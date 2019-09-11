@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  cloudApiBase: 'https://api.kramerius.cloud/api/v1'
 };

@@ -1,0 +1,42 @@
+<div class="app-login-wrapper">
+    <div class="app-card app-login">
+        <div class="app-card-title">Přihlaste se</div>
+        <div class="app-card-content">
+            <mat-form-field>
+                <input 
+                    type="email" 
+                    matInput 
+                    [disabled]="state == 'loading'"
+                    [(ngModel)]="email"
+                    placeholder="E-mail" 
+                    ngModel 
+                    name="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input 
+                    type="password" 
+                    matInput 
+                    [disabled]="state == 'loading'"
+                    placeholder="Heslo" 
+                    [(ngModel)]="password"
+                    name="password">
+            </mat-form-field>
+            <div *ngIf="state === 'failure'" class="app-error">{{ errorMessage }}</div>
+        </div>
+        <div class="app-card-actions">
+            <button type="submit" (click)="login()" [disabled]="state == 'loading'" mat-raised-button color="primary">Přihlásit se</button>
+            <mat-spinner *ngIf="state=='loading'"
+                [strokeWidth]="3" 
+                [diameter]="30">
+            </mat-spinner>
+
+            <div class="app-social-auth-wrapper">
+                    <button mat-button [disabled]="state == 'loading'"
+                            class="app-social-auth app-google-auth" (click)="loginWithGoogle()">
+                      Přihlásit se Google účtem
+                    </button>
+            </div>
+
+        </div>
+    </div>
+  </div>
