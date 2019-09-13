@@ -1,0 +1,128 @@
+<div class="container filter_component">
+
+    <div class="row">
+        <h4>Filtry</h4>
+    </div>
+
+
+
+    <form [formGroup]="form" (ngSubmit)="onUpdateFilters()" class="form">
+
+        <!-- date range -->
+        <!-- <div class="row"> -->
+        <div>
+            <!-- from -->
+            <!-- <div class="form-group col-sm"> -->
+            <div>
+                <!-- <div class="input-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="filterFrom"
+                            formControlName="filterFrom">
+                        <label class="custom-control-label" for="filterFrom">Od</label>
+                    </div>
+                </div> -->
+                <div class="input-group">
+                    <!-- <input class="form-control" placeholder="yyyy-mm-dd" name="from" formControlName="from"
+                        ngbDatepicker #datepickerFrom="ngbDatepicker" [appDisableControl]="!form.value.filterFrom">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary calendar" (click)="datepickerFrom.toggle()"
+                            type="button" [disabled]="!form.value.filterFrom"></button>
+                    </div> -->
+
+                    <div class="form-element">
+                        <mat-checkbox formControlName="filterDate">Datum</mat-checkbox>
+                    </div>
+
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="fromDatePicker" formControlName="from" placeholder="Od">
+                        <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #fromDatePicker></mat-datepicker>
+                    </mat-form-field>
+                   &nbsp; 
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="untilDatePicker" formControlName="until" placeholder="Do">
+                        <mat-datepicker-toggle matSuffix [for]="untilDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #untilDatePicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <!-- until -->
+            <!-- <div class="form-group col-sm">
+          <div class="input-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="filterUntil" formControlName="filterUntil">
+              <label class="custom-control-label" for="filterUntil">Do</label>
+            </div>
+          </div>
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="until" formControlName="until" ngbDatepicker
+              #datepickerUntil="ngbDatepicker" [appDisableControl]="!form.value.filterUntil">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="datepickerUntil.toggle()" type="button"
+                [disabled]="!form.value.filterUntil"></button>
+            </div>
+          </div>
+        </div> -->
+
+        </div>
+
+        <!-- state -->
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <div class="input-group ">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="filterState"
+                            formControlName="filterState">
+                        <label class="custom-control-label" for="filterState">Stav</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <select class="form-control" id="state" [appDisableControl]="!form.value.filterState"
+                        formControlName="state">
+                        <option>PLANNED</option>
+                        <option>RUNNING</option>
+                        <option>FINISHED</option>
+                        <option>FAILED</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- owner -->
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <div class="input-group ">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="filterOwner"
+                            formControlName="filterOwner">
+                        <label class="custom-control-label" for="filterOwner">Vlastník</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <select class="form-control" id="owner" [appDisableControl]="!form.value.filterOwner"
+                        formControlName="owner">
+                        <!-- TODO: should not be hardcoded -->
+                        <option value="rehan">Martin Řehánek (rehan)</option>
+                        <option value="meditor">Metadata Editor (meditor)</option>
+                        <option value="editor">Nový Editor (editor)</option>
+                        <option value="hanis">Jan Rychtář (hanis)</option>
+                        <option value="magarim">David Magarim (magarim)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- <button class="btn btn-success" type="submit">Filtrovat</button> -->
+
+    </form>
+
+
+    <br>
+    <button mat-raised-button color="primary" (click)="devLog()">Dev log</button>
+
+
+</div>

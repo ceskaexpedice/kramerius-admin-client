@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AngularTokenModule } from 'angular-token';
-import { environment } from 'src/environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { ProcessesComponent } from './components/processes/processes.component';
 import { LoginComponent } from './components/account/login/login.component';
@@ -17,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppSettings } from './services/app-settings';
 import { ApiService } from './services/api.service';
+import { environment } from 'src/environments/environment';
+import { FilterComponent } from './components/processes/filter/filter.component';
+import { DisableControlDirective } from './components/processes/disable-control.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ApiService } from './services/api.service';
     HomeComponent,
     ProcessesComponent,
     LoginComponent,
-    OmniauthComponent
+    OmniauthComponent,
+    FilterComponent,
+    DisableControlDirective
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,131 @@
+<br>
+
+<!-- filtrování výsledků -->
+<app-process-filter (dataChanged)="onFilterUpdated($event)"></app-process-filter>
+
+<br>
+
+<!-- výsledky -->
+<div class="container">
+
+  <!-- TODO: řadit procesy podle PID, datumů apod. -->
+
+
+  <div class="row">
+    <div class="col">
+      <h4>Nalezeno {{processCount}} procesů/dávek</h4>
+      <ngb-pagination [(page)]="page" [pageSize]="pageSize" [maxSize]="10" [rotate]="true" [boundaryLinks]="true"
+        [ellipses]="false" [collectionSize]="processCount" (pageChange)="onPageChange()"></ngb-pagination>
+    </div>
+  </div>
+
+<!-- 
+  <!-- table with results -->
+  <div class="row">
+    <!-- table -->
+    <div class="col-sm-9">
+      <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->
+      <table class="table table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Název</th>
+            <th scope="col">Stav</th>
+            <th scope="col">Naplánováno</th>
+            <th scope="col">Spuštěno</th>
+            <th scope="col">Ukončeno</th>
+            <th scope="col">Trvání</th>
+            <th scope="col">Vlastník</th>
+            <!-- <th scope="col">Akce</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let process of processes; let i = index">
+            <tr (click)="process.children ? toggleBatchOpen(process) : onProcessSelected(process)"
+              [ngClass]="{'table-primary':selectedProcess && process.process_id == selectedProcess.process_id,  'my-batch-open': !!process.children && isBatchOpen(process.batch_id)}">
+              <th>
+                {{process.batch_id}}
+                <button *ngIf="!!process.children && isBatchOpen(process.batch_id)"
+                  class="btn btn-outline-primary">-</button>
+                <button *ngIf="!!process.children && !isBatchOpen(process.batch_id)"
+                  class="btn btn-outline-primary">+</button>
+              </th>
+              <!-- <td>{{process.children ? process.children[0].name : process.name |shorten:20}}</td> -->
+              <td *ngIf="process.children">{{process.children[0].name|shorten:25}}</td>
+              <td *ngIf="!process.children">{{process.name|shorten:25}}</td>
+              <td [ngClass]="{
+            'text-info':process.batch_state=='PLANNED',
+            'text-primary':process.batch_state=='PLANNED',
+            'text-success':process.batch_state=='FINISHED',
+            'text-danger':process.batch_state=='FAILED'
+            }">{{process.batch_state}}</td>
+              <td>{{process.batch_planned | date:'W. L. y, H:mm:ss'}}</td>
+              <td>{{process.batch_started | date:'W. L. y, H:mm:ss'}}</td>
+              <td>{{process.batch_finished | date:'W. L. y, H:mm:ss'}}</td>
+              <td>{{toDurationInMs(process.batch_started, process.batch_finished) | duration}}</td>
+              <td>{{process.batch_owner_login}}</td>
+              <!-- <td>
+              <button *ngIf="processLogsAvailable(process.state)" class="btn btn-primary">Logy</button>
+              <button *ngIf="processCanBeCanceled(process.state)" class="btn btn-danger">Zastavit</button>
+              <button *ngIf="processCanBeDeleted(process.state)" class="btn btn-danger">Smazat</button>
+              <button *ngIf="process.children" class="btn btn-primary">+</button>
+            </td> -->
+            </tr>
+
+            <!-- children -->
+            <ng-container *ngIf="process.children && isBatchOpen(process.batch_id)">
+              <tr *ngFor="let subprocess of process.children" class="my-subprocess"
+                (click)="onProcessSelected(subprocess)"
+                [ngClass]="{'table-primary':selectedProcess && subprocess.process_id == selectedProcess.process_id }">
+                <th scope="row">{{subprocess.process_id}}</th>
+                <td>{{subprocess.name|shorten:25}}</td>
+                <td [ngClass]="{
+                  'text-info':subprocess.state=='PLANNED',
+                  'text-primary':subprocess.state=='PLANNED',
+                  'text-success':subprocess.state=='FINISHED',
+                  'text-danger':subprocess.state=='FAILED'
+                  }">{{subprocess.state}}</td>
+                <td>{{subprocess.planned | date:'W. L. y, H:mm:ss'}}</td>
+                <td>{{subprocess.started | date:'W. L. y, H:mm:ss'}}</td>
+                <td>{{subprocess.finished | date:'W. L. y, H:mm:ss'}}</td>
+                <td>{{toDurationInMs(subprocess.started, subprocess.finished) | duration}}</td>
+                <td></td>
+              </tr>
+            </ng-container>
+
+          </ng-container>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- detail -->
+
+    <!--
+    <div *ngIf="!!selectedProcess" class="col-sm-3" style="border:1px solid black;">
+      <button class="btn btn-outline-dark" (click)="selectedProcess = null">X</button>
+      <h2>{{selectedProcess.process_id}}</h2>
+      <h3>{{selectedProcess.name}}</h3>
+      <div>
+        <button *ngIf="processLogsAvailable(selectedProcess.state)" class="btn btn-primary">Logy</button>
+        <button *ngIf="processCanBeCanceled(selectedProcess.state)" class="btn btn-danger">Zastavit</button>
+        <button *ngIf="processCanBeDeleted(selectedProcess.state)" class="btn btn-danger">Smazat</button>
+      </div>
+      <br>
+      <div>
+        Standardní výstup
+        <textarea name="standLog" id="" cols="30" rows="10" readonly>TODO: standardní výstup</textarea>
+        <br>
+        Chybový výstup
+        <textarea name="errorLog" id="" cols="30" rows="10" readonly>TODO: chybový výstup</textarea>
+
+      </div>
+
+    </div>
+    -->
+
+  </div> -->
+
+
+</div>
