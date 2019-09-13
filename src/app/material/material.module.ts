@@ -16,6 +16,7 @@ import {
   MAT_DATE_LOCALE,
   MAT_DATE_FORMATS,
   DateAdapter,
+  MatTableModule,
 } from '@angular/material';
 
 
@@ -33,11 +34,12 @@ const components = [
   //MatMomentDateModule,
   MatInputModule,
   MatCheckboxModule,
+  MatTableModule,
 ];
 
 const providers = [
   MatDatepickerModule,
-  {provide: MAT_DATE_LOCALE, useValue: 'cs-CZ'},
+  { provide: MAT_DATE_LOCALE, useValue: 'cs-CZ' },
   // {provide: DateAdapter, useClass: AppDateAdapter},
   // {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
 ];

@@ -18,6 +18,8 @@ import { AppSettings } from './services/app-settings';
 import { ApiService } from './services/api.service';
 import { environment } from 'src/environments/environment';
 import { FilterComponent } from './components/processes/filter/filter.component';
+import { DurationPipe } from './components/processes/duration.pipe';
+import { ShortenPipe } from './components/processes/shorten.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FilterComponent } from './components/processes/filter/filter.component'
     ProcessesComponent,
     LoginComponent,
     OmniauthComponent,
-    FilterComponent
+    FilterComponent,
+    DurationPipe,
+    ShortenPipe
   ],
   imports: [
     BrowserModule,

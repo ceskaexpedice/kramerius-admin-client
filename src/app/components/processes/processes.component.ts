@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {ProcessService} from '../../services/process.service'
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ProcessService } from '../../services/process.service'
 import { Filters } from './filters';
+import { MatSort, MatTable, MatTableDataSource } from '@angular/material';
+
 
 @Component({
   selector: 'app-processes',
@@ -9,18 +11,32 @@ import { Filters } from './filters';
 })
 export class ProcessesComponent implements OnInit {
 
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+
   processCount: number; //number of all processes with filteres applied
-  processes: Object[]; //processes of current page
+  processes: Object[] = []; //processes of current page
   page = 1;
   pageSize = 100;
   filters = null;
   batchesOpen = new Set();
   selectedProcess;
 
+  tableDisplayedColumns: string[] = ['id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner'];
+  tableDataSource = new MatTableDataSource(this.processes);
+
   constructor(private service: ProcessService) { }
 
   ngOnInit() {
     this.fetchProcesses();
+  }
+
+  test() {
+    // this.processes.push({
+    //   bash_id: 123,
+    //   name: 'blabla'
+    // })
+    // this.table.renderRows();
+    // console.log(this.processes);
   }
 
   fetchProcesses() {
@@ -31,7 +47,13 @@ export class ProcessesComponent implements OnInit {
     this.service.getProcesses(offset, limit, this.filters).subscribe(response => {
       this.processCount = response['total_size'];
       console.log(response);
-      this.processes = response['items'];
+      //this.processes = response['items'];
+      //because table is referencing this array
+      this.processes.length = 0;
+      response['items'].forEach(element => {
+        this.processes.push(element);
+      });
+      this.table.renderRows();
     });
   }
 
@@ -71,8 +93,8 @@ export class ProcessesComponent implements OnInit {
     console.log('onFilterUpdated');
     console.log(filters);
     //console.log(JSON.stringify(filters));
-    //this.filters = filters;
-    //this.fetchProcesses();
+    this.filters = filters;
+    this.fetchProcesses();
   }
 
   onProcessSelected(process) {
