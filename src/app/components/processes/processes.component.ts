@@ -69,9 +69,10 @@ export class ProcessesComponent implements OnInit {
 
   onFilterUpdated(filters: Filters) {
     console.log('onFilterUpdated');
-    console.log(JSON.stringify(filters));
-    this.filters = filters;
-    this.fetchProcesses();
+    console.log(filters);
+    //console.log(JSON.stringify(filters));
+    //this.filters = filters;
+    //this.fetchProcesses();
   }
 
   onProcessSelected(process) {

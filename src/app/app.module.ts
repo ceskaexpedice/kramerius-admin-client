@@ -18,7 +18,6 @@ import { AppSettings } from './services/app-settings';
 import { ApiService } from './services/api.service';
 import { environment } from 'src/environments/environment';
 import { FilterComponent } from './components/processes/filter/filter.component';
-import { DisableControlDirective } from './components/processes/disable-control.directive';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,7 @@ import { DisableControlDirective } from './components/processes/disable-control.
     ProcessesComponent,
     LoginComponent,
     OmniauthComponent,
-    FilterComponent,
-    DisableControlDirective
+    FilterComponent
   ],
   imports: [
     BrowserModule,

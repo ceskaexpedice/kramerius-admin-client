@@ -16,13 +16,6 @@ export class FilterComponent implements OnInit {
   form: FormGroup;
   lastFilter = null;
 
-  //filterFrom = new FormControl(false);
-  //from = new FormControl(null);
-  //from = new FormControl(new Date());
-
-
-  //today = new FormControl(new Date());
-
   constructor() { }
 
   ngOnInit() {
@@ -31,73 +24,70 @@ export class FilterComponent implements OnInit {
       'from': new FormControl({ value: null, disabled: true }),
       'until': new FormControl({ value: null, disabled: true }),
       'filterState': new FormControl(false),
-      'state': new FormControl('PLANNED'),
+      'state': new FormControl({ value: 'PLANNED', disabled: true }),
       'filterOwner': new FormControl(false),
-      'owner': new FormControl('rehan'), //TODO: should not be hardcoded
+      'owner': new FormControl({ value: 'rehan', disabled: true }), //TODO: should not be hardcoded
     });
 
     this.lastFilter = this.createFilters(this.form.value);
-    /*
+
+    this.form.get('filterDate').valueChanges.subscribe(filter => {
+      var fromCtrl = this.form.controls['from'];
+      var untilCtrl = this.form.controls['until'];
+      if (filter) {
+        fromCtrl.enable();
+        untilCtrl.enable();
+      } else {
+        fromCtrl.disable();
+        untilCtrl.disable();
+      }
+    })
+
+    this.form.get('filterState').valueChanges.subscribe(filter => {
+      var stateCtrl = this.form.controls['state'];
+      if (filter) {
+        stateCtrl.enable();
+      } else {
+        stateCtrl.disable();
+      }
+    })
+
+    this.form.get('filterOwner').valueChanges.subscribe(filter => {
+      var ownerCtrl = this.form.controls['owner'];
+      if (filter) {
+        ownerCtrl.enable();
+      } else {
+        ownerCtrl.disable();
+      }
+    })
+
     this.form.valueChanges.subscribe(value => {
       const filters: Filters = this.createFilters(value);
       //console.log(filters)
       //console.log(this.lastFilter)
       if (JSON.stringify(filters) === JSON.stringify(this.lastFilter)) {
-        //nothing
-        console.log('no change in filters');
+        //nothing, no change
+        //console.log('no change in filters');
       } else {
+        //console.log('some change in filters');
         this.lastFilter = filters;
         this.dataChanged.emit(filters);
-        console.log(filters);
+        //console.log(filters);
       }
     });
-    */
-
-    this.form.get('filterDate').valueChanges.subscribe(filter => {
-      var from = this.form.controls['from'];
-      var until = this.form.controls['until'];
-      if (filter) {
-        from.enable();
-        until.enable();
-      } else {
-        from.disable();
-        until.disable();
-      }
-    })
-
-    /*
-  this.form.valueChanges.subscribe(value => {
-    console.log(value);
-    const data = value.filterFrom ? null : new Date();
-
-    this.form.patchValue(
-      { from: data }
-    )
-
-    //
-
-
-  });
-*/
-  }
-
-  devLog() {
-    console.log('formGroup:')
-    console.log(this.form.value)
   }
 
   createFilters(formValue): Filters {
-    console.log(formValue);
     const filters: Filters = {}
     //from
-    if (formValue.filterFrom && !!formValue.from) {
+    if (formValue.filterDate && !!formValue.from) {
       const from = this.parseDate(formValue.from);
       if (!!from) {
         filters.from = from;
       }
     }
     //until
-    if (formValue.filterUntil && !!formValue.until) {
+    if (formValue.filterDate && !!formValue.until) {
       const until = this.parseDate(formValue.until);
       if (!!until) {
         filters.until = until;
@@ -129,5 +119,10 @@ export class FilterComponent implements OnInit {
   }
 
 
+  //TODO: cleanpu
+  devLog() {
+    console.log('formGroup:')
+    console.log(this.form.value)
+  }
 
 }
