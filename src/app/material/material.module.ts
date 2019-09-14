@@ -17,6 +17,7 @@ import {
   MAT_DATE_FORMATS,
   DateAdapter,
   MatTableModule,
+  MatPaginatorModule,
 } from '@angular/material';
 
 
@@ -35,6 +36,7 @@ const components = [
   MatInputModule,
   MatCheckboxModule,
   MatTableModule,
+  MatPaginatorModule,
 ];
 
 const providers = [

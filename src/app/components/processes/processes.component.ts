@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProcessService } from '../../services/process.service'
 import { Filters } from './filters';
-import { MatSort, MatTable, MatTableDataSource } from '@angular/material';
+import { MatSort, MatTable, MatTableDataSource, PageEvent } from '@angular/material';
 
 
 @Component({
@@ -10,23 +10,39 @@ import { MatSort, MatTable, MatTableDataSource } from '@angular/material';
   styleUrls: ['./processes.component.scss']
 })
 export class ProcessesComponent implements OnInit {
-
-  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
-
-  processCount: number; //number of all processes with filteres applied
+  
+  //process data
+  processTotalCount= 0; //number of all processes with filteres applied
   processes: Object[] = []; //processes of current page
-  page = 1;
-  pageSize = 100;
+  
+  //pagionation
+  pageSizeOptions: number[] = [10, 25, 50, 100];
+  pageSize = this.pageSizeOptions[0];
+
+  //query data
   filters = null;
+  offset = 0;
+  limit = this.pageSize;
+  
+  //table
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+  tableDisplayedColumns: string[] = ['id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner'];
+  tableDataSource = new MatTableDataSource(this.processes);
+
+  //TODO: subprocesses
   batchesOpen = new Set();
   selectedProcess;
 
-  tableDisplayedColumns: string[] = ['id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner'];
-  tableDataSource = new MatTableDataSource(this.processes);
 
   constructor(private service: ProcessService) { }
 
   ngOnInit() {
+    this.fetchProcesses();
+  }
+
+  onPageEvent(pageEvent: PageEvent){
+    this.limit = pageEvent.pageSize;
+    this.offset = pageEvent.pageIndex * pageEvent.pageSize;
     this.fetchProcesses();
   }
 
@@ -40,13 +56,9 @@ export class ProcessesComponent implements OnInit {
   }
 
   fetchProcesses() {
-    const offset = this.pageSize * (this.page - 1);
-    const limit = this.pageSize;
-    console.log('offset: ' + offset);
-    console.log('limit: ' + limit);
-    this.service.getProcesses(offset, limit, this.filters).subscribe(response => {
-      this.processCount = response['total_size'];
-      console.log(response);
+    this.service.getProcesses(this.offset, this.limit, this.filters).subscribe(response => {
+      this.processTotalCount = response['total_size'];
+      //console.log(response);
       //this.processes = response['items'];
       //because table is referencing this array
       this.processes.length = 0;
@@ -115,7 +127,6 @@ export class ProcessesComponent implements OnInit {
   isBatchOpen(batchId) {
     return this.batchesOpen.has(batchId);
   }
-
 
 
 }
