@@ -1,11 +1,21 @@
 .results {
-    width: 90%;
     margin-right: 5%;
     margin-left: 5%;
+    height: 800px;
+  overflow: auto;
 }
-
 
 .box {
     display: flex;
     align-items:center;
  }
+
+ table {
+    width: 100%;
+  }
+
+  .mat-paginator-sticky {
+    bottom: 0px;
+    position: sticky;
+    z-index: 10;
+  }
