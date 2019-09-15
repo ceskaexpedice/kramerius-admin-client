@@ -1,8 +1,8 @@
-<!-- filtrování výsledků -->
-<app-process-filter (dataChanged)="onFilterUpdated($event)"></app-process-filter>
+<div class="container">
 
+    <!-- filtrování výsledků -->
+    <app-process-filter (dataChanged)="onFilterUpdated($event)"></app-process-filter>
 
-<div class="results">
     <div class="mat-elevation-z8">
 
         <table mat-table [dataSource]="tableDataSource">
@@ -75,8 +75,8 @@
             <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>
         </table>
 
-        <mat-paginator class="mat-paginator-sticky" [length]="processTotalCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-            (page)="onPageEvent($event)">
+        <mat-paginator class="mat-paginator-sticky" [length]="processTotalCount" [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions" (page)="onPageEvent($event)">
         </mat-paginator>
 
     </div>

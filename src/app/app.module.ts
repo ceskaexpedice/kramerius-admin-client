@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment';
 import { FilterComponent } from './components/processes/filter/filter.component';
 import { DurationPipe } from './components/processes/duration.pipe';
 import { ShortenPipe } from './components/processes/shorten.pipe';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ShortenPipe } from './components/processes/shorten.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FlexLayoutModule,
     AngularTokenModule.forRoot({
       apiBase: environment.cloudApiBase,
       oAuthBase: environment.cloudApiBase,
@@ -49,7 +51,7 @@ import { ShortenPipe } from './components/processes/shorten.pipe';
         google: 'auth/google_oauth2'
       },
       oAuthWindowType: 'newWindow'
-    })
+    })   
   ],
   providers: [
     AngularTokenModule,

@@ -1,53 +1,64 @@
-<div class="filter_component">
+<div class="filters">
 
-    <h3>Filtry</h3>
+    <!-- <h4>Filtrování</h4> -->
 
     <form [formGroup]="form" (ngSubmit)="onUpdateFilters()" class="form">
 
-        <!-- datum -->
-        <div class="form-element">
-            <mat-checkbox formControlName="filterDate">Datum</mat-checkbox>
-        </div>
-        <!-- TODO: validace. Pokud přepíšu input korektním datumem, pořád není validní -->
-        <mat-form-field>
-            <input matInput [matDatepicker]="fromDatePicker" formControlName="from" placeholder="Od">
-            <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
-            <mat-datepicker #fromDatePicker></mat-datepicker>
-        </mat-form-field>
-        &nbsp;
-        <mat-form-field>
-            <input matInput [matDatepicker]="untilDatePicker" formControlName="until" placeholder="Do">
-            <mat-datepicker-toggle matSuffix [for]="untilDatePicker"></mat-datepicker-toggle>
-            <mat-datepicker #untilDatePicker></mat-datepicker>
-        </mat-form-field>
+        <div fxLayout="row" class="fields_container" fxLayoutAlign="start">
 
-        <!-- stav -->
-        <div class="form-element">
-            <mat-checkbox formControlName="filterState">Stav</mat-checkbox>
-        </div>
-        <mat-form-field>
-            <select matNativeControl required conform formControlName="state">
-                <option>PLANNED</option>
-                <option>RUNNING</option>
-                <option>FINISHED</option>
-                <option>FAILED</option>
-            </select>
-        </mat-form-field>
+            <!-- datum -->
+            <div fxLayout="column" class="filter_item">
+                <div class="form-element">
+                    <mat-checkbox formControlName="filterDate">Datum</mat-checkbox>
+                </div>
+                <div fxLayout="row">
+                    <!-- TODO: validace. Pokud přepíšu input korektním datumem, pořád není validní -->
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="fromDatePicker" formControlName="from" placeholder="Od">
+                        <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #fromDatePicker></mat-datepicker>
+                    </mat-form-field>
+                    &nbsp;&nbsp;
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="untilDatePicker" formControlName="until" placeholder="Do">
+                        <mat-datepicker-toggle matSuffix [for]="untilDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #untilDatePicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
 
-        <!-- vlastník -->
-        <div class="form-element">
-            <mat-checkbox formControlName="filterOwner">Vlastník</mat-checkbox>
+            <!-- stav -->
+            <div fxLayout="column" class="filter_item">
+                <div class="form-element">
+                    <mat-checkbox formControlName="filterState">Stav</mat-checkbox>
+                </div>
+                <mat-form-field>
+                    <select matNativeControl required conform formControlName="state">
+                        <option>PLANNED</option>
+                        <option>RUNNING</option>
+                        <option>FINISHED</option>
+                        <option>FAILED</option>
+                    </select>
+                </mat-form-field>
+            </div>
+
+            <!-- vlastník -->
+            <div fxLayout="column" class="filter_item">
+                <div class="form-element">
+                    <mat-checkbox formControlName="filterOwner">Vlastník</mat-checkbox>
+                </div>
+                <mat-form-field>
+                    <select matNativeControl required conform formControlName="owner">
+                        <!-- TODO: should not be hardcoded -->
+                        <option value="rehan">Martin Řehánek (rehan)</option>
+                        <option value="meditor">Metadata Editor (meditor)</option>
+                        <option value="editor">Nový Editor (editor)</option>
+                        <option value="hanis">Jan Rychtář (hanis)</option>
+                        <option value="magarim">David Magarim (magarim)</option>
+                    </select>
+                </mat-form-field>
+            </div>
         </div>
-        <mat-form-field>
-            <select matNativeControl required conform formControlName="owner">
-                <!-- TODO: should not be hardcoded -->
-                <option value="rehan">Martin Řehánek (rehan)</option>
-                <option value="meditor">Metadata Editor (meditor)</option>
-                <option value="editor">Nový Editor (editor)</option>
-                <option value="hanis">Jan Rychtář (hanis)</option>
-                <option value="magarim">David Magarim (magarim)</option>
-            </select>
-        </mat-form-field>
 
     </form>
 
