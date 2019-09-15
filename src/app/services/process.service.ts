@@ -10,7 +10,8 @@ import { Filters } from '../components/processes/filters';
 export class ProcessService {
 
    //baseUrl = 'http://archive.difmoe.eu:3000';
-   baseUrl = 'http://localhost:3000';
+   //baseUrl = 'http://localhost:3000';
+   baseUrl = 'http://digitallibrary.cz:3000';
    processes: Object[];
  
    constructor(private http: HttpClient) {
