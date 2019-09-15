@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 //import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { AppDateAdapter, APP_DATE_FORMATS } from '../components/processes/format-datepicker';
-
+import { MatPaginatorIntlCz } from './mat-paginator-intl-cz';
 
 import {
   MatToolbarModule,
@@ -18,6 +18,7 @@ import {
   DateAdapter,
   MatTableModule,
   MatPaginatorModule,
+  MatPaginatorIntl,
 } from '@angular/material';
 
 
@@ -36,11 +37,12 @@ const components = [
   MatInputModule,
   MatCheckboxModule,
   MatTableModule,
-  MatPaginatorModule,
+  MatPaginatorModule
 ];
 
 const providers = [
   MatDatepickerModule,
+  { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCz},
   { provide: MAT_DATE_LOCALE, useValue: 'cs-CZ' },
   // {provide: DateAdapter, useClass: AppDateAdapter},
   // {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
