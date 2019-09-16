@@ -10,11 +10,11 @@ import { MatSort, MatTable, MatTableDataSource, PageEvent } from '@angular/mater
   styleUrls: ['./processes.component.scss']
 })
 export class ProcessesComponent implements OnInit {
-  
+
   //process data
-  processTotalCount= 0; //number of all processes with filteres applied
+  processTotalCount = 0; //number of all processes with filteres applied
   processes: Object[] = []; //processes of current page
-  
+
   //pagionation
   pageSizeOptions: number[] = [10, 25, 50, 100];
   pageSize = this.pageSizeOptions[0];
@@ -23,10 +23,10 @@ export class ProcessesComponent implements OnInit {
   filters = null;
   offset = 0;
   limit = this.pageSize;
-  
+
   //table
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
-  tableDisplayedColumns: string[] = ['id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner'];
+  tableDisplayedColumns: string[] = ['btn', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner'];
   tableDataSource = new MatTableDataSource(this.processes);
 
   //TODO: subprocesses
@@ -40,7 +40,7 @@ export class ProcessesComponent implements OnInit {
     this.fetchProcesses();
   }
 
-  onPageEvent(pageEvent: PageEvent){
+  onPageEvent(pageEvent: PageEvent) {
     this.limit = pageEvent.pageSize;
     this.offset = pageEvent.pageIndex * pageEvent.pageSize;
     this.fetchProcesses();
@@ -59,14 +59,20 @@ export class ProcessesComponent implements OnInit {
     this.service.getProcesses(this.offset, this.limit, this.filters).subscribe(response => {
       this.processTotalCount = response['total_size'];
       //console.log(response);
-      //this.processes = response['items'];
-      //because table is referencing this array
-      this.processes.length = 0;
-      response['items'].forEach(element => {
-        this.processes.push(element);
-      });
-      this.table.renderRows();
+      this.batchesOpen.clear();
+      this.resetProcesses(response['items']);
     });
+  }
+
+  resetProcesses(newProcesses) {
+    //this.processes = response['items'];
+    //because table is referencing this array
+    this.processes.length = 0;
+    newProcesses.forEach(element => {
+      this.processes.push(element);
+    });
+    //console.log(this.processes);
+    this.table.renderRows();
   }
 
   processCanBeDeleted(processState: string) {
@@ -117,11 +123,46 @@ export class ProcessesComponent implements OnInit {
   toggleBatchOpen(process) {
     console.log(process);
     const processId = process.batch_id;
-    if (this.batchesOpen.has(processId)) {
-      this.batchesOpen.delete(processId);
-    } else {
+    var openingNow = !this.batchesOpen.has(processId);
+    if (openingNow) {
       this.batchesOpen.add(processId);
+      this.openBatch(process);
+    } else {
+      this.batchesOpen.delete(processId);
+      this.closeBatch(process);
     }
+  }
+
+  openBatch(process: any) {
+    const updatedProcesses = this.processes.slice();
+    var inserted = 0;
+    for (var i = 0; i < this.processes.length; i++) {
+      if (this.processes[i] == process) {
+        console.log('hit for ' + process.batch_id);
+        for (var j = 0; j < process.children.length; j++) {
+          const child = process.children[j];
+          console.log(j);
+          var newIndex: number = i + 1 + inserted++;
+          console.log("new index:" + newIndex);
+          updatedProcesses.splice(newIndex, 0, child);
+        }
+      }
+    }
+    //update original array
+    this.resetProcesses(updatedProcesses);
+  }
+
+  closeBatch(process: any) {
+    const updatedProcesses = this.processes.slice();
+    var inserted = 0;
+    for (var i = 0; i < this.processes.length; i++) {
+      if (this.processes[i] == process) {
+        const subCount = process.children.length;
+        updatedProcesses.splice(i + 1, subCount);
+      }
+    }
+    //update original array
+    this.resetProcesses(updatedProcesses);
   }
 
   isBatchOpen(batchId) {

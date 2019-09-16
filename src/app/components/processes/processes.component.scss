@@ -21,3 +21,17 @@
     position: sticky;
     z-index: 10;
   }
+
+  .aggregate {
+    // background-color: #e0e0e0;  
+     background-color: #f1f1f1;
+  }
+
+  .subprocess {
+    // background-color: #f3f3f3;
+    background-color: #fafafa;
+  }
+
+  td.mat-cell:first-of-type {
+    padding-left: 4px;
+  }
