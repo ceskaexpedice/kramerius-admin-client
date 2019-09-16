@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-//import { MatMomentDateModule } from "@angular/material-moment-adapter";
-import { AppDateAdapter, APP_DATE_FORMATS } from '../components/processes/format-datepicker';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatPaginatorIntlCz } from './mat-paginator-intl-cz';
 
 import {
@@ -31,9 +30,7 @@ const components = [
   MatProgressSpinnerModule,
   MatMenuModule,
   MatDatepickerModule,
-  //TODO: disable MatNativeDateModule and use MatMomentDateModule
   MatNativeDateModule,
-  //MatMomentDateModule,
   MatInputModule,
   MatCheckboxModule,
   MatTableModule,
@@ -42,10 +39,10 @@ const components = [
 
 const providers = [
   MatDatepickerModule,
-  { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCz},
+  { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCz },
+  { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+  { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
   { provide: MAT_DATE_LOCALE, useValue: 'cs-CZ' },
-  // {provide: DateAdapter, useClass: AppDateAdapter},
-  // {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
 ];
 
 @NgModule({

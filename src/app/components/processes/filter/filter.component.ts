@@ -105,17 +105,18 @@ export class FilterComponent implements OnInit {
   }
 
   parseDate(dateModel) {
-    if (dateModel.year) {
-      // result.from = new Date(`${dateModel.year}-${dateModel.month}-${dateModel.day}`);
-      return new Date(dateModel.year, dateModel.month - 1, dateModel.day);
-    } else {
-      const parsed = new Date(dateModel);
-      if (!!parsed && parsed.toString() != 'Invalid Date') {
-        return parsed;
-      } else {
-        return null;
-      }
-    }
+    // if (dateModel.year) {
+    //   // result.from = new Date(`${dateModel.year}-${dateModel.month}-${dateModel.day}`);
+    //   return new Date(dateModel.year, dateModel.month - 1, dateModel.day);
+    // } else {
+    //   const parsed = new Date(dateModel);
+    //   if (!!parsed && parsed.toString() != 'Invalid Date') {
+    //     return parsed;
+    //   } else {
+    //     return null;
+    //   }
+    // }  
+    return dateModel.toDate();
   }
 
 
