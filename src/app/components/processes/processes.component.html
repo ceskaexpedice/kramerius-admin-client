@@ -37,8 +37,10 @@
                 <th mat-header-cell *matHeaderCellDef>Název</th>
                 <td mat-cell *matCellDef="let item"
                     [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
-                    <ng-container *ngIf="item.type=='batch'">{{item.processes[0].name|shorten:30}}</ng-container>
-                    <ng-container *ngIf="item.type=='process'">{{item.process.name|shorten:30}}</ng-container>
+                    <!-- <ng-container *ngIf="item.type=='batch'">{{item.processes[0].name|shorten:30}}</ng-container>
+                    <ng-container *ngIf="item.type=='process'">{{item.process.name|shorten:30}}</ng-container> -->
+                    <ng-container *ngIf="item.type=='batch'">{{item.processes[0].name}}</ng-container>
+                    <ng-container *ngIf="item.type=='process'">{{item.process.name}}</ng-container>
                 </td>
             </ng-container>
 
