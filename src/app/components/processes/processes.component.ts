@@ -11,11 +11,11 @@ import { MatSort, MatTable, MatTableDataSource, PageEvent } from '@angular/mater
 })
 export class ProcessesComponent implements OnInit {
 
-  //process data
-  processTotalCount = 0; //number of all processes with filteres applied
-  processes: Object[] = []; //processes of current page
+  //batch (and process) data
+  batchTotalCount = 0;
+  batches: Object[] = []; //batches of current page
 
-  //pagionation
+  //pagination
   pageSizeOptions: number[] = [10, 25, 50, 100];
   pageSize = this.pageSizeOptions[0];
 
@@ -27,9 +27,8 @@ export class ProcessesComponent implements OnInit {
   //table
   @ViewChild(MatTable, { static: true }) table: MatTable<any>;
   tableDisplayedColumns: string[] = ['btn', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner'];
-  tableDataSource = new MatTableDataSource(this.processes);
-
-  //TODO: subprocesses
+  tableItems: Object[] = []; //items in table (batch + processes in batch if batch is open)
+  tableDataSource = new MatTableDataSource(this.tableItems);
   batchesOpen = new Set();
   selectedProcess;
 
@@ -46,32 +45,39 @@ export class ProcessesComponent implements OnInit {
     this.fetchProcesses();
   }
 
-  test() {
-    // this.processes.push({
-    //   bash_id: 123,
-    //   name: 'blabla'
-    // })
-    // this.table.renderRows();
-    // console.log(this.processes);
-  }
-
   fetchProcesses() {
     this.service.getProcesses(this.offset, this.limit, this.filters).subscribe(response => {
-      this.processTotalCount = response['total_size'];
+      this.batchTotalCount = response['total_size'];
       //console.log(response);
       this.batchesOpen.clear();
-      this.resetProcesses(response['items']);
+      //console.log('response')
+      //console.log(response);
+      this.batches = response['batches'];
+      this.resetTableItems();
     });
   }
 
-  resetProcesses(newProcesses) {
-    //this.processes = response['items'];
-    //because table is referencing this array
-    this.processes.length = 0;
-    newProcesses.forEach(element => {
-      this.processes.push(element);
+  resetTableItems() {
+    //console.log('resetTableItems')
+    this.tableItems.length = 0;
+    this.batches.forEach(batch => {
+      const batchItem = {};
+      batchItem['type'] = 'batch'
+      batchItem['batch'] = batch['batch']
+      batchItem['processes'] = batch['processes']
+      //console.log(batchItem);
+      this.tableItems.push(batchItem);
+      if (this.isBatchOpen(batch['batch']['id'])) {
+        batchItem['processes'].forEach(process => {
+          const processItem = {};
+          processItem['type'] = 'process';
+          processItem['process'] = process;
+          processItem['batch'] = batch['batch'];
+          //console.log(processItem);
+          this.tableItems.push(processItem);
+        });
+      }
     });
-    //console.log(this.processes);
     this.table.renderRows();
   }
 
@@ -108,61 +114,27 @@ export class ProcessesComponent implements OnInit {
   }
 
   onFilterUpdated(filters: Filters) {
-    console.log('onFilterUpdated');
-    console.log(filters);
+    //console.log('onFilterUpdated');
+    //console.log(filters);
     //console.log(JSON.stringify(filters));
     this.filters = filters;
     this.fetchProcesses();
   }
 
   onProcessSelected(process) {
-    console.log(process);
+    //console.log(process);
     this.selectedProcess = process;
   }
 
-  toggleBatchOpen(process) {
-    console.log(process);
-    const processId = process.batch_id;
-    var openingNow = !this.batchesOpen.has(processId);
-    if (openingNow) {
-      this.batchesOpen.add(processId);
-      this.openBatch(process);
+  toggleBatchOpen(batchId) {
+    //console.log("toggleBatchOpen: " + batchId);
+    var nowClosed = !this.batchesOpen.has(batchId);
+    if (nowClosed) {
+      this.batchesOpen.add(batchId);
     } else {
-      this.batchesOpen.delete(processId);
-      this.closeBatch(process);
+      this.batchesOpen.delete(batchId);
     }
-  }
-
-  openBatch(process: any) {
-    const updatedProcesses = this.processes.slice();
-    var inserted = 0;
-    for (var i = 0; i < this.processes.length; i++) {
-      if (this.processes[i] == process) {
-        console.log('hit for ' + process.batch_id);
-        for (var j = 0; j < process.children.length; j++) {
-          const child = process.children[j];
-          console.log(j);
-          var newIndex: number = i + 1 + inserted++;
-          console.log("new index:" + newIndex);
-          updatedProcesses.splice(newIndex, 0, child);
-        }
-      }
-    }
-    //update original array
-    this.resetProcesses(updatedProcesses);
-  }
-
-  closeBatch(process: any) {
-    const updatedProcesses = this.processes.slice();
-    var inserted = 0;
-    for (var i = 0; i < this.processes.length; i++) {
-      if (this.processes[i] == process) {
-        const subCount = process.children.length;
-        updatedProcesses.splice(i + 1, subCount);
-      }
-    }
-    //update original array
-    this.resetProcesses(updatedProcesses);
+    this.resetTableItems();
   }
 
   isBatchOpen(batchId) {

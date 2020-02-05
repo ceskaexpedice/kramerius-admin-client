@@ -9,131 +9,132 @@
 
             <ng-container matColumnDef="btn">
                 <th mat-header-cell *matHeaderCellDef> </th>
-                <td mat-cell *matCellDef="let process" class="btn-cell"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    <ng-container *ngIf="process.children && isBatchOpen(process.batch_id)">
-                        <button mat-icon-button color="primary" (click)="toggleBatchOpen(process)"><b>-</b></button>
-                    </ng-container>
-                    <ng-container *ngIf="process.children && !isBatchOpen(process.batch_id)">
-                        <button mat-icon-button color="primary" (click)="toggleBatchOpen(process)"><b>+</b></button>
+                <td mat-cell *matCellDef="let item" class="btn-cell"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <ng-container *ngIf="item.type=='batch' && item.processes.length>1">
+                        <button *ngIf="isBatchOpen(item.batch.id)" mat-icon-button color="primary"
+                            (click)="toggleBatchOpen(item.batch.id)"><b>-</b></button>
+                        <button *ngIf="!isBatchOpen(item.batch.id)" mat-icon-button color="primary"
+                            (click)="toggleBatchOpen(item.batch.id)"><b>+</b></button>
                     </ng-container>
                 </td>
+
             </ng-container>
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>ID</th>
-                <td mat-cell *matCellDef="let process"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    <ng-container *ngIf="process.children && isBatchOpen(process.batch_id)">
-                        <!-- <button mat-icon-button color="primary" (click)="toggleBatchOpen(process)"><b>-</b></button> -->
-                        {{process.batch_id}}
+                <td mat-cell *matCellDef="let item"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <ng-container *ngIf="item.type=='batch'">
+                        {{item.batch.id}}
                     </ng-container>
-                    <ng-container *ngIf="process.children && !isBatchOpen(process.batch_id)">
-                        <!-- <button mat-icon-button color="primary" (click)="toggleBatchOpen(process)"><b>+</b></button> -->
-                        {{process.batch_id}}
+                    <ng-container *ngIf="item.type=='process'">
+                        {{item.process.id}}
                     </ng-container>
-                    <ng-container *ngIf="!process.children">
-                        {{process.process_id}}
-                    </ng-container>
-                </td>
             </ng-container>
 
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Název</th>
-                <td mat-cell *matCellDef="let process"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    <ng-container *ngIf="process.children">{{process.children[0].name|shorten:25}}</ng-container>
-                    <ng-container *ngIf="!process.children">{{process.name|shorten:25}}</ng-container>
+                <td mat-cell *matCellDef="let item"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <ng-container *ngIf="item.type=='batch'">{{item.processes[0].name|shorten:30}}</ng-container>
+                    <ng-container *ngIf="item.type=='process'">{{item.process.name|shorten:30}}</ng-container>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="state">
                 <th mat-header-cell *matHeaderCellDef>Stav</th>
-                <td mat-cell *matCellDef="let process"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    <div class="box" *ngIf="process.batch_id">
+                <td mat-cell *matCellDef="let item"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <div class="box" *ngIf="item.type=='batch'">
                         <!-- see https://material.io/resources/icons/?style=baseline -->
-                        <mat-icon *ngIf="process.batch_state=='PLANNED'">queue</mat-icon>
-                        <mat-icon *ngIf="process.batch_state=='RUNNING'">360</mat-icon>
-                        <mat-icon *ngIf="process.batch_state=='FINISHED'">done</mat-icon>
-                        <mat-icon *ngIf="process.batch_state=='FAILED'">error_outline</mat-icon>
-                        <span>&nbsp;{{process.batch_state}}</span>
+                        <mat-icon *ngIf="item.batch.state=='PLANNED'">queue</mat-icon>
+                        <mat-icon *ngIf="item.batch.state=='RUNNING'">360</mat-icon>
+                        <mat-icon *ngIf="item.batch.state=='FINISHED'">done</mat-icon>
+                        <mat-icon *ngIf="item.batch.state=='FAILED'">error_outline</mat-icon>
+                        <span>&nbsp;{{item.batch.state}}</span>
+                        <span
+                            *ngIf="item.type=='batch' && item.processes.length==1 && item.batch.state!=item.processes[0].state">&nbsp;({{item.processes[0].state}})</span>
                     </div>
-                    <div class="box" *ngIf="!process.batch_id">
+
+                    <div class="box" *ngIf="item.type=='process'">
                         <!-- see https://material.io/resources/icons/?style=baseline -->
-                        <mat-icon *ngIf="process.state=='PLANNED'">queue</mat-icon>
-                        <mat-icon *ngIf="process.state=='RUNNING'">360</mat-icon>
-                        <mat-icon *ngIf="process.state=='FINISHED'">done</mat-icon>
-                        <mat-icon *ngIf="process.state=='FAILED'">error_outline</mat-icon>
-                        <mat-icon *ngIf="process.state=='WARNING'">error_outline</mat-icon>
-                        <span>&nbsp;{{process.state}}</span>
+                        <mat-icon *ngIf="item.process.state=='PLANNED'">queue</mat-icon>
+                        <mat-icon *ngIf="item.process.state=='RUNNING'">360</mat-icon>
+                        <mat-icon *ngIf="item.process.state=='FINISHED'">done</mat-icon>
+                        <mat-icon *ngIf="item.process.state=='FAILED'">error_outline</mat-icon>
+                        <mat-icon *ngIf="item.process.state=='WARNING'">error_outline</mat-icon>
+                        <span>&nbsp;{{item.process.state}}</span>
                     </div>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="planned">
                 <th mat-header-cell *matHeaderCellDef>Naplánováno</th>
-                <td mat-cell *matCellDef="let process"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    <ng-container *ngIf="process.batch_id">
-                        {{process.batch_planned | date:'W. L. y, H:mm:ss'}}
+                <td mat-cell *matCellDef="let item"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <ng-container *ngIf="item.type=='batch'">
+                        {{item.batch.planned | date:'W. L. y, H:mm:ss'}}
                     </ng-container>
-                    <ng-container *ngIf="!process.batch_id">
-                        {{process.planned | date:'W. L. y, H:mm:ss'}}
+                    <ng-container *ngIf="item.type=='process'">
+                        {{item.process.planned | date:'W. L. y, H:mm:ss'}}
                     </ng-container>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="started">
                 <th mat-header-cell *matHeaderCellDef>Spuštěno</th>
-                <td mat-cell *matCellDef="let process"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    <ng-container *ngIf="process.batch_id">
-                        {{process.batch_started | date:'W. L. y, H:mm:ss'}}
+                <td mat-cell *matCellDef="let item"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <ng-container *ngIf="item.type=='batch'">
+                        {{item.batch.started | date:'W. L. y, H:mm:ss'}}
                     </ng-container>
-                    <ng-container *ngIf="!process.batch_id">
-                        {{process.started | date:'W. L. y, H:mm:ss'}}
+                    <ng-container *ngIf="item.type=='process'">
+                        {{item.process.started | date:'W. L. y, H:mm:ss'}}
                     </ng-container>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="finished">
                 <th mat-header-cell *matHeaderCellDef>Ukončeno</th>
-                <td mat-cell *matCellDef="let process"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    <ng-container *ngIf="process.batch_id">
-                        {{process.batch_finished | date:'W. L. y, H:mm:ss'}}
+                <td mat-cell *matCellDef="let item"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <ng-container *ngIf="item.type=='batch'">
+                        {{item.batch.finished | date:'W. L. y, H:mm:ss'}}
                     </ng-container>
-                    <ng-container *ngIf="!process.batch_id">
-                        {{process.finished | date:'W. L. y, H:mm:ss'}}
+                    <ng-container *ngIf="item.type=='process'">
+                        {{item.process.finished | date:'W. L. y, H:mm:ss'}}
                     </ng-container>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="duration">
                 <th mat-header-cell *matHeaderCellDef>Trvání</th>
-                <td mat-cell *matCellDef="let process"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    <ng-container *ngIf="process.batch_id">
-                        {{toDurationInMs(process.batch_started, process.batch_finished) | duration}}
+                <td mat-cell *matCellDef="let item"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <ng-container *ngIf="item.type=='batch'">
+                        {{toDurationInMs(item.batch.started, item.batch.finished) | duration}}
                     </ng-container>
-                    <ng-container *ngIf="!process.batch_id">
-                        {{toDurationInMs(process.started, process.finished) | duration}}
+                    <ng-container *ngIf="item.type=='process'">
+                        {{toDurationInMs(item.process.started, item.process.finished) | duration}}
                     </ng-container>
             </ng-container>
 
             <ng-container matColumnDef="owner">
                 <th mat-header-cell *matHeaderCellDef>Vlastník</th>
-                <td mat-cell *matCellDef="let process"
-                    [ngClass]="{'aggregate': process.children, 'subprocess': !process.batch_id}">
-                    {{process.batch_owner_login}}</td>
+                <td mat-cell *matCellDef="let item"
+                    [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
+                    <ng-container *ngIf="item.type=='batch'">
+                        {{item.batch.owner_login}}
+                    </ng-container>
+                </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="tableDisplayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: tableDisplayedColumns;"></tr>
         </table>
 
-        <mat-paginator class="mat-paginator-sticky" [length]="processTotalCount" [pageSize]="pageSize"
+        <mat-paginator class="mat-paginator-sticky" [length]="batchTotalCount" [pageSize]="pageSize"
             [pageSizeOptions]="pageSizeOptions" (page)="onPageEvent($event)">
         </mat-paginator>
 
