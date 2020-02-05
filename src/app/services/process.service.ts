@@ -9,10 +9,10 @@ import { Filters } from '../components/processes/filters';
 })
 export class ProcessService {
 
-  //apiBaseUrl = 'http://archive.difmoe.eu:3000';
   //apiBaseUrl = 'http://localhost:3000';
-  apiBaseUrl = 'http://localhost:8080/search/api/v6.0';
   //apiBaseUrl = 'http://digitallibrary.cz:3000';
+  //apiBaseUrl = 'http://localhost:8080/search/api/v6.0';
+  apiBaseUrl = 'https://kramerius.dev.digitallibrary.cz/search/api/v6.0';
   processes: Object[];
 
   constructor(private http: HttpClient) { }
@@ -98,11 +98,7 @@ export class ProcessService {
     if (!!filters) {
       //from
       if (!!filters.from) {
-        //reqParams = reqParams.append('from', filters.from.toLocaleDateString()/* .toISOString()*/);
-
         reqParams = reqParams.append('from', this.dateToISOLikeButLocal(filters.from));
-
-        
       }
       //until
       if (!!filters.until) {
