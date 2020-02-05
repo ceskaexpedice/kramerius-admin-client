@@ -76,10 +76,16 @@
                 <td mat-cell *matCellDef="let item"
                     [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
                     <ng-container *ngIf="item.type=='batch'">
-                        {{item.batch.planned | date:'W. L. y, H:mm:ss'}}
+                        <!-- {{item.batch.planned | date:'W. L. y H:mm:ss'}} -->
+                        {{item.batch.planned | date:'W. L. y'}}
+                        <br>
+                        {{item.batch.planned | date:'H:mm:ss'}}
                     </ng-container>
                     <ng-container *ngIf="item.type=='process'">
-                        {{item.process.planned | date:'W. L. y, H:mm:ss'}}
+                        <!-- {{item.process.planned | date:'W. L. y H:mm:ss'}} -->
+                        {{item.process.planned | date:'W. L. y'}}
+                        <br>
+                        {{item.process.planned | date:'H:mm:ss'}}
                     </ng-container>
                 </td>
             </ng-container>
@@ -89,10 +95,16 @@
                 <td mat-cell *matCellDef="let item"
                     [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
                     <ng-container *ngIf="item.type=='batch'">
-                        {{item.batch.started | date:'W. L. y, H:mm:ss'}}
+                        <!-- {{item.batch.started | date:'W. L. y H:mm:ss'}} -->
+                        {{item.batch.started | date:'W. L. y'}}
+                        <br>
+                        {{item.batch.started | date:'H:mm:ss'}}
                     </ng-container>
                     <ng-container *ngIf="item.type=='process'">
-                        {{item.process.started | date:'W. L. y, H:mm:ss'}}
+                        <!-- {{item.process.started | date:'W. L. y H:mm:ss'}} -->
+                        {{item.process.started | date:'W. L. y'}}
+                        <br>
+                        {{item.process.started | date:'H:mm:ss'}}
                     </ng-container>
                 </td>
             </ng-container>
@@ -102,10 +114,16 @@
                 <td mat-cell *matCellDef="let item"
                     [ngClass]="{'aggregate': item.type=='batch', 'subprocess': item.type=='process'}">
                     <ng-container *ngIf="item.type=='batch'">
-                        {{item.batch.finished | date:'W. L. y, H:mm:ss'}}
+                        <!-- {{item.batch.finished | date:'W. L. y H:mm:ss'}} -->
+                        {{item.batch.finished | date:'W. L. y'}}
+                        <br>
+                        {{item.batch.finished | date:'H:mm:ss'}}
                     </ng-container>
                     <ng-container *ngIf="item.type=='process'">
-                        {{item.process.finished | date:'W. L. y, H:mm:ss'}}
+                        <!-- {{item.process.finished | date:'W. L. y H:mm:ss'}} -->
+                        {{item.process.finished | date:'W. L. y'}}
+                        <br>
+                        {{item.process.finished | date:'H:mm:ss'}}
                     </ng-container>
                 </td>
             </ng-container>
