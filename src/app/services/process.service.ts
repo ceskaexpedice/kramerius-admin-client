@@ -98,11 +98,15 @@ export class ProcessService {
     if (!!filters) {
       //from
       if (!!filters.from) {
-        reqParams = reqParams.append('from', filters.from.toISOString());
+        //reqParams = reqParams.append('from', filters.from.toLocaleDateString()/* .toISOString()*/);
+
+        reqParams = reqParams.append('from', this.dateToISOLikeButLocal(filters.from));
+
+        
       }
       //until
       if (!!filters.until) {
-        reqParams = reqParams.append('until', filters.until.toISOString());
+        reqParams = reqParams.append('until', this.dateToISOLikeButLocal(filters.until));
       }
       //state
       if (!!filters.state) {
@@ -215,6 +219,15 @@ export class ProcessService {
       case 4: return "BATCH_WARNING";
       default: return "";
     }
+  }
+
+  dateToISOLikeButLocal(date) {
+    const offsetMs = date.getTimezoneOffset() * 60 * 1000;
+    const msLocal = date.getTime() - offsetMs;
+    const dateLocal = new Date(msLocal);
+    const iso = dateLocal.toISOString();
+    const isoLocal = iso.slice(0, 19);
+    return isoLocal;
   }
 
 }
