@@ -57,6 +57,18 @@ export class ProcessesComponent implements OnInit {
     });
   }
 
+  scheduleProcess() {
+    const params = {
+      def: 'mock',
+      name: 'Testovani planovace procesu',
+      duration: '5',
+      processesInBatch: '3'
+    }
+    this.service.scheduleProcess(params).subscribe(response => {
+      console.log(response);
+    });
+  }
+
   resetTableItems() {
     //console.log('resetTableItems')
     this.tableItems.length = 0;

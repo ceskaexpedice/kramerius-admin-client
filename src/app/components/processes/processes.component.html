@@ -1,5 +1,11 @@
 <div class="container">
 
+    <button class="mat-raised-button" (click)="fetchProcesses()">Reload</button>
+    &nbsp;
+    <button class="mat-raised-button" (click)="scheduleProcess()">Schedule Mock Process</button>
+    <br>
+    <br>
+
     <!-- filtrování výsledků -->
     <app-process-filter (dataChanged)="onFilterUpdated($event)"></app-process-filter>
 

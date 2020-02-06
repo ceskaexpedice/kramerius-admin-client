@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Filters } from '../components/processes/filters';
 
@@ -11,8 +11,8 @@ export class ProcessService {
 
   //apiBaseUrl = 'http://localhost:3000';
   //apiBaseUrl = 'http://digitallibrary.cz:3000';
-  //apiBaseUrl = 'http://localhost:8080/search/api/v6.0';
-  apiBaseUrl = 'https://kramerius.dev.digitallibrary.cz/search/api/v6.0';
+  apiBaseUrl = 'http://localhost:8080/search/api/v6.0';
+  //apiBaseUrl = 'https://kramerius.dev.digitallibrary.cz/search/api/v6.0';
   processes: Object[];
 
   constructor(private http: HttpClient) { }
@@ -127,6 +127,47 @@ export class ProcessService {
     }))
     */
   }
+
+  scheduleProcess(definition): Observable<any> {
+    const params = {
+      def: 'mock',
+      name: 'Testovani planovace procesu',
+      duration: '5',
+      processesInBatch: '3'
+    }
+
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //   })
+    // };
+    var headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json')
+    headers.set('Accept', 'application/json');
+
+
+    const httpOptions = {
+      headers: headers,
+    };
+
+
+    //headers = headers.append("Authorization", "Basic " + btoa("waqas:waqas-secret"));
+    //headers = headers.append("Content-Type", 'application/x-www-form-urlencoded;charset=UTF-8')
+
+    return this.http
+      //.post<any>(this.apiBaseUrl + '/processes', definition);
+      //.post<any>(this.apiBaseUrl + '/processes/fuck', JSON.stringify(definition), httpOptions);
+      .post<any>(this.apiBaseUrl + '/processes/fuck',
+        JSON.stringify(definition),
+        {
+          headers: headers
+        }
+      );
+    //.post<any>('http://localhost:8080/search/api/v4.6/processes?def=mock', definition);
+    //.post<any>('https://kramerius.dev.digitallibrary.cz/search/api/v4.6/processes?def=mock', definition);
+
+  }
+
 
   updateItems(items: Object[]) {
     const data = items.slice();
