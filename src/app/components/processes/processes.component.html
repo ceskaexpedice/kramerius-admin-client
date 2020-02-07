@@ -2,8 +2,7 @@
 
   <div class="app-actions">
 
-    <button mat-raised-button (click)="reload()" color="primary">Reload</button>
-    <button mat-raised-button (click)="scheduleProcess()" color="primary">Schedule Mock Process</button>
+    <button class="app-action-btn" mat-raised-button (click)="scheduleProcess()" color="primary">Schedule Mock Process</button>
 
     <mat-form-field class="app-filter-state">
       <mat-select placeholder="Stav" [(value)]="filters.state" (selectionChange)="onSelectedStateChanged($event)">
@@ -32,6 +31,10 @@
       <mat-datepicker-toggle matSuffix [for]="myDatepickerTo"></mat-datepicker-toggle>
       <mat-datepicker disabled="false" #myDatepickerTo></mat-datepicker>
     </mat-form-field>
+
+    <button class="app-filter-reload" mat-icon-button (click)="reload()">
+      <mat-icon>refresh</mat-icon>
+    </button>
 
   </div>
 

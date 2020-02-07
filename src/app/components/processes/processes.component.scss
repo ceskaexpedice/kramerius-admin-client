@@ -4,12 +4,13 @@
   .app-actions {
     height: 62px;
     overflow: hidden;
-    button {
-      margin-right: 16px;
+    .app-action-btn {
+      float: right;
+      margin-top: 8px;;
     }
     .app-filter-state {
       margin-right: 16px;
-      margin-left: 16px;;
+      margin-left: 6px;
     }    
     .app-filter-owner {
       margin-right: 16px;
@@ -19,6 +20,10 @@
     }
     .app-filter-date-from {
       margin-right: 16px;
+    }
+    .app-filter-reload {
+      margin-left: 8px;
+      color: #666;
     }
   }
 
