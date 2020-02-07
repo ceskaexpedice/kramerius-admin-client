@@ -129,45 +129,11 @@ export class ProcessService {
   }
 
   scheduleProcess(definition): Observable<any> {
-    const params = {
-      def: 'mock',
-      name: 'Testovani planovace procesu',
-      duration: '5',
-      processesInBatch: '3'
-    }
-
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //   })
-    // };
-    var headers = new HttpHeaders();
-    headers.set('Content-Type', 'application/json')
-    headers.set('Accept', 'application/json');
-
-
-    const httpOptions = {
-      headers: headers,
-    };
-
-
-    //headers = headers.append("Authorization", "Basic " + btoa("waqas:waqas-secret"));
-    //headers = headers.append("Content-Type", 'application/x-www-form-urlencoded;charset=UTF-8')
-
     return this.http
-      //.post<any>(this.apiBaseUrl + '/processes', definition);
-      //.post<any>(this.apiBaseUrl + '/processes/fuck', JSON.stringify(definition), httpOptions);
-      .post<any>(this.apiBaseUrl + '/processes/fuck',
-        JSON.stringify(definition),
-        {
-          headers: headers
-        }
+      .post<any>(this.apiBaseUrl + '/processes',
+        definition,  
       );
-    //.post<any>('http://localhost:8080/search/api/v4.6/processes?def=mock', definition);
-    //.post<any>('https://kramerius.dev.digitallibrary.cz/search/api/v4.6/processes?def=mock', definition);
-
   }
-
 
   updateItems(items: Object[]) {
     const data = items.slice();
