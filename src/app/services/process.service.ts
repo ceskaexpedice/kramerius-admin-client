@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Filters } from '../components/processes/filters';
-
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,9 @@ import { Filters } from '../components/processes/filters';
 export class ProcessService {
 
   //apiBaseUrl = 'http://localhost:3000';
-  //apiBaseUrl = 'http://digitallibrary.cz:3000';
-  apiBaseUrl = 'http://localhost:8080/search/api/v6.0';
-  //apiBaseUrl = 'https://kramerius.dev.digitallibrary.cz/search/api/v6.0';
+  //apiBaseUrl = 'http://digitallibrary.cz:3000'; 
+  //apiBaseUrl = 'http://localhost:8080/search/api/v6.0';
+  apiBaseUrl = 'https://kramerius.dev.digitallibrary.cz/search/api/v6.0';
   processes: Object[];
 
   constructor(private http: HttpClient) { }
@@ -129,10 +129,19 @@ export class ProcessService {
   }
 
   scheduleProcess(definition): Observable<any> {
+    const login = "TODO:login";
+    const password = "TODO:password";
     return this.http
       .post<any>(this.apiBaseUrl + '/processes',
-        definition,  
-      );
+        definition, {
+        headers: new HttpHeaders({
+          'Authorization': 'Basic ' + btoa(`${login}:${password}`)
+        })
+      })
+      .pipe(
+        tap(response => {
+          //console.log(response)
+        }))
   }
 
   updateItems(items: Object[]) {
