@@ -17,10 +17,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppSettings } from './services/app-settings';
 import { ApiService } from './services/api.service';
 import { environment } from 'src/environments/environment';
-import { FilterComponent } from './components/processes/filter/filter.component';
-import { DurationPipe } from './components/processes/duration.pipe';
-import { ShortenPipe } from './components/processes/shorten.pipe';
+import { DurationPipe } from './pipes/duration.pipe';
+import { ShortenPipe } from './pipes/shorten.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DatetimePipe } from './pipes/datetime.pipe';
 
 @NgModule({
   declarations: [
@@ -30,9 +30,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ProcessesComponent,
     LoginComponent,
     OmniauthComponent,
-    FilterComponent,
     DurationPipe,
-    ShortenPipe
+    ShortenPipe,
+    DatetimePipe
   ],
   imports: [
     BrowserModule,
