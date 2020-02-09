@@ -11,18 +11,25 @@
     .app-filter-state {
       margin-right: 16px;
       margin-left: 6px;
+      width: 150px;
     }    
     .app-filter-owner {
       margin-right: 16px;
+      width: 150px;
     }
     .app-filter-date-from {
-      margin-right: 16px;
+      // margin-right: 16px;
+      width: 150px;
     }
-    .app-filter-date-from {
-      margin-right: 16px;
+    .app-filter-date-to {
+      margin-left: 16px;
+      width: 150px;
     }
     .app-filter-reload {
       margin-left: 8px;
+      color: #666;
+    }
+    .app-filter-clear {
       color: #666;
     }
   }

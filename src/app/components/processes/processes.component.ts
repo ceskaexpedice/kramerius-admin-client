@@ -86,6 +86,18 @@ export class ProcessesComponent implements OnInit {
     this.filters.until = new Date(String(this.dateTo));
   }
 
+  clearDateFrom() {
+    this.dateFrom = null;
+    this.filters.from = null;
+  }
+
+  clearDateTo() {
+    this.dateTo = null;
+    this.filters.until = null;
+  }
+
+
+
   onSelectedOwnerChanged(event) {
     this.reload();
   }

@@ -24,6 +24,9 @@
       <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
       <mat-datepicker disabled="false" #myDatepickerFrom></mat-datepicker>
     </mat-form-field>
+    <button *ngIf="!!dateFrom" class="app-filter-clear" mat-icon-button matTooltip="Zrušit datum od" (click)="clearDateFrom()">
+      <mat-icon>clear</mat-icon>
+    </button>
 
 
     <mat-form-field class="app-filter-date-to">
@@ -32,7 +35,11 @@
       <mat-datepicker disabled="false" #myDatepickerTo></mat-datepicker>
     </mat-form-field>
 
-    <button class="app-filter-reload" mat-icon-button (click)="reload()">
+    <button *ngIf="!!dateTo" class="app-filter-clear" mat-icon-button matTooltip="Zrušit datum do" (click)="clearDateTo()">
+      <mat-icon>clear</mat-icon>
+    </button>
+
+    <button class="app-filter-reload" mat-icon-button matTooltip="Obnovit" (click)="reload()">
       <mat-icon>refresh</mat-icon>
     </button>
 
