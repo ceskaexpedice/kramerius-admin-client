@@ -13,20 +13,15 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(request);
     }
     const data = this.tokenService.currentAuthData;
-    console.log('data', data);
     if (data) {
       request = request.clone({
         setHeaders: {
-          // 'access-token': data.accessToken,
-          // 'uid': data.uid,
-          // 'client': data.client
+          'access-token': data.accessToken,
+          'uid': data.uid,
+          'client': data.client
         }
       });
     }
     return next.handle(request);
   }
 }
-
-
-
-// Access-Control-Expose-Headers: access-token, expiry, token-type, uid, client

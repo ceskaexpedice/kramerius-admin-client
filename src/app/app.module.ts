@@ -63,7 +63,7 @@ import { AuthInterceptor } from './services/auth-interceptor';
     AuthService,
     AppSettings,
     ApiService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [
     SimpleDialogComponent

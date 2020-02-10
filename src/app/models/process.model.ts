@@ -94,7 +94,7 @@ export class Process {
     if (!this.started || !this.finished) {
       return null;
     }
-    return this.finished.getDate() - this.started.getDate();
+    return this.finished.getTime() - this.started.getTime();
   }
 
 }
