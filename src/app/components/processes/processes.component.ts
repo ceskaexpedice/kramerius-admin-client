@@ -25,7 +25,7 @@ export class ProcessesComponent implements OnInit {
   selectedOwner = '';
   selectedState = '';
 
-  states = [];
+  batch_states = [];
 
   owners = [
     'rehan',
@@ -37,8 +37,8 @@ export class ProcessesComponent implements OnInit {
   batches: Batch[];
 
   constructor(private api: ApiService, private dialog: MatDialog) {
-    for (const state of Process.STATES) {
-      this.states.push( { key: state, label: Process.stateLabel(state) })
+    for (const state of Process.BATCH_STATES) {
+      this.batch_states.push( { key: state, label: Process.stateLabel(state) })
     }
   }
 

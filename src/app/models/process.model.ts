@@ -1,17 +1,31 @@
 export class Process {
 
+  static PLANNED = 'PLANNED';
   static RUNNING = 'RUNNING';
   static FINISHED = 'FINISHED';
   static FAILED = 'FAILED';
-  static PLANNED = 'PLANNED';
   static KILLED = 'KILLED';
+  //jen pro procesy, ne dávky
+  static NOT_RUNNING = 'NOT_RUNNING';
+  static WARNING = 'WARNING';
+
 
   static STATES = [
+    Process.PLANNED,
     Process.RUNNING,
     Process.FINISHED,
     Process.FAILED,
+    Process.KILLED,
+    Process.NOT_RUNNING,
+    Process.WARNING
+  ];
+
+  static BATCH_STATES = [
     Process.PLANNED,
-    Process.KILLED
+    Process.RUNNING,
+    Process.FINISHED,
+    Process.FAILED,
+    Process.KILLED,
   ];
 
   static DELETABLE_STATES = [
@@ -37,22 +51,27 @@ export class Process {
 
   static stateLabel(state: string): string {
     switch (state) {
+      case Process.PLANNED: return 'Naplánováno';
       case Process.RUNNING: return 'Běží';
       case Process.FINISHED: return 'Dokončeno';
       case Process.FAILED: return 'Chyba';
-      case Process.PLANNED: return 'Naplánováno';
       case Process.KILLED: return 'Zrušeno';
+      case Process.NOT_RUNNING: return 'Nespuštěno';
+      case Process.WARNING: return 'Varování';
     }
     return state;
   }
 
   static stateColor(state: string): string {
     switch (state) {
+      case Process.PLANNED: return '#7b7b7b';
       case Process.RUNNING: return '#456aa5';
       case Process.FINISHED: return '#45a55a';
       case Process.FAILED: return '#ab493f';
-      case Process.PLANNED: return '#7b7b7b';
       case Process.KILLED: return '#ca7023';
+      case Process.KILLED: return '#ca7023';
+      case Process.NOT_RUNNING: return '#7b7b7b';
+      case Process.WARNING: return '#ab493f';
     }
     return '#000';
   }

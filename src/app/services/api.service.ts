@@ -15,7 +15,7 @@ export class ApiService {
   }
 
   private get(path: string, params = {}): Observable<Object> {
-    return this.http.get(this.baseUrl + path, {params: params});
+    return this.http.get(this.baseUrl + path, { params: params });
   }
 
   private post(path: string, body, options = {}): Observable<Object> {

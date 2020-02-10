@@ -7,7 +7,7 @@
     <mat-form-field class="app-filter-state">
       <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onSelectedStateChanged($event)">
         <mat-option value="">Vše</mat-option>
-        <mat-option *ngFor="let state of states" [value]="state.key">{{ state.label }}</mat-option>
+        <mat-option *ngFor="let state of batch_states" [value]="state.key">{{ state.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -94,7 +94,7 @@
             <div class="process-id">{{ process.id }}</div>
             <div class="process-name">{{ process.name }}</div>
             <div class="process-state">
-              <div class="state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}</div>
+              <div class="state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}</div>
             </div>
             <div class="process-datetime">{{ process.planned | appDatetime }}</div>
             <div class="process-datetime">{{ process.started | appDatetime }}</div>
