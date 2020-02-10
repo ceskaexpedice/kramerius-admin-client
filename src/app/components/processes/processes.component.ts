@@ -4,6 +4,7 @@ import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { ApiService, ProcessesParams } from 'src/app/services/api.service';
 import { Batch } from 'src/app/models/batch.model';
+import { Process } from 'src/app/models/process.model';
 
 
 @Component({
@@ -24,13 +25,7 @@ export class ProcessesComponent implements OnInit {
   selectedOwner = '';
   selectedState = '';
 
-  states = [
-    'RUNNING',
-    'FINISHED',
-    'FAILED',
-    'PLANNED',
-    'KILLED'
-  ];
+  states = [];
 
   owners = [
     'rehan',
@@ -41,7 +36,11 @@ export class ProcessesComponent implements OnInit {
 
   batches: Batch[];
 
-  constructor(private api: ApiService, private dialog: MatDialog) { }
+  constructor(private api: ApiService, private dialog: MatDialog) {
+    for (const state of Process.STATES) {
+      this.states.push( { key: state, label: Process.stateLabel(state) })
+    }
+  }
 
   ngOnInit() {
     this.reload();

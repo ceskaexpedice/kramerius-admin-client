@@ -7,7 +7,7 @@
     <mat-form-field class="app-filter-state">
       <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onSelectedStateChanged($event)">
         <mat-option value="">Vše</mat-option>
-        <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+        <mat-option *ngFor="let state of states" [value]="state.key">{{ state.label }}</mat-option>
       </mat-select>
     </mat-form-field>
 
