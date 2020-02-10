@@ -28,6 +28,7 @@ export class ProcessesComponent implements OnInit {
     'RUNNING',
     'FINISHED',
     'FAILED',
+    'KILLED',
     'PLANNED',
   ];
 
