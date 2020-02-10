@@ -57,11 +57,12 @@
         <div class="process-datetime">Ukončeno</div>
         <div class="process-duration">Trvání</div>
         <div class="process-owner">Vlastník</div>
+        <div class="process-actions"></div>
       </div>
     </div>
     <div class="scrollable app-table">
       <ng-container *ngFor="let batch of batches">
-        <div class="app-row">
+        <a class="app-row" [routerLink]="['/processes', batch.batch.id]">
           <div class="process-expand">
             <button (click)="batch.expanded = !batch.expanded" *ngIf="batch.processes.length > 1" mat-icon-button
               color="primary" matTooltip="Zobrazit podprocesy">
@@ -77,9 +78,14 @@
           <div class="process-duration">
             {{ toDurationInMs(batch.batch.started, batch.batch.finished) | appDuration }}</div>
           <div class="process-owner">{{ batch.batch.owner_login }}</div>
-        </div>
+          <div class="process-actions">
+            <button class="app-action-remove" (click)="onRemoveProcess(batch.batch.id); $event.preventDefault(); $event.stopPropagation()" mat-icon-button color="#aaa" matTooltip="Smazat podproces" matTooltipPosition="below">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </a>
         <ng-container *ngIf="batch.expanded">
-          <div *ngFor="let process of batch.processes" class="app-row app-subprocess">
+          <a *ngFor="let process of batch.processes" class="app-row app-subprocess" [routerLink]="['/processes', process.id]">
             <div class="process-expand"><mat-icon>arrow_right</mat-icon></div>
             <div class="process-id">{{ process.id }}</div>
             <div class="process-name">{{ process.name }}</div>
@@ -90,7 +96,12 @@
             <div class="process-duration">
               {{ toDurationInMs(process.started, process.finished) | appDuration }}</div>
             <div class="process-owner">{{ process.owner_login }}</div>
-          </div>
+            <div class="process-actions">
+              <button (click)="onRemoveProcess(process.id); $event.preventDefault(); $event.stopPropagation()" mat-icon-button color="warn" matTooltip="Smazat podproces" matTooltipPosition="below">
+                <mat-icon>remove</mat-icon>
+              </button>
+            </div>
+          </a>
         </ng-container>
       </ng-container>
       </div>

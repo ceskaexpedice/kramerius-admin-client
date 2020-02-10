@@ -70,6 +70,15 @@
     .process-owner {
       width: 160px;
     }
+    .process-actions {
+      width: 40px;
+      .app-action-remove {
+        color: #999;
+        &:hover {
+          color: #333;
+        }
+      }
+    }
     .app-subprocess {
       background: #f4f4f4;
       .process-expand {

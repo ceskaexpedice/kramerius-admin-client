@@ -21,6 +21,8 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DatetimePipe } from './pipes/datetime.pipe';
+import { ProcessComponent } from './components/processes/process/process.component';
+import { SimpleDialogComponent } from './dialogs/simple-dialog/simple-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { DatetimePipe } from './pipes/datetime.pipe';
     OmniauthComponent,
     DurationPipe,
     ShortenPipe,
-    DatetimePipe
+    DatetimePipe,
+    ProcessComponent,
+    SimpleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,9 @@ import { DatetimePipe } from './pipes/datetime.pipe';
     AuthService,
     AppSettings,
     ApiService
+  ],
+  entryComponents: [
+    SimpleDialogComponent
   ],
   bootstrap: [AppComponent]
 })

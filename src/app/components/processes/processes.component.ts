@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProcessService } from '../../services/process.service'
 import { Filters } from './filters';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatDialog } from '@angular/material';
+import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
+import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 
 
 @Component({
@@ -40,7 +42,7 @@ export class ProcessesComponent implements OnInit {
 
   batches: any[];
 
-  constructor(private service: ProcessService) { }
+  constructor(private service: ProcessService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.reload();
@@ -97,6 +99,33 @@ export class ProcessesComponent implements OnInit {
   }
 
 
+  onRemoveProcess(process) {
+    const data: SimpleDialogData = {
+      title: "Smazání procesu",
+      message: "Určitě chcete proces trvale smazat?",
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'default'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        // TODO: Delete process and reload data
+      }
+    });
+  }
+
+
+
+
+  
 
   onSelectedOwnerChanged(event) {
     this.reload();
