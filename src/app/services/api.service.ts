@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
 import { map } from 'rxjs/operators';
@@ -11,8 +11,7 @@ export class ApiService {
   private baseUrl: string;
 
   constructor(private http: HttpClient, private appSettings: AppSettings) {
-    // this.baseUrl = this.appSettings.krameriusApiBase;
-    this.baseUrl = 'https://kramerius.dev.digitallibrary.cz/search/api/v6.0'
+    this.baseUrl = this.appSettings.adminApiBase;
   }
 
   private get(path: string, params = {}): Observable<Object> {
