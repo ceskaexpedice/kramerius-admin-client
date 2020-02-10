@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProcessService } from '../../services/process.service'
-import { Filters } from './filters';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatDialog } from '@angular/material';
+import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
+import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
+import { ApiService, ProcessesParams } from 'src/app/services/api.service';
+import { Batch } from 'src/app/models/batch.model';
+import { Process } from 'src/app/models/process.model';
 
 
 @Component({
@@ -19,18 +22,10 @@ export class ProcessesComponent implements OnInit {
   // Filters
   dateFrom;
   dateTo;
-  filters: Filters = {
-    owner: '',
-    state: ''
-  };
+  selectedOwner = '';
+  selectedState = '';
 
-  states = [
-    'RUNNING',
-    'FINISHED',
-    'FAILED',
-    'KILLED',
-    'PLANNED',
-  ];
+  states = [];
 
   owners = [
     'rehan',
@@ -39,20 +34,22 @@ export class ProcessesComponent implements OnInit {
     'krameriusAdmin'
   ];
 
-  batches: any[];
+  batches: Batch[];
 
-  constructor(private service: ProcessService) { }
+  constructor(private api: ApiService, private dialog: MatDialog) {
+    for (const state of Process.STATES) {
+      this.states.push( { key: state, label: Process.stateLabel(state) })
+    }
+  }
 
   ngOnInit() {
     this.reload();
   }
 
   reload() {
-    const limit = this.pageSize;
-    const offset = this.pageIndex * this.pageSize;
-    this.service.getProcesses(offset, limit, this.filters).subscribe(response => {
-      this.batches = response['batches'];
-      this.resultCount = response['total_size'];
+    this.api.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
+      this.batches = batches;
+      this.resultCount = total
     });
   }
 
@@ -65,7 +62,7 @@ export class ProcessesComponent implements OnInit {
         fail: false,
       }
     }
-    this.service.scheduleProcess(params).subscribe(response => {
+    this.api.scheduleProcess(params).subscribe(response => {
       this.reload();
     });
   }
@@ -79,36 +76,85 @@ export class ProcessesComponent implements OnInit {
     this.reload();
   }
 
-  onDateFromChanged() {
-    this.filters.from = new Date(String(this.dateFrom));
-  }
-
-  onDateToChanged() {
-    this.filters.until = new Date(String(this.dateTo));
-  }
-
   clearDateFrom() {
     this.dateFrom = null;
-    this.filters.from = null;
   }
 
   clearDateTo() {
     this.dateTo = null;
-    this.filters.until = null;
   }
 
+
+  onRemove(batch: Batch) {
+    const data: SimpleDialogData = {
+      title: "Smazání procesu",
+      message: "Určitě chcete proces trvale smazat?",
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'default'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        // TODO: Delete process and reload data
+      }
+    });
+  }
+
+  onKill(batch: Batch) {
+    const data: SimpleDialogData = {
+      title: "Zrušení procesu",
+      message: "Určitě chcete zrušit celý proces?",
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'default'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        // TODO: kill process and reload data
+      }
+    });
+  }
 
 
   onSelectedOwnerChanged(event) {
     this.reload();
   }
 
-  toDurationInMs(start, end) {
-    if (start === null || end === null) {
-      return null;
+  private buildProcessesParams(): any {
+    const params = {
+      offset: this.pageIndex * this.pageSize,
+      limit: this.pageSize
+    } as ProcessesParams;
+    if (this.selectedState) {
+      params.state = this.selectedState;
     }
-    const result = Date.parse(end) - Date.parse(start);
-    return result;
+    if (this.selectedOwner) {
+      params.owner = this.selectedOwner;
+    }
+    if (this.dateFrom) {
+      params.from = new Date(String(this.dateFrom)).toISOString().slice(0, 19);
+    }
+    if (this.dateTo) {
+      params.until = new Date(String(this.dateTo)).toISOString().slice(0, 19);
+    }
+    return params;
   }
+
 
 }

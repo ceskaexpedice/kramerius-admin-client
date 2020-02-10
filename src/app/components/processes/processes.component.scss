@@ -55,13 +55,19 @@
       padding-right: 10px;
       word-break: break-all;
     }
-    .process-id {
-      width: 60px;
-    }
     .process-state {
-      width: 120px;
-      display: flex;
-      align-items:center ;
+      width: 110px;
+      margin-right: 16px;
+      .state-label {
+        color: #fff;
+        text-align: center;
+        height: 21px;
+        line-height: 22px;
+        margin-top: 13px;
+        border-radius: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
     }
     .process-datetime {
       width: 160px;
@@ -72,10 +78,19 @@
     .process-owner {
       width: 160px;
     }
+    .process-actions {
+      width: 40px;
+      .app-action-remove {
+        color: #999;
+        &:hover {
+          color: #333;
+        }
+      }
+    }
     .app-subprocess {
-      background: #f4f4f4;
+      background: #f6f6f6;
       .process-expand {
-        margin-left: -8px;
+        width: 103px;
       }
     }
   }

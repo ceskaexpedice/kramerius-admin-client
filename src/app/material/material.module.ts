@@ -20,6 +20,7 @@ import {
   MatPaginatorIntl,
   MatTooltipModule,
   MatSelectModule,
+  MatDialogModule
 } from '@angular/material';
 
 
@@ -38,7 +39,8 @@ const components = [
   MatTableModule,
   MatPaginatorModule,
   MatTooltipModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule
 ];
 
 const providers = [

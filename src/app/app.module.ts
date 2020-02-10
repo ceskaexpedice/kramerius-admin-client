@@ -12,7 +12,7 @@ import { ProcessesComponent } from './components/processes/processes.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { OmniauthComponent } from './components/account/omniauth/omniauth.component';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppSettings } from './services/app-settings';
 import { ApiService } from './services/api.service';
@@ -21,6 +21,9 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DatetimePipe } from './pipes/datetime.pipe';
+import { ProcessComponent } from './components/processes/process/process.component';
+import { SimpleDialogComponent } from './dialogs/simple-dialog/simple-dialog.component';
+import { AuthInterceptor } from './services/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { DatetimePipe } from './pipes/datetime.pipe';
     OmniauthComponent,
     DurationPipe,
     ShortenPipe,
-    DatetimePipe
+    DatetimePipe,
+    ProcessComponent,
+    SimpleDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,13 +56,17 @@ import { DatetimePipe } from './pipes/datetime.pipe';
         google: 'auth/google_oauth2'
       },
       oAuthWindowType: 'newWindow'
-    })   
+    })
   ],
   providers: [
     AngularTokenModule,
     AuthService,
     AppSettings,
-    ApiService
+    ApiService,
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
+  entryComponents: [
+    SimpleDialogComponent
   ],
   bootstrap: [AppComponent]
 })
