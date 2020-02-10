@@ -60,6 +60,8 @@
     }
     .process-state {
       width: 120px;
+      display: flex;
+      align-items:center ;
     }
     .process-datetime {
       width: 160px;

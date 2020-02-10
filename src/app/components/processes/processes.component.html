@@ -70,7 +70,15 @@
           </div>
           <div class="process-id">{{ batch.batch.id }}</div>
           <div class="process-name">{{ batch.processes[0].name }}</div>
-          <div class="process-state">{{ batch.batch.state }}</div>
+          <div class="process-state">
+             <!-- see https://material.io/resources/icons/?style=baseline -->
+             <mat-icon *ngIf="batch.batch.state=='PLANNED'">queue</mat-icon>
+             <mat-icon *ngIf="batch.batch.state=='RUNNING'">360</mat-icon>
+             <mat-icon *ngIf="batch.batch.state=='FINISHED'">done</mat-icon>
+             <mat-icon *ngIf="batch.batch.state=='FAILED'">error_outline</mat-icon>
+             <mat-icon *ngIf="batch.batch.state=='KILLED'">cancel</mat-icon>
+             <span>&nbsp;{{batch.batch.state}}</span>
+          </div>
           <div class="process-datetime">{{ batch.batch.planned | appDatetime }}</div>
           <div class="process-datetime">{{ batch.batch.started | appDatetime }}</div>
           <div class="process-datetime">{{ batch.batch.finished | appDatetime }}</div>
@@ -83,7 +91,17 @@
             <div class="process-expand"><mat-icon>arrow_right</mat-icon></div>
             <div class="process-id">{{ process.id }}</div>
             <div class="process-name">{{ process.name }}</div>
-            <div class="process-state">{{ process.state }}</div>
+            <div class="process-state">
+                <!-- see https://material.io/resources/icons/?style=baseline -->
+                <mat-icon *ngIf="process.state =='NOT_RUNNING'">queue</mat-icon>
+                <mat-icon *ngIf="process.state =='PLANNED'">queue</mat-icon>
+                <mat-icon *ngIf="process.state =='RUNNING'">360</mat-icon>
+                <mat-icon *ngIf="process.state =='FINISHED'">done</mat-icon>
+                <mat-icon *ngIf="process.state =='FAILED'">error_outline</mat-icon>
+                <mat-icon *ngIf="process.state =='KILLED'">cancel</mat-icon>
+                <mat-icon *ngIf="process.state =='WARNING'">error_outline</mat-icon>
+                <span>&nbsp;{{process.state }}</span>
+             </div>
             <div class="process-datetime">{{ process.planned | appDatetime }}</div>
             <div class="process-datetime">{{ process.started | appDatetime }}</div>
             <div class="process-datetime">{{ process.finished | appDatetime }}</div>
