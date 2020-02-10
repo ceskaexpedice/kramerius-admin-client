@@ -59,7 +59,18 @@
       width: 60px;
     }
     .process-state {
-      width: 120px;
+      width: 110px;
+      margin-right: 10px;
+      .state-label {
+        color: #fff;
+        text-align: center;
+        height: 21px;
+        line-height: 22px;
+        margin-top: 13px;
+        border-radius: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
     }
     .process-datetime {
       width: 160px;
@@ -80,9 +91,8 @@
       }
     }
     .app-subprocess {
-      background: #f4f4f4;
       .process-expand {
-        margin-left: -8px;
+        width: 103px;
       }
     }
   }

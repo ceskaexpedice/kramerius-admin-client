@@ -2,17 +2,17 @@
 
   <div class="app-actions">
 
-    <button class="app-action-btn" mat-raised-button (click)="scheduleProcess()" color="primary">Schedule Mock Process</button>
+    <button class="app-action-btn" mat-raised-button (click)="scheduleProcess()" color="primary">Spustit proces</button>
 
     <mat-form-field class="app-filter-state">
-      <mat-select placeholder="Stav" [(value)]="filters.state" (selectionChange)="onSelectedStateChanged($event)">
+      <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onSelectedStateChanged($event)">
         <mat-option value="">Vše</mat-option>
         <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="app-filter-owner">
-      <mat-select placeholder="Vlastník" [(value)]="filters.owner" (selectionChange)="onSelectedOwnerChanged($event)">
+      <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onSelectedOwnerChanged($event)">
         <mat-option value="">Vše</mat-option>
         <mat-option *ngFor="let owner of owners" [value]="owner">{{ owner }}</mat-option>
       </mat-select>
@@ -20,7 +20,7 @@
 
 
     <mat-form-field class="app-filter-date-from">
-      <input matInput [matDatepicker]="myDatepickerFrom" (dateInput)="onDateFromChanged()" placeholder="Od" [(ngModel)]='dateFrom' disabled>
+      <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom' disabled>
       <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
       <mat-datepicker disabled="false" #myDatepickerFrom></mat-datepicker>
     </mat-form-field>
@@ -30,7 +30,7 @@
 
 
     <mat-form-field class="app-filter-date-to">
-      <input matInput [matDatepicker]="myDatepickerTo" (dateInput)="onDateToChanged()" placeholder="Do" [(ngModel)]='dateTo' disabled>
+      <input matInput [matDatepicker]="myDatepickerTo" placeholder="Do" [(ngModel)]='dateTo' disabled>
       <mat-datepicker-toggle matSuffix [for]="myDatepickerTo"></mat-datepicker-toggle>
       <mat-datepicker disabled="false" #myDatepickerTo></mat-datepicker>
     </mat-form-field>
@@ -62,44 +62,46 @@
     </div>
     <div class="scrollable app-table">
       <ng-container *ngFor="let batch of batches">
-        <a class="app-row" [routerLink]="['/processes', batch.batch.id]">
+        <a class="app-row" [routerLink]="['/processes', batch.id]">
           <div class="process-expand">
-            <button (click)="batch.expanded = !batch.expanded" *ngIf="batch.processes.length > 1" mat-icon-button
+            <button (click)="batch.expanded = !batch.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="batch.hasSubprocesses()" mat-icon-button
               color="primary" matTooltip="Zobrazit podprocesy">
               <mat-icon>{{ batch.expanded ? 'remove' : 'add' }}</mat-icon>
             </button>
           </div>
-          <div class="process-id">{{ batch.batch.id }}</div>
-          <div class="process-name">{{ batch.processes[0].name }}</div>
-          <div class="process-state">{{ batch.batch.state }}</div>
-          <div class="process-datetime">{{ batch.batch.planned | appDatetime }}</div>
-          <div class="process-datetime">{{ batch.batch.started | appDatetime }}</div>
-          <div class="process-datetime">{{ batch.batch.finished | appDatetime }}</div>
-          <div class="process-duration">
-            {{ toDurationInMs(batch.batch.started, batch.batch.finished) | appDuration }}</div>
-          <div class="process-owner">{{ batch.batch.owner_login }}</div>
+          <div class="process-id">{{ batch.id }}</div>
+          <div class="process-name">{{ batch.getName() }}</div>
+          <div class="process-state">
+            <div class="state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}</div>
+          </div>
+          <div class="process-datetime">{{ batch.planned | appDatetime }}</div>
+          <div class="process-datetime">{{ batch.started | appDatetime }}</div>
+          <div class="process-datetime">{{ batch.finished | appDatetime }}</div>
+          <div class="process-duration">{{ batch.getDuration() | appDuration }}</div>
+          <div class="process-owner">{{ batch.owner }}</div>
           <div class="process-actions">
-            <button class="app-action-remove" (click)="onRemoveProcess(batch.batch.id); $event.preventDefault(); $event.stopPropagation()" mat-icon-button color="#aaa" matTooltip="Smazat podproces" matTooltipPosition="below">
+            <button *ngIf="batch.isDeletable()" class="app-action-remove" (click)="onRemove(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below">
               <mat-icon>delete</mat-icon>
+            </button>
+            <button *ngIf="batch.isKillable()" class="app-action-remove" (click)="onKill(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below">
+              <mat-icon>cancel</mat-icon>
             </button>
           </div>
         </a>
         <ng-container *ngIf="batch.expanded">
           <a *ngFor="let process of batch.processes" class="app-row app-subprocess" [routerLink]="['/processes', process.id]">
-            <div class="process-expand"><mat-icon>arrow_right</mat-icon></div>
+            <div class="process-expand"></div>
             <div class="process-id">{{ process.id }}</div>
             <div class="process-name">{{ process.name }}</div>
-            <div class="process-state">{{ process.state }}</div>
+            <div class="process-state">
+              <div class="state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}</div>
+            </div>
             <div class="process-datetime">{{ process.planned | appDatetime }}</div>
             <div class="process-datetime">{{ process.started | appDatetime }}</div>
             <div class="process-datetime">{{ process.finished | appDatetime }}</div>
-            <div class="process-duration">
-              {{ toDurationInMs(process.started, process.finished) | appDuration }}</div>
+            <div class="process-duration">{{ process.getDuration() | appDuration }}</div>
             <div class="process-owner">{{ process.owner_login }}</div>
             <div class="process-actions">
-              <button (click)="onRemoveProcess(process.id); $event.preventDefault(); $event.stopPropagation()" mat-icon-button color="warn" matTooltip="Smazat podproces" matTooltipPosition="below">
-                <mat-icon>remove</mat-icon>
-              </button>
             </div>
           </a>
         </ng-container>
