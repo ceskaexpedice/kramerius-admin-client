@@ -78,7 +78,7 @@
           <div class="process-datetime">{{ batch.started | appDatetime }}</div>
           <div class="process-datetime">{{ batch.finished | appDatetime }}</div>
           <div class="process-duration">{{ batch.getDuration() | appDuration }}</div>
-          <div class="process-owner">{{ batch.owner }}</div>
+          <div class="process-owner">{{ batch.ownerName }}</div>
           <div class="process-actions">
             <button *ngIf="batch.isDeletable()" class="app-action-remove" (click)="onRemove(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below">
               <mat-icon>delete</mat-icon>

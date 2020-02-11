@@ -7,7 +7,8 @@ export class Batch {
   started: Date;
   finished: Date;
   planned: Date;
-  owner: string;
+  ownerId: string;
+  ownerName: string;
   processes: Process[];
   expanded = false;
 
@@ -20,7 +21,8 @@ export class Batch {
     const jProcesses = json['processes'];
     batch.id = jBatch['id'];
     batch.state = jBatch['state'];
-    batch.owner = jBatch['owner_login'];
+    batch.ownerId = jBatch['owner_id'];
+    batch.ownerName = jBatch['owner_name'];
     if (jBatch['started']) {
       batch.started = new Date(jBatch['started']);
     }
