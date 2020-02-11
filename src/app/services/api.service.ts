@@ -31,18 +31,11 @@ export class ApiService {
   }
 
   getProcesses(params: ProcessesParams): Observable<[Batch[], number]> {
-    return this.get('/processes/batches', params).pipe(map(response => [Batch.fromJsonArray(response['batches']), response['total_size']]));
+    return this.get('/admin/processes/batches', params).pipe(map(response => [Batch.fromJsonArray(response['batches']), response['total_size']]));
   }
 
   scheduleProcess(definition): Observable<any> {
-    const login = "krameriusAdmin";
-    const password = "kramadam";
-    const options = {
-      headers: {
-        'Authorization': 'Basic ' + btoa(`${login}:${password}`)
-      }
-    };
-    return this.post('/processes', definition, options);
+    return this.post('/admin/processes', definition);
   }
 
 }
