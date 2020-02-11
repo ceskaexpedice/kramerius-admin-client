@@ -14,7 +14,7 @@
     <mat-form-field class="app-filter-owner">
       <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onSelectedOwnerChanged($event)">
         <mat-option value="">Vše</mat-option>
-        <mat-option *ngFor="let owner of owners" [value]="owner">{{ owner }}</mat-option>
+        <mat-option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</mat-option>
       </mat-select>
     </mat-form-field>
 

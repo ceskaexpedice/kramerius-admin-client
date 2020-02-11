@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
 import { map } from 'rxjs/operators';
+import { ProcessOwner } from '../models/process-owner.model';
 
 @Injectable()
 export class ApiService {
@@ -32,6 +33,10 @@ export class ApiService {
 
   getProcesses(params: ProcessesParams): Observable<[Batch[], number]> {
     return this.get('/admin/processes/batches', params).pipe(map(response => [Batch.fromJsonArray(response['batches']), response['total_size']]));
+  }
+
+  getProcessOwners(): Observable<ProcessOwner[]> {
+    return this.get('/admin/processes/owners').pipe(map(response => ProcessOwner.fromJsonArray(response['owners'])));
   }
 
   scheduleProcess(definition): Observable<any> {

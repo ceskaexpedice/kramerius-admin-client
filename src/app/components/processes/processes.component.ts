@@ -5,6 +5,7 @@ import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dial
 import { ApiService, ProcessesParams } from 'src/app/services/api.service';
 import { Batch } from 'src/app/models/batch.model';
 import { Process } from 'src/app/models/process.model';
+import { ProcessOwner } from 'src/app/models/process-owner.model';
 
 
 @Component({
@@ -26,19 +27,12 @@ export class ProcessesComponent implements OnInit {
   selectedState = '';
 
   batch_states = [];
-
-  owners = [
-    'rehan',
-    'editor',
-    'hanis',
-    'krameriusAdmin'
-  ];
-
+  owners: ProcessOwner[] = []
   batches: Batch[];
 
   constructor(private api: ApiService, private dialog: MatDialog) {
     for (const state of Process.BATCH_STATES) {
-      this.batch_states.push( { key: state, label: Process.stateLabel(state) })
+      this.batch_states.push({ key: state, label: Process.stateLabel(state) })
     }
   }
 
@@ -50,6 +44,9 @@ export class ProcessesComponent implements OnInit {
     this.api.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
       this.batches = batches;
       this.resultCount = total
+    });
+    this.api.getProcessOwners().subscribe((owners: ProcessOwner[]) => {
+      this.owners = owners;
     });
   }
 
