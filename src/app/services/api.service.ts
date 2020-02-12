@@ -43,6 +43,10 @@ export class ApiService {
     return this.post('/admin/processes', definition);
   }
 
+  deleteProcess(batchId : number) {
+    return this.delete('/admin/processes/batches/by_first_process_id/' + batchId);
+  }
+
 }
 
 
