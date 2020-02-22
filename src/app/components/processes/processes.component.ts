@@ -15,6 +15,15 @@ import { ProcessOwner } from 'src/app/models/process-owner.model';
 })
 export class ProcessesComponent implements OnInit {
 
+  //TODO: should be in it's own component
+  //Test process
+  testProcessFinalStates = ['FINISHED', 'FAILED', 'WARNING', 'RANDOM'];
+  selectedtestProcessFinalState = this.testProcessFinalStates[0];
+  testProcessProcessesInBatch = [1, 2, 3, 4, 5]
+  selectedTestProcessProcessesInBatch = this.testProcessProcessesInBatch[0];
+  testProcessDuration = [1, 5, 10, 30, 60, 120]
+  selectedTestProcessDuration = this.testProcessDuration[0];
+
   // Paginator
   resultCount = 0;
   pageIndex = 0;
@@ -54,9 +63,9 @@ export class ProcessesComponent implements OnInit {
     const params = {
       type: 'test',
       params: {
-        duration: '5',
-        processesInBatch: '3',
-        fail: false,
+        duration: this.selectedTestProcessDuration,
+        processesInBatch: this.selectedTestProcessProcessesInBatch,
+        finalState: this.selectedtestProcessFinalState,
       }
     }
     this.api.scheduleProcess(params).subscribe(response => {

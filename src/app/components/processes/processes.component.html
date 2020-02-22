@@ -2,7 +2,30 @@
 
   <div class="app-actions">
 
-    <button class="app-action-btn" mat-raised-button (click)="scheduleProcess()" color="primary">Spustit proces</button>
+    <!-- spusteni testovaciho procesu -->
+    
+    <mat-form-field class="app-schedule-test-process-final-state">
+      <mat-select placeholder="Konečný stav" [(value)]="selectedtestProcessFinalState">
+        <mat-option *ngFor="let state of testProcessFinalStates" [value]="state">{{ state }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="app-schedule-test-process-processes-in-batch">
+      <mat-select placeholder="Procesů v dávce" [(value)]="selectedTestProcessProcessesInBatch">
+        <mat-option *ngFor="let processes of testProcessProcessesInBatch" [value]="processes">{{ processes }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="app-schedule-test-process-duration">
+      <mat-select placeholder="Trvání procesu" [(value)]="selectedTestProcessDuration">
+        <mat-option *ngFor="let duration of testProcessDuration" [value]="duration">{{ duration }} s</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button class="app-schedule-test-process-btn" mat-raised-button (click)="scheduleProcess()" color="primary">Spustit testovací proces</button>
+
+    <!-- filtrovani seznamu procesu  -->
 
     <mat-form-field class="app-filter-state">
       <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onSelectedStateChanged($event)">
@@ -24,7 +47,8 @@
       <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
       <mat-datepicker disabled="false" #myDatepickerFrom></mat-datepicker>
     </mat-form-field>
-    <button *ngIf="!!dateFrom" class="app-filter-clear" mat-icon-button matTooltip="Zrušit datum od" (click)="clearDateFrom()">
+    <button *ngIf="!!dateFrom" class="app-filter-clear" mat-icon-button matTooltip="Zrušit datum od"
+      (click)="clearDateFrom()">
       <mat-icon>clear</mat-icon>
     </button>
 
@@ -35,7 +59,8 @@
       <mat-datepicker disabled="false" #myDatepickerTo></mat-datepicker>
     </mat-form-field>
 
-    <button *ngIf="!!dateTo" class="app-filter-clear" mat-icon-button matTooltip="Zrušit datum do" (click)="clearDateTo()">
+    <button *ngIf="!!dateTo" class="app-filter-clear" mat-icon-button matTooltip="Zrušit datum do"
+      (click)="clearDateTo()">
       <mat-icon>clear</mat-icon>
     </button>
 
@@ -64,8 +89,8 @@
       <ng-container *ngFor="let batch of batches">
         <a class="app-row" [routerLink]="['/processes', batch.id]">
           <div class="process-expand">
-            <button (click)="batch.expanded = !batch.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="batch.hasSubprocesses()" mat-icon-button
-              color="primary" matTooltip="Zobrazit podprocesy">
+            <button (click)="batch.expanded = !batch.expanded; $event.preventDefault(); $event.stopPropagation()"
+              *ngIf="batch.hasSubprocesses()" mat-icon-button color="primary" matTooltip="Zobrazit podprocesy">
               <mat-icon>{{ batch.expanded ? 'remove' : 'add' }}</mat-icon>
             </button>
           </div>
@@ -80,21 +105,27 @@
           <div class="process-duration">{{ batch.getDuration() | appDuration }}</div>
           <div class="process-owner">{{ batch.ownerName }}</div>
           <div class="process-actions">
-            <button *ngIf="batch.isDeletable()" class="app-action-remove" (click)="onRemove(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below">
+            <button *ngIf="batch.isDeletable()" class="app-action-remove"
+              (click)="onRemove(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button
+              matTooltip="Smazat proces" matTooltipPosition="below">
               <mat-icon>delete</mat-icon>
             </button>
-            <button *ngIf="batch.isKillable()" class="app-action-remove" (click)="onKill(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below">
+            <button *ngIf="batch.isKillable()" class="app-action-remove"
+              (click)="onKill(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button
+              matTooltip="Zrušit proces" matTooltipPosition="below">
               <mat-icon>cancel</mat-icon>
             </button>
           </div>
         </a>
         <ng-container *ngIf="batch.expanded">
-          <a *ngFor="let process of batch.processes" class="app-row app-subprocess" [routerLink]="['/processes', process.id]">
+          <a *ngFor="let process of batch.processes" class="app-row app-subprocess"
+            [routerLink]="['/processes', process.id]">
             <div class="process-expand"></div>
             <div class="process-id">{{ process.id }}</div>
             <div class="process-name">{{ process.name }}</div>
             <div class="process-state">
-              <div class="state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}</div>
+              <div class="state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}
+              </div>
             </div>
             <div class="process-datetime">{{ process.planned | appDatetime }}</div>
             <div class="process-datetime">{{ process.started | appDatetime }}</div>
@@ -106,13 +137,13 @@
           </a>
         </ng-container>
       </ng-container>
-      </div>
-
-      <div class="paginator-wrapper">
-        <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
-          (page)="onPageChanged($event)" >
-        </mat-paginator>
-      </div>
     </div>
 
+    <div class="paginator-wrapper">
+      <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
+        (page)="onPageChanged($event)">
+      </mat-paginator>
+    </div>
   </div>
+
+</div>

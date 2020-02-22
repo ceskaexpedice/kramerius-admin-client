@@ -4,9 +4,26 @@
   .app-actions {
     height: 62px;
     overflow: hidden;
-    .app-action-btn {
+    .app-schedule-test-process-btn {
       float: right;
-      margin-top: 8px;;
+      margin-top: 8px;
+      margin-right: 16px;
+      margin-left: 16px;
+    }
+    .app-schedule-test-process-final-state {
+      float: right;
+      margin-right: 16px;
+      width: 100px;
+    }
+    .app-schedule-test-process-processes-in-batch {
+      float: right;
+      margin-right: 16px;
+      width: 100px;
+    }
+    .app-schedule-test-process-duration {
+      float: right;
+      margin-right: 16px;
+      width: 80px;
     }
     .app-filter-state {
       margin-right: 16px;
