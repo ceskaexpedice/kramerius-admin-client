@@ -40,6 +40,7 @@ export class Process {
   ];
 
   id: number;
+  uuid: string;
   state: string;
   started: Date;
   finished: Date;
@@ -79,6 +80,7 @@ export class Process {
   static fromJson(json): Process {
     const process = new Process();
     process.id = json['id'];
+    process.uuid = json['uuid'];
     process.state = json['state'];
     process.name = json['name'];
     if (json['started']) {

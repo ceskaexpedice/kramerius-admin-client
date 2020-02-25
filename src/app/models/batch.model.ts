@@ -33,8 +33,10 @@ export class Batch {
       batch.planned = new Date(jBatch['planned']);
     }
     batch.processes = [];
-    for (const process of jProcesses) {
-      batch.processes.push(Process.fromJson(process));
+    if (jProcesses) {
+      for (const process of jProcesses) {
+        batch.processes.push(Process.fromJson(process));
+      }
     }
     return batch;
   }

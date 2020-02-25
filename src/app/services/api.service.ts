@@ -3,8 +3,9 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
+import { Process } from '../models/process.model';
 
 @Injectable()
 export class ApiService {
@@ -32,7 +33,17 @@ export class ApiService {
   }
 
   getProcesses(params: ProcessesParams): Observable<[Batch[], number]> {
-    return this.get('/admin/processes/batches', params).pipe(map(response => [Batch.fromJsonArray(response['batches']), response['total_size']]));
+    return this.get('/admin/processes/batches', params).pipe(
+      //tap(response => console.log(response)),
+      map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
+    );
+  }
+
+  getProcess(processId: number): Observable<[Batch, Process]> {
+    return this.get('/admin/processes/by_process_id/' + processId).pipe(
+      //tap(response => console.log(response)),
+      map(response => [Batch.fromJson(response), Process.fromJson(response['process'])])
+    );
   }
 
   getProcessOwners(): Observable<ProcessOwner[]> {
@@ -43,8 +54,8 @@ export class ApiService {
     return this.post('/admin/processes', definition);
   }
 
-  deleteProcess(batchId : number) {
-    return this.delete('/admin/processes/batches/by_first_process_id/' + batchId);
+  deleteProcess(firstProcessId: number) {
+    return this.delete('/admin/processes/batches/by_first_process_id/' + firstProcessId);
   }
 
 }
