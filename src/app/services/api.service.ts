@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
 import { map, tap } from 'rxjs/operators';
@@ -36,6 +36,26 @@ export class ApiService {
     return this.get('/admin/processes/batches', params).pipe(
       //tap(response => console.log(response)),
       map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
+    );
+  }
+
+  getProcessLogsOut(procesUuid: string, offset: number, limit: number): Observable<any> {
+    return this.get(`/admin/processes/by_process_uuid/${procesUuid}/logs/out`, {
+      'offset': offset,
+      'limit': limit
+    }).pipe(
+      tap(response => console.log(response)),
+      //map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
+    );
+  }
+
+  getProcessLogsErr(procesUuid: string, offset: number, limit: number): Observable<any> {
+    return this.get(`/admin/processes/by_process_uuid/${procesUuid}/logs/err`, {
+      'offset': offset,
+      'limit': limit
+    }).pipe(
+      tap(response => console.log(response)),
+      //map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
     );
   }
 

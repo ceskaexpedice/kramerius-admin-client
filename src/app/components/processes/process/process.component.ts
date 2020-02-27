@@ -12,7 +12,7 @@ import { Batch } from 'src/app/models/batch.model';
 export class ProcessComponent implements OnInit {
 
   processId;
-  
+
   batch: Batch;
   process: Process;
 
@@ -27,10 +27,30 @@ export class ProcessComponent implements OnInit {
           ([batch, process]: [Batch, Process]) => {
             this.batch = batch;
             this.process = process;
-            //TODO: fetch initial few lines of process's SOUT and SERR logs
+            //TODO: showing logs (out or err) with pagination in own component
+            this.fetchLogsOut();
+            this.fetchLogsErr();
           }
         );
     })
+  }
+
+  fetchLogsOut() {
+    const offset = 0;
+    const limit = 4096;
+    this.api.getProcessLogsOut(this.process.uuid, offset, limit).subscribe(result => {
+      //TODO: zobrazit
+      console.log(result);
+    });
+  }
+
+  fetchLogsErr() {
+    const offset = 0;
+    const limit = 4096;
+    this.api.getProcessLogsErr(this.process.uuid, offset, limit).subscribe(result => {
+      //TODO: zobrazit
+      console.log(result);
+    });
   }
 
 }
