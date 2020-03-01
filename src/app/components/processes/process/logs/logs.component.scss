@@ -1,0 +1,14 @@
+.app-process-logs-data {
+    height: calc(100% - 60px);
+    .scrollable {
+      max-height: calc(100% - 106px);
+      overflow: auto;
+    }
+    width: 150px;
+}
+
+.app-process-logs-line {
+    white-space: pre;
+    width: 150px;
+    overflow-wrap: normal;
+}

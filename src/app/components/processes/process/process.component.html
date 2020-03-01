@@ -1,3 +1,8 @@
 <div class="app-process">
-  Process {{ processId }} <i *ngIf="process">with uuid {{process.uuid}}</i>
+  Process {{ processId }}
+  <div *ngIf="process">
+    Stav: {{process.state}}
+    <h1>Logy</h1>
+    <app-process-logs [process]="process"></app-process-logs>
+  </div>
 </div>

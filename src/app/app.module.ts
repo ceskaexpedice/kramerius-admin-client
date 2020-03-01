@@ -24,6 +24,7 @@ import { DatetimePipe } from './pipes/datetime.pipe';
 import { ProcessComponent } from './components/processes/process/process.component';
 import { SimpleDialogComponent } from './dialogs/simple-dialog/simple-dialog.component';
 import { AuthInterceptor } from './services/auth-interceptor';
+import { LogsComponent } from './components/processes/process/logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AuthInterceptor } from './services/auth-interceptor';
     ShortenPipe,
     DatetimePipe,
     ProcessComponent,
-    SimpleDialogComponent
+    SimpleDialogComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,

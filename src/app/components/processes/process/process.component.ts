@@ -27,30 +27,9 @@ export class ProcessComponent implements OnInit {
           ([batch, process]: [Batch, Process]) => {
             this.batch = batch;
             this.process = process;
-            //TODO: showing logs (out or err) with pagination in own component
-            this.fetchLogsOut();
-            this.fetchLogsErr();
           }
         );
     })
-  }
-
-  fetchLogsOut() {
-    const offset = 0;
-    const limit = 4096;
-    this.api.getProcessLogsOut(this.process.uuid, offset, limit).subscribe(result => {
-      //TODO: zobrazit
-      console.log(result);
-    });
-  }
-
-  fetchLogsErr() {
-    const offset = 0;
-    const limit = 4096;
-    this.api.getProcessLogsErr(this.process.uuid, offset, limit).subscribe(result => {
-      //TODO: zobrazit
-      console.log(result);
-    });
   }
 
 }
