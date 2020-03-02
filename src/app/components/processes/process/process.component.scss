@@ -3,6 +3,27 @@
   padding: 16px;
 }
 
+.app-process-title {
+  height: 100%;
+  margin: 8px;
+}
+
 .app-log-tab-group {
   height: 500px;
+}
+
+
+.app-process-state {
+  width: 110px;
+  margin-right: 16px;
+  .app-state-label {
+    color: #fff;
+    text-align: center;
+    height: 21px;
+    line-height: 22px;
+    margin-top: 13px;
+    border-radius: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
 }

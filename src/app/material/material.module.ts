@@ -3,6 +3,7 @@ import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-mo
 import { MatPaginatorIntlCz } from './mat-paginator-intl-cz';
 
 import {
+  MatCardModule,
   MatToolbarModule,
   MatButtonModule,
   MatIconModule,
@@ -26,6 +27,7 @@ import {
 
 
 const components = [
+  MatCardModule,
   MatButtonModule,
   MatToolbarModule,
   MatButtonModule,
