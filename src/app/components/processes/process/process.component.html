@@ -1,8 +1,21 @@
 <div class="app-process">
   Process {{ processId }}
+
   <div *ngIf="process">
+    id: {{process.id}}
+    <br>
+    uuid: {{process.uuid}}
+    <br>
     Stav: {{process.state}}
-    <h1>Logy</h1>
-    <app-process-logs [process]="process"></app-process-logs>
+
+    <h2>Logy</h2>
+    <mat-tab-group>
+      <mat-tab label="Standardní">
+        <app-process-logs [process]="process" [logType]="'out'"></app-process-logs>
+      </mat-tab>
+      <mat-tab label="Chybové">
+        <app-process-logs [process]="process" [logType]="'err'"></app-process-logs>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

@@ -39,18 +39,8 @@ export class ApiService {
     );
   }
 
-  getProcessLogsOut(procesUuid: string, offset: number, limit: number): Observable<any> {
-    return this.get(`/admin/processes/by_process_uuid/${procesUuid}/logs/out`, {
-      'offset': offset,
-      'limit': limit
-    }).pipe(
-      tap(response => console.log(response)),
-      //map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
-    );
-  }
-
-  getProcessLogsErr(procesUuid: string, offset: number, limit: number): Observable<any> {
-    return this.get(`/admin/processes/by_process_uuid/${procesUuid}/logs/err`, {
+  getProcessLogs(procesUuid: string, logType: string, offset: number, limit: number): Observable<any> {
+    return this.get(`/admin/processes/by_process_uuid/${procesUuid}/logs/${logType}`, {
       'offset': offset,
       'limit': limit
     }).pipe(

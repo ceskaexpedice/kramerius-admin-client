@@ -1,14 +1,6 @@
-
-id: {{process.id}}
-<br>
-uuid: {{process.uuid}}
-<br>
-total: {{resultCount}} B
-<br>
-
 <div class="paginator-wrapper">
-    <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize" [showFirstLastButtons]="true"
-        (page)="onPageChanged($event)">
+    <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
+        [showFirstLastButtons]="true" (page)="onPageChanged($event)">
     </mat-paginator>
 </div>
 
