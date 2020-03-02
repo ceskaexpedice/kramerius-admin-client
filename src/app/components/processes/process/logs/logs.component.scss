@@ -1,14 +1,19 @@
 .app-process-logs-data {
-    height: calc(100% - 60px);
+    //height: calc(100% - 60px);
+    height: 1000px;
     .scrollable {
       max-height: calc(100% - 106px);
       overflow: auto;
     }
-    width: 150px;
+    //width: 150px;
+    
+    background-color: #fff;
+    padding: 16px;
+    overflow-x: clip;
+    overflow-y: scroll;
 }
 
 .app-process-logs-line {
     white-space: pre;
     width: 150px;
-    overflow-wrap: normal;
 }
