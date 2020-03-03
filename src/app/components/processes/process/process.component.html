@@ -3,62 +3,62 @@
 
   <div *ngIf="process">
     <h2 class="app-process-title">{{process.name}}</h2>
-    <br>
-
-    <mat-card style="width:500px">
-      <mat-card-header>
-        <!-- <div mat-card-avatar class="example-header-image"></div> -->
-        <mat-card-title>Proces</mat-card-title>
-        <!-- <mat-card-subtitle><div class="app-state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}
-        </div></mat-card-subtitle> -->
-        <mat-card-subtitle>{{process.getStateLabel()}}</mat-card-subtitle>
-        <!-- <mat-card-subtitle>{{process.name}}</mat-card-subtitle> -->
-      </mat-card-header>
-
-      <!-- <h1>Proces</h1> -->
-      <mat-card-content>
-        <!-- <div class="app-process-state">
+    
+    <div fxLayout="row">
+      <!-- karta procesu -->
+      <mat-card class="app-card">
+        <div class="app-card-header">Proces</div>
+        <div class="app-state">
           <div class="app-state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}
           </div>
-        </div> -->
-        <p *ngIf="process.planned">
-          Naplánováno: {{process.planned | appDatetime}}
-        </p>
-        <p *ngIf="process.started">
-          Spuštěno: {{process.started | appDatetime}}
-        </p>
-        <p *ngIf="process.finished">
-          Ukončeno: {{process.finished | appDatetime}}
-        </p>
-        <p *ngIf="process.getDuration()">
-          Trvání: {{process.getDuration() | appDuration}}
-        </p>
-      </mat-card-content>
-    </mat-card>
-
-    <br>
-    
-    <mat-card style="width:500px">
-      <h1>Dávka</h1>
-      <div>{{batch.name}}</div>
-      <div class="app-process-state">
-        <div class="app-state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}
         </div>
-      </div>
-      <div *ngIf="batch.planned">
-        Naplánováno: {{batch.planned | appDatetime}}
-      </div>
-      <div *ngIf="batch.started">
-        Spuštěno: {{batch.started | appDatetime}}
-      </div>
-      <div *ngIf="batch.finished">
-        Ukončeno: {{batch.finished | appDatetime}}
-      </div>
-      <div *ngIf="batch.getDuration()">
-        Trvání: {{batch.getDuration() | appDuration}}
-      </div>
-    </mat-card>
-
+        <div *ngIf="process.planned">
+          <div class="app-card-content-label">Naplánován</div>
+          <div class="app-card-content-value">{{process.planned | appDatetime}}</div>
+        </div>
+        <div *ngIf="process.started">
+          <div class="app-card-content-label">Spuštěn</div>
+          <div class="app-card-content-value">{{process.started | appDatetime}}</div>
+        </div>
+        <div *ngIf="process.finished">
+          <div class="app-card-content-label">Ukončen</div>
+          <div class="app-card-content-value">{{process.finished | appDatetime}}</div>
+        </div>
+        <div *ngIf="process.getDuration()">
+          <div class="app-card-content-label">Trvání</div>
+          <div class="app-card-content-value">{{process.getDuration() | appDuration}}</div>
+        </div>
+      </mat-card>
+      <!-- karta davky -->
+      <mat-card class="app-card">
+        <div class="app-card-header">Dávka</div>
+        <div class="app-state">
+          <div class="app-state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}
+          </div>
+        </div>
+        <div *ngIf="batch.planned">
+          <div class="app-card-content-label">Naplánována</div>
+          <div class="app-card-content-value">{{batch.planned | appDatetime}}</div>
+        </div>
+        <div *ngIf="batch.started">
+          <div class="app-card-content-label">Spuštěna</div>
+          <div class="app-card-content-value">{{batch.started | appDatetime}}</div>
+        </div>
+        <div *ngIf="batch.finished">
+          <div class="app-card-content-label">Ukončena</div>
+          <div class="app-card-content-value">{{batch.finished | appDatetime}}</div>
+        </div>
+        <div *ngIf="batch.getDuration()">
+          <div class="app-card-content-label">Trvání</div>
+          <div class="app-card-content-value">{{batch.getDuration() | appDuration}}</div>
+        </div>
+        <mat-card-actions>
+          <!-- TODO: akce a filtrovani podle stavu procesu -->
+          <button mat-button>Zastavit</button>
+          <button mat-button>Smazat</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
     <h2>Logy procesu</h2>
     <mat-tab-group>

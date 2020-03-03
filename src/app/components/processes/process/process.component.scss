@@ -1,21 +1,23 @@
 .app-process {
-  height: 100%;
   padding: 16px;
 }
 
 .app-process-title {
-  height: 100%;
   margin: 8px;
 }
 
-.app-log-tab-group {
-  height: 500px;
+.app-card {
+  margin: 16px; 
+  min-width: 220px;
 }
 
+.app-card-header {
+  font-size: 140%;
+}
 
-.app-process-state {
+.app-state {
   width: 110px;
-  margin-right: 16px;
+  margin-bottom: 16px;
   .app-state-label {
     color: #fff;
     text-align: center;
@@ -27,3 +29,16 @@
     text-transform: uppercase;
   }
 }
+
+.app-card-content-label {
+  font-style: italic;
+  color: #999;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 85%;
+}
+
+.app-card-content-value {
+  margin-left: 16px;
+}
+
