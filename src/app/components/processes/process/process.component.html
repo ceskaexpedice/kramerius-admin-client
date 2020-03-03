@@ -3,7 +3,7 @@
 
   <div *ngIf="process">
     <h2 class="app-process-title">{{process.name}}</h2>
-    
+
     <div fxLayout="row">
       <!-- karta procesu -->
       <mat-card class="app-card">
@@ -53,9 +53,8 @@
           <div class="app-card-content-value">{{batch.getDuration() | appDuration}}</div>
         </div>
         <mat-card-actions>
-          <!-- TODO: akce a filtrovani podle stavu procesu -->
-          <button mat-button>Zastavit</button>
-          <button mat-button>Smazat</button>
+          <button mat-button *ngIf="batch.isKillable()" (click)="onKill(batch)">Zastavit</button>
+          <button mat-button *ngIf="batch.isDeletable()" (click)="onRemove(batch)">Smazat</button>
         </mat-card-actions>
       </mat-card>
     </div>

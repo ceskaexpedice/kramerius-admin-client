@@ -64,7 +64,7 @@ export class ApiService {
     return this.post('/admin/processes', definition);
   }
 
-  deleteProcess(firstProcessId: number) {
+  deleteProcessBatch(firstProcessId: number) {
     return this.delete('/admin/processes/batches/by_first_process_id/' + firstProcessId);
   }
 

@@ -93,8 +93,8 @@ export class ProcessesComponent implements OnInit {
 
   onRemove(batch: Batch) {
     const data: SimpleDialogData = {
-      title: "Smazání procesu",
-      message: "Určitě chcete proces trvale smazat?",
+      title: "Smazání procesu/dávky",
+      message: "Určitě chcete proces/dávku trvale smazat?",
       btn1: {
         label: 'Ano',
         value: 'yes',
@@ -109,7 +109,7 @@ export class ProcessesComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        this.api.deleteProcess(batch.id).subscribe(result => {
+        this.api.deleteProcessBatch(batch.id).subscribe(result => {
           //console.log(result)
           this.reload();
         });
@@ -119,8 +119,8 @@ export class ProcessesComponent implements OnInit {
 
   onKill(batch: Batch) {
     const data: SimpleDialogData = {
-      title: "Zrušení procesu",
-      message: "Určitě chcete zrušit celý proces?",
+      title: "Zrušení procesu/dávky",
+      message: "Určitě chcete zrušit proces/dávku?",
       btn1: {
         label: 'Ano',
         value: 'yes',
