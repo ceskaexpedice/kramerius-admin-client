@@ -1,10 +1,8 @@
-<div class="app-process">
+<div class="app-process" *ngIf="process">
   <!-- Process {{ processId }} -->
+    <h2>{{process.name}}</h2>
 
-  <div *ngIf="process">
-    <h2 class="app-process-title">{{process.name}}</h2>
-
-    <div fxLayout="row">
+    <div class="app-cards-left">
       <!-- karta procesu -->
       <mat-card class="app-card">
         <div class="app-card-header">Proces</div>
@@ -59,14 +57,17 @@
       </mat-card>
     </div>
 
-    <h2>Logy procesu</h2>
-    <mat-tab-group>
-      <mat-tab label="Standardní">
-        <app-process-logs [process]="process" [logType]="'out'"></app-process-logs>
-      </mat-tab>
-      <mat-tab label="Chybové">
-        <app-process-logs [process]="process" [logType]="'err'"></app-process-logs>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+    <div class="app-tabs">
+      <div class="app-tabs-headers">
+        <div class="app-tabs-header" [class.app-tabs-active]="log=='out'" (click)="log='out'">Standardní výstup</div>
+        <div class="app-tabs-header" [class.app-tabs-active]="log=='err'" (click)="log='err'">Chybový výstup</div>
+      </div>
+      <div class="app-tabs-content">
+        <app-process-logs *ngIf="log=='out'" [process]="process" [logType]="'out'"></app-process-logs>
+        <app-process-logs *ngIf="log=='err'" [process]="process" [logType]="'err'"></app-process-logs>
+      </div>
+    </div>
+
+
+
 </div>

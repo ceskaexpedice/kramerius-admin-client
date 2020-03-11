@@ -18,6 +18,7 @@ export class ProcessComponent implements OnInit {
 
   batch: Batch;
   process: Process;
+  log = 'out';
 
   constructor(private route: ActivatedRoute, private api: ApiService, private dialog: MatDialog, private router: Router) { }
 

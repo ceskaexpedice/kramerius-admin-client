@@ -1,3 +1,5 @@
+
+<div class="app-process-logs-wrapper">
 <div class="paginator-wrapper">
     <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
         [showFirstLastButtons]="true" (page)="onPageChanged($event)">
@@ -6,4 +8,5 @@
 
 <div class="app-process-logs-data">
     <div class="app-process-logs-line" *ngFor="let line of lines">{{ line }}</div>
+</div>
 </div>
