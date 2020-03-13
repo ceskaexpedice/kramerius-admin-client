@@ -32,10 +32,12 @@
     <textarea matInput [(ngModel)]="collection.description"></textarea>
   </mat-form-field>
 
+  <div class="app-label">Úplný popis sbírky</div>
   <ckeditor
     [config]="editorConfig" [editor]="editor"
     required [(ngModel)]="collection.content"
     data="" name="text"></ckeditor>
+
 </div>
 
 <mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">

@@ -16,7 +16,7 @@ export class EditCollectionComponent implements OnInit {
   editor = ClassicEditor; //BalloonEditor;
   
   editorConfig = {
-      placeholder: 'Popis sbírky',
+      // placeholder: 'Popis sbírky',
       language: 'cs',
       toolbar: [ 'heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'  ],
   };
