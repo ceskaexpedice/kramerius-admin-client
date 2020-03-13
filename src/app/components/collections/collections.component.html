@@ -1,9 +1,16 @@
-<div class="app-collections">
-
+<div class="breadcrumb-nav">
   <div class="app-actions">
-    <a class="app-new-collection-btn" mat-raised-button [routerLink]="['/collections', 'new']" color="primary">Vytvoři sbírku</a>
-
+    <a class="action-btn" mat-icon-button color="default" matTooltip="Vytvořit novou sbírku" [routerLink]="['/collections', 'new']" >
+      <mat-icon>add</mat-icon>
+    </a>    
+ </div>
+  <div class="app-nav">
+    <span>Sbírky</span>
   </div>
+</div>
+
+
+<div class="app-collections">
 
   <div class="app-collections-table">
     <div class="app-table">
@@ -38,3 +45,6 @@
   </div>
 
 </div>
+
+<mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
+</mat-spinner>

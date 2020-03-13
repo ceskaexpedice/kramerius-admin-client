@@ -7,18 +7,36 @@ import { map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
+import { ModsParserService } from './mods-parser.service';
 
 @Injectable()
 export class ApiService {
 
   private baseUrl: string;
 
-  constructor(private http: HttpClient, private appSettings: AppSettings) {
+  constructor(private http: HttpClient, private appSettings: AppSettings, private mods: ModsParserService) {
     this.baseUrl = this.appSettings.adminApiBase;
   }
 
+  private doGet(path: string, params, type = 'json'): Observable<Object> {
+    const options = {
+      params: params
+    };
+    if (type === 'text') {
+      options['responseType'] = 'text';
+      options['observe'] = 'response';
+    }
+    let url = this.baseUrl + path;
+    url = url.replace(/api\/v6\.0\/item/, "api/v5.0/item");
+    return this.http.get(url, options );
+  }
+
   private get(path: string, params = {}): Observable<Object> {
-    return this.http.get(this.baseUrl + path, { params: params });
+    return this.doGet(path, params);
+  }
+
+  private getText(path: string, params = {}): Observable<string> {
+    return this.doGet(path, params, 'text').pipe(map(response => response['body']));
   }
 
   private post(path: string, body, options = {}): Observable<Object> {
@@ -80,6 +98,35 @@ export class ApiService {
       map(response => [Collection.fromJsonArray(response['response']['docs']), parseInt(response['response']['numFound'], 10)]));
   }
 
+  getMods(uuid: string): Observable<string> {
+    return this.getText(`/item/${uuid}/streams/BIBLIO_MODS`);
+  }
+
+  getCollection(id: string): Observable<Collection> {
+    return this.getMods(id).pipe(map(response => this.mods.getCollection(response, id)));
+  }
+
+  createCollection(collection: Collection) {
+    const payload = {
+      name: collection.name,
+      description: collection.description,
+      content: collection.content
+    }
+    return this.post('/admin/collections', payload);
+  }
+
+  updateCollection(collection: Collection) {
+    const payload = {
+      name: collection.name,
+      description: collection.description,
+      content: collection.content
+    }
+    return this.put(`/admin/collections/${collection.id}`, payload);
+  }
+
+  deleteCollection(collection: Collection) {
+    return this.delete(`/admin/collections/${collection.id}`);
+  }
 
 }
 

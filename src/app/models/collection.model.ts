@@ -1,9 +1,9 @@
 export class Collection {
 
   id: string;
-  name: string;
-  description: string;
-  content: string;
+  name: string = "";
+  description: string = "";
+  content: string = "";
 
   createdAt: Date;
   modifiedAt: Date;

@@ -16,6 +16,7 @@ export class CollectionsComponent implements OnInit {
     resultCount = 0;
     pageIndex = 0;
     pageSize = 50;
+    state = 'none';
 
   constructor(private api: ApiService) { }
 
@@ -24,11 +25,13 @@ export class CollectionsComponent implements OnInit {
   }
 
   reload() {
+    this.state = 'loading';
     const offset = this.pageIndex * this.pageSize;
     const limit = this.pageSize;
     this.api.getCollections(offset, limit).subscribe(([collections, count]: [Collection[], number]) => {
       this.collections = collections;
       this.resultCount = count;
+      this.state = 'success';
     });
   }
 

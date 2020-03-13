@@ -1,13 +1,9 @@
 .app-collections {
-  height: 100%;
+  height: calc(100% - 50px);
   padding: 16px;
-  .app-actions {
-    height: 62px;
-    overflow: hidden;
-  }
 
   .app-collections-table {
-    height: calc(100% - 60px);
+    height: calc(100%);
     .app-scrollable {
       max-height: calc(100% - 106px);
       overflow: auto;

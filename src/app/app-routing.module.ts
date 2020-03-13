@@ -8,6 +8,7 @@ import { OmniauthComponent } from './components/account/omniauth/omniauth.compon
 import { ProcessComponent } from './components/processes/process/process.component';
 import { CollectionsComponent } from './components/collections/collections.component';
 import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
+import { CollectionComponent } from './components/collections/collection/collection.component';
 
 
 const routes: Routes = [
@@ -16,8 +17,9 @@ const routes: Routes = [
   { path: 'processes', component: ProcessesComponent, canActivate: [ AuthGuard ]},
   { path: 'login', component: LoginComponent },
   { path: 'omniauth', component: OmniauthComponent },
+  { path: 'collections/:id/edit', component: EditCollectionComponent, canActivate: [ AuthGuard ]},
   { path: 'collections/new', component: EditCollectionComponent, canActivate: [ AuthGuard ]},
-
+  { path: 'collections/:id', component: CollectionComponent, canActivate: [ AuthGuard ]},
   { path: 'collections', component: CollectionsComponent, canActivate: [ AuthGuard ]},
 
 

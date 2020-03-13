@@ -1,3 +1,42 @@
-<div class="app-edit-collection">
-  Edit collection
+<div class="breadcrumb-nav">
+  <div class="app-actions">
+    <button *ngIf="mode=='new'" class="action-btn" mat-icon-button color="default" matTooltip="Vytvořit sbírku" (click)="onSave()">
+      <mat-icon>save</mat-icon>
+    </button>
+    <button *ngIf="mode=='edit'" class="action-btn" mat-icon-button color="default" matTooltip="Uložit změny" (click)="onUpdate()">
+      <mat-icon>save</mat-icon>
+    </button>    
+ </div>
+  <div class="app-nav">
+      <a [routerLink]="['/collections']">Sbírky</a>
+      <mat-icon>chevron_right</mat-icon>
+      <ng-container *ngIf="mode=='new'">
+        <span>Nová sbírka</span>
+      </ng-container>
+      <ng-container *ngIf="mode=='edit'">
+        <a [routerLink]="['/collections', collection.id]">{{ collectionName }}</a>
+        <mat-icon>chevron_right</mat-icon>
+        <span>Úprava sbírky</span>
+      </ng-container>
+  </div>
 </div>
+
+<div class="app-edit-collection" *ngIf="collection">
+  <mat-form-field>
+    <mat-label>Název sbírky</mat-label>
+    <input matInput [(ngModel)]="collection.name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Krátky popis sbírky</mat-label>
+    <textarea matInput [(ngModel)]="collection.description"></textarea>
+  </mat-form-field>
+
+  <ckeditor
+    [config]="editorConfig" [editor]="editor"
+    required [(ngModel)]="collection.content"
+    data="" name="text"></ckeditor>
+</div>
+
+<mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
+</mat-spinner>

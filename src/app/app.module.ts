@@ -27,7 +27,10 @@ import { AuthInterceptor } from './services/auth-interceptor';
 import { LogsComponent } from './components/processes/process/logs/logs.component';
 import { CollectionsComponent } from './components/collections/collections.component';
 import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
-
+import { CKEditorModule} from '@ckeditor/ckeditor5-angular';
+import { ModsParserService } from './services/mods-parser.service';
+import { UIService } from './services/ui.service';
+import { CollectionComponent } from './components/collections/collection/collection.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +46,8 @@ import { EditCollectionComponent } from './components/collections/edit-collectio
     SimpleDialogComponent,
     LogsComponent,
     EditCollectionComponent,
-    CollectionsComponent
+    CollectionsComponent,
+    CollectionComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,7 @@ import { EditCollectionComponent } from './components/collections/edit-collectio
     ReactiveFormsModule,
     HttpClientModule,
     FlexLayoutModule,
+    CKEditorModule,
     AngularTokenModule.forRoot({
       apiBase: environment.cloudApiBase,
       oAuthBase: environment.cloudApiBase,
@@ -69,6 +74,8 @@ import { EditCollectionComponent } from './components/collections/edit-collectio
     AuthService,
     AppSettings,
     ApiService,
+    UIService,
+    ModsParserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [

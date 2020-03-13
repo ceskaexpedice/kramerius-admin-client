@@ -22,7 +22,8 @@ import {
   MatTooltipModule,
   MatSelectModule,
   MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 
@@ -44,7 +45,8 @@ const components = [
   MatTooltipModule,
   MatSelectModule,
   MatDialogModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSnackBarModule
 ];
 
 const providers = [

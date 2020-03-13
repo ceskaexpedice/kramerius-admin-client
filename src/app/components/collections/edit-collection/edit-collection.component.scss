@@ -1,4 +1,9 @@
+
 .app-edit-collection {
   padding: 20px;
-  height: 100%;
+  height: calc(100% - 50px);
+  overflow: auto;
+  mat-form-field {
+    width: 100%;
+  }
 }

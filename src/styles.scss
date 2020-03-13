@@ -108,8 +108,54 @@ body {
 
 
 
+.breadcrumb-nav {
+  background: $breadcrumb-color;
+  height: 50px;
+  padding-left: 20px;
+  -webkit-box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+  .app-nav {
+    color: #eeeeee;
+    .mat-icon {
+      margin: 13px;
+      opacity: 0.5;
+      display: block;
+      float: left;
+    }
+    span {
+      line-height: 50px;
+      display: block;
+      float: left;
+    }
+    a {
+      line-height: 50px;
+      display: block;
+      float: left;
+      text-decoration: none;
+      opacity: 0.75;
+      color: #fff;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .app-actions {
+    padding-top: 5px;
+    padding-right: 10px;
+    float: right;
+    color: #eeeeee;
+  }
+}
+
 
 
 .mat-dialog-actions {
   margin-bottom: -16px !important;
+}
+
+
+.center-spinner {
+  position: absolute !important;
+  top: 50%;
+  left: calc(50% - 30px);
 }
