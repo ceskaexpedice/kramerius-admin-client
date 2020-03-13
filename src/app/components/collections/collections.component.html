@@ -1,0 +1,40 @@
+<div class="app-collections">
+
+  <div class="app-actions">
+    <a class="app-new-collection-btn" mat-raised-button [routerLink]="['/collections', 'new']" color="primary">Vytvoři sbírku</a>
+
+  </div>
+
+  <div class="app-collections-table">
+    <div class="app-table">
+      <div class="app-row app-header">
+        <div class="collection-id">UUID</div>
+        <div class="collection-name">Název</div>
+        <div class="collection-description">Popis</div>
+        <div class="collection-datetime">Vytvořeno</div>
+        <div class="collection-datetime">Upraveno</div>
+        <div class="collection-actions"></div>
+      </div>
+    </div>
+    <div class="app-scrollable app-table">
+      <ng-container *ngFor="let collection of collections">
+        <a class="app-row" [routerLink]="['/collections', collection.id]">
+          <div class="collection-id">{{ collection.id }}</div>
+          <div class="collection-name">{{ collection.name }}</div>
+          <div class="collection-description">{{ collection.description | appShorten:10 }}</div>
+          <div class="collection-datetime">{{ collection.createdAt | appDatetime }}</div>
+          <div class="collection-datetime">{{ collection.modifiedAt | appDatetime }}</div>
+          <div class="collection-actions">
+          </div>
+        </a>
+      </ng-container>
+    </div>
+
+    <div class="paginator-wrapper">
+      <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
+        (page)="onPageChanged($event)">
+      </mat-paginator>
+    </div>
+  </div>
+
+</div>

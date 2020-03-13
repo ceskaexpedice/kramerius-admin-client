@@ -6,6 +6,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/account/login/login.component';
 import { OmniauthComponent } from './components/account/omniauth/omniauth.component';
 import { ProcessComponent } from './components/processes/process/process.component';
+import { CollectionsComponent } from './components/collections/collections.component';
+import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
 
 
 const routes: Routes = [
@@ -14,6 +16,10 @@ const routes: Routes = [
   { path: 'processes', component: ProcessesComponent, canActivate: [ AuthGuard ]},
   { path: 'login', component: LoginComponent },
   { path: 'omniauth', component: OmniauthComponent },
+  { path: 'collections/new', component: EditCollectionComponent, canActivate: [ AuthGuard ]},
+
+  { path: 'collections', component: CollectionsComponent, canActivate: [ AuthGuard ]},
+
 
 ];
 

@@ -1,0 +1,39 @@
+.app-collections {
+  height: 100%;
+  padding: 16px;
+  .app-actions {
+    height: 62px;
+    overflow: hidden;
+  }
+
+  .app-collections-table {
+    height: calc(100% - 60px);
+    .app-scrollable {
+      max-height: calc(100% - 106px);
+      overflow: auto;
+    }
+    .collection-id {
+      width: 310px;
+    }
+    .collection-name {
+      width: 400px;
+    }
+    .collection-description {
+      flex: 1;
+      padding-right: 10px;
+      word-break: break-all;
+    }
+    .collection-datetime {
+      width: 160px;
+    }
+    .collection-actions {
+      width: 40px;
+      .app-action-remove {
+        color: #999;
+        &:hover {
+          color: #333;
+        }
+      }
+    }
+  }
+}

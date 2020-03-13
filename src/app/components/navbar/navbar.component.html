@@ -7,6 +7,7 @@
   
 
   <ng-container *ngIf="auth.isLoggedIn()">   
+    <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
     <a routerLink="/processes" routerLinkActive="active" mat-button>Procesy</a>
     <a [matMenuTriggerFor]="profile_menu" mat-button>
         <img *ngIf="auth.user.image" class="app-profile-img" [src]="auth.user.image" id="btn-dropdown-profile">

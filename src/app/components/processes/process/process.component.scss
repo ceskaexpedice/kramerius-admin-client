@@ -4,7 +4,6 @@
 }
 
 h2 {
-  // margin: 4px 10px;
   margin: 0;
   padding: 0;
   font-size: 17px;
@@ -37,15 +36,10 @@ h2 {
 }
 
 .app-card-content-label {
-  // font-style: italic;
   color: #999;
   margin-top: 8px;
   margin-bottom: 4px;
   font-size: 85%;
-}
-
-.app-card-content-value {
-  // margin-left: 16px;
 }
 
 .app-cards-left {
@@ -63,7 +57,6 @@ h2 {
   overflow: hidden;
   .app-tabs-headers {
     height: 48px;
-    // overflow: hidden;
     position: relative;
     .app-tabs-header {
       top: 50px;

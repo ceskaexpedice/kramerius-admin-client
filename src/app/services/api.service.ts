@@ -6,6 +6,7 @@ import { Batch } from '../models/batch.model';
 import { map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
+import { Collection } from '../models/collection.model';
 
 @Injectable()
 export class ApiService {
@@ -67,6 +68,18 @@ export class ApiService {
   deleteProcessBatch(firstProcessId: number) {
     return this.delete('/admin/processes/batches/by_first_process_id/' + firstProcessId);
   }
+
+  getCollections(offset: number, limit: number): Observable<[Collection[], number]> {
+    const params = {
+      q: 'n.model:collection',
+      fl: 'n.pid,n.title.search,n.collection.desc,n.created,n.modified',
+      rows: limit,
+      start: offset
+    };
+    return this.get('/search', params).pipe(
+      map(response => [Collection.fromJsonArray(response['response']['docs']), parseInt(response['response']['numFound'], 10)]));
+  }
+
 
 }
 

@@ -25,6 +25,8 @@ import { ProcessComponent } from './components/processes/process/process.compone
 import { SimpleDialogComponent } from './dialogs/simple-dialog/simple-dialog.component';
 import { AuthInterceptor } from './services/auth-interceptor';
 import { LogsComponent } from './components/processes/process/logs/logs.component';
+import { CollectionsComponent } from './components/collections/collections.component';
+import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { LogsComponent } from './components/processes/process/logs/logs.componen
     DatetimePipe,
     ProcessComponent,
     SimpleDialogComponent,
-    LogsComponent
+    LogsComponent,
+    EditCollectionComponent,
+    CollectionsComponent
   ],
   imports: [
     BrowserModule,
