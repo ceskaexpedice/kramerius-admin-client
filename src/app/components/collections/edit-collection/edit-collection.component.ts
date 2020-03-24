@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic/';
+import { ClassicEditor } from '@ckeditor/ckeditor5-build-classic/';
 import '@ckeditor/ckeditor5-build-classic/build/translations/cs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -14,11 +14,11 @@ import { UIService } from 'src/app/services/ui.service';
 export class EditCollectionComponent implements OnInit {
 
   editor = ClassicEditor; //BalloonEditor;
-  
+
   editorConfig = {
-      // placeholder: 'Popis sbírky',
-      language: 'cs',
-      toolbar: [ 'heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'  ],
+    // placeholder: 'Popis sbírky',
+    language: 'cs',
+    toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'],
   };
 
   collection: Collection;
@@ -28,10 +28,10 @@ export class EditCollectionComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private ui: UIService, 
+    private ui: UIService,
     private router: Router,
     private api: ApiService) {
-   }
+  }
 
   ngOnInit() {
     this.state = 'loading';
@@ -60,10 +60,10 @@ export class EditCollectionComponent implements OnInit {
       this.ui.showInfoSnackBar("Sbírka byla vytvořena");
       this.router.navigate(['/collections', this.collection.id]);
     },
-    (error) => {
-      console.log(error);
-      this.ui.showErrorSnackBar("Sbírku se nepodařilo vytvořit");
-    });
+      (error) => {
+        console.log(error);
+        this.ui.showErrorSnackBar("Sbírku se nepodařilo vytvořit");
+      });
   }
 
 
@@ -72,10 +72,10 @@ export class EditCollectionComponent implements OnInit {
       this.ui.showInfoSnackBar("Sbírka byla upravena");
       this.router.navigate(['/collections', this.collection.id]);
     },
-    (error) => {
-      console.log(error);
-      this.ui.showErrorSnackBar("Sbírku se nepodařilo upravit");
-    });
+      (error) => {
+        console.log(error);
+        this.ui.showErrorSnackBar("Sbírku se nepodařilo upravit");
+      });
   }
 
 

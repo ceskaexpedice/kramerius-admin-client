@@ -27,8 +27,9 @@ export class ApiService {
       options['observe'] = 'response';
     }
     let url = this.baseUrl + path;
+    //TODO: odstranit do produkce pouzivani /api/v5.0/item
     url = url.replace(/api\/v6\.0\/item/, "api/v5.0/item");
-    return this.http.get(url, options );
+    return this.http.get(url, options);
   }
 
   private get(path: string, params = {}): Observable<Object> {
@@ -69,7 +70,7 @@ export class ApiService {
   }
 
   getProcess(processId: number): Observable<[Batch, Process]> {
-    return this.get('/admin/processes/by_process_id/' + processId).pipe(
+    return this.get(`/admin/processes/by_process_id/${processId}`).pipe(
       //tap(response => console.log(response)),
       map(response => [Batch.fromJson(response), Process.fromJson(response['process'])])
     );
@@ -83,8 +84,12 @@ export class ApiService {
     return this.post('/admin/processes', definition);
   }
 
+  killBatch(firstProcessId: number): Observable<any> {
+    return this.delete(`/admin/processes/batches/by_first_process_id/${firstProcessId}/execution`);
+  }
+
   deleteProcessBatch(firstProcessId: number) {
-    return this.delete('/admin/processes/batches/by_first_process_id/' + firstProcessId);
+    return this.delete(`/admin/processes/batches/by_first_process_id/${firstProcessId}`);
   }
 
   getCollections(offset: number, limit: number): Observable<[Collection[], number]> {

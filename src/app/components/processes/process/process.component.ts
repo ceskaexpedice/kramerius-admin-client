@@ -58,7 +58,9 @@ export class ProcessComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        // TODO: kill process and reload data
+        this.api.killBatch(batch.id).subscribe((result) => {
+          this.reload();
+        });
       }
     });
   }
