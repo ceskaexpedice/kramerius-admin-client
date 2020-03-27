@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
 import { Process } from 'src/app/models/process.model';
 import { Batch } from 'src/app/models/batch.model';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { MatDialog } from '@angular/material';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   selector: 'app-process',
@@ -20,7 +20,7 @@ export class ProcessComponent implements OnInit {
   process: Process;
   log = 'out';
 
-  constructor(private route: ActivatedRoute, private api: ApiService, private dialog: MatDialog, private router: Router) { }
+  constructor(private route: ActivatedRoute, private adminApi: AdminApiService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -31,7 +31,7 @@ export class ProcessComponent implements OnInit {
 
   reload() {
     // fetch process detail
-    this.api.getProcess(this.processId)
+    this.adminApi.getProcess(this.processId)
       .subscribe(
         ([batch, process]: [Batch, Process]) => {
           this.batch = batch;
@@ -58,7 +58,7 @@ export class ProcessComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        this.api.killBatch(batch.id).subscribe((result) => {
+        this.adminApi.killBatch(batch.id).subscribe((result) => {
           this.reload();
         });
       }
@@ -83,7 +83,7 @@ export class ProcessComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        this.api.deleteProcessBatch(batch.id).subscribe(result => {
+        this.adminApi.deleteProcessBatch(batch.id).subscribe(result => {
           //console.log(result)
           this.router.navigate(['..'], { relativeTo: this.route });
         });

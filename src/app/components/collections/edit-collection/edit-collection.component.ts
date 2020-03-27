@@ -3,8 +3,8 @@ import { Collection } from 'src/app/models/collection.model';
 import { ClassicEditor } from '@ckeditor/ckeditor5-build-classic/';
 import '@ckeditor/ckeditor5-build-classic/build/translations/cs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
 import { UIService } from 'src/app/services/ui.service';
+import { CollectionsService } from 'src/app/services/collections.service';
 
 @Component({
   selector: 'app-edit-collection',
@@ -30,14 +30,14 @@ export class EditCollectionComponent implements OnInit {
     private route: ActivatedRoute,
     private ui: UIService,
     private router: Router,
-    private api: ApiService) {
+    private collectionsService: CollectionsService) {
   }
 
   ngOnInit() {
     this.state = 'loading';
     this.route.params.subscribe(params => {
       if (params['id']) {
-        this.api.getCollection(params['id']).subscribe((collection: Collection) => {
+        this.collectionsService.getCollection(params['id']).subscribe((collection: Collection) => {
           this.collection = collection;
           this.collectionName = collection.name;
           this.init('edit');
@@ -56,7 +56,7 @@ export class EditCollectionComponent implements OnInit {
 
 
   onSave() {
-    this.api.createCollection(this.collection).subscribe(() => {
+    this.collectionsService.createCollection(this.collection).subscribe(() => {
       this.ui.showInfoSnackBar("Sbírka byla vytvořena");
       this.router.navigate(['/collections', this.collection.id]);
     },
@@ -68,7 +68,7 @@ export class EditCollectionComponent implements OnInit {
 
 
   onUpdate() {
-    this.api.updateCollection(this.collection).subscribe(() => {
+    this.collectionsService.updateCollection(this.collection).subscribe(() => {
       this.ui.showInfoSnackBar("Sbírka byla upravena");
       this.router.navigate(['/collections', this.collection.id]);
     },

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { MatDialog } from '@angular/material';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
+import { CollectionsService } from 'src/app/services/collections.service';
 
 @Component({
   selector: 'app-collection',
@@ -20,18 +20,18 @@ export class CollectionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private ui: UIService, 
+    private ui: UIService,
     private dialog: MatDialog,
-    private api: ApiService) {
-   }
+    private collectionsService: CollectionsService) {
+  }
 
   ngOnInit() {
     this.state = 'loading';
     this.route.params.subscribe(params => {
-        this.api.getCollection(params['id']).subscribe((collection: Collection) => {
-          this.collection = collection;
-          this.state = 'success';
-        });
+      this.collectionsService.getCollection(params['id']).subscribe((collection: Collection) => {
+        this.collection = collection;
+        this.state = 'success';
+      });
     });
   }
 
@@ -56,14 +56,14 @@ export class CollectionComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        this.api.deleteCollection(this.collection).subscribe(result => {
+        this.collectionsService.deleteCollection(this.collection).subscribe(result => {
           this.ui.showInfoSnackBar("Sbírka byla odstraněna")
           this.router.navigate(['/collections']);
         },
-        (error) => {
-          console.log('error');
-          this.ui.showErrorSnackBar("Sbírku se nepodařilo odstranit")
-        });
+          (error) => {
+            console.log('error');
+            this.ui.showErrorSnackBar("Sbírku se nepodařilo odstranit")
+          });
       }
     });
   }

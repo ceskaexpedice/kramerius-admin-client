@@ -15,7 +15,6 @@ import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppSettings } from './services/app-settings';
-import { ApiService } from './services/api.service';
 import { environment } from 'src/environments/environment';
 import { DurationPipe } from './pipes/duration.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
@@ -27,10 +26,13 @@ import { AuthInterceptor } from './services/auth-interceptor';
 import { LogsComponent } from './components/processes/process/logs/logs.component';
 import { CollectionsComponent } from './components/collections/collections.component';
 import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
-import { CKEditorModule} from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ModsParserService } from './services/mods-parser.service';
 import { UIService } from './services/ui.service';
 import { CollectionComponent } from './components/collections/collection/collection.component';
+import { AdminApiService } from './services/admin-api.service';
+import { ClientApiService } from './services/client-api.service';
+import { CollectionsService } from './services/collections.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +75,9 @@ import { CollectionComponent } from './components/collections/collection/collect
     AngularTokenModule,
     AuthService,
     AppSettings,
-    ApiService,
+    ClientApiService,
+    AdminApiService,
+    CollectionsService,
     UIService,
     ModsParserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

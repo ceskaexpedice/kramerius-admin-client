@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent, MatDialog } from '@angular/material';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
-import { ApiService, ProcessesParams } from 'src/app/services/api.service';
 import { Batch } from 'src/app/models/batch.model';
 import { Process } from 'src/app/models/process.model';
 import { ProcessOwner } from 'src/app/models/process-owner.model';
+import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class ProcessesComponent implements OnInit {
   owners: ProcessOwner[] = []
   batches: Batch[];
 
-  constructor(private api: ApiService, private dialog: MatDialog) {
+  constructor(private adminApi: AdminApiService, private dialog: MatDialog) {
     for (const state of Process.BATCH_STATES) {
       this.batch_states.push({ key: state, label: Process.stateLabel(state) })
     }
@@ -50,11 +50,11 @@ export class ProcessesComponent implements OnInit {
   }
 
   reload() {
-    this.api.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
+    this.adminApi.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
       this.batches = batches;
       this.resultCount = total
     });
-    this.api.getProcessOwners().subscribe((owners: ProcessOwner[]) => {
+    this.adminApi.getProcessOwners().subscribe((owners: ProcessOwner[]) => {
       this.owners = owners;
     });
   }
@@ -68,7 +68,7 @@ export class ProcessesComponent implements OnInit {
         finalState: this.selectedtestProcessFinalState,
       }
     }
-    this.api.scheduleProcess(params).subscribe(response => {
+    this.adminApi.scheduleProcess(params).subscribe(response => {
       this.reload();
     });
   }
@@ -109,7 +109,7 @@ export class ProcessesComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        this.api.deleteProcessBatch(batch.id).subscribe(result => {
+        this.adminApi.deleteProcessBatch(batch.id).subscribe(result => {
           //console.log(result)
           this.reload();
         });
@@ -135,7 +135,7 @@ export class ProcessesComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        this.api.killBatch(batch.id).subscribe((result) => {
+        this.adminApi.killBatch(batch.id).subscribe((result) => {
           this.reload();
         });
       }

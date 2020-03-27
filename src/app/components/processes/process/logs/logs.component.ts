@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Process } from 'src/app/models/process.model';
-import { ApiService } from 'src/app/services/api.service';
 import { PageEvent } from '@angular/material';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   selector: 'app-process-logs',
@@ -27,7 +27,7 @@ export class LogsComponent implements OnInit {
 
   lines: string[];
 
-  constructor(private api: ApiService) { }
+  constructor(private adminApi: AdminApiService) { }
 
   ngOnInit() {
     this.reload();
@@ -36,7 +36,7 @@ export class LogsComponent implements OnInit {
   reload() {
     const offset = this.pageIndex * this.pageSize;
     const limit = this.pageSize;
-    this.api.getProcessLogs(this.process.uuid, this.logType, offset, limit).subscribe(result => {
+    this.adminApi.getProcessLogs(this.process.uuid, this.logType, offset, limit).subscribe(result => {
       this.resultCount = result['total_size'];
       this.lines = result['lines'];
     });

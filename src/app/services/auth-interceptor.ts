@@ -6,10 +6,10 @@ import { AngularTokenService } from 'angular-token';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private tokenService: AngularTokenService, private appSettings: AppSettings) {}
+  constructor(private tokenService: AngularTokenService, private appSettings: AppSettings) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!request.url.startsWith(this.appSettings.adminApiBase)) {
+    if (!request.url.startsWith(this.appSettings.adminApiBaseUrl)) {
       return next.handle(request);
     }
     const data = this.tokenService.currentAuthData;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
-import { ApiService } from 'src/app/services/api.service';
 import { PageEvent } from '@angular/material';
+import { CollectionsService } from 'src/app/services/collections.service';
 
 @Component({
   selector: 'app-collections',
@@ -12,13 +12,13 @@ export class CollectionsComponent implements OnInit {
 
   collections: Collection[];
 
-    // Paginator
-    resultCount = 0;
-    pageIndex = 0;
-    pageSize = 50;
-    state = 'none';
+  // Paginator
+  resultCount = 0;
+  pageIndex = 0;
+  pageSize = 50;
+  state = 'none';
 
-  constructor(private api: ApiService) { }
+  constructor(private collectionsService: CollectionsService) { }
 
   ngOnInit() {
     this.reload();
@@ -28,7 +28,7 @@ export class CollectionsComponent implements OnInit {
     this.state = 'loading';
     const offset = this.pageIndex * this.pageSize;
     const limit = this.pageSize;
-    this.api.getCollections(offset, limit).subscribe(([collections, count]: [Collection[], number]) => {
+    this.collectionsService.getCollections(offset, limit).subscribe(([collections, count]: [Collection[], number]) => {
       this.collections = collections;
       this.resultCount = count;
       this.state = 'success';
