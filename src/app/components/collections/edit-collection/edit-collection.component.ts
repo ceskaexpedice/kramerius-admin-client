@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
-import { ClassicEditor } from '@ckeditor/ckeditor5-build-classic/';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic/';
 import '@ckeditor/ckeditor5-build-classic/build/translations/cs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
