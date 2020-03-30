@@ -25,9 +25,7 @@ export class CollectionsService {
   }
 
   getCollection(id: string): Observable<Collection> {
-    return this.clientApi.getMods(id).pipe(map(response => this.modsParser.getCollection(response, id)));
-    //TODO: nahradit volani client API za admin API. Tam se bude parsovat MODS apod
-    //return this.adminApi.getCollection(id);
+    return this.adminApi.getCollection(id);
   }
 
   createCollection(collection: Collection): Observable<Object> {
