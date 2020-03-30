@@ -90,6 +90,37 @@ export class AdminApiService {
   deleteProcessBatch(firstProcessId: number) {
     return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}`);
   }
+
+  createCollection(collection: Collection): Observable<any> {
+    const payload = {
+      name: collection.name,
+      description: collection.description,
+      //TODO: fix content
+      //content: collection.content
+    }
+    //console.log(collection);
+    //console.log(payload);
+    return this.post(`/collections`, payload);
+  }
+
+  getCollection(pid: string): Observable<any> {
+    return this.get(`/collections/${pid}`);
+  }
+
+  updateCollection(collection: Collection): Observable<any> {
+    const payload = {
+      name: collection.name,
+      description: collection.description,
+      //TODO: fix content
+      //content: collection.content
+    }
+    return this.put(`/collections/${collection.id}`, payload);
+  }
+
+  deleteCollection(pid: string): Observable<any> {
+    return this.delete(`/collections/${pid}`);
+  }
+
 }
 
 export interface ProcessesParams {
@@ -100,3 +131,4 @@ export interface ProcessesParams {
   state?: string;
   owner?: string;
 }
+

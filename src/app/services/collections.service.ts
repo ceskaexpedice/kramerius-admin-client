@@ -26,33 +26,19 @@ export class CollectionsService {
 
   getCollection(id: string): Observable<Collection> {
     return this.clientApi.getMods(id).pipe(map(response => this.modsParser.getCollection(response, id)));
+    //TODO: nahradit volani client API za admin API. Tam se bude parsovat MODS apod
+    //return this.adminApi.getCollection(id);
   }
 
   createCollection(collection: Collection): Observable<Object> {
-    const payload = {
-      name: collection.name,
-      description: collection.description,
-      content: collection.content
-    }
-    //TODO: implement using admin api
-    return new Observable<Object>();
-    //return this.post('/admin/collections', payload);
+    return this.adminApi.createCollection(collection);
   }
 
   updateCollection(collection: Collection): Observable<Object> {
-    const payload = {
-      name: collection.name,
-      description: collection.description,
-      content: collection.content
-    }
-    //TODO: implement using admin api
-    return new Observable<Object>();
-    //return this.put(`/admin/collections/${collection.id}`, payload);
+    return this.adminApi.updateCollection(collection);
   }
 
   deleteCollection(collection: Collection): Observable<Object> {
-    //TODO: implement using admin api
-    return new Observable<Object>();
-    //return this.delete(`/admin/collections/${collection.id}`);
+    return this.adminApi.deleteCollection(collection.id);
   }
 }
