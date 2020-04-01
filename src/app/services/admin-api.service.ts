@@ -103,8 +103,8 @@ export class AdminApiService {
     return this.post(`/collections`, payload);
   }
 
-  getCollection(pid: string): Observable<any> {
-    return this.get(`/collections/${pid}`);
+  getCollection(id: string): Observable<any> {
+    return this.get(`/collections/${id}`);
   }
 
   updateCollection(collection: Collection): Observable<any> {
@@ -117,8 +117,8 @@ export class AdminApiService {
     return this.put(`/collections/${collection.id}`, payload);
   }
 
-  deleteCollection(pid: string): Observable<any> {
-    return this.delete(`/collections/${pid}`);
+  deleteCollection(id: string): Observable<any> {
+    return this.delete(`/collections/${id}`);
   }
 
 }

@@ -42,7 +42,7 @@ export class ClientApiService {
     return this.getText(`/item/${uuid}/streams/BIBLIO_MODS`);
   }
 
-  search(params) {
+  search(params): Observable<Object> {
     return this.get('/search', params);
   }
 

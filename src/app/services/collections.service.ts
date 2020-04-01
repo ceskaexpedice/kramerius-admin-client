@@ -25,7 +25,17 @@ export class CollectionsService {
   }
 
   getCollection(id: string): Observable<Collection> {
-    return this.adminApi.getCollection(id);
+    return this.adminApi.getCollection(id).pipe(map(response => {
+      const col: Collection = {
+        id: response['pid'],
+        name: response['name'],
+        description: response['description'],
+        content: response['content'],
+        createdAt: response['created'],
+        modifiedAt: response['modified'],
+      }
+      return col;
+    }));
   }
 
   createCollection(collection: Collection): Observable<Object> {
