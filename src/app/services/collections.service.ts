@@ -13,6 +13,10 @@ export class CollectionsService {
 
   constructor(private clientApi: ClientApiService, private adminApi: AdminApiService, private modsParser: ModsParserService) { }
 
+  //TODO: mozna nepouzivat client search api, ale radsi admin collection api. Protoze nez se sbirka zaindexuje pro vyhledavani, muze to trvat i dny (podle poctu veci ve fronte)
+  //zatimco pres api (Akubra, processing index) je zmena videt temer hned
+  //a taky to tam logicky nepatri
+  //takze by bylo v admin api GET /collections, coz by vracelo zaznam sbirky, pouze bez dlouhe popisu. A razeni podle casovych znamek a  filtrovani (jen samostatne) by si delal klient
   getCollections(offset: number, limit: number): Observable<[Collection[], number]> {
     const params = {
       q: 'n.model:collection',

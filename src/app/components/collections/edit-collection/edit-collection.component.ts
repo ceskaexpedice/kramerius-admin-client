@@ -56,9 +56,9 @@ export class EditCollectionComponent implements OnInit {
 
 
   onSave() {
-    this.collectionsService.createCollection(this.collection).subscribe(() => {
+    this.collectionsService.createCollection(this.collection).subscribe(response => {
       this.ui.showInfoSnackBar("Sbírka byla vytvořena");
-      this.router.navigate(['/collections', this.collection.id]);
+      this.router.navigate(['/collections', response['pid']]);
     },
       (error) => {
         console.log(error);
