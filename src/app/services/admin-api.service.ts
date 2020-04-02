@@ -95,12 +95,9 @@ export class AdminApiService {
     const payload = {
       name: collection.name,
       description: collection.description,
-      //TODO: fix content
-      //content: collection.content
+      content: collection.content
     }
-    //console.log(collection);
-    //console.log(payload);
-    return this.post(`/collections`, payload);
+    return this.post(`/collections`, payload);queueMicrotask
   }
 
   getCollections(): Observable<any> {
@@ -116,8 +113,7 @@ export class AdminApiService {
     const payload = {
       name: collection.name,
       description: collection.description,
-      //TODO: fix content
-      //content: collection.content
+      content: collection.content
     }
     return this.put(`/collections/${collection.id}`, payload);
   }

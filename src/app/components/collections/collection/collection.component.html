@@ -1,18 +1,19 @@
 <div class="breadcrumb-nav">
   <div class="app-actions" *ngIf="collection">
-    <a class="action-btn" mat-icon-button color="default" matTooltip="Upravit sbírku" [routerLink]="['/collections', collection.id, 'edit']">
+    <a class="action-btn" mat-icon-button color="default" matTooltip="Upravit sbírku"
+      [routerLink]="['/collections', collection.id, 'edit']">
       <mat-icon>edit</mat-icon>
-    </a> 
+    </a>
     <a class="action-btn" mat-icon-button color="default" matTooltip="Odstranit sbírku" (click)="onDelete()">
       <mat-icon>delete</mat-icon>
-    </a> 
- </div>
+    </a>
+  </div>
   <div class="app-nav">
-      <a [routerLink]="['/collections']">Sbírky</a>
-      <ng-container *ngIf="collection">
-        <mat-icon>chevron_right</mat-icon>
-        <span>{{ collection.name }}</span>
-      </ng-container>
+    <a [routerLink]="['/collections']">Sbírky</a>
+    <ng-container *ngIf="collection">
+      <mat-icon>chevron_right</mat-icon>
+      <span>{{ collection.name }}</span>
+    </ng-container>
   </div>
 </div>
 
@@ -23,9 +24,7 @@
   <div class="app-description">
     {{ collection.description }}
   </div>
-  <div class="app-content">
-    {{ collection.content }}
-  </div>
+  <div class="app-content" [innerHTML]="collection.content"></div>
 
 </div>
 

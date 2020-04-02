@@ -13,20 +13,16 @@ export class CollectionsService {
 
   constructor(private clientApi: ClientApiService, private adminApi: AdminApiService, private modsParser: ModsParserService) { }
 
-  //TODO: mozna nepouzivat client search api, ale radsi admin collection api. Protoze nez se sbirka zaindexuje pro vyhledavani, muze to trvat i dny (podle poctu veci ve fronte)
-  //zatimco pres api (Akubra, processing index) je zmena videt temer hned
-  //a taky to tam logicky nepatri
-  //takze by bylo v admin api GET /collections, coz by vracelo zaznam sbirky, pouze bez dlouhe popisu. A razeni podle casovych znamek a  filtrovani (jen samostatne) by si delal klient
   getCollections(offset: number, limit: number): Observable<[Collection[], number]> {
-    const params = {
-      q: 'n.model:collection',
-      fl: 'n.pid,n.title.search,n.collection.desc,n.created,n.modified',
-      rows: limit,
-      start: offset
-    };
+    // const params = {
+    //   q: 'n.model:collection',
+    //   fl: 'n.pid,n.title.search,n.collection.desc,n.created,n.modified',
+    //   rows: limit,
+    //   start: offset
+    // };
     // return this.clientApi.search(params).pipe(
     //   map(response => [Collection.fromJsonArray(response['response']['docs']), parseInt(response['response']['numFound'], 10)]));
-    
+
     //TODO: use offset, limit
     return this.adminApi.getCollections().pipe(
       map(response => {
@@ -37,7 +33,6 @@ export class CollectionsService {
 
   getCollection(id: string): Observable<Collection> {
     return this.adminApi.getCollection(id).pipe(map(response => {
-      //console.log(response);
       const col: Collection = {
         id: response['pid'],
         name: response['name'],
