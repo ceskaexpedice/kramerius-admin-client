@@ -103,6 +103,11 @@ export class AdminApiService {
     return this.post(`/collections`, payload);
   }
 
+  getCollections(): Observable<any> {
+    //TODO: offset, limit
+    return this.get(`/collections`);
+  }
+
   getCollection(id: string): Observable<any> {
     return this.get(`/collections/${id}`);
   }

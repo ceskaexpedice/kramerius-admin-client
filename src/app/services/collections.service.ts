@@ -24,12 +24,20 @@ export class CollectionsService {
       rows: limit,
       start: offset
     };
-    return this.clientApi.search(params).pipe(
-      map(response => [Collection.fromJsonArray(response['response']['docs']), parseInt(response['response']['numFound'], 10)]));
+    // return this.clientApi.search(params).pipe(
+    //   map(response => [Collection.fromJsonArray(response['response']['docs']), parseInt(response['response']['numFound'], 10)]));
+    
+    //TODO: use offset, limit
+    return this.adminApi.getCollections().pipe(
+      map(response => {
+        //console.log(response);
+        return [Collection.fromAdminApiJsonArray(response['collections']), parseInt(response['total_size'], 10)]
+      }));
   }
 
   getCollection(id: string): Observable<Collection> {
     return this.adminApi.getCollection(id).pipe(map(response => {
+      //console.log(response);
       const col: Collection = {
         id: response['pid'],
         name: response['name'],

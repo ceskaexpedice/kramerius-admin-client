@@ -11,7 +11,7 @@ export class Collection {
   constructor() {
   }
 
-  static fromJson(json): Collection {
+  static fromSolrJson(json): Collection {
     const collection = new Collection();
     collection.id = json['n.pid'];
     collection.name = json['n.title.search'];
@@ -25,10 +25,32 @@ export class Collection {
     return collection;
   }
 
-  static fromJsonArray(json): Collection[] {
+  static fromSolrJsonArray(json): Collection[] {
     const items = [];
     for (const obj of json) {
-      items.push(Collection.fromJson(obj));
+      items.push(Collection.fromSolrJson(obj));
+    }
+    return items;
+  }
+
+  static fromAdminApiJson(json): Collection {
+    const collection = new Collection();
+    collection.id = json['pid'];
+    collection.name = json['name'];
+    collection.description = json['description'];
+    if (json['created']) {
+      collection.createdAt = new Date(json['created']);
+    }
+    if (json['modified']) {
+      collection.modifiedAt = new Date(json['modified']);
+    }
+    return collection;
+  }
+
+  static fromAdminApiJsonArray(json): Collection[] {
+    const items = [];
+    for (const obj of json) {
+      items.push(Collection.fromAdminApiJson(obj));
     }
     return items;
   }
