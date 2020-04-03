@@ -7,7 +7,6 @@ import { map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
-import { ModsParserService } from './mods-parser.service';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { map, tap } from 'rxjs/operators';
-import { ModsParserService } from './mods-parser.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,7 @@ export class ClientApiService {
 
   private baseUrl: string;
 
-  constructor(private http: HttpClient, private appSettings: AppSettings, private mods: ModsParserService) {
+  constructor(private http: HttpClient, private appSettings: AppSettings) {
     this.baseUrl = this.appSettings.clientApiBaseUrl;
   }
 
@@ -25,8 +24,6 @@ export class ClientApiService {
       options['observe'] = 'response';
     }
     let url = this.baseUrl + path;
-    //TODO: odstranit do produkce pouzivani /api/v5.0/item
-    //url = url.replace(/api\/v6\.0\/item/, "api/v5.0/item");
     return this.http.get(url, options);
   }
 

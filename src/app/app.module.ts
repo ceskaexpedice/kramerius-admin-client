@@ -27,7 +27,6 @@ import { LogsComponent } from './components/processes/process/logs/logs.componen
 import { CollectionsComponent } from './components/collections/collections.component';
 import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { ModsParserService } from './services/mods-parser.service';
 import { UIService } from './services/ui.service';
 import { CollectionComponent } from './components/collections/collection/collection.component';
 import { AdminApiService } from './services/admin-api.service';
@@ -81,7 +80,6 @@ import { DevComponent } from './components/dev/dev.component';
     AdminApiService,
     CollectionsService,
     UIService,
-    ModsParserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [
