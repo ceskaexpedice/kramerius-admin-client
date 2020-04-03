@@ -9,6 +9,7 @@ import { ProcessComponent } from './components/processes/process/process.compone
 import { CollectionsComponent } from './components/collections/collections.component';
 import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
 import { CollectionComponent } from './components/collections/collection/collection.component';
+import { DevComponent } from './components/dev/dev.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'collections/new', component: EditCollectionComponent, canActivate: [ AuthGuard ]},
   { path: 'collections/:id', component: CollectionComponent, canActivate: [ AuthGuard ]},
   { path: 'collections', component: CollectionsComponent, canActivate: [ AuthGuard ]},
-
+  { path: 'dev', component: DevComponent, canActivate: [ AuthGuard ]},
 
 ];
 
