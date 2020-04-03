@@ -28,11 +28,18 @@ export class CollectionComponent implements OnInit {
   ngOnInit() {
     this.state = 'loading';
     this.route.params.subscribe(params => {
-      this.collectionsService.getCollection(params['id']).subscribe((collection: Collection) => {
-        this.collection = collection;
-        console.log(collection);
-        this.state = 'success';
-      });
+      this.loadData(params['id']);
+    });
+  }
+
+  loadData(collectionId: string) {
+    this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
+      this.collection = collection;
+      console.log(collection);
+      this.state = 'success';
+    }, (error) => {
+      console.log(error);
+      this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
     });
   }
 
@@ -60,11 +67,10 @@ export class CollectionComponent implements OnInit {
         this.collectionsService.deleteCollection(this.collection).subscribe(result => {
           this.ui.showInfoSnackBar("Sbírka byla odstraněna")
           this.router.navigate(['/collections']);
-        },
-          (error) => {
-            console.log('error');
-            this.ui.showErrorSnackBar("Sbírku se nepodařilo odstranit")
-          });
+        }, (error) => {
+          console.log(error);
+          this.ui.showErrorSnackBar("Sbírku se nepodařilo odstranit")
+        });
       }
     });
   }
@@ -72,9 +78,9 @@ export class CollectionComponent implements OnInit {
   onRemoveItemFromCollection(itemPid: string) {
     //TODO: mozna potvrzovací dialog
     this.collectionsService.removeItemFromCollection(this.collection.id, itemPid).subscribe(() => {
-      //TODO: routing na sebe
+      this.loadData(this.collection.id);
     }, (error) => {
-      console.log('error');
+      console.log(error);
       this.ui.showErrorSnackBar("Položku se nepodařilo odstranit ze sbírky")
     });
   }
