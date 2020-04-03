@@ -13,6 +13,12 @@ export class CollectionsService {
 
   constructor(private clientApi: ClientApiService, private adminApi: AdminApiService, private modsParser: ModsParserService) { }
 
+  //collections CRUD
+
+  createCollection(collection: Collection): Observable<Object> {
+    return this.adminApi.createCollection(collection);
+  }
+
   getCollections(offset: number, limit: number): Observable<[Collection[], number]> {
     // const params = {
     //   q: 'n.model:collection',
@@ -45,10 +51,6 @@ export class CollectionsService {
     }));
   }
 
-  createCollection(collection: Collection): Observable<Object> {
-    return this.adminApi.createCollection(collection);
-  }
-
   updateCollection(collection: Collection): Observable<Object> {
     return this.adminApi.updateCollection(collection);
   }
@@ -56,4 +58,14 @@ export class CollectionsService {
   deleteCollection(collection: Collection): Observable<Object> {
     return this.adminApi.deleteCollection(collection.id);
   }
+
+  //item-in-collection CRUD
+
+  addItemToCollection(collectionPid : string, itemPid: string) : Observable<Object> {
+    return this.adminApi.addItemToCollection(collectionPid, itemPid);
+  }
+
+  
+
+
 }

@@ -97,7 +97,7 @@ export class AdminApiService {
       description: collection.description,
       content: collection.content
     }
-    return this.post(`/collections`, payload);queueMicrotask
+    return this.post(`/collections`, payload);
   }
 
   getCollections(): Observable<any> {
@@ -120,6 +120,10 @@ export class AdminApiService {
 
   deleteCollection(id: string): Observable<any> {
     return this.delete(`/collections/${id}`);
+  }
+
+  addItemToCollection(collectionPid: string, itemPid: string): Observable<Object> {
+    return this.post(`/collections/${collectionPid}/items`, itemPid);
   }
 
 }
