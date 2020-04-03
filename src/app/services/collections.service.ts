@@ -39,15 +39,8 @@ export class CollectionsService {
 
   getCollection(id: string): Observable<Collection> {
     return this.adminApi.getCollection(id).pipe(map(response => {
-      const col: Collection = {
-        id: response['pid'],
-        name: response['name'],
-        description: response['description'],
-        content: response['content'],
-        createdAt: response['created'],
-        modifiedAt: response['modified'],
-      }
-      return col;
+      //console.log(response);
+      return Collection.fromAdminApiJson(response);
     }));
   }
 
@@ -61,11 +54,13 @@ export class CollectionsService {
 
   //item-in-collection CRUD
 
-  addItemToCollection(collectionPid : string, itemPid: string) : Observable<Object> {
+  addItemToCollection(collectionPid: string, itemPid: string): Observable<Object> {
     return this.adminApi.addItemToCollection(collectionPid, itemPid);
   }
 
-  
+  removeItemFromCollection(collectionPid: string, itemPid: string): Observable<Object> {
+    return this.adminApi.removeItemFromCollection(collectionPid, itemPid);
+  }
 
 
 }

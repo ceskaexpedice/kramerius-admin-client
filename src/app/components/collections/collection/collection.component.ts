@@ -30,6 +30,7 @@ export class CollectionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.collectionsService.getCollection(params['id']).subscribe((collection: Collection) => {
         this.collection = collection;
+        console.log(collection);
         this.state = 'success';
       });
     });
@@ -65,6 +66,16 @@ export class CollectionComponent implements OnInit {
             this.ui.showErrorSnackBar("Sbírku se nepodařilo odstranit")
           });
       }
+    });
+  }
+
+  onRemoveItemFromCollection(itemPid: string) {
+    //TODO: mozna potvrzovací dialog
+    this.collectionsService.removeItemFromCollection(this.collection.id, itemPid).subscribe(() => {
+      //TODO: routing na sebe
+    }, (error) => {
+      console.log('error');
+      this.ui.showErrorSnackBar("Položku se nepodařilo odstranit ze sbírky")
     });
   }
 

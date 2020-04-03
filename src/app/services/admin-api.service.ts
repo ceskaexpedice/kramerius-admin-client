@@ -126,6 +126,10 @@ export class AdminApiService {
     return this.post(`/collections/${collectionPid}/items`, itemPid);
   }
 
+  removeItemFromCollection(collectionPid: string, itemPid: string): Observable<Object> {
+    return this.delete(`/collections/${collectionPid}/items/${itemPid}`);
+  }
+
 }
 
 export interface ProcessesParams {

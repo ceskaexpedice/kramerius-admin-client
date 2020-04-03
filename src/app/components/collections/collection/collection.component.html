@@ -26,6 +26,15 @@
   </div>
   <div class="app-content" [innerHTML]="collection.content"></div>
 
+  <!-- TODO: udelat poradne seznam polozek -->
+  <div *ngIf="collection.items">
+    <div>Položky ve sbírce</div>
+    <ng-container *ngFor="let item of collection.items">
+      {{item}}
+      <button (click)="onRemoveItemFromCollection(item)">Odstranit ze sbírky</button>
+    </ng-container>
+  </div>
+
 </div>
 
 <mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">

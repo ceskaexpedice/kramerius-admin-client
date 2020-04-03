@@ -8,6 +8,8 @@ export class Collection {
   createdAt: Date;
   modifiedAt: Date;
 
+  items: string[];
+
   constructor() {
   }
 
@@ -44,6 +46,7 @@ export class Collection {
     if (json['modified']) {
       collection.modifiedAt = new Date(json['modified']);
     }
+    collection.items = json['items'];
     return collection;
   }
 
