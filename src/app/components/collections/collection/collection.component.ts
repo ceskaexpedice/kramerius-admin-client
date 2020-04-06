@@ -35,7 +35,7 @@ export class CollectionComponent implements OnInit {
   loadData(collectionId: string) {
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
-      console.log(collection);
+      //console.log(collection);
       this.state = 'success';
     }, (error) => {
       console.log(error);
