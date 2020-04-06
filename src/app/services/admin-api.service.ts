@@ -104,6 +104,10 @@ export class AdminApiService {
     return this.get(`/collections`);
   }
 
+  getCollectionsContainingItem(itemPid: String) {
+    return this.get(`/collections?withItem=${itemPid}`);
+  }
+
   getCollection(id: string): Observable<any> {
     return this.get(`/collections/${id}`);
   }

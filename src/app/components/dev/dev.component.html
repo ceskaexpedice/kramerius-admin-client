@@ -4,6 +4,24 @@
     <p>Tato komponenta slouží pro testování, typicky nové funkcionality na backendu. Protože tady máme funkční
         autentizaci, což se složitěji simuluje.</p>
 
-    <button (click)="addToCollection()">add to collection</button>
+    <!-- <button (click)="logData()">log data</button> -->
+
+    <ng-container *ngFor="let item of items">
+        <h4>Object {{item}}</h4>
+        <ng-container *ngFor="let collection_id of pids_of_collections_having_item[item]">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button (click)="removeFromCollection(item,collection_id)">odebrat</button>
+            {{collections_by_id[collection_id].name}} ({{collection_id}})
+            <br>
+        </ng-container>
+        <br>
+        <ng-container *ngFor="let collection_id of pids_of_collections_missing_item[item]">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button (click)="addToCollection(item,collection_id)">přidat</button>
+            {{collections_by_id[collection_id].name}} ({{collection_id}})
+            <br>
+        </ng-container>
+
+    </ng-container>
 
 </div>

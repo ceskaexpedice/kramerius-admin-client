@@ -27,6 +27,14 @@ export class CollectionsService {
       }));
   }
 
+  getCollectionsContainingItem(itemPid: String): Observable<[Collection[], number]> {
+    return this.adminApi.getCollectionsContainingItem(itemPid).pipe(
+      map(response => {
+        //console.log(response);
+        return [Collection.fromAdminApiJsonArray(response['collections']), parseInt(response['total_size'], 10)]
+      }));
+  }
+
   getCollection(id: string): Observable<Collection> {
     return this.adminApi.getCollection(id).pipe(map(response => {
       //console.log(response);
