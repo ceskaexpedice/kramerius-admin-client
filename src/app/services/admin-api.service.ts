@@ -94,7 +94,8 @@ export class AdminApiService {
     const payload = {
       name: collection.name,
       description: collection.description,
-      content: collection.content
+      content: collection.content,
+      standalone: collection.standalone
     }
     return this.post(`/collections`, payload);
   }
@@ -116,7 +117,8 @@ export class AdminApiService {
     const payload = {
       name: collection.name,
       description: collection.description,
-      content: collection.content
+      content: collection.content,
+      standalone: collection.standalone
     }
     return this.put(`/collections/${collection.id}`, payload);
   }

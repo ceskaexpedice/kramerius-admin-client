@@ -1,23 +1,25 @@
 <div class="breadcrumb-nav">
   <div class="app-actions">
-    <button *ngIf="mode=='new'" class="action-btn" mat-icon-button color="default" matTooltip="Vytvořit sbírku" (click)="onSave()">
+    <button *ngIf="mode=='new'" class="action-btn" mat-icon-button color="default" matTooltip="Vytvořit sbírku"
+      (click)="onSave()">
       <mat-icon>save</mat-icon>
     </button>
-    <button *ngIf="mode=='edit'" class="action-btn" mat-icon-button color="default" matTooltip="Uložit změny" (click)="onUpdate()">
+    <button *ngIf="mode=='edit'" class="action-btn" mat-icon-button color="default" matTooltip="Uložit změny"
+      (click)="onUpdate()">
       <mat-icon>save</mat-icon>
-    </button>    
- </div>
+    </button>
+  </div>
   <div class="app-nav">
-      <a [routerLink]="['/collections']">Sbírky</a>
+    <a [routerLink]="['/collections']">Sbírky</a>
+    <mat-icon>chevron_right</mat-icon>
+    <ng-container *ngIf="mode=='new'">
+      <span>Nová sbírka</span>
+    </ng-container>
+    <ng-container *ngIf="mode=='edit'">
+      <a [routerLink]="['/collections', collection.id]">{{ collectionName }}</a>
       <mat-icon>chevron_right</mat-icon>
-      <ng-container *ngIf="mode=='new'">
-        <span>Nová sbírka</span>
-      </ng-container>
-      <ng-container *ngIf="mode=='edit'">
-        <a [routerLink]="['/collections', collection.id]">{{ collectionName }}</a>
-        <mat-icon>chevron_right</mat-icon>
-        <span>Úprava sbírky</span>
-      </ng-container>
+      <span>Úprava sbírky</span>
+    </ng-container>
   </div>
 </div>
 
@@ -32,11 +34,18 @@
     <textarea matInput [(ngModel)]="collection.description"></textarea>
   </mat-form-field>
 
+  <mat-form-field>
+    <!-- <mat-checkbox [(ngModel)]="collection.standalone">Samostatná</mat-checkbox> -->
+    <mat-label>Typ</mat-label>
+    <mat-select [(ngModel)]="collection.standalone">
+      <mat-option value="true">Samostatná</mat-option>
+      <mat-option value="false">Nesamostatná</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <div class="app-label">Úplný popis sbírky</div>
-  <ckeditor
-    [config]="editorConfig" [editor]="editor"
-    required [(ngModel)]="collection.content"
-    data="" name="text"></ckeditor>
+  <ckeditor [config]="editorConfig" [editor]="editor" required [(ngModel)]="collection.content" data="" name="text">
+  </ckeditor>
 
 </div>
 

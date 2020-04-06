@@ -4,6 +4,7 @@ export class Collection {
   name: string = "";
   description: string = "";
   content: string = "";
+  standalone: boolean = false;
 
   createdAt: Date;
   modifiedAt: Date;
@@ -40,6 +41,7 @@ export class Collection {
     collection.id = json['pid'];
     collection.name = json['name'];
     collection.description = json['description'];
+    collection.standalone = json['standalone'];
     if (json['created']) {
       collection.createdAt = new Date(json['created']);
     }
