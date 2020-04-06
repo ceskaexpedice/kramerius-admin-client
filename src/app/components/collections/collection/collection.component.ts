@@ -78,12 +78,18 @@ export class CollectionComponent implements OnInit {
   onRemoveItemFromCollection(itemPid: string) {
     //TODO: mozna potvrzovací dialog
     this.collectionsService.removeItemFromCollection(this.collection.id, itemPid).subscribe(() => {
-      this.loadData(this.collection.id);
+      (async () => {
+        await this.delay(0);
+        this.loadData(this.collection.id);
+      })();
     }, (error) => {
       console.log(error);
       this.ui.showErrorSnackBar("Položku se nepodařilo odstranit ze sbírky")
     });
   }
 
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 }

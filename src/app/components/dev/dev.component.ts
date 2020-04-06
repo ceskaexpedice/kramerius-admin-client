@@ -43,7 +43,7 @@ export class DevComponent implements OnInit {
       this.collections = collections;
       //console.log(collections);
       this.items.forEach(item => {
-        console.log(item);
+        //console.log(item);
         this.collectionsService.getCollectionsContainingItem(item).subscribe(([collectionsWithItem, count]: [Collection[], number]) => {
           //console.log("collections of " + item);
           //console.log(collectionsWithItem);
@@ -74,7 +74,10 @@ export class DevComponent implements OnInit {
     //console.log(collection_id)
     this.collectionsService.removeItemFromCollection(collection_id, item_id).subscribe(result => {
       console.log(result);
-      this.loadData();
+      (async () => {
+        await this.delay(0);
+        this.loadData();
+      })();
     });
   }
 
@@ -83,8 +86,15 @@ export class DevComponent implements OnInit {
     //console.log(collection_id)
     this.collectionsService.addItemToCollection(collection_id, item_id).subscribe(result => {
       console.log(result);
-      this.loadData();
+      (async () => {
+        await this.delay(0);
+        this.loadData();
+      })();
     });
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

@@ -54,7 +54,6 @@ export class EditCollectionComponent implements OnInit {
     this.state = 'success';
   }
 
-
   onSave() {
     this.collectionsService.createCollection(this.collection).subscribe(response => {
       this.ui.showInfoSnackBar("Sbírka byla vytvořena");
@@ -69,14 +68,22 @@ export class EditCollectionComponent implements OnInit {
 
   onUpdate() {
     this.collectionsService.updateCollection(this.collection).subscribe(() => {
-      this.ui.showInfoSnackBar("Sbírka byla upravena");
-      this.router.navigate(['/collections', this.collection.id]);
+      (async () => {
+        this.state = 'loading';
+        await this.delay(0);
+        this.ui.showInfoSnackBar("Sbírka byla upravena");
+        this.router.navigate(['/collections', this.collection.id]);
+      })();
     },
       (error) => {
+        this.state = 'error';
         console.log(error);
         this.ui.showErrorSnackBar("Sbírku se nepodařilo upravit");
       });
   }
 
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 }
