@@ -18,15 +18,21 @@
 </div>
 
 <div class="app-collection" *ngIf="collection">
+  <div class="app-label">Název sbírky</div>
   <div class="app-name">
     {{ collection.name }}
   </div>
+  <div class="app-label">Krátky popis sbírky</div>
   <div class="app-description">
     {{ collection.description }}
   </div>
+
+  <div class="app-label">Samostatná sbírka</div>  
   <div class="app-standalone">
-    samostatná: {{ collection.standalone }}
+    {{ collection.standalone ? "Ano" : "Ne" }}
   </div>
+
+  <div class="app-label">Úplný popis sbírky</div>
   <div class="app-content" [innerHTML]="collection.content"></div>
 
   <!-- TODO: udelat poradne seznam polozek -->
