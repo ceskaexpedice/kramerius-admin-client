@@ -78,7 +78,7 @@
 <mat-menu #collectionsMenu="matMenu" xPosition="before" class="app-collections-menu">
   <ng-template matMenuContent ngFor>
     <div class="app-collections">
-      <div *ngFor="let collection of availableCollections" class="app-collection" (click)="addToCollection(collection['n.pid'])">
+      <div *ngFor="let collection of availableCollections" class="app-collection" (click)="addThisToCollection(collection['n.pid'])">
         {{ collection['n.title.search'] }}
       </div>
     </div>

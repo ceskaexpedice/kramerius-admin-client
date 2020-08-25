@@ -105,6 +105,7 @@ export class DevComponent implements OnInit {
   addToCollection(item_id: string, collection_id: string) {
     //console.log(item_id)
     //console.log(collection_id)
+    //console.log("dev.component: adding item " + item_id + " to collection " + collection_id)
     this.collectionsService.addItemToCollection(collection_id, item_id).subscribe(result => {
       console.log(result);
       (async () => {

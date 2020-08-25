@@ -83,8 +83,9 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  addToCollection(uuid: string) {
-    this.collectionsService.addItemToCollection(this.collection.id, uuid).subscribe((res) => {
+  addThisToCollection(collection_uuid: string) {
+    //console.log("collection.component: adding item " + this.collection.id + " to collection " + collection_uuid)
+    this.collectionsService.addItemToCollection(collection_uuid, this.collection.id).subscribe((res) => {
       console.log('ressss', res);
     });
 
