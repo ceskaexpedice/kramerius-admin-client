@@ -39,8 +39,22 @@ export class ClientApiService {
     return this.getText(`/item/${uuid}/streams/BIBLIO_MODS`);
   }
 
-  search(params): Observable<Object> {
-    return this.get('/search', params);
+  search(params): Observable<any[]> {
+    return this.get('/search', params).pipe(map(response => response['response']['docs']));
+  }
+
+  getCollectionChildren(uuid: string): Observable<any[]> {
+    return this.search({
+      q: `n.in_collections.direct:"${uuid}"`,
+      fl: 'n.model,n.pid,n.title.search'
+    });
+  }
+
+  getAvailableCollections(uuid: string): Observable<any[]> {
+    return this.search({
+      q: `n.model:collection !n.in_collections:"${uuid}" AND !n.pid:"${uuid}"`,
+      fl: 'n.pid,n.title.search'
+    });
   }
 
 }

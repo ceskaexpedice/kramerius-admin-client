@@ -16,8 +16,8 @@ export class DevComponent implements OnInit {
   //collection3 = "uuid:e7c94b4d-a980-4c40-9402-9c391806ea65";//cr
   //collections = [this.collection1,this.collection2,this.collection3,]
 
-  item1 = "uuid:0eaa6730-9068-11dd-97de-000d606f5dc6";//drobnustky
-  item2 = "uuid:ba4934d1-0a1e-4a01-a89d-c948477ca833";//plan velkeho brna
+  item1 = "uuid:0c5e9951-253e-4566-8c43-9599cfe0374e";//drobnustky
+  item2 = "uuid:9960a459-46a8-4508-90ac-ae01d5651c03";//plan velkeho brna
   item3 = "uuid:fbf5efba-ff5f-4921-aee6-2d7f4141561b"; //klavirni skladby
   item4 = "uuid:b7a9bc7f-db16-403b-8358-78f9c12cd817"; //Chybna indexace - level 1
   item5 = "uuid:e1d36b93-4152-4c50-89b8-a8871ee6c390"; //Chybna indexace - level 2

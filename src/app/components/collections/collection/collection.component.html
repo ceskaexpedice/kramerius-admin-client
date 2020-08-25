@@ -1,5 +1,16 @@
 <div class="breadcrumb-nav">
   <div class="app-actions" *ngIf="collection">
+    
+    
+
+
+
+    <button matTooltip="Přidat do sbírky" class="action-btn" mat-icon-button [matMenuTriggerFor]="collectionsMenu" (click)="loadCollections()">
+      <mat-icon>add</mat-icon>
+    </button>
+    
+    
+    
     <a class="action-btn" mat-icon-button color="default" matTooltip="Upravit sbírku"
       [routerLink]="['/collections', collection.id, 'edit']">
       <mat-icon>edit</mat-icon>
@@ -7,6 +18,10 @@
     <a class="action-btn" mat-icon-button color="default" matTooltip="Odstranit sbírku" (click)="onDelete()">
       <mat-icon>delete</mat-icon>
     </a>
+
+
+
+
   </div>
   <div class="app-nav">
     <a [routerLink]="['/collections']">Sbírky</a>
@@ -35,17 +50,37 @@
   <div class="app-label">Úplný popis sbírky</div>
   <div class="app-content" [innerHTML]="collection.content"></div>
 
-  <!-- TODO: udelat poradne seznam polozek -->
+
+
   <div *ngIf="collection.items">
-    <div>Položky ve sbírce</div>
-    <ng-container *ngFor="let item of collection.items">
-      {{item}}
-      <button (click)="onRemoveItemFromCollection(item)">Odstranit ze sbírky</button>
+    <div class="app-label">Obsah sbírky</div>
+    <div *ngFor="let item of items" class="app-collection-item">
+
+      <a class="app-collection-name" [routerLink]="['/collections', item['n.pid']]">
+        {{ item['n.title.search'] }}
+      </a>
+      <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['n.pid'])">cancel</mat-icon>
       <br>
-    </ng-container>
+    </div>
   </div>
+
+
+
 
 </div>
 
 <mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
 </mat-spinner>
+
+
+
+
+<mat-menu #collectionsMenu="matMenu" xPosition="before" class="app-collections-menu">
+  <ng-template matMenuContent ngFor>
+    <div class="app-collections">
+      <div *ngFor="let collection of availableCollections" class="app-collection" (click)="addToCollection(collection['n.pid'])">
+        {{ collection['n.title.search'] }}
+      </div>
+    </div>
+  </ng-template>
+</mat-menu>

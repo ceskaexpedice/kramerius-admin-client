@@ -23,7 +23,8 @@ import {
   MatSelectModule,
   MatDialogModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatRadioModule
 } from '@angular/material';
 
 
@@ -46,7 +47,8 @@ const components = [
   MatSelectModule,
   MatDialogModule,
   MatTabsModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatRadioModule
 ];
 
 const providers = [
