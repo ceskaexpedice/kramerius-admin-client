@@ -39,10 +39,10 @@ export class Collection {
   static fromAdminApiJson(json): Collection {
     const collection = new Collection();
     collection.id = json['pid'];
-    collection.name = json['name'];
+    collection.name = json['name'] || "";
     collection.description = json['description'];
-    collection.content = json['content'];
-    collection.standalone = json['standalone'];
+    collection.content = json['content'] || "";
+    collection.standalone = json['standalone'] == "true";
     if (json['created']) {
       collection.createdAt = new Date(json['created']);
     }
@@ -58,6 +58,9 @@ export class Collection {
     for (const obj of json) {
       items.push(Collection.fromAdminApiJson(obj));
     }
+    items.sort((a: Collection, b: Collection) => {
+      return a.name.localeCompare(b.name)
+    });
     return items;
   }
 

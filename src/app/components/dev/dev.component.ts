@@ -15,9 +15,11 @@ export class DevComponent implements OnInit {
   //collection2 = "uuid:f478da13-33c2-4c5d-aab9-a7471b211a0a";//evropa
   //collection3 = "uuid:e7c94b4d-a980-4c40-9402-9c391806ea65";//cr
 
-  item1 = "uuid:0eaa6730-9068-11dd-97de-000d606f5dc6";//drobnustky
-  item2 = "uuid:ba4934d1-0a1e-4a01-a89d-c948477ca833";//plan velkeho brna
+  item1 = "uuid:0c5e9951-253e-4566-8c43-9599cfe0374e";//drobnustky
+  item2 = "uuid:9960a459-46a8-4508-90ac-ae01d5651c03";//plan velkeho brna
   item3 = "uuid:fbf5efba-ff5f-4921-aee6-2d7f4141561b"; //klavirni skladby
+
+
 
   //collections = [this.collection1,this.collection2,this.collection3,]
 

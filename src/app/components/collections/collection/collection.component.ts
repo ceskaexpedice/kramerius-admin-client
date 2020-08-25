@@ -6,6 +6,7 @@ import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { MatDialog } from '@angular/material';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { CollectionsService } from 'src/app/services/collections.service';
+import { ClientApiService } from 'src/app/services/client-api.service';
 
 @Component({
   selector: 'app-collection',
@@ -16,12 +17,16 @@ export class CollectionComponent implements OnInit {
 
   collection: Collection;
   state = 'none';
+  availableCollections: any[];
+
+  items: any[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private ui: UIService,
     private dialog: MatDialog,
+    private clientApi: ClientApiService,
     private collectionsService: CollectionsService) {
   }
 
@@ -35,8 +40,11 @@ export class CollectionComponent implements OnInit {
   loadData(collectionId: string) {
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
-      //console.log(collection);
-      this.state = 'success';
+      this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
+        this.items = res;
+        console.log('res', res);
+        this.state = 'success';
+      })
     }, (error) => {
       console.log(error);
       this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
@@ -75,6 +83,13 @@ export class CollectionComponent implements OnInit {
     });
   }
 
+  addToCollection(uuid: string) {
+    this.collectionsService.addItemToCollection(this.collection.id, uuid).subscribe((res) => {
+      console.log('ressss', res);
+    });
+
+  }
+
   onRemoveItemFromCollection(itemPid: string) {
     //TODO: mozna potvrzovací dialog
     this.collectionsService.removeItemFromCollection(this.collection.id, itemPid).subscribe(() => {
@@ -91,5 +106,12 @@ export class CollectionComponent implements OnInit {
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  loadCollections() {
+    this.clientApi.getAvailableCollections(this.collection.id).subscribe((collections: any[]) => {
+      this.availableCollections = collections;
+    });
+  }
+  
 
 }

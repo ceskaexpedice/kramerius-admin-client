@@ -34,14 +34,11 @@
     <textarea matInput [(ngModel)]="collection.description"></textarea>
   </mat-form-field>
 
-  <mat-form-field>
-    <!-- <mat-checkbox [(ngModel)]="collection.standalone">Samostatná</mat-checkbox> -->
-    <mat-label>Typ</mat-label>
-    <mat-select [(ngModel)]="collection.standalone">
-      <mat-option value="true">Samostatná</mat-option>
-      <mat-option value="false">Nesamostatná</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div class="app-edit-standalone">
+    <div class="app-label">Samostatná sbírka</div>
+    <mat-checkbox color="primary" [(ngModel)]="collection.standalone">Ano</mat-checkbox>
+  </div>
+
 
   <div class="app-label">Úplný popis sbírky</div>
   <ckeditor [config]="editorConfig" [editor]="editor" required [(ngModel)]="collection.content" data="" name="text">

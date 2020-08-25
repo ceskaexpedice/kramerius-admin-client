@@ -28,7 +28,7 @@
         <a class="app-row" [routerLink]="['/collections', collection.id]">
           <div class="collection-id">{{ collection.id }}</div>
           <div class="collection-name">{{ collection.name }}</div>
-          <div class="collection-description">{{ collection.description | appShorten:10 }}</div>
+          <div class="collection-description">{{ collection.description }}</div>
           <div class="collection-datetime">{{ collection.createdAt | appDatetime }}</div>
           <div class="collection-datetime">{{ collection.modifiedAt | appDatetime }}</div>
           <div class="collection-actions">
