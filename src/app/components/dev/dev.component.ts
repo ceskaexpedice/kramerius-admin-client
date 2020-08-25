@@ -14,14 +14,35 @@ export class DevComponent implements OnInit {
   //collection1 = "uuid:bdd66da5-1833-4c88-b90f-7acb3695b8ec";//test
   //collection2 = "uuid:f478da13-33c2-4c5d-aab9-a7471b211a0a";//evropa
   //collection3 = "uuid:e7c94b4d-a980-4c40-9402-9c391806ea65";//cr
+  //collections = [this.collection1,this.collection2,this.collection3,]
 
   item1 = "uuid:0eaa6730-9068-11dd-97de-000d606f5dc6";//drobnustky
   item2 = "uuid:ba4934d1-0a1e-4a01-a89d-c948477ca833";//plan velkeho brna
   item3 = "uuid:fbf5efba-ff5f-4921-aee6-2d7f4141561b"; //klavirni skladby
+  item4 = "uuid:b7a9bc7f-db16-403b-8358-78f9c12cd817"; //Chybna indexace - level 1
+  item5 = "uuid:e1d36b93-4152-4c50-89b8-a8871ee6c390"; //Chybna indexace - level 2
 
-  //collections = [this.collection1,this.collection2,this.collection3,]
+  item1Title = "drobnustky";
+  item2Title = "plan velkeho brna";
+  item3Title = "klavirni skladby";
+  item4Title = "Chybna indexace - level 1"; 
+  item5Title = "Chybna indexace - level 2"; 
 
-  items = [this.item1, this.item2, this.item3]
+  items = [
+    // this.item1, 
+    // this.item2, 
+    this.item3,
+    this.item4,
+    this.item5,
+
+  ]
+  titles = [
+    // this.item1Title, 
+    // this.item2Title, 
+    this.item3Title,
+    this.item4Title,
+    this.item5Title,
+  ]
 
   collections;
   collections_by_id;

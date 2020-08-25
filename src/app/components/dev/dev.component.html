@@ -6,8 +6,8 @@
 
     <!-- <button (click)="logData()">log data</button> -->
 
-    <ng-container *ngFor="let item of items">
-        <h4>Object {{item}}</h4>
+    <ng-container *ngFor="let item of items;let i = index">
+        <h4>{{titles[i]}} ({{item}})</h4>
         <ng-container *ngFor="let collection_id of pids_of_collections_having_item[item]">
             &nbsp;&nbsp;&nbsp;&nbsp;
             <button (click)="removeFromCollection(item,collection_id)">odebrat</button>
