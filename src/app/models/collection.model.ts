@@ -42,7 +42,7 @@ export class Collection {
     collection.name = json['name'] || "";
     collection.description = json['description'];
     collection.content = json['content'] || "";
-    collection.standalone = json['standalone'] == "true";
+    collection.standalone = json['standalone'];
     if (json['created']) {
       collection.createdAt = new Date(json['created']);
     }
