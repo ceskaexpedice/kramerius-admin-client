@@ -6,6 +6,7 @@ import { Batch } from 'src/app/models/batch.model';
 import { Process } from 'src/app/models/process.model';
 import { ProcessOwner } from 'src/app/models/process-owner.model';
 import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
+import { AppSettings } from 'src/app/services/app-settings';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class ProcessesComponent implements OnInit {
   owners: ProcessOwner[] = []
   batches: Batch[];
 
-  constructor(private adminApi: AdminApiService, private dialog: MatDialog) {
+  constructor(private adminApi: AdminApiService, private dialog: MatDialog, private appSettings: AppSettings) {
     for (const state of Process.BATCH_STATES) {
       this.batch_states.push({ key: state, label: Process.stateLabel(state) })
     }
@@ -59,7 +60,7 @@ export class ProcessesComponent implements OnInit {
     });
   }
 
-  scheduleProcess() {
+  scheduleTestProcess() {
     const params = {
       defid: 'process-api-test',
       params: {

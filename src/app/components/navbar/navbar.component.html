@@ -7,7 +7,7 @@
 
   <ng-container *ngIf="auth.isLoggedIn()">
     <!-- TODO: hide /dev in production -->
-    <a routerLink="/dev" routerLinkActive="active" mat-button>Test</a>
+    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="appSettings.devMode">Test</a>
     <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
     <a routerLink="/processes" routerLinkActive="active" mat-button>Procesy</a>
     <a [matMenuTriggerFor]="profile_menu" mat-button>

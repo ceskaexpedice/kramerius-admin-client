@@ -2,28 +2,31 @@
 
   <div class="app-actions">
 
-    <!-- spusteni testovaciho procesu -->
-    
-    <mat-form-field class="app-schedule-test-process-final-state">
-      <mat-select placeholder="Konečný stav" [(value)]="selectedtestProcessFinalState">
-        <mat-option *ngFor="let state of testProcessFinalStates" [value]="state">{{ state }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div *ngIf="appSettings.devMode">
+      <!-- spusteni testovaciho procesu -->
 
-    <mat-form-field class="app-schedule-test-process-processes-in-batch">
-      <mat-select placeholder="Procesů v dávce" [(value)]="selectedTestProcessProcessesInBatch">
-        <mat-option *ngFor="let processes of testProcessProcessesInBatch" [value]="processes">{{ processes }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field class="app-schedule-test-process-final-state">
+        <mat-select placeholder="Konečný stav" [(value)]="selectedtestProcessFinalState">
+          <mat-option *ngFor="let state of testProcessFinalStates" [value]="state">{{ state }}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field class="app-schedule-test-process-duration">
-      <mat-select placeholder="Trvání procesu" [(value)]="selectedTestProcessDuration">
-        <mat-option *ngFor="let duration of testProcessDuration" [value]="duration">{{ duration }} s</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field class="app-schedule-test-process-processes-in-batch">
+        <mat-select placeholder="Procesů v dávce" [(value)]="selectedTestProcessProcessesInBatch">
+          <mat-option *ngFor="let processes of testProcessProcessesInBatch" [value]="processes">{{ processes }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <button class="app-schedule-test-process-btn" mat-raised-button (click)="scheduleProcess()" color="primary">Spustit testovací proces</button>
+      <mat-form-field class="app-schedule-test-process-duration">
+        <mat-select placeholder="Trvání procesu" [(value)]="selectedTestProcessDuration">
+          <mat-option *ngFor="let duration of testProcessDuration" [value]="duration">{{ duration }} s</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button class="app-schedule-test-process-btn" mat-raised-button (click)="scheduleTestProcess()"
+        color="primary">Spustit testovací proces</button>
+    </div>
 
     <!-- filtrovani seznamu procesu  -->
 
