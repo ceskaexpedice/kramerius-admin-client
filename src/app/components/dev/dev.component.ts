@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { Collection } from 'src/app/models/collection.model';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   selector: 'app-dev',
@@ -9,7 +10,9 @@ import { Collection } from 'src/app/models/collection.model';
 })
 export class DevComponent implements OnInit {
 
-  constructor(private collectionsService: CollectionsService) { }
+  constructor(private collectionsService: CollectionsService, private adminApi: AdminApiService) { }
+
+  //Sbirky
 
   //collection1 = "uuid:bdd66da5-1833-4c88-b90f-7acb3695b8ec";//test
   //collection2 = "uuid:f478da13-33c2-4c5d-aab9-a7471b211a0a";//evropa
@@ -25,8 +28,8 @@ export class DevComponent implements OnInit {
   item1Title = "drobnustky";
   item2Title = "plan velkeho brna";
   item3Title = "klavirni skladby";
-  item4Title = "Chybna indexace - level 1"; 
-  item5Title = "Chybna indexace - level 2"; 
+  item4Title = "Chybna indexace - level 1";
+  item5Title = "Chybna indexace - level 2";
 
   items = [
     // this.item1, 
@@ -48,6 +51,13 @@ export class DevComponent implements OnInit {
   collections_by_id;
   pids_of_collections_having_item;
   pids_of_collections_missing_item;
+
+
+  //Indexační proces
+  indexationProcessTypes = ['OBJECT', 'OBJECT_AND_CHILDREN', 'TREE']; //TODO: add all types
+  selectedIndexationProcessType = this.indexationProcessTypes[0];
+  pidForIndexation = this.item1;
+
 
   ngOnInit() {
     this.loadData();
@@ -117,6 +127,20 @@ export class DevComponent implements OnInit {
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  scheduleIndexationProcess() {
+    const params = {
+      defid: 'new_indexer',
+      params: {
+        type: this.selectedIndexationProcessType,
+        pid: this.pidForIndexation,
+      }
+    }
+    // this.pidForIndexation = null;
+    this.adminApi.scheduleProcess(params).subscribe(response => {
+      console.log('indexation scheduled')
+    });
   }
 
 }

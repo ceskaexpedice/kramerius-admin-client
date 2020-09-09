@@ -4,8 +4,27 @@
     <p>Tato komponenta slouží pro testování, typicky nové funkcionality na backendu. Protože tady máme funkční
         autentizaci, což se složitěji simuluje.</p>
 
+    <h2>Indexační proces</h2>
+    <div>
+        <!-- spusteni indexačního procesu -->
+
+        <mat-form-field class="app-schedule-indexation-process-type">
+            <mat-select placeholder="Typ indexace" [(value)]="selectedIndexationProcessType">
+                <mat-option *ngFor="let type of indexationProcessTypes" [value]="type">{{ type }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="pidForIndexation" placeholder="PID">
+        </mat-form-field>
+
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationProcess()"
+            [disabled]="!pidForIndexation" color="primary">Spustit indexační proces</button>
+    </div>
+
     <!-- <button (click)="logData()">log data</button> -->
 
+    <h2>Ukázkové objekty ve sbírkách</h2>
     <ng-container *ngFor="let item of items;let i = index">
         <h4>{{titles[i]}} ({{item}})</h4>
         <ng-container *ngFor="let collection_id of pids_of_collections_having_item[item]">
