@@ -7,7 +7,6 @@
     <h2>Indexační proces</h2>
     <div>
         <!-- spusteni indexačního procesu -->
-
         <mat-form-field class="app-schedule-indexation-process-type">
             <mat-select placeholder="Typ indexace" [(value)]="selectedIndexationProcessType">
                 <mat-option *ngFor="let type of indexationProcessTypes" [value]="type">{{ type }}</mat-option>
@@ -25,6 +24,17 @@
         <button mat-raised-button (click)="scheduleIndexationProcessesForAll()" color="primary">Naplánovat indexační
             procesy pro všchny známé
             objekty</button>
+    </div>
+
+    <h2>Úklid</h2>
+    <div>
+        <!-- mazani objektu z repozitare -->
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="pidForDeletion" placeholder="PID">
+        </mat-form-field>
+        <!-- tohle pouzivat fakt opatrne, neresi se uklid vyhledavaciho indexu, taky to kvuli cachovani neznamena, ze bude objekt skutecne smazan, muze byt potreba restratovat Tomcat -->
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="deleteObjectFromRepo()"
+            [disabled]="!pidForDeletion" color="primary">Smazat objekt</button>
     </div>
 
     <!-- <button (click)="logData()">log data</button> -->

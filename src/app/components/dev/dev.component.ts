@@ -58,6 +58,9 @@ export class DevComponent implements OnInit {
   selectedIndexationProcessType = this.indexationProcessTypes[0];
   pidForIndexation = this.item1;
 
+  //deletion
+  pidForDeletion;
+
 
   ngOnInit() {
     this.loadData();
@@ -140,6 +143,12 @@ export class DevComponent implements OnInit {
     // this.pidForIndexation = null;
     this.adminApi.scheduleProcess(params).subscribe(response => {
       console.log('indexation scheduled')
+    });
+  }
+
+  deleteObjectFromRepo() {
+    this.adminApi.deleteObject(this.pidForDeletion).subscribe(response => {
+      console.log(`object ${this.pidForDeletion} deleted`)
     });
   }
 

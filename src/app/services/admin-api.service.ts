@@ -135,6 +135,10 @@ export class AdminApiService {
     return this.delete(`/collections/${collectionPid}/items/${itemPid}`);
   }
 
+  deleteObject(pid: string): Observable<any> {
+    return this.delete(`/item/${pid}`);
+  }
+
 }
 
 export interface ProcessesParams {
