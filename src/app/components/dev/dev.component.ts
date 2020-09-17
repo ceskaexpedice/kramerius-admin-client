@@ -177,6 +177,8 @@ export class DevComponent implements OnInit {
       "uuid:a101de00-2119-11e3-a5bb-005056827e52",
       //p5_filosoficky_casopis_2015_pdf_clanky
       "uuid:c82a1017-48e1-11e1-9389-005056a60003",
+      //p6_zvon
+      "uuid:5d555200-8db0-11e3-bd09-005056827e51",
 
       //COLLECTIONS
       //c1_evropa
