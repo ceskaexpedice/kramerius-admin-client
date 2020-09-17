@@ -21,6 +21,11 @@
         <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationProcess()"
             [disabled]="!pidForIndexation" color="primary">Spustit indexační proces</button>
     </div>
+    <div>
+        <button mat-raised-button (click)="scheduleIndexationProcessesForAll()" color="primary">Naplánovat indexační
+            procesy pro všchny známé
+            objekty</button>
+    </div>
 
     <!-- <button (click)="logData()">log data</button> -->
 
