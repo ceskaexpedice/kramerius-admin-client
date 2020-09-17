@@ -62,7 +62,7 @@ export class AdminApiService {
       'offset': offset,
       'limit': limit
     }).pipe(
-      tap(response => console.log(response)),
+      //tap(response => console.log(response)),
       //map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
     );
   }
