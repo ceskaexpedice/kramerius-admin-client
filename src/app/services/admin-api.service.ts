@@ -136,7 +136,7 @@ export class AdminApiService {
   }
 
   deleteObject(pid: string): Observable<any> {
-    return this.delete(`/item/${pid}`);
+    return this.delete(`/items/${pid}`);
   }
 
 }

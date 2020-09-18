@@ -36,7 +36,7 @@ export class ClientApiService {
   }
 
   getMods(uuid: string): Observable<string> {
-    return this.getText(`/item/${uuid}/streams/BIBLIO_MODS`);
+    return this.getText(`/items/${uuid}/streams/BIBLIO_MODS`);
   }
 
   search(params): Observable<any[]> {
