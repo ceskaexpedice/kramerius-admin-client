@@ -53,10 +53,14 @@ export class DevComponent implements OnInit {
   pids_of_collections_missing_item;
 
 
-  //Indexační proces
+  //Indexační proces (jeden objekt)
   indexationProcessTypes = ['OBJECT', 'OBJECT_AND_CHILDREN', 'TREE']; //TODO: add all types
   selectedIndexationProcessType = this.indexationProcessTypes[0];
   pidForIndexation = this.item1;
+
+  //Indexační proces (model)
+  modelIndexationProcessModels = ['monograph', 'periodical', 'graphic', 'map', 'archive', 'collection', 'sheetmusic', 'soundrecording'];
+  selectedModelIndexationProcessModel = this.modelIndexationProcessModels[0];
 
   //deletion
   pidForDeletion;
@@ -140,10 +144,48 @@ export class DevComponent implements OnInit {
         pid: this.pidForIndexation,
       }
     }
-    // this.pidForIndexation = null;
     this.adminApi.scheduleProcess(params).subscribe(response => {
-      console.log('indexation scheduled')
+      console.log('indexation scheduled for ' + this.pidForIndexation);
     });
+  }
+
+  scheduleModelIndexationProcesses() {
+    this.adminApi.getObjectsByModel(this.selectedModelIndexationProcessModel).subscribe(response => {
+      //console.log(response);
+      response['items'].forEach(pid => {
+        const params = {
+          defid: 'new_indexer',
+          params: {
+            type: 'TREE',
+            pid: pid,
+          }
+        }
+        this.adminApi.scheduleProcess(params).subscribe(response => {
+          console.log('indexation scheduled for ' + this.pidForIndexation);
+        });
+      });
+    });
+  }
+
+
+  scheduleIndexationProcessesAllInRepository() {
+    //TODO: to je blbost, vraci to i stranky
+    console.log('operace zrusena');
+    //   this.adminApi.getObjects().subscribe(response => {
+    //     //console.log(response);
+    //     response['items'].forEach(pid => {
+    //       const params = {
+    //         defid: 'new_indexer',
+    //         params: {
+    //           type: 'TREE',
+    //           pid: pid,
+    //         }
+    //       }
+    //       this.adminApi.scheduleProcess(params).subscribe(response => {
+    //         console.log('indexation scheduled for ' + this.pidForIndexation);
+    //       });
+    //     });
+    //   });
   }
 
   deleteObjectFromRepo() {

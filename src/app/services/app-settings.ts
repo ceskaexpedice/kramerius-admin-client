@@ -13,4 +13,4 @@ export class AppSettings {
   constructor() {
   }
 
-}
+} 

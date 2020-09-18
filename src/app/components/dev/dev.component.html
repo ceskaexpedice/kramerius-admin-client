@@ -6,7 +6,7 @@
 
     <h2>Indexační proces</h2>
     <div>
-        <!-- spusteni indexačního procesu -->
+        <!-- spusteni indexačního procesu pro vybraný objekt -->
         <mat-form-field class="app-schedule-indexation-process-type">
             <mat-select placeholder="Typ indexace" [(value)]="selectedIndexationProcessType">
                 <mat-option *ngFor="let type of indexationProcessTypes" [value]="type">{{ type }}</mat-option>
@@ -20,10 +20,30 @@
         <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationProcess()"
             [disabled]="!pidForIndexation" color="primary">Spustit indexační proces</button>
     </div>
+
     <div>
+        <!-- spusteni indexačního procesu pro model -->
+        <mat-form-field class="app-schedule-indexation-process-type">
+            <mat-select placeholder="Model" [(value)]="selectedModelIndexationProcessModel">
+                <mat-option *ngFor="let model of modelIndexationProcessModels" [value]="model">{{model}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="app-schedule-indexation-process-btn" mat-raised-button
+            (click)="scheduleModelIndexationProcesses()" color="primary">Indexovat vše podle modelu</button>
+    </div>
+
+    <div>
+        <!-- spusteni indexačního procesu pro vše v repozitáři -->
+        <button class="app-schedule-indexation-process-btn" mat-raised-button disabled
+            (click)="scheduleIndexationProcessesAllInRepository()" color="primary">Indexovat vše v repozitáři</button>
+    </div>
+
+    <div>
+        <!-- spusteni indexačního procesu pro hard-coded seznam objektů -->
+        <!-- <br>
         <button mat-raised-button (click)="scheduleIndexationProcessesForAll()" color="primary">Naplánovat indexační
-            procesy pro všchny známé
-            objekty</button>
+            procesy pro všechny známé
+            objekty</button> -->
     </div>
 
     <h2>Úklid</h2>
