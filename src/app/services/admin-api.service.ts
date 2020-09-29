@@ -50,12 +50,6 @@ export class AdminApiService {
     return this.http.put(this.baseUrl + path, body, options);
   }
 
-  getObjects(): Observable<any> {
-    return this.get(`/items`).pipe(
-      //tap(response => console.log(response)),
-    );
-  }
-
   getObjectsByModel(model: string) {
     return this.get(`/items`, {
       'model': model

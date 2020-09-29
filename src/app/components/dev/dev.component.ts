@@ -167,27 +167,6 @@ export class DevComponent implements OnInit {
     });
   }
 
-
-  scheduleIndexationProcessesAllInRepository() {
-    //TODO: to je blbost, vraci to i stranky
-    console.log('operace zrusena');
-    //   this.adminApi.getObjects().subscribe(response => {
-    //     //console.log(response);
-    //     response['items'].forEach(pid => {
-    //       const params = {
-    //         defid: 'new_indexer',
-    //         params: {
-    //           type: 'TREE',
-    //           pid: pid,
-    //         }
-    //       }
-    //       this.adminApi.scheduleProcess(params).subscribe(response => {
-    //         console.log('indexation scheduled for ' + this.pidForIndexation);
-    //       });
-    //     });
-    //   });
-  }
-
   deleteObjectFromRepo() {
     this.adminApi.deleteObject(this.pidForDeletion).subscribe(response => {
       console.log(`object ${this.pidForDeletion} deleted`)
