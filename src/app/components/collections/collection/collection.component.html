@@ -57,7 +57,10 @@
     <div *ngFor="let item of items" class="app-collection-item">
 
       <a class="app-collection-name" [routerLink]="['/collections', item['n.pid']]">
-        {{ item['n.title.search'] }}
+        {{ item['n.title.search'] }} 
+        <span *ngIf="item['n.title.search'] != item['n.root.title']">
+          ({{ item['n.root.title'] }} )
+        </span>
       </a>
       <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['n.pid'])">cancel</mat-icon>
       <br>

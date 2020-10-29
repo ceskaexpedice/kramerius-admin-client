@@ -42,7 +42,6 @@ export class CollectionComponent implements OnInit {
       this.collection = collection;
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
         this.items = res;
-        console.log('res', res);
         this.state = 'success';
       })
     }, (error) => {

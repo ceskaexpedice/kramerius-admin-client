@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AppSettings } from './app-settings';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,14 +46,16 @@ export class ClientApiService {
   getCollectionChildren(uuid: string): Observable<any[]> {
     return this.search({
       q: `n.in_collections.direct:"${uuid}"`,
-      fl: 'n.model,n.pid,n.title.search'
+      fl: 'n.model,n.pid,n.title.search,n.root.title',
+      ows: '400'
     });
   }
 
   getAvailableCollections(uuid: string): Observable<any[]> {
     return this.search({
       q: `n.model:collection !n.in_collections:"${uuid}" AND !n.pid:"${uuid}"`,
-      fl: 'n.pid,n.title.search'
+      fl: 'n.pid,n.title.search',
+      rows: '400'
     });
   }
 
