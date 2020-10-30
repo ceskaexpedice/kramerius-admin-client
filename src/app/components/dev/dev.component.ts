@@ -54,7 +54,7 @@ export class DevComponent implements OnInit {
 
 
   //Indexační proces (jeden objekt)
-  indexationProcessTypes = ['OBJECT', 'OBJECT_AND_CHILDREN', 'TREE']; //TODO: add all types
+  indexationProcessTypes = ['TREE_AND_FOSTER_TREES', 'OBJECT', 'OBJECT_AND_CHILDREN', 'TREE']; //TODO: add all types
   selectedIndexationProcessType = this.indexationProcessTypes[0];
   pidForIndexation = this.item1;
 
