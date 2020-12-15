@@ -59,7 +59,7 @@ export class DevComponent implements OnInit {
   pidForIndexation = this.item1;
 
   //Indexační proces (model)
-  modelIndexationProcessModels = ['monograph', 'periodical', 'graphic', 'map', 'archive', 'collection', 'sheetmusic', 'soundrecording'];
+  modelIndexationProcessModels = ['monograph', 'periodical', 'graphic', 'map', 'archive', 'collection', 'sheetmusic', 'soundrecording', 'manuscript'];
   selectedModelIndexationProcessModel = this.modelIndexationProcessModels[0];
 
   //deletion
