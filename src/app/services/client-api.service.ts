@@ -45,16 +45,16 @@ export class ClientApiService {
 
   getCollectionChildren(uuid: string): Observable<any[]> {
     return this.search({
-      q: `n.in_collections.direct:"${uuid}"`,
-      fl: 'n.model,n.pid,n.title.search,n.root.title',
+      q: `in_collections.direct:"${uuid}"`,
+      fl: 'model,pid,title.search,root.title',
       ows: '400'
     });
   }
 
   getAvailableCollections(uuid: string): Observable<any[]> {
     return this.search({
-      q: `n.model:collection !n.in_collections:"${uuid}" AND !n.pid:"${uuid}"`,
-      fl: 'n.pid,n.title.search',
+      q: `model:collection !in_collections:"${uuid}" AND !pid:"${uuid}"`,
+      fl: 'pid,title.search',
       rows: '400'
     });
   }

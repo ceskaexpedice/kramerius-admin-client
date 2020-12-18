@@ -56,13 +56,13 @@
     <div class="app-label">Obsah sbírky</div>
     <div *ngFor="let item of items" class="app-collection-item">
 
-      <a class="app-collection-name" [routerLink]="['/collections', item['n.pid']]">
-        {{ item['n.title.search'] }} 
-        <span *ngIf="item['n.title.search'] != item['n.root.title']">
-          ({{ item['n.root.title'] }} )
+      <a class="app-collection-name" [routerLink]="['/collections', item['pid']]">
+        {{ item['title.search'] }} 
+        <span *ngIf="item['title.search'] != item['root.title']">
+          ({{ item['root.title'] }} )
         </span>
       </a>
-      <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['n.pid'])">cancel</mat-icon>
+      <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['pid'])">cancel</mat-icon>
       <br>
     </div>
   </div>
@@ -81,8 +81,8 @@
 <mat-menu #collectionsMenu="matMenu" xPosition="before" class="app-collections-menu">
   <ng-template matMenuContent ngFor>
     <div class="app-collections">
-      <div *ngFor="let collection of availableCollections" class="app-collection" (click)="addThisToCollection(collection['n.pid'])">
-        {{ collection['n.title.search'] }}
+      <div *ngFor="let collection of availableCollections" class="app-collection" (click)="addThisToCollection(collection['pid'])">
+        {{ collection['title.search'] }}
       </div>
     </div>
   </ng-template>

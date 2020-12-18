@@ -16,14 +16,14 @@ export class Collection {
 
   static fromSolrJson(json): Collection {
     const collection = new Collection();
-    collection.id = json['n.pid'];
-    collection.name = json['n.title.search'];
-    collection.description = json['n.collection.desc'];
-    if (json['n.created']) {
-      collection.createdAt = new Date(json['n.created']);
+    collection.id = json['pid'];
+    collection.name = json['title.search'];
+    collection.description = json['collection.desc'];
+    if (json['created']) {
+      collection.createdAt = new Date(json['created']);
     }
-    if (json['n.modified']) {
-      collection.modifiedAt = new Date(json['n.modified']);
+    if (json['modified']) {
+      collection.modifiedAt = new Date(json['modified']);
     }
     return collection;
   }
