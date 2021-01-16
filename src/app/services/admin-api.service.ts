@@ -66,13 +66,17 @@ export class AdminApiService {
   }
 
   getProcessLogs(procesUuid: string, logType: string, offset: number, limit: number): Observable<any> {
-    return this.get(`/processes/by_process_uuid/${procesUuid}/logs/${logType}`, {
+    return this.get(`/processes/by_process_uuid/${procesUuid}/logs/${logType}/lines`, {
       'offset': offset,
       'limit': limit
     }).pipe(
       //tap(response => console.log(response)),
       //map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
     );
+  }
+
+  getProcessLogsUrl(procesUuid: string, logType: string, fileName: string): string {
+    return `${this.baseUrl}/processes/by_process_uuid/${procesUuid}/logs/${logType}?fileName=${fileName}`;
   }
 
   getProcess(processId: number): Observable<[Batch, Process]> {

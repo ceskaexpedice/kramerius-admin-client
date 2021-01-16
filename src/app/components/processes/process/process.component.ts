@@ -36,6 +36,8 @@ export class ProcessComponent implements OnInit {
         ([batch, process]: [Batch, Process]) => {
           this.batch = batch;
           this.process = process;
+          console.log(this.batch);
+          console.log(this.process);
         }
       );
   }
@@ -89,6 +91,33 @@ export class ProcessComponent implements OnInit {
         });
       }
     });
+  }
+
+  canDownloadLog() {
+    switch (this.batch.state) {
+      case Process.FINISHED:
+      case Process.FAILED:
+      case Process.KILLED:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  logOutUrl() {
+    return this.adminApi.getProcessLogsUrl(this.process.uuid, "out", this.logOutFilename());
+  }
+
+  logOutFilename() {
+    return `process_${String(this.process.id)}_out.txt`;
+  }
+
+  logErrUrl() {
+    return this.adminApi.getProcessLogsUrl(this.process.uuid, "err", this.logErrFilename());
+  }
+
+  logErrFilename() {
+    return `process_${String(this.process.id)}_err.txt`;
   }
 
 }

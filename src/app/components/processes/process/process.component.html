@@ -1,72 +1,82 @@
 <div class="app-process" *ngIf="process">
   <!-- Process {{ processId }} -->
-    <h2>{{process.name}}</h2>
+  <h2>{{process.name}}</h2>
 
-    <div class="app-cards-left">
-      <!-- karta procesu -->
-      <mat-card class="app-card">
-        <div class="app-card-header">Proces</div>
-        <div class="app-state">
-          <div class="app-state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}
-          </div>
+  <div class="app-cards-left">
+    <!-- karta procesu -->
+    <mat-card class="app-card">
+      <div class="app-card-header">Proces</div>
+      <div class="app-state">
+        <div class="app-state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}
         </div>
-        <div *ngIf="process.planned">
-          <div class="app-card-content-label">Naplánován</div>
-          <div class="app-card-content-value">{{process.planned | appDatetime}}</div>
+      </div>
+      <div *ngIf="process.planned">
+        <div class="app-card-content-label">Naplánován</div>
+        <div class="app-card-content-value">{{process.planned | appDatetime}}</div>
+      </div>
+      <div *ngIf="process.started">
+        <div class="app-card-content-label">Spuštěn</div>
+        <div class="app-card-content-value">{{process.started | appDatetime}}</div>
+      </div>
+      <div *ngIf="process.finished">
+        <div class="app-card-content-label">Ukončen</div>
+        <div class="app-card-content-value">{{process.finished | appDatetime}}</div>
+      </div>
+      <div *ngIf="process.getDuration()">
+        <div class="app-card-content-label">Trvání</div>
+        <div class="app-card-content-value">{{process.getDuration() | appDuration}}</div>
+      </div>
+    </mat-card>
+    <!-- karta davky -->
+    <mat-card class="app-card">
+      <div class="app-card-header">Dávka</div>
+      <div class="app-state">
+        <div class="app-state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}
         </div>
-        <div *ngIf="process.started">
-          <div class="app-card-content-label">Spuštěn</div>
-          <div class="app-card-content-value">{{process.started | appDatetime}}</div>
-        </div>
-        <div *ngIf="process.finished">
-          <div class="app-card-content-label">Ukončen</div>
-          <div class="app-card-content-value">{{process.finished | appDatetime}}</div>
-        </div>
-        <div *ngIf="process.getDuration()">
-          <div class="app-card-content-label">Trvání</div>
-          <div class="app-card-content-value">{{process.getDuration() | appDuration}}</div>
-        </div>
-      </mat-card>
-      <!-- karta davky -->
-      <mat-card class="app-card">
-        <div class="app-card-header">Dávka</div>
-        <div class="app-state">
-          <div class="app-state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}
-          </div>
-        </div>
-        <div *ngIf="batch.planned">
-          <div class="app-card-content-label">Naplánována</div>
-          <div class="app-card-content-value">{{batch.planned | appDatetime}}</div>
-        </div>
-        <div *ngIf="batch.started">
-          <div class="app-card-content-label">Spuštěna</div>
-          <div class="app-card-content-value">{{batch.started | appDatetime}}</div>
-        </div>
-        <div *ngIf="batch.finished">
-          <div class="app-card-content-label">Ukončena</div>
-          <div class="app-card-content-value">{{batch.finished | appDatetime}}</div>
-        </div>
-        <div *ngIf="batch.getDuration()">
-          <div class="app-card-content-label">Trvání</div>
-          <div class="app-card-content-value">{{batch.getDuration() | appDuration}}</div>
-        </div>
-        <mat-card-actions>
-          <button mat-button *ngIf="batch.isKillable()" (click)="onKill(batch)">Zastavit</button>
-          <button mat-button *ngIf="batch.isDeletable()" (click)="onRemove(batch)">Smazat</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+      </div>
+      <div *ngIf="batch.planned">
+        <div class="app-card-content-label">Naplánována</div>
+        <div class="app-card-content-value">{{batch.planned | appDatetime}}</div>
+      </div>
+      <div *ngIf="batch.started">
+        <div class="app-card-content-label">Spuštěna</div>
+        <div class="app-card-content-value">{{batch.started | appDatetime}}</div>
+      </div>
+      <div *ngIf="batch.finished">
+        <div class="app-card-content-label">Ukončena</div>
+        <div class="app-card-content-value">{{batch.finished | appDatetime}}</div>
+      </div>
+      <div *ngIf="batch.getDuration()">
+        <div class="app-card-content-label">Trvání</div>
+        <div class="app-card-content-value">{{batch.getDuration() | appDuration}}</div>
+      </div>
+      <mat-card-actions>
+        <button mat-button *ngIf="batch.isKillable()" (click)="onKill(batch)">Zastavit</button>
+        <button mat-button *ngIf="batch.isDeletable()" (click)="onRemove(batch)">Smazat</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
-    <div class="app-tabs">
-      <div class="app-tabs-headers">
-        <div class="app-tabs-header" [class.app-tabs-active]="log=='out'" (click)="log='out'">Standardní výstup</div>
-        <div class="app-tabs-header" [class.app-tabs-active]="log=='err'" (click)="log='err'">Chybový výstup</div>
+  <div class="app-tabs">
+    <div class="app-tabs-headers">
+      <div class="app-tabs-header" [class.app-tabs-active]="log=='out'" (click)="log='out'">Standardní výstup
+        <a class="action-btn" mat-icon-button color="default" matTooltip="Stáhnout celý standardní výstup"
+          href="{{logOutUrl()}}" download="{{logOutFilename()}}" [disabled]="!canDownloadLog()">
+          <mat-icon>get_app</mat-icon>
+        </a>
       </div>
-      <div class="app-tabs-content">
-        <app-process-logs *ngIf="log=='out'" [process]="process" [logType]="'out'"></app-process-logs>
-        <app-process-logs *ngIf="log=='err'" [process]="process" [logType]="'err'"></app-process-logs>
+      <div class="app-tabs-header" [class.app-tabs-active]="log=='err'" (click)="log='err'">Chybový výstup
+        <a class="action-btn" mat-icon-button color="default" matTooltip="Stáhnout celý chybový výstup"
+          href="{{logErrUrl()}}" download="{{logErrFilename()}}" [disabled]="!canDownloadLog()">
+          <mat-icon>get_app</mat-icon>
+        </a>
       </div>
     </div>
+    <div class="app-tabs-content">
+      <app-process-logs *ngIf="log=='out'" [process]="process" [logType]="'out'"></app-process-logs>
+      <app-process-logs *ngIf="log=='err'" [process]="process" [logType]="'err'"></app-process-logs>
+    </div>
+  </div>
 
 
 
