@@ -7,7 +7,7 @@ export class MatPaginatorIntlCz extends MatPaginatorIntl {
 
     getRangeLabel = function (page, pageSize, length) {
         if (length === 0 || pageSize === 0) {
-            return '0 z ' + length;
+            return `0 z ${this.formatNumber(length)}`
         }
         length = Math.max(length, 0);
         const startIndex = page * pageSize;
@@ -15,7 +15,12 @@ export class MatPaginatorIntlCz extends MatPaginatorIntl {
         const endIndex = startIndex < length ?
             Math.min(startIndex + pageSize, length) :
             startIndex + pageSize;
-        return startIndex + 1 + ' - ' + endIndex + ' z ' + length;
+
+        return `${this.formatNumber(startIndex + 1)} - ${this.formatNumber(endIndex)} z ${this.formatNumber(length)}`
     };
+
+    formatNumber(num: number) {
+        return String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 ');
+    }
 
 }
