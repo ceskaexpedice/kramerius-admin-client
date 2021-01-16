@@ -40,7 +40,7 @@ export class ProcessesComponent implements OnInit {
   owners: ProcessOwner[] = []
   batches: Batch[];
 
-  constructor(private adminApi: AdminApiService, private dialog: MatDialog, private appSettings: AppSettings) {
+  constructor(private adminApi: AdminApiService, private dialog: MatDialog, public appSettings: AppSettings) {
     for (const state of Process.BATCH_STATES) {
       this.batch_states.push({ key: state, label: Process.stateLabel(state) })
     }

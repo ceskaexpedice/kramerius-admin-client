@@ -10,7 +10,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public auth: AuthService, public router: Router, private appSettings: AppSettings) { }
+  constructor(public auth: AuthService, public router: Router, public appSettings: AppSettings) { }
 
   ngOnInit() {
   }
