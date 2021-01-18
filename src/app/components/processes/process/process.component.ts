@@ -36,8 +36,6 @@ export class ProcessComponent implements OnInit {
         ([batch, process]: [Batch, Process]) => {
           this.batch = batch;
           this.process = process;
-          console.log(this.batch);
-          console.log(this.process);
         }
       );
   }
