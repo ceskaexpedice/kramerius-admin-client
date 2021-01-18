@@ -26,7 +26,7 @@ export class DurationPipe implements PipeTransform {
   }
 
   with2Digits(num: number) {
-    return num > 10 ? num : "0" + num;
+    return num >= 10 ? num : "0" + num;
   }
 
 }
