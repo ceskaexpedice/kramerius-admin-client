@@ -6,10 +6,11 @@
   <span class="fill-remaining-space"></span>
 
   <ng-container *ngIf="auth.isLoggedIn()">
-    <!-- TODO: hide /dev in production -->
-    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="appSettings.devMode">Test</a>
-    <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
     <a routerLink="/processes" routerLinkActive="active" mat-button>Procesy</a>
+    <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
+    <a routerLink="/indexing" routerLinkActive="active" mat-button>Indexace</a>
+    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="appSettings.devMode">Dev</a>
+
     <a [matMenuTriggerFor]="profile_menu" mat-button>
       <img *ngIf="auth.user.image" class="app-profile-img" [src]="auth.user.image" id="btn-dropdown-profile">
       <div *ngIf="!auth.user.image" class="app-profile-img app-profile-txt" id="btn-dropdown-profile">

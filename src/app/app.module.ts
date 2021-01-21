@@ -33,6 +33,7 @@ import { AdminApiService } from './services/admin-api.service';
 import { ClientApiService } from './services/client-api.service';
 import { CollectionsService } from './services/collections.service';
 import { DevComponent } from './components/dev/dev.component';
+import { IndexingComponent } from './components/indexing/indexing.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +51,8 @@ import { DevComponent } from './components/dev/dev.component';
     EditCollectionComponent,
     CollectionsComponent,
     CollectionComponent,
-    DevComponent
+    DevComponent,
+    IndexingComponent
   ],
   imports: [
     BrowserModule,

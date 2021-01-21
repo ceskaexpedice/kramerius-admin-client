@@ -10,20 +10,21 @@ import { CollectionsComponent } from './components/collections/collections.compo
 import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
 import { CollectionComponent } from './components/collections/collection/collection.component';
 import { DevComponent } from './components/dev/dev.component';
+import { IndexingComponent } from './components/indexing/indexing.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [ AuthGuard ]},
-  { path: 'processes/:id', component: ProcessComponent, canActivate: [ AuthGuard ]},
-  { path: 'processes', component: ProcessesComponent, canActivate: [ AuthGuard ]},
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'omniauth', component: OmniauthComponent },
-  { path: 'collections/:id/edit', component: EditCollectionComponent, canActivate: [ AuthGuard ]},
-  { path: 'collections/new', component: EditCollectionComponent, canActivate: [ AuthGuard ]},
-  { path: 'collections/:id', component: CollectionComponent, canActivate: [ AuthGuard ]},
-  { path: 'collections', component: CollectionsComponent, canActivate: [ AuthGuard ]},
-  { path: 'dev', component: DevComponent, canActivate: [ AuthGuard ]},
-
+  { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
+  { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
+  { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
+  { path: 'collections/:id/edit', component: EditCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/new', component: EditCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
+  { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

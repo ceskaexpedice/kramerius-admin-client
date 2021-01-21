@@ -1,0 +1,32 @@
+<div class="app-root">
+
+    <h2>Indexace objektu</h2>
+    <div>
+        <!-- spusteni indexačního procesu pro vybraný objekt -->
+        <mat-form-field class="app-schedule-indexation-process-type">
+            <mat-select placeholder="Typ indexace" [(value)]="selectedIndexationProcessType">
+                <mat-option *ngFor="let type of indexationProcessTypes" [value]="type">{{ type }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="pidForIndexation" placeholder="PID">
+        </mat-form-field>
+
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationProcess()"
+            [disabled]="!pidForIndexation" color="primary">Spustit indexační proces</button>
+    </div>
+
+    <h2>Indexace všech objektů podle modelu</h2>
+    <div>
+        <!-- spusteni indexačního procesu pro model -->
+        <mat-form-field class="app-schedule-indexation-process-type">
+            <mat-select placeholder="Model" [(value)]="selectedModelIndexationProcessModel">
+                <mat-option *ngFor="let model of modelIndexationProcessModels" [value]="model">{{model}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="app-schedule-indexation-process-btn" mat-raised-button
+            (click)="scheduleModelIndexationProcesses()" color="primary">Indexovat vše podle modelu</button>
+    </div>
+
+</div>
