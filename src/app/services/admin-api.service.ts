@@ -50,8 +50,8 @@ export class AdminApiService {
     return this.http.put(this.baseUrl + path, body, options);
   }
 
-  getObjectsByModel(model: string) {
-    return this.get(`/items`, {
+  getObjectsByModel(model: string, order='ASC') {
+    return this.get(`/items?order=${order}`, {
       'model': model
     }).pipe(
       //tap(response => console.log(response)),

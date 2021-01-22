@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
@@ -38,18 +39,36 @@ export class IndexingComponent implements OnInit {
   scheduleModelIndexationProcesses() {
     this.adminApi.getObjectsByModel(this.selectedModelIndexationProcessModel).subscribe(response => {
       //console.log(response);
-      response['items'].forEach(pid => {
+      response['items'].forEach(item => {
         const params = {
           defid: 'new_indexer',
           params: {
-            type: 'TREE',
-            pid: pid,
+            type: 'TREE_AND_FOSTER_TREES',
+            pid: item.pid,
           }
         }
         this.adminApi.scheduleProcess(params).subscribe(response => {
           console.log('indexation scheduled for ' + this.pidForIndexation);
         });
       });
+    });
+  }
+
+  fetchObjectsByModel() {
+    this.adminApi.getObjectsByModel(this.selectedModelIndexationProcessModel, 'DESC').subscribe(response => {
+      console.log(response.items);
+      // response['items'].forEach(pid => {
+      //   const params = {
+      //     defid: 'new_indexer',
+      //     params: {
+      //       type: 'TREE',
+      //       pid: pid,
+      //     }
+      //   }
+      //   this.adminApi.scheduleProcess(params).subscribe(response => {
+      //     console.log('indexation scheduled for ' + this.pidForIndexation);
+      //   });
+      // });
     });
   }
 
