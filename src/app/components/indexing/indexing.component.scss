@@ -16,3 +16,64 @@
     margin-right: 16px;
     margin-left: 16px;
   }
+
+  .app-processes-table {
+    height: calc(100% - 60px);
+    .scrollable {
+      max-height: calc(100% - 106px);
+      overflow: auto;
+    }
+    .process-expand {
+      margin-left: -20px;
+      width: 44px;
+      mat-icon {
+        font-size: 18px;
+      }
+    }
+    .process-id {
+      width: 340px;
+    }
+    .process-name {
+      flex: 1;
+      padding-right: 10px;
+      word-break: break-all;
+    }
+    .process-state {
+      width: 110px;
+      margin-right: 16px;
+      .state-label {
+        color: #fff;
+        text-align: center;
+        height: 21px;
+        line-height: 22px;
+        margin-top: 13px;
+        border-radius: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+    }
+    .process-datetime {
+      width: 160px;
+    }
+    .process-duration {
+      width: 60px;
+    }
+    .process-owner {
+      width: 160px;
+    }
+    .process-actions {
+      width: 40px;
+      .app-action-remove {
+        color: #999;
+        &:hover {
+          color: #333;
+        }
+      }
+    }
+    .app-subprocess {
+      background: #f6f6f6;
+      .process-expand {
+        width: 103px;
+      }
+    }
+  }

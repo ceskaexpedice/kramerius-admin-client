@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from './app-settings';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { isNgTemplate } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,16 @@ export class ClientApiService {
       fl: 'pid,title.search',
       rows: '400'
     });
+  }
+
+  getObjectsByModelFromIndex(model: string) {
+    return this.search({
+      q: `model:${model}`,
+      fl: 'pid', //'pid,title.search',
+      rows: '2147483647'
+    }).pipe(
+      map(items  => items.map(item => item['pid']))
+    );
   }
 
 }

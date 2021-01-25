@@ -1,6 +1,10 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { MatSelectChange } from '@angular/material';
+import { forkJoin, Observable } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { ClientApiService } from 'src/app/services/client-api.service';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-indexing',
@@ -15,12 +19,18 @@ export class IndexingComponent implements OnInit {
   pidForIndexation;
 
   //Indexační procesy (všechny objekty v modelu)
-  modelIndexationProcessModels = ['monograph', 'periodical', 'graphic', 'map', 'archive', 'collection', 'sheetmusic', 'soundrecording', 'manuscript'];
-  selectedModelIndexationProcessModel = this.modelIndexationProcessModels[0];
+  models = ['monograph', 'periodical', 'graphic', 'map', 'archive', 'collection', 'sheetmusic', 'soundrecording', 'manuscript'];
+  modelNames = ['Monografie', 'Periodika', 'Grafiky', 'Mapy', 'Archiválie', 'Sbírky', 'Hudebniny', 'Zvukové nahrávky', 'Rukopisy'];
+  selectedModelIndexationProcessModel = undefined;
 
-  constructor(private adminApi: AdminApiService) { }
+  objectsByModel: { pid: string, title: string, indexed: boolean }[] = [];
+
+  constructor(private adminApi: AdminApiService, private clientApi: ClientApiService, private uiService: UIService) { }
 
   ngOnInit() {
+    //TODO: disable for production
+    this.selectedModelIndexationProcessModel =  this.models[0];
+    this.fetchObjectsByModel();
   }
 
   scheduleIndexationProcess() {
@@ -55,21 +65,33 @@ export class IndexingComponent implements OnInit {
   }
 
   fetchObjectsByModel() {
-    this.adminApi.getObjectsByModel(this.selectedModelIndexationProcessModel, 'DESC').subscribe(response => {
-      console.log(response.items);
-      // response['items'].forEach(pid => {
-      //   const params = {
-      //     defid: 'new_indexer',
-      //     params: {
-      //       type: 'TREE',
-      //       pid: pid,
-      //     }
-      //   }
-      //   this.adminApi.scheduleProcess(params).subscribe(response => {
-      //     console.log('indexation scheduled for ' + this.pidForIndexation);
-      //   });
-      // });
+    let fromRepository = this.adminApi.getObjectsByModel(this.selectedModelIndexationProcessModel, 'ASC');
+    let fromIndex = this.clientApi.getObjectsByModelFromIndex(this.selectedModelIndexationProcessModel);
+    forkJoin([fromRepository, fromIndex]).subscribe(result => {
+      //console.log(result)
+      let objectsByModel: { pid: string, title: string, indexed: boolean }[] = [];
+      const pidsInIndex = result[1];
+      result[0]['items'].forEach(item => {
+        objectsByModel.push({
+          pid: item['pid'],
+          title: item['title'],
+          indexed: pidsInIndex.indexOf(item['pid']) != -1
+        });
+      });
+      console.log(objectsByModel)
+      this.objectsByModel = objectsByModel
     });
+  }
+
+  scheduleIndexation(object: { pid: string, title: string, indexed: boolean }) {
+    this.uiService.showInfoSnackBar('TODO: naplánovat indexaci objektu s potvrzovacím dialogem a výběrem módu indexace');
+  }
+
+  onSelectModel(event: MatSelectChange) {
+    console.log(event)
+    if (event.value) {
+      this.fetchObjectsByModel();
+    }
   }
 
 }
