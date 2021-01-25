@@ -1,8 +1,10 @@
 <div class="app-root">
 
-    <h2>Indexace objektu</h2>
+    <h2>Indexace</h2>
+
+    <h3>Objekt podle PID</h3>
     <div>
-        <!-- spusteni indexačního procesu pro vybraný objekt -->
+        <!-- spusteni indexačního u pro vybraný objekt -->
         <mat-form-field class="app-schedule-indexation-process-type">
             <mat-select placeholder="Typ indexace" [(value)]="selectedIndexationProcessType">
                 <mat-option *ngFor="let type of indexationProcessTypes" [value]="type">{{ type }}</mat-option>
@@ -14,10 +16,12 @@
         </mat-form-field>
 
         <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationProcess()"
-            [disabled]="!pidForIndexation" color="primary">Spustit indexační proces</button>
+            [disabled]="!pidForIndexation" color="primary">
+            <mat-icon>play_arrow</mat-icon>Indexovat objekt
+        </button>
     </div>
 
-    <h2>Indexace objektů podle modelu</h2>
+    <h3>Podle modelu</h3>
     <div>
         <!-- spusteni indexačního procesu pro model -->
         <mat-form-field class="app-schedule-indexation-process-type">
@@ -29,115 +33,56 @@
 
         <!-- TODO: zvýraznit rozdíl mezi aktivním a neaktivním -->
         <mat-button-toggle-group name="fontStyle" aria-label="Font Style" appearance="legacy" [(ngModel)]="isEnabled">
-            <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">Vše</mat-button-toggle>
-            <mat-button-toggle value="indexed" (change)="onChangeStateFilter($event.value)">Jen indexované</mat-button-toggle>
-            <mat-button-toggle value="not_indexed" (change)="onChangeStateFilter($event.value)">Jen neindexované</mat-button-toggle>
-          </mat-button-toggle-group>    
+            <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">vše</mat-button-toggle>
+            <mat-button-toggle value="indexed" (change)="onChangeStateFilter($event.value)">indexované
+            </mat-button-toggle>
+            <mat-button-toggle value="not_indexed" (change)="onChangeStateFilter($event.value)">neindexované
+            </mat-button-toggle>
+        </mat-button-toggle-group>
 
         <button class="app-schedule-indexation-process-btn" mat-raised-button
-            (click)="scheduleModelIndexationProcesses()" color="primary" disabled>Indexovat vše podle modelu</button>
-
+            (click)="scheduleModelIndexationProcesses()" color="primary" disabled>
+            <mat-icon>play_arrow</mat-icon>
+            Indexovat hromadně
+        </button>
     </div>
 
     <div class="app-object-table" *ngIf="objectsByModelFiltered">
         <div class="app-table">
             <div class="app-row app-header">
-                <!-- <div class="process-expand"></div> -->
                 <div class="object-pid">PID</div>
                 <div class="object-name">Název</div>
                 <div class="object-in-index-cont">V indexu</div>
-                <!-- <div class="process-state">Stav</div>
-            <div class="process-datetime">Naplánováno</div>
-            <div class="process-datetime">Spuštěno</div>
-            <div class="process-datetime">Ukončeno</div>
-            <div class="process-duration">Trvání</div>
-            <div class="process-owner">Vlastník</div>
-             -->
                 <div class="object-actions"></div>
             </div>
         </div>
         <div class="scrollable app-table">
-            <!-- <ng-container *ngFor="let batch of batches"> -->
             <ng-container *ngFor="let object of objectsByModelFiltered">
                 <!-- TODO: url z konfigurace -->
-                <a class="app-row" href="https://dev.digitallibrary.cz/d/uuid/{{object.pid}}" target="_blank">
-                    <!-- <div class="process-expand">
-                <button (click)="batch.expanded = !batch.expanded; $event.preventDefault(); $event.stopPropagation()"
-                  *ngIf="batch.hasSubprocesses()" mat-icon-button color="primary" matTooltip="Zobrazit podprocesy">
-                  <mat-icon>{{ batch.expanded ? 'remove' : 'add' }}</mat-icon>
-                </button>
-              </div> -->
+                <a class="app-row" href="{{buildDigitalLibraryUrl(object.pid)}}" target="_blank">
                     <div class="object-pid">{{ object.pid }}</div>
                     <div class="object-name">{{ object.title |appShorten:100}}</div>
 
-                    <!-- <div class="process-state">
-                <div class="state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}</div>
-              </div>
-              <div class="process-datetime">{{ batch.planned | appDatetime }}</div>
-              <div class="process-datetime">{{ batch.started | appDatetime }}</div>
-              <div class="process-datetime">{{ batch.finished | appDatetime }}</div>
-              <div class="process-duration">{{ batch.getDuration() | appDuration }}</div>
-              <div class="process-owner">{{ batch.ownerName }}</div>
-            -->
-
-                    <!-- <div class="object-in-index-cont">
-                        <mat-icon *ngIf="object.indexed" class="object-in-index">done</mat-icon>
-                        <mat-icon *ngIf="!object.indexed" class="object-in-index">warning</mat-icon>
-                    </div> -->
-
-
                     <div class="object-in-index-cont">
-                        <!-- <mat-icon *ngIf="object.indexed" class="object-in-index">spellcheck</mat-icon> -->
-                        <mat-icon *ngIf="object.indexed" class="object-in-index">check</mat-icon>
-                        <mat-icon *ngIf="!object.indexed" class="object-in-index">error_outline</mat-icon>
+                        <mat-icon *ngIf="object.indexed" class="object-in-index">done</mat-icon>
+                        <!-- <mat-icon *ngIf="!object.indexed" class="object-in-index">error_outline</mat-icon> -->
+                        <mat-icon *ngIf="!object.indexed" class="object-in-index">warning</mat-icon>
                     </div>
 
                     <div class="object-actions">
-                        <!-- <button *ngIf="batch.isDeletable()" class="app-action-remove"
-                  (click)="onRemove(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button
-                  matTooltip="Smazat proces" matTooltipPosition="below">
-                  <mat-icon>delete</mat-icon>
-                </button>
-                <button *ngIf="batch.isKillable()" class="app-action-remove"
-                  (click)="onKill(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button
-                  matTooltip="Zrušit proces" matTooltipPosition="below">
-                  <mat-icon>cancel</mat-icon>
-                </button> -->
-
-
-
-                        <!-- TODO: prejmenovat css tridu -->
                         <button class="object-action"
                             (click)="scheduleIndexation(object); $event.preventDefault(); $event.stopPropagation()"
                             mat-icon-button matTooltip="naplánovat indexaci" matTooltipPosition="below">
-                            <mat-icon>label_important</mat-icon>
+                            <!-- <mat-icon>schedule</mat-icon> -->
+                            <mat-icon>play_arrow</mat-icon>
                         </button>
-
                     </div>
                 </a>
-
-                <!-- <ng-container *ngIf="batch.expanded">
-              <a *ngFor="let process of batch.processes" class="app-row app-subprocess"
-                [routerLink]="['/processes', process.id]">
-                <div class="process-expand"></div>
-                <div class="process-id">{{ process.id }}</div>
-                <div class="process-name">{{ process.name }}</div>
-                <div class="process-state">
-                  <div class="state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}
-                  </div>
-                </div>
-                <div class="process-datetime">{{ process.planned | appDatetime }}</div>
-                <div class="process-datetime">{{ process.started | appDatetime }}</div>
-                <div class="process-datetime">{{ process.finished | appDatetime }}</div>
-                <div class="process-duration">{{ process.getDuration() | appDuration }}</div>
-                <div class="process-owner">{{ process.owner_login }}</div>
-                <div class="process-actions">
-                </div>
-              </a>
-            </ng-container> -->
             </ng-container>
         </div>
 
+
+        <!-- TODO: pagination -->
         <div class="paginator-wrapper">
             <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
                 (page)="onPageChanged($event)">

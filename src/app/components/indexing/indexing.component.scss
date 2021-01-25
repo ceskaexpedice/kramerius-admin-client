@@ -5,92 +5,52 @@
 .app-schedule-indexation-process-type {
     margin-right: 16px;
     width: 100px;
-  }
-  .app-schedule-indexation-process-pid {
+}
+.app-schedule-indexation-process-pid {
     margin-right: 16px;
     width: 350px;
-  }
-  
-  .app-schedule-indexation-process-btn {
+}
+
+.app-schedule-indexation-process-btn {
     margin-top: 8px;
     margin-right: 16px;
     margin-left: 16px;
-  }
+}
 
-  .app-object-table {
+.app-object-table {
     height: calc(100% - 60px);
     .scrollable {
-      max-height: calc(100% - 106px);
-      overflow: auto;
-    }
-    .process-expand {
-      margin-left: -20px;
-      width: 44px;
-      mat-icon {
-        font-size: 18px;
-      }
+        max-height: calc(100% - 106px);
+        overflow: auto;
     }
     .object-pid {
-      width: 340px;
+        width: 340px;
     }
     .object-name {
-      flex: 1;
-      padding-right: 10px;
-      word-break: break-all;
+        flex: 1;
+        padding-right: 10px;
+        word-break: break-all;
     }
-    .object-in-index-cont{
+    .object-in-index-cont {
         width: 50px;
         position: relative;
-        .object-in-index-bak {
-            background-color: blue;
-            display: block;
-            margin: auto auto;
-        }
         .object-in-index {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            font-size: 20px;
+            width: 20px;
         }
     }
 
-
-    .process-state {
-      width: 110px;
-      margin-right: 16px;
-      .state-label {
-        color: #fff;
-        text-align: center;
-        height: 21px;
-        line-height: 22px;
-        margin-top: 13px;
-        border-radius: 8px;
-        font-size: 12px;
-        text-transform: uppercase;
-      }
-    }
-    .process-datetime {
-      width: 160px;
-    }
-    .process-duration {
-      width: 60px;
-    }
-    .process-owner {
-      width: 160px;
-    }
     .object-actions {
-      width: 40px;
-      .object-action {
-        color: #999;
-        &:hover {
-          color: #333;
+        width: 40px;
+        .object-action {
+            color: #999;
+            &:hover {
+                color: #333;
+            }
         }
-      }
     }
-    .app-subprocess {
-      background: #f6f6f6;
-      .process-expand {
-        width: 103px;
-      }
-    }
-  }
+}

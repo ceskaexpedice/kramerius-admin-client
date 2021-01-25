@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material';
 import { forkJoin, Observable } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { AppSettings } from 'src/app/services/app-settings';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
@@ -28,7 +29,7 @@ export class IndexingComponent implements OnInit {
   objectsByModel: { pid: string, title: string, indexed: boolean }[] = [];
   objectsByModelFiltered: { pid: string, title: string, indexed: boolean }[] = [];
 
-  constructor(private adminApi: AdminApiService, private clientApi: ClientApiService, private uiService: UIService) { }
+  constructor(private adminApi: AdminApiService, private clientApi: ClientApiService, private uiService: UIService, private appSettings: AppSettings) { }
 
   ngOnInit() {
     //TODO: disable for production
@@ -51,7 +52,6 @@ export class IndexingComponent implements OnInit {
 
   scheduleModelIndexationProcesses() {
     this.adminApi.getObjectsByModel(this.selectedModelIndexationProcessModel).subscribe(response => {
-      //console.log(response);
       response['items'].forEach(item => {
         const params = {
           defid: 'new_indexer',
@@ -112,6 +112,10 @@ export class IndexingComponent implements OnInit {
     this.stateFilter = event;
     //this.fetchObjectsByModel();
     this.filterObjectsByState();
+  }
+
+  buildDigitalLibraryUrl(pid: string) {
+    return this.appSettings.digitalLibraryBaseUrl + "/uuid/" + pid;
   }
 
 }
