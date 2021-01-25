@@ -24,7 +24,8 @@ import {
   MatDialogModule,
   MatTabsModule,
   MatSnackBarModule,
-  MatRadioModule
+  MatRadioModule,
+  MatButtonToggleModule
 } from '@angular/material';
 
 
@@ -33,6 +34,7 @@ const components = [
   MatButtonModule,
   MatToolbarModule,
   MatButtonModule,
+  MatButtonToggleModule,
   MatIconModule,
   MatInputModule,
   MatProgressSpinnerModule,

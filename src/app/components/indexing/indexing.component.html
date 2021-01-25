@@ -26,18 +26,26 @@
                 <mat-option *ngFor="let model of models; let i = index" [value]="model">{{modelNames[i]}}</mat-option>
             </mat-select>
         </mat-form-field>
+
+        <!-- TODO: zvýraznit rozdíl mezi aktivním a neaktivním -->
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" appearance="legacy" [(ngModel)]="isEnabled">
+            <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">Vše</mat-button-toggle>
+            <mat-button-toggle value="indexed" (change)="onChangeStateFilter($event.value)">Jen indexované</mat-button-toggle>
+            <mat-button-toggle value="not_indexed" (change)="onChangeStateFilter($event.value)">Jen neindexované</mat-button-toggle>
+          </mat-button-toggle-group>    
+
         <button class="app-schedule-indexation-process-btn" mat-raised-button
             (click)="scheduleModelIndexationProcesses()" color="primary" disabled>Indexovat vše podle modelu</button>
 
     </div>
 
-    <div class="app-processes-table" *ngIf="objectsByModel">
+    <div class="app-object-table" *ngIf="objectsByModelFiltered">
         <div class="app-table">
             <div class="app-row app-header">
                 <!-- <div class="process-expand"></div> -->
-                <div class="process-id">PID</div>
-                <div class="process-name">Název</div>
-                <div class="process-id">V indexu</div>
+                <div class="object-pid">PID</div>
+                <div class="object-name">Název</div>
+                <div class="object-in-index-cont">V indexu</div>
                 <!-- <div class="process-state">Stav</div>
             <div class="process-datetime">Naplánováno</div>
             <div class="process-datetime">Spuštěno</div>
@@ -45,12 +53,12 @@
             <div class="process-duration">Trvání</div>
             <div class="process-owner">Vlastník</div>
              -->
-                <div class="process-actions"></div>
+                <div class="object-actions"></div>
             </div>
         </div>
         <div class="scrollable app-table">
             <!-- <ng-container *ngFor="let batch of batches"> -->
-            <ng-container *ngFor="let object of objectsByModel">
+            <ng-container *ngFor="let object of objectsByModelFiltered">
                 <!-- TODO: url z konfigurace -->
                 <a class="app-row" href="https://dev.digitallibrary.cz/d/uuid/{{object.pid}}" target="_blank">
                     <!-- <div class="process-expand">
@@ -59,8 +67,8 @@
                   <mat-icon>{{ batch.expanded ? 'remove' : 'add' }}</mat-icon>
                 </button>
               </div> -->
-                    <div class="process-id">{{ object.pid }}</div>
-                    <div class="process-name">{{ object.title |appShorten:100}}</div>
+                    <div class="object-pid">{{ object.pid }}</div>
+                    <div class="object-name">{{ object.title |appShorten:100}}</div>
 
                     <!-- <div class="process-state">
                 <div class="state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}</div>
@@ -72,12 +80,19 @@
               <div class="process-owner">{{ batch.ownerName }}</div>
             -->
 
-                    <div class="process-actions">
-                        <mat-icon *ngIf="object.indexed">done</mat-icon>
-                        <mat-icon *ngIf="!object.indexed">warning</mat-icon>
+                    <!-- <div class="object-in-index-cont">
+                        <mat-icon *ngIf="object.indexed" class="object-in-index">done</mat-icon>
+                        <mat-icon *ngIf="!object.indexed" class="object-in-index">warning</mat-icon>
+                    </div> -->
+
+
+                    <div class="object-in-index-cont">
+                        <!-- <mat-icon *ngIf="object.indexed" class="object-in-index">spellcheck</mat-icon> -->
+                        <mat-icon *ngIf="object.indexed" class="object-in-index">check</mat-icon>
+                        <mat-icon *ngIf="!object.indexed" class="object-in-index">error_outline</mat-icon>
                     </div>
 
-                    <div class="process-actions">
+                    <div class="object-actions">
                         <!-- <button *ngIf="batch.isDeletable()" class="app-action-remove"
                   (click)="onRemove(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button
                   matTooltip="Smazat proces" matTooltipPosition="below">
@@ -92,7 +107,7 @@
 
 
                         <!-- TODO: prejmenovat css tridu -->
-                        <button class="app-action-remove"
+                        <button class="object-action"
                             (click)="scheduleIndexation(object); $event.preventDefault(); $event.stopPropagation()"
                             mat-icon-button matTooltip="naplánovat indexaci" matTooltipPosition="below">
                             <mat-icon>label_important</mat-icon>

@@ -23,13 +23,16 @@ export class IndexingComponent implements OnInit {
   modelNames = ['Monografie', 'Periodika', 'Grafiky', 'Mapy', 'Archiválie', 'Sbírky', 'Hudebniny', 'Zvukové nahrávky', 'Rukopisy'];
   selectedModelIndexationProcessModel = undefined;
 
+  stateFilter = 'all';
+
   objectsByModel: { pid: string, title: string, indexed: boolean }[] = [];
+  objectsByModelFiltered: { pid: string, title: string, indexed: boolean }[] = [];
 
   constructor(private adminApi: AdminApiService, private clientApi: ClientApiService, private uiService: UIService) { }
 
   ngOnInit() {
     //TODO: disable for production
-    this.selectedModelIndexationProcessModel =  this.models[0];
+    this.selectedModelIndexationProcessModel = this.models[0];
     this.fetchObjectsByModel();
   }
 
@@ -78,8 +81,19 @@ export class IndexingComponent implements OnInit {
           indexed: pidsInIndex.indexOf(item['pid']) != -1
         });
       });
-      console.log(objectsByModel)
+      //console.log(objectsByModel)
       this.objectsByModel = objectsByModel
+      this.filterObjectsByState();
+    });
+  }
+
+  filterObjectsByState() {
+    this.objectsByModelFiltered = this.objectsByModel.filter(o => {
+      switch (this.stateFilter) {
+        case 'all': return true;
+        case 'indexed': return o.indexed;
+        case 'not_indexed': return !o.indexed;
+      }
     });
   }
 
@@ -92,6 +106,12 @@ export class IndexingComponent implements OnInit {
     if (event.value) {
       this.fetchObjectsByModel();
     }
+  }
+
+  onChangeStateFilter(event) {
+    this.stateFilter = event;
+    //this.fetchObjectsByModel();
+    this.filterObjectsByState();
   }
 
 }
