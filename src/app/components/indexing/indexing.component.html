@@ -15,9 +15,9 @@
             <input matInput [(ngModel)]="pidForIndexation" placeholder="PID">
         </mat-form-field>
 
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationProcess()"
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationByPid()"
             [disabled]="!pidForIndexation" color="primary">
-            <mat-icon>play_arrow</mat-icon>Indexovat objekt
+            <mat-icon>play_arrow</mat-icon>Indexovat
         </button>
     </div>
 
@@ -25,8 +25,7 @@
     <div>
         <!-- spusteni indexačního procesu pro model -->
         <mat-form-field class="app-schedule-indexation-process-type">
-            <mat-select placeholder="Model" [(value)]="selectedModelIndexationProcessModel"
-                (selectionChange)="onSelectModel($event)">
+            <mat-select placeholder="Model" [(value)]="selectedModel" (selectionChange)="onSelectModel($event)">
                 <mat-option *ngFor="let model of models; let i = index" [value]="model">{{modelNames[i]}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -40,8 +39,8 @@
             </mat-button-toggle>
         </mat-button-toggle-group>
 
-        <button class="app-schedule-indexation-process-btn" mat-raised-button
-            (click)="scheduleModelIndexationProcesses()" color="primary" disabled>
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationsByModel()"
+            color="primary" [disabled]="!selectedModel">
             <mat-icon>play_arrow</mat-icon>
             Indexovat hromadně
         </button>
@@ -71,8 +70,8 @@
 
                     <div class="object-actions">
                         <button class="object-action"
-                            (click)="scheduleIndexation(object); $event.preventDefault(); $event.stopPropagation()"
-                            mat-icon-button matTooltip="naplánovat indexaci" matTooltipPosition="below">
+                            (click)="scheduleFullIndexation(object); $event.preventDefault(); $event.stopPropagation()"
+                            mat-icon-button matTooltip="Indexovat objekt" matTooltipPosition="below">
                             <!-- <mat-icon>schedule</mat-icon> -->
                             <mat-icon>play_arrow</mat-icon>
                         </button>
