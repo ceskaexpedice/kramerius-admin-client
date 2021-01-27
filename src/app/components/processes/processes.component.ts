@@ -33,8 +33,8 @@ export class ProcessesComponent implements OnInit {
   // Filters
   dateFrom;
   dateTo;
-  selectedOwner = '';
-  selectedState = '';
+  selectedOwner;
+  selectedState;
 
   batch_states = [];
   owners: ProcessOwner[] = []
@@ -79,18 +79,10 @@ export class ProcessesComponent implements OnInit {
     this.reload();
   }
 
-  onSelectedStateChanged(event) {
+  onFiltersChanged() {
+    this.pageIndex = 0;
     this.reload();
   }
-
-  clearDateFrom() {
-    this.dateFrom = null;
-  }
-
-  clearDateTo() {
-    this.dateTo = null;
-  }
-
 
   onRemove(batch: Batch) {
     const data: SimpleDialogData = {

@@ -28,46 +28,51 @@
         color="primary">Spustit testovací proces</button>
     </div>
 
-    <!-- filtrovani seznamu procesu  -->
+    <!-- filtrovani seznamu procesů  -->
 
     <mat-form-field class="app-filter-state">
-      <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onSelectedStateChanged($event)">
-        <mat-option value="">Vše</mat-option>
+      <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onFiltersChanged()">
         <mat-option *ngFor="let state of batch_states" [value]="state.key">{{ state.label }}</mat-option>
       </mat-select>
     </mat-form-field>
+    <button *ngIf="!!selectedState" class="app-filter-clear" mat-icon-button matTooltip="Odebrat filtrování podle stavu"
+      (click)="selectedState=undefined;onFiltersChanged()">
+      <mat-icon>clear</mat-icon>
+    </button>
 
     <mat-form-field class="app-filter-owner">
-      <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onSelectedOwnerChanged($event)">
-        <mat-option value="">Vše</mat-option>
+      <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onFiltersChanged()">
         <mat-option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</mat-option>
       </mat-select>
     </mat-form-field>
-
+    <button *ngIf="!!selectedOwner" class="app-filter-clear" mat-icon-button
+      matTooltip="Odebrat filtrování podle vlastníka" (click)="selectedOwner=undefined;onFiltersChanged()">
+      <mat-icon>clear</mat-icon>
+    </button>
 
     <mat-form-field class="app-filter-date-from">
-      <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom' disabled>
+      <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom' disabled
+        (dateChange)="onFiltersChanged()">
       <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
       <mat-datepicker disabled="false" #myDatepickerFrom></mat-datepicker>
     </mat-form-field>
-    <button *ngIf="!!dateFrom" class="app-filter-clear" mat-icon-button matTooltip="Zrušit datum od"
-      (click)="clearDateFrom()">
+    <button *ngIf="!!dateFrom" class="app-filter-clear" mat-icon-button
+      matTooltip="Odebrat filtrování podle počátečního data" (click)="dateFrom=undefined;onFiltersChanged()">
       <mat-icon>clear</mat-icon>
     </button>
 
-
     <mat-form-field class="app-filter-date-to">
-      <input matInput [matDatepicker]="myDatepickerTo" placeholder="Do" [(ngModel)]='dateTo' disabled>
+      <input matInput [matDatepicker]="myDatepickerTo" placeholder="Do" [(ngModel)]='dateTo' disabled
+        (dateChange)="onFiltersChanged()">
       <mat-datepicker-toggle matSuffix [for]="myDatepickerTo"></mat-datepicker-toggle>
       <mat-datepicker disabled="false" #myDatepickerTo></mat-datepicker>
     </mat-form-field>
-
-    <button *ngIf="!!dateTo" class="app-filter-clear" mat-icon-button matTooltip="Zrušit datum do"
-      (click)="clearDateTo()">
+    <button *ngIf="!!dateTo" class="app-filter-clear" mat-icon-button
+      matTooltip="Odebrat filtrování podle koncového data" (click)="dateTo=undefined;onFiltersChanged()">
       <mat-icon>clear</mat-icon>
     </button>
 
-    <button class="app-filter-reload" mat-icon-button matTooltip="Obnovit" (click)="reload()">
+    <button class="app-filter-reload" mat-icon-button matTooltip="Znovu načíst procesy" (click)="reload()">
       <mat-icon>refresh</mat-icon>
     </button>
 
@@ -134,6 +139,7 @@
             <div class="process-datetime">{{ process.started | appDatetime }}</div>
             <div class="process-datetime">{{ process.finished | appDatetime }}</div>
             <div class="process-duration">{{ process.getDuration() | appDuration }}</div>
+            <!-- TODO: funguje? owner_login-->
             <div class="process-owner">{{ process.owner_login }}</div>
             <div class="process-actions">
             </div>

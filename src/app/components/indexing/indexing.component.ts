@@ -44,7 +44,6 @@ export class IndexingComponent implements OnInit {
     let fromRepository = this.adminApi.getObjectsByModel(this.selectedModel, 'ASC');
     let fromIndex = this.clientApi.getObjectsByModelFromIndex(this.selectedModel);
     forkJoin([fromRepository, fromIndex]).subscribe(result => {
-      //console.log(result)
       let objectsByModel: { pid: string, title: string, indexed: boolean }[] = [];
       const pidsInIndex = result[1];
       result[0]['items'].forEach(item => {
@@ -54,7 +53,6 @@ export class IndexingComponent implements OnInit {
           indexed: pidsInIndex.indexOf(item['pid']) != -1
         });
       });
-      //console.log(objectsByModel)
       this.objectsByModel = objectsByModel
       this.filterObjectsByState();
     });

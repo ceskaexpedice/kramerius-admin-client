@@ -26,16 +26,15 @@
       width: 80px;
     }
     .app-filter-state {
-      margin-right: 16px;
       margin-left: 6px;
       width: 150px;
-    }    
+    }
     .app-filter-owner {
-      margin-right: 16px;
+      margin-left: 16px;
       width: 150px;
     }
     .app-filter-date-from {
-      // margin-right: 16px;
+      margin-left: 16px;
       width: 150px;
     }
     .app-filter-date-to {
@@ -111,5 +110,4 @@
       }
     }
   }
-
 }
