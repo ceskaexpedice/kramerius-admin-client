@@ -26,7 +26,7 @@ export class IndexingComponent implements OnInit {
   modelNames = ['Monografie', 'Periodika', 'Grafiky', 'Mapy', 'Archiválie', 'Sbírky', 'Hudebniny', 'Zvukové nahrávky', 'Rukopisy'];
   selectedModel = undefined;
 
-  stateFilter = 'all';
+  stateFilter = 'not_indexed';
 
   objectsByModel: { pid: string, title: string, indexed: boolean }[] = [];
   objectsByModelFiltered: { pid: string, title: string, indexed: boolean }[] = [];
@@ -35,7 +35,7 @@ export class IndexingComponent implements OnInit {
 
   ngOnInit() {
     if (this.appSettings.devMode) {
-      this.selectedModel = 'periodical'
+      //this.selectedModel = 'periodical'
       this.fetchObjectsByModel();
     }
   }
@@ -107,6 +107,7 @@ export class IndexingComponent implements OnInit {
           params: {
             type: this.selectedIndexationProcessType,
             pid: this.pidForIndexation,
+            title: ""
           }
         }
         this.adminApi.scheduleProcess(params).subscribe(response => {
@@ -139,6 +140,7 @@ export class IndexingComponent implements OnInit {
           params: {
             type: 'TREE_AND_FOSTER_TREES',
             pid: object.pid,
+            title: object.title
           }
         }
         this.adminApi.scheduleProcess(params).subscribe(response => {
@@ -157,6 +159,7 @@ export class IndexingComponent implements OnInit {
           params: {
             type: 'TREE_AND_FOSTER_TREES',
             pid: item.pid,
+            title: ""
           }
         }
         this.adminApi.scheduleProcess(params).subscribe(response => {
