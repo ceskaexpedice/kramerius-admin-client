@@ -103,7 +103,7 @@
             </button>
           </div>
           <div class="process-id">{{ batch.id }}</div>
-          <div class="process-name">{{ batch.getName() }}</div>
+          <div class="process-name" matTooltip="{{ batch.getName() }}">{{ batch.getName() }}</div>
           <div class="process-state">
             <div class="state-label" [style.backgroundColor]="batch.getStateColor()">{{ batch.getStateLabel() }}</div>
           </div>
@@ -130,7 +130,7 @@
             [routerLink]="['/processes', process.id]">
             <div class="process-expand"></div>
             <div class="process-id">{{ process.id }}</div>
-            <div class="process-name">{{ process.name }}</div>
+            <div class="process-name" matTooltip="{{ process.name }}">{{ process.name }}</div>
             <div class="process-state">
               <div class="state-label" [style.backgroundColor]="process.getStateColor()">{{ process.getStateLabel() }}
               </div>
