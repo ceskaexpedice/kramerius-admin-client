@@ -5,11 +5,14 @@
   <mat-checkbox *ngIf="data.checkbox" [(ngModel)]="data.checkbox.checked">{{ data.checkbox.label }}</mat-checkbox>
 
   <mat-form-field *ngIf="data.numberInput">
-    <input  type="number" step="1" [min]="data.numberInput.min" [max]="data.numberInput.max" autocomplete="off" matInput [placeholder]="data.numberInput.label" [(ngModel)]="data.numberInput.value">
+    <input type="number" step="1" [min]="data.numberInput.min" [max]="data.numberInput.max" autocomplete="off" matInput
+      [placeholder]="data.numberInput.label" [(ngModel)]="data.numberInput.value">
   </mat-form-field>
 
 </div>
 <div mat-dialog-actions cdk-focus-start>
-  <button mat-raised-button [color]="data.btn1.color" [mat-dialog-close]="data.btn1.value" >{{ data.btn1.label }}</button>
-  <button *ngIf="data.btn2" mat-raised-button [color]="data.btn2.color" [mat-dialog-close]="data.btn2.value" >{{ data.btn2.label }}</button>
+  <button mat-raised-button [color]="data.btn1.color" [mat-dialog-close]="data.btn1.value"
+    autofocus>{{data.btn1.label}}</button>
+  <button *ngIf="data.btn2" mat-raised-button [color]="data.btn2.color"
+    [mat-dialog-close]="data.btn2.value">{{data.btn2.label}}</button>
 </div>

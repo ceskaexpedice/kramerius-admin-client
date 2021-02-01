@@ -42,7 +42,7 @@
             </mat-button-toggle>
         </mat-button-toggle-group>
 
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationsByModel()"
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationsOfCurrentItems()"
             color="primary" [disabled]="fetchingNow || !selectedModel">
             <mat-icon>play_arrow</mat-icon>
             Indexovat hromadně

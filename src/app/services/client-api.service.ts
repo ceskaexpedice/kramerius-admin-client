@@ -48,7 +48,7 @@ export class ClientApiService {
     return this.search({
       q: `in_collections.direct:"${uuid}"`,
       fl: 'model,pid,title.search,root.title',
-      ows: '400'
+      rows: '400'
     });
   }
 
@@ -79,6 +79,7 @@ export class ClientApiService {
     return this.search({
       q: query,
       fl: 'pid',
+      rows: pids.length
     }).pipe(
       map(items => items.map(item => item['pid']))
     );

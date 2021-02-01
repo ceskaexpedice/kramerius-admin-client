@@ -26,8 +26,8 @@ export class IndexingComponent implements OnInit {
   modelNames = ['Monografie', 'Periodika', 'Grafiky', 'Mapy', 'Archiválie', 'Sbírky', 'Hudebniny', 'Zvukové nahrávky', 'Rukopisy'];
   selectedModel = 'monograph';
 
-  //stateFilter = 'not_indexed';
-  stateFilter = 'all';
+  stateFilter = 'not_indexed';
+  //stateFilter = 'all';
 
   fetchingNow = false;
 
@@ -49,7 +49,6 @@ export class IndexingComponent implements OnInit {
   }
 
   onSelectModel(event: MatSelectChange) {
-    console.log(event)
     if (event.value) {
       this.loadFirstBatchOfItems();
     }
@@ -149,7 +148,7 @@ export class IndexingComponent implements OnInit {
   //   });
   // }
 
-  scheduleIndexationsByModel() {
+  scheduleIndexationsOfCurrentItems() {
     const size = this.items.length;
     const data: SimpleDialogData = {
       title: "Indexace objektů podle modelu",
