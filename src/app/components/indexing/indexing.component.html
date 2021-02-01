@@ -94,9 +94,8 @@
     <mat-progress-bar mode="buffer" *ngIf="fetchingNow"></mat-progress-bar>
 
     <!-- TODO: style or replace with neverending page -->
-    <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="loadNextBatchOfItems()"
+    <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()"
         color="primary" [disabled]="fetchingNow || !selectedModel">
-        <!-- <mat-icon>play_arrow</mat-icon> -->
         Načíst další
     </button>
 
