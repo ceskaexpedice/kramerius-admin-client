@@ -4,6 +4,11 @@
   .app-actions {
     height: 62px;
     overflow: hidden;
+    .app-cancel-all-scheduled-processes-btn {
+      float: right;
+      margin-top: 8px;
+      margin-left: 16px;
+    }
     .app-schedule-test-process-btn {
       float: right;
       margin-top: 8px;
@@ -111,3 +116,4 @@
     }
   }
 }
+

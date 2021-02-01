@@ -78,6 +78,14 @@
 
   </div>
 
+  <div class="app-actions">
+    <button mat-raised-button class="app-cancel-all-scheduled-processes-btn" (click)="onKillAllScheduled()"
+      color="primary" matTooltip="Zrušit všechny zobrazené naplánované procesy">
+      <mat-icon>cancel</mat-icon>
+      Zrušit naplánované procesy
+    </button>
+  </div>
+
   <div class="app-processes-table">
     <div class="app-table">
       <div class="app-row app-header">

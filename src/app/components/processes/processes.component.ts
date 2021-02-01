@@ -7,6 +7,7 @@ import { Process } from 'src/app/models/process.model';
 import { ProcessOwner } from 'src/app/models/process-owner.model';
 import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -159,5 +160,23 @@ export class ProcessesComponent implements OnInit {
     return params;
   }
 
+  onKillAllScheduled() {
+    let requests = [];
+    this.batches.forEach(batch => {
+      if (batch.state == Process.PLANNED) {
+        requests.push(this.adminApi.killBatch(batch.id));
+      }
+    });
+
+    console.log("killing " + requests.length + " scheduled processes")
+    forkJoin(requests).subscribe(result => {
+      console.log("killed " + result.length)
+      if (result.length == requests.length) {
+        console.log("reloading");
+        this.reload();
+      }
+    });
+
+  }
 
 }
