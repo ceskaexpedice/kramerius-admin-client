@@ -50,11 +50,14 @@ export class AdminApiService {
     return this.http.put(this.baseUrl + path, body, options);
   }
 
-  getObjectsByModel(model: string, order='ASC') {
-    return this.get(`/items?order=${order}`, {
+  getObjectsByModel(model: string, order = 'ASC', offset: number, limit: number): Observable<any> {
+    return this.get(`/items?order=${order}&offset=${offset}&limit=${limit}`, {
       'model': model
     }).pipe(
-      //tap(response => console.log(response)),
+      // tap(response => {
+      //   response.offset = offset;
+      //   response.limit = limit;
+      // }),
     );
   }
 

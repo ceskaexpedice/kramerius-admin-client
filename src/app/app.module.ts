@@ -34,6 +34,7 @@ import { ClientApiService } from './services/client-api.service';
 import { CollectionsService } from './services/collections.service';
 import { DevComponent } from './components/dev/dev.component';
 import { IndexingComponent } from './components/indexing/indexing.component';
+import { MatProgressBarModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { IndexingComponent } from './components/indexing/indexing.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatProgressBarModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

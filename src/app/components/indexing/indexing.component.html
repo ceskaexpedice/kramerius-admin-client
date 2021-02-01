@@ -25,14 +25,16 @@
     <div>
         <!-- spusteni indexačního procesu pro model -->
         <mat-form-field class="app-schedule-indexation-process-type">
-            <mat-select placeholder="Model" [(value)]="selectedModel" (selectionChange)="onSelectModel($event)">
+            <mat-select placeholder="Model" [(value)]="selectedModel" (selectionChange)="onSelectModel($event)"
+                [disabled]="fetchingNow">
                 <mat-option *ngFor="let model of models; let i = index" [value]="model">{{modelNames[i]}}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <!-- TODO: namisto legacy pouzit defaultni typ, ale nastylovat-->
         <!-- appearance="legacy"  -->
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="isEnabled">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="stateFilter"
+            [disabled]="fetchingNow">
             <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">vše</mat-button-toggle>
             <mat-button-toggle value="indexed" (change)="onChangeStateFilter($event.value)">indexované
             </mat-button-toggle>
@@ -41,13 +43,13 @@
         </mat-button-toggle-group>
 
         <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationsByModel()"
-            color="primary" [disabled]="!selectedModel">
+            color="primary" [disabled]="fetchingNow || !selectedModel">
             <mat-icon>play_arrow</mat-icon>
             Indexovat hromadně
         </button>
     </div>
 
-    <div class="app-object-table" *ngIf="objectsByModelFiltered">
+    <div class="app-object-table" *ngIf="items">
         <div class="app-table">
             <div class="app-row app-header">
                 <div class="object-pid">PID</div>
@@ -57,7 +59,7 @@
             </div>
         </div>
         <div class="scrollable app-table">
-            <ng-container *ngFor="let object of objectsByModelFiltered">
+            <ng-container *ngFor="let object of items">
                 <!-- TODO: url z konfigurace -->
                 <a class="app-row" href="{{buildDigitalLibraryUrl(object.pid)}}" target="_blank">
                     <div class="object-pid">{{ object.pid }}</div>
@@ -81,13 +83,21 @@
             </ng-container>
         </div>
 
-
         <!-- TODO: pagination -->
-        <div class="paginator-wrapper">
+        <!-- <div class="paginator-wrapper">
             <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
                 (page)="onPageChanged($event)">
             </mat-paginator>
-        </div>
+        </div> -->
     </div>
+
+    <mat-progress-bar mode="buffer" *ngIf="fetchingNow"></mat-progress-bar>
+
+    <!-- TODO: style or replace with neverending page -->
+    <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="loadNextBatchOfItems()"
+        color="primary" [disabled]="fetchingNow || !selectedModel">
+        <!-- <mat-icon>play_arrow</mat-icon> -->
+        Načíst další
+    </button>
 
 </div>

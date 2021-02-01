@@ -24,60 +24,40 @@ export class IndexingComponent implements OnInit {
   //Indexační procesy (všechny objekty v modelu)
   models = ['monograph', 'periodical', 'graphic', 'map', 'archive', 'collection', 'sheetmusic', 'soundrecording', 'manuscript'];
   modelNames = ['Monografie', 'Periodika', 'Grafiky', 'Mapy', 'Archiválie', 'Sbírky', 'Hudebniny', 'Zvukové nahrávky', 'Rukopisy'];
-  selectedModel = undefined;
+  selectedModel = 'monograph';
 
-  stateFilter = 'not_indexed';
+  //stateFilter = 'not_indexed';
+  stateFilter = 'all';
 
-  objectsByModel: { pid: string, title: string, indexed: boolean }[] = [];
-  objectsByModelFiltered: { pid: string, title: string, indexed: boolean }[] = [];
+  fetchingNow = false;
+
+  itemsBatchSize = 100;
+  totalItemsToShow = 0;
+
+  repoLastOffset = 0;
+  repoLimit = this.itemsBatchSize;
+
+  items: { pid: string, title: string, indexed: boolean }[] = [];
+
 
   constructor(private adminApi: AdminApiService, private clientApi: ClientApiService, private uiService: UIService, private appSettings: AppSettings, private dialog: MatDialog) { }
 
   ngOnInit() {
     if (this.appSettings.devMode) {
-      //this.selectedModel = 'periodical'
-      this.fetchObjectsByModel();
+      this.loadFirstBatchOfItems();
     }
-  }
-
-  fetchObjectsByModel() {
-    let fromRepository = this.adminApi.getObjectsByModel(this.selectedModel, 'ASC');
-    let fromIndex = this.clientApi.getObjectsByModelFromIndex(this.selectedModel);
-    forkJoin([fromRepository, fromIndex]).subscribe(result => {
-      let objectsByModel: { pid: string, title: string, indexed: boolean }[] = [];
-      const pidsInIndex = result[1];
-      result[0]['items'].forEach(item => {
-        objectsByModel.push({
-          pid: item['pid'],
-          title: item['title'],
-          indexed: pidsInIndex.indexOf(item['pid']) != -1
-        });
-      });
-      this.objectsByModel = objectsByModel
-      this.filterObjectsByState();
-    });
-  }
-
-  filterObjectsByState() {
-    this.objectsByModelFiltered = this.objectsByModel.filter(o => {
-      switch (this.stateFilter) {
-        case 'all': return true;
-        case 'indexed': return o.indexed;
-        case 'not_indexed': return !o.indexed;
-      }
-    });
   }
 
   onSelectModel(event: MatSelectChange) {
     console.log(event)
     if (event.value) {
-      this.fetchObjectsByModel();
+      this.loadFirstBatchOfItems();
     }
   }
 
   onChangeStateFilter(event) {
     this.stateFilter = event;
-    this.filterObjectsByState();
+    this.loadFirstBatchOfItems();
   }
 
   buildDigitalLibraryUrl(pid: string) {
@@ -151,31 +131,29 @@ export class IndexingComponent implements OnInit {
   }
 
   //TODO: deprecated, maybe usefull for some testing
-  scheduleIndexationsOfAllObjectsByModel() {
-    this.adminApi.getObjectsByModel(this.selectedModel).subscribe(response => {
-      response['items'].forEach(item => {
-        const params = {
-          defid: 'new_indexer',
-          params: {
-            type: 'TREE_AND_FOSTER_TREES',
-            pid: item.pid,
-            title: ""
-          }
-        }
-        this.adminApi.scheduleProcess(params).subscribe(response => {
-          console.log('indexation scheduled for ' + this.pidForIndexation);
-        });
-      });
-    });
-  }
+  // scheduleIndexationsOfAllObjectsByModel() {
+  //   this.adminApi.getObjectsByModel(this.selectedModel).subscribe(response => {
+  //     response['items'].forEach(item => {
+  //       const params = {
+  //         defid: 'new_indexer',
+  //         params: {
+  //           type: 'TREE_AND_FOSTER_TREES',
+  //           pid: item.pid,
+  //           title: ""
+  //         }
+  //       }
+  //       this.adminApi.scheduleProcess(params).subscribe(response => {
+  //         console.log('indexation scheduled for ' + this.pidForIndexation);
+  //       });
+  //     });
+  //   });
+  // }
 
   scheduleIndexationsByModel() {
-    const max = 10;
-    const size = this.objectsByModelFiltered.length;
-    const processed = Math.min(size, max);
+    const size = this.items.length;
     const data: SimpleDialogData = {
       title: "Indexace objektů podle modelu",
-      message: `Určitě chcete spusit úplnou indexaci prvních ${processed} z celkových ${size} objektů?`,
+      message: `Určitě chcete spusit úplnou indexaci všech ${size} načtených objektů?`,
       btn1: {
         label: 'Ano',
         value: 'yes',
@@ -191,7 +169,7 @@ export class IndexingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         let requests = [];
-        this.objectsByModelFiltered.slice(0, processed).forEach(object => {
+        this.items.forEach(object => {
           requests.push(
             this.adminApi.scheduleProcess({
               defid: 'new_indexer',
@@ -204,6 +182,70 @@ export class IndexingComponent implements OnInit {
         })
         forkJoin(requests).subscribe(result => {
           this.uiService.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`);
+        });
+      }
+    });
+  }
+
+  loadFirstBatchOfItems() {
+    this.repoLastOffset = 0;
+    this.items = [];
+    this.totalItemsToShow = this.itemsBatchSize;
+    if (this.selectedModel) {
+      this.loadMoreItemsForBatch();
+    }
+  }
+
+  loadNextBatchOfItems() {
+    if (this.selectedModel) {
+      this.totalItemsToShow += this.itemsBatchSize;
+      this.loadMoreItemsForBatch();
+    }
+  }
+
+  loadMoreItemsForBatch() {
+    this.fetchingNow = true;
+    //fetch items from repo by offset, limit
+    this.adminApi.getObjectsByModel(this.selectedModel, 'ASC', this.repoLastOffset, this.repoLimit).subscribe(response => {
+      const itemsFromRepo = response.items;
+      let pidsFromRepo = [];
+      itemsFromRepo.forEach(item => {
+        pidsFromRepo.push(item.pid);
+      });
+
+      if (itemsFromRepo.length == 0) { //no more items in repo
+        console.log('no more items in repo')
+        this.fetchingNow = false;
+      } else {
+        this.repoLastOffset += pidsFromRepo.length;
+        //check which of pids are in index
+        this.clientApi.getPidsInIndex(pidsFromRepo).subscribe(pidsInIndex => {
+          //merge to get final results
+          let itemsMerged: { pid: string, title: string, indexed: boolean }[] = [];
+          itemsFromRepo.forEach(item => {
+            itemsMerged.push({
+              pid: item['pid'],
+              title: item['title'],
+              indexed: pidsInIndex.indexOf(item['pid']) != -1
+            });
+          });
+
+          //filter by states
+          const filtered = itemsMerged.filter(o => {
+            switch (this.stateFilter) {
+              case 'all': return true;
+              case 'indexed': return o.indexed;
+              case 'not_indexed': return !o.indexed;
+            }
+          });
+          //push
+          this.items.push(...filtered);
+          //load more data
+          if (this.items.length < this.totalItemsToShow) {
+            this.loadMoreItemsForBatch();
+          } else {
+            this.fetchingNow = false;
+          }
         });
       }
     });

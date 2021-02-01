@@ -66,7 +66,21 @@ export class ClientApiService {
       fl: 'pid', //'pid,title.search',
       rows: '2147483647'
     }).pipe(
-      map(items  => items.map(item => item['pid']))
+      map(items => items.map(item => item['pid']))
+    );
+  }
+
+  getPidsInIndex(pids: string[]) {
+    let query = "";
+    pids.forEach(pid => {
+      query += "pid:" + pid.replace(':', '\\:') + " OR ";
+    });
+    query = query.substring(0, query.length - " OR ".length);
+    return this.search({
+      q: query,
+      fl: 'pid',
+    }).pipe(
+      map(items => items.map(item => item['pid']))
     );
   }
 
