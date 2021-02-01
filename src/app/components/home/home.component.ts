@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppSettings } from 'src/app/services/app-settings';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appSettings: AppSettings) { }
 
   ngOnInit() {
+  }
+
+  getVersion() {
+    return this.appSettings.version;
   }
 
 }
