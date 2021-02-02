@@ -175,6 +175,7 @@ export class IndexingComponent implements OnInit {
               params: {
                 type: 'TREE_AND_FOSTER_TREES',
                 pid: object.pid,
+                title: object.title,
               }
             })
           );
