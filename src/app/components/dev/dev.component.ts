@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { Collection } from 'src/app/models/collection.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { ClientApiService } from 'src/app/services/client-api.service';
 
 @Component({
   selector: 'app-dev',
@@ -10,7 +11,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 })
 export class DevComponent implements OnInit {
 
-  constructor(private collectionsService: CollectionsService, private adminApi: AdminApiService) { }
+  constructor(private collectionsService: CollectionsService, private adminApi: AdminApiService, private clientApi: ClientApiService) { }
 
   //Sbirky
 
@@ -134,8 +135,27 @@ export class DevComponent implements OnInit {
     });
   }
 
-  printFoxmlOfObjectFromRepo(){
-    this.adminApi.getFoxml(this.pidForPrint).subscribe(response =>{
+  printFoxmlOfObjectFromRepo() {
+    const query = `/items/${this.pidForPrint}/foxml`
+    this.adminApi.getGeneralQuery(query).subscribe(response => {
+      console.log(response);
+    })
+  }
+
+  logDataFromAdminApi() {
+    //const query = `/items/${pid}/foxml`
+    const pid = "uuid:51f84b60-5542-11e9-8854-005056827e51"
+    const query = `/items/${pid}/foxml`
+    this.adminApi.getGeneralQuery(query).subscribe(response => {
+      console.log(response);
+    })
+  }
+
+  logDataFromClientApi() {
+    //const query = `/items/${pid}/foxml`
+    const pid = "uuid:51f84b60-5542-11e9-8854-005056827e51"
+    const query = `/items/${pid}/info/structure`
+    this.clientApi.getGeneralQuery(query).subscribe(response => {
       console.log(response);
     })
   }

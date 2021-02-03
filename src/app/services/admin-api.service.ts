@@ -50,9 +50,8 @@ export class AdminApiService {
     return this.http.put(this.baseUrl + path, body, options);
   }
 
-  getFoxml(pid: any): Observable<any> {
-    return this.get(`/items/${pid}/foxml`
-    )
+  getGeneralQuery(path: string): Observable<any> {
+    return this.get(path);
   }
 
   getObjectsByModel(model: string, order = 'ASC', offset: number, limit: number): Observable<any> {

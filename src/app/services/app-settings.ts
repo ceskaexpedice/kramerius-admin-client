@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class AppSettings {
 
   devMode = true; //pokud true, tak se zobrazuje zalozka Test a dalsi testovaci veci (napr. spousteni testovaciho procesu)
-  version = "1.0" + (this.devMode ? "-dev" : "");
+  version = "1.1" + (this.devMode ? "-dev" : "");
 
 
   //kramerius.dev.digitallibrary.cz
@@ -13,7 +13,7 @@ export class AppSettings {
 
   //k7-test.mzk.cz
   //digitalLibraryBaseUrl = 'https://k7-test.mzk.cz/';
-  //coreBaseUrl = 'http://k7-test.mzk.cz/search/'
+  //coreBaseUrl = 'https://k7-test.mzk.cz/search/'
 
   //localhost
   digitalLibraryBaseUrl = 'http://www.digitalniknihovna.cz/mzk'; //TODO

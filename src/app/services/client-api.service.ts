@@ -36,6 +36,10 @@ export class ClientApiService {
     return this.doGet(path, params, 'text').pipe(map(response => response['body']));
   }
 
+  getGeneralQuery(query: string): Observable<string> {
+    return this.getText(query);
+  }
+
   getMods(uuid: string): Observable<string> {
     return this.getText(`/items/${uuid}/streams/BIBLIO_MODS`);
   }
