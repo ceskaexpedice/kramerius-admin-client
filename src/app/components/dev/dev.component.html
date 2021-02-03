@@ -17,7 +17,7 @@
 
     <!-- <button (click)="logData()">log data</button> -->
 
-    <h2>Ukázkové objekty ve sbírkách</h2>
+    <!-- <h2>Ukázkové objekty ve sbírkách</h2>
     <ng-container *ngFor="let item of items;let i = index">
         <h4>{{titles[i]}} ({{item}})</h4>
         <ng-container *ngFor="let collection_id of pids_of_collections_having_item[item]">
@@ -34,6 +34,15 @@
             <br>
         </ng-container>
 
-    </ng-container>
+    </ng-container> -->
+
+    <h2>Print foxml</h2>
+    <div>
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="pidForPrint" placeholder="PID">
+        </mat-form-field>
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="printFoxmlOfObjectFromRepo()"
+            [disabled]="!pidForPrint" color="primary">Vytisknout foxml</button>
+    </div>
 
 </div>

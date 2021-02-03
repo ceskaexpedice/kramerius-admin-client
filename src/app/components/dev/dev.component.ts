@@ -56,6 +56,7 @@ export class DevComponent implements OnInit {
   //deletion
   pidForDeletion;
 
+  pidForPrint;
 
   ngOnInit() {
     this.loadData();
@@ -131,6 +132,12 @@ export class DevComponent implements OnInit {
     this.adminApi.deleteObject(this.pidForDeletion).subscribe(response => {
       console.log(`object ${this.pidForDeletion} deleted`)
     });
+  }
+
+  printFoxmlOfObjectFromRepo(){
+    this.adminApi.getFoxml(this.pidForPrint).subscribe(response =>{
+      console.log(response);
+    })
   }
 
 }
