@@ -58,10 +58,10 @@ export class AdminApiService {
     return this.get(`/items?order=${order}&offset=${offset}&limit=${limit}`, {
       'model': model
     }).pipe(
-      // tap(response => {
-      //   response.offset = offset;
-      //   response.limit = limit;
-      // }),
+      tap(response => {
+        //console.log(offset + ", " + limit);
+        //console.log(response)
+      })
     );
   }
 

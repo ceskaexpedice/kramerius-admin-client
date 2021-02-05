@@ -49,7 +49,7 @@
         </button>
     </div>
 
-    <div class="app-object-table" *ngIf="items">
+    <div class="app-object-table" *ngIf="getCurrentItems()">
         <div class="app-table">
             <div class="app-row app-header">
                 <div class="object-pid">PID</div>
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="scrollable app-table">
-            <ng-container *ngFor="let object of items">
+            <ng-container *ngFor="let object of getCurrentItems()">
                 <!-- TODO: url z konfigurace -->
                 <a class="app-row" href="{{buildDigitalLibraryUrl(object.pid)}}" target="_blank">
                     <div class="object-pid">{{ object.pid }}</div>

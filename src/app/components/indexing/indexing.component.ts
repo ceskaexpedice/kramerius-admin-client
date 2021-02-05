@@ -32,14 +32,12 @@ export class IndexingComponent implements OnInit {
 
   loading = false;
 
-  itemsBatchSize = 100;
-  totalItemsToShow = 0;
+  itemsLoaded: { pid: string, title: string, indexed: boolean }[] = [];
+  itemsToShowBatchSize = 100;
+  itemsToShow = 0;
 
   repoLastOffset = 0;
-  repoLimit = this.itemsBatchSize;
-
-  items: { pid: string, title: string, indexed: boolean }[] = [];
-
+  repoLimit = this.itemsToShowBatchSize;
 
   constructor(private adminApi: AdminApiService, private clientApi: ClientApiService, private uiService: UIService, private appSettings: AppSettings, private dialog: MatDialog) { }
 
@@ -150,10 +148,10 @@ export class IndexingComponent implements OnInit {
   // }
 
   scheduleIndexationsOfCurrentItems() {
-    const size = this.items.length;
+    const items = this.getCurrentItems();
     const data: SimpleDialogData = {
       title: "Indexace objektů podle modelu",
-      message: `Určitě chcete spusit úplnou indexaci všech ${size} načtených objektů?`,
+      message: `Určitě chcete spusit úplnou indexaci všech ${items.length} načtených objektů?`,
       btn1: {
         label: 'Ano',
         value: 'yes',
@@ -169,7 +167,7 @@ export class IndexingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         let requests = [];
-        this.items.forEach(object => {
+        items.forEach(object => {
           requests.push(
             this.adminApi.scheduleProcess({
               defid: 'new_indexer',
@@ -190,8 +188,8 @@ export class IndexingComponent implements OnInit {
 
   loadFirstBatchOfItems() {
     this.repoLastOffset = 0;
-    this.items = [];
-    this.totalItemsToShow = this.itemsBatchSize;
+    this.itemsLoaded = [];
+    this.itemsToShow = this.itemsToShowBatchSize;
     if (this.selectedModel) {
       this.loadMoreItemsForBatch();
     }
@@ -199,7 +197,7 @@ export class IndexingComponent implements OnInit {
 
   loadNextBatchOfItems() {
     if (this.selectedModel) {
-      this.totalItemsToShow += this.itemsBatchSize;
+      this.itemsToShow += this.itemsToShowBatchSize;
       this.loadMoreItemsForBatch();
     }
   }
@@ -240,9 +238,9 @@ export class IndexingComponent implements OnInit {
             }
           });
           //push
-          this.items.push(...filtered);
+          this.itemsLoaded.push(...filtered);
           //load more data
-          if (this.items.length < this.totalItemsToShow) {
+          if (this.itemsLoaded.length < this.itemsToShow) {
             this.loadMoreItemsForBatch();
           } else {
             this.loading = false;
@@ -250,6 +248,14 @@ export class IndexingComponent implements OnInit {
         });
       }
     });
+  }
+
+  getCurrentItems() {
+    if (this.itemsToShow >= this.itemsLoaded.length) {
+      return this.itemsLoaded;
+    } else {
+      return this.itemsLoaded.slice(0, this.itemsToShow);
+    }
   }
 
 }
