@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
-import { map, tap } from 'rxjs/operators';
+import { delay, map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
@@ -67,7 +67,8 @@ export class AdminApiService {
 
   getProcesses(params: ProcessesParams): Observable<[Batch[], number]> {
     return this.get('/processes/batches', params).pipe(
-      //tap(response => console.log(response)),
+      //delay(3000),
+      tap(response => console.log(response)),
       map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
     );
   }
@@ -94,19 +95,28 @@ export class AdminApiService {
   }
 
   getProcessOwners(): Observable<ProcessOwner[]> {
-    return this.get('/processes/owners').pipe(map(response => ProcessOwner.fromJsonArray(response['owners'])));
+    return this.get('/processes/owners').pipe(
+      //delay(3000),
+      map(response => ProcessOwner.fromJsonArray(response['owners']))
+    );
   }
 
   scheduleProcess(definition): Observable<any> {
-    return this.post('/processes', definition);
+    return this.post('/processes', definition).pipe(
+      //delay(3000)
+    );
   }
 
   killBatch(firstProcessId: number): Observable<any> {
-    return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}/execution`);
+    return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}/execution`).pipe(
+      //delay(3000)
+    )
   }
 
   deleteProcessBatch(firstProcessId: number) {
-    return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}`);
+    return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}`).pipe(
+      //delay(3000),
+    )
   }
 
   createCollection(collection: Collection): Observable<any> {

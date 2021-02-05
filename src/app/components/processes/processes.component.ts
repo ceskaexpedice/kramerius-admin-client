@@ -41,6 +41,12 @@ export class ProcessesComponent implements OnInit {
   owners: ProcessOwner[] = []
   batches: Batch[];
 
+  fetchingProcesses = false;
+  fetchingOwners = false;
+  schedulingProcesses = false;
+  deletingProcesses = false;
+  cancelingProcesses = false;
+
   constructor(private adminApi: AdminApiService, private dialog: MatDialog, public appSettings: AppSettings) {
     for (const state of Process.BATCH_STATES) {
       this.batch_states.push({ key: state, label: Process.stateLabel(state) })
@@ -52,16 +58,21 @@ export class ProcessesComponent implements OnInit {
   }
 
   reload() {
+    this.fetchingProcesses = true;
     this.adminApi.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
       this.batches = batches;
-      this.resultCount = total
+      this.resultCount = total;
+      this.fetchingProcesses = false;
     });
+    this.fetchingProcesses = true;
     this.adminApi.getProcessOwners().subscribe((owners: ProcessOwner[]) => {
       this.owners = owners;
+      this.fetchingProcesses = false;;
     });
   }
 
   scheduleTestProcess() {
+    this.schedulingProcesses = true;
     const params = {
       defid: 'new_process-api-test',
       params: {
@@ -71,6 +82,7 @@ export class ProcessesComponent implements OnInit {
       }
     }
     this.adminApi.scheduleProcess(params).subscribe(response => {
+      this.schedulingProcesses = false;
       this.reload();
     });
   }
@@ -103,8 +115,10 @@ export class ProcessesComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
+        this.deletingProcesses = true;
         this.adminApi.deleteProcessBatch(batch.id).subscribe(result => {
           //console.log(result)
+          this.deletingProcesses = false;
           this.reload();
         });
       }
@@ -129,7 +143,9 @@ export class ProcessesComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
+        this.cancelingProcesses = true;
         this.adminApi.killBatch(batch.id).subscribe((result) => {
+          this.cancelingProcesses = false;
           this.reload();
         });
       }
@@ -160,6 +176,7 @@ export class ProcessesComponent implements OnInit {
     return params;
   }
 
+
   onKillAllScheduled() {
     let requests = [];
     this.batches.forEach(batch => {
@@ -168,15 +185,39 @@ export class ProcessesComponent implements OnInit {
       }
     });
 
-    console.log("killing " + requests.length + " scheduled processes")
-    forkJoin(requests).subscribe(result => {
-      console.log("killed " + result.length)
-      if (result.length == requests.length) {
-        console.log("reloading");
-        this.reload();
+
+    const data: SimpleDialogData = {
+      title: "Zrušení naplánovaných procesů",
+      message: `Určitě chcete zrušit ${requests.length} naplánovaných procesů?`,
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'default'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.cancelingProcesses = true;
+        console.log("killing " + requests.length + " scheduled processes")
+        forkJoin(requests).subscribe(result => {
+          console.log("killed " + result.length)
+          if (result.length == requests.length) {//after last one
+            this.cancelingProcesses = false;
+            this.reload();
+          }
+        });
       }
     });
+  }
 
+  isLoading() {
+    return this.fetchingOwners || this.fetchingProcesses || this.schedulingProcesses || this.deletingProcesses || this.cancelingProcesses;
   }
 
 }

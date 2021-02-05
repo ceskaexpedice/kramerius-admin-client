@@ -24,12 +24,13 @@ export class IndexingComponent implements OnInit {
   //Indexační procesy (všechny objekty v modelu)
   models = ['monograph', 'periodical', 'graphic', 'map', 'archive', 'collection', 'sheetmusic', 'soundrecording', 'manuscript'];
   modelNames = ['Monografie', 'Periodika', 'Grafiky', 'Mapy', 'Archiválie', 'Sbírky', 'Hudebniny', 'Zvukové nahrávky', 'Rukopisy'];
-  selectedModel = 'monograph';
+  //selectedModel = 'monograph';
+  selectedModel = undefined;
 
   stateFilter = 'not_indexed';
   //stateFilter = 'all';
 
-  fetchingNow = false;
+  loading = false;
 
   itemsBatchSize = 100;
   totalItemsToShow = 0;
@@ -204,7 +205,7 @@ export class IndexingComponent implements OnInit {
   }
 
   loadMoreItemsForBatch() {
-    this.fetchingNow = true;
+    this.loading = true;
     //fetch items from repo by offset, limit
     this.adminApi.getObjectsByModel(this.selectedModel, 'ASC', this.repoLastOffset, this.repoLimit).subscribe(response => {
       const itemsFromRepo = response.items;
@@ -215,7 +216,7 @@ export class IndexingComponent implements OnInit {
 
       if (itemsFromRepo.length == 0) { //no more items in repo
         console.log('no more items in repo')
-        this.fetchingNow = false;
+        this.loading = false;
       } else {
         this.repoLastOffset += pidsFromRepo.length;
         //check which of pids are in index
@@ -244,7 +245,7 @@ export class IndexingComponent implements OnInit {
           if (this.items.length < this.totalItemsToShow) {
             this.loadMoreItemsForBatch();
           } else {
-            this.fetchingNow = false;
+            this.loading = false;
           }
         });
       }

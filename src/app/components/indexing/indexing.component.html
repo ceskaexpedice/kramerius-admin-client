@@ -6,17 +6,17 @@
     <div>
         <!-- spusteni indexačního u pro vybraný objekt -->
         <mat-form-field class="app-schedule-indexation-process-type">
-            <mat-select placeholder="Typ indexace" [(value)]="selectedIndexationProcessType">
+            <mat-select placeholder="Typ indexace" [(value)]="selectedIndexationProcessType" [disabled]="loading">
                 <mat-option *ngFor="let type of indexationProcessTypes" [value]="type">{{ type }}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="app-schedule-indexation-process-pid">
-            <input matInput [(ngModel)]="pidForIndexation" placeholder="PID">
+            <input matInput [(ngModel)]="pidForIndexation" placeholder="PID" [disabled]="loading">
         </mat-form-field>
 
         <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationByPid()"
-            [disabled]="!pidForIndexation" color="primary">
+            [disabled]="!pidForIndexation || loading" color="primary">
             <mat-icon>play_arrow</mat-icon>Indexovat
         </button>
     </div>
@@ -26,7 +26,7 @@
         <!-- spusteni indexačního procesu pro model -->
         <mat-form-field class="app-schedule-indexation-process-type">
             <mat-select placeholder="Model" [(value)]="selectedModel" (selectionChange)="onSelectModel($event)"
-                [disabled]="fetchingNow">
+                [disabled]="loading">
                 <mat-option *ngFor="let model of models; let i = index" [value]="model">{{modelNames[i]}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -34,7 +34,7 @@
         <!-- TODO: namisto legacy pouzit defaultni typ, ale nastylovat-->
         <!-- appearance="legacy"  -->
         <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="stateFilter"
-            [disabled]="fetchingNow">
+            [disabled]="loading">
             <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">vše</mat-button-toggle>
             <mat-button-toggle value="indexed" (change)="onChangeStateFilter($event.value)">indexované
             </mat-button-toggle>
@@ -42,8 +42,8 @@
             </mat-button-toggle>
         </mat-button-toggle-group>
 
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationsOfCurrentItems()"
-            color="primary" [disabled]="fetchingNow || !selectedModel">
+        <button class="app-schedule-indexation-process-btn" mat-raised-button
+            (click)="scheduleIndexationsOfCurrentItems()" color="primary" [disabled]="loading || !selectedModel">
             <mat-icon>play_arrow</mat-icon>
             Indexovat hromadně
         </button>
@@ -91,11 +91,11 @@
         </div> -->
     </div>
 
-    <mat-progress-bar mode="buffer" *ngIf="fetchingNow"></mat-progress-bar>
+    <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
 
     <!-- TODO: style or replace with neverending page -->
-    <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()"
-        color="primary" [disabled]="fetchingNow || !selectedModel">
+    <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()" color="primary"
+        [disabled]="loading || !selectedModel">
         Načíst další
     </button>
 
