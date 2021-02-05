@@ -99,4 +99,10 @@
         Načíst další
     </button>
 
+    <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationsOfCurrentItems()"
+        color="primary" [disabled]="loading || !selectedModel">
+        <mat-icon>play_arrow</mat-icon>
+        Indexovat hromadně
+    </button>
+
 </div>
