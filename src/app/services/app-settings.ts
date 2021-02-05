@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class AppSettings {
 
   devMode = true; //pokud true, tak se zobrazuje zalozka Test a dalsi testovaci veci (napr. spousteni testovaciho procesu)
-  version = "1.1" + (this.devMode ? "-dev" : "");
+  version = "1.2" + (this.devMode ? "-dev" : "");
 
 
   //kramerius.dev.digitallibrary.cz
