@@ -59,15 +59,16 @@ export class ProcessesComponent implements OnInit {
 
   reload() {
     this.fetchingProcesses = true;
+    this.batches = [];
     this.adminApi.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
       this.batches = batches;
       this.resultCount = total;
       this.fetchingProcesses = false;
     });
-    this.fetchingProcesses = true;
+    this.fetchingOwners = true;
     this.adminApi.getProcessOwners().subscribe((owners: ProcessOwner[]) => {
       this.owners = owners;
-      this.fetchingProcesses = false;;
+      this.fetchingOwners = false;
     });
   }
 

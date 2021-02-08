@@ -24,40 +24,44 @@
         </mat-select>
       </mat-form-field>
 
-      <button class="app-schedule-test-process-btn" mat-raised-button (click)="scheduleTestProcess()" [disabled]="isLoading()"
-        color="primary">Spustit testovací proces</button>
+      <button class="app-schedule-test-process-btn" mat-raised-button (click)="scheduleTestProcess()"
+        [disabled]="isLoading()" color="primary">Spustit testovací proces</button>
     </div>
 
     <!-- filtrovani seznamu procesů  -->
 
     <mat-form-field class="app-filter-state">
-      <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
+      <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onFiltersChanged()"
+        [disabled]="isLoading()">
         <mat-option *ngFor="let state of batch_states" [value]="state.key">{{ state.label }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button *ngIf="!!selectedState" class="app-filter-clear" mat-icon-button matTooltip="Odebrat filtrování podle stavu" [disabled]="isLoading()"
-      (click)="selectedState=undefined;onFiltersChanged()">
+    <button *ngIf="!!selectedState" class="app-filter-clear" mat-icon-button matTooltip="Odebrat filtrování podle stavu"
+      [disabled]="isLoading()" (click)="selectedState=undefined;onFiltersChanged()">
       <mat-icon>clear</mat-icon>
     </button>
 
     <mat-form-field class="app-filter-owner">
-      <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
+      <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onFiltersChanged()"
+        [disabled]="isLoading()">
         <mat-option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</mat-option>
       </mat-select>
     </mat-form-field>
     <button *ngIf="!!selectedOwner" class="app-filter-clear" mat-icon-button
-      matTooltip="Odebrat filtrování podle vlastníka" (click)="selectedOwner=undefined;onFiltersChanged()" [disabled]="isLoading()">
+      matTooltip="Odebrat filtrování podle vlastníka" (click)="selectedOwner=undefined;onFiltersChanged()"
+      [disabled]="isLoading()">
       <mat-icon>clear</mat-icon>
     </button>
 
     <mat-form-field class="app-filter-date-from">
-      <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom' [disabled]="isLoading()"
-        (dateChange)="onFiltersChanged()">
+      <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom'
+        [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
       <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
       <mat-datepicker disabled="false" #myDatepickerFrom></mat-datepicker>
     </mat-form-field>
     <button *ngIf="!!dateFrom" class="app-filter-clear" mat-icon-button
-      matTooltip="Odebrat filtrování podle počátečního data" (click)="dateFrom=undefined;onFiltersChanged()" [disabled]="isLoading()">
+      matTooltip="Odebrat filtrování podle počátečního data" (click)="dateFrom=undefined;onFiltersChanged()"
+      [disabled]="isLoading()">
       <mat-icon>clear</mat-icon>
     </button>
 
@@ -68,11 +72,13 @@
       <mat-datepicker disabled="false" #myDatepickerTo></mat-datepicker>
     </mat-form-field>
     <button *ngIf="!!dateTo" class="app-filter-clear" mat-icon-button
-      matTooltip="Odebrat filtrování podle koncového data" (click)="dateTo=undefined;onFiltersChanged()" [disabled]="isLoading()">
+      matTooltip="Odebrat filtrování podle koncového data" (click)="dateTo=undefined;onFiltersChanged()"
+      [disabled]="isLoading()">
       <mat-icon>clear</mat-icon>
     </button>
 
-    <button class="app-filter-reload" mat-icon-button matTooltip="Znovu načíst procesy" (click)="reload()" [disabled]="isLoading()">
+    <button class="app-filter-reload" mat-icon-button matTooltip="Znovu načíst procesy" (click)="reload()"
+      [disabled]="isLoading()">
       <mat-icon>refresh</mat-icon>
     </button>
 
@@ -101,7 +107,7 @@
         <div class="process-actions"></div>
       </div>
     </div>
-    <div class="scrollable app-table">
+    <div class="scrollable app-table" *ngIf="!isLoading()">
       <ng-container *ngFor="let batch of batches">
         <a class="app-row" [routerLink]="['/processes', batch.id]">
           <div class="process-expand">
@@ -147,7 +153,6 @@
             <div class="process-datetime">{{ process.started | appDatetime }}</div>
             <div class="process-datetime">{{ process.finished | appDatetime }}</div>
             <div class="process-duration">{{ process.getDuration() | appDuration }}</div>
-            <!-- TODO: funguje? owner_login-->
             <div class="process-owner">{{ process.owner_login }}</div>
             <div class="process-actions">
             </div>
@@ -156,11 +161,14 @@
       </ng-container>
     </div>
 
-    <div class="paginator-wrapper">
+    <div class="paginator-wrapper" *ngIf="!isLoading()">
       <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
         (page)="onPageChanged($event)">
       </mat-paginator>
     </div>
+
+    <mat-progress-bar mode="buffer" *ngIf="isLoading()"></mat-progress-bar>
+
   </div>
 
 </div>
