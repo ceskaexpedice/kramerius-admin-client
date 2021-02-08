@@ -8,6 +8,8 @@ import { ProcessOwner } from 'src/app/models/process-owner.model';
 import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { forkJoin } from 'rxjs';
+import { UIService } from 'src/app/services/ui.service';
+import { error } from 'protractor';
 
 
 @Component({
@@ -47,7 +49,12 @@ export class ProcessesComponent implements OnInit {
   deletingProcesses = false;
   cancelingProcesses = false;
 
-  constructor(private adminApi: AdminApiService, private dialog: MatDialog, public appSettings: AppSettings) {
+  constructor(
+    private adminApi: AdminApiService,
+    private dialog: MatDialog,
+    public appSettings: AppSettings,
+    private ui: UIService
+  ) {
     for (const state of Process.BATCH_STATES) {
       this.batch_states.push({ key: state, label: Process.stateLabel(state) })
     }
@@ -64,12 +71,15 @@ export class ProcessesComponent implements OnInit {
       this.batches = batches;
       this.resultCount = total;
       this.fetchingProcesses = false;
+    }, error => {
+      this.ui.showErrorSnackBar("Nepodařilo se načíst procesy")
+      this.fetchingProcesses = false;
     });
     this.fetchingOwners = true;
     this.adminApi.getProcessOwners().subscribe((owners: ProcessOwner[]) => {
       this.owners = owners;
       this.fetchingOwners = false;
-    });
+    }, error => this.fetchingOwners = false);
   }
 
   scheduleTestProcess() {
@@ -85,6 +95,9 @@ export class ProcessesComponent implements OnInit {
     this.adminApi.scheduleProcess(params).subscribe(response => {
       this.schedulingProcesses = false;
       this.reload();
+    }, error => {
+      this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces")
+      this.schedulingProcesses = false;
     });
   }
 
@@ -121,6 +134,9 @@ export class ProcessesComponent implements OnInit {
           //console.log(result)
           this.deletingProcesses = false;
           this.reload();
+        }, error => {
+          this.ui.showErrorSnackBar("Nepodařilo se smazat proces/dávku")
+          this.deletingProcesses = false;
         });
       }
     });
@@ -148,6 +164,9 @@ export class ProcessesComponent implements OnInit {
         this.adminApi.killBatch(batch.id).subscribe((result) => {
           this.cancelingProcesses = false;
           this.reload();
+        }, error => {
+          this.ui.showErrorSnackBar("Nepodařilo se zrušit proces/dávku")
+          this.cancelingProcesses = false;
         });
       }
     });
@@ -185,7 +204,6 @@ export class ProcessesComponent implements OnInit {
         requests.push(this.adminApi.killBatch(batch.id));
       }
     });
-
 
     const data: SimpleDialogData = {
       title: "Zrušení naplánovaných procesů",

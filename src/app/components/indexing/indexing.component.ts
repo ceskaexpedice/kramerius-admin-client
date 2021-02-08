@@ -1,4 +1,3 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSelectChange } from '@angular/material';
 import { forkJoin, Observable } from 'rxjs';
@@ -39,7 +38,14 @@ export class IndexingComponent implements OnInit {
   repoLastOffset = 0;
   repoLimit = this.itemsToShowBatchSize;
 
-  constructor(private adminApi: AdminApiService, private clientApi: ClientApiService, private uiService: UIService, private appSettings: AppSettings, private dialog: MatDialog) { }
+  constructor(
+    private adminApi: AdminApiService,
+    private clientApi: ClientApiService,
+    private uiService: UIService,
+    private appSettings: AppSettings,
+    private dialog: MatDialog,
+    private ui: UIService
+  ) { }
 
   ngOnInit() {
     if (this.appSettings.devMode) {
@@ -90,6 +96,8 @@ export class IndexingComponent implements OnInit {
         }
         this.adminApi.scheduleProcess(params).subscribe(response => {
           this.uiService.showInfoSnackBar(`Indexace ${this.pidForIndexation} byla naplánována`);
+        }, error => {
+          this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
         });
       }
     });
@@ -123,6 +131,8 @@ export class IndexingComponent implements OnInit {
         }
         this.adminApi.scheduleProcess(params).subscribe(response => {
           this.uiService.showInfoSnackBar(`Indexace ${object.title} byla naplánována`);
+        }, error => {
+          this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
         });
       }
     });
@@ -181,6 +191,8 @@ export class IndexingComponent implements OnInit {
         })
         forkJoin(requests).subscribe(result => {
           this.uiService.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`);
+        }, error => {
+          this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexace")
         });
       }
     });
@@ -245,8 +257,14 @@ export class IndexingComponent implements OnInit {
           } else {
             this.loading = false;
           }
+        }, error => {
+          this.ui.showErrorSnackBar("Nepodařilo se načíst data")
+          this.loading = false;
         });
       }
+    }, error => {
+      this.ui.showErrorSnackBar("Nepodařilo se načíst data")
+      this.loading = false;
     });
   }
 
@@ -256,6 +274,10 @@ export class IndexingComponent implements OnInit {
     } else {
       return this.itemsLoaded.slice(0, this.itemsToShow);
     }
+  }
+
+  noCurrentItems() {
+    return this.getCurrentItems().length == 0;
   }
 
 }

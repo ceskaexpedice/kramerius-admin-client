@@ -43,7 +43,8 @@
         </mat-button-toggle-group>
 
         <button class="app-schedule-indexation-process-btn" mat-raised-button
-            (click)="scheduleIndexationsOfCurrentItems()" color="primary" [disabled]="loading || !selectedModel">
+            (click)="scheduleIndexationsOfCurrentItems()" color="primary"
+            [disabled]="loading || !selectedModel || noCurrentItems()">
             <mat-icon>play_arrow</mat-icon>
             Indexovat hromadně
         </button>
@@ -83,24 +84,17 @@
             </ng-container>
         </div>
 
-        <!-- TODO: pagination -->
-        <!-- <div class="paginator-wrapper">
-            <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
-                (page)="onPageChanged($event)">
-            </mat-paginator>
-        </div> -->
     </div>
 
     <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
 
-    <!-- TODO: style or replace with neverending page -->
     <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()" color="primary"
         [disabled]="loading || !selectedModel">
         Načíst další
     </button>
 
     <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationsOfCurrentItems()"
-        color="primary" [disabled]="loading || !selectedModel">
+        color="primary" [disabled]="loading || !selectedModel || noCurrentItems()">
         <mat-icon>play_arrow</mat-icon>
         Indexovat hromadně
     </button>

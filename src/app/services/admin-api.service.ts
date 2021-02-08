@@ -68,7 +68,7 @@ export class AdminApiService {
   getProcesses(params: ProcessesParams): Observable<[Batch[], number]> {
     return this.get('/processes/batches', params).pipe(
       //delay(3000),
-      tap(response => console.log(response)),
+      //tap(response => console.log(response)),
       map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
     );
   }
