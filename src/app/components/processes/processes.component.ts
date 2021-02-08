@@ -188,14 +188,26 @@ export class ProcessesComponent implements OnInit {
       params.owner = this.selectedOwner;
     }
     if (this.dateFrom) {
-      params.from = new Date(String(this.dateFrom)).toISOString().slice(0, 19);
+      //params.from = new Date(String(this.dateFrom)).toISOString().slice(0, 19);
+      const from = this.convertDate(new Date(String(this.dateFrom)).toLocaleDateString('en-GB')) + "T00:00:00";
+      //console.log(from);
+      params.from = from;
     }
     if (this.dateTo) {
-      params.until = new Date(String(this.dateTo)).toISOString().slice(0, 19);
+      //params.until = new Date(String(this.dateTo)).toISOString().slice(0, 19);
+      const until = this.convertDate(new Date(String(this.dateTo)).toLocaleDateString('en-GB')) + "T23:59:59";
+      //console.log(until);
+      params.until = until;
     }
     return params;
   }
 
+  convertDate(date) { //01/02/2021 -> 2021-02-01
+    const year = date.slice(6, 10);
+    const month = date.slice(3, 5);
+    const day = date.slice(0, 2);
+    return `${year}-${month}-${day}`;
+  }
 
   onKillAllScheduled() {
     let requests = [];
