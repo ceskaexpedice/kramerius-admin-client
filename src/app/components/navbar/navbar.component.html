@@ -1,6 +1,6 @@
 <mat-toolbar class="mat-elevation-z6" color="primary">
   <a routerLink="/" class="app-logo">
-    <span>Kramerius Admin</span>
+    <span>kAdmin</span>
   </a>
 
   <span class="fill-remaining-space"></span>
@@ -9,6 +9,7 @@
     <a routerLink="/processes" routerLinkActive="active" mat-button>Procesy</a>
     <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
     <a routerLink="/indexing" routerLinkActive="active" mat-button>Indexace</a>
+    <a routerLink="/config" routerLinkActive="active" mat-button>Konfigurace</a>
     <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="appSettings.devMode">Dev</a>
 
     <a [matMenuTriggerFor]="profile_menu" mat-button>

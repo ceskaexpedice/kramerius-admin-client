@@ -35,6 +35,7 @@ import { CollectionsService } from './services/collections.service';
 import { DevComponent } from './components/dev/dev.component';
 import { IndexingComponent } from './components/indexing/indexing.component';
 import { MatProgressBarModule } from '@angular/material';
+import { ConfigComponent } from './components/config/config.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import { MatProgressBarModule } from '@angular/material';
     CollectionsComponent,
     CollectionComponent,
     DevComponent,
-    IndexingComponent
+    IndexingComponent,
+    ConfigComponent
   ],
   imports: [
     BrowserModule,
