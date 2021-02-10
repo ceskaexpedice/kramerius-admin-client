@@ -1,3 +1,63 @@
 <div class="app-root">
     <h2>Konfigurace</h2>
+
+    <h3>Texty</h3>
+    <div class="app-subhead">
+        Texty pro klienta, např. o nedostupnosti.
+        <br>
+        Můžou obsahovat placeholdery pro pidy apod.
+    </div>
+
+    <div>
+        <mat-form-field class="app-form-field">
+            <textarea matInput [(ngModel)]="properties['texts.rightMsg.cs']" placeholder="texts.rightMsg.cs" rows="5"
+                [disabled]="isLoadingNow('texts.rightMsg.cs') || isSavingNow('texts.rightMsg.cs')"
+                type="text"></textarea>
+        </mat-form-field>
+        <button class="app-update-property-btn" mat-raised-button color="primary"
+            (click)="saveValue('texts.rightMsg.cs')"
+            [disabled]="isLoadingNow('texts.rightMsg.cs') || isSavingNow('texts.rightMsg.cs') || !properties['texts.rightMsg.cs']">Uložit</button>
+    </div>
+    <div>
+        <mat-form-field class="app-form-field">
+            <textarea matInput [(ngModel)]="properties['texts.rightMsg.en']" placeholder="texts.rightMsg.en" rows="5"
+                [disabled]="isLoadingNow('texts.rightMsg.en') || isSavingNow('texts.rightMsg.en')"
+                type="text"></textarea>
+        </mat-form-field>
+        <button class="app-update-property-btn" mat-raised-button color="primary"
+            (click)="saveValue('texts.rightMsg.en')"
+            [disabled]="isLoadingNow('texts.rightMsg.en') || isSavingNow('texts.rightMsg.en') || !properties['texts.rightMsg.en']">Uložit</button>
+    </div>
+
+    <h3>Ostatní</h3>
+    <div class="app-subhead">
+        Tohle je jen pro ilustraci, aktuálně se neprojeví ve fungování.
+        <br>
+        Např. zde nastavený pdfMaxRange se neprojeví v počtu stránek při exportu do pdf.
+        <br>
+        Navíc to jsou věci určené jen pro backend.
+    </div>
+
+    <div>
+        <mat-form-field class="app-form-field">
+            <input matInput [(ngModel)]="properties['pdfMaxRange']" placeholder="pdfMaxRange"
+                [disabled]="isLoadingNow('pdfMaxRange') || isSavingNow('pdfMaxRange')" type="number">
+        </mat-form-field>
+        <button class="app-update-property-btn" mat-raised-button color="primary" (click)="saveValue('pdfMaxRange')"
+            [disabled]="isLoadingNow('pdfMaxRange') || isSavingNow('pdfMaxRange') || !properties['pdfMaxRange']">Uložit</button>
+    </div>
+    <div>
+        <mat-form-field class="app-form-field">
+            <input matInput [(ngModel)]="properties['processQueue.activeProcess']"
+                placeholder="processQueue.activeProcess"
+                [disabled]="isLoadingNow('processQueue.activeProcess') || isSavingNow('processQueue.activeProcess')"
+                type="number">
+        </mat-form-field>
+        <button class="app-update-property-btn" mat-raised-button color="primary"
+            (click)="saveValue('processQueue.activeProcess')"
+            [disabled]="isLoadingNow('processQueue.activeProcess') || isSavingNow('processQueue.activeProcess') || !properties['processQueue.activeProcess']">Uložit</button>
+    </div>
+
+    <mat-spinner [diameter]="30" style="margin-top: 16px;" *ngIf="isLoadingOrSavingSomething()"> </mat-spinner>
+
 </div>

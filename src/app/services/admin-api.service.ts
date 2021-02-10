@@ -168,6 +168,18 @@ export class AdminApiService {
     return this.delete(`/items/${pid}`);
   }
 
+  getConfigProperty(key: string): Observable<any> {
+    return this.get(`/config/${key}`).pipe(
+      delay(300),
+    )
+  }
+
+  setConfigProperty(key: string, value: string): Observable<any> {
+    return this.put(`/config/${key}`, value).pipe(
+      delay(300),
+    )
+  }
+
 }
 
 export interface ProcessesParams {
