@@ -7,9 +7,8 @@ import { Process } from 'src/app/models/process.model';
 import { ProcessOwner } from 'src/app/models/process-owner.model';
 import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
-import { forkJoin } from 'rxjs';
+import { forkJoin, interval, Subscription } from 'rxjs';
 import { UIService } from 'src/app/services/ui.service';
-import { error } from 'protractor';
 
 
 @Component({
@@ -49,6 +48,10 @@ export class ProcessesComponent implements OnInit {
   deletingProcesses = false;
   cancelingProcesses = false;
 
+  //for reloading process duration without change from server
+  now = new Date();
+  private refreshPageTimer: Subscription;
+
   constructor(
     private adminApi: AdminApiService,
     private dialog: MatDialog,
@@ -62,6 +65,15 @@ export class ProcessesComponent implements OnInit {
 
   ngOnInit() {
     this.reload();
+    this.refreshPageTimer = interval(1000)
+      .subscribe(x => {
+        this.now = new Date();
+        //console.log(this.now);
+      });
+  }
+
+  ngOnDestroy() {
+    this.refreshPageTimer.unsubscribe();
   }
 
   reload() {

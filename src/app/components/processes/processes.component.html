@@ -57,7 +57,7 @@
       <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom'
         [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
       <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
-      <mat-datepicker disabled="false" #myDatepickerFrom></mat-datepicker>
+      <mat-datepicker #myDatepickerFrom [disabled]="isLoading()"></mat-datepicker>
     </mat-form-field>
     <button *ngIf="!!dateFrom" class="app-filter-clear" mat-icon-button
       matTooltip="Odebrat filtrování podle počátečního data" (click)="dateFrom=undefined;onFiltersChanged()"
@@ -69,7 +69,7 @@
       <input matInput [matDatepicker]="myDatepickerTo" placeholder="Do" [(ngModel)]='dateTo' [disabled]="isLoading()"
         (dateChange)="onFiltersChanged()">
       <mat-datepicker-toggle matSuffix [for]="myDatepickerTo"></mat-datepicker-toggle>
-      <mat-datepicker disabled="false" #myDatepickerTo></mat-datepicker>
+      <mat-datepicker #myDatepickerTo [disabled]="isLoading()"></mat-datepicker>
     </mat-form-field>
     <button *ngIf="!!dateTo" class="app-filter-clear" mat-icon-button
       matTooltip="Odebrat filtrování podle koncového data" (click)="dateTo=undefined;onFiltersChanged()"
@@ -168,6 +168,8 @@
     </div>
 
     <mat-progress-bar mode="buffer" *ngIf="isLoading()"></mat-progress-bar>
+    <!-- this forces reloading components including duration for running processes -->
+    <div style="height: 0px; overflow: hidden;">{{now}}</div>
 
   </div>
 
