@@ -22,9 +22,9 @@
         <div class="app-card-content-label">Ukončen</div>
         <div class="app-card-content-value">{{process.finished | appDatetime}}</div>
       </div>
-      <div *ngIf="process.getDuration()">
+      <div *ngIf="process.getDuration(loadedTimestamp)">
         <div class="app-card-content-label">Trvání</div>
-        <div class="app-card-content-value">{{process.getDuration() | appDuration}}</div>
+        <div class="app-card-content-value">{{process.getDuration(loadedTimestamp) | appDuration}}</div>
       </div>
     </mat-card>
     <!-- karta davky -->
@@ -46,9 +46,9 @@
         <div class="app-card-content-label">Ukončena</div>
         <div class="app-card-content-value">{{batch.finished | appDatetime}}</div>
       </div>
-      <div *ngIf="batch.getDuration()">
+      <div *ngIf="batch.getDuration(loadedTimestamp)">
         <div class="app-card-content-label">Trvání</div>
-        <div class="app-card-content-value">{{batch.getDuration() | appDuration}}</div>
+        <div class="app-card-content-value">{{batch.getDuration(loadedTimestamp) | appDuration}}</div>
       </div>
       <mat-card-actions>
         <button mat-button *ngIf="batch.isKillable()" (click)="onKill(batch)">Zastavit</button>

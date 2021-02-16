@@ -124,7 +124,7 @@
           <div class="process-datetime">{{ batch.planned | appDatetime }}</div>
           <div class="process-datetime">{{ batch.started | appDatetime }}</div>
           <div class="process-datetime">{{ batch.finished | appDatetime }}</div>
-          <div class="process-duration">{{ batch.getDuration() | appDuration }}</div>
+          <div class="process-duration">{{ batch.getDuration(loadedTimestamp) | appDuration }}</div>
           <div class="process-owner">{{ batch.ownerName }}</div>
           <div class="process-actions">
             <button *ngIf="batch.isDeletable()" class="app-action-remove"
@@ -152,7 +152,7 @@
             <div class="process-datetime">{{ process.planned | appDatetime }}</div>
             <div class="process-datetime">{{ process.started | appDatetime }}</div>
             <div class="process-datetime">{{ process.finished | appDatetime }}</div>
-            <div class="process-duration">{{ process.getDuration() | appDuration }}</div>
+            <div class="process-duration">{{ process.getDuration(loadedTimestamp) | appDuration }}</div>
             <div class="process-owner">{{ process.owner_login }}</div>
             <div class="process-actions">
             </div>
@@ -168,8 +168,6 @@
     </div>
 
     <mat-progress-bar mode="buffer" *ngIf="isLoading()"></mat-progress-bar>
-    <!-- this forces reloading components including duration for running processes -->
-    <div style="height: 0px; overflow: hidden;">{{now}}</div>
 
   </div>
 

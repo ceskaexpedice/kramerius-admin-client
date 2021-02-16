@@ -20,6 +20,9 @@ export class ProcessComponent implements OnInit {
   process: Process;
   log = 'out';
 
+  // when current data was loaded
+  loadedTimestamp;
+
   constructor(private route: ActivatedRoute, private adminApi: AdminApiService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
@@ -36,6 +39,7 @@ export class ProcessComponent implements OnInit {
         ([batch, process]: [Batch, Process]) => {
           this.batch = batch;
           this.process = process;
+          this.loadedTimestamp = new Date();
         }
       );
   }

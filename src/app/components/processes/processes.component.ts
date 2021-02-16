@@ -48,9 +48,8 @@ export class ProcessesComponent implements OnInit {
   deletingProcesses = false;
   cancelingProcesses = false;
 
-  //for reloading process duration without change from server
-  now = new Date();
-  private refreshPageTimer: Subscription;
+  // when current data was loaded
+  loadedTimestamp: Date;
 
   constructor(
     private adminApi: AdminApiService,
@@ -65,15 +64,6 @@ export class ProcessesComponent implements OnInit {
 
   ngOnInit() {
     this.reload();
-    this.refreshPageTimer = interval(1000)
-      .subscribe(x => {
-        this.now = new Date();
-        //console.log(this.now);
-      });
-  }
-
-  ngOnDestroy() {
-    this.refreshPageTimer.unsubscribe();
   }
 
   reload() {
@@ -83,6 +73,7 @@ export class ProcessesComponent implements OnInit {
       this.batches = batches;
       this.resultCount = total;
       this.fetchingProcesses = false;
+      this.loadedTimestamp = new Date();
     }, error => {
       this.ui.showErrorSnackBar("Nepodařilo se načíst procesy")
       this.fetchingProcesses = false;

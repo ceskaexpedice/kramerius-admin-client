@@ -111,11 +111,21 @@ export class Process {
     return Process.stateColor(this.state);
   }
 
-  getDuration(): number {
-    if (!this.started || !this.finished) {
-      return null;
+  getDuration(now: Date): number {
+    if (!this.started) {
+      return undefined;
     }
-    return this.finished.getTime() - this.started.getTime();
+    if (this.finished) {
+      return this.finished.getTime() - this.started.getTime();
+    }
+    if (now) {
+      let nowRoundedToSeconds = Math.floor(now.getTime() / 1000) * 1000;
+      //cas prideleny na servru a na klientovi se muze lisit (az o stovky sekund), takze by vysledek mohl byt negativni, takze vracim jen kladne hodnoty
+      //proto pro procesy, ktere bezi asi do 2 minut se nezobracuje cas, dokud proces jeste bezi, po dokonceni uz ano
+      const duration = nowRoundedToSeconds - this.started.getTime();
+      return duration > 0 ? duration : null;
+    }
+    return undefined;
   }
 
 }
