@@ -74,7 +74,7 @@ export class ClientApiService {
     );
   }
 
-  getPidsInIndex(pids: string[]) {
+  getIndexationInfoForPids(pids: string[]) {
     let query = "";
     pids.forEach(pid => {
       query += "pid:" + pid.replace(':', '\\:') + " OR ";
@@ -82,11 +82,13 @@ export class ClientApiService {
     query = query.substring(0, query.length - " OR ".length);
     return this.search({
       q: query,
-      fl: 'pid',
+      fl: 'pid,indexer_version,full_indexation_in_progress',
       rows: pids.length
-    }).pipe(
-      map(items => items.map(item => item['pid']))
-    );
+    });
+  }
+
+  getInfo(): Observable<any> {
+    return this.get(`/info`);
   }
 
 }

@@ -36,9 +36,17 @@
         <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="stateFilter"
             [disabled]="loading">
             <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">vše</mat-button-toggle>
-            <mat-button-toggle value="indexed" (change)="onChangeStateFilter($event.value)">indexované
+            <mat-button-toggle value="indexed_current" (change)="onChangeStateFilter($event.value)"
+                matTooltip="Indexováno aktuální verzí indexeru" matTooltipPosition="above">indexováno
             </mat-button-toggle>
-            <mat-button-toggle value="not_indexed" (change)="onChangeStateFilter($event.value)">neindexované
+            <mat-button-toggle value="indexed_old" (change)="onChangeStateFilter($event.value)"
+                matTooltip="Indexováno některou starší verzí indexeru" matTooltipPosition="above">indexováno (starší
+                verze)</mat-button-toggle>
+            <mat-button-toggle value="in_progress" (change)="onChangeStateFilter($event.value)"
+                matTooltip="Probíhá kompletní indexace, nebo kompletní indexace nebyla korektně ukončena"
+                matTooltipPosition="above">probíhá indexace
+            </mat-button-toggle>
+            <mat-button-toggle value="not_indexed" (change)="onChangeStateFilter($event.value)">neindexováno
             </mat-button-toggle>
         </mat-button-toggle-group>
 
@@ -55,7 +63,8 @@
             <div class="app-row app-header">
                 <div class="object-pid">PID</div>
                 <div class="object-name">Název</div>
-                <div class="object-in-index-cont">V indexu</div>
+                <div class="object-indexer-version-cont" matTooltip="Verze indexeru, kterou byl dokument indexován"
+                    matTooltipPosition="above">Verze</div>
                 <div class="object-actions"></div>
             </div>
         </div>
@@ -65,11 +74,13 @@
                 <a class="app-row" href="{{buildDigitalLibraryUrl(object.pid)}}" target="_blank">
                     <div class="object-pid">{{ object.pid }}</div>
                     <div class="object-name" matTooltip="{{ object.title}}">{{ object.title |appShorten:100}}</div>
-
-                    <div class="object-in-index-cont">
-                        <mat-icon *ngIf="object.indexed" class="object-in-index">done</mat-icon>
-                        <!-- <mat-icon *ngIf="!object.indexed" class="object-in-index">error_outline</mat-icon> -->
-                        <mat-icon *ngIf="!object.indexed" class="object-in-index">warning</mat-icon>
+                    <div class="object-indexer-version-cont">
+                        <div *ngIf="object.indexerVersion!=undefined" class="object-indexer-version">
+                            {{object.indexerVersion}}
+                        </div>
+                        <div *ngIf="object.indexerVersion==undefined" class="object-indexer-version">
+                            n/a
+                        </div>
                     </div>
 
                     <div class="object-actions">

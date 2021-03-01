@@ -31,15 +31,14 @@
         padding-right: 10px;
         word-break: break-all;
     }
-    .object-in-index-cont {
+    .object-indexer-version-cont {
         width: 50px;
         position: relative;
-        .object-in-index {
+        .object-indexer-version {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 20px;
             width: 20px;
         }
     }

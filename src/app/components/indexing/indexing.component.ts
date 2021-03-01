@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSelectChange } from '@angular/material';
+import { error } from 'protractor';
 import { forkJoin, Observable } from 'rxjs';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -26,13 +27,15 @@ export class IndexingComponent implements OnInit {
   //selectedModel = 'monograph';
   selectedModel = undefined;
 
-  stateFilter = 'not_indexed';
-  //stateFilter = 'all';
+  //stateFilter = 'not_indexed';
+  stateFilter = 'all';
 
   loading = false;
 
-  itemsLoaded: { pid: string, title: string, indexed: boolean }[] = [];
-  itemsToShowBatchSize = 100;
+  currentIndexerVersion;
+
+  itemsLoaded: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgres: boolean }[] = [];
+  itemsToShowBatchSize = 10;
   itemsToShow = 0;
 
   repoLastOffset = 0;
@@ -48,6 +51,10 @@ export class IndexingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.clientApi.getInfo().subscribe(data => {
+      this.currentIndexerVersion = data.indexerVersion;
+      this.loading = false;
+    });
     if (this.appSettings.devMode) {
       this.loadFirstBatchOfItems();
     }
@@ -176,6 +183,7 @@ export class IndexingComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
+        this.loading = true;
         let requests = [];
         items.forEach(object => {
           requests.push(
@@ -191,6 +199,7 @@ export class IndexingComponent implements OnInit {
         })
         forkJoin(requests).subscribe(result => {
           this.uiService.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`);
+          this.loading = false;
         }, error => {
           this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexace")
         });
@@ -230,14 +239,21 @@ export class IndexingComponent implements OnInit {
       } else {
         this.repoLastOffset += pidsFromRepo.length;
         //check which of pids are in index
-        this.clientApi.getPidsInIndex(pidsFromRepo).subscribe(pidsInIndex => {
+        this.clientApi.getIndexationInfoForPids(pidsFromRepo).subscribe(objectsInIndex => {
+          const objectsInIndexByPid = {};
+          objectsInIndex.forEach(object => {
+            objectsInIndexByPid[object.pid] = object;
+          })
           //merge to get final results
-          let itemsMerged: { pid: string, title: string, indexed: boolean }[] = [];
+          let itemsMerged: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgres: boolean }[] = [];
           itemsFromRepo.forEach(item => {
+            const objectInIndex = objectsInIndexByPid[item.pid];
             itemsMerged.push({
               pid: item['pid'],
               title: item['title'],
-              indexed: pidsInIndex.indexOf(item['pid']) != -1
+              indexed: objectInIndex && !objectInIndex['full_indexation_in_progress'],
+              indexationInProgres: objectInIndex && objectInIndex['full_indexation_in_progress'],
+              indexerVersion: objectInIndex ? (objectInIndex['indexer_version'] ? +objectInIndex['indexer_version'] : 0) : undefined,
             });
           });
 
@@ -245,8 +261,10 @@ export class IndexingComponent implements OnInit {
           const filtered = itemsMerged.filter(o => {
             switch (this.stateFilter) {
               case 'all': return true;
-              case 'indexed': return o.indexed;
-              case 'not_indexed': return !o.indexed;
+              case 'in_progress': return o.indexationInProgres;
+              case 'not_indexed': return !o.indexed && !o.indexationInProgres;
+              case 'indexed_old': return o.indexed && o.indexerVersion != this.currentIndexerVersion;
+              case 'indexed_current': return o.indexed && o.indexerVersion == this.currentIndexerVersion;
             }
           });
           //push
