@@ -35,10 +35,12 @@ export class IndexingComponent implements OnInit {
   currentIndexerVersion;
 
   itemsLoaded: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgres: boolean }[] = [];
-  itemsToShowBatchSize = 10;
+  itemsToShowBatchSize = 100;
   itemsToShow = 0;
 
-  repoLastOffset = 0;
+  repoUseCursor = true;
+  repoNextOffset = 0;
+  reponNextCursor = '*';
   repoLimit = this.itemsToShowBatchSize;
 
   constructor(
@@ -208,7 +210,8 @@ export class IndexingComponent implements OnInit {
   }
 
   loadFirstBatchOfItems() {
-    this.repoLastOffset = 0;
+    this.reponNextCursor = '*';
+    this.repoNextOffset = 0;
     this.itemsLoaded = [];
     this.itemsToShow = this.itemsToShowBatchSize;
     if (this.selectedModel) {
@@ -225,8 +228,11 @@ export class IndexingComponent implements OnInit {
 
   loadMoreItemsForBatch() {
     this.loading = true;
-    //fetch items from repo by offset, limit
-    this.adminApi.getObjectsByModel(this.selectedModel, 'ASC', this.repoLastOffset, this.repoLimit).subscribe(response => {
+    //fetch items from repo by offset/cursor & limit
+    const query = this.repoUseCursor ?
+      this.adminApi.getObjectsByModelWithCursor(this.selectedModel, 'ASC', this.reponNextCursor, this.repoLimit) :
+      this.adminApi.getObjectsByModel(this.selectedModel, 'ASC', this.repoNextOffset, this.repoLimit);
+    query.subscribe(response => {
       const itemsFromRepo = response.items;
       let pidsFromRepo = [];
       itemsFromRepo.forEach(item => {
@@ -237,7 +243,8 @@ export class IndexingComponent implements OnInit {
         console.log('no more items in repo')
         this.loading = false;
       } else {
-        this.repoLastOffset += pidsFromRepo.length;
+        this.repoNextOffset += pidsFromRepo.length;
+        this.reponNextCursor = response.nextCursor;
         //check which of pids are in index
         this.clientApi.getIndexationInfoForPids(pidsFromRepo).subscribe(objectsInIndex => {
           const objectsInIndexByPid = {};

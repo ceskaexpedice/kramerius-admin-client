@@ -65,6 +65,16 @@ export class AdminApiService {
     );
   }
 
+  getObjectsByModelWithCursor(model: string, order = 'ASC', cursor: string, limit: number): Observable<any> {
+    return this.get(`/items?order=${order}&cursor=${encodeURIComponent(cursor)}&limit=${limit}`, {
+      'model': model
+    }).pipe(
+      tap(response => {
+        //console.log(response)
+      })
+    );
+  }
+
   getProcesses(params: ProcessesParams): Observable<[Batch[], number]> {
     return this.get('/processes/batches', params).pipe(
       //delay(3000),

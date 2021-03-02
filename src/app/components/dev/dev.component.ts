@@ -143,9 +143,10 @@ export class DevComponent implements OnInit {
   }
 
   logDataFromAdminApi() {
-    //const query = `/items/${pid}/foxml`
     const pid = "uuid:51f84b60-5542-11e9-8854-005056827e51"
-    const query = `/items/${pid}/foxml`
+    //const query = `/items/${pid}/foxml`
+    //const query = `/items?model=monograph&order=ASC&offset=0&limit=10`
+    const query = `/items?model=monograph&order=ASC&cursor=*&limit=10`
     this.adminApi.getGeneralQuery(query).subscribe(response => {
       console.log(response);
     })
