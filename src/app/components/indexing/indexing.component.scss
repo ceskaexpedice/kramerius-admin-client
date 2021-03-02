@@ -58,3 +58,20 @@
     margin-top: 8px;
     margin-right: 0px;
 }
+
+:host ::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    line-height: 34px !important;
+    color: rgba(0, 0, 0, 0.54) !important;
+}
+
+:host ::ng-deep .mat-button-toggle-checked {
+    background-color: #c8c8c8 !important;
+}
+
+:host ::ng-deep .mat-button-toggle-checked .mat-button-toggle-label-content {
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+
+::ng-deep .mat-select-panel {
+    max-height: none !important;
+}

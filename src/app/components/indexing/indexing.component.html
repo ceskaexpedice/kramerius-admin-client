@@ -24,17 +24,15 @@
     <h3>Podle modelu</h3>
     <div>
         <!-- spusteni indexačního procesu pro model -->
-        <mat-form-field class="app-schedule-indexation-process-type">
+        <mat-form-field class="app-schedule-indexation-process-type" style="width:150px;">
             <mat-select placeholder="Model" [(value)]="selectedModel" (selectionChange)="onSelectModel($event)"
                 [disabled]="loading">
                 <mat-option *ngFor="let model of models; let i = index" [value]="model">{{modelNames[i]}}</mat-option>
             </mat-select>
         </mat-form-field>
 
-        <!-- TODO: namisto legacy pouzit defaultni typ, ale nastylovat-->
-        <!-- appearance="legacy"  -->
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="stateFilter"
-            [disabled]="loading">
+        <mat-button-toggle-group aria-label="Font Style" [(ngModel)]="stateFilter" [disabled]="loading"
+            style="margin-left: 24px;">
             <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">vše</mat-button-toggle>
             <mat-button-toggle value="indexed_current" (change)="onChangeStateFilter($event.value)"
                 matTooltip="Indexováno aktuální verzí indexeru" matTooltipPosition="above">indexováno
@@ -50,7 +48,7 @@
             </mat-button-toggle>
         </mat-button-toggle-group>
 
-        <button class="app-schedule-indexation-process-btn" mat-raised-button
+        <button class="app-schedule-indexation-process-btn" style="float: right; margin-right: 0px;" mat-raised-button
             (click)="scheduleIndexationsOfCurrentItems()" color="primary"
             [disabled]="loading || !selectedModel || noCurrentItems()">
             <mat-icon>play_arrow</mat-icon>

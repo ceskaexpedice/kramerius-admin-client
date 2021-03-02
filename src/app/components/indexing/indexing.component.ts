@@ -22,8 +22,9 @@ export class IndexingComponent implements OnInit {
   pidForIndexation;
 
   //Indexační procesy (všechny objekty v modelu)
-  models = ['monograph', 'periodical', 'graphic', 'map', 'archive', 'collection', 'sheetmusic', 'soundrecording', 'manuscript'];
-  modelNames = ['Monografie', 'Periodika', 'Grafiky', 'Mapy', 'Archiválie', 'Sbírky', 'Hudebniny', 'Zvukové nahrávky', 'Rukopisy'];
+  models = ['archive', 'graphic', 'sheetmusic', 'map', 'monograph', 'periodical', 'manuscript', 'collection', 'soundrecording'];
+  modelNames = ['Archiválie', 'Grafiky', 'Hudebniny', 'Mapy', 'Monografie', 'Periodika', 'Rukopisy', 'Sbírky', 'Zvukové nahrávky'];
+
   //selectedModel = 'monograph';
   selectedModel = undefined;
 
