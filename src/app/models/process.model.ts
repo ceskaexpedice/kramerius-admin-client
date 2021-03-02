@@ -71,7 +71,7 @@ export class Process {
       case Process.FAILED: return '#ab493f';
       case Process.KILLED: return '#ca7023';
       case Process.KILLED: return '#ca7023';
-      case Process.NOT_RUNNING: return '#7b7b7b';
+      case Process.NOT_RUNNING: return '#ca7023';
       case Process.WARNING: return '#ab493f';
     }
     return '#000';
