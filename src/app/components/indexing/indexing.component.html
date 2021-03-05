@@ -34,17 +34,19 @@
         <mat-button-toggle-group aria-label="Font Style" [(ngModel)]="stateFilter" [disabled]="loading"
             style="margin-left: 24px;">
             <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">vše</mat-button-toggle>
+            <mat-button-toggle value="not_indexed" (change)="onChangeStateFilter($event.value)"
+                matTooltip="Doposud nebylo indexováno" matTooltipPosition="above">
+                neindexováno
+            </mat-button-toggle>
+            <mat-button-toggle value="in_progress" (change)="onChangeStateFilter($event.value)"
+                matTooltip="Probíhá kompletní indexace, nebo kompletní indexace nebyla řádně dokončena"
+                matTooltipPosition="above">probíhá/chyba
+            </mat-button-toggle>
             <mat-button-toggle value="indexed_current" (change)="onChangeStateFilter($event.value)"
-                matTooltip="Indexováno aktuální verzí indexeru" matTooltipPosition="above">indexováno
+                matTooltip="Indexováno aktuální verzí Indexeru" matTooltipPosition="above">indexováno
             </mat-button-toggle>
             <mat-button-toggle value="indexed_old" (change)="onChangeStateFilter($event.value)"
-                matTooltip="Indexováno některou starší verzí indexeru" matTooltipPosition="above">indexováno (starší
-                verze)</mat-button-toggle>
-            <mat-button-toggle value="in_progress" (change)="onChangeStateFilter($event.value)"
-                matTooltip="Probíhá kompletní indexace, nebo kompletní indexace nebyla korektně ukončena"
-                matTooltipPosition="above">probíhá indexace
-            </mat-button-toggle>
-            <mat-button-toggle value="not_indexed" (change)="onChangeStateFilter($event.value)">neindexováno
+                matTooltip="Indexováno některou starší verzí indexeru" matTooltipPosition="above">indexováno (zastaralé)
             </mat-button-toggle>
         </mat-button-toggle-group>
 
