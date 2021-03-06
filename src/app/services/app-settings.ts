@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AppSettings {
 
-  devMode = true; //pokud true, tak se zobrazuje zalozka Test a dalsi testovaci veci (napr. spousteni testovaciho procesu)
-  version = "1.6" + (this.devMode ? "-dev" : "");
+  devMode = false; //pokud true, tak se zobrazuje zalozka Test a dalsi testovaci veci (napr. spousteni testovaciho procesu)
+  version = "1.7" + (this.devMode ? "-dev" : "");
 
   //kramerius.dev.digitallibrary.cz
   //digitalLibraryBaseUrl = 'https://dev.digitallibrary.cz/d/';
