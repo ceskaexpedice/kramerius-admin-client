@@ -69,6 +69,7 @@ export class AdminApiService {
     return this.get(`/items?order=${order}&cursor=${encodeURIComponent(cursor)}&limit=${limit}`, {
       'model': model
     }).pipe(
+      //delay(500),
       tap(response => {
         //console.log(response)
       })
@@ -111,10 +112,11 @@ export class AdminApiService {
     );
   }
 
-  scheduleProcess(definition): Observable<any> {
+  scheduleProcess(definition, onScheduled = undefined): Observable<any> {
     return this.post('/processes', definition).pipe(
-      //delay(3000)
-    );
+      tap(response => { if (onScheduled) onScheduled(response); }),
+      //delay(500)
+    )
   }
 
   killBatch(firstProcessId: number): Observable<any> {

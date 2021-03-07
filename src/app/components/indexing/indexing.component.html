@@ -99,6 +99,10 @@
 
     <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
 
+    <div *ngIf="repoNextOffset"  class="app-items-count">Zpracováno {{repoNextOffset}} objektů</div>
+    <div *ngIf="scheduledIndexationsCounter"  class="app-items-count">Naplánováno {{scheduledIndexationsCounter}}
+        indexací</div>
+
     <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()" color="primary"
         [disabled]="loading || !selectedModel">
         Načíst další
@@ -109,9 +113,5 @@
         <mat-icon>play_arrow</mat-icon>
         Indexovat hromadně
     </button>
-
-    <!-- pocet prectenych objektu z repozitare -->
-    <!-- TODO: style -->
-    {{repoNextOffset}}
 
 </div>

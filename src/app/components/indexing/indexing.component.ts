@@ -44,6 +44,8 @@ export class IndexingComponent implements OnInit {
   reponNextCursor = '*';
   repoLimit = this.itemsToShowBatchSize;
 
+  scheduledIndexationsCounter = 0;
+
   constructor(
     private adminApi: AdminApiService,
     private clientApi: ClientApiService,
@@ -197,14 +199,17 @@ export class IndexingComponent implements OnInit {
                 pid: object.pid,
                 title: object.title,
               }
-            })
+            }, () => this.scheduledIndexationsCounter++)
           );
         })
         forkJoin(requests).subscribe(result => {
           this.uiService.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`);
+          this.scheduledIndexationsCounter = 0;
           this.loading = false;
         }, error => {
+          this.loading = false;
           this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexace")
+          console.log(error);
         });
       }
     });
