@@ -31,6 +31,12 @@
             </mat-select>
         </mat-form-field>
 
+        <button class="app-schedule-model-indexation-process-btn" mat-raised-button
+            (click)="scheduleIndexationsOfModel()" color="primary" [disabled]="loading || !selectedModel">
+            <mat-icon>play_arrow</mat-icon>
+            Indexovat model
+        </button>
+
         <mat-button-toggle-group aria-label="Font Style" [(ngModel)]="stateFilter" [disabled]="loading"
             style="margin-left: 24px;">
             <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">vše</mat-button-toggle>
@@ -50,7 +56,7 @@
             </mat-button-toggle>
         </mat-button-toggle-group>
 
-        <button class="app-schedule-indexation-process-btn" style="float: right; margin-right: 0px;" mat-raised-button
+        <button class="app-schedule-indexation-processes-btn" style="float: right; margin-right: 0px;" mat-raised-button
             (click)="scheduleIndexationsOfCurrentItems()" color="primary"
             [disabled]="loading || !selectedModel || noCurrentItems()">
             <mat-icon>play_arrow</mat-icon>
@@ -104,12 +110,13 @@
         indexací</div>
 
     <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()" color="primary"
-        [disabled]="loading || !selectedModel">
+        [disabled]="loading || !selectedModel || !stateFilter">
         Načíst další
     </button>
 
-    <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationsOfCurrentItems()"
-        color="primary" [disabled]="loading || !selectedModel || noCurrentItems()">
+    <button class="app-schedule-indexation-processes-btn" mat-raised-button
+        (click)="scheduleIndexationsOfCurrentItems()" color="primary"
+        [disabled]="loading || !selectedModel || !stateFilter || noCurrentItems()">
         <mat-icon>play_arrow</mat-icon>
         Indexovat hromadně
     </button>

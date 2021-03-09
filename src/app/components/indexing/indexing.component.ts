@@ -25,11 +25,12 @@ export class IndexingComponent implements OnInit {
   models = ['archive', 'graphic', 'sheetmusic', 'map', 'monograph', 'periodical', 'manuscript', 'collection', 'soundrecording'];
   modelNames = ['Archiválie', 'Grafiky', 'Hudebniny', 'Mapy', 'Monografie', 'Periodika', 'Rukopisy', 'Sbírky', 'Zvukové nahrávky'];
 
-  //selectedModel = 'monograph';
-  selectedModel = undefined;
+  selectedModel = 'monograph';
+  //selectedModel = undefined;
 
   //stateFilter = 'not_indexed';
-  stateFilter = 'all';
+  //stateFilter = 'all';
+  stateFilter = undefined;
 
   loading = false;
 
@@ -66,6 +67,7 @@ export class IndexingComponent implements OnInit {
   }
 
   onSelectModel(event: MatSelectChange) {
+    this.stateFilter = undefined;
     if (event.value) {
       this.loadFirstBatchOfItems();
     }
@@ -99,7 +101,7 @@ export class IndexingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         const params = {
-          defid: 'new_indexer',
+          defid: 'new_indexer_index_object',
           params: {
             type: this.selectedIndexationProcessType,
             pid: this.pidForIndexation,
@@ -134,7 +136,7 @@ export class IndexingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         const params = {
-          defid: 'new_indexer',
+          defid: 'new_indexer_index_object',
           params: {
             type: 'TREE_AND_FOSTER_TREES',
             pid: object.pid,
@@ -155,7 +157,7 @@ export class IndexingComponent implements OnInit {
   //   this.adminApi.getObjectsByModel(this.selectedModel).subscribe(response => {
   //     response['items'].forEach(item => {
   //       const params = {
-  //         defid: 'new_indexer',
+  //         defid: 'new_indexer_index_object',
   //         params: {
   //           type: 'TREE_AND_FOSTER_TREES',
   //           pid: item.pid,
@@ -193,7 +195,7 @@ export class IndexingComponent implements OnInit {
         items.forEach(object => {
           requests.push(
             this.adminApi.scheduleProcess({
-              defid: 'new_indexer',
+              defid: 'new_indexer_index_object',
               params: {
                 type: 'TREE_AND_FOSTER_TREES',
                 pid: object.pid,
@@ -215,12 +217,33 @@ export class IndexingComponent implements OnInit {
     });
   }
 
+  scheduleIndexationsOfModel() {
+    //TODO: parametry co indexovat
+    const params = {
+      defid: 'new_indexer_index_model',
+      params: {
+        type: 'TREE_AND_FOSTER_TREES',
+        pid: 'model:' + this.selectedModel,
+        indexNotIndexed: true,
+        indexRunningOrError: false,
+        indexIndexed: false,
+        indexIndexedOutdated: false,
+      }
+    }
+    const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
+    this.adminApi.scheduleProcess(params).subscribe(response => {
+      this.uiService.showInfoSnackBar(`Indexace modelu ${modelTitle} byla naplánována`, 3000);
+    }, error => {
+      this.ui.showErrorSnackBar(`Nepodařilo se naplánovat indexaci modelu ${modelTitle}`)
+    });
+  }
+
   loadFirstBatchOfItems() {
     this.reponNextCursor = '*';
     this.repoNextOffset = 0;
     this.itemsLoaded = [];
     this.itemsToShow = this.itemsToShowBatchSize;
-    if (this.selectedModel) {
+    if (this.selectedModel && this.stateFilter) {
       this.loadMoreItemsForBatch();
     }
   }
