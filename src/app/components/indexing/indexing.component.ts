@@ -36,7 +36,7 @@ export class IndexingComponent implements OnInit {
 
   currentIndexerVersion;
 
-  itemsLoaded: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgres: boolean }[] = [];
+  itemsLoaded: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgress: boolean }[] = [];
   itemsToShowBatchSize = 100;
   itemsToShow = 0;
 
@@ -281,14 +281,14 @@ export class IndexingComponent implements OnInit {
             objectsInIndexByPid[object.pid] = object;
           })
           //merge to get final results
-          let itemsMerged: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgres: boolean }[] = [];
+          let itemsMerged: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgress: boolean }[] = [];
           itemsFromRepo.forEach(item => {
             const objectInIndex = objectsInIndexByPid[item.pid];
             itemsMerged.push({
               pid: item['pid'],
               title: item['title'],
               indexed: objectInIndex && !objectInIndex['full_indexation_in_progress'],
-              indexationInProgres: objectInIndex && objectInIndex['full_indexation_in_progress'],
+              indexationInProgress: objectInIndex && objectInIndex['full_indexation_in_progress'],
               indexerVersion: objectInIndex ? (objectInIndex['indexer_version'] ? +objectInIndex['indexer_version'] : 0) : undefined,
             });
           });
@@ -297,8 +297,8 @@ export class IndexingComponent implements OnInit {
           const filtered = itemsMerged.filter(o => {
             switch (this.stateFilter) {
               case 'all': return true;
-              case 'in_progress': return o.indexationInProgres;
-              case 'not_indexed': return !o.indexed && !o.indexationInProgres;
+              case 'in_progress': return o.indexationInProgress;
+              case 'not_indexed': return !o.indexed && !o.indexationInProgress;
               case 'indexed_old': return o.indexed && o.indexerVersion != this.currentIndexerVersion;
               case 'indexed_current': return o.indexed && o.indexerVersion == this.currentIndexerVersion;
             }
