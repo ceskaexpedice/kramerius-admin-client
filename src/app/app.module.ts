@@ -36,6 +36,7 @@ import { DevComponent } from './components/dev/dev.component';
 import { IndexingComponent } from './components/indexing/indexing.component';
 import { MatProgressBarModule } from '@angular/material';
 import { ConfigComponent } from './components/config/config.component';
+import { ScheduleIndexationByPidDialogComponent } from './dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { ConfigComponent } from './components/config/config.component';
     CollectionComponent,
     DevComponent,
     IndexingComponent,
-    ConfigComponent
+    ConfigComponent,
+    ScheduleIndexationByPidDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +91,8 @@ import { ConfigComponent } from './components/config/config.component';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [
-    SimpleDialogComponent
+    SimpleDialogComponent,
+    ScheduleIndexationByPidDialogComponent
   ],
   bootstrap: [AppComponent]
 })

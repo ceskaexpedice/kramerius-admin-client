@@ -2,26 +2,25 @@
 
     <h2>Indexace</h2>
 
-    <h3>Objekt podle PID</h3>
+    <!-- podle pidu -->
     <div>
-        <!-- spusteni indexačního u pro vybraný objekt -->
-        <mat-form-field class="app-schedule-indexation-process-type">
-            <mat-select placeholder="Typ indexace" [(value)]="selectedIndexationProcessType" [disabled]="loading">
-                <mat-option *ngFor="let type of indexationProcessTypes" [value]="type">{{ type }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="app-schedule-indexation-process-pid">
-            <input matInput [(ngModel)]="pidForIndexation" placeholder="PID" [disabled]="loading">
-        </mat-form-field>
-
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="scheduleIndexationByPid()"
-            [disabled]="!pidForIndexation || loading" color="primary">
-            <mat-icon>play_arrow</mat-icon>Indexovat
+        <h3 class="app-section-header">Objekt</h3>
+        <div class="app-section-desc">
+            Indexace objektu, případně stromu, jehož je objekt kořenem.
+        </div>
+        <button mat-button class="app-schedule-indexation-by-pid-btn " mat-raised-button
+            (click)="openIndexationByPidDialog()">
+            Indexovat
         </button>
     </div>
 
-    <h3>Podle modelu</h3>
+    <br>
+
+    <!-- podle modelu -->
+    <h3 class="app-section-header">Model</h3>
+    <div class="app-section-desc">
+        Indexace objektů (a jejich stromů), které mají vybraný model.
+    </div>
     <div>
         <!-- spusteni indexačního procesu pro model -->
         <mat-form-field class="app-schedule-indexation-process-type" style="width:150px;">
@@ -57,8 +56,7 @@
         </mat-button-toggle-group>
 
         <button class="app-schedule-indexation-processes-btn" style="float: right; margin-right: 0px;" mat-raised-button
-            (click)="scheduleIndexationsOfCurrentItems()" color="primary"
-            [disabled]="loading || !selectedModel || noCurrentItems()">
+            (click)="scheduleIndexationsOfCurrentItems()" [disabled]="loading || !selectedModel || noCurrentItems()">
             <mat-icon>play_arrow</mat-icon>
             Indexovat hromadně
         </button>
@@ -92,7 +90,7 @@
                     <div class="object-actions">
                         <button class="object-action"
                             (click)="scheduleFullIndexation(object); $event.preventDefault(); $event.stopPropagation()"
-                            mat-icon-button matTooltip="Indexovat objekt" matTooltipPosition="below">
+                            mat-icon-button matTooltip="Indexovat od objektu" matTooltipPosition="below">
                             <!-- <mat-icon>schedule</mat-icon> -->
                             <mat-icon>play_arrow</mat-icon>
                         </button>
@@ -109,13 +107,13 @@
     <div *ngIf="scheduledIndexationsCounter"  class="app-items-count">Naplánováno {{scheduledIndexationsCounter}}
         indexací</div>
 
-    <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()" color="primary"
+    <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()"
         [disabled]="loading || !selectedModel || !stateFilter">
         Načíst další
     </button>
 
     <button class="app-schedule-indexation-processes-btn" mat-raised-button
-        (click)="scheduleIndexationsOfCurrentItems()" color="primary"
+        (click)="scheduleIndexationsOfCurrentItems()"
         [disabled]="loading || !selectedModel || !stateFilter || noCurrentItems()">
         <mat-icon>play_arrow</mat-icon>
         Indexovat hromadně

@@ -2,13 +2,27 @@
     padding: 16px;
 }
 
-.app-schedule-indexation-process-type {
+.app-section-header {
+    margin-bottom: 8px;
+}
+
+.app-section-desc {
+    font-size: 90%;
+    opacity: 90%;
+    margin-bottom: 16px;
+}
+
+.app-schedule-indexation-process-type-bak {
     margin-right: 16px;
     width: 100px;
 }
 .app-schedule-indexation-process-pid {
     margin-right: 16px;
     width: 350px;
+}
+
+.app-schedule-indexation-by-pid-btn {
+    margin-top: 8px;
 }
 
 .app-schedule-indexation-process-btn {
