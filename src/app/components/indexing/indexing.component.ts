@@ -168,23 +168,45 @@ export class IndexingComponent implements OnInit {
   }
 
   scheduleIndexationsOfModel() {
-    //TODO: parametry co indexovat
-    const params = {
-      defid: 'new_indexer_index_model',
-      params: {
-        type: 'TREE_AND_FOSTER_TREES',
-        pid: 'model:' + this.selectedModel,
-        indexNotIndexed: true,
-        indexRunningOrError: false,
-        indexIndexed: false,
-        indexIndexedOutdated: false,
-      }
-    }
     const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
-    this.adminApi.scheduleProcess(params).subscribe(response => {
-      this.uiService.showInfoSnackBar(`Indexace modelu ${modelTitle} byla naplánována`, 3000);
-    }, error => {
-      this.ui.showErrorSnackBar(`Nepodařilo se naplánovat indexaci modelu ${modelTitle}`)
+    const data: SimpleDialogData = {
+      title: "Indexace modelu",
+      message: `Určitě chcete spusit indexaci modelu ${modelTitle}?`,
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'default'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        //TODO: parametry co indexovat
+        //TODO: parametr ignoreInconsistentObjects
+        const params = {
+          defid: 'new_indexer_index_model',
+          params: {
+            type: 'TREE_AND_FOSTER_TREES',
+            pid: 'model:' + this.selectedModel,
+            ignoreInconsistentObjects: false,
+            indexNotIndexed: true,
+            indexRunningOrError: false,
+            indexIndexed: false,
+            indexIndexedOutdated: false,
+          }
+        }
+        //const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
+        this.adminApi.scheduleProcess(params).subscribe(response => {
+          this.uiService.showInfoSnackBar(`Indexace modelu ${modelTitle} byla naplánována`, 3000);
+        }, error => {
+          this.ui.showErrorSnackBar(`Nepodařilo se naplánovat indexaci modelu ${modelTitle}`)
+        });
+      }
     });
   }
 
