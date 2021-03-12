@@ -6,10 +6,11 @@
     <div>
         <h3 class="app-section-header">Objekt</h3>
         <div class="app-section-desc">
-            Indexace objektu, případně stromu, jehož je objekt kořenem.
+            Indexace objektu, nebo stromu, jehož je objekt kořenem.
         </div>
-        <button mat-button class="app-schedule-indexation-by-pid-btn " mat-raised-button
+        <button mat-button class="app-schedule-indexation-by-pid-btn " mat-stroked-button color="primary"
             (click)="openIndexationByPidDialog()">
+            <mat-icon>play_arrow</mat-icon>
             Indexovat
         </button>
     </div>
@@ -30,12 +31,14 @@
             </mat-select>
         </mat-form-field>
 
-        <button class="app-schedule-model-indexation-process-btn" mat-raised-button
+        <button class="app-schedule-model-indexation-process-btn" mat-stroked-button
             (click)="scheduleIndexationsOfModel()" color="primary" [disabled]="loading || !selectedModel">
             <mat-icon>play_arrow</mat-icon>
             Indexovat model
         </button>
+    </div>
 
+    <div style="margin-left: -25px; margin-bottom: 4px;">
         <mat-button-toggle-group aria-label="Font Style" [(ngModel)]="stateFilter" [disabled]="loading"
             style="margin-left: 24px;">
             <mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)">vše</mat-button-toggle>
@@ -55,8 +58,9 @@
             </mat-button-toggle>
         </mat-button-toggle-group>
 
-        <button class="app-schedule-indexation-processes-btn" style="float: right; margin-right: 0px;" mat-raised-button
-            (click)="scheduleIndexationsOfCurrentItems()" [disabled]="loading || !selectedModel || noCurrentItems()">
+        <button class="app-schedule-indexation-processes-btn" style="float: right; margin-right: 0px; margin-top: 0px;"
+            mat-raised-button (click)="scheduleIndexationsOfCurrentItems()"
+            [disabled]="loading || !selectedModel || noCurrentItems()">
             <mat-icon>play_arrow</mat-icon>
             Indexovat hromadně
         </button>
