@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
@@ -15,7 +15,15 @@ export class ScheduleIndexationByPidDialogComponent implements OnInit {
   selectedIndexationProcessType = this.indexationProcessTypes[0];
   inProgress = false;
 
-  constructor(public dialogRef: MatDialogRef<ScheduleIndexationByPidDialogComponent>, private adminApi: AdminApiService) { }
+  pid = undefined;
+  title = undefined;
+
+  constructor(public dialogRef: MatDialogRef<ScheduleIndexationByPidDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
+    if (data) {
+      this.pid = data.pid;
+      this.title = data.title;
+    }
+  }
 
   ngOnInit() {
   }
@@ -26,12 +34,13 @@ export class ScheduleIndexationByPidDialogComponent implements OnInit {
       defid: 'new_indexer_index_object',
       params: {
         type: formData.type,
-        pid: formData.pid,
-        title: undefined,
+        pid: this.pid,
+        title: this.title,
         ignoreInconsistentObjects: formData.ignore_inconsistent_objects
       }
     }
     this.inProgress = true;
+    //console.log(params);
     this.adminApi.scheduleProcess(params).subscribe(response => {
       this.dialogRef.close('scheduled');
     }, error => {

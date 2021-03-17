@@ -93,8 +93,8 @@
 
                     <div class="object-actions">
                         <button class="object-action"
-                            (click)="scheduleFullIndexation(object); $event.preventDefault(); $event.stopPropagation()"
-                            mat-icon-button matTooltip="Indexovat od objektu" matTooltipPosition="below">
+                            (click)="openIndexationByPidDialog(object); $event.preventDefault(); $event.stopPropagation()"
+                            mat-icon-button matTooltip="Indexovat" matTooltipPosition="below">
                             <!-- <mat-icon>schedule</mat-icon> -->
                             <mat-icon>play_arrow</mat-icon>
                         </button>

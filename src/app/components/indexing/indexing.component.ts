@@ -74,8 +74,8 @@ export class IndexingComponent implements OnInit {
     return this.appSettings.digitalLibraryBaseUrl + "/uuid/" + pid;
   }
 
-  openIndexationByPidDialog() {
-    const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent);
+  openIndexationByPidDialog(object: { pid: string, title: string } = null) {
+    const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent, { data: object });
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
       if (result === 'scheduled') {
@@ -85,41 +85,6 @@ export class IndexingComponent implements OnInit {
       }
     });
   };
-
-  scheduleFullIndexation(object: { pid: string, title: string, indexed: boolean }) {
-    const data: SimpleDialogData = {
-      title: "Indexace objektu",
-      message: `Určitě chcete spusit úplnou indexaci ${object.title}?`,
-      btn1: {
-        label: 'Ano',
-        value: 'yes',
-        color: 'warn'
-      },
-      btn2: {
-        label: 'Ne',
-        value: 'no',
-        color: 'default'
-      }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'yes') {
-        const params = {
-          defid: 'new_indexer_index_object',
-          params: {
-            type: 'TREE_AND_FOSTER_TREES',
-            pid: object.pid,
-            title: object.title
-          }
-        }
-        this.adminApi.scheduleProcess(params).subscribe(response => {
-          this.uiService.showInfoSnackBar(`Indexace ${object.title} byla naplánována`);
-        }, error => {
-          this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
-        });
-      }
-    });
-  }
 
   scheduleIndexationsOfCurrentItems() {
     const items = this.getCurrentItems();

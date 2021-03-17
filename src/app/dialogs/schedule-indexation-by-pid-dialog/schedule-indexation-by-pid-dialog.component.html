@@ -3,8 +3,13 @@
     <h1 mat-dialog-title>Indexace od objektu</h1>
 
     <mat-form-field class="input-pid">
-        <input [disabled]="inProgress" matInput type="text" id="inputPid" name="pid" ngModel placeholder="PID" required
-            autofocus>
+        <input [disabled]="inProgress || title" matInput type="text" id="inputPid" name="pid" [(ngModel)]="pid"
+            placeholder="PID" required autofocus>
+    </mat-form-field>
+
+    <mat-form-field class="input-title" *ngIf="title">
+        <input [disabled]="inProgress || title" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title"
+            placeholder="Název">
     </mat-form-field>
 
     <mat-form-field class="input-type">
