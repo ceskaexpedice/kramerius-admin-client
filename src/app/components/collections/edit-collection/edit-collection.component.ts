@@ -13,7 +13,8 @@ import { CollectionsService } from 'src/app/services/collections.service';
 })
 export class EditCollectionComponent implements OnInit {
 
-  editor = ClassicEditor; //BalloonEditor;
+  editorCze = ClassicEditor; //BalloonEditor;
+  editorEng = ClassicEditor; //BalloonEditor;
 
   editorConfig = {
     // placeholder: 'Popis sbírky',
@@ -39,7 +40,7 @@ export class EditCollectionComponent implements OnInit {
       if (params['id']) {
         this.collectionsService.getCollection(params['id']).subscribe((collection: Collection) => {
           this.collection = collection;
-          this.collectionName = collection.name;
+          this.collectionName = collection.name_cze ? collection.name_cze : collection.name_eng;
           this.init('edit');
         });
       } else {

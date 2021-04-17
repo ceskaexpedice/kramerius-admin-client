@@ -1,16 +1,17 @@
 <div class="breadcrumb-nav">
   <div class="app-actions" *ngIf="collection">
-    
-    
 
 
 
-    <button matTooltip="Přidat do sbírky" class="action-btn" mat-icon-button [matMenuTriggerFor]="collectionsMenu" (click)="loadCollections()">
+
+
+    <button matTooltip="Přidat do sbírky" class="action-btn" mat-icon-button [matMenuTriggerFor]="collectionsMenu"
+      (click)="loadCollections()">
       <mat-icon>add</mat-icon>
     </button>
-    
-    
-    
+
+
+
     <a class="action-btn" mat-icon-button color="default" matTooltip="Upravit sbírku"
       [routerLink]="['/collections', collection.id, 'edit']">
       <mat-icon>edit</mat-icon>
@@ -27,7 +28,7 @@
     <a [routerLink]="['/collections']">Sbírky</a>
     <ng-container *ngIf="collection">
       <mat-icon>chevron_right</mat-icon>
-      <span>{{ collection.name }}</span>
+      <span>{{ collection.name_cze }}</span>
     </ng-container>
   </div>
 </div>
@@ -35,34 +36,47 @@
 <div class="app-collection" *ngIf="collection">
   <div class="app-label">Název sbírky</div>
   <div class="app-name">
-    {{ collection.name }}
-  </div>
-  <div class="app-label">Krátky popis sbírky</div>
-  <div class="app-description">
-    {{ collection.description }}
+    {{ collection.name_cze }}
   </div>
 
-  <div class="app-label">Samostatná sbírka</div>  
+  <div class="app-label">Název sbírky (anglický)</div>
+  <div class="app-name">
+    {{ collection.name_eng }}
+  </div>
+
+  <div class="app-label">Krátky popis sbírky</div>
+  <div class="app-description">
+    {{ collection.description_cze }}
+  </div>
+
+  <div class="app-label">Krátky popis sbírky (anglický)</div>
+  <div class="app-description">
+    {{ collection.description_eng }}
+  </div>
+
+  <div class="app-label">Samostatná sbírka</div>
   <div class="app-standalone">
     {{ collection.standalone ? "Ano" : "Ne" }}
   </div>
 
   <div class="app-label">Úplný popis sbírky</div>
-  <div class="app-content" [innerHTML]="collection.content"></div>
+  <div class="app-content" [innerHTML]="collection.content_cze"></div>
 
-
+  <div class="app-label">Úplný popis sbírky (anglický)</div>
+  <div class="app-content" [innerHTML]="collection.content_eng"></div>
 
   <div *ngIf="collection.items">
     <div class="app-label">Obsah sbírky</div>
     <div *ngFor="let item of items" class="app-collection-item">
 
       <a class="app-collection-name" [routerLink]="['/collections', item['pid']]">
-        {{ item['title.search'] }} 
+        {{ item['title.search'] }}
         <span *ngIf="item['title.search'] != item['root.title']">
           ({{ item['root.title'] }} )
         </span>
       </a>
-      <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['pid'])">cancel</mat-icon>
+      <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['pid'])">
+        cancel</mat-icon>
       <br>
     </div>
   </div>
@@ -81,7 +95,8 @@
 <mat-menu #collectionsMenu="matMenu" xPosition="before" class="app-collections-menu">
   <ng-template matMenuContent ngFor>
     <div class="app-collections">
-      <div *ngFor="let collection of availableCollections" class="app-collection" (click)="addThisToCollection(collection['pid'])">
+      <div *ngFor="let collection of availableCollections" class="app-collection"
+        (click)="addThisToCollection(collection['pid'])">
         {{ collection['title.search'] }}
       </div>
     </div>

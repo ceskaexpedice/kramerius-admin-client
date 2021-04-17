@@ -27,8 +27,8 @@
       <ng-container *ngFor="let collection of collections">
         <a class="app-row" [routerLink]="['/collections', collection.id]">
           <div class="collection-id">{{ collection.id }}</div>
-          <div class="collection-name">{{ collection.name }}</div>
-          <div class="collection-description">{{ collection.description }}</div>
+          <div class="collection-name">{{ collection.name_cze }}</div>
+          <div class="collection-description">{{ collection.description_cze }}</div>
           <div class="collection-datetime">{{ collection.createdAt | appDatetime }}</div>
           <div class="collection-datetime">{{ collection.modifiedAt | appDatetime }}</div>
           <div class="collection-actions">

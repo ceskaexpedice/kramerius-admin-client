@@ -133,9 +133,12 @@ export class AdminApiService {
 
   createCollection(collection: Collection): Observable<any> {
     const payload = {
-      name: collection.name,
-      description: collection.description,
-      content: collection.content,
+      name_cze: collection.name_cze,
+      name_eng: collection.name_eng,
+      description_cze: collection.description_cze,
+      description_eng: collection.description_eng,
+      content_cze: collection.content_cze,
+      content_eng: collection.content_eng,
       standalone: collection.standalone
     }
     return this.post(`/collections`, payload);
@@ -156,9 +159,12 @@ export class AdminApiService {
 
   updateCollection(collection: Collection): Observable<any> {
     const payload = {
-      name: collection.name,
-      description: collection.description,
-      content: collection.content,
+      name_cze: collection.name_cze,
+      name_eng: collection.name_eng,
+      description_cze: collection.description_cze,
+      description_eng: collection.description_eng,
+      content_cze: collection.content_cze,
+      content_eng: collection.content_eng,
       standalone: collection.standalone
     }
     return this.put(`/collections/${collection.id}`, payload);

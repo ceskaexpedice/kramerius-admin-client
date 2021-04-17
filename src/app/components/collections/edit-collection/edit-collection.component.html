@@ -26,12 +26,22 @@
 <div class="app-edit-collection" *ngIf="collection && state != 'loading'">
   <mat-form-field>
     <mat-label>Název sbírky</mat-label>
-    <input matInput [(ngModel)]="collection.name">
+    <input matInput [(ngModel)]="collection.name_cze">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Název sbírky (anglický)</mat-label>
+    <input matInput [(ngModel)]="collection.name_eng">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Krátky popis sbírky</mat-label>
-    <textarea matInput [(ngModel)]="collection.description"></textarea>
+    <textarea matInput [(ngModel)]="collection.description_cze"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Krátky popis sbírky (anglický)</mat-label>
+    <textarea matInput [(ngModel)]="collection.description_eng"></textarea>
   </mat-form-field>
 
   <div class="app-edit-standalone">
@@ -41,7 +51,13 @@
 
 
   <div class="app-label">Úplný popis sbírky</div>
-  <ckeditor [config]="editorConfig" [editor]="editor" required [(ngModel)]="collection.content" data="" name="text">
+  <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data=""
+    name="text">
+  </ckeditor>
+
+  <div class="app-label">Úplný popis sbírky (anglický)</div>
+  <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""
+    name="text">
   </ckeditor>
 
 </div>
