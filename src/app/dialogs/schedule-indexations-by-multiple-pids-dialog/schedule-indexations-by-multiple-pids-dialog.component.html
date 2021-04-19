@@ -1,0 +1,23 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
+
+    <h1 mat-dialog-title>Indexace {{itemsCount}} objektů</h1>
+    <div class="info">Potvrzením naplánujete {{itemsCount}} indexačních Procesů - jeden pro každý z aktuálně
+        vylistovaných objektů.
+        Půjde o úplné indexace, tedy včetně všech potomků.</div>
+
+    <mat-checkbox class="input-ignore_inconsistent_objects" [ngModel]="false" name="ignore_inconsistent_objects"
+        color="primary">
+        Přeskakovat nekonzistentní objekty *</mat-checkbox>
+    <div class="input-ignore_inconsistent_objects-info">
+        *Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb.
+        Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <i>Chyba</i>.
+    </div>
+
+    <button [disabled]="inProgress || !f.valid" color="primary" mat-raised-button type="submit"
+        color="warn">Naplánovat</button>
+    <button [disabled]="inProgress " mat-raised-button mat-dialog-close="cancel"
+        style="margin-left: 10px;">Zrušit</button>
+
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+
+</form>

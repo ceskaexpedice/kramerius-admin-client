@@ -1,0 +1,35 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
+
+    <h1 mat-dialog-title>Indexace modelu</h1>
+    <div class="mat-dialog-title subheader">{{modelName}} (model:{{model}})</div>
+    <div class="info">Potvrzením naplánujete Proces, který bude iterovat všemi objekty vybraného modelu.
+        Ty objekty, které splní stavový filtr, pak (re)indexuje - úplnou instalací včetně všech potomků.</div>
+
+    <div class="mat-dialog-title state-filter-header">Indexovat objekty ve stavech</div>
+    <mat-checkbox class="input-index_checbox" [ngModel]="true" name="index_not_indexed" color="primary">
+        neindexováno</mat-checkbox>
+    <mat-checkbox class="input-index_checbox" [ngModel]="false" name="index_indexed" color="primary">
+        indexováno (aktuální)</mat-checkbox>
+    <mat-checkbox class="input-index_checbox" [ngModel]="true" name="index_indexed_outdated" color="primary">
+        indexováno (zastaralé)</mat-checkbox>
+    <mat-checkbox class="input-index_checbox" [ngModel]="false" name="index_running_or_error" color="primary">
+        probíhá/chyba</mat-checkbox>
+
+    <hr style="margin-top: 10px;">
+
+    <mat-checkbox class="input-ignore_inconsistent_objects" [ngModel]="true" name="ignore_inconsistent_objects"
+        color="primary">
+        Přeskakovat nekonzistentní objekty *</mat-checkbox>
+    <div class="input-ignore_inconsistent_objects-info">
+        *Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb.
+        Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <i>Chyba</i>.
+    </div>
+
+    <button [disabled]="inProgress || !f.valid" color="primary" mat-raised-button type="submit"
+        color="warn">Naplánovat</button>
+    <button [disabled]="inProgress " mat-raised-button mat-dialog-close="cancel"
+        style="margin-left: 10px;">Zrušit</button>
+
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+
+</form>

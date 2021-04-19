@@ -37,6 +37,8 @@ import { IndexingComponent } from './components/indexing/indexing.component';
 import { MatProgressBarModule } from '@angular/material';
 import { ConfigComponent } from './components/config/config.component';
 import { ScheduleIndexationByPidDialogComponent } from './dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
+import { ScheduleIndexationByModelDialogComponent } from './dialogs/schedule-indexation-by-model-dialog/schedule-indexation-by-model-dialog.component';
+import { ScheduleIndexationsByMultiplePidsDialogComponent } from './dialogs/schedule-indexations-by-multiple-pids-dialog/schedule-indexations-by-multiple-pids-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,9 @@ import { ScheduleIndexationByPidDialogComponent } from './dialogs/schedule-index
     DevComponent,
     IndexingComponent,
     ConfigComponent,
-    ScheduleIndexationByPidDialogComponent
+    ScheduleIndexationByPidDialogComponent,
+    ScheduleIndexationByModelDialogComponent,
+    ScheduleIndexationsByMultiplePidsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,9 @@ import { ScheduleIndexationByPidDialogComponent } from './dialogs/schedule-index
   ],
   entryComponents: [
     SimpleDialogComponent,
-    ScheduleIndexationByPidDialogComponent
+    ScheduleIndexationByPidDialogComponent,
+    ScheduleIndexationByModelDialogComponent,
+    ScheduleIndexationsByMultiplePidsDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSelectChange } from '@angular/material';
-import { error } from 'protractor';
 import { forkJoin, Observable } from 'rxjs';
+import { ScheduleIndexationByModelDialogComponent } from 'src/app/dialogs/schedule-indexation-by-model-dialog/schedule-indexation-by-model-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
+import { ScheduleIndexationsByMultiplePidsDialogComponent } from 'src/app/dialogs/schedule-indexations-by-multiple-pids-dialog/schedule-indexations-by-multiple-pids-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
@@ -77,7 +78,6 @@ export class IndexingComponent implements OnInit {
   openIndexationByPidDialog(object: { pid: string, title: string } = null) {
     const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent, { data: object });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       if (result === 'scheduled') {
         this.uiService.showInfoSnackBar(`Indexace byla naplánována`);
       } else if (result === 'error') {
@@ -86,25 +86,24 @@ export class IndexingComponent implements OnInit {
     });
   };
 
-  scheduleIndexationsOfCurrentItems() {
-    const items = this.getCurrentItems();
-    const data: SimpleDialogData = {
-      title: "Indexace objektů podle modelu",
-      message: `Určitě chcete spusit úplnou indexaci všech ${items.length} načtených objektů?`,
-      btn1: {
-        label: 'Ano',
-        value: 'yes',
-        color: 'warn'
-      },
-      btn2: {
-        label: 'Ne',
-        value: 'no',
-        color: 'default'
-      }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+  openIndexationByModelDialog() {
+    const dialogRef = this.dialog.open(ScheduleIndexationByModelDialogComponent, { data: { model: this.selectedModel, modelName: this.modelNames[this.models.indexOf(this.selectedModel)] } });
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'yes') {
+      const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
+      if (result === 'scheduled') {
+        this.uiService.showInfoSnackBar(`Indexace modelu ${modelTitle} byla naplánována`, 3000);
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar(`Nepodařilo se naplánovat indexaci modelu ${modelTitle}`)
+      }
+    });
+  }
+
+  openIndexationsByMultiplePidsDialog() {
+    const items = this.getCurrentItems();
+    const dialogRef = this.dialog.open(ScheduleIndexationsByMultiplePidsDialogComponent, { data: items.length });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'ignore_inconsistent_objects:true' || result === 'ignore_inconsistent_objects:false') {
+        const ignoreInconsistentObjects = result === 'ignore_inconsistent_objects:true';
         this.loading = true;
         let requests = [];
         items.forEach(object => {
@@ -115,12 +114,13 @@ export class IndexingComponent implements OnInit {
                 type: 'TREE_AND_FOSTER_TREES',
                 pid: object.pid,
                 title: object.title,
+                ignoreInconsistentObjects: ignoreInconsistentObjects
               }
             }, () => this.scheduledIndexationsCounter++)
           );
         })
         forkJoin(requests).subscribe(result => {
-          this.uiService.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`);
+          this.uiService.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`, 3000);
           this.scheduledIndexationsCounter = 0;
           this.loading = false;
         }, error => {
@@ -128,49 +128,8 @@ export class IndexingComponent implements OnInit {
           this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexace")
           console.log(error);
         });
-      }
-    });
-  }
-
-  scheduleIndexationsOfModel() {
-    const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
-    const data: SimpleDialogData = {
-      title: "Indexace modelu",
-      message: `Určitě chcete spusit indexaci modelu ${modelTitle}?`,
-      btn1: {
-        label: 'Ano',
-        value: 'yes',
-        color: 'warn'
-      },
-      btn2: {
-        label: 'Ne',
-        value: 'no',
-        color: 'default'
-      }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'yes') {
-        //TODO: parametry co indexovat
-        //TODO: parametr ignoreInconsistentObjects
-        const params = {
-          defid: 'new_indexer_index_model',
-          params: {
-            type: 'TREE_AND_FOSTER_TREES',
-            pid: 'model:' + this.selectedModel,
-            ignoreInconsistentObjects: false,
-            indexNotIndexed: true,
-            indexRunningOrError: false,
-            indexIndexed: false,
-            indexIndexedOutdated: false,
-          }
-        }
-        //const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
-        this.adminApi.scheduleProcess(params).subscribe(response => {
-          this.uiService.showInfoSnackBar(`Indexace modelu ${modelTitle} byla naplánována`, 3000);
-        }, error => {
-          this.ui.showErrorSnackBar(`Nepodařilo se naplánovat indexaci modelu ${modelTitle}`)
-        });
+      } else if (result === 'error' || result === 'cancel') {
+        this.loading = false;
       }
     });
   }

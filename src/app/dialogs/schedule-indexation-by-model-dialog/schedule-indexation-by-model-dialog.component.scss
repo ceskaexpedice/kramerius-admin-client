@@ -1,9 +1,16 @@
+.subheader {
+    margin-top: -23px;
+    margin-bottom: 20px;
+    opacity: 70%;
+    font-size: 90%;
+}
+
 .info {
     margin-top: -5px;
     margin-bottom: 5px;
     display: block;
     width: 350px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 90%;
     opacity: 70%;
 }
@@ -23,10 +30,22 @@
     width: 350px;
 }
 
+.state-filter-header {
+    font-size: 97%;
+    margin-bottom: 8px;
+}
+
+.input-index_checbox {
+    display: block;
+    width: 350px;
+    margin-bottom: 8px;
+}
+
 .input-ignore_inconsistent_objects {
     display: block;
     width: 350px;
     margin-bottom: 8px;
+    margin-top: 20px;
 }
 
 .input-ignore_inconsistent_objects-info {

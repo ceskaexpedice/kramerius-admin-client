@@ -29,7 +29,7 @@ export class ScheduleIndexationByPidDialogComponent implements OnInit {
   }
 
   schedule(formData) {
-    console.log(formData)
+    //console.log(formData)
     const params = {
       defid: 'new_indexer_index_object',
       params: {

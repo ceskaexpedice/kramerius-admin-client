@@ -32,7 +32,7 @@
         </mat-form-field>
 
         <button class="app-schedule-model-indexation-process-btn" mat-stroked-button
-            (click)="scheduleIndexationsOfModel()" color="primary" [disabled]="loading || !selectedModel">
+            (click)="openIndexationByModelDialog()" color="primary" [disabled]="loading || !selectedModel">
             <mat-icon>play_arrow</mat-icon>
             Indexovat model
         </button>
@@ -59,7 +59,8 @@
         </mat-button-toggle-group>
 
         <button class="app-schedule-indexation-processes-btn" style="float: right; margin-right: 0px; margin-top: 0px;"
-            mat-raised-button (click)="scheduleIndexationsOfCurrentItems()"
+            mat-raised-button (click)="openIndexationsByMultiplePidsDialog()"
+            matTooltip="Indexovat všechny aktuálně zobrazené objekty - každý ve vlastním procesu"
             [disabled]="loading || !selectedModel || noCurrentItems()">
             <mat-icon>play_arrow</mat-icon>
             Indexovat hromadně
@@ -112,13 +113,15 @@
         indexací</div>
 
     <button class="app-load-more-items-btn" mat-raised-button (click)="loadNextBatchOfItems()"
-        [disabled]="loading || !selectedModel || !stateFilter">
+        [disabled]="loading || !selectedModel || !stateFilter"
+        matTooltip="Pokračovat v procházení repozitáře a načítaní dalších objektů">
         Načíst další
     </button>
 
     <button class="app-schedule-indexation-processes-btn" mat-raised-button
-        (click)="scheduleIndexationsOfCurrentItems()"
-        [disabled]="loading || !selectedModel || !stateFilter || noCurrentItems()">
+        (click)="openIndexationsByMultiplePidsDialog()"
+        [disabled]="loading || !selectedModel || !stateFilter || noCurrentItems()"
+        matTooltip="Indexovat všechny aktuálně zobrazené objekty - každý ve vlastním procesu">
         <mat-icon>play_arrow</mat-icon>
         Indexovat hromadně
     </button>
