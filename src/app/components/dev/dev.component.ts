@@ -3,6 +3,10 @@ import { CollectionsService } from 'src/app/services/collections.service';
 import { Collection } from 'src/app/models/collection.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
+import { MatDialog } from '@angular/material';
+import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
+import { UIService } from 'src/app/services/ui.service';
+import { ScheduleChangeVisibilityByPidlDialogComponent } from 'src/app/dialogs/schedule-change-visibility-by-pidl-dialog/schedule-change-visibility-by-pidl-dialog.component';
 
 @Component({
   selector: 'app-dev',
@@ -10,8 +14,6 @@ import { ClientApiService } from 'src/app/services/client-api.service';
   styleUrls: ['./dev.component.scss']
 })
 export class DevComponent implements OnInit {
-
-  constructor(private collectionsService: CollectionsService, private adminApi: AdminApiService, private clientApi: ClientApiService) { }
 
   //Sbirky
 
@@ -58,6 +60,15 @@ export class DevComponent implements OnInit {
   pidForDeletion;
 
   pidForPrint;
+
+  constructor(
+    private collectionsService: CollectionsService,
+    private adminApi: AdminApiService,
+    private clientApi: ClientApiService,
+    private dialog: MatDialog,
+    private ui: UIService
+  ) { }
+
 
   ngOnInit() {
     this.loadData();
@@ -160,5 +171,16 @@ export class DevComponent implements OnInit {
       console.log(response);
     })
   }
+
+  openChangeVisibilityDialog(object: { pid: string } = null) {
+    const dialogRef = this.dialog.open(ScheduleChangeVisibilityByPidlDialogComponent, { data: object });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'scheduled') {
+        this.ui.showInfoSnackBar(`Změna viditelnosti byla naplánována`);
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat změnu viditelnosti")
+      }
+    });
+  };
 
 }

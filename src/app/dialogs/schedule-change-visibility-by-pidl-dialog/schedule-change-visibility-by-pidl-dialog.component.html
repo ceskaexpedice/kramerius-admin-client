@@ -1,0 +1,33 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
+
+    <h1 mat-dialog-title>Změna viditelnosti</h1>
+    <div class="info">Potvrzením naplánujete Proces, který nastaví viditelnost vybraného objektu, případně jeho potomků.
+    </div>
+
+    <mat-form-field class="input-pid">
+        <input [disabled]="inProgress || title" matInput type="text" id="inputPid" name="pid" [(ngModel)]="pid"
+            placeholder="PID" required autofocus>
+    </mat-form-field>
+
+    <mat-form-field class="input-visibility">
+        <mat-select placeholder="Výsledná viditelnost" ngModel name="visibility" required>
+            <mat-option *ngFor="let visibility of visibilityKeys; let i = index" [value]="visibility">
+                {{visibilityNames[i] }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-scope">
+        <mat-select placeholder="Změnit viditelnost pro" ngModel name="scope" required>
+            <mat-option *ngFor="let scope of scopeKeys; let i = index" [value]="scope">
+                {{scopeNames[i] }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button [disabled]="inProgress || !f.valid" color="primary" mat-raised-button type="submit"
+        color="warn">Naplánovat</button>
+    <button [disabled]="inProgress " mat-raised-button mat-dialog-close="cancel"
+        style="margin-left: 10px;">Zrušit</button>
+
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+
+</form>

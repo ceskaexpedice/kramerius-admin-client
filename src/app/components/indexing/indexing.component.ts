@@ -43,7 +43,6 @@ export class IndexingComponent implements OnInit {
   constructor(
     private adminApi: AdminApiService,
     private clientApi: ClientApiService,
-    private uiService: UIService,
     private appSettings: AppSettings,
     private dialog: MatDialog,
     private ui: UIService
@@ -79,7 +78,7 @@ export class IndexingComponent implements OnInit {
     const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent, { data: object });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'scheduled') {
-        this.uiService.showInfoSnackBar(`Indexace byla naplánována`);
+        this.ui.showInfoSnackBar(`Indexace byla naplánována`);
       } else if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
       }
@@ -91,7 +90,7 @@ export class IndexingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
       if (result === 'scheduled') {
-        this.uiService.showInfoSnackBar(`Indexace modelu ${modelTitle} byla naplánována`, 3000);
+        this.ui.showInfoSnackBar(`Indexace modelu ${modelTitle} byla naplánována`, 3000);
       } else if (result === 'error') {
         this.ui.showErrorSnackBar(`Nepodařilo se naplánovat indexaci modelu ${modelTitle}`)
       }
@@ -120,7 +119,7 @@ export class IndexingComponent implements OnInit {
           );
         })
         forkJoin(requests).subscribe(result => {
-          this.uiService.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`, 3000);
+          this.ui.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`, 3000);
           this.scheduledIndexationsCounter = 0;
           this.loading = false;
         }, error => {

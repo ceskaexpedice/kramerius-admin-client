@@ -39,6 +39,7 @@ import { ConfigComponent } from './components/config/config.component';
 import { ScheduleIndexationByPidDialogComponent } from './dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { ScheduleIndexationByModelDialogComponent } from './dialogs/schedule-indexation-by-model-dialog/schedule-indexation-by-model-dialog.component';
 import { ScheduleIndexationsByMultiplePidsDialogComponent } from './dialogs/schedule-indexations-by-multiple-pids-dialog/schedule-indexations-by-multiple-pids-dialog.component';
+import { ScheduleChangeVisibilityByPidlDialogComponent } from './dialogs/schedule-change-visibility-by-pidl-dialog/schedule-change-visibility-by-pidl-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,8 @@ import { ScheduleIndexationsByMultiplePidsDialogComponent } from './dialogs/sche
     ConfigComponent,
     ScheduleIndexationByPidDialogComponent,
     ScheduleIndexationByModelDialogComponent,
-    ScheduleIndexationsByMultiplePidsDialogComponent
+    ScheduleIndexationsByMultiplePidsDialogComponent,
+    ScheduleChangeVisibilityByPidlDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,8 @@ import { ScheduleIndexationsByMultiplePidsDialogComponent } from './dialogs/sche
     SimpleDialogComponent,
     ScheduleIndexationByPidDialogComponent,
     ScheduleIndexationByModelDialogComponent,
-    ScheduleIndexationsByMultiplePidsDialogComponent
+    ScheduleIndexationsByMultiplePidsDialogComponent,
+    ScheduleChangeVisibilityByPidlDialogComponent
   ],
   bootstrap: [AppComponent]
 })
