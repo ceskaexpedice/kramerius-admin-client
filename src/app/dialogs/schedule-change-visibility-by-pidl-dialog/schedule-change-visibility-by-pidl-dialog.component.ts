@@ -9,13 +9,13 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 })
 export class ScheduleChangeVisibilityByPidlDialogComponent implements OnInit {
 
-  scopeKeys = ['object', 'tree',];
-  scopeNames = ['Jen objekt', 'Objekt i s potomky',];
+  scopeKeys = ['TREE', 'OBJECT',];
+  scopeNames = ['Objekt i s potomky', 'Jen objekt'];
 
-  visibilityKeys = ['public', 'private',];
-  visibilityNames = ['Veřejné', 'Neveřejné',];
+  policyKeys = ['PUBLIC', 'PRIVATE',];
+  policyNames = ['Veřejné', 'Neveřejné',];
 
-  selectedVisibility = this.visibilityKeys[0];
+  selectedPolicy = this.policyKeys[0];
 
   selectedScope = this.scopeKeys[0];
   inProgress = false;
@@ -33,25 +33,21 @@ export class ScheduleChangeVisibilityByPidlDialogComponent implements OnInit {
 
   schedule(formData) {
     console.log(formData)
-    console.log("TODO: actually schedule Proc3ss")
-    this.dialogRef.close('scheduled');
-
-    // const params = {
-    //   defid: 'new_indexer_index_object',
-    //   params: {
-    //     type: formData.type,
-    //     pid: this.pid,
-    //     title: this.title,
-    //     ignoreInconsistentObjects: formData.ignore_inconsistent_objects
-    //   }
-    // }
-    // this.inProgress = true;
-    // //console.log(params);
-    // this.adminApi.scheduleProcess(params).subscribe(response => {
-    //   this.dialogRef.close('scheduled');
-    // }, error => {
-    //   this.dialogRef.close('error');
-    // });
+    const params = {
+      defid: 'set_policy',
+      params: {
+        scope: formData.scope,
+        policy: formData.policy,
+        pid: this.pid,
+      }
+    }
+    this.inProgress = true;
+    //console.log(params);
+    this.adminApi.scheduleProcess(params).subscribe(response => {
+      this.dialogRef.close('scheduled');
+    }, error => {
+      this.dialogRef.close('error');
+    });
   }
 
 }

@@ -88,7 +88,7 @@ export class ProcessesComponent implements OnInit {
   scheduleTestProcess() {
     this.schedulingProcesses = true;
     const params = {
-      defid: 'new_process-api-test',
+      defid: 'new_process_api_test',
       params: {
         duration: this.selectedTestProcessDuration,
         processesInBatch: this.selectedTestProcessProcessesInBatch,

@@ -9,10 +9,10 @@
             placeholder="PID" required autofocus>
     </mat-form-field>
 
-    <mat-form-field class="input-visibility">
-        <mat-select placeholder="Výsledná viditelnost" ngModel name="visibility" required>
-            <mat-option *ngFor="let visibility of visibilityKeys; let i = index" [value]="visibility">
-                {{visibilityNames[i] }}</mat-option>
+    <mat-form-field class="input-policy">
+        <mat-select placeholder="Výsledná viditelnost" ngModel name="policy" required>
+            <mat-option *ngFor="let policy of policyKeys; let i = index" [value]="policy">
+                {{policyNames[i] }}</mat-option>
         </mat-select>
     </mat-form-field>
 
