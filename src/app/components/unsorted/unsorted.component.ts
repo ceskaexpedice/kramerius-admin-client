@@ -1,0 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { ScheduleChangeVisibilityByPidlDialogComponent } from 'src/app/dialogs/schedule-change-visibility-by-pidl-dialog/schedule-change-visibility-by-pidl-dialog.component';
+import { AdminApiService } from 'src/app/services/admin-api.service';
+import { ClientApiService } from 'src/app/services/client-api.service';
+import { CollectionsService } from 'src/app/services/collections.service';
+import { UIService } from 'src/app/services/ui.service';
+
+@Component({
+  selector: 'app-unsorted',
+  templateUrl: './unsorted.component.html',
+  styleUrls: ['./unsorted.component.scss']
+})
+export class UnsortedComponent implements OnInit {
+
+  constructor(
+    private collectionsService: CollectionsService,
+    private adminApi: AdminApiService,
+    private clientApi: ClientApiService,
+    private dialog: MatDialog,
+    private ui: UIService
+  ) { }
+
+  ngOnInit() {
+  }
+
+  openChangePolicyDialog(object: { pid: string } = null) {
+    const dialogRef = this.dialog.open(ScheduleChangeVisibilityByPidlDialogComponent, { data: object }); //TODO: taky prejmenovat
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'scheduled') {
+        this.ui.showInfoSnackBar(`Změna viditelnosti byla naplánována`);
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat změnu viditelnosti")
+      }
+    });
+  };
+
+}

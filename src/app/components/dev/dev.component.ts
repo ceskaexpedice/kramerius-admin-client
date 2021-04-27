@@ -179,15 +179,4 @@ export class DevComponent implements OnInit {
     })
   }
 
-  openChangeVisibilityDialog(object: { pid: string } = null) {
-    const dialogRef = this.dialog.open(ScheduleChangeVisibilityByPidlDialogComponent, { data: object });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'scheduled') {
-        this.ui.showInfoSnackBar(`Změna viditelnosti byla naplánována`);
-      } else if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat změnu viditelnosti")
-      }
-    });
-  };
-
 }
