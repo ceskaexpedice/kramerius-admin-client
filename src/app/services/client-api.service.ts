@@ -64,6 +64,15 @@ export class ClientApiService {
     });
   }
 
+  getObjectByPidFromIndex(pid: string) {
+    return this.search({
+      q: 'pid:' + pid.replace(':', '\\:'),
+    })
+      .pipe(
+        map(items => items[0])
+      );
+  }
+
   getObjectsByModelFromIndex(model: string) {
     return this.search({
       q: `model:${model}`,

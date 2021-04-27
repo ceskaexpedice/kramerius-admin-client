@@ -59,7 +59,8 @@ export class DevComponent implements OnInit {
   //deletion
   pidForDeletion;
 
-  pidForPrint;
+  pidForPrintFoxml;
+  pidForPrintSolr;
 
   constructor(
     private collectionsService: CollectionsService,
@@ -147,8 +148,14 @@ export class DevComponent implements OnInit {
   }
 
   printFoxmlOfObjectFromRepo() {
-    const query = `/items/${this.pidForPrint}/foxml`
+    const query = `/items/${this.pidForPrintFoxml}/foxml`
     this.adminApi.getGeneralQuery(query).subscribe(response => {
+      console.log(response);
+    })
+  }
+
+  printSolrRecord() {
+    this.clientApi.getObjectByPidFromIndex(this.pidForPrintSolr).subscribe(response => {
       console.log(response);
     })
   }

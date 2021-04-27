@@ -36,13 +36,22 @@
 
     </ng-container> -->
 
-    <h2>Print foxml</h2>
+    <h2>Výpis foxml (do konzole)</h2>
     <div>
         <mat-form-field class="app-schedule-indexation-process-pid">
-            <input matInput [(ngModel)]="pidForPrint" placeholder="PID">
+            <input matInput [(ngModel)]="pidForPrintFoxml" placeholder="PID">
         </mat-form-field>
         <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="printFoxmlOfObjectFromRepo()"
-            [disabled]="!pidForPrint" color="primary">Vytisknout foxml</button>
+            [disabled]="!pidForPrintFoxml" color="primary">Zalogovat foxml</button>
+    </div>
+
+    <h2>Výpis z vyhledávacího indexu (do konzole)</h2>
+    <div>
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="pidForPrintSolr" placeholder="PID">
+        </mat-form-field>
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="printSolrRecord()"
+            [disabled]="!pidForPrintSolr" color="primary">Zalogovat solr záznam</button>
     </div>
 
     <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="logDataFromAdminApi()"
