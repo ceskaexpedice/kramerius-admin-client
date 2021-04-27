@@ -4,9 +4,7 @@ import { Collection } from 'src/app/models/collection.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { MatDialog } from '@angular/material';
-import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { UIService } from 'src/app/services/ui.service';
-import { ScheduleChangeVisibilityByPidlDialogComponent } from 'src/app/dialogs/schedule-change-visibility-by-pidl-dialog/schedule-change-visibility-by-pidl-dialog.component';
 
 @Component({
   selector: 'app-dev',

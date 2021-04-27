@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ScheduleChangeVisibilityByPidlDialogComponent } from 'src/app/dialogs/schedule-change-visibility-by-pidl-dialog/schedule-change-visibility-by-pidl-dialog.component';
+import { ScheduleChangePolicyByPidDialogComponent as ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
@@ -25,7 +25,7 @@ export class UnsortedComponent implements OnInit {
   }
 
   openChangePolicyDialog(object: { pid: string } = null) {
-    const dialogRef = this.dialog.open(ScheduleChangeVisibilityByPidlDialogComponent, { data: object }); //TODO: taky prejmenovat
+    const dialogRef = this.dialog.open(ScheduleChangePolicyByPidDialogComponent, { data: object });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'scheduled') {
         this.ui.showInfoSnackBar(`Změna viditelnosti byla naplánována`);

@@ -3,11 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  selector: 'app-schedule-change-visibility-by-pidl-dialog',
-  templateUrl: './schedule-change-visibility-by-pidl-dialog.component.html',
-  styleUrls: ['./schedule-change-visibility-by-pidl-dialog.component.scss']
+  selector: 'app-schedule-change-policy-by-pid-dialog',
+  templateUrl: './schedule-change-policy-by-pid-dialog.component.html',
+  styleUrls: ['./schedule-change-policy-by-pid-dialog.component.scss']
 })
-export class ScheduleChangeVisibilityByPidlDialogComponent implements OnInit {
+export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
 
   scopeKeys = ['TREE', 'OBJECT',];
   scopeNames = ['Objekt i s potomky', 'Jen objekt'];
@@ -22,7 +22,7 @@ export class ScheduleChangeVisibilityByPidlDialogComponent implements OnInit {
 
   pid = undefined;
 
-  constructor(public dialogRef: MatDialogRef<ScheduleChangeVisibilityByPidlDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
+  constructor(public dialogRef: MatDialogRef<ScheduleChangePolicyByPidDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
       this.pid = data.pid;
     }

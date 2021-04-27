@@ -39,7 +39,7 @@ import { ConfigComponent } from './components/config/config.component';
 import { ScheduleIndexationByPidDialogComponent } from './dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { ScheduleIndexationByModelDialogComponent } from './dialogs/schedule-indexation-by-model-dialog/schedule-indexation-by-model-dialog.component';
 import { ScheduleIndexationsByMultiplePidsDialogComponent } from './dialogs/schedule-indexations-by-multiple-pids-dialog/schedule-indexations-by-multiple-pids-dialog.component';
-import { ScheduleChangeVisibilityByPidlDialogComponent } from './dialogs/schedule-change-visibility-by-pidl-dialog/schedule-change-visibility-by-pidl-dialog.component';
+import { ScheduleChangePolicyByPidDialogComponent } from './dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { UnsortedComponent } from './components/unsorted/unsorted.component';
 @NgModule({
   declarations: [
@@ -64,7 +64,7 @@ import { UnsortedComponent } from './components/unsorted/unsorted.component';
     ScheduleIndexationByPidDialogComponent,
     ScheduleIndexationByModelDialogComponent,
     ScheduleIndexationsByMultiplePidsDialogComponent,
-    ScheduleChangeVisibilityByPidlDialogComponent,
+    ScheduleChangePolicyByPidDialogComponent,
     UnsortedComponent
   ],
   imports: [
@@ -103,7 +103,7 @@ import { UnsortedComponent } from './components/unsorted/unsorted.component';
     ScheduleIndexationByPidDialogComponent,
     ScheduleIndexationByModelDialogComponent,
     ScheduleIndexationsByMultiplePidsDialogComponent,
-    ScheduleChangeVisibilityByPidlDialogComponent
+    ScheduleChangePolicyByPidDialogComponent
   ],
   bootstrap: [AppComponent]
 })
