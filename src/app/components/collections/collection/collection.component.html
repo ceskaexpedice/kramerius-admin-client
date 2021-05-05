@@ -1,16 +1,10 @@
 <div class="breadcrumb-nav">
   <div class="app-actions" *ngIf="collection">
 
-
-
-
-
-    <button matTooltip="Přidat do sbírky" class="action-btn" mat-icon-button [matMenuTriggerFor]="collectionsMenu"
-      (click)="loadCollections()">
+    <button matTooltip="Přidat tuto sbírku do jiné sbírky" class="action-btn" mat-icon-button
+      [matMenuTriggerFor]="collectionsMenu" (click)="loadCollections()">
       <mat-icon>add</mat-icon>
     </button>
-
-
 
     <a class="action-btn" mat-icon-button color="default" matTooltip="Upravit sbírku"
       [routerLink]="['/collections', collection.id, 'edit']">
@@ -19,9 +13,6 @@
     <a class="action-btn" mat-icon-button color="default" matTooltip="Odstranit sbírku" (click)="onDelete()">
       <mat-icon>delete</mat-icon>
     </a>
-
-
-
 
   </div>
   <div class="app-nav">

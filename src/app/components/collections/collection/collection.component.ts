@@ -85,7 +85,8 @@ export class CollectionComponent implements OnInit {
   addThisToCollection(collection_uuid: string) {
     //console.log("collection.component: adding item " + this.collection.id + " to collection " + collection_uuid)
     this.collectionsService.addItemToCollection(collection_uuid, this.collection.id).subscribe((res) => {
-      console.log('ressss', res);
+      console.log(res);
+      //TODO: potvrzovaci dialog
     });
 
   }
@@ -109,9 +110,10 @@ export class CollectionComponent implements OnInit {
 
   loadCollections() {
     this.clientApi.getAvailableCollections(this.collection.id).subscribe((collections: any[]) => {
-      this.availableCollections = collections;
+      this.availableCollections = collections.sort((a, b) => {
+        return a['title.search'].localeCompare(b['title.search'])
+      });
     });
   }
-  
 
 }

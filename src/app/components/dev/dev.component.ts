@@ -177,4 +177,10 @@ export class DevComponent implements OnInit {
     })
   }
 
+  testAction() {
+    // const itemPid = 'uuid:fcf35088-0ea2-4f0d-a2dc-85cef425c91e';
+    // const collectionPid = 'uuid:b5eb8404-30ea-4d97-9385-42ed020144ea';
+    // this.addToCollection(itemPid, collectionPid);
+  }
+
 }
