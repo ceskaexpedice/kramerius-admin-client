@@ -7,11 +7,11 @@ export class AppSettings {
   version = "1.15" + (this.devMode ? "-dev" : "");
 
   //kramerius.dev.digitallibrary.cz
-  //digitalLibraryBaseUrl = 'https://dev.digitallibrary.cz/d/';
+  //digitalLibraryBaseUrl = 'https://dev.digitallibrary.cz/d';
   //coreBaseUrl = 'https://kramerius.dev.digitallibrary.cz/search/'
 
   //k7-test.mzk.cz
-  //digitalLibraryBaseUrl = 'https://k7-test.mzk.cz/';
+  //digitalLibraryBaseUrl = 'https://k7-test.mzk.cz/mzkk7';
   //coreBaseUrl = 'https://k7-test.mzk.cz/search/'
 
   //localhost

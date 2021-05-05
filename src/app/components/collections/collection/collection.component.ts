@@ -82,13 +82,37 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  addThisToCollection(collection_uuid: string) {
-    //console.log("collection.component: adding item " + this.collection.id + " to collection " + collection_uuid)
-    this.collectionsService.addItemToCollection(collection_uuid, this.collection.id).subscribe((res) => {
-      console.log(res);
-      //TODO: potvrzovaci dialog
+  addThisToCollection(collection: { pid: string, 'title.search': string }) {
+    console.log(collection);
+    if (!this.collection) {
+      return;
+    }
+    const data: SimpleDialogData = {
+      title: "Smazání sbírky",
+      message: `Opravdu chcete tuto sbírku přidat do sbírky "${collection['title.search']}"?`,
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'default'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.collectionsService.addItemToCollection(collection.pid, this.collection.id).subscribe((res) => {
+          console.log(res);
+          this.ui.showInfoSnackBar(`Sbírka byla přidána do sbírky "${collection['title.search']}"`)
+        }, error => {
+          console.log(error);
+          this.ui.showErrorSnackBar("Sbírku se nepodařilo přidat");
+        });
+      }
     });
-
   }
 
   onRemoveItemFromCollection(itemPid: string) {

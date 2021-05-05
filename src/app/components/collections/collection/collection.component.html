@@ -72,22 +72,16 @@
     </div>
   </div>
 
-
-
-
 </div>
 
 <mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
 </mat-spinner>
 
-
-
-
 <mat-menu #collectionsMenu="matMenu" xPosition="before" class="app-collections-menu">
   <ng-template matMenuContent ngFor>
     <div class="app-collections">
       <div *ngFor="let collection of availableCollections" class="app-collection"
-        (click)="addThisToCollection(collection['pid'])">
+        (click)="addThisToCollection(collection)">
         {{ collection['title.search'] }}
       </div>
     </div>
