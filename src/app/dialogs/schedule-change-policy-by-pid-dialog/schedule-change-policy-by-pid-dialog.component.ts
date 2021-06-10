@@ -29,7 +29,7 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ScheduleChangePolicyByPidDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
-      this.pids = data.pid;
+      this.pids = data.pids;
     }
   }
 
