@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
@@ -9,6 +9,8 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
   styleUrls: ['./schedule-change-policy-by-pid-dialog.component.scss']
 })
 export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
+
+  @ViewChild('fileWithPids', { static: true }) fileWithPids: ElementRef;
 
   scopeKeys = ['TREE', 'OBJECT',];
   scopeNames = ['Objekt i s potomky', 'Jen objekt'];
@@ -21,16 +23,14 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
   selectedScope = this.scopeKeys[0];
   inProgress = false;
 
-  pids = undefined;
+  pids = "";
 
   pidsCounter = 0;
   scheduledCounter = 0;
   progressBarMode = 'indeterminate';
 
   constructor(public dialogRef: MatDialogRef<ScheduleChangePolicyByPidDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
-    if (data) {
-      this.pids = data.pids;
-    }
+
   }
 
   ngOnInit() {
@@ -80,4 +80,21 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
   getProgress() {
     return Math.floor(this.scheduledCounter / this.pidsCounter * 100);
   }
+
+  onSelectFile(event: any): void {
+    console.log('fileList', event);
+    let fileReader: FileReader = new FileReader();
+    fileReader.onload = (e) => {
+      this.pids = String(fileReader.result);
+    }
+    fileReader.readAsText(event.target.files[0]);
+  }
+
+  onPidsFromFile() {
+    let el: HTMLElement = this.fileWithPids.nativeElement;
+    el.click();
+}
+
+
+
 }
