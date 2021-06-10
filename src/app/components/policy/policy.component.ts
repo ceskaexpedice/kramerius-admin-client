@@ -8,11 +8,11 @@ import { CollectionsService } from 'src/app/services/collections.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  selector: 'app-unsorted',
-  templateUrl: './unsorted.component.html',
-  styleUrls: ['./unsorted.component.scss']
+  selector: 'app-policy',
+  templateUrl: './policy.component.html',
+  styleUrls: ['./policy.component.scss']
 })
-export class UnsortedComponent implements OnInit {
+export class PolicyComponent implements OnInit {
 
   @ViewChild('fileWithPids', undefined) fileWithPids: ElementRef;
   pidsFromFile = undefined;
