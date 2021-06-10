@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'collections/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
   { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },
-  { path: 'unsorted', component: UnsortedComponent, canActivate: [AuthGuard] },
+  { path: 'policy', component: UnsortedComponent, canActivate: [AuthGuard] },
   { path: 'config', component: ConfigComponent, canActivate: [AuthGuard] },
 ];
 
