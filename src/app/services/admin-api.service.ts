@@ -114,8 +114,8 @@ export class AdminApiService {
 
   scheduleProcess(definition, onScheduled = undefined): Observable<any> {
     return this.post('/processes', definition).pipe(
+      //delay(Math.floor(Math.random() * 5000)),
       tap(response => { if (onScheduled) onScheduled(response); }),
-      //delay(500)
     )
   }
 

@@ -24,13 +24,16 @@ export class UnsortedComponent implements OnInit {
   ngOnInit() {
   }
 
-  openChangePolicyDialog(object: { pid: string } = null) {
+  openChangePolicyDialog(object: { pids: string } = null) {
     const dialogRef = this.dialog.open(ScheduleChangePolicyByPidDialogComponent, { data: object });
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'scheduled') {
-        this.ui.showInfoSnackBar(`Změna viditelnosti byla naplánována`);
-      } else if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat změnu viditelnosti")
+      console.log(result);
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat změny viditelnosti")
+      } else if (result === 'cancel') {
+        //nothing
+      } else {
+        this.ui.showInfoSnackBar(`Byly naplánovány změny viditelnosti pro ${result} objektů`);
       }
     });
   };

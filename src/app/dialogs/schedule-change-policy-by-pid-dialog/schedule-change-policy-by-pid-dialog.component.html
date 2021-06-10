@@ -1,23 +1,24 @@
 <form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
 
     <h1 mat-dialog-title>Změna viditelnosti</h1>
-    <div class="info">Potvrzením naplánujete Proces, který nastaví viditelnost vybraného objektu, případně jeho potomků.
+    <div class="info">Pro každý vložený PID bude naplánován proces <i>Změna viditelnosti</i> pro objekt, případně i jeho
+        potomky.
     </div>
 
-    <mat-form-field class="input-pid">
-        <input [disabled]="inProgress" matInput type="text" id="inputPid" name="pid" [(ngModel)]="pid"
-            placeholder="PID" required autofocus>
+    <mat-form-field class="input-pids">
+        <textarea [disabled]="inProgress" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids"
+            placeholder="PIDy" required autofocus></textarea>
     </mat-form-field>
 
     <mat-form-field class="input-policy">
-        <mat-select placeholder="Výsledná viditelnost" ngModel name="policy" required>
+        <mat-select [disabled]="inProgress" placeholder="Výsledná viditelnost" ngModel name="policy" required>
             <mat-option *ngFor="let policy of policyKeys; let i = index" [value]="policy">
                 {{policyNames[i] }}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field class="input-scope">
-        <mat-select placeholder="Změnit viditelnost pro" ngModel name="scope" required>
+        <mat-select [disabled]="inProgress" placeholder="Změnit viditelnost pro" ngModel name="scope" required>
             <mat-option *ngFor="let scope of scopeKeys; let i = index" [value]="scope">
                 {{scopeNames[i] }}</mat-option>
         </mat-select>
@@ -28,6 +29,7 @@
     <button [disabled]="inProgress " mat-raised-button mat-dialog-close="cancel"
         style="margin-left: 10px;">Zrušit</button>
 
-    <mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()">
+    </mat-progress-bar>
 
 </form>
