@@ -82,7 +82,7 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
   }
 
   onSelectFile(event: any): void {
-    console.log('fileList', event);
+    //console.log('fileList', event);
     let fileReader: FileReader = new FileReader();
     fileReader.onload = (e) => {
       this.pids = String(fileReader.result);
@@ -93,8 +93,6 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
   onPidsFromFile() {
     let el: HTMLElement = this.fileWithPids.nativeElement;
     el.click();
-}
-
-
+  }
 
 }

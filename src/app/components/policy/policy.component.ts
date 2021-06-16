@@ -24,7 +24,7 @@ export class PolicyComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat změny viditelnosti")
-      } else if (result === 'cancel') {
+      } else if (result === 'cancel' || result === undefined) {
         //nothing
       } else {
         this.ui.showInfoSnackBar(`Byly naplánovány změny viditelnosti pro ${result} objektů`);
