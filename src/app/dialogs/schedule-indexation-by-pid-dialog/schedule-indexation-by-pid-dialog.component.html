@@ -6,10 +6,15 @@
         i
         jeho potomky (podle typu indexace).</div>
 
-    <mat-form-field class="input-pid">
-        <input [disabled]="inProgress || title" matInput type="text" id="inputPid" name="pid" [(ngModel)]="pid"
-            placeholder="PID" required autofocus>
+    <mat-icon (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-pids-from-file">file_download
+    </mat-icon>
+
+    <mat-form-field class="input-pids">
+        <textarea [disabled]="inProgress || title" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids"
+            placeholder="PIDy" required autofocus rows="{{pidsTextareaRows}}"></textarea>
     </mat-form-field>
+
+    <input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 
     <mat-form-field class="input-title" *ngIf="title">
         <input [disabled]="inProgress || title" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title"
@@ -31,12 +36,12 @@
         Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <i>Chyba</i>.
     </div>
 
-
     <button [disabled]="inProgress || !f.valid" color="primary" mat-raised-button type="submit"
         color="warn">Naplánovat</button>
     <button [disabled]="inProgress " mat-raised-button mat-dialog-close="cancel"
         style="margin-left: 10px;">Zrušit</button>
 
-    <mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()">
+    </mat-progress-bar>
 
 </form>

@@ -8,9 +8,9 @@
     opacity: 70%;
 }
 
-.input-pid {
+.input-pids {
     display: block;
-    width: 350px;
+    width: 325px;
 }
 
 .input-title {
@@ -40,4 +40,14 @@
 .progress-bar {
     margin-top: 22px;
     margin-bottom: -6px;
+}
+
+.app-pids-from-file {
+    color: #999;
+    cursor: pointer;
+    margin-top: 10px;
+    float: right;
+    &:hover {
+        color: #111;
+    }
 }

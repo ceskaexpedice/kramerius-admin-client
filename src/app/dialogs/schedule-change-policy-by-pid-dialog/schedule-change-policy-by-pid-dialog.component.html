@@ -5,15 +5,15 @@
         potomky.
     </div>
 
-    <mat-icon (click)="onPidsFromFile()" matTooltip="Načíst pidy ze souboru" class="app-pids-from-file" >file_download</mat-icon>
+    <mat-icon (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-pids-from-file">file_download
+    </mat-icon>
 
     <mat-form-field class="input-pids">
         <textarea [disabled]="inProgress" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids"
             placeholder="PIDy" required autofocus rows="4"></textarea>
     </mat-form-field>
 
-    <input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)"
-    accept=".txt" />
+    <input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 
     <mat-form-field class="input-policy">
         <mat-select [disabled]="inProgress" placeholder="Výsledná viditelnost" ngModel name="policy" required>

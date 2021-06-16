@@ -83,6 +83,20 @@ export class IndexingComponent implements OnInit {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
       }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Indexace")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else if (result == 1) {
+        this.ui.showInfoSnackBar(`Proces Indexace byl naplánován`);
+      } else if (result == 2 || result == 3 || result == 4) {
+        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Indexace`);
+      } else {
+        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Indexace`);
+      }
+    });
   };
 
   openIndexationByModelDialog() {

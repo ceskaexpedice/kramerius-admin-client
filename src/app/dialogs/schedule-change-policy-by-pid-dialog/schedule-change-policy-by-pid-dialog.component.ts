@@ -69,11 +69,13 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
     });
   }
 
-  //uuid:123 uuid:456,uuid:789;uuid:012, uuid:345; uuid:678    uuid:901
-  //uuid:123 uuid:456,uuid:789;uuid:012, uuid:345; uuid:678    uuid:901 xxx
   splitPids(pids: string) {
+    //uuid:123 uuid:456,uuid:789;uuid:012, uuid:345; uuid:678    uuid:901
+    //uuid:123 uuid:456,uuid:789;uuid:012, uuid:345; uuid:678    uuid:901 xxx
     if (pids) {
-      return pids.split(/[\s,;]+/);
+      return pids
+        .split(/[\s,;]+/) //split by white spaces, ',', ';'
+        .filter(n => n); //remove empty strings
     }
   }
 
