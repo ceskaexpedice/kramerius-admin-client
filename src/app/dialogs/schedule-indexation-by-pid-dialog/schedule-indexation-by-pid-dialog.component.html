@@ -1,8 +1,10 @@
 <form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
 
     <h1 mat-dialog-title>Indexace objektu</h1>
-    <div class="info">Potvrzením naplánujete Proces, který (re)indexuje vybraný objekt, případně jeho potomky, podle
-        typu indexace.</div>
+
+    <div class="info">Pro každý vložený PID bude naplánován proces <i>Indexace</i>, který (re)indexuje objekt, případně
+        i
+        jeho potomky (podle typu indexace).</div>
 
     <mat-form-field class="input-pid">
         <input [disabled]="inProgress || title" matInput type="text" id="inputPid" name="pid" [(ngModel)]="pid"
