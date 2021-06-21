@@ -54,6 +54,18 @@
             [disabled]="!pidForPrintSolr" color="primary">Zalogovat solr záznam</button>
     </div>
 
+    <h2>Nastavení Thumbnailu ze stránky</h2>
+    <div>
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="changeThumbnailTrgPid" placeholder="PID (cíle)">
+        </mat-form-field>
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="changeThumbnailSrcPid" placeholder="PID (zdrojové stránky)">
+        </mat-form-field>
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="changeThubnail()"
+            [disabled]="!changeThumbnailSrcPid || !changeThumbnailTrgPid" color="primary">Nastavit thumbnail</button>
+    </div>
+
     <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="logDataFromAdminApi()"
         color="primary">Log data from admin api</button>
     <br>

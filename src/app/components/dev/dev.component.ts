@@ -53,6 +53,8 @@ export class DevComponent implements OnInit {
   pids_of_collections_having_item;
   pids_of_collections_missing_item;
 
+  changeThumbnailSrcPid;
+  changeThumbnailTrgPid;
 
   //deletion
   pidForDeletion;
@@ -178,9 +180,27 @@ export class DevComponent implements OnInit {
   }
 
   testAction() {
-    // const itemPid = 'uuid:fcf35088-0ea2-4f0d-a2dc-85cef425c91e';
-    // const collectionPid = 'uuid:b5eb8404-30ea-4d97-9385-42ed020144ea';
-    // this.addToCollection(itemPid, collectionPid);
+    console.log('TODO: test');
+  }
+
+  changeThubnail() {
+    //const monPid = "uuid:1ad9c320-8be5-11e7-927c-001018b5eb5c";
+    //const pagePid = "uuid:d4978b50-8dc3-11e7-aac2-5ef3fc9bb22f"; //control group E, URL
+    //const pagePid = "uuid:4a7c2e50-af36-11dd-9643-000d606f5dc6" //control group M
+    //TODO: control group R
+    //lidovky
+    //const pagePid = "uuid:95d42670-6e84-11dd-a1d2-000d606f5dc6"//1. issue rocnik 50
+    //const pagePid = "uuid:8247fcc0-6a1b-11dd-b8b3-000d606f5dc6";//1. issue rocnik 51
+    //const monPid = "uuid:bdc405b0-e5f9-11dc-bfb2-000d606f5dc6";
+    //drobnustky
+    //const pagePid = "uuid:4a79bd50-af36-11dd-a60c-000d606f5dc6"
+    //const monPid = "uuid:0eaa6730-9068-11dd-97de-000d606f5dc6";
+
+    this.adminApi.setThumbFromPage(this.changeThumbnailTrgPid, this.changeThumbnailSrcPid).subscribe(result => {
+      console.log(result);
+      this.changeThumbnailSrcPid = undefined;
+      this.changeThumbnailTrgPid = undefined;
+    });
   }
 
 }

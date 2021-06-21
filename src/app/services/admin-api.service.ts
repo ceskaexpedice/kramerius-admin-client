@@ -198,6 +198,11 @@ export class AdminApiService {
     )
   }
 
+  setThumbFromPage(targetPid: string, sourcePid: string): Observable<any> {
+    return this.put(`/items/${targetPid}/streams/IMG_THUMB?srcPid=${sourcePid}`, undefined).pipe(
+      delay(300),
+    )
+  }
 }
 
 export interface ProcessesParams {
