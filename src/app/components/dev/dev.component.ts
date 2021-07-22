@@ -5,6 +5,8 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { MatDialog } from '@angular/material';
 import { UIService } from 'src/app/services/ui.service';
+import { HttpHeaders } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-dev',
@@ -61,6 +63,9 @@ export class DevComponent implements OnInit {
 
   pidForPrintFoxml;
   pidForPrintSolr;
+
+  setModsPid;
+  setModsMods;
 
   constructor(
     private collectionsService: CollectionsService,
@@ -181,6 +186,13 @@ export class DevComponent implements OnInit {
 
   testAction() {
     console.log('TODO: test');
+
+    // const pid = "uuid:d4978b50-8dc3-11e7-aac2-5ef3fc9bb22f";
+    // const query = `/items/${pid}/streams/BIBLIO_MODS`
+    // //const query = `/items/${pid}/streams/DC`
+    // this.adminApi.getGeneralQuery(query).subscribe(response => {
+    //   console.log(response);
+    // })
   }
 
   changeThubnail() {
@@ -200,6 +212,14 @@ export class DevComponent implements OnInit {
       console.log(result);
       this.changeThumbnailSrcPid = undefined;
       this.changeThumbnailTrgPid = undefined;
+    });
+  }
+
+  setMods() {
+    this.adminApi.setMods(this.setModsPid, this.setModsMods).subscribe(result => {
+      console.log(result);
+      this.setModsPid = undefined;
+      this.setModsMods = undefined;
     });
   }
 

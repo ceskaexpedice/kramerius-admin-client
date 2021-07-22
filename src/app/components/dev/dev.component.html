@@ -4,7 +4,7 @@
     <p>Tato komponenta slouží pro testování, typicky nové funkcionality na backendu. Protože tady máme funkční
         autentizaci, což se složitěji simuluje.</p>
 
-    <h2>Úklid</h2>
+    <h3>Úklid</h3>
     <div>
         <!-- mazani objektu z repozitare -->
         <mat-form-field class="app-schedule-indexation-process-pid">
@@ -36,7 +36,7 @@
 
     </ng-container> -->
 
-    <h2>Výpis foxml (do konzole)</h2>
+    <h3>Výpis foxml (do konzole)</h3>
     <div>
         <mat-form-field class="app-schedule-indexation-process-pid">
             <input matInput [(ngModel)]="pidForPrintFoxml" placeholder="PID">
@@ -45,7 +45,7 @@
             [disabled]="!pidForPrintFoxml" color="primary">Zalogovat foxml</button>
     </div>
 
-    <h2>Výpis z vyhledávacího indexu (do konzole)</h2>
+    <h3>Výpis z vyhledávacího indexu (do konzole)</h3>
     <div>
         <mat-form-field class="app-schedule-indexation-process-pid">
             <input matInput [(ngModel)]="pidForPrintSolr" placeholder="PID">
@@ -54,7 +54,7 @@
             [disabled]="!pidForPrintSolr" color="primary">Zalogovat solr záznam</button>
     </div>
 
-    <h2>Nastavení Thumbnailu ze stránky</h2>
+    <h3>Nastavení Thumbnailu ze stránky</h3>
     <div>
         <mat-form-field class="app-schedule-indexation-process-pid">
             <input matInput [(ngModel)]="changeThumbnailTrgPid" placeholder="PID (cíle)">
@@ -65,6 +65,21 @@
         <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="changeThubnail()"
             [disabled]="!changeThumbnailSrcPid || !changeThumbnailTrgPid" color="primary">Nastavit thumbnail</button>
     </div>
+
+    <h3>Nastavení MODS</h3>
+    <div>
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="setModsPid" placeholder="PID">
+        </mat-form-field>
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <mat-label>MODS záznam objektu</mat-label>
+            <textarea matInput [(ngModel)]="setModsMods" type="text" rows='10'></textarea>
+        </mat-form-field>
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="setMods()"
+            [disabled]="!setModsPid || !setModsMods" color="primary">Nastavit MODS</button>
+    </div>
+
+    <br>
 
     <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="logDataFromAdminApi()"
         color="primary">Log data from admin api</button>

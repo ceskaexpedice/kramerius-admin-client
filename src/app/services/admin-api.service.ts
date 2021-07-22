@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
 import { delay, map, tap } from 'rxjs/operators';
@@ -51,7 +51,9 @@ export class AdminApiService {
   }
 
   getGeneralQuery(path: string): Observable<any> {
-    return this.get(path);
+    const options = { headers: new HttpHeaders({ 'Accept': '*' }) };
+    return this.http.get(this.baseUrl + path, options);
+    //return this.get(path);
   }
 
   getObjectsByModel(model: string, order = 'ASC', offset: number, limit: number): Observable<any> {
@@ -203,8 +205,14 @@ export class AdminApiService {
       delay(300),
     )
   }
-}
 
+  setMods(pid: string, mods: string): Observable<any> {
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/xml' }) };
+    return this.put(`/items/${pid}/streams/BIBLIO_MODS`, mods, options).pipe(
+      delay(300),
+    )
+  }
+}
 export interface ProcessesParams {
   limit: number;
   offset: number;
