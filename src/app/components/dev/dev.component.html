@@ -79,6 +79,15 @@
             [disabled]="!setModsPid || !setModsMods" color="primary">Nastavit MODS</button>
     </div>
 
+    <h3>Export do PDF</h3>
+    <div>
+        <mat-form-field class="app-schedule-indexation-process-pid">
+            <input matInput [(ngModel)]="pidForPdfExport" placeholder="PID">
+        </mat-form-field>
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="exportPDF()"
+            [disabled]="!pidForPdfExport" color="primary">Exportovat PDF</button>
+    </div>
+
     <br>
 
     <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="logDataFromAdminApi()"

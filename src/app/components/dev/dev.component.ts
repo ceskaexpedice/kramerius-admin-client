@@ -64,8 +64,12 @@ export class DevComponent implements OnInit {
   pidForPrintFoxml;
   pidForPrintSolr;
 
+  //set MODS
   setModsPid;
   setModsMods;
+
+  //export PDF
+  pidForPdfExport;
 
   constructor(
     private collectionsService: CollectionsService,
@@ -221,6 +225,10 @@ export class DevComponent implements OnInit {
       this.setModsPid = undefined;
       this.setModsMods = undefined;
     });
+  }
+
+  exportPDF() {
+    console.log('TODO: exportPDF');
   }
 
 }
