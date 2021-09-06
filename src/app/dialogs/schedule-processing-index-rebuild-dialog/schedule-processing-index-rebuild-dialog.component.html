@@ -1,0 +1,36 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="schedule()">
+
+    <h1 mat-dialog-title>Vybudování Processing indexu</h1>
+    <div class="info">
+        Proces <i>Vybudování Processing indexu</i> smaže stávající Processing index a vyrobí nový index z dat v
+        Repozitáři (Akubra).
+    </div>
+    <div class="info">
+        Protože se prochází všechny FOXML objekty, jde o náročnou operaci, která může trvat i desítky hodin (podle
+        velikosti repozitáře a dostupného výpočetního výkonu).
+        Proto je doporučeno nejprve Processing index zálohovat.
+    </div>
+    <div class="info">
+        Postup zálohy Processing indexu:
+        <ol>
+            <li>vypnout Solr: <i>$SOLR_HOME/bin/solr stop</i></li>
+            <li>zálohovat datový adresář Processing indexu: typicky <i>$SOLR_HOME/server/solr/processing/data</i></li>
+            <li>zapnout Solr <i>$SOLR_HOME/bin/solr start</i></li>
+        </ol>
+    </div>
+    <div class="info">
+        Postup obnovy Processing indexu:
+        <ol>
+            <li>vypnout Solr</li>
+            <li>nahradit datový adresář Processing indexu zálohou</li>
+            <li>zapnout Solr</li>
+        </ol>
+    </div>
+
+    <button [disabled]="inProgress" color="primary" mat-raised-button type="submit" color="warn">Naplánovat</button>
+    <button [disabled]="inProgress " mat-raised-button mat-dialog-close="cancel"
+        style="margin-left: 10px;">Zrušit</button>
+
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+
+</form>
