@@ -1,12 +1,16 @@
 <div class="app-root">
 
-    <h3>Změna viditelnosti</h3>
-    <div class="app-schedule-process">
-        <!-- <input type='file' (change)="onSelectFile($event.target.files)" #fileWithPids> -->
-        <!-- <br> -->
-        <button class="app-schedule-process-btn" mat-raised-button (click)="openChangePolicyDialog()"
-            color="primary">Změnit
-            viditelnost</button>
+    <h2>Nastavení licencí</h2>
+    <div>
+        <button class="app-btn" mat-raised-button (click)="openChangePolicyDialog()" color="primary">
+            Změnit viditelnost</button>
+        <br>
+        <button class="app-btn" mat-raised-button (click)="todo()" disabled color="primary">
+            Nastavit licenci (DNNT)</button>
+        <br>
+        <button class="app-btn" mat-raised-button (click)="todo()" disabled color="primary">
+            Nastavit licenci (DNNT 2)</button>
+        <br>
     </div>
 
 </div>

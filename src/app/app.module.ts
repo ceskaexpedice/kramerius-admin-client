@@ -41,6 +41,7 @@ import { ScheduleIndexationByModelDialogComponent } from './dialogs/schedule-ind
 import { ScheduleIndexationsByMultiplePidsDialogComponent } from './dialogs/schedule-indexations-by-multiple-pids-dialog/schedule-indexations-by-multiple-pids-dialog.component';
 import { ScheduleChangePolicyByPidDialogComponent } from './dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { PolicyComponent } from './components/policy/policy.component';
+import { RepositoryComponent } from './components/repository/repository.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { PolicyComponent } from './components/policy/policy.component';
     ScheduleIndexationByModelDialogComponent,
     ScheduleIndexationsByMultiplePidsDialogComponent,
     ScheduleChangePolicyByPidDialogComponent,
-    PolicyComponent
+    PolicyComponent,
+    RepositoryComponent
   ],
   imports: [
     BrowserModule,
