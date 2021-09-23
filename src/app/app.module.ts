@@ -40,7 +40,6 @@ import { ScheduleIndexationByPidDialogComponent } from './dialogs/schedule-index
 import { ScheduleIndexationByModelDialogComponent } from './dialogs/schedule-indexation-by-model-dialog/schedule-indexation-by-model-dialog.component';
 import { ScheduleIndexationsByMultiplePidsDialogComponent } from './dialogs/schedule-indexations-by-multiple-pids-dialog/schedule-indexations-by-multiple-pids-dialog.component';
 import { ScheduleChangePolicyByPidDialogComponent } from './dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
-import { PolicyComponent } from './components/policy/policy.component';
 import { RepositoryComponent } from './components/repository/repository.component';
 import { ScheduleProcessingIndexRebuildDialogComponent } from './dialogs/schedule-processing-index-rebuild-dialog/schedule-processing-index-rebuild-dialog.component';
 import { ScheduleImportFoxmlDialogComponent } from './dialogs/schedule-import-foxml-dialog/schedule-import-foxml-dialog.component';
@@ -68,7 +67,6 @@ import { ScheduleImportFoxmlDialogComponent } from './dialogs/schedule-import-fo
     ScheduleIndexationByModelDialogComponent,
     ScheduleIndexationsByMultiplePidsDialogComponent,
     ScheduleChangePolicyByPidDialogComponent,
-    PolicyComponent,
     RepositoryComponent,
     ScheduleProcessingIndexRebuildDialogComponent,
     ScheduleImportFoxmlDialogComponent

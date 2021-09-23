@@ -12,7 +12,6 @@ import { CollectionComponent } from './components/collections/collection/collect
 import { DevComponent } from './components/dev/dev.component';
 import { IndexingComponent } from './components/indexing/indexing.component';
 import { ConfigComponent } from './components/config/config.component';
-import { PolicyComponent } from './components/policy/policy.component';
 import { RepositoryComponent } from './components/repository/repository.component';
 
 
@@ -28,7 +27,6 @@ const routes: Routes = [
   { path: 'collections/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
   { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },
-  { path: 'policy', component: PolicyComponent, canActivate: [AuthGuard] },
   { path: 'config', component: ConfigComponent, canActivate: [AuthGuard] },
   { path: 'repository', component: RepositoryComponent, canActivate: [AuthGuard] },
 ];

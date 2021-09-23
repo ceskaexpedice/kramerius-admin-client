@@ -1,15 +1,66 @@
 <div class="app-root">
 
     <h2>Správa repozitáře</h2>
+    <button class="app-btn" mat-raised-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary">
+        Vybudovat Processing index</button><!-- TODO: neprejmenujeme na Index Vazeb? -->
+    <br>
+
+    <h3>Importy</h3>
     <div>
-        <button class="app-btn" mat-raised-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary">
-            Vybudovat Processing index</button><!-- TODO: neprejmenujeme na Index Vazeb? -->
-        <br>
         <button class="app-btn" mat-raised-button (click)="openScheduleImportFoxmlDialog()" color="primary">
             Importovat FOXML</button>
         <br>
         <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
             Importovat NDK METS</button>
+        <br>
+    </div>
+
+    <h3>Exporty</h3>
+    <div>
+        <h4>Globální</h4>
+        <div>
+            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
+                Exportovast statistiky</button>
+            <br>
+            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
+                Exportovat PIDy objektů s licencí DNNT</button> <!-- do CSV -->
+            <br>
+            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
+                Generovat přístupové logy</button>
+            <br>
+        </div>
+
+        <h4>Pro dokument</h4>
+        <div>
+            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>Export dokument
+                (PDF)</button>
+            <br>
+            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>Exportovat dokument
+                (FOXML)</button>
+            <br>
+        </div>
+    </div>
+
+    <h3>Hromadné úpravy dat</h3>
+    <div>
+        <h4>Na základě vložených PIDů</h4>
+        <!-- tj. změna viditelnosti -->
+        <button class="app-btn" mat-raised-button (click)="openChangePolicyDialog()" color="primary">
+            Nastavit public/private</button>
+        <br>
+        <!-- DNNT, DNNT2 apod. -->
+        <button class="app-btn" mat-raised-button (click)="todo()" disabled color="primary">
+            Přidat licenci</button>
+        <br>
+        <!-- DNNT, DNNT2 apod. -->
+        <button class="app-btn" mat-raised-button (click)="todo()" disabled color="primary">
+            Odebrat licenci</button>
+        <br>
+
+        <h4>Na základě dat</h4>
+        <!-- tj. pohyblivá zeď -->
+        <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
+            Nastavit public podle datumů</button>
         <br>
     </div>
 
