@@ -212,6 +212,10 @@ export class AdminApiService {
       delay(300),
     )
   }
+
+  getImportDirs(): Observable<any> {
+    return this.get(`/dirs/import-foxml-input/subDirs`);
+  }
 }
 export interface ProcessesParams {
   limit: number;
