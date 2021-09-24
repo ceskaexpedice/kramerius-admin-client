@@ -213,9 +213,14 @@ export class AdminApiService {
     )
   }
 
-  getImportDirs(): Observable<any> {
+  getImportFoxmlInputDirs(): Observable<any> {
     return this.get(`/dirs/import-foxml-input/subDirs`);
   }
+
+  getConvertAndImportNdkInputDirs(): Observable<any> {
+    return this.get(`/dirs/convert-and-import-ndk-input/subDirs`);
+  }
+
 }
 export interface ProcessesParams {
   limit: number;

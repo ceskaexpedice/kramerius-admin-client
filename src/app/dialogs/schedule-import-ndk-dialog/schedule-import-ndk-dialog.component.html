@@ -1,17 +1,25 @@
 <form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
 
-    <h1 mat-dialog-title>Import FOXML</h1>
+    <h1 mat-dialog-title>Import NDK METS</h1>
     <div class="info">
-        Naplánujte proces, který importuje FOXML soubory ze zvoleného importního adresáře na serveru.
+        Naplánujte proces, který konvertuje soubory ve formátu NDK METS ze zvoleného importního adresáře na serveru a
+        výsledek importuje.
     </div>
     <div class="info">
-        Kořenový adresář pro import FOXML je typicky <i>$HOME/.kramerius/import</i>.
+        Kořenový adresář pro import NDK METS je typicky <i>$HOME/.kramerius/convert</i>.
     </div>
 
     <mat-form-field class="input-import_dir">
         <mat-select placeholder="Importní adresář" ngModel name="import_dir" required>
             <mat-option *ngFor="let importDir of importDirs; let i = index" [value]="importDir">
                 {{importDir}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-policy">
+        <mat-select placeholder="Viditelnost" ngModel name="policy" required>
+            <mat-option *ngFor="let policy of policies; let i = index" [value]="policy">
+                {{policyLabels[i]}}</mat-option>
         </mat-select>
     </mat-form-field>
 

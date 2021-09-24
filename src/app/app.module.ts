@@ -43,6 +43,7 @@ import { ScheduleChangePolicyByPidDialogComponent } from './dialogs/schedule-cha
 import { RepositoryComponent } from './components/repository/repository.component';
 import { ScheduleProcessingIndexRebuildDialogComponent } from './dialogs/schedule-processing-index-rebuild-dialog/schedule-processing-index-rebuild-dialog.component';
 import { ScheduleImportFoxmlDialogComponent } from './dialogs/schedule-import-foxml-dialog/schedule-import-foxml-dialog.component';
+import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-dialog/schedule-import-ndk-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,8 @@ import { ScheduleImportFoxmlDialogComponent } from './dialogs/schedule-import-fo
     ScheduleChangePolicyByPidDialogComponent,
     RepositoryComponent,
     ScheduleProcessingIndexRebuildDialogComponent,
-    ScheduleImportFoxmlDialogComponent
+    ScheduleImportFoxmlDialogComponent,
+    ScheduleImportNdkDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +111,8 @@ import { ScheduleImportFoxmlDialogComponent } from './dialogs/schedule-import-fo
     ScheduleIndexationsByMultiplePidsDialogComponent,
     ScheduleChangePolicyByPidDialogComponent,
     ScheduleProcessingIndexRebuildDialogComponent,
-    ScheduleImportFoxmlDialogComponent
+    ScheduleImportFoxmlDialogComponent,
+    ScheduleImportNdkDialogComponent
   ],
   bootstrap: [AppComponent]
 })

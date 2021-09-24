@@ -3,20 +3,22 @@ import { MatDialogRef } from '@angular/material';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  selector: 'app-schedule-import-foxml-dialog',
-  templateUrl: './schedule-import-foxml-dialog.component.html',
-  styleUrls: ['./schedule-import-foxml-dialog.component.scss']
+  selector: 'app-schedule-import-ndk-dialog',
+  templateUrl: './schedule-import-ndk-dialog.component.html',
+  styleUrls: ['./schedule-import-ndk-dialog.component.scss']
 })
-export class ScheduleImportFoxmlDialogComponent implements OnInit {
+export class ScheduleImportNdkDialogComponent implements OnInit {
 
   inProgress = false;
   importDirs = [];
+  policies = ['PUBLIC', 'PRIVATE'];
+  policyLabels = ['veřejné', 'neveřejné'];
 
-  constructor(public dialogRef: MatDialogRef<ScheduleImportFoxmlDialogComponent>, private adminApi: AdminApiService) { }
+  constructor(public dialogRef: MatDialogRef<ScheduleImportNdkDialogComponent>, private adminApi: AdminApiService) { }
 
   ngOnInit() {
     this.inProgress = true;
-    this.adminApi.getImportFoxmlInputDirs().subscribe(response => {
+    this.adminApi.getConvertAndImportNdkInputDirs().subscribe(response => {
       this.importDirs = response.dirs;
       this.inProgress = false;
     }, error => {
@@ -27,13 +29,13 @@ export class ScheduleImportFoxmlDialogComponent implements OnInit {
 
   schedule(formData) {
     this.adminApi.scheduleProcess({
-      defid: 'import',
+      defid: 'convert_and_import',
       params: {
+        policy: formData.policy,
         inputDataDir: formData.import_dir,
         startIndexer: formData.schedule_indexations,
       }
     }).subscribe(response => {
-      //console.log(response);
       this.dialogRef.close("scheduled");
     }, error => {
       console.log(error);

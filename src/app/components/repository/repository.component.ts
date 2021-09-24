@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { ScheduleImportFoxmlDialogComponent } from 'src/app/dialogs/schedule-import-foxml-dialog/schedule-import-foxml-dialog.component';
+import { ScheduleImportNdkDialogComponent } from 'src/app/dialogs/schedule-import-ndk-dialog/schedule-import-ndk-dialog.component';
 import { ScheduleProcessingIndexRebuildDialogComponent } from 'src/app/dialogs/schedule-processing-index-rebuild-dialog/schedule-processing-index-rebuild-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
@@ -15,7 +16,8 @@ export class RepositoryComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private ui: UIService
+    private ui: UIService,
+    private adminApi: AdminApiService
   ) { }
 
   ngOnInit() {
@@ -64,5 +66,17 @@ export class RepositoryComponent implements OnInit {
     });
   };
 
+  openScheduleImportNdkDialog() {
+    const dialogRef = this.dialog.open(ScheduleImportNdkDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Import NDK METS")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else {
+        this.ui.showInfoSnackBar(`Proces Import NDK METS byl naplánován`);
+      }
+    });
+  }
 
 }
