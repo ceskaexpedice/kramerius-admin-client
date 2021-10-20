@@ -87,7 +87,11 @@ import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-
     AngularTokenModule.forRoot({
       apiBase: environment.cloudApiBase,
       oAuthBase: environment.cloudApiBase,
-      oAuthCallbackPath: 'omniauth',
+      //oAuthCallbackPath: 'omniauth',
+      //podpora obou způsobů instalace:
+      //jak klasická s adminem na subdoméně (https://admin.knihovna.cz),
+      //tak hack s více aplikacemi na path (dig. knihovna: https://knihovna.cz/, admin: https://knihovna.cz/admin)
+      oAuthCallbackPath: 'admin/omniauth', 
       oAuthPaths: {
         google: 'auth/google_oauth2'
       },

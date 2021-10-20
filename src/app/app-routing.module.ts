@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'omniauth', component: OmniauthComponent },
+  { path: 'admin/omniauth', component: OmniauthComponent }, //hack pro instalaci s adminem na path, namísto subdomény (https://knihovna.cz/admin namísto https://admin.knihovna.cz)
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
   { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
