@@ -11,12 +11,16 @@ export class AppSettings {
   //coreBaseUrl = 'https://kramerius.dev.digitallibrary.cz/search/'
 
   //k7-test.mzk.cz
-  digitalLibraryBaseUrl = 'https://k7-test.mzk.cz/mzkk7';
-  coreBaseUrl = 'https://k7-test.mzk.cz/search/'
+  //digitalLibraryBaseUrl = 'https://k7-test.mzk.cz/mzkk7';
+  //coreBaseUrl = 'https://k7-test.mzk.cz/search/'
+
+  //k7.inovatika.dev
+  //digitalLibraryBaseUrl = 'https://k7.inovatika.dev'; //TODO:bude tam suffix
+  //coreBaseUrl = 'https://k7.inovatika.dev/search/'
 
   //localhost
-  // digitalLibraryBaseUrl = 'http://www.digitalniknihovna.cz/mzk'; //TODO
-  // coreBaseUrl = 'http://localhost:8080/search/'
+  digitalLibraryBaseUrl = 'http://www.digitalniknihovna.cz/mzk'; //TODO
+  coreBaseUrl = 'http://localhost:8080/search/'
 
 
   clientApiBaseUrl = this.coreBaseUrl + 'api/client/v6.0';
