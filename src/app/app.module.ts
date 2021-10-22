@@ -44,6 +44,8 @@ import { RepositoryComponent } from './components/repository/repository.componen
 import { ScheduleProcessingIndexRebuildDialogComponent } from './dialogs/schedule-processing-index-rebuild-dialog/schedule-processing-index-rebuild-dialog.component';
 import { ScheduleImportFoxmlDialogComponent } from './dialogs/schedule-import-foxml-dialog/schedule-import-foxml-dialog.component';
 import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-dialog/schedule-import-ndk-dialog.component';
+import { ScheduleAddLicenseDialogComponent } from './dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
+import { ScheduleRemoveLicenseDialogComponent } from './dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +73,9 @@ import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-
     RepositoryComponent,
     ScheduleProcessingIndexRebuildDialogComponent,
     ScheduleImportFoxmlDialogComponent,
-    ScheduleImportNdkDialogComponent
+    ScheduleImportNdkDialogComponent,
+    ScheduleAddLicenseDialogComponent,
+    ScheduleRemoveLicenseDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +120,9 @@ import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-
     ScheduleChangePolicyByPidDialogComponent,
     ScheduleProcessingIndexRebuildDialogComponent,
     ScheduleImportFoxmlDialogComponent,
-    ScheduleImportNdkDialogComponent
+    ScheduleImportNdkDialogComponent,
+    ScheduleAddLicenseDialogComponent,
+    ScheduleRemoveLicenseDialogComponent
   ],
   bootstrap: [AppComponent]
 })

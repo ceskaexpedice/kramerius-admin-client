@@ -1,0 +1,29 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
+
+    <h1 mat-dialog-title>Odebrání licence</h1>
+    <div class="info">Bude naplánován proces <i>Odebrání licence</i> pro všechny vložené PIDy.</div>
+
+    <mat-icon (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-pids-from-file">file_download
+    </mat-icon>
+
+    <mat-form-field class="input-pids">
+        <textarea [disabled]="inProgress" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids"
+            placeholder="PIDy" required autofocus rows="4"></textarea>
+    </mat-form-field>
+
+    <input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
+
+    <mat-form-field class="input-license">
+        <input [disabled]="inProgress" matInput type="text" id="inputLicense" name="license" [(ngModel)]="license"
+            required placeholder="Licence">
+    </mat-form-field>
+
+    <button [disabled]="inProgress || !f.valid" color="primary" mat-raised-button type="submit"
+        color="warn">Naplánovat</button>
+    <button [disabled]="inProgress " mat-raised-button mat-dialog-close="cancel"
+        style="margin-left: 10px;">Zrušit</button>
+
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()">
+    </mat-progress-bar>
+
+</form>
