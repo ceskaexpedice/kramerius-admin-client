@@ -222,12 +222,16 @@ export class AdminApiService {
     )
   }
 
-  getImportFoxmlInputDirs(): Observable<any> {
-    return this.get(`/dirs/import-foxml-input/subDirs`);
+  getImportFoxmlInputDirFiles(): Observable<any> {
+    return this.get(`/files/input-data-dir-for_import-foxml/`);
   }
 
-  getConvertAndImportNdkInputDirs(): Observable<any> {
-    return this.get(`/dirs/convert-and-import-ndk-input/subDirs`);
+  getConvertAndImportNdkInputDirFiles(): Observable<any> {
+    return this.get(`/files/input-data-dir-for_convert-and-import-ndk/`);
+  }
+
+  getPidlistDirFiles(): Observable<any> {
+    return this.get(`/files/pidlist-dir/`);
   }
 
 }

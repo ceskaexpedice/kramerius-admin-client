@@ -197,6 +197,24 @@ export class DevComponent implements OnInit {
     // this.adminApi.getGeneralQuery(query).subscribe(response => {
     //   console.log(response);
     // })
+
+    // this.adminApi.scheduleProcess({
+    //   defid: 'add_license',
+    //   //defid: 'remove_license',
+    //   params: {
+    //     //license: 'public_domain',
+    //     license: 'blabla',
+    //     pid: 'uuid:61acc90c-52df-473b-8c2d-02adcaaf66e3'
+    //   }
+    // }).subscribe(response => {
+    //   console.log(response);
+    // }, error => {
+    //   console.log(error);
+    // });
+
+    this.adminApi.getPidlistDirFiles().subscribe(response => {
+      console.log(response);
+    });
   }
 
   changeThubnail() {
