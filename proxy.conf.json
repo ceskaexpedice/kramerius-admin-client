@@ -1,0 +1,8 @@
+{
+    "/search/api/v5.0/admin/*": {
+      "target": "https://k7.inovatika.dev",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+  }

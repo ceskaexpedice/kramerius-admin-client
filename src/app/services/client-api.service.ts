@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { map, tap } from 'rxjs/operators';
 import { isNgTemplate } from '@angular/compiler';

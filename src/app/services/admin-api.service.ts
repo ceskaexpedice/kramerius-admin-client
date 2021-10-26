@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
 import { delay, map, tap } from 'rxjs/operators';
@@ -49,6 +49,15 @@ export class AdminApiService {
   private put(path: string, body: any, options: any = {}): Observable<Object> {
     return this.http.put(this.baseUrl + path, body, options);
   }
+
+  getRights(): Observable<any> {
+    return this.http.get('/search/api/v5.0/admin/rights', {
+      headers: new HttpHeaders({
+        "Accept-Language": 'en-US',
+        "Authorization": "Basic " + btoa("krameriusAdmin:krameriusAdmin")
+      })});
+  }
+
 
   getGeneralQuery(path: string): Observable<any> {
     const options = { headers: new HttpHeaders({ 'Accept': '*' }) };

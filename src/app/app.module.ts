@@ -46,6 +46,7 @@ import { ScheduleImportFoxmlDialogComponent } from './dialogs/schedule-import-fo
 import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-dialog/schedule-import-ndk-dialog.component';
 import { ScheduleAddLicenseDialogComponent } from './dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from './dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
+import { RightsComponent } from './components/rights/rights.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +76,8 @@ import { ScheduleRemoveLicenseDialogComponent } from './dialogs/schedule-remove-
     ScheduleImportFoxmlDialogComponent,
     ScheduleImportNdkDialogComponent,
     ScheduleAddLicenseDialogComponent,
-    ScheduleRemoveLicenseDialogComponent
+    ScheduleRemoveLicenseDialogComponent,
+    RightsComponent
   ],
   imports: [
     BrowserModule,
