@@ -16,8 +16,14 @@ export class ScheduleImportFoxmlDialogComponent implements OnInit {
 
   ngOnInit() {
     this.inProgress = true;
-    this.adminApi.getImportFoxmlInputDirs().subscribe(response => {
-      this.importDirs = response.dirs;
+    this.adminApi.getImportFoxmlInputDirFiles().subscribe(response => {
+      this.importDirs = [];
+      //TODO: neresi se prochazeni do hloubky, ale berou se jen adresare prvni urovne
+      response.files.forEach(file => {
+        if (file.isDir) {
+          this.importDirs.push(file.name);
+        }
+      });
       this.inProgress = false;
     }, error => {
       console.log(error);
