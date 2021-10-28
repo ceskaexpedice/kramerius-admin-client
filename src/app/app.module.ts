@@ -46,7 +46,11 @@ import { ScheduleImportFoxmlDialogComponent } from './dialogs/schedule-import-fo
 import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-dialog/schedule-import-ndk-dialog.component';
 import { ScheduleAddLicenseDialogComponent } from './dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from './dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
-import { RightsComponent } from './components/rights/rights.component';
+import { AccessComponent } from './components/access/access.component';
+import { Admin2ApiService } from './services/admin2-api.service';
+import { NewLicenseDialogComponent } from './dialogs/new-license-dialog/new-license-dialog.component';
+import { LicensesComponent } from './components/access/licenses/licenses.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +81,9 @@ import { RightsComponent } from './components/rights/rights.component';
     ScheduleImportNdkDialogComponent,
     ScheduleAddLicenseDialogComponent,
     ScheduleRemoveLicenseDialogComponent,
-    RightsComponent
+    AccessComponent,
+    LicensesComponent,
+    NewLicenseDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -110,6 +116,7 @@ import { RightsComponent } from './components/rights/rights.component';
     AppSettings,
     ClientApiService,
     AdminApiService,
+    Admin2ApiService,
     CollectionsService,
     UIService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
@@ -124,7 +131,8 @@ import { RightsComponent } from './components/rights/rights.component';
     ScheduleImportFoxmlDialogComponent,
     ScheduleImportNdkDialogComponent,
     ScheduleAddLicenseDialogComponent,
-    ScheduleRemoveLicenseDialogComponent
+    ScheduleRemoveLicenseDialogComponent,
+    NewLicenseDialogComponent
   ],
   bootstrap: [AppComponent]
 })

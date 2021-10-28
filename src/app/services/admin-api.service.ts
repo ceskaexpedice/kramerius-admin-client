@@ -50,15 +50,6 @@ export class AdminApiService {
     return this.http.put(this.baseUrl + path, body, options);
   }
 
-  getRights(): Observable<any> {
-    return this.http.get('/search/api/v5.0/admin/rights', {
-      headers: new HttpHeaders({
-        "Accept-Language": 'en-US',
-        "Authorization": "Basic " + btoa("krameriusAdmin:krameriusAdmin")
-      })});
-  }
-
-
   getGeneralQuery(path: string): Observable<any> {
     const options = { headers: new HttpHeaders({ 'Accept': '*' }) };
     return this.http.get(this.baseUrl + path, options);

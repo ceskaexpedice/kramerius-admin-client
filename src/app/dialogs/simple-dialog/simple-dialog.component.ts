@@ -4,7 +4,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SimpleDialogData } from './simple-dialog';
 
 @Component({
-  selector: 'app-simple-dialog',
   templateUrl: './simple-dialog.component.html',
   styleUrls: ['./simple-dialog.component.scss']
 })
@@ -15,6 +14,10 @@ export class SimpleDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: SimpleDialogData) { }
 
   ngOnInit() {
+  }
+
+  onClose(data: string) {
+    this.dialogRef.close(data);
   }
 
 }

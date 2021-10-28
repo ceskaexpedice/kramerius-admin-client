@@ -1,0 +1,38 @@
+<div mat-dialog-content>
+
+  <div class="app-dialog-title">{{ mode == 'new' ? "Nová licence" : "Úprava licence" }}</div>
+  
+  <div class="app-dialog-content">
+    <div class="app-property">
+      <div class="app-label">Název</div>
+      <div class="app-value">
+        <input 
+            type="text" 
+            matInput 
+            name="note"
+            [(ngModel)]="license.name"
+            autocomplete="off">
+      </div>
+    </div>
+    
+    <div class="app-property">
+      <div class="app-label">Popis</div>
+      <div class="app-value">
+        <input 
+            type="text" 
+            matInput 
+            name="description"
+            [(ngModel)]="license.description"
+            autocomplete="off">
+      </div>
+    </div>
+  </div>
+        
+  <div class="app-dialog-actions">
+    <div *ngIf="mode == 'new'" class="app-button" (click)="onSave()">Vytvořit</div>
+    <div *ngIf="mode == 'edit'" class="app-button" (click)="onSave()">Upravit</div>
+    <div class="app-button app-button-light" (click)="onCancel()">Zrušit</div>
+  </div>
+
+</div>
+

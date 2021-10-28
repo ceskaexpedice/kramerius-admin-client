@@ -1,0 +1,19 @@
+<div class="app-access">
+
+
+  <div class="app-view-toggle">
+    <div class="app-toggle-buttons">
+      <div class="app-toggle-button" (click)="view = 'roles'" [class.app-selected]="view == 'roles'">
+        <span>Role</span>
+      </div>
+      <div class="app-toggle-button" (click)="view = 'licenses'" [class.app-selected]="view == 'licenses'">
+        <span>Licence</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-view-content">
+    <app-licenses *ngIf="view == 'licenses'"></app-licenses>
+  </div>
+
+</div>

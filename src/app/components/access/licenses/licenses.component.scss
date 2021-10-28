@@ -1,0 +1,47 @@
+@import './src/variables.scss';
+.app-licenses {
+    max-width: 800px;
+    margin: 10px auto;
+    .app-licence {
+        background: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        line-height: 24px;
+        .app-licence-priority {
+            font-size: 12px;
+            color: #888;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            border-radius: 50%;
+            border: 1px solid #eee;
+            text-align: center;
+            background: $app-action-color;
+            color: #eee;
+            float: right;
+        }
+        .app-licence-name {
+            font-size: 14px;
+            color: #111;
+        }
+        .app-licence-description {
+            font-size: 14px;
+            color: #777;
+
+        }
+        mat-icon {
+            font-size: 20px;
+            padding: 2px;
+            color: $app-action-transparent;
+            float: right;
+            margin-right: 10px;
+            cursor: pointer;
+            &:hover {
+                color: $app-action-color;
+            }
+        }
+    }
+}
+.app-new-licence {
+    margin-top: 5px;
+}

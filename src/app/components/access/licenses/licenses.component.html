@@ -1,0 +1,13 @@
+<div class="app-licenses">
+
+  <div class="app-licence" *ngFor="let licence of licenses">
+    <div class="app-licence-priority">{{ licence.priority }}</div>
+    <mat-icon (click)="onEditLicese(licence)">edit</mat-icon>
+    <mat-icon (click)="onRemoveLicese(licence)">delete</mat-icon>
+
+    <div class="app-licence-name">{{ licence.name }}</div>
+    <div class="app-licence-description">{{ licence.description }}</div>
+
+  </div>
+<div class="app-new-licence app-button" (click)="onNewLicence()">Přidat licenci</div>
+</div>
