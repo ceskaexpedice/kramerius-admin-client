@@ -1,6 +1,7 @@
 export interface SimpleDialogData {
   title: string;
-  message: string;
+  message?: string;
+  html?: string;
   btn1: SimpleDialogButton;
   btn2?: SimpleDialogButton;
   checkbox?: SimpleDialogCheckbox;

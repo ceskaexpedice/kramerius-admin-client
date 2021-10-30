@@ -1,0 +1,41 @@
+.app-row {
+  height: 34px;
+  line-height: 34px;
+  padding-left: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #444;
+  &.app-selected {
+    font-weight: 600;
+    color: #37474f;
+  }
+.app-tree-left {
+  float: left; 
+  text-align: right; 
+  min-height: 1px;
+  mat-spinner {
+    margin-top: 8px;
+    float: right;
+    margin-right: 8px;
+  }
+  .app-tree-expand {
+    width: 36px;
+    text-align: center;
+    line-height: 34px;
+    height: 34px;
+    margin-right: 2px;
+    cursor: pointer;
+  }
+}
+
+.result-label {
+  overflow: hidden;
+  &.app-file {
+    color: #777;
+  }
+  .app-tree-gap {
+    float: left;
+  }
+  flex: 1;
+}
+}

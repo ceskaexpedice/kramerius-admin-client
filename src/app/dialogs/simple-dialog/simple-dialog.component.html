@@ -6,6 +6,9 @@
 
     <p class="app-message" *ngIf="data.message">{{ data.message }}</p>
 
+    <div class="app-html" *ngIf="data.html" [innerHtml]="data.html"></div>
+
+
     <mat-checkbox *ngIf="data.checkbox" [(ngModel)]="data.checkbox.checked">{{ data.checkbox.label }}</mat-checkbox>
 
     <div class="app-property" *ngIf="data.numberInput">

@@ -236,6 +236,14 @@ body {
       background: #eee;
     }
   }
+  &.app-disabled {
+    background: #ddd;
+    color: #555;
+    &:hover {
+      background: #ddd;
+      color: #555;
+    }
+  }
 
 
 }

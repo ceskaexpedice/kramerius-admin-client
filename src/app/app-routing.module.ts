@@ -14,6 +14,7 @@ import { IndexingComponent } from './components/indexing/indexing.component';
 import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './components/repository/repository.component';
 import { AccessComponent } from './components/access/access.component';
+import { ImportComponent } from './components/import/import.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },
   { path: 'config', component: ConfigComponent, canActivate: [AuthGuard] },
   { path: 'repository', component: RepositoryComponent, canActivate: [AuthGuard] },
-  { path: 'rights', component: AccessComponent, canActivate: [AuthGuard] }
+  { path: 'rights', component: AccessComponent, canActivate: [AuthGuard] },
+  { path: 'import', component: ImportComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

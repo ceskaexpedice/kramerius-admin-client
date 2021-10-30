@@ -1,0 +1,38 @@
+<div class="app-import">
+
+
+  <div class="app-view-toggle">
+    <div class="app-toggle-buttons">
+      <div class="app-toggle-button" (click)="changeType('foxml')" [class.app-selected]="type == 'foxml'">
+        <span>FOXML</span>
+      </div>
+      <div class="app-toggle-button" (click)="changeType('ndk')" [class.app-selected]="type == 'ndk'">
+        <span>NDK METS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-view-content">
+
+    <div class="app-header">
+
+      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary">
+        Naplánovat následnou indexaci</mat-checkbox>
+
+        <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">
+          Zveřejnit</mat-checkbox>
+
+      <div (click)="submit()" class="app-button" style="float: right;" [class.app-disabled]="!imports.selectedTree">Spustit import</div>
+    </div>
+
+    <div class="app-header2">
+      <mat-icon (click)="showHelpDialog()">help</mat-icon>
+      <div class="app-path">{{ imports.selectedTree ? imports.selectedTree.getFullPath() : ''}}</div>
+    </div>
+
+    <app-tree [tree]="tree"></app-tree>
+
+
+  </div>
+
+</div>

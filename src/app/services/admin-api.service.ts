@@ -7,6 +7,7 @@ import { delay, map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
+import { File } from '../models/tree.model';
 
 @Injectable({
   providedIn: 'root'
@@ -111,7 +112,7 @@ export class AdminApiService {
     return this.get('/processes/owners').pipe(
       //delay(3000),
       map(response => ProcessOwner.fromJsonArray(response['owners']))
-    );
+    );   
   }
 
   scheduleProcess(definition, onScheduled = undefined): Observable<any> {
@@ -211,6 +212,22 @@ export class AdminApiService {
     return this.put(`/items/${pid}/streams/BIBLIO_MODS`, mods, options).pipe(
       delay(300),
     )
+  }
+
+  getImportFiles(type: string, path: string): Observable<File[]> {
+    console.log('type', type);
+    let fullPath = '/files/';
+    if (type == 'foxml') {
+      fullPath += 'input-data-dir-for_import-foxml';
+    } else if (type == 'ndk') {
+      fullPath += 'input-data-dir-for_convert-and-import-ndk';
+    }
+    fullPath += path;
+    console.log('path', path);
+    console.log('fullPath', fullPath);
+
+    // fullPath = '/files/input-data-dir-for_import-foxml/045b1250-7e47-11e0-add1-000d606f5dc6/';
+    return this.get(fullPath).pipe(map(response => response['files']));
   }
 
   getImportFoxmlInputDirFiles(): Observable<any> {

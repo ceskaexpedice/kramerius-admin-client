@@ -1,0 +1,72 @@
+@import './src/variables.scss';
+.app-import {
+    height: 100%;
+    padding-top: 20px;
+    .app-view-toggle {
+        text-align: center;
+        height: 50px;
+        .app-toggle-button {
+            min-width: 80px;
+        }
+    }
+    .app-view-content {
+        height: calc(100% - 50px);
+        app-tree {
+            display: block;
+            background: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            height: calc(100% - 100px);
+            overflow: auto;
+        }
+        .app-header {
+            display: block;
+            max-width: 800px;
+            margin: 0 auto 2px;
+            height: 40px;
+            padding: 6px;
+            mat-checkbox {
+                color: #666;
+                margin-top: 3px;
+                margin-right: 10px;
+                margin-left: 5px;
+                font-size: 15px;
+                display: block;
+                float: left;
+            }
+        }
+        .app-header2 {
+            display: block;
+            background: #fff;
+            max-width: 800px;
+            margin: 0 auto 2px;
+            height: 40px;
+            padding: 6px;
+            mat-icon {
+                float: right;
+                color: $app-action-transparent;
+                font-size: 20px;
+                padding: 2px;
+                cursor: pointer;
+                margin-top: 2px;
+                &:hover {
+                    color: $app-action-color;
+                }
+            }
+            .app-path {
+                // cursor: pointer;
+                // margin-top: 4px;
+                font-size: 14px;
+                color: #333;
+                line-height: 28px;
+                height: 28px;
+                width: 400px;
+                padding: 0 10px;
+                /* width: 126px; */
+                // background: #eee;
+                // border: 1px solid #bdbdbd;
+                // border-radius: 4px;
+            }
+        }
+    }
+}

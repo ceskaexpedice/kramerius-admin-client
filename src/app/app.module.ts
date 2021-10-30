@@ -56,6 +56,10 @@ import { LocalStorageService } from './services/local-storage.service';
 import { ActionsComponent } from './components/access/actions/actions.component';
 import { NewRightDialogComponent } from './dialogs/new-right-dialog/new-right-dialog.component';
 import { ParamsComponent } from './components/access/params/params.component';
+import { ImportComponent } from './components/import/import.component';
+import { ImportService } from './services/import.service';
+import { Tree } from './models/tree.model';
+import { TreeComponent } from './components/import/tree/tree.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +98,9 @@ import { ParamsComponent } from './components/access/params/params.component';
     NewRoleDialogComponent,
     ActionsComponent,
     NewRightDialogComponent,
-    ParamsComponent
+    ParamsComponent,
+    ImportComponent,
+    TreeComponent
   ],
   imports: [
     BrowserModule,
@@ -131,6 +137,7 @@ import { ParamsComponent } from './components/access/params/params.component';
     CollectionsService,
     LocalStorageService,
     UIService,
+    ImportService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [
