@@ -1,0 +1,88 @@
+@import './src/variables.scss';
+.app-actions {
+    max-width: 800px;
+    margin: 10px auto;
+    .app-action {
+        background: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        line-height: 24px;
+        .app-action-name {
+            font-size: 14px;
+            color: #111;
+            span {
+                font-size: 11px;
+                color: #999;
+                margin-left: 3px;
+            }
+        }
+        .app-action-description {
+            font-size: 14px;
+            color: #777;
+        }
+        mat-icon {
+            font-size: 20px;
+            padding: 2px;
+            color: $app-action-transparent2;
+            float: right;
+            // margin-right: 10px;
+            cursor: pointer;
+            user-select: none;
+            &:hover {
+                color: $app-action-color;
+            }
+        }
+        .app-rights {
+            border-top: 1px solid #ddd;
+            margin-top: 8px;
+            // padding-top: 8px;
+            overflow: hidden;
+            .app-right {
+                font-size: 14px;
+                color: #444;
+                overflow: hidden;
+                .app-right-role {
+                    float: left;
+                    width: calc(25% - 13px);
+                }
+                .app-right-condition {
+                    float: left;
+                    width: calc(25% - 13px);
+                }
+                .app-right-param {
+                    float: left;
+                    width: calc(25% - 13px);
+                }
+                .app-right-license {
+                    float: left;
+                    width: calc(25% - 13px);
+                }
+                .app-right-actions {
+                    width: 51px;
+                    float: right;
+                    mat-icon {
+                        margin: 0;
+                        &:not(:hover) {
+                            color: $app-action-transparent;
+                        }
+                    }
+                }
+                &.app-right-header {
+                    color: #999;
+                    font-size: 12px;
+                }
+                &:not(.app-right-header):hover {
+                    background: #f5f5f5;
+                }
+            }
+            .app-new-right {
+                margin-top: 8px;
+                font-size: 12px;
+                padding: 3px 8px;
+            }
+        }
+    }
+}
+mat-spinner {
+    margin: 20px auto 0;
+}

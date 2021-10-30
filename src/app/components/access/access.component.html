@@ -3,17 +3,27 @@
 
   <div class="app-view-toggle">
     <div class="app-toggle-buttons">
-      <div class="app-toggle-button" (click)="view = 'roles'" [class.app-selected]="view == 'roles'">
+      <div class="app-toggle-button" (click)="changeView('actions')" [class.app-selected]="view == 'actions'">
+        <span>Práva</span>
+      </div>
+      <div class="app-toggle-button" (click)="changeView('roles')" [class.app-selected]="view == 'roles'">
         <span>Role</span>
       </div>
-      <div class="app-toggle-button" (click)="view = 'licenses'" [class.app-selected]="view == 'licenses'">
+      <div class="app-toggle-button" (click)="changeView('licenses')" [class.app-selected]="view == 'licenses'">
         <span>Licence</span>
+      </div>
+      <div class="app-toggle-button" (click)="changeView('params')" [class.app-selected]="view == 'params'">
+        <span>Parametry</span>
       </div>
     </div>
   </div>
 
   <div class="app-view-content">
+    <app-roles *ngIf="view == 'roles'"></app-roles>
     <app-licenses *ngIf="view == 'licenses'"></app-licenses>
+    <app-actions *ngIf="view == 'actions'"></app-actions>
+    <app-params *ngIf="view == 'params'"></app-params>
+
   </div>
 
 </div>

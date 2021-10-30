@@ -14,6 +14,7 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class LicensesComponent implements OnInit {
 
+  state: string;
   licenses: any[];
 
   constructor(private api: Admin2ApiService, 
@@ -21,8 +22,10 @@ export class LicensesComponent implements OnInit {
     private dialog: MatDialog) {}
 
   ngOnInit() {
+    this.state = 'loading';
     this.api.getLicenses().subscribe((licenses: License[]) => {
       this.licenses = licenses;
+      this.state = 'success';
       console.log('licenses', licenses);
     });
   }

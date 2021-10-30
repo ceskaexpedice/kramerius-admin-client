@@ -1,0 +1,48 @@
+
+export class ConditionParam {
+
+  id: number;
+  description: string;
+  values: string[];
+
+  constructor() {
+    this.id = 0;
+    this.description = '';
+    this.values = [];
+  }
+
+  static fromJson(json): ConditionParam {
+    const param = new ConditionParam();
+    param.id = json['id'];
+    param.description = json['description'] || '';
+    param.values = json['objects'] || [];
+    return param;
+  }
+
+  static fromJsonArray(json): ConditionParam[] {
+    const result = [];
+    for (const obj of json) {
+      result.push(ConditionParam.fromJson(obj));
+    }
+    return result;
+  }
+
+  copyFrom(param: ConditionParam) {
+    this.id = param.id;
+    this.values = [];
+    for (const value of param.values) {
+      this.values.push(value);
+    }
+    this.description = param.description || '';
+  }
+
+  toJson() {
+    return {
+      id: this.id,
+      description: this.description || '',
+      objects: this.values
+    }
+  }
+
+
+}

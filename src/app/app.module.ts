@@ -50,6 +50,12 @@ import { AccessComponent } from './components/access/access.component';
 import { Admin2ApiService } from './services/admin2-api.service';
 import { NewLicenseDialogComponent } from './dialogs/new-license-dialog/new-license-dialog.component';
 import { LicensesComponent } from './components/access/licenses/licenses.component';
+import { RolesComponent } from './components/access/roles/roles.component';
+import { NewRoleDialogComponent } from './dialogs/new-role-dialog/new-role-dialog.component';
+import { LocalStorageService } from './services/local-storage.service';
+import { ActionsComponent } from './components/access/actions/actions.component';
+import { NewRightDialogComponent } from './dialogs/new-right-dialog/new-right-dialog.component';
+import { ParamsComponent } from './components/access/params/params.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +89,12 @@ import { LicensesComponent } from './components/access/licenses/licenses.compone
     ScheduleRemoveLicenseDialogComponent,
     AccessComponent,
     LicensesComponent,
-    NewLicenseDialogComponent
+    NewLicenseDialogComponent,
+    RolesComponent,
+    NewRoleDialogComponent,
+    ActionsComponent,
+    NewRightDialogComponent,
+    ParamsComponent
   ],
   imports: [
     BrowserModule,
@@ -118,6 +129,7 @@ import { LicensesComponent } from './components/access/licenses/licenses.compone
     AdminApiService,
     Admin2ApiService,
     CollectionsService,
+    LocalStorageService,
     UIService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
@@ -132,7 +144,9 @@ import { LicensesComponent } from './components/access/licenses/licenses.compone
     ScheduleImportNdkDialogComponent,
     ScheduleAddLicenseDialogComponent,
     ScheduleRemoveLicenseDialogComponent,
-    NewLicenseDialogComponent
+    NewLicenseDialogComponent,
+    NewRoleDialogComponent,
+    NewRightDialogComponent
   ],
   bootstrap: [AppComponent]
 })

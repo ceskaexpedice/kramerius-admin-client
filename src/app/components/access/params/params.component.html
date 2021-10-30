@@ -1,0 +1,34 @@
+<div class="app-params">
+
+  <mat-spinner *ngIf="state=='loading'"
+    [strokeWidth]="3" 
+    [diameter]="30">
+  </mat-spinner>
+
+  <ng-container *ngIf="state=='success'">
+    <div class="app-param" *ngFor="let param of params">
+      <mat-icon (click)="selectedParam = param" *ngIf="selectedParam != param">expand_more</mat-icon>
+      <mat-icon (click)="selectedParam = null" *ngIf="selectedParam == param">expand_less</mat-icon>
+      <mat-icon (click)="onRemoveParam(param)">delete</mat-icon>
+      <mat-icon (click)="onEditParam(param)">edit</mat-icon>
+      <div class="app-param-name">
+        {{ param.description }}
+        <span> {{ param.values.length }}</span>
+      </div>
+      <div class="app-values" *ngIf="selectedParam == param">
+        <div class="app-value" *ngFor="let value of param.values; let index = index">
+          <div class="app-value-value">{{ value }}</div>
+          <div class="app-value-actions">
+            <mat-icon (click)="onRemoveValue(param, index)" style="margin-right: 34px;">delete</mat-icon>      
+            <mat-icon (click)="onEditValue(param, index)" style="margin-right: 10px;">edit</mat-icon>
+          </div>
+        </div>
+        <div class="app-new-value app-button" (click)="onNewValue(param)">Přidat hodnotu</div>
+
+      </div>
+    </div>
+    <div class="app-new-param app-button" (click)="onNewParam()">Přidat parametr</div>
+  </ng-container>
+
+
+</div>

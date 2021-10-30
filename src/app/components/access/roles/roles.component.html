@@ -1,0 +1,18 @@
+<div class="app-roles">
+
+  <mat-spinner *ngIf="state=='loading'"
+    [strokeWidth]="3" 
+    [diameter]="30">
+  </mat-spinner>
+
+  <ng-container *ngIf="state=='success'">
+    <div class="app-role" *ngFor="let role of roles">
+      <mat-icon (click)="onEditRole(role)">edit</mat-icon>
+      <mat-icon (click)="onRemoveRole(role)">delete</mat-icon>
+      <div class="app-role-name">{{ role.name }}</div>
+    </div>
+    <div class="app-new-role app-button" (click)="onNewRole()">Přidat roli</div>
+  </ng-container>
+
+
+</div>

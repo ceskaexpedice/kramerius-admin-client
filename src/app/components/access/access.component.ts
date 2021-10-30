@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-access',
@@ -8,12 +9,17 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 })
 export class AccessComponent implements OnInit {
 
-  view = 'licenses';
+  view: string;
 
-  constructor(private api: AdminApiService) {}
+  constructor(private api: AdminApiService, private local: LocalStorageService) {}
 
   ngOnInit() {
+    this.view = this.local.getStringProperty('access.view', 'roles');
+  }
 
+  changeView(view: string) {
+    this.view = view;
+    this.local.setStringProperty('access.view', view);
   }
 
 }

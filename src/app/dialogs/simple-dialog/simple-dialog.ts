@@ -5,6 +5,7 @@ export interface SimpleDialogData {
   btn2?: SimpleDialogButton;
   checkbox?: SimpleDialogCheckbox;
   numberInput?: SimpleDialogNumberInput;
+  textInput?: SimpleDialogTextInput;
   width?: number;
 }
 
@@ -24,4 +25,9 @@ export interface SimpleDialogNumberInput {
   value: number;
   min: number;
   max: number;
+}
+
+export interface SimpleDialogTextInput {
+  label: string;
+  value: string;
 }

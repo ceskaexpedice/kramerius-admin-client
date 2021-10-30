@@ -4,7 +4,7 @@
   
   <div class="app-dialog-content">
 
-    <p class="app-message">{{ data.message }}</p>
+    <p class="app-message" *ngIf="data.message">{{ data.message }}</p>
 
     <mat-checkbox *ngIf="data.checkbox" [(ngModel)]="data.checkbox.checked">{{ data.checkbox.label }}</mat-checkbox>
 
@@ -22,6 +22,16 @@
       </div>
     </div>
 
+    <div class="app-property" *ngIf="data.textInput">
+      <div class="app-label">{{ data.textInput.label }}</div>
+      <div class="app-value">
+        <input 
+            type="text" 
+            matInput 
+            [(ngModel)]="data.textInput.value"
+            autocomplete="off">
+      </div>
+    </div>
 
   </div>
 
