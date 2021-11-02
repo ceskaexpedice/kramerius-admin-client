@@ -2,8 +2,41 @@
   height: calc(100% - 50px);
   padding: 16px;
 
+  .app-collections-header {
+    display: block;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    .app-button {
+      height: 30px;
+    }
+    .app-collection-search {
+      flex: 1;
+      margin-left: 12px;
+      margin-right: 12px;
+      outline: none;
+      background: transparent;
+      border: none;
+      font-size: 15px;
+      color: #444;
+      line-height: 32px;
+      height: 32px;
+      padding: 0 10px;
+      border: 1px solid #bdbdbd;
+      border-radius: 4px;
+      background: #fff;
+    }
+    .app-standalone-toggle {
+      font-size: 14px;
+      margin-top: 4px;
+      color: #444;
+    }
+
+  }
+
   .app-collections-table {
-    height: calc(100%);
+    height: calc(100% - 44px);
     .app-scrollable {
       max-height: calc(100% - 106px);
       overflow: auto;
@@ -20,7 +53,7 @@
       word-break: break-all;
     }
     .collection-datetime {
-      width: 160px;
+      width: 130px;
     }
     .collection-actions {
       width: 40px;

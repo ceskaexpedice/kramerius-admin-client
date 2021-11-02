@@ -25,6 +25,7 @@ import {
   MatTabsModule,
   MatSnackBarModule,
   MatRadioModule,
+  MatSlideToggleModule,
   MatButtonToggleModule
 } from '@angular/material';
 
@@ -50,7 +51,8 @@ const components = [
   MatDialogModule,
   MatTabsModule,
   MatSnackBarModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSlideToggleModule
 ];
 
 const providers = [

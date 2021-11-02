@@ -1,47 +1,72 @@
-<div class="breadcrumb-nav">
-  <div class="app-actions">
-    <a class="action-btn" mat-icon-button color="default" matTooltip="Vytvořit novou sbírku" [routerLink]="['/collections', 'new']" >
-      <mat-icon>add</mat-icon>
-    </a>    
- </div>
-  <div class="app-nav">
-    <span>Sbírky</span> 
-  </div>
-</div>
-
-
 <div class="app-collections">
+
+  <div class="app-collections-header">
+    <div class="app-new-collection app-button" (click)="onNewCollections()">Vytvořit novou sbírku</div>
+    <input class="app-collection-search"
+      type="text" 
+      placeholder="Hledat sbírku"
+      [(ngModel)]="query"
+      (ngModelChange)="onSearch($event)"
+      autocomplete="off">
+
+    <mat-slide-toggle
+      class="app-standalone-toggle"
+      color="primary"
+      [disableRipple]="true"
+      (change)="onStandaloneChange($event)"
+      [(ngModel)]="standaloneOnly">
+        Puze samostatné
+    </mat-slide-toggle>
+
+  </div>
 
   <div class="app-collections-table">
     <div class="app-table">
       <div class="app-row app-header">
-        <div class="collection-id">UUID</div>
-        <div class="collection-name">Název</div>
-        <div class="collection-description">Popis</div>
-        <div class="collection-datetime">Vytvořeno</div>
-        <div class="collection-datetime">Upraveno</div>
-        <div class="collection-actions"></div>
+        <!-- <div class="collection-id">UUID</div> -->
+        <div class="collection-name">
+          <div class="app-sortable" (click)="sortBy('name_cze')">
+            Název
+            <mat-icon *ngIf="getSortIcon('name_cze')" class="sort-arrow app-icon-16">{{ getSortIcon('name_cze') }}</mat-icon>
+          </div>
+        </div>
+        <div class="collection-description">
+          <div class="app-sortable" (click)="sortBy('description_cze')">
+            Popis
+            <mat-icon *ngIf="getSortIcon('description_cze')" class="sort-arrow app-icon-16">{{ getSortIcon('description_cze') }}</mat-icon>
+          </div>
+        </div>
+        <div class="collection-datetime">
+          <div class="app-sortable" (click)="sortBy('createdAt')">
+            Vytvořeno
+            <mat-icon *ngIf="getSortIcon('createdAt')" class="sort-arrow app-icon-16">{{ getSortIcon('createdAt') }}</mat-icon>
+          </div>
+        </div>
+        <div class="collection-datetime">
+          <div class="app-sortable" (click)="sortBy('modifiedAt')">
+            Upraveno
+            <mat-icon *ngIf="getSortIcon('modifiedAt')" class="sort-arrow app-icon-16">{{ getSortIcon('modifiedAt') }}</mat-icon>
+          </div>
+        </div>
       </div>
     </div>
     <div class="app-scrollable app-table">
       <ng-container *ngFor="let collection of collections">
         <a class="app-row" [routerLink]="['/collections', collection.id]">
-          <div class="collection-id">{{ collection.id }}</div>
+          <!-- <div class="collection-id">{{ collection.id }}</div> -->
           <div class="collection-name">{{ collection.name_cze }}</div>
           <div class="collection-description">{{ collection.description_cze }}</div>
           <div class="collection-datetime">{{ collection.createdAt | appDatetime }}</div>
           <div class="collection-datetime">{{ collection.modifiedAt | appDatetime }}</div>
-          <div class="collection-actions">
-          </div>
         </a>
       </ng-container>
     </div>
 
-    <div class="paginator-wrapper">
+    <!-- <div class="paginator-wrapper">
       <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
         (page)="onPageChanged($event)">
       </mat-paginator>
-    </div>
+    </div> -->
   </div>
 
 </div>

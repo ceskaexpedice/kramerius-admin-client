@@ -1,66 +1,84 @@
-<div class="breadcrumb-nav">
-  <div class="app-actions">
-    <button *ngIf="mode=='new'" class="action-btn" mat-icon-button color="default" matTooltip="Vytvořit sbírku"
-      (click)="onSave()">
-      <mat-icon>save</mat-icon>
-    </button>
-    <button *ngIf="mode=='edit'" class="action-btn" mat-icon-button color="default" matTooltip="Uložit změny"
-      (click)="onUpdate()">
-      <mat-icon>save</mat-icon>
-    </button>
-  </div>
-  <div class="app-nav">
-    <a [routerLink]="['/collections']">Sbírky</a>
-    <mat-icon>chevron_right</mat-icon>
-    <ng-container *ngIf="mode=='new'">
-      <span>Nová sbírka</span>
-    </ng-container>
-    <ng-container *ngIf="mode=='edit'">
-      <a [routerLink]="['/collections', collection.id]">{{ collectionName }}</a>
-      <mat-icon>chevron_right</mat-icon>
-      <span>Úprava sbírky</span>
-    </ng-container>
-  </div>
-</div>
-
 <div class="app-edit-collection" *ngIf="collection && state != 'loading'">
-  <mat-form-field>
-    <mat-label>Název sbírky</mat-label>
-    <input matInput [(ngModel)]="collection.name_cze">
-  </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Název sbírky (anglický)</mat-label>
-    <input matInput [(ngModel)]="collection.name_eng">
-  </mat-form-field>
+<div class="app-page-dialog">
 
-  <mat-form-field>
-    <mat-label>Krátky popis sbírky</mat-label>
-    <textarea matInput [(ngModel)]="collection.description_cze"></textarea>
-  </mat-form-field>
+  <div class="app-dialog-title">Nová sbírka</div>
 
-  <mat-form-field>
-    <mat-label>Krátky popis sbírky (anglický)</mat-label>
-    <textarea matInput [(ngModel)]="collection.description_eng"></textarea>
-  </mat-form-field>
+  <div class="app-dialog-content-wrapper">
 
-  <div class="app-edit-standalone">
-    <div class="app-label">Samostatná sbírka</div>
-    <mat-checkbox color="primary" [(ngModel)]="collection.standalone">Ano</mat-checkbox>
+  <div class="app-dialog-content">
+    <div class="app-property">
+      <div class="app-label">Název sbírky</div>
+      <div class="app-value">
+        <input 
+            type="text" 
+            [(ngModel)]="collection.name_cze"
+            autocomplete="off">
+      </div>
+    </div>
+
+    <div class="app-property">
+      <div class="app-label">Název sbírky (anglický)</div>
+      <div class="app-value">
+        <input 
+            type="text" 
+            [(ngModel)]="collection.name_eng"
+            autocomplete="off">
+      </div>
+    </div>
+
+    <div class="app-property">
+      <div class="app-label">Krátky popis sbírky</div>
+      <textarea 
+          type="text" 
+          [(ngModel)]="collection.description_cze"
+          autocomplete="off"></textarea>
+    </div>
+
+    <div class="app-property">
+      <div class="app-label">Krátky popis sbírky (anglický)</div>
+      <textarea 
+          type="text" 
+          [(ngModel)]="collection.description_eng"
+          autocomplete="off"></textarea>
+    </div>
+
+    <div class="app-property">
+      <div class="app-label">Samostatná sbírka</div>
+      <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="collection.standalone">Ano</mat-checkbox>
+    </div>
+
+    <div class="app-property">
+      <div class="app-label">Úplný popis sbírky</div>
+      <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data=""
+        name="text">
+      </ckeditor>
+    </div>
+
+    <div class="app-property">
+      <div class="app-label">Úplný popis sbírky (anglický)</div>
+      <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""
+        name="text">
+      </ckeditor>
+    </div>
+
   </div>
+</div>
 
 
-  <div class="app-label">Úplný popis sbírky</div>
-  <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data=""
-    name="text">
-  </ckeditor>
 
-  <div class="app-label">Úplný popis sbírky (anglický)</div>
-  <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""
-    name="text">
-  </ckeditor>
+
+<div class="app-dialog-actions">
+  <div *ngIf="mode == 'new'" class="app-button" (click)="onSave()">Vytvořit</div>
+  <div *ngIf="mode == 'edit'" class="app-button" (click)="onUpdate()">Upravit</div>
+  <!-- <div class="app-button app-button-light" (click)="onCancel()">Zrušit</div> -->
+</div>
+
 
 </div>
+
+</div>
+
 
 <mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
 </mat-spinner>
