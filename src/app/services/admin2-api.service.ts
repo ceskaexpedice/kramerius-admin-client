@@ -103,12 +103,12 @@ export class Admin2ApiService {
   }
 
   updateRole(role: Role): Observable<Role> {
-    return this.put(`roles`, role.toJson()).pipe(map(response => 
+    return this.put(`roles/${role.id}`, role.toJson()).pipe(map(response => 
       Role.fromJson(response)));
   }
 
   removeRole(role: Role): Observable<any> {
-    return this.delete(`roles`, { id: role.id });
+    return this.delete(`roles/${role.id}`);
   }
 
   getLicenses(): Observable<License[]> {
@@ -122,13 +122,23 @@ export class Admin2ApiService {
   }
 
   updateLicense(license: License): Observable<License> {
-    return this.put(`licenses`, license.toJson()).pipe(map(response => 
+    return this.put(`licenses/${license.id}`, license.toJson()).pipe(map(response => 
       License.fromJson(response)));
   }
 
-  removeLicense(license: License): Observable<any> {
-    return this.delete(`licenses`, { id: license.id });
+  moveLicenseUp(license: License): Observable<any> {
+    return this.put(`licenses/moveup/${license.id}`, license.toJson());
   }
+
+  moveLicenseDown(license: License): Observable<any> {
+    return this.put(`licenses/movedown/${license.id}`, license.toJson());
+  }
+
+  removeLicense(license: License): Observable<any> {
+    return this.delete(`licenses/${license.id}`);
+  }
+
+
 
 }
 

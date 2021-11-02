@@ -37,10 +37,8 @@ export class License {
 
   toJson() {
     return {
-      id: this.id,
       name: this.name,
-      description: this.description || '',
-      priority: this.priority
+      description: this.description || ''
     }
   }
 

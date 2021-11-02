@@ -22,11 +22,14 @@ export class LicensesComponent implements OnInit {
     private dialog: MatDialog) {}
 
   ngOnInit() {
+    this.reload();
+  }
+
+  reload() {
     this.state = 'loading';
     this.api.getLicenses().subscribe((licenses: License[]) => {
       this.licenses = licenses;
       this.state = 'success';
-      console.log('licenses', licenses);
     });
   }
 
@@ -67,14 +70,29 @@ export class LicensesComponent implements OnInit {
     });
   }
 
+  onMoveLiceseUp(license: License) {
+    this.api.moveLicenseUp(license).subscribe(result => {
+      console.log('moveUp', result);
+      this.reload();
+    });
+  }
+
+  onMoveLiceseDown(license: License) {
+    this.api.moveLicenseDown(license).subscribe(result => {
+      console.log('moveDown', result);
+      this.reload();
+    });
+  }
+
   onEditLicese(license: License) {
     const dialogRef = this.dialog.open(NewLicenseDialogComponent, {
       data: { license: license }
     } );
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.license) {
-          license.copyFrom(result.license);
-          this.sortLicenses();
+          // license.copyFrom(result.license);
+          // this.sortLicenses();
+          this.reload();
         }
     });
   }
