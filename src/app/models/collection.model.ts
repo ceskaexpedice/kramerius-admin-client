@@ -40,6 +40,7 @@ export class Collection {
   // }
 
   static fromAdminApiJson(json): Collection {
+    console.log('json', json);
     const collection = new Collection();
     collection.id = json['pid'];
     collection.name_cze = json['name_cze'] || "";

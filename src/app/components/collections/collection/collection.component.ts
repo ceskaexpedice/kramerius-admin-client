@@ -18,6 +18,7 @@ export class CollectionComponent implements OnInit {
   collection: Collection;
   state = 'none';
   availableCollections: any[];
+  view = 'detail';
 
   items: any[];
 
@@ -33,6 +34,7 @@ export class CollectionComponent implements OnInit {
   ngOnInit() {
     this.state = 'loading';
     this.route.params.subscribe(params => {
+      
       this.loadData(params['id']);
     });
   }
@@ -42,11 +44,48 @@ export class CollectionComponent implements OnInit {
       this.collection = collection;
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
         this.items = res;
+        this.view = 'detail';
         this.state = 'success';
       })
     }, (error) => {
       console.log(error);
       this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
+    });
+  }
+
+  getModel(model: string): string {
+    switch(model) {
+      case 'monograph': return 'Kniha'
+      case 'periodical': return 'Periodikum'
+      case 'page': return 'Stránka'
+      case 'periodicalitem': return 'Číslo periodika'
+      case 'periodicalvolume': return 'Ročník periodika'
+      default: return model
+    }
+  }
+
+  getName(collection): string {
+    let name = collection['title.search'];
+    if (collection['date.str'] && ['page', 'periodicalitem', 'periodicalvolume'].indexOf(collection['model']) >= 0) {
+      name += ' / ' + collection['date.str'];
+    }
+    return name;
+  }
+
+  getThumb(uuid: string): string {
+    return this.clientApi.getThumb(uuid);
+  }
+
+  changeView(view: string) {
+    this.view = view;
+  }
+
+  onUpdated() {
+    this.state = 'loading';
+    this.collectionsService.getCollection(this.collection.id).subscribe((collection: Collection) => {
+      this.collection = collection;
+      this.state = 'success';
+      this.changeView('detail');
     });
   }
 
@@ -65,7 +104,7 @@ export class CollectionComponent implements OnInit {
       btn2: {
         label: 'Ne',
         value: 'no',
-        color: 'default'
+        color: 'light'
       }
     };
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });

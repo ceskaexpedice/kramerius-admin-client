@@ -37,12 +37,11 @@ export class CollectionsService {
 
   getCollection(id: string): Observable<Collection> {
     return this.adminApi.getCollection(id).pipe(map(response => {
-      //console.log(response);
       return Collection.fromAdminApiJson(response);
     }));
   }
 
-  updateCollection(collection: Collection): Observable<Object> {
+  updateCollection(collection: Collection): Observable<any> {
     return this.adminApi.updateCollection(collection);
   }
 

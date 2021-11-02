@@ -1,4 +1,4 @@
-<div class="breadcrumb-nav">
+<!-- <div class="breadcrumb-nav">
   <div class="app-actions" *ngIf="collection">
 
     <button matTooltip="Přidat tuto sbírku do jiné sbírky" class="action-btn" mat-icon-button
@@ -22,57 +22,104 @@
       <span>{{ collection.name_cze }}</span>
     </ng-container>
   </div>
-</div>
+</div> -->
+
 
 <div class="app-collection" *ngIf="collection">
-  <div class="app-label">Název sbírky</div>
-  <div class="app-name">
-    {{ collection.name_cze }}
-  </div>
 
-  <div class="app-label">Název sbírky (anglický)</div>
-  <div class="app-name">
-    {{ collection.name_eng }}
-  </div>
 
-  <div class="app-label">Krátky popis sbírky</div>
-  <div class="app-description">
-    {{ collection.description_cze }}
-  </div>
-
-  <div class="app-label">Krátky popis sbírky (anglický)</div>
-  <div class="app-description">
-    {{ collection.description_eng }}
-  </div>
-
-  <div class="app-label">Samostatná sbírka</div>
-  <div class="app-standalone">
-    {{ collection.standalone ? "Ano" : "Ne" }}
-  </div>
-
-  <div class="app-label">Úplný popis sbírky</div>
-  <div class="app-content" [innerHTML]="collection.content_cze"></div>
-
-  <div class="app-label">Úplný popis sbírky (anglický)</div>
-  <div class="app-content" [innerHTML]="collection.content_eng"></div>
-
-  <div *ngIf="collection.items">
-    <div class="app-label">Obsah sbírky</div>
-    <div *ngFor="let item of items" class="app-collection-item">
-
-      <a class="app-collection-name" [routerLink]="['/collections', item['pid']]">
-        {{ item['title.search'] }}
-        <span *ngIf="item['title.search'] != item['root.title']">
-          ({{ item['root.title'] }} )
-        </span>
-      </a>
-      <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['pid'])">
-        cancel</mat-icon>
-      <br>
+<div class="app-view-toggle">
+  <div class="app-toggle-buttons">
+    <div class="app-toggle-button" (click)="changeView('detail')" [class.app-selected]="view == 'detail'">
+      <span>Detail</span>
+    </div>
+    <div class="app-toggle-button" (click)="changeView('edit')" [class.app-selected]="view == 'edit'">
+      <span>Úprava</span>
+    </div>
+    <div class="app-toggle-button" (click)="changeView('content')" [class.app-selected]="view == 'content'">
+      <span>Obsah</span>
     </div>
   </div>
+</div>
+
+
+
+<div class="app-view-content">
+
+
+  <ng-container *ngIf="view == 'content'">
+
+    <div *ngIf="collection.items" class="app-collection-content">
+      <div *ngFor="let item of items" class="app-collection-item">
+        <div class="app-image-wrapper">
+          <img [src]="getThumb(item['pid'])">
+        </div>
+        <div class="app-name-and-model">
+          <div class="app-col-name">
+            {{ getName(item) }}
+            <span *ngIf="item['title.search'] != item['root.title']">
+              ({{ item['root.title'] }})
+            </span>
+          </div>
+          <div class="app-col-model">{{ getModel(item['model']) }}</div>
+        </div>
+        <div class="app-col-actions">
+          <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['pid'])">
+            cancel</mat-icon>
+        </div>
+      </div>
+    </div>
+
+
+  </ng-container>
+
+
+  <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" *ngIf="view == 'edit'" [colId]="collection.id"></app-edit-collection>
+
+
+  <ng-container *ngIf="view == 'detail'">
+    <div class="app-label">Název sbírky</div>
+    <div class="app-name">
+      {{ collection.name_cze }}
+    </div>
+
+    <div class="app-label">Název sbírky (anglický)</div>
+    <div class="app-name">
+      {{ collection.name_eng }}
+    </div>
+
+    <div class="app-label">Krátky popis sbírky</div>
+    <div class="app-description">
+      {{ collection.description_cze }}
+    </div>
+
+    <div class="app-label">Krátky popis sbírky (anglický)</div>
+    <div class="app-description">
+      {{ collection.description_eng }}
+    </div>
+
+    <div class="app-label">Samostatná sbírka</div>
+    <div class="app-standalone">
+      {{ collection.standalone ? "Ano" : "Ne" }}
+    </div>
+
+    <div class="app-label">Úplný popis sbírky</div>
+    <div class="app-content" [innerHTML]="collection.content_cze"></div>
+
+    <div class="app-label">Úplný popis sbírky (anglický)</div>
+    <div class="app-content" [innerHTML]="collection.content_eng"></div>
+
+  </ng-container>
+
 
 </div>
+
+
+
+</div>
+
+
+
 
 <mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
 </mat-spinner>

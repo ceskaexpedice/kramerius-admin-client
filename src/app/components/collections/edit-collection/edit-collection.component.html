@@ -71,7 +71,7 @@
 <div class="app-dialog-actions">
   <div *ngIf="mode == 'new'" class="app-button" (click)="onSave()">Vytvořit</div>
   <div *ngIf="mode == 'edit'" class="app-button" (click)="onUpdate()">Upravit</div>
-  <!-- <div class="app-button app-button-light" (click)="onCancel()">Zrušit</div> -->
+  <div *ngIf="mode == 'edit'" class="app-button app-button-warn" (click)="onDelete()">Odstranit sbírku</div>
 </div>
 
 

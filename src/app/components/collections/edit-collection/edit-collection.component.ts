@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic/';
 import '@ckeditor/ckeditor5-build-classic/build/translations/cs';
@@ -27,6 +27,12 @@ export class EditCollectionComponent implements OnInit {
   mode = 'none';
   state = 'none';
 
+  @Input() colId;
+
+  @Output() updated = new EventEmitter<any>();
+  @Output() delete = new EventEmitter<any>();
+
+
   constructor(
     private route: ActivatedRoute,
     private ui: UIService,
@@ -36,18 +42,26 @@ export class EditCollectionComponent implements OnInit {
 
   ngOnInit() {
     this.state = 'loading';
-    this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.collectionsService.getCollection(params['id']).subscribe((collection: Collection) => {
-          this.collection = collection;
-          this.collectionName = collection.name_cze ? collection.name_cze : collection.name_eng;
-          this.init('edit');
-        });
-      } else {
-        this.collection = new Collection();
-        this.init('new');
-      }
-    });
+    if (this.colId) {
+      this.collectionsService.getCollection(this.colId).subscribe((collection: Collection) => {
+        this.collection = collection;
+        this.collectionName = collection.name_cze ? collection.name_cze : collection.name_eng;
+        this.init('edit');
+      });
+    } else {
+      this.route.params.subscribe(params => {
+        if (params['id']) {
+          this.collectionsService.getCollection(params['id']).subscribe((collection: Collection) => {
+            this.collection = collection;
+            this.collectionName = collection.name_cze ? collection.name_cze : collection.name_eng;
+            this.init('edit');
+          });
+        } else {
+          this.collection = new Collection();
+          this.init('new');
+        }
+      });
+    }
   }
 
   private init(mode: string) {
@@ -68,14 +82,15 @@ export class EditCollectionComponent implements OnInit {
 
 
   onUpdate() {
+    this.state = 'loading';
     this.collectionsService.updateCollection(this.collection).subscribe(() => {
-      (async () => {
-        this.state = 'loading';
-        await this.delay(0);
         this.ui.showInfoSnackBar("Sbírka byla upravena");
-        this.router.navigate(['/collections', this.collection.id]);
-      })();
-    },
+        if (this.colId) {
+          this.updated.emit();
+        } else {
+          this.router.navigate(['/collections', this.collection.id]);
+        }
+      },
       (error) => {
         this.state = 'error';
         console.log(error);
@@ -83,8 +98,8 @@ export class EditCollectionComponent implements OnInit {
       });
   }
 
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  onDelete() {
+    this.delete.emit();
   }
 
 }

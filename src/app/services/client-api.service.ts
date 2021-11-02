@@ -44,6 +44,10 @@ export class ClientApiService {
     return this.getText(`/items/${uuid}/streams/BIBLIO_MODS`);
   }
 
+  getThumb(uuid: string): string {
+    return this.baseUrl + `/items/${uuid}/image/thumb`;
+  }
+
   search(params): Observable<any[]> {
     return this.get('/search', params).pipe(map(response => response['response']['docs']));
   }
@@ -51,7 +55,8 @@ export class ClientApiService {
   getCollectionChildren(uuid: string): Observable<any[]> {
     return this.search({
       q: `in_collections.direct:"${uuid}"`,
-      fl: 'model,pid,title.search,root.title',
+      fl: 'model,pid,title.search,root.title,date.str,level',
+      sort: 'rels_ext_index.sort asc',
       rows: '400'
     });
   }
