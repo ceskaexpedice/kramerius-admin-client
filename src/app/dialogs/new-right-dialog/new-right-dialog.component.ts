@@ -86,7 +86,7 @@ export class NewRightDialogComponent implements OnInit {
 
   onSave() {
     // TODO: validation
-    if (!this.right.role || !this.right.condition || 
+    if (!this.right.role ||
       (this.right.condition && this.right.condition.paramsNecessary && !this.right.condition.params)) {
         return;
       }

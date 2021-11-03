@@ -60,7 +60,8 @@ export class Admin2ApiService {
   }
 
   updateRight(right: Right): Observable<Right> {
-    return this.put(`rights`, right.toJson()).pipe(map(response => 
+    console.log('updateRight', right.toJson());
+    return this.put(`rights/${right.id}`, right.toJson()).pipe(map(response => 
       Right.fromJson(response)));
   }
 
@@ -70,7 +71,7 @@ export class Admin2ApiService {
   }
 
   removeRight(right: Right): Observable<any> {
-    return this.delete(`rights`, { id: right.id});
+    return this.delete(`rights/${right.id}`);
   }
 
   getConditionParams(): Observable<ConditionParam[]> {
@@ -84,12 +85,12 @@ export class Admin2ApiService {
   }
 
   updateConditionParam(param: ConditionParam): Observable<ConditionParam> {
-    return this.put(`rights/params`, param.toJson()).pipe(map(response => 
+    return this.put(`rights/params/${param.id}`, param.toJson()).pipe(map(response => 
       ConditionParam.fromJson(response)));
   }
 
   removeConditionParam(param: ConditionParam): Observable<any> {
-    return this.delete(`rights/params`, { id: param.id });
+    return this.delete(`rights/params/${param.id}`);
   }
 
   getRoles(): Observable<Role[]> {

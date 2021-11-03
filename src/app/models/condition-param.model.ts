@@ -6,7 +6,6 @@ export class ConditionParam {
   values: string[];
 
   constructor() {
-    this.id = 0;
     this.description = '';
     this.values = [];
   }
@@ -37,11 +36,14 @@ export class ConditionParam {
   }
 
   toJson() {
-    return {
-      id: this.id,
+    const json = {
       description: this.description || '',
-      objects: this.values
+      objects: this.values     
     }
+    if (this.id) {
+      json['id'] = this.id;
+    }
+    return json;
   }
 
 

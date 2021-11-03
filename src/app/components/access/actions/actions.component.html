@@ -28,7 +28,7 @@
             {{ right.condition ? right.condition.name : "-"}}
           </div>
           <div class="app-right-condition">
-            {{ right.condition && right.condition.params ? right.condition.params.description : "-"}}
+            {{ right.condition && right.condition.params && right.condition.params.description ? right.condition.params.description : "-"}}
           </div>
           <div class="app-right-license">
             {{ right.hasLicense() ? right.condition.license : "-"}}

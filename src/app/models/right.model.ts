@@ -8,6 +8,10 @@ export class Right {
   condition: Condition;
   action: string;
 
+  constructor() {
+    this.pid = "uuid:1";
+  }
+
   hasLicense(): boolean {
     return !!this.condition && !!this.condition.license;
   }
@@ -23,6 +27,8 @@ export class Right {
     if (right.condition) {
       this.condition = new Condition();
       this.condition.copyFrom(right.condition);
+    } else {
+      this.condition = null;
     }
   }
 
@@ -49,13 +55,15 @@ export class Right {
   }
 
   toJson() {
-    return {
+    const json = {
       action: this.action,
-      criterium: this.condition ? this.condition.toJson() : null,
-      role: this.role ? this.role.toJson() : null,
-      id: this.id,
-      pid: this.pid || ""
+      role: this.role ? { name: this.role.name, id: this.role.id } : null,
+      pid: this.pid
     }
+    if (this.condition) {
+      json['criterium'] = this.condition.toJson();
+    }
+    return json;
   }
 
   clone(): Right {
@@ -106,11 +114,13 @@ export class Condition {
   }
 
   toJson() {
-    return {
-      label: this.license,
+    const json = {
       qname: this.code,
-      params: this.params ? this.params.toJson() : null
     }
+    if (this.params) {
+      json['params'] = this.params.toJson();
+    }
+    return json;
   }
 
 }
