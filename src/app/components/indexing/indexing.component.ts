@@ -70,8 +70,8 @@ export class IndexingComponent implements OnInit {
     this.loadFirstBatchOfItems();
   }
 
-  buildDigitalLibraryUrl(pid: string) {
-    return this.appSettings.digitalLibraryBaseUrl + "/uuid/" + pid;
+  buildUserClinetUrl(pid: string) {
+    return this.appSettings.userClientBaseUrl + "/uuid/" + pid;
   }
 
   openIndexationByPidDialog(object: { pid: string, title: string } = null) {

@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
     return this.appSettings.version;
   }
 
-  getDigitalLibraryUrl() {
-    return this.appSettings.digitalLibraryBaseUrl;
+  getUserClientUrl() {
+    return this.appSettings.userClientBaseUrl;
   }
 
   getCoreUrl() {

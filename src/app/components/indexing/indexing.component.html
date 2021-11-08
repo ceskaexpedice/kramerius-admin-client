@@ -81,7 +81,7 @@
         <div class="scrollable app-table">
             <ng-container *ngFor="let object of getCurrentItems()">
                 <!-- TODO: url z konfigurace -->
-                <a class="app-row" href="{{buildDigitalLibraryUrl(object.pid)}}" target="_blank">
+                <a class="app-row" href="{{buildUserClientUrl(object.pid)}}" target="_blank">
                     <div class="object-pid">{{ object.pid }}</div>
                     <div class="object-name" matTooltip="{{ object.title}}">{{ object.title |appShorten:100}}</div>
                     <div class="object-indexer-version-cont">
