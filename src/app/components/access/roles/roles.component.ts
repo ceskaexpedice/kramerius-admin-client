@@ -61,6 +61,10 @@ export class RolesComponent implements OnInit {
         this.api.removeRole(role).subscribe(() => {
           this.roles.splice(this.roles.indexOf(role), 1);
           this.ui.showInfoSnackBar("Role byla odstraněna")
+        },
+        (error) => {
+          console.log('on error', error);
+          this.ui.showInfoSnackBar("Roli se nepodřilo odstranit");
         });
       }
     });
@@ -72,6 +76,7 @@ export class RolesComponent implements OnInit {
     } );
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.role) {
+          this.ui.showInfoSnackBar("Role byla upravena.")
           role.copyFrom(result.role);
         }
     });

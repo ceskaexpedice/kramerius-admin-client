@@ -302,6 +302,11 @@ body {
         // margin-top: 5px;
       }
     }
+    .app-error-message {
+      color: $app-action-warn;
+      padding-top: 10px;
+      font-size: 14px;
+    }
   }
   .app-dialog-actions {
     margin-top: 25px;

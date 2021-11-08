@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Role } from "src/app/models/roles.model";
 import { Admin2ApiService } from "src/app/services/admin2-api.service";
+import { UIService } from "src/app/services/ui.service";
 
 @Component({
   templateUrl: './new-role-dialog.component.html',
@@ -11,6 +12,7 @@ export class NewRoleDialogComponent implements OnInit {
 
   role: Role;
   mode: string;
+  errorMessage: string;
 
   constructor(public dialogRef: MatDialogRef<NewRoleDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -45,14 +47,28 @@ export class NewRoleDialogComponent implements OnInit {
     this.api.createRole(this.role).subscribe((role: Role) => {
       console.log('oncreate response', role);
       this.dialogRef.close({ role: role });
-    });
+    },
+    (error) => {
+      console.log('onCreate', error);
+    }
+    );
   }
 
   private onUpdate() {
+    this.errorMessage = null;
     this.api.updateRole(this.role).subscribe((role: Role) => {
       console.log('oncreate response', role);
       this.dialogRef.close({ role: role });
-    });
+    },
+    (error) => {
+      console.log('onCreate', error);
+      if (error && error.error && error.error.status == 409) {
+        this.errorMessage = "Role se tímto názvem už exituje, zadejte jiný název.";
+      } else {
+        this.errorMessage = "Roli ne nepodařilo upravit.";
+      }
+    }
+    );
   }
 
   onCancel() {
