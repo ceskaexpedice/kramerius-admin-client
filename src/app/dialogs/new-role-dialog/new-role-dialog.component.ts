@@ -43,32 +43,30 @@ export class NewRoleDialogComponent implements OnInit {
 
 
   private onCreate() {
-    console.log('on create');
     this.api.createRole(this.role).subscribe((role: Role) => {
-      console.log('oncreate response', role);
       this.dialogRef.close({ role: role });
     },
     (error) => {
-      console.log('onCreate', error);
-    }
-    );
+      if (error && error.error && error.error.status == 409) {
+        this.errorMessage = "Role s tímto názvem už exituje, zadejte jiný název.";
+      } else {
+        this.errorMessage = "Roli se nepodařilo vytvořit.";
+      }
+    });
   }
 
   private onUpdate() {
     this.errorMessage = null;
     this.api.updateRole(this.role).subscribe((role: Role) => {
-      console.log('oncreate response', role);
       this.dialogRef.close({ role: role });
     },
     (error) => {
-      console.log('onCreate', error);
       if (error && error.error && error.error.status == 409) {
-        this.errorMessage = "Role se tímto názvem už exituje, zadejte jiný název.";
+        this.errorMessage = "Role s tímto názvem už exituje, zadejte jiný název.";
       } else {
-        this.errorMessage = "Roli ne nepodařilo upravit.";
+        this.errorMessage = "Roli se nepodařilo upravit.";
       }
-    }
-    );
+    });
   }
 
   onCancel() {

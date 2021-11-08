@@ -11,6 +11,7 @@ export class NewLicenseDialogComponent implements OnInit {
 
   license: License;
   mode: string;
+  errorMessage: string;
 
   constructor(public dialogRef: MatDialogRef<NewLicenseDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -41,17 +42,28 @@ export class NewLicenseDialogComponent implements OnInit {
 
 
   private onCreate() {
-    console.log('on create');
     this.api.createLicense(this.license).subscribe((license: License) => {
-      console.log('oncreate response', license);
       this.dialogRef.close({ license: license });
+    },
+    (error) => {
+      if (error && error.error && error.error.status == 409) {
+        this.errorMessage = "Licence s tímto názvem už exituje, zadejte jiný název.";
+      } else {
+        this.errorMessage = "Licenci se nepodařilo vytvořit.";
+      }
     });
   }
 
   private onUpdate() {
     this.api.updateLicense(this.license).subscribe((license: License) => {
-      console.log('oncreate response', license);
       this.dialogRef.close({ license: license });
+    },
+    (error) => {
+      if (error && error.error && error.error.status == 409) {
+        this.errorMessage = "Licence s tímto názvem už exituje, zadejte jiný název.";
+      } else {
+        this.errorMessage = "Licenci se nepodařilo upravit.";
+      }
     });
   }
 

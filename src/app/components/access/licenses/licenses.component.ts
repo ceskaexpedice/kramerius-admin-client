@@ -65,6 +65,9 @@ export class LicensesComponent implements OnInit {
         this.api.removeLicense(license).subscribe(() => {
           this.licenses.splice(this.licenses.indexOf(license), 1);
           this.ui.showInfoSnackBar("Licence byla odstraněna")
+        },
+        (error) => {
+          this.ui.showInfoSnackBar("Licenci se nepodřilo odstranit");
         });
       }
     });
@@ -90,9 +93,10 @@ export class LicensesComponent implements OnInit {
     } );
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.license) {
-          // license.copyFrom(result.license);
-          // this.sortLicenses();
-          this.reload();
+          this.ui.showInfoSnackBar("Licence byla upravena.")
+          license.copyFrom(result.license);
+          this.sortLicenses();
+          // this.reload();
         }
     });
   }
