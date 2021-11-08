@@ -120,6 +120,9 @@ export class Condition {
     if (this.params) {
       json['params'] = this.params.toJson();
     }
+    if (this.license) {
+      json['label'] = this.license;
+    }
     return json;
   }
 

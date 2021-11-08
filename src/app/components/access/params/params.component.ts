@@ -177,6 +177,9 @@ export class ParamsComponent implements OnInit {
         this.api.removeConditionParam(param).subscribe(() => {
           this.params.splice(this.params.indexOf(param), 1);
           this.ui.showInfoSnackBar("parametr byl odstraněn")
+        },
+        (error) => {
+          this.ui.showInfoSnackBar("parametr se nepodřilo odstranit");
         });
       }
     });
