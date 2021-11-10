@@ -66,11 +66,30 @@ export class ImportComponent implements OnInit {
 
 
   submit() {
-    if (this.type == 'foxml') {
-      this.importFoxml();
-    } else if (this.type == 'ndk') {
-      this.importNdk();
-    }
+    const data: SimpleDialogData = {
+      title: "Spuštění importu",
+      message: "Opravdu chcete spustit import?",
+      btn1: {
+        label: 'Spustit',
+        value: 'approve',
+        color: 'primary'
+      },
+      btn2: {
+        label: 'Zrušit',
+        value: 'cancel',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'approve') {
+        if (this.type == 'foxml') {
+          this.importFoxml();
+        } else if (this.type == 'ndk') {
+          this.importNdk();
+        }
+      }
+    });
   }
 
   importNdk() {

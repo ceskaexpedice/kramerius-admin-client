@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSelectChange } from '@angular/material';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { ScheduleIndexationByModelDialogComponent } from 'src/app/dialogs/schedule-indexation-by-model-dialog/schedule-indexation-by-model-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { ScheduleIndexationsByMultiplePidsDialogComponent } from 'src/app/dialogs/schedule-indexations-by-multiple-pids-dialog/schedule-indexations-by-multiple-pids-dialog.component';
-import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
-import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { ClientApiService } from 'src/app/services/client-api.service';
@@ -70,7 +68,7 @@ export class IndexingComponent implements OnInit {
     this.loadFirstBatchOfItems();
   }
 
-  buildUserClinetUrl(pid: string) {
+  buildUserClientUrl(pid: string) {
     return this.appSettings.userClientBaseUrl + "/uuid/" + pid;
   }
 
