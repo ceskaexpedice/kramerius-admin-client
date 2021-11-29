@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Collection } from 'src/app/models/collection.model';
-import { PageEvent } from '@angular/material/paginator';
-import { CollectionsService } from 'src/app/services/collections.service';
 import { Router } from '@angular/router';
+import { Collection } from 'src/app/models/collection.model';
+import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
@@ -10,6 +9,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   templateUrl: './collections.component.html',
   styleUrls: ['./collections.component.scss']
 })
+
 export class CollectionsComponent implements OnInit {
 
   collections: Collection[];

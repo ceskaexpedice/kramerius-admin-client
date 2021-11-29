@@ -6,14 +6,14 @@
       type="text" 
       placeholder="Hledat sbírku"
       [(ngModel)]="query"
-      (ngModelChange)="onSearch($event)"
+      (ngModelChange)="onSearch()"
       autocomplete="off">
 
     <mat-slide-toggle
       class="app-standalone-toggle"
       color="primary"
       [disableRipple]="true"
-      (change)="onStandaloneChange($event)"
+      (change)="onStandaloneChange()"
       [(ngModel)]="standaloneOnly">
         Puze samostatné
     </mat-slide-toggle>

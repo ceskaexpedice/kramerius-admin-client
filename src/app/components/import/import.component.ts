@@ -23,7 +23,7 @@ export class ImportComponent implements OnInit {
   constructor(private api: AdminApiService, 
     private dialog: MatDialog,
     private ui: UIService,
-    private imports: ImportService,
+    public imports: ImportService,
     private local: LocalStorageService) {}
 
   ngOnInit() {
