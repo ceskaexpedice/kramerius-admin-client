@@ -1,5 +1,5 @@
 .app-collections {
-  height: calc(100% - 50px);
+  height: calc(100% - 0px);
   padding: 16px;
 
   .app-collections-header {
@@ -38,7 +38,7 @@
   .app-collections-table {
     height: calc(100% - 44px);
     .app-scrollable {
-      max-height: calc(100% - 106px);
+      max-height: calc(100% - 50px);
       overflow: auto;
     }
     .collection-id {
