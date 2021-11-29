@@ -18,7 +18,6 @@ import { AppSettings } from './services/app-settings';
 import { environment } from 'src/environments/environment';
 import { DurationPipe } from './pipes/duration.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { DatetimePipe } from './pipes/datetime.pipe';
 import { ProcessComponent } from './components/processes/process/process.component';
 import { SimpleDialogComponent } from './dialogs/simple-dialog/simple-dialog.component';
@@ -111,7 +110,6 @@ import { TreeComponent } from './components/import/tree/tree.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule,
     CKEditorModule,
     AngularTokenModule.forRoot({
       apiBase: environment.cloudApiBase,
