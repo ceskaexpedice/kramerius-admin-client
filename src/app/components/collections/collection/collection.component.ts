@@ -3,7 +3,7 @@ import { Collection } from 'src/app/models/collection.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { ClientApiService } from 'src/app/services/client-api.service';

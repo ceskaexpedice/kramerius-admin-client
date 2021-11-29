@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Process } from 'src/app/models/process.model';
 import { Batch } from 'src/app/models/batch.model';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 

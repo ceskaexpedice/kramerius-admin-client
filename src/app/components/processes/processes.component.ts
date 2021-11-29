@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { Batch } from 'src/app/models/batch.model';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';

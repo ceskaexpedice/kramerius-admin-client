@@ -3,7 +3,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 import { Collection } from 'src/app/models/collection.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpHeaders } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';

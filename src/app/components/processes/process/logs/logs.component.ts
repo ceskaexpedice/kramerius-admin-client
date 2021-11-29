@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Process } from 'src/app/models/process.model';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
