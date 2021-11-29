@@ -1,5 +1,7 @@
 import { MatPaginatorIntl } from '@angular/material';
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class MatPaginatorIntlCz extends MatPaginatorIntl {
     itemsPerPageLabel = 'Položek na stránku';
     nextPageLabel = 'Další stránka';
