@@ -1,0 +1,36 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="schedule()">
+
+    <h1 mat-dialog-title>Přebudování Processing indexu pro objekt</h1>
+    <div class="info">
+        Proces <i>Přebudování Processing indexu pro objekt</i> smaže
+        z Processing indexu záznam Description zvoleného objektu a všechny záznamy Relation pro vazby vedoucí ze
+        zvoleného objektu.
+        Následně vytvoří záznam Description a záznamy Relation z FOXML objektu v Repozitáři (Akubra).
+    </div>
+    <div class="info">
+        Proces je potřeba spustit po zásahu v RELS-EXT záznamu FOXML přímo v Repozitáři, mimo nástroje Krameria.
+        Typicky jde o přidání a/nebo odebrání vazby.
+    </div>
+    <div class="info">
+        Po dokončení procesu je potřeba ještě přeindexovat dotčený objekt (jen on). A všechny objekty (do hloubky),
+        které byly, manipulacemi s vazbami ve FOXML, pod objekt přiřazeny/odebrány.
+    </div>
+    <div class="info">
+        Pozor! Proces neopraví vazby vedoucí na tento objekt.
+        Při rozsáhlejším zásahu v datech Repozitáře je potřeba tento proces spustit pro každý objekt,
+        jehož vazby byly v Repozitáři změněny. Případně spustit rebuild celého Processing indexu.
+    </div>
+
+    <mat-form-field class="input-pid">
+        <input [disabled]="inProgress" matInput type="text" id="pid" name="pid" [(ngModel)]="pid" placeholder="PID"
+            required autofocus>
+    </mat-form-field>
+
+    <button [disabled]="inProgress || !pidValid(f.value.pid)" color="primary" mat-raised-button type="submit"
+        color="warn">Naplánovat</button>
+    <button [disabled]="inProgress || !pidValid(f.value.pid)" mat-raised-button mat-dialog-close="cancel"
+        style="margin-left: 10px;">Zrušit</button>
+
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+
+</form>

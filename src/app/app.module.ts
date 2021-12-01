@@ -60,6 +60,7 @@ import { ImportComponent } from './components/import/import.component';
 import { ImportService } from './services/import.service';
 import { Tree } from './models/tree.model';
 import { TreeComponent } from './components/import/tree/tree.component';
+import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from './dialogs/schedule-processing-index-rebuild-for-object-dialog/schedule-processing-index-rebuild-for-object-dialog.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { TreeComponent } from './components/import/tree/tree.component';
     NewRightDialogComponent,
     ParamsComponent,
     ImportComponent,
-    TreeComponent
+    TreeComponent,
+    ScheduleProcessingIndexRebuildForObjectDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,7 @@ import { TreeComponent } from './components/import/tree/tree.component';
       //podpora obou způsobů instalace:
       //jak klasická s adminem na subdoméně (https://admin.knihovna.cz),
       //tak hack s více aplikacemi na path (dig. knihovna: https://knihovna.cz/, admin: https://knihovna.cz/admin)
-      oAuthCallbackPath: 'admin/omniauth', 
+      oAuthCallbackPath: 'admin/omniauth',
       oAuthPaths: {
         google: 'auth/google_oauth2'
       },
@@ -147,6 +149,7 @@ import { TreeComponent } from './components/import/tree/tree.component';
     ScheduleIndexationsByMultiplePidsDialogComponent,
     ScheduleChangePolicyByPidDialogComponent,
     ScheduleProcessingIndexRebuildDialogComponent,
+    ScheduleProcessingIndexRebuildForObjectDialogComponent,
     ScheduleImportFoxmlDialogComponent,
     ScheduleImportNdkDialogComponent,
     ScheduleAddLicenseDialogComponent,
