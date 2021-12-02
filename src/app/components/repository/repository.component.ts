@@ -5,6 +5,7 @@ import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedu
 import { ScheduleImportFoxmlDialogComponent } from 'src/app/dialogs/schedule-import-foxml-dialog/schedule-import-foxml-dialog.component';
 import { ScheduleImportNdkDialogComponent } from 'src/app/dialogs/schedule-import-ndk-dialog/schedule-import-ndk-dialog.component';
 import { ScheduleProcessingIndexRebuildDialogComponent } from 'src/app/dialogs/schedule-processing-index-rebuild-dialog/schedule-processing-index-rebuild-dialog.component';
+import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from 'src/app/dialogs/schedule-processing-index-rebuild-for-object-dialog/schedule-processing-index-rebuild-for-object-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
@@ -34,6 +35,19 @@ export class RepositoryComponent implements OnInit {
         //nothing, dialog was closed
       } else {
         this.ui.showInfoSnackBar(`Proces Vybudování Processing indexu byl naplánován`);
+      }
+    });
+  };
+
+  openscheduleProcessingIndexRebuildForPidDialog() {
+    const dialogRef = this.dialog.open(ScheduleProcessingIndexRebuildForObjectDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else {
+        this.ui.showInfoSnackBar(`Proces Přebudování Processing indexu pro objekt byl naplánován`);
       }
     });
   };
@@ -112,6 +126,5 @@ export class RepositoryComponent implements OnInit {
     console.log('TODO: implement');
   }
 
-  
 
 }
