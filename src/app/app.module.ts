@@ -57,7 +57,6 @@ import { NewRightDialogComponent } from './dialogs/new-right-dialog/new-right-di
 import { ParamsComponent } from './components/access/params/params.component';
 import { ImportComponent } from './components/import/import.component';
 import { ImportService } from './services/import.service';
-import { Tree } from './models/tree.model';
 import { TreeComponent } from './components/import/tree/tree.component';
 import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from './dialogs/schedule-processing-index-rebuild-for-object-dialog/schedule-processing-index-rebuild-for-object-dialog.component';
 

@@ -11,7 +11,7 @@ export class AppSettings {
   //
 
   devMode = false; //pokud true, tak se zobrazuje zalozka Test a dalsi testovaci veci (napr. spousteni testovaciho procesu)
-  version = "1.0.24" + (this.devMode ? "-dev" : "");
+  version = "1.0.25" + (this.devMode ? "-dev" : "");
 
   clientApiBaseUrl = this.coreBaseUrl + 'api/client/v6.0';
   adminApiBaseUrl = this.coreBaseUrl + 'api/admin/v1.0';

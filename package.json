@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4321 --proxy-config proxy.conf.json",
-    "build": "ng build --prod --aot",
+    "build": "ng build --prod --base-href ./ --deploy-url ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
