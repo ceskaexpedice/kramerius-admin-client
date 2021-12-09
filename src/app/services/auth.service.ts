@@ -163,8 +163,9 @@ export class AuthService {
       return name[0];
   }
 
-  private afterLogin() {
+   afterLogin() {
     const userData = this.tokenService.currentUserData;
+    console.log('al user data', userData);
     if (!userData) {
       // TODO: no user data
       return
@@ -173,8 +174,10 @@ export class AuthService {
     user.email = userData.uid;
     user.name = userData.name;
     user.image = userData.image;
+    user.roles = userData['roles'];
     this.user = user;
   }
+
 
 
 }

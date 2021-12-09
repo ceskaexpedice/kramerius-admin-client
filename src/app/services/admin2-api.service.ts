@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Role } from '../models/roles.model';
 import { Right } from '../models/right.model';
 import { ConditionParam } from '../models/condition-param.model';
+import { AppSettings } from './app-settings';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,14 @@ export class Admin2ApiService {
 
   private baseUrl = '/search/api/v5.0/admin/'
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private settings: AppSettings) {
   }
 
   private get(path: string, params = {}): Observable<Object> {
     return this.http.get(`${this.baseUrl}${path}`, {
       params: params,
       headers: new HttpHeaders({
-        "Authorization": "Basic " + btoa("krameriusAdmin:krameriusAdmin")
+        "Authorization": this.buildAuthValue()
       })});
   }
 
@@ -29,7 +30,7 @@ export class Admin2ApiService {
   private post(path: string, body): Observable<Object> {
     return this.http.post(`${this.baseUrl}${path}`, body, {
       headers: new HttpHeaders({
-        "Authorization": "Basic " + btoa("krameriusAdmin:krameriusAdmin")
+        "Authorization": this.buildAuthValue()
       })}
       );
   }
@@ -38,16 +39,22 @@ export class Admin2ApiService {
     return this.http.delete(`${this.baseUrl}${path}`, {
       params: params,
       headers: new HttpHeaders({
-        "Authorization": "Basic " + btoa("krameriusAdmin:krameriusAdmin")
+        "Authorization": this.buildAuthValue()
       })});  
   }
 
   private put(path: string, body: any, options: any = {}): Observable<Object> {
     return this.http.put(`${this.baseUrl}${path}`, body, {
       headers: new HttpHeaders({
-        "Authorization": "Basic " + btoa("krameriusAdmin:krameriusAdmin")
+        "Authorization": this.buildAuthValue()
       })}
       );
+  }
+
+  private buildAuthValue(): string {
+    const u = "krameriusAdmin";
+    const p = this.settings.coreBaseUrl == 'https://k7-test.mzk.cz/search/' ? 'sSsizZn2' : 'krameriusAdmin';
+    return "Basic " + btoa(`${u}:${p}`);
   }
 
   getConditions(): Observable<any> {

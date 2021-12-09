@@ -1,0 +1,8 @@
+{
+    "/search/api/v5.0/admin/*": {
+      "target": "https://k7-test.mzk.cz",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+  }

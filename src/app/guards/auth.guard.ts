@@ -17,13 +17,18 @@ export class AuthGuard implements CanActivate {
       console.log('canActivate');
       return Observable.create(observer => {
         if (this.authService.user) {
-          observer.next(true);
+          // this.authService.afterLogin();
+          console.log('val1', this.authService.user);
+          observer.next(this.authService.user.isAdmin());
           observer.complete();
           return;
         }
         this.tokenService.validateToken().subscribe(
           () => {
-            observer.next(true);
+            this.authService.afterLogin();
+            console.log('val2', this.authService.user);
+
+            observer.next(this.authService.user && this.authService.user.isAdmin());
             observer.complete();
           },
           () => {

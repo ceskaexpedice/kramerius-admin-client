@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4321 --proxy-config proxy.conf.json",
+    "mzk": "ng serve --port 4322 --proxy-config proxy.conf.mzk.json",
     "build": "ng build --prod --base-href ./ --deploy-url ./",
     "test": "ng test",
     "lint": "ng lint",

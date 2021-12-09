@@ -10,4 +10,8 @@ export class User {
     this.roles = [];
   }
 
+  isAdmin() {
+    return this.roles.indexOf('kramerius_admin') >= 0;
+  }
+
 }
