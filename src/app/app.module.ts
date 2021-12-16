@@ -59,6 +59,7 @@ import { ImportComponent } from './components/import/import.component';
 import { ImportService } from './services/import.service';
 import { TreeComponent } from './components/import/tree/tree.component';
 import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from './dialogs/schedule-processing-index-rebuild-for-object-dialog/schedule-processing-index-rebuild-for-object-dialog.component';
+import { ObjectAccessComponent } from './components/access/object-access/object-access.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from './dialog
     ParamsComponent,
     ImportComponent,
     TreeComponent,
-    ScheduleProcessingIndexRebuildForObjectDialogComponent
+    ScheduleProcessingIndexRebuildForObjectDialogComponent,
+    ObjectAccessComponent
   ],
   imports: [
     BrowserModule,

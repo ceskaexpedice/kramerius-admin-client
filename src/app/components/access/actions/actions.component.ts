@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewRightDialogComponent } from 'src/app/dialogs/new-right-dialog/new-right-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
@@ -22,6 +22,8 @@ export class ActionsComponent implements OnInit {
 
   actions: RightAction[];
 
+  @Input() pid: string;
+
   constructor(private api: Admin2ApiService, 
     private ui: UIService,
     private dialog: MatDialog) {}
@@ -34,7 +36,7 @@ export class ActionsComponent implements OnInit {
     //   this.state = 'success';
     //   console.log('roles', roles);
     // });
-    this.api.getRights().subscribe((rights: Right[]) => {
+    this.api.getRights(this.pid || 'uuid:1').subscribe((rights: Right[]) => {
       for (const right of rights) {
         if (this.actionMap[right.action]) {
           this.actionMap[right.action].addRight(right);
@@ -45,7 +47,6 @@ export class ActionsComponent implements OnInit {
       console.log('rights', rights);
     });
   }
-
 
   onEditRight(right: Right) {
     const dialogRef = this.dialog.open(NewRightDialogComponent, {
@@ -90,7 +91,7 @@ export class ActionsComponent implements OnInit {
 
   onNewRight(action: RightAction) {
     const dialogRef = this.dialog.open(NewRightDialogComponent, {
-      data : { action: this.selectedAction.code}
+      data : { action: this.selectedAction.code, pid: this.pid || 'uuid:1' }
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.right) {
@@ -116,41 +117,51 @@ export class ActionsComponent implements OnInit {
   private initActions() {
     this.actions = [];
     this.actionMap = {};
-    this.addAction('read', 'Číst data z aplikace');
-    this.addAction('import', 'Importovat data do K4');
-    this.addAction('convert', 'Spustit proces convert');
-    this.addAction('replicationrights', 'Spustit proces replicationrights');
-    this.addAction('enumerator', 'Spustit proces enumerator');
-    this.addAction('reindex', 'Manipulovat s indexem');
-    this.addAction('replikator_periodicals', 'Spustit proces replicator_periodicals');
-    this.addAction('replikator_monographs', 'Spustit proces replicator_monographs');
-    this.addAction('replikator_k3', 'K3 replikace');
-    this.addAction('delete', 'Spustit proces delete');
-    this.addAction('export', 'Spustit statický export');
-    this.addAction('setprivate', 'Spustit proces setprivate');
-    this.addAction('setpublic', 'Spustit proces setpublic');
-    this.addAction('administrate', 'Administrovat');
-    this.addAction('editor', 'Spustit editor');
-    this.addAction('manage_lr_process', 'Manipulovat s adm. procesy');
-    this.addAction('export_k4_replications', 'Replikovat objekty z K4');
-    this.addAction('import_k4_replications', 'Importovat replikované objekty z jiného K4');
-    this.addAction('export_cdk_replications', 'Replikovat objekty z K4 do ČDK');
-    this.addAction('edit_info_text', 'Editovat informace o digitální knihovně');
-    this.addAction('rightsadmin', 'Spustit editor uživatelů v superadmin módu');
-    this.addAction('rightssubadmin', 'Spustit editor uživatelů v subadmin módu');
-    this.addAction('virtualcollection_manage', 'Administrace virtuálních sbírek');
-    this.addAction('criteria_rights_manage', 'Spravovat dodatečné podmínky');
-    this.addAction('ndk_mets_import', 'NDK Mets import');
-    this.addAction('aggregate', 'Agregace procesů');
-    this.addAction('sort', 'Třídit');
-    this.addAction('show_alternative_info_text', 'Ukázat alternativní informativní text');
-    this.addAction('display_admin_menu', 'Zobrazení administrativního menu');
-    this.addAction('show_statictics', 'Zobrazit statistiky');
-    this.addAction('show_print_menu', 'Tisknout');
-    this.addAction('show_client_print_menu', 'Zobrazit print menu');
-    this.addAction('show_client_pdf_menu', 'Show pdf menu');
-    this.addAction('pdf_resource', 'Use pdf resource');
-    this.addAction('dnnt_admin', 'Dnnt administrace');
+    if (this.pid) {
+      this.addAction('read', 'Číst data z aplikace');
+      this.addAction('reindex', 'Manipulovat s indexem');
+      this.addAction('delete', 'Spustit proces delete');
+      this.addAction('export', 'Spustit statický export');
+      this.addAction('setprivate', 'Spustit proces setprivate');
+      this.addAction('setpublic', 'Spustit proces setpublic');
+      this.addAction('administrate', 'Administrovat');
+    } else {
+      this.addAction('read', 'Číst data z aplikace');
+      this.addAction('import', 'Importovat data do K4');
+      this.addAction('convert', 'Spustit proces convert');
+      this.addAction('replicationrights', 'Spustit proces replicationrights');
+      this.addAction('enumerator', 'Spustit proces enumerator');
+      this.addAction('reindex', 'Manipulovat s indexem');
+      this.addAction('replikator_periodicals', 'Spustit proces replicator_periodicals');
+      this.addAction('replikator_monographs', 'Spustit proces replicator_monographs');
+      this.addAction('replikator_k3', 'K3 replikace');
+      this.addAction('delete', 'Spustit proces delete');
+      this.addAction('export', 'Spustit statický export');
+      this.addAction('setprivate', 'Spustit proces setprivate');
+      this.addAction('setpublic', 'Spustit proces setpublic');
+      this.addAction('administrate', 'Administrovat');
+      this.addAction('editor', 'Spustit editor');
+      this.addAction('manage_lr_process', 'Manipulovat s adm. procesy');
+      this.addAction('export_k4_replications', 'Replikovat objekty z K4');
+      this.addAction('import_k4_replications', 'Importovat replikované objekty z jiného K4');
+      this.addAction('export_cdk_replications', 'Replikovat objekty z K4 do ČDK');
+      this.addAction('edit_info_text', 'Editovat informace o digitální knihovně');
+      this.addAction('rightsadmin', 'Spustit editor uživatelů v superadmin módu');
+      this.addAction('rightssubadmin', 'Spustit editor uživatelů v subadmin módu');
+      this.addAction('virtualcollection_manage', 'Administrace virtuálních sbírek');
+      this.addAction('criteria_rights_manage', 'Spravovat dodatečné podmínky');
+      this.addAction('ndk_mets_import', 'NDK Mets import');
+      this.addAction('aggregate', 'Agregace procesů');
+      this.addAction('sort', 'Třídit');
+      this.addAction('show_alternative_info_text', 'Ukázat alternativní informativní text');
+      this.addAction('display_admin_menu', 'Zobrazení administrativního menu');
+      this.addAction('show_statictics', 'Zobrazit statistiky');
+      this.addAction('show_print_menu', 'Tisknout');
+      this.addAction('show_client_print_menu', 'Zobrazit print menu');
+      this.addAction('show_client_pdf_menu', 'Show pdf menu');
+      this.addAction('pdf_resource', 'Use pdf resource');
+      this.addAction('dnnt_admin', 'Dnnt administrace');
+    }
   }
 
   private addAction(code: string, description: string) {

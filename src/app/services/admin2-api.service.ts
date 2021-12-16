@@ -61,8 +61,8 @@ export class Admin2ApiService {
     return this.get('rights/criteria');
   }
 
-  getRights(): Observable<Right[]> {
-    return this.get('rights').pipe(map(response => 
+  getRights(pid: string): Observable<Right[]> {
+    return this.get('rights', { pids: pid }).pipe(map(response => 
       Right.fromJsonArray(response)));
   }
 

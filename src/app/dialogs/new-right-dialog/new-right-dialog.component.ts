@@ -31,7 +31,6 @@ export class NewRightDialogComponent implements OnInit {
   ngOnInit() {
     this.conditions = [];
     this.action = this.data.action;
-
     this.right = new Right();
     this.right.action = this.action;
     this.data = this.data || {};
@@ -40,6 +39,7 @@ export class NewRightDialogComponent implements OnInit {
       this.right.copyFrom(this.data.right);
     } else {
       this.mode = 'new';
+      this.right.pid = this.data.pid;
     }
     this.api.getLicenses().subscribe((licenses: License[]) => {
       this.licenses = licenses;

@@ -1,0 +1,16 @@
+<div class="app-object-access" *ngIf="pid">
+
+
+  <div class="app-view-toggle">
+    <div class="app-toggle-buttons">
+      <div class="app-toggle-button" (click)="changeView('actions')" [class.app-selected]="view == 'actions'">
+        <span>Práva</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-view-content">
+    <app-actions *ngIf="view == 'actions'" [pid]="pid"></app-actions>
+  </div>
+
+</div>
