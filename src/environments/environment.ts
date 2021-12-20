@@ -3,8 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  cloudApiBase: 'https://api.kramerius.cloud/api/v1'
+  production: false
 };
 
 /*

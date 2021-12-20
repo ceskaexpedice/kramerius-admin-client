@@ -4,7 +4,6 @@ import { HomeComponent } from './components/home/home.component';
 import { ProcessesComponent } from './components/processes/processes.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/account/login/login.component';
-import { OmniauthComponent } from './components/account/omniauth/omniauth.component';
 import { ProcessComponent } from './components/processes/process/process.component';
 import { CollectionsComponent } from './components/collections/collections.component';
 import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
@@ -15,14 +14,11 @@ import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './components/repository/repository.component';
 import { AccessComponent } from './components/access/access.component';
 import { ImportComponent } from './components/import/import.component';
-import { ActionsComponent } from './components/access/actions/actions.component';
 import { ObjectAccessComponent } from './components/access/object-access/object-access.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'omniauth', component: OmniauthComponent },
-  { path: 'admin/omniauth', component: OmniauthComponent }, //hack pro instalaci s adminem na path, namísto subdomény (https://knihovna.cz/admin namísto https://admin.knihovna.cz)
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
   { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },

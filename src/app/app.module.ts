@@ -6,16 +6,13 @@ import { AppComponent } from './components/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AngularTokenModule } from 'angular-token';
 import { HomeComponent } from './components/home/home.component';
 import { ProcessesComponent } from './components/processes/processes.component';
 import { LoginComponent } from './components/account/login/login.component';
-import { OmniauthComponent } from './components/account/omniauth/omniauth.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppSettings } from './services/app-settings';
-import { environment } from 'src/environments/environment';
 import { DurationPipe } from './pipes/duration.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { DatetimePipe } from './pipes/datetime.pipe';
@@ -68,7 +65,6 @@ import { ObjectAccessComponent } from './components/access/object-access/object-
     HomeComponent,
     ProcessesComponent,
     LoginComponent,
-    OmniauthComponent,
     DurationPipe,
     ShortenPipe,
     DatetimePipe,
@@ -113,23 +109,9 @@ import { ObjectAccessComponent } from './components/access/object-access/object-
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CKEditorModule,
-    AngularTokenModule.forRoot({
-      apiBase: environment.cloudApiBase,
-      oAuthBase: environment.cloudApiBase,
-      //oAuthCallbackPath: 'omniauth',
-      //podpora obou způsobů instalace:
-      //jak klasická s adminem na subdoméně (https://admin.knihovna.cz),
-      //tak hack s více aplikacemi na path (dig. knihovna: https://knihovna.cz/, admin: https://knihovna.cz/admin)
-      oAuthCallbackPath: 'admin/omniauth',
-      oAuthPaths: {
-        google: 'auth/google_oauth2'
-      },
-      oAuthWindowType: 'newWindow'
-    })
+    CKEditorModule
   ],
   providers: [
-    AngularTokenModule,
     AuthService,
     AppSettings,
     ClientApiService,

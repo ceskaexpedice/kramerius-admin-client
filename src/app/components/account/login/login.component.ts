@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (!this.email) {
-      this.errorMessage = 'Zadejte prosím e-mailovou adresu';
+      this.errorMessage = 'Zadejte prosím uživatelské jméno';
       this.state = 'failure';
       return;
     }
@@ -32,9 +32,16 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.state = 'loading';
-    this.auth.login(this.email, this.password, (success: boolean) => {
-      if (success) {
+    this.auth.login(this.email, this.password, (status: string) => {
+      console.log('login', status);
+      if (status == 'authorized') {
         this.router.navigate(['/']);
+      } else if (status == 'logged_in_not_authorized') {
+        this.errorMessage = 'Nemáte dostatečné oprávnění';
+        this.state = 'failure';
+      } else if (status == 'not_logged_in') {
+        this.errorMessage = 'Neplatné přihlašovací údaje';
+        this.state = 'failure';
       } else {
         this.errorMessage = 'Přihlášení se nezdařilo';
         this.state = 'failure';
@@ -42,11 +49,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  loginWithGoogle() {
-    this.auth.signInOAuth('google', () => {
-      console.log('after loginWithGoogle');
-    });
-  }
+  // loginWithGoogle() {
+  //   this.auth.signInOAuth('google', () => {
+  //     console.log('after loginWithGoogle');
+  //   });
+  // }
 
 
 }

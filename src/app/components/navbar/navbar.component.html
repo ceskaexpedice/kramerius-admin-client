@@ -13,18 +13,17 @@
     <a routerLink="/indexing" routerLinkActive="active" mat-button>Indexace</a>
     <a routerLink="/config" routerLinkActive="active" mat-button>Konfigurace</a>
     <a routerLink="/repository" routerLinkActive="active" mat-button>Repozitář</a>
-    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="appSettings.devMode">DEV</a>
+    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
 
     <a [matMenuTriggerFor]="profile_menu" mat-button>
-      <img *ngIf="auth.user.image" class="app-profile-img" [src]="auth.user.image" id="btn-dropdown-profile">
-      <div *ngIf="!auth.user.image" class="app-profile-img app-profile-txt" id="btn-dropdown-profile">
+      <div class="app-profile-img app-profile-txt" id="btn-dropdown-profile">
         {{ auth.getTextProfileImage() }}</div>
     </a>
 
     <mat-menu #profile_menu="matMenu">
       <button mat-menu-item disabled>
         <mat-icon>person</mat-icon>
-        <span>{{ auth.user.name }}</span>
+        <span>{{ auth.username }}</span>
       </button>
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>

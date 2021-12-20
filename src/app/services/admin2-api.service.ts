@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { License } from '../models/license.model';
 import { map } from 'rxjs/operators';
 import { Role } from '../models/roles.model';
@@ -13,48 +13,25 @@ import { AppSettings } from './app-settings';
 })
 export class Admin2ApiService {
 
-  private baseUrl = '/search/api/v5.0/admin/'
+  private baseUrl = 'https://k7.inovatika.dev/search/api/v5.0/admin/'
 
   constructor(private http: HttpClient, private settings: AppSettings) {
   }
 
   private get(path: string, params = {}): Observable<Object> {
-    return this.http.get(`${this.baseUrl}${path}`, {
-      params: params,
-      headers: new HttpHeaders({
-        "Authorization": this.buildAuthValue()
-      })});
+    return this.http.get(`${this.baseUrl}${path}`, { params: params });
   }
 
-
   private post(path: string, body): Observable<Object> {
-    return this.http.post(`${this.baseUrl}${path}`, body, {
-      headers: new HttpHeaders({
-        "Authorization": this.buildAuthValue()
-      })}
-      );
+    return this.http.post(`${this.baseUrl}${path}`, body);
   }
 
   private delete(path: string, params = {}): Observable<Object> {
-    return this.http.delete(`${this.baseUrl}${path}`, {
-      params: params,
-      headers: new HttpHeaders({
-        "Authorization": this.buildAuthValue()
-      })});  
+    return this.http.delete(`${this.baseUrl}${path}`, { params: params });  
   }
 
   private put(path: string, body: any, options: any = {}): Observable<Object> {
-    return this.http.put(`${this.baseUrl}${path}`, body, {
-      headers: new HttpHeaders({
-        "Authorization": this.buildAuthValue()
-      })}
-      );
-  }
-
-  private buildAuthValue(): string {
-    const u = "krameriusAdmin";
-    const p = this.settings.coreBaseUrl == 'https://k7-test.mzk.cz/search/' ? 'sSsizZn2' : 'krameriusAdmin';
-    return "Basic " + btoa(`${u}:${p}`);
+    return this.http.put(`${this.baseUrl}${path}`, body);
   }
 
   getConditions(): Observable<any> {

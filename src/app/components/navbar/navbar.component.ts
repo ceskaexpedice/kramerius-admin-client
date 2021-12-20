@@ -10,16 +10,14 @@ import { AppSettings } from 'src/app/services/app-settings';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public auth: AuthService, public router: Router, public appSettings: AppSettings) { }
+  constructor(public auth: AuthService, private router: Router, public settings: AppSettings) { }
 
   ngOnInit() {
   }
 
   logout() {
-    this.auth.logout(() => {
-      this.router.navigate(['/']);
-    });
+    this.auth.logout();
+    this.router.navigate(['/', 'login']);
   }
-
 
 }

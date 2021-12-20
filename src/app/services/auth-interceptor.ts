@@ -2,23 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpRequest, HttpInterceptor, HttpHandler } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Observable } from 'rxjs';
-import { AngularTokenService } from 'angular-token';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private tokenService: AngularTokenService, private appSettings: AppSettings) { }
+  constructor(private appSettings: AppSettings, private auth: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!request.url.startsWith(this.appSettings.adminApiBaseUrl)) {
+    console.log('intercepter', request.url);
+    if (!request.url.startsWith(this.appSettings.coreBaseUrl)) {
+      console.log('intercepter', 'not');
       return next.handle(request);
     }
-    const data = this.tokenService.currentAuthData;
-    if (data) {
+    const token = this.auth.token;
+    if (token) {
+      console.log('intercepter', 'with token');
+
       request = request.clone({
         setHeaders: {
-          'access-token': data.accessToken,
-          'uid': data.uid,
-          'client': data.client
+          'Authorization': 'Bearer ' + token
         }
       });
     }

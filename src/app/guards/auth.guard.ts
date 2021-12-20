@@ -2,39 +2,47 @@ import { AuthService } from './../services/auth.service';
 
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AngularTokenService } from 'angular-token';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService,
-              private tokenService: AngularTokenService,
               private router: Router) { }
-
 
     canActivate(): Observable<boolean>|boolean {
       console.log('canActivate');
       return Observable.create(observer => {
-        if (this.authService.user) {
-          // this.authService.afterLogin();
-          console.log('val1', this.authService.user);
-          observer.next(this.authService.user.isAdmin());
+        if (this.authService.isLoggedIn()) {
+          observer.next(true);
           observer.complete();
-          return;
-        }
-        this.tokenService.validateToken().subscribe(
-          () => {
-            this.authService.afterLogin();
-            console.log('val2', this.authService.user);
-
-            observer.next(this.authService.user && this.authService.user.isAdmin());
+        } else {
+            observer.next(false);
             observer.complete();
-          },
-          () => {
-          this.router.navigate(['/login']);
-          observer.next(false);
-        });
+            this.router.navigate(['/login']);
+        }
+        // if (this.authService.checked) {
+        //   console.log('guard', 'p2 ' + this.authService.authorized);
+        //   observer.next(this.authService.authorized);
+        //   observer.complete();
+        //   if (!this.authService.authorized) {
+        //     this.router.navigate(['/login']);
+        //   }
+        //   return;
+        // }
+        // this.authService.isAauthorized(
+        //   (success) => {
+        //     if (success) {
+        //       console.log('guard', 'p3 true');
+        //       observer.next(true);
+        //       observer.complete();
+        //     } else {
+        //       console.log('guard', 'p3 false');
+        //       observer.next(false);
+        //       observer.complete();
+        //       this.router.navigate(['/login']);
+        //     }
+        // });
       });
     }
 
