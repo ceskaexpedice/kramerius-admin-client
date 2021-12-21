@@ -4,7 +4,7 @@ import { NewRoleDialogComponent } from 'src/app/dialogs/new-role-dialog/new-role
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { Role } from 'src/app/models/roles.model';
-import { Admin2ApiService } from 'src/app/services/admin2-api.service';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class RolesComponent implements OnInit {
   state: string;
   roles: any[];
 
-  constructor(private api: Admin2ApiService, 
+  constructor(private api: AdminApiService, 
     private ui: UIService,
     private dialog: MatDialog) {}
 

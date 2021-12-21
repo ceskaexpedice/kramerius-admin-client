@@ -5,7 +5,7 @@ import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { RightAction } from 'src/app/models/right-action.model';
 import { Right } from 'src/app/models/right.model';
-import { Admin2ApiService } from 'src/app/services/admin2-api.service';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class ActionsComponent implements OnInit {
 
   @Input() pid: string;
 
-  constructor(private api: Admin2ApiService, 
+  constructor(private api: AdminApiService, 
     private ui: UIService,
     private dialog: MatDialog) {}
 

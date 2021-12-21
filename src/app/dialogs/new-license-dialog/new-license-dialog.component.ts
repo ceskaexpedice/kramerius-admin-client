@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { License } from "src/app/models/license.model";
-import { Admin2ApiService } from "src/app/services/admin2-api.service";
+import { AdminApiService } from "src/app/services/admin-api.service";
 
 @Component({
   templateUrl: './new-license-dialog.component.html',
@@ -15,7 +15,7 @@ export class NewLicenseDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<NewLicenseDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private api: Admin2ApiService) {
+              private api: AdminApiService) {
   }
 
   ngOnInit() {

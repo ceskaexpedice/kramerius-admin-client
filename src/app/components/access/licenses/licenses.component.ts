@@ -4,7 +4,7 @@ import { NewLicenseDialogComponent } from 'src/app/dialogs/new-license-dialog/ne
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { License } from 'src/app/models/license.model';
-import { Admin2ApiService } from 'src/app/services/admin2-api.service';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class LicensesComponent implements OnInit {
   state: string;
   licenses: any[];
 
-  constructor(private api: Admin2ApiService, 
+  constructor(private api: AdminApiService, 
     private ui: UIService,
     private dialog: MatDialog) {}
 

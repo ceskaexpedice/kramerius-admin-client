@@ -5,7 +5,7 @@ import { ConditionParam } from "src/app/models/condition-param.model";
 import { License } from "src/app/models/license.model";
 import { Condition, Right } from "src/app/models/right.model";
 import { Role } from "src/app/models/roles.model";
-import { Admin2ApiService } from "src/app/services/admin2-api.service";
+import { AdminApiService } from "src/app/services/admin-api.service";
 
 @Component({
   templateUrl: './new-right-dialog.component.html',
@@ -25,7 +25,7 @@ export class NewRightDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<NewRightDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private api: Admin2ApiService) {
+              private api: AdminApiService) {
   }
 
   ngOnInit() {

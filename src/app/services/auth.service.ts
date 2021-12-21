@@ -15,12 +15,8 @@ export class AuthService {
   }
 
   login(email: string, password: string, callback: (status: string) => void) {
-    const body = `username=${email}&password=${password}&client_id=krameriusClient&client_secret=kyPtgyMN7rFfPiJzgaaE90cpBryAQ4nG&grant_type=password`;
-    this.http.post(this.settings.keycloakUrl, body, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded'
-      })
-    }).subscribe(
+    const body = `username=${email}&password=${password}`;
+    this.http.post(`${this.settings.coreBaseUrl}api/auth/token`, body).subscribe(
       (result) => {
         console.log('login ok', result);
         const token = result['access_token'];

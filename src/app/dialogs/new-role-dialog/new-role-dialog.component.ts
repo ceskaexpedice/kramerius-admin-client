@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Role } from "src/app/models/roles.model";
-import { Admin2ApiService } from "src/app/services/admin2-api.service";
-import { UIService } from "src/app/services/ui.service";
+import { AdminApiService } from "src/app/services/admin-api.service";
 
 @Component({
   templateUrl: './new-role-dialog.component.html',
@@ -16,7 +15,7 @@ export class NewRoleDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<NewRoleDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private api: Admin2ApiService) {
+              private api: AdminApiService) {
   }
 
   ngOnInit() {

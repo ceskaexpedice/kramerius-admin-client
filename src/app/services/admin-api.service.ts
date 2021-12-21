@@ -8,6 +8,10 @@ import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
 import { File } from '../models/tree.model';
+import { License } from '../models/license.model';
+import { Role } from '../models/roles.model';
+import { ConditionParam } from '../models/condition-param.model';
+import { Right } from '../models/right.model';
 
 @Injectable({
   providedIn: 'root'
@@ -242,9 +246,98 @@ export class AdminApiService {
     return this.get(`/files/pidlist-dir/`);
   }
 
+  getConditions(): Observable<any> {
+    return this.get('/rights/criteria');
+  }
 
+  getRights(pid: string): Observable<Right[]> {
+    return this.get('/rights', { pids: pid }).pipe(map(response => 
+      Right.fromJsonArray(response)));
+  }
 
+  updateRight(right: Right): Observable<Right> {
+    return this.put(`/rights/${right.id}`, right.toJson()).pipe(map(response => 
+      Right.fromJson(response)));
+  }
 
+  createRight(right: Right): Observable<Right> {
+    return this.post(`/rights`, right.toJson()).pipe(map(response => 
+      Right.fromJson(response)));
+  }
+
+  removeRight(right: Right): Observable<any> {
+    return this.delete(`/rights/${right.id}`);
+  }
+
+  getConditionParams(): Observable<ConditionParam[]> {
+    return this.get('/rights/params').pipe(map(response => 
+      ConditionParam.fromJsonArray(response)));
+  }
+
+  createConditionParam(param: ConditionParam): Observable<ConditionParam> {
+    return this.post(`/rights/params`, param.toJson()).pipe(map(response => 
+      ConditionParam.fromJson(response)));
+  }
+
+  updateConditionParam(param: ConditionParam): Observable<ConditionParam> {
+    return this.put(`/rights/params/${param.id}`, param.toJson()).pipe(map(response => 
+      ConditionParam.fromJson(response)));
+  }
+
+  removeConditionParam(param: ConditionParam): Observable<any> {
+    return this.delete(`/rights/params/${param.id}`);
+  }
+
+  getRoles(): Observable<Role[]> {
+    return this.get('/roles').pipe(map(response => 
+      Role.fromJsonArray(response)));
+  }
+
+  createRole(role: Role): Observable<Role> {
+    return this.post(`/roles`, role.toJson()).pipe(map(response => 
+      Role.fromJson(response)));
+  }
+
+  updateRole(role: Role): Observable<Role> {
+    return this.put(`/roles/${role.id}`, role.toJson()).pipe(map(response => 
+      Role.fromJson(response)));
+  }
+
+  removeRole(role: Role): Observable<any> {
+    return this.delete(`/roles/${role.id}`);
+  }
+
+  getLicenses(): Observable<License[]> {
+    return this.get('/licenses').pipe(map(response => 
+      License.fromJsonArray(response)));
+  }
+  // getLicenses(): Observable<License[]> {
+  //   return this.http.get('https://k7.inovatika.dev/search/api/v5.0/admin//licenses').pipe(map(response => 
+  //     License.fromJsonArray(response)));
+  // }
+  
+
+  createLicense(license: License): Observable<License> {
+    return this.post(`/licenses`, license.toJson()).pipe(map(response => 
+      License.fromJson(response)));
+  }
+
+  updateLicense(license: License): Observable<License> {
+    return this.put(`/licenses/${license.id}`, license.toJson()).pipe(map(response => 
+      License.fromJson(response)));
+  }
+
+  moveLicenseUp(license: License): Observable<any> {
+    return this.put(`/licenses/moveup/${license.id}`, license.toJson());
+  }
+
+  moveLicenseDown(license: License): Observable<any> {
+    return this.put(`/licenses/movedown/${license.id}`, license.toJson());
+  }
+
+  removeLicense(license: License): Observable<any> {
+    return this.delete(`/licenses/${license.id}`);
+  }
 
 
 

@@ -43,7 +43,6 @@ import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-
 import { ScheduleAddLicenseDialogComponent } from './dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from './dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { AccessComponent } from './components/access/access.component';
-import { Admin2ApiService } from './services/admin2-api.service';
 import { NewLicenseDialogComponent } from './dialogs/new-license-dialog/new-license-dialog.component';
 import { LicensesComponent } from './components/access/licenses/licenses.component';
 import { RolesComponent } from './components/access/roles/roles.component';
@@ -116,7 +115,6 @@ import { ObjectAccessComponent } from './components/access/object-access/object-
     AppSettings,
     ClientApiService,
     AdminApiService,
-    Admin2ApiService,
     CollectionsService,
     LocalStorageService,
     UIService,

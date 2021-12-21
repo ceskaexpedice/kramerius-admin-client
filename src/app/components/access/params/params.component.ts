@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { ConditionParam } from 'src/app/models/condition-param.model';
-import { Admin2ApiService } from 'src/app/services/admin2-api.service';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class ParamsComponent implements OnInit {
   selectedParam: ConditionParam;
 
 
-  constructor(private api: Admin2ApiService, 
+  constructor(private api: AdminApiService, 
     private ui: UIService,
     private dialog: MatDialog) {}
 
