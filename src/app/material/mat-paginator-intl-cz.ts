@@ -22,7 +22,7 @@ export class MatPaginatorIntlCz extends MatPaginatorIntl {
     };
 
     formatNumber(num: number) {
-        return String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 ');
+        return String(num);
     }
 
 }
