@@ -18,8 +18,8 @@ import { UIService } from 'src/app/services/ui.service';
 export class IndexingComponent implements OnInit {
 
   //Indexační procesy (všechny objekty v modelu)
-  models = ['archive', 'graphic', 'sheetmusic', 'map', 'monograph', 'periodical', 'manuscript', 'collection', 'soundrecording'];
-  modelNames = ['Archiválie', 'Grafiky', 'Hudebniny', 'Mapy', 'Monografie', 'Periodika', 'Rukopisy', 'Sbírky', 'Zvukové nahrávky'];
+  models = ['archive', 'graphic', 'sheetmusic', 'convolute', 'map', 'monograph', 'periodical', 'manuscript', 'collection', 'soundrecording'];
+  modelNames = ['Archiválie', 'Grafiky', 'Hudebniny', 'Konvoluty', 'Mapy', 'Monografie', 'Periodika', 'Rukopisy', 'Sbírky', 'Zvukové nahrávky'];
 
   selectedModel = undefined;
   stateFilter = undefined;
