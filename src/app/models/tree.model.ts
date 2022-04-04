@@ -1,4 +1,5 @@
 import { AdminApiService } from "../services/admin-api.service";
+import { UIService } from "../services/ui.service";
 
 export class Tree {
 
@@ -10,7 +11,7 @@ export class Tree {
     level: number;
     parent: Tree;
 
-    constructor(type: string, file: File, parent: Tree = null, level: number = 0) {
+    constructor(private ui: UIService, type: string, file: File, parent: Tree = null, level: number = 0) {
         this.type = type;
         this.file = file;
         this.parent = parent;
@@ -47,12 +48,10 @@ export class Tree {
         this.loading = true;
         this.children = [];
 
-
-
         api.getImportFiles(this.type, this.getFullPath()).subscribe((files: File[]) => {
             console.log('files', files);
             for (const file of files) {
-                const tree = new Tree(this.type, file, this, this.level + 1);
+                const tree = new Tree(this.ui, this.type, file, this, this.level + 1);
                 this.children.push(tree);
             }
             this.expanded = true;
@@ -60,6 +59,9 @@ export class Tree {
             if (all) {
                 this.expandChildren(api);
             }
+        }, error => {
+            console.error(error);
+            this.ui.showErrorSnackBar(`Chyba načítání dat: ${error.error.error}`)
         });
     }
 

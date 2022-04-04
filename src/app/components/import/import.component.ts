@@ -20,11 +20,11 @@ export class ImportComponent implements OnInit {
   ndkPublic: boolean;
   scheduleIndexations: boolean;
 
-  constructor(private api: AdminApiService, 
+  constructor(private api: AdminApiService,
     private dialog: MatDialog,
     private ui: UIService,
     public imports: ImportService,
-    private local: LocalStorageService) {}
+    private local: LocalStorageService) { }
 
   ngOnInit() {
     this.ndkPublic = true;
@@ -40,7 +40,7 @@ export class ImportComponent implements OnInit {
   }
 
   initTree() {
-    this.tree = new Tree(this.type, { name: '/', isDir: true });
+    this.tree = new Tree(this.ui, this.type, { name: '/', isDir: true });
     this.imports.selectedTree = null;
     this.tree.expand(this.api);
   }
