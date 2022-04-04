@@ -9,14 +9,14 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private appSettings: AppSettings, private auth: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('intercepter', request.url);
+    //console.log('intercepter', request.url);
     if (!request.url.startsWith(this.appSettings.coreBaseUrl)) {
-      console.log('intercepter', 'not');
+      //console.log('intercepter', 'not');
       return next.handle(request);
     }
     const token = this.auth.token;
     if (token) {
-      console.log('intercepter', 'with token');
+      //console.log('intercepter', 'with token');
 
       request = request.clone({
         setHeaders: {
@@ -27,3 +27,6 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 }
+
+
+
