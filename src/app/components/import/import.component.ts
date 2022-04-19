@@ -19,6 +19,7 @@ export class ImportComponent implements OnInit {
   tree: Tree;
   ndkPublic: boolean;
   scheduleIndexations: boolean;
+  inputDirError = {};
 
   constructor(private api: AdminApiService,
     private dialog: MatDialog,
@@ -42,7 +43,10 @@ export class ImportComponent implements OnInit {
   initTree() {
     this.tree = new Tree(this.ui, this.type, { name: '/', isDir: true });
     this.imports.selectedTree = null;
-    this.tree.expand(this.api);
+    delete this.inputDirError[this.type];
+    this.tree.expand(this.api, false, error => {
+      this.inputDirError[this.type] = error;
+    });
   }
 
   showHelpDialog() {
@@ -63,7 +67,6 @@ export class ImportComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
   }
-
 
   submit() {
     const data: SimpleDialogData = {

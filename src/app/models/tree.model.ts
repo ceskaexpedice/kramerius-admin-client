@@ -31,7 +31,7 @@ export class Tree {
         return this.parent.getFullPath() + '/' + this.file.name;
     }
 
-    expand(api: AdminApiService, all: boolean = false) {
+    expand(api: AdminApiService, all: boolean = false, onError?) {
         if (!this.expandable()) {
             return;
         }
@@ -61,7 +61,11 @@ export class Tree {
             }
         }, error => {
             console.error(error);
-            this.ui.showErrorSnackBar(`Chyba načítání dat: ${error.error.error}`)
+            if (onError) {
+                onError(`Chyba načítání dat: ${error.error.error}`);
+            } else {
+                this.ui.showErrorSnackBar(`Chyba načítání dat: ${error.error.error}`)
+            }
         });
     }
 

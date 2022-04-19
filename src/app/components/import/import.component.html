@@ -12,17 +12,18 @@
     </div>
   </div>
 
-  <div class="app-view-content">
+  <div class="app-view-content" *ngIf="!this.inputDirError[this.type]">
 
     <div class="app-header">
 
-      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary">
-        Naplánovat následnou indexaci</mat-checkbox>
+      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations"
+        color="primary">Naplánovat následnou indexaci</mat-checkbox>
 
-        <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">
-          Zveřejnit</mat-checkbox>
+      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'"
+        [(ngModel)]="ndkPublic" color="primary">Zveřejnit</mat-checkbox>
 
-      <div (click)="submit()" class="app-button" style="float: right;" [class.app-disabled]="!imports.selectedTree">Spustit import</div>
+      <div (click)="submit()" class="app-button" style="float: right;" [class.app-disabled]="!imports.selectedTree">
+        Spustit import</div>
     </div>
 
     <div class="app-header2">
@@ -32,7 +33,10 @@
 
     <app-tree [tree]="tree"></app-tree>
 
+  </div>
 
+  <div class="app-view-content" *ngIf="this.inputDirError[this.type]">
+    <div class="app-error">{{this.inputDirError[this.type]}}</div>
   </div>
 
 </div>
