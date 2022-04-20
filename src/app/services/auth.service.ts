@@ -28,7 +28,7 @@ export class AuthService {
     AuthService.token = null;
     localStorage.removeItem('account.token');
     this.user = null;
-    const redircetUri = window.location.origin + suffix;
+    const redircetUri = `${this.settings.adminClientBaseUrl}${suffix}`;
     const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout?redirect_uri=${redircetUri}`;
     window.open(url, '_top');
   }
@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   private buildLoginUrl(): string {
-    const redircetUri = window.location.origin + '/auth';
+    const redircetUri = `${this.settings.adminClientBaseUrl}/auth`;
     return `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/auth?client_id=${this.settings.keycloak.clientId}&redirect_uri=${redircetUri}&response_type=code`;
   }
 
@@ -96,7 +96,7 @@ export class AuthService {
 
   private getToken(code: string): Observable<string> {
     const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/token`;
-    const redircetUri = window.location.origin + '/auth';
+    const redircetUri = `${this.settings.adminClientBaseUrl}/auth`;
     const body = `grant_type=authorization_code&code=${code}&client_id=${this.settings.keycloak.clientId}&client_secret=${this.settings.keycloak.secret}&redirect_uri=${redircetUri}`; 
     const options = {
         headers: new HttpHeaders({

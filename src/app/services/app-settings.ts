@@ -7,9 +7,9 @@ export class AppSettings {
 
   // external properties from /assets/shared/globals.js
   userClientBaseUrl = APP_GLOBAL.userClientBaseUrl;
+  adminClientBaseUrl = APP_GLOBAL.adminClientBaseUrl;
   coreBaseUrl = APP_GLOBAL.coreBaseUrl;
   keycloak = APP_GLOBAL.keycloak;
-
 
   devMode = !!APP_GLOBAL.devMode; //pokud true, tak se zobrazuje zalozka DEV a dalsi testovaci veci (napr. spousteni testovaciho procesu)
   version = "1.1.4" + (this.devMode ? "-dev" : "");
