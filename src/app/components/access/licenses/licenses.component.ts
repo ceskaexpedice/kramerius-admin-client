@@ -67,7 +67,11 @@ export class LicensesComponent implements OnInit {
           this.ui.showInfoSnackBar("Licence byla odstraněna")
         },
         (error) => {
-          this.ui.showInfoSnackBar("Licenci se nepodřilo odstranit");
+          if (error && error.error && error.error.status == 409) {
+            this.ui.showInfoSnackBar("Licence je použita, není možné ji odstranit");
+          } else {
+            this.ui.showInfoSnackBar("Licenci se nepodřilo odstranit");
+          }
         });
       }
     });

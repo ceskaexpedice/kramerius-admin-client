@@ -116,7 +116,7 @@ export class AdminApiService {
     return this.get('/processes/owners').pipe(
       //delay(3000),
       map(response => ProcessOwner.fromJsonArray(response['owners']))
-    );   
+    );
   }
 
   scheduleProcess(definition, onScheduled = undefined): Observable<any> {
@@ -231,13 +231,19 @@ export class AdminApiService {
     console.log('fullPath', fullPath);
 
     // fullPath = '/files/input-data-dir-for_import-foxml/045b1250-7e47-11e0-add1-000d606f5dc6/';
-    return this.get(fullPath).pipe(map(response => response['files']));
+    return this.get(fullPath).pipe(
+      //delay(3000),
+      map(response => response['files']));
   }
 
+  //deprecated (use getImportFiles instead)
   getImportFoxmlInputDirFiles(): Observable<any> {
-    return this.get(`/files/input-data-dir-for_import-foxml/`);
+    return this.get(`/files/input-data-dir-for_import-foxml/`).pipe(
+      //delay(300),
+    )
   }
 
+  //deprecated (use getImportFiles instead)
   getConvertAndImportNdkInputDirFiles(): Observable<any> {
     return this.get(`/files/input-data-dir-for_convert-and-import-ndk/`);
   }
@@ -251,17 +257,17 @@ export class AdminApiService {
   }
 
   getRights(pid: string): Observable<Right[]> {
-    return this.get('/rights', { pids: pid }).pipe(map(response => 
+    return this.get('/rights', { pids: pid }).pipe(map(response =>
       Right.fromJsonArray(response)));
   }
 
   updateRight(right: Right): Observable<Right> {
-    return this.put(`/rights/${right.id}`, right.toJson()).pipe(map(response => 
+    return this.put(`/rights/${right.id}`, right.toJson()).pipe(map(response =>
       Right.fromJson(response)));
   }
 
   createRight(right: Right): Observable<Right> {
-    return this.post(`/rights`, right.toJson()).pipe(map(response => 
+    return this.post(`/rights`, right.toJson()).pipe(map(response =>
       Right.fromJson(response)));
   }
 
@@ -270,17 +276,17 @@ export class AdminApiService {
   }
 
   getConditionParams(): Observable<ConditionParam[]> {
-    return this.get('/rights/params').pipe(map(response => 
+    return this.get('/rights/params').pipe(map(response =>
       ConditionParam.fromJsonArray(response)));
   }
 
   createConditionParam(param: ConditionParam): Observable<ConditionParam> {
-    return this.post(`/rights/params`, param.toJson()).pipe(map(response => 
+    return this.post(`/rights/params`, param.toJson()).pipe(map(response =>
       ConditionParam.fromJson(response)));
   }
 
   updateConditionParam(param: ConditionParam): Observable<ConditionParam> {
-    return this.put(`/rights/params/${param.id}`, param.toJson()).pipe(map(response => 
+    return this.put(`/rights/params/${param.id}`, param.toJson()).pipe(map(response =>
       ConditionParam.fromJson(response)));
   }
 
@@ -289,17 +295,17 @@ export class AdminApiService {
   }
 
   getRoles(): Observable<Role[]> {
-    return this.get('/roles').pipe(map(response => 
+    return this.get('/roles').pipe(map(response =>
       Role.fromJsonArray(response)));
   }
 
   createRole(role: Role): Observable<Role> {
-    return this.post(`/roles`, role.toJson()).pipe(map(response => 
+    return this.post(`/roles`, role.toJson()).pipe(map(response =>
       Role.fromJson(response)));
   }
 
   updateRole(role: Role): Observable<Role> {
-    return this.put(`/roles/${role.id}`, role.toJson()).pipe(map(response => 
+    return this.put(`/roles/${role.id}`, role.toJson()).pipe(map(response =>
       Role.fromJson(response)));
   }
 
@@ -308,22 +314,22 @@ export class AdminApiService {
   }
 
   getLicenses(): Observable<License[]> {
-    return this.get('/licenses').pipe(map(response => 
+    return this.get('/licenses').pipe(map(response =>
       License.fromJsonArray(response)));
   }
   // getLicenses(): Observable<License[]> {
   //   return this.http.get('https://k7.inovatika.dev/search/api/v5.0/admin//licenses').pipe(map(response => 
   //     License.fromJsonArray(response)));
   // }
-  
+
 
   createLicense(license: License): Observable<License> {
-    return this.post(`/licenses`, license.toJson()).pipe(map(response => 
+    return this.post(`/licenses`, license.toJson()).pipe(map(response =>
       License.fromJson(response)));
   }
 
   updateLicense(license: License): Observable<License> {
-    return this.put(`/licenses/${license.id}`, license.toJson()).pipe(map(response => 
+    return this.put(`/licenses/${license.id}`, license.toJson()).pipe(map(response =>
       License.fromJson(response)));
   }
 

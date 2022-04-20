@@ -106,6 +106,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   onPageChanged(event: PageEvent) {
+    this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
     this.reload();
   }

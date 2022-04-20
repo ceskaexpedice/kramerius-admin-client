@@ -161,8 +161,8 @@
     </div>
 
     <div class="paginator-wrapper" *ngIf="!isLoading()">
-      <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
-        (page)="onPageChanged($event)">
+      <mat-paginator [length]="resultCount" hidePageSize="false" [pageIndex]="pageIndex" [pageSize]="pageSize"
+        [pageSizeOptions]="[50, 100, 1000]" (page)="onPageChanged($event)">
       </mat-paginator>
     </div>
 

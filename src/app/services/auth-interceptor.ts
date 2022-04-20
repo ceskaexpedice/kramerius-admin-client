@@ -9,14 +9,11 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private appSettings: AppSettings) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('intercepter', request.url);
     if (!request.url.startsWith(this.appSettings.coreBaseUrl)) {
-      console.log('intercepter', 'not');
       return next.handle(request);
     }
     const token = AuthService.token;
     if (token) {
-      console.log('intercepter', 'with token');
       request = request.clone({
         setHeaders: {
           'Authorization': 'Bearer ' + token

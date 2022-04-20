@@ -63,7 +63,11 @@ export class RolesComponent implements OnInit {
           this.ui.showInfoSnackBar("Role byla odstraněna")
         },
         (error) => {
-          this.ui.showInfoSnackBar("Roli se nepodřilo odstranit");
+          if (error && error.error && error.error.status == 409) {
+            this.ui.showInfoSnackBar("Role je použita, není možné ji odstranit");
+          } else {
+            this.ui.showInfoSnackBar("Roli se nepodřilo odstranit");
+          }
         });
       }
     });
