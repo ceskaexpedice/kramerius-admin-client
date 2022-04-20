@@ -7,42 +7,30 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService,
+  constructor(private auth: AuthService,
               private router: Router) { }
 
     canActivate(): Observable<boolean>|boolean {
       console.log('canActivate');
       return Observable.create(observer => {
-        if (this.authService.isLoggedIn()) {
+        if (this.auth.isAuthorized()) {
           observer.next(true);
           observer.complete();
         } else {
-            observer.next(false);
-            observer.complete();
-            this.router.navigate(['/login']);
+          this.auth.checkToken((status: number) => {
+            if (status == AuthService.AUTH_AUTHORIZED) {
+              observer.next(true);
+              observer.complete();
+            } else {
+              const path = window.location.pathname + window.location.search;
+              console.log('settings target', path);
+              localStorage.setItem('login.url', path);
+              observer.next(false);
+              observer.complete();
+              this.router.navigate(['/login']);
+            }
+          });
         }
-        // if (this.authService.checked) {
-        //   console.log('guard', 'p2 ' + this.authService.authorized);
-        //   observer.next(this.authService.authorized);
-        //   observer.complete();
-        //   if (!this.authService.authorized) {
-        //     this.router.navigate(['/login']);
-        //   }
-        //   return;
-        // }
-        // this.authService.isAauthorized(
-        //   (success) => {
-        //     if (success) {
-        //       console.log('guard', 'p3 true');
-        //       observer.next(true);
-        //       observer.complete();
-        //     } else {
-        //       console.log('guard', 'p3 false');
-        //       observer.next(false);
-        //       observer.complete();
-        //       this.router.navigate(['/login']);
-        //     }
-        // });
       });
     }
 

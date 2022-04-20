@@ -23,7 +23,7 @@
     <mat-menu #profile_menu="matMenu">
       <button mat-menu-item disabled>
         <mat-icon>person</mat-icon>
-        <span>{{ auth.username }}</span>
+        <span>{{ auth.user?.name }}</span>
       </button>
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>

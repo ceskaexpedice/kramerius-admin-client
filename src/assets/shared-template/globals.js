@@ -1,12 +1,17 @@
 var APP_GLOBAL = {
 
     //k7.inovatika.dev
-    //userClientBaseUrl: 'https://k7.inovatika.dev',
-    //coreBaseUrl: 'https://k7.inovatika.dev/search/'
+    userClientBaseUrl: 'https://k7.inovatika.dev',
+    coreBaseUrl: 'https://k7.inovatika.dev/search',
+    keycloak: {
+        baseUrl: 'https://k7.inovatika.dev/auth',
+        secret: 'kyPtgyMN7rFfPiJzgaaE90cpBryAQ4nG',
+        clientId: 'krameriusClient'
+    }
 
     //localhost
-    userClientBaseUrl: 'http://www.digitalniknihovna.cz/mzk',
-    coreBaseUrl: 'http://localhost:8080/search/'
+    // userClientBaseUrl: 'http://www.digitalniknihovna.cz/mzk',
+    // coreBaseUrl: 'http://localhost:8080/search/'
 
     //kramerius.dev.digitallibrary.cz
     // userClientBaseUrl: 'https://dev.digitallibrary.cz/d',

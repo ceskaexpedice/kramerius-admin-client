@@ -15,10 +15,12 @@ import { RepositoryComponent } from './components/repository/repository.componen
 import { AccessComponent } from './components/access/access.component';
 import { ImportComponent } from './components/import/import.component';
 import { ObjectAccessComponent } from './components/access/object-access/object-access.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'auth', component: AuthComponent },
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
   { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },

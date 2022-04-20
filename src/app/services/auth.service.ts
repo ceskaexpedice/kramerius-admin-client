@@ -1,103 +1,109 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppSettings } from './app-settings';
-import { LocalStorageService } from './local-storage.service';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { User } from '../models/user.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
 
-  username: string;
-  token: string;
+  static AUTH_AUTHORIZED = 1;
+  static AUTH_NOT_AUTHORIZED = 2;
+  static AUTH_NOT_LOGGED_IN = 3;
 
-  constructor(private http: HttpClient, private settings: AppSettings,  private locals: LocalStorageService) {
-    this.checkToken(this.locals.getStringProperty('account.token'));
+  user: User;
+  static token: string;
+
+  constructor(private http: HttpClient, private settings: AppSettings) {
+    AuthService.token = localStorage.getItem('account.token');
   }
 
-  login(email: string, password: string, callback: (status: string) => void) {
-    const body = `username=${email}&password=${password}`;
-    this.http.post(`${this.settings.coreBaseUrl}api/auth/token`, body).subscribe(
-      (result) => {
-        console.log('login ok', result);
-        const token = result['access_token'];
-        if (this.checkToken(token)) {
-          callback('authorized');
-        } else {
-          callback('logged_in_not_authorized');
-        }
-      },
-      (error) => {
-        console.log('login not ok', error);
-        if (error.status == 401) {
-          callback('not_logged_in');
-        } else {
-          callback('auth_error');
-        }
-      }
-    );
+  login() {
+    const url = this.buildLoginUrl();
+    window.open(url, '_top');
   }
 
-  logout() {
-    this.token = null;
-    this.username = null;
-    this.locals.setStringProperty('account.token', '');
-    this.locals.setStringProperty('account.username', '');
+  logout(suffix: string = "") {
+    AuthService.token = null;
+    localStorage.removeItem('account.token');
+    this.user = null;
+    const redircetUri = window.location.origin + suffix;
+    const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout?redirect_uri=${redircetUri}`;
+    window.open(url, '_top');
   }
 
   isLoggedIn() {
-    return !!this.token;
+    return this.user && this.user.isLoggedIn();
   }
 
-  // isAauthorized(callback: (success: boolean) => void) {
-  //   this.http.get(`${this.settings.coreBaseUrl}api/admin/v1.0/processes/batches?offset=0&limit=1`).subscribe(
-  //     (success) => {
-  //       this.checked = true;
-  //       this.authorized = true;
-  //       console.log('isAauthorized', success);
-  //       callback(true);
-  //     },
-  //     (error) => {
-  //       console.log('isAauthorized', error);
-  //       callback(false);
-  //     });
-  // }
- 
+  isAuthorized() {
+    return this.user && this.user.isAdmin();
+  }
+
   getTextProfileImage(): string {
-    if (!this.username) {
+    if (!this.user && !this.user.name) {
         return '?';
     }
-    return this.username[0];
+    return this.user.name[0];
+  }
+
+  private buildLoginUrl(): string {
+    const redircetUri = window.location.origin + '/auth';
+    return `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/auth?client_id=${this.settings.keycloak.clientId}&redirect_uri=${redircetUri}&response_type=code`;
+  }
+
+  checkToken(callback: (number) => void) {
+    if (!AuthService.token) {
+      callback(AuthService.AUTH_NOT_LOGGED_IN);
+      return;
+    }
+    this.validateToken().subscribe((user: User) => {
+      this.user = user;
+      if (this.isAuthorized()) {
+        callback(AuthService.AUTH_AUTHORIZED);
+      } else {
+        callback(AuthService.AUTH_NOT_AUTHORIZED);
+      }
+    },
+    (error) => {
+      callback(AuthService.AUTH_NOT_LOGGED_IN);
+    });
+  }
+
+  keycloakAuth(code: string, callback: (number) => void = null) {
+    this.getToken(code).subscribe(
+        (token: string) => {
+            if (!token) {
+                callback(AuthService.AUTH_NOT_LOGGED_IN);
+            } else {
+                AuthService.token = token;
+                localStorage.setItem('account.token', token);
+                this.checkToken(callback);
+            }
+        },
+        (error) => {
+            callback(AuthService.AUTH_NOT_LOGGED_IN);
+        }
+    );
   }
 
 
-  checkToken(token: string): boolean {
-    if (!token) {
-      this.logout();
-      return false;
-    }
-    console.log('??');
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(token);
-    const expirationDate = helper.getTokenExpirationDate(token);
-    const isExpired = helper.isTokenExpired(token);
-    console.log('decodedToken', decodedToken);
-    console.log('expirationDate', expirationDate);
-    console.log('isExpired', isExpired);
-    if (isExpired) {
-      this.logout();
-      return false;
-    }
-    const roles = decodedToken.realm_access.roles;
-    if (!roles || roles.indexOf("kramerius_admin") < 0) {
-      this.logout();
-      return false;
-    } 
-    this.token = token;
-    this.username = decodedToken.preferred_username;
-    this.locals.setStringProperty('account.token', this.token);
-    this.locals.setStringProperty('account.username', this.username);
-    return true;
+  private validateToken(): Observable<User> {
+    return this.http.get(`${this.settings.clientApiBaseUrl}/user`)
+        .pipe(map(response => User.fromJson(response)));
   }
 
+  private getToken(code: string): Observable<string> {
+    const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/token`;
+    const redircetUri = window.location.origin + '/auth';
+    const body = `grant_type=authorization_code&code=${code}&client_id=${this.settings.keycloak.clientId}&client_secret=${this.settings.keycloak.secret}&redirect_uri=${redircetUri}`; 
+    const options = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        })
+    };
+    return this.http.post(url, body, options).pipe(map(response => response['access_token']));
+}
   
 }
