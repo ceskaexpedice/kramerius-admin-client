@@ -7,7 +7,7 @@ export class AppSettings {
 
   // external properties from /assets/shared/globals.js
   userClientBaseUrl = APP_GLOBAL.userClientBaseUrl;
-  adminClientBaseUrl = APP_GLOBAL.adminClientBaseUrl;
+  deployPath = APP_GLOBAL.deployPath || '';
   coreBaseUrl = APP_GLOBAL.coreBaseUrl;
   keycloak = APP_GLOBAL.keycloak;
 
