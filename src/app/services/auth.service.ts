@@ -34,9 +34,11 @@ export class AuthService {
     AuthService.token = null;
     localStorage.removeItem('account.token');
     this.user = null;
-    const redircetUri = `${this.baseUrl()}${suffix}`;
-    const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout?redirect_uri=${redircetUri}`;
-    window.open(url, '_top');
+    this.logoutKramerius().subscribe(() => {
+      const redircetUri = `${this.baseUrl()}${suffix}`;
+      const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout?redirect_uri=${redircetUri}`;
+      window.open(url, '_top');
+    });
   }
 
   isLoggedIn() {
@@ -89,10 +91,13 @@ export class AuthService {
     );
   }
 
-
   private validateToken(): Observable<User> {
     return this.http.get(`${this.settings.clientApiBaseUrl}/user`)
         .pipe(map(response => User.fromJson(response)));
+  }
+
+  private logoutKramerius(): Observable<any> {
+    return this.http.get(`${this.settings.clientApiBaseUrl}/user/logout`);
   }
 
   private getToken(code: string): Observable<string> {
