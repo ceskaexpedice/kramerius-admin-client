@@ -46,3 +46,5 @@ testem.log
 Thumbs.db
 
 /src/assets/shared
+
+git-info.json

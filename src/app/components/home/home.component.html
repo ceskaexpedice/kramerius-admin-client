@@ -1,7 +1,9 @@
 <div class="app-home">
 
     <h2>kAdmin</h2>
-    <p>verze {{getVersion()}}</p>
+    <div class="app-home-version">verze {{getVersion()}}</div>
+    <div class="app-home-commit">commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></div>
+   
     <br>
     <!-- <div>
         <h4>Odkazy</h4>

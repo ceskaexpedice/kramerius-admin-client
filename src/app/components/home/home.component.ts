@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettings } from 'src/app/services/app-settings';
+import * as gitInfo from 'git-info.json'
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,15 @@ export class HomeComponent implements OnInit {
 
   getCoreUrl() {
     return this.appSettings.coreBaseUrl;
+  }
+
+  getLastCommitHash() {
+    const info = gitInfo;
+    //console.log(info)
+    const hash = info.hash ? info.hash
+      : info['default'].hash.substring(1); //pokud je to jeste v objektu "default", je hash prefixovan 'g', viz git-info.json (generovan pred buildem)
+    //console.log(hash)
+    return hash;
   }
 
 }

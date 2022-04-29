@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4321 --proxy-config proxy.conf.json",
-    "mzk": "ng serve --port 4322 --proxy-config proxy.conf.mzk.json",
-    "build": "ng build --prod",
+    "start": "node git-info-detect.js && ng serve --port 4321 --proxy-config proxy.conf.json",
+    "mzk": "node git-info-detect.js && ng serve --port 4322 --proxy-config proxy.conf.mzk.json",
+    "build": "node git-info-detect.js && ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -44,6 +44,7 @@
     "@types/jasminewd2": "^2.0.10",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "git-describe": "^4.1.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.9",
