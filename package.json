@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node git-info-detect.js && ng serve --port 4321 --proxy-config proxy.conf.json",
-    "mzk": "node git-info-detect.js && ng serve --port 4322 --proxy-config proxy.conf.mzk.json",
+    "start": "node git-info-detect.js && ng serve",
     "build": "node git-info-detect.js && ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
