@@ -1,6 +1,17 @@
-.app-object-access {
+.app-object {
     height: 100%;
     padding-top: 20px;
+
+
+    .app-object-not-selected {
+        mat-form-field {
+            display: block;
+            max-width: calc(100% - 20px);
+            width: 600px;
+            margin: 200px auto 0;
+        }
+    }
+
     .app-view-toggle {
         text-align: center;
         height: 50px;

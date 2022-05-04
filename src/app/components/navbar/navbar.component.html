@@ -6,6 +6,7 @@
   <span class="fill-remaining-space"></span>
 
   <ng-container *ngIf="auth.isLoggedIn()">
+    <a routerLink="/object" routerLinkActive="active" mat-button>Objekt</a>
     <a routerLink="/import" routerLinkActive="active" mat-button>Import</a>
     <a routerLink="/rights" routerLinkActive="active" mat-button>Práva</a>
     <a routerLink="/processes" routerLinkActive="active" mat-button>Procesy</a>

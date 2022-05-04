@@ -14,8 +14,8 @@ import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './components/repository/repository.component';
 import { AccessComponent } from './components/access/access.component';
 import { ImportComponent } from './components/import/import.component';
-import { ObjectAccessComponent } from './components/access/object-access/object-access.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { ObjectComponent } from './components/access/object/object.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -31,7 +31,8 @@ const routes: Routes = [
   { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },
   { path: 'config', component: ConfigComponent, canActivate: [AuthGuard] },
   { path: 'repository', component: RepositoryComponent, canActivate: [AuthGuard] },
-  { path: 'rights/:pid', component: ObjectAccessComponent, canActivate: [AuthGuard] },
+  { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'rights', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'import', component: ImportComponent, canActivate: [AuthGuard] }
 ];

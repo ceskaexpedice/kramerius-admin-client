@@ -1,0 +1,36 @@
+
+
+<div class="app-object">
+
+
+  <div class="app-object-not-selected" *ngIf="!pid">
+    <mat-form-field>
+      <input matInput
+          [(ngModel)]="inputPid"
+          placeholder="Zadejte UUID objektu"
+          (keyup.enter)="assignUuid()"
+          type="text">
+    </mat-form-field>
+  </div>
+
+  <div class="app-object-selected" *ngIf="pid">
+
+    <div class="app-view-toggle">
+      <div class="app-toggle-buttons">
+        <div class="app-toggle-button" (click)="changeView('actions')" [class.app-selected]="view == 'actions'">
+          <span>Práva</span>
+        </div>
+        <div class="app-toggle-button" (click)="changeView('accessibility')" [class.app-selected]="view == 'accessibility'">
+          <span>Přístupnost</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-view-content">
+      <app-actions *ngIf="view == 'actions'" [pid]="pid"></app-actions>
+    </div>
+
+  </div>
+
+
+</div>
