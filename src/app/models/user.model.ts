@@ -1,32 +1,28 @@
 
 export class User {
 
-  id: number;
+  authenticated: boolean = false;
+  uid: string;
   name: string;
   roles: string[];
 
   static fromJson(json): User {
     if (json) {
-      const id = json['id'];
-      const user = new User(id);
-      user.name = json['lname'];
-      user.roles = [];
-      if (json['roles']) {
-        for (const role of json['roles']) {
-          user.roles.push(role.name);
-        }
-      }
+      const user = new User();
+      user.authenticated = !!json['authenticated'];
+      user.name = (json['name'] || '').trim();
+      user.uid = json['uid'];
+      user.roles = json['roles'] || [];
       return user;
     }
     return null;
   }
 
-  constructor(id: number) {
-    this.id = id;
+  constructor() {
   }
 
   isLoggedIn(): boolean {
-    return this.id > -1;
+    return this.authenticated;
   }
 
   isAdmin(): boolean {

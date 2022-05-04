@@ -21,9 +21,9 @@
     </a>
 
     <mat-menu #profile_menu="matMenu">
-      <button mat-menu-item disabled>
+      <button mat-menu-item disabled *ngIf="auth.user">
         <mat-icon>person</mat-icon>
-        <span>{{ auth.user?.name }}</span>
+        <span>{{ auth.user.name || auth.user.uid }}</span>
       </button>
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>

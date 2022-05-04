@@ -50,10 +50,10 @@ export class AuthService {
   }
 
   getTextProfileImage(): string {
-    if (!this.user && !this.user.name) {
+    if (!this.user) {
         return '?';
     }
-    return this.user.name[0];
+    return (this.user.name || this.user.uid || '?')[0];
   }
 
   checkToken(callback: (number) => void) {
