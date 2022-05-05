@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       const failureStatus = params.get('failure');
       if (failureStatus == '1') {
-        this.errorMessage = 'Nedostateřná oprávnění';
+        this.errorMessage = 'Nedostatečná oprávnění';
       } else if (failureStatus == '2') {
         this.errorMessage = 'Přihlášení se nezdařilo';
       }
