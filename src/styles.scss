@@ -1,5 +1,12 @@
-@import './theme.scss';
-@import './src/variables.scss';
+// --- ROOT ---
+
+@import 'sass/app-theme.scss';
+@import 'sass/app-variables.scss';
+@import "sass/app-mixins";
+@import 'sass/app-global.scss';
+@import 'sass/app-mat-override.scss';
+@import 'sass/app-layout.scss';
+
 
 
 html {
