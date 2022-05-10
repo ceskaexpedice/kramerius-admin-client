@@ -6,3 +6,21 @@ $app-action-highlight-color: #556369;
 
 $app-action-warn: #bf4848;
 $app-action-warn-highlight: #d94444;
+
+// pedro
+$app-toolbar-height: 64px !default;
+$app-container: 1280px !default;
+
+// gaps
+$gaps: (
+  "0": 0,
+  "1": 4,
+  "2": 8,
+  "3": 12,
+  "4": 16,
+  "5": 20,
+  "6": 24,
+  "7": 28,
+  "8": 32,
+);
+

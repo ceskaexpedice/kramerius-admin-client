@@ -1,2 +1,35 @@
 // --- MATERIAL OVERRIDE ---
 
+.mat-card {
+  &.app-card {
+    @extend .app-clean-shadow;
+    
+    .app-card-title {
+      @extend .app-mb-4;
+      color: #61718c;
+      font-size: 18px;
+    }
+
+    .app-card-content {
+      .warn-message {
+        color: #aa6666;
+        margin: 5px 0 10px 0;
+  
+      }
+      mat-form-field {
+        width: 100%;
+      }
+
+      mat-checkbox {
+        display: block;
+      }
+    }
+
+    .app-card-actions {
+      mat-spinner {
+        float: right;
+        margin-top: 5px;
+      } 
+    }
+  }
+}

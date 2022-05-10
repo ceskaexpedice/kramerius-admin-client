@@ -1,6 +1,4 @@
-<div class="app-import">
-
-
+<div class="app-container app-import">
   <div class="app-view-toggle">
     <div class="app-toggle-buttons">
       <div class="app-toggle-button" (click)="changeType('foxml')" [class.app-selected]="type == 'foxml'">
@@ -13,30 +11,22 @@
   </div>
 
   <div class="app-view-content" *ngIf="!this.inputDirError[this.type]">
-
     <div class="app-header">
-
-      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations"
-        color="primary">Naplánovat následnou indexaci</mat-checkbox>
-
-      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'"
-        [(ngModel)]="ndkPublic" color="primary">Zveřejnit</mat-checkbox>
-
+      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary">Naplánovat následnou indexaci</mat-checkbox>
+      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">Zveřejnit</mat-checkbox>
       <div (click)="submit()" class="app-button" style="float: right;" [class.app-disabled]="!imports.selectedTree">
-        Spustit import</div>
+        Spustit import
+      </div>
     </div>
 
     <div class="app-header2">
       <mat-icon (click)="showHelpDialog()">help</mat-icon>
       <div class="app-path">{{ imports.selectedTree ? imports.selectedTree.getFullPath() : ''}}</div>
     </div>
-
     <app-tree [tree]="tree"></app-tree>
-
   </div>
 
   <div class="app-view-content" *ngIf="this.inputDirError[this.type]">
     <div class="app-error">{{this.inputDirError[this.type]}}</div>
   </div>
-
 </div>

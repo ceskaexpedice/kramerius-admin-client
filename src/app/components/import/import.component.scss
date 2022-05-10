@@ -1,10 +1,13 @@
 @import './src/sass/app-variables.scss';
+
 .app-import {
     height: 100%;
     padding-top: 20px;
+
     .app-view-toggle {
         text-align: center;
         height: 50px;
+
         .app-toggle-button {
             min-width: 80px;
         }

@@ -1,2 +1,95 @@
 // --- GLOBAL ---
 
+@include setGap();
+
+// cleaners
+.app-cleanfix {
+  @include cleanfix();
+}
+
+.app-clean-bg {
+  background-color: transparent !important;
+}
+
+.app-clean-radius {
+  border-radius: 0 !important;
+}
+
+.app-clean-border {
+  border: 0 !important;
+}
+
+.app-clean-shadow {
+  box-shadow: none !important;
+}
+
+.app-dn {
+  display: none;
+}
+
+.app-vh {
+  visibility: hidden;
+}
+
+
+// common
+.app-pipe {
+  @extend .app-ml-2, .app-mr-2;
+  border-left: 1px solid $app-gray-4;
+
+  &:last-child {
+    @extend .app-dn;
+  }
+}
+
+
+// table
+.app-table {
+  margin: 0;
+  background: $table-color-bg;
+  padding: 0;
+  
+  .app-row {
+    border-bottom-color: rgba(0,0,0,.12);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding: 0 24px;
+    display: flex;
+    height: 48px;
+    line-height: 48px;
+    color: $table-color-fg;
+    text-decoration: none;
+    overflow: hidden;
+    font-size: 14px;
+
+    &:hover {
+      background: $app-action-transparent;
+    }
+
+    &.app-header {
+      // color: rgba(0,0,0,.63);
+      font-size: 12px;
+      height: 54px;
+      line-height: 54px;
+      &:hover {
+        background: $table-color-bg;
+      }
+      .app-sortable {
+        cursor: pointer;
+        display: inline-block;
+        user-select: none;
+        mat-icon {
+          vertical-align: middle;
+        }
+      }
+    }
+
+    &.active {
+      background: $table-color-bg-active;
+
+      &:hover {
+        background: $table-color-bg-hover;
+      }
+    }
+  }
+}

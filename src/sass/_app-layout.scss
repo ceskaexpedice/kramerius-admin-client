@@ -1,2 +1,42 @@
 // --- LAYOUT ---
 
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  @extend .app-m-0;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background: $main-bg;
+
+  .app-content-wrapper {
+    height: 100%;
+    padding-top: $app-toolbar-height;
+
+    // container
+    .app-container {
+      @extend .app-p-4;
+      margin: 0 auto;
+      max-width: $app-container;
+      width: 100%;
+    }
+
+    .app-container-fluid {
+      @extend .app-p-4;
+      max-width: 100%;
+    }
+  }
+}
+
