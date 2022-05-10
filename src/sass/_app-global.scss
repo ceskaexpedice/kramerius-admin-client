@@ -2,6 +2,10 @@
 
 @include setGap();
 
+a {
+  @extend .app-cursor-pointer;
+}
+
 // cleaners
 .app-cleanfix {
   @include cleanfix();
@@ -33,12 +37,39 @@
 
 
 // common
+.app-cursor-pointer {
+  cursor: pointer;
+}
+
+
+// pipe
 .app-pipe {
   @extend .app-ml-2, .app-mr-2;
   border-left: 1px solid $app-gray-4;
 
   &:last-child {
     @extend .app-dn;
+  }
+}
+
+
+// breadcrumbs
+.app-path-bar {
+  @extend .app-pt-2, .app-pb-2, .app-pr-4, .app-pl-4;
+  border-bottom: 1px solid $app-content-bg;
+
+  .app-left {
+    a {
+      font-weight: bold;
+  
+      .mat-icon {
+        @include setIcon(18, red, middle);
+      }
+    }
+
+    .app-path {
+      color: $app-gray-8;
+    }
   }
 }
 

@@ -125,4 +125,8 @@ export class ImportComponent implements OnInit {
     });
   }
 
+  clearPath() {
+    this.imports.selectedTree = null;
+  }
+
 }

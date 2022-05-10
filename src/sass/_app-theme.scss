@@ -59,6 +59,10 @@ $table-color-bg-active: $primary-color;
 $table-color-fg-active: #ffffff;
 $table-color-fg: #666666;
 
+// custom colors
+$app-color-lightnes: #ffffff!default;
+$app-color-darknes: #000000 !default;
+$app-content-bg: #e4e4e4 !default;
 
 // gray colors
 $app-gray-0: mat-color($mat-gray, 50) !default;

@@ -1,5 +1,6 @@
 // --- MATERIAL OVERRIDE ---
 
+// card
 .mat-card {
   &.app-card {
     @extend .app-clean-shadow;
@@ -31,5 +32,17 @@
         margin-top: 5px;
       } 
     }
+  }
+}
+
+// button toogle
+.mat-button-toggle-appearance-standard {
+  &.mat-button-toggle-checked {
+    background-color: $primary-color;
+    color: $app-color-lightnes;
+  }
+  
+  .mat-button-toggle-label-content {
+    line-height: $app-button-height;
   }
 }

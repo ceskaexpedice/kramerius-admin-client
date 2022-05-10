@@ -57,6 +57,7 @@ import { TreeComponent } from './components/import/tree/tree.component';
 import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from './dialogs/schedule-processing-index-rebuild-for-object-dialog/schedule-processing-index-rebuild-for-object-dialog.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { ObjectComponent } from './components/access/object/object.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CKEditorModule
+    CKEditorModule,
+    FlexLayoutModule
   ],
   providers: [
     AuthService,
