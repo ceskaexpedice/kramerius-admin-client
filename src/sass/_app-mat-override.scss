@@ -33,13 +33,25 @@
       } 
     }
   }
+
+  &.app-alert {
+    @extend .app-clean-shadow;
+    @include setAlertCard();
+    text-align: center;
+    border: 1px solid;
+
+    .mat-icon {
+      @extend .app-mr-2;
+      @include setIcon($position: sub)
+    }
+  }
 }
 
 // button toogle
 .mat-button-toggle-appearance-standard {
   &.mat-button-toggle-checked {
-    background-color: $app-color-primary;
-    color: $app-color-lightnes;
+    background-color: $app-color-primary !important;
+    color: $app-color-lightnes !important;
   }
   
   .mat-button-toggle-label-content {

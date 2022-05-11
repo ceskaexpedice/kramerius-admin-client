@@ -1,38 +1,43 @@
-<div class="app-container app-import-wrapper">
-  <div fxLayout="row" fxLayoutAlign="center">
-    <mat-button-toggle-group>
-      <mat-button-toggle (click)="changeType('foxml')" [class.mat-button-toggle-checked]="type == 'foxml'">FOXML</mat-button-toggle>
-      <mat-button-toggle (click)="changeType('ndk')"  [class.mat-button-toggle-checked]="type == 'ndk'">NDK METS</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
-
-  <div fxLayout="row" fxLayoutAlign="start end" class="app-mb-4">
-    <div fxFlex>
-      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">Naplánovat následnou indexaci</mat-checkbox>
-      <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">Zveřejnit</mat-checkbox>
-    </div>
+<div class="app-container app-import">
+  <div fxLayout="column" fxFlexFill>
     <div>
-      <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">Spustit import</button>
-    </div>
-  </div>
-
-  <mat-card *ngIf="!this.inputDirError[this.type]" class="app-p-0 app-pb-4">
-    <div fxLayout="row" fxLayoutAlign="start center" class="app-path-bar app-mb-2">
-      <div fxFlex class="app-left">
-        <ng-container *ngIf="imports.selectedTree">
-          <a (click)="clearPath()" class="app-mr-2" matTooltip="Zrušit výběr">
-            <mat-icon>cancel</mat-icon>
-          </a>
-          <strong class="app-mr-2">Zvolená cesta:</strong>
-        </ng-container>
-        <span class="app-path">{{ imports.selectedTree ? imports.selectedTree.getFullPath() : '' }}</span>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <mat-button-toggle-group>
+          <mat-button-toggle (click)="changeType('foxml')" [class.mat-button-toggle-checked]="type == 'foxml'">FOXML</mat-button-toggle>
+          <mat-button-toggle (click)="changeType('ndk')"  [class.mat-button-toggle-checked]="type == 'ndk'">NDK METS</mat-button-toggle>
+        </mat-button-toggle-group>
       </div>
-      <div class="app-right"><a (click)="showHelpDialog()"><mat-icon>help</mat-icon></a></div>
+      <div fxLayout="row" fxLayoutAlign="start end" class="app-mb-4">
+        <div fxFlex>
+          <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">Naplánovat následnou indexaci</mat-checkbox>
+          <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">Zveřejnit</mat-checkbox>
+        </div>
+        <div>
+          <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">Spustit import</button>
+        </div>
+      </div>
     </div>
-    <app-tree [tree]="tree"></app-tree>
-  </mat-card>
-
-  <div class="app-view-content" *ngIf="this.inputDirError[this.type]">
-    <div class="app-error">{{this.inputDirError[this.type]}}</div>
+    <div fxFlex style="overflow: hidden;">
+      <mat-card fxLayout="column" fxFlexFill *ngIf="!this.inputDirError[this.type]" class="app-p-0">
+        <div fxLayout="row" fxLayoutAlign="start center" class="app-path-bar app-mb-2">
+          <div fxFlex class="app-left">
+            <ng-container *ngIf="imports.selectedTree">
+              <a (click)="clearPath()" class="app-mr-2" matTooltip="Zrušit výběr">
+                <mat-icon>cancel</mat-icon>
+              </a>
+              <strong class="app-mr-2">Zvolená cesta:</strong>
+            </ng-container>
+            <span class="app-path">{{ imports.selectedTree ? imports.selectedTree.getFullPath() : '' }}</span>
+          </div>
+          <div class="app-right"><a (click)="showHelpDialog()"><mat-icon>help</mat-icon></a></div>
+        </div>
+        <div fxFlex class="app-oa-y">
+          <app-tree [tree]="tree"></app-tree>
+        </div>
+      </mat-card>
+      <mat-card *ngIf="this.inputDirError[this.type]" class="app-alert app-warning">
+        {{this.inputDirError[this.type]}}
+      </mat-card>
+    </div>
   </div>
 </div>

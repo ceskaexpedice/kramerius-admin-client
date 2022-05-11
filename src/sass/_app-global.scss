@@ -41,6 +41,18 @@ a {
   cursor: pointer;
 }
 
+.app-oh {
+  overflow: hidden;
+}
+
+.app-oa-y {
+  overflow-y: auto;
+}
+
+.app-oa-x {
+  overflow-x: auto;
+}
+
 
 // pipe
 .app-pipe {
@@ -49,27 +61,6 @@ a {
 
   &:last-child {
     @extend .app-dn;
-  }
-}
-
-
-// breadcrumbs
-.app-path-bar {
-  @extend .app-pt-2, .app-pb-2, .app-pr-4, .app-pl-4;
-  border-bottom: 1px solid $app-body-bg;
-
-  .app-left {
-    a {
-      font-weight: bold;
-  
-      .mat-icon {
-        @include setIcon(18, $app-color-warn, middle);
-      }
-    }
-
-    .app-path {
-      color: $app-gray-8;
-    }
   }
 }
 

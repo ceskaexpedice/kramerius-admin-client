@@ -1,8 +1,29 @@
 @import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
 
-.app-import-wrapper {
+
+.app-import {
+	.app-path-bar {
+		@extend .app-pt-2, .app-pb-2, .app-pr-4, .app-pl-4;
+		border-bottom: 1px solid $app-body-bg;
 	
+		.app-left {
+			a {
+				font-weight: bold;
+		
+				.mat-icon {
+					@include setIcon(18, $app-color-warn, middle);
+				}
+			}
+	
+			.app-path {
+				color: $app-gray-8;
+			}
+		}
+	}
 }
+
 
 
 
