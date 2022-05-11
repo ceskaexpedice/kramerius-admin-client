@@ -19,7 +19,7 @@ html, body {
 body { 
   @extend .app-m-0;
   font-family: Roboto, "Helvetica Neue", sans-serif; 
-  background: $main-bg;
+  background: $app-body-bg;
 
   .app-content-wrapper {
     height: 100%;

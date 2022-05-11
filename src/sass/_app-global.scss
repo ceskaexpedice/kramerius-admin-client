@@ -56,14 +56,14 @@ a {
 // breadcrumbs
 .app-path-bar {
   @extend .app-pt-2, .app-pb-2, .app-pr-4, .app-pl-4;
-  border-bottom: 1px solid $app-content-bg;
+  border-bottom: 1px solid $app-body-bg;
 
   .app-left {
     a {
       font-weight: bold;
   
       .mat-icon {
-        @include setIcon(18, red, middle);
+        @include setIcon(18, $app-color-warn, middle);
       }
     }
 
@@ -77,7 +77,7 @@ a {
 // table
 .app-table {
   margin: 0;
-  background: $table-color-bg;
+  background: $app-table-color-bg;
   padding: 0;
   
   .app-row {
@@ -88,7 +88,7 @@ a {
     display: flex;
     height: 48px;
     line-height: 48px;
-    color: $table-color-fg;
+    color: $app-table-color-fg;
     text-decoration: none;
     overflow: hidden;
     font-size: 14px;
@@ -103,7 +103,7 @@ a {
       height: 54px;
       line-height: 54px;
       &:hover {
-        background: $table-color-bg;
+        background: $app-table-color-bg;
       }
       .app-sortable {
         cursor: pointer;
@@ -116,10 +116,10 @@ a {
     }
 
     &.active {
-      background: $table-color-bg-active;
+      background: $app-table-color-bg-active;
 
       &:hover {
-        background: $table-color-bg-hover;
+        background: $app-table-color-bg-hover;
       }
     }
   }

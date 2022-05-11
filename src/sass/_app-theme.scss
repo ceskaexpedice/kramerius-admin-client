@@ -3,75 +3,43 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$my-palette: (
-    50 : #e7e9ea,
-    100 : #c3c8ca,
-    200 : #9ba3a7,
-    300 : #737e84,
-    400 : #556369,
-    500 : #37474f,
-    600 : #314048,
-    700 : #2a373f,
-    800 : #232f36,
-    900 : #162026,
-    A100 : #6ac6ff,
-    A200 : #37b2ff,
-    A400 : #049fff,
-    A700 : #0090ea,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #ffffff,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #ffffff,
-        A700 : #ffffff,
-    )
-);
-
-$app-primary: mat-palette($my-palette, 500);
+$app-primary: mat-palette($mat-blue-gray, 600);
 $app-accent: mat-palette($mat-pink, 500, 900, A100);
 $app-warn: mat-palette($mat-red);
 $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
-$app-primary-lightest: mat-palette($my-palette, 50);
+$app-primary-lightest: mat-palette($mat-blue-gray, 50);
 
 @include angular-material-theme($app-theme);
 
-$primary-color: mat-color($app-primary);
-$primary-color-lightest: mat-color($app-primary-lightest);
-$accent-color: mat-color($app-accent);
-$warn-color: mat-color($app-warn);
+// system colors
+$app-color-primary: mat-color($app-primary) !default;;
+$app-color-accent: mat-color($app-accent) !default;;
+$app-color-warn: mat-color($app-warn) !default;
+$app-color-lightnes: #ffffff !default;
+$app-color-darknes: #000000  !default;
 
-$main-bg: #e4e4e4;
-$toolbar-color: $primary-color;
-$breadcrumb-color: $primary-color;
-$table-color-bg: #ffffff;
-$table-color-bg-hover: $primary-color-lightest;
-$table-color-bg-active: $primary-color;
-$table-color-fg-active: #ffffff;
-$table-color-fg: #666666;
+// gray palete colors
+$app-gray-0: mat-color($mat-blue-gray, 50) !default;
+$app-gray-1: mat-color($mat-blue-gray, 100) !default;
+$app-gray-2: mat-color($mat-blue-gray, 200) !default;
+$app-gray-3: mat-color($mat-blue-gray, 300) !default;
+$app-gray-4: mat-color($mat-blue-gray, 400) !default;
+$app-gray-5: mat-color($mat-blue-gray, 500) !default;
+$app-gray-6: mat-color($mat-blue-gray, 600) !default;
+$app-gray-7: mat-color($mat-blue-gray, 700) !default;
+$app-gray-8: mat-color($mat-blue-gray, 800) !default;
+$app-gray-9: mat-color($mat-blue-gray, 900) !default;
 
-// custom colors
-$app-color-lightnes: #ffffff!default;
-$app-color-darknes: #000000 !default;
-$app-content-bg: #e4e4e4 !default;
+// element colors
+$app-body-bg: $app-gray-0;
 
-// gray colors
-$app-gray-0: mat-color($mat-gray, 50) !default;
-$app-gray-1: mat-color($mat-gray, 100) !default;
-$app-gray-2: mat-color($mat-gray, 200) !default;
-$app-gray-3: mat-color($mat-gray, 300) !default;
-$app-gray-4: mat-color($mat-gray, 400) !default;
-$app-gray-5: mat-color($mat-gray, 500) !default;
-$app-gray-6: mat-color($mat-gray, 600) !default;
-$app-gray-7: mat-color($mat-gray, 700) !default;
-$app-gray-8: mat-color($mat-gray, 800) !default;
-$app-gray-9: mat-color($mat-gray, 900) !default;
+
+
+
+
+// original honza code
+$app-table-color-bg: $app-color-lightnes;
+$app-table-color-bg-hover: $app-gray-0;
+$app-table-color-bg-active: $app-color-primary;
+$app-table-color-fg: $app-gray-7;
