@@ -5,7 +5,7 @@ $app-color-primary: mat-color($app-primary) !default;
 $app-color-accent: mat-color($app-accent) !default;
 $app-color-warn: mat-color($app-warn) !default;
 $app-color-lightnes: #ffffff !default;
-$app-color-darknes: #000000  !default;
+$app-color-darknes: mat-color($mat-blue-gray, 900)  !default;
 
 // gray contrast colors
 $app-gray-0: mat-color($mat-blue-gray, 50) !default;
@@ -25,6 +25,7 @@ $app-color-success: mat-color($mat-green, 800) !default;
 
 // elements
 $app-body-bg: $app-gray-0;
+$app-body-color: $app-color-darknes;
 $app-toolbar-height: 64px !default;
 $app-container: 1280px !default;
 $app-button-height: 36px !default;

@@ -2,6 +2,8 @@
 
 // card
 .mat-card {
+  color: $app-body-color !important;
+  
   &.app-card {
     @extend .app-clean-shadow;
     
@@ -50,6 +52,8 @@
 
 // button toogle
 .mat-button-toggle-appearance-standard {
+  color: $app-color-primary !important;
+  
   &.mat-button-toggle-checked {
     background-color: $app-color-primary !important;
     color: $app-color-lightnes !important;

@@ -29,9 +29,11 @@
             </ng-container>
             <span class="app-path">{{ imports.selectedTree ? imports.selectedTree.getFullPath() : '' }}</span>
           </div>
-          <div class="app-right"><a (click)="showHelpDialog()"><mat-icon>help</mat-icon></a></div>
+          <div class="app-right">
+            <a (click)="showHelpDialog()" matTooltip="Zobrazit nápovědu"><mat-icon>help</mat-icon></a>
+          </div>
         </div>
-        <div fxFlex class="app-oa-y">
+        <div fxFlex class="app-oa-y app-pl-2 app-pr-2 app-pb-2">
           <app-tree [tree]="tree"></app-tree>
         </div>
       </mat-card>

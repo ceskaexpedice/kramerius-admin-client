@@ -1,14 +1,14 @@
-
 <ng-container *ngIf="tree">
-  <div (click)="select()" (dblclick)="open()" class="app-row" [class.app-selected]="tree == imports.selectedTree">
-    <div class="result-label" [class.app-file]="!tree.file.isDir">
-      <div class="app-tree-left" [style.width]="(tree.level * 20 + 40) + 'px'">
-        <mat-spinner *ngIf="tree.loading" [strokeWidth]="3" [diameter]="20"></mat-spinner>
-        <mat-icon class="app-tree-expand" *ngIf="tree.expandable() && !tree.loading" (click)="toggle($event)">{{ tree.expanded ? "expand_more" : "chevron_right" }}</mat-icon>
-      </div>
+  <div fxLayout="row" fxLayoutAlign="start center" (click)="select()" (dblclick)="open()" class="app-row" [class.app-file]="!tree.file.isDir" [class.app-selected]="tree == imports.selectedTree">
+    <div class="app-left" [fxFlex]="(tree.level * 20 + 40) + 'px'">
+      <mat-spinner *ngIf="tree.loading" [strokeWidth]="3" [diameter]="20" class="app-mr-2"></mat-spinner>
+      <mat-icon class="app-tree-expand" *ngIf="tree.expandable() && !tree.loading" (click)="toggle($event)" class="app-mr-2">{{ tree.expanded ? "expand_more" : "chevron_right" }}</mat-icon>
+    </div>
+    <div class="app-right">
       {{ tree.file.name }}
     </div>
   </div>
+
   <ng-container *ngIf="tree.expanded && tree.children">
     <app-tree *ngFor="let child of tree.children" [tree]="child"></app-tree>
   </ng-container>
