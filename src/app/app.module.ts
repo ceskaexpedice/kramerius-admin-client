@@ -58,6 +58,7 @@ import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from './dialog
 import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     HttpClientModule,
     CKEditorModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatBadgeModule
   ],
   providers: [
     AuthService,

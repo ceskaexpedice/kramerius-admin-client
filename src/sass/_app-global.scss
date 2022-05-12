@@ -61,6 +61,23 @@ a {
   height: 100% !important;
 }
 
+.app-rotate-up {
+  .mat-icon {
+    &:not(.app-no-rotate) {
+      transition: all 0.4s ease;
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.app-rotate-down {
+  .mat-icon {
+    &:not(.app-no-rotate) {
+      transition: all 0.4s ease;
+      transform: rotateZ(0deg);
+    }
+  }
+}
 
 // pipe
 .app-pipe {
@@ -72,8 +89,67 @@ a {
   }
 }
 
-
 // table
+table {
+  // standart table
+  &.app-table {
+    @extend .app-w-100;
+    $app-tbc: $app-gray-1;
+    border-width: 1px 0 0 1px;
+    border-style: solid;
+    border-color: $app-tbc;
+
+    tr {
+      td, th {
+        border-width: 0 1px 1px 0;
+        border-style: solid;
+        border-color: $app-tbc;
+        padding: 4px 8px;
+        vertical-align: top;
+        text-align: left;
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          &.app-col-action {
+            width: 30px;
+            color: $app-color-primary;
+
+            .mat-icon {
+              @include setIcon(18, $position: sub)
+            }
+          }
+
+          &.app-col-remove {
+            color: $app-color-warn;
+
+            a {
+              @include setLinkColor($app-color-warn);
+            } 
+          }
+        }
+
+        &:hover {
+          td {
+            background-color: $app-gray-0;
+          }
+        }
+        &:nth-child(odd) {
+          background-color: rgba($app-gray-0, .5);
+        }
+
+        .app-input {
+          width: calc(100% - 4px);
+        }
+      }
+    }
+  }
+}
+
+
+// table - hozna
 .app-table {
   margin: 0;
   background: $app-table-color-bg;

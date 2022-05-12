@@ -1,47 +1,54 @@
-<div class="app-actions">
+<mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
 
-  <mat-spinner *ngIf="state=='loading'"
-    [strokeWidth]="3" 
-    [diameter]="30">
-  </mat-spinner>
-
-  <ng-container *ngIf="state=='success'">
-    <div class="app-action" *ngFor="let action of actions">
-      <mat-icon (click)="selectedAction = action" *ngIf="selectedAction != action">expand_more</mat-icon>
-      <mat-icon (click)="selectedAction = null" *ngIf="selectedAction == action">expand_less</mat-icon>
-
-      <!--  <mat-icon (click)="onRemoveRole(role)">delete</mat-icon> -->
-      <div class="app-action-name">{{ action.code }} <span> {{ action.rights.length }}</span></div>
-      <div class="app-action-description">{{ action.description }}</div>
-      <div class="app-rights" *ngIf="selectedAction == action">
-        <div class="app-right app-right-header">
-          <div class="app-right-role">Role</div>
-          <div class="app-right-condition">Podmínka</div>
-          <div class="app-right-param">Parametr</div>
-          <div class="app-right-license">Licence</div>
+<ng-container *ngIf="state=='success'">
+  <mat-card class="app-view-rights" *ngFor="let action of actions; let idx = index" [class.app-card-expanded]="selectedAction == action">
+      <mat-card-header fxLayout="row">
+        <div fxFlex class="app-left">
+          <mat-card-title><span [matBadge]="action.rights.length" matBadgeOverlap="false" matBadgeColor="accent">{{ action.code }}</span></mat-card-title>
+          <mat-card-subtitle>{{ action.description }}</mat-card-subtitle>
         </div>
-        <div class="app-right" *ngFor="let right of action.rights">
-          <div class="app-right-role">
-            {{ right.role.name }}
-          </div>
-          <div class="app-right-condition">
-            {{ right.condition ? right.condition.name : "-"}}
-          </div>
-          <div class="app-right-condition">
-            {{ right.condition && right.condition.params && right.condition.params.description ? right.condition.params.description : "-"}}
-          </div>
-          <div class="app-right-license">
-            {{ right.hasLicense() ? right.condition.license : "-"}}
-          </div>
-          <div class="app-right-actions">
-            <mat-icon (click)="onRemoveRight(action, right)">delete</mat-icon>      
-            <mat-icon (click)="onEditRight(right)" style="margin-right: 3px;">edit</mat-icon>
-          </div>
+        <div class="app-right">
+          <a (click)="selectedAction = action" *ngIf="selectedAction != action">
+            <mat-icon>expand_more</mat-icon>
+          </a>
+          <a (click)="selectedAction = null" *ngIf="selectedAction == action">
+            <mat-icon>expand_less</mat-icon>
+          </a>
         </div>
-        <div class="app-new-right app-button" (click)="onNewRight(action)">Přidat právo</div>
-      </div>
-    </div>
-  </ng-container>
-
-
-</div>
+      </mat-card-header>
+      <ng-container *ngIf="selectedAction == action">
+        <mat-card-content>
+          <table [cellPadding]="0" [cellSpacing]="0" class="app-table app-mt-4">
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Podmínka</th>
+                <th>Parametr</th>
+                <th>Licnce</th>
+                <th colspan="2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let right of action.rights">
+                <td> {{ right.role.name }}</td>
+                <td>{{ right.condition ? right.condition.name : "-"}}</td>
+                <td>{{ right.condition && right.condition.params && right.condition.params.description ? right.condition.params.description : "-"}}</td>
+                <td>{{ right.hasLicense() ? right.condition.license : "-"}}</td>
+                <td class="app-col-action">
+                  <a (click)="onEditRight(right)" matTooltip="Editovat právo"><mat-icon>edit</mat-icon></a>
+                </td>
+                <td class="app-col-action app-col-remove">
+                  <a (click)="onRemoveRight(action, right)" matTooltip="Smazat právo"><mat-icon>delete</mat-icon></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button (click)="onNewRight(action)" color="primary">
+            Přidat právo
+          </button>
+        </mat-card-actions> 
+      </ng-container>
+  </mat-card>
+</ng-container>

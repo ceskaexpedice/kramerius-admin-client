@@ -1,29 +1,20 @@
-<div class="app-access">
-
-
-  <div class="app-view-toggle">
-    <div class="app-toggle-buttons">
-      <div class="app-toggle-button" (click)="changeView('actions')" [class.app-selected]="view == 'actions'">
-        <span>Práva</span>
-      </div>
-      <div class="app-toggle-button" (click)="changeView('roles')" [class.app-selected]="view == 'roles'">
-        <span>Role</span>
-      </div>
-      <div class="app-toggle-button" (click)="changeView('licenses')" [class.app-selected]="view == 'licenses'">
-        <span>Licence</span>
-      </div>
-      <div class="app-toggle-button" (click)="changeView('params')" [class.app-selected]="view == 'params'">
-        <span>Parametry</span>
-      </div>
+<div class="app-container app-access app-h-100">
+  <div fxLayout="column" fxFlexFill>
+    <div fxLayout="row" fxLayoutAlign="center" class="app-mb-4">
+      <mat-button-toggle-group>
+        <mat-button-toggle (click)="changeView('actions')" [class.mat-button-toggle-checked]="view == 'actions'">Práva</mat-button-toggle>
+        <mat-button-toggle (click)="changeView('roles')"  [class.mat-button-toggle-checked]="view == 'roles'">Role</mat-button-toggle>
+        <mat-button-toggle (click)="changeView('licenses')"  [class.mat-button-toggle-checked]="view == 'licenses'">Licence</mat-button-toggle>
+        <mat-button-toggle (click)="changeView('params')"  [class.mat-button-toggle-checked]="view == 'params'">Parametry</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div fxFlex class="app-oh">
+      <mat-card fxLayout="column" fxFlexFill class="app-card app-p-0 app-oa-y">
+        <app-actions *ngIf="view == 'actions'"></app-actions>
+        <app-roles *ngIf="view == 'roles'"></app-roles>
+        <app-licenses *ngIf="view == 'licenses'"></app-licenses>
+        <app-params *ngIf="view == 'params'"></app-params>
+      </mat-card>
     </div>
   </div>
-
-  <div class="app-view-content">
-    <app-roles *ngIf="view == 'roles'"></app-roles>
-    <app-licenses *ngIf="view == 'licenses'"></app-licenses>
-    <app-actions *ngIf="view == 'actions'"></app-actions>
-    <app-params *ngIf="view == 'params'"></app-params>
-
-  </div>
-
 </div>

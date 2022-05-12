@@ -5,9 +5,9 @@
   color: $app-body-color !important;
   
   &.app-card {
-    @extend .app-clean-shadow;
+    @extend .app-clean-shadow, .app-clean-radius;
     
-    .app-card-title {
+    /* .app-card-title {
       @extend .app-mb-4;
       color: #61718c;
       font-size: 18px;
@@ -33,6 +33,33 @@
         float: right;
         margin-top: 5px;
       } 
+    } */
+  }
+
+  &.app-view-rights {
+    @extend .app-clean-shadow, .app-clean-radius;
+    border-bottom: 1px solid $app-body-bg;
+
+    &.app-card-expanded {
+      background-color: rgba($app-body-bg, .2);
+    }
+
+    .mat-card-header {
+      .mat-card-header-text {
+        @extend .app-m-0;
+      }
+
+      .mat-card-title {
+        font-size: 16px;
+      }
+  
+      .mat-card-subtitle {
+        @extend .app-mb-0;
+      }
+    }
+    
+    .mat-card-actions {
+      @extend .app-m-0, .app-p-0;
     }
   }
 
@@ -61,5 +88,27 @@
   
   .mat-button-toggle-label-content {
     line-height: $app-button-height;
+  }
+}
+
+// button
+.mat-button-base {
+  line-height: $app-button-height !important;
+}
+
+// badge
+.mat-badge {
+  &.mat-badge-medium {
+    &.mat-badge-after {
+      .mat-badge-content {
+        right: -30px;
+      }
+    }
+
+    &.mat-badge-above {
+      .mat-badge-content {
+        top: 0;
+      }
+    }
   }
 }
