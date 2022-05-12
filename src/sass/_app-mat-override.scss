@@ -37,12 +37,13 @@
   &.app-alert {
     @extend .app-clean-shadow;
     @include setAlertCard();
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid;
 
     .mat-icon {
       @extend .app-mr-2;
-      @include setIcon($position: sub)
     }
   }
 }
