@@ -27,6 +27,8 @@ $app-color-success: mat-color($mat-green, 800) !default;
 $app-body-bg: $app-gray-0;
 $app-body-color: $app-color-darknes;
 $app-card-border-color: $app-gray-1;
+$app-card-bg-hover: rgba($app-body-bg, .3);
+$app-card-bg-expanded: $app-card-bg-hover;
 $app-toolbar-height: 64px !default;
 $app-container: 1280px !default;
 $app-button-height: 32px !default;

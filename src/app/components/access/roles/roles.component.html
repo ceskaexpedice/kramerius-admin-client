@@ -1,18 +1,18 @@
-<div class="app-roles">
+<mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
 
-  <mat-spinner *ngIf="state=='loading'"
-    [strokeWidth]="3" 
-    [diameter]="30">
-  </mat-spinner>
-
-  <ng-container *ngIf="state=='success'">
-    <div class="app-role" *ngFor="let role of roles;">
-      <mat-icon (click)="onRemoveRole(role)">delete</mat-icon>
-      <mat-icon (click)="onEditRole(role)">edit</mat-icon>
-      <div class="app-role-name">{{ role.name }}</div>
-    </div>
-    <div class="app-new-role app-button" (click)="onNewRole()">Přidat roli</div>
-  </ng-container>
-
-
-</div>
+<ng-container *ngIf="state=='success'">
+  <mat-card class="app-view-rights app-view-hover app-pt-0 app-pb-0 app-pr-0" *ngFor="let role of roles">
+    <mat-card-header fxLayout="row" fxFlexAlign="center">
+      <div fxFlex class="app-left" fxFlexAlign="center">
+        <mat-card-title class="app-p-0 app-m-0">{{ role.name }}</mat-card-title>
+      </div>
+      <div class="app-right app-actions">
+        <a (click)="onEditRole(role)" class="app-btn" matTooltip="Editovat roli"><mat-icon>edit</mat-icon></a>
+        <a (click)="onRemoveRole(role)" class="app-btn" matTooltip="Smazat roli"><mat-icon>delete</mat-icon></a>
+      </div>
+    </mat-card-header>
+  </mat-card>
+  <button mat-flat-button (click)="onNewRole()" color="primary" class="app-m-4">
+    Přidat roli
+  </button>
+</ng-container>

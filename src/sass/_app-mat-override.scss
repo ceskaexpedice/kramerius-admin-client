@@ -11,12 +11,21 @@
     border: 1px solid $app-card-border-color;
   }
 
+  &.app-view-hover {
+    &:hover {
+      background-color: $app-card-bg-hover;
+    }
+  }
+
   &.app-view-rights {
     @extend .app-clean-shadow, .app-clean-radius;
-    border-bottom: 1px solid $app-card-border-color;
+   
+    &:not(:last-child) {
+      border-bottom: 1px solid $app-card-border-color;
+    }
 
     &.app-card-expanded {
-      background-color: rgba($app-body-bg, .2);
+      background-color: $app-card-bg-hover;
     }
 
     .mat-card-header {
@@ -24,18 +33,41 @@
         @extend .app-m-0;
       }
 
-      .mat-card-title {
-        font-size: 16px;
+      .app-left {
+        .mat-card-title {
+          font-size: 16px;
+        }
+    
+        .mat-card-subtitle {
+          @extend .app-mb-0;
+        }
       }
+
+      .app-right {
+        &.app-actions {
+          .app-btn {
+            @extend  .app-p-2;
+            display: inline-block;
+            border-left: 1px solid $app-card-border-color;
+            color: $app-color-primary;
+            
   
-      .mat-card-subtitle {
-        @extend .app-mb-0;
+            .mat-icon {
+              @include setIcon($position: sub);
+            }
+          }
+        }
       }
     }
     
     .mat-card-actions {
       @extend .app-m-0, .app-p-0;
     }
+  }
+
+  .app-button-wrapper {
+    @extend .app-p-4;
+    background-color: $app-card-bg-hover;
   }
 
   &.app-view-alert {
