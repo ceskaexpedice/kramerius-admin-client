@@ -18,7 +18,7 @@
       </div>
     </div>
     <div fxFlex class="app-oh">
-      <mat-card fxLayout="column" fxFlexFill *ngIf="!this.inputDirError[this.type]" class="app-p-0 app-card">
+      <mat-card fxLayout="column" fxFlexFill *ngIf="!this.inputDirError[this.type]" class="app-p-0 app-card app-view-border">
         <div fxLayout="row" fxLayoutAlign="start center" class="app-path-bar app-mb-2">
           <div fxFlex class="app-left">
             <ng-container *ngIf="imports.selectedTree">
@@ -37,7 +37,7 @@
           <app-tree [tree]="tree"></app-tree>
         </div>
       </mat-card>
-      <mat-card *ngIf="this.inputDirError[this.type]" class="app-alert app-warning">
+      <mat-card *ngIf="this.inputDirError[this.type]" class="app-view-alert app-warning">
         <mat-icon>error</mat-icon>{{ this.inputDirError[this.type] }}
       </mat-card>
     </div>

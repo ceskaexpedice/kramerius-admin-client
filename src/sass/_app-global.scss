@@ -110,6 +110,16 @@ table {
       }
     }
 
+    thead {
+      tr {
+        th {
+          /* font-size: 12px;
+          font-weight: 500;
+          color: $app-gray-6; */
+        }
+      }
+    }
+
     tbody {
       tr {
         td {
@@ -120,14 +130,6 @@ table {
             .mat-icon {
               @include setIcon(18, $position: sub)
             }
-          }
-
-          &.app-col-remove {
-            color: $app-color-warn;
-
-            a {
-              @include setLinkColor($app-color-warn);
-            } 
           }
         }
 

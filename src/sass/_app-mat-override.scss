@@ -2,43 +2,18 @@
 
 // card
 .mat-card {
-  color: $app-body-color !important;
-  
   &.app-card {
     @extend .app-clean-shadow, .app-clean-radius;
-    
-    /* .app-card-title {
-      @extend .app-mb-4;
-      color: #61718c;
-      font-size: 18px;
-    }
+    color: $app-body-color !important;
+  }
 
-    .app-card-content {
-      .warn-message {
-        color: #aa6666;
-        margin: 5px 0 10px 0;
-  
-      }
-      mat-form-field {
-        width: 100%;
-      }
-
-      mat-checkbox {
-        display: block;
-      }
-    }
-
-    .app-card-actions {
-      mat-spinner {
-        float: right;
-        margin-top: 5px;
-      } 
-    } */
+  &.app-view-border {
+    border: 1px solid $app-card-border-color;
   }
 
   &.app-view-rights {
     @extend .app-clean-shadow, .app-clean-radius;
-    border-bottom: 1px solid $app-body-bg;
+    border-bottom: 1px solid $app-card-border-color;
 
     &.app-card-expanded {
       background-color: rgba($app-body-bg, .2);
@@ -63,7 +38,7 @@
     }
   }
 
-  &.app-alert {
+  &.app-view-alert {
     @extend .app-clean-shadow;
     @include setAlertCard();
     display: flex;

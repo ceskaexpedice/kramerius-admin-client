@@ -4,7 +4,7 @@
   <mat-card class="app-view-rights" *ngFor="let action of actions; let idx = index" [class.app-card-expanded]="selectedAction == action">
       <mat-card-header fxLayout="row">
         <div fxFlex class="app-left">
-          <mat-card-title><span [matBadge]="action.rights.length" matBadgeOverlap="false" matBadgeColor="accent">{{ action.code }}</span></mat-card-title>
+          <mat-card-title><span [matBadge]="action.rights.length" matBadgeOverlap="false" matBadgeColor="primary">{{ action.code }}</span></mat-card-title>
           <mat-card-subtitle>{{ action.description }}</mat-card-subtitle>
         </div>
         <div class="app-right">
@@ -37,7 +37,7 @@
                 <td class="app-col-action">
                   <a (click)="onEditRight(right)" matTooltip="Editovat právo"><mat-icon>edit</mat-icon></a>
                 </td>
-                <td class="app-col-action app-col-remove">
+                <td class="app-col-action">
                   <a (click)="onRemoveRight(action, right)" matTooltip="Smazat právo"><mat-icon>delete</mat-icon></a>
                 </td>
               </tr>
