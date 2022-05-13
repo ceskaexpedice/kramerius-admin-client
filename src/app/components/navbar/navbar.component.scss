@@ -11,6 +11,12 @@
     text-decoration: none;
   }
 
+  .mat-button-base {
+    &.active {
+      background-color: $app-gray-8;
+    }
+  }
+
   .app-avatar {
     div {
       width: $app-avatar-size;
