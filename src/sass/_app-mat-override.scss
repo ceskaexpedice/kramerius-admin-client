@@ -42,22 +42,6 @@
           @extend .app-mb-0;
         }
       }
-
-      .app-right {
-        &.app-actions {
-          .app-btn {
-            @extend  .app-p-2;
-            display: inline-block;
-            border-left: 1px solid $app-card-border-color;
-            color: $app-color-primary;
-            
-  
-            .mat-icon {
-              @include setIcon($position: sub);
-            }
-          }
-        }
-      }
     }
     
     .mat-card-actions {

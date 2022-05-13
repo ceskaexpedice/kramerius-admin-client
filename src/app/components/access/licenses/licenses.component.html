@@ -1,4 +1,35 @@
-<div class="app-licenses">
+<mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
+
+<ng-container *ngIf="state=='success'">
+  <mat-card class="app-view-rights app-view-hover" *ngFor="let licence of licenses; let first = first; let last = last">
+    <mat-card-header fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex class="app-left">
+        <mat-card-title>{{ licence.name }}</mat-card-title>
+        <mat-card-subtitle>{{ licence.description }}</mat-card-subtitle>
+      </div>
+      <div class="app-right">
+        <div class="app-button-group">
+          <a *ngIf="!last" (click)="onMoveLiceseDown(licence)" matTooltip="Editovat roli"><mat-icon>south</mat-icon></a>
+          <a *ngIf="!first" (click)="onMoveLiceseUp(licence)"  matTooltip="Editovat roli"><mat-icon>north</mat-icon></a>
+          <a (click)="onEditLicese(licence)"  matTooltip="Editovat roli"><mat-icon>edit</mat-icon></a>
+          <a (click)="onRemoveLicese(licence)" matTooltip="Smazat roli"><mat-icon>delete</mat-icon></a>
+        </div>
+      </div>
+    </mat-card-header>
+  </mat-card>
+  <button mat-flat-button (click)="onNewLicence()" color="primary" class="app-m-4">
+    Přidat licenci
+  </button>
+</ng-container>
+
+
+
+
+
+
+
+
+<!-- <div class="app-licenses">
 
   <mat-spinner *ngIf="state=='loading'"
     [strokeWidth]="3" 
@@ -20,4 +51,4 @@
   </ng-container>
 
 
-</div>
+</div> -->
