@@ -5,6 +5,16 @@
   &.app-card {
     @extend .app-clean-shadow, .app-clean-radius;
     color: $app-body-color !important;
+
+    .mat-card-header {
+      .mat-card-header-text {
+        @extend .app-m-0;
+      }
+    }
+
+    .mat-card-actions {
+      @extend .app-m-0, .app-p-0;
+    }
   }
 
   &.app-view-border {
@@ -29,10 +39,6 @@
     }
 
     .mat-card-header {
-      .mat-card-header-text {
-        @extend .app-m-0;
-      }
-
       .app-left {
         .mat-card-title {
           font-size: 16px;
@@ -57,10 +63,6 @@
           }
         }
       }
-    }
-    
-    .mat-card-actions {
-      @extend .app-m-0, .app-p-0;
     }
   }
 
@@ -117,6 +119,26 @@
         width: $app-badge-size;
         height: $app-badge-size;
         line-height: $app-badge-size;
+      }
+    }
+  }
+}
+
+// form field
+.mat-form-field {
+  &.app-select {
+    .mat-form-field-wrapper {
+      margin-bottom: -1.34375em;
+
+      .mat-form-field-infix,
+      .mat-form-field-flex  {
+        @extend .app-pt-0;
+
+        .mat-select {
+          .mat-select-arrow-wrapper {
+            vertical-align: bottom;
+          }
+        }
       }
     }
   }

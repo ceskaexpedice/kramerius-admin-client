@@ -1,10 +1,67 @@
-<div class="app-root">
+<div class="app-container-fluid app-import app-h-100">
+	<div class="app-mb-4">Aktuální verze Indexeru: <strong>{{currentIndexerVersion}}</strong></div>
+	<div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
+		<mat-card class="app-card app-view-border app-w-100">
+			<mat-card-header>
+				<mat-card-title>Objekt(y)</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru.
+			</mat-card-content>
+			<mat-card-actions>
+				<button mat-flat-button color="primary" (click)="openIndexationByPidDialog()">
+					<mat-icon>play_arrow</mat-icon>Indexovat
+				</button>
+			</mat-card-actions>
+		</mat-card>
+		<mat-card class="app-card app-view-border app-w-100">
+			<mat-card-header>
+				<mat-card-title>Model</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				Indexace objektů (a jejich stromů), které mají vybraný model.
+			</mat-card-content>
+			<mat-card-actions>
+				<mat-form-field appearance="fill" class="app-select app-mr-4">
+					<mat-select placeholder="Model" [(value)]="selectedModel" (selectionChange)="onSelectModel($event)" [disabled]="loading">
+						<mat-option *ngFor="let model of models; let i = index" [value]="model">{{modelNames[i]}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<button mat-flat-button color="primary" (click)="openIndexationByModelDialog()" [disabled]="loading || !selectedModel">
+					<mat-icon>play_arrow</mat-icon>Indexovat
+				</button>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+	<div fxLayout="row">
+		<div fxFlex>
+			<mat-button-toggle-group [(ngModel)]="stateFilter" [disabled]="loading">
+				<mat-button-toggle value="all" (change)="onChangeStateFilter($event.value)" [class.mat-button-toggle-checked]="stateFilter == 'all'">vše</mat-button-toggle>
+				<mat-button-toggle value="not_indexed" (change)="onChangeStateFilter($event.value)" matTooltip="Doposud nebylo indexováno" matTooltipPosition="above">neindexováno</mat-button-toggle>
+				<mat-button-toggle value="in_progress" (change)="onChangeStateFilter($event.value)" matTooltip="Probíhá kompletní indexace, nebo kompletní indexace nebyla řádně dokončena" matTooltipPosition="above">probíhá/chyba</mat-button-toggle>
+				<mat-button-toggle value="indexed_current" (change)="onChangeStateFilter($event.value)" matTooltip="Indexováno aktuální verzí Indexeru" matTooltipPosition="above">indexováno</mat-button-toggle>
+				<mat-button-toggle value="indexed_old" (change)="onChangeStateFilter($event.value)" matTooltip="Indexováno některou starší verzí indexeru" matTooltipPosition="above">indexováno (zastaralé)</mat-button-toggle>
+			</mat-button-toggle-group>
+		</div>
+		<div>
+			<button mat-flat-button color="primary" (click)="openIndexationsByMultiplePidsDialog()" matTooltip="Indexovat všechny aktuálně zobrazené objekty - každý ve vlastním procesu" [disabled]="loading || !selectedModel || noCurrentItems()">
+				<mat-icon>play_arrow</mat-icon>Indexovat hromadně
+			</button>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<!-- <div class="app-root">
 
     <h2>Indexace</h2>
 
     <div class="app-indexer-version">Aktuální verze Indexeru: {{currentIndexerVersion}}</div>
 
-    <!-- podle pidu -->
+
     <div>
         <h3 class="app-section-header">Objekt(y)</h3>
         <div class="app-section-desc">
@@ -20,13 +77,13 @@
 
     <br>
 
-    <!-- podle modelu -->
+
     <h3 class="app-section-header">Model</h3>
     <div class="app-section-desc">
         Indexace objektů (a jejich stromů), které mají vybraný model.
     </div>
     <div>
-        <!-- spusteni indexačního procesu pro model -->
+
         <mat-form-field class="app-schedule-indexation-process-type" style="width:150px;">
             <mat-select placeholder="Model" [(value)]="selectedModel" (selectionChange)="onSelectModel($event)"
                 [disabled]="loading">
@@ -82,7 +139,7 @@
         </div>
         <div class="scrollable app-table">
             <ng-container *ngFor="let object of getCurrentItems()">
-                <!-- TODO: url z konfigurace -->
+
                 <a class="app-row" href="{{buildUserClientUrl(object.pid)}}" target="_blank">
                     <div class="object-pid">{{ object.pid }}</div>
                     <div class="object-name" matTooltip="{{ object.title}}">{{ object.title |appShorten:100}}</div>
@@ -99,7 +156,6 @@
                         <button class="object-action"
                             (click)="openIndexationByPidDialog(object); $event.preventDefault(); $event.stopPropagation()"
                             mat-icon-button matTooltip="Indexovat" matTooltipPosition="below">
-                            <!-- <mat-icon>schedule</mat-icon> -->
                             <mat-icon>play_arrow</mat-icon>
                         </button>
                     </div>
@@ -129,4 +185,4 @@
         Indexovat hromadně
     </button>
 
-</div>
+</div> -->
