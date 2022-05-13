@@ -102,6 +102,14 @@
 // button
 .mat-button-base {
   line-height: $app-button-height !important;
+
+  &.mat-flat-button {
+    .mat-icon {
+      @extend .app-mr-1, .app-ml-n2;
+
+      @include setIcon(20);
+    }
+  }
 }
 
 // badge
