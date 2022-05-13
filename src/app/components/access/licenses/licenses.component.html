@@ -7,13 +7,11 @@
         <mat-card-title>{{ licence.name }}</mat-card-title>
         <mat-card-subtitle>{{ licence.description }}</mat-card-subtitle>
       </div>
-      <div class="app-right">
-        <div class="app-button-group">
-          <a *ngIf="!last" (click)="onMoveLiceseDown(licence)" matTooltip="Editovat roli"><mat-icon>south</mat-icon></a>
-          <a *ngIf="!first" (click)="onMoveLiceseUp(licence)"  matTooltip="Editovat roli"><mat-icon>north</mat-icon></a>
-          <a (click)="onEditLicese(licence)"  matTooltip="Editovat roli"><mat-icon>edit</mat-icon></a>
-          <a (click)="onRemoveLicese(licence)" matTooltip="Smazat roli"><mat-icon>delete</mat-icon></a>
-        </div>
+      <div class="app-right app-actions">
+        <a *ngIf="!last" (click)="onMoveLiceseDown(licence)" matTooltip="Editovat roli"><mat-icon>south</mat-icon></a>
+        <a *ngIf="!first" (click)="onMoveLiceseUp(licence)"  matTooltip="Editovat roli"><mat-icon>north</mat-icon></a>
+        <a (click)="onEditLicese(licence)"  matTooltip="Editovat roli"><mat-icon>edit</mat-icon></a>
+        <a (click)="onRemoveLicese(licence)" matTooltip="Smazat roli"><mat-icon>delete</mat-icon></a>
       </div>
     </mat-card-header>
   </mat-card>
@@ -21,34 +19,3 @@
     Přidat licenci
   </button>
 </ng-container>
-
-
-
-
-
-
-
-
-<!-- <div class="app-licenses">
-
-  <mat-spinner *ngIf="state=='loading'"
-    [strokeWidth]="3" 
-    [diameter]="30">
-  </mat-spinner>
-
-  <ng-container *ngIf="state=='success'">
-    <div class="app-licence" *ngFor="let licence of licenses; let first = first; let last = last">
-      <mat-icon (click)="onRemoveLicese(licence)">delete</mat-icon>
-      <mat-icon (click)="onEditLicese(licence)">edit</mat-icon>
-      <mat-icon *ngIf="!first" (click)="onMoveLiceseUp(licence)">north</mat-icon>
-      <mat-icon *ngIf="!last" (click)="onMoveLiceseDown(licence)">south</mat-icon>
-
-      <div class="app-licence-name">{{ licence.name }}</div>
-      <div class="app-licence-description">{{ licence.description }}</div>
-
-    </div>
-    <div class="app-new-licence app-button" (click)="onNewLicence()">Přidat licenci</div>
-  </ng-container>
-
-
-</div> -->

@@ -43,6 +43,21 @@
         }
       }
     }
+
+    .app-right {
+      &.app-actions {
+        a {
+          @extend .app-ml-4;
+          color: $app-color-primary;
+
+          &:not(.app-ico-expand) {
+            .mat-icon {
+              @include setIcon(20);
+            }
+          }
+        }
+      }
+    }
     
     .mat-card-actions {
       @extend .app-m-0, .app-p-0;
@@ -99,6 +114,9 @@
     &.mat-badge-above {
       .mat-badge-content {
         top: 0;
+        width: $app-badge-size;
+        height: $app-badge-size;
+        line-height: $app-badge-size;
       }
     }
   }

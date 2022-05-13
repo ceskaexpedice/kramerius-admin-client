@@ -93,31 +93,6 @@ a {
   }
 }
 
-// button group
-.app-button-group {
-  border: 1px solid $app-card-border-color;
-  background-color: $app-body-bg;
-  
-  a {
-    @extend  .app-p-2;
-    display: inline-block;
-    color: $app-color-primary;
-
-    &:not(:last-child) {
-      border-right: 1px solid $app-card-border-color;
-      //border-right: 2px solid $app-color-lightnes;
-    }
-
-    &:hover {
-      background-color: $app-card-border-color;
-    }
-    
-    .mat-icon {
-      @include setIcon(20, $position: sub);
-    }
-  }
-}
-
 // table
 table {
   // standart table
@@ -167,9 +142,10 @@ table {
             background-color: $app-gray-0;
           }
         }
-        &:nth-child(odd) {
+
+       /*  &:nth-child(odd) {
           background-color: rgba($app-gray-0, .5);
-        }
+        } */
 
         .app-input {
           width: calc(100% - 4px);

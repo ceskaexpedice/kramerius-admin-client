@@ -1,34 +1,48 @@
-<div class="app-params">
+<mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
 
-  <mat-spinner *ngIf="state=='loading'"
-    [strokeWidth]="3" 
-    [diameter]="30">
-  </mat-spinner>
-
-  <ng-container *ngIf="state=='success'">
-    <div class="app-param" *ngFor="let param of params">
-      <mat-icon (click)="selectedParam = param" *ngIf="selectedParam != param">expand_more</mat-icon>
-      <mat-icon (click)="selectedParam = null" *ngIf="selectedParam == param">expand_less</mat-icon>
-      <mat-icon (click)="onRemoveParam(param)">delete</mat-icon>
-      <mat-icon (click)="onEditParam(param)">edit</mat-icon>
-      <div class="app-param-name">
-        {{ param.description }}
-        <span> {{ param.values.length }}</span>
+<ng-container *ngIf="state=='success'">
+  <mat-card class="app-view-rights app-view-hover" *ngFor="let param of params" [class.app-card-expanded]="selectedParam == param">
+    <mat-card-header fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex class="app-left">
+        <mat-card-title class="app-m-0 app-p-0"><span [matBadge]="param.values.length" matBadgeOverlap="false" matBadgeColor="primary">{{ param.description }}</span></mat-card-title>
       </div>
-      <div class="app-values" *ngIf="selectedParam == param">
-        <div class="app-value" *ngFor="let value of param.values; let index = index">
-          <div class="app-value-value">{{ value }}</div>
-          <div class="app-value-actions">
-            <mat-icon (click)="onRemoveValue(param, index)" style="margin-right: 34px;">delete</mat-icon>      
-            <mat-icon (click)="onEditValue(param, index)" style="margin-right: 10px;">edit</mat-icon>
-          </div>
-        </div>
-        <div class="app-new-value app-button" (click)="onNewValue(param)">Přidat hodnotu</div>
-
+      <div class="app-right app-actions">
+        <a (click)="onEditParam(param)" matTooltip="Editovat roli"><mat-icon>edit</mat-icon></a>
+        <a (click)="onRemoveParam(param)" matTooltip="Smazat roli"><mat-icon>delete</mat-icon></a>
+        <a (click)="selectedParam = param" *ngIf="selectedParam != param" class="app-ico-expand"><mat-icon>expand_more</mat-icon></a>
+        <a (click)="selectedParam = null" *ngIf="selectedParam == param" class="app-ico-expand"><mat-icon>expand_less</mat-icon></a>
       </div>
-    </div>
-    <div class="app-new-param app-button" (click)="onNewParam()">Přidat parametr</div>
-  </ng-container>
-
-
-</div>
+    </mat-card-header>
+    <ng-container *ngIf="selectedParam == param">
+      <mat-card-content>
+        <table [cellPadding]="0" [cellSpacing]="0" class="app-table app-mt-4">
+          <thead>
+            <tr>
+              <th>Hodnota</th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let value of param.values; let index = index">
+              <td> {{ value }}</td>
+              <td class="app-col-action">
+                <a (click)="onEditValue(param, index)" matTooltip="Editovat právo"><mat-icon>edit</mat-icon></a>
+              </td>
+              <td class="app-col-action">
+                <a (click)="onRemoveValue(param, index)" matTooltip="Smazat právo"><mat-icon>delete</mat-icon></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button (click)="onNewValue(param)" color="primary">
+          Přidat hodnotu
+        </button>
+      </mat-card-actions> 
+    </ng-container>
+  </mat-card>
+  <button mat-flat-button (click)="onNewParam()" color="primary" class="app-m-4">
+    Přidat parametr
+  </button>
+</ng-container>

@@ -2,18 +2,14 @@
 
 <ng-container *ngIf="state=='success'">
   <mat-card class="app-view-rights app-view-hover" *ngFor="let action of actions" [class.app-card-expanded]="selectedAction == action">
-    <mat-card-header fxLayout="row">
+    <mat-card-header fxLayout="row" fxLayoutAlign="start center">
       <div fxFlex class="app-left">
         <mat-card-title><span [matBadge]="action.rights.length" matBadgeOverlap="false" matBadgeColor="primary">{{ action.code }}</span></mat-card-title>
         <mat-card-subtitle>{{ action.description }}</mat-card-subtitle>
       </div>
-      <div class="app-right">
-        <a (click)="selectedAction = action" *ngIf="selectedAction != action">
-          <mat-icon>expand_more</mat-icon>
-        </a>
-        <a (click)="selectedAction = null" *ngIf="selectedAction == action">
-          <mat-icon>expand_less</mat-icon>
-        </a>
+      <div class="app-right app-actions">
+        <a (click)="selectedAction = action" *ngIf="selectedAction != action" class="app-ico-expand"><mat-icon>expand_more</mat-icon></a>
+        <a (click)="selectedAction = null" *ngIf="selectedAction == action" class="app-ico-expand"><mat-icon>expand_less</mat-icon></a>
       </div>
     </mat-card-header>
     <ng-container *ngIf="selectedAction == action">
