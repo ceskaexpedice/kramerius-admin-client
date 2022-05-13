@@ -1,35 +1,36 @@
-<mat-toolbar color="primary">
-  <a routerLink="/" class="app-logo">
-    <span>K7 Admin</span>
-  </a>
-
-  <span class="fill-remaining-space"></span>
-
-  <ng-container *ngIf="auth.isLoggedIn()">
-    <a routerLink="/object" routerLinkActive="active" mat-button>Objekt</a>
-    <a routerLink="/import" routerLinkActive="active" mat-button>Import</a>
-    <a routerLink="/rights" routerLinkActive="active" mat-button>Práva</a>
-    <a routerLink="/processes" routerLinkActive="active" mat-button>Procesy</a>
-    <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
-    <a routerLink="/indexing" routerLinkActive="active" mat-button>Indexace</a>
-    <!-- <a routerLink="/config" routerLinkActive="active" mat-button>Konfigurace</a> -->
-    <a routerLink="/repository" routerLinkActive="active" mat-button>Repozitář</a>
-    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
-
-    <a [matMenuTriggerFor]="profile_menu" mat-button>
-      <div class="app-profile-img app-profile-txt" id="btn-dropdown-profile">
-        {{ auth.getTextProfileImage() }}</div>
+<mat-toolbar color="primary" fxLayout="row">
+  <div fxFlex>
+    <a routerLink="/" class="app-logo">
+      <span>K7 Admin</span>
     </a>
-
-    <mat-menu #profile_menu="matMenu">
-      <button mat-menu-item disabled *ngIf="auth.user">
-        <mat-icon>person</mat-icon>
-        <span>{{ auth.user.name || auth.user.uid }}</span>
-      </button>
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>Odhlásit</span>
-      </button>
-    </mat-menu>
-  </ng-container>
+  </div>
+  <div>
+    <ng-container *ngIf="auth.isLoggedIn()">
+      <a routerLink="/object" routerLinkActive="active" mat-button>Objekt</a>
+      <a routerLink="/import" routerLinkActive="active" mat-button>Import</a>
+      <a routerLink="/rights" routerLinkActive="active" mat-button>Práva</a>
+      <a routerLink="/processes" routerLinkActive="active" mat-button>Procesy</a>
+      <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
+      <a routerLink="/indexing" routerLinkActive="active" mat-button>Indexace</a>
+      <a routerLink="/repository" routerLinkActive="active" mat-button>Repozitář</a>
+      <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
+  
+      <a [matMenuTriggerFor]="profile_menu" mat-button class="app-avatar">
+        <div fxLayout="row" fxLayoutAlign="center center">
+          {{ auth.getTextProfileImage() }}
+        </div>
+      </a>
+  
+      <mat-menu #profile_menu="matMenu">
+        <button mat-menu-item disabled *ngIf="auth.user">
+          <mat-icon>person</mat-icon>
+          <span>{{ auth.user.name || auth.user.uid }}</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Odhlásit</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+  </div> 
 </mat-toolbar>

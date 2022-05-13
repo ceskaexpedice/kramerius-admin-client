@@ -1,40 +1,25 @@
-mat-toolbar {
+@import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
+
+
+.mat-toolbar {
   position: fixed;
-  z-index: 1000;
+
   .app-logo {
-    height: 64px;
+    color: $app-color-lightnes;
     text-decoration: none;
-    color: #fff;
-    span {
-      line-height: 64px;
+  }
+
+  .app-avatar {
+    div {
+      width: $app-avatar-size;
+      height: $app-avatar-size;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: 900;
+      text-transform: uppercase;
+      background-color: $app-avatar-color;
     }
   }
-  .fill-remaining-space {
-    flex: 1 1 auto;
-  }
-  .mat-button {
-    line-height: 60px;
-    border-radius: 0;
-  }
-
-
-  .app-profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    padding: 1px;
-    background: #cacaca;
-    cursor: pointer;
-  }
-  .app-profile-txt {
-    text-align: center;
-    font-size: 16px;
-    text-transform: uppercase;
-    color: #fff;
-    background: #dd4b39;
-    font-weight: 600;
-    line-height: 40px;
-  }
-
-
 }
