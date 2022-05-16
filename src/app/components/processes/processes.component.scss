@@ -1,118 +1,58 @@
+@import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
+
 .app-processes {
-  height: 100%;
-  padding: 16px;
-  .app-actions {
-    height: 62px;
-    overflow: hidden;
-    .app-cancel-all-scheduled-processes-btn {
-      float: right;
-      margin-top: 8px;
-      margin-left: 16px;
-    }
-    .app-schedule-test-process-btn {
-      float: right;
-      margin-top: 8px;
-      margin-right: 16px;
-      margin-left: 16px;
-    }
-    .app-schedule-test-process-final-state {
-      float: right;
-      margin-right: 16px;
-      width: 100px;
-    }
-    .app-schedule-test-process-processes-in-batch {
-      float: right;
-      margin-right: 16px;
-      width: 100px;
-    }
-    .app-schedule-test-process-duration {
-      float: right;
-      margin-right: 16px;
-      width: 80px;
-    }
-    .app-filter-state {
-      margin-left: 6px;
-      width: 150px;
-    }
-    .app-filter-owner {
-      margin-left: 16px;
-      width: 150px;
-    }
-    .app-filter-date-from {
-      margin-left: 16px;
-      width: 150px;
-    }
-    .app-filter-date-to {
-      margin-left: 16px;
-      width: 150px;
-    }
-    .app-filter-reload {
-      margin-left: 8px;
-      color: #666;
-    }
-    .app-filter-clear {
-      color: #666;
+  .app-scrollable {
+    max-height: calc(100% - 104px);
+    overflow: auto;
+  }
+
+  .app-col-expand {
+    margin-left: -20px;
+    width: 44px;
+
+    mat-icon {
+      font-size: 18px;
     }
   }
 
-  .app-processes-table {
-    height: calc(100% - 62px);
-    .scrollable {
-      max-height: calc(100% - 106px);
-      overflow: auto;
-    }
-    .process-expand {
-      margin-left: -20px;
-      width: 44px;
-      mat-icon {
-        font-size: 18px;
-      }
-    }
-    .process-id {
-      width: 60px;
-    }
-    .process-name {
-      flex: 1;
-      padding-right: 10px;
-      word-break: break-all;
-    }
-    .process-state {
-      width: 110px;
-      margin-right: 16px;
-      .state-label {
-        color: #fff;
-        text-align: center;
-        height: 21px;
-        line-height: 22px;
-        margin-top: 13px;
-        border-radius: 8px;
-        font-size: 12px;
-        text-transform: uppercase;
-      }
-    }
-    .process-datetime {
-      width: 160px;
-    }
-    .process-duration {
-      width: 60px;
-    }
-    .process-owner {
-      width: 160px;
-    }
-    .process-actions {
-      width: 40px;
-      .app-action-remove {
-        color: #999;
-        &:hover {
-          color: #333;
-        }
-      }
-    }
-    .app-subprocess {
-      background: #f6f6f6;
-      .process-expand {
-        width: 103px;
-      }
+  .app-col-id {
+    width: 60px;
+  }
+
+  .app-col-name {
+    flex: 1;
+    padding-right: 10px;
+    word-break: break-all;
+  }
+
+  .app-col-state {
+    width: 110px;
+    margin-right: 16px;
+  }
+
+  .app-col-datetime {
+    width: 160px;
+  }
+
+  .app-col-duration {
+    width: 60px;
+  }
+
+  .app-col-owner {
+    width: 160px;
+  }
+
+  .app-col-actions {
+    width: 40px;
+  }
+
+  .app-subprocess {
+    background: rgba($app-table-color-bg-hover, .6);
+
+    .app-col-expand {
+      width: 103px;
     }
   }
 }

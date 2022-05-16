@@ -11,10 +11,6 @@
 		.app-left {
 			a {
 				font-weight: bold;
-		
-				.mat-icon {
-					@include setIcon(18, $app-color-warn, middle);
-				}
 			}
 	
 			.app-path {

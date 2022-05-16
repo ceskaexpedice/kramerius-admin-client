@@ -65,6 +65,10 @@ export class Batch {
     return Process.stateColor(this.state);
   }
 
+  getStateClass(): string {
+    return Process.stateClass(this.state);
+  }
+
   getName(): string {
     if (this.processes.length > 0) {
       return this.processes[0].name;

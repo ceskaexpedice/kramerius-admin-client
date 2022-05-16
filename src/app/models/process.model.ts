@@ -77,6 +77,19 @@ export class Process {
     return '#000';
   }
 
+  static stateClass(state: string): string {
+    switch (state) {
+      case Process.PLANNED: return 'app-planned';
+      case Process.RUNNING: return 'app-running';
+      case Process.FINISHED: return 'app-finished';
+      case Process.FAILED: return 'app-failed';
+      case Process.KILLED: return 'app-killed';
+      case Process.NOT_RUNNING: return 'app-not-running';
+      case Process.WARNING: return 'app-warning';
+    }
+    return '';
+  }
+
   static fromJson(json): Process {
     const process = new Process();
     process.id = json['id'];

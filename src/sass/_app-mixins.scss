@@ -51,6 +51,15 @@
   }
 }
 
+// set badge color
+@mixin setStateColor() {
+  @each $state, $color in $states {
+    &.app-#{$state} {
+      background-color: $color !important;
+    }
+  }
+}
+
 // set gap
 @mixin setGap() {
   @each $gap, $val in $gaps {
