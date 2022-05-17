@@ -16,6 +16,9 @@ export class LogsComponent implements OnInit {
   @Input()
   logType: string;
 
+  @Input()
+  urlOutUrl: string;
+
 
   // Paginator
   resultCount = 0;

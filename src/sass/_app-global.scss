@@ -98,6 +98,12 @@ a {
   }
 }
 
+.app-label {
+  color: $app-gray-6;
+  font-size: 12px;
+  //font-weight: 500;
+}
+
 .app-clear-filter {
   .mat-icon {
     @include setIcon(18, $app-color-warn, middle);
@@ -260,6 +266,21 @@ table {
       text-decoration: none;
       overflow: hidden;
       font-size: 14px;
+    }
+  }
+}
+
+
+
+// test
+.mat-tab-body-wrapper {
+  flex: 1 !important;
+
+  .mat-tab-body {
+    overflow-y: hidden;
+
+    .mat-tab-body-content {
+      overflow-y: hidden;
     }
   }
 }

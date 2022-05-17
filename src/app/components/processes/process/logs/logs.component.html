@@ -1,12 +1,16 @@
-
-<div class="app-process-logs-wrapper">
-<div class="paginator-wrapper">
-    <mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize"
-        [showFirstLastButtons]="true" (page)="onPageChanged($event)">
-    </mat-paginator>
-</div>
-
-<div class="app-process-logs-data">
-    <div class="app-process-logs-line" *ngFor="let line of lines">{{ line }}</div>
-</div>
+<div fxLayout="column" fxFlexFill>
+	<div fxLayout="row">
+		<div fxFlex fxLayoutAlign="start center">
+			<a mat-flat-button color="primary" [href]="urlOutUrl">
+				<mat-icon>download</mat-icon>
+				{{ logType === 'out' ?  'Stáhnout celý standarní výstup' : 'Stáhnout celý chybový výstup' }}
+			</a>
+		</div>
+		<div>
+			<mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize" [showFirstLastButtons]="true" (page)="onPageChanged($event)"></mat-paginator>
+		</div>
+	</div>
+	<div fxFlex class="app-oa-y">
+		<div *ngFor="let line of lines">{{ line }}</div>
+	</div>
 </div>
