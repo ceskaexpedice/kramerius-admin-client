@@ -2,18 +2,17 @@
 @import './src/sass/app-mixins.scss';
 @import './src/sass/app-global.scss';
 
-.app-processes {
+.app-view-processes {
   .app-scrollable {
     max-height: calc(100% - 104px);
     overflow: auto;
   }
 
   .app-col-expand {
-    margin-left: -20px;
     width: 44px;
 
-    mat-icon {
-      font-size: 18px;
+    .mat-icon {
+      @include setIcon(18);
     }
   }
 

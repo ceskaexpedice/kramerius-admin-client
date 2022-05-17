@@ -127,6 +127,7 @@ table {
     border-width: 1px 0 0 1px;
     border-style: solid;
     border-color: $app-tbc;
+    background-color: $app-table-color-bg;
 
     tr {
       td, th {
@@ -183,7 +184,7 @@ table {
 
 // table - hozna
 .app-table-wrapper {
-  &.app-bordered {
+  &.app-view-border {
     border: 1px solid $app-table-border-color;
   }
 

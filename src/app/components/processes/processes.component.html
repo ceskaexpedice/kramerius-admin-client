@@ -73,7 +73,7 @@
         </button>
       </div>
     </div>
-    <div fxFlex class="app-table-wrapper app-bordered app-oh">
+    <div fxFlex class="app-table-wrapper app-view-border app-view-processes app-oh">
       <div class="app-table app-head">
         <div class="app-row">
           <div class="app-col-expand"></div>
@@ -92,9 +92,9 @@
         <ng-container *ngFor="let batch of batches">
           <a class="app-row" [routerLink]="['/processes', batch.id]">
             <div class="app-col-expand">
-              <button (click)="batch.expanded = !batch.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="batch.hasSubprocesses()" mat-icon-button color="primary" matTooltip="Zobrazit podprocesy">
+              <a (click)="batch.expanded = !batch.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="batch.hasSubprocesses()" matTooltip="Zobrazit podprocesy">
                 <mat-icon>{{ batch.expanded ? 'remove' : 'add' }}</mat-icon>
-              </button>
+              </a>
             </div>
             <div class="app-col-id">{{ batch.id }}</div>
             <div class="app-col-name app-text-cutter" matTooltip="{{ batch.getName() }}">{{ batch.getName() }}</div>
