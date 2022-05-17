@@ -118,6 +118,13 @@ a {
   text-transform: uppercase;
 }
 
+.app-input-autocomplete {
+  @extend .app-clean-shadow, .app-pl-4, .app-pr-4;
+  height: $app-button-height;
+  border-radius: $app-border-radius;
+  border: 1px solid $app-gray-1;
+}
+
 // table
 table {
   // standart table
@@ -185,7 +192,22 @@ table {
 // table - hozna
 .app-table-wrapper {
   &.app-view-border {
-    border: 1px solid $app-table-border-color;
+    .app-head, .app-body, .mat-paginator {
+      border-style: solid;
+      border-color: $app-table-border-color;
+    }
+
+    .app-head {
+      border-width: 1px 1px 0 1px;
+    }
+
+    .app-body {
+      border-width: 0 1px 1px 1px;
+    }
+
+    .mat-paginator {
+      border-width: 0 1px 1px 1px; 
+    }
   }
 
   .app-table {
@@ -195,6 +217,7 @@ table {
     &.app-head {
       .app-row {
         font-size: 12px;
+        border-bottom: 1px solid #{$app-table-border-color};
       
         .app-sortable {
           cursor: pointer;
@@ -210,6 +233,10 @@ table {
   
     &.app-body {
       .app-row {
+        &:not(:last-child) {
+          border-bottom: 1px solid #{$app-table-border-color};
+        }
+
         &:hover {
           background: $app-table-color-bg-hover;
         }
@@ -225,7 +252,6 @@ table {
     }
     
     .app-row {
-      border-bottom: 1px solid #{$app-table-border-color};
       padding: 0 24px;
       display: flex;
       align-items: center;

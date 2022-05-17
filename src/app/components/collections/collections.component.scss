@@ -1,68 +1,24 @@
-.app-collections {
-  height: calc(100% - 0px);
-  padding: 16px;
-
-  .app-collections-header {
-    display: block;
-    height: 44px;
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    .app-button {
-      height: 30px;
-    }
-    .app-collection-search {
-      flex: 1;
-      margin-left: 12px;
-      margin-right: 12px;
-      outline: none;
-      background: transparent;
-      border: none;
-      font-size: 15px;
-      color: #444;
-      line-height: 32px;
-      height: 32px;
-      padding: 0 10px;
-      border: 1px solid #bdbdbd;
-      border-radius: 4px;
-      background: #fff;
-    }
-    .app-standalone-toggle {
-      font-size: 14px;
-      margin-top: 4px;
-      color: #444;
-    }
-
+.app-view-collections {
+  .app-scrollable {
+    max-height: calc(100% - 49px);
+    overflow: auto;
   }
 
-  .app-collections-table {
-    height: calc(100% - 44px);
-    .app-scrollable {
-      max-height: calc(100% - 50px);
-      overflow: auto;
-    }
-    .collection-id {
-      width: 310px;
-    }
-    .collection-name {
-      width: 400px;
-    }
-    .collection-description {
-      flex: 1;
-      padding-right: 10px;
-      word-break: break-all;
-    }
-    .collection-datetime {
-      width: 130px;
-    }
-    .collection-actions {
-      width: 40px;
-      .app-action-remove {
-        color: #999;
-        &:hover {
-          color: #333;
-        }
-      }
-    }
+  .app-col-id {
+    width: 310px;
+  }
+
+  .app-col-name {
+    width: 400px;
+  }
+
+  .app-col-description {
+    flex: 1;
+    padding-right: 10px;
+    word-break: break-all;
+  }
+
+  .app-col-datetime {
+    width: 130px;
   }
 }
