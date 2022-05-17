@@ -1,24 +1,26 @@
-.app-view-indexing {
-	.app-scrollable {
-		max-height: calc(100% - 49px);
-		overflow: auto;
-	}
-
-	.app-col-pid {
-		width: 340px;
-	}
-
-	.app-col-name {
-		flex: 1;
-		padding-right: 10px;
-		word-break: break-all;
-	}
-
-	.app-col-indexer-version-cont {
-		width: 50px;
-	}
-
-	.app-col-actions {
-		width: 40px;
+.app-table-wrapper {
+	&.app-view-indexing {
+		.app-scrollable {
+			max-height: calc(100% - 49px);
+			overflow: auto;
+		}
+	
+		.app-col-pid {
+			width: 340px;
+		}
+	
+		.app-col-name {
+			flex: 1;
+			padding-right: 10px;
+			word-break: break-all;
+		}
+	
+		.app-col-indexer-version-cont {
+			width: 50px;
+		}
+	
+		.app-col-actions {
+			width: 40px;
+		}
 	}
 }

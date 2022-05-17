@@ -1,24 +1,26 @@
-.app-view-collections {
-  .app-scrollable {
-    max-height: calc(100% - 49px);
-    overflow: auto;
-  }
-
-  .app-col-id {
-    width: 310px;
-  }
-
-  .app-col-name {
-    width: 400px;
-  }
-
-  .app-col-description {
-    flex: 1;
-    padding-right: 10px;
-    word-break: break-all;
-  }
-
-  .app-col-datetime {
-    width: 130px;
+.app-table-wrapper {
+  &.app-view-collections {
+    .app-scrollable {
+      max-height: calc(100% - 49px);
+      overflow: auto;
+    }
+  
+    .app-col-id {
+      width: 310px;
+    }
+  
+    .app-col-name {
+      width: 400px;
+    }
+  
+    .app-col-description {
+      flex: 1;
+      padding-right: 10px;
+      word-break: break-all;
+    }
+  
+    .app-col-datetime {
+      width: 130px;
+    }
   }
 }
