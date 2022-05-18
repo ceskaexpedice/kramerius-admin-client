@@ -14,11 +14,11 @@
   <div fxLayout="row" fxLayoutGap="16px">
     <mat-form-field fxFlex appearance="fill">
       <mat-label>Krátky popis sbírky</mat-label>
-      <textarea matInput [(ngModel)]="collection.description_cze"></textarea>
+      <textarea matInput [(ngModel)]="collection.description_cze" rows="4"></textarea>
     </mat-form-field>
     <mat-form-field fxFlex  appearance="fill">
       <mat-label>Krátky popis sbírky (anglický)</mat-label>
-      <textarea matInput [(ngModel)]="collection.description_eng"></textarea>
+      <textarea matInput [(ngModel)]="collection.description_eng" rows="4"></textarea>
     </mat-form-field>
   </div>
   <div class="app-mb-4">
@@ -33,101 +33,10 @@
     <div class="app-label app-mb-2">Úplný popis sbírky (anglický)</div>
     <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""name="text"></ckeditor>
   </div>
- 
+
   <div>
     <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">Vytvořit</button>
     <button mat-flat-button color="primary" *ngIf="mode === 'edit'" class="app-mr-2">Upravit</button>
     <button mat-flat-button color="warn" *ngIf="mode === 'edit'" class="app-mr-2">Odstranit sbírku</button>
   </div>
 </div>
-
-
-
-
-
-
-
-<!-- <div class="app-edit-collection" *ngIf="collection && state != 'loading'">
-
-<div class="app-page-dialog">
-
-  <div class="app-dialog-title">Nová sbírka</div>
-
-  <div class="app-dialog-content-wrapper">
-
-  <div class="app-dialog-content">
-    <div class="app-property">
-      <div class="app-label">Název sbírky</div>
-      <div class="app-value">
-        <input 
-            type="text" 
-            [(ngModel)]="collection.name_cze"
-            autocomplete="off">
-      </div>
-    </div>
-
-    <div class="app-property">
-      <div class="app-label">Název sbírky (anglický)</div>
-      <div class="app-value">
-        <input 
-            type="text" 
-            [(ngModel)]="collection.name_eng"
-            autocomplete="off">
-      </div>
-    </div>
-
-    <div class="app-property">
-      <div class="app-label">Krátky popis sbírky</div>
-      <textarea 
-          type="text" 
-          [(ngModel)]="collection.description_cze"
-          autocomplete="off"></textarea>
-    </div>
-
-    <div class="app-property">
-      <div class="app-label">Krátky popis sbírky (anglický)</div>
-      <textarea 
-          type="text" 
-          [(ngModel)]="collection.description_eng"
-          autocomplete="off"></textarea>
-    </div>
-
-    <div class="app-property">
-      <div class="app-label">Samostatná sbírka</div>
-      <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="collection.standalone">Ano</mat-checkbox>
-    </div>
-
-    <div class="app-property">
-      <div class="app-label">Úplný popis sbírky</div>
-      <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data=""
-        name="text">
-      </ckeditor>
-    </div>
-
-    <div class="app-property">
-      <div class="app-label">Úplný popis sbírky (anglický)</div>
-      <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""
-        name="text">
-      </ckeditor>
-    </div>
-
-  </div>
-</div>
-
-
-
-
-<div class="app-dialog-actions">
-  <div *ngIf="mode == 'new'" class="app-button" (click)="onSave()">Vytvořit</div>
-  <div *ngIf="mode == 'edit'" class="app-button" (click)="onUpdate()">Upravit</div>
-  <div *ngIf="mode == 'edit'" class="app-button app-button-warn" (click)="onDelete()">Odstranit sbírku</div>
-</div>
-
-
-</div>
-
-</div>
-
-
-<mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
-</mat-spinner> -->

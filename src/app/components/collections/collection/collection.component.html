@@ -8,9 +8,9 @@
       </mat-button-toggle-group>
     </div>
     <div fxFlex class="app-oh" *ngIf="collection">
-      <mat-card fxLayout="column" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-        <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-        <div *ngIf="view == 'detail'" class="app-p-4">
+      <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'" class="app-mn-4"></mat-progress-bar>
+      <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+        <div class="app-p-4">
           <div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
             <mat-card fxFlex class="app-card app-view-border">
               <mat-card-header>
@@ -60,133 +60,35 @@
             </mat-card>
           </div>
         </div>
-       
-        <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" *ngIf="view == 'edit'" [colId]="collection.id"></app-edit-collection>
-
-        <ng-container *ngIf="view === 'content'">
-          <ng-container *ngIf="collection.items">
-            <mat-card class="app-view-rights app-view-hover" *ngFor="let item of items">
-              <mat-card-header fxLayout="row" fxLayoutGap="16px">
-                <div>
-                  <img [src]="getThumb(item['pid'])" />
-                </div>
-                <div fxFlex class="app-left">
-                  <mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container></mat-card-title>
-                  <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
-                </div>
-                <div class="app-right app-actions">
-                  <a (click)="onRemoveItemFromCollection(item['pid'])" matTooltip="Odstranit ze sbírky"><mat-icon>cancel</mat-icon></a>
-                </div>
-              </mat-card-header>
-            </mat-card>
-          </ng-container>
-        </ng-container>
+      </mat-card>
+      
+      <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+        <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-edit-collection>
+      </mat-card>
+        
+      <mat-card fxLayout="column" *ngIf="view === 'content' && collection.items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+        <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
+          <mat-card class="app-view-rights app-view-hover" *ngFor="let item of items">
+            <mat-card-header fxLayout="row" fxLayoutGap="16px">
+              <div>
+                <img [src]="getThumb(item['pid'])" />
+              </div>
+              <div fxFlex class="app-left">
+                <mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container></mat-card-title>
+                <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
+              </div>
+              <div class="app-right app-actions">
+                <a (click)="onRemoveItemFromCollection(item['pid'])" matTooltip="Odstranit ze sbírky"><mat-icon>cancel</mat-icon></a>
+              </div>
+            </mat-card-header>
+          </mat-card>
       </mat-card>
     </div>
   </div>
 </div>
 
 
-
-
-<!-- <div class="app-collection" *ngIf="collection">
-
-<div class="app-view-toggle">
-  <div class="app-toggle-buttons">
-    <div class="app-toggle-button" (click)="changeView('detail')" [class.app-selected]="view == 'detail'">
-      <span>Detail</span>
-    </div>
-    <div class="app-toggle-button" (click)="changeView('edit')" [class.app-selected]="view == 'edit'">
-      <span>Úprava</span>
-    </div>
-    <div class="app-toggle-button" (click)="changeView('content')" [class.app-selected]="view == 'content'">
-      <span>Obsah</span>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="app-view-content">
-
-
-  <ng-container *ngIf="view == 'content'">
-
-    <div *ngIf="collection.items" class="app-collection-content">
-      <div *ngFor="let item of items" class="app-collection-item">
-        <div class="app-image-wrapper">
-          <img [src]="getThumb(item['pid'])">
-        </div>
-        <div class="app-name-and-model">
-          <div class="app-col-name">
-            {{ getName(item) }}
-            <span *ngIf="item['title.search'] != item['root.title']">
-              ({{ item['root.title'] }})
-            </span>
-          </div>
-          <div class="app-col-model">{{ getModel(item['model']) }}</div>
-        </div>
-        <div class="app-col-actions">
-          <mat-icon mat-icon-button matTooltip="Odstranit ze sbírky" (click)="onRemoveItemFromCollection(item['pid'])">
-            cancel</mat-icon>
-        </div>
-      </div>
-    </div>
-
-
-  </ng-container>
-
-
-  <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" *ngIf="view == 'edit'" [colId]="collection.id"></app-edit-collection>
-
-
-  <ng-container *ngIf="view == 'detail'">
-    <div class="app-label">Název sbírky</div>
-    <div class="app-name">
-      {{ collection.name_cze }}
-    </div>
-
-    <div class="app-label">Název sbírky (anglický)</div>
-    <div class="app-name">
-      {{ collection.name_eng }}
-    </div>
-
-    <div class="app-label">Krátky popis sbírky</div>
-    <div class="app-description">
-      {{ collection.description_cze }}
-    </div>
-
-    <div class="app-label">Krátky popis sbírky (anglický)</div>
-    <div class="app-description">
-      {{ collection.description_eng }}
-    </div>
-
-    <div class="app-label">Samostatná sbírka</div>
-    <div class="app-standalone">
-      {{ collection.standalone ? "Ano" : "Ne" }}
-    </div>
-
-    <div class="app-label">Úplný popis sbírky</div>
-    <div class="app-content" [innerHTML]="collection.content_cze"></div>
-
-    <div class="app-label">Úplný popis sbírky (anglický)</div>
-    <div class="app-content" [innerHTML]="collection.content_eng"></div>
-
-  </ng-container>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-<mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
-</mat-spinner>
-
+<!--
 <mat-menu #collectionsMenu="matMenu" xPosition="before" class="app-collections-menu">
   <ng-template matMenuContent ngFor>
     <div class="app-collections">
