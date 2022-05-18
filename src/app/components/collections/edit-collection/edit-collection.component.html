@@ -1,4 +1,53 @@
-<div class="app-edit-collection" *ngIf="collection && state != 'loading'">
+<mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
+<div class="app-p-4">
+  <h3>Nová sbírka</h3>
+  <div fxLayout="row" fxLayoutGap="16px">
+    <mat-form-field fxFlex appearance="fill">
+      <mat-label>Název sbírky</mat-label>
+      <input matInput [(ngModel)]="collection.name_cze">
+    </mat-form-field>
+    <mat-form-field fxFlex  appearance="fill">
+      <mat-label>Název sbírky (anglický)</mat-label>
+      <input matInput [(ngModel)]="collection.name_eng">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="16px">
+    <mat-form-field fxFlex appearance="fill">
+      <mat-label>Krátky popis sbírky</mat-label>
+      <textarea matInput [(ngModel)]="collection.description_cze"></textarea>
+    </mat-form-field>
+    <mat-form-field fxFlex  appearance="fill">
+      <mat-label>Krátky popis sbírky (anglický)</mat-label>
+      <textarea matInput [(ngModel)]="collection.description_eng"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="app-mb-4">
+    <div class="app-label app-mb-2">Samostatná sbírka</div>
+    <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="collection.standalone">Ano</mat-checkbox>
+  </div>
+  <div class="app-mb-4">
+    <div class="app-label app-mb-2">Úplný popis sbírky</div>
+    <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data="" name="text"></ckeditor>
+  </div>
+  <div class="app-mb-4">
+    <div class="app-label app-mb-2">Úplný popis sbírky (anglický)</div>
+    <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""name="text"></ckeditor>
+  </div>
+ 
+  <div>
+    <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">Vytvořit</button>
+    <button mat-flat-button color="primary" *ngIf="mode === 'edit'" class="app-mr-2">Upravit</button>
+    <button mat-flat-button color="warn" *ngIf="mode === 'edit'" class="app-mr-2">Odstranit sbírku</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div class="app-edit-collection" *ngIf="collection && state != 'loading'">
 
 <div class="app-page-dialog">
 
@@ -81,4 +130,4 @@
 
 
 <mat-spinner *ngIf="state === 'loading'" [strokeWidth]="5" [diameter]="60" class="center-spinner">
-</mat-spinner>
+</mat-spinner> -->

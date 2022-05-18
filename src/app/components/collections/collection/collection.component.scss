@@ -1,5 +1,18 @@
+.mat-card {
+  &.app-view-rights {
+    .mat-card-header {
+      img {
+        max-height: 60px;
+      }
+    }
+  }
+}
 
-.app-collection {
+
+
+
+
+/* .app-collection {
   padding: 20px;
   height: 100%;
   .app-view-toggle {
@@ -38,32 +51,6 @@
       padding: 2px 12px;
       margin: 8px 0 12px;
     }
-    // .app-collection-item {
-    //   overflow: hidden;
-    //   line-height: 30px;
-    //   height: 30px;
-    //   .app-collection-name {
-    //     float: left;
-    //     margin-right: 4px;
-    //     color: #444;
-    //     text-decoration: none;
-    //     &:hover {
-    //       color: #000;
-    //     }
-    //   }
-    //   mat-icon {
-    //     display: none;
-    //     font-size: 18px;
-    //     cursor: pointer;
-    //     line-height: 30px;
-    //   }
-    //   &:hover {
-    //     mat-icon {
-    //       color: #aa5555;
-    //       display: inline-block;
-    //     }
-    //   }
-    // }
   }
   .app-collection-content {
     .app-collection-item {
@@ -132,4 +119,4 @@
       }
     }
   }
-}
+} */
