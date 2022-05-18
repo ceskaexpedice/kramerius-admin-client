@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
+import { AddItemsToCollectionDialogComponent } from 'src/app/dialogs/add-items-to-collection-dialog/add-items-to-collection-dialog.component';
 
 @Component({
   selector: 'app-collection',
@@ -34,7 +35,7 @@ export class CollectionComponent implements OnInit {
   ngOnInit() {
     this.state = 'loading';
     this.route.params.subscribe(params => {
-      
+
       this.loadData(params['id']);
     });
   }
@@ -54,7 +55,7 @@ export class CollectionComponent implements OnInit {
   }
 
   getModel(model: string): string {
-    switch(model) {
+    switch (model) {
       case 'monograph': return 'Kniha'
       case 'periodical': return 'Periodikum'
       case 'page': return 'Stránka'
@@ -164,6 +165,16 @@ export class CollectionComponent implements OnInit {
     }, (error) => {
       console.log(error);
       this.ui.showErrorSnackBar("Položku se nepodařilo odstranit ze sbírky")
+    });
+  }
+
+  onAddItemsToCollection() {
+    const dialogRef = this.dialog.open(AddItemsToCollectionDialogComponent, { data: this.collection });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result == 'close') {
+        console.log('todo: reload collection content');
+        this.loadData(this.collection.id)
+      }
     });
   }
 

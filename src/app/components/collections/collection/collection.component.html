@@ -2,14 +2,18 @@
   <div fxLayout="column" fxFlexFill>
     <div fxLayout="row" fxLayoutAlign="center" class="app-mb-4">
       <mat-button-toggle-group>
-        <mat-button-toggle (click)="changeView('detail')" [class.mat-button-toggle-checked]="view == 'detail'">Detail</mat-button-toggle>
-        <mat-button-toggle (click)="changeView('edit')"  [class.mat-button-toggle-checked]="view == 'edit'">Úprava</mat-button-toggle>
-        <mat-button-toggle (click)="changeView('content')"  [class.mat-button-toggle-checked]="view == 'content'">Obsah</mat-button-toggle>
+        <mat-button-toggle (click)="changeView('detail')" [class.mat-button-toggle-checked]="view == 'detail'">Detail
+        </mat-button-toggle>
+        <mat-button-toggle (click)="changeView('edit')" [class.mat-button-toggle-checked]="view == 'edit'">Úprava
+        </mat-button-toggle>
+        <mat-button-toggle (click)="changeView('content')" [class.mat-button-toggle-checked]="view == 'content'">Obsah
+        </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
     <div fxFlex class="app-oh" *ngIf="collection">
       <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'" class="app-mn-4"></mat-progress-bar>
-      <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+      <mat-card fxLayout="column" *ngIf="view == 'detail'"
+        class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <div class="app-p-4">
           <div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
             <mat-card fxFlex class="app-card app-view-border">
@@ -61,27 +65,40 @@
           </div>
         </div>
       </mat-card>
-      
+
       <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-        <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-edit-collection>
+        <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id">
+        </app-edit-collection>
       </mat-card>
-        
-      <mat-card fxLayout="column" *ngIf="view === 'content' && collection.items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+
+      <mat-card fxLayout="column" *ngIf="view === 'content' && collection.items"
+        class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-          <mat-card class="app-view-rights app-view-hover" *ngFor="let item of items">
-            <mat-card-header fxLayout="row" fxLayoutGap="16px">
-              <div>
-                <img [src]="getThumb(item['pid'])" />
-              </div>
-              <div fxFlex class="app-left">
-                <mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container></mat-card-title>
-                <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
-              </div>
-              <div class="app-right app-actions">
-                <a (click)="onRemoveItemFromCollection(item['pid'])" matTooltip="Odstranit ze sbírky"><mat-icon>cancel</mat-icon></a>
-              </div>
-            </mat-card-header>
-          </mat-card>
+        <div class="app-right app-actions" style="margin: 8px;">
+          <!-- TODO: zarovnat doprava -->
+          <a (click)="onAddItemsToCollection()" matTooltip="Přidat do této sbírky">
+            <mat-icon>add</mat-icon>
+          </a>
+        </div>
+
+        <mat-card class="app-view-rights app-view-hover" *ngFor="let item of items">
+          <mat-card-header fxLayout="row" fxLayoutGap="16px">
+            <div>
+              <img [src]="getThumb(item['pid'])" />
+            </div>
+            <div fxFlex class="app-left">
+              <mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{
+                  item['root.title'] }})</ng-container>
+              </mat-card-title>
+              <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
+            </div>
+            <div class="app-right app-actions">
+              <a (click)="onRemoveItemFromCollection(item['pid'])" matTooltip="Odstranit ze sbírky">
+                <mat-icon>cancel</mat-icon>
+              </a>
+            </div>
+          </mat-card-header>
+        </mat-card>
       </mat-card>
     </div>
   </div>

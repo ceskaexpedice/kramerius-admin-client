@@ -1,0 +1,59 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
+
+    <h1 mat-dialog-title>Přidání položek do sbírky</h1>
+
+    <div class="info">Pro každý vložený PID bude přidána položka do sbírky.
+        Součástí přidání každé položky do sbírky je naplánování indexačního procesu,
+        proto se příslušnost do sbírky nemusí projevit okamžitě.
+    </div>
+
+    <div class="section-header">
+        Sbírka
+    </div>
+
+    <mat-form-field class="input-collection_title" *ngIf="collection_title">
+        <input [disabled]="inProgress || collection_title" matInput type="text" id="inputCollectionTitle"
+            name="collection_title" [(ngModel)]="collection_title" placeholder="Název">
+    </mat-form-field>
+
+    <mat-form-field class="input-collection_pid" *ngIf="collection_pid">
+        <input [disabled]="inProgress || collection_pid" matInput type="text" id="inputCollectionPid"
+            name="collection_pid" [(ngModel)]="collection_pid" placeholder="PID">
+    </mat-form-field>
+
+
+    <div class="section-header">
+        Přidávané položky
+    </div>
+
+    <mat-icon (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-pids-from-file">file_download
+    </mat-icon>
+
+    <mat-form-field class="input-pids">
+        <textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids"
+            [(ngModel)]="pids" placeholder="PIDy" required autofocus rows="{{pidsTextareaRows}}"></textarea>
+    </mat-form-field>
+
+    <input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
+
+    <div class="progress-info" *ngIf="!!items_counter_total">
+        <div class="progress-info-text">Přidáno {{items_counter_added}}/{{items_counter_total}} položek!</div>
+        <div class="progress-info-text" *ngIf="!!items_counter_failed">Nepodařilo se přidat {{items_counter_failed}}
+            položek!</div>
+    </div>
+
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()">
+    </mat-progress-bar>
+
+    <div class="buttons">
+        <button [disabled]="inProgress || !f.valid || isFinished()" color="primary" mat-raised-button type="submit"
+            color="warn">Naplánovat</button>
+        <button *ngIf="!isFinished()" [disabled]="inProgress" mat-raised-button mat-dialog-close="cancel"
+            style="margin-left: 10px;">Zrušit</button>
+
+        <button *ngIf="isFinished()" mat-raised-button mat-dialog-close="close"
+            style="margin-left: 10px;">Zavřít</button>
+
+    </div>
+
+</form>
