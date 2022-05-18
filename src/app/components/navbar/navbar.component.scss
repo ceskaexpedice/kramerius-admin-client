@@ -13,7 +13,7 @@
 
   .mat-button-base {
     &.active {
-      background-color: $app-gray-8;
+      background-color: darken($app-color-primary, 10);
     }
   }
 
