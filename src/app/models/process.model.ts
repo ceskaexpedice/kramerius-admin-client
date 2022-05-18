@@ -87,7 +87,7 @@ export class Process {
       case Process.NOT_RUNNING: return 'app-not-running';
       case Process.WARNING: return 'app-warning';
     }
-    return '';
+    return 'app-default';
   }
 
   static fromJson(json): Process {

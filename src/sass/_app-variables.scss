@@ -65,7 +65,8 @@ $states: (
   failed: #ab493f,
   killed: #ca7023,
   not-running: #ca7023,
-  warning: #ab493f
+  warning: #ab493f,
+  default: $app-gray-6
 );
 
 
