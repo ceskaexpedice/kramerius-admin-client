@@ -23,6 +23,8 @@ export class CollectionComponent implements OnInit {
 
   items: any[];
 
+  superCollections: Collection[] = []; //sbirky obsahujici tuto sbirku
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -41,6 +43,7 @@ export class CollectionComponent implements OnInit {
   }
 
   loadData(collectionId: string) {
+    console.log('loading data for ' + collectionId)
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
@@ -51,6 +54,13 @@ export class CollectionComponent implements OnInit {
     }, (error) => {
       console.log(error);
       this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
+    });
+    this.collectionsService.getCollectionsContainingItem(collectionId).subscribe((data: [collections: Collection[], size: number]) => {
+      //console.log(data)
+      this.superCollections = data[0];
+    }, (error) => {
+      console.log(error);
+      this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tutu sbírku")
     });
   }
 
@@ -155,13 +165,14 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  onRemoveItemFromCollection(itemPid: string) {
-    //TODO: mozna potvrzovací dialog
-    this.collectionsService.removeItemFromCollection(this.collection.id, itemPid).subscribe(() => {
-      (async () => {
-        await this.delay(0);
-        this.loadData(this.collection.id);
-      })();
+  onRemoveItemFromCollection(collectionPid: string, itemPid: string) {
+    //TODO: potvrzovací dialog
+    this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
+      this.loadData(this.collection.id);
+      // (async () => {
+      //   await this.delay(0);
+      //   this.loadData(this.collection.id);
+      // })();
     }, (error) => {
       console.log(error);
       this.ui.showErrorSnackBar("Položku se nepodařilo odstranit ze sbírky")
@@ -195,6 +206,14 @@ export class CollectionComponent implements OnInit {
 
   filterNonCollections(items) {
     return items.filter(item => item['model'] != 'collection');
+  }
+
+  getCollectionName(collection: Collection) {
+    return !!collection.name_cze ? collection.name_cze : collection.name_eng;
+  }
+
+  getCollectionDescription(collection: Collection) {
+    return !!collection.description_cze ? collection.description_cze : collection.description_eng;
   }
 
 }
