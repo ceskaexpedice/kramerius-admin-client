@@ -7,8 +7,8 @@
         <mat-card-title class="app-m-0 app-p-0"><span [matBadge]="param.values.length" matBadgeOverlap="false" matBadgeColor="primary">{{ param.description }}</span></mat-card-title>
       </div>
       <div class="app-right app-actions">
-        <a (click)="onEditParam(param)" matTooltip="Editovat roli"><mat-icon>edit</mat-icon></a>
-        <a (click)="onRemoveParam(param)" matTooltip="Smazat roli"><mat-icon>delete</mat-icon></a>
+        <a (click)="onEditParam(param)" matTooltip="Editovat parametr"><mat-icon>edit</mat-icon></a>
+        <a (click)="onRemoveParam(param)" matTooltip="Smazat parametr"><mat-icon>delete</mat-icon></a>
         <a (click)="selectedParam = param" *ngIf="selectedParam != param" class="app-ico-expand"><mat-icon>expand_more</mat-icon></a>
         <a (click)="selectedParam = null" *ngIf="selectedParam == param" class="app-ico-expand"><mat-icon>expand_less</mat-icon></a>
       </div>
@@ -26,10 +26,10 @@
             <tr *ngFor="let value of param.values; let index = index">
               <td> {{ value }}</td>
               <td class="app-col-action">
-                <a (click)="onEditValue(param, index)" matTooltip="Editovat právo"><mat-icon>edit</mat-icon></a>
+                <a (click)="onEditValue(param, index)" matTooltip="Editovat hodnotu"><mat-icon>edit</mat-icon></a>
               </td>
               <td class="app-col-action">
-                <a (click)="onRemoveValue(param, index)" matTooltip="Smazat právo"><mat-icon>delete</mat-icon></a>
+                <a (click)="onRemoveValue(param, index)" matTooltip="Smazat hodnotu"><mat-icon>delete</mat-icon></a>
               </td>
             </tr>
           </tbody>
