@@ -20,7 +20,7 @@ import { ObjectComponent } from './components/access/object/object.component';
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'auth', component: AuthComponent },
+  { path: 'keycloak', component: AuthComponent },
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
   { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
