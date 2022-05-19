@@ -172,7 +172,6 @@ export class CollectionComponent implements OnInit {
     const dialogRef = this.dialog.open(AddItemsToCollectionDialogComponent, { data: this.collection });
     dialogRef.afterClosed().subscribe(result => {
       if (result && result == 'close') {
-        console.log('todo: reload collection content');
         this.loadData(this.collection.id)
       }
     });
@@ -188,6 +187,14 @@ export class CollectionComponent implements OnInit {
         return a['title.search'].localeCompare(b['title.search'])
       });
     });
+  }
+
+  filterCollections(items) {
+    return items.filter(item => item['model'] == 'collection');
+  }
+
+  filterNonCollections(items) {
+    return items.filter(item => item['model'] != 'collection');
   }
 
 }
