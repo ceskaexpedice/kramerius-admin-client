@@ -47,7 +47,7 @@
 
     <div class="buttons">
         <button [disabled]="inProgress || !f.valid || isFinished()" color="primary" mat-raised-button type="submit"
-            color="warn">Naplánovat</button>
+            color="warn">Přidat</button>
         <button *ngIf="!isFinished()" [disabled]="inProgress" mat-raised-button mat-dialog-close="cancel"
             style="margin-left: 10px;">Zrušit</button>
 
