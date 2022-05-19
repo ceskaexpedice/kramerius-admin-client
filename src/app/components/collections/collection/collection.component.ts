@@ -8,6 +8,7 @@ import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dial
 import { CollectionsService } from 'src/app/services/collections.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { AddItemsToCollectionDialogComponent } from 'src/app/dialogs/add-items-to-collection-dialog/add-items-to-collection-dialog.component';
+import { AddCollectionToAnotherCollectionDialogComponent } from 'src/app/dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
 
 @Component({
   selector: 'app-collection',
@@ -181,6 +182,15 @@ export class CollectionComponent implements OnInit {
 
   onAddItemsToCollection() {
     const dialogRef = this.dialog.open(AddItemsToCollectionDialogComponent, { data: this.collection });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result == 'close') {
+        this.loadData(this.collection.id)
+      }
+    });
+  }
+
+  onAddThisToSuperCollection() {
+    const dialogRef = this.dialog.open(AddCollectionToAnotherCollectionDialogComponent, { data: this.collection });
     dialogRef.afterClosed().subscribe(result => {
       if (result && result == 'close') {
         this.loadData(this.collection.id)

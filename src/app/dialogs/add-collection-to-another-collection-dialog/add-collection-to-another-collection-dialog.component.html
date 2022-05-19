@@ -1,0 +1,53 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="onAdd(f.value)">
+
+    <h1 mat-dialog-title>Přidání sbírky do jiné sbírky</h1>
+
+    <div class="info">
+        Tato sbírka bude přidána do jiné sbírky.
+        Součástí přidání do sbírky je naplánování indexačního procesu,
+        proto se příslušnost do sbírky nemusí projevit okamžitě.
+    </div>
+
+    <div class="section-header">
+        Přidávaná sbírka
+    </div>
+
+    <mat-form-field class="input-collection_title" *ngIf="collection_title">
+        <input [disabled]="inProgress || collection_title" matInput type="text" id="inputCollectionTitle"
+            name="collection_title" [(ngModel)]="collection_title" placeholder="Název">
+    </mat-form-field>
+
+    <mat-form-field class="input-collection_pid" *ngIf="collection_pid">
+        <input [disabled]="inProgress || collection_pid" matInput type="text" id="inputCollectionPid"
+            name="collection_pid" [(ngModel)]="collection_pid" placeholder="PID">
+    </mat-form-field>
+
+
+    <div class="section-header">
+        Sbírka, do které se přidává
+    </div>
+
+    <div class="app-scrollable" style="overflow-y: scroll; max-height:200px">
+        <div *ngFor="let superCollection of potentialSuperCollections" style="margin-bottom: 4px;">
+            <a (click)="selectSuperCollection(superCollection)"
+                [ngClass]="{'super-collection-selected':superCollection == selectedSuperCollection}">
+                <div class="super-collection-name">{{getCollectionName(superCollection)}}</div>
+                <div class="super-collection-description">{{getCollectionDescription(superCollection)}}</div>
+            </a>
+        </div>
+    </div>
+
+    <mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="'indeterminate'">
+    </mat-progress-bar>
+
+    <div class="buttons">
+        <button [disabled]="inProgress || !selectedSuperCollection || finished" color="primary" mat-raised-button
+            type="submit" color="warn">Přidat</button>
+        <button *ngIf="!finished" [disabled]="inProgress" mat-raised-button mat-dialog-close="cancel"
+            style="margin-left: 10px;">Zrušit</button>
+
+        <button *ngIf="finished" mat-raised-button mat-dialog-close="close" style="margin-left: 10px;">Zavřít</button>
+
+    </div>
+
+</form>

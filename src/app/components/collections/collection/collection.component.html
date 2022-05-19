@@ -79,7 +79,6 @@
       </mat-card>
 
       <div class="app-right app-actions" style="margin: 8px;" *ngIf="view === 'content'">
-        <!-- TODO: zarovnat doprava -->
         <a (click)="onAddItemsToCollection()" matTooltip="Přidat do této sbírky">
           <mat-icon>add</mat-icon>
         </a>
@@ -139,7 +138,11 @@
       <div *ngIf="view === 'context'">Sbírky obsahující tutu sbírku</div>
       <br>
 
-      <!-- TODO: tlačítko pro přidání této sbírky do jiné -->
+      <div class="app-right app-actions" style="margin: 8px;" *ngIf="view === 'context'">
+        <a (click)="onAddThisToSuperCollection()" matTooltip="Přidat tuto sbírku do jiné sbírky">
+          <mat-icon>add</mat-icon>
+        </a>
+      </div>
 
       <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections"
         class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">

@@ -60,6 +60,7 @@ import { ObjectComponent } from './components/access/object/object.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AddItemsToCollectionDialogComponent } from './dialogs/add-items-to-collection-dialog/add-items-to-collection-dialog.component';
+import { AddCollectionToAnotherCollectionDialogComponent } from './dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { AddItemsToCollectionDialogComponent } from './dialogs/add-items-to-coll
     ScheduleProcessingIndexRebuildForObjectDialogComponent,
     ObjectComponent,
     AuthComponent,
-    AddItemsToCollectionDialogComponent
+    AddItemsToCollectionDialogComponent,
+    AddCollectionToAnotherCollectionDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -46,7 +46,7 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     fileReader.readAsText(event.target.files[0]);
   }
 
-  schedule(formData) {
+  onAdd(formData) {
     this.inProgress = true;
     const pids = this.splitPids(this.pids);
     this.items_counter_total = pids.length;
