@@ -9,7 +9,7 @@
       </mat-button-toggle-group>
     </div>
 
-    <mat-card class="app-card app-view-border app-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+    <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
       <div fxFlex class="app-text-cutter">
         <strong>{{ getCollectionName(collection) }}</strong><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
       </div>
@@ -25,7 +25,7 @@
       </div>
     </mat-card>
 
-    <mat-card *ngIf="view === 'context'" class="app-card app-view-border app-header">
+    <mat-card *ngIf="view === 'context'" class="app-card app-view-border">
       <strong>Sbírky obsahující tutu sbírku:</strong>
     </mat-card>
     

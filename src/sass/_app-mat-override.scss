@@ -24,6 +24,10 @@
     }
   }
 
+  &.app-view-header {
+    max-height: 53px;
+  }
+
   &.app-view-border {
     border: 1px solid $app-card-border-color;
   }
