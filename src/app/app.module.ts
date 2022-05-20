@@ -61,7 +61,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AddItemsToCollectionDialogComponent } from './dialogs/add-items-to-collection-dialog/add-items-to-collection-dialog.component';
 import { AddCollectionToAnotherCollectionDialogComponent } from './dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
-import { CollectionDetailComponent } from './components/collections/collection-detail/collection-detail.component';
+import { DetailComponent } from './components/collections/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +107,7 @@ import { CollectionDetailComponent } from './components/collections/collection-d
     AuthComponent,
     AddItemsToCollectionDialogComponent,
     AddCollectionToAnotherCollectionDialogComponent,
-    CollectionDetailComponent
+    DetailComponent
   ],
   imports: [
     BrowserModule,
