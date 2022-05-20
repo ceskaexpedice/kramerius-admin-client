@@ -1,15 +1,43 @@
-<div class="app-home">
-
-    <h2>kAdmin</h2>
-    <div class="app-home-version">verze {{getVersion()}}</div>
-    <div class="app-home-commit">commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></div>
-   
-    <br>
-    <!-- <div>
-        <h4>Odkazy</h4>
-        <ul>
-            <li><a href="{{ getUserClientUrl() }}" target="_blank">Digitální knihovna</a></li>
-        </ul>
-    </div> -->
-
+<div class="app-container">
+	<mat-card class="app-card app-view-border app-mb-4">
+		<mat-card-content>
+			<h2>kAdmin</h2>
+			<div>verze {{getVersion()}}</div>
+			<div>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></div>
+		</mat-card-content>
+	</mat-card>
+	<div>
+		<mat-form-field appearance="fill" class="app-mr-2">
+			<mat-label>Datum od</mat-label>
+			<input matInput [matDatepicker]="picker">
+			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field appearance="fill" class="app-mr-2">
+			<mat-label>Datum do</mat-label>
+			<input matInput [matDatepicker]="picker">
+			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field appearance="fill">
+			<mat-label>Favorite food</mat-label>
+			<mat-select>
+				<mat-option value="hodnota 1">hodnota 1</mat-option>
+				<mat-option value="hodnota 2">hodnota 2</mat-option>
+				<mat-option value="hodnota 3">hodnota 3</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<div fxLayout="row" fxLayoutGap="16px">
+		<mat-card fxFlex class="app-card app-view-border">
+			<h2>Statistiky 1</h2>
+			<div style="height: 200px;"></div>
+		</mat-card>
+		<mat-card fxFlex class="app-card app-view-border">
+			<h2>Statistiky 2</h2>
+		</mat-card>
+		<mat-card fxFlex class="app-card app-view-border">
+			<h2>Statistiky 3</h2>
+		</mat-card>
+	</div>
 </div>
