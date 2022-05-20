@@ -32,63 +32,13 @@
     <div fxFlex class="app-oh" *ngIf="collection">
       <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'" class="app-mn-4"></mat-progress-bar>
       <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-        <div class="app-p-4">
-          <div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
-            <mat-card fxFlex class="app-card app-view-border">
-              <mat-card-header>
-                <mat-card-subtitle class="app-mb-2">Název sbírky</mat-card-subtitle>
-                <mat-card-title class="app-m-0">{{ collection.name_cze }}</mat-card-title>
-              </mat-card-header>
-            </mat-card>
-            <mat-card fxFlex class="app-card app-view-border">
-              <mat-card-header>
-                <mat-card-subtitle class="app-mb-2">Název sbírky (anglický)</mat-card-subtitle>
-                <mat-card-title class="app-m-0">{{ collection.name_eng }}</mat-card-title>
-              </mat-card-header>
-            </mat-card>
-            <mat-card fxFlex class="app-card app-view-border">
-              <mat-card-header>
-                <mat-card-subtitle class="app-mb-2">Samostatná sbírka</mat-card-subtitle>
-                <mat-card-title class="app-m-0">{{ collection.standalone ? "Ano" : "Ne" }}</mat-card-title>
-              </mat-card-header>
-            </mat-card>
-          </div>
-          <div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
-            <mat-card fxFlex class="app-card app-view-border">
-              <mat-card-header>
-                <mat-card-subtitle class="app-mb-2">Krátky popis sbírky</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>{{ collection.description_cze }}</mat-card-content>
-            </mat-card>
-            <mat-card fxFlex class="app-card app-view-border">
-              <mat-card-header>
-                <mat-card-subtitle class="app-mb-2">Krátky popis sbírky (anglický)</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>{{ collection.description_eng }}</mat-card-content>
-            </mat-card>
-          </div>
-          <div fxLayout="row" fxLayoutGap="16px">
-            <mat-card fxFlex class="app-card app-view-border">
-              <mat-card-header>
-                <mat-card-subtitle class="app-mb-2">Úplný popis sbírky</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content [innerHTML]="collection.content_cze"></mat-card-content>
-            </mat-card>
-            <mat-card fxFlex class="app-card app-view-border">
-              <mat-card-header>
-                <mat-card-subtitle class="app-mb-2">Úplný popis sbírky (anglický)</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content [innerHTML]="collection.content_eng"></mat-card-content>
-            </mat-card>
-          </div>
-        </div>
+        <app-collection-detail [collection]="collection"></app-collection-detail>
       </mat-card>
 
 
       <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-edit-collection>
       </mat-card>
-
 
       <mat-card fxLayout="column" *ngIf="view === 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>

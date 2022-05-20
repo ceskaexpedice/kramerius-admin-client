@@ -1,0 +1,50 @@
+<div class="app-p-4">
+  <div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
+    <mat-card fxFlex class="app-card app-view-border">
+      <mat-card-header>
+        <mat-card-subtitle class="app-mb-2">Název sbírky</mat-card-subtitle>
+        <mat-card-title class="app-m-0">{{ collection.name_cze }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+    <mat-card fxFlex class="app-card app-view-border">
+      <mat-card-header>
+        <mat-card-subtitle class="app-mb-2">Název sbírky (anglický)</mat-card-subtitle>
+        <mat-card-title class="app-m-0">{{ collection.name_eng }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+    <mat-card fxFlex class="app-card app-view-border">
+      <mat-card-header>
+        <mat-card-subtitle class="app-mb-2">Samostatná sbírka</mat-card-subtitle>
+        <mat-card-title class="app-m-0">{{ collection.standalone ? "Ano" : "Ne" }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  <div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
+    <mat-card fxFlex class="app-card app-view-border">
+      <mat-card-header>
+        <mat-card-subtitle class="app-mb-2">Krátky popis sbírky</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>{{ collection.description_cze }}</mat-card-content>
+    </mat-card>
+    <mat-card fxFlex class="app-card app-view-border">
+      <mat-card-header>
+        <mat-card-subtitle class="app-mb-2">Krátky popis sbírky (anglický)</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>{{ collection.description_eng }}</mat-card-content>
+    </mat-card>
+  </div>
+  <div fxLayout="row" fxLayoutGap="16px">
+    <mat-card fxFlex class="app-card app-view-border">
+      <mat-card-header>
+        <mat-card-subtitle class="app-mb-2">Úplný popis sbírky</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content [innerHTML]="collection.content_cze"></mat-card-content>
+    </mat-card>
+    <mat-card fxFlex class="app-card app-view-border">
+      <mat-card-header>
+        <mat-card-subtitle class="app-mb-2">Úplný popis sbírky (anglický)</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content [innerHTML]="collection.content_eng"></mat-card-content>
+    </mat-card>
+  </div>
+</div>
