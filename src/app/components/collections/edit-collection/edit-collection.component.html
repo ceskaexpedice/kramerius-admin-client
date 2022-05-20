@@ -25,6 +25,16 @@
     <div class="app-label app-mb-2">Samostatná sbírka</div>
     <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="collection.standalone">Ano</mat-checkbox>
   </div>
+  <!-- <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+    <div fxFlex style="background-color: red;">
+      <div class="app-label app-mb-2">Úplný popis sbírky</div>
+      <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data="" name="text"></ckeditor>
+    </div>
+    <div fxFlex style="background-color: green;">
+      <div class="app-label app-mb-2">Úplný popis sbírky (anglický)</div>
+      <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""name="text"></ckeditor>
+    </div>
+  </div> -->
   <div class="app-mb-4">
     <div class="app-label app-mb-2">Úplný popis sbírky</div>
     <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data="" name="text"></ckeditor>
@@ -33,6 +43,7 @@
     <div class="app-label app-mb-2">Úplný popis sbírky (anglický)</div>
     <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""name="text"></ckeditor>
   </div>
+  
 
   <div>
     <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">Vytvořit</button>

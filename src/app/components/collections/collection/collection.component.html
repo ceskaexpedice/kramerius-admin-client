@@ -1,26 +1,37 @@
 <div class="app-container app-collection app-h-100">
   <div fxLayout="column" fxFlexFill>
-    <div>
-      <!-- TODO: konzistentni stylovani -->
-      <div class="header-collection-name">{{ getCollectionName(collection) }}</div>
-      <div class="header-collection-description">{{ getCollectionDescription(collection) }}</div>
-    </div>
     <div fxLayout="row" fxLayoutAlign="center" class="app-mb-4">
       <mat-button-toggle-group>
-        <mat-button-toggle (click)="changeView('detail')" [class.mat-button-toggle-checked]="view == 'detail'">Detail
-        </mat-button-toggle>
-        <mat-button-toggle (click)="changeView('edit')" [class.mat-button-toggle-checked]="view == 'edit'">Úprava
-        </mat-button-toggle>
-        <mat-button-toggle (click)="changeView('content')" [class.mat-button-toggle-checked]="view == 'content'">Obsah
-        </mat-button-toggle>
-        <mat-button-toggle (click)="changeView('context')" [class.mat-button-toggle-checked]="view == 'context'">Kontext
-        </mat-button-toggle>
+        <mat-button-toggle (click)="changeView('detail')" [class.mat-button-toggle-checked]="view == 'detail'">Detail</mat-button-toggle>
+        <mat-button-toggle (click)="changeView('edit')" [class.mat-button-toggle-checked]="view == 'edit'">Úprava</mat-button-toggle>
+        <mat-button-toggle (click)="changeView('content')" [class.mat-button-toggle-checked]="view == 'content'">Obsah</mat-button-toggle>
+        <mat-button-toggle (click)="changeView('context')" [class.mat-button-toggle-checked]="view == 'context'">Kontext</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
+
+    <mat-card class="app-card app-view-border app-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+      <div fxFlex class="app-text-cutter">
+        <strong>{{ getCollectionName(collection) }}</strong><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
+      </div>
+      <div *ngIf="view === 'content'">
+        <a mat-flat-button color="primary" (click)="onAddItemsToCollection()">
+          <mat-icon>add_circle</mat-icon>Přidat do této sbírky
+        </a>
+      </div>
+      <div *ngIf="view === 'context'">
+        <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
+          <mat-icon>add_circle</mat-icon>Přidat tuto sbírku do jiné sbírky
+        </a>
+      </div>
+    </mat-card>
+
+    <mat-card *ngIf="view === 'context'" class="app-card app-view-border app-header">
+      <strong>Sbírky obsahující tutu sbírku:</strong>
+    </mat-card>
+    
     <div fxFlex class="app-oh" *ngIf="collection">
       <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'" class="app-mn-4"></mat-progress-bar>
-      <mat-card fxLayout="column" *ngIf="view == 'detail'"
-        class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+      <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <div class="app-p-4">
           <div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
             <mat-card fxFlex class="app-card app-view-border">
@@ -73,47 +84,32 @@
         </div>
       </mat-card>
 
+
       <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-        <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id">
-        </app-edit-collection>
+        <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-edit-collection>
       </mat-card>
 
-      <div class="app-right app-actions" style="margin: 8px;" *ngIf="view === 'content'">
-        <a (click)="onAddItemsToCollection()" matTooltip="Přidat do této sbírky">
-          <mat-icon>add</mat-icon>
-        </a>
-      </div>
 
-      <mat-card fxLayout="column" *ngIf="view === 'content' && items"
-        class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+      <mat-card fxLayout="column" *ngIf="view === 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-
-        <!-- sbirky -->
-        <mat-card class="app-view-rights app-view-hover item-collection" *ngFor="let item of filterCollections(items)">
-          <a class="app-row" [routerLink]="['/collections', item['pid']]">
-            <mat-card-header fxLayout="row" fxLayoutGap="16px">
-              <div>
-                <img [src]="getThumb(item['pid'])" />
-              </div>
-              <div fxFlex class="app-left">
-                <mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{
-                    item['root.title'] }})</ng-container>
-                </mat-card-title>
-                <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
-              </div>
-              <div class="app-right app-actions">
-                <a (click)="onRemoveItemFromCollection(collection.id, item['pid']); $event.preventDefault(); $event.stopPropagation()"
-                  matTooltip="Odstranit ze sbírky">
-                  <mat-icon>cancel</mat-icon>
-                </a>
-              </div>
-            </mat-card-header>
-          </a>
+        <mat-card class="app-view-rights app-view-hover item-collection app-cursor-pointer" *ngFor="let item of filterCollections(items)" [routerLink]="['/collections', item['pid']]">
+          <mat-card-header fxLayout="row" fxLayoutGap="16px">
+            <div>
+              <img [src]="getThumb(item['pid'])" />
+            </div>
+            <div fxFlex class="app-left">
+              <mat-card-title><mat-icon>link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container>
+              </mat-card-title>
+              <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
+            </div>
+            <div class="app-right app-actions">
+              <a (click)="onRemoveItemFromCollection(collection.id, item['pid']); $event.preventDefault(); $event.stopPropagation()" class="app-btn-warn" matTooltip="Odstranit ze sbírky">
+                <mat-icon>cancel</mat-icon>
+              </a>
+            </div>
+          </mat-card-header>
         </mat-card>
-
-        <!-- ostatni -->
-        <mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)"
-          [ngClass]="{'item-collection':item['model'] == 'collection'}">
+        <mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}">
           <mat-card-header fxLayout="row" fxLayoutGap="16px">
             <div>
               <img [src]="getThumb(item['pid'])" />
@@ -125,8 +121,7 @@
               <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
             </div>
             <div class="app-right app-actions">
-              <a (click)="onRemoveItemFromCollection(collection.id, item['pid']); $event.preventDefault(); $event.stopPropagation()"
-                matTooltip="Odstranit ze sbírky">
+              <a (click)="onRemoveItemFromCollection(collection.id, item['pid']); $event.preventDefault(); $event.stopPropagation()" class="app-btn-warn" matTooltip="Odstranit ze sbírky">
                 <mat-icon>cancel</mat-icon>
               </a>
             </div>
@@ -134,54 +129,26 @@
         </mat-card>
       </mat-card>
 
-      <!-- TODO: nastylovat -->
-      <div *ngIf="view === 'context'">Sbírky obsahující tutu sbírku</div>
-      <br>
 
-      <div class="app-right app-actions" style="margin: 8px;" *ngIf="view === 'context'">
-        <a (click)="onAddThisToSuperCollection()" matTooltip="Přidat tuto sbírku do jiné sbírky">
-          <mat-icon>add</mat-icon>
-        </a>
-      </div>
-
-      <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections"
-        class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+      <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-
-        <mat-card class="app-view-rights app-view-hover item-collection"
-          *ngFor="let superCollection of superCollections">
-          <a class="app-row" [routerLink]="['/collections', superCollection['id']]">
-            <mat-card-header fxLayout="row" fxLayoutGap="16px">
-              <div>
-                <img [src]="getThumb(superCollection['id'])" />
-              </div>
-              <div fxFlex class="app-left">
-                <mat-card-title>{{ getCollectionName(superCollection) }} </mat-card-title>
-                <mat-card-subtitle>{{ getCollectionDescription(superCollection) }}</mat-card-subtitle>
-              </div>
-              <div class="app-right app-actions">
-                <a (click)="onRemoveItemFromCollection(superCollection['id'], collection.id); $event.preventDefault(); $event.stopPropagation()"
-                  matTooltip="Odstranit odsuď">
-                  <mat-icon>cancel</mat-icon>
-                </a>
-              </div>
-            </mat-card-header>
-          </a>
+        <mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="['/collections', superCollection['id']]">
+          <mat-card-header fxLayout="row" fxLayoutGap="16px">
+            <div>
+              <img [src]="getThumb(superCollection['id'])" />
+            </div>
+            <div fxFlex class="app-left">
+              <mat-card-title><mat-icon>link</mat-icon>{{ getCollectionName(superCollection) }} </mat-card-title>
+              <mat-card-subtitle>{{ getCollectionDescription(superCollection) }}</mat-card-subtitle>
+            </div>
+            <div class="app-right app-actions">
+              <a (click)="onRemoveItemFromCollection(superCollection['id'], collection.id); $event.preventDefault(); $event.stopPropagation()" matTooltip="Odstranit odsuď" class="app-btn-warn">
+                <mat-icon>cancel</mat-icon>
+              </a>
+            </div>
+          </mat-card-header>
         </mat-card>
       </mat-card>
     </div>
   </div>
 </div>
-
-
-<!--
-<mat-menu #collectionsMenu="matMenu" xPosition="before" class="app-collections-menu">
-  <ng-template matMenuContent ngFor>
-    <div class="app-collections">
-      <div *ngFor="let collection of availableCollections" class="app-collection"
-        (click)="addThisToCollection(collection)">
-        {{ collection['title.search'] }}
-      </div>
-    </div>
-  </ng-template>
-</mat-menu> -->

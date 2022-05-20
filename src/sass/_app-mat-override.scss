@@ -10,6 +10,13 @@
       .mat-card-header-text {
         @extend .app-m-0;
       }
+
+      .mat-card-title {
+        .mat-icon {
+          @extend .app-mr-1;
+          @include setIcon(20, $position: bottom);
+        }
+      }
     }
 
     .mat-card-actions {

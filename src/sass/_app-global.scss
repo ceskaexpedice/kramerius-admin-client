@@ -93,18 +93,23 @@ a {
   @extend .app-ml-2, .app-mr-2;
   border-left: 1px solid $app-gray-4;
 
-  &:last-child {
+  /* &:last-child {
     @extend .app-dn;
-  }
+  } */
 }
 
 .app-label {
   color: $app-gray-6;
   font-size: 12px;
-  //font-weight: 500;
 }
 
-.app-clear-filter {
+.app-desc {
+  color: $app-gray-6;
+  font-size: 14px;
+}
+
+.app-clear-filter,
+.app-btn-warn {
   .mat-icon {
     @include setIcon(18, $app-color-warn, middle);
   }
