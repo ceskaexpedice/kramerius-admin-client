@@ -7,11 +7,11 @@ import { UIService } from 'src/app/services/ui.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 
 @Component({
-  selector: 'app-edit-collection',
-  templateUrl: './edit-collection.component.html',
-  styleUrls: ['./edit-collection.component.scss']
+  selector: 'app-collection-edit',
+  templateUrl: './collection-edit.component.html',
+  styleUrls: ['./collection-edit.component.scss']
 })
-export class EditCollectionComponent implements OnInit {
+export class CollectionEditComponent implements OnInit {
 
   editorCze = ClassicEditor; //BalloonEditor;
   editorEng = ClassicEditor; //BalloonEditor;

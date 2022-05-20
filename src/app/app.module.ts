@@ -21,7 +21,7 @@ import { SimpleDialogComponent } from './dialogs/simple-dialog/simple-dialog.com
 import { AuthInterceptor } from './services/auth-interceptor';
 import { LogsComponent } from './components/processes/process/logs/logs.component';
 import { CollectionsComponent } from './components/collections/collections.component';
-import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
+import { CollectionEditComponent } from './components/collections/collection-edit/collection-edit.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { UIService } from './services/ui.service';
 import { CollectionComponent } from './components/collections/collection/collection.component';
@@ -76,7 +76,7 @@ import { DetailComponent } from './components/collections/detail/detail.componen
     ProcessComponent,
     SimpleDialogComponent,
     LogsComponent,
-    EditCollectionComponent,
+    CollectionEditComponent,
     CollectionsComponent,
     CollectionComponent,
     DevComponent,

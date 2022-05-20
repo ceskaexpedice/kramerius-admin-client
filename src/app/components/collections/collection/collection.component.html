@@ -36,7 +36,7 @@
 
 
       <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-        <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-edit-collection>
+        <app-collection-edit (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-collection-edit>
       </mat-card>
 
 

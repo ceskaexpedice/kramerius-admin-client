@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/account/login/login.component';
 import { ProcessComponent } from './components/processes/process/process.component';
 import { CollectionsComponent } from './components/collections/collections.component';
-import { EditCollectionComponent } from './components/collections/edit-collection/edit-collection.component';
+import { CollectionEditComponent } from './components/collections/collection-edit/collection-edit.component';
 import { CollectionComponent } from './components/collections/collection/collection.component';
 import { DevComponent } from './components/dev/dev.component';
 import { IndexingComponent } from './components/indexing/indexing.component';
@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
   { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
-  { path: 'collections/:id/edit', component: EditCollectionComponent, canActivate: [AuthGuard] },
-  { path: 'collections/new', component: EditCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/:id/edit', component: CollectionEditComponent, canActivate: [AuthGuard] },
+  { path: 'collections/new', component: CollectionEditComponent, canActivate: [AuthGuard] },
   { path: 'collections/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
   { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },
