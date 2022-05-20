@@ -30,15 +30,15 @@
     </mat-card>
     
     <div fxFlex class="app-oh" *ngIf="collection">
-      <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'" class="app-mn-4"></mat-progress-bar>
       <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-        <app-collection-detail [collection]="collection"></app-collection-detail>
+        <app-collection-detail [collection]="collection" [state]="state"></app-collection-detail>
       </mat-card>
 
 
       <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <app-edit-collection (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-edit-collection>
       </mat-card>
+
 
       <mat-card fxLayout="column" *ngIf="view === 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>

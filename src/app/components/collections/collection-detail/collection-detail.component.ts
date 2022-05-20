@@ -8,10 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CollectionDetailComponent implements OnInit {
 
   @Input() collection;
+  @Input() state;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }
