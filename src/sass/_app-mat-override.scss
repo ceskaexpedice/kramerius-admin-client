@@ -90,8 +90,12 @@
     justify-content: center;
     border: 1px solid;
 
-    .mat-icon {
-      @extend .app-mr-2;
+    .mat-card-content {
+      @extend .app-text-center;
+
+      .mat-icon {
+        @extend .app-mr-2;
+      }
     }
   }
 }
@@ -115,6 +119,10 @@
   line-height: $app-button-height !important;
 
   &.mat-flat-button {
+    &:not(.mat-primary, .mat-warn, .mat-accent) {
+      background-color: $app-gray-0;
+    }
+
     .mat-icon {
       @extend .app-mr-1, .app-ml-n2;
 
@@ -159,6 +167,20 @@
           }
         }
       }
+    }
+  }
+
+  &.app-download {
+    textarea {
+      &.mat-input-element {
+        @extend .app-mt-4;
+      }
+    }
+
+    .mat-form-field-suffix {
+      position: absolute;
+      top: 10px;
+      right: 8px;
     }
   }
 }

@@ -42,11 +42,10 @@
     <div class="app-label app-mb-2">Úplný popis sbírky (anglický)</div>
     <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""name="text"></ckeditor>
   </div>
-  
 
   <div>
     <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">Vytvořit</button>
-    <button mat-flat-button color="primary" *ngIf="mode === 'edit'" class="app-mr-2">Upravit</button>
-    <button mat-flat-button color="warn" *ngIf="mode === 'edit'" class="app-mr-2">Odstranit sbírku</button>
+    <button mat-flat-button color="primary" *ngIf="mode === 'edit'" (click)="onUpdate()" class="app-mr-2">Upravit</button>
+    <button mat-flat-button color="warn" *ngIf="mode === 'edit'" (click)="onDelete()" class="app-mr-2">Odstranit sbírku</button>
   </div>
 </div>
