@@ -1,6 +1,55 @@
 <form class="form-signin" #f="ngForm" (ngSubmit)="onAdd(f.value)">
+	<h2 mat-dialog-title>Přidání sbírky do jiné sbírky</h2>
+	<mat-dialog-content class="mat-typography">
+		<div class="app-desc app-mb-4">
+			Tato sbírka bude přidána do jiné sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě.
+		</div>
+		<div class="app-mb-2">
+			<mat-form-field class="app-w-100" *ngIf="collection_title">
+				<input [disabled]="inProgress || collection_title" matInput type="text" id="inputCollectionTitle" name="collection_title" [(ngModel)]="collection_title" placeholder="Název">
+			</mat-form-field>
+			<mat-form-field class="app-w-100" *ngIf="collection_pid">
+				<input [disabled]="inProgress || collection_pid" matInput type="text" id="inputCollectionPid" name="collection_pid" [(ngModel)]="collection_pid" placeholder="PID">
+			</mat-form-field>
+		</div>
+		<div class="app-mb-4">
+			<strong>Sírka, do které se přidává:</strong>
+		</div>
+		<mat-card *ngFor="let superCollection of potentialSuperCollections" class="app-card app-view-item app-view-hover" (click)="selectSuperCollection(superCollection)" [class.app-selected]="superCollection == selectedSuperCollection">
+			<mat-card-header>
+				<mat-card-title class="app-mb-1">
+					<mat-icon>{{  superCollection == selectedSuperCollection ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
+					{{getCollectionName(superCollection)}}
+				</mat-card-title>
+				<mat-card-subtitle class="app-m-0">{{getCollectionDescription(superCollection)}}</mat-card-subtitle>
+			</mat-card-header>
+		</mat-card>
 
-    <h1 mat-dialog-title>Přidání sbírky do jiné sbírky</h1>
+		<!-- <div *ngFor="let superCollection of potentialSuperCollections" style="margin-bottom: 4px;">
+			<a (click)="selectSuperCollection(superCollection)" [ngClass]="{'super-collection-selected':superCollection == selectedSuperCollection}">
+				<div class="super-collection-name">{{getCollectionName(superCollection)}}</div>
+				<div class="super-collection-description">{{getCollectionDescription(superCollection)}}</div>
+			</a>
+		</div> -->
+
+
+		<mat-progress-bar *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-flat-button [disabled]="inProgress || !selectedSuperCollection || finished" color="primary" type="submit">Přidat</button>
+		<button mat-flat-button *ngIf="!finished" [disabled]="inProgress" mat-dialog-close="cancel" color="warn">Zrušit</button>
+		<button mat-flat-button *ngIf="finished" mat-raised-button mat-dialog-close="close">Zavřít</button>
+	</mat-dialog-actions>
+</form>
+
+
+
+
+
+<!-- <form class="form-signin" #f="ngForm" (ngSubmit)="onAdd(f.value)">
+
+	<h1 mat-dialog-title>Přidání sbírky do jiné sbírky</h1>
 
     <div class="info">
         Tato sbírka bude přidána do jiné sbírky.
@@ -50,4 +99,4 @@
 
     </div>
 
-</form>
+</form> -->

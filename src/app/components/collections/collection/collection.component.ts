@@ -194,7 +194,11 @@ export class CollectionComponent implements OnInit {
   }
 
   onAddThisToSuperCollection() {
-    const dialogRef = this.dialog.open(AddCollectionToAnotherCollectionDialogComponent, { data: this.collection });
+    const dialogRef = this.dialog.open(AddCollectionToAnotherCollectionDialogComponent, { 
+      data: this.collection,
+      width: '600px',
+      panelClass: 'app-add-collection-to-another-collection'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result && result == 'close') {
         this.loadData(this.collection.id)
