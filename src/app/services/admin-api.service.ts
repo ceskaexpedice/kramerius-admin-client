@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
 import { delay, map, tap } from 'rxjs/operators';
@@ -346,16 +346,47 @@ export class AdminApiService {
   }
 
   // Pridano by PS
-  statisticsModels() : Observable<any> {
-    return this.get(`/statistics/multimodel`);
+  statisticsModels(dateFrom:string, dateTo:string, license:string) : Observable<any> {
+    let params: HttpParams = new HttpParams();
+    if (dateFrom) {
+      params = params.set('dateFrom', dateFrom);
+    }
+    if (dateTo) {
+      params = params.set('dateTo', dateTo);
+    } 
+    if (license) {
+      params = params.set('license', license);
+    }
+    return this.get(`/statistics/multimodel`, params);
   }
 
-  statisticsLang() : Observable<any> {
-    return this.get(`/statistics/lang`);
+  statisticsLang(dateFrom:string, dateTo:string, license:string) : Observable<any> {
+    let params: HttpParams = new HttpParams();
+    if (dateFrom) {
+      params = params.set('dateFrom', dateFrom);
+    }
+    if (dateTo) {
+      params = params.set('dateTo', dateTo);
+    } 
+    if (license) {
+      params = params.set('license', license);
+    }
+
+     return this.get(`/statistics/lang`, params);
   }
 
-  statisticsAuthors() : Observable<any> {
-    return this.get(`/statistics/author`);
+  statisticsAuthors(dateFrom:string, dateTo:string, license: string) : Observable<any> {
+    let params: HttpParams = new HttpParams();
+    if (dateFrom) {
+      params = params.set('dateFrom', dateFrom);
+    }
+    if (dateTo) {
+      params = params.set('dateTo', dateTo);
+    } 
+    if (license) {
+      params = params.set('license', license);
+    }
+    return this.get(`/statistics/author`, params);
   }
 
 }

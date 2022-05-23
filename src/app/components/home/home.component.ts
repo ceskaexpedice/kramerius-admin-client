@@ -9,6 +9,8 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
 import 'echarts/theme/macarons.js';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { License } from 'src/app/models/license.model';
 
 @Component({
   selector: 'app-home',
@@ -17,15 +19,36 @@ import 'echarts/theme/macarons.js';
 })
 export class HomeComponent implements OnInit {
 
+  // vybrane modely
+  models = ["monograph","periodical","soundrecording"];
+
+  // konfigurace grafu 
   modelsOpts: EChartsOption = {};
   langOpts: EChartsOption = {};
   authorOpts: EChartsOption = {};
 
-  constructor(private appSettings: AppSettings,
-              private adminApi: AdminApiService) { }
+  dateFrom: Date = null;
+  dateTo: Date = null;
+  license:string = null;
+  allLicenses:string[];
 
-  ngOnInit() {
-    this.adminApi.statisticsAuthors().subscribe(response=> {
+  // tabulka
+  table: any;
+
+  // pripojena instance
+  constructor(public appSettings: AppSettings, private adminApi: AdminApiService) { }
+
+
+
+  reinitGraphs() {
+    let requestedLicense = this.license != null && this.license !== 'All' ? this.license : null;
+
+    // authors graph configuration
+    this.adminApi.statisticsAuthors(
+      this.dateFrom != null ? this.format(this.dateFrom) : null, 
+      this.dateTo != null ? this.format(this.dateTo) : null,
+      requestedLicense
+    ).subscribe(response=> {
       this.authorOpts = {
         xAxis: {
           type: 'category',
@@ -49,11 +72,14 @@ export class HomeComponent implements OnInit {
           }
         ]
       };
-      console.log(response);
     });
 
-
-    this.adminApi.statisticsLang().subscribe(response=> {
+    // lang graph configuration
+    this.adminApi.statisticsLang(
+      this.dateFrom != null ? this.format(this.dateFrom) : null, 
+      this.dateTo != null ? this.format(this.dateTo) : null,
+      requestedLicense
+   ).subscribe(response=> {
       this.langOpts = {
         xAxis: {
           type: 'category',
@@ -78,21 +104,23 @@ export class HomeComponent implements OnInit {
         ]
       };
     });
-    this.adminApi.statisticsModels().subscribe(response => {
-     
+    // models pie graph configuration
+    this.adminApi.statisticsModels(
+      this.dateFrom != null ? this.format(this.dateFrom) : null, 
+      this.dateTo != null ? this.format(this.dateTo) : null,
+      requestedLicense
+    ).subscribe(response => {
+      this.table =response;
       this.modelsOpts = {
-        title: {
-          text: "Zobrazeni modelu", 
-          left: 'center'
+        legend: {
+          type:"scroll"
         },
         tooltip: {
           trigger: 'item'
         },
+
         series: {
-          name: "Zobrazeni modelu",
           type: 'pie',
-          radius: '50%',
-          // center: ['40%', '50%'],
           label: {
             show: false,
           },
@@ -101,6 +129,9 @@ export class HomeComponent implements OnInit {
               shadowBlur: 10,
               shadowOffsetX: 0,
               shadowColor: 'rgba(0, 0, 0, 0.5)'
+            },
+            label: {
+                show: false
             }
           },
           data: Object.keys(response.sums).map(key => {
@@ -109,17 +140,25 @@ export class HomeComponent implements OnInit {
               name: key
             }
           })
-        },
-        
-        legend: {
-          orient: 'vertical',
-          left: 'left'
         }
       };
   
     });
+
   }
 
+  ngOnInit() {
+    this.reinitGraphs();
+    this.adminApi.getLicenses().subscribe((licenses: License[]) => {
+      this.allLicenses = licenses.map(l=> {
+        return l.name;
+      });
+      this.allLicenses.unshift('All');
+    });
+  }
+
+
+  
   getVersion() {
     return this.appSettings.version;
   }
@@ -141,7 +180,24 @@ export class HomeComponent implements OnInit {
     return hash;
   }
 
-  // generovane grafy 
+  changeEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    console.log("Changing event");
+    this.reinitGraphs();
+  }
 
+  // date formatting - presunout
+  private format(date) {
+    let d = new Date(date);
+    let month = (d.getMonth() + 1).toString();
+    let day = d.getDate().toString();
+    let year = d.getFullYear();
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+    return [year, month, day].join('.');
+  }
 
 }

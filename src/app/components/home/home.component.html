@@ -6,57 +6,49 @@
 				<span class="app-badge app-version app-mr-2">verze {{getVersion()}}</span>
 				<span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
 			</div>
-			<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
-				<thead>
-					<tr>
-						<th>Nadpis 1</th>
-						<th>Nadpis 2</th>
-						<th>Nadpis 3</th>
-						<th>Nadpis 4</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-					</tr>
-					<tr>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-					</tr>
-					<tr>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-						<td>Hodnota</td>
-					</tr>
-				</tbody>
-			</table>
+			<div>
+				<strong class="app-mr-2">Připojená instance: </strong>  <a href="{{appSettings.clientApiBaseUrl}}">{{appSettings.clientApiBaseUrl}}</a>
+			</div>
+			<h3> Nejvíce zobrazované dokumenty </h3>
+			<div *ngFor="let m of models">
+				<div *ngIf="table!=null && table[m] != null && table[m].length > 0">
+					<h3>{{m}}</h3>
+					<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
+						<thead>
+							<tr>
+								<th>Počet zobrazení</th>
+								<th>Dílo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let v of table[m]">
+								<td>{{v.count}}</td>
+								<td> <a href="">{{v.title}}</a> </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 		</mat-card-content>
 	</mat-card>
 	<div>
 		<mat-form-field appearance="fill" class="app-mr-2">
 			<mat-label>Datum od</mat-label>
-			<input matInput [matDatepicker]="from">
-			<mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+			<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
+			<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
 			<mat-datepicker #from></mat-datepicker>
 		</mat-form-field>
 		<mat-form-field appearance="fill" class="app-mr-2">
 			<mat-label>Datum do</mat-label>
-			<input matInput [matDatepicker]="to">
-			<mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+			<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
+			<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
 			<mat-datepicker #to></mat-datepicker>
 		</mat-form-field>
 		<mat-form-field appearance="fill">
-			<mat-label>Favorite food</mat-label>
-			<mat-select>
-				<mat-option value="hodnota 1">hodnota 1</mat-option>
-				<mat-option value="hodnota 2">hodnota 2</mat-option>
-				<mat-option value="hodnota 3">hodnota 3</mat-option>
+			<mat-label>Licence</mat-label>
+			<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
+				<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
 			</mat-select>
 		</mat-form-field>
 	</div>
