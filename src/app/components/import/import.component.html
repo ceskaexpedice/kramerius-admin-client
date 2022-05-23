@@ -38,7 +38,9 @@
         </div>
       </mat-card>
       <mat-card *ngIf="this.inputDirError[this.type]" class="app-view-alert app-warning">
-        <mat-icon>error</mat-icon>{{ this.inputDirError[this.type] }}
+        <mat-card-content>
+          <mat-icon>error</mat-icon>{{ this.inputDirError[this.type] }}
+        </mat-card-content>
       </mat-card>
     </div>
   </div>

@@ -42,7 +42,6 @@
     <div class="app-label app-mb-2">Úplný popis sbírky (anglický)</div>
     <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""name="text"></ckeditor>
   </div>
-  
 
   <div>
     <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">Vytvořit</button>

@@ -1,59 +1,41 @@
 <form class="form-signin" #f="ngForm" (ngSubmit)="onAdd(f.value)">
-
-    <h1 mat-dialog-title>Přidání položek do sbírky</h1>
-
-    <div class="info">Pro každý vložený PID bude přidána položka do sbírky.
-        Součástí přidání každé položky do sbírky je naplánování indexačního procesu,
-        proto se příslušnost do sbírky nemusí projevit okamžitě.
+	<h2 mat-dialog-title>Přidání položek do sbírky</h2>
+	<mat-dialog-content class="mat-typography">
+		<div class="app-desc app-mb-4">
+			Pro každý vložený PID bude přidána položka do sbírky. Součástí přidání každé položky do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě.
+		</div>
+		<div class="app-mb-2">
+      <strong>Sbírka</strong>
     </div>
-
-    <div class="section-header">
-        Sbírka
+		<div class="app-mb-2">
+			<mat-form-field class="app-w-100" *ngIf="collection_title">
+				<input [disabled]="inProgress || collection_title" matInput type="text" id="inputCollectionTitle" name="collection_title" [(ngModel)]="collection_title" placeholder="Název">
+			</mat-form-field>
+			<mat-form-field class="app-w-100" *ngIf="collection_pid">
+				<input [disabled]="inProgress || collection_pid" matInput type="text" id="inputCollectionPid" name="collection_pid" [(ngModel)]="collection_pid" placeholder="PID">
+			</mat-form-field>
+		</div>
+		<div class="app-mb-2">
+      <strong>Přidávané položky</strong>
     </div>
-
-    <mat-form-field class="input-collection_title" *ngIf="collection_title">
-        <input [disabled]="inProgress || collection_title" matInput type="text" id="inputCollectionTitle"
-            name="collection_title" [(ngModel)]="collection_title" placeholder="Název">
-    </mat-form-field>
-
-    <mat-form-field class="input-collection_pid" *ngIf="collection_pid">
-        <input [disabled]="inProgress || collection_pid" matInput type="text" id="inputCollectionPid"
-            name="collection_pid" [(ngModel)]="collection_pid" placeholder="PID">
-    </mat-form-field>
-
-
-    <div class="section-header">
-        Přidávané položky
-    </div>
-
-    <mat-icon (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-pids-from-file">file_download
-    </mat-icon>
-
-    <mat-form-field class="input-pids">
-        <textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids"
-            [(ngModel)]="pids" placeholder="PIDy" required autofocus rows="{{pidsTextareaRows}}"></textarea>
-    </mat-form-field>
-
-    <input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
-
-    <div class="progress-info" *ngIf="!!items_counter_total">
-        <div class="progress-info-text">Přidáno {{items_counter_added}}/{{items_counter_total}} položek!</div>
-        <div class="progress-info-text" *ngIf="!!items_counter_failed">Nepodařilo se přidat {{items_counter_failed}}
-            položek!</div>
-    </div>
-
-    <mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()">
-    </mat-progress-bar>
-
-    <div class="buttons">
-        <button [disabled]="inProgress || !f.valid || isFinished()" color="primary" mat-raised-button type="submit"
-            color="warn">Přidat</button>
-        <button *ngIf="!isFinished()" [disabled]="inProgress" mat-raised-button mat-dialog-close="cancel"
-            style="margin-left: 10px;">Zrušit</button>
-
-        <button *ngIf="isFinished()" mat-raised-button mat-dialog-close="close"
-            style="margin-left: 10px;">Zavřít</button>
-
-    </div>
-
+		<div>
+			<mat-form-field appearance="fill" class="app-w-100 app-download">
+				<mat-label>PIDy</mat-label>
+				<textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" placeholder="PIDy" required autofocus rows="{{pidsTextareaRows}}"></textarea>
+				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-cursor-pointer">file_download</mat-icon>
+			</mat-form-field>
+			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
+		</div>
+		<mat-card *ngIf="!!items_counter_total" class="app-view-alert" [ngClass]="!!items_counter_failed ? 'app-warning' : 'app-success'">
+			<mat-card-content>
+				Přidáno <strong>{{ items_counter_added }}/{{ items_counter_total }}</strong> položek!<br />
+				<ng-container *ngIf="!!items_counter_failed">Nepodařilo se přidat <strong>{{ items_counter_failed }}</strong> položek!</ng-container>
+			</mat-card-content>
+		</mat-card>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-flat-button [disabled]="inProgress || !f.valid || isFinished()" color="primary" type="submit">Přidat</button>
+		<button mat-flat-button *ngIf="!isFinished()" [disabled]="inProgress" mat-dialog-close="cancel" color="warn">Zrušit</button>
+		<button mat-flat-button *ngIf="isFinished()" mat-dialog-close="close">Zavřít</button>
+	</mat-dialog-actions>
 </form>

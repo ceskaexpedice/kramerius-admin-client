@@ -181,7 +181,11 @@ export class CollectionComponent implements OnInit {
   }
 
   onAddItemsToCollection() {
-    const dialogRef = this.dialog.open(AddItemsToCollectionDialogComponent, { data: this.collection });
+    const dialogRef = this.dialog.open(AddItemsToCollectionDialogComponent, {
+      data: this.collection,
+      width: '600px',
+      panelClass: 'app-add-items-to-collection'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result && result == 'close') {
         this.loadData(this.collection.id)

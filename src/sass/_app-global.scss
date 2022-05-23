@@ -65,6 +65,18 @@ a {
   max-height: 100% !important;
 }
 
+.app-text-left {
+  text-align: left !important;
+}
+
+.app-text-right {
+  text-align: right !important;
+}
+
+.app-text-center {
+  text-align: center;
+}
+
 .app-rotate-up {
   .mat-icon {
     &:not(.app-no-rotate) {
