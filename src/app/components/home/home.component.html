@@ -31,13 +31,16 @@
 	<div fxLayout="row" fxLayoutGap="16px">
 		<mat-card fxFlex class="app-card app-view-border">
 			<h2>Statistiky 1</h2>
-			<div style="height: 200px;"></div>
+			<div echarts [options]="modelsOpts" style="height: 350px;" ></div>
+
 		</mat-card>
 		<mat-card fxFlex class="app-card app-view-border">
 			<h2>Statistiky 2</h2>
+			<div echarts [options]="langOpts" style="height: 350px;" ></div>
 		</mat-card>
 		<mat-card fxFlex class="app-card app-view-border">
 			<h2>Statistiky 3</h2>
+			<div echarts [options]="authorOpts" style="height: 350px;" ></div>
 		</mat-card>
 	</div>
 </div>

@@ -62,6 +62,12 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { AddItemsToCollectionDialogComponent } from './dialogs/add-items-to-collection-dialog/add-items-to-collection-dialog.component';
 import { AddCollectionToAnotherCollectionDialogComponent } from './dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
 import { CollectionDetailComponent } from './components/collections/collection-detail/collection-detail.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts/core';
+import { BarChart } from 'echarts/charts';
+import { LineChart } from 'echarts/charts';
+import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
 
 @NgModule({
   declarations: [
@@ -120,7 +126,11 @@ import { CollectionDetailComponent } from './components/collections/collection-d
     HttpClientModule,
     CKEditorModule,
     FlexLayoutModule,
-    MatBadgeModule
+    MatBadgeModule,
+    NgxEchartsModule.forRoot({ 
+      echarts
+    })
+
   ],
   providers: [
     AuthService,

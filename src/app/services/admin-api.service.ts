@@ -345,9 +345,18 @@ export class AdminApiService {
     return this.delete(`/licenses/${license.id}`);
   }
 
+  // Pridano by PS
+  statisticsModels() : Observable<any> {
+    return this.get(`/statistics/multimodel`);
+  }
 
+  statisticsLang() : Observable<any> {
+    return this.get(`/statistics/lang`);
+  }
 
-
+  statisticsAuthors() : Observable<any> {
+    return this.get(`/statistics/author`);
+  }
 
 }
 export interface ProcessesParams {
