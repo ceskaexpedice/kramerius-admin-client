@@ -26,6 +26,7 @@
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 		</div>
+		<mat-progress-bar mode="indeterminate" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
 		<mat-card *ngIf="!!items_counter_total" class="app-view-alert" [ngClass]="!!items_counter_failed ? 'app-warning' : 'app-success'">
 			<mat-card-content>
 				Přidáno <strong>{{ items_counter_added }}/{{ items_counter_total }}</strong> položek!<br />
