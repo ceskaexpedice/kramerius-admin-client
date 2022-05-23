@@ -1,9 +1,41 @@
 <div class="app-container">
 	<mat-card class="app-card app-view-border app-mb-4">
 		<mat-card-content>
-			<h2>kAdmin</h2>
-			<div>verze {{getVersion()}}</div>
-			<div>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></div>
+			<div class="app-mb-4">
+				<strong class="app-mr-2">k7Admin</strong>
+				<span class="app-badge app-version app-mr-2">verze {{getVersion()}}</span>
+				<span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
+			</div>
+			<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
+				<thead>
+					<tr>
+						<th>Nadpis 1</th>
+						<th>Nadpis 2</th>
+						<th>Nadpis 3</th>
+						<th>Nadpis 4</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+					</tr>
+					<tr>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+					</tr>
+					<tr>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+						<td>Hodnota</td>
+					</tr>
+				</tbody>
+			</table>
 		</mat-card-content>
 	</mat-card>
 	<div>
@@ -30,17 +62,28 @@
 	</div>
 	<div fxLayout="row" fxLayoutGap="16px">
 		<mat-card fxFlex class="app-card app-view-border">
-			<h2>Statistiky 1</h2>
-			<div echarts [options]="modelsOpts" style="height: 350px;" ></div>
-
+			<mat-card-header>
+				<mat-card-title>Statistiky zobrazení modelů</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<div echarts [options]="modelsOpts" style="height: 350px;" ></div>
+			</mat-card-content>
 		</mat-card>
 		<mat-card fxFlex class="app-card app-view-border">
-			<h2>Statistiky 2</h2>
-			<div echarts [options]="langOpts" style="height: 350px;" ></div>
+			<mat-card-header>
+				<mat-card-title>Statistiky použitých jazyků</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<div echarts [options]="langOpts" style="height: 350px;" ></div>
+			</mat-card-content>
 		</mat-card>
 		<mat-card fxFlex class="app-card app-view-border">
-			<h2>Statistiky 3</h2>
-			<div echarts [options]="authorOpts" style="height: 350px;" ></div>
+			<mat-card-header>
+				<mat-card-title>Statistiky autorů</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<div echarts [options]="authorOpts" style="height: 350px;" ></div>
+			</mat-card-content>
 		</mat-card>
 	</div>
 </div>
