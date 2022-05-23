@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit {
           })
         },
         yAxis: {
-          type: 'value'
         },
         tooltip: {
           trigger: 'item'
@@ -88,7 +87,6 @@ export class HomeComponent implements OnInit {
           })
         },
         yAxis: {
-          type: 'value'
         },
         tooltip: {
           trigger: 'item'
@@ -183,6 +181,10 @@ export class HomeComponent implements OnInit {
   changeEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     console.log("Changing event");
     this.reinitGraphs();
+  }
+
+  onChartClick(event) {
+    console.log(event.name);
   }
 
   // date formatting - presunout
