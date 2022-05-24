@@ -65,7 +65,11 @@ export class ImportComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple'
+    });
   }
 
   submit() {
@@ -83,7 +87,11 @@ export class ImportComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'approve') {
         if (this.type == 'foxml') {
