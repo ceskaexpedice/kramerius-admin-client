@@ -22,7 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import {MatDividerModule} from '@angular/material/divider';
 
 const components = [
   MatCardModule,
@@ -46,7 +46,8 @@ const components = [
   MatTabsModule,
   MatSnackBarModule,
   MatRadioModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatDividerModule
 ];
 
 const providers = [

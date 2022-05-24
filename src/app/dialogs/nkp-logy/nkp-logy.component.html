@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>NKP logy</h2>
+<mat-dialog-content class="mat-typography">
+  <div fxLayout="row" fxLayoutGap="16px">
+    <mat-form-field fxFlex>
+      <mat-label>Datum od</mat-label>
+      <input matInput [matDatepicker]="from">
+      <mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
+      <mat-datepicker #from></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>Datum do</mat-label>
+      <input matInput [matDatepicker]="to">
+      <mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
+      <mat-datepicker #to></mat-datepicker>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close>Zavřít</button>
+</mat-dialog-actions>

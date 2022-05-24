@@ -44,27 +44,32 @@
         </div>
     </div>
 
-    <h3>Hromadné úpravy dat</h3>
-    <div>
-        <h4>Na základě vložených PIDů</h4>
-        <!-- tj. změna viditelnosti -->
-        <button class="app-btn" mat-raised-button (click)="openChangePolicyDialog()" color="primary">
-            Nastavit public/private</button>
-        <br>
-        <!-- DNNT, DNNT2 apod. -->
-        <button class="app-btn" mat-raised-button (click)="openAddLicenceDialog()" color="primary">
-            Přidat licenci</button>
-        <br>
-        <!-- DNNT, DNNT2 apod. -->
-        <button class="app-btn" mat-raised-button (click)="openRemoveLicenceDialog()" color="primary">
-            Odebrat licenci</button>
-        <br>
+	<div class="app-mb-4">
+		<h3>Hromadné úpravy dat</h3>
+		<h4>Na základě vložených PIDů</h4>
+		<!-- tj. změna viditelnosti -->
+		<button mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2"> Nastavit public/private</button>
 
-        <h4>Na základě dat</h4>
-        <!-- tj. pohyblivá zeď -->
-        <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
-            Nastavit public podle datumů</button>
-        <br>
-    </div>
+		<!-- DNNT, DNNT2 apod. -->
+		<button mat-flat-button (click)="openAddLicenceDialog()" color="primary" class="app-mr-2">Přidat licenci</button>
+
+		<!-- DNNT, DNNT2 apod. -->
+		<button mat-flat-button (click)="openRemoveLicenceDialog()" color="primary" class="app-mr-2">Odebrat licenci</button>
+
+		<h4>Na základě dat</h4>
+		<!-- tj. pohyblivá zeď -->
+		<button mat-flat-button (click)="todo()" color="primary" disabled  class="app-mr-2"> Nastavit public podle datumů</button>
+	</div>
+   
+	<mat-divider></mat-divider>
+	
+	<h3>Statistiky</h3>
+	<div>
+		<button mat-flat-button color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">NKP logy</button>
+		<button mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">Mazání statistik</button><!--od do-->
+
+		<button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button>
+		<button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button>
+	</div>
 
 </div>

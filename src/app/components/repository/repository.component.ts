@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DeleteStatisticsComponent } from 'src/app/dialogs/delete-statistics/delete-statistics.component';
+import { NkpLogyComponent } from 'src/app/dialogs/nkp-logy/nkp-logy.component';
 import { ScheduleAddLicenseDialogComponent } from 'src/app/dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { ScheduleImportFoxmlDialogComponent } from 'src/app/dialogs/schedule-import-foxml-dialog/schedule-import-foxml-dialog.component';
@@ -124,6 +126,21 @@ export class RepositoryComponent implements OnInit {
 
   todo() {
     console.log('TODO: implement');
+  }
+
+
+  openNkpLogyDialog() {
+    const dialogRef = this.dialog.open(NkpLogyComponent, {
+      width: '600px',
+      panelClass: 'app-nkp-logy-dialog'
+    });
+  }
+
+  openDeleteStatisticsDialog() {
+    const dialogRef = this.dialog.open(DeleteStatisticsComponent, {
+      width: '600px',
+      panelClass: 'app-nkp-logy-dialog'
+    });
   }
 
 

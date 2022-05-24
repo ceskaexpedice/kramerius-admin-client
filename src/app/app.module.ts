@@ -68,6 +68,8 @@ import { BarChart } from 'echarts/charts';
 import { LineChart } from 'echarts/charts';
 import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import { NkpLogyComponent } from './dialogs/nkp-logy/nkp-logy.component';
+import { DeleteStatisticsComponent } from './dialogs/delete-statistics/delete-statistics.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +115,9 @@ import { CanvasRenderer } from 'echarts/renderers';
     AuthComponent,
     AddItemsToCollectionDialogComponent,
     AddCollectionToAnotherCollectionDialogComponent,
-    CollectionDetailComponent
+    CollectionDetailComponent,
+    NkpLogyComponent,
+    DeleteStatisticsComponent
   ],
   imports: [
     BrowserModule,
