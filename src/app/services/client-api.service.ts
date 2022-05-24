@@ -52,6 +52,8 @@ export class ClientApiService {
   }
 
   getCollectionChildren(uuid: string): Observable<any[]> {
+    //vrati obsah sbirky na zaklade priznaku ve vyhledavacim indexu (tj. korektni az eventually po reindexaci)
+    //takze hned po pridani (spatne) ne, hned po odbrani (spatne) ano
     return this.search({
       q: `in_collections.direct:"${uuid}"`,
       fl: 'model,pid,title.search,root.title,date.str,level',

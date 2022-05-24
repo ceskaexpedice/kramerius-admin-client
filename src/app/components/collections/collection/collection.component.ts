@@ -47,9 +47,8 @@ export class CollectionComponent implements OnInit {
     console.log('loading data for ' + collectionId)
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
-      //TODO: na tohle pouzivat admin API a mit zaruceny obsah, ne ten eventual consistenci (az budou objekty zaindexovane)
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
-        this.items = res;
+        this.items = res.filter(item => this.collection.items.includes(item['pid']))
         this.view = 'detail';
         this.state = 'success';
       })
