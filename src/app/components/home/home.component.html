@@ -60,9 +60,9 @@
 		<mat-tab label="Nejvíce zobrazované dokumenty">
 			<mat-card class="app-card app-view-border app-mb-4 app-mt-4">
 				<mat-card-content>
-					<div *ngFor="let item of table | keyvalue">
+					<div *ngFor="let item of table | keyvalue" class="app-mb-4">
 						<div *ngIf="item.value.length > 0">
-							<h3>{{item.key}}</h3>
+							<h3 class="app-mb-2">{{item.key}}</h3>
 							<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
 								<thead>
 									<tr>

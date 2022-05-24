@@ -4,6 +4,11 @@
 
 a {
   @extend .app-cursor-pointer;
+  color: $app-color-primary;
+
+  &:hover {
+    color: rgba($app-color-primary, .7);
+  }
 }
 
 // theme colors
