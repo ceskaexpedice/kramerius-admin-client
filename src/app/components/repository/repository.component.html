@@ -1,48 +1,33 @@
 <div class="app-root">
+	<div class="app-mb-4">
+		<h3>Správa repozitáře</h3>
+    <button mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2">Vybudovat Processing index</button>
+    <button mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">Přebudovat Processing index pro objekt</button>
+	</div>
+    
+	<mat-divider></mat-divider>
 
-    <h2>Správa repozitáře</h2>
-    <button class="app-btn" mat-raised-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary">
-        Vybudovat Processing index</button><!-- TODO: neprejmenujeme na Index Vazeb? -->
-    <br>
-    <button class="app-btn" mat-raised-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary">
-        Přebudovat Processing index pro objekt</button>
-    <br>
+	<div class="app-mb-4">
+		<h3>Importy</h3>
+			<button mat-flat-button (click)="openScheduleImportFoxmlDialog()" color="primary" class="app-mr-2">Importovat FOXML</button>
+			<button mat-flat-button (click)="openScheduleImportNdkDialog()" color="primary" class="app-mr-2">Importovat NDK METS</button>
+	</div>
+    
+	<mat-divider></mat-divider>
 
-    <h3>Importy</h3>
-    <div>
-        <button class="app-btn" mat-raised-button (click)="openScheduleImportFoxmlDialog()" color="primary">
-            Importovat FOXML</button>
-        <br>
-        <button class="app-btn" mat-raised-button (click)="openScheduleImportNdkDialog()" color="primary">
-            Importovat NDK METS</button>
-        <br>
-    </div>
+	<div class="app-mb-4">
+		<h3>Exporty</h3>
+		<h4>Globální</h4>
+		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Exportovast statistiky</button>
+		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Exportovat PIDy objektů s licencí DNNT</button> <!-- do CSV -->
+		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Generovat přístupové logy</button>
 
-    <h3>Exporty</h3>
-    <div>
-        <h4>Globální</h4>
-        <div>
-            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
-                Exportovast statistiky</button>
-            <br>
-            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
-                Exportovat PIDy objektů s licencí DNNT</button> <!-- do CSV -->
-            <br>
-            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>
-                Generovat přístupové logy</button>
-            <br>
-        </div>
-
-        <h4>Pro dokument</h4>
-        <div>
-            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>Export dokument
-                (PDF)</button>
-            <br>
-            <button class="app-btn" mat-raised-button (click)="todo()" color="primary" disabled>Exportovat dokument
-                (FOXML)</button>
-            <br>
-        </div>
-    </div>
+		<h4>Pro dokument</h4>
+		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Export dokument (PDF)</button>
+		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Exportovat dokument (FOXML)</button>
+	</div>
+    
+	<mat-divider></mat-divider>
 
 	<div class="app-mb-4">
 		<h3>Hromadné úpravy dat</h3>
