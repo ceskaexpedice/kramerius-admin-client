@@ -47,6 +47,7 @@ export class CollectionComponent implements OnInit {
     console.log('loading data for ' + collectionId)
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
+      //TODO: na tohle pouzivat admin API a mit zaruceny obsah, ne ten eventual consistenci (az budou objekty zaindexovane)
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
         this.items = res;
         this.view = 'detail';
@@ -194,7 +195,7 @@ export class CollectionComponent implements OnInit {
   }
 
   onAddThisToSuperCollection() {
-    const dialogRef = this.dialog.open(AddCollectionToAnotherCollectionDialogComponent, { 
+    const dialogRef = this.dialog.open(AddCollectionToAnotherCollectionDialogComponent, {
       data: this.collection,
       width: '600px',
       panelClass: 'app-add-collection-to-another-collection'
@@ -227,11 +228,15 @@ export class CollectionComponent implements OnInit {
   }
 
   getCollectionName(collection: Collection) {
-    return !!collection.name_cze ? collection.name_cze : collection.name_eng;
+    if (!!collection) {
+      return !!collection.name_cze ? collection.name_cze : collection.name_eng;
+    }
   }
 
   getCollectionDescription(collection: Collection) {
-    return !!collection.description_cze ? collection.description_cze : collection.description_eng;
+    if (!!collection) {
+      return !!collection.description_cze ? collection.description_cze : collection.description_eng;
+    }
   }
 
 }

@@ -61,11 +61,15 @@ export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
   }
 
   getCollectionName(collection: Collection) {
-    return !!collection.name_cze ? collection.name_cze : collection.name_eng;
+    if (!!collection) {
+      return !!collection.name_cze ? collection.name_cze : collection.name_eng;
+    }
   }
 
   getCollectionDescription(collection: Collection) {
-    return !!collection.description_cze ? collection.description_cze : collection.description_eng;
+    if (!!collection) {
+      return !!collection.description_cze ? collection.description_cze : collection.description_eng;
+    }
   }
 
   selectSuperCollection(collection: Collection) {
