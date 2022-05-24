@@ -13,6 +13,12 @@
   }
 
   .mat-button-base {
+    color: $app-color-lightnes;
+
+    &:hover {
+      background-color: rgba($app-color-lightnes, .2);
+    }
+
     &.active {
       background-color: darken($app-color-primary, 10);
     }
