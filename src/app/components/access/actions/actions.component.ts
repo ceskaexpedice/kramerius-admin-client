@@ -53,7 +53,9 @@ export class ActionsComponent implements OnInit {
       data : { 
         action: this.selectedAction.code,
         right: right.clone()
-      }
+      },
+      width: '600px',
+      panelClass: 'app-new-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.right) {
@@ -77,7 +79,11 @@ export class ActionsComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.api.removeRight(right).subscribe((response) => {
@@ -91,7 +97,9 @@ export class ActionsComponent implements OnInit {
 
   onNewRight(action: RightAction) {
     const dialogRef = this.dialog.open(NewRightDialogComponent, {
-      data : { action: this.selectedAction.code, pid: this.pid || 'uuid:1' }
+      data : { action: this.selectedAction.code, pid: this.pid || 'uuid:1' },
+      width: '600px',
+      panelClass: 'app-new-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.right) {
