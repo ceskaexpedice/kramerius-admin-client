@@ -6,6 +6,19 @@ a {
   @extend .app-cursor-pointer;
 }
 
+// theme colors
+.app-color-primary {
+  color: $app-color-primary;
+}
+
+.app-color-accent {
+  color: $app-color-accent;
+}
+
+.app-color-warn {
+  color: $app-color-warn;
+}
+
 // cleaners
 .app-cleanfix {
   @include cleanfix();

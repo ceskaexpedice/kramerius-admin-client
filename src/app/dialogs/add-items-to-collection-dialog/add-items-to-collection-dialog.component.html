@@ -21,7 +21,7 @@
 		<div>
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
 				<mat-label>PIDy</mat-label>
-				<textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" placeholder="PIDy" required autofocus rows="{{pidsTextareaRows}}"></textarea>
+				<textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" placeholder="Zde vložit PIDy ..." required autofocus rows="{{pidsTextareaRows}}"></textarea>
 				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />

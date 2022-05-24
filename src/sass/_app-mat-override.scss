@@ -46,6 +46,20 @@
     &:nth-of-type(1) {
       border-top: 1px solid $app-card-border-color !important;
     }
+
+    &.app-selected {
+      background-color: rgba($app-color-accent, .03);
+    }
+
+    .mat-card-header {
+      .mat-card-title {
+        font-size: 16px;
+
+        .mat-icon {
+          @include setIcon(16, $position: middle);
+        }
+      }
+    }
   }
 
   &.app-view-rights {
