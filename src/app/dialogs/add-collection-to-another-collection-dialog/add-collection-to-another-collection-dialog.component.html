@@ -13,7 +13,7 @@
 			</mat-form-field>
 		</div>
 		<div class="app-mb-4">
-			<strong>Sírka, do které se přidává:</strong>
+			<strong>Sbírka, do které se přidává:</strong>
 		</div>
 		<mat-card *ngFor="let superCollection of potentialSuperCollections" class="app-card app-view-item app-view-hover app-cursor-pointer" (click)="selectSuperCollection(superCollection)" [class.app-selected]="superCollection == selectedSuperCollection">
 			<mat-card-header>

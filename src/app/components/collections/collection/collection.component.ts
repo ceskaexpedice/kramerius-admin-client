@@ -61,7 +61,7 @@ export class CollectionComponent implements OnInit {
       this.superCollections = data[0];
     }, (error) => {
       console.log(error);
-      this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tutu sbírku")
+      this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tuto sbírku")
     });
   }
 

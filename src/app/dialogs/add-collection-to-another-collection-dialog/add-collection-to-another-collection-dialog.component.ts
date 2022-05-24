@@ -37,7 +37,7 @@ export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
       }, (error) => {
         console.log(error);
         //TODO: handle error
-        //this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tutu sbírku")
+        //this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tuto sbírku")
       });
     }
   }
