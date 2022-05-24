@@ -147,7 +147,7 @@ a {
 
 .app-badge {
   @include setStateColor();
-
+  @extend .app-pr-2, .app-pl-2;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -159,7 +159,6 @@ a {
   text-transform: uppercase;
 
   &.app-version {
-    @extend .app-pr-2, .app-pl-2;
     color: $app-badge-version-color;
     border: 1px solid rgba($app-badge-version-color, .3);
     background-color: rgba($app-badge-version-color, .05);
