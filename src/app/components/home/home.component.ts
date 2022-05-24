@@ -35,6 +35,8 @@ export class HomeComponent implements OnInit {
   // tabulka
   table: any;
 
+  public isResult: boolean = true;
+
   // pripojena instance
   constructor(public appSettings: AppSettings, private adminApi: AdminApiService) { }
 

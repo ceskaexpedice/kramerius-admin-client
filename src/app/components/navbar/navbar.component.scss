@@ -5,6 +5,7 @@
 
 .mat-toolbar {
   position: fixed;
+  z-index: 1092;
 
   .app-logo {
     color: $app-color-lightnes;

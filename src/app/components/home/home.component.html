@@ -1,84 +1,88 @@
 <div class="app-container">
-	<mat-card class="app-card app-view-border app-mb-4">
-		<mat-card-content>
-			<div class="app-mb-4">
-				<strong class="app-mr-2">k7Admin</strong>
-				<span class="app-badge app-version app-mr-2">verze {{getVersion()}}</span>
-				<span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
-			</div>
+	<mat-tab-group>
+		<mat-tab label="Statistiky">
+			<mat-card class="app-card app-view-border app-mb-4 app-mt-4">
+				<mat-card-content>	
+					<strong class="app-mr-2">k7Admin</strong>
+					<span class="app-badge app-version app-mr-2">verze {{getVersion()}}</span>
+					<span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
+					<span class="app-pipe"></span>
+					<strong class="app-mr-2">Připojená instance: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
+				</mat-card-content>
+			</mat-card>
 			<div>
-				<strong class="app-mr-2">Připojená instance: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
+				<mat-form-field class="app-mr-2">
+					<mat-label>Datum od</mat-label>
+					<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
+					<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
+					<mat-datepicker #from></mat-datepicker>
+				</mat-form-field>
+				<mat-form-field class="app-mr-2">
+					<mat-label>Datum do</mat-label>
+					<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
+					<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
+					<mat-datepicker #to></mat-datepicker>
+				</mat-form-field>
+				<mat-form-field>
+					<mat-label>Licence</mat-label>
+					<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
+						<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
+					</mat-select>
+				</mat-form-field>
 			</div>
-		
-			<h3> Nejvíce zobrazované dokumenty </h3>
-			<div *ngFor="let item of table | keyvalue">
-				<div *ngIf="item.value.length > 0">
-					<h3>{{item.key}}</h3>
-					<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
-						<thead>
-							<tr>
-								<th>Počet zobrazení</th>
-								<th>PID</th>
-								<th>Dílo</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let v of item.value">
-								<td>{{v.count}}</td>
-								<td>{{v.pid}}</td>
-								<td> <a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank">{{v.title}}</a> </td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+			<div fxLayout="row" fxLayoutGap="16px">
+				<mat-card fxFlex class="app-card app-view-border" *ngIf="isResult">
+					<mat-card-header>
+						<mat-card-title>Statistiky zobrazení modelů</mat-card-title>
+					</mat-card-header>
+					<mat-card-content>
+						<div echarts [options]="modelsOpts" style="height: 350px;" (chartClick)="onChartClick($event)" ></div>
+					</mat-card-content>
+				</mat-card>
+				<mat-card fxFlex class="app-card app-view-border" *ngIf="isResult">
+					<mat-card-header>
+						<mat-card-title>Statistiky použitých jazyků</mat-card-title>
+					</mat-card-header>
+					<mat-card-content>
+						<div echarts [options]="langOpts" style="height: 350px;" ></div>
+					</mat-card-content>
+				</mat-card>
+				<mat-card fxFlex class="app-card app-view-border" *ngIf="isResult">
+					<mat-card-header>
+						<mat-card-title>Statistiky autorů</mat-card-title>
+					</mat-card-header>
+					<mat-card-content>
+						<div echarts [options]="authorOpts" style="height: 350px;" ></div>
+					</mat-card-content>
+				</mat-card>
 			</div>
-
-		</mat-card-content>
-	</mat-card>
-	<div>
-		<mat-form-field appearance="fill" class="app-mr-2">
-			<mat-label>Datum od</mat-label>
-			<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
-			<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
-			<mat-datepicker #from></mat-datepicker>
-		</mat-form-field>
-		<mat-form-field appearance="fill" class="app-mr-2">
-			<mat-label>Datum do</mat-label>
-			<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
-			<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
-			<mat-datepicker #to></mat-datepicker>
-		</mat-form-field>
-		<mat-form-field appearance="fill">
-			<mat-label>Licence</mat-label>
-			<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
-				<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
-			</mat-select>
-		</mat-form-field>
-	</div>
-	<div fxLayout="row" fxLayoutGap="16px">
-		<mat-card fxFlex class="app-card app-view-border">
-			<mat-card-header>
-				<mat-card-title>Statistiky zobrazení modelů</mat-card-title>
-			</mat-card-header>
-			<mat-card-content>
-				<div echarts [options]="modelsOpts" style="height: 350px;" (chartClick)="onChartClick($event)" ></div>
-			</mat-card-content>
-		</mat-card>
-		<mat-card fxFlex class="app-card app-view-border">
-			<mat-card-header>
-				<mat-card-title>Statistiky použitých jazyků</mat-card-title>
-			</mat-card-header>
-			<mat-card-content>
-				<div echarts [options]="langOpts" style="height: 350px;" ></div>
-			</mat-card-content>
-		</mat-card>
-		<mat-card fxFlex class="app-card app-view-border">
-			<mat-card-header>
-				<mat-card-title>Statistiky autorů</mat-card-title>
-			</mat-card-header>
-			<mat-card-content>
-				<div echarts [options]="authorOpts" style="height: 350px;" ></div>
-			</mat-card-content>
-		</mat-card>
-	</div>
+		</mat-tab>
+		<mat-tab label="Nejvíce zobrazované dokumenty">
+			<mat-card class="app-card app-view-border app-mb-4 app-mt-4">
+				<mat-card-content>
+					<div *ngFor="let item of table | keyvalue">
+						<div *ngIf="item.value.length > 0">
+							<h3>{{item.key}}</h3>
+							<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
+								<thead>
+									<tr>
+										<th>Počet zobrazení</th>
+										<th>PID</th>
+										<th>Dílo</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let v of item.value">
+										<td>{{v.count}}</td>
+										<td>{{v.pid}}</td>
+										<td> <a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank">{{v.title}}</a> </td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</mat-tab>
+	</mat-tab-group>
 </div>
