@@ -31,7 +31,10 @@ export class RolesComponent implements OnInit {
   }
 
   onNewRole() {
-    const dialogRef = this.dialog.open(NewRoleDialogComponent);
+    const dialogRef = this.dialog.open(NewRoleDialogComponent, {
+      width: '600px',
+      panelClass: 'app-new-right-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.role) {
             const role = result.role;
@@ -75,7 +78,9 @@ export class RolesComponent implements OnInit {
 
   onEditRole(role: Role) {
     const dialogRef = this.dialog.open(NewRoleDialogComponent, {
-      data: { role: role }
+      data: { role: role },
+      width: '600px',
+      panelClass: 'app-new-role-dialog'
     } );
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.role) {
