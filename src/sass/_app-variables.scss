@@ -8,27 +8,27 @@ $app-color-lightnes: #ffffff !default;
 $app-color-darknes: mat-color($mat-blue-gray, 900) !default;
 
 // gray contrast colors
-$app-gray-0: mat-color($mat-blue-gray, 50) !default;
-$app-gray-1: mat-color($mat-blue-gray, 100) !default;
-$app-gray-2: mat-color($mat-blue-gray, 200) !default;
-$app-gray-3: mat-color($mat-blue-gray, 300) !default;
-$app-gray-4: mat-color($mat-blue-gray, 400) !default;
-$app-gray-5: mat-color($mat-blue-gray, 500) !default;
-$app-gray-6: mat-color($mat-blue-gray, 600) !default;
-$app-gray-7: mat-color($mat-blue-gray, 700) !default;
-$app-gray-8: mat-color($mat-blue-gray, 800) !default;
-$app-gray-9: mat-color($mat-blue-gray, 900) !default;
+$app-gray-0: mat-color($mat-gray, 50) !default;
+$app-gray-1: mat-color($mat-gray, 100) !default;
+$app-gray-2: mat-color($mat-gray, 200) !default;
+$app-gray-3: mat-color($mat-gray, 300) !default;
+$app-gray-4: mat-color($mat-gray, 400) !default;
+$app-gray-5: mat-color($mat-gray, 500) !default;
+$app-gray-6: mat-color($mat-gray, 600) !default;
+$app-gray-7: mat-color($mat-gray, 700) !default;
+$app-gray-8: mat-color($mat-gray, 800) !default;
+$app-gray-9: mat-color($mat-gray, 900) !default;
 
 // custom colors
 $app-color-info: mat-color($mat-amber, 900) !default;
 $app-color-success: mat-color($mat-green, 800) !default;
 
 // elements
-$app-body-bg: rgba($app-gray-0, .5);
+$app-body-bg: $app-gray-1;
 $app-body-color: $app-color-darknes;
 $app-border-radius: 4px !default;
-$app-card-border-color: $app-gray-1;
-$app-card-bg-hover: rgba($app-body-bg, .3);
+$app-card-border-color: $app-gray-3;
+$app-card-bg-hover: $app-gray-1;
 $app-card-bg-expanded: $app-card-bg-hover;
 $app-toolbar-height: 64px !default;
 $app-container: 1280px !default;
@@ -38,6 +38,7 @@ $app-avatar-size: 40px !default;
 $app-avatar-color: mat-color($mat-amber, 900) !default;
 $app-badge-version-color: $app-color-accent;
 $app-mat-radio-button-size: 16px !default;
+$app-tbc: $app-gray-3;
 
 // gaps
 $gaps: (
@@ -79,7 +80,7 @@ $states: (
 $app-table-row-height: 48px !default;
 $app-table-border-color: $app-gray-1;
 $app-table-color-bg: $app-color-lightnes;
-$app-table-color-bg-hover: $app-gray-0;
+$app-table-color-bg-hover: $app-gray-2;
 $app-table-color-bg-active: $app-color-primary;
 $app-table-color-fg: $app-gray-7;
 

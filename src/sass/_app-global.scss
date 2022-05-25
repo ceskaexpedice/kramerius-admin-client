@@ -182,7 +182,6 @@ table {
   // standart table
   &.app-table {
     @extend .app-w-100;
-    $app-tbc: $app-gray-1;
     border-width: 1px 0 0 1px;
     border-style: solid;
     border-color: $app-tbc;
@@ -246,7 +245,7 @@ table {
   &.app-view-border {
     .app-head, .app-body, .mat-paginator {
       border-style: solid;
-      border-color: $app-table-border-color;
+      border-color: $app-tbc;
     }
 
     .app-head {
@@ -269,7 +268,7 @@ table {
     &.app-head {
       .app-row {
         font-size: 12px;
-        border-bottom: 1px solid #{$app-table-border-color};
+        border-bottom: 1px solid #{$app-tbc};
       
         .app-sortable {
           cursor: pointer;
@@ -286,7 +285,7 @@ table {
     &.app-body {
       .app-row {
         &:not(:last-child) {
-          border-bottom: 1px solid #{$app-table-border-color};
+          border-bottom: 1px solid #{$app-tbc};
         }
 
         &:hover {
