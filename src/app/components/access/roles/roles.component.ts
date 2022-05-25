@@ -55,10 +55,14 @@ export class RolesComponent implements OnInit {
       btn2: {
         label: 'Ne',
         value: 'no',
-        color: 'light'
+        color: ''
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.api.removeRole(role).subscribe(() => {

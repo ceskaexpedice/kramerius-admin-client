@@ -15,6 +15,6 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button (click)="onClose(data.btn1.value)" color="primary">{{ data.btn1.label }}</button>
-  <button mat-flat-button (click)="onClose(data.btn2.value)" color="warn" *ngIf="data.btn2"><mat-icon>clear</mat-icon>{{ data.btn2.label }}</button>
+  <button mat-flat-button (click)="onClose(data.btn1.value)" [color]="data.btn1.color">{{ data.btn1.label }}</button>
+  <button mat-flat-button (click)="onClose(data.btn2.value)" [color]="data.btn2.color" *ngIf="data.btn2">{{ data.btn2.label }}</button>
 </mat-dialog-actions>

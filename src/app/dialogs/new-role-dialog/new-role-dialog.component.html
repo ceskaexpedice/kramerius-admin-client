@@ -5,7 +5,7 @@
     <input matInput placeholder="Název"  name="note" [(ngModel)]="role.name" autocomplete="off">
   </mat-form-field>
 </mat-dialog-content>
-<mat-card class="app-view-alert app-warning" *ngIf="errorMessage">
+<mat-card class="app-view-alert app-warn" *ngIf="errorMessage">
   <mat-card-content>
     {{ errorMessage }}
   </mat-card-content>
@@ -13,6 +13,5 @@
 <mat-dialog-actions align="end">
   <button mat-flat-button *ngIf="mode == 'new'" (click)="onSave()" color="primary">Vytvořit</button>
   <button mat-flat-button *ngIf="mode == 'edit'" (click)="onSave()" color="primary">Upravit</button>
-  <button mat-flat-button (click)="onCancel()" color="warn"><mat-icon>clear</mat-icon>Zrušit</button>
+  <button mat-flat-button (click)="onCancel()">Zrušit</button>
 </mat-dialog-actions>
-
