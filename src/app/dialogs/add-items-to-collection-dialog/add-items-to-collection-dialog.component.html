@@ -36,7 +36,7 @@
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
 		<button mat-flat-button [disabled]="inProgress || !f.valid || isFinished()" color="primary" type="submit">Přidat</button>
-		<button mat-flat-button *ngIf="!isFinished()" [disabled]="inProgress" mat-dialog-close="cancel" color="warn">Zrušit</button>
+		<button mat-flat-button *ngIf="!isFinished()" [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
 		<button mat-flat-button *ngIf="isFinished()" mat-dialog-close="close">Zavřít</button>
 	</mat-dialog-actions>
 </form>
