@@ -5,7 +5,7 @@ $app-color-primary: mat-color($app-primary) !default;
 $app-color-accent: mat-color($app-accent) !default;
 $app-color-warn: mat-color($app-warn) !default;
 $app-color-lightnes: #ffffff !default;
-$app-color-darknes: mat-color($mat-blue-gray, 900) !default;
+$app-color-darknes: #000000 !default;
 
 // gray contrast colors
 $app-gray-0: mat-color($mat-gray, 50) !default;
@@ -38,7 +38,12 @@ $app-avatar-size: 40px !default;
 $app-avatar-color: mat-color($mat-amber, 900) !default;
 $app-badge-version-color: $app-color-accent;
 $app-mat-radio-button-size: 16px !default;
-$app-tbc: $app-gray-3;
+
+$app-table-row-height: 48px !default;
+$app-table-color: $app-gray-7;
+$app-table-color-border: $app-card-border-color;
+$app-table-color-bg: $app-color-lightnes;
+$app-table-color-bg-hover: $app-gray-2;
 
 // gaps
 $gaps: (
@@ -71,25 +76,3 @@ $states: (
   warning: #ab493f,
   default: $app-gray-6
 );
-
-
-
-
-
-// original honza code
-$app-table-row-height: 48px !default;
-$app-table-border-color: $app-gray-1;
-$app-table-color-bg: $app-color-lightnes;
-$app-table-color-bg-hover: $app-gray-2;
-$app-table-color-bg-active: $app-color-primary;
-$app-table-color-fg: $app-gray-7;
-
-$app-selection-color: #c3c8ca;
-$app-action-color: #37474f;
-$app-action-transparent: #37474f33;
-$app-action-transparent2: #37474f55;
-$app-action-highlight-color: #556369;
-
-$app-action-warn: #bf4848;
-$app-action-warn-highlight: #d94444;
-

@@ -184,14 +184,14 @@ table {
     @extend .app-w-100;
     border-width: 1px 0 0 1px;
     border-style: solid;
-    border-color: $app-tbc;
+    border-color: $app-table-color-border;
     background-color: $app-table-color-bg;
 
     tr {
       td, th {
         border-width: 0 1px 1px 0;
         border-style: solid;
-        border-color: $app-tbc;
+        border-color: $app-table-color-border;
         padding: 4px 8px;
         vertical-align: top;
         text-align: left;
@@ -245,7 +245,7 @@ table {
   &.app-view-border {
     .app-head, .app-body, .mat-paginator {
       border-style: solid;
-      border-color: $app-tbc;
+      border-color: $app-table-color-border;
     }
 
     .app-head {
@@ -268,7 +268,7 @@ table {
     &.app-head {
       .app-row {
         font-size: 12px;
-        border-bottom: 1px solid #{$app-tbc};
+        border-bottom: 1px solid #{$app-table-color-border};
       
         .app-sortable {
           cursor: pointer;
@@ -285,16 +285,14 @@ table {
     &.app-body {
       .app-row {
         &:not(:last-child) {
-          border-bottom: 1px solid #{$app-tbc};
+          border-bottom: 1px solid #{$app-table-color-border};
         }
 
         &:hover {
           background: $app-table-color-bg-hover;
         }
     
-        &.active {
-          background: $app-table-color-bg-active;
-    
+        &.active {    
           &:hover {
             background: $app-table-color-bg-hover;
           }
@@ -307,7 +305,7 @@ table {
       display: flex;
       align-items: center;
       height: $app-table-row-height;
-      color: $app-table-color-fg;
+      color: $app-table-color;
       text-decoration: none;
       overflow: hidden;
       font-size: 14px;
