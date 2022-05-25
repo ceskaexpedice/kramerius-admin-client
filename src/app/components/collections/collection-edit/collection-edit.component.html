@@ -1,21 +1,21 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
 <div class="app-p-4">
   <div fxLayout="row" fxLayoutGap="16px">
-    <mat-form-field fxFlex appearance="fill">
+    <mat-form-field fxFlex>
       <mat-label>Název sbírky</mat-label>
       <input matInput [(ngModel)]="collection.name_cze">
     </mat-form-field>
-    <mat-form-field fxFlex  appearance="fill">
+    <mat-form-field fxFlex>
       <mat-label>Název sbírky (anglický)</mat-label>
       <input matInput [(ngModel)]="collection.name_eng">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="16px">
-    <mat-form-field fxFlex appearance="fill">
+    <mat-form-field fxFlex>
       <mat-label>Krátky popis sbírky</mat-label>
       <textarea matInput [(ngModel)]="collection.description_cze" rows="4"></textarea>
     </mat-form-field>
-    <mat-form-field fxFlex  appearance="fill">
+    <mat-form-field fxFlex>
       <mat-label>Krátky popis sbírky (anglický)</mat-label>
       <textarea matInput [(ngModel)]="collection.description_eng" rows="4"></textarea>
     </mat-form-field>
