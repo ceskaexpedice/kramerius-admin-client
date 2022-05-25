@@ -23,7 +23,7 @@
 					Indexace objektů (a jejich stromů), které mají vybraný model.
 				</mat-card-content>
 				<mat-card-actions>
-					<mat-form-field appearance="fill" class="app-select app-mr-2">
+					<mat-form-field class="app-mr-2 app-mb-n4">
 						<mat-select placeholder="Model" [(value)]="selectedModel" (selectionChange)="onSelectModel($event)" [disabled]="loading">
 							<mat-option *ngFor="let model of models; let i = index" [value]="model">{{modelNames[i]}}</mat-option>
 						</mat-select>
