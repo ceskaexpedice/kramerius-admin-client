@@ -74,7 +74,11 @@ export class IndexingComponent implements OnInit {
   }
 
   openIndexationByPidDialog(object: { pid: string, title: string } = null) {
-    const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent, { data: object });
+    const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent, {
+      data: object,
+      width: '600px',
+      panelClass: 'app-schedule-indexation-by-pid-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'scheduled') {
         this.ui.showInfoSnackBar(`Indexace byla naplánována`);
@@ -99,7 +103,11 @@ export class IndexingComponent implements OnInit {
   };
 
   openIndexationByModelDialog() {
-    const dialogRef = this.dialog.open(ScheduleIndexationByModelDialogComponent, { data: { model: this.selectedModel, modelName: this.modelNames[this.models.indexOf(this.selectedModel)] } });
+    const dialogRef = this.dialog.open(ScheduleIndexationByModelDialogComponent, { 
+      data: { model: this.selectedModel, modelName: this.modelNames[this.models.indexOf(this.selectedModel)] },
+      width: '600px',
+      panelClass: 'app-schedule-indexation-by-model-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
       if (result === 'scheduled') {
@@ -112,7 +120,11 @@ export class IndexingComponent implements OnInit {
 
   openIndexationsByMultiplePidsDialog() {
     const items = this.getCurrentItems();
-    const dialogRef = this.dialog.open(ScheduleIndexationsByMultiplePidsDialogComponent, { data: items.length });
+    const dialogRef = this.dialog.open(ScheduleIndexationsByMultiplePidsDialogComponent, { 
+      data: items.length,
+      width: '600px',
+      panelClass: 'app-schedule-indexations-by-multiple-pids-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'ignore_inconsistent_objects:true' || result === 'ignore_inconsistent_objects:false') {
         const ignoreInconsistentObjects = result === 'ignore_inconsistent_objects:true';
