@@ -1,4 +1,24 @@
 <div class="app-container">
+	<div class="app-mt-4 app-text-right">
+		<mat-form-field class="app-mr-2">
+			<mat-label>Datum od</mat-label>
+			<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
+			<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
+			<mat-datepicker #from></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field class="app-mr-2">
+			<mat-label>Datum do</mat-label>
+			<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
+			<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
+			<mat-datepicker #to></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field>
+			<mat-label>Licence</mat-label>
+			<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
+				<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
 	<mat-tab-group>
 		<mat-tab label="Statistiky">
 			<!-- <mat-card class="app-card app-view-border app-mb-4 app-mt-4">
@@ -10,27 +30,7 @@
 					<strong class="app-mr-2">Připojená instance: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
 				</mat-card-content>
 			</mat-card> -->
-			<div class="app-mt-4">
-				<mat-form-field class="app-mr-2">
-					<mat-label>Datum od</mat-label>
-					<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
-					<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
-					<mat-datepicker #from></mat-datepicker>
-				</mat-form-field>
-				<mat-form-field class="app-mr-2">
-					<mat-label>Datum do</mat-label>
-					<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
-					<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
-					<mat-datepicker #to></mat-datepicker>
-				</mat-form-field>
-				<mat-form-field>
-					<mat-label>Licence</mat-label>
-					<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
-						<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
-					</mat-select>
-				</mat-form-field>
-			</div>
-			<div fxLayout="row" fxLayoutGap="16px">
+			<div fxLayout="row" fxLayoutGap="16px" class="app-mt-4">
 				<mat-card fxFlex class="app-card app-view-border" *ngIf="isResult">
 					<mat-card-header>
 						<mat-card-title>Statistiky zobrazení modelů</mat-card-title>
@@ -61,27 +61,7 @@
 			</div>
 		</mat-tab>
 		<mat-tab label="Nejvíce zobrazované dokumenty">
-			<div class="app-mt-4">
-				<mat-form-field class="app-mr-2">
-					<mat-label>Datum od</mat-label>
-					<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
-					<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
-					<mat-datepicker #from></mat-datepicker>
-				</mat-form-field>
-				<mat-form-field class="app-mr-2">
-					<mat-label>Datum do</mat-label>
-					<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
-					<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
-					<mat-datepicker #to></mat-datepicker>
-				</mat-form-field>
-				<mat-form-field>
-					<mat-label>Licence</mat-label>
-					<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
-						<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
-					</mat-select>
-				</mat-form-field>
-			</div>
-			<mat-card class="app-card app-view-border app-mb-4">
+			<mat-card class="app-card app-view-border app-mb-4 app-mt-4">
 				<mat-card-content>
 					<div *ngFor="let item of table | keyvalue" class="app-mb-4">
 						<div *ngIf="item.value.length > 0">
