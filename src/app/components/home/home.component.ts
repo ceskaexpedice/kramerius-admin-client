@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AppSettings } from 'src/app/services/app-settings';
 import * as gitInfo from 'git-info.json'
 import { ECharts, EChartsOption } from 'echarts';
@@ -11,6 +11,7 @@ import 'echarts/lib/component/legend'
 import 'echarts/theme/macarons.js';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { License } from 'src/app/models/license.model';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -27,8 +28,8 @@ export class HomeComponent implements OnInit {
   langOpts: EChartsOption = {};
   authorOpts: EChartsOption = {};
 
-  dateFrom: Date = null;
-  dateTo: Date = null;
+  dateTo: Date = new Date();
+  dateFrom: Date = new Date(this.dateTo.getFullYear(), this.dateTo.getMonth()-1,this.dateTo.getDate());
   license:string = null;
   allLicenses:string[];
 
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
   public isResult: boolean = true;
 
   // pripojena instance
-  constructor(public appSettings: AppSettings, private adminApi: AdminApiService) { }
+  constructor(public appSettings: AppSettings, private adminApi: AdminApiService, @Inject(DOCUMENT) private document: Document) { }
 
 
 
@@ -187,6 +188,43 @@ export class HomeComponent implements OnInit {
 
   onChartClick(event) {
     console.log(event.name);
+  }
+
+  csvModels() {
+    let url = this.appSettings.adminApiBaseUrl+'/statistics/summary';
+    this.goto(url);
+
+  }
+  csvAuthor() {
+    let url = this.appSettings.adminApiBaseUrl+'/statistics/author';
+    this.goto(url);
+
+  }
+  csvLang() {
+    let url = this.appSettings.adminApiBaseUrl+'/statistics/lang';
+    this.goto(url);
+  }
+
+  goto(url:string) {
+    let u = url + "/export/csv";
+    if (this.dateFrom || this.dateTo || this.license) {
+      u = u +"?";
+    }
+    if (this.dateFrom) {
+      let fdat = this.format(this.dateFrom);
+
+      u = u + "dateFrom="+(u.endsWith("?") ? fdat : fdat) ;
+    }
+    if (this.dateTo) {
+      let fdat = this.format(this.dateTo);
+      u = u + "&dateFrom="+ (u.endsWith("?") ? fdat : fdat) ;
+    } 
+    console.log("Before licence"+u);
+    if (this.license) {
+      u = u + "&license="+  (u.endsWith("?") ? this.license : "&"+this.license) ;
+    }
+    console.log(u);
+    this.document.location.href = u;
   }
 
   // date formatting - presunout

@@ -37,6 +37,7 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div echarts [options]="modelsOpts" style="height: 350px;" (chartClick)="onChartClick($event)" ></div>
+						<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
 					</mat-card-content>
 				</mat-card>
 				<mat-card fxFlex class="app-card app-view-border" *ngIf="isResult">
@@ -45,6 +46,7 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div echarts [options]="langOpts" style="height: 350px;" ></div>
+						<button mat-flat-button  (click)="csvLang()" color="primary" class="app-mr-2">CSV</button>
 					</mat-card-content>
 				</mat-card>
 				<mat-card fxFlex class="app-card app-view-border" *ngIf="isResult">
@@ -53,6 +55,7 @@
 					</mat-card-header>
 					<mat-card-content>
 						<div echarts [options]="authorOpts" style="height: 350px;" ></div>
+						<button mat-flat-button  (click)="csvAuthor()" color="primary" class="app-mr-2">CSV</button>
 					</mat-card-content>
 				</mat-card>
 			</div>
@@ -86,16 +89,18 @@
 							<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
 								<thead>
 									<tr>
-										<th>Počet zobrazení</th>
-										<th>PID</th>
+										<th width="8%">Počet zobrazení</th>
 										<th>Dílo</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr *ngFor="let v of item.value">
 										<td>{{v.count}}</td>
-										<td>{{v.pid}}</td>
-										<td> <a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank">{{v.title}}</a> </td>
+										<td> 
+											
+											<a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank">{{v.title}}</a> 
+										
+										</td>
 									</tr>
 								</tbody>
 							</table>
