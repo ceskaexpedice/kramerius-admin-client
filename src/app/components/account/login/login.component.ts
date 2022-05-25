@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { AppSettings } from 'src/app/services/app-settings';
+import * as gitInfo from 'git-info.json'
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public appSettings: AppSettings
     ) { }
 
   ngOnInit() {
@@ -34,6 +37,19 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.login();
+  }
+
+  getVersion() {
+    return this.appSettings.version;
+  }
+
+  getLastCommitHash() {
+    const info = gitInfo;
+    //console.log(info)
+    const hash = info.hash ? info.hash
+      : info['default'].hash.substring(1); //pokud je to jeste v objektu "default", je hash prefixovan 'g', viz git-info.json (generovan pred buildem)
+    //console.log(hash)
+    return hash;
   }
 
 }
