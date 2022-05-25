@@ -2,28 +2,28 @@
 <mat-dialog-content class="mat-typography">
   <mat-form-field appearance="fill" class="app-w-100">
     <mat-label>Role</mat-label>
-    <mat-select [(value)]="right.role.name">
-      <mat-option *ngFor="let role of roles" (click)="right.role = role" [value]="role.name">
-        {{ role.name }}
+    <mat-select [(value)]="right.role">
+      <mat-option *ngFor="let role of roles" (click)="right.role = role" [value]="role">
+        {{ role ? role.name : '-'  }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="app-w-100">
     <mat-label>Podmínka</mat-label>
-    <mat-select [(value)]="right.condition.name">
+    <mat-select [(value)]="right.condition">
       <mat-option value="-" (click)="selectCondition(null)">-</mat-option>
-      <mat-option *ngFor="let condition of conditions" (click)="selectCondition(condition)" [value]="condition.name">
-        {{ condition.name }}
+      <mat-option *ngFor="let condition of conditions" (click)="selectCondition(condition)" [value]="condition">
+        {{ condition ? condition.name : '-' }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.paramsNecessary">
     <mat-label>Parametr</mat-label>
-    <mat-select [(value)]="right.condition.params.description">
+    <mat-select [(value)]="right.condition.params">
       <mat-option value="-" (click)="selectParam(null)">-</mat-option>
-      <mat-option *ngFor="let param of params" (click)="selectParam(param)" [value]="param.description">
+      <mat-option *ngFor="let param of params" (click)="selectParam(param)" [value]="param">
         {{ param.description }}
       </mat-option>
     </mat-select>
