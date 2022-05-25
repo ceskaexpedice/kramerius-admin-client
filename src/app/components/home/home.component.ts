@@ -219,11 +219,9 @@ export class HomeComponent implements OnInit {
       let fdat = this.format(this.dateTo);
       u = u + "&dateFrom="+ (u.endsWith("?") ? fdat : fdat) ;
     } 
-    console.log("Before licence"+u);
     if (this.license) {
       u = u + "&license="+  (u.endsWith("?") ? this.license : "&"+this.license) ;
     }
-    console.log(u);
     this.document.location.href = u;
   }
 

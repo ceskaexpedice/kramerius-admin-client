@@ -20,8 +20,12 @@ export class NewRightDialogComponent implements OnInit {
   roles: Role[];
 
   conditions: Condition[];
-  licenses: License[];
+  // changed by PS
+  //licenses: License[];
+  licenses: string[];
   params: ConditionParam[];
+
+  
 
   constructor(public dialogRef: MatDialogRef<NewRightDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -41,15 +45,34 @@ export class NewRightDialogComponent implements OnInit {
       this.mode = 'new';
       this.right.pid = this.data.pid;
     }
-    this.api.getLicenses().subscribe((licenses: License[]) => {
-      this.licenses = licenses;
-    });
+    // TODO: Moved by PS 
+    // this.api.getLicenses().subscribe((licenses: License[]) => {
+    //   this.licenses = licenses;
+    //   if (this.data.right.condition.license) {
+    //     let license =  this.licenses.find((license) => {
+    //       return license.name == this.data.right.condition.license.name; 
+    //     });
+    //     this.data.right.license = license;
+    //   }
+    // });
+
     this.api.getRoles().subscribe((roles: Role[]) => {
       this.roles = roles;
+      if (this.data.right?.role) {
+        let role =  this.roles.find((role) => {
+          return role.name == this.data.right.role.name; 
+        });
+        if (role) {
+          this.right.role = role;
+        }
+      }
     });
-    this.api.getConditionParams().subscribe((params: ConditionParam[]) => {
-      this.params = params;
-    });
+
+    // Changed by PS - moved to conditions
+    // this.api.getConditionParams().subscribe((params: ConditionParam[]) => {
+    //   this.params = params;
+    // });
+
     this.api.getConditions().subscribe((conditions) => {
       for (const key in conditions) {
         const c = conditions[key];
@@ -64,16 +87,42 @@ export class NewRightDialogComponent implements OnInit {
             this.right.condition.paramsNecessary = condition.paramsNecessary;
             this.right.condition.isLabelAssignable = condition.isLabelAssignable;
             this.right.condition.rootLevelCriterum = condition.rootLevelCriterum;
+            // added by PS
+            this.right.condition = condition;
           }
         }
       }
-    });
+      // condition
+      this.api.getConditionParams().subscribe((params: ConditionParam[]) => {
+        this.params = params;
+        if (this.data.right?.condition.params) {
+          let params =  this.params.find((p) => {
+            return p.id ==this.data.right.condition.params.id; 
+          });
+          if (params) {
+            this.right.condition.params = params;
+          }
+        }
+      });
+
+      this.api.getLicenses().subscribe((licenses: License[]) => {
+        this.licenses = licenses.map((lic) => lic.name );
+        if (this.data.right?.condition.license) {
+          let license =  this.licenses.find((license) => {
+            let eq =  license == this.data.right.condition.license; 
+            return eq;
+          });
+          this.right.condition.license = license;
+        }
+      });
+
+  });
 
 
   }
 
-  selectLicense(license: License) {
-    this.right.condition.license = license ? license.name : null;
+  selectLicense(license: string) {
+    this.right.condition.license = license === '-' ? license : null;
   }
 
   selectParam(param: ConditionParam) {
