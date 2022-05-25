@@ -24,34 +24,3 @@
     <button mat-flat-button  [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
 	</mat-dialog-actions>
 </form>
-
-
-<!-- 
-<form class="form-signin" #f="ngForm" (ngSubmit)="schedule(f.value)">
-
-    <h1 mat-dialog-title>Import FOXML</h1>
-    <div class="info">
-        Naplánujte proces, který importuje FOXML soubory ze zvoleného importního adresáře na serveru.
-    </div>
-    <div class="info">
-        Kořenový adresář pro import FOXML je typicky <i>$HOME/.kramerius/import</i>.
-    </div>
-
-    <mat-form-field class="input-import_dir">
-        <mat-select placeholder="Importní adresář" ngModel name="import_dir" required>
-            <mat-option *ngFor="let importDir of importDirs; let i = index" [value]="importDir">
-                {{importDir}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-checkbox class="input-schedule_indexations" [ngModel]="true" name="schedule_indexations" color="primary">
-        Naplánovat následnou indexaci</mat-checkbox>
-
-    <button [disabled]="inProgress || !f.valid" color="primary" mat-raised-button type="submit"
-        color="warn">Naplánovat</button>
-    <button [disabled]="inProgress " mat-raised-button mat-dialog-close="cancel"
-        style="margin-left: 10px;">Zrušit</button>
-
-    <mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
-
-</form> -->
