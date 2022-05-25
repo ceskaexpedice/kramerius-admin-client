@@ -29,7 +29,10 @@ export class RepositoryComponent implements OnInit {
   }
 
   openscheduleProcessingIndexRebuildDialog() {
-    const dialogRef = this.dialog.open(ScheduleProcessingIndexRebuildDialogComponent);
+    const dialogRef = this.dialog.open(ScheduleProcessingIndexRebuildDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-processing-index-rebuild-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Vybudování Processing indexu")
@@ -42,7 +45,10 @@ export class RepositoryComponent implements OnInit {
   };
 
   openscheduleProcessingIndexRebuildForPidDialog() {
-    const dialogRef = this.dialog.open(ScheduleProcessingIndexRebuildForObjectDialogComponent);
+    const dialogRef = this.dialog.open(ScheduleProcessingIndexRebuildForObjectDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-processing-index-for-object-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt")
@@ -55,7 +61,10 @@ export class RepositoryComponent implements OnInit {
   };
 
   openScheduleImportFoxmlDialog() {
-    const dialogRef = this.dialog.open(ScheduleImportFoxmlDialogComponent);
+    const dialogRef = this.dialog.open(ScheduleImportFoxmlDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-import-foxml-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Import FOXML")
@@ -68,7 +77,10 @@ export class RepositoryComponent implements OnInit {
   }
 
   openChangePolicyDialog() {
-    const dialogRef = this.dialog.open(ScheduleChangePolicyByPidDialogComponent);
+    const dialogRef = this.dialog.open(ScheduleChangePolicyByPidDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-change-policy-by-pid-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Změna viditelnosti")
@@ -85,7 +97,10 @@ export class RepositoryComponent implements OnInit {
   };
 
   openScheduleImportNdkDialog() {
-    const dialogRef = this.dialog.open(ScheduleImportNdkDialogComponent);
+    const dialogRef = this.dialog.open(ScheduleImportNdkDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-import-Ndk-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Import NDK METS")
@@ -98,7 +113,10 @@ export class RepositoryComponent implements OnInit {
   }
 
   openAddLicenceDialog() {
-    const dialogRef = this.dialog.open(ScheduleAddLicenseDialogComponent);
+    const dialogRef = this.dialog.open(ScheduleAddLicenseDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-add-licencse-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přidání licence")
@@ -111,7 +129,10 @@ export class RepositoryComponent implements OnInit {
   }
 
   openRemoveLicenceDialog() {
-    const dialogRef = this.dialog.open(ScheduleRemoveLicenseDialogComponent);
+    const dialogRef = this.dialog.open(ScheduleRemoveLicenseDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-remove-license--dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Odebrání licence")
