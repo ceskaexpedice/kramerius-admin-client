@@ -1,10 +1,10 @@
 <h2 mat-dialog-title>{{ mode == 'new' ? "Nová licence" : "Úprava licence" }}</h2>
 <mat-dialog-content class="mat-typography">
-  <mat-form-field class="app-w-100" appearance="outline">
+  <mat-form-field class="app-w-100">
     <mat-label>Název</mat-label>
     <input matInput placeholder="Název" type="text" name="note" [(ngModel)]="license.name" autocomplete="off">
   </mat-form-field>
-  <mat-form-field class="app-w-100" appearance="outline">
+  <mat-form-field class="app-w-100">
     <mat-label>Popis</mat-label>
     <input matInput placeholder="Popis" type="text" name="description" [(ngModel)]="license.description" autocomplete="off">
   </mat-form-field>

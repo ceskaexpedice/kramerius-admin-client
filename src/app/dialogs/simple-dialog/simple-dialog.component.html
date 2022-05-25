@@ -5,11 +5,11 @@
   <div *ngIf="data.checkbox" class="app-mb-4">
     <mat-checkbox [(ngModel)]="data.checkbox.checked">{{ data.checkbox.label }}</mat-checkbox>
   </div>
-  <mat-form-field *ngIf="data.numberInput" class="app-w-100" appearance="outline">
+  <mat-form-field *ngIf="data.numberInput" class="app-w-100">
     <mat-label>{{ data.numberInput.label }}</mat-label>
     <input matInput [placeholder]="data.numberInput.label" type="number" step="1" [min]="data.numberInput.min" [max]="data.numberInput.max" [(ngModel)]="data.numberInput.value">
   </mat-form-field>
-  <mat-form-field *ngIf="data.textInput" class="app-w-100" appearance="outline">
+  <mat-form-field *ngIf="data.textInput" class="app-w-100">
     <mat-label>{{ data.textInput.label }}</mat-label>
     <input matInput [placeholder]="data.textInput.label" type="text" [(ngModel)]="data.textInput.value">
   </mat-form-field>
