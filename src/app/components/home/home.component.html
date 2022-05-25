@@ -1,7 +1,7 @@
 <div class="app-container">
 	<mat-tab-group>
 		<mat-tab label="Statistiky">
-			<mat-card class="app-card app-view-border app-mb-4 app-mt-4">
+			<!-- <mat-card class="app-card app-view-border app-mb-4 app-mt-4">
 				<mat-card-content>	
 					<strong class="app-mr-2">k7Admin</strong>
 					<span class="app-badge app-version app-mr-2">verze {{getVersion()}}</span>
@@ -9,8 +9,8 @@
 					<span class="app-pipe"></span>
 					<strong class="app-mr-2">Připojená instance: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
 				</mat-card-content>
-			</mat-card>
-			<div>
+			</mat-card> -->
+			<div class="app-mt-4">
 				<mat-form-field class="app-mr-2">
 					<mat-label>Datum od</mat-label>
 					<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
