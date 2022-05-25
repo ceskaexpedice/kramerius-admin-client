@@ -34,7 +34,10 @@ export class LicensesComponent implements OnInit {
   }
 
   onNewLicence() {
-    const dialogRef = this.dialog.open(NewLicenseDialogComponent);
+    const dialogRef = this.dialog.open(NewLicenseDialogComponent, {
+      width: '600px',
+      panelClass: 'app-new-license-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.license) {
             const license = result.license;
@@ -59,7 +62,11 @@ export class LicensesComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.api.removeLicense(license).subscribe(() => {
@@ -93,7 +100,9 @@ export class LicensesComponent implements OnInit {
 
   onEditLicese(license: License) {
     const dialogRef = this.dialog.open(NewLicenseDialogComponent, {
-      data: { license: license }
+      data: { license: license },
+      width: '600px',
+      panelClass: 'app-new-license-dialog'
     } );
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.license) {

@@ -1,39 +1,21 @@
-<div mat-dialog-content>
-
-  <div class="app-dialog-title">{{ mode == 'new' ? "Nová licence" : "Úprava licence" }}</div>
-  
-  <div class="app-dialog-content">
-    <div class="app-property">
-      <div class="app-label">Název</div>
-      <div class="app-value">
-        <input 
-            type="text" 
-            matInput 
-            name="note"
-            [(ngModel)]="license.name"
-            autocomplete="off">
-      </div>
-    </div>
-    
-    <div class="app-property">
-      <div class="app-label">Popis</div>
-      <div class="app-value">
-        <input 
-            type="text" 
-            matInput 
-            name="description"
-            [(ngModel)]="license.description"
-            autocomplete="off">
-      </div>
-    </div>
-    <div class="app-error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
-  </div>
-        
-  <div class="app-dialog-actions">
-    <div *ngIf="mode == 'new'" class="app-button" (click)="onSave()">Vytvořit</div>
-    <div *ngIf="mode == 'edit'" class="app-button" (click)="onSave()">Upravit</div>
-    <div class="app-button app-button-light" (click)="onCancel()">Zrušit</div>
-  </div>
-
-</div>
-
+<h2 mat-dialog-title>{{ mode == 'new' ? "Nová licence" : "Úprava licence" }}</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-form-field class="app-w-100" appearance="outline">
+    <mat-label>Název</mat-label>
+    <input matInput placeholder="Název" type="text" name="note" [(ngModel)]="license.name" autocomplete="off">
+  </mat-form-field>
+  <mat-form-field class="app-w-100" appearance="outline">
+    <mat-label>Popis</mat-label>
+    <input matInput placeholder="Popis" type="text" name="description" [(ngModel)]="license.description" autocomplete="off">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-card class="app-view-alert app-warn" *ngIf="errorMessage">
+  <mat-card-content>
+    {{ errorMessage }}
+  </mat-card-content>
+</mat-card>
+<mat-dialog-actions align="end">
+  <button mat-flat-button *ngIf="mode == 'new'" (click)="onSave()" color="primary">Vytvořit</button>
+  <button mat-flat-button *ngIf="mode == 'edit'" (click)="onSave()" color="primary">Upravit</button>
+  <button mat-flat-button (click)="onCancel()">Zrušit</button>  
+</mat-dialog-actions>
