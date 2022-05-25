@@ -131,7 +131,11 @@ export class ProcessesComponent implements OnInit {
         color: 'default'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.deletingProcesses = true;
@@ -162,7 +166,11 @@ export class ProcessesComponent implements OnInit {
         color: 'default'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.cancelingProcesses = true;
@@ -236,7 +244,11 @@ export class ProcessesComponent implements OnInit {
         color: 'default'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.cancelingProcesses = true;

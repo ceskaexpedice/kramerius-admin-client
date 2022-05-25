@@ -59,7 +59,11 @@ export class ProcessComponent implements OnInit {
         color: 'default'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.adminApi.killBatch(batch.id).subscribe((result) => {
@@ -84,7 +88,11 @@ export class ProcessComponent implements OnInit {
         color: 'default'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.adminApi.deleteProcessBatch(batch.id).subscribe(result => {
