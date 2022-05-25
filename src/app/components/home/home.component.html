@@ -61,7 +61,7 @@
 			</div>
 		</mat-tab>
 		<mat-tab label="Nejvíce zobrazované dokumenty">
-			<div class="app-mt-2">
+			<div class="app-mt-4">
 				<mat-form-field class="app-mr-2">
 					<mat-label>Datum od</mat-label>
 					<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
@@ -89,7 +89,7 @@
 							<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
 								<thead>
 									<tr>
-										<th width="8%">Počet zobrazení</th>
+										<th class="app-first">Počet zobrazení</th>
 										<th>Dílo</th>
 									</tr>
 								</thead>
@@ -97,9 +97,7 @@
 									<tr *ngFor="let v of item.value">
 										<td>{{v.count}}</td>
 										<td> 
-											
 											<a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank">{{v.title}}</a> 
-										
 										</td>
 									</tr>
 								</tbody>

@@ -1,0 +1,11 @@
+.app-table {
+  thead {
+    tr {
+      th {
+        &.app-first {
+          width: 200px;
+        }
+      }
+    }
+  }
+}
