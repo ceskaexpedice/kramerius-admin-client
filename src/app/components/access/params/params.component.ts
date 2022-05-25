@@ -51,7 +51,11 @@ export class ParamsComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'create') {
         const value = data.textInput.value;
@@ -86,7 +90,11 @@ export class ParamsComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'create') {
         const value = data.textInput.value;
@@ -115,7 +123,11 @@ export class ParamsComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'remove') {
         param.values.splice(index, 1);
@@ -145,7 +157,11 @@ export class ParamsComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'edit' && data.textInput.value) {
         param.values[index] = data.textInput.value;
@@ -171,7 +187,11 @@ export class ParamsComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.api.removeConditionParam(param).subscribe(() => {
@@ -204,7 +224,11 @@ export class ParamsComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'edit' && data.textInput.value) {
         param.description = data.textInput.value;
