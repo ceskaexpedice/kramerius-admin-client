@@ -39,6 +39,8 @@ export class IndexingComponent implements OnInit {
 
   scheduledIndexationsCounter = 0;
 
+  displayedColumns = ['pid', 'title', 'indexerVersion', 'action'];
+
   constructor(
     private adminApi: AdminApiService,
     private clientApi: ClientApiService,
