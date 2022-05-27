@@ -312,18 +312,3 @@ table {
     }
   }
 }
-
-
-
-// test
-.mat-tab-body-wrapper {
-  flex: 1 !important;
-
-  .mat-tab-body {
-    overflow-y: hidden;
-
-    .mat-tab-body-content {
-      overflow-y: hidden;
-    }
-  }
-}

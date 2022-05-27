@@ -73,6 +73,80 @@
         </button>
       </div>
     </div>
+    <!-- ready to implement mat table - DO NOT DELETE!!!
+    <div class="app-table-wrapper app-h-100 app-oa-y">
+      <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
+      <table mat-table [dataSource]="batches" class="app-view-border app-w-100">
+        <ng-container matColumnDef="expand">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" matTooltip="Zobrazit podprocesy">
+              <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Název</th>
+          <td mat-cell *matCellDef="let element" [matTooltip]="element.getName()">
+            <div class="app-text-cutter-wrapper">
+              <div class="app-text-cutter">
+                {{ element.getName() }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>Stav</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="app-badge" [ngClass]="element.getStateClass()">{{ element.getStateLabel() }}</div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="planned">
+          <th mat-header-cell *matHeaderCellDef>Naplánováno</th>
+          <td mat-cell *matCellDef="let element">{{ element.planned | date : 'dd.MM.yyyy' }}</td>
+        </ng-container> 
+        <ng-container matColumnDef="started">
+          <th mat-header-cell *matHeaderCellDef>Spuštěno</th>
+          <td mat-cell *matCellDef="let element">{{ element.started | date : 'dd.MM.yyyy' }}</td>
+        </ng-container>  
+        <ng-container matColumnDef="finished">
+          <th mat-header-cell *matHeaderCellDef>Ukončeno</th>
+          <td mat-cell *matCellDef="let element">{{ element.finished | date : 'dd.MM.yyyy' }}</td>
+        </ng-container>  
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef>Trvání</th>
+          <td mat-cell *matCellDef="let element">{{ element.getDuration(loadedTimestamp) | appDuration }}</td>
+        </ng-container>  
+        <ng-container matColumnDef="owner">
+          <th mat-header-cell *matHeaderCellDef>Vlastník</th>
+          <td mat-cell *matCellDef="let element" [matTooltip]="element.ownerName">
+            <div class="app-text-cutter-wrapper">
+              <div class="app-text-cutter">
+                {{ element.ownerName  }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button *ngIf="element.isDeletable()" (click)="onRemove(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below" color="primary">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below" color="primary">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </td>
+        </ng-container>     
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/processes', row.id]" class="app-cursor-pointer"></tr>
+      </table>
+      <mat-paginator *ngIf="!isLoading()" [length]="resultCount" hidePageSize="false" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 1000]" (page)="onPageChanged($event)"></mat-paginator>
+    </div> -->
     <div fxFlex class="app-table-wrapper app-view-border app-view-processes app-oh">
       <div class="app-table app-head">
         <div class="app-row">

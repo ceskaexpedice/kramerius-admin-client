@@ -28,6 +28,8 @@ export class ProcessesComponent implements OnInit {
   testProcessDuration = [1, 5, 10, 30, 60, 120]
   selectedTestProcessDuration = this.testProcessDuration[0];
 
+  displayedColumns = ['expand', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner', 'action'];
+
   // Paginator
   resultCount = 0;
   pageIndex = 0;

@@ -3,6 +3,32 @@
 @import './src/sass/app-global.scss';
 
 
+.mat-cell {
+  &.mat-column-expand,
+  &.mat-column-action {
+    width: 50px;
+  }
+
+  &.mat-column-name {
+    width: 50%
+  }
+
+  &.mat-column-owner {
+    width: 150px;
+  }
+
+  &.mat-column-state {
+    @extend .app-pr-4;
+    width: 110px;
+
+    .app-badge {
+      @extend .app-w-100;
+    }
+  }
+}
+
+
+// johny table
 .app-table-wrapper {
   &.app-view-processes {
     .app-scrollable {
