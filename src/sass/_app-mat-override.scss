@@ -213,3 +213,38 @@
 .mat-tooltip {
   font-size: 14px;
 }
+
+// table
+.mat-table {
+  &.app-view-border {
+    border: 1px solid $app-table-color-border;
+  }
+
+  tbody {
+    .mat-row {
+      &:hover {
+        background: $app-table-color-bg-hover;
+      }
+  
+      &.active {    
+        &:hover {
+          background: $app-table-color-bg-hover;
+        }
+      }
+
+      .mat-cell {
+        .app-text-cutter-wrapper {
+          position: relative;
+          display: flex;
+        }
+  
+        .app-text-cutter {
+          @extend .app-pr-4;
+          position: absolute;
+          max-width: 100%;
+          align-self: center;
+        }
+      } 
+    }
+  }
+}

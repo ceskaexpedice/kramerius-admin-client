@@ -174,7 +174,7 @@ a {
   @extend .app-clean-shadow, .app-pl-4, .app-pr-4;
   height: $app-button-height;
   border-radius: $app-border-radius;
-  border: 1px solid $app-gray-1;
+  border: 1px solid $app-table-color-border;
 }
 
 // table

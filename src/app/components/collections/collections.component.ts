@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-collections',
@@ -24,6 +25,10 @@ export class CollectionsComponent implements OnInit {
 
   sortField: string;
   sortAsc: boolean;
+
+  displayedColumns = ['name_cze', 'description_cze', 'createdAt', 'modifiedAt'];
+  @ViewChild(MatSort) sort: MatSort;
+
 
   constructor(private collectionsService: CollectionsService, private router: Router, private locals: LocalStorageService) { }
 
@@ -112,5 +117,4 @@ export class CollectionsComponent implements OnInit {
       return r;
     });
   }
-
 }

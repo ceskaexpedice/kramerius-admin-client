@@ -11,6 +11,37 @@
         <mat-slide-toggle class="app-standalone-toggle" color="primary" (change)="onStandaloneChange()" [(ngModel)]="standaloneOnly">Pouze samostatné</mat-slide-toggle>
       </div>
     </div>
+    <!-- ready to implement mat table - DO NOT DELETE!!!
+    <div class="app-h-100 app-oa-y">
+      <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
+      <table mat-table [dataSource]="collections" class="app-view-border app-w-100" matSort matSortActive="name_cze" matSortDisableClear matSortDirection="desc">
+        <ng-container matColumnDef="name_cze">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Název</th>
+          <td mat-cell *matCellDef="let element">{{ element.name_cze }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description_cze">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Popis</th>
+          <td mat-cell *matCellDef="let element" [matTooltip]="element.description_cze">
+            <div class="app-text-cutter-wrapper">
+              <div class="app-text-cutter">
+                {{ element.description_cze }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Vytvořeno</th>
+          <td mat-cell *matCellDef="let element">{{ element.createdAt | date : 'dd.MM.yyyy' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="modifiedAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Upraveno</th>
+          <td mat-cell *matCellDef="let element">{{ element.modifiedAt | date : 'dd.MM.yyyy' }}</td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/collections', row.id]" class="app-cursor-pointer"></tr>
+      </table>
+    </div> -->
     <div fxFlex class="app-table-wrapper app-view-border app-view-collections app-oh">
       <div class="app-table app-head">
         <div class="app-row">
