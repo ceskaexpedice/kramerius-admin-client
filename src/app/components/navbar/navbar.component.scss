@@ -15,6 +15,11 @@
       .app-colored {
         fill: $app-color-primary;
       }
+
+      #admin-letter,
+      .app-separator {
+        fill-opacity: .6;
+      }
     }
   }
 
