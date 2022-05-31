@@ -10,6 +10,12 @@
   .app-logo {
     color: $app-color-lightnes;
     text-decoration: none;
+
+    svg {
+      .app-colored {
+        fill: $app-color-primary;
+      }
+    }
   }
 
   .mat-button-base {
