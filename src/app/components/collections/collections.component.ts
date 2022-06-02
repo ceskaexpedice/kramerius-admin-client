@@ -29,7 +29,7 @@ export class CollectionsComponent implements OnInit {
 
   displayedColumns = ['name_cze', 'description_cze', 'createdAt', 'modifiedAt'];
   @ViewChild(MatSort) sort: MatSort;
-  dataSource = new MatTableDataSource(this.collections);;
+  dataSource = new MatTableDataSource(this.collections);
 
 
   constructor(private collectionsService: CollectionsService, private router: Router, private locals: LocalStorageService) { }
@@ -111,7 +111,7 @@ export class CollectionsComponent implements OnInit {
         this.collections.push(col);
       }
     }
-    this.collections.sort((a: Collection, b: Collection) => {
+    /* this.collections.sort((a: Collection, b: Collection) => {
       let r = 0;
       if (this.sortField == 'createdAt' || this.sortField == 'modifiedAt') {
         r = a[this.sortField].getTime() - b[this.sortField].getTime();
@@ -122,6 +122,8 @@ export class CollectionsComponent implements OnInit {
         r = -r;
       }
       return r;
-    });
+    }); */
+    this.dataSource = new MatTableDataSource(this.collections);
+    this.dataSource.sort = this.sort;
   }
 }

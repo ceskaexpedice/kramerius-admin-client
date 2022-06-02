@@ -12,7 +12,7 @@
       </div>
     </div>
     
-    <!-- <div class="app-h-100 app-oa-y">
+    <div class="app-h-100 app-oa-y">
       <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
       <table mat-table [dataSource]="dataSource" class="app-view-border app-w-100" matSort>
         <ng-container matColumnDef="name_cze">
@@ -45,10 +45,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/collections', row.id]" class="app-cursor-pointer"></tr>
       </table>
-    </div> -->
+    </div>
 
 
-    <div fxFlex class="app-table-wrapper app-view-border app-view-collections app-oh">
+   <!--  <div fxFlex class="app-table-wrapper app-view-border app-view-collections app-oh">
       <div class="app-table app-head">
         <div class="app-row">
           <div class="app-col-name">
@@ -84,6 +84,6 @@
         </ng-container>
       </div>
       <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
-    </div>
+    </div> -->
   </div>
 </div>
