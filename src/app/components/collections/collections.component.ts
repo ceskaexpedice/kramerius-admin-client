@@ -4,6 +4,7 @@ import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {MatSort} from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-collections',
@@ -13,8 +14,8 @@ import {MatSort} from '@angular/material/sort';
 
 export class CollectionsComponent implements OnInit {
 
-  collections: Collection[];
-  allCollections: Collection[];
+  collections: Collection[] = [];
+  allCollections: Collection[] = [];
   // Paginator
   // resultCount = 0;
   // pageIndex = 0;
@@ -28,6 +29,7 @@ export class CollectionsComponent implements OnInit {
 
   displayedColumns = ['name_cze', 'description_cze', 'createdAt', 'modifiedAt'];
   @ViewChild(MatSort) sort: MatSort;
+  dataSource = new MatTableDataSource(this.collections);;
 
 
   constructor(private collectionsService: CollectionsService, private router: Router, private locals: LocalStorageService) { }
@@ -40,6 +42,10 @@ export class CollectionsComponent implements OnInit {
     this.reload();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
   reload() {
     this.state = 'loading';
     // const offset = this.pageIndex * this.pageSize;
@@ -49,6 +55,8 @@ export class CollectionsComponent implements OnInit {
       // this.resultCount = count;
       this.reloadTable();
       this.state = 'success';
+      this.dataSource = new MatTableDataSource(this.collections);
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -70,6 +78,10 @@ export class CollectionsComponent implements OnInit {
         return 'arrow_drop_down';
       }
     }
+  }
+
+  sortChange(e) {
+    console.log(e);
   }
 
 
