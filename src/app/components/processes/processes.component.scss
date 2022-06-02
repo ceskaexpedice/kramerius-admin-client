@@ -10,7 +10,7 @@
   }
 
   &.mat-column-name {
-    width: 50%
+    width: 40%
   }
 
   &.mat-column-owner {
@@ -18,12 +18,28 @@
   }
 
   &.mat-column-state {
-    @extend .app-pr-4;
     width: 110px;
 
     .app-badge {
-      @extend .app-w-100;
+      @extend .app-w-100, .app-mr-4;
     }
+  }
+
+  .app-text-cutter-wrapper,
+  .app-col-expanded,
+  .app-fix-expanded {
+    min-height: $app-table-row-height;
+  }
+
+  .app-fix-expanded {
+    display: flex;
+    align-items: center;
+  }
+
+  .app-col-expanded {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
   }
 }
 

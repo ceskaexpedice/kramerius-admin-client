@@ -80,50 +80,92 @@
         <ng-container matColumnDef="expand">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" matTooltip="Zobrazit podprocesy">
+            <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" matTooltip="Zobrazit podprocesy" class="app-fix-expanded">
               <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
             </a>
-          </td>
+            <ng-container *ngIf="element.expanded">
+              <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
+            </ng-container>
         </ng-container>
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>Id</th>
-          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          <td mat-cell *matCellDef="let element">
+            <span class="app-fix-expanded app-cursor-pointer" [routerLink]="['/processes', element.id]">
+              {{ element.id }}
+            </span>
+            <ng-container *ngIf="element.expanded">
+              <div *ngFor="let p of element.processes" class="app-col-expanded">&#160;</div>
+            </ng-container>
+          </td>
         </ng-container>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Název</th>
           <td mat-cell *matCellDef="let element" [matTooltip]="element.getName()">
-            <div class="app-text-cutter-wrapper">
+            <div class="app-text-cutter-wrapper app-cursor-pointer" [routerLink]="['/processes', element.id]">
               <div class="app-text-cutter">
                 {{ element.getName() }}
-                <ng-container *ngIf="element.expanded">
-                  <div *ngFor="let p of element.processes">
-                    {{ p.id }} {{ p.name }}
-                  </div>
-                </ng-container>
               </div>
             </div>
+            <ng-container *ngIf="element.expanded">
+              <div *ngFor="let p of element.processes" class="app-col-expanded app-text-cutter-wrapper app-w-100 app-cursor-pointer" [routerLink]="['/processes', p.id]">
+                <div class="app-text-cutter">
+                  <span class="app-mr-4">{{ p.id }}</span> {{ p.name }}
+                </div>
+              </div>
+            </ng-container>
           </td>
         </ng-container>
         <ng-container matColumnDef="state">
           <th mat-header-cell *matHeaderCellDef>Stav</th>
           <td mat-cell *matCellDef="let element">
-            <div class="app-badge" [ngClass]="element.getStateClass()">{{ element.getStateLabel() }}</div>
+            <span class="app-fix-expanded">
+              <div class="app-badge" [ngClass]="element.getStateClass()">
+                {{ element.getStateLabel() }}
+              </div>
+            </span>
+            <ng-container *ngIf="element.expanded">
+              <div *ngFor="let p of element.processes" class="app-col-expanded">
+                <div class="app-badge" [ngClass]="element.getStateClass()">
+                  {{ p.getStateLabel() }}
+                </div>
+              </div>
+            </ng-container>
           </td>
         </ng-container>
         <ng-container matColumnDef="planned">
           <th mat-header-cell *matHeaderCellDef>Naplánováno</th>
-          <td mat-cell *matCellDef="let element">{{ element.planned | date : 'dd.MM.yyyy hh:mm' }}</td>
+          <td mat-cell *matCellDef="let element">
+            <span class="app-fix-expanded">
+              {{ element.planned | date : 'dd.MM.yyyy hh:mm' }}
+            </span>
+            <ng-container *ngIf="element.expanded">
+              <div *ngFor="let p of element.processes" class="app-col-expanded">
+                {{ p.planned | date : 'dd.MM.yyyy hh:mm' }}
+              </div>
+            </ng-container>
+          </td>
         </ng-container> 
         <ng-container matColumnDef="started">
           <th mat-header-cell *matHeaderCellDef>Spuštěno</th>
-          <td mat-cell *matCellDef="let element">{{ element.started | date : 'dd.MM.yyyy hh:mm' }}</td>
+          <td mat-cell *matCellDef="let element">
+            <span class="app-fix-expanded">
+              {{ element.started | date : 'dd.MM.yyyy hh:mm' }}
+            </span>
+            <ng-container *ngIf="element.expanded">
+              <div *ngFor="let p of element.processes" class="app-col-expanded">
+                {{ p.started | date : 'dd.MM.yyyy hh:mm' }}
+              </div>
+            </ng-container>
+          </td>
         </ng-container>  
         <ng-container matColumnDef="finished">
           <th mat-header-cell *matHeaderCellDef>Ukončeno</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.finished | date : 'dd.MM.yyyy hh:mm' }}
+            <span class="app-fix-expanded">
+              {{ element.finished | date : 'dd.MM.yyyy hh:mm' }}
+            </span>
             <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes">
+              <div *ngFor="let p of element.processes" class="app-col-expanded">
                 {{ p.finished | date : 'dd.MM.yyyy hh:mm' }}
               </div>
             </ng-container>
@@ -132,13 +174,15 @@
         <ng-container matColumnDef="duration">
           <th mat-header-cell *matHeaderCellDef>Trvání</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.getDuration(loadedTimestamp) | appDuration }}
-          
+            <span class="app-fix-expanded">
+              {{ element.getDuration(loadedTimestamp) | appDuration }}
+            </span>
             <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes">
+              <div *ngFor="let p of element.processes" class="app-col-expanded">
                 {{ p.getDuration(loadedTimestamp) | appDuration }}
               </div>
-            </ng-container></td>
+            </ng-container>
+          </td>
         </ng-container>  
         <ng-container matColumnDef="owner">
           <th mat-header-cell *matHeaderCellDef>Vlastník</th>
@@ -148,27 +192,39 @@
                 {{ element.ownerName  }}
               </div>
             </div>
+            <ng-container *ngIf="element.expanded">
+              <div *ngFor="let p of element.processes" class="app-col-expanded app-text-cutter-wrapper app-w-100">
+                <div class="app-text-cutter">
+                  {{ element.ownerName  }}
+                </div>
+              </div>
+            </ng-container>
           </td>
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button *ngIf="element.isDeletable()" (click)="onRemove(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below" color="primary">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below" color="primary">
-              <mat-icon>cancel</mat-icon>
-            </button>
+            <span class="app-fix-expanded">
+              <button *ngIf="element.isDeletable()" (click)="onRemove(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below" color="primary">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below" color="primary">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </span>
+            <ng-container *ngIf="element.expanded">
+              <div *ngFor="let p of element.processes" class="app-col-expanded app-mr-n4">&#160;</div>
+            </ng-container>
           </td>
         </ng-container>     
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/processes', row.id]" class="app-cursor-pointer"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       <mat-paginator *ngIf="!isLoading()" [length]="resultCount" hidePageSize="false" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 1000]" (page)="onPageChanged($event)"></mat-paginator>
     </div>
 
 
-    <div fxFlex class="app-table-wrapper app-view-border app-view-processes app-oh">
+  <!--   <div fxFlex class="app-table-wrapper app-view-border app-view-processes app-oh">
       <div class="app-table app-head">
         <div class="app-row">
           <div class="app-col-expand"></div>
@@ -234,6 +290,6 @@
       </ng-container >
       
       <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
-    </div>
+    </div> -->
   </div>
 </div>
