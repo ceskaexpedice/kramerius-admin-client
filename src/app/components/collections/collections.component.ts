@@ -80,11 +80,6 @@ export class CollectionsComponent implements OnInit {
     }
   }
 
-  sortChange(e) {
-    console.log(e);
-  }
-
-
   sortBy(field: string) {
     if (this.sortField === field) {
       this.sortAsc = !this.sortAsc;

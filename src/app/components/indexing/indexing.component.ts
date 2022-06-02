@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { forkJoin } from 'rxjs';
 import { ScheduleIndexationByModelDialogComponent } from 'src/app/dialogs/schedule-indexation-by-model-dialog/schedule-indexation-by-model-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
@@ -40,6 +42,9 @@ export class IndexingComponent implements OnInit {
   scheduledIndexationsCounter = 0;
 
   displayedColumns = ['pid', 'title', 'indexerVersion', 'action'];
+  
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource = new MatTableDataSource(this.itemsLoaded);;
 
   constructor(
     private adminApi: AdminApiService,
@@ -229,6 +234,9 @@ export class IndexingComponent implements OnInit {
           });
           //push
           this.itemsLoaded.push(...filtered);
+          
+          this.dataSource = new MatTableDataSource(this.itemsLoaded);
+          this.dataSource.sort = this.sort;
           //load more data
           if (this.itemsLoaded.length < this.itemsToShow) {
             this.loadMoreItemsForBatch();

@@ -50,16 +50,16 @@
 				</button>
 			</div>
 		</div>
-		<!-- ready to implement mat table - DO NOT DELETE!!!
+		
 		<div class="app-h-100 app-oa-y">
 			<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-      <table mat-table [dataSource]="getCurrentItems()" class="app-view-border app-w-100">
+      <table mat-table [dataSource]="dataSource" class="app-view-border app-w-100" matSort>
         <ng-container matColumnDef="pid">
-          <th mat-header-cell *matHeaderCellDef>PID</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>PID</th>
           <td mat-cell *matCellDef="let element">{{ element.pid }}</td>
         </ng-container>
         <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef>Název</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Název</th>
           <td mat-cell *matCellDef="let element" [matTooltip]="element.title">
             <div class="app-text-cutter-wrapper">
               <div class="app-text-cutter">
@@ -69,11 +69,11 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="indexerVersion">
-          <th mat-header-cell *matHeaderCellDef matTooltip="Verze indexeru, kterou byl dokument indexován">Verze</th>
+          <th mat-header-cell *matHeaderCellDef matTooltip="Verze indexeru, kterou byl dokument indexován" >Verze</th>
           <td mat-cell *matCellDef="let element">	{{ element.indexerVersion != undefined ? element.indexerVersion : 'n/a' }}</td>
         </ng-container>
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-header-cell *matHeaderCellDef ></th>
           <td mat-cell *matCellDef="let element">
 						<button (click)="openIndexationByPidDialog(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Indexovat" matTooltipPosition="below" color="primary">
 							<mat-icon>play_arrow</mat-icon>
@@ -84,7 +84,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[buildUserClientUrl(row.pid)]"></tr>
       </table>
-    </div> -->
+    </div>
 		<div class="app-table-wrapper app-view-border app-view-indexing app-oh app-mb-4">
 			<div class="app-table app-head">
 				<div class="app-row">

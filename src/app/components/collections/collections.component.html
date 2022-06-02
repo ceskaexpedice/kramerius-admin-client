@@ -14,8 +14,7 @@
     
     <div class="app-h-100 app-oa-y">
       <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
-      <table mat-table [dataSource]="dataSource" class="app-view-border app-w-100" matSort 
-        (matSortChange)="sortChange($event)">
+      <table mat-table [dataSource]="dataSource" class="app-view-border app-w-100" matSort>
         <ng-container matColumnDef="name_cze">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Název</th>
           <td mat-cell *matCellDef="let element">{{ element.name_cze }}</td>
