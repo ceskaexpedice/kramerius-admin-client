@@ -1,4 +1,11 @@
-.app-table-wrapper {
+.mat-cell {
+  &.mat-column-title {
+    width: 70%;
+  }
+}
+
+// hohny table
+/* .app-table-wrapper {
 	&.app-view-indexing {
 		.app-scrollable {
 			max-height: calc(100% - 49px);
@@ -23,4 +30,4 @@
 			width: 40px;
 		}
 	}
-}
+} */

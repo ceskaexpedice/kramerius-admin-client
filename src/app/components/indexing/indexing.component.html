@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		
-		<div class="app-h-100 app-oa-y">
+		<div class="app-oa-y app-oh app-mb-4">
 			<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
       <table mat-table [dataSource]="dataSource" class="app-view-border app-w-100" matSort>
         <ng-container matColumnDef="pid">
@@ -80,12 +80,12 @@
 						</button>
 					</td>
         </ng-container>
-    
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[buildUserClientUrl(row.pid)]"></tr>
       </table>
     </div>
-		<div class="app-table-wrapper app-view-border app-view-indexing app-oh app-mb-4">
+
+		<!-- <div class="app-table-wrapper app-view-border app-view-indexing app-oh app-mb-4">
 			<div class="app-table app-head">
 				<div class="app-row">
 					<div class="app-col-pid">PID</div>
@@ -110,7 +110,7 @@
 					</a>
 				</ng-container>
 			</div>
-		</div>
+		</div> -->
 		<div fxLayout="row">
 			<div fxFlex>
 				<div *ngIf="repoNextOffset">Zpracováno {{repoNextOffset}} objektů</div>
