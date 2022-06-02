@@ -10,7 +10,7 @@
 			<mat-paginator [length]="resultCount" hidePageSize="true" [pageIndex]="pageIndex" [pageSize]="pageSize" [showFirstLastButtons]="true" (page)="onPageChanged($event)"></mat-paginator>
 		</div>
 	</div>
-	<div fxFlex class="app-oa-y">
+	<div class="app-oa-y">
 		<div *ngFor="let line of lines">{{ line }}</div>
 	</div>
 </div>
