@@ -70,6 +70,7 @@ export class ImportComponent implements OnInit {
       width: '600px',
       panelClass: 'app-simple'
     });
+    
   }
 
   submit() {

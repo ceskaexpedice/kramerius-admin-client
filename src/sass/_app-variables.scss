@@ -24,7 +24,8 @@ $app-color-info: mat-color($mat-amber, 900) !default;
 $app-color-success: mat-color($mat-green, 800) !default;
 
 // elements
-$app-body-bg: $app-gray-1;
+//$app-body-bg: $app-gray-1;
+$app-body-bg: $app-color-lightnes;
 $app-body-color: $app-color-darknes;
 $app-border-radius: 4px !default;
 $app-card-border-color: $app-gray-3;

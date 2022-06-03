@@ -1,3 +1,73 @@
+<!-- <div class="app-import app-h-100">
+  <div fxLayout="column" fxFlexFill>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <a routerLink="/import">import</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ type }}</span>
+      </div>
+      <div>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <span (click)="changeType('foxml')" [class.mat-tab-label-active]="type == 'foxml'" class="app-tab">FOXML</span>
+            </ng-template>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <span (click)="changeType('ndk')"  [class.mat-tab-label-active]="type == 'ndk'" class="app-tab">NDK METS</span>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+    <div fxFlex fxLayout="column" fxFlexFill class="app-container">
+      <div fxLayout="row" fxLayoutAlign="start end" class="app-mb-4">
+        <div fxFlex>
+          <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">Naplánovat následnou indexaci</mat-checkbox>
+          <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">Zveřejnit</mat-checkbox>
+        </div>
+        <div>
+          <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">Spustit import</button>
+        </div>
+      </div>
+      <div fxFlex class="app-oh" style="background-color: green;">
+        <mat-card fxLayout="column" fxFlexFill *ngIf="!this.inputDirError[this.type]" class="app-p-0 app-card app-view-border">
+          <div fxLayout="row" fxLayoutAlign="start center" class="app-path-bar app-mb-2">
+            <div fxFlex class="app-left">
+              <ng-container *ngIf="imports.selectedTree">
+                <a (click)="clearPath()" class="app-clear-filter app-mr-2" matTooltip="Zrušit výběr">
+                  <mat-icon>cancel</mat-icon>
+                </a>
+                <strong class="app-mr-2">Zvolená cesta:</strong>
+              </ng-container>
+              <span class="app-path">{{ imports.selectedTree ? imports.selectedTree.getFullPath() : '' }}</span>
+            </div>
+            <div class="app-right">
+              <a (click)="showHelpDialog()" matTooltip="Zobrazit nápovědu"><mat-icon>help</mat-icon></a>
+            </div>
+          </div>
+          <div fxFlex class="app-oa-y app-pl-2 app-pr-2 app-pb-2">
+            <app-tree [tree]="tree"></app-tree>
+          </div>
+        </mat-card>
+        <mat-card *ngIf="this.inputDirError[this.type]" class="app-view-alert app-warn">
+          <mat-card-content>
+            <mat-icon>error</mat-icon>{{ this.inputDirError[this.type] }}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+ -->
+
+
+
+
 <div class="app-container app-import app-h-100">
   <div fxLayout="column" fxFlexFill>
     <div>
