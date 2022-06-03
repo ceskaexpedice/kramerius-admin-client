@@ -5,7 +5,7 @@
 
 .app-import {
 	// - development
-	/* .app-topbar {
+	.app-topbar {
 		@extend .app-pt-8, .app-pl-4, .app-pr-4;
 		background-color: $app-gray-1;
 		border-bottom: 1px solid $app-gray-3;
@@ -26,7 +26,7 @@
 				@include setIcon($color: $app-gray-4, $position: bottom);
 			}
 		}
-	} */
+	}
 	// - development
 
 	.app-path-bar {
@@ -46,7 +46,7 @@
 }
 
 // - development
-/* ::ng-deep {			
+::ng-deep {			
 	.mat-tab-header {
 		border-bottom: none !important;
 
@@ -75,5 +75,5 @@
 			}
 		}
 	}		
-} */
+}
 // - development
