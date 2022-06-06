@@ -10,18 +10,10 @@
         <span class="app-last">{{ type }}</span>
       </div>
       <div>
-        <mat-tab-group animationDuration="0ms">
-          <mat-tab>
-            <ng-template mat-tab-label>
-              <span (click)="changeType('foxml')" [class.mat-tab-label-active]="type == 'foxml'" class="app-tab">FOXML</span>
-            </ng-template>
-          </mat-tab>
-          <mat-tab>
-            <ng-template mat-tab-label>
-              <span (click)="changeType('ndk')"  [class.mat-tab-label-active]="type == 'ndk'" class="app-tab">NDK METS</span>
-            </ng-template>
-          </mat-tab>
-        </mat-tab-group>
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link (click)="changeType('foxml')" [active]="type == 'foxml'">FOXML</a>
+          <a mat-tab-link (click)="changeType('ndk')" [active]="type == 'ndk'">NDK METS</a>
+        </nav>
       </div>
     </div>
     <div fxFlex fxLayout="column" fxFlexFill class="app-container">
@@ -34,7 +26,7 @@
           <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">Spustit import</button>
         </div>
       </div>
-      <div fxFlex class="app-oh" style="background-color: green;">
+      <div fxFlex class="app-oh">
         <mat-card fxLayout="column" fxFlexFill *ngIf="!this.inputDirError[this.type]" class="app-p-0 app-card app-view-border">
           <div fxLayout="row" fxLayoutAlign="start center" class="app-path-bar app-mb-2">
             <div fxFlex class="app-left">
