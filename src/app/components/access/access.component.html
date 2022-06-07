@@ -1,14 +1,24 @@
-<div class="app-container app-access app-h-100">
+<div class="app-access app-h-100">
   <div fxLayout="column" fxFlexFill>
-    <div fxLayout="row" fxLayoutAlign="center" class="app-mb-4">
-      <mat-button-toggle-group>
-        <mat-button-toggle (click)="changeView('actions')" [class.mat-button-toggle-checked]="view == 'actions'">Práva</mat-button-toggle>
-        <mat-button-toggle (click)="changeView('roles')"  [class.mat-button-toggle-checked]="view == 'roles'">Role</mat-button-toggle>
-        <mat-button-toggle (click)="changeView('licenses')"  [class.mat-button-toggle-checked]="view == 'licenses'">Licence</mat-button-toggle>
-        <mat-button-toggle (click)="changeView('params')"  [class.mat-button-toggle-checked]="view == 'params'">Parametry</mat-button-toggle>
-      </mat-button-toggle-group>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <a routerLink="/rigts">práva</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ view }}</span>
+      </div>
+      <div>
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'">Práva</a>
+          <a mat-tab-link (click)="changeView('roles')"  [active]="view == 'roles'">Role</a>
+          <a mat-tab-link (click)="changeView('licenses')"  [active]="view == 'licenses'">Licence</a>
+          <a mat-tab-link (click)="changeView('params')"  [active]="view == 'params'">Parametry</a>
+        </nav>
+      </div>
     </div>
-    <div fxFlex class="app-oh">
+    <div fxFlex class="app-oh app-container">
       <mat-card fxLayout="column" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
         <app-actions *ngIf="view == 'actions'"></app-actions>
         <app-roles *ngIf="view == 'roles'"></app-roles>

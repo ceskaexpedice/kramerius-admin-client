@@ -186,13 +186,15 @@ a {
   .app-breadcrumbs {
     font-size: 20px;
 
-    .app-last {
-      font-weight: 700;
-    }
+    span {
+      &.app-separator {
+        @extend .app-ml-2, .app-mr-2;
+        color: $app-gray-4;
+      }
 
-    .app-separator {
-      @extend .app-ml-2, .app-mr-2;
-      color: $app-gray-4;
+      &.app-last {
+        font-weight: 700;
+      }
     }
 
     .mat-icon {
