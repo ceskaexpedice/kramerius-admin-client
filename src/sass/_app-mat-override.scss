@@ -109,13 +109,12 @@
   &.app-view-alert {
     @extend .app-clean-shadow;
     @include setAlertCard();
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border: 1px solid;
 
     .mat-card-content {
-      @extend .app-text-center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       .mat-icon {
         @extend .app-mr-2;
