@@ -70,7 +70,7 @@
     }
 
     &.app-card-expanded {
-      background-color: $app-card-bg-hover;
+      //background-color: rgba($app-color-accent, .03);
     }
 
     .mat-card-header {
@@ -264,7 +264,9 @@
     bottom: 0px;
     position: sticky;
     z-index: 10;
-    border: 1px solid $app-table-color-border;
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: $app-table-color-border;
   }
 }
 

@@ -1,4 +1,4 @@
-<div class="app-container-fluid app-processes app-h-100">
+<div class="app-processes app-h-100">
   <div fxLayout="column" fxFlexFill>
     <mat-card fxLayout="row" fxLayoutAlign="start center" *ngIf="appSettings.devMode" class="app-card app-view-border app-pb-0">
       <div fxFlex>
@@ -25,271 +25,213 @@
         <button mat-flat-button (click)="scheduleTestProcess()" [disabled]="isLoading()" color="primary"><mat-icon>play_arrow</mat-icon>Spustit testovací proces</button>
       </div>
     </mat-card>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div fxFlex>
-        <mat-form-field class="app-mr-2">
-          <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
-            <mat-option *ngFor="let state of batch_states" [value]="state.key">{{ state.label }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <a *ngIf="!!selectedState" mat-icon-button matTooltip="Odebrat filtrování podle stavu" [disabled]="isLoading()" (click)="selectedState=undefined;onFiltersChanged()" class="app-clear-filter app-mr-2">
-          <mat-icon>cancel</mat-icon>
-        </a>
-    
-        <mat-form-field class="app-mr-2">
-          <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
-            <mat-option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <a *ngIf="!!selectedOwner"mat-icon-button matTooltip="Odebrat filtrování podle vlastníka" (click)="selectedOwner=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
-          <mat-icon>cancel</mat-icon>
-        </a>
-    
-        <mat-form-field class="app-mr-2">
-          <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
-          <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
-          <mat-datepicker #myDatepickerFrom [disabled]="isLoading()"></mat-datepicker>
-        </mat-form-field>
-        <a *ngIf="!!dateFrom" mat-icon-button matTooltip="Odebrat filtrování podle počátečního data" (click)="dateFrom=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
-          <mat-icon>cancel</mat-icon>
-        </a>
-    
-        <mat-form-field class="app-mr-2">
-          <input matInput [matDatepicker]="myDatepickerTo" placeholder="Do" [(ngModel)]='dateTo' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
-          <mat-datepicker-toggle matSuffix [for]="myDatepickerTo"></mat-datepicker-toggle>
-          <mat-datepicker #myDatepickerTo [disabled]="isLoading()"></mat-datepicker>
-        </mat-form-field>
-        <a *ngIf="!!dateTo" mat-icon-button matTooltip="Odebrat filtrování podle koncového data" (click)="dateTo=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter">
-          <mat-icon>cancel</mat-icon>
-        </a>
-    
-        <button mat-icon-button matTooltip="Znovu načíst procesy" (click)="reload()" [disabled]="isLoading()">
-          <mat-icon>refresh</mat-icon>
-        </button>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <a routerLink="/processes">procesy</a>
+        <!-- <span class="app-separator">/</span>
+        <span class="app-last">{{ view }}</span> -->
       </div>
-      <div>
-        <button mat-flat-button (click)="onKillAllScheduled()" color="primary" matTooltip="Zrušit všechny zobrazené naplánované procesy" [disabled]="isLoading()">
-          <mat-icon>clear</mat-icon>Zrušit naplánované procesy
-        </button>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex>
+          <mat-form-field class="app-mr-2">
+            <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
+              <mat-option *ngFor="let state of batch_states" [value]="state.key">{{ state.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <a *ngIf="!!selectedState" mat-icon-button matTooltip="Odebrat filtrování podle stavu" [disabled]="isLoading()" (click)="selectedState=undefined;onFiltersChanged()" class="app-clear-filter app-mr-2">
+            <mat-icon>cancel</mat-icon>
+          </a>
+      
+          <mat-form-field class="app-mr-2">
+            <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
+              <mat-option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <a *ngIf="!!selectedOwner"mat-icon-button matTooltip="Odebrat filtrování podle vlastníka" (click)="selectedOwner=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
+            <mat-icon>cancel</mat-icon>
+          </a>
+      
+          <mat-form-field class="app-mr-2">
+            <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
+            <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepickerFrom [disabled]="isLoading()"></mat-datepicker>
+          </mat-form-field>
+          <a *ngIf="!!dateFrom" mat-icon-button matTooltip="Odebrat filtrování podle počátečního data" (click)="dateFrom=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
+            <mat-icon>cancel</mat-icon>
+          </a>
+      
+          <mat-form-field class="app-mr-2">
+            <input matInput [matDatepicker]="myDatepickerTo" placeholder="Do" [(ngModel)]='dateTo' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
+            <mat-datepicker-toggle matSuffix [for]="myDatepickerTo"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepickerTo [disabled]="isLoading()"></mat-datepicker>
+          </mat-form-field>
+          <a *ngIf="!!dateTo" mat-icon-button matTooltip="Odebrat filtrování podle koncového data" (click)="dateTo=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter">
+            <mat-icon>cancel</mat-icon>
+          </a>
+      
+          <button mat-icon-button matTooltip="Znovu načíst procesy" (click)="reload()" [disabled]="isLoading()">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-flat-button (click)="onKillAllScheduled()" color="primary" matTooltip="Zrušit všechny zobrazené naplánované procesy" [disabled]="isLoading()">
+            <mat-icon>clear</mat-icon>Zrušit naplánované procesy
+          </button>
+        </div>
       </div>
     </div>
-
-    <div class="app-table-wrapper app-h-100 app-oa-y">
-      <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
-      <table mat-table [dataSource]="batches" class="app-view-border app-w-100">
-        <ng-container matColumnDef="expand">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element">
-            <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" matTooltip="Zobrazit podprocesy" class="app-fix-expanded">
-              <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
-            </a>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
-            </ng-container>
-        </ng-container>
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>Id</th>
-          <td mat-cell *matCellDef="let element">
-            <span class="app-fix-expanded">
-              <a [routerLink]="['/processes', element.id]" class="app-mr-4">{{ element.id }}</a>
-            </span>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded">&#160;</div>
-            </ng-container>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Název</th>
-          <td mat-cell *matCellDef="let element" [matTooltip]="element.getName()">
-            <div class="app-text-cutter-wrapper">
-              <div class="app-text-cutter">
-                {{ element.getName() }}
-              </div>
-            </div>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded app-text-cutter-wrapper app-w-100">
+    <div fxFlex class="app-container-fluid app-oh">
+      <div class="app-table-wrapper app-view-border app-h-100 app-oa-y">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
+        <table mat-table [dataSource]="batches" class="app-w-100">
+          <ng-container matColumnDef="expand">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" matTooltip="Zobrazit podprocesy" class="app-fix-expanded">
+                <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
+              </a>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
+              </ng-container>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded">
+                <a [routerLink]="['/processes', element.id]" class="app-mr-4">{{ element.id }}</a>
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded">&#160;</div>
+              </ng-container>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Název</th>
+            <td mat-cell *matCellDef="let element" [matTooltip]="element.getName()">
+              <div class="app-text-cutter-wrapper">
                 <div class="app-text-cutter">
-                  <a [routerLink]="['/processes', p.id]" class="app-mr-4">{{ p.id }}</a> {{ p.name }}
+                  {{ element.getName() }}
                 </div>
               </div>
-            </ng-container>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="state">
-          <th mat-header-cell *matHeaderCellDef>Stav</th>
-          <td mat-cell *matCellDef="let element">
-            <span class="app-fix-expanded">
-              <div class="app-badge" [ngClass]="element.getStateClass()">
-                {{ element.getStateLabel() }}
-              </div>
-            </span>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded">
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded app-text-cutter-wrapper app-w-100">
+                  <div class="app-text-cutter">
+                    <a [routerLink]="['/processes', p.id]" class="app-mr-4">{{ p.id }}</a> {{ p.name }}
+                  </div>
+                </div>
+              </ng-container>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="state">
+            <th mat-header-cell *matHeaderCellDef>Stav</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded">
                 <div class="app-badge" [ngClass]="element.getStateClass()">
-                  {{ p.getStateLabel() }}
+                  {{ element.getStateLabel() }}
                 </div>
-              </div>
-            </ng-container>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="planned">
-          <th mat-header-cell *matHeaderCellDef>Naplánováno</th>
-          <td mat-cell *matCellDef="let element">
-            <span class="app-fix-expanded">
-              {{ element.planned | date : 'dd.MM.yyyy hh:mm' }}
-            </span>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded">
-                {{ p.planned | date : 'dd.MM.yyyy hh:mm' }}
-              </div>
-            </ng-container>
-          </td>
-        </ng-container> 
-        <ng-container matColumnDef="started">
-          <th mat-header-cell *matHeaderCellDef>Spuštěno</th>
-          <td mat-cell *matCellDef="let element">
-            <span class="app-fix-expanded">
-              {{ element.started | date : 'dd.MM.yyyy hh:mm' }}
-            </span>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded">
-                {{ p.started | date : 'dd.MM.yyyy hh:mm' }}
-              </div>
-            </ng-container>
-          </td>
-        </ng-container>  
-        <ng-container matColumnDef="finished">
-          <th mat-header-cell *matHeaderCellDef>Ukončeno</th>
-          <td mat-cell *matCellDef="let element">
-            <span class="app-fix-expanded">
-              {{ element.finished | date : 'dd.MM.yyyy hh:mm' }}
-            </span>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded">
-                {{ p.finished | date : 'dd.MM.yyyy hh:mm' }}
-              </div>
-            </ng-container>
-          </td>
-        </ng-container>  
-        <ng-container matColumnDef="duration">
-          <th mat-header-cell *matHeaderCellDef>Trvání</th>
-          <td mat-cell *matCellDef="let element">
-            <span class="app-fix-expanded">
-              {{ element.getDuration(loadedTimestamp) | appDuration }}
-            </span>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded">
-                {{ p.getDuration(loadedTimestamp) | appDuration }}
-              </div>
-            </ng-container>
-          </td>
-        </ng-container>  
-        <ng-container matColumnDef="owner">
-          <th mat-header-cell *matHeaderCellDef>Vlastník</th>
-          <td mat-cell *matCellDef="let element" [matTooltip]="element.ownerName">
-            <div class="app-text-cutter-wrapper">
-              <div class="app-text-cutter">
-                {{ element.ownerName  }}
-              </div>
-            </div>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded app-text-cutter-wrapper app-w-100">
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded">
+                  <div class="app-badge" [ngClass]="element.getStateClass()">
+                    {{ p.getStateLabel() }}
+                  </div>
+                </div>
+              </ng-container>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="planned">
+            <th mat-header-cell *matHeaderCellDef>Naplánováno</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded">
+                {{ element.planned | date : 'dd.MM.yyyy hh:mm' }}
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded">
+                  {{ p.planned | date : 'dd.MM.yyyy hh:mm' }}
+                </div>
+              </ng-container>
+            </td>
+          </ng-container> 
+          <ng-container matColumnDef="started">
+            <th mat-header-cell *matHeaderCellDef>Spuštěno</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded">
+                {{ element.started | date : 'dd.MM.yyyy hh:mm' }}
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded">
+                  {{ p.started | date : 'dd.MM.yyyy hh:mm' }}
+                </div>
+              </ng-container>
+            </td>
+          </ng-container>  
+          <ng-container matColumnDef="finished">
+            <th mat-header-cell *matHeaderCellDef>Ukončeno</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded">
+                {{ element.finished | date : 'dd.MM.yyyy hh:mm' }}
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded">
+                  {{ p.finished | date : 'dd.MM.yyyy hh:mm' }}
+                </div>
+              </ng-container>
+            </td>
+          </ng-container>  
+          <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef>Trvání</th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded">
+                {{ element.getDuration(loadedTimestamp) | appDuration }}
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded">
+                  {{ p.getDuration(loadedTimestamp) | appDuration }}
+                </div>
+              </ng-container>
+            </td>
+          </ng-container>  
+          <ng-container matColumnDef="owner">
+            <th mat-header-cell *matHeaderCellDef>Vlastník</th>
+            <td mat-cell *matCellDef="let element" [matTooltip]="element.ownerName">
+              <div class="app-text-cutter-wrapper">
                 <div class="app-text-cutter">
                   {{ element.ownerName  }}
                 </div>
               </div>
-            </ng-container>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element">
-            <span class="app-fix-expanded">
-              <button *ngIf="element.isDeletable()" (click)="onRemove(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below" color="primary">
-                <mat-icon>delete</mat-icon>
-              </button>
-              <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below" color="primary">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </span>
-            <ng-container *ngIf="element.expanded">
-              <div *ngFor="let p of element.processes" class="app-col-expanded app-mr-n4">&#160;</div>
-            </ng-container>
-          </td>
-        </ng-container>     
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-      <mat-paginator *ngIf="!isLoading()" [length]="resultCount" hidePageSize="false" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 1000]" (page)="onPageChanged($event)"></mat-paginator>
-    </div>
-
-
-  <!--   <div fxFlex class="app-table-wrapper app-view-border app-view-processes app-oh">
-      <div class="app-table app-head">
-        <div class="app-row">
-          <div class="app-col-expand"></div>
-          <div class="app-col-id">ID</div>
-          <div class="app-col-name">Název</div>
-          <div class="app-col-state">Stav</div>
-          <div class="app-col-datetime">Naplánováno</div>
-          <div class="app-col-datetime">Spuštěno</div>
-          <div class="app-col-datetime">Ukončeno</div>
-          <div class="app-col-duration">Trvání</div>
-          <div class="app-col-owner">Vlastník</div>
-          <div class="app-col-actions"></div>
-        </div>
-      </div>
-      <div class="app-table app-body app-scrollable" *ngIf="!isLoading()">
-        <ng-container *ngFor="let batch of batches">
-          <a class="app-row" [routerLink]="['/processes', batch.id]">
-            <div class="app-col-expand">
-              <a (click)="batch.expanded = !batch.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="batch.hasSubprocesses()" matTooltip="Zobrazit podprocesy">
-                <mat-icon>{{ batch.expanded ? 'remove' : 'add' }}</mat-icon>
-              </a>
-            </div>
-            <div class="app-col-id">{{ batch.id }}</div>
-            <div class="app-col-name app-text-cutter" matTooltip="{{ batch.getName() }}">{{ batch.getName() }}</div>
-            <div class="app-col-state">
-              <div fxFlex class="app-badge" [ngClass]="batch.getStateClass()">{{ batch.getStateLabel() }}</div>
-            </div>
-            <div class="app-col-datetime">{{ batch.planned | appDatetime }}</div>
-            <div class="app-col-datetime">{{ batch.started | appDatetime }}</div>
-            <div class="app-col-datetime">{{ batch.finished | appDatetime }}</div>
-            <div class="app-col-duration">{{ batch.getDuration(loadedTimestamp) | appDuration }}</div>
-            <div class="app-col-owner app-text-cutter" [matTooltip]="batch.ownerName">{{ batch.ownerName }}</div>
-            <div class="app-col-actions">
-              <button *ngIf="batch.isDeletable()" (click)="onRemove(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below" color="primary">
-                <mat-icon>delete</mat-icon>
-              </button>
-              <button *ngIf="batch.isKillable()" (click)="onKill(batch); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below" color="primary">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </div>
-          </a>
-          <ng-container *ngIf="batch.expanded">
-            <a *ngFor="let process of batch.processes" class="app-row app-subprocess" [routerLink]="['/processes', process.id]">
-              <div class="app-col-expand"></div>
-              <div class="app-col-id">{{ process.id }}</div>
-              <div class="app-col-name app-text-cutter" [matTooltip]="process.name">{{ process.name }}</div>
-              <div class="app-col-state">
-                <div fxFlex class="app-badge" [ngClass]="batch.getStateClass()">{{ process.getStateLabel() }}</div>
-              </div>
-              <div class="app-col-datetime">{{ process.planned | appDatetime }}</div>
-              <div class="app-col-datetime">{{ process.started | appDatetime }}</div>
-              <div class="app-col-datetime">{{ process.finished | appDatetime }}</div>
-              <div class="app-col-duration">{{ process.getDuration(loadedTimestamp) | appDuration }}</div>
-              <div class="app-col-owner app-text-cutter" [matTooltip]="process.owner_login">{{ process.owner_login }}</div>
-              <div class="app-col-actions"></div>
-            </a>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded app-text-cutter-wrapper app-w-100">
+                  <div class="app-text-cutter">
+                    {{ element.ownerName  }}
+                  </div>
+                </div>
+              </ng-container>
+            </td>
           </ng-container>
-        </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded">
+                <button *ngIf="element.isDeletable()" (click)="onRemove(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below" color="primary">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below" color="primary">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded app-mr-n4">&#160;</div>
+              </ng-container>
+            </td>
+          </ng-container>     
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator *ngIf="!isLoading()" [length]="resultCount" hidePageSize="false" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 1000]" (page)="onPageChanged($event)"></mat-paginator>
       </div>
-  
-      <ng-container *ngIf="!isLoading()">
-        <mat-paginator [length]="resultCount" hidePageSize="false" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 1000]" (page)="onPageChanged($event)"></mat-paginator>
-      </ng-container >
-      
-      <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
-    </div> -->
+    </div>
   </div>
 </div>

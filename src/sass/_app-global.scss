@@ -5,6 +5,7 @@
 a {
   @extend .app-cursor-pointer;
   color: $app-color-primary;
+  text-decoration: none;
 
   &:hover {
     color: rgba($app-color-primary, .7);
@@ -177,7 +178,7 @@ a {
   border: 1px solid $app-table-color-border;
 }
 
-// - development
+// top bar
 .app-topbar {
   @extend .app-pt-8, .app-pl-4, .app-pr-4;
   background-color: $app-gray-1;
@@ -202,7 +203,13 @@ a {
     }
   }
 }
-// - development
+
+// table wrapper
+.app-table-wrapper {
+  &.app-view-border {
+    border: 1px solid $app-table-color-border;
+  }
+}
 
 
 // table
@@ -269,7 +276,7 @@ table {
 
 
 // table - hozna
-.app-table-wrapper {
+/* .app-table-wrapper {
   &.app-view-border {
     .app-head, .app-body, .mat-paginator {
       border-style: solid;
@@ -339,4 +346,4 @@ table {
       font-size: 14px;
     }
   }
-}
+} */
