@@ -10,7 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProcessesComponent } from './components/processes/processes.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { AuthService } from './services/auth.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppSettings } from './services/app-settings';
 import { DurationPipe } from './pipes/duration.pipe';
@@ -70,6 +70,23 @@ import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/compone
 import { CanvasRenderer } from 'echarts/renderers';
 import { NkpLogyComponent } from './dialogs/nkp-logy/nkp-logy.component';
 import { DeleteStatisticsComponent } from './dialogs/delete-statistics/delete-statistics.component';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PaginatorI18n } from './paginator-i18n';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
+
+
+export function createCustomMatPaginatorIntl(
+  translateService: TranslateService
+) { return new PaginatorI18n(translateService); }
 
 @NgModule({
   declarations: [
@@ -131,9 +148,16 @@ import { DeleteStatisticsComponent } from './dialogs/delete-statistics/delete-st
     CKEditorModule,
     FlexLayoutModule,
     MatBadgeModule,
-    NgxEchartsModule.forRoot({ 
+    NgxEchartsModule.forRoot({
       echarts
-    })
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
 
   ],
   providers: [
@@ -145,6 +169,12 @@ import { DeleteStatisticsComponent } from './dialogs/delete-statistics/delete-st
     LocalStorageService,
     UIService,
     ImportService,
+    HttpClient,
+    TranslateService,
+    {
+      provide: MatPaginatorIntl, deps: [TranslateService],
+      useFactory: createCustomMatPaginatorIntl
+    },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [

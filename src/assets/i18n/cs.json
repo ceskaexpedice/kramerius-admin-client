@@ -1,0 +1,18 @@
+{
+  "paginator": {
+    "desc": {
+      "Číslo stránky": "Číslo stránky",
+      "Řazení": "Řadit podle",
+      "itemsPerPageLabel" : "Počet záznamů na stránce",
+      "nextPageLabel" : "Následující stránka",
+      "previousPageLabel" : "Předchozí stránka",
+      "firstPageLabel": "První stránka",
+      "lastPageLabel": "Poslední stránka",
+      "rangeLabel1": "0 z {{length}}",
+      "rangeLabel2": "{{startIndex}} - {{endIndex}} z {{length}}"
+    },
+    "tooltip": {
+      "Přejděte číslo stránky": "Přejít na stránku"
+    }
+  }
+}

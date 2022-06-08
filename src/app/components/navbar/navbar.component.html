@@ -61,6 +61,8 @@
       <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
       <a routerLink="/indexing" routerLinkActive="active" mat-button>Indexace</a>
       <a routerLink="/repository" routerLinkActive="active" mat-button>Repozitář</a>
+      <a (click)="changeLang('cs')"  mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
+      <a (click)="changeLang('en')"  mat-button *ngIf="ui.currentLang !== 'en'">EN</a>
       <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
   
       <a [matMenuTriggerFor]="profile_menu" mat-button class="app-avatar">

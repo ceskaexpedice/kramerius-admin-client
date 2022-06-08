@@ -30,6 +30,8 @@
     "@ckeditor/ckeditor5-build-decoupled-document": "^17.0.0",
     "@ckeditor/ckeditor5-upload": "^17.0.0",
     "moment": "^2.29.1",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "rxjs": "~6.6.7",
     "timers": "^0.1.1",
     "tslib": "^2.0.0",
