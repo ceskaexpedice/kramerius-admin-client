@@ -54,13 +54,13 @@
   </div>
   <div>
     <ng-container *ngIf="auth.isLoggedIn()">
-      <a routerLink="/object" routerLinkActive="active" mat-button>Objekt</a>
-      <a routerLink="/import" routerLinkActive="active" mat-button>Import</a>
-      <a routerLink="/rights" routerLinkActive="active" mat-button>Práva</a>
-      <a routerLink="/processes" routerLinkActive="active" mat-button>Procesy</a>
-      <a routerLink="/collections" routerLinkActive="active" mat-button>Sbírky</a>
-      <a routerLink="/indexing" routerLinkActive="active" mat-button>Indexace</a>
-      <a routerLink="/repository" routerLinkActive="active" mat-button>Repozitář</a>
+      <a routerLink="/object" routerLinkActive="active" mat-button>{{ 'navbar.objekt' | translate }}</a>
+      <a routerLink="/import" routerLinkActive="active" mat-button>{{ 'navbar.import' | translate }}</a>
+      <a routerLink="/rights" routerLinkActive="active" mat-button>{{ 'navbar.prava' | translate }}</a>
+      <a routerLink="/processes" routerLinkActive="active" mat-button>{{ 'navbar.procesy' | translate }}</a>
+      <a routerLink="/collections" routerLinkActive="active" mat-button>{{ 'navbar.sbirky' | translate }}</a>
+      <a routerLink="/indexing" routerLinkActive="active" mat-button>{{ 'navbar.indexace' | translate }}</a>
+      <a routerLink="/repository" routerLinkActive="active" mat-button>{{ 'navbar.repozitar' | translate }}</a>
       <a (click)="changeLang('cs')"  mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
       <a (click)="changeLang('en')"  mat-button *ngIf="ui.currentLang !== 'en'">EN</a>
       <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
@@ -78,7 +78,7 @@
         </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>
-          <span>Odhlásit</span>
+          <span>{{ 'navbar.odhlasit' | translate }}</span>
         </button>
       </mat-menu>
     </ng-container>

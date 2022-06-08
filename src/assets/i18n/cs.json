@@ -1,4 +1,14 @@
 {
+  "navbar": {
+    "objekt": "Objekt",
+    "import": "Import",
+    "prava": "Práva",
+    "procesy": "Procesy",
+    "sbirky": "Sbírky",
+    "indexace": "Indexace",
+    "repozitar": "Repozitář",
+    "odhlasit": "Odhlásit"
+  },
   "paginator": {
     "desc": {
       "Číslo stránky": "Číslo stránky",
