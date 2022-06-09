@@ -9,6 +9,18 @@
     "repository": "Repozitář",
     "logout": "Odhlásit"
   },
+  "breadcrumbs": {
+    "actions": "Práva",
+    "roles": "Role",
+    "licenses": "Licence",
+    "params": "Parametry"
+  },
+  "tabnav": {
+    "rights": "Práva",
+    "roles": "Role",
+    "licenses": "Licence",
+    "parameters": "Parametry"
+  },  
   "paginator": {
     "desc": {
       "pageNumber": "Číslo stránky",

@@ -9,6 +9,18 @@
     "repository": "Repository",
     "logout": "Logout"
   },
+  "breadcrumbs": {
+    "actions": "Rights",
+    "roles": "Roles",
+    "licenses": "Licences",
+    "params": "Parameters"
+  },
+  "tabnav": {
+    "rights": "Rights",
+    "roles": "Roles",
+    "licenses": "Licenses",
+    "parameters": "Parameters"
+  },  
   "paginator": {
     "desc": {
       "pageNumbe": "Page number",
