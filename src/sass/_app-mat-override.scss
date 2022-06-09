@@ -276,6 +276,20 @@
   .mat-tab-links {
     .mat-tab-link {
       opacity: unset;
+
+      &.mat-tab-label-active {
+        font-weight: 900;
+      }
+
+      &:not(.mat-tab-label-active) {
+        color: $app-gray-6;
+        font-weight: normal;
+      }
+
+      .mat-icon {
+        @extend .app-mr-2;
+        @include setIcon(20);
+      }
     }
   }
 }

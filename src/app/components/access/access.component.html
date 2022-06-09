@@ -11,10 +11,10 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'">Práva</a>
-          <a mat-tab-link (click)="changeView('roles')"  [active]="view == 'roles'">Role</a>
-          <a mat-tab-link (click)="changeView('licenses')"  [active]="view == 'licenses'">Licence</a>
-          <a mat-tab-link (click)="changeView('params')"  [active]="view == 'params'">Parametry</a>
+          <a mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>Práva</a>
+          <a mat-tab-link (click)="changeView('roles')"  [active]="view == 'roles'"><mat-icon class="material-icons-outlined">manage_accounts</mat-icon>Role</a>
+          <a mat-tab-link (click)="changeView('licenses')"  [active]="view == 'licenses'"><mat-icon class="material-icons-outlined">policy</mat-icon>Licence</a>
+          <a mat-tab-link (click)="changeView('params')"  [active]="view == 'params'"><mat-icon class="material-icons-outlined">rule_folder</mat-icon>Parametry</a>
         </nav>
       </div>
     </div>
