@@ -11,8 +11,8 @@
   },
   "paginator": {
     "desc": {
-      "Číslo stránky": "Page number",
-      "Řazení": "Order by",
+      "pageNumbe": "Page number",
+      "sortBy": "Order by",
       "itemsPerPageLabel" : "Records per page",
       "nextPageLabel" : "Next page",
       "previousPageLabel" : "Previous page",
@@ -22,7 +22,7 @@
       "rangeLabel2": "{{startIndex}} - {{endIndex}} of {{length}}"
     },
     "tooltip": {
-      "Přejděte číslo stránky": "Go to page"
+      "scrollToThePageNumber": "Go to page"
     }
   }
 }
