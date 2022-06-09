@@ -45,5 +45,10 @@
     "tooltip": {
       "scrollToThePageNumber": "Přejít na stránku"
     }
+  },
+  "desc": {
+    "modelDisplayStatistics": "Statistiky zobrazení modelů",
+    "statisticsOfUsedLanguages": "Statistiky použitých jazyků",
+    "authorStatistics": "Statistiky autorů"
   }
 }

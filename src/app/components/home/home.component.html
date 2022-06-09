@@ -40,7 +40,7 @@
 					<div fxLayout="row" fxLayoutGap="16px">
 						<mat-card fxFlex class="app-card app-view-border">
 							<mat-card-header>
-								<mat-card-title>Statistiky zobrazení modelů</mat-card-title>
+								<mat-card-title>{{ 'desc.modelDisplayStatistics' | translate }}</mat-card-title>
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultModel">
 								<div echarts [options]="modelsOpts" style="height: 350px;" (chartClick)="onChartClick($event)"></div>
@@ -52,7 +52,7 @@
 						</mat-card>
 						<mat-card fxFlex class="app-card app-view-border">
 							<mat-card-header>
-								<mat-card-title>Statistiky použitých jazyků</mat-card-title>
+								<mat-card-title>{{ 'desc.statisticsOfUsedLanguages' | translate }}</mat-card-title>
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultLang">
 								<div echarts [options]="langOpts" style="height: 350px;" ></div>
@@ -64,7 +64,7 @@
 						</mat-card>
 						<mat-card fxFlex class="app-card app-view-border">
 							<mat-card-header>
-								<mat-card-title>Statistiky autorů</mat-card-title>
+								<mat-card-title>{{ 'desc.authorStatistics' | translate }}</mat-card-title>
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultAuthor">
 								<div echarts [options]="authorOpts" style="height: 350px;" ></div>
@@ -100,12 +100,17 @@
 																<a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank" [matTooltip]="v.title">{{ v.title }}</a>
 															</div>
 														</div>
-														<div *ngIf="selection[v.pid]">
-															hovno<br />
-															zase
+														<div *ngIf="selection[v.pid]" class="app-mt-1">
+															<div><label class="app-label">Autor:</label> Pokorný, Václav Jan, Klášter Rajhrad</div>
+															<div><label class="app-label">Nakladatelské údaje:</label> 1913-1948</div>
+															<div><label class="app-label">Typ dokumentu:</label> Úřední písemnosti, Archivní fondy</div>
+															<div><label class="app-label">Klíčová slova:</label> Pokorný, Václav Jan, Klášter Rajhrad</div>
+															<div><label class="app-label">Jazyk:</label> Latina, Čeština</div>
+															<div><label class="app-label">Místo uložení:</label> <a href=""> Moravská zemská knihovna v Brně</a>, Signatura: BOE950R - A - D. n. 34</div>
+															<div><label class="app-label">Fyzický popis:</label> Rozsah: 27 fol.</div>
 														</div>
 													</td>
-													<td>
+													<td class="app-col-detail">
 														<a (click)="showMore(v.pid)" fxLayout="row" fxLayoutAlign="start center" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
 															<mat-icon>expand_more</mat-icon>
 															{{ selection[v.pid] ? ('Skryt detail' | translate) : ('Zobrazit detail' | translate) }}

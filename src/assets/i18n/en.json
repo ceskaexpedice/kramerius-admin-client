@@ -45,5 +45,10 @@
     "tooltip": {
       "scrollToThePageNumber": "Go to page"
     }
+  },
+  "desc": {
+    "modelDisplayStatistics": "Model display statistics",
+    "statisticsOfUsedLanguages": "Statistics of used languages",
+    "authorStatistics": "Author statistics"
   }
 }

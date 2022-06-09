@@ -265,6 +265,14 @@ table {
               @include setIcon(18, $position: sub)
             }
           }
+
+          &.app-col-detail {
+            .mat-icon {
+              @include setIcon(22, $position: sub);
+              height: 18px;
+              line-height: 18px;
+            }
+          }
         }
 
         &:hover {
