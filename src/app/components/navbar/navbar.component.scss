@@ -30,11 +30,13 @@
     color: $app-color-lightnes;
 
     &:hover {
-      background-color: rgba($app-color-lightnes, .2);
+      &:not(.app-avatar) {
+        background-color: rgba($app-color-lightnes, .2);
+      }
     }
 
     &.active {
-      background-color: darken($app-color-primary, 10);
+      background-color: rgba($app-color-lightnes, .2);
     }
   }
 
