@@ -1,13 +1,13 @@
 {
   "navbar": {
-    "objekt": "Objekt",
+    "object": "Objekt",
     "import": "Import",
-    "prava": "Práva",
-    "procesy": "Procesy",
-    "sbirky": "Sbírky",
-    "indexace": "Indexace",
-    "repozitar": "Repozitář",
-    "odhlasit": "Odhlásit"
+    "rights": "Práva",
+    "processes": "Procesy",
+    "collections": "Sbírky",
+    "indexation": "Indexace",
+    "repository": "Repozitář",
+    "logout": "Odhlásit"
   },
   "paginator": {
     "desc": {

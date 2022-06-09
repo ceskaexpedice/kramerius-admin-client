@@ -1,4 +1,14 @@
 {
+  "navbar": {
+    "object": "Object",
+    "import": "Import",
+    "rights": "Rights",
+    "processes": "Processes",
+    "collections": "Collections",
+    "indexation": "Indexation",
+    "repository": "Repository",
+    "logout": "Logout"
+  },
   "paginator": {
     "desc": {
       "Číslo stránky": "Page number",
