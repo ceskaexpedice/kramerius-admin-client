@@ -12,6 +12,7 @@ import 'echarts/theme/macarons.js';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { License } from 'src/app/models/license.model';
 import { DOCUMENT } from '@angular/common';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -36,10 +37,16 @@ export class HomeComponent implements OnInit {
   // tabulka
   table: any;
 
-  public isResult: boolean = true;
+  view: string;
+
+  public selection: any = [];
+
+  public isResultModel: boolean = false;
+  public isResultLang: boolean = false;
+  public isResultAuthor: boolean = false;
 
   // pripojena instance
-  constructor(public appSettings: AppSettings, private adminApi: AdminApiService, @Inject(DOCUMENT) private document: Document) { }
+  constructor(public appSettings: AppSettings, private adminApi: AdminApiService, @Inject(DOCUMENT) private document: Document, private local: LocalStorageService) { }
 
 
 
@@ -52,6 +59,7 @@ export class HomeComponent implements OnInit {
       this.dateTo != null ? this.format(this.dateTo) : null,
       requestedLicense
     ).subscribe(response=> {
+      this.isResultAuthor = response && response.length > 0;
       this.authorOpts = {
         xAxis: {
           type: 'category',
@@ -82,6 +90,7 @@ export class HomeComponent implements OnInit {
       this.dateTo != null ? this.format(this.dateTo) : null,
       requestedLicense
    ).subscribe(response=> {
+      this.isResultLang = response && response.length > 0;
       this.langOpts = {
         xAxis: {
           type: 'category',
@@ -111,6 +120,7 @@ export class HomeComponent implements OnInit {
       this.dateTo != null ? this.format(this.dateTo) : null,
       requestedLicense
     ).subscribe(response => {
+      this.isResultModel = Object.keys(response.sums).length > 0;
       this.table =response;
       this.modelsOpts = {
         legend: {
@@ -149,6 +159,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.view = this.local.getStringProperty('home.view', 'statistics');
+
     this.reinitGraphs();
     this.adminApi.getLicenses().subscribe((licenses: License[]) => {
       this.allLicenses = licenses.map(l=> {
@@ -238,6 +250,19 @@ export class HomeComponent implements OnInit {
       day = '0' + day;
     }
     return [year, month, day].join('.');
+  }
+
+  changeView(view: string) {
+    this.view = view;
+    this.local.setStringProperty('home.view', view);
+  }
+
+  showMore(id: number) {
+    if (this.selection[id]) {
+      this.selection[id] =! this.selection[id];
+    } else {
+      this.selection[id] = true;
+    }
   }
 
 }

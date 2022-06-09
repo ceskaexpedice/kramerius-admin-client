@@ -105,12 +105,6 @@ a {
   }
 }
 
-.app-text-cutter {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .app-rotate-down {
   .mat-icon {
     &:not(.app-no-rotate) {
@@ -119,6 +113,22 @@ a {
     }
   }
 }
+
+.app-text-cutter {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-text-cutter-wrapper {
+  position: relative; 
+  
+  .app-text-cutter {
+    position: absolute;
+    max-width: 100%;
+  }
+}
+
 
 .app-pipe {
   @extend .app-ml-2, .app-mr-2;

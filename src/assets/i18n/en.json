@@ -2,7 +2,7 @@
   "navbar": {
     "object": "Object",
     "import": "Import",
-    "rights": "Rights",
+    "rightOfAdministration": "Right of administration",
     "processes": "Processes",
     "collections": "Collections",
     "indexation": "Indexation",
@@ -10,17 +10,26 @@
     "logout": "Logout"
   },
   "breadcrumbs": {
+    "statistics": "Statistics",
+    "mostViewedDocuments": "Most viewed documents",
     "actions": "Rights",
     "roles": "Roles",
     "licenses": "Licences",
     "params": "Parameters"
   },
   "tabnav": {
+    "statistics": "Statistics",
+    "mostViewedDocuments": "Most viewed documents",
     "rights": "Rights",
     "roles": "Roles",
     "licenses": "Licenses",
     "parameters": "Parameters"
-  },  
+  },
+  "alert": {
+    "statistics": {
+      "noData": "No data available"
+    }
+  },
   "paginator": {
     "desc": {
       "pageNumbe": "Page number",

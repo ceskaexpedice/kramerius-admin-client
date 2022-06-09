@@ -3,7 +3,11 @@
     tr {
       th {
         &.app-first {
-          width: 200px;
+          width: 150px;
+        }
+
+        &.app-last {
+          width: 140px;
         }
       }
     }

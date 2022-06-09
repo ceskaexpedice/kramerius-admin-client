@@ -1,5 +1,138 @@
-<div class="app-container">
-	<div class="app-mt-4 app-text-right">
+<div class="app-home app-h-100">
+	<div fxLayout="column" fxFlexFill>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'breadcrumbs.' + view | translate }}</span>
+      </div>
+      <div>
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link (click)="changeView('statistics')" [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.statistics' | translate }}</a>
+          <a mat-tab-link (click)="changeView('mostViewedDocuments')"  [active]="view == 'mostViewedDocuments'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'tabnav.mostViewedDocuments' | translate }}</a>
+        </nav>
+      </div>
+    </div>
+    <div fxFlex class="app-oa-y">
+			<div class="app-container">
+				<div>
+					<mat-form-field class="app-mr-2">
+						<mat-label>Datum od</mat-label>
+						<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
+						<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
+						<mat-datepicker #from></mat-datepicker>
+					</mat-form-field>
+					<mat-form-field class="app-mr-2">
+						<mat-label>Datum do</mat-label>
+						<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
+						<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
+						<mat-datepicker #to></mat-datepicker>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label>Licence</mat-label>
+						<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
+							<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<ng-container  *ngIf="view == 'statistics'">
+					<div fxLayout="row" fxLayoutGap="16px">
+						<mat-card fxFlex class="app-card app-view-border">
+							<mat-card-header>
+								<mat-card-title>Statistiky zobrazení modelů</mat-card-title>
+							</mat-card-header>
+							<mat-card-content *ngIf="isResultModel">
+								<div echarts [options]="modelsOpts" style="height: 350px;" (chartClick)="onChartClick($event)"></div>
+								<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
+							</mat-card-content>
+							<mat-card *ngIf="!isResultModel" class="app-view-alert app-info">
+								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+							</mat-card>
+						</mat-card>
+						<mat-card fxFlex class="app-card app-view-border">
+							<mat-card-header>
+								<mat-card-title>Statistiky použitých jazyků</mat-card-title>
+							</mat-card-header>
+							<mat-card-content *ngIf="isResultLang">
+								<div echarts [options]="langOpts" style="height: 350px;" ></div>
+								<button mat-flat-button  (click)="csvLang()" color="primary" class="app-mr-2">CSV</button>
+							</mat-card-content>
+							<mat-card *ngIf="!isResultLang" class="app-view-alert app-info">
+								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+							</mat-card>
+						</mat-card>
+						<mat-card fxFlex class="app-card app-view-border">
+							<mat-card-header>
+								<mat-card-title>Statistiky autorů</mat-card-title>
+							</mat-card-header>
+							<mat-card-content *ngIf="isResultAuthor">
+								<div echarts [options]="authorOpts" style="height: 350px;" ></div>
+								<button mat-flat-button  (click)="csvAuthor()" color="primary" class="app-mr-2">CSV</button>
+							</mat-card-content>
+							<mat-card *ngIf="!isResultAuthor" class="app-view-alert app-info">
+								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+							</mat-card>
+						</mat-card>
+					</div>
+				</ng-container>
+				<ng-container  *ngIf="view == 'mostViewedDocuments'">
+					<mat-card *ngIf="(table | keyvalue).length > 1" class="app-card app-view-border">
+						<mat-card-content>
+							<ng-container *ngFor="let item of table | keyvalue; let last = last">
+								<div class="app-mb-4" [class.app-mb-n4]="last">
+									<ng-container *ngIf="item.value.length > 0">
+										<h3 class="app-mt-0 app-mb-2">{{item.key}}</h3>
+										<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
+											<thead>
+												<tr>
+													<th class="app-first">Počet zobrazení</th>
+													<th>Dílo</th>
+													<th class="app-last"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr *ngFor="let v of item.value;">
+													<td>{{v.count}}</td>
+													<td> 
+														<div [class.app-text-cutter-wrapper]="!selection[v.pid]">
+															<div [class.app-text-cutter]="!selection[v.pid]">
+																<a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank" [matTooltip]="v.title">{{ v.title }}</a>
+															</div>
+														</div>
+														<div *ngIf="selection[v.pid]">
+															hovno<br />
+															zase
+														</div>
+													</td>
+													<td>
+														<a (click)="showMore(v.pid)" fxLayout="row" fxLayoutAlign="start center" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
+															<mat-icon>expand_more</mat-icon>
+															{{ selection[v.pid] ? ('Skryt detail' | translate) : ('Zobrazit detail' | translate) }}
+														</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</ng-container>
+								</div>
+							</ng-container>
+						</mat-card-content>
+					</mat-card>
+					<mat-card *ngIf="(table | keyvalue).length === 1" class="app-view-alert app-info">
+						<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+					</mat-card>
+				</ng-container>
+			</div>
+			</div>
+  </div>
+	
+	
+	
+	
+	
+	
+	<!-- <div class="app-mt-4 app-text-right">
 		<mat-form-field class="app-mr-2">
 			<mat-label>Datum od</mat-label>
 			<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
@@ -21,15 +154,6 @@
 	</div>
 	<mat-tab-group>
 		<mat-tab label="Statistiky">
-			<!-- <mat-card class="app-card app-view-border app-mb-4 app-mt-4">
-				<mat-card-content>	
-					<strong class="app-mr-2">k7Admin</strong>
-					<span class="app-badge app-version app-mr-2">verze {{getVersion()}}</span>
-					<span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
-					<span class="app-pipe"></span>
-					<strong class="app-mr-2">Připojená instance: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
-				</mat-card-content>
-			</mat-card> -->
 			<div fxLayout="row" fxLayoutGap="16px" class="app-mt-4">
 				<mat-card fxFlex class="app-card app-view-border" *ngIf="isResult">
 					<mat-card-header>
@@ -87,5 +211,5 @@
 				</mat-card-content>
 			</mat-card>
 		</mat-tab>
-	</mat-tab-group>
+	</mat-tab-group> -->
 </div>
