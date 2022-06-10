@@ -3,12 +3,24 @@
     tr {
       th {
         &.app-first {
-          width: 150px;
+          width: 180px;
         }
 
         &.app-last {
           width: 140px;
         }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        &:not(.app-col-detail) {
+          div {
+            line-height: 20px;
+          }
+        }       
       }
     }
   }

@@ -46,9 +46,38 @@
       "scrollToThePageNumber": "Go to page"
     }
   },
+  "button": {
+    "showDetail": "Show detail",
+    "hideDetail": "Hide detail"
+  },
+  "field": {
+    "archive": "Archive",
+    "article": "Article",
+    "convolute": "Convolute",
+    "graphic": "Graphic",
+    "map": "Map",
+    "monograph": "Monograph",
+    "periodical": "Periodical",
+    "soundrecording": "Soundrecording"
+  },
   "desc": {
     "modelDisplayStatistics": "Model display statistics",
     "statisticsOfUsedLanguages": "Statistics of used languages",
-    "authorStatistics": "Author statistics"
+    "authorStatistics": "Author statistics",
+    "dateFrom": "Date form",
+    "dateTo": "Date to",
+    "license": "License",
+    "numberOfImpressions": "Number of impressions",
+    "work": "Work",
+    "author": "Author",
+    "publishingData": "Publishing data",
+    "documentType": "Document type",
+    "keywords": "Keywords",
+    "language": "Language",
+    "storageLocation": "Storage location",
+    "physicalDescription": "Physical description",
+    "abstract": "Abstract",
+    "comment": "Comment",
+    "page": "Page"
   }
 }

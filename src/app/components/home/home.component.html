@@ -18,19 +18,19 @@
 			<div class="app-container">
 				<div>
 					<mat-form-field class="app-mr-2">
-						<mat-label>Datum od</mat-label>
+						<mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
 						<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
 						<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
 						<mat-datepicker #from></mat-datepicker>
 					</mat-form-field>
 					<mat-form-field class="app-mr-2">
-						<mat-label>Datum do</mat-label>
+						<mat-label>{{ 'desc.dateTo' | translate }}</mat-label>
 						<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
 						<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
 						<mat-datepicker #to></mat-datepicker>
 					</mat-form-field>
 					<mat-form-field>
-						<mat-label>Licence</mat-label>
+						<mat-label>{{ 'desc.license' | translate }}</mat-label>
 						<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
 							<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
 						</mat-select>
@@ -82,38 +82,41 @@
 							<ng-container *ngFor="let item of table | keyvalue; let last = last">
 								<div class="app-mb-4" [class.app-mb-n4]="last">
 									<ng-container *ngIf="item.value.length > 0">
-										<h3 class="app-mt-0 app-mb-2">{{item.key}}</h3>
+										<h3 class="app-mt-0 app-mb-2">{{ 'field.' + item.key | translate }}</h3>
 										<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
 											<thead>
 												<tr>
-													<th class="app-first">Počet zobrazení</th>
-													<th>Dílo</th>
+													<th class="app-first">{{ 'desc.numberOfImpressions' | translate }}</th>
+													<th>{{ 'desc.work' | translate }}</th>
 													<th class="app-last"></th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr *ngFor="let v of item.value;">
 													<td>{{v.count}}</td>
-													<td> 
+													<td [class.app-detail-expanded]="selection[v.pid]"> 
 														<div [class.app-text-cutter-wrapper]="!selection[v.pid]">
 															<div [class.app-text-cutter]="!selection[v.pid]">
 																<a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank" [matTooltip]="v.title">{{ v.title }}</a>
 															</div>
 														</div>
-														<div *ngIf="selection[v.pid]" class="app-metadata app-mt-1">
-															<div><label class="app-label">Autor:</label> Pokorný, Václav Jan, Klášter Rajhrad</div>
-															<div><label class="app-label">Nakladatelské údaje:</label> 1913-1948</div>
-															<div><label class="app-label">Typ dokumentu:</label> Úřední písemnosti, Archivní fondy</div>
-															<div><label class="app-label">Klíčová slova:</label> Pokorný, Václav Jan, Klášter Rajhrad</div>
-															<div><label class="app-label">Jazyk:</label> Latina, Čeština</div>
-															<div><label class="app-label">Místo uložení:</label> <a href=""> Moravská zemská knihovna v Brně</a>, Signatura: BOE950R - A - D. n. 34</div>
-															<div><label class="app-label">Fyzický popis:</label> Rozsah: 27 fol.</div>
+														<div *ngIf="selection[v.pid]" class="app-metadata">
+															<div><label class="app-label">{{ 'desc.author' | translate }}</label> Pokorný, Václav Jan, Klášter Rajhrad</div>
+															<div><label class="app-label">{{ 'desc.publishingData' | translate }}</label> 1913-1948</div>
+															<div><label class="app-label">{{ 'desc.documentType' | translate }}</label> Úřední písemnosti, Archivní fondy</div>
+															<div><label class="app-label">{{ 'desc.keywords' | translate }}</label> Pokorný, Václav Jan, Klášter Rajhrad</div>
+															<div><label class="app-label">{{ 'desc.language' | translate }}</label> Latina, Čeština</div>
+															<div><label class="app-label">{{ 'desc.storageLocation' | translate }}</label> <a href=""> Moravská zemská knihovna v Brně</a>, Signatura: BOE950R - A - D. n. 34</div>
+															<div><label class="app-label">{{ 'desc.physicalDescription' | translate }}</label> Rozsah: 27 fol.</div>
+															<div><label class="app-label">{{ 'desc.abstract' | translate }}</label> Žádosti o přijetí do noviciátu, doklady o kněžském svěcení (5. 7. 1918), domovský list, dekret o jmenování konservátorem ministerstva školství a osvěty pro státní památkovou péči ve správním okresu Moravský Krumlov (23. 5. 1947) aj.</div>
+															<div><label class="app-label">{{ 'desc.comment' | translate }}</label> Latinský a český text, Psáno: Humanistickou kurzívou, též strojopis a tisk, Moravský zemský archiv v Brně.</div>
+															<div><label class="app-label">{{ 'desc.page' | translate }}</label> 1</div>
 														</div>
 													</td>
 													<td class="app-col-detail">
 														<a (click)="showMore(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
 															<mat-icon>expand_more</mat-icon>
-															{{ selection[v.pid] ? ('Skryt detail' | translate) : ('Zobrazit detail' | translate) }}
+															{{ selection[v.pid] ? ('button.hideDetail' | translate) : ('button.showDetail' | translate) }}
 														</a>
 													</td>
 												</tr>

@@ -46,9 +46,38 @@
       "scrollToThePageNumber": "Přejít na stránku"
     }
   },
+  "button": {
+    "showDetail": "Zobrazit detail",
+    "hideDetail": "Skrýt detail"
+  },
+  "field": {
+    "archive": "Archiv",
+    "article": "Článek",
+    "convolute": "Sbírka",
+    "graphic": "Grafika",
+    "map": "Mapa",
+    "monograph": "Monografie",
+    "periodical": "Časopis",
+    "soundrecording": "Zvuková nahrávka"
+  },
   "desc": {
     "modelDisplayStatistics": "Statistiky zobrazení modelů",
     "statisticsOfUsedLanguages": "Statistiky použitých jazyků",
-    "authorStatistics": "Statistiky autorů"
+    "authorStatistics": "Statistiky autorů",
+    "dateFrom": "Datum od",
+    "dateTo": "Datum do",
+    "license": "Licence",
+    "numberOfImpressions": "Počet zobrazení",
+    "work": "Dílo",
+    "author": "Autor",
+    "publishingData": "Nakladatelské údaje",
+    "documentType": "Typ dokumentu",
+    "keywords": "Klíčová slova",
+    "language": "Jazyk",
+    "storageLocation": "Místo uložení",
+    "physicalDescription": "Fyzický popis",
+    "abstract": "Abstrakt",
+    "comment": "Poznámky",
+    "page": "Strana"
   }
 }
