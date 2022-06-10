@@ -9,6 +9,14 @@ a {
 
   &:hover {
     color: rgba($app-color-primary, .7);
+
+    &:not(.mat-toolbar &) {
+      text-decoration: underline;
+
+      &.app-tdn {
+        text-decoration: none;
+      }
+    }
   }
 }
 
@@ -48,6 +56,10 @@ a {
 
 .app-dn {
   display: none;
+}
+
+.app-d-contents {
+  display: contents;
 }
 
 .app-vh {

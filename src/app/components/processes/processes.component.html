@@ -90,7 +90,7 @@
           <ng-container matColumnDef="expand">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" matTooltip="Zobrazit podprocesy" class="app-fix-expanded">
+              <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" matTooltip="Zobrazit podprocesy" class="app-fix-expanded app-tdn">
                 <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
               </a>
               <ng-container *ngIf="element.expanded">

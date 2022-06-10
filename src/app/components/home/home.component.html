@@ -111,7 +111,7 @@
 														</div>
 													</td>
 													<td class="app-col-detail">
-														<a (click)="showMore(v.pid)" fxLayout="row" fxLayoutAlign="start center" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
+														<a (click)="showMore(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
 															<mat-icon>expand_more</mat-icon>
 															{{ selection[v.pid] ? ('Skryt detail' | translate) : ('Zobrazit detail' | translate) }}
 														</a>
