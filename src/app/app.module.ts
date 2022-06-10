@@ -48,7 +48,7 @@ import { LicensesComponent } from './components/access/licenses/licenses.compone
 import { RolesComponent } from './components/access/roles/roles.component';
 import { NewRoleDialogComponent } from './dialogs/new-role-dialog/new-role-dialog.component';
 import { LocalStorageService } from './services/local-storage.service';
-import { ActionsComponent } from './components/access/actions/actions.component';
+import { RightsComponent } from './components/access/rights/rights.component';
 import { NewRightDialogComponent } from './dialogs/new-right-dialog/new-right-dialog.component';
 import { ParamsComponent } from './components/access/params/params.component';
 import { ImportComponent } from './components/import/import.component';
@@ -122,7 +122,7 @@ export function createCustomMatPaginatorIntl(
     NewLicenseDialogComponent,
     RolesComponent,
     NewRoleDialogComponent,
-    ActionsComponent,
+    RightsComponent,
     NewRightDialogComponent,
     ParamsComponent,
     ImportComponent,

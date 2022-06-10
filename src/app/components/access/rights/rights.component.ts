@@ -9,11 +9,11 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  selector: 'app-actions',
-  templateUrl: './actions.component.html',
-  styleUrls: ['./actions.component.scss']
+  selector: 'app-rights',
+  templateUrl: './rights.component.html',
+  styleUrls: ['./rights.component.scss']
 })
-export class ActionsComponent implements OnInit {
+export class RightsComponent implements OnInit {
 
   state: string;
   // roles: any[];

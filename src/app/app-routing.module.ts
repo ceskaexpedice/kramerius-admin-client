@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'repository', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
-  { path: 'rights', component: AccessComponent, canActivate: [AuthGuard] },
+  { path: 'access', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'import', component: ImportComponent, canActivate: [AuthGuard] }
 ];
 
