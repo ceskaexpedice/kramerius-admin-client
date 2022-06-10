@@ -7,6 +7,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ImportService } from 'src/app/services/import.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-import',
@@ -25,7 +26,8 @@ export class ImportComponent implements OnInit {
     private dialog: MatDialog,
     private ui: UIService,
     public imports: ImportService,
-    private local: LocalStorageService) { }
+    private local: LocalStorageService,
+    private router: Router) { }
 
   ngOnInit() {
     this.ndkPublic = true;
@@ -137,5 +139,12 @@ export class ImportComponent implements OnInit {
   clearPath() {
     this.imports.selectedTree = null;
   }
-
+  
+  getCurrentRoute(type: string) {
+    if (type === 'string') {
+      return this.router.url.replace('/', '');
+    } else {
+      return this.router.url;
+    }
+  } 
 }

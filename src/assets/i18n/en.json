@@ -12,7 +12,8 @@
   "breadcrumbs": {
     "statistics": "Statistics",
     "mostViewedDocuments": "Most viewed documents",
-    "actions": "Rights",
+    "access": "Right of administration",
+    "rights": "Rights",
     "roles": "Roles",
     "licenses": "Licences",
     "params": "Parameters"
@@ -49,7 +50,10 @@
   "button": {
     "showDetail": "Show detail",
     "hideDetail": "Hide detail",
-    "startImport": "Start import"
+    "startImport": "Start import",
+    "addRight": "Add right",
+    "editRight": "Edit right",
+    "deleteRight": "Delete right"
   },
   "field": {
     "archive": "Archive",
@@ -83,6 +87,9 @@
     "scheduleSubsequentIndexing": "Schedule subsequent indexing",
     "post": "Post",
     "selectedPath": "Selected path",
-    "deselect": "Deselect"
+    "deselect": "Deselect",
+    "role": "Role",
+    "condition": "Condition",
+    "parameter": "Parameter"
   }
 }

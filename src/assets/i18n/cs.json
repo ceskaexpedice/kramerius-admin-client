@@ -12,7 +12,8 @@
   "breadcrumbs": {
     "statistics": "Statistiky",
     "mostViewedDocuments": "Nejvíce zobrazované dokumenty",
-    "actions": "Práva",
+    "access": "Správa oprávnění",
+    "rights": "Práva",
     "roles": "Role",
     "licenses": "Licence",
     "params": "Parametry"
@@ -49,7 +50,10 @@
   "button": {
     "showDetail": "Zobrazit detail",
     "hideDetail": "Skrýt detail",
-    "startImport": "Spustit import"
+    "startImport": "Spustit import",
+    "addRight": "Přidat právo",
+    "editRight": "Editovat právo",
+    "deleteRight": "Smazat právo"
   },
   "field": {
     "archive": "Archiv",
@@ -83,6 +87,9 @@
     "scheduleSubsequentIndexing": "Naplánovat následnou indexaci",
     "post": "Zveřejnit",
     "selectedPath": "Zvolená cesta",
-    "deselect": "Zrušit výběr"
+    "deselect": "Zrušit výběr",
+    "role": "Role",
+    "condition": "Podmínka",
+    "parameter": "Parametr"
   }
 }

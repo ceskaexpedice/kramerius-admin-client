@@ -17,10 +17,10 @@
         <table [cellPadding]="0" [cellSpacing]="0" class="app-table app-mt-4">
           <thead>
             <tr>
-              <th>Role</th>
-              <th>Podmínka</th>
-              <th>Parametr</th>
-              <th>Licence</th>
+              <th>{{ 'desc.role' | translate }}</th>
+              <th>{{ 'desc.condition' | translate }}</th>
+              <th>{{ 'desc.parameter' | translate }}</th>
+              <th>{{ 'desc.license' | translate }}</th>
               <th colspan="2"></th>
             </tr>
           </thead>
@@ -31,10 +31,10 @@
               <td>{{ right.condition && right.condition.params && right.condition.params.description ? right.condition.params.description : "-"}}</td>
               <td>{{ right.hasLicense() ? right.condition.license : "-"}}</td>
               <td class="app-col-action">
-                <a (click)="onEditRight(right)" matTooltip="Editovat právo"><mat-icon>edit</mat-icon></a>
+                <a (click)="onEditRight(right)" [matTooltip]="'button.editRight' | translate"><mat-icon>edit</mat-icon></a>
               </td>
               <td class="app-col-action">
-                <a (click)="onRemoveRight(action, right)" matTooltip="Smazat právo"><mat-icon>delete</mat-icon></a>
+                <a (click)="onRemoveRight(action, right)" [matTooltip]="'button.deleteRight' | translate"><mat-icon>delete</mat-icon></a>
               </td>
             </tr>
           </tbody>
@@ -42,7 +42,7 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-flat-button (click)="onNewRight(action)" color="primary">
-          Přidat právo
+          {{ 'button.addRight' | translate }}
         </button>
       </mat-card-actions> 
     </ng-container>

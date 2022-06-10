@@ -5,7 +5,7 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a routerLink="/import">import</a>
+        <a [routerLink]="getCurrentRoute('path')">{{ getCurrentRoute('string') }}</a>
         <span class="app-separator">/</span>
         <span class="app-last">{{ type }}</span>
       </div>
