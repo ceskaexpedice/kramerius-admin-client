@@ -48,7 +48,8 @@
   },
   "button": {
     "showDetail": "Zobrazit detail",
-    "hideDetail": "Skrýt detail"
+    "hideDetail": "Skrýt detail",
+    "startImport": "Spustit import"
   },
   "field": {
     "archive": "Archiv",
@@ -78,6 +79,9 @@
     "physicalDescription": "Fyzický popis",
     "abstract": "Abstrakt",
     "comment": "Poznámky",
-    "page": "Strana"
+    "page": "Strana",
+    "scheduleSubsequentIndexing": "Naplánovat následnou indexaci",
+    "post": "Zveřejnit",
+    "selectedPath": "Zvolená cesta"
   }
 }

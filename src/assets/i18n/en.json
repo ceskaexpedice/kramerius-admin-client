@@ -48,7 +48,8 @@
   },
   "button": {
     "showDetail": "Show detail",
-    "hideDetail": "Hide detail"
+    "hideDetail": "Hide detail",
+    "startImport": "Start import"
   },
   "field": {
     "archive": "Archive",
@@ -78,6 +79,9 @@
     "physicalDescription": "Physical description",
     "abstract": "Abstract",
     "comment": "Comment",
-    "page": "Page"
+    "page": "Page",
+    "scheduleSubsequentIndexing": "Schedule subsequent indexing",
+    "post": "Post",
+    "selectedPath": "Selected path"
   }
 }
