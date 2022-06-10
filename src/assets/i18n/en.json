@@ -82,6 +82,7 @@
     "page": "Page",
     "scheduleSubsequentIndexing": "Schedule subsequent indexing",
     "post": "Post",
-    "selectedPath": "Selected path"
+    "selectedPath": "Selected path",
+    "deselect": "Deselect"
   }
 }

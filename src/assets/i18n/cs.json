@@ -82,6 +82,7 @@
     "page": "Strana",
     "scheduleSubsequentIndexing": "Naplánovat následnou indexaci",
     "post": "Zveřejnit",
-    "selectedPath": "Zvolená cesta"
+    "selectedPath": "Zvolená cesta",
+    "deselect": "Zrušit výběr"
   }
 }
