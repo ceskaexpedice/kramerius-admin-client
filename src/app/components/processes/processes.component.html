@@ -30,7 +30,7 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a routerLink="/processes">procesy</a>
+        <span class="app-last">procesy</span>
         <!-- <span class="app-separator">/</span>
         <span class="app-last">{{ view }}</span> -->
       </div>
@@ -130,13 +130,13 @@
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
                 <div class="app-badge" [ngClass]="element.getStateClass()">
-                  {{ element.getStateLabel() }}
+                  {{ 'batch.' + element.state | translate }}
                 </div>
               </span>
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded">
                   <div class="app-badge" [ngClass]="element.getStateClass()">
-                    {{ p.getStateLabel() }}
+                    {{ 'batch.' + p.state | translate }}
                   </div>
                 </div>
               </ng-container>

@@ -1,4 +1,100 @@
-<div class="app-container-fluid app-process app-h-100" *ngIf="process">
+<div class="app-home app-h-100">
+	<div fxLayout="column" fxFlexFill>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <a routerLink="/processes">{{ 'navbar.processes' | translate }}</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ getCurrentRoute('string') }}</span>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'breadcrumbs.' + view | translate }}</span>
+      </div>
+      <div>
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link (click)="changeView('standardOutput')" [active]="view == 'standardOutput'"><mat-icon class="material-icons-outlined">output</mat-icon>{{ 'tabnav.standardOutput' | translate }}</a>
+          <a mat-tab-link (click)="changeView('errorOutput')"  [active]="view == 'errorOutput'"><mat-icon class="material-icons-outlined">error_outline</mat-icon>{{ 'tabnav.errorOutput' | translate }}</a>
+        </nav>
+      </div>
+    </div>
+    <div fxFlex class="app-oa-y">
+			<div class="app-container-fluid">
+        <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+          <div class="app-left">
+            <mat-card class="app-card app-view-border app-mb-4">
+              <mat-card-header>
+                <mat-card-title>{{ 'desc.process' | translate }}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="app-badge app-mb-4" [ngClass]="batch.getStateClass()">{{ 'batch.' + process.state | translate }}</div>
+                <div *ngIf="process.planned" class="app-mb-4">
+                  <div class="app-label">{{ 'desc.scheduled' | translate }}</div>
+                  <div>{{ process.planned | appDatetime }}</div>
+                </div>
+                <div *ngIf="process.started" class="app-mb-4">
+                  <div class="app-label">{{ 'desc.running' | translate }}</div>
+                  <div>{{ process.started | appDatetime }}</div>
+                </div>
+                <div *ngIf="process.finished" class="app-mb-4">
+                  <div class="app-label">{{ 'desc.finished' | translate }}</div>
+                  <div>{{ process.finished | appDatetime }}</div>
+                </div>
+                <div *ngIf="process.getDuration(loadedTimestamp)">
+                  <div class="app-label">{{ 'desc.duration' | translate }}</div>
+                  <div>{{ process.getDuration(loadedTimestamp) | appDuration }}</div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            <mat-card class="app-card app-view-border">
+              <mat-card-header>
+                <mat-card-title>{{ 'desc.batch' | translate }}</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="app-badge app-mb-4" [ngClass]="batch.getStateClass()">{{ 'batch.' + process.state | translate }}</div>
+                <div *ngIf="process.planned" class="app-mb-4">
+                  <div class="app-label">{{ 'desc.scheduled' | translate }}</div>
+                  <div>{{ batch.planned | appDatetime }}</div>
+                </div>
+                <div *ngIf="process.started" class="app-mb-4">
+                  <div class="app-label">{{ 'desc.running' | translate }}</div>
+                  <div>{{ batch.started | appDatetime }}</div>
+                </div>
+                <div *ngIf="process.finished" class="app-mb-4">
+                  <div class="app-label">{{ 'desc.finished' | translate }}</div>
+                  <div>{{ batch.finished | appDatetime }}</div>
+                </div>
+                <div *ngIf="process.getDuration(loadedTimestamp)">
+                  <div class="app-label">{{ 'desc.duration' | translate }}</div>
+                  <div>{{ batch.getDuration(loadedTimestamp) | appDuration }}</div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-flat-button *ngIf="batch.isKillable()" (click)="onKill(batch)" color="primary">{{ 'button.stop' | translate }}</button>
+                <button mat-flat-button *ngIf="batch.isDeletable()" (click)="onRemove(batch)" color="primary">{{ 'button.delete' | translate }}</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+          <mat-card fxFlex class="app-right" class="app-card app-view-border">
+            <app-process-logs *ngIf="view === 'standardOutput'" [process]="process" [logType]="'out'" [urlOutUrl]="logOutUrl()"></app-process-logs>
+            <app-process-logs *ngIf="view === 'errorOutput'" [process]="process" [logType]="'err'" [urlOutUrl]="logErrUrl()"></app-process-logs>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="app-container-fluid app-process app-h-100" *ngIf="process">
   <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
     <div class="app-left">
       <mat-card class="app-card app-view-border app-mb-4">
@@ -65,4 +161,4 @@
       </mat-tab-group>
     </mat-card>
   </div>
-</div>
+</div> -->

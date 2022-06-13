@@ -10,7 +10,7 @@ a {
   &:hover {
     color: rgba($app-color-primary, .7);
 
-    &:not(.mat-toolbar &, .mat-tab-nav-bar &) {
+    &:not(.mat-toolbar &, .mat-tab-nav-bar &, .mat-flat-button) {
       text-decoration: underline;
 
       &.app-tdn {

@@ -16,7 +16,9 @@
     "rights": "Rights",
     "roles": "Roles",
     "licenses": "Licences",
-    "params": "Parameters"
+    "params": "Parameters",
+    "standardOutput": "Standard output",
+    "errorOutput": "Error output"
   },
   "tabnav": {
     "statistics": "Statistics",
@@ -24,12 +26,23 @@
     "rights": "Rights",
     "roles": "Roles",
     "licenses": "Licenses",
-    "parameters": "Parameters"
+    "parameters": "Parameters",
+    "standardOutput": "Standard output",
+    "errorOutput": "Error output"
   },
   "alert": {
     "statistics": {
       "noData": "No data available"
     }
+  },
+  "batch": {
+    "PLANNED": "Planned",
+    "RUNNING": "Running",
+    "FINISHED": "Finished",
+    "FAILED": "Failed",
+    "KILLED": "Killed",
+    "NOT_RUNNING": "Not running",
+    "WARNING": "Warning"
   },
   "paginator": {
     "desc": {
@@ -67,7 +80,11 @@
     "deleteParameter": "Delete parameter",
     "addValue": "Add value",
     "editValue": "Edit value",
-    "deleteValue": "Delete value"
+    "deleteValue": "Delete value",
+    "delete": "Delete",
+    "downloadStandardOutput": "Download standard output",
+    "downloadErrorOutput": "Download error output",
+    "stop": "Stop"
   },
   "field": {
     "archive": "Archive",
@@ -105,6 +122,12 @@
     "role": "Role",
     "condition": "Condition",
     "parameter": "Parameter",
-    "value": "Value"
+    "value": "Value",
+    "process": "Process",
+    "batch": "Batch",
+    "scheduled": "Scheduled",
+    "running": "Running",
+    "finished": "Finished",
+    "duration": "Duration"
   }
 }

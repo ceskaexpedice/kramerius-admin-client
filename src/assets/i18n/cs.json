@@ -16,7 +16,9 @@
     "rights": "Práva",
     "roles": "Role",
     "licenses": "Licence",
-    "params": "Parametry"
+    "params": "Parametry",
+    "standardOutput": "Standarní výstup",
+    "errorOutput": "Chybový výstup"
   },
   "tabnav": {
     "statistics": "Statistiky",
@@ -24,12 +26,23 @@
     "rights": "Práva",
     "roles": "Role",
     "licenses": "Licence",
-    "parameters": "Parametry"
+    "parameters": "Parametry",
+    "standardOutput": "Standarní výstup",
+    "errorOutput": "Chybový výstup"
   },
   "alert": {
     "statistics": {
       "noData": "K dispozici nejsou žádná data"
     }
+  },
+  "batch": {
+    "PLANNED": "Naplánováno",
+    "RUNNING": "Běží",
+    "FINISHED": "Dokončeno",
+    "FAILED": "Chyba",
+    "KILLED": "Zrušeno",
+    "NOT_RUNNING": "Nespuštěno",
+    "WARNING": "Varování"
   },
   "paginator": {
     "desc": {
@@ -67,7 +80,11 @@
     "deleteParameter": "Smazat parametr",
     "addValue": "Přidat hodnotu",
     "editValue": "Editovat hodnotu",
-    "deleteValue": "Smazat hodnotu"
+    "deleteValue": "Smazat hodnotu",
+    "delete": "Smazat",
+    "downloadStandardOutput": "Stáhnout standarní výstup",
+    "downloadErrorOutput": "Stáhnout chybový výstup",
+    "stop": "Zastavit"
   },
   "field": {
     "archive": "Archiv",
@@ -105,6 +122,12 @@
     "role": "Role",
     "condition": "Podmínka",
     "parameter": "Parametr",
-    "value": "Hodnota"
+    "value": "Hodnota",
+    "process": "Proces",
+    "batch": "Dávka",
+    "scheduled": "Naplánován",
+    "running": "Spuštěn",
+    "finished": "Ukončen",
+    "duration": "Trvání"
   }
 }

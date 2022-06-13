@@ -6,6 +6,7 @@ import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-process',
@@ -20,12 +21,21 @@ export class ProcessComponent implements OnInit {
   process: Process;
   log = 'out';
 
+  view: string;
+
   // when current data was loaded
   loadedTimestamp;
 
-  constructor(private route: ActivatedRoute, private adminApi: AdminApiService, private dialog: MatDialog, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private adminApi: AdminApiService, 
+    private dialog: MatDialog, 
+    private router: Router,  
+    private local: LocalStorageService) { }
 
   ngOnInit() {
+    this.view = this.local.getStringProperty('processes.view', 'standardOUtput');
+
     this.route.params.subscribe(params => {
       this.processId = params['id'];
       this.reload();
@@ -129,5 +139,19 @@ export class ProcessComponent implements OnInit {
   logErrFilename() {
     return `process_${String(this.process.id)}_err.txt`;
   }
+
+  changeView(view: string) {
+    this.view = view;
+    this.local.setStringProperty('processes.view', view);
+  }
+
+  getCurrentRoute(type: string) {
+    if (type === 'string') {
+      return this.router.url.replace('/processes/', '');
+    } else {
+      return this.router.url;
+    }
+  } 
+
 
 }
