@@ -29,12 +29,28 @@
 						<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
 						<mat-datepicker #to></mat-datepicker>
 					</mat-form-field>
-					<mat-form-field>
+					<!-- redady to implement for each filter same as is in processes-->
+					<!-- <a mat-icon-button [matTooltip]="'desc.deselect' | translate" class="app-clear-filter app-mr-2">
+            <mat-icon>cancel</mat-icon>
+          </a> -->
+					<mat-form-field class="app-mr-2">
 						<mat-label>{{ 'desc.license' | translate }}</mat-label>
 						<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
 							<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
 						</mat-select>
 					</mat-form-field>
+					<!-- redady to implement for each filter same as is in processes-->
+					<!-- <a mat-icon-button [matTooltip]="'desc.deselect' | translate" class="app-clear-filter app-mr-2">
+            <mat-icon>cancel</mat-icon>
+          </a> -->
+					<!-- <mat-form-field>
+						<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
+						<input matInput placeholder="Pid / Čnb / Issn / Issbn">
+					</mat-form-field> -->
+					<!-- redady to implement for each filter same as is in processes-->
+					<!-- <a mat-icon-button [matTooltip]="'desc.deselect' class="app-clear-filter app-mr-2">
+            <mat-icon>cancel</mat-icon>
+          </a> -->
 				</div>
 				<ng-container  *ngIf="view == 'statistics'">
 					<div fxLayout="row" fxLayoutGap="16px">
