@@ -53,7 +53,10 @@
     "startImport": "Spustit import",
     "addRight": "Přidat právo",
     "editRight": "Editovat právo",
-    "deleteRight": "Smazat právo"
+    "deleteRight": "Smazat právo",
+    "addRole": "Přidat roli",
+    "editRole": "Editovat roli",
+    "deleteRole": "Smazat roli"
   },
   "field": {
     "archive": "Archiv",

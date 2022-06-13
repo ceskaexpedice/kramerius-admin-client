@@ -53,7 +53,10 @@
     "startImport": "Start import",
     "addRight": "Add right",
     "editRight": "Edit right",
-    "deleteRight": "Delete right"
+    "deleteRight": "Delete right",
+    "addRole": "Add role",
+    "editRole": "Edit role",
+    "deleteRole": "Delete role"
   },
   "field": {
     "archive": "Archive",

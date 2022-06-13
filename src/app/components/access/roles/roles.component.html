@@ -7,12 +7,12 @@
         <mat-card-title class="app-p-0 app-m-0">{{ role.name }}</mat-card-title>
       </div>
       <div class="app-right app-actions">
-        <a (click)="onEditRole(role)" class="app-btn" matTooltip="Editovat roli"><mat-icon>edit</mat-icon></a>
-        <a (click)="onRemoveRole(role)" class="app-btn" matTooltip="Smazat roli"><mat-icon>delete</mat-icon></a>     
+        <a (click)="onEditRole(role)" class="app-btn" [matTooltip]="'button.editRole' | translate"><mat-icon>edit</mat-icon></a>
+        <a (click)="onRemoveRole(role)" class="app-btn" [matTooltip]="'button.deleteRole' | translate"><mat-icon>delete</mat-icon></a>     
       </div>
     </mat-card-header>
   </mat-card>
   <button mat-flat-button (click)="onNewRole()" color="primary" class="app-m-4">
-    Přidat roli
+    {{ 'button.addRole' | translate }}
   </button>
 </ng-container>
