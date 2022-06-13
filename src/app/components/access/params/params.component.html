@@ -7,8 +7,8 @@
         <mat-card-title class="app-m-0 app-p-0"><span [matBadge]="param.values.length" matBadgeOverlap="false" matBadgeColor="primary">{{ param.description }}</span></mat-card-title>
       </div>
       <div class="app-right app-actions">
-        <a (click)="onEditParam(param)" matTooltip="Editovat parametr"><mat-icon>edit</mat-icon></a>
-        <a (click)="onRemoveParam(param)" matTooltip="Smazat parametr"><mat-icon>delete</mat-icon></a>
+        <a (click)="onEditParam(param)" [matTooltip]="'button.editParameter' | translate"><mat-icon>edit</mat-icon></a>
+        <a (click)="onRemoveParam(param)" [matTooltip]="'button.deleteParameter' | translate"><mat-icon>delete</mat-icon></a>
         <a (click)="selectedParam = param" *ngIf="selectedParam != param" class="app-ico-expand"><mat-icon>expand_more</mat-icon></a>
         <a (click)="selectedParam = null" *ngIf="selectedParam == param" class="app-ico-expand"><mat-icon>expand_less</mat-icon></a>
       </div>
@@ -18,7 +18,7 @@
         <table [cellPadding]="0" [cellSpacing]="0" class="app-table app-mt-4">
           <thead>
             <tr>
-              <th>Hodnota</th>
+              <th>{{ 'desc.value' | translate }}</th>
               <th colspan="2"></th>
             </tr>
           </thead>
@@ -26,10 +26,10 @@
             <tr *ngFor="let value of param.values; let index = index">
               <td> {{ value }}</td>
               <td class="app-col-action">
-                <a (click)="onEditValue(param, index)" matTooltip="Editovat hodnotu"><mat-icon>edit</mat-icon></a>
+                <a (click)="onEditValue(param, index)" [matTooltip]="'button.editValue' | translate"><mat-icon>edit</mat-icon></a>
               </td>
               <td class="app-col-action">
-                <a (click)="onRemoveValue(param, index)" matTooltip="Smazat hodnotu"><mat-icon>delete</mat-icon></a>
+                <a (click)="onRemoveValue(param, index)" [matTooltip]="'button.editValue' | translate"><mat-icon>delete</mat-icon></a>
               </td>
             </tr>
           </tbody>
@@ -37,12 +37,12 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-flat-button (click)="onNewValue(param)" color="primary">
-          Přidat hodnotu
+          {{ 'button.addValue' | translate }}
         </button>
       </mat-card-actions> 
     </ng-container>
   </mat-card>
   <button mat-flat-button (click)="onNewParam()" color="primary" class="app-m-4">
-    Přidat parametr
+    {{ 'button.addParameter' | translate }}
   </button>
 </ng-container>

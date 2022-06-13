@@ -61,7 +61,13 @@
     "editLicense": "Editovat licenci",
     "deleteLicense": "Smazat licenci",
     "moveUp": "Posunout nahoru",
-    "moveDown": "Posunout dolu"
+    "moveDown": "Posunout dolu",
+    "addParameter": "Přidat parametr",
+    "editParameter": "Editovat parametr",
+    "deleteParameter": "Smazat parametr",
+    "addValue": "Přidat hodnotu",
+    "editValue": "Editovat hodnotu",
+    "deleteValue": "Smazat hodnotu"
   },
   "field": {
     "archive": "Archiv",
@@ -98,6 +104,7 @@
     "deselect": "Zrušit výběr",
     "role": "Role",
     "condition": "Podmínka",
-    "parameter": "Parametr"
+    "parameter": "Parametr",
+    "value": "Hodnota"
   }
 }

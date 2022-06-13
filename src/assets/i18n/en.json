@@ -61,7 +61,13 @@
     "editLicense": "Edit license",
     "deleteLicense": "Delete license",
     "moveUp": "Move up",
-    "moveDown": "Move down"
+    "moveDown": "Move down",
+    "addParameter": "Add parameter",
+    "editParameter": "Edit parameter",
+    "deleteParameter": "Delete parameter",
+    "addValue": "Add value",
+    "editValue": "Edit value",
+    "deleteValue": "Delete value"
   },
   "field": {
     "archive": "Archive",
@@ -98,6 +104,7 @@
     "deselect": "Deselect",
     "role": "Role",
     "condition": "Condition",
-    "parameter": "Parameter"
+    "parameter": "Parameter",
+    "value": "Value"
   }
 }
