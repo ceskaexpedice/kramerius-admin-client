@@ -56,7 +56,12 @@
     "deleteRight": "Smazat právo",
     "addRole": "Přidat roli",
     "editRole": "Editovat roli",
-    "deleteRole": "Smazat roli"
+    "deleteRole": "Smazat roli",
+    "addLicense": "Přidat licenci",
+    "editLicense": "Editovat licenci",
+    "deleteLicense": "Smazat licenci",
+    "moveUp": "Posunout nahoru",
+    "moveDown": "Posunout dolu"
   },
   "field": {
     "archive": "Archiv",

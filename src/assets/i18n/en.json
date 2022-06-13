@@ -56,7 +56,12 @@
     "deleteRight": "Delete right",
     "addRole": "Add role",
     "editRole": "Edit role",
-    "deleteRole": "Delete role"
+    "deleteRole": "Delete role",
+    "addLicense": "Add license",
+    "editLicense": "Edit license",
+    "deleteLicense": "Delete license",
+    "moveUp": "Move up",
+    "moveDown": "Move down"
   },
   "field": {
     "archive": "Archive",

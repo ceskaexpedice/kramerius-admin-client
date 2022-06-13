@@ -8,14 +8,14 @@
         <mat-card-subtitle>{{ licence.description }}</mat-card-subtitle>
       </div>
       <div class="app-right app-actions">
-        <a *ngIf="!last" (click)="onMoveLiceseDown(licence)" matTooltip="Posunout dolů"><mat-icon>south</mat-icon></a>
-        <a *ngIf="!first" (click)="onMoveLiceseUp(licence)"  matTooltip="Posunout nahoru"><mat-icon>north</mat-icon></a>
-        <a (click)="onEditLicese(licence)"  matTooltip="Editovat licenci"><mat-icon>edit</mat-icon></a>
-        <a (click)="onRemoveLicese(licence)" matTooltip="Smazat licenci"><mat-icon>delete</mat-icon></a>
+        <a *ngIf="!last" (click)="onMoveLiceseDown(licence)" [matTooltip]="'button.moveDown' | translate"><mat-icon>south</mat-icon></a>
+        <a *ngIf="!first" (click)="onMoveLiceseUp(licence)" [matTooltip]="'button.moveUp' | translate"><mat-icon>north</mat-icon></a>
+        <a (click)="onEditLicese(licence)" [matTooltip]="'button.editLicense' | translate"><mat-icon>edit</mat-icon></a>
+        <a (click)="onRemoveLicese(licence)" [matTooltip]="'button.deleteLicense' | translate"><mat-icon>delete</mat-icon></a>
       </div>
     </mat-card-header>
   </mat-card>
   <button mat-flat-button (click)="onNewLicence()" color="primary" class="app-m-4">
-    Přidat licenci
+    {{ 'button.addLicense' | translate }}
   </button>
 </ng-container>
