@@ -18,13 +18,15 @@
         </nav>
       </div>
     </div>
-    <div fxFlex class="app-oh app-container">
-      <mat-card fxLayout="column" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-        <app-rights *ngIf="view == 'rights'"></app-rights>
-        <app-roles *ngIf="view == 'roles'"></app-roles>
-        <app-licenses *ngIf="view == 'licenses'"></app-licenses>
-        <app-params *ngIf="view == 'params'"></app-params>
-      </mat-card>
+    <div fxFlex class="app-oa-y">
+      <div class="app-container">
+        <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
+          <app-rights *ngIf="view == 'rights'"></app-rights>
+          <app-roles *ngIf="view == 'roles'"></app-roles>
+          <app-licenses *ngIf="view == 'licenses'"></app-licenses>
+          <app-params *ngIf="view == 'params'"></app-params>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
