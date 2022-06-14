@@ -101,11 +101,6 @@
     }
   }
 
-  .app-button-wrapper {
-    @extend .app-p-4;
-    background-color: $app-card-bg-hover;
-  }
-
   &.app-view-alert {
     @extend .app-clean-shadow;
     @include setAlertCard();
@@ -120,6 +115,31 @@
         @extend .app-mr-2;
       }
     }
+  }
+
+  &.app-view-dev {
+    position: relative;
+    background-color: rgba($app-color-dev, .1) !important;
+    border: 1px solid rgba($app-color-dev, .4);
+
+    .app-marker {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: $app-color-dev;
+      color: $app-color-lightnes;
+      font-size: 12px;
+      padding: 1px 4px;
+    }
+
+    .mat-flat-button {
+      background-color: $app-color-dev !important;
+    }
+  }
+
+  .app-button-wrapper {
+    @extend .app-p-4;
+    background-color: $app-card-bg-hover;
   }
 }
 

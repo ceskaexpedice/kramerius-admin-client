@@ -6,6 +6,7 @@ $app-color-accent: mat-color($app-accent) !default;
 $app-color-warn: mat-color($app-warn) !default;
 $app-color-lightnes: #ffffff !default;
 $app-color-darknes: #000000 !default;
+$app-color-dev: mat-color($mat-teal, 700) !default;
 
 // gray contrast colors
 $app-gray-0: mat-color($mat-gray, 50) !default;

@@ -90,7 +90,8 @@
     "cancelAllScheduledProcesses": "Zrušit všechny naplánované procesy",
     "showThreads": "Zobrazit podprocesy",
     "deleteProcess": "Smazat proces",
-    "cancelProcess": "Zrušit proces"
+    "cancelProcess": "Zrušit proces",
+    "startTheTestProcess": "Spustit testovací proces"
   },
   "field": {
     "archive": "Archiv",
@@ -138,6 +139,9 @@
     "owner": "Vlastník",
     "from": "Od",
     "to": "Do",
-    "name": "Název"
+    "name": "Název",
+    "finalState": "Konečný stav",
+    "processInTheBatch": "Proces v dávce",
+    "durationOfTheProcess": "Trvání procesu"
   }
 }

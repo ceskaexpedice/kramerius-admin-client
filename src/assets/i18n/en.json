@@ -90,7 +90,8 @@
     "cancelAllScheduledProcesses": "Cancel all scheduled processes",
     "showThreads": "Show threads",
     "deleteProcess": "Delete process",
-    "cancelProcess": "Cancel process"
+    "cancelProcess": "Cancel process",
+    "startTheTestProcess": "Start the test process"
   },
   "field": {
     "archive": "Archive",
@@ -138,6 +139,9 @@
     "owner": "Owner",
     "from": "From",
     "to": "To",
-    "name": "Name"
+    "name": "Name",
+    "finalState": "Final state",
+    "processInTheBatch": "Process in the batch",
+    "durationOfTheProcess": "Duration of the process"
   }
 }

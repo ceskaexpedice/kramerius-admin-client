@@ -1,30 +1,5 @@
 <div class="app-processes app-h-100">
   <div fxLayout="column" fxFlexFill>
-    <mat-card fxLayout="row" fxLayoutAlign="start center" *ngIf="appSettings.devMode" class="app-card app-view-border app-pb-0">
-      <div fxFlex>
-        <mat-form-field class="app-mr-2">
-          <mat-select placeholder="Konečný stav" [(value)]="selectedtestProcessFinalState">
-            <mat-option *ngFor="let state of testProcessFinalStates" [value]="state">{{ state }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-  
-        <mat-form-field class="app-mr-2">
-          <mat-select placeholder="Procesů v dávce" [(value)]="selectedTestProcessProcessesInBatch">
-            <mat-option *ngFor="let processes of testProcessProcessesInBatch" [value]="processes">{{ processes }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-  
-        <mat-form-field class="app-mr-2">
-          <mat-select placeholder="Trvání procesu" [(value)]="selectedTestProcessDuration">
-            <mat-option *ngFor="let duration of testProcessDuration" [value]="duration">{{ duration }} s</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div>
-        <button mat-flat-button (click)="scheduleTestProcess()" [disabled]="isLoading()" color="primary"><mat-icon>play_arrow</mat-icon>Spustit testovací proces</button>
-      </div>
-    </mat-card>
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
@@ -34,6 +9,32 @@
         <!-- <span class="app-separator">/</span>
         <span class="app-last">{{ view }}</span> -->
       </div>
+      <mat-card fxLayout="row" fxLayoutAlign="start center" *ngIf="appSettings.devMode" class="app-card app-view-dev app-pb-0 app-mb-4 app-mt-4">
+        <div class="app-marker">Development mode</div>
+        <div fxFlex>
+          <mat-form-field class="app-mr-2">
+            <mat-select [placeholder]="'desc.finalState' | translate" [(value)]="selectedtestProcessFinalState">
+              <mat-option *ngFor="let state of testProcessFinalStates" [value]="state">{{ state }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-form-field class="app-mr-2">
+            <mat-select [placeholder]="'desc.processInTheBatch' | translate" [(value)]="selectedTestProcessProcessesInBatch">
+              <mat-option *ngFor="let processes of testProcessProcessesInBatch" [value]="processes">{{ processes }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-form-field class="app-mr-2">
+            <mat-select [placeholder]="'desc.durationOfTheProcess' | translate" [(value)]="selectedTestProcessDuration">
+              <mat-option *ngFor="let duration of testProcessDuration" [value]="duration">{{ duration }} s</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-flat-button (click)="scheduleTestProcess()" [disabled]="isLoading()" color="primary"><mat-icon>play_arrow</mat-icon>{{ 'button.startTheTestProcess' | translate }}</button>
+        </div>
+      </mat-card>
       <div fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex>
           <mat-form-field class="app-mr-2">
@@ -218,7 +219,7 @@
                 <button *ngIf="element.isDeletable()" (click)="onRemove(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button [matTooltip]="'button.deleteProcess' | translate" matTooltipPosition="below" color="primary">
                   <mat-icon>delete</mat-icon>
                 </button>
-                <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button [matTooltip]="'button.cancelProcess' | translate" matTooltipPosition="below" color="primary">
+                <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button [matTooltip]="'button.cancelProcess' | translate" matTooltipPosition="below" color="warn">
                   <mat-icon>cancel</mat-icon>
                 </button>
               </span>
