@@ -84,7 +84,13 @@
     "delete": "Delete",
     "downloadStandardOutput": "Download standard output",
     "downloadErrorOutput": "Download error output",
-    "stop": "Stop"
+    "stop": "Stop",
+    "reloadProcesses": "Reload processes",
+    "deselect": "Deselect",
+    "cancelAllScheduledProcesses": "Cancel all scheduled processes",
+    "showThreads": "Show threads",
+    "deleteProcess": "Delete process",
+    "cancelProcess": "Cancel process"
   },
   "field": {
     "archive": "Archive",
@@ -118,7 +124,6 @@
     "scheduleSubsequentIndexing": "Schedule subsequent indexing",
     "post": "Post",
     "selectedPath": "Selected path",
-    "deselect": "Deselect",
     "role": "Role",
     "condition": "Condition",
     "parameter": "Parameter",
@@ -128,6 +133,11 @@
     "scheduled": "Scheduled",
     "running": "Running",
     "finished": "Finished",
-    "duration": "Duration"
+    "duration": "Duration",
+    "state": "State",
+    "owner": "Owner",
+    "from": "From",
+    "to": "To",
+    "name": "Name"
   }
 }

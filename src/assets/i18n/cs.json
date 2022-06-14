@@ -84,7 +84,13 @@
     "delete": "Smazat",
     "downloadStandardOutput": "Stáhnout standarní výstup",
     "downloadErrorOutput": "Stáhnout chybový výstup",
-    "stop": "Zastavit"
+    "stop": "Zastavit",
+    "reloadProcesses": "Znovu načíst procesy",
+    "deselect": "Zrušit výběr",
+    "cancelAllScheduledProcesses": "Zrušit všechny naplánované procesy",
+    "showThreads": "Zobrazit podprocesy",
+    "deleteProcess": "Smazat proces",
+    "cancelProcess": "Zrušit proces"
   },
   "field": {
     "archive": "Archiv",
@@ -118,16 +124,20 @@
     "scheduleSubsequentIndexing": "Naplánovat následnou indexaci",
     "post": "Zveřejnit",
     "selectedPath": "Zvolená cesta",
-    "deselect": "Zrušit výběr",
     "role": "Role",
     "condition": "Podmínka",
     "parameter": "Parametr",
     "value": "Hodnota",
     "process": "Proces",
     "batch": "Dávka",
-    "scheduled": "Naplánován",
-    "running": "Spuštěn",
-    "finished": "Ukončen",
-    "duration": "Trvání"
+    "scheduled": "Naplánováno",
+    "running": "Spuštěno",
+    "finished": "Ukončeno",
+    "duration": "Trvání",
+    "state": "Stav",
+    "owner": "Vlastník",
+    "from": "Od",
+    "to": "Do",
+    "name": "Název"
   }
 }

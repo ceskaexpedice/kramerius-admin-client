@@ -31,7 +31,7 @@
           <div fxLayout="row" fxLayoutAlign="start center" class="app-path-bar app-mb-2">
             <div fxFlex class="app-left">
               <ng-container *ngIf="imports.selectedTree">
-                <a (click)="clearPath()" class="app-clear-filter app-mr-2" [matTooltip]="'desc.deselect' | translate">
+                <a (click)="clearPath()" class="app-clear-filter app-mr-2" [matTooltip]="'button.deselect' | translate">
                   <mat-icon class="material-icons-outlined">cancel</mat-icon>
                 </a>
                 <strong class="app-mr-2">{{ 'desc.selectedPath' | translate }}:</strong>

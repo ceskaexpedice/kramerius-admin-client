@@ -30,55 +30,55 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <span class="app-last">procesy</span>
+        <span class="app-last">{{ 'navbar.processes' | translate }}</span>
         <!-- <span class="app-separator">/</span>
         <span class="app-last">{{ view }}</span> -->
       </div>
       <div fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex>
           <mat-form-field class="app-mr-2">
-            <mat-select placeholder="Stav" [(value)]="selectedState" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
+            <mat-select [placeholder]="'desc.state' | translate" [(value)]="selectedState" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
               <mat-option *ngFor="let state of batch_states" [value]="state.key">{{ state.label }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <a *ngIf="!!selectedState" mat-icon-button matTooltip="Odebrat filtrování podle stavu" [disabled]="isLoading()" (click)="selectedState=undefined;onFiltersChanged()" class="app-clear-filter app-mr-2">
+          <a *ngIf="!!selectedState" mat-icon-button [matTooltip]="'button.deselect' | translate" [disabled]="isLoading()" (click)="selectedState=undefined;onFiltersChanged()" class="app-clear-filter app-mr-2">
             <mat-icon>cancel</mat-icon>
           </a>
       
           <mat-form-field class="app-mr-2">
-            <mat-select placeholder="Vlastník" [(value)]="selectedOwner" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
+            <mat-select [placeholder]="'desc.owner' | translate" [(value)]="selectedOwner" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
               <mat-option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</mat-option>
             </mat-select>
           </mat-form-field>
-          <a *ngIf="!!selectedOwner"mat-icon-button matTooltip="Odebrat filtrování podle vlastníka" (click)="selectedOwner=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
+          <a *ngIf="!!selectedOwner"mat-icon-button [matTooltip]="'button.deselect' | translate" (click)="selectedOwner=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
             <mat-icon>cancel</mat-icon>
           </a>
       
           <mat-form-field class="app-mr-2">
-            <input matInput [matDatepicker]="myDatepickerFrom" placeholder="Od" [(ngModel)]='dateFrom' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
+            <input matInput [matDatepicker]="myDatepickerFrom" [placeholder]="'desc.from' | translate" [(ngModel)]='dateFrom' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
             <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
             <mat-datepicker #myDatepickerFrom [disabled]="isLoading()"></mat-datepicker>
           </mat-form-field>
-          <a *ngIf="!!dateFrom" mat-icon-button matTooltip="Odebrat filtrování podle počátečního data" (click)="dateFrom=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
+          <a *ngIf="!!dateFrom" mat-icon-button [matTooltip]="'button.deselect' | translate" (click)="dateFrom=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
             <mat-icon>cancel</mat-icon>
           </a>
       
           <mat-form-field class="app-mr-2">
-            <input matInput [matDatepicker]="myDatepickerTo" placeholder="Do" [(ngModel)]='dateTo' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
+            <input matInput [matDatepicker]="myDatepickerTo" [placeholder]="'desc.to' | translate" [(ngModel)]='dateTo' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
             <mat-datepicker-toggle matSuffix [for]="myDatepickerTo"></mat-datepicker-toggle>
             <mat-datepicker #myDatepickerTo [disabled]="isLoading()"></mat-datepicker>
           </mat-form-field>
-          <a *ngIf="!!dateTo" mat-icon-button matTooltip="Odebrat filtrování podle koncového data" (click)="dateTo=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter">
+          <a *ngIf="!!dateTo" mat-icon-button [matTooltip]="'button.deselect' | translate" (click)="dateTo=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter">
             <mat-icon>cancel</mat-icon>
           </a>
       
-          <button mat-icon-button matTooltip="Znovu načíst procesy" (click)="reload()" [disabled]="isLoading()">
+          <button mat-icon-button [matTooltip]="'button.reloadProcesses' | translate" (click)="reload()" [disabled]="isLoading()">
             <mat-icon>refresh</mat-icon>
           </button>
         </div>
         <div>
-          <button mat-flat-button (click)="onKillAllScheduled()" color="primary" matTooltip="Zrušit všechny zobrazené naplánované procesy" [disabled]="isLoading()">
-            <mat-icon>clear</mat-icon>Zrušit naplánované procesy
+          <button mat-flat-button (click)="onKillAllScheduled()" color="primary" [disabled]="isLoading()">
+            <mat-icon>clear</mat-icon>{{ 'button.cancelAllScheduledProcesses' | translate }}
           </button>
         </div>
       </div>
@@ -90,7 +90,7 @@
           <ng-container matColumnDef="expand">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" matTooltip="Zobrazit podprocesy" class="app-fix-expanded app-tdn">
+              <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" *ngIf="element.hasSubprocesses()" [matTooltip]="'button.showThreads' | translate" class="app-fix-expanded app-tdn">
                 <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
               </a>
               <ng-container *ngIf="element.expanded">
@@ -109,7 +109,7 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Název</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let element" [matTooltip]="element.getName()">
               <div class="app-text-cutter-wrapper">
                 <div class="app-text-cutter">
@@ -126,7 +126,7 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="state">
-            <th mat-header-cell *matHeaderCellDef>Stav</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.state' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
                 <div class="app-badge" [ngClass]="element.getStateClass()">
@@ -143,7 +143,7 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="planned">
-            <th mat-header-cell *matHeaderCellDef>Naplánováno</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.scheduled' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
                 {{ element.planned | date : 'dd.MM.yyyy hh:mm' }}
@@ -156,7 +156,7 @@
             </td>
           </ng-container> 
           <ng-container matColumnDef="started">
-            <th mat-header-cell *matHeaderCellDef>Spuštěno</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.running' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
                 {{ element.started | date : 'dd.MM.yyyy hh:mm' }}
@@ -169,7 +169,7 @@
             </td>
           </ng-container>  
           <ng-container matColumnDef="finished">
-            <th mat-header-cell *matHeaderCellDef>Ukončeno</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.finished' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
                 {{ element.finished | date : 'dd.MM.yyyy hh:mm' }}
@@ -182,7 +182,7 @@
             </td>
           </ng-container>  
           <ng-container matColumnDef="duration">
-            <th mat-header-cell *matHeaderCellDef>Trvání</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.duration' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
                 {{ element.getDuration(loadedTimestamp) | appDuration }}
@@ -195,7 +195,7 @@
             </td>
           </ng-container>  
           <ng-container matColumnDef="owner">
-            <th mat-header-cell *matHeaderCellDef>Vlastník</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.owner' | translate }}</th>
             <td mat-cell *matCellDef="let element" [matTooltip]="element.ownerName">
               <div class="app-text-cutter-wrapper">
                 <div class="app-text-cutter">
@@ -215,10 +215,10 @@
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
-                <button *ngIf="element.isDeletable()" (click)="onRemove(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Smazat proces" matTooltipPosition="below" color="primary">
+                <button *ngIf="element.isDeletable()" (click)="onRemove(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button [matTooltip]="'button.deleteProcess' | translate" matTooltipPosition="below" color="primary">
                   <mat-icon>delete</mat-icon>
                 </button>
-                <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button matTooltip="Zrušit proces" matTooltipPosition="below" color="primary">
+                <button *ngIf="element.isKillable()" (click)="onKill(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button [matTooltip]="'button.cancelProcess' | translate" matTooltipPosition="below" color="primary">
                   <mat-icon>cancel</mat-icon>
                 </button>
               </span>
