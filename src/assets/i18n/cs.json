@@ -94,7 +94,9 @@
     "showThreads": "Zobrazit podprocesy",
     "deleteProcess": "Smazat proces",
     "cancelProcess": "Zrušit proces",
-    "startTheTestProcess": "Spustit testovací proces"
+    "startTheTestProcess": "Spustit testovací proces",
+    "createNewCollection": "Vytvořit novou sbírku",
+    "showStandaloneOnly": "Zobrazit pouze samostatné"
   },
   "field": {
     "archive": "Archiv",
@@ -146,6 +148,10 @@
     "finalState": "Konečný stav",
     "processInTheBatch": "Proces v dávce",
     "durationOfTheProcess": "Trvání procesu",
-    "enterTheUuidOfTheObject": "Zadejte UUID objektu"
+    "enterTheUuidOfTheObject": "Zadejte UUID objektu",
+    "searchCollection": "Hledat sbírku",
+    "description": "Popis",
+    "created": "Vytvořeno",
+    "managed": "Upraveno"
   }
 }

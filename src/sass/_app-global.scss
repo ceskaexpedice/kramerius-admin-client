@@ -198,6 +198,7 @@ a {
   height: $app-button-height;
   border-radius: $app-border-radius;
   border: 1px solid $app-table-color-border;
+  min-width: 400px;
 }
 
 // top bar

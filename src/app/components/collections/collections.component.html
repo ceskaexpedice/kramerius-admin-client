@@ -1,4 +1,63 @@
-<div class="app-container-fluid app-collections app-h-100">
+<div class="app-processes app-h-100">
+  <div fxLayout="column" fxFlexFill>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'navbar.collections' | translate }}</span>
+      </div>
+      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="app-mb-4">
+        <div fxFlex>
+          <input class="app-input-autocomplete app-mr-4" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
+          <button mat-flat-button color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
+        </div>
+        <div>
+          <mat-slide-toggle class="app-standalone-toggle" color="primary" (change)="onStandaloneChange()" [(ngModel)]="standaloneOnly">{{ 'button.showStandaloneOnly' | translate }}</mat-slide-toggle>
+        </div>
+      </div>
+    </div>
+    <div fxFlex class="app-container-fluid app-oh">
+      <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
+      <table mat-table [dataSource]="dataSource" class="app-view-border app-w-100" matSort>
+        <ng-container matColumnDef="name_cze">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.name' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            <a [routerLink]="['/collections', element.id]">
+              {{ element.name_cze }}
+            </a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="description_cze">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.description' | translate }}</th>
+          <td mat-cell *matCellDef="let element" [matTooltip]="element.description_cze">
+            <div class="app-text-cutter-wrapper">
+              <div class="app-text-cutter">
+                {{ element.description_cze }}
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.created' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.createdAt | date : 'dd.MM.yyyy' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="modifiedAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.managed' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.modifiedAt | date : 'dd.MM.yyyy' }}</td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/collections', row.id]" class="app-cursor-pointer"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- <div class="app-container-fluid app-collections app-h-100">
   <div fxLayout="column" fxFlexFill>
     <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="app-mb-4">
       <div>
@@ -46,44 +105,5 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/collections', row.id]" class="app-cursor-pointer"></tr>
       </table>
     </div>
-
-
-   <!--  <div fxFlex class="app-table-wrapper app-view-border app-view-collections app-oh">
-      <div class="app-table app-head">
-        <div class="app-row">
-          <div class="app-col-name">
-            <div class="app-sortable" (click)="sortBy('name_cze')">
-              Název<mat-icon *ngIf="getSortIcon('name_cze')" class="sort-arrow app-icon-16">{{ getSortIcon('name_cze') }}</mat-icon>
-            </div>
-          </div>
-          <div class="app-col-description">
-            <div class="app-sortable" (click)="sortBy('description_cze')">
-              Popis<mat-icon *ngIf="getSortIcon('description_cze')" class="sort-arrow app-icon-16">{{ getSortIcon('description_cze') }}</mat-icon>
-            </div>
-          </div>
-          <div class="app-col-datetime">
-            <div class="app-sortable" (click)="sortBy('createdAt')">
-              Vytvořeno<mat-icon *ngIf="getSortIcon('createdAt')" class="sort-arrow app-icon-16">{{ getSortIcon('createdAt') }}</mat-icon>
-            </div>
-          </div>
-          <div class="app-col-datetime">
-            <div class="app-sortable" (click)="sortBy('modifiedAt')">
-              Upraveno<mat-icon *ngIf="getSortIcon('modifiedAt')" class="sort-arrow app-icon-16">{{ getSortIcon('modifiedAt') }}</mat-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="app-table app-body app-scrollable">
-        <ng-container *ngFor="let collection of collections">
-          <a class="app-row" [routerLink]="['/collections', collection.id]">
-            <div class="app-col-name">{{ collection.name_cze }}</div>
-            <div class="app-col-description app-text-cutter" [matTooltip]="collection.description_cze">{{ collection.description_cze }}</div>
-            <div class="app-col-datetime">{{ collection.createdAt | appDatetime }}</div>
-            <div class="app-col-datetime">{{ collection.modifiedAt | appDatetime }}</div>
-          </a>
-        </ng-container>
-      </div>
-      <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
-    </div> -->
   </div>
-</div>
+</div> -->

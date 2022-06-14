@@ -94,7 +94,9 @@
     "showThreads": "Show threads",
     "deleteProcess": "Delete process",
     "cancelProcess": "Cancel process",
-    "startTheTestProcess": "Start the test process"
+    "startTheTestProcess": "Start the test process",
+    "createNewCollection": "Create new collection",
+    "showStandaloneOnly": "Show standalone only"
   },
   "field": {
     "archive": "Archive",
@@ -146,6 +148,10 @@
     "finalState": "Final state",
     "processInTheBatch": "Process in the batch",
     "durationOfTheProcess": "Duration of the process",
-    "enterTheUuidOfTheObject": "Enter the UUID of the object"
+    "enterTheUuidOfTheObject": "Enter the UUID of the object",
+    "searchCollection": "Search collection",
+    "description": "Description",
+    "created": "Created",
+    "managed": "Managed"
   }
 }
