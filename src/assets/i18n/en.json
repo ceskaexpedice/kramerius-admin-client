@@ -18,7 +18,9 @@
     "licenses": "Licences",
     "params": "Parameters",
     "standardOutput": "Standard output",
-    "errorOutput": "Error output"
+    "errorOutput": "Error output",
+    "object": "Object",
+    "accessibility": "Accessibility"
   },
   "tabnav": {
     "statistics": "Statistics",
@@ -28,7 +30,8 @@
     "licenses": "Licenses",
     "parameters": "Parameters",
     "standardOutput": "Standard output",
-    "errorOutput": "Error output"
+    "errorOutput": "Error output",
+    "accessibility": "Accessibility"
   },
   "alert": {
     "statistics": {
@@ -142,6 +145,7 @@
     "name": "Name",
     "finalState": "Final state",
     "processInTheBatch": "Process in the batch",
-    "durationOfTheProcess": "Duration of the process"
+    "durationOfTheProcess": "Duration of the process",
+    "enterTheUuidOfTheObject": "Enter the UUID of the object"
   }
 }

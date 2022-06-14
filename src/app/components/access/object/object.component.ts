@@ -20,7 +20,7 @@ export class ObjectComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.pid = params['pid'];
-      this.view = this.local.getStringProperty('object.view', 'actions');
+      this.view = this.local.getStringProperty('object.view', 'rights');
     });
   }
 
@@ -35,5 +35,13 @@ export class ObjectComponent implements OnInit {
     }
     this.router.navigate(['/', 'object', this.inputPid]);
   }
+
+  getCurrentRoute(type: string) {
+    if (type === 'string') {
+      return this.router.url.replace('/object/', '');
+    } else {
+      return this.router.url;
+    }
+  } 
 
 }

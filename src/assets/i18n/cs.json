@@ -18,7 +18,9 @@
     "licenses": "Licence",
     "params": "Parametry",
     "standardOutput": "Standarní výstup",
-    "errorOutput": "Chybový výstup"
+    "errorOutput": "Chybový výstup",
+    "object": "Objekt",
+    "accessibility": "Přístupnost"
   },
   "tabnav": {
     "statistics": "Statistiky",
@@ -28,7 +30,8 @@
     "licenses": "Licence",
     "parameters": "Parametry",
     "standardOutput": "Standarní výstup",
-    "errorOutput": "Chybový výstup"
+    "errorOutput": "Chybový výstup",
+    "accessibility": "Přístupnost"
   },
   "alert": {
     "statistics": {
@@ -142,6 +145,7 @@
     "name": "Název",
     "finalState": "Konečný stav",
     "processInTheBatch": "Proces v dávce",
-    "durationOfTheProcess": "Trvání procesu"
+    "durationOfTheProcess": "Trvání procesu",
+    "enterTheUuidOfTheObject": "Zadejte UUID objektu"
   }
 }
