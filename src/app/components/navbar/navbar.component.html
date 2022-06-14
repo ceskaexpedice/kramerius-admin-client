@@ -25,9 +25,9 @@
     <a routerLink="/collections" routerLinkActive="active" mat-button>{{ 'navbar.collections' | translate }}</a>
     <a routerLink="/indexing" routerLinkActive="active" mat-button>{{ 'navbar.indexation' | translate }}</a>
     <a routerLink="/repository" routerLinkActive="active" mat-button>{{ 'navbar.repository' | translate }}</a>
+    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
     <a (click)="changeLang('cs')"  mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
     <a (click)="changeLang('en')"  mat-button *ngIf="ui.currentLang !== 'en'">EN</a>
-    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
 
     <a [matMenuTriggerFor]="profile_menu" mat-button class="app-avatar">
       <div fxLayout="row" fxLayoutAlign="center center">
