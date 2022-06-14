@@ -5,9 +5,10 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a [routerLink]="getCurrentRoute('path')">{{ 'breadcrumbs.' + getCurrentRoute('string') | translate }}</a>
+        <span class="app-last">{{ 'breadcrumbs.' + getCurrentRoute('string') | translate }}</span>
+        <!-- <a [routerLink]="getCurrentRoute('path')">{{ 'breadcrumbs.' + getCurrentRoute('string') | translate }}</a>
         <span class="app-separator">/</span>
-        <span class="app-last">{{ 'breadcrumbs.' + view | translate }}</span>
+        <span class="app-last">{{ 'breadcrumbs.' + view | translate }}</span> -->
       </div>
       <div>
         <nav mat-tab-nav-bar>
