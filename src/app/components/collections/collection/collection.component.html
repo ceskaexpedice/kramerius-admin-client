@@ -37,7 +37,7 @@
         </mat-card>
 
         <mat-card *ngIf="view === 'context'" class="app-card app-view-border">
-          <strong>Sbírky obsahující tuto sbírku:</strong>
+          <strong>{{ 'desc.collectionsContainingThisCollection' | translate }}:</strong>
         </mat-card>
 
         <div *ngIf="collection">
@@ -82,7 +82,7 @@
                   <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
                 </div>
                 <div class="app-right app-actions">
-                  <a (click)="onRemoveItemFromCollection(collection.id, item['pid']); $event.preventDefault(); $event.stopPropagation()" class="app-btn-warn" matTooltip="Odstranit ze sbírky">
+                  <a (click)="onRemoveItemFromCollection(collection.id, item['pid']); $event.preventDefault(); $event.stopPropagation()" class="app-btn-warn" [matTooltip]="'button.remove' | translate">
                     <mat-icon>cancel</mat-icon>
                   </a>
                 </div>
@@ -103,7 +103,7 @@
                   <mat-card-subtitle>{{ getCollectionDescription(superCollection) }}</mat-card-subtitle>
                 </div>
                 <div class="app-right app-actions">
-                  <a (click)="onRemoveItemFromCollection(superCollection['id'], collection.id); $event.preventDefault(); $event.stopPropagation()" matTooltip="Odstranit odsuď" class="app-btn-warn">
+                  <a (click)="onRemoveItemFromCollection(superCollection['id'], collection.id); $event.preventDefault(); $event.stopPropagation()" [matTooltip]="'button.remove' | translate" class="app-btn-warn">
                     <mat-icon>cancel</mat-icon>
                   </a>
                 </div>

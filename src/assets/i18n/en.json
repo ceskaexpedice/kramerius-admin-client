@@ -167,6 +167,7 @@
     "separateCollection": "Separate collection",
     "shortDescriptionOfTheCollection": "Short description of the collection",
     "fullDescriptionOfTheCollection": "Full description of the collection",
-    "yes": "Yes"
+    "yes": "Yes",
+    "collectionsContainingThisCollection": "Collections containing this collection"
   }
 }

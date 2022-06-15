@@ -167,6 +167,7 @@
     "separateCollection": "Samostatná sbírka",
     "shortDescriptionOfTheCollection": "Krátky popis sbírky",
     "fullDescriptionOfTheCollection": "Úplný popis sbírky",
-    "yes": "Ano"
+    "yes": "Ano",
+    "collectionsContainingThisCollection": "Sbírky obsahující tuto sbírku"
   }
 }
