@@ -31,7 +31,11 @@
     "parameters": "Parametry",
     "standardOutput": "Standarní výstup",
     "errorOutput": "Chybový výstup",
-    "accessibility": "Přístupnost"
+    "accessibility": "Přístupnost",
+    "detail": "Detail",
+    "edit": "Editace",
+    "content": "Obsah",
+    "context": "Kontext"
   },
   "alert": {
     "statistics": {
@@ -96,7 +100,12 @@
     "cancelProcess": "Zrušit proces",
     "startTheTestProcess": "Spustit testovací proces",
     "createNewCollection": "Vytvořit novou sbírku",
-    "showStandaloneOnly": "Zobrazit pouze samostatné"
+    "showStandaloneOnly": "Zobrazit pouze samostatné",
+    "addToThisCollection": "Přidat do této sbírky",
+    "addThisCollectionToAnotherCollection": "Přidat tuto sbírku do jiné sbírky",
+    "create": "Vytvořit",
+    "edit": "Upravit",
+    "remove": "Odstranit"
   },
   "field": {
     "archive": "Archiv",
@@ -152,6 +161,12 @@
     "searchCollection": "Hledat sbírku",
     "description": "Popis",
     "created": "Vytvořeno",
-    "managed": "Upraveno"
+    "managed": "Upraveno",
+    "collectionName": "Název sbírky",
+    "english": "Anglický",
+    "separateCollection": "Samostatná sbírka",
+    "shortDescriptionOfTheCollection": "Krátky popis sbírky",
+    "fullDescriptionOfTheCollection": "Úplný popis sbírky",
+    "yes": "Ano"
   }
 }

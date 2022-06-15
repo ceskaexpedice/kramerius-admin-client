@@ -2,50 +2,40 @@
 <div class="app-p-4">
   <div fxLayout="row" fxLayoutGap="16px">
     <mat-form-field fxFlex>
-      <mat-label>Název sbírky</mat-label>
+      <mat-label>{{ 'desc.collectionName'  | translate }}</mat-label>
       <input matInput [(ngModel)]="collection.name_cze">
     </mat-form-field>
     <mat-form-field fxFlex>
-      <mat-label>Název sbírky (anglický)</mat-label>
+      <mat-label>{{ 'desc.collectionName'  | translate }} ({{ 'desc.english'  | translate }})</mat-label>
       <input matInput [(ngModel)]="collection.name_eng">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="16px">
     <mat-form-field fxFlex>
-      <mat-label>Krátky popis sbírky</mat-label>
+      <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }}</mat-label>
       <textarea matInput [(ngModel)]="collection.description_cze" rows="4"></textarea>
     </mat-form-field>
     <mat-form-field fxFlex>
-      <mat-label>Krátky popis sbírky (anglický)</mat-label>
+      <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }} ({{ 'desc.english'  | translate }})</mat-label>
       <textarea matInput [(ngModel)]="collection.description_eng" rows="4"></textarea>
     </mat-form-field>
   </div>
   <div class="app-mb-4">
-    <div class="app-label app-mb-2">Samostatná sbírka</div>
-    <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="collection.standalone">Ano</mat-checkbox>
+    <div class="app-label app-mb-2">{{ 'desc.separateCollection'  | translate }}</div>
+    <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="collection.standalone">{{ 'desc.yes' | translate }}</mat-checkbox>
   </div>
-  <!-- <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
-    <div fxFlex style="background-color: red;">
-      <div class="app-label app-mb-2">Úplný popis sbírky</div>
-      <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data="" name="text"></ckeditor>
-    </div>
-    <div fxFlex style="background-color: green;">
-      <div class="app-label app-mb-2">Úplný popis sbírky (anglický)</div>
-      <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""name="text"></ckeditor>
-    </div>
-  </div> -->
   <div class="app-mb-4">
-    <div class="app-label app-mb-2">Úplný popis sbírky</div>
+    <div class="app-label app-mb-2">{{ 'desc.fullDescriptionOfTheCollection'  | translate }}</div>
     <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data="" name="text"></ckeditor>
   </div>
   <div class="app-mb-4">
-    <div class="app-label app-mb-2">Úplný popis sbírky (anglický)</div>
+    <div class="app-label app-mb-2">{{ 'desc.fullDescriptionOfTheCollection'  | translate }} ({{ 'desc.english'  | translate }})</div>
     <ckeditor [config]="editorConfig" [editor]="editorEng" required [(ngModel)]="collection.content_eng" data=""name="text"></ckeditor>
   </div>
 
   <div>
-    <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">Vytvořit</button>
-    <button mat-flat-button color="primary" *ngIf="mode === 'edit'" (click)="onUpdate()" class="app-mr-2">Upravit</button>
-    <button mat-flat-button color="warn" *ngIf="mode === 'edit'" (click)="onDelete()" class="app-mr-2">Odstranit sbírku</button>
+    <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">{{ 'button.create'  | translate }}</button>
+    <button mat-flat-button color="primary" *ngIf="mode === 'edit'" (click)="onUpdate()" class="app-mr-2">{{ 'button.edit'  | translate }}</button>
+    <button mat-flat-button color="warn" *ngIf="mode === 'edit'" (click)="onDelete()" class="app-mr-2">{{ 'button.remove'  | translate }}</button>
   </div>
 </div>

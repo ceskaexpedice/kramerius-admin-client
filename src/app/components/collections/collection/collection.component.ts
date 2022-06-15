@@ -238,4 +238,12 @@ export class CollectionComponent implements OnInit {
     }
   }
 
+  getCurrentRoute(type: string) {
+    if (type === 'string') {
+      return this.router.url.replace('/collections/', '');
+    } else {
+      return this.router.url;
+    }
+  } 
+
 }

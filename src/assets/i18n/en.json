@@ -31,7 +31,11 @@
     "parameters": "Parameters",
     "standardOutput": "Standard output",
     "errorOutput": "Error output",
-    "accessibility": "Accessibility"
+    "accessibility": "Accessibility",
+    "detail": "Detail",
+    "edit": "Edit",
+    "content": "Content",
+    "context": "Context"
   },
   "alert": {
     "statistics": {
@@ -96,7 +100,12 @@
     "cancelProcess": "Cancel process",
     "startTheTestProcess": "Start the test process",
     "createNewCollection": "Create new collection",
-    "showStandaloneOnly": "Show standalone only"
+    "showStandaloneOnly": "Show standalone only",
+    "addToThisCollection": "Add to this collection",
+    "addThisCollectionToAnotherCollection": "Add this collection to another collection",
+    "create": "Create",
+    "edit": "Edit",
+    "remove": "Remove"
   },
   "field": {
     "archive": "Archive",
@@ -152,6 +161,12 @@
     "searchCollection": "Search collection",
     "description": "Description",
     "created": "Created",
-    "managed": "Managed"
+    "managed": "Managed",
+    "collectionName": "Collection name",
+    "english": "English",
+    "separateCollection": "Separate collection",
+    "shortDescriptionOfTheCollection": "Short description of the collection",
+    "fullDescriptionOfTheCollection": "Full description of the collection",
+    "yes": "Yes"
   }
 }
