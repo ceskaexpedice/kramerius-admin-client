@@ -11,6 +11,7 @@ import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from 'src/app/
 import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-repository',
@@ -18,14 +19,17 @@ import { UIService } from 'src/app/services/ui.service';
   styleUrls: ['./repository.component.scss']
 })
 export class RepositoryComponent implements OnInit {
+  view: string;
 
   constructor(
     private dialog: MatDialog,
     private ui: UIService,
-    private adminApi: AdminApiService
+    private adminApi: AdminApiService,
+    private local: LocalStorageService
   ) { }
 
   ngOnInit() {
+    this.view = this.local.getStringProperty('repository.view', 'repositoryManagement');
   }
 
   openscheduleProcessingIndexRebuildDialog() {
@@ -162,6 +166,11 @@ export class RepositoryComponent implements OnInit {
       width: '600px',
       panelClass: 'app-nkp-logy-dialog'
     });
+  }
+
+  changeView(view: string) {
+    this.view = view;
+    this.local.setStringProperty('repository.view', view);
   }
 
 

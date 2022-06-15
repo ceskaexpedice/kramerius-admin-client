@@ -35,7 +35,11 @@
     "detail": "Detail",
     "edit": "Editace",
     "content": "Obsah",
-    "context": "Kontext"
+    "context": "Kontext",
+    "repositoryManagement": "Správa repozitáře",
+    "imports": "Importy",
+    "exports": "Exporty",
+    "bulkDataEditing": "Hromadné úpravy dat"
   },
   "alert": {
     "statistics": {
@@ -105,7 +109,19 @@
     "addThisCollectionToAnotherCollection": "Přidat tuto sbírku do jiné sbírky",
     "create": "Vytvořit",
     "edit": "Upravit",
-    "remove": "Odstranit"
+    "remove": "Odstranit",
+    "buildProcessingIndex": "Vybudovat processing index",
+    "rebuildTheProcessingIndexForTheObject": "Přebudovat processing index pro objekt",
+    "import": "Importovat",
+    "exportDocument": "Exportovat dokument",
+    "exportStatistics": "Exportovat statistiky",
+    "exportPidsOfDnntLicensedObjects": "Exportovat PIDy objektů s licencí DNNT",
+    "generateAccessLogs": "Generovat přístupové logy",
+    "setPublicPrivate": "Nastavit public/private",
+    "removeLicense": "Odstranit licenci",
+    "setPublicByDates": "Nastavit public podle datumů",
+    "nkpLogs": "NKP logy",
+    "deletingStatistics": "Mazání statistik"
   },
   "field": {
     "archive": "Archiv",
@@ -168,6 +184,10 @@
     "shortDescriptionOfTheCollection": "Krátky popis sbírky",
     "fullDescriptionOfTheCollection": "Úplný popis sbírky",
     "yes": "Ano",
-    "collectionsContainingThisCollection": "Sbírky obsahující tuto sbírku"
+    "collectionsContainingThisCollection": "Sbírky obsahující tuto sbírku",
+    "global": "Globální",
+    "forDocument": "Pro dokument",
+    "basedOnEmbeddedPids": "Na základě vložených PIDů",
+    "basedOnData": "Na základě dat"
   }
 }

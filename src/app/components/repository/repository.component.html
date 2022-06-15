@@ -1,60 +1,66 @@
-<div class="app-container">
-	<div class="app-mb-4">
-		<h3>Správa repozitáře</h3>
-    <button mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2">Vybudovat Processing index</button>
-    <button mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">Přebudovat Processing index pro objekt</button>
-	</div>
-    
-	<mat-divider></mat-divider>
+<div class="app-access app-h-100">
+  <div fxLayout="column" fxFlexFill>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'navbar.repository' | translate }}</span>
+      </div>
+      <div>
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link (click)="changeView('repositoryManagement')" [active]="view == 'repositoryManagement'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.repositoryManagement' | translate }}</a>
+          <a mat-tab-link (click)="changeView('imports')"  [active]="view == 'imports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.imports' | translate }}</a>
+          <a mat-tab-link (click)="changeView('exports')"  [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.exports' | translate }}</a>
+          <a mat-tab-link (click)="changeView('bulkDataEditing')"  [active]="view == 'bulkDataEditing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'tabnav.bulkDataEditing' | translate }}</a>
+					<a mat-tab-link (click)="changeView('statistics')"  [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.statistics' | translate }}</a>
+        </nav>
+      </div>
+    </div>
+    <div fxFlex class="app-oa-y">
+      <div class="app-container">
+        <mat-card fxLayout="column" class="app-card app-view-border">
+					<div *ngIf="view == 'repositoryManagement'">
+						<button mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2">{{ 'button.buildProcessingIndex' | translate }}</button>
+						<button mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+					</div>
+					<div *ngIf="view == 'imports'">
+						<button mat-flat-button (click)="openScheduleImportFoxmlDialog()" color="primary" class="app-mr-2">{{ 'button.import' | translate }} FOXML</button>
+						<button mat-flat-button (click)="openScheduleImportNdkDialog()" color="primary" class="app-mr-2">{{ 'button.import' | translate }} NDK METS</button>
+					</div>
+					<div *ngIf="view == 'exports'">
+						<h4>{{ 'desc.global' | translate }}</h4>
+						<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportStatistics' | translate }}</button>
+						<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportPidsOfDnntLicensedObjects' | translate }}</button> <!-- do CSV -->
+						<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.generateAccessLogs' | translate }}</button>
 
-	<div class="app-mb-4">
-		<h3>Importy</h3>
-			<button mat-flat-button (click)="openScheduleImportFoxmlDialog()" color="primary" class="app-mr-2">Importovat FOXML</button>
-			<button mat-flat-button (click)="openScheduleImportNdkDialog()" color="primary" class="app-mr-2">Importovat NDK METS</button>
-	</div>
-    
-	<mat-divider></mat-divider>
+						<h4>{{ 'desc.forDocument' | translate }}</h4>
+						<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportDocument' | translate }} (PDF)</button>
+						<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportDocument' | translate }} (FOXML)</button>
+					</div>
+					<div *ngIf="view == 'bulkDataEditing'">
+						<h4>{{ 'desc.basedOnEmbeddedPids' | translate }}</h4>
+						<!-- tj. změna viditelnosti -->
+						<button mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2">{{ 'button.setPublicPrivate' | translate }}</button>
 
-	<div class="app-mb-4">
-		<h3>Exporty</h3>
-		<h4>Globální</h4>
-		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Exportovast statistiky</button>
-		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Exportovat PIDy objektů s licencí DNNT</button> <!-- do CSV -->
-		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Generovat přístupové logy</button>
+						<!-- DNNT, DNNT2 apod. -->
+						<button mat-flat-button (click)="openAddLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.addLicense' | translate }}</button>
 
-		<h4>Pro dokument</h4>
-		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Export dokument (PDF)</button>
-		<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">Exportovat dokument (FOXML)</button>
-	</div>
-    
-	<mat-divider></mat-divider>
+						<!-- DNNT, DNNT2 apod. -->
+						<button mat-flat-button (click)="openRemoveLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.removeLicense' | translate }}</button>
 
-	<div class="app-mb-4">
-		<h3>Hromadné úpravy dat</h3>
-		<h4>Na základě vložených PIDů</h4>
-		<!-- tj. změna viditelnosti -->
-		<button mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2"> Nastavit public/private</button>
-
-		<!-- DNNT, DNNT2 apod. -->
-		<button mat-flat-button (click)="openAddLicenceDialog()" color="primary" class="app-mr-2">Přidat licenci</button>
-
-		<!-- DNNT, DNNT2 apod. -->
-		<button mat-flat-button (click)="openRemoveLicenceDialog()" color="primary" class="app-mr-2">Odebrat licenci</button>
-
-		<h4>Na základě dat</h4>
-		<!-- tj. pohyblivá zeď -->
-		<button mat-flat-button (click)="todo()" color="primary" disabled  class="app-mr-2"> Nastavit public podle datumů</button>
-	</div>
-   
-	<mat-divider></mat-divider>
-	
-	<h3>Statistiky</h3>
-	<div>
-		<button mat-flat-button color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">NKP logy</button>
-		<button mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">Mazání statistik</button><!--od do-->
-
-		<button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button>
-		<button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button>
-	</div>
-
+						<h4>{{ 'desc.basedOnData' | translate }}</h4>
+						<!-- tj. pohyblivá zeď -->
+						<button mat-flat-button (click)="todo()" color="primary" disabled  class="app-mr-2">{{ 'button.setPublicByDates' | translate }}</button>
+					</div>
+					<div *ngIf="view == 'statistics'">
+						<button mat-flat-button color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">{{ 'button.nkpLogs' | translate }}</button>
+						<button mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deletingStatistics' | translate }}</button><!--od do-->
+						<!-- <button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button>
+						<button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button> -->
+					</div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 </div>

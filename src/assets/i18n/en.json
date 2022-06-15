@@ -35,7 +35,11 @@
     "detail": "Detail",
     "edit": "Edit",
     "content": "Content",
-    "context": "Context"
+    "context": "Context",
+    "repositoryManagement": "Repository management",
+    "imports": "Imports",
+    "exports": "Exports",
+    "bulkDataEditing": "Bulk data editing"
   },
   "alert": {
     "statistics": {
@@ -105,7 +109,19 @@
     "addThisCollectionToAnotherCollection": "Add this collection to another collection",
     "create": "Create",
     "edit": "Edit",
-    "remove": "Remove"
+    "remove": "Remove",
+    "buildProcessingIndex": "Build a processing index",
+    "rebuildTheProcessingIndexForTheObject": "Rebuild the processing index for the object",
+    "import": "Import",
+    "exportDocument": "Document export",
+    "exportStatistics": "Export statistics",
+    "exportPidsOfDnntLicensedObjects": "Export PIDs of DNNT licensed objects",
+    "generateAccessLogs": "Generate access logs",
+    "setPublicPrivate": "Set public / private",
+    "removeLicense": "Remove license",
+    "setPublicByDates": "Set public by dates",
+    "nkpLogs": "NKP logs",
+    "deletingStatistics": "Deleting statistics"
   },
   "field": {
     "archive": "Archive",
@@ -168,6 +184,10 @@
     "shortDescriptionOfTheCollection": "Short description of the collection",
     "fullDescriptionOfTheCollection": "Full description of the collection",
     "yes": "Yes",
-    "collectionsContainingThisCollection": "Collections containing this collection"
+    "collectionsContainingThisCollection": "Collections containing this collection",
+    "global": "Global",
+    "forDocument": "For document",
+    "basedOnEmbeddedPids": "Based on embedded PIDs",
+    "basedOnData": "Based on data"
   }
 }
