@@ -11,6 +11,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { UIService } from 'src/app/services/ui.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-indexing',
@@ -42,6 +43,8 @@ export class IndexingComponent implements OnInit {
   scheduledIndexationsCounter = 0;
 
   displayedColumns = ['pid', 'title', 'indexerVersion', 'action'];
+
+  view: string;
   
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource(this.itemsLoaded);;
@@ -51,10 +54,13 @@ export class IndexingComponent implements OnInit {
     private clientApi: ClientApiService,
     private appSettings: AppSettings,
     private dialog: MatDialog,
-    private ui: UIService
+    private ui: UIService,
+    private local: LocalStorageService
   ) { }
 
   ngOnInit() {
+    this.view = this.local.getStringProperty('indexing.view', 'object');
+
     this.clientApi.getInfo().subscribe(data => {
       this.currentIndexerVersion = data.indexerVersion;
       this.loading = false;
@@ -265,5 +271,9 @@ export class IndexingComponent implements OnInit {
   noCurrentItems() {
     return this.getCurrentItems().length == 0;
   }
-
+  
+  changeView(view: string) {
+    this.view = view;
+    this.local.setStringProperty('indexing.view', view);
+  }
 }

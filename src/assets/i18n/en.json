@@ -39,7 +39,9 @@
     "repositoryManagement": "Repository management",
     "imports": "Imports",
     "exports": "Exports",
-    "bulkDataEditing": "Bulk data editing"
+    "bulkDataEditing": "Bulk data editing",
+    "object": "Object",
+    "model": "Model"
   },
   "alert": {
     "statistics": {
