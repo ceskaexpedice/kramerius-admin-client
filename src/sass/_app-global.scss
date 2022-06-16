@@ -191,6 +191,10 @@ a {
     border: 1px solid rgba($app-badge-version-color, .3);
     background-color: rgba($app-badge-version-color, .05);
   }
+
+  &.app-version-navbar {
+    opacity: .7;
+  }
 }
 
 .app-input-autocomplete {

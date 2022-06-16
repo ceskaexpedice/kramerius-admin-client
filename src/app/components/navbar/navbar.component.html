@@ -26,8 +26,8 @@
     <a routerLink="/indexing" routerLinkActive="active" mat-button>{{ 'navbar.indexation' | translate }}</a>
     <a routerLink="/repository" routerLinkActive="active" mat-button>{{ 'navbar.repository' | translate }}</a>
     <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
-    <a (click)="changeLang('cs')"  mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
-    <a (click)="changeLang('en')"  mat-button *ngIf="ui.currentLang !== 'en'">EN</a>
+    <a (click)="changeLang('cs')" mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
+    <a (click)="changeLang('en')" mat-button *ngIf="ui.currentLang !== 'en'">EN</a>
 
     <a [matMenuTriggerFor]="profile_menu" mat-button class="app-avatar">
       <div fxLayout="row" fxLayoutAlign="center center">
@@ -45,5 +45,6 @@
         <span>{{ 'navbar.logout' | translate }}</span>
       </button>
     </mat-menu>
-  </div> 
+  </div>
+  <div *ngIf="auth.isLoggedIn()"><span class="app-badge app-version-navbar app-mr-2">{{ 'desc.version' | translate }} {{getVersion()}}</span></div>
 </mat-toolbar>

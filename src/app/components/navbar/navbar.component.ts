@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/services/app-settings';
 import { UIService } from 'src/app/services/ui.service';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -11,7 +12,13 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public auth: AuthService, private router: Router, public settings: AppSettings, public ui: UIService) { }
+  constructor(
+    public auth: AuthService, 
+    private router: Router, 
+    public settings: AppSettings, 
+    public ui: UIService,
+    public appSettings: AppSettings
+    ) { }
 
   ngOnInit() {
   }
@@ -22,6 +29,10 @@ export class NavbarComponent implements OnInit {
 
   changeLang(lang: string) {
     this.ui.changeLang(lang);
+  }
+
+  getVersion() {
+    return this.appSettings.version;
   }
 
 }
