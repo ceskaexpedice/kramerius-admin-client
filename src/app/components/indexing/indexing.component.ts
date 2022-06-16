@@ -71,7 +71,7 @@ export class IndexingComponent implements OnInit {
   }
 
   onSelectModel(event: MatSelectChange) {
-    this.stateFilter = undefined;
+    this.stateFilter = 'all';
     if (event.value) {
       this.loadFirstBatchOfItems();
     }
