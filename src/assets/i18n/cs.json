@@ -37,6 +37,7 @@
     "content": "Obsah",
     "context": "Kontext",
     "repositoryManagement": "Správa repozitáře",
+    "import": "Import",
     "imports": "Importy",
     "exports": "Exporty",
     "bulkDataEditing": "Hromadné úpravy dat",
