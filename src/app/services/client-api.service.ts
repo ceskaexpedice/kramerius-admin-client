@@ -43,6 +43,11 @@ export class ClientApiService {
     return this.getText(`/items/${uuid}/streams/BIBLIO_MODS`);
   }
 
+  getModsNewApi(uuid: string): Observable<string> {
+    ///client/v7.0/items/{pid}/metadata/mods
+    return this.getText(`/items/${uuid}/metadata/mods`);
+  }
+
   getThumb(uuid: string): string {
     return this.baseUrl + `/items/${uuid}/image/thumb`;
   }

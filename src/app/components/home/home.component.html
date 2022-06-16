@@ -93,7 +93,7 @@
 					</div>
 				</ng-container>
 				<ng-container  *ngIf="view == 'mostViewedDocuments'">
-					<mat-card *ngIf="(table | keyvalue).length > 1" class="app-card app-view-border">
+					<mat-card  *ngIf="isResultModel" class="app-card app-view-border">
 						<mat-card-content>
 							<ng-container *ngFor="let item of table | keyvalue; let last = last">
 								<div class="app-mb-4" [class.app-mb-n4]="last">
@@ -117,16 +117,43 @@
 															</div>
 														</div>
 														<div *ngIf="selection[v.pid]" class="app-metadata">
-															<div><label class="app-label">{{ 'desc.author' | translate }}</label> Pokorný, Václav Jan, Klášter Rajhrad</div>
-															<div><label class="app-label">{{ 'desc.publishingData' | translate }}</label> 1913-1948</div>
+															
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['author']"><label class="app-label">{{ 'desc.author' | translate }} : </label>{{descriptions[v.pid]['author']}}</div>
+
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['origininfo']"><label class="app-label">{{ 'desc.publishingData' | translate }} :</label> {{descriptions[v.pid]['origininfo']}}</div>
+															<!--
 															<div><label class="app-label">{{ 'desc.documentType' | translate }}</label> Úřední písemnosti, Archivní fondy</div>
-															<div><label class="app-label">{{ 'desc.keywords' | translate }}</label> Pokorný, Václav Jan, Klášter Rajhrad</div>
-															<div><label class="app-label">{{ 'desc.language' | translate }}</label> Latina, Čeština</div>
-															<div><label class="app-label">{{ 'desc.storageLocation' | translate }}</label> <a href=""> Moravská zemská knihovna v Brně</a>, Signatura: BOE950R - A - D. n. 34</div>
-															<div><label class="app-label">{{ 'desc.physicalDescription' | translate }}</label> Rozsah: 27 fol.</div>
-															<div><label class="app-label">{{ 'desc.abstract' | translate }}</label> Žádosti o přijetí do noviciátu, doklady o kněžském svěcení (5. 7. 1918), domovský list, dekret o jmenování konservátorem ministerstva školství a osvěty pro státní památkovou péči ve správním okresu Moravský Krumlov (23. 5. 1947) aj.</div>
-															<div><label class="app-label">{{ 'desc.comment' | translate }}</label> Latinský a český text, Psáno: Humanistickou kurzívou, též strojopis a tisk, Moravský zemský archiv v Brně.</div>
-															<div><label class="app-label">{{ 'desc.page' | translate }}</label> 1</div>
+															-->
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['keywords']"><label class="app-label">{{ 'desc.keywords' | translate }}</label> 
+																<span *ngFor="let k of descriptions[v.pid]['keywords']; ; let isLast=last">
+																	{{k}}{{isLast ? '' : ', '}}
+																</span>
+															</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['langs']"><label class="app-label">{{ 'desc.language' | translate }}:</label> 
+																<span *ngFor="let l of descriptions[v.pid]['langs']; ; let isLast=last">
+																	{{ 'desc.sigla.'+ l | translate }}{{isLast ? '' : ', '}}
+																</span>
+															</div>
+															
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['location']"><label class="app-label">{{ 'desc.storageLocation' | translate }}</label> 
+																<span *ngFor="let l of descriptions[v.pid]['location']; ; let isLast=last">
+																	{{ 'desc.sigla.'+ l | translate }}{{isLast ? '' : ', '}}
+																</span>
+															</div>
+
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['physicalDescription']"><label class="app-label">{{ 'desc.physicalDescription' | translate }}</label> 
+																{{descriptions[v.pid]['physicalDescription']}}
+															</div>
+
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['abstract']"><label class="app-label">{{ 'desc.abstract' | translate }}</label> {{descriptions[v.pid]['abstract']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['note']"><label class="app-label">{{ 'desc.comment' | translate }}</label> {{descriptions[v.pid]['note']}}</div>
+
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['isbn']"><label class="app-label">{{ 'desc.isbn' | translate }}</label> {{descriptions[v.pid]['isbn']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['issn']"><label class="app-label">{{ 'desc.isbn' | translate }}</label> {{descriptions[v.pid]['issn']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['barcode']"><label class="app-label">{{ 'desc.barcode' | translate }}</label> {{descriptions[v.pid]['barcode']}}</div>
+															<!--
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['uuid']"><label class="app-label">{{ 'desc.uuid' | translate }}</label> {{descriptions[v.pid]['uuid']}}</div>
+															-->
 														</div>
 													</td>
 													<td class="app-col-detail">
@@ -143,7 +170,7 @@
 							</ng-container>
 						</mat-card-content>
 					</mat-card>
-					<mat-card *ngIf="(table | keyvalue).length === 1" class="app-view-alert app-info">
+					<mat-card *ngIf="isResultModel" class="app-view-alert app-info">
 						<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
 					</mat-card>
 				</ng-container>
