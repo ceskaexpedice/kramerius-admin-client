@@ -39,7 +39,9 @@
     "repositoryManagement": "Správa repozitáře",
     "imports": "Importy",
     "exports": "Exporty",
-    "bulkDataEditing": "Hromadné úpravy dat"
+    "bulkDataEditing": "Hromadné úpravy dat",
+    "object": "Objekt",
+    "model": "Model"
   },
   "alert": {
     "statistics": {
