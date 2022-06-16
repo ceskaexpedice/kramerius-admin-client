@@ -9,19 +9,6 @@
     "repository": "Repozitář",
     "logout": "Odhlásit"
   },
-  "breadcrumbs": {
-    "statistics": "Statistiky",
-    "mostViewedDocuments": "Nejvíce zobrazované dokumenty",
-    "access": "Správa oprávnění",
-    "rights": "Práva",
-    "roles": "Role",
-    "licenses": "Licence",
-    "params": "Parametry",
-    "standardOutput": "Standarní výstup",
-    "errorOutput": "Chybový výstup",
-    "object": "Objekt",
-    "accessibility": "Přístupnost"
-  },
   "tabnav": {
     "statistics": "Statistiky",
     "mostViewedDocuments": "Nejvíce zobrazované dokumenty",

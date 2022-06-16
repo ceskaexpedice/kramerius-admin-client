@@ -9,19 +9,6 @@
     "repository": "Repository",
     "logout": "Logout"
   },
-  "breadcrumbs": {
-    "statistics": "Statistics",
-    "mostViewedDocuments": "Most viewed documents",
-    "access": "Right of administration",
-    "rights": "Rights",
-    "roles": "Roles",
-    "licenses": "Licences",
-    "params": "Parameters",
-    "standardOutput": "Standard output",
-    "errorOutput": "Error output",
-    "object": "Object",
-    "accessibility": "Accessibility"
-  },
   "tabnav": {
     "statistics": "Statistics",
     "mostViewedDocuments": "Most viewed documents",
