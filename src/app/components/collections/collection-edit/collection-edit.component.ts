@@ -87,6 +87,7 @@ export class CollectionEditComponent implements OnInit {
         this.ui.showInfoSnackBar("Sbírka byla upravena");
         if (this.colId) {
           this.updated.emit();
+          this.state = 'success';
         } else {
           this.router.navigate(['/collections', this.collection.id]);
         }

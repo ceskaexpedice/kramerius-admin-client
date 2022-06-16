@@ -13,8 +13,8 @@
           <a mat-tab-link (click)="changeView('model')"  [active]="view == 'model'"><mat-icon class="material-icons-outlined">category</mat-icon>{{ 'tabnav.model' | translate }}</a>
         </nav>
       </div>
-    </div>
-    <div fxFlex class="app-oa-y">
+    </div>	
+		<div fxFlex class="app-oa-y">
       <div class="app-container-fluid">
 				<ng-container *ngIf="view == 'object'">
 					<mat-card class="app-card app-view-border" fxLayout="row">
@@ -77,7 +77,7 @@
 						</div>
 					</div>
 
-					<div class="app-oa-y app-oh app-mb-4">
+					<div class="app-mb-4">
 						<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 						<table mat-table [dataSource]="dataSource" class="app-view-border app-w-100" matSort>
 							<ng-container matColumnDef="pid">

@@ -9,6 +9,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { AddItemsToCollectionDialogComponent } from 'src/app/dialogs/add-items-to-collection-dialog/add-items-to-collection-dialog.component';
 import { AddCollectionToAnotherCollectionDialogComponent } from 'src/app/dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-collection',
@@ -20,7 +21,7 @@ export class CollectionComponent implements OnInit {
   collection: Collection;
   state = 'none';
   availableCollections: any[];
-  view = 'detail';
+  view: string;
 
   items: any[];
 
@@ -32,15 +33,15 @@ export class CollectionComponent implements OnInit {
     private ui: UIService,
     private dialog: MatDialog,
     private clientApi: ClientApiService,
-    private collectionsService: CollectionsService) {
+    private collectionsService: CollectionsService,
+    private local: LocalStorageService) {
   }
 
   ngOnInit() {
     this.state = 'loading';
     this.route.params.subscribe(params => {
-
       this.loadData(params['id']);
-    });
+    })
   }
 
   loadData(collectionId: string) {
@@ -49,7 +50,8 @@ export class CollectionComponent implements OnInit {
       this.collection = collection;
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
         this.items = res.filter(item => this.collection.items.includes(item['pid']))
-        this.view = 'detail';
+        //this.view = 'detail';
+        this.view = this.local.getStringProperty('collection.view', 'detail');
         this.state = 'success';
       })
     }, (error) => {
@@ -90,6 +92,7 @@ export class CollectionComponent implements OnInit {
 
   changeView(view: string) {
     this.view = view;
+    this.local.setStringProperty('collection.view', view);
   }
 
   onUpdated() {
@@ -97,7 +100,7 @@ export class CollectionComponent implements OnInit {
     this.collectionsService.getCollection(this.collection.id).subscribe((collection: Collection) => {
       this.collection = collection;
       this.state = 'success';
-      this.changeView('detail');
+      //this.changeView('detail');
     });
   }
 
