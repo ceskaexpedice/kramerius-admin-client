@@ -25,13 +25,4 @@ export class AccessComponent implements OnInit {
     this.view = view;
     this.local.setStringProperty('access.view', view);
   }
-
-  getCurrentRoute(type: string) {
-    if (type === 'string') {
-      return this.router.url.replace('/', '');
-    } else {
-      return this.router.url;
-    }
-  } 
-
 }
