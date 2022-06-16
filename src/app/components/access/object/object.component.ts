@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
+
 @Component({
   templateUrl: './object.component.html',
   styleUrls: ['./object.component.scss']
