@@ -214,5 +214,11 @@
     "collection": "Sbírky",
     "soundrecording": "Zvukové nahrávky",
     "version": "Verze"
+  },
+
+  "lang":{
+      "lat": "Latina",
+      "cze": "Čeština",
+      "ger": "Němčina"
   }
 }

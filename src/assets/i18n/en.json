@@ -214,5 +214,12 @@
     "collection": "Collection",
     "soundrecording": "Soundrecording",
     "version": "Version"
+  },
+  "lang":{
+    "lat": "Latin",
+    "cze": "Czech",
+    "ger": "German",
+    "eng": "English"
   }
+
 }

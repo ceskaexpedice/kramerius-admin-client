@@ -99,28 +99,50 @@ export class HomeComponent implements OnInit {
       requestedLicense
    ).subscribe(response=> {
       this.isResultLang = response && response.length > 0;
-      this.langOpts = {
-        xAxis: {
-          type: 'category',
-          data: response.map(item=> {
-            return item.lang;
-          })
-        },
-        yAxis: {
-        },
-        tooltip: {
-          trigger: 'item'
-        },
-
-        series: [
-          {
+      if (response) {
+        this.langOpts = {
+          xAxis: {
+            type: 'category',
             data: response.map(item=> {
-              return item.count;
-            }),
-            type: 'bar'
-          }
-        ]
-      };
+              return item.lang;
+            })
+          },
+          yAxis: {
+          },
+          tooltip: {
+            trigger: 'item'
+          },
+  
+          series: [
+            {
+              data: response.map(item=> {
+                return item.count;
+              }),
+              type: 'bar'
+            }
+          ]
+        };
+  
+      } else {
+        this.langOpts = {
+          xAxis: {
+            type: 'category',
+            data: []
+          },
+          yAxis: {
+          },
+          tooltip: {
+            trigger: 'item'
+          },
+  
+          series: [
+            {
+              data: [],
+              type: 'bar'
+            }
+          ]
+        }
+      }
     });
 
     // models pie graph configuration
