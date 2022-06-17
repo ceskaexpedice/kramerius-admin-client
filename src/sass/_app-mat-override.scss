@@ -253,6 +253,12 @@
         }
       }
 
+      &:last-child {
+        .mat-cell {
+          border-bottom: none;
+        }
+      }
+
       .mat-cell {
         &:first-of-type {
           @extend .app-pl-4;
@@ -284,6 +290,7 @@
     bottom: 0px;
     position: sticky;
     z-index: 10;
+    border-top: 1px solid $app-table-color-border;
   }
 }
 
