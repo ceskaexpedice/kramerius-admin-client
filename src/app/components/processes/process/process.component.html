@@ -10,6 +10,10 @@
         <span class="app-last">{{ getCurrentRoute('string') }}</span>
       </div>
       <div>
+        <!-- TODO: nastylovat -->
+        {{ process.name }}
+      </div>
+      <div>
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('standardOutput')" [active]="view == 'standardOutput'"><mat-icon class="material-icons-outlined">output</mat-icon>{{ 'tabnav.standardOutput' | translate }}</a>
           <a mat-tab-link (click)="changeView('errorOutput')"  [active]="view == 'errorOutput'"><mat-icon class="material-icons-outlined">error_outline</mat-icon>{{ 'tabnav.errorOutput' | translate }}</a>
