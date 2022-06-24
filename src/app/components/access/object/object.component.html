@@ -4,11 +4,19 @@
       <mat-card-content>
         <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
           <mat-label>{{ 'desc.enterTheUuidOfTheObject' | translate }}</mat-label>
-          <input matInput [(ngModel)]="inputPid" placeholder="Zadejte UUID objektu" (keyup.enter)="assignUuid()" type="text">
+          <input matInput [(ngModel)]="inputPid" placeholder="{{pid}}" (keyup.enter)="assignUuid()" type="text">
           <!-- <mat-error *ngIf="">
             Toto UUID je navalidní!
           </mat-error> -->
+          <mat-error *ngIf="!!errorMessage">
+            Toto UUID je navalidní!
+          </mat-error>
+          
+
         </mat-form-field>
+        <mat-error *ngIf="!!errorMessage">
+          {{errorMessage}}
+        </mat-error>
       </mat-card-content>
     </mat-card>
   </div>
@@ -25,8 +33,12 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.rights' | translate }}</a>
-          <a mat-tab-link (click)="changeView('accessibility')"  [active]="view == 'accessibility'"><mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'tabnav.accessibility' | translate }}</a>
+          <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
+            <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.rights' | translate }}
+          </a>
+          <a mat-tab-link (click)="changeView('accessibility')" [active]="view == 'accessibility'">
+            <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'tabnav.accessibility' | translate }}
+          </a>
         </nav>
       </div>
     </div>

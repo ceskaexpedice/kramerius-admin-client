@@ -43,6 +43,10 @@ export class AdminApiService {
     return this.doGet(path, params, 'text').pipe(map(response => response['body']));
   }
 
+  private head(path: string, options = {}): Observable<Object> {
+    return this.http.head(this.baseUrl + path, options);
+  }
+
   private post(path: string, body, options = {}): Observable<Object> {
     return this.http.post(this.baseUrl + path, body, options);
   }
@@ -59,6 +63,11 @@ export class AdminApiService {
     const options = { headers: new HttpHeaders({ 'Accept': '*' }) };
     return this.http.get(this.baseUrl + path, options);
     //return this.get(path);
+  }
+
+  checkObject(pid: string): Observable<any> {
+    return this.head(`/items/${pid}`)
+    //.pipe(delay(500));
   }
 
   getObjectsByModel(model: string, order = 'ASC', offset: number, limit: number): Observable<any> {
@@ -346,43 +355,43 @@ export class AdminApiService {
   }
 
   // Pridano by PS
-  statisticsModels(dateFrom:string, dateTo:string, license:string) : Observable<any> {
+  statisticsModels(dateFrom: string, dateTo: string, license: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
       params = params.set('dateFrom', dateFrom);
     }
     if (dateTo) {
       params = params.set('dateTo', dateTo);
-    } 
+    }
     if (license) {
       params = params.set('license', license);
     }
     return this.get(`/statistics/multimodel`, params);
   }
 
-  statisticsLang(dateFrom:string, dateTo:string, license:string) : Observable<any> {
+  statisticsLang(dateFrom: string, dateTo: string, license: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
       params = params.set('dateFrom', dateFrom);
     }
     if (dateTo) {
       params = params.set('dateTo', dateTo);
-    } 
+    }
     if (license) {
       params = params.set('license', license);
     }
 
-     return this.get(`/statistics/lang`, params);
+    return this.get(`/statistics/lang`, params);
   }
 
-  statisticsAuthors(dateFrom:string, dateTo:string, license: string) : Observable<any> {
+  statisticsAuthors(dateFrom: string, dateTo: string, license: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
       params = params.set('dateFrom', dateFrom);
     }
     if (dateTo) {
       params = params.set('dateTo', dateTo);
-    } 
+    }
     if (license) {
       params = params.set('license', license);
     }
