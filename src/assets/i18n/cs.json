@@ -96,6 +96,8 @@
     "createNewCollection": "Vytvořit novou sbírku",
     "showStandaloneOnly": "Zobrazit pouze samostatné",
     "addToThisCollection": "Přidat do této sbírky",
+    "removeFromThisCollection": "Odebrat z této sbírky",
+    "removeFromCollection": "Odebrat ze sbírky",
     "addThisCollectionToAnotherCollection": "Přidat tuto sbírku do jiné sbírky",
     "create": "Vytvořit",
     "edit": "Upravit",

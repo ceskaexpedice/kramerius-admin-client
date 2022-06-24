@@ -102,7 +102,7 @@ export class CollectionsComponent implements OnInit {
 
   private reloadTable() {
     this.collections = [];
-    console.log('this.standaloneOnly', this.standaloneOnly);
+    //console.log('this.standaloneOnly', this.standaloneOnly);
     for (const col of this.allCollections) {
       if (this.standaloneOnly && !col.standalone) {
         continue;

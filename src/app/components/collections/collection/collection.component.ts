@@ -45,7 +45,7 @@ export class CollectionComponent implements OnInit {
   }
 
   loadData(collectionId: string) {
-    console.log('loading data for ' + collectionId)
+    //console.log('loading data for ' + collectionId)
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
@@ -78,10 +78,10 @@ export class CollectionComponent implements OnInit {
     }
   }
 
-  getName(collection): string {
-    let name = collection['title.search'];
-    if (collection['date.str'] && ['page', 'periodicalitem', 'periodicalvolume'].indexOf(collection['model']) >= 0) {
-      name += ' / ' + collection['date.str'];
+  getName(item): string {
+    let name = item['title.search'];
+    if (item['date.str'] && ['page', 'periodicalitem', 'periodicalvolume'].indexOf(item['model']) >= 0) {
+      name += ' / ' + item['date.str'];
     }
     return name;
   }
@@ -169,17 +169,40 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  onRemoveItemFromCollection(collectionPid: string, itemPid: string) {
-    //TODO: potvrzovací dialog
-    this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
-      this.loadData(this.collection.id);
-      // (async () => {
-      //   await this.delay(0);
-      //   this.loadData(this.collection.id);
-      // })();
-    }, (error) => {
-      console.log(error);
-      this.ui.showErrorSnackBar("Položku se nepodařilo odstranit ze sbírky")
+  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
+    // TODO: i18n
+    const data: SimpleDialogData = {
+      title: "Odebrání ze sbírky",
+      message: `Opravdu chcete odebrat "${itemName}" ze sbírky "${collectionName}"?`,
+      btn1: {
+        label: 'Odebrat',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
+          this.loadData(this.collection.id);
+          // (async () => {
+          //   await this.delay(0);
+          //   this.loadData(this.collection.id);
+          // })();
+        }, (error) => {
+          console.log(error);
+          this.ui.showErrorSnackBar("Položku se nepodařilo odebrat ze sbírky")
+        });
+      }
     });
   }
 
@@ -247,6 +270,6 @@ export class CollectionComponent implements OnInit {
     } else {
       return this.router.url;
     }
-  } 
+  }
 
 }

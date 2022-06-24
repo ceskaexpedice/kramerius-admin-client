@@ -96,6 +96,8 @@
     "createNewCollection": "Create new collection",
     "showStandaloneOnly": "Show standalone only",
     "addToThisCollection": "Add to this collection",
+    "removeFromThisCollection": "Remove from this collection",
+    "removeFromCollection": "Remove from collection",
     "addThisCollectionToAnotherCollection": "Add this collection to another collection",
     "create": "Create",
     "edit": "Edit",
