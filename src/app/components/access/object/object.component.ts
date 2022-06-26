@@ -13,6 +13,7 @@ export class ObjectComponent implements OnInit {
   view: string;
   pid: string;
   inputPid: string;
+  pidIsCorrect = false;
   errorMessage: string;
 
   constructor(
@@ -34,26 +35,33 @@ export class ObjectComponent implements OnInit {
 
   loadData() {
     this.errorMessage = undefined;
+    this.inputPid = this.pid;
     //TODO: loader
-    //existuje:  uuid:7f064634-d405-4774-912d-8c701554e5de
+    //existuje:  uuid:495c089c-22c4-43fe-a4c3-1e7b4147834b
     //neexistuje: uuid:7f064634-xxxx-4774-912d-8c701554e5de
     console.log(this.pid)
     console.log(this.inputPid);
     this.adminApi.checkObject(this.pid).subscribe(result => {
       console.log('object found')
+      this.pidIsCorrect = true;
       this.view = this.local.getStringProperty('object.view', 'rights');
       console.log(result);
     }, error => {
+      this.pidIsCorrect = false;
       if (error.status == 400) {
-        this.errorMessage = `neplatný PID ${this.pid}`;
+        this.errorMessage = `neplatné UUID`;
       } else if (error.status == 404) {
-        this.errorMessage = `nenalezen objekt ${this.pid} `;
+        this.errorMessage = `objekt nenalezen`;
       } else if (error.status == 403) {
-        this.errorMessage = `nedostatečná přístupová práva k objektu ${this.pid} `;
+        this.errorMessage = `nedostatečná přístupová práva`;
       } else {
-        this.errorMessage = `chyba čtení z repozitáře pro objekt ${this.pid}: ${error.status}: ${error.message}`;
+        this.errorMessage = `chyba čtení z repozitáře: ${error.status}: ${error.message}`;
       }
     })
+  }
+
+  correctPid() {
+    return this.pid && this.pidIsCorrect;
   }
 
   changeView(view: string) {

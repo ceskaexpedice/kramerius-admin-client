@@ -1,5 +1,5 @@
 <div class="app-object app-h-100">
-  <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" *ngIf="!pid">
+  <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" *ngIf="!correctPid()">
     <mat-card class="app-card app-view-border app-p-8" fxFlex="600px">
       <mat-card-content>
         <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
@@ -8,11 +8,6 @@
           <!-- <mat-error *ngIf="">
             Toto UUID je navalidní!
           </mat-error> -->
-          <mat-error *ngIf="!!errorMessage">
-            Toto UUID je navalidní!
-          </mat-error>
-          
-
         </mat-form-field>
         <mat-error *ngIf="!!errorMessage">
           {{errorMessage}}
@@ -21,7 +16,7 @@
     </mat-card>
   </div>
 
-  <div fxLayout="column" fxFlexFill *ngIf="pid">
+  <div fxLayout="column" fxFlexFill *ngIf="correctPid()">
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
