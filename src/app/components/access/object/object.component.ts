@@ -88,8 +88,8 @@ export class ObjectComponent implements OnInit {
     this.loadingCollections = true;
     this.superCollections = undefined;
     this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
-      this.loadingCollections = false;
       this.superCollections = data[0];
+      this.loadingCollections = false;
     }, (error) => {
       console.log(error);
       this.loadingCollections = false;
@@ -105,7 +105,6 @@ export class ObjectComponent implements OnInit {
       this.licenses = data['licenses']
       this.policy = data['policy'];
       this.loadingLicenses = false;
-      console.log(data);
     }, (error) => {
       console.log(error);
       this.loadingLicenses = false;
