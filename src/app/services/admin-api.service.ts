@@ -328,19 +328,19 @@ export class AdminApiService {
     return this.delete(`/roles/${role.id}`);
   }
 
+  createLicense(license: License): Observable<License> {
+    return this.post(`/licenses`, license.toJson()).pipe(map(response =>
+      License.fromJson(response)));
+  }
+
   getLicenses(): Observable<License[]> {
     return this.get('/licenses').pipe(map(response =>
       License.fromJsonArray(response)));
   }
-  // getLicenses(): Observable<License[]> {
-  //   return this.http.get('https://k7.inovatika.dev/search/api/v5.0/admin//licenses').pipe(map(response => 
-  //     License.fromJsonArray(response)));
-  // }
 
-
-  createLicense(license: License): Observable<License> {
-    return this.post(`/licenses`, license.toJson()).pipe(map(response =>
-      License.fromJson(response)));
+  getLicensesOfObject(pid: string) {
+    return this.get(`/items/${pid}/licenses`)
+    //.pipe(delay(3000));
   }
 
   updateLicense(license: License): Observable<License> {

@@ -1,5 +1,5 @@
 <div class="app-object app-h-100">
-  <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" *ngIf="!correctPid() && !loadingFoxml">
+  <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" *ngIf="!correctPid() && !checkingPid">
     <mat-card class="app-card app-view-border app-p-8" fxFlex="600px">
       <mat-card-content>
         <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
@@ -16,7 +16,7 @@
     </mat-card>
   </div>
 
-  <mat-progress-bar mode="indeterminate" *ngIf="loadingFoxml"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" *ngIf="checkingPid"></mat-progress-bar>
 
   <div fxLayout="column" fxFlexFill *ngIf="correctPid()">
     <div class="app-topbar">
@@ -34,12 +34,10 @@
             <!-- TODO: rename, translate -->
             <mat-icon class="material-icons-outlined">settings</mat-icon>ostatní
           </a>
-
           <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
             <!-- TODO: rename, translate -->
             <mat-icon class="material-icons-outlined">collections</mat-icon>ve sbírkách
           </a>
-
           <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
             <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.rights' | translate }}
           </a>
@@ -52,27 +50,32 @@
     <div fxFlex class="app-oh app-oa-y">
       <div class="app-container">
 
+        <!-- tab RIGHTS -->
         <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
           <app-rights *ngIf="view == 'rights'" [pid]="pid"></app-rights>
         </mat-card>
 
+        <!-- tab ACCESSIBILITY -->
         <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
-          <div *ngIf="view == 'accessibility'">
-            <!-- <ul>
-              <li>TODO: dostupnost (public, private a změna)</li>
-              <li>TODO: seznam licenci, odebrat licenci, pridat licenci</li>
-              <li>TODO: sbírky (kontext), odebrání ze sbírky</li>
-            </ul> -->
-
-            <div>
-
+          <mat-progress-bar mode="indeterminate" *ngIf="loadingLicenses"></mat-progress-bar>
+          <div *ngIf="view == 'accessibility' && !loadingLicenses">
+            <!-- TODO: nastylovat -->
+            <div>policy: {{policy}}
+              <button (click)="onChangePolicy()" disabled>Změnit</button>
             </div>
+            <h3>Licence</h3>
+            <div *ngFor="let license of licenses">
+              {{license}}
+              <button (click)="onRemoveLicense(license)" disabled>Odebrat</button>
+            </div>
+            <br>
+            <button (click)="onAddLicense()" disabled>Přidat licenci</button>
           </div>
         </mat-card>
 
+        <!-- tab OTHER -->
         <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
           <div *ngIf="view == 'other'">
-
             <div>
               <button mat-raised-button (click)="deleteObjectFromRepo()" color="primary">Smazat z repozitáře (jen
                 objekt)</button>
@@ -96,6 +99,7 @@
           </div>
         </mat-card>
 
+        <!-- tab COLLECTIONS -->
         <!-- TODO: nastylovat, pro testovani odkomentovat .pipe(delay(3000)); v AdminApiService.getCollectionsContainingItem() -->
         <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
         <mat-card fxLayout="column" *ngIf="view === 'collections' && !loadingCollections"

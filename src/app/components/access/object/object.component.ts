@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddCollectionToAnotherCollectionDialogComponent } from 'src/app/dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -26,12 +25,16 @@ export class ObjectComponent implements OnInit {
   errorMessage: string;
   title;
 
-  //TODO: rename
-  loadingFoxml = false;
+  checkingPid = false;
 
   //tab collections
   loadingCollections = false;
   superCollections;
+
+  //tab accessibility
+  loadingLicenses = false;
+  licenses;
+  policy;
 
   constructor(
     private local: LocalStorageService,
@@ -55,21 +58,19 @@ export class ObjectComponent implements OnInit {
   }
 
   loadData() {
-    this.loadingFoxml = true;
+    this.checkingPid = true;
     this.errorMessage = undefined;
     this.inputPid = this.pid;
-    console.log('loading foxml')
     //TODO: optimalizace: nacist zvlast RELS-EXT a MODS, takhle to taha zbytcne moc data (binarni datastreamy, verze RELS-EXT apod.)
-    this.adminApi.getFoxml(this.pid).subscribe(result => {
-      console.log('foxml loaded')
-      console.log(result);
+    this.adminApi.checkObject(this.pid).subscribe(result => {
       this.pidIsCorrect = true;
-      this.view = this.local.getStringProperty('object.view', 'collections');
-      this.loadingFoxml = false;
-      this.loadCollectionsData();
+      this.view = this.local.getStringProperty('object.view', 'accessibility');
+      this.checkingPid = false;
+      this.loadCollections();
+      this.loadLicenses();
     }, error => {
       this.pidIsCorrect = false;
-      this.loadingFoxml = false;
+      this.checkingPid = false;
       if (error.status == 400) {
         this.errorMessage = `neplatné UUID`;
       } else if (error.status == 404) {
@@ -83,8 +84,9 @@ export class ObjectComponent implements OnInit {
     })
   }
 
-  loadCollectionsData() {
+  loadCollections() {
     this.loadingCollections = true;
+    this.superCollections = undefined;
     this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
       this.loadingCollections = false;
       this.superCollections = data[0];
@@ -92,6 +94,22 @@ export class ObjectComponent implements OnInit {
       console.log(error);
       this.loadingCollections = false;
       this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tento objekt")
+    });
+  }
+
+  loadLicenses() {
+    this.loadingLicenses = true;
+    this.licenses = undefined;
+    this.policy = undefined;
+    this.adminApi.getLicensesOfObject(this.pid).subscribe(data => {
+      this.licenses = data['licenses']
+      this.policy = data['policy'];
+      this.loadingLicenses = false;
+      console.log(data);
+    }, (error) => {
+      console.log(error);
+      this.loadingLicenses = false;
+      this.ui.showErrorSnackBar("Nepodařil načíst seznam licence tohoto objektu")
     });
   }
 
@@ -231,7 +249,7 @@ export class ObjectComponent implements OnInit {
       if (result === 'yes') {
         this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
           //this.loadData(this.pid);
-          this.loadCollectionsData();
+          this.loadCollections();
           // (async () => {
           //   await this.delay(0);
           //   this.loadData(this.collection.id);
@@ -246,6 +264,18 @@ export class ObjectComponent implements OnInit {
 
   onAddThisToSuperCollection() {
     //TODO: implement
+  }
+
+  onAddLicense() {
+    console.log('TODO: add license')
+  }
+
+  onRemoveLicense(licence: String) {
+    console.log('TODO: remove license ' + licence)
+  }
+
+  onChangePolicy() {
+    console.log('TODO: change policy')
   }
 
 }

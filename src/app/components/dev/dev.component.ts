@@ -189,7 +189,20 @@ export class DevComponent implements OnInit {
   }
 
   testAction() {
-    console.log('TODO: test');
+    //vrati globalne dostupne licence
+    //const query = `/licenses/items/${pid}/info/structure`
+    // const query = `/licenses`
+    // this.adminApi.getGeneralQuery(query).subscribe(response => {
+    //   console.log(response);
+    // })
+
+    //vrati lincence konkretniho objektu
+    const pid = "uuid:17fe155d-a975-11e0-a5e1-0050569d679d"
+    const query = `/items/${pid}/licenses`
+    this.adminApi.getGeneralQuery(query).subscribe(response => {
+      console.log(response);
+    })
+
 
     // const pid = "uuid:d4978b50-8dc3-11e7-aac2-5ef3fc9bb22f";
     // const query = `/items/${pid}/streams/BIBLIO_MODS`
@@ -212,9 +225,9 @@ export class DevComponent implements OnInit {
     //   console.log(error);
     // });
 
-    this.adminApi.getPidlistDirFiles().subscribe(response => {
-      console.log(response);
-    });
+    // this.adminApi.getPidlistDirFiles().subscribe(response => {
+    //   console.log(response);
+    // });
   }
 
   changeThubnail() {
