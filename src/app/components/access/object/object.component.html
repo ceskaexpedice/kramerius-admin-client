@@ -33,6 +33,11 @@
             <mat-icon class="material-icons-outlined">settings</mat-icon>ostatní
           </a>
 
+          <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
+            <!-- TODO: rename, translate -->
+            <mat-icon class="material-icons-outlined">collections</mat-icon>ve sbírkách
+          </a>
+
           <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
             <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.rights' | translate }}
           </a>
@@ -56,6 +61,15 @@
               <li>TODO: seznam licenci, odebrat licenci, pridat licenci</li>
               <li>TODO: sbírky (kontext), odebrání ze sbírky</li>
             </ul> -->
+
+            <div>
+              <h3>Sbírky obsahující tento objekt</h3>
+
+
+
+
+              <!-- TODO: sbírky, co ho obsahují nepřímo? -->
+            </div>
           </div>
         </mat-card>
 
@@ -81,6 +95,35 @@
               <li>TODO: export FOXML?</li>
             </ul> -->
           </div>
+        </mat-card>
+
+        <mat-card fxLayout="column" *ngIf="view === 'collections' && superCollections"
+          class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+          <!-- <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar> -->
+          <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()" disabled>
+            <!-- TODO: i18n -->
+            <mat-icon>add_circle</mat-icon>Přidat do sbírky
+          </a>
+          <mat-card class="app-view-rights app-view-hover app-cursor-pointer"
+            *ngFor="let superCollection of superCollections">
+            <mat-card-header fxLayout="row" fxLayoutGap="16px">
+              <div>
+                <img [src]="getThumb(superCollection['id'])" />
+              </div>
+              <div fxFlex class="app-left">
+                <mat-card-title>
+                  <mat-icon>link</mat-icon>{{ getCollectionName(superCollection) }}
+                </mat-card-title>
+                <mat-card-subtitle>{{ getCollectionDescription(superCollection) }}</mat-card-subtitle>
+              </div>
+              <div class="app-right app-actions">
+                <a (click)="onRemoveItemFromCollection(superCollection['id'], getCollectionName(superCollection), pid, title); $event.preventDefault(); $event.stopPropagation()"
+                  [matTooltip]="'button.removeFromCollection' | translate" class="app-btn-warn">
+                  <mat-icon>cancel</mat-icon>
+                </a>
+              </div>
+            </mat-card-header>
+          </mat-card>
         </mat-card>
 
       </div>

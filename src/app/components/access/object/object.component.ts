@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddCollectionToAnotherCollectionDialogComponent } from 'src/app/dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
+import { Collection } from 'src/app/models/collection.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { ClientApiService } from 'src/app/services/client-api.service';
+import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
 
@@ -20,6 +24,9 @@ export class ObjectComponent implements OnInit {
   inputPid: string;
   pidIsCorrect = false;
   errorMessage: string;
+  title;
+
+  superCollections;
 
   constructor(
     private local: LocalStorageService,
@@ -28,11 +35,14 @@ export class ObjectComponent implements OnInit {
     private adminApi: AdminApiService,
     private dialog: MatDialog,
     private ui: UIService,
+    private collectionsService: CollectionsService,
+    private clientApi: ClientApiService,
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.pid = params['pid'];
+      this.title = this.pid;
       if (!!this.pid) {
         this.loadData();
       }
@@ -47,6 +57,7 @@ export class ObjectComponent implements OnInit {
     this.adminApi.checkObject(this.pid).subscribe(result => {
       this.pidIsCorrect = true;
       this.view = this.local.getStringProperty('object.view', 'other');
+      this.loadCollectionsData();
     }, error => {
       this.pidIsCorrect = false;
       if (error.status == 400) {
@@ -59,6 +70,15 @@ export class ObjectComponent implements OnInit {
         this.errorMessage = `chyba čtení z repozitáře: ${error.status}: ${error.message}`;
       }
     })
+  }
+
+  loadCollectionsData() {
+    this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
+      this.superCollections = data[0];
+    }, (error) => {
+      console.log(error);
+      this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tento objekt")
+    });
   }
 
   correctPid() {
@@ -155,7 +175,64 @@ export class ObjectComponent implements OnInit {
     });
   };
 
+  getThumb(uuid: string): string {
+    return this.clientApi.getThumb(uuid);
+  }
 
+  getCollectionName(collection: Collection) {
+    if (!!collection) {
+      return !!collection.name_cze ? collection.name_cze : collection.name_eng;
+    }
+  }
+
+  getCollectionDescription(collection: Collection) {
+    //console.log(collection)
+    if (!!collection) {
+      return !!collection.description_cze ? collection.description_cze : collection.description_eng;
+    }
+  }
+
+  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
+    // TODO: i18n
+    const data: SimpleDialogData = {
+      title: "Odebrání ze sbírky",
+      message: `Opravdu chcete odebrat "${itemName}" ze sbírky "${collectionName}"?`,
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
+          //this.loadData(this.pid);
+          this.loadCollectionsData();
+          // (async () => {
+          //   await this.delay(0);
+          //   this.loadData(this.collection.id);
+          // })();
+        }, (error) => {
+          console.log(error);
+          this.ui.showErrorSnackBar("Položku se nepodařilo odebrat ze sbírky")
+        });
+      }
+    });
+  }
+
+  onAddThisToSuperCollection() {
+    //TODO: implement
+  }
 
 }
 
