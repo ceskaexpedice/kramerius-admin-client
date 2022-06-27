@@ -26,6 +26,11 @@ export class ObjectComponent implements OnInit {
   errorMessage: string;
   title;
 
+  //TODO: rename
+  loadingFoxml = false;
+
+  //tab collections
+  loadingCollections = false;
   superCollections;
 
   constructor(
@@ -46,20 +51,25 @@ export class ObjectComponent implements OnInit {
       if (!!this.pid) {
         this.loadData();
       }
-      //this.view = this.local.getStringProperty('object.view', 'rights');
     });
   }
 
   loadData() {
+    this.loadingFoxml = true;
     this.errorMessage = undefined;
     this.inputPid = this.pid;
-    //TODO: loader
-    this.adminApi.checkObject(this.pid).subscribe(result => {
+    console.log('loading foxml')
+    //TODO: optimalizace: nacist zvlast RELS-EXT a MODS, takhle to taha zbytcne moc data (binarni datastreamy, verze RELS-EXT apod.)
+    this.adminApi.getFoxml(this.pid).subscribe(result => {
+      console.log('foxml loaded')
+      console.log(result);
       this.pidIsCorrect = true;
-      this.view = this.local.getStringProperty('object.view', 'other');
+      this.view = this.local.getStringProperty('object.view', 'collections');
+      this.loadingFoxml = false;
       this.loadCollectionsData();
     }, error => {
       this.pidIsCorrect = false;
+      this.loadingFoxml = false;
       if (error.status == 400) {
         this.errorMessage = `neplatné UUID`;
       } else if (error.status == 404) {
@@ -68,15 +78,19 @@ export class ObjectComponent implements OnInit {
         this.errorMessage = `nedostatečná přístupová práva`;
       } else {
         this.errorMessage = `chyba čtení z repozitáře: ${error.status}: ${error.message}`;
+        console.log(error);
       }
     })
   }
 
   loadCollectionsData() {
+    this.loadingCollections = true;
     this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
+      this.loadingCollections = false;
       this.superCollections = data[0];
     }, (error) => {
       console.log(error);
+      this.loadingCollections = false;
       this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tento objekt")
     });
   }

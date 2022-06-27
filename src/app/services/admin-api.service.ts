@@ -67,7 +67,12 @@ export class AdminApiService {
 
   checkObject(pid: string): Observable<any> {
     return this.head(`/items/${pid}`)
-    //.pipe(delay(500));
+    //.pipe(delay(3000));
+  }
+
+  getFoxml(pid: string): Observable<any> {
+    return this.getText(`/items/${pid}/foxml`)
+    //.pipe(delay(3000));
   }
 
   getObjectsByModel(model: string, order = 'ASC', offset: number, limit: number): Observable<any> {
@@ -166,7 +171,8 @@ export class AdminApiService {
   }
 
   getCollectionsContainingItem(itemPid: String) {
-    return this.get(`/collections?withItem=${itemPid}`);
+    return this.get(`/collections?withItem=${itemPid}`)
+    //.pipe(delay(3000));
   }
 
   getCollection(id: string): Observable<any> {

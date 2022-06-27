@@ -1,5 +1,5 @@
 <div class="app-object app-h-100">
-  <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" *ngIf="!correctPid()">
+  <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" *ngIf="!correctPid() && !loadingFoxml">
     <mat-card class="app-card app-view-border app-p-8" fxFlex="600px">
       <mat-card-content>
         <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
@@ -15,6 +15,8 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="loadingFoxml"></mat-progress-bar>
 
   <div fxLayout="column" fxFlexFill *ngIf="correctPid()">
     <div class="app-topbar">
@@ -63,12 +65,7 @@
             </ul> -->
 
             <div>
-              <h3>Sbírky obsahující tento objekt</h3>
 
-
-
-
-              <!-- TODO: sbírky, co ho obsahují nepřímo? -->
             </div>
           </div>
         </mat-card>
@@ -90,6 +87,8 @@
               <button mat-raised-button (click)="indexObjectWithProcess()" color="primary">Naplánovat indexaci</button>
             </div>
 
+            <!-- TODO: tlacitko prebudovat processing index pro objekt -->
+
             <!-- <ul>
               <li>TODO: export PDF?</li>
               <li>TODO: export FOXML?</li>
@@ -97,9 +96,10 @@
           </div>
         </mat-card>
 
-        <mat-card fxLayout="column" *ngIf="view === 'collections' && superCollections"
+        <!-- TODO: nastylovat, pro testovani odkomentovat .pipe(delay(3000)); v AdminApiService.getCollectionsContainingItem() -->
+        <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
+        <mat-card fxLayout="column" *ngIf="view === 'collections' && !loadingCollections"
           class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-          <!-- <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar> -->
           <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()" disabled>
             <!-- TODO: i18n -->
             <mat-icon>add_circle</mat-icon>Přidat do sbírky
@@ -124,6 +124,7 @@
               </div>
             </mat-card-header>
           </mat-card>
+          <!-- TODO: sbírky, co ho obsahují nepřímo (z indexu)? -->
         </mat-card>
 
       </div>
