@@ -175,7 +175,7 @@ export class CollectionComponent implements OnInit {
       title: "Odebrání ze sbírky",
       message: `Opravdu chcete odebrat "${itemName}" ze sbírky "${collectionName}"?`,
       btn1: {
-        label: 'Odebrat',
+        label: 'Ano',
         value: 'yes',
         color: 'warn'
       },

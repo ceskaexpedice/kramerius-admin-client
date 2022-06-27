@@ -28,6 +28,11 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
+          <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
+            <!-- TODO: rename, translate -->
+            <mat-icon class="material-icons-outlined">settings</mat-icon>ostatní
+          </a>
+
           <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
             <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.rights' | translate }}
           </a>
@@ -39,9 +44,41 @@
     </div>
     <div fxFlex class="app-oh app-oa-y">
       <div class="app-container">
+        
         <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
           <app-rights *ngIf="view == 'rights'" [pid]="pid"></app-rights>
         </mat-card>
+
+        <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
+          <div *ngIf="view == 'accessibility'">
+            <!-- <ul>
+              <li>TODO: dostupnost (public, private a změna)</li>
+              <li>TODO: seznam licenci, odebrat licenci, pridat licenci</li>
+              <li>TODO: sbírky (kontext), odebrání ze sbírky</li>
+            </ul> -->
+          </div>
+        </mat-card>
+
+        <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
+          <div *ngIf="view == 'other'">
+
+            <div>
+              <button mat-raised-button (click)="deleteObjectFromRepo()" color="primary">Smazat objekt z
+                repozitáře</button>
+            </div>
+            <br>
+            <div>
+              <button mat-raised-button disabled (click)="deleteObjectTreeWithProcess()" color="primary">Smazat strom objektu</button>
+            </div>
+
+            <!-- <ul>
+              <li>TODO: naplánovat indexaci</li>
+              <li>TODO: export PDF?</li>
+              <li>TODO: export FOXML?</li>
+            </ul> -->
+          </div>
+        </mat-card>
+
       </div>
     </div>
   </div>

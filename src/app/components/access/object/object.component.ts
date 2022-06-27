@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
+import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UIService } from 'src/app/services/ui.service';
 
 
 @Component({
@@ -21,6 +25,8 @@ export class ObjectComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private adminApi: AdminApiService,
+    private dialog: MatDialog,
+    private ui: UIService,
   ) { }
 
   ngOnInit() {
@@ -37,15 +43,9 @@ export class ObjectComponent implements OnInit {
     this.errorMessage = undefined;
     this.inputPid = this.pid;
     //TODO: loader
-    //existuje:  uuid:495c089c-22c4-43fe-a4c3-1e7b4147834b
-    //neexistuje: uuid:7f064634-xxxx-4774-912d-8c701554e5de
-    console.log(this.pid)
-    console.log(this.inputPid);
     this.adminApi.checkObject(this.pid).subscribe(result => {
-      console.log('object found')
       this.pidIsCorrect = true;
-      this.view = this.local.getStringProperty('object.view', 'rights');
-      console.log(result);
+      this.view = this.local.getStringProperty('object.view', 'other');
     }, error => {
       this.pidIsCorrect = false;
       if (error.status == 400) {
@@ -82,6 +82,44 @@ export class ObjectComponent implements OnInit {
     } else {
       return this.router.url;
     }
+  }
+
+  deleteObjectFromRepo() {
+    const data: SimpleDialogData = {
+      title: "Smazání objektu (nízkoúrovňově)",
+      message: "Opravdu chcete objekt trvale smazat? Objekt bude smazán z repozitáře i vyhledávácího indexu. " +
+        "Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů, nebudou mazány ani další odkazované objekty.",
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.adminApi.deleteObject(this.pid).subscribe(result => {
+          this.ui.showInfoSnackBar("Objekt byl smazán");
+          this.router.navigate(['/object']);
+        }, (error) => {
+          console.log(error);
+          this.ui.showErrorSnackBar("Objekt se nepodařilo smazat")
+        });
+      }
+    });
+  }
+
+  deleteObjectTreeWithProcess() {
+    //TODO: implement after process has been tested on backend
   }
 
 }
