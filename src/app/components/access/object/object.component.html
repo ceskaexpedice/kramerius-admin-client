@@ -44,7 +44,7 @@
     </div>
     <div fxFlex class="app-oh app-oa-y">
       <div class="app-container">
-        
+
         <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
           <app-rights *ngIf="view == 'rights'" [pid]="pid"></app-rights>
         </mat-card>
@@ -63,16 +63,20 @@
           <div *ngIf="view == 'other'">
 
             <div>
-              <button mat-raised-button (click)="deleteObjectFromRepo()" color="primary">Smazat objekt z
-                repozitáře</button>
+              <button mat-raised-button (click)="deleteObjectFromRepo()" color="primary">Smazat z repozitáře (jen
+                objekt)</button>
             </div>
             <br>
             <div>
-              <button mat-raised-button disabled (click)="deleteObjectTreeWithProcess()" color="primary">Smazat strom objektu</button>
+              <button mat-raised-button disabled (click)="deleteObjectTreeWithProcess()" color="primary">Naplánovat
+                mazání stromu</button>
+            </div>
+            <br>
+            <div>
+              <button mat-raised-button (click)="indexObjectWithProcess()" color="primary">Naplánovat indexaci</button>
             </div>
 
             <!-- <ul>
-              <li>TODO: naplánovat indexaci</li>
               <li>TODO: export PDF?</li>
               <li>TODO: export FOXML?</li>
             </ul> -->

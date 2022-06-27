@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
@@ -86,7 +87,7 @@ export class ObjectComponent implements OnInit {
 
   deleteObjectFromRepo() {
     const data: SimpleDialogData = {
-      title: "Smazání objektu (nízkoúrovňově)",
+      title: "Smazání objektu (nízkoúrovňové)",
       message: "Opravdu chcete objekt trvale smazat? Objekt bude smazán z repozitáře i vyhledávácího indexu. " +
         "Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů, nebudou mazány ani další odkazované objekty.",
       btn1: {
@@ -121,6 +122,40 @@ export class ObjectComponent implements OnInit {
   deleteObjectTreeWithProcess() {
     //TODO: implement after process has been tested on backend
   }
+
+  indexObjectWithProcess() {
+    const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent, {
+      data: {
+        pid: this.pid,
+        //TODO: title
+        //title: 'BLA' 
+      },
+      width: '600px',
+      panelClass: 'app-schedule-indexation-by-pid-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'scheduled') {
+        this.ui.showInfoSnackBar(`Indexace byla naplánována`);
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Indexace")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else if (result == 1) {
+        this.ui.showInfoSnackBar(`Proces Indexace byl naplánován`);
+      } else if (result == 2 || result == 3 || result == 4) {
+        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Indexace`);
+      } else {
+        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Indexace`);
+      }
+    });
+  };
+
+
 
 }
 
