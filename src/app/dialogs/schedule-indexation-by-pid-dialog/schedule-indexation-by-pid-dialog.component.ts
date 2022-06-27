@@ -20,6 +20,7 @@ export class ScheduleIndexationByPidDialogComponent implements OnInit {
 
   pids = "";
   title = undefined;
+  fixed = false;
 
   pidsCounter = 0;
   scheduledCounter = 0;
@@ -28,6 +29,7 @@ export class ScheduleIndexationByPidDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ScheduleIndexationByPidDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
+      this.fixed = true;
       this.pids = data.pid;
       this.title = data.title;
       this.pidsTextareaRows = 1;

@@ -3,35 +3,44 @@
 	<h2 mat-dialog-title>Indexace objektu</h2>
 	<mat-dialog-content>
 		<div class="app-desc app-mb-4">
-			Pro každý vložený PID bude naplánován proces <em>Indexace</em>, který (re)indexuje objekt, případně i jeho potomky (podle typu indexace).
+			Pro každý vložený PID bude naplánován proces <em>Indexace</em>, který (re)indexuje objekt, případně i jeho
+			potomky (podle typu indexace).
 		</div>
 		<div>
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
 				<mat-label>PIDy</mat-label>
-				<textarea [disabled]="inProgress || title" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" placeholder="Zde vložit PIDy ..." required autofocus rows="{{pidsTextareaRows}}"></textarea>
-				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-cursor-pointer">file_download</mat-icon>
+				<textarea [disabled]="inProgress || fixed" matInput type="text" id="inputPids" name="pids"
+					[(ngModel)]="pids" placeholder="Zde vložit PIDy ..." required autofocus
+					rows="{{pidsTextareaRows}}"></textarea>
+				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" *ngIf="!fixed"
+					class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
-			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
+			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)"
+				accept=".txt" />
 		</div>
 		<div>
 			<mat-form-field *ngIf="title" class="app-w-100">
-        <input [disabled]="inProgress || title" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" placeholder="Název">
-    	</mat-form-field>
-			<mat-form-field class="app-w-100">				
+				<input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title"
+					[(ngModel)]="title" placeholder="Název">
+			</mat-form-field>
+			<mat-form-field class="app-w-100">
 				<mat-select placeholder="Typ indexace" ngModel name="type" required>
-					<mat-option *ngFor="let type of indexationProcessTypes; let i = index" [value]="type">{{indexationProcessTypeNames[i] }}</mat-option>
+					<mat-option *ngFor="let type of indexationProcessTypes; let i = index" [value]="type">
+						{{indexationProcessTypeNames[i] }}</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
 		<div class="app-mb-3">
-			<mat-checkbox [ngModel]="true" name="ignore_inconsistent_objects" color="primary">Přeskakovat nekonzistentní objekty *</mat-checkbox>
+			<mat-checkbox [ngModel]="true" name="ignore_inconsistent_objects" color="primary">Přeskakovat nekonzistentní
+				objekty *</mat-checkbox>
 		</div>
 		<div class="app-explanation">
-			* Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <em>Chyba</em>.
+			* Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb.
+			Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <em>Chyba</em>.
 		</div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
 		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">Naplánovat</button>
-    <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
+		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
 	</mat-dialog-actions>
 </form>
