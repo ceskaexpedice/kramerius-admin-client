@@ -127,7 +127,7 @@
           <!-- TODO: nastylovat, pro testovani odkomentovat .pipe(delay(3000)); v AdminApiService.getCollectionsContainingItem() -->
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
           <div *ngIf="!loadingCollections">
-            <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()" disabled>
+            <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
               <!-- TODO: i18n -->
               <mat-icon>add_circle</mat-icon>Přidat do sbírky
             </a>

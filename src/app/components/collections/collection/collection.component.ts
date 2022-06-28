@@ -221,7 +221,11 @@ export class CollectionComponent implements OnInit {
 
   onAddThisToSuperCollection() {
     const dialogRef = this.dialog.open(AddCollectionToAnotherCollectionDialogComponent, {
-      data: this.collection,
+      data: {
+        pid: this.collection.id,
+        title: this.getCollectionName(this.collection),
+        isCollection: true
+      },
       width: '600px',
       panelClass: 'app-add-collection-to-another-collection'
     });

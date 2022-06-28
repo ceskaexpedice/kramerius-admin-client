@@ -11,8 +11,10 @@ import { CollectionsService } from 'src/app/services/collections.service';
 })
 export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
 
-  collection_title;
-  collection_pid;
+
+  pid;
+  title;
+  isCollection = false;
 
   potentialSuperCollections = [];
   selectedSuperCollection;
@@ -20,15 +22,17 @@ export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
   inProgress = false;
   finished = false;
 
-  constructor(public dialogRef: MatDialogRef<AddCollectionToAnotherCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public collection: Collection, private collectionApi: CollectionsService) {
-    if (collection) {
-      this.collection_title = collection.name_cze;
-      this.collection_pid = collection.id;
-      this.collectionApi.getCollectionsContainingItem(this.collection_pid).subscribe((data: [collections: Collection[], size: number]) => {
+  constructor(public dialogRef: MatDialogRef<AddCollectionToAnotherCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, private collectionApi: CollectionsService) {
+    if (data) {
+      this.pid = data.pid;
+      this.title = data.title;
+      this.isCollection = data.isCollection;
+
+      this.collectionApi.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         let pidsOfCurrentSuperCollections = data[0].map(collection => collection.id);
         //TODO: handle offset, limit
         this.collectionApi.getCollections(0, 999).subscribe((data: [collections: Collection[], size: number]) => {
-          this.potentialSuperCollections = data[0].filter(collection => collection.id != this.collection_pid && !pidsOfCurrentSuperCollections.includes(collection.id))
+          this.potentialSuperCollections = data[0].filter(collection => collection.id != this.pid && !pidsOfCurrentSuperCollections.includes(collection.id))
         }, (error) => {
           console.log(error);
           //TODO: handle error
@@ -47,7 +51,7 @@ export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
 
   onAdd(formData) {
     this.inProgress = true;
-    this.collectionApi.addItemToCollection(this.selectedSuperCollection.id, this.collection.id)
+    this.collectionApi.addItemToCollection(this.selectedSuperCollection.id, this.pid)
       .subscribe(() => {
         this.inProgress = false;
         this.finished = true;

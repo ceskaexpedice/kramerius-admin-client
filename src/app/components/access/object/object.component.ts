@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AddCollectionToAnotherCollectionDialogComponent } from 'src/app/dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
 import { ScheduleAddLicenseDialogComponent } from 'src/app/dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
@@ -272,7 +273,20 @@ export class ObjectComponent implements OnInit {
   }
 
   onAddThisToSuperCollection() {
-    //TODO: implement
+    const dialogRef = this.dialog.open(AddCollectionToAnotherCollectionDialogComponent, {
+      data: {
+        pid: this.pid,
+        title: this.title,
+        isCollection: false,
+      },
+      width: '600px',
+      panelClass: 'app-add-collection-to-another-collection'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result == 'close') {
+        this.loadCollections();
+      }
+    });
   }
 
   onAddLicense() {
