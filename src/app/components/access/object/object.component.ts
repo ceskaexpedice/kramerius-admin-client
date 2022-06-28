@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleAddLicenseDialogComponent } from 'src/app/dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
+import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from 'src/app/dialogs/schedule-processing-index-rebuild-for-object-dialog/schedule-processing-index-rebuild-for-object-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -338,6 +339,26 @@ export class ObjectComponent implements OnInit {
         this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Změna viditelnosti`);
       } else {
         this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Změna viditelnosti`);
+      }
+    });
+  }
+
+  rebuildProcessingIndexForObject() {
+    const dialogRef = this.dialog.open(ScheduleProcessingIndexRebuildForObjectDialogComponent, {
+      data: {
+        pid: this.pid,
+        title: this.title
+      },
+      width: '600px',
+      panelClass: 'app-schedule-processing-index-for-object-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else {
+        this.ui.showInfoSnackBar(`Proces Přebudování Processing indexu pro objekt byl naplánován`);
       }
     });
   }

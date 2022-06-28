@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 
@@ -10,10 +10,19 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 })
 export class ScheduleProcessingIndexRebuildForObjectDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ScheduleProcessingIndexRebuildForObjectDialogComponent>, private adminApi: AdminApiService) { }
-
+  fixed = false;
   inProgress = false;
   pid;
+  title;
+
+
+  constructor(public dialogRef: MatDialogRef<ScheduleProcessingIndexRebuildForObjectDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
+    if (data) {
+      this.fixed = true;
+      this.pid = data.pid;
+      this.title = data.title;
+    }
+  }
 
   ngOnInit() {
   }

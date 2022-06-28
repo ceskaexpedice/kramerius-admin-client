@@ -82,21 +82,37 @@
         <!-- tab OTHER -->
         <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
           <div *ngIf="view == 'other'">
+            <h4>Synchronizace</h4>
             <div>
-              <button mat-raised-button (click)="deleteObjectFromRepo()" color="primary">Smazat z repozitáře (jen
+              <button mat-raised-button (click)="indexObjectWithProcess()" color="primary">Reindexovat (vyhledávací
+                index)</button>
+            </div>
+            <br>
+            <div>
+              <button mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{
+                'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+            </div>
+            <br>
+            <h4>Mazání</h4>
+            <div>
+              <button mat-raised-button disabled (click)="deleteObjectTreeWithProcess()" color="primary">Smazat celý
+                strom
+                (chytře)</button>
+            </div>
+            <br>
+            <div>
+              <button mat-raised-button (click)="deleteObjectFromRepo()" color="warn">Smazat z repozitáře (jen
                 objekt)</button>
             </div>
-            <br>
-            <div>
-              <button mat-raised-button disabled (click)="deleteObjectTreeWithProcess()" color="primary">Naplánovat
-                mazání stromu</button>
-            </div>
-            <br>
-            <div>
-              <button mat-raised-button (click)="indexObjectWithProcess()" color="primary">Naplánovat indexaci</button>
-            </div>
 
-            <!-- TODO: tlacitko prebudovat processing index pro objekt -->
+            <h4>Exporty</h4>
+            <div>
+              <button mat-raised-button disabled color="primary">Export PDF</button>
+            </div>
+            <div>
+              <br>
+              <button mat-raised-button disabled color="primary">Export FOXML</button>
+            </div>
 
             <!-- <ul>
               <li>TODO: export PDF?</li>
