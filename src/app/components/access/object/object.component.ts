@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
+import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { Collection } from 'src/app/models/collection.model';
@@ -23,7 +24,7 @@ export class ObjectComponent implements OnInit {
   inputPid: string;
   pidIsCorrect = false;
   errorMessage: string;
-  title;
+  title = 'TODO:nazev'
 
   checkingPid = false;
 
@@ -50,7 +51,7 @@ export class ObjectComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.pid = params['pid'];
-      this.title = this.pid;
+      //this.title = this.pid;
       if (!!this.pid) {
         this.loadData();
       }
@@ -178,8 +179,7 @@ export class ObjectComponent implements OnInit {
     const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent, {
       data: {
         pid: this.pid,
-        //TODO: title
-        //title: 'BLA' 
+        title: this.title
       },
       width: '600px',
       panelClass: 'app-schedule-indexation-by-pid-dialog'
@@ -270,7 +270,25 @@ export class ObjectComponent implements OnInit {
   }
 
   onRemoveLicense(licence: String) {
-    console.log('TODO: remove license ' + licence)
+    const dialogRef = this.dialog.open(ScheduleRemoveLicenseDialogComponent, {
+      data: {
+        pid: this.pid,
+        title: this.title,
+        licenses: this.licenses,
+        license: licence
+      },
+      width: '600px',
+      panelClass: 'app-schedule-remove-license--dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Odebrání licence")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else {
+        this.ui.showInfoSnackBar(`Proces Odebrání licence byl naplánován`);
+      }
+    });
   }
 
   onChangePolicy() {

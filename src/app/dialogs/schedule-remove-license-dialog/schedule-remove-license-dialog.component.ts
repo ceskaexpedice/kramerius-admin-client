@@ -1,5 +1,6 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
@@ -14,16 +15,35 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
   inProgress = false;
 
   pids;
-  //pids = "uuid:0eaa6730-9068-11dd-97de-000d606f5dc6";
-  //pids = "uuid:0eaa6730-9068-11dd-97de-000d606f5dc6,uuid:4a8cf730-af36-11dd-ae88-000d606f5dc6";
+  title;
+  fixed = false;
+
+  licenses;
   license;
-  //license = "public_domain"
 
   pidsCounter = 0;
   scheduledCounter = 0;
   progressBarMode = 'indeterminate';
 
   constructor(public dialogRef: MatDialogRef<ScheduleRemoveLicenseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
+    if (data) {
+      this.fixed = true;
+      this.pids = data.pid;
+      this.title = data.title;
+      this.license = data.license;
+      this.licenses = data.licenses;
+    } else {
+      this.fetchAvailableLicenses();
+    }
+  }
+
+  fetchAvailableLicenses() {
+    this.inProgress = true;
+    this.adminApi.getLicenses().subscribe((licenses: License[]) => {
+      this.licenses = licenses.map((lic) => lic.name);
+      this.license = this.licenses[0];
+      this.inProgress = false;
+    });
   }
 
   ngOnInit() {
@@ -32,7 +52,7 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
   schedule(formData) {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
-    const license = formData.license;
+    const license = this.license; //formData.license;
     this.adminApi.scheduleProcess({
       defid: 'remove_license',
       params: {
@@ -74,6 +94,11 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
   onPidsFromFile() {
     let el: HTMLElement = this.fileWithPids.nativeElement;
     el.click();
+  }
+
+  isValid(form) {
+    //return form.valid //nefunguje, kdyz je textarea disabled (protoze fixed)
+    return this.pids && this.license;
   }
 
 }

@@ -110,7 +110,7 @@
     "exportPidsOfDnntLicensedObjects": "Exportovat PIDy objektů s licencí DNNT",
     "generateAccessLogs": "Generovat přístupové logy",
     "setPublicPrivate": "Nastavit public/private",
-    "removeLicense": "Odstranit licenci",
+    "removeLicense": "Odebrat licenci",
     "setPublicByDates": "Nastavit public podle datumů",
     "nkpLogs": "NKP logy",
     "deletingStatistics": "Mazání statistik",
