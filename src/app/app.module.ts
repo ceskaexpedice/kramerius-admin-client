@@ -60,7 +60,7 @@ import { ObjectComponent } from './components/access/object/object.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AddItemsToCollectionDialogComponent } from './dialogs/add-items-to-collection-dialog/add-items-to-collection-dialog.component';
-import { AddCollectionToAnotherCollectionDialogComponent } from './dialogs/add-collection-to-another-collection-dialog/add-collection-to-another-collection-dialog.component';
+import { AddItemToCollectionDialogComponent } from './dialogs/add-item-to-collection-dialog/add-item-to-collection-dialog.component';
 import { CollectionDetailComponent } from './components/collections/collection-detail/collection-detail.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts/core';
@@ -131,7 +131,7 @@ export function createCustomMatPaginatorIntl(
     ObjectComponent,
     AuthComponent,
     AddItemsToCollectionDialogComponent,
-    AddCollectionToAnotherCollectionDialogComponent,
+    AddItemToCollectionDialogComponent,
     CollectionDetailComponent,
     NkpLogyComponent,
     DeleteStatisticsComponent

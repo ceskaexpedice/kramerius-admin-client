@@ -5,11 +5,11 @@ import { CollectionsService } from 'src/app/services/collections.service';
 
 
 @Component({
-  selector: 'app-add-collection-to-another-collection-dialog',
-  templateUrl: './add-collection-to-another-collection-dialog.component.html',
-  styleUrls: ['./add-collection-to-another-collection-dialog.component.scss']
+  selector: 'app-add-item-to-collection-dialog',
+  templateUrl: './add-item-to-collection-dialog.component.html',
+  styleUrls: ['./add-item-to-collection-dialog.component.scss']
 })
-export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
+export class AddItemToCollectionDialogComponent implements OnInit {
 
 
   pid;
@@ -21,7 +21,7 @@ export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
 
   inProgress = false;
 
-  constructor(public dialogRef: MatDialogRef<AddCollectionToAnotherCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, private collectionApi: CollectionsService) {
+  constructor(public dialogRef: MatDialogRef<AddItemToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, private collectionApi: CollectionsService) {
     if (data) {
       this.pid = data.pid;
       this.title = data.title;

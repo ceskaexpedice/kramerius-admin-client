@@ -1,5 +1,6 @@
 <form class="form-signin" #f="ngForm" (ngSubmit)="onAdd(f.value)">
-	<h2 mat-dialog-title>Přidání sbírky do jiné sbírky</h2>
+	<h2 mat-dialog-title *ngIf="isCollection">Přidání sbírky do jiné sbírky</h2>
+	<h2 mat-dialog-title *ngIf="!isCollection">Přidání objektu do sbírky</h2>
 	<mat-dialog-content class="mat-typography">
 		<div class="app-desc app-mb-4" *ngIf="isCollection">
 			Tato sbírka bude přidána do jiné sbírky. Součástí přidání do sbírky je naplánování indexačního procesu,
