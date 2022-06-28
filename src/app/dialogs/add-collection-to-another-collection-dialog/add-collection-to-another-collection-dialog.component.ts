@@ -20,7 +20,6 @@ export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
   selectedSuperCollection;
 
   inProgress = false;
-  finished = false;
 
   constructor(public dialogRef: MatDialogRef<AddCollectionToAnotherCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, private collectionApi: CollectionsService) {
     if (data) {
@@ -53,14 +52,10 @@ export class AddCollectionToAnotherCollectionDialogComponent implements OnInit {
     this.inProgress = true;
     this.collectionApi.addItemToCollection(this.selectedSuperCollection.id, this.pid)
       .subscribe(() => {
-        this.inProgress = false;
-        this.finished = true;
+        this.dialogRef.close('added');
       }, error => {
-        //TODO: handle error
-        //this.ui.showErrorSnackBar("Nepodařil přidat sbírku do jiné sbírky")
         console.log(error);
-        this.inProgress = false;
-        this.finished = true;
+        this.dialogRef.close('error');
       });
   }
 

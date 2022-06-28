@@ -258,15 +258,11 @@ export class ObjectComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
-          //this.loadData(this.pid);
+          this.ui.showInfoSnackBar(`Objekt byl odebrán ze sbírky`);
           this.loadCollections();
-          // (async () => {
-          //   await this.delay(0);
-          //   this.loadData(this.collection.id);
-          // })();
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("Položku se nepodařilo odebrat ze sbírky")
+          this.ui.showErrorSnackBar("Objekt se nepodařilo odebrat ze sbírky")
         });
       }
     });
@@ -283,8 +279,13 @@ export class ObjectComponent implements OnInit {
       panelClass: 'app-add-collection-to-another-collection'
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result && result == 'close') {
+      if (result == 'added') {
+        this.ui.showInfoSnackBar(`Objekt byl přidán do sbírky`);
         this.loadCollections();
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar("Objekt se nepodařilo přidat do sbírky")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
       }
     });
   }

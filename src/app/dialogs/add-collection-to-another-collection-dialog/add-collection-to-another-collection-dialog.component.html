@@ -39,9 +39,8 @@
 		<mat-progress-bar *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !selectedSuperCollection || finished" color="primary"
+		<button mat-flat-button [disabled]="inProgress || !selectedSuperCollection" color="primary"
 			type="submit">Přidat</button>
-		<button mat-flat-button *ngIf="!finished" [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
-		<button mat-flat-button *ngIf="finished" mat-dialog-close="close">Zavřít</button>
+		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
 	</mat-dialog-actions>
 </form>

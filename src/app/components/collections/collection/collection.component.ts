@@ -230,8 +230,13 @@ export class CollectionComponent implements OnInit {
       panelClass: 'app-add-collection-to-another-collection'
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result && result == 'close') {
+      if (result == 'added') {
+        this.ui.showInfoSnackBar(`Sbírka byla přidána do jiné sbírky`);
         this.loadData(this.collection.id)
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar("Sbírku se nepodařilo přidat do sbírky")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
       }
     });
   }
