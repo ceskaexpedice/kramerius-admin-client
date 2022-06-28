@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduleAddLicenseDialogComponent } from 'src/app/dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
+import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
@@ -310,7 +311,28 @@ export class ObjectComponent implements OnInit {
   }
 
   onChangePolicy() {
-    console.log('TODO: change policy')
+    const dialogRef = this.dialog.open(ScheduleChangePolicyByPidDialogComponent, {
+      data: {
+        pid: this.pid,
+        title: this.title,
+        policy: this.policy == 'private' ? 'PUBLIC' : 'PRIVATE'
+      },
+      width: '600px',
+      panelClass: 'app-schedule-change-policy-by-pid-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Změna viditelnosti")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else if (result == 1) {
+        this.ui.showInfoSnackBar(`Proces Změna viditelnosti byl naplánován`);
+      } else if (result == 2 || result == 3 || result == 4) {
+        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Změna viditelnosti`);
+      } else {
+        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Změna viditelnosti`);
+      }
+    });
   }
 
 }

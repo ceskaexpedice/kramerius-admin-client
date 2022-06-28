@@ -1,33 +1,55 @@
 <form #f="ngForm" (ngSubmit)="schedule(f.value)">
-	<mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
+	<mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()">
+	</mat-progress-bar>
 	<h2 mat-dialog-title>Změna viditelnosti</h2>
 	<mat-dialog-content>
-		<div class="app-desc app-mb-4">
-			Pro každý vložený PID bude naplánován proces <i>Změna viditelnosti</i> pro objekt, případně i jeho potomky.
+		<div class="app-desc app-mb-4" *ngIf="!fixed">
+			Pro každý vložený PID bude naplánován proces <i>Změna viditelnosti</i>, který nastaví příznak POLICY
+			objektu, případně i jeho potomkům.
+		</div>
+		<div class="app-desc app-mb-4" *ngIf="fixed">
+			Pro vybraný PID bude naplánován proces <i>Změna viditelnosti</i>, který nastaví příznak POLICY objektu,
+			případně i jeho potomkům.
 		</div>
 		<div>
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
-				<mat-label>PIDy</mat-label>
-				<textarea [disabled]="inProgress" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" placeholder="Zde vložit PIDy ..." required autofocus rows="4"></textarea>
-				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-cursor-pointer">file_download</mat-icon>
+				<mat-label>{{fixed ? 'PID' : 'PIDy'}}</mat-label>
+				<textarea [disabled]="inProgress || fixed" matInput type="text" id="inputPids" name="pids"
+					[(ngModel)]="pids" placeholder="Zde vložit PIDy ..." required autofocus
+					rows="{{fixed ? 1 : 4}}"></textarea>
+				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" *ngIf="!fixed"
+					class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
-			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
+			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)"
+				accept=".txt" />
+		</div>
+		<div>
+			<mat-form-field *ngIf="title" class="app-w-100">
+				<input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title"
+					[(ngModel)]="title" placeholder="Název">
+			</mat-form-field>
 		</div>
 		<div>
 			<mat-form-field class="app-w-100">
-				<mat-select [disabled]="inProgress" placeholder="Výsledná viditelnost" ngModel name="policy" required>
-					<mat-option *ngFor="let policy of policyKeys; let i = index" [value]="policy">{{policyNames[i] }}</mat-option>
+				<mat-select [disabled]="inProgress || fixed" placeholder="Výsledná viditelnost" [(value)]="policy"
+					name="policy" required>
+					<mat-option *ngFor="let policy of policies; let i = index" [value]="policy">
+						{{translatePolicy(policy)}}
+					</mat-option>
 				</mat-select>
-    	</mat-form-field>
+			</mat-form-field>
+		</div>
+		<div>
 			<mat-form-field class="app-w-100">
 				<mat-select [disabled]="inProgress" placeholder="Změnit viditelnost pro" ngModel name="scope" required>
-					<mat-option *ngFor="let scope of scopeKeys; let i = index" [value]="scope">{{scopeNames[i] }}</mat-option>
+					<mat-option *ngFor="let scope of scopeKeys; let i = index" [value]="scope">{{scopeNames[i] }}
+					</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
 		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">Naplánovat</button>
-    <button mat-flat-button [disabled]="inProgress"  mat-dialog-close="cancel">Zrušit</button>
+		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
 	</mat-dialog-actions>
 </form>

@@ -62,7 +62,7 @@
             <div *ngIf="!loadingLicenses">
               <!-- TODO: nastylovat -->
               <div>policy: {{policy}}
-                <button (click)="onChangePolicy()" disabled>Změnit</button>
+                <button (click)="onChangePolicy()">Změnit</button>
               </div>
               <h3>Licence</h3>
               <div *ngFor="let license of licenses">

@@ -12,25 +12,40 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
 
   @ViewChild('fileWithPids', { static: true }) fileWithPids: ElementRef;
 
+  fixed = false;
+
   scopeKeys = ['TREE', 'OBJECT',];
-  scopeNames = ['Objekt i s potomky', 'Jen objekt'];
-
-  policyKeys = ['PUBLIC', 'PRIVATE',];
-  policyNames = ['Veřejné', 'Neveřejné',];
-
-  selectedPolicy = this.policyKeys[0];
-
+  scopeNames = ['Objekt i s potomky', 'Jen objekt']; //TODO: i18n
   selectedScope = this.scopeKeys[0];
+
+  policies = ['PUBLIC', 'PRIVATE'];
+
   inProgress = false;
 
   pids = "";
+  title;
+  policy;
 
   pidsCounter = 0;
   scheduledCounter = 0;
   progressBarMode = 'indeterminate';
 
   constructor(public dialogRef: MatDialogRef<ScheduleChangePolicyByPidDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
+    if (data) {
+      this.fixed = true;
+      this.pids = data.pid;
+      this.title = data.title;
+      this.policy = data.policy;
+    }
+  }
 
+  translatePolicy(policy) {
+    //TODO: i18n
+    switch (policy) {
+      case 'PUBLIC': return 'Veřejné';
+      case 'PRIVATE': return 'Neveřejné';
+    }
+    return policy;
   }
 
   ngOnInit() {
@@ -44,7 +59,7 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
     this.scheduledCounter = 0;
 
     const scope = formData.scope;
-    const policy = formData.policy;
+    const policy = this.policy;//formData.policy;
 
     let requests = [];
     pids.forEach(pid => {
