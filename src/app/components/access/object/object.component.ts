@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ScheduleAddLicenseDialogComponent } from 'src/app/dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
@@ -266,7 +267,24 @@ export class ObjectComponent implements OnInit {
   }
 
   onAddLicense() {
-    console.log('TODO: add license')
+    const dialogRef = this.dialog.open(ScheduleAddLicenseDialogComponent, {
+      data: {
+        pid: this.pid,
+        title: this.title,
+        licenses: this.licenses,
+      },
+      width: '600px',
+      panelClass: 'app-schedule-add-licencse-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přidání licence")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else {
+        this.ui.showInfoSnackBar(`Proces Přidání licence byl naplánován`);
+      }
+    });
   }
 
   onRemoveLicense(licence: String) {
