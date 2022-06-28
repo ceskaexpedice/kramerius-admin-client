@@ -26,7 +26,7 @@ export class ObjectComponent implements OnInit {
   inputPid: string;
   pidIsCorrect = false;
   errorMessage: string;
-  title = 'TODO:nazev'
+  title;
 
   checkingPid = false;
 
@@ -64,11 +64,11 @@ export class ObjectComponent implements OnInit {
     this.checkingPid = true;
     this.errorMessage = undefined;
     this.inputPid = this.pid;
-    //TODO: optimalizace: nacist zvlast RELS-EXT a MODS, takhle to taha zbytcne moc data (binarni datastreamy, verze RELS-EXT apod.)
     this.adminApi.checkObject(this.pid).subscribe(result => {
       this.pidIsCorrect = true;
       this.view = this.local.getStringProperty('object.view', 'accessibility');
       this.checkingPid = false;
+      this.loadSolrData();
       this.loadCollections();
       this.loadLicenses();
     }, error => {
@@ -84,6 +84,13 @@ export class ObjectComponent implements OnInit {
         this.errorMessage = `chyba čtení z repozitáře: ${error.status}: ${error.message}`;
         console.log(error);
       }
+    })
+  }
+
+  loadSolrData() {
+    this.title = undefined;
+    this.clientApi.getObjectByPidFromIndex(this.pid).subscribe(result => {
+      this.title = result['title.search'];
     })
   }
 
