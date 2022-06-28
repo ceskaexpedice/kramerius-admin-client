@@ -28,7 +28,6 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ScheduleAddLicenseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
       this.fixed = true;
-      this.fixed = true;
       this.pids = data.pid;
       this.title = data.title;
       this.fetchAvailableLicenses(data.licenses);

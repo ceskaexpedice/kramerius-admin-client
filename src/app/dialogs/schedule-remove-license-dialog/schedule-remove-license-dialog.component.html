@@ -3,14 +3,18 @@
 	</mat-progress-bar>
 	<h2 mat-dialog-title>Odebrání licence</h2>
 	<mat-dialog-content>
-		<div class="app-desc app-mb-4">
-			Pro každý vložený PID bude naplánován proces <i>Odebrání licence</i>
+		<div class="app-desc app-mb-4" *ngIf="!fixed">
+			Pro každý vložený PID bude naplánován proces <i>PřOdebránídání licence</i>
+		</div>
+		<div class="app-desc app-mb-4" *ngIf="fixed">
+			Pro vybraný PID bude naplánován proces <i>Odebrání licence</i>
 		</div>
 		<div>
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
-				<mat-label>PIDy</mat-label>
+				<mat-label>{{fixed ? 'PID' : 'PIDy'}}</mat-label>
 				<textarea matInput type="text" id="inputPids" name="pids" autofocus [(ngModel)]="pids"
-					placeholder="Zde vložit PIDy ..." [disabled]="inProgress || fixed" required rows="4"></textarea>
+					placeholder="Zde vložit PIDy ..." [disabled]="inProgress || fixed" required
+					rows="{{fixed ? 1 : 4}}"></textarea>
 				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" *ngIf="!fixed"
 					class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
