@@ -1,4 +1,10 @@
 {
+  "lang":{
+    "lat": "Latin",
+    "cze": "Czech",
+    "ger": "German",
+    "eng": "English"
+  },
   "navbar": {
     "object": "Object",
     "import": "Import",
@@ -28,7 +34,9 @@
     "exports": "Exports",
     "bulkDataEditing": "Bulk data editing",
     "object": "Object",
-    "model": "Model"
+    "model": "Model",
+    "others": "Others",
+    "inCollections": "In collections"
   },
   "alert": {
     "statistics": {
@@ -216,12 +224,5 @@
     "collection": "Collection",
     "soundrecording": "Soundrecording",
     "version": "Version"
-  },
-  "lang":{
-    "lat": "Latin",
-    "cze": "Czech",
-    "ger": "German",
-    "eng": "English"
   }
-
 }

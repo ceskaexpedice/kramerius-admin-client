@@ -77,13 +77,13 @@ export class ObjectComponent implements OnInit {
       this.pidIsCorrect = false;
       this.checkingPid = false;
       if (error.status == 400) {
-        this.errorMessage = `neplatné UUID`;
+        this.errorMessage = `Neplatné UUID`;
       } else if (error.status == 404) {
-        this.errorMessage = `objekt nenalezen`;
+        this.errorMessage = `Objekt nenalezen`;
       } else if (error.status == 403) {
-        this.errorMessage = `nedostatečná přístupová práva`;
+        this.errorMessage = `Nedostatečná přístupová práva`;
       } else {
-        this.errorMessage = `chyba čtení z repozitáře: ${error.status}: ${error.message}`;
+        this.errorMessage = `Chyba čtení z repozitáře: ${error.status}: ${error.message}`;
         console.log(error);
       }
     })

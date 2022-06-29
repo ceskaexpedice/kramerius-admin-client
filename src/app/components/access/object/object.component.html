@@ -5,12 +5,9 @@
         <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
           <mat-label>{{ 'desc.enterTheUuidOfTheObject' | translate }}</mat-label>
           <input matInput [(ngModel)]="inputPid" placeholder="{{pid}}" (keyup.enter)="assignUuid()" type="text">
-          <!-- <mat-error *ngIf="">
-            Toto UUID je navalidní!
-          </mat-error> -->
         </mat-form-field>
         <mat-error *ngIf="!!errorMessage">
-          {{errorMessage}}
+          {{ errorMessage }}
         </mat-error>
       </mat-card-content>
     </mat-card>
@@ -29,18 +26,17 @@
         <span class="app-last">{{ getCurrentRoute('string') }}</span>
       </div>
       <div>
-        <!-- TODO: nastylovat -->
         {{ title }}
       </div>
       <div>
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
             <!-- TODO: rename, translate -->
-            <mat-icon class="material-icons-outlined">settings</mat-icon>ostatní
+            <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'tabnav.others' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
             <!-- TODO: rename, translate -->
-            <mat-icon class="material-icons-outlined">collections</mat-icon>ve sbírkách
+            <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'tabnav.inCollections' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
             <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.rights' | translate }}

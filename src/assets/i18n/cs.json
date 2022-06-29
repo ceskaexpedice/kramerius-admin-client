@@ -1,4 +1,10 @@
 {
+  "lang":{
+    "lat": "Latina",
+    "cze": "Čeština",
+    "ger": "Němčina",
+    "eng": "Angličtina"
+  },
   "navbar": {
     "object": "Objekt",
     "import": "Import",
@@ -28,7 +34,9 @@
     "exports": "Exporty",
     "bulkDataEditing": "Hromadné úpravy dat",
     "object": "Objekt",
-    "model": "Model"
+    "model": "Model",
+    "others": "Ostatní",
+    "inCollections": "Ve sbírkách"
   },
   "alert": {
     "statistics": {
@@ -216,11 +224,5 @@
     "collection": "Sbírky",
     "soundrecording": "Zvukové nahrávky",
     "version": "Verze"
-  },
-
-  "lang":{
-      "lat": "Latina",
-      "cze": "Čeština",
-      "ger": "Němčina"
   }
 }
