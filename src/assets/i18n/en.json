@@ -130,7 +130,11 @@
     "indexedObsolete": "Indexed (obsolete)",
     "indexInBulk": "Index in bulk",
     "loadMore": "Load more",
-    "changeAvailability": "Change availability"
+    "changeAvailability": "Change availability",
+    "reindexSearchIndex": "Reindex (search index)",
+    "deleteTheWholeTreeSmartly": "Delete the whole tree (smartly)",  
+    "deleteFromRepositoryObjectOnly": "Delete from repository (object only)",
+    "export": "Export"
   },
   "field": {
     "archive": "Archive",
@@ -227,6 +231,9 @@
     "collection": "Collection",
     "soundrecording": "Soundrecording",
     "version": "Version",
-    "availability": "Availability"
+    "availability": "Availability",
+    "synchronization": "Synchronization",
+    "deleting": "Deleting",
+    "exports": "Exports"
   }
 }

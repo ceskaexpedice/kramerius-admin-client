@@ -130,7 +130,11 @@
     "indexedObsolete": "Indexováno (zastaralé)",
     "indexInBulk": "Indexovat hromadně",
     "loadMore": "Načíst další",
-    "changeAvailability": "Změnit dostupnost"
+    "changeAvailability": "Změnit dostupnost",
+    "reindexSearchIndex": "Reindexovat (vyhledávací index)",
+    "deleteTheWholeTreeSmartly": "Smazat celý strom (chytře)",  
+    "deleteFromRepositoryObjectOnly": "Smazat z repozitáře (jen objekt)",
+    "export": "Exportovat"
   },
   "field": {
     "archive": "Archiv",
@@ -227,6 +231,9 @@
     "collection": "Sbírky",
     "soundrecording": "Zvukové nahrávky",
     "version": "Verze",
-    "availability": "Dostupnost"
+    "availability": "Dostupnost",
+    "synchronization": "Synchronizace",
+    "deleting": "Mazání",
+    "exports": "Exporty"
   }
 }

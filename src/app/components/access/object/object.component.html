@@ -116,45 +116,26 @@
           </mat-card>
         </ng-container>
         
-
-        <!-- tab OTHER -->
-        <mat-card fxLayout="column" class="app-card app-view-border app-p-0" *ngIf="view == 'other'">
-          <h4>Synchronizace</h4>
-          <div>
-            <button mat-raised-button (click)="indexObjectWithProcess()" color="primary">Reindexovat (vyhledávací
-              index)</button>
-          </div>
-          <br>
-          <div>
-            <button mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{
-              'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
-          </div>
-          <br>
-          <h4>Mazání</h4>
-          <div>
-            <button mat-raised-button disabled (click)="deleteObjectTreeWithProcess()" color="primary">Smazat celý
-              strom
-              (chytře)</button>
-          </div>
-          <br>
-          <div>
-            <button mat-raised-button (click)="deleteObjectFromRepo()" color="warn">Smazat z repozitáře (jen
-              objekt)</button>
-          </div>
-
-          <h4>Exporty</h4>
-          <div>
-            <button mat-raised-button disabled color="primary">Export PDF</button>
-          </div>
-          <div>
-            <br>
-            <button mat-raised-button disabled color="primary">Export FOXML</button>
-          </div>
-
-          <!-- <ul>
-            <li>TODO: export PDF?</li>
-            <li>TODO: export FOXML?</li>
-          </ul> -->
+        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'other'">
+          <mat-card-content>
+            <div class="app-mb-4">
+              <h3 class="app-mt-0">{{ 'desc.synchronization' | translate }}</h3>
+              <button mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2">{{ 'button.reindexSearchIndex' | translate }}</button>
+              <button mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+            </div>
+            <mat-divider [inset]="true"></mat-divider>
+            <div class="app-mt-4 app-mb-4">
+              <h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
+              <button mat-flat-button disabled (click)="deleteObjectTreeWithProcess()" color="warn" class="app-mr-2">{{ 'button.deleteTheWholeTreeSmartly' | translate }}</button>
+              <button mat-flat-button (click)="deleteObjectFromRepo()" color="warn">{{ 'button.deleteFromRepositoryObjectOnly' | translate }}</button>
+            </div>
+            <mat-divider [inset]="true"></mat-divider>
+            <div class="app-mt-4">
+              <h3 class="app-mt-0">{{ 'desc.exports' | translate }}</h3>
+              <button mat-flat-button disabled color="primary" class="app-mr-2">{{ 'button.export' | translate }} PDF</button>
+              <button mat-flat-button disabled color="primary">{{ 'button.export' | translate }} FOXML</button>
+            </div>
+          </mat-card-content>
         </mat-card>
       </div>
     </div>
