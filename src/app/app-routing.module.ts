@@ -16,6 +16,7 @@ import { AccessComponent } from './components/access/access.component';
 import { ImportComponent } from './components/import/import.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
+import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
   { path: 'collections/:id/edit', component: CollectionEditComponent, canActivate: [AuthGuard] },
-  { path: 'collections/new', component: CollectionEditComponent, canActivate: [AuthGuard] },
+  { path: 'collections/new', component: CollectionNewComponent, canActivate: [AuthGuard] },
   { path: 'collections/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
   { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },

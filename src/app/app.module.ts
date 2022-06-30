@@ -74,6 +74,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PaginatorI18n } from './paginator-i18n';
+import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -134,7 +135,8 @@ export function createCustomMatPaginatorIntl(
     AddItemToCollectionDialogComponent,
     CollectionDetailComponent,
     NkpLogyComponent,
-    DeleteStatisticsComponent
+    DeleteStatisticsComponent,
+    CollectionNewComponent
   ],
   imports: [
     BrowserModule,
