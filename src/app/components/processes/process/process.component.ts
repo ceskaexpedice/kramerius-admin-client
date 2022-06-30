@@ -34,7 +34,7 @@ export class ProcessComponent implements OnInit {
     private local: LocalStorageService) { }
 
   ngOnInit() {
-    this.view = this.local.getStringProperty('processes.view', 'standardOUtput');
+    this.view = this.local.getStringProperty('processes.view', 'standardOutput');
 
     this.route.params.subscribe(params => {
       this.processId = params['id'];

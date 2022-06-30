@@ -23,19 +23,14 @@
         <span class="app-separator">/</span>
         <a routerLink="/object">{{ 'navbar.object' | translate }}</a>
         <span class="app-separator">/</span>
-        <span class="app-last">{{ getCurrentRoute('string') }}</span>
-      </div>
-      <div>
-        {{ title }}
+        <span class="app-last app-text-cutter">
+          <span [matTooltip]="title">{{ title }}</span>
+          <!-- {{ getCurrentRoute('string') }} --> 
+        </span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
-            <!-- TODO: rename, translate -->
-            <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'tabnav.others' | translate }}
-          </a>
           <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
-            <!-- TODO: rename, translate -->
             <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'tabnav.inCollections' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
@@ -44,6 +39,9 @@
           <a mat-tab-link (click)="changeView('accessibility')" [active]="view == 'accessibility'">
             <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'tabnav.accessibility' | translate }}
           </a>
+          <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
+            <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'tabnav.others' | translate }}
+          </a>
         </nav>
       </div>
     </div>
@@ -51,84 +49,88 @@
       <div class="app-container">
 
         <!-- tab RIGHTS -->
-        <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
-          <app-rights *ngIf="view == 'rights'" [pid]="pid"></app-rights>
+        <mat-card fxLayout="column" class="app-card app-view-border app-p-0" *ngIf="view == 'rights'">
+          <app-rights [pid]="pid"></app-rights>
         </mat-card>
 
         <!-- tab ACCESSIBILITY -->
-        <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
-          <div *ngIf="view == 'accessibility'">
-            <mat-progress-bar mode="indeterminate" *ngIf="loadingLicenses"></mat-progress-bar>
-            <div *ngIf="!loadingLicenses">
-              <!-- TODO: nastylovat -->
-              <div>policy: {{policy}}
-                <button (click)="onChangePolicy()">Změnit</button>
-              </div>
-              <h3>Licence</h3>
-              <div *ngFor="let license of licenses">
-                {{license}}
-                <button (click)="onRemoveLicense(license)">Odebrat</button>
-              </div>
-              <br>
-              <button (click)="onAddLicense()">Přidat licenci</button>
+        <mat-card fxLayout="column" class="app-card app-view-border app-p-0" *ngIf="view == 'accessibility'">
+          <mat-progress-bar mode="indeterminate" *ngIf="loadingLicenses"></mat-progress-bar>
+          <div *ngIf="!loadingLicenses">
+            <!-- TODO: nastylovat -->
+            <div>policy: {{policy}}
+              <button (click)="onChangePolicy()">Změnit</button>
             </div>
-          </div>
+            <h3>Licence</h3>
+            <div *ngFor="let license of licenses">
+              {{license}}
+              <button (click)="onRemoveLicense(license)">Odebrat</button>
+            </div>
+            <br>
+            <button (click)="onAddLicense()">Přidat licenci</button>
+          </div>  
         </mat-card>
 
         <!-- tab OTHER -->
-        <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
-          <div *ngIf="view == 'other'">
-            <h4>Synchronizace</h4>
-            <div>
-              <button mat-raised-button (click)="indexObjectWithProcess()" color="primary">Reindexovat (vyhledávací
-                index)</button>
-            </div>
-            <br>
-            <div>
-              <button mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{
-                'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
-            </div>
-            <br>
-            <h4>Mazání</h4>
-            <div>
-              <button mat-raised-button disabled (click)="deleteObjectTreeWithProcess()" color="primary">Smazat celý
-                strom
-                (chytře)</button>
-            </div>
-            <br>
-            <div>
-              <button mat-raised-button (click)="deleteObjectFromRepo()" color="warn">Smazat z repozitáře (jen
-                objekt)</button>
-            </div>
-
-            <h4>Exporty</h4>
-            <div>
-              <button mat-raised-button disabled color="primary">Export PDF</button>
-            </div>
-            <div>
-              <br>
-              <button mat-raised-button disabled color="primary">Export FOXML</button>
-            </div>
-
-            <!-- <ul>
-              <li>TODO: export PDF?</li>
-              <li>TODO: export FOXML?</li>
-            </ul> -->
+        <mat-card fxLayout="column" class="app-card app-view-border app-p-0" *ngIf="view == 'other'">
+          <h4>Synchronizace</h4>
+          <div>
+            <button mat-raised-button (click)="indexObjectWithProcess()" color="primary">Reindexovat (vyhledávací
+              index)</button>
           </div>
+          <br>
+          <div>
+            <button mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{
+              'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+          </div>
+          <br>
+          <h4>Mazání</h4>
+          <div>
+            <button mat-raised-button disabled (click)="deleteObjectTreeWithProcess()" color="primary">Smazat celý
+              strom
+              (chytře)</button>
+          </div>
+          <br>
+          <div>
+            <button mat-raised-button (click)="deleteObjectFromRepo()" color="warn">Smazat z repozitáře (jen
+              objekt)</button>
+          </div>
+
+          <h4>Exporty</h4>
+          <div>
+            <button mat-raised-button disabled color="primary">Export PDF</button>
+          </div>
+          <div>
+            <br>
+            <button mat-raised-button disabled color="primary">Export FOXML</button>
+          </div>
+
+          <!-- <ul>
+            <li>TODO: export PDF?</li>
+            <li>TODO: export FOXML?</li>
+          </ul> -->
         </mat-card>
 
-        <!-- tab COLLECTIONS -->
-        <mat-card fxLayout="column" *ngIf="view === 'collections'"
-          class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+
+
+
+        
+
+        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px" *ngIf="view === 'collections'">
+          <div fxFlex>
+            {{ getCurrentRoute('string') }}
+          </div>
+          <div>
+            <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
+              <mat-icon>add_circle</mat-icon>{{ 'button.addToThisCollection' | translate }}
+            </a>
+          </div>
+        </mat-card>
+        <mat-card fxLayout="column" *ngIf="view === 'collections'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
           <!-- TODO: nastylovat, pro testovani odkomentovat .pipe(delay(3000)); v AdminApiService.getCollectionsContainingItem() -->
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
-          <div *ngIf="!loadingCollections">
-            <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
-              <!-- TODO: i18n -->
-              <mat-icon>add_circle</mat-icon>Přidat do sbírky
-            </a>
-            <mat-card class="app-view-rights app-view-hover app-cursor-pointer"
-              *ngFor="let superCollection of superCollections">
+          <ng-container *ngIf="!loadingCollections">
+            <mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections">
               <mat-card-header fxLayout="row" fxLayoutGap="16px">
                 <div>
                   <img [src]="getThumb(superCollection['id'])" />
@@ -140,15 +142,14 @@
                   <mat-card-subtitle>{{ getCollectionDescription(superCollection) }}</mat-card-subtitle>
                 </div>
                 <div class="app-right app-actions">
-                  <a (click)="onRemoveItemFromCollection(superCollection['id'], getCollectionName(superCollection), pid, title); $event.preventDefault(); $event.stopPropagation()"
-                    [matTooltip]="'button.removeFromCollection' | translate" class="app-btn-warn">
+                  <a (click)="onRemoveItemFromCollection(superCollection['id'], getCollectionName(superCollection), pid, title); $event.preventDefault(); $event.stopPropagation()" [matTooltip]="'button.removeFromCollection' | translate" class="app-btn-warn">
                     <mat-icon>cancel</mat-icon>
                   </a>
                 </div>
               </mat-card-header>
             </mat-card>
             <!-- TODO: sbírky, co ho obsahují nepřímo od rodiče (z indexu)? Jen pro informaci, nebo proklik na sbírku-->
-          </div>
+          </ng-container>
         </mat-card>
 
       </div>
