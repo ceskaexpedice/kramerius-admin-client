@@ -10,7 +10,7 @@
       <div>
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('repositoryManagement')" [active]="view == 'repositoryManagement'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.repositoryManagement' | translate }}</a>
-          <a mat-tab-link (click)="changeView('imports')"  [active]="view == 'imports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.imports' | translate }}</a>
+          <!-- <a mat-tab-link (click)="changeView('imports')"  [active]="view == 'imports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.imports' | translate }}</a> -->
           <a mat-tab-link (click)="changeView('exports')"  [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.exports' | translate }}</a>
           <a mat-tab-link (click)="changeView('bulkDataEditing')"  [active]="view == 'bulkDataEditing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'tabnav.bulkDataEditing' | translate }}</a>
 					<a mat-tab-link (click)="changeView('statistics')"  [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.statistics' | translate }}</a>
@@ -24,10 +24,10 @@
 						<button mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2">{{ 'button.buildProcessingIndex' | translate }}</button>
 						<button mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
 					</div>
-					<div *ngIf="view == 'imports'">
+					<!-- <div *ngIf="view == 'imports'">
 						<button mat-flat-button (click)="openScheduleImportFoxmlDialog()" color="primary" class="app-mr-2">{{ 'button.import' | translate }} FOXML</button>
 						<button mat-flat-button (click)="openScheduleImportNdkDialog()" color="primary" class="app-mr-2">{{ 'button.import' | translate }} NDK METS</button>
-					</div>
+					</div> -->
 					<div *ngIf="view == 'exports'">
 						<h4>{{ 'desc.global' | translate }}</h4>
 						<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportStatistics' | translate }}</button>
