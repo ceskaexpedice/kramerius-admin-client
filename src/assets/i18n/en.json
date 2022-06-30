@@ -234,6 +234,7 @@
     "availability": "Availability",
     "synchronization": "Synchronization",
     "deleting": "Deleting",
-    "exports": "Exports"
+    "exports": "Exports",
+    "newCollection": "New collection"
   }
 }

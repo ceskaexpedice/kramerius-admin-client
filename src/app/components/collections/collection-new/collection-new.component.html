@@ -1,1 +1,23 @@
-<p>collection-new works!</p>
+<div class="app-collection-new app-h-100">
+  <div fxLayout="column" fxFlexFill>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-8">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <a routerLink="/collections">{{ 'navbar.collections' | translate }}</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'desc.newCollection' | translate }}</span>
+      </div>
+    </div>
+    <div fxFlex class="app-oa-y">
+      <div class="app-container">
+        <mat-card class="app-card app-view-border app-p-0">
+          <mat-card-content>
+            <app-collection-edit></app-collection-edit>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
