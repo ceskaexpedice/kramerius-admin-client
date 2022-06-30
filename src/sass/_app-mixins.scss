@@ -60,6 +60,18 @@
   }
 }
 
+// set icon size
+@mixin setIconSize() {
+  @each $size, $val in $iconSize {
+    &.app-#{$size} {
+      font-size: #{$val}px;
+      width: #{$val}px;
+      height: #{$val}px;
+    }
+  }
+}
+
+
 // set gap
 @mixin setGap() {
   @each $gap, $val in $gaps {

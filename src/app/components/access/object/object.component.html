@@ -58,7 +58,7 @@
               <div class="app-mb-4">
                 <h3 class="app-mt-0">{{ 'desc.availability' | translate }}</h3>
                 <div  fxLayout="row" fxLayoutAlign="start center">
-                  <mat-icon class="app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon><strong>{{ 'field.' + policy | translate }}</strong>
+                  <mat-icon class="app-20 app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon><strong>{{ 'field.' + policy | translate }}</strong>
                   <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4">{{ 'button.changeAvailability' | translate }}</button>
                 </div>
               </div>

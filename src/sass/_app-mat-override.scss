@@ -331,3 +331,8 @@
     font-size: 14px;
   }
 }
+
+// icon
+.mat-icon {
+  @include setIconSize();
+}
