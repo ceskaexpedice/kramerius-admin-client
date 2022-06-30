@@ -129,7 +129,8 @@
     "indexed": "Indexováno",
     "indexedObsolete": "Indexováno (zastaralé)",
     "indexInBulk": "Indexovat hromadně",
-    "loadMore": "Načíst další"
+    "loadMore": "Načíst další",
+    "changeAvailability": "Změnit dostupnost"
   },
   "field": {
     "archive": "Archiv",
@@ -139,7 +140,9 @@
     "map": "Mapa",
     "monograph": "Monografie",
     "periodical": "Časopis",
-    "soundrecording": "Zvuková nahrávka"
+    "soundrecording": "Zvuková nahrávka",
+    "public": "Veřejné",
+    "private": "Neveřejné"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
@@ -223,6 +226,7 @@
     "manuscript": "Rukopisy",
     "collection": "Sbírky",
     "soundrecording": "Zvukové nahrávky",
-    "version": "Verze"
+    "version": "Verze",
+    "availability": "Dostupnost"
   }
 }

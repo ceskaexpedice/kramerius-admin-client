@@ -205,6 +205,10 @@ a {
   min-width: 400px;
 }
 
+.app-list-inside {
+  list-style-position: inside;
+}
+
 // top bar
 .app-topbar {
   @extend .app-pt-8, .app-pl-4, .app-pr-4;

@@ -129,7 +129,8 @@
     "indexed": "Indexed",
     "indexedObsolete": "Indexed (obsolete)",
     "indexInBulk": "Index in bulk",
-    "loadMore": "Load more"
+    "loadMore": "Load more",
+    "changeAvailability": "Change availability"
   },
   "field": {
     "archive": "Archive",
@@ -139,7 +140,9 @@
     "map": "Map",
     "monograph": "Monograph",
     "periodical": "Periodical",
-    "soundrecording": "Soundrecording"
+    "soundrecording": "Soundrecording",
+    "public": "Public",
+    "private": "Private"
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
@@ -223,6 +226,7 @@
     "manuscript": "Manuscript",
     "collection": "Collection",
     "soundrecording": "Soundrecording",
-    "version": "Version"
+    "version": "Version",
+    "availability": "Availability"
   }
 }
