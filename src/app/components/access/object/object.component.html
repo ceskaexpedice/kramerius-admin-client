@@ -126,32 +126,26 @@
             </a>
           </div>
         </mat-card>
-        <mat-card fxLayout="column" *ngIf="view === 'collections'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-          <!-- TODO: nastylovat, pro testovani odkomentovat .pipe(delay(3000)); v AdminApiService.getCollectionsContainingItem() -->
-          <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
-          <ng-container *ngIf="!loadingCollections">
-            <mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections">
-              <mat-card-header fxLayout="row" fxLayoutGap="16px">
-                <div>
-                  <img [src]="getThumb(superCollection['id'])" />
-                </div>
-                <div fxFlex class="app-left">
-                  <mat-card-title>
-                    <mat-icon>link</mat-icon>{{ getCollectionName(superCollection) }}
-                  </mat-card-title>
-                  <mat-card-subtitle>{{ getCollectionDescription(superCollection) }}</mat-card-subtitle>
-                </div>
-                <div class="app-right app-actions">
-                  <a (click)="onRemoveItemFromCollection(superCollection['id'], getCollectionName(superCollection), pid, title); $event.preventDefault(); $event.stopPropagation()" [matTooltip]="'button.removeFromCollection' | translate" class="app-btn-warn">
-                    <mat-icon>cancel</mat-icon>
-                  </a>
-                </div>
-              </mat-card-header>
-            </mat-card>
-            <!-- TODO: sbírky, co ho obsahují nepřímo od rodiče (z indexu)? Jen pro informaci, nebo proklik na sbírku-->
-          </ng-container>
+        <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
+        <mat-card fxLayout="column" *ngIf="view === 'collections' && !loadingCollections" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+          <mat-card class="app-view-rights app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="'/collections/' + getCurrentRoute('string')">
+            <mat-card-header fxLayout="row" fxLayoutGap="16px">
+              <div>
+                <img [src]="getThumb(superCollection['id'])" />
+              </div>
+              <div fxFlex class="app-left">
+                <mat-card-title><mat-icon>link</mat-icon>{{ getCollectionName(superCollection) }}</mat-card-title>
+                <mat-card-subtitle>{{ getCollectionDescription(superCollection) }}</mat-card-subtitle>
+              </div>
+              <div class="app-right app-actions">
+                <a (click)="onRemoveItemFromCollection(superCollection['id'], getCollectionName(superCollection), pid, title); $event.preventDefault(); $event.stopPropagation()" [matTooltip]="'button.removeFromCollection' | translate" class="app-btn-warn">
+                  <mat-icon>cancel</mat-icon>
+                </a>
+              </div>
+            </mat-card-header>
+          </mat-card>
+          <!-- TODO: sbírky, co ho obsahují nepřímo od rodiče (z indexu)? Jen pro informaci, nebo proklik na sbírku-->
         </mat-card>
-
       </div>
     </div>
   </div>
