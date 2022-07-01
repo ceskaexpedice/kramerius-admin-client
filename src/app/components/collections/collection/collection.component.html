@@ -7,7 +7,7 @@
         <span class="app-separator">/</span>
         <a routerLink="/collections">{{ 'navbar.collections' | translate }}</a>
         <span class="app-separator">/</span>
-        <span class="app-last">{{ getCurrentRoute('string') }}</span>
+        <span class="app-last">{{ getCollectionName(collection) }}</span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
@@ -22,7 +22,7 @@
       <div class="app-container">
         <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
           <div fxFlex class="app-text-cutter">
-            <strong>{{ getCollectionName(collection) }}</strong><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
+            <span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
           </div>
           <div *ngIf="view === 'content'">
             <a mat-flat-button color="primary" (click)="onAddItemsToCollection()">

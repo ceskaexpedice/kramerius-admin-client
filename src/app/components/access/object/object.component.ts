@@ -29,6 +29,7 @@ export class ObjectComponent implements OnInit {
   pidIsCorrect = false;
   errorMessage: string;
   title;
+  collection: Collection;
 
   checkingPid = false;
 
@@ -106,6 +107,14 @@ export class ObjectComponent implements OnInit {
       console.log(error);
       this.loadingCollections = false;
       this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tento objekt")
+    });
+
+    // PEDRO -> chybel popisek, vzal jsem z collection.component.ts
+    this.collectionsService.getCollection(this.pid).subscribe((collection: Collection) => {
+      this.collection = collection;
+    }, (error) => {
+      console.log(error);
+      this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
     });
   }
 

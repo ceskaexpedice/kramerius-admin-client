@@ -85,8 +85,8 @@
        
         <ng-container *ngIf="view === 'collections'">
           <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
-            <div fxFlex>
-              <strong>{{ getCurrentRoute('string') }}</strong>
+            <div fxFlex class="app-text-cutter">
+              <span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
             </div>
             <div>
               <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
