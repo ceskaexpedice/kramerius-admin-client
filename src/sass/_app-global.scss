@@ -108,6 +108,26 @@ a {
   text-align: center;
 }
 
+.app-va-middle {
+  vertical-align: middle;
+}
+
+.app-va-top {
+  vertical-align: top;
+}
+
+.app-va-bottom {
+  vertical-align: bottom;
+}
+
+.app-va-text-botttom {
+  vertical-align: text-bottom;
+}
+
+.app-va-sub {
+  vertical-align: sub;
+}
+
 .app-rotate-up {
   .mat-icon {
     &:not(.app-no-rotate) {

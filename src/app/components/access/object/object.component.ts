@@ -15,6 +15,7 @@ import { ClientApiService } from 'src/app/services/client-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 
 @Component({
@@ -51,6 +52,7 @@ export class ObjectComponent implements OnInit {
     private ui: UIService,
     private collectionsService: CollectionsService,
     private clientApi: ClientApiService,
+    private clipboard: Clipboard
   ) { }
 
   ngOnInit() {
@@ -385,6 +387,11 @@ export class ObjectComponent implements OnInit {
         this.ui.showInfoSnackBar(`Proces Přebudování Processing indexu pro objekt byl naplánován`);
       }
     });
+  }
+
+  copyTextToClipboard(val: string) {
+    this.clipboard.copy(val);
+    this.ui.showInfoSnackBar('Text byl úspěšně zkopírován do schánky!');
   }
 
 }

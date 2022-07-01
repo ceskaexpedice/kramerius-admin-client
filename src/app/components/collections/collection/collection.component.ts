@@ -10,6 +10,7 @@ import { ClientApiService } from 'src/app/services/client-api.service';
 import { AddItemsToCollectionDialogComponent } from 'src/app/dialogs/add-items-to-collection-dialog/add-items-to-collection-dialog.component';
 import { AddItemToCollectionDialogComponent } from 'src/app/dialogs/add-item-to-collection-dialog/add-item-to-collection-dialog.component';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-collection',
@@ -34,7 +35,8 @@ export class CollectionComponent implements OnInit {
     private dialog: MatDialog,
     private clientApi: ClientApiService,
     private collectionsService: CollectionsService,
-    private local: LocalStorageService) {
+    private local: LocalStorageService,
+    private clipboard: Clipboard) {
   }
 
   ngOnInit() {
@@ -279,6 +281,11 @@ export class CollectionComponent implements OnInit {
     } else {
       return this.router.url;
     }
+  }
+
+  copyTextToClipboard(val: string) {
+    this.clipboard.copy(val);
+    this.ui.showInfoSnackBar('Text byl úspěšně zkopírován do schánky!');
   }
 
 }
