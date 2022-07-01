@@ -7,11 +7,9 @@
         <span class="app-separator">/</span>
         <a routerLink="/processes">{{ 'navbar.processes' | translate }}</a>
         <span class="app-separator">/</span>
-        <span class="app-last">{{ getCurrentRoute('string') }}</span>
-      </div>
-      <div>
-        <!-- TODO: nastylovat -->
-        {{ process.name }}
+        <span class="app-last app-text-cutter">
+          <span [matTooltip]="process.name">{{ process.name }}</span>
+        </span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
