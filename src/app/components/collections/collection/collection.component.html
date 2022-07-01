@@ -59,8 +59,7 @@
                   <img [src]="getThumb(item['pid'])" />
                 </div>
                 <div fxFlex class="app-left">
-                  <mat-card-title><mat-icon>link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container>
-                  </mat-card-title>
+                  <mat-card-title><mat-icon>link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container></mat-card-title>
                   <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
                 </div>
                 <div class="app-right app-actions">
@@ -76,8 +75,7 @@
                   <img [src]="getThumb(item['pid'])" />
                 </div>
                 <div fxFlex class="app-left">
-                  <mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container>
-                  </mat-card-title>
+                  <mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
                   <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
                 </div>
                 <div class="app-right app-actions">
