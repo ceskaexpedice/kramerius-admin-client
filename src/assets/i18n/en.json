@@ -134,7 +134,8 @@
     "reindexSearchIndex": "Reindex (search index)",
     "deleteTheWholeTreeSmartly": "Delete the whole tree (smartly)",  
     "deleteFromRepositoryObjectOnly": "Delete from repository (object only)",
-    "export": "Export"
+    "export": "Export",
+    "copyTheTextToTheClipboard": "Copy the text to the clipboard"
   },
   "field": {
     "archive": "Archive",

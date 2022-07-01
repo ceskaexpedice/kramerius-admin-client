@@ -134,7 +134,8 @@
     "reindexSearchIndex": "Reindexovat (vyhledávací index)",
     "deleteTheWholeTreeSmartly": "Smazat celý strom (chytře)",  
     "deleteFromRepositoryObjectOnly": "Smazat z repozitáře (jen objekt)",
-    "export": "Exportovat"
+    "export": "Exportovat",
+    "copyTheTextToTheClipboard": "Zkopirovat text do schránky"
   },
   "field": {
     "archive": "Archiv",

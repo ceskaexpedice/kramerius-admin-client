@@ -22,7 +22,7 @@
       <div class="app-container">
         <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
           <div fxFlex class="app-text-cutter">
-            <a (click)="copyTextToClipboard(getCurrentRoute('string'))" matTooltip="'desc.zkopirovat uuid do schranky' | translate"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a><span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
+            <a (click)="copyTextToClipboard(getCurrentRoute('string'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a><span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
           </div>
           <div *ngIf="view === 'content'">
             <a mat-flat-button color="primary" (click)="onAddItemsToCollection()">
