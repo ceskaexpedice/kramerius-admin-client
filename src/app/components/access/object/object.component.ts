@@ -145,7 +145,12 @@ export class ObjectComponent implements OnInit {
   }
 
   assignUuid() {
+    this.errorMessage = undefined;
     if (!this.inputPid) {
+      return;
+    }
+    if(!this.inputPid.startsWith('uuid:')){
+      this.errorMessage = `Neplatné UUID`;
       return;
     }
     this.router.navigate(['/', 'object', this.inputPid]);
