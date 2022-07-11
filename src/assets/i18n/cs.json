@@ -236,6 +236,7 @@
     "synchronization": "Synchronizace",
     "deleting": "Mazání",
     "exports": "Exporty",
-    "newCollection": "Nová sbírka"
+    "newCollection": "Nová sbírka",
+    "barcode": "Čárový kód"
   }
 }

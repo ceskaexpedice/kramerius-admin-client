@@ -236,6 +236,7 @@
     "synchronization": "Synchronization",
     "deleting": "Deleting",
     "exports": "Exports",
-    "newCollection": "New collection"
+    "newCollection": "New collection",
+    "barcode": "Barcode"
   }
 }
