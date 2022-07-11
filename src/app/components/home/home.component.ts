@@ -227,6 +227,10 @@ export class HomeComponent implements OnInit {
     this.subject.next(target.value);
   }
 
+  clearIdentifier(target) {
+    this.identifier = null;
+    this.subject.next(target.value);
+  }
   
   getVersion() {
     return this.appSettings.version;

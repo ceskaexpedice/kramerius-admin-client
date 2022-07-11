@@ -45,10 +45,9 @@
 						<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
 						<input matInput placeholder="Pid / Čnb / Issn / Issbn" [(ngModel)]="identifier"  (keyup)="onIdentKeyUp($event.target)">
 					</mat-form-field>
-					<!-- redady to implement for each filter same as is in processes-->
-					<!-- <a mat-icon-button [matTooltip]="'button.deselect' class="app-clear-filter app-mr-2">
+					<a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2" *ngIf="identifier" (click)="clearIdentifier($event.target)">
             <mat-icon>cancel</mat-icon>
-          </a> -->
+          </a>
 				</div>
 				<ng-container  *ngIf="view == 'statistics'">
 					<div fxLayout="row" fxLayoutGap="16px">
