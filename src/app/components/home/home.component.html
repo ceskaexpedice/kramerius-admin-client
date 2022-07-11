@@ -41,10 +41,10 @@
 					<!-- <a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2">
             <mat-icon>cancel</mat-icon>
           </a> -->
-					<!-- <mat-form-field>
+					<mat-form-field>
 						<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
-						<input matInput placeholder="Pid / Čnb / Issn / Issbn">
-					</mat-form-field> -->
+						<input matInput placeholder="Pid / Čnb / Issn / Issbn" [(ngModel)]="identifier"  (keyup)="onIdentKeyUp($event.target)">
+					</mat-form-field>
 					<!-- redady to implement for each filter same as is in processes-->
 					<!-- <a mat-icon-button [matTooltip]="'button.deselect' class="app-clear-filter app-mr-2">
             <mat-icon>cancel</mat-icon>
@@ -57,8 +57,8 @@
 								<mat-card-title>{{ 'desc.modelDisplayStatistics' | translate }}</mat-card-title>
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultModel">
-								<div echarts [options]="modelsOpts" style="height: 350px;" (chartClick)="onChartClick($event)"></div>
-								<button mat-flat-button  (click)="csvModels()" color="primary" disabled class="app-mr-2">CSV</button>
+								<div echarts [options]="modelsOpts" style="height: 350px;" ></div>
+								<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
 							</mat-card-content>
 							<mat-card *ngIf="!isResultModel" class="app-view-alert app-info">
 								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
@@ -70,7 +70,7 @@
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultLang">
 								<div echarts [options]="langOpts" style="height: 350px;" ></div>
-								<button mat-flat-button  (click)="csvLang()" color="primary" disabled class="app-mr-2">CSV</button>
+								<button mat-flat-button  (click)="csvLang()" color="primary"  class="app-mr-2">CSV</button>
 							</mat-card-content>
 							<mat-card *ngIf="!isResultLang" class="app-view-alert app-info">
 								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
@@ -82,7 +82,7 @@
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultAuthor">
 								<div echarts [options]="authorOpts" style="height: 350px;" ></div>
-								<button mat-flat-button  (click)="csvAuthor()" color="primary" disabled class="app-mr-2">CSV</button>
+								<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
 							</mat-card-content>
 							<mat-card *ngIf="!isResultAuthor" class="app-view-alert app-info">
 								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>

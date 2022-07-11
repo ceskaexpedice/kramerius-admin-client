@@ -361,7 +361,7 @@ export class AdminApiService {
   }
 
   // Pridano by PS
-  statisticsModels(dateFrom: string, dateTo: string, license: string): Observable<any> {
+  statisticsModels(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
       params = params.set('dateFrom', dateFrom);
@@ -371,11 +371,14 @@ export class AdminApiService {
     }
     if (license) {
       params = params.set('license', license);
+    }
+    if (identifier) {
+      params = params.set('identifier', identifier);
     }
     return this.get(`/statistics/multimodel`, params);
   }
 
-  statisticsLang(dateFrom: string, dateTo: string, license: string): Observable<any> {
+  statisticsLang(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
       params = params.set('dateFrom', dateFrom);
@@ -385,12 +388,15 @@ export class AdminApiService {
     }
     if (license) {
       params = params.set('license', license);
+    }
+    if (identifier) {
+      params = params.set('identifier', identifier);
     }
 
     return this.get(`/statistics/lang`, params);
   }
 
-  statisticsAuthors(dateFrom: string, dateTo: string, license: string): Observable<any> {
+  statisticsAuthors(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
       params = params.set('dateFrom', dateFrom);
@@ -401,8 +407,13 @@ export class AdminApiService {
     if (license) {
       params = params.set('license', license);
     }
+    if (identifier) {
+      params = params.set('identifier', identifier);
+    }
     return this.get(`/statistics/author`, params);
   }
+
+  
 
 }
 export interface ProcessesParams {
