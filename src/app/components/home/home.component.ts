@@ -37,7 +37,9 @@ export class HomeComponent implements OnInit {
   dateTo: Date = new Date(new Date().getFullYear(), new Date().getMonth(),new Date().getDate()+1);
   dateFrom: Date = new Date(new Date().getFullYear(), new Date().getMonth()-1,new Date().getDate());
   license:string = null;
+
   allLicenses:string[];
+
   identifier:string;
 
   
@@ -65,7 +67,18 @@ export class HomeComponent implements OnInit {
     private local: LocalStorageService) { }
 
   reinitGraphs() {
+  
     let requestedLicense = this.license != null && this.license !== 'All' ? this.license : null;
+
+    this.adminApi.statisticsLicenseFilter(
+      this.dateFrom != null ? this.format(this.dateFrom) : null, 
+      this.dateTo != null ? this.format(this.dateTo) : null,
+      requestedLicense, this.identifier
+    ).subscribe(response => {
+      this.allLicenses = response["license"];
+      this.allLicenses.unshift('All');
+    });
+
 
     // authors graph configuration
     this.adminApi.statisticsAuthors(
@@ -201,12 +214,6 @@ export class HomeComponent implements OnInit {
     this.view = this.local.getStringProperty('home.view', 'statistics');
 
     this.reinitGraphs();
-    this.adminApi.getLicenses().subscribe((licenses: License[]) => {
-      this.allLicenses = licenses.map(l=> {
-        return l.name;
-      });
-      this.allLicenses.unshift('All');
-    });
 
     this.subject.pipe(
       debounceTime(400)

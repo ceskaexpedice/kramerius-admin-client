@@ -360,7 +360,26 @@ export class AdminApiService {
     return this.delete(`/licenses/${license.id}`);
   }
 
+
+
   // Pridano by PS
+  statisticsLicenseFilter(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {
+    let params: HttpParams = new HttpParams();
+    if (dateFrom) {
+      params = params.set('dateFrom', dateFrom);
+    }
+    if (dateTo) {
+      params = params.set('dateTo', dateTo);
+    }
+    if (license) {
+      params = params.set('license', license);
+    }
+    if (identifier) {
+      params = params.set('identifier', identifier);
+    }
+    return this.get(`/statistics/license/options`, params);
+  }
+
   statisticsModels(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
