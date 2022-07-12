@@ -16,7 +16,7 @@ export class UIService {
   }
 
   showInfoSnackBar(message: string, duration: number = 2000) {
-    this.snackBar.open(message, '', { duration: duration });
+    this.snackBar.open(this.getTranslation(message), '', { duration: duration });
   }
 
   showErrorSnackBar(message: string, duration: number = 3000) {
