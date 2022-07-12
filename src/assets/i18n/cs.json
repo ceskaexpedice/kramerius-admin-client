@@ -162,6 +162,29 @@
     "indexationProcessedObjects": "Zpracováno <strong>{{value}}</strong> objektů",
     "indexationScheduledByIndexing": "Naplánováno <strong>{{value}}</strong> indexací"
   },
+  "modal": {
+    "removeFromThisCollection": {
+      "title": "Odebrání ze sbírky",
+      "message": "Opravdu chcete odebrat <strong>{{value1}}</strong> ze sbírky <strong>{{value2}}</strong>" 
+    }
+  },
+  "snackbar": {
+    "success": {
+      "addThisCollectionToAnotherCollection": "Sbírka byla přidána do jiné sbírky",
+      "theCollectionHasBeenRemoved": "Sbírka byla odstraněna",
+      "removeFromThisCollection": "Položka byla úspěšně odebrána ze sbírky",
+      "copyToClipboard": "Text byl úspěšně zkopírován do schánky",
+      "addToTheCollection": "Sbírka byla přidána"
+    },
+    "error": {
+      "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
+      "theCollectionCouldNotBeLoaded": "Sbírku se nepodařilo načíst",
+      "failedToLoadListOfCollectionsContainingThisCollection": "Nepodařil se načíst seznam sbírek obsahujích tuto sbírku",
+      "collectionCouldNotBeDeleted": "Sbírku se nepodařilo odstranit",
+      "removeFromThisCollection": "Položku se nepodařilo odebrat ze sbírky",
+      "addToTheCollection": "Sbírku se nepodařilo přidat"
+    }
+  },
   "desc": {
     "modelDisplayStatistics": "Statistiky zobrazení modelů",
     "statisticsOfUsedLanguages": "Statistiky použitých jazyků",
@@ -213,6 +236,7 @@
     "shortDescriptionOfTheCollection": "Krátky popis sbírky",
     "fullDescriptionOfTheCollection": "Úplný popis sbírky",
     "yes": "Ano",
+    "no": "Ne",
     "collectionsContainingThisCollection": "Sbírky obsahující tuto sbírku",
     "global": "Globální",
     "forDocument": "Pro dokument",
@@ -237,6 +261,7 @@
     "deleting": "Mazání",
     "exports": "Exporty",
     "newCollection": "Nová sbírka",
-    "barcode": "Čárový kód"
+    "barcode": "Čárový kód",
+    "error": "Chyba"
   }
 }

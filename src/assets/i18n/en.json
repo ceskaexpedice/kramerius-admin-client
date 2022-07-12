@@ -162,6 +162,29 @@
     "indexationProcessedObjects": "Processed <strong>{{value}}</strong> objects",
     "indexationScheduledByIndexing": "Scheduled by <strong>{{value}}</strong> indexing"
   },
+  "modal": {
+    "removeFromThisCollection": {
+      "title": "Removal from collection",
+      "message": "Do you really want to remove <strong>{{value1}}</strong> from the collection <strong>{{value2}}</strong>" 
+    }
+  },
+  "snackbar": {
+    "success": {
+      "addThisCollectionToAnotherCollection": "The collection has been added to another collection",
+      "theCollectionHasBeenRemoved": "The collection has been removed",
+      "removeFromThisCollection": "The item has been successfully removed from the collection",
+      "copyToClipboard": "The text has been successfully copied to the clipboard",
+      "addToTheCollection": "The collection has been added"
+    },
+    "error": {
+      "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
+      "theCollectionCouldNotBeLoaded": "The collection could not be loaded",
+      "failedToLoadListOfCollectionsContainingThisCollection": "Failed to load list of collections containing this collection",
+      "collectionCouldNotBeDeleted": "Collection could not be deleted",
+      "removeFromThisCollection": "Could not remove item from collection",
+      "addToTheCollection": "The collection could not been added"
+    }
+  },
   "desc": {
     "modelDisplayStatistics": "Model display statistics",
     "statisticsOfUsedLanguages": "Statistics of used languages",
@@ -213,6 +236,7 @@
     "shortDescriptionOfTheCollection": "Short description of the collection",
     "fullDescriptionOfTheCollection": "Full description of the collection",
     "yes": "Yes",
+    "no": "No",
     "collectionsContainingThisCollection": "Collections containing this collection",
     "global": "Global",
     "forDocument": "For document",
@@ -237,6 +261,7 @@
     "deleting": "Deleting",
     "exports": "Exports",
     "newCollection": "New collection",
-    "barcode": "Barcode"
+    "barcode": "Barcode",
+    "error": "Error"
   }
 }

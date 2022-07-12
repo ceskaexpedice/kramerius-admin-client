@@ -20,11 +20,11 @@ export class UIService {
   }
 
   showErrorSnackBar(message: string, duration: number = 3000) {
-    this.snackBar.open(message, 'Chyba', { duration: duration, verticalPosition: 'top' });
+    this.snackBar.open(this.getTranslation(message), this.getTranslation('desc.error'), { duration: duration, verticalPosition: 'top' });
   }
 
-  getTranslation(s: string): string {
-    return this.translate.instant(s);
+  getTranslation(s: string, interpolateParams?: Object): string {
+    return this.translate.instant(s, interpolateParams);
   }
 
   changeLang(lang: string) {
