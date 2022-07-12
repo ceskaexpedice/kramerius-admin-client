@@ -116,14 +116,13 @@
 														<div *ngIf="selection[v.pid]" class="app-metadata">
 															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['author']"><label class="app-label">{{ 'desc.author' | translate }}:</label> {{descriptions[v.pid]['author']}}</div>
 															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['origininfo']"><label class="app-label">{{ 'desc.publishingData' | translate }}:</label> {{descriptions[v.pid]['origininfo']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['keywords']"><label class="app-label">{{ 'desc.keywords' | translate }}:</label> 
-																debug => {{descriptions[v.pid]['keywords'].length }}<br />
-																<span *ngFor="let k of descriptions[v.pid]['keywords']; ; let isLast=last">
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['keywords'] && descriptions[v.pid]['keywords'].length > 0"><label class="app-label">{{ 'desc.keywords' | translate }}:</label> 
+																<span *ngFor="let k of descriptions[v.pid]['keywords']; let isLast=last">
 																	{{k}}{{isLast ? '' : ', '}}
 																</span>
 															</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['langs']"><label class="app-label">{{ 'desc.language' | translate }}:</label> 
-																<ng-container *ngFor="let l of descriptions[v.pid]['langs']; ; let isLast=last">
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['langs'] && descriptions[v.pid]['langs'].length > 0"><label class="app-label">{{ 'desc.language' | translate }}:</label> 
+																<ng-container *ngFor="let l of descriptions[v.pid]['langs']; let isLast=last">
 																	<span *ngIf="l && l!==''">
 																		{{ 'lang.'+ l | translate }}{{isLast ? '' : ', '}}
 																	</span>

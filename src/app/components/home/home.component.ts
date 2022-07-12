@@ -402,7 +402,13 @@ export class HomeComponent implements OnInit {
             let f = this.texts(term);  
             return f ? f : '';
           });
-          modsFields['keywords'] = tl;
+          let filtered = [];
+          tl.forEach(k=> {
+            if (k !== '' && !filtered.includes(k)) {
+              filtered.push(k);
+            }
+          });
+          modsFields['keywords'] = filtered;
         }
 
         // location 
