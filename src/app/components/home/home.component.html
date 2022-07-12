@@ -117,6 +117,7 @@
 															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['author']"><label class="app-label">{{ 'desc.author' | translate }}:</label> {{descriptions[v.pid]['author']}}</div>
 															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['origininfo']"><label class="app-label">{{ 'desc.publishingData' | translate }}:</label> {{descriptions[v.pid]['origininfo']}}</div>
 															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['keywords']"><label class="app-label">{{ 'desc.keywords' | translate }}:</label> 
+																debug => {{descriptions[v.pid]['keywords'].length }}<br />
 																<span *ngFor="let k of descriptions[v.pid]['keywords']; ; let isLast=last">
 																	{{k}}{{isLast ? '' : ', '}}
 																</span>
