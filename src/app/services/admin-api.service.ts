@@ -50,9 +50,15 @@ export class AdminApiService {
   private post(path: string, body, options = {}): Observable<Object> {
     return this.http.post(this.baseUrl + path, body, options);
   }
-
+  
+  /*
   private delete(path: string): Observable<Object> {
     return this.http.delete(this.baseUrl + path, {});
+  }
+  */
+
+  private delete(path: string,options = {}): Observable<Object> {
+    return this.http.delete(this.baseUrl + path, options);
   }
 
   private put(path: string, body: any, options: any = {}): Observable<Object> {
@@ -361,8 +367,7 @@ export class AdminApiService {
   }
 
 
-
-  // Pridano by PS
+  /** Statistiky  */
   statisticsLicenseFilter(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
@@ -432,6 +437,20 @@ export class AdminApiService {
     return this.get(`/statistics/author`, params);
   }
 
+  deleteStatistics(dateFrom: string, dateTo: string) {
+    let params: HttpParams = new HttpParams();
+    if (dateFrom) {
+      params = params.set('dateFrom', dateFrom);
+    }
+    if (dateTo) {
+      params = params.set('dateTo', dateTo);
+    }
+
+    const options = {
+      params: params
+    };
+    return this.delete(`/statistics/`, options);
+  }
   
 
 }

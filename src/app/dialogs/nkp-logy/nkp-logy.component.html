@@ -3,19 +3,19 @@
   <div fxLayout="row" fxLayoutGap="16px">
     <mat-form-field fxFlex>
       <mat-label>Datum od</mat-label>
-      <input matInput [matDatepicker]="from">
+      <input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" >
       <mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
       <mat-datepicker #from></mat-datepicker>
     </mat-form-field>
     <mat-form-field fxFlex>
       <mat-label>Datum do</mat-label>
-      <input matInput [matDatepicker]="to">
+      <input matInput [matDatepicker]="to" [(ngModel)]="dateTo" >
       <mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
       <mat-datepicker #to></mat-datepicker>
     </mat-form-field>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" (click)="generate()" >Spustit</button>
+  <button mat-flat-button color="primary" (click)="scheduleProcess()" >Spustit</button>
   <button mat-flat-button mat-dialog-close>Zavřít</button>
 </mat-dialog-actions>
