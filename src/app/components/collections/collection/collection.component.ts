@@ -111,15 +111,15 @@ export class CollectionComponent implements OnInit {
       return;
     }
     const data: SimpleDialogData = {
-      title: "Smazání sbírky",
-      message: "Opravdu chcete sbírku trvale smazat?",
+      title: this.ui.getTranslation('modal.removeCollection.title'),
+      message: this.ui.getTranslation('modal.removeCollection.message') + '?',
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('desc.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('desc.no'),
         value: 'no',
         color: 'light'
       }

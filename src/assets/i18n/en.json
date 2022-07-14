@@ -41,6 +41,10 @@
   "alert": {
     "statistics": {
       "noData": "No data available"
+    },
+    "addItemsToCollection": {
+      "success": "Added <strong>{{ value1 }}/{{ value2 }}</strong> items",
+      "error": "Failed to add <strong>{{ value }}</strong> items"
     }
   },
   "batch": {
@@ -135,7 +139,11 @@
     "deleteTheWholeTreeSmartly": "Delete the whole tree (smartly)",  
     "deleteFromRepositoryObjectOnly": "Delete from repository (object only)",
     "export": "Export",
-    "copyTheTextToTheClipboard": "Copy the text to the clipboard"
+    "copyTheTextToTheClipboard": "Copy the text to the clipboard",
+    "add": "Add",
+    "cancel": "Cancel",
+    "close": "Close",
+    "loadPidsFromFile": "Load PIDs from file"
   },
   "field": {
     "archive": "Archive",
@@ -166,6 +174,20 @@
     "removeFromThisCollection": {
       "title": "Removal from collection",
       "message": "Do you really want to remove <strong>{{value1}}</strong> from the collection <strong>{{value2}}</strong>" 
+    },
+    "removeCollection": {
+      "title": "Deleting a collection",
+      "message": "Do you really want to permanently delete the collection"
+    },
+    "addItemsToCollection": {
+      "title": "Adding items to a collection",
+      "message": "For each PID entered, an item will be added to the collection. Part of adding each item to a collection is scheduling the indexing process, so collection membership may not be immediately apparent" 
+    },
+    "addItemToCollection": {
+      "titleCollection": "Adding a collection to another collection",
+      "titleObject": "Adding an object to a collection",
+      "messageCollection": "This collection will be added to another collection. Part of adding to a collection involves scheduling the indexing process, so belonging to a collection may not be immediately apparent",
+      "messageObject": "The object will be added to the collection. Part of adding to a collection involves scheduling the indexing process, so belonging to a collection may not be immediately apparent" 
     }
   },
   "snackbar": {
@@ -174,7 +196,9 @@
       "theCollectionHasBeenRemoved": "The collection has been removed",
       "removeFromThisCollection": "The item has been successfully removed from the collection",
       "copyToClipboard": "The text has been successfully copied to the clipboard",
-      "addToTheCollection": "The collection has been added"
+      "addToTheCollection": "The collection has been added",
+      "theCollectionHasBeenModified": "The collection has been modified",
+      "collectionHasBeenCreated": "Collection has been created"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -182,7 +206,9 @@
       "failedToLoadListOfCollectionsContainingThisCollection": "Failed to load list of collections containing this collection",
       "collectionCouldNotBeDeleted": "Collection could not be deleted",
       "removeFromThisCollection": "Could not remove item from collection",
-      "addToTheCollection": "The collection could not been added"
+      "addToTheCollection": "The collection could not been added",
+      "theCollectionHasBeenModified": "The collection could not be edited",
+      "collectionHasBeenCreated": "The collection could not be created"
     }
   },
   "desc": {
@@ -262,6 +288,10 @@
     "exports": "Exports",
     "newCollection": "New collection",
     "barcode": "Barcode",
-    "error": "Error"
+    "error": "Error",
+    "itemsBeingAdded": "Items being added",
+    "pids": "PIDs",
+    "insertPidsHere": "Insert PIDs here",
+    "theCollectionItIsBeingAddedTo": "The collection it is being added to"
   }
 }

@@ -71,12 +71,12 @@ export class CollectionEditComponent implements OnInit {
 
   onSave() {
     this.collectionsService.createCollection(this.collection).subscribe(response => {
-      this.ui.showInfoSnackBar("Sbírka byla vytvořena");
+      this.ui.showInfoSnackBar("snackbar.success.collectionHasBeenCreated");
       this.router.navigate(['/collections', response['pid']]);
     },
       (error) => {
         console.log(error);
-        this.ui.showErrorSnackBar("Sbírku se nepodařilo vytvořit");
+        this.ui.showErrorSnackBar("snackbar.error.collectionHasBeenCreated");
       });
   }
 
@@ -84,7 +84,7 @@ export class CollectionEditComponent implements OnInit {
   onUpdate() {
     this.state = 'loading';
     this.collectionsService.updateCollection(this.collection).subscribe(() => {
-        this.ui.showInfoSnackBar("Sbírka byla upravena");
+        this.ui.showInfoSnackBar("snackbar.success.theCollectionHasBeenModified");
         if (this.colId) {
           this.updated.emit();
           this.state = 'success';
@@ -95,7 +95,7 @@ export class CollectionEditComponent implements OnInit {
       (error) => {
         this.state = 'error';
         console.log(error);
-        this.ui.showErrorSnackBar("Sbírku se nepodařilo upravit");
+        this.ui.showErrorSnackBar("snackbar.error.theCollectionHasBeenModified");
       });
   }
 

@@ -41,6 +41,10 @@
   "alert": {
     "statistics": {
       "noData": "K dispozici nejsou žádná data"
+    },
+    "addItemsToCollection": {
+      "success": "Přidáno <strong>{{ value1 }}/{{ value2 }}</strong> položek",
+      "error": "Nepodařilo se přidat <strong>{{ value }}</strong> položek"
     }
   },
   "batch": {
@@ -135,7 +139,11 @@
     "deleteTheWholeTreeSmartly": "Smazat celý strom (chytře)",  
     "deleteFromRepositoryObjectOnly": "Smazat z repozitáře (jen objekt)",
     "export": "Exportovat",
-    "copyTheTextToTheClipboard": "Zkopirovat text do schránky"
+    "copyTheTextToTheClipboard": "Zkopirovat text do schránky",
+    "add": "Přidat",
+    "cancel": "Zrušit",
+    "close": "Zavřít",
+    "loadPidsFromFile": "Načíst PIDy ze souboru"
   },
   "field": {
     "archive": "Archiv",
@@ -166,6 +174,20 @@
     "removeFromThisCollection": {
       "title": "Odebrání ze sbírky",
       "message": "Opravdu chcete odebrat <strong>{{value1}}</strong> ze sbírky <strong>{{value2}}</strong>" 
+    },
+    "removeCollection": {
+      "title": "Smazání sbírky",
+      "message": "Opravdu chcete sbírku trvale smazat" 
+    },
+    "addItemsToCollection": {
+      "title": "Přidání položek do sbírky",
+      "message": "Pro každý vložený PID bude přidána položka do sbírky. Součástí přidání každé položky do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě" 
+    },
+    "addItemToCollection": {
+      "titleCollection": "Přidání sbírky do jiné sbírky",
+      "titleObject": "Přidání objektu do sbírky",
+      "messageCollection": "Tato sbírka bude přidána do jiné sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě",
+      "messageObject": "Objekt bude přidán do sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě" 
     }
   },
   "snackbar": {
@@ -174,7 +196,9 @@
       "theCollectionHasBeenRemoved": "Sbírka byla odstraněna",
       "removeFromThisCollection": "Položka byla úspěšně odebrána ze sbírky",
       "copyToClipboard": "Text byl úspěšně zkopírován do schánky",
-      "addToTheCollection": "Sbírka byla přidána"
+      "addToTheCollection": "Sbírka byla přidána",
+      "theCollectionHasBeenModified": "Sbírka byla upravena",
+      "collectionHasBeenCreated": "Sbírka byla vytvořena"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -182,7 +206,9 @@
       "failedToLoadListOfCollectionsContainingThisCollection": "Nepodařil se načíst seznam sbírek obsahujích tuto sbírku",
       "collectionCouldNotBeDeleted": "Sbírku se nepodařilo odstranit",
       "removeFromThisCollection": "Položku se nepodařilo odebrat ze sbírky",
-      "addToTheCollection": "Sbírku se nepodařilo přidat"
+      "addToTheCollection": "Sbírku se nepodařilo přidat",
+      "theCollectionHasBeenModified": "Sbírku se nepodařilo upravit",
+      "collectionHasBeenCreated": "Sbírku se nepodařilo vytvořit"
     }
   },
   "desc": {
@@ -262,6 +288,10 @@
     "exports": "Exporty",
     "newCollection": "Nová sbírka",
     "barcode": "Čárový kód",
-    "error": "Chyba"
+    "error": "Chyba",
+    "itemsBeingAdded": "Přidávané položky",
+    "pids": "PIDy",
+    "insertPidsHere": "Zde vložit PIDy",
+    "theCollectionItIsBeingAddedTo": "Sbírka, do které se přidává"
   }
 }
