@@ -47,6 +47,17 @@
 
     <div fxFlex class="app-oh app-oa-y">
       <div class="app-container">
+        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+          <div fxFlex class="app-text-cutter">
+            <a (click)="copyTextToClipboard(getCurrentRoute('string'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a><span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe" *ngIf="getCollectionDescription(collection)"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
+          </div>
+          <div *ngIf="view === 'collections'">
+            <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
+              <mat-icon>add_circle</mat-icon>{{ 'button.addToThisCollection' | translate }}
+            </a>
+          </div>
+        </mat-card>
+        
         <mat-card  *ngIf="view == 'rights'" fxLayout="column" class="app-card app-view-border app-p-0">
           <app-rights [pid]="pid"></app-rights>
         </mat-card>
@@ -84,7 +95,7 @@
         </ng-container>
        
         <ng-container *ngIf="view === 'collections'">
-          <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+          <!-- <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
             <div fxFlex class="app-text-cutter">
               <a (click)="copyTextToClipboard(getCurrentRoute('string'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a><span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
             </div>
@@ -93,7 +104,7 @@
                 <mat-icon>add_circle</mat-icon>{{ 'button.addToThisCollection' | translate }}
               </a>
             </div>
-          </mat-card>
+          </mat-card> -->
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
           <mat-card fxLayout="column" *ngIf="!loadingCollections" class="app-card app-view-border app-p-0">
             <mat-card class="app-view-rights app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="'/collections/' + getCurrentRoute('string')">

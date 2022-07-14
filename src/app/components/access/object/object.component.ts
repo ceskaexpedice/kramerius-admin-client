@@ -80,7 +80,7 @@ export class ObjectComponent implements OnInit {
       this.pidIsCorrect = false;
       this.checkingPid = false;
       if (error.status == 400) {
-        this.errorMessage = `Neplatné UUID`;
+        this.errorMessage = this.ui.getTranslation('alert.object.invalidUuid');
       } else if (error.status == 404) {
         this.errorMessage = `Objekt nenalezen`;
       } else if (error.status == 403) {
@@ -150,7 +150,7 @@ export class ObjectComponent implements OnInit {
       return;
     }
     if(!this.inputPid.startsWith('uuid:')){
-      this.errorMessage = `Neplatné UUID`;
+      this.errorMessage = this.ui.getTranslation('alert.object.invalidUuid');
       return;
     }
     this.router.navigate(['/', 'object', this.inputPid]);

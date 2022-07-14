@@ -45,6 +45,9 @@
     "addItemsToCollection": {
       "success": "Added <strong>{{ value1 }}/{{ value2 }}</strong> items",
       "error": "Failed to add <strong>{{ value }}</strong> items"
+    },
+    "object": {
+      "invalidUuid": "Invalid UUID"
     }
   },
   "batch": {

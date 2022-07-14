@@ -45,6 +45,9 @@
     "addItemsToCollection": {
       "success": "Přidáno <strong>{{ value1 }}/{{ value2 }}</strong> položek",
       "error": "Nepodařilo se přidat <strong>{{ value }}</strong> položek"
+    },
+    "object": {
+      "invalidUuid": "Neplatné UUID"
     }
   },
   "batch": {
