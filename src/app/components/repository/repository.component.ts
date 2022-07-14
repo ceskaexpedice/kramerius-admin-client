@@ -173,5 +173,13 @@ export class RepositoryComponent implements OnInit {
     this.local.setStringProperty('repository.view', view);
   }
 
+  deleteObjectTreeWithProcess() {
+    // todu
+  }
+
+  deleteObjectFromRepo() {
+    // todo
+  }
+
 
 }
