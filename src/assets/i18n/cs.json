@@ -47,7 +47,10 @@
       "error": "Nepodařilo se přidat <strong>{{ value }}</strong> položek"
     },
     "object": {
-      "invalidUuid": "Neplatné UUID"
+      "uuidValidation400": "Neplatné UUID",
+      "uuidValidation404": "Objekt nenalezen",
+      "uuidValidation403": "Nedostatečná přístupová práva",
+      "uuidValidationElse": "Chyba čtení z repozitáře: {{ value1 }}: {{ value2 }}"
     }
   },
   "batch": {

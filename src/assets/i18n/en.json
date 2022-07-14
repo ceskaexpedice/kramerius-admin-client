@@ -47,7 +47,10 @@
       "error": "Failed to add <strong>{{ value }}</strong> items"
     },
     "object": {
-      "invalidUuid": "Invalid UUID"
+      "uuidValidation400": "Invalid UUID",
+      "uuidValidation404": "Object not found",
+      "uuidValidation403": "Insufficient access rights",
+      "uuidValidationElse": "Error reading from repository: {{ value1 }}: {{ value2 }}"
     }
   },
   "batch": {

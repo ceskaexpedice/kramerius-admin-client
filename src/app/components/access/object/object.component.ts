@@ -80,13 +80,13 @@ export class ObjectComponent implements OnInit {
       this.pidIsCorrect = false;
       this.checkingPid = false;
       if (error.status == 400) {
-        this.errorMessage = this.ui.getTranslation('alert.object.invalidUuid');
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation400');
       } else if (error.status == 404) {
-        this.errorMessage = `Objekt nenalezen`;
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation404');
       } else if (error.status == 403) {
-        this.errorMessage = `Nedostatečná přístupová práva`;
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation403');
       } else {
-        this.errorMessage = `Chyba čtení z repozitáře: ${error.status}: ${error.message}`;
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidationElse', {value1: error.status, value2: error.message});
         console.log(error);
       }
     })
@@ -150,7 +150,7 @@ export class ObjectComponent implements OnInit {
       return;
     }
     if(!this.inputPid.startsWith('uuid:')){
-      this.errorMessage = this.ui.getTranslation('alert.object.invalidUuid');
+      this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation400');
       return;
     }
     this.router.navigate(['/', 'object', this.inputPid]);
