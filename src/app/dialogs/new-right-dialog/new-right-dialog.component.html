@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ mode == 'new' ? "Nová licence" : "Úprava licence" }}</h2>
+<h2 mat-dialog-title>{{ mode == 'new' ? "Nové právo" : "Úprava práva" }}</h2>
 <mat-dialog-content class="mat-typography">
   <mat-form-field appearance="fill" class="app-w-100">
     <mat-label>Role</mat-label>
@@ -42,7 +42,7 @@
 <mat-dialog-actions align="end">
   <button mat-flat-button color="primary" *ngIf="mode == 'new'" (click)="onSave()">Vytvořit</button>
   <button mat-flat-button color="primary" *ngIf="mode == 'edit'" (click)="onSave()">Upravit</button>
-  <button mat-flat-button color="warn" (click)="onCancel()"><mat-icon>clear</mat-icon>Zrušit</button>
+  <button mat-flat-button (click)="onCancel()">Zrušit</button>
 </mat-dialog-actions>
 
 
