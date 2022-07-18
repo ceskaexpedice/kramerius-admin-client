@@ -86,7 +86,7 @@ export class ObjectComponent implements OnInit {
       } else if (error.status == 403) {
         this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation403');
       } else {
-        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidationElse', {value1: error.status, value2: error.message});
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidationElse', { value1: error.status, value2: error.message });
         console.log(error);
       }
     })
@@ -149,7 +149,7 @@ export class ObjectComponent implements OnInit {
     if (!this.inputPid) {
       return;
     }
-    if(!this.inputPid.startsWith('uuid:')){
+    if (!this.inputPid.startsWith('uuid:')) {
       this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation400');
       return;
     }
@@ -199,7 +199,47 @@ export class ObjectComponent implements OnInit {
   }
 
   deleteObjectTreeWithProcess() {
-    //TODO: implement after process has been tested on backend
+    const data: SimpleDialogData = {
+      title: "Smazání stromu objektu (chytře)",
+      message: "Opravdu chcete trvale smazat objekt včetně jeho veškerého* obsahu?<br>" +
+        "Bude naplánován proces, který postupně vymaže celý strom objektu z repozitáře i vyhledávacího indexu.<br>" +
+        "Proces také synchronizuje data relevantních objektů, které smazání ovlivní s ohledem na licence a sbírky.<br>" +
+        "*Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.",
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(this.title)
+      if (result === 'yes') {
+        this.adminApi.scheduleProcess({
+          defid: 'delete_tree',
+          params: {
+            pid: this.pid,
+            title: this.title,
+          }
+        }).subscribe(result => {
+          this.ui.showInfoSnackBar("Mazací proces byl naplánován");
+          //this.router.navigate(['/object']);
+        }, (error) => {
+          console.log(error);
+          this.ui.showErrorSnackBar("Nepodařilo se naplánovat mazací proces")
+        });
+      }
+    });
+
   }
 
   indexObjectWithProcess() {
