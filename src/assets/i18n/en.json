@@ -149,7 +149,8 @@
     "add": "Add",
     "cancel": "Cancel",
     "close": "Close",
-    "loadPidsFromFile": "Load PIDs from file"
+    "loadPidsFromFile": "Load PIDs from file",
+    "schedule": "Schedule"
   },
   "field": {
     "archive": "Archive",
@@ -161,7 +162,9 @@
     "periodical": "Periodical",
     "soundrecording": "Soundrecording",
     "public": "Public",
-    "private": "Private"
+    "private": "Private",
+    "TREE": "An object with descendants",
+    "OBJECT": "Just an object"
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
@@ -202,6 +205,21 @@
     "removeRight": {
       "title": "Removal of right",
       "message": "You really want to remove the right"
+    },
+    "scheduleChangePolicyByPid": {
+      "title": "Visibility change",
+      "messageFixed": "A <strong><i>Visibility Change</i></strong> process will be scheduled for the selected PID, which will set the POLICY flag of the object, possibly also its descendants.",
+      "messageNotfixed": "For each inserted PID, a <strong><i>Change Visibility</i></strong> process will be scheduled, which will set the POLICY flag of the object, possibly also its descendants."
+    },
+    "scheduleAddLicense": {
+      "title": "Adding a licensee",
+      "messageFixed": "The <strong><i>Add License</i></strong> process will be scheduled for the selected PID",
+      "messageNotFixed": "An <strong><i>Add License</i></strong> process will be scheduled for each PID inserted"
+    },
+    "scheduleRemoveLicense": {
+      "title": "License withdrawal",
+      "messageFixed": "A <strong><i>License Removal</i></strong> process will be scheduled for the selected PID",
+      "messageNotFixed": "A <strong><i>Pre-License</i></strong> process will be scheduled for each PID entered"
     }
   },
   "snackbar": {
@@ -213,7 +231,14 @@
       "addToTheCollection": "The collection has been added",
       "theCollectionHasBeenModified": "The collection has been modified",
       "collectionHasBeenCreated": "Collection has been created",
-      "theRightHasBeenRemoved": "The right has been removed"
+      "theRightHasBeenRemoved": "The right has been removed",
+      "visibilityChange": {
+        "1": "The Change Visibility process has been scheduled",
+        "2-4": "{{value}} processes Change Visibility have been scheduled",
+        "more": "{{value}} processes have been scheduled to change visibility"
+      },
+      "scheduleAddLicense": "The Add License process has been scheduled",
+      "scheduleRemoveLicense": "The License Withdrawal process has been scheduled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -223,7 +248,10 @@
       "removeFromThisCollection": "Could not remove item from collection",
       "addToTheCollection": "The collection could not been added",
       "theCollectionHasBeenModified": "The collection could not be edited",
-      "collectionHasBeenCreated": "The collection could not be created"
+      "collectionHasBeenCreated": "The collection could not be created",
+      "visibilityChange": "Failed to schedule process(es) Change Visibility",
+      "scheduleAddLicense": "Failed to schedule the Add License process",
+      "scheduleRemoveLicense": "Failed to schedule the License Removal process"
     }
   },
   "desc": {
@@ -307,6 +335,8 @@
     "itemsBeingAdded": "Items being added",
     "pids": "PIDs",
     "insertPidsHere": "Insert PIDs here",
-    "theCollectionItIsBeingAddedTo": "The collection it is being added to"
+    "theCollectionItIsBeingAddedTo": "The collection it is being added to",
+    "theResultingVisibility": "The resulting visibility",
+    "changeVisibilityFor": "Change visibility for"
   }
 }

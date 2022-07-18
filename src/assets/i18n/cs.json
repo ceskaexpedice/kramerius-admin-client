@@ -149,7 +149,8 @@
     "add": "Přidat",
     "cancel": "Zrušit",
     "close": "Zavřít",
-    "loadPidsFromFile": "Načíst PIDy ze souboru"
+    "loadPidsFromFile": "Načíst PIDy ze souboru",
+    "schedule": "Naplánovat"
   },
   "field": {
     "archive": "Archiv",
@@ -161,7 +162,9 @@
     "periodical": "Časopis",
     "soundrecording": "Zvuková nahrávka",
     "public": "Veřejné",
-    "private": "Neveřejné"
+    "private": "Neveřejné",
+    "TREE": "Objekt i s potomky",
+    "OBJECT": "Jen objekt"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
@@ -202,6 +205,21 @@
     "removeRight": {
       "title": "Odstranění práva",
       "message": "Opravdu chcete právo odstranit"
+    },
+    "scheduleChangePolicyByPid": {
+      "title": "Změna viditelnosti",
+      "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Změna viditelnosti</i></strong>, který nastaví příznak POLICY objektu, případně i jeho potomkům.",
+      "messageNotfixed": "Pro každý vložený PID bude naplánován proces <strong><i>Změna viditelnosti</i></strong>, který nastaví příznak POLICY objektu, případně i jeho potomkům."
+    },
+    "scheduleAddLicense": {
+      "title": "Přidání licence",
+      "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Přidání licence</i></strong>",
+      "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>Přidání licence</i></strong>"
+    },
+    "scheduleRemoveLicense": {
+      "title": "Odebrání licence",
+      "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Odebrání licence</i></strong>",
+      "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>PřOdebránídání licence</i></strong>"
     }
   },
   "snackbar": {
@@ -213,7 +231,14 @@
       "addToTheCollection": "Sbírka byla přidána",
       "theCollectionHasBeenModified": "Sbírka byla upravena",
       "collectionHasBeenCreated": "Sbírka byla vytvořena",
-      "theRightHasBeenRemoved": "Právo bylo odstraněno"
+      "theRightHasBeenRemoved": "Právo bylo odstraněno",
+      "visibilityChange": {
+        "1": "Proces Změna viditelnosti byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Změna viditelnosti",
+        "more": "Bylo naplánováno {{value}} procesů Změna viditelnosti"
+      },
+      "scheduleAddLicense": "Proces Přidání licence byl naplánován",
+      "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -223,7 +248,10 @@
       "removeFromThisCollection": "Položku se nepodařilo odebrat ze sbírky",
       "addToTheCollection": "Sbírku se nepodařilo přidat",
       "theCollectionHasBeenModified": "Sbírku se nepodařilo upravit",
-      "collectionHasBeenCreated": "Sbírku se nepodařilo vytvořit"
+      "collectionHasBeenCreated": "Sbírku se nepodařilo vytvořit",
+      "visibilityChange": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
+      "scheduleAddLicense": "Nepodařilo se naplánovat proces Přidání licence",
+      "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence"
     }
   },
   "desc": {
@@ -307,6 +335,8 @@
     "itemsBeingAdded": "Přidávané položky",
     "pids": "PIDy",
     "insertPidsHere": "Zde vložit PIDy",
-    "theCollectionItIsBeingAddedTo": "Sbírka, do které se přidává"
+    "theCollectionItIsBeingAddedTo": "Sbírka, do které se přidává",
+    "theResultingVisibility": "Výsledná viditelnost",
+    "changeVisibilityFor": "Změnit viditelnost pro"
   }
 }

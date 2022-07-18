@@ -12,7 +12,7 @@
 				<textarea [disabled]="inProgress || fixed" matInput type="text" id="inputPids" name="pids"
 					[(ngModel)]="pids" placeholder="Zde vložit PIDy ..." required autofocus
 					rows="{{pidsTextareaRows}}"></textarea>
-				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" *ngIf="!fixed"
+				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed"
 					class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)"
