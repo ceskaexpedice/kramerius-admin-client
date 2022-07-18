@@ -291,7 +291,6 @@ export class ObjectComponent implements OnInit {
   }
 
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
-    // TODO: i18n
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
       message: this.ui.getTranslation('modal.removeFromThisCollection.message', {value1: itemName, value2: collectionName}) + '?',
