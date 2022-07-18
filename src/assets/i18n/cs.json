@@ -194,6 +194,14 @@
       "titleObject": "Přidání objektu do sbírky",
       "messageCollection": "Tato sbírka bude přidána do jiné sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě",
       "messageObject": "Objekt bude přidán do sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě" 
+    },
+    "newRight": {
+      "titleNew": "Nové právo",
+      "titleEdit": "Úprava práva"
+    },
+    "removeRight": {
+      "title": "Odstranění práva",
+      "message": "Opravdu chcete právo odstranit"
     }
   },
   "snackbar": {
@@ -204,7 +212,8 @@
       "copyToClipboard": "Text byl úspěšně zkopírován do schánky",
       "addToTheCollection": "Sbírka byla přidána",
       "theCollectionHasBeenModified": "Sbírka byla upravena",
-      "collectionHasBeenCreated": "Sbírka byla vytvořena"
+      "collectionHasBeenCreated": "Sbírka byla vytvořena",
+      "theRightHasBeenRemoved": "Právo bylo odstraněno"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",

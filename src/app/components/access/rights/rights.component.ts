@@ -66,15 +66,15 @@ export class RightsComponent implements OnInit {
 
   onRemoveRight(action: RightAction, right: Right) {
     const data: SimpleDialogData = {
-      title: "Odstranění práva",
-      message: `Opravdu chcete právo odstranit?`,
+      title: this.ui.getTranslation('modal.removeRight.title'),
+      message: this.ui.getTranslation('modal.removeRight.message') + '?',
       btn1: {
-        label: 'Odstranit',
+        label: this.ui.getTranslation('button.remove'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.cancel'),
         value: 'no',
         color: 'light'
       }
@@ -88,7 +88,7 @@ export class RightsComponent implements OnInit {
       if (result === 'yes') {
         this.api.removeRight(right).subscribe((response) => {
           action.rights.splice(action.rights.indexOf(right), 1);
-          this.ui.showInfoSnackBar("Právo bylo odstraněno")
+          this.ui.showInfoSnackBar('snackbar.success.theRightHasBeenRemoved');
           console.log('response', response);
         });
       }

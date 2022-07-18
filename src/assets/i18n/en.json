@@ -194,6 +194,14 @@
       "titleObject": "Adding an object to a collection",
       "messageCollection": "This collection will be added to another collection. Part of adding to a collection involves scheduling the indexing process, so belonging to a collection may not be immediately apparent",
       "messageObject": "The object will be added to the collection. Part of adding to a collection involves scheduling the indexing process, so belonging to a collection may not be immediately apparent" 
+    },
+    "newRight": {
+      "titleNew": "New right",
+      "titleEdit": "Edit right"
+    },
+    "removeRight": {
+      "title": "Removal of right",
+      "message": "You really want to remove the right"
     }
   },
   "snackbar": {
@@ -204,7 +212,8 @@
       "copyToClipboard": "The text has been successfully copied to the clipboard",
       "addToTheCollection": "The collection has been added",
       "theCollectionHasBeenModified": "The collection has been modified",
-      "collectionHasBeenCreated": "Collection has been created"
+      "collectionHasBeenCreated": "Collection has been created",
+      "theRightHasBeenRemoved": "The right has been removed"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
