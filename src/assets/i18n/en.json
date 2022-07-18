@@ -150,7 +150,9 @@
     "cancel": "Cancel",
     "close": "Close",
     "loadPidsFromFile": "Load PIDs from file",
-    "schedule": "Schedule"
+    "schedule": "Schedule",
+    "yes": "Yes",
+    "no": "No"
   },
   "field": {
     "archive": "Archive",
@@ -238,7 +240,8 @@
         "more": "{{value}} processes have been scheduled to change visibility"
       },
       "scheduleAddLicense": "The Add License process has been scheduled",
-      "scheduleRemoveLicense": "The License Withdrawal process has been scheduled"
+      "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
+      "addThisToSuperCollection": "The object has been added to the collection"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -251,7 +254,8 @@
       "collectionHasBeenCreated": "The collection could not be created",
       "visibilityChange": "Failed to schedule process(es) Change Visibility",
       "scheduleAddLicense": "Failed to schedule the Add License process",
-      "scheduleRemoveLicense": "Failed to schedule the License Removal process"
+      "scheduleRemoveLicense": "Failed to schedule the License Removal process",
+      "addThisToSuperCollection": "The object could not be added to the collection"
     }
   },
   "desc": {

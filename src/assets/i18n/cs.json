@@ -150,7 +150,9 @@
     "cancel": "Zrušit",
     "close": "Zavřít",
     "loadPidsFromFile": "Načíst PIDy ze souboru",
-    "schedule": "Naplánovat"
+    "schedule": "Naplánovat",
+    "yes": "Ano",
+    "no": "Ne"
   },
   "field": {
     "archive": "Archiv",
@@ -238,7 +240,8 @@
         "more": "Bylo naplánováno {{value}} procesů Změna viditelnosti"
       },
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
-      "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován"
+      "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
+      "addThisToSuperCollection": "Objekt byl přidán do sbírky"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -251,7 +254,8 @@
       "collectionHasBeenCreated": "Sbírku se nepodařilo vytvořit",
       "visibilityChange": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
       "scheduleAddLicense": "Nepodařilo se naplánovat proces Přidání licence",
-      "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence"
+      "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence",
+      "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky"
     }
   },
   "desc": {

@@ -114,12 +114,12 @@ export class CollectionComponent implements OnInit {
       title: this.ui.getTranslation('modal.removeCollection.title'),
       message: this.ui.getTranslation('modal.removeCollection.message') + '?',
       btn1: {
-        label: this.ui.getTranslation('desc.yes'),
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: this.ui.getTranslation('desc.no'),
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -178,12 +178,12 @@ export class CollectionComponent implements OnInit {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
       message: this.ui.getTranslation('modal.removeFromThisCollection.message', {value1: itemName, value2: collectionName}) + '?',
       btn1: {
-        label: this.ui.getTranslation('desc.yes'),
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: this.ui.getTranslation('desc.no'),
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }

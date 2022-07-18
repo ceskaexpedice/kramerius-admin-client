@@ -293,15 +293,15 @@ export class ObjectComponent implements OnInit {
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
     // TODO: i18n
     const data: SimpleDialogData = {
-      title: "Odebrání ze sbírky",
-      message: `Opravdu chcete odebrat "${itemName}" ze sbírky "${collectionName}"?`,
+      title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
+      message: this.ui.getTranslation('modal.removeFromThisCollection.message', {value1: itemName, value2: collectionName}) + '?',
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -314,11 +314,11 @@ export class ObjectComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
-          this.ui.showInfoSnackBar(`Objekt byl odebrán ze sbírky`);
+          this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`);
           this.loadCollections();
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("Objekt se nepodařilo odebrat ze sbírky")
+          this.ui.showErrorSnackBar(`snackbar.error.removeFromThisCollection`)
         });
       }
     });
@@ -336,10 +336,10 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'added') {
-        this.ui.showInfoSnackBar(`Objekt byl přidán do sbírky`);
+        this.ui.showInfoSnackBar(`snackbar.success.addThisToSuperCollection`);
         this.loadCollections();
       } else if (result === 'error') {
-        this.ui.showErrorSnackBar("Objekt se nepodařilo přidat do sbírky")
+        this.ui.showErrorSnackBar("snackbar.error.addThisToSuperCollection")
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       }
