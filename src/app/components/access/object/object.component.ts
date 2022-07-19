@@ -251,24 +251,25 @@ export class ObjectComponent implements OnInit {
       width: '600px',
       panelClass: 'app-schedule-indexation-by-pid-dialog'
     });
+    /* commented because same calling bellow
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'scheduled') {
         this.ui.showInfoSnackBar(`Indexace byla naplánována`);
       } else if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
       }
-    });
+    }); */
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Indexace")
+        this.ui.showErrorSnackBar('snackbar.error.indexObjectWithProces')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar(`Proces Indexace byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.indexObjectWithProces.1');
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Indexace`);
+        this.ui.showInfoSnackBar('snackbar.success.indexObjectWithProces.2-4', {value: result});
       } else {
-        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Indexace`);
+        this.ui.showInfoSnackBar('snackbar.success.indexObjectWithProces.more', {value: result});
       }
     });
   };
@@ -424,18 +425,18 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt")
+        this.ui.showErrorSnackBar('snackbar.error.rebuildProcessingIndexForObject')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Přebudování Processing indexu pro objekt byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.rebuildProcessingIndexForObject');
       }
     });
   }
 
   copyTextToClipboard(val: string) {
     this.clipboard.copy(val);
-    this.ui.showInfoSnackBar('Text byl úspěšně zkopírován do schánky!');
+    this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
   }
 
 }
