@@ -4,11 +4,11 @@ import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  selector: 'app-delete-objects-low-level-dialog',
-  templateUrl: './delete-objects-low-level-dialog.component.html',
-  styleUrls: ['./delete-objects-low-level-dialog.component.scss']
+  selector: 'app-schedule-delete-objects-smart',
+  templateUrl: './schedule-delete-objects-smart.component.html',
+  styleUrls: ['./schedule-delete-objects-smart.component.scss']
 })
-export class DeleteObjectsLowLevelDialogComponent implements OnInit {
+export class ScheduleDeleteObjectsSmartComponent implements OnInit {
 
   @ViewChild('fileWithPids', { static: true }) fileWithPids: ElementRef;
 
@@ -22,7 +22,7 @@ export class DeleteObjectsLowLevelDialogComponent implements OnInit {
   scheduledCounter = 0;
   progressBarMode = 'indeterminate';
 
-  constructor(public dialogRef: MatDialogRef<DeleteObjectsLowLevelDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
+  constructor(public dialogRef: MatDialogRef<ScheduleDeleteObjectsSmartComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
       this.fixed = true;
       this.pids = data.pid;
@@ -36,11 +36,16 @@ export class DeleteObjectsLowLevelDialogComponent implements OnInit {
   schedule(formData) {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
-
     let requests = [];
     pidlist.forEach(pid => {
       requests.push(
-        this.adminApi.deleteObject(pid)
+        this.adminApi.scheduleProcess({
+          defid: 'delete_tree',
+          params: {
+            pid: pid,
+            title: this.title,
+          }
+        })
       );
     })
     //TODO: namisto forkJoin pocitat uspesne a neuspesne, ted je to bud "proslo vse", nebo "chyba"

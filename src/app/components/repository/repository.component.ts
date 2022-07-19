@@ -13,6 +13,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { DeleteObjectsLowLevelDialogComponent } from 'src/app/dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
+import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 
 @Component({
   selector: 'app-repository',
@@ -174,9 +175,6 @@ export class RepositoryComponent implements OnInit {
     this.local.setStringProperty('repository.view', view);
   }
 
-  deleteObjectTreeWithProcess() {
-    console.log('TODO: implement')
-  }
 
   openDeleteObjectsLowLevelDialog() {
     const dialogRef = this.dialog.open(DeleteObjectsLowLevelDialogComponent, {
@@ -195,6 +193,27 @@ export class RepositoryComponent implements OnInit {
         this.ui.showInfoSnackBar(`Byly smazány ${result} objekty`);
       } else {
         this.ui.showInfoSnackBar(`Bylo smazáno ${result} objektů`);
+      }
+    });
+  }
+
+  openScheduleDeleteObjectsDialog() {
+    const dialogRef = this.dialog.open(ScheduleDeleteObjectsSmartComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-delete-objects-smart'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Smazání stromu")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else if (result == 1) {
+        this.ui.showInfoSnackBar(`Proces Smazání stromu byl naplánován`);
+      } else if (result == 2 || result == 3 || result == 4) {
+        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Smazání stromu`);
+      } else {
+        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Smazání stromu`);
       }
     });
   }

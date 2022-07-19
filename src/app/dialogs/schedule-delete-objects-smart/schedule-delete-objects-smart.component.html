@@ -2,17 +2,18 @@
     <mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()">
     </mat-progress-bar>
     <!-- <h2 mat-dialog-title>{{ 'modal.scheduleRemoveLicense.title' | translate }}</h2> -->
-    <h2 mat-dialog-title>Mazání objektů z repozitáře (nízkoúrovňové)</h2>
+    <h2 mat-dialog-title>Mazání stromů objektů</h2>
     <mat-dialog-content>
         <!-- <div class="app-desc app-mb-4" *ngIf="!fixed" [innerHtml]="'modal.scheduleRemoveLicense.messageNotFixed' | translate"></div> -->
         <div class="app-desc app-mb-4" *ngIf="!fixed">
-            Pro každý vložený PID bude vymazán jeden objekt.<br>
+            Pro každý vložený PID bude naplánován proces <i>Smazání stromu od PID</i>.<br>
             <br>
-            Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou ale aktualizovány odkazy na tento objekt z
-            jiných objektů. Ani nebudou mazány další odkazované objekty. Nedojde ani k synchronizaci s ohledem na
-            licence a sbírky.
+            Proces postupně smaže všechny objekty ve stromě od PID<sup>*</sup> a to z repozitáře i vyhledávacího indexu.
             <br>
-            <b>Tato operace může způsobit nekonzistence v Digitální knihovně!</b>
+            Dále proces synchronizuje data relevantních procesů, které smazání ovlivní s ohledem na licence a sbírky.
+            <br>
+            <sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.
+            Protože položky sbírky nejsou vlastními potomky sbírky, sbírka na ně jen ukazuje.
             <br>
         </div>
         <!-- <div class="app-desc app-mb-4" *ngIf="fixed"
@@ -38,7 +39,7 @@
     </mat-dialog-content>
     <mat-dialog-actions align="end">
         <button mat-flat-button [disabled]="inProgress || !isValid(f)" color="primary" type="submit">{{
-            'button.delete' | translate }}</button>
+            'button.schedule' | translate }}</button>
         <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate
             }}</button>
     </mat-dialog-actions>

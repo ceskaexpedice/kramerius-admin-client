@@ -201,10 +201,10 @@ export class ObjectComponent implements OnInit {
   deleteObjectTreeWithProcess() {
     const data: SimpleDialogData = {
       title: "Smazání stromu objektu (chytře)",
-      message: "Opravdu chcete trvale smazat objekt včetně jeho veškerého* obsahu?<br>" +
+      message: "Opravdu chcete trvale smazat objekt včetně jeho veškerého<sup>*</sup> obsahu?<br>" +
         "Bude naplánován proces, který postupně vymaže celý strom objektu z repozitáře i vyhledávacího indexu.<br>" +
         "Proces také synchronizuje data relevantních objektů, které smazání ovlivní s ohledem na licence a sbírky.<br>" +
-        "*Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.",
+        "<sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.",
       btn1: {
         label: 'Ano',
         value: 'yes',
@@ -293,7 +293,7 @@ export class ObjectComponent implements OnInit {
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
-      message: this.ui.getTranslation('modal.removeFromThisCollection.message', {value1: itemName, value2: collectionName}) + '?',
+      message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
       btn1: {
         label: this.ui.getTranslation('button.yes'),
         value: 'yes',
@@ -406,9 +406,9 @@ export class ObjectComponent implements OnInit {
       } else if (result == 1) {
         this.ui.showInfoSnackBar(`snackbar.success.visibilityChange.1`);
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`snackbar.success.visibilityChange.2-4`, {value: result});
+        this.ui.showInfoSnackBar(`snackbar.success.visibilityChange.2-4`, { value: result });
       } else {
-        this.ui.showInfoSnackBar(`snackbar.success.visibilityChange.more`, {value: result});
+        this.ui.showInfoSnackBar(`snackbar.success.visibilityChange.more`, { value: result });
       }
     });
   }
