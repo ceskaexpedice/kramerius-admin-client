@@ -1,42 +1,25 @@
 <form #f="ngForm" (ngSubmit)="schedule()">
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
-	<h2 mat-dialog-title>Přebudování Processing indexu pro objekt</h2>
+	<h2 mat-dialog-title>{{ 'modal.scheduleProcessingIndexRebuildForObject.title' | translate }}</h2>
 	<mat-dialog-content>
-		<div class="app-desc app-mb-4">
-			Proces <i>Přebudování Processing indexu pro objekt</i> smaže z Processing indexu záznam Description
-			zvoleného objektu a všechny záznamy Relation pro vazby vedoucí ze zvoleného objektu. Následně vytvoří záznam
-			Description a záznamy Relation z FOXML objektu v Repozitáři (Akubra).
-		</div>
-		<div class="app-desc app-mb-4">
-			Proces je potřeba spustit po zásahu v RELS-EXT záznamu FOXML přímo v Repozitáři, mimo nástroje Krameria.
-			Typicky jde o přidání a/nebo odebrání vazby.
-		</div>
-		<div class="app-desc app-mb-4">
-			Po dokončení procesu je potřeba ještě přeindexovat dotčený objekt (jen on). A všechny objekty (do hloubky),
-			které byly, manipulacemi s vazbami ve FOXML, pod objekt přiřazeny/odebrány.
-		</div>
-		<div class="app-desc app-mb-4">
-			Pozor! Proces neopraví vazby vedoucí na tento objekt. Při rozsáhlejším zásahu v datech Repozitáře je potřeba
-			tento proces spustit pro každý objekt, jehož vazby byly v Repozitáři změněny. Případně spustit rebuild
-			celého Processing indexu.
-		</div>
+		<div class="app-desc app-mb-4" [innerHtml]="('modal.scheduleProcessingIndexRebuildForObject.message1' | translate) + '.'"></div>
+		<div class="app-desc app-mb-4">{{ 'modal.scheduleProcessingIndexRebuildForObject.message2' | translate }}</div>
+		<div class="app-desc app-mb-4">{{ 'modal.scheduleProcessingIndexRebuildForObject.message3' | translate }}</div>
+		<div class="app-desc app-mb-4 app-color-warn">{{ 'modal.scheduleProcessingIndexRebuildForObject.message4' | translate }}</div>
 		<div>
 			<mat-form-field class="app-w-100">
 				<mat-label>PID</mat-label>
-				<input [disabled]="inProgress || fixed" matInput type="text" id="pid" name="pid" [(ngModel)]="pid"
-					placeholder="PID" required autofocus>
+				<input [disabled]="inProgress || fixed" matInput type="text" id="pid" name="pid" [(ngModel)]="pid" placeholder="PID" required autofocus>
 			</mat-form-field>
 		</div>
 		<div>
 			<mat-form-field *ngIf="title" class="app-w-100">
-				<input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title"
-					[(ngModel)]="title" placeholder="Název">
+				<input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" [placeholder]="'desc.name' | translate">
 			</mat-form-field>
 		</div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !pidValid(f.value.pid)" color="primary"
-			type="submit">Naplánovat</button>
-		<button mat-flat-button mat-dialog-close="cancel">Zrušit</button>
+		<button mat-flat-button [disabled]="inProgress || !pidValid(f.value.pid)" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+		<button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>

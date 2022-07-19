@@ -228,6 +228,13 @@
       "title": "Indexace objektu",
       "message": "Pro každý vložený PID bude naplánován proces <strong><em>Indexace</em></strong>, který (re)indexuje objekt, případně i jeho potomky (podle typu indexace)",
       "explanation": "Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <strong><em>Chyba</em></strong>"
+    },
+    "scheduleProcessingIndexRebuildForObject": {
+      "title": "Přebudování Processing indexu pro objekt",
+      "message1": "Proces <strong><i>Přebudování Processing indexu pro objekt</i></strong> smaže z Processing indexu záznam Description zvoleného objektu a všechny záznamy Relation pro vazby vedoucí ze zvoleného objektu. Následně vytvoří záznam Description a záznamy Relation z FOXML objektu v Repozitáři (Akubra)",
+      "message2": "Proces je potřeba spustit po zásahu v RELS-EXT záznamu FOXML přímo v Repozitáři, mimo nástroje Krameria. Typicky jde o přidání a/nebo odebrání vazby.",
+      "message3": "Po dokončení procesu je potřeba ještě přeindexovat dotčený objekt (jen on). A všechny objekty (do hloubky), které byly, manipulacemi s vazbami ve FOXML, pod objekt přiřazeny/odebrány.",
+      "message4": "Pozor! Proces neopraví vazby vedoucí na tento objekt. Při rozsáhlejším zásahu v datech Repozitáře je potřeba tento proces spustit pro každý objekt, jehož vazby byly v Repozitáři změněny. Případně spustit rebuild celého Processing indexu."
     }
   },
   "snackbar": {
@@ -252,7 +259,8 @@
       },
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
-      "addThisToSuperCollection": "Objekt byl přidán do sbírky"
+      "addThisToSuperCollection": "Objekt byl přidán do sbírky",
+      "rebuildProcessingIndexForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -267,7 +275,8 @@
       "indexObjectWithProces": "Nepodařilo se naplánovat proces(y) Indexace",
       "scheduleAddLicense": "Nepodařilo se naplánovat proces Přidání licence",
       "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence",
-      "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky"
+      "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky",
+      "rebuildProcessingIndexForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt"
     }
   },
   "desc": {

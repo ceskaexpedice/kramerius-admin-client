@@ -425,18 +425,18 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt")
+        this.ui.showErrorSnackBar('snackbar.error.rebuildProcessingIndexForObject')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Přebudování Processing indexu pro objekt byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.rebuildProcessingIndexForObject');
       }
     });
   }
 
   copyTextToClipboard(val: string) {
     this.clipboard.copy(val);
-    this.ui.showInfoSnackBar('Text byl úspěšně zkopírován do schánky!');
+    this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
   }
 
 }
