@@ -75,6 +75,7 @@ import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PaginatorI18n } from './paginator-i18n';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
+import { DeleteObjectsLowLevelDialogComponent } from './dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -136,7 +137,8 @@ export function createCustomMatPaginatorIntl(
     CollectionDetailComponent,
     NkpLogyComponent,
     DeleteStatisticsComponent,
-    CollectionNewComponent
+    CollectionNewComponent,
+    DeleteObjectsLowLevelDialogComponent
   ],
   imports: [
     BrowserModule,

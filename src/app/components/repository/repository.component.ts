@@ -12,6 +12,7 @@ import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-r
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { DeleteObjectsLowLevelDialogComponent } from 'src/app/dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
 
 @Component({
   selector: 'app-repository',
@@ -174,11 +175,28 @@ export class RepositoryComponent implements OnInit {
   }
 
   deleteObjectTreeWithProcess() {
-    // todu
+    console.log('TODO: implement')
   }
 
-  deleteObjectFromRepo() {
-    // todo
+  openDeleteObjectsLowLevelDialog() {
+    const dialogRef = this.dialog.open(DeleteObjectsLowLevelDialogComponent, {
+      width: '600px',
+      panelClass: 'app-delete-objects-low-level-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar("Nepodařilo se smazat objekty")
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else if (result == 1) {
+        this.ui.showInfoSnackBar(`Objekt byl smazán`);
+      } else if (result == 2 || result == 3 || result == 4) {
+        this.ui.showInfoSnackBar(`Byly smazány ${result} objekty`);
+      } else {
+        this.ui.showInfoSnackBar(`Bylo smazáno ${result} objektů`);
+      }
+    });
   }
 
 
