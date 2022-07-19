@@ -166,7 +166,8 @@
     "public": "Veřejné",
     "private": "Neveřejné",
     "TREE": "Objekt i s potomky",
-    "OBJECT": "Jen objekt"
+    "OBJECT": "Jen objekt",
+    "TREE_AND_FOSTER_TREES": "Úplná"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
@@ -222,6 +223,11 @@
       "title": "Odebrání licence",
       "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Odebrání licence</i></strong>",
       "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>PřOdebránídání licence</i></strong>"
+    },
+    "scheduleIndexationByPid": {
+      "title": "Indexace objektu",
+      "message": "Pro každý vložený PID bude naplánován proces <strong><em>Indexace</em></strong>, který (re)indexuje objekt, případně i jeho potomky (podle typu indexace)",
+      "explanation": "Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <strong><em>Chyba</em></strong>"
     }
   },
   "snackbar": {
@@ -239,6 +245,11 @@
         "2-4": "Byly naplánovány {{value}} procesy Změna viditelnosti",
         "more": "Bylo naplánováno {{value}} procesů Změna viditelnosti"
       },
+      "indexObjectWithProces": {
+        "1": "Proces Indexace byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Indexace",
+        "more": "Bylo naplánováno {{value}} procesů Indexace"
+      },
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky"
@@ -253,6 +264,7 @@
       "theCollectionHasBeenModified": "Sbírku se nepodařilo upravit",
       "collectionHasBeenCreated": "Sbírku se nepodařilo vytvořit",
       "visibilityChange": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
+      "indexObjectWithProces": "Nepodařilo se naplánovat proces(y) Indexace",
       "scheduleAddLicense": "Nepodařilo se naplánovat proces Přidání licence",
       "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence",
       "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky"
@@ -341,6 +353,8 @@
     "insertPidsHere": "Zde vložit PIDy",
     "theCollectionItIsBeingAddedTo": "Sbírka, do které se přidává",
     "theResultingVisibility": "Výsledná viditelnost",
-    "changeVisibilityFor": "Změnit viditelnost pro"
+    "changeVisibilityFor": "Změnit viditelnost pro",
+    "skipInconsistentObjects": "Přeskakovat nekonzistentní objekty",
+    "indexingType": "Typ indexace"
   }
 }

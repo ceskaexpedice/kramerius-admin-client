@@ -166,7 +166,8 @@
     "public": "Public",
     "private": "Private",
     "TREE": "An object with descendants",
-    "OBJECT": "Just an object"
+    "OBJECT": "Just an object",
+    "TREE_AND_FOSTER_TREES": "Complete"
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
@@ -222,6 +223,11 @@
       "title": "License withdrawal",
       "messageFixed": "A <strong><i>License Removal</i></strong> process will be scheduled for the selected PID",
       "messageNotFixed": "A <strong><i>Pre-License</i></strong> process will be scheduled for each PID entered"
+    },
+    "scheduleIndexationByPid": {
+      "title": "Object indexing",
+      "message": "For each inserted PID, an <strong><em>Indexing</em></strong> process will be scheduled, which (re)indexes the object, possibly also its descendants (according to the type of indexing)",
+      "explanation": "How the Indexer should behave if it encounters an object that cannot be indexed due to an incorrect binding structure. It can skip the object, log the error and continue. Or terminate the Process in <strong><em>Error</em></strong> state"
     }
   },
   "snackbar": {
@@ -239,6 +245,11 @@
         "2-4": "{{value}} processes Change Visibility have been scheduled",
         "more": "{{value}} processes have been scheduled to change visibility"
       },
+      "indexObjectWithProces": {
+        "1": "The Indexing process has been scheduled",
+        "2-4": "{{value}} Indexing processes have been scheduled",
+        "more": "{{value}} Indexing processes have been scheduled"
+      },
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection"
@@ -253,6 +264,7 @@
       "theCollectionHasBeenModified": "The collection could not be edited",
       "collectionHasBeenCreated": "The collection could not be created",
       "visibilityChange": "Failed to schedule process(es) Change Visibility",
+      "indexObjectWithProces": "Failed to schedule Indexing process(es).",
       "scheduleAddLicense": "Failed to schedule the Add License process",
       "scheduleRemoveLicense": "Failed to schedule the License Removal process",
       "addThisToSuperCollection": "The object could not be added to the collection"
@@ -341,6 +353,8 @@
     "insertPidsHere": "Insert PIDs here",
     "theCollectionItIsBeingAddedTo": "The collection it is being added to",
     "theResultingVisibility": "The resulting visibility",
-    "changeVisibilityFor": "Change visibility for"
+    "changeVisibilityFor": "Change visibility for",
+    "skipInconsistentObjects": "Skip inconsistent objects",
+    "indexingType": "Indexing type"
   }
 }
