@@ -241,6 +241,10 @@
     "deleteObjectTreeWithProcess": {
       "title": "Deleting the object tree (smartly)",
       "message": "<div class=\"app-desc app-mb-4\">Are you sure you want to permanently delete the object including all its<sup>*</sup> content?</div><div class=\"app-desc app- mb-4\">A process will be scheduled that will gradually delete the entire object tree from the repository and the search index.</div><div class=\"app-desc app-mb-4\">The process will also synchronize the data of the relevant objects, which deletion will affect with regard to licenses and collections.</div><div class=\"app-explanation\"><sup>*</sup>Does not apply to the contents of collections. Deleting a collection does not include recursively deleting its items.</div>"
+    },
+    "deleteObjectFromRepo": {
+      "title": "Object deletion (low-level)",
+      "message": "Are you sure you want to permanently delete the object? The object will be deleted from the repository and the search index. However, references to this object from other objects will not be updated, nor will other referenced objects be deleted."
     }
   },
   "snackbar": {
@@ -267,7 +271,8 @@
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",
       "rebuildProcessingIndexForObject": "The Process Rebuild Processing index for the object has been scheduled",
-      "deleteObjectTreeWithProcess": "The deletion process has been scheduled"
+      "deleteObjectTreeWithProcess": "The deletion process has been scheduled",
+      "deleteObjectFromRepo": "The object has been deleted"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -284,7 +289,8 @@
       "scheduleRemoveLicense": "Failed to schedule the License Removal process",
       "addThisToSuperCollection": "The object could not be added to the collection",
       "rebuildProcessingIndexForObject": "Failed to schedule the Rebuild Processing index process for the object",
-      "deleteObjectTreeWithProcess": "Failed to schedule delete process"
+      "deleteObjectTreeWithProcess": "Failed to schedule delete process",
+      "deleteObjectFromRepo": "The object could not be deleted"
     }
   },
   "desc": {

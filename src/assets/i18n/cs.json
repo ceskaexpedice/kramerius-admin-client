@@ -241,6 +241,10 @@
     "deleteObjectTreeWithProcess": {
       "title": "Smazání stromu objektu (chytře)",
       "message": "<div class=\"app-desc app-mb-4\">Opravdu chcete trvale smazat objekt včetně jeho veškerého<sup>*</sup> obsahu?</div><div class=\"app-desc app-mb-4\">Bude naplánován proces, který postupně vymaže celý strom objektu z repozitáře i vyhledávacího indexu.</div><div class=\"app-desc app-mb-4\">Proces také synchronizuje data relevantních objektů, které smazání ovlivní s ohledem na licence a sbírky.</div><div class=\"app-explanation\"><sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.</div>"
+    },
+    "deleteObjectFromRepo": {
+      "title": "Smazání objektu (nízkoúrovňové)",
+      "message": "Opravdu chcete objekt trvale smazat? Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů, nebudou mazány ani další odkazované objekty."
     }
   },
   "snackbar": {
@@ -267,7 +271,8 @@
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
       "rebuildProcessingIndexForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
-      "deleteObjectTreeWithProcess": "Mazací proces byl naplánován"
+      "deleteObjectTreeWithProcess": "Mazací proces byl naplánován",
+      "deleteObjectFromRepo": "Objekt byl smazán"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -284,7 +289,8 @@
       "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence",
       "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky",
       "rebuildProcessingIndexForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
-      "deleteObjectTreeWithProcess": "Nepodařilo se naplánovat mazací proces"
+      "deleteObjectTreeWithProcess": "Nepodařilo se naplánovat mazací proces",
+      "deleteObjectFromRepo": "Objekt se nepodařilo smazat"
     }
   },
   "desc": {

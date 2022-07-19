@@ -166,16 +166,15 @@ export class ObjectComponent implements OnInit {
 
   deleteObjectFromRepo() {
     const data: SimpleDialogData = {
-      title: "Smazání objektu (nízkoúrovňové)",
-      message: "Opravdu chcete objekt trvale smazat? Objekt bude smazán z repozitáře i vyhledávácího indexu. " +
-        "Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů, nebudou mazány ani další odkazované objekty.",
+      title: this.ui.getTranslation('modal.deleteObjectFromRepo.title'),
+      message: this.ui.getTranslation('modal.deleteObjectFromRepo.message'),
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -188,11 +187,11 @@ export class ObjectComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.adminApi.deleteObject(this.pid).subscribe(result => {
-          this.ui.showInfoSnackBar("Objekt byl smazán");
+          this.ui.showInfoSnackBar('snackbar.success.deleteObjectFromRepo');
           this.router.navigate(['/object']);
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("Objekt se nepodařilo smazat")
+          this.ui.showErrorSnackBar('snackbar.error.deleteObjectFromRepo')
         });
       }
     });
@@ -200,7 +199,7 @@ export class ObjectComponent implements OnInit {
 
   deleteObjectTreeWithProcess() {
     const data: SimpleDialogData = {
-      title: "Smazání stromu objektu (chytře)",
+      title: this.ui.getTranslation('modal.deleteObjectTreeWithProcess.title'),
       message: this.ui.getTranslation('modal.deleteObjectTreeWithProcess.message'),
       btn1: {
         label: this.ui.getTranslation('button.yes'),
