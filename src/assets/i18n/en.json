@@ -1,5 +1,5 @@
 {
-  "lang":{
+  "lang": {
     "lat": "Latin",
     "cze": "Czech",
     "ger": "German",
@@ -67,9 +67,9 @@
     "desc": {
       "pageNumbe": "Page number",
       "sortBy": "Order by",
-      "itemsPerPageLabel" : "Records per page",
-      "nextPageLabel" : "Next page",
-      "previousPageLabel" : "Previous page",
+      "itemsPerPageLabel": "Records per page",
+      "nextPageLabel": "Next page",
+      "previousPageLabel": "Previous page",
       "firstPageLabel": "First page",
       "lastPageLabel": "Last page",
       "rangeLabel1": "0 of {{length}}",
@@ -142,7 +142,7 @@
     "loadMore": "Load more",
     "changeAvailability": "Change availability",
     "reindexSearchIndex": "Reindex (search index)",
-    "deleteTheWholeTreeSmartly": "Delete the whole tree (smartly)",  
+    "deleteTheWholeTreeSmartly": "Delete the whole tree (smartly)",
     "deleteFromRepositoryObjectOnly": "Delete from repository (object only)",
     "export": "Export",
     "copyTheTextToTheClipboard": "Copy the text to the clipboard",
@@ -184,7 +184,7 @@
   "modal": {
     "removeFromThisCollection": {
       "title": "Removal from collection",
-      "message": "Do you really want to remove <strong>{{value1}}</strong> from the collection <strong>{{value2}}</strong>" 
+      "message": "Do you really want to remove <strong>{{value1}}</strong> from the collection <strong>{{value2}}</strong>"
     },
     "removeCollection": {
       "title": "Deleting a collection",
@@ -192,13 +192,13 @@
     },
     "addItemsToCollection": {
       "title": "Adding items to a collection",
-      "message": "For each PID entered, an item will be added to the collection. Part of adding each item to a collection is scheduling the indexing process, so collection membership may not be immediately apparent" 
+      "message": "For each PID entered, an item will be added to the collection. Part of adding each item to a collection is scheduling the indexing process, so collection membership may not be immediately apparent"
     },
     "addItemToCollection": {
       "titleCollection": "Adding a collection to another collection",
       "titleObject": "Adding an object to a collection",
       "messageCollection": "This collection will be added to another collection. Part of adding to a collection involves scheduling the indexing process, so belonging to a collection may not be immediately apparent",
-      "messageObject": "The object will be added to the collection. Part of adding to a collection involves scheduling the indexing process, so belonging to a collection may not be immediately apparent" 
+      "messageObject": "The object will be added to the collection. Part of adding to a collection involves scheduling the indexing process, so belonging to a collection may not be immediately apparent"
     },
     "newRight": {
       "titleNew": "New right",
@@ -211,7 +211,7 @@
     "scheduleChangePolicyByPid": {
       "title": "Visibility change",
       "messageFixed": "A <strong><i>Visibility Change</i></strong> process will be scheduled for the selected PID, which will set the POLICY flag of the object, possibly also its descendants.",
-      "messageNotfixed": "For each inserted PID, a <strong><i>Change Visibility</i></strong> process will be scheduled, which will set the POLICY flag of the object, possibly also its descendants."
+      "messageNotFixed": "For each inserted PID, a <strong><i>Change Visibility</i></strong> process will be scheduled, which will set the POLICY flag of the object, possibly also its descendants."
     },
     "scheduleAddLicense": {
       "title": "Adding a licensee",
@@ -221,7 +221,7 @@
     "scheduleRemoveLicense": {
       "title": "License withdrawal",
       "messageFixed": "A <strong><i>License Removal</i></strong> process will be scheduled for the selected PID",
-      "messageNotFixed": "A <strong><i>Pre-License</i></strong> process will be scheduled for each PID entered"
+      "messageNotFixed": "A <strong><i>License Removal</i></strong> process will be scheduled for each PID entered"
     }
   },
   "snackbar": {

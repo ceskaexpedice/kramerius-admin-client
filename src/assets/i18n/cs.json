@@ -1,5 +1,5 @@
 {
-  "lang":{
+  "lang": {
     "lat": "Latina",
     "cze": "Čeština",
     "ger": "Němčina",
@@ -67,9 +67,9 @@
     "desc": {
       "pageNumber": "Číslo stránky",
       "sortBy": "Řadit podle",
-      "itemsPerPageLabel" : "Počet záznamů na stránce",
-      "nextPageLabel" : "Následující stránka",
-      "previousPageLabel" : "Předchozí stránka",
+      "itemsPerPageLabel": "Počet záznamů na stránce",
+      "nextPageLabel": "Následující stránka",
+      "previousPageLabel": "Předchozí stránka",
       "firstPageLabel": "První stránka",
       "lastPageLabel": "Poslední stránka",
       "rangeLabel1": "0 z {{length}}",
@@ -142,7 +142,7 @@
     "loadMore": "Načíst další",
     "changeAvailability": "Změnit dostupnost",
     "reindexSearchIndex": "Reindexovat (vyhledávací index)",
-    "deleteTheWholeTreeSmartly": "Smazat celý strom (chytře)",  
+    "deleteTheWholeTreeSmartly": "Smazat celý strom (chytře)",
     "deleteFromRepositoryObjectOnly": "Smazat z repozitáře (jen objekt)",
     "export": "Exportovat",
     "copyTheTextToTheClipboard": "Zkopirovat text do schránky",
@@ -184,21 +184,21 @@
   "modal": {
     "removeFromThisCollection": {
       "title": "Odebrání ze sbírky",
-      "message": "Opravdu chcete odebrat <strong>{{value1}}</strong> ze sbírky <strong>{{value2}}</strong>" 
+      "message": "Opravdu chcete odebrat <strong>{{value1}}</strong> ze sbírky <strong>{{value2}}</strong>"
     },
     "removeCollection": {
       "title": "Smazání sbírky",
-      "message": "Opravdu chcete sbírku trvale smazat" 
+      "message": "Opravdu chcete sbírku trvale smazat"
     },
     "addItemsToCollection": {
       "title": "Přidání položek do sbírky",
-      "message": "Pro každý vložený PID bude přidána položka do sbírky. Součástí přidání každé položky do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě" 
+      "message": "Pro každý vložený PID bude přidána položka do sbírky. Součástí přidání každé položky do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě"
     },
     "addItemToCollection": {
       "titleCollection": "Přidání sbírky do jiné sbírky",
       "titleObject": "Přidání objektu do sbírky",
       "messageCollection": "Tato sbírka bude přidána do jiné sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě",
-      "messageObject": "Objekt bude přidán do sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě" 
+      "messageObject": "Objekt bude přidán do sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě"
     },
     "newRight": {
       "titleNew": "Nové právo",
@@ -211,7 +211,7 @@
     "scheduleChangePolicyByPid": {
       "title": "Změna viditelnosti",
       "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Změna viditelnosti</i></strong>, který nastaví příznak POLICY objektu, případně i jeho potomkům.",
-      "messageNotfixed": "Pro každý vložený PID bude naplánován proces <strong><i>Změna viditelnosti</i></strong>, který nastaví příznak POLICY objektu, případně i jeho potomkům."
+      "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>Změna viditelnosti</i></strong>, který nastaví příznak POLICY objektu, případně i jeho potomkům."
     },
     "scheduleAddLicense": {
       "title": "Přidání licence",
@@ -221,7 +221,7 @@
     "scheduleRemoveLicense": {
       "title": "Odebrání licence",
       "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Odebrání licence</i></strong>",
-      "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>PřOdebránídání licence</i></strong>"
+      "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>Odebrání licence</i></strong>"
     }
   },
   "snackbar": {
