@@ -237,6 +237,10 @@
       "message2": "Proces je potřeba spustit po zásahu v RELS-EXT záznamu FOXML přímo v Repozitáři, mimo nástroje Krameria. Typicky jde o přidání a/nebo odebrání vazby.",
       "message3": "Po dokončení procesu je potřeba ještě přeindexovat dotčený objekt (jen on). A všechny objekty (do hloubky), které byly, manipulacemi s vazbami ve FOXML, pod objekt přiřazeny/odebrány.",
       "message4": "Pozor! Proces neopraví vazby vedoucí na tento objekt. Při rozsáhlejším zásahu v datech Repozitáře je potřeba tento proces spustit pro každý objekt, jehož vazby byly v Repozitáři změněny. Případně spustit rebuild celého Processing indexu."
+    },
+    "deleteObjectTreeWithProcess": {
+      "title": "Smazání stromu objektu (chytře)",
+      "message": "<div class=\"app-desc app-mb-4\">Opravdu chcete trvale smazat objekt včetně jeho veškerého<sup>*</sup> obsahu?</div><div class=\"app-desc app-mb-4\">Bude naplánován proces, který postupně vymaže celý strom objektu z repozitáře i vyhledávacího indexu.</div><div class=\"app-desc app-mb-4\">Proces také synchronizuje data relevantních objektů, které smazání ovlivní s ohledem na licence a sbírky.</div><div class=\"app-explanation\"><sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.</div>"
     }
   },
   "snackbar": {
@@ -262,7 +266,8 @@
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
-      "rebuildProcessingIndexForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován"
+      "rebuildProcessingIndexForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
+      "deleteObjectTreeWithProcess": "Mazací proces byl naplánován"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -278,7 +283,8 @@
       "scheduleAddLicense": "Nepodařilo se naplánovat proces Přidání licence",
       "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence",
       "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky",
-      "rebuildProcessingIndexForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt"
+      "rebuildProcessingIndexForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
+      "deleteObjectTreeWithProcess": "Nepodařilo se naplánovat mazací proces"
     }
   },
   "desc": {

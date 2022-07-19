@@ -201,17 +201,14 @@ export class ObjectComponent implements OnInit {
   deleteObjectTreeWithProcess() {
     const data: SimpleDialogData = {
       title: "Smazání stromu objektu (chytře)",
-      message: "Opravdu chcete trvale smazat objekt včetně jeho veškerého<sup>*</sup> obsahu?<br>" +
-        "Bude naplánován proces, který postupně vymaže celý strom objektu z repozitáře i vyhledávacího indexu.<br>" +
-        "Proces také synchronizuje data relevantních objektů, které smazání ovlivní s ohledem na licence a sbírky.<br>" +
-        "<sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.",
+      message: this.ui.getTranslation('modal.deleteObjectTreeWithProcess.message'),
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -231,11 +228,11 @@ export class ObjectComponent implements OnInit {
             title: this.title,
           }
         }).subscribe(result => {
-          this.ui.showInfoSnackBar("Mazací proces byl naplánován");
+          this.ui.showInfoSnackBar("snackbar.success.deleteObjectTreeWithProcess");
           //this.router.navigate(['/object']);
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("Nepodařilo se naplánovat mazací proces")
+          this.ui.showErrorSnackBar("snackbar.error.deleteObjectTreeWithProcess");
         });
       }
     });

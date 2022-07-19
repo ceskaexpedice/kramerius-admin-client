@@ -237,6 +237,10 @@
       "message2": "The process needs to be started after hitting the RELS-EXT FOXML record directly in the Repository, outside of the Krameria tools. Typically this involves adding and/or removing a bond.",
       "message3": "After the process is completed, the affected object (only it) needs to be re-indexed. And all the objects (in depth) that were assigned/removed under the object by manipulations with bindings in FOXML.",
       "message4": "Attention! The process does not repair bindings to this object. In the event of a more extensive intervention in the Repository data, this process needs to be started for each object whose bindings have been changed in the Repository. Alternatively, run a rebuild of the entire Processing index."
+    },
+    "deleteObjectTreeWithProcess": {
+      "title": "Deleting the object tree (smartly)",
+      "message": "<div class=\"app-desc app-mb-4\">Are you sure you want to permanently delete the object including all its<sup>*</sup> content?</div><div class=\"app-desc app- mb-4\">A process will be scheduled that will gradually delete the entire object tree from the repository and the search index.</div><div class=\"app-desc app-mb-4\">The process will also synchronize the data of the relevant objects, which deletion will affect with regard to licenses and collections.</div><div class=\"app-explanation\"><sup>*</sup>Does not apply to the contents of collections. Deleting a collection does not include recursively deleting its items.</div>"
     }
   },
   "snackbar": {
@@ -262,7 +266,8 @@
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",
-      "rebuildProcessingIndexForObject": "The Process Rebuild Processing index for the object has been scheduled"
+      "rebuildProcessingIndexForObject": "The Process Rebuild Processing index for the object has been scheduled",
+      "deleteObjectTreeWithProcess": "The deletion process has been scheduled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -278,7 +283,8 @@
       "scheduleAddLicense": "Failed to schedule the Add License process",
       "scheduleRemoveLicense": "Failed to schedule the License Removal process",
       "addThisToSuperCollection": "The object could not be added to the collection",
-      "rebuildProcessingIndexForObject": "Failed to schedule the Rebuild Processing index process for the object"
+      "rebuildProcessingIndexForObject": "Failed to schedule the Rebuild Processing index process for the object",
+      "deleteObjectTreeWithProcess": "Failed to schedule delete process"
     }
   },
   "desc": {
