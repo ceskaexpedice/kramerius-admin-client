@@ -184,15 +184,15 @@ export class RepositoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se smazat objekty")
+        this.ui.showErrorSnackBar('snackbar.error.deleteObjectsLowLevel')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar(`Objekt byl smazán`);
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsLowLevel.1');
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`Byly smazány ${result} objekty`);
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsLowLevel.2-4', {value: result});
       } else {
-        this.ui.showInfoSnackBar(`Bylo smazáno ${result} objektů`);
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsLowLevel.more', {value: result});
       }
     });
   }
