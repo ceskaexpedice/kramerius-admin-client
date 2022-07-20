@@ -236,7 +236,7 @@
       "message1": "Proces <strong><i>Přebudování Processing indexu pro objekt</i></strong> smaže z Processing indexu záznam Description zvoleného objektu a všechny záznamy Relation pro vazby vedoucí ze zvoleného objektu. Následně vytvoří záznam Description a záznamy Relation z FOXML objektu v Repozitáři (Akubra)",
       "message2": "Proces je potřeba spustit po zásahu v RELS-EXT záznamu FOXML přímo v Repozitáři, mimo nástroje Krameria. Typicky jde o přidání a/nebo odebrání vazby.",
       "message3": "Po dokončení procesu je potřeba ještě přeindexovat dotčený objekt (jen on). A všechny objekty (do hloubky), které byly, manipulacemi s vazbami ve FOXML, pod objekt přiřazeny/odebrány.",
-      "message4": "Pozor! Proces neopraví vazby vedoucí na tento objekt. Při rozsáhlejším zásahu v datech Repozitáře je potřeba tento proces spustit pro každý objekt, jehož vazby byly v Repozitáři změněny. Případně spustit rebuild celého Processing indexu."
+      "message4": "<strong>Pozor!</strong> Proces neopraví vazby vedoucí na tento objekt. Při rozsáhlejším zásahu v datech Repozitáře je potřeba tento proces spustit pro každý objekt, jehož vazby byly v Repozitáři změněny. Případně spustit rebuild celého Processing indexu."
     },
     "deleteObjectTreeWithProcess": {
       "title": "Smazání stromu objektu (chytře)",
