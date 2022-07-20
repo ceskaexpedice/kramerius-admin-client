@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{ 'modal.generateNkpLogs.title' | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  <div fxLayout="row" fxLayoutGap="16px">
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
+      <input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" >
+      <mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
+      <mat-datepicker #from></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <mat-label>{{ 'desc.dateTo' | translate }}</mat-label>
+      <input matInput [matDatepicker]="to" [(ngModel)]="dateTo" >
+      <mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
+      <mat-datepicker #to></mat-datepicker>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" (click)="scheduleNkpLogsProcess()">{{ 'button.schedule' | translate }}</button>
+  <button mat-flat-button mat-dialog-close>{{ 'button.close' | translate }}</button>
+</mat-dialog-actions>

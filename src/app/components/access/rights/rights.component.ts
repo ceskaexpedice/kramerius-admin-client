@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NewRightDialogComponent } from 'src/app/dialogs/new-right-dialog/new-right-dialog.component';
+import { CreateOrEditRightDialogComponent } from 'src/app/dialogs/create-or-edit-right-dialog/create-or-edit-right-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { RightAction } from 'src/app/models/right-action.model';
@@ -14,6 +14,7 @@ import { UIService } from 'src/app/services/ui.service';
   styleUrls: ['./rights.component.scss']
 })
 export class RightsComponent implements OnInit {
+  //TODO: prejmenovat na ActionsComponent. Je to hlavně seznam (relevantních) akcí. Až sekundárně administrace práv nad konkrétními akcemi
 
   state: string;
   // roles: any[];
@@ -49,13 +50,13 @@ export class RightsComponent implements OnInit {
   }
 
   onEditRight(right: Right) {
-    const dialogRef = this.dialog.open(NewRightDialogComponent, {
+    const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
       data : { 
         action: this.selectedAction.code,
         right: right.clone()
       },
       width: '600px',
-      panelClass: 'app-new-right-dialog'
+      panelClass: 'app-create-or-edit-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.right) {
@@ -66,15 +67,15 @@ export class RightsComponent implements OnInit {
 
   onRemoveRight(action: RightAction, right: Right) {
     const data: SimpleDialogData = {
-      title: "Odstranění práva",
-      message: `Opravdu chcete právo odstranit?`,
+      title: this.ui.getTranslation('modal.removeRight.title'),
+      message: this.ui.getTranslation('modal.removeRight.message') + '?',
       btn1: {
-        label: 'Odstranit',
+        label: this.ui.getTranslation('button.remove'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.cancel'),
         value: 'no',
         color: 'light'
       }
@@ -88,7 +89,7 @@ export class RightsComponent implements OnInit {
       if (result === 'yes') {
         this.api.removeRight(right).subscribe((response) => {
           action.rights.splice(action.rights.indexOf(right), 1);
-          this.ui.showInfoSnackBar("Právo bylo odstraněno")
+          this.ui.showInfoSnackBar('snackbar.success.theRightHasBeenRemoved');
           console.log('response', response);
         });
       }
@@ -96,10 +97,10 @@ export class RightsComponent implements OnInit {
   }
 
   onNewRight(action: RightAction) {
-    const dialogRef = this.dialog.open(NewRightDialogComponent, {
+    const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
       data : { action: this.selectedAction.code, pid: this.pid || 'uuid:1' },
       width: '600px',
-      panelClass: 'app-new-right-dialog'
+      panelClass: 'app-create-or-edit-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.right) {

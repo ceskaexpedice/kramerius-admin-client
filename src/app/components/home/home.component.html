@@ -41,14 +41,13 @@
 					<!-- <a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2">
             <mat-icon>cancel</mat-icon>
           </a> -->
-					<!-- <mat-form-field>
+					<mat-form-field>
 						<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
-						<input matInput placeholder="Pid / Čnb / Issn / Issbn">
-					</mat-form-field> -->
-					<!-- redady to implement for each filter same as is in processes-->
-					<!-- <a mat-icon-button [matTooltip]="'button.deselect' class="app-clear-filter app-mr-2">
+						<input matInput placeholder="Pid / Čnb / Issn / Issbn" [(ngModel)]="identifier"  (keyup)="onIdentKeyUp($event.target)">
+					</mat-form-field>
+					<a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2" *ngIf="identifier" (click)="clearIdentifier($event.target)">
             <mat-icon>cancel</mat-icon>
-          </a> -->
+          </a>
 				</div>
 				<ng-container  *ngIf="view == 'statistics'">
 					<div fxLayout="row" fxLayoutGap="16px">
@@ -57,8 +56,8 @@
 								<mat-card-title>{{ 'desc.modelDisplayStatistics' | translate }}</mat-card-title>
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultModel">
-								<div echarts [options]="modelsOpts" style="height: 350px;" (chartClick)="onChartClick($event)"></div>
-								<button mat-flat-button  (click)="csvModels()" color="primary" disabled class="app-mr-2">CSV</button>
+								<div echarts [options]="modelsOpts" style="height: 350px;" ></div>
+								<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
 							</mat-card-content>
 							<mat-card *ngIf="!isResultModel" class="app-view-alert app-info">
 								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
@@ -70,7 +69,7 @@
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultLang">
 								<div echarts [options]="langOpts" style="height: 350px;" ></div>
-								<button mat-flat-button  (click)="csvLang()" color="primary" disabled class="app-mr-2">CSV</button>
+								<button mat-flat-button  (click)="csvLang()" color="primary"  class="app-mr-2">CSV</button>
 							</mat-card-content>
 							<mat-card *ngIf="!isResultLang" class="app-view-alert app-info">
 								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
@@ -82,7 +81,7 @@
 							</mat-card-header>
 							<mat-card-content *ngIf="isResultAuthor">
 								<div echarts [options]="authorOpts" style="height: 350px;" ></div>
-								<button mat-flat-button  (click)="csvAuthor()" color="primary" disabled class="app-mr-2">CSV</button>
+								<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
 							</mat-card-content>
 							<mat-card *ngIf="!isResultAuthor" class="app-view-alert app-info">
 								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
@@ -115,46 +114,33 @@
 															</div>
 														</div>
 														<div *ngIf="selection[v.pid]" class="app-metadata">
-															
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['author']"><label class="app-label">{{ 'desc.author' | translate }} : </label>{{descriptions[v.pid]['author']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['origininfo']"><label class="app-label">{{ 'desc.publishingData' | translate }} :</label> {{descriptions[v.pid]['origininfo']}}</div>
-															<!--
-															<div><label class="app-label">{{ 'desc.documentType' | translate }}</label> Úřední písemnosti, Archivní fondy</div>
-															-->
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['keywords']"><label class="app-label">{{ 'desc.keywords' | translate }}</label> 
-																<span *ngFor="let k of descriptions[v.pid]['keywords']; ; let isLast=last">
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['author']"><label class="app-label">{{ 'desc.author' | translate }}:</label> {{descriptions[v.pid]['author']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['origininfo']"><label class="app-label">{{ 'desc.publishingData' | translate }}:</label> {{descriptions[v.pid]['origininfo']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['keywords'] && descriptions[v.pid]['keywords'].length > 0"><label class="app-label">{{ 'desc.keywords' | translate }}:</label> 
+																<span *ngFor="let k of descriptions[v.pid]['keywords']; let isLast=last">
 																	{{k}}{{isLast ? '' : ', '}}
 																</span>
 															</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['langs']"><label class="app-label">{{ 'desc.language' | translate }}:</label> 
-																<ng-container *ngFor="let l of descriptions[v.pid]['langs']; ; let isLast=last">
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['langs'] && descriptions[v.pid]['langs'].length > 0"><label class="app-label">{{ 'desc.language' | translate }}:</label> 
+																<ng-container *ngFor="let l of descriptions[v.pid]['langs']; let isLast=last">
 																	<span *ngIf="l && l!==''">
 																		{{ 'lang.'+ l | translate }}{{isLast ? '' : ', '}}
 																	</span>
 																</ng-container>
 															</div>
-															
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['location'] && descriptions[v.pid]['location'].length>0"><label class="app-label">{{ 'desc.storageLocation' | translate }}</label> 
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['location'] && descriptions[v.pid]['location'].length>0"><label class="app-label">{{ 'desc.storageLocation' | translate }}:</label> 
 																<ng-container *ngFor="let l of descriptions[v.pid]['location']; ; let isLast=last">
 																	<span *ngIf="l && l!==''">
 																		{{  'sigla.'+ l | translate }}{{isLast ? '' : ', '}}
 																	</span>
 																</ng-container>
 															</div>
-
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['physicalDescription']"><label class="app-label">{{ 'desc.physicalDescription' | translate }}</label> 
-																{{descriptions[v.pid]['physicalDescription']}}
-															</div>
-
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['abstract']"><label class="app-label">{{ 'desc.abstract' | translate }}</label> {{descriptions[v.pid]['abstract']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['note']"><label class="app-label">{{ 'desc.comment' | translate }}</label> {{descriptions[v.pid]['note']}}</div>
-
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['isbn']"><label class="app-label">{{ 'desc.isbn' | translate }}</label> {{descriptions[v.pid]['isbn']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['issn']"><label class="app-label">{{ 'desc.isbn' | translate }}</label> {{descriptions[v.pid]['issn']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['barcode']"><label class="app-label">{{ 'desc.barcode' | translate }}</label> {{descriptions[v.pid]['barcode']}}</div>
-															<!--
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['uuid']"><label class="app-label">{{ 'desc.uuid' | translate }}</label> {{descriptions[v.pid]['uuid']}}</div>
-															-->
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['physicalDescription']"><label class="app-label">{{ 'desc.physicalDescription' | translate }}:</label> {{descriptions[v.pid]['physicalDescription']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['abstract']"><label class="app-label">{{ 'desc.abstract' | translate }}:</label> {{descriptions[v.pid]['abstract']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['note']"><label class="app-label">{{ 'desc.comment' | translate }}:</label> {{descriptions[v.pid]['note']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['isbn']"><label class="app-label">{{ 'Isbn' | translate }}:</label> {{descriptions[v.pid]['isbn']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['issn']"><label class="app-label">{{ 'Isbn' | translate }}:</label> {{descriptions[v.pid]['issn']}}</div>
+															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['barcode']"><label class="app-label">{{ 'desc.barcode' | translate }}:</label> {{descriptions[v.pid]['barcode']}}</div>
 														</div>
 													</td>
 													<td class="app-col-detail">

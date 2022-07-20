@@ -4,16 +4,17 @@ import { License } from "src/app/models/license.model";
 import { AdminApiService } from "src/app/services/admin-api.service";
 
 @Component({
-  templateUrl: './new-license-dialog.component.html',
-  styleUrls: ['./new-license-dialog.component.scss']
+  selector: 'app-create-or-edit-license-dialog',
+  templateUrl: './create-or-edit-license-dialog.component.html',
+  styleUrls: ['./create-or-edit-license-dialog.component.scss']
 })
-export class NewLicenseDialogComponent implements OnInit {
+export class CreateOrEditLicenseDialogComponent implements OnInit {
 
   license: License;
   mode: string;
   errorMessage: string;
 
-  constructor(public dialogRef: MatDialogRef<NewLicenseDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<CreateOrEditLicenseDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private api: AdminApiService) {
   }

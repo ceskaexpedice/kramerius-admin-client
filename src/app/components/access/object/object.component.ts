@@ -80,13 +80,13 @@ export class ObjectComponent implements OnInit {
       this.pidIsCorrect = false;
       this.checkingPid = false;
       if (error.status == 400) {
-        this.errorMessage = `Neplatné UUID`;
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation400');
       } else if (error.status == 404) {
-        this.errorMessage = `Objekt nenalezen`;
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation404');
       } else if (error.status == 403) {
-        this.errorMessage = `Nedostatečná přístupová práva`;
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation403');
       } else {
-        this.errorMessage = `Chyba čtení z repozitáře: ${error.status}: ${error.message}`;
+        this.errorMessage = this.ui.getTranslation('alert.object.uuidValidationElse', { value1: error.status, value2: error.message });
         console.log(error);
       }
     })
@@ -149,8 +149,8 @@ export class ObjectComponent implements OnInit {
     if (!this.inputPid) {
       return;
     }
-    if(!this.inputPid.startsWith('uuid:')){
-      this.errorMessage = `Neplatné UUID`;
+    if (!this.inputPid.startsWith('uuid:')) {
+      this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation400');
       return;
     }
     this.router.navigate(['/', 'object', this.inputPid]);
@@ -166,16 +166,15 @@ export class ObjectComponent implements OnInit {
 
   deleteObjectFromRepo() {
     const data: SimpleDialogData = {
-      title: "Smazání objektu (nízkoúrovňové)",
-      message: "Opravdu chcete objekt trvale smazat? Objekt bude smazán z repozitáře i vyhledávácího indexu. " +
-        "Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů, nebudou mazány ani další odkazované objekty.",
+      title: this.ui.getTranslation('modal.deleteObjectFromRepo.title'),
+      message: this.ui.getTranslation('modal.deleteObjectFromRepo.message'),
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -188,18 +187,55 @@ export class ObjectComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.adminApi.deleteObject(this.pid).subscribe(result => {
-          this.ui.showInfoSnackBar("Objekt byl smazán");
+          this.ui.showInfoSnackBar('snackbar.success.deleteObjectFromRepo');
           this.router.navigate(['/object']);
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("Objekt se nepodařilo smazat")
+          this.ui.showErrorSnackBar('snackbar.error.deleteObjectFromRepo')
         });
       }
     });
   }
 
   deleteObjectTreeWithProcess() {
-    //TODO: implement after process has been tested on backend
+    const data: SimpleDialogData = {
+      title: this.ui.getTranslation('modal.deleteObjectTreeWithProcess.title'),
+      message: this.ui.getTranslation('modal.deleteObjectTreeWithProcess.message'),
+      btn1: {
+        label: this.ui.getTranslation('button.yes'),
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: this.ui.getTranslation('button.no'),
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(this.title)
+      if (result === 'yes') {
+        this.adminApi.scheduleProcess({
+          defid: 'delete_tree',
+          params: {
+            pid: this.pid,
+            title: this.title,
+          }
+        }).subscribe(result => {
+          this.ui.showInfoSnackBar("snackbar.success.deleteObjectTreeWithProcess");
+          //this.router.navigate(['/object']);
+        }, (error) => {
+          console.log(error);
+          this.ui.showErrorSnackBar("snackbar.error.deleteObjectTreeWithProcess");
+        });
+      }
+    });
+
   }
 
   indexObjectWithProcess() {
@@ -211,24 +247,25 @@ export class ObjectComponent implements OnInit {
       width: '600px',
       panelClass: 'app-schedule-indexation-by-pid-dialog'
     });
+    /* commented because same calling bellow
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'scheduled') {
         this.ui.showInfoSnackBar(`Indexace byla naplánována`);
       } else if (result === 'error') {
         this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
       }
-    });
+    }); */
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Indexace")
+        this.ui.showErrorSnackBar('snackbar.error.indexObjectWithProces')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar(`Proces Indexace byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.indexObjectWithProces.1');
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Indexace`);
+        this.ui.showInfoSnackBar('snackbar.success.indexObjectWithProces.2-4', {value: result});
       } else {
-        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Indexace`);
+        this.ui.showInfoSnackBar('snackbar.success.indexObjectWithProces.more', {value: result});
       }
     });
   };
@@ -251,17 +288,16 @@ export class ObjectComponent implements OnInit {
   }
 
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
-    // TODO: i18n
     const data: SimpleDialogData = {
-      title: "Odebrání ze sbírky",
-      message: `Opravdu chcete odebrat "${itemName}" ze sbírky "${collectionName}"?`,
+      title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
+      message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -274,17 +310,17 @@ export class ObjectComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
-          this.ui.showInfoSnackBar(`Objekt byl odebrán ze sbírky`);
+          this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`);
           this.loadCollections();
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("Objekt se nepodařilo odebrat ze sbírky")
+          this.ui.showErrorSnackBar(`snackbar.error.removeFromThisCollection`)
         });
       }
     });
   }
 
-  onAddThisToSuperCollection() {
+  onAddThisToACollection() {
     const dialogRef = this.dialog.open(AddItemToCollectionDialogComponent, {
       data: {
         pid: this.pid,
@@ -296,10 +332,10 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'added') {
-        this.ui.showInfoSnackBar(`Objekt byl přidán do sbírky`);
+        this.ui.showInfoSnackBar(`snackbar.success.addThisToSuperCollection`);
         this.loadCollections();
       } else if (result === 'error') {
-        this.ui.showErrorSnackBar("Objekt se nepodařilo přidat do sbírky")
+        this.ui.showErrorSnackBar("snackbar.error.addThisToSuperCollection")
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       }
@@ -318,11 +354,11 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přidání licence")
+        this.ui.showErrorSnackBar("snackbar.error.scheduleAddLicense")
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Přidání licence byl naplánován`);
+        this.ui.showInfoSnackBar(`snackbar.success.scheduleAddLicense`);
       }
     });
   }
@@ -340,11 +376,11 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Odebrání licence")
+        this.ui.showErrorSnackBar("snackbar.error.scheduleRemoveLicense")
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Odebrání licence byl naplánován`);
+        this.ui.showInfoSnackBar(`snackbar.success.scheduleRemoveLicense`);
       }
     });
   }
@@ -361,15 +397,15 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Změna viditelnosti")
+        this.ui.showErrorSnackBar("snackbar.error.visibilityChange")
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar(`Proces Změna viditelnosti byl naplánován`);
+        this.ui.showInfoSnackBar(`snackbar.success.visibilityChange.1`);
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Změna viditelnosti`);
+        this.ui.showInfoSnackBar(`snackbar.success.visibilityChange.2-4`, { value: result });
       } else {
-        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Změna viditelnosti`);
+        this.ui.showInfoSnackBar(`snackbar.success.visibilityChange.more`, { value: result });
       }
     });
   }
@@ -385,18 +421,18 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt")
+        this.ui.showErrorSnackBar('snackbar.error.rebuildProcessingIndexForObject')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Přebudování Processing indexu pro objekt byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.rebuildProcessingIndexForObject');
       }
     });
   }
 
   copyTextToClipboard(val: string) {
     this.clipboard.copy(val);
-    this.ui.showInfoSnackBar('Text byl úspěšně zkopírován do schánky!');
+    this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
   }
 
 }

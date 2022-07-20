@@ -1,7 +1,7 @@
-<h2 mat-dialog-title>{{ mode == 'new' ? "Nová licence" : "Úprava licence" }}</h2>
+<h2 mat-dialog-title>{{ mode == 'new' ? ('modal.newRight.titleNew' | translate) : ('modal.newRight.titleEdit' | translate) }}</h2>
 <mat-dialog-content class="mat-typography">
   <mat-form-field appearance="fill" class="app-w-100">
-    <mat-label>Role</mat-label>
+    <mat-label>{{ 'desc.role' | translate }}</mat-label>
     <mat-select [(value)]="right.role">
       <mat-option *ngFor="let role of roles" (click)="right.role = role" [value]="role" >
         {{ role ? role.name : '-'  }}
@@ -10,7 +10,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="app-w-100">
-    <mat-label>Podmínka</mat-label>
+    <mat-label>{{ 'desc.condition' | translate }}</mat-label>
     <mat-select [(value)]="right.condition">
       <mat-option value="-" (click)="selectCondition(null)">-</mat-option>
       <mat-option *ngFor="let condition of conditions" (click)="selectCondition(condition)" [value]="condition">
@@ -20,7 +20,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.paramsNecessary">
-    <mat-label>Parametr</mat-label>
+    <mat-label>{{ 'desc.parameter' | translate }}</mat-label>
     <mat-select [(value)]="right.condition.params">
       <mat-option value="-" (click)="selectParam(null)">-</mat-option>
       <mat-option *ngFor="let param of params" (click)="selectParam(param)" [value]="param">
@@ -30,7 +30,7 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.isLabelAssignable">
-    <mat-label>Licence</mat-label>
+    <mat-label>{{ 'desc.license' | translate }}</mat-label>
     <mat-select [(value)]="right.condition.license">
       <mat-option value="-" >-</mat-option>
       <mat-option *ngFor="let license of licenses" [value]="license">
@@ -40,9 +40,9 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" *ngIf="mode == 'new'" (click)="onSave()">Vytvořit</button>
-  <button mat-flat-button color="primary" *ngIf="mode == 'edit'" (click)="onSave()">Upravit</button>
-  <button mat-flat-button color="warn" (click)="onCancel()"><mat-icon>clear</mat-icon>Zrušit</button>
+  <button mat-flat-button color="primary" *ngIf="mode == 'new'" (click)="onSave()">{{ 'button.create' | translate }}</button>
+  <button mat-flat-button color="primary" *ngIf="mode == 'edit'" (click)="onSave()">{{ 'button.edit' | translate }}</button>
+  <button mat-flat-button (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>
 
 

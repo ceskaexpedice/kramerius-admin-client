@@ -58,14 +58,14 @@ export class CollectionComponent implements OnInit {
       })
     }, (error) => {
       console.log(error);
-      this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
+      this.ui.showErrorSnackBar("snackbar.error.theCollectionCouldNotBeLoaded");
     });
     this.collectionsService.getCollectionsContainingItem(collectionId).subscribe((data: [collections: Collection[], size: number]) => {
       //console.log(data)
       this.superCollections = data[0];
     }, (error) => {
       console.log(error);
-      this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tuto sbírku")
+      this.ui.showErrorSnackBar("snackbar.error.failedToLoadListOfCollectionsContainingThisCollection");
     });
   }
 
@@ -111,15 +111,15 @@ export class CollectionComponent implements OnInit {
       return;
     }
     const data: SimpleDialogData = {
-      title: "Smazání sbírky",
-      message: "Opravdu chcete sbírku trvale smazat?",
+      title: this.ui.getTranslation('modal.removeCollection.title'),
+      message: this.ui.getTranslation('modal.removeCollection.message') + '?',
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -128,61 +128,62 @@ export class CollectionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.collectionsService.deleteCollection(this.collection).subscribe(result => {
-          this.ui.showInfoSnackBar("Sbírka byla odstraněna")
+          this.ui.showInfoSnackBar("snackbar.success.theCollectionHasBeenRemoved");
           this.router.navigate(['/collections']);
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("Sbírku se nepodařilo odstranit")
+          this.ui.showErrorSnackBar("snackbar.error.collectionCouldNotBeDeleted");
         });
       }
     });
   }
 
-  addThisToCollection(collection: { pid: string, 'title.search': string }) {
-    console.log(collection);
-    if (!this.collection) {
-      return;
-    }
-    const data: SimpleDialogData = {
-      title: "Smazání sbírky",
-      message: `Opravdu chcete tuto sbírku přidat do sbírky "${collection['title.search']}"?`,
-      btn1: {
-        label: 'Ano',
-        value: 'yes',
-        color: 'warn'
-      },
-      btn2: {
-        label: 'Ne',
-        value: 'no',
-        color: 'default'
-      }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'yes') {
-        this.collectionsService.addItemToCollection(collection.pid, this.collection.id).subscribe((res) => {
-          console.log(res);
-          this.ui.showInfoSnackBar(`Sbírka byla přidána do sbírky "${collection['title.search']}"`)
-        }, error => {
-          console.log(error);
-          this.ui.showErrorSnackBar("Sbírku se nepodařilo přidat");
-        });
-      }
-    });
-  }
+  // tato metoda neni nikde pouzita, zakomentovano 
+  /*  addThisToCollection(collection: { pid: string, 'title.search': string }) {
+     console.log(collection);
+     if (!this.collection) {
+       return;
+     }
+     const data: SimpleDialogData = {
+       title: "Smazání sbírky",
+       message: `Opravdu chcete tuto sbírku přidat do sbírky "${collection['title.search']}"?`,
+       btn1: {
+         label: 'Ano',
+         value: 'yes',
+         color: 'warn'
+       },
+       btn2: {
+         label: 'Ne',
+         value: 'no',
+         color: 'default'
+       }
+     };
+     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+     dialogRef.afterClosed().subscribe(result => {
+       if (result === 'yes') {
+         this.collectionsService.addItemToCollection(collection.pid, this.collection.id).subscribe((res) => {
+           console.log(res);
+           this.ui.showInfoSnackBar(`Sbírka byla přidána do sbírky "${collection['title.search']}"`)
+         }, error => {
+           console.log(error);
+           this.ui.showErrorSnackBar("Sbírku se nepodařilo přidat");
+         });
+       }
+     });
+   } */
 
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
     // TODO: i18n
     const data: SimpleDialogData = {
-      title: "Odebrání ze sbírky",
-      message: `Opravdu chcete odebrat "${itemName}" ze sbírky "${collectionName}"?`,
+      title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
+      message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -195,6 +196,7 @@ export class CollectionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
+          this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`);
           this.loadData(this.collection.id);
           // (async () => {
           //   await this.delay(0);
@@ -202,22 +204,20 @@ export class CollectionComponent implements OnInit {
           // })();
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("Položku se nepodařilo odebrat ze sbírky")
+          this.ui.showErrorSnackBar("snackbar.error.removeFromThisCollection");
         });
       }
     });
   }
 
-  onAddItemsToCollection() {
+  onAddItemsToThisCollection() {
     const dialogRef = this.dialog.open(AddItemsToCollectionDialogComponent, {
       data: this.collection,
       width: '600px',
       panelClass: 'app-add-items-to-collection'
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result && result == 'close') {
-        this.loadData(this.collection.id)
-      }
+      //nothing, information about number of items added and failed to add is shown in the dialog  (it does not close automatically)
     });
   }
 
@@ -233,10 +233,10 @@ export class CollectionComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'added') {
-        this.ui.showInfoSnackBar(`Sbírka byla přidána do jiné sbírky`);
+        this.ui.showInfoSnackBar(`snackbar.success.addThisCollectionToAnotherCollection`);
         this.loadData(this.collection.id)
       } else if (result === 'error') {
-        this.ui.showErrorSnackBar("Sbírku se nepodařilo přidat do sbírky")
+        this.ui.showErrorSnackBar("snackbar.error.addThisCollectionToAnotherCollection");
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       }
@@ -285,7 +285,7 @@ export class CollectionComponent implements OnInit {
 
   copyTextToClipboard(val: string) {
     this.clipboard.copy(val);
-    this.ui.showInfoSnackBar('Text byl úspěšně zkopírován do schánky!');
+    this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
   }
 
 }

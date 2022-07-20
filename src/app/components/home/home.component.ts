@@ -15,6 +15,8 @@ import { DOCUMENT } from '@angular/common';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import parse from 'xml-parser';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 
 @Component({
@@ -32,11 +34,17 @@ export class HomeComponent implements OnInit {
   langOpts: EChartsOption = {};
   authorOpts: EChartsOption = {};
 
-  dateTo: Date = new Date();
-  dateFrom: Date = new Date(this.dateTo.getFullYear(), this.dateTo.getMonth()-1,this.dateTo.getDate());
+  dateTo: Date = new Date(new Date().getFullYear(), new Date().getMonth(),new Date().getDate()+1);
+  dateFrom: Date = new Date(new Date().getFullYear(), new Date().getMonth()-1,new Date().getDate());
   license:string = null;
+
   allLicenses:string[];
 
+  identifier:string;
+
+  
+  // Debouncing 
+  private subject: Subject<string> = new Subject();
 
   // tabulka 
   table: any;
@@ -59,13 +67,24 @@ export class HomeComponent implements OnInit {
     private local: LocalStorageService) { }
 
   reinitGraphs() {
+  
     let requestedLicense = this.license != null && this.license !== 'All' ? this.license : null;
+
+    this.adminApi.statisticsLicenseFilter(
+      this.dateFrom != null ? this.format(this.dateFrom) : null, 
+      this.dateTo != null ? this.format(this.dateTo) : null,
+      requestedLicense, this.identifier
+    ).subscribe(response => {
+      this.allLicenses = response["license"];
+      this.allLicenses.unshift('All');
+    });
+
 
     // authors graph configuration
     this.adminApi.statisticsAuthors(
       this.dateFrom != null ? this.format(this.dateFrom) : null, 
       this.dateTo != null ? this.format(this.dateTo) : null,
-      requestedLicense
+      requestedLicense, this.identifier
     ).subscribe(response=> {
       this.isResultAuthor = response && response.length > 0;
       this.authorOpts = {
@@ -96,7 +115,7 @@ export class HomeComponent implements OnInit {
     this.adminApi.statisticsLang(
       this.dateFrom != null ? this.format(this.dateFrom) : null, 
       this.dateTo != null ? this.format(this.dateTo) : null,
-      requestedLicense
+      requestedLicense, this.identifier
    ).subscribe(response=> {
       this.isResultLang = response && response.length > 0;
       if (response) {
@@ -149,7 +168,7 @@ export class HomeComponent implements OnInit {
     this.adminApi.statisticsModels(
       this.dateFrom != null ? this.format(this.dateFrom) : null, 
       this.dateTo != null ? this.format(this.dateTo) : null,
-      requestedLicense
+      requestedLicense, this.identifier
     ).subscribe(response => {
       this.isResultModel = Object.keys(response.sums).length > 0;
 
@@ -195,15 +214,23 @@ export class HomeComponent implements OnInit {
     this.view = this.local.getStringProperty('home.view', 'statistics');
 
     this.reinitGraphs();
-    this.adminApi.getLicenses().subscribe((licenses: License[]) => {
-      this.allLicenses = licenses.map(l=> {
-        return l.name;
-      });
-      this.allLicenses.unshift('All');
+
+    this.subject.pipe(
+      debounceTime(400)
+    ).subscribe(searchTextValue => {
+      console.log("Changing event");
+      this.reinitGraphs();
     });
   }
 
+  onIdentKeyUp(target) {
+    this.subject.next(target.value);
+  }
 
+  clearIdentifier(target) {
+    this.identifier = null;
+    this.subject.next(target.value);
+  }
   
   getVersion() {
     return this.appSettings.version;
@@ -231,9 +258,6 @@ export class HomeComponent implements OnInit {
     this.reinitGraphs();
   }
 
-  onChartClick(event) {
-    console.log(event.name);
-  }
 
   csvModels() {
     let url = this.appSettings.adminApiBaseUrl+'/statistics/summary';
@@ -262,11 +286,12 @@ export class HomeComponent implements OnInit {
     }
     if (this.dateTo) {
       let fdat = this.format(this.dateTo);
-      u = u + "&dateFrom="+ (u.endsWith("?") ? fdat : fdat) ;
+      u = u + (u.endsWith("?")  ?  "" : "&") + "dateTo="+fdat;
     } 
-    if (this.license) {
-      u = u + "&license="+  (u.endsWith("?") ? this.license : "&"+this.license) ;
+    if (this.license && this.license !== 'All') {
+      u = u + (u.endsWith("?")  ?  "" : "&") + "license="+this.license;
     }
+    console.log("url is "+url);
     this.document.location.href = u;
   }
 
@@ -377,7 +402,13 @@ export class HomeComponent implements OnInit {
             let f = this.texts(term);  
             return f ? f : '';
           });
-          modsFields['keywords'] = tl;
+          let filtered = [];
+          tl.forEach(k=> {
+            if (k !== '' && !filtered.includes(k)) {
+              filtered.push(k);
+            }
+          });
+          modsFields['keywords'] = filtered;
         }
 
         // location 

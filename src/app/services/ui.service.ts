@@ -15,16 +15,16 @@ export class UIService {
     ) {
   }
 
-  showInfoSnackBar(message: string, duration: number = 2000) {
-    this.snackBar.open(message, '', { duration: duration });
+  showInfoSnackBar(message: string, params?: Object, duration: number = 2000) {
+    this.snackBar.open(this.getTranslation(message, params), '', { duration: duration });
   }
 
-  showErrorSnackBar(message: string, duration: number = 3000) {
-    this.snackBar.open(message, 'Chyba', { duration: duration, verticalPosition: 'top' });
+  showErrorSnackBar(message: string, params?: Object, duration: number = 3000) {
+    this.snackBar.open(this.getTranslation(message, params), this.getTranslation('desc.error'), { duration: duration, verticalPosition: 'top' });
   }
 
-  getTranslation(s: string): string {
-    return this.translate.instant(s);
+  getTranslation(s: string, interpolateParams?: Object): string {
+    return this.translate.instant(s, interpolateParams);
   }
 
   changeLang(lang: string) {

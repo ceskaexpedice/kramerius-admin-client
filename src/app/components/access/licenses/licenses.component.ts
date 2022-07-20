@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NewLicenseDialogComponent } from 'src/app/dialogs/new-license-dialog/new-license-dialog.component';
+import { CreateOrEditLicenseDialogComponent } from 'src/app/dialogs/create-or-edit-license-dialog/create-or-edit-license-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { License } from 'src/app/models/license.model';
@@ -34,9 +34,9 @@ export class LicensesComponent implements OnInit {
   }
 
   onNewLicence() {
-    const dialogRef = this.dialog.open(NewLicenseDialogComponent, {
+    const dialogRef = this.dialog.open(CreateOrEditLicenseDialogComponent, {
       width: '600px',
-      panelClass: 'app-new-license-dialog'
+      panelClass: 'app-create-or-edit-license-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.license) {
@@ -99,10 +99,10 @@ export class LicensesComponent implements OnInit {
   }
 
   onEditLicese(license: License) {
-    const dialogRef = this.dialog.open(NewLicenseDialogComponent, {
+    const dialogRef = this.dialog.open(CreateOrEditLicenseDialogComponent, {
       data: { license: license },
       width: '600px',
-      panelClass: 'app-new-license-dialog'
+      panelClass: 'app-create-or-edit-license-dialog'
     } );
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.license) {

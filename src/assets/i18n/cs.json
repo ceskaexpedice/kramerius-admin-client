@@ -1,5 +1,5 @@
 {
-  "lang":{
+  "lang": {
     "lat": "Latina",
     "cze": "Čeština",
     "ger": "Němčina",
@@ -19,6 +19,7 @@
     "statistics": "Statistiky",
     "mostViewedDocuments": "Nejvíce zobrazované dokumenty",
     "rights": "Práva",
+    "actions": "Akce",
     "roles": "Role",
     "licenses": "Licence",
     "parameters": "Parametry",
@@ -41,6 +42,16 @@
   "alert": {
     "statistics": {
       "noData": "K dispozici nejsou žádná data"
+    },
+    "addItemsToCollection": {
+      "success": "Přidáno <strong>{{ value1 }}/{{ value2 }}</strong> položek",
+      "error": "Nepodařilo se přidat <strong>{{ value }}</strong> položek"
+    },
+    "object": {
+      "uuidValidation400": "Neplatné UUID",
+      "uuidValidation404": "Objekt nenalezen",
+      "uuidValidation403": "Nedostatečná přístupová práva",
+      "uuidValidationElse": "Chyba čtení z repozitáře: {{ value1 }}: {{ value2 }}"
     }
   },
   "batch": {
@@ -57,9 +68,9 @@
     "desc": {
       "pageNumber": "Číslo stránky",
       "sortBy": "Řadit podle",
-      "itemsPerPageLabel" : "Počet záznamů na stránce",
-      "nextPageLabel" : "Následující stránka",
-      "previousPageLabel" : "Předchozí stránka",
+      "itemsPerPageLabel": "Počet záznamů na stránce",
+      "nextPageLabel": "Následující stránka",
+      "previousPageLabel": "Předchozí stránka",
       "firstPageLabel": "První stránka",
       "lastPageLabel": "Poslední stránka",
       "rangeLabel1": "0 z {{length}}",
@@ -73,7 +84,7 @@
     "showDetail": "Zobrazit detail",
     "hideDetail": "Skrýt detail",
     "startImport": "Spustit import",
-    "addRight": "Přidat právo",
+    "addRight": "Přidat právo k akci",
     "editRight": "Editovat právo",
     "deleteRight": "Smazat právo",
     "addRole": "Přidat roli",
@@ -104,6 +115,7 @@
     "createNewCollection": "Vytvořit novou sbírku",
     "showStandaloneOnly": "Zobrazit pouze samostatné",
     "addToThisCollection": "Přidat do této sbírky",
+    "addToACollection": "Přidat do sbírky",
     "removeFromThisCollection": "Odebrat z této sbírky",
     "removeFromCollection": "Odebrat ze sbírky",
     "addThisCollectionToAnotherCollection": "Přidat tuto sbírku do jiné sbírky",
@@ -120,8 +132,8 @@
     "setPublicPrivate": "Nastavit public/private",
     "removeLicense": "Odebrat licenci",
     "setPublicByDates": "Nastavit public podle datumů",
-    "nkpLogs": "NKP logy",
-    "deletingStatistics": "Mazání statistik",
+    "generateNkpLogs": "Generovat NKP logy",
+    "deleteStatistics": "Promazat statistiky",
     "index": "Indexovat",
     "all": "Vše",
     "notIndexed": "Neindexováno",
@@ -132,10 +144,19 @@
     "loadMore": "Načíst další",
     "changeAvailability": "Změnit dostupnost",
     "reindexSearchIndex": "Reindexovat (vyhledávací index)",
-    "deleteTheWholeTreeSmartly": "Smazat celý strom (chytře)",  
+    "deleteTheWholeTreeSmartly": "Smazat celý strom (chytře)",
+    "deleteTheWholeTreesSmartly": "Smazat stromy objektů",
     "deleteFromRepositoryObjectOnly": "Smazat z repozitáře (jen objekt)",
+    "deleteFromRepositoryObjectsOnly": "Smazat objekty z repozitáře",
     "export": "Exportovat",
-    "copyTheTextToTheClipboard": "Zkopirovat text do schránky"
+    "copyTheTextToTheClipboard": "Zkopirovat text do schránky",
+    "add": "Přidat",
+    "cancel": "Zrušit",
+    "close": "Zavřít",
+    "loadPidsFromFile": "Načíst PIDy ze souboru",
+    "schedule": "Naplánovat",
+    "yes": "Ano",
+    "no": "Ne"
   },
   "field": {
     "archive": "Archiv",
@@ -147,7 +168,10 @@
     "periodical": "Časopis",
     "soundrecording": "Zvuková nahrávka",
     "public": "Veřejné",
-    "private": "Neveřejné"
+    "private": "Neveřejné",
+    "TREE": "Objekt i s potomky",
+    "OBJECT": "Jen objekt",
+    "TREE_AND_FOSTER_TREES": "Úplná"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
@@ -161,6 +185,177 @@
     "indexationIndexInBulk": "Indexovat všechny aktuálně zobrazené objekty - každý ve vlastním procesu",
     "indexationProcessedObjects": "Zpracováno <strong>{{value}}</strong> objektů",
     "indexationScheduledByIndexing": "Naplánováno <strong>{{value}}</strong> indexací"
+  },
+  "modal": {
+    "removeFromThisCollection": {
+      "title": "Odebrání ze sbírky",
+      "message": "Opravdu chcete odebrat <strong>{{value1}}</strong> ze sbírky <strong>{{value2}}</strong>"
+    },
+    "removeCollection": {
+      "title": "Smazání sbírky",
+      "message": "Opravdu chcete sbírku trvale smazat"
+    },
+    "addItemsToCollection": {
+      "title": "Přidání položek do sbírky",
+      "message": "Pro každý vložený PID bude přidána položka do sbírky. Součástí přidání každé položky do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě"
+    },
+    "addItemToCollection": {
+      "titleCollection": "Přidání sbírky do jiné sbírky",
+      "titleObject": "Přidání objektu do sbírky",
+      "messageCollection": "Tato sbírka bude přidána do jiné sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě",
+      "messageObject": "Objekt bude přidán do sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě"
+    },
+    "newRight": {
+      "titleNew": "Nové právo",
+      "titleEdit": "Úprava práva"
+    },
+    "removeRight": {
+      "title": "Odstranění práva",
+      "message": "Opravdu chcete právo odstranit"
+    },
+    "scheduleChangePolicyByPid": {
+      "title": "Změna viditelnosti",
+      "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Změna viditelnosti</i></strong>, který nastaví příznak POLICY objektu, případně i jeho potomkům.",
+      "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>Změna viditelnosti</i></strong>, který nastaví příznak POLICY objektu, případně i jeho potomkům."
+    },
+    "scheduleAddLicense": {
+      "title": "Přidání licence",
+      "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Přidání licence</i></strong>",
+      "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>Přidání licence</i></strong>"
+    },
+    "scheduleRemoveLicense": {
+      "title": "Odebrání licence",
+      "messageFixed": "Pro vybraný PID bude naplánován proces <strong><i>Odebrání licence</i></strong>",
+      "messageNotFixed": "Pro každý vložený PID bude naplánován proces <strong><i>Odebrání licence</i></strong>"
+    },
+    "scheduleIndexationByPid": {
+      "title": "Indexace objektu",
+      "message": "Pro každý vložený PID bude naplánován proces <strong><em>Indexace</em></strong>, který (re)indexuje objekt, případně i jeho potomky (podle typu indexace)",
+      "explanation": "Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <strong><em>Chyba</em></strong>"
+    },
+    "scheduleProcessingIndexRebuildForObject": {
+      "title": "Přebudování Processing indexu pro objekt",
+      "message1": "Proces <strong><i>Přebudování Processing indexu pro objekt</i></strong> smaže z Processing indexu záznam Description zvoleného objektu a všechny záznamy Relation pro vazby vedoucí ze zvoleného objektu. Následně vytvoří záznam Description a záznamy Relation z FOXML objektu v Repozitáři (Akubra)",
+      "message2": "Proces je potřeba spustit po zásahu v RELS-EXT záznamu FOXML přímo v Repozitáři, mimo nástroje Krameria. Typicky jde o přidání a/nebo odebrání vazby.",
+      "message3": "Po dokončení procesu je potřeba ještě přeindexovat dotčený objekt (jen on). A všechny objekty (do hloubky), které byly, manipulacemi s vazbami ve FOXML, pod objekt přiřazeny/odebrány.",
+      "message4": "<strong>Pozor!</strong> Proces neopraví vazby vedoucí na tento objekt. Při rozsáhlejším zásahu v datech Repozitáře je potřeba tento proces spustit pro každý objekt, jehož vazby byly v Repozitáři změněny. Případně spustit rebuild celého Processing indexu."
+    },
+    "deleteObjectTreeWithProcess": {
+      "title": "Smazání stromu objektu (chytře)",
+      "message": "<div class=\"app-desc app-mb-4\">Opravdu chcete trvale smazat objekt včetně jeho veškerého<sup>*</sup> obsahu?</div><div class=\"app-desc app-mb-4\">Bude naplánován proces, který postupně vymaže celý strom objektu z repozitáře i vyhledávacího indexu.</div><div class=\"app-desc app-mb-4\">Proces také synchronizuje data relevantních objektů, které smazání ovlivní s ohledem na licence a sbírky.</div><div class=\"app-explanation\"><sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.</div>"
+    },
+    "deleteObjectFromRepo": {
+      "title": "Smazání objektu (nízkoúrovňové)",
+      "message": "Opravdu chcete objekt trvale smazat? Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů, nebudou mazány ani další odkazované objekty."
+    },
+    "scheduleDeleteObjectsSmart": {
+      "title": "Mazání stromů objektů",
+      "message1": "Pro každý vložený PID bude naplánován proces <strong><i>Smazání stromu od PID</i></strong>.",
+      "message2": "Proces postupně smaže všechny objekty ve stromě od PID<sup>*</sup> a to z repozitáře i vyhledávacího indexu.",
+      "message3": "Dále proces synchronizuje data relevantních procesů, které smazání ovlivní s ohledem na licence a sbírky.",
+      "explanation": "<sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek. Protože položky sbírky nejsou vlastními potomky sbírky, sbírka na ně jen ukazuje."
+    },
+    "deleteObjectsLowLevel": {
+      "title": "Mazání objektů z repozitáře (nízkoúrovňové)",
+      "message1": "Pro každý vložený PID bude vymazán jeden objekt.",
+      "message2": "Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů. Ani nebudou mazány další odkazované objekty. Nedojde ani k synchronizaci s ohledem na licence a sbírky.",
+      "message3": "Tato operace může způsobit nekonzistence v Digitální knihovně!"
+    },
+    "deletingStatistics": {
+      "title": "Mazání statistik"
+    },
+    "scheduleProcessingIndexRebuild": {
+      "title": "Vybudování Processing indexu",
+      "message1": "Proces <strong><em>Vybudování Processing indexu</em></strong> smaže stávající Processing index a vyrobí nový index z dat v Repozitáři (Akubra).",
+      "message2": "Protože se prochází všechny FOXML objekty, jde o náročnou operaci, která může trvat i desítky hodin (podle velikosti repozitáře a dostupného výpočetního výkonu). Proto je doporučeno nejprve Processing index zálohovat.",
+      "instruction": {
+        "backup": {
+          "title": "Postup zálohy Processing indexu:",
+          "1": "vypnout Solr: <i>$SOLR_HOME/bin/solr stop</i>",
+          "2": "zálohovat datový adresář Processing indexu: typicky <i>$SOLR_HOME/server/solr/processing/data</i>",
+          "3": "zapnout Solr <i>$SOLR_HOME/bin/solr start</i>"
+        },
+        "recovery": {
+          "title": "Postup obnovy Processing indexu:",
+          "1": "vypnout Solr",
+          "2": "nahradit datový adresář Processing indexu zálohou",
+          "3": "zapnout Solr"
+        }
+      }
+    },
+    "generateNkpLogs": {
+      "title": "Generování NKP logů"
+    }
+  },
+  "snackbar": {
+    "success": {
+      "addThisCollectionToAnotherCollection": "Sbírka byla přidána do jiné sbírky",
+      "theCollectionHasBeenRemoved": "Sbírka byla odstraněna",
+      "removeFromThisCollection": "Položka byla úspěšně odebrána ze sbírky",
+      "copyToClipboard": "Text byl úspěšně zkopírován do schánky",
+      "addToTheCollection": "Sbírka byla přidána",
+      "theCollectionHasBeenModified": "Sbírka byla upravena",
+      "collectionHasBeenCreated": "Sbírka byla vytvořena",
+      "theRightHasBeenRemoved": "Právo bylo odstraněno",
+      "visibilityChange": {
+        "1": "Proces Změna viditelnosti byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Změna viditelnosti",
+        "more": "Bylo naplánováno {{value}} procesů Změna viditelnosti"
+      },
+      "indexObjectWithProces": {
+        "1": "Proces Indexace byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Indexace",
+        "more": "Bylo naplánováno {{value}} procesů Indexace"
+      },
+      "deleteTreesOfObjects": {
+        "1": "Proces Smazání stromu byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Smazání stromu",
+        "more": "Bylo naplánováno {{value}} procesů Smazání stromu"
+      },
+      "deleteObjectsLowLevel": {
+        "1": "Objekt byl smazán",
+        "2-4": "Byly smazány {{value}} objektyu",
+        "more": "Bylo smazáno {{value}} objektů"
+      },
+      "scheduleChangePolicyByPid": {
+        "1": "Proces Změna viditelnosti byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Změna viditelnosti",
+        "more": "Bylo naplánováno {{value}} procesů Změna viditelnosti"
+      },
+      "scheduleAddLicense": "Proces Přidání licence byl naplánován",
+      "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
+      "addThisToSuperCollection": "Objekt byl přidán do sbírky",
+      "rebuildProcessingIndexForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
+      "deleteObjectTreeWithProcess": "Mazací proces byl naplánován",
+      "deleteObjectFromRepo": "Objekt byl smazán",
+      "scheduleNkpLogsProcess": "Proces Generování logů pro období {{value1}} - {{value2}} naplánován",
+      "deleteStatistics": "Statistiky pro období {{value1}} do {{value2}} smazány",
+      "scheduleProcessingIndexRebuild": "Proces Vybudování Processing indexu byl naplánován",
+      "scheduleProcessingIndexRebuildForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován"
+    },
+    "error": {
+      "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
+      "theCollectionCouldNotBeLoaded": "Sbírku se nepodařilo načíst",
+      "failedToLoadListOfCollectionsContainingThisCollection": "Nepodařil se načíst seznam sbírek obsahujích tuto sbírku",
+      "collectionCouldNotBeDeleted": "Sbírku se nepodařilo odstranit",
+      "removeFromThisCollection": "Položku se nepodařilo odebrat ze sbírky",
+      "addToTheCollection": "Sbírku se nepodařilo přidat",
+      "theCollectionHasBeenModified": "Sbírku se nepodařilo upravit",
+      "collectionHasBeenCreated": "Sbírku se nepodařilo vytvořit",
+      "visibilityChange": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
+      "indexObjectWithProces": "Nepodařilo se naplánovat proces(y) Indexace",
+      "scheduleAddLicense": "Nepodařilo se naplánovat proces Přidání licence",
+      "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence",
+      "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky",
+      "rebuildProcessingIndexForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
+      "deleteObjectTreeWithProcess": "Nepodařilo se naplánovat mazací proces",
+      "deleteObjectFromRepo": "Objekt se nepodařilo smazat",
+      "deleteTreesOfObjects": "Nepodařilo se naplánovat proces(y) Smazání stromu",
+      "deleteObjectsLowLevel": "Nepodařilo se smazat objekty",
+      "scheduleChangePolicyByPid": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
+      "scheduleProcessingIndexRebuild": "Nepodařilo se naplánovat proces Vybudování Processing indexu",
+      "scheduleProcessingIndexRebuildForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt"
+    }
   },
   "desc": {
     "modelDisplayStatistics": "Statistiky zobrazení modelů",
@@ -213,6 +408,7 @@
     "shortDescriptionOfTheCollection": "Krátky popis sbírky",
     "fullDescriptionOfTheCollection": "Úplný popis sbírky",
     "yes": "Ano",
+    "no": "Ne",
     "collectionsContainingThisCollection": "Sbírky obsahující tuto sbírku",
     "global": "Globální",
     "forDocument": "Pro dokument",
@@ -229,13 +425,24 @@
     "monograph": "Monografie",
     "periodical": "Periodika",
     "manuscript": "Rukopisy",
-    "collection": "Sbírky",
+    "collection": "Sbírka",
     "soundrecording": "Zvukové nahrávky",
     "version": "Verze",
     "availability": "Dostupnost",
     "synchronization": "Synchronizace",
     "deleting": "Mazání",
     "exports": "Exporty",
-    "newCollection": "Nová sbírka"
+    "newCollection": "Nová sbírka",
+    "barcode": "Čárový kód",
+    "error": "Chyba",
+    "itemsBeingAdded": "Přidávané položky",
+    "pids": "PIDy",
+    "insertPidsHere": "Zde vložit PIDy",
+    "theCollectionItIsBeingAddedTo": "Sbírka, do které se přidává",
+    "theResultingVisibility": "Výsledná viditelnost",
+    "changeVisibilityFor": "Změnit viditelnost pro",
+    "skipInconsistentObjects": "Přeskakovat nekonzistentní objekty",
+    "indexingType": "Typ indexace",
+    "logs": "Logy"
   }
 }

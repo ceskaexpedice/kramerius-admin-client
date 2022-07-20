@@ -1,42 +1,43 @@
 <form #f="ngForm" (ngSubmit)="onAdd(f.value)">
-	<h2 mat-dialog-title>Přidání položek do sbírky</h2>
+	<h2 mat-dialog-title>{{ 'modal.addItemsToCollection.title' | translate }}</h2>
 	<mat-dialog-content class="mat-typography">
 		<div class="app-desc app-mb-4">
-			Pro každý vložený PID bude přidána položka do sbírky. Součástí přidání každé položky do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě.
+			{{ 'modal.addItemsToCollection.message' | translate }}.
 		</div>
 		<div class="app-mb-2">
-      <strong>Sbírka</strong>
+      <strong>{{ 'desc.collection' | translate }}</strong>
     </div>
 		<div class="app-mb-2">
 			<mat-form-field class="app-w-100" *ngIf="collection_title">
-				<input [disabled]="inProgress || collection_title" matInput type="text" id="inputCollectionTitle" name="collection_title" [(ngModel)]="collection_title" placeholder="Název">
+				<input [disabled]="inProgress || collection_title" matInput type="text" id="inputCollectionTitle" name="collection_title" [(ngModel)]="collection_title" [placeholder]="'desc.name' | translate">
 			</mat-form-field>
 			<mat-form-field class="app-w-100" *ngIf="collection_pid">
 				<input [disabled]="inProgress || collection_pid" matInput type="text" id="inputCollectionPid" name="collection_pid" [(ngModel)]="collection_pid" placeholder="PID">
 			</mat-form-field>
 		</div>
 		<div class="app-mb-2">
-      <strong>Přidávané položky</strong>
+      <strong>{{ 'desc.itemsBeingAdded' | translate }}</strong>
     </div>
 		<div>
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
-				<mat-label>PIDy</mat-label>
-				<textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" placeholder="Zde vložit PIDy ..." required autofocus rows="{{pidsTextareaRows}}"></textarea>
-				<mat-icon matSuffix (click)="onPidsFromFile()" matTooltip="Načíst PIDy ze souboru" class="app-cursor-pointer">file_download</mat-icon>
+				<mat-label>{{ 'desc.pids' | translate }}</mat-label>
+				<textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="{{pidsTextareaRows}}"></textarea>
+				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 		</div>
 		<mat-progress-bar mode="indeterminate" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
 		<mat-card *ngIf="!!items_counter_total" class="app-view-alert" [ngClass]="!!items_counter_failed ? 'app-warn' : 'app-success'">
 			<mat-card-content>
-				Přidáno <strong>{{ items_counter_added }}/{{ items_counter_total }}</strong> položek!<br />
-				<ng-container *ngIf="!!items_counter_failed">Nepodařilo se přidat <strong>{{ items_counter_failed }}</strong> položek!</ng-container>
+				<div [innerHtml]="('alert.addItemsToCollection.success' | translate : {value1: items_counter_added, value2: items_counter_total}) + '!'"></div>
+				&nbsp;
+				<div *ngIf="!!items_counter_failed" [innerHtml]="('alert.addItemsToCollection.error' | translate : {value: items_counter_failed}) + '!'"></div>
 			</mat-card-content>
 		</mat-card>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !f.valid || isFinished()" color="primary" type="submit">Přidat</button>
-		<button mat-flat-button *ngIf="!isFinished()" [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
-		<button mat-flat-button *ngIf="isFinished()" mat-dialog-close="close">Zavřít</button>
+		<button mat-flat-button [disabled]="inProgress || !f.valid || isFinished()" color="primary" type="submit">{{ 'button.add' | translate }}</button>
+		<button mat-flat-button *ngIf="!isFinished()" [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+		<button mat-flat-button *ngIf="isFinished()" mat-dialog-close="close">{{ 'button.close' | translate }}</button>
 	</mat-dialog-actions>
 </form>

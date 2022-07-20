@@ -1,37 +1,28 @@
 <form class="form-signin" #f="ngForm" (ngSubmit)="onAdd(f.value)">
-	<h2 mat-dialog-title *ngIf="isCollection">Přidání sbírky do jiné sbírky</h2>
-	<h2 mat-dialog-title *ngIf="!isCollection">Přidání objektu do sbírky</h2>
+	<h2 mat-dialog-title *ngIf="isCollection">{{ 'modal.addItemToCollection.titleCollection' | translate }}</h2>
+	<h2 mat-dialog-title *ngIf="!isCollection">{{ 'modal.addItemToCollection.titleObject' | translate }}</h2>
 	<mat-dialog-content class="mat-typography">
 		<div class="app-desc app-mb-4" *ngIf="isCollection">
-			Tato sbírka bude přidána do jiné sbírky. Součástí přidání do sbírky je naplánování indexačního procesu,
-			proto se příslušnost do sbírky nemusí projevit okamžitě.
+			{{ 'modal.addItemToCollection.messageCollection' | translate }}.
 		</div>
 		<div class="app-desc app-mb-4" *ngIf="!isCollection">
-			Objekt bude přidán do sbírky. Součástí přidání do sbírky je naplánování indexačního procesu, proto se
-			příslušnost do sbírky nemusí projevit okamžitě.
+			{{ 'modal.addItemToCollection.messageObject' | translate }}.
 		</div>
-
 		<div class="app-mb-2">
 			<mat-form-field class="app-w-100" *ngIf="title">
-				<input [disabled]="inProgress || title" matInput type="text" id="inputTitle" name="title"
-					[(ngModel)]="title" placeholder="Název">
+				<input [disabled]="inProgress || title" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" [placeholder]="'desc.name' | translate">
 			</mat-form-field>
 			<mat-form-field class="app-w-100" *ngIf="pid">
-				<input [disabled]="inProgress || pid" matInput type="text" id="inputPid" name="pid" [(ngModel)]="pid"
-					placeholder="PID">
+				<input [disabled]="inProgress || pid" matInput type="text" id="inputPid" name="pid" [(ngModel)]="pid" placeholder="PID">
 			</mat-form-field>
 		</div>
 		<div class="app-mb-4">
-			<strong>Sbírka, do které se přidává:</strong>
+			<strong>{{ 'desc.theCollectionItIsBeingAddedTo' | translate }}:</strong>
 		</div>
-		<mat-card *ngFor="let superCollection of potentialSuperCollections"
-			class="app-card app-view-item app-view-hover app-cursor-pointer"
-			(click)="selectSuperCollection(superCollection)"
-			[class.app-selected]="superCollection == selectedSuperCollection">
+		<mat-card *ngFor="let superCollection of potentialSuperCollections" class="app-card app-view-item app-view-hover app-cursor-pointer" (click)="selectSuperCollection(superCollection)" [class.app-selected]="superCollection == selectedSuperCollection">
 			<mat-card-header>
 				<mat-card-title class="app-mb-1" fxLayout="row" fxLayoutAlign="start center">
-					<mat-icon [class.app-color-accent]="superCollection == selectedSuperCollection">{{ superCollection
-						== selectedSuperCollection ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
+					<mat-icon [class.app-color-accent]="superCollection == selectedSuperCollection">{{ superCollection == selectedSuperCollection ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
 					{{getCollectionName(superCollection)}}
 				</mat-card-title>
 				<mat-card-subtitle class="app-m-0">{{ getCollectionDescription(superCollection )}}</mat-card-subtitle>
@@ -40,8 +31,7 @@
 		<mat-progress-bar *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !selectedSuperCollection" color="primary"
-			type="submit">Přidat</button>
-		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
+		<button mat-flat-button [disabled]="inProgress || !selectedSuperCollection" color="primary" type="submit">{{ 'button.add' | translate }}</button>
+		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>

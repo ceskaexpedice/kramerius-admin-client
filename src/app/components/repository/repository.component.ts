@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteStatisticsComponent } from 'src/app/dialogs/delete-statistics/delete-statistics.component';
-import { NkpLogyComponent } from 'src/app/dialogs/nkp-logy/nkp-logy.component';
+import { DeleteStatisticsDialogComponent } from 'src/app/dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
+import { GenerateNkpLogsDialogComponent } from 'src/app/dialogs/generate-nkp-logs-dialog/generate-nkp-logs-dialog.component';
 import { ScheduleAddLicenseDialogComponent } from 'src/app/dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { ScheduleImportFoxmlDialogComponent } from 'src/app/dialogs/schedule-import-foxml-dialog/schedule-import-foxml-dialog.component';
@@ -12,6 +12,8 @@ import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-r
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { DeleteObjectsLowLevelDialogComponent } from 'src/app/dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
+import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 
 @Component({
   selector: 'app-repository',
@@ -39,11 +41,11 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Vybudování Processing indexu")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleProcessingIndexRebuild');
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Vybudování Processing indexu byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleProcessingIndexRebuild');
       }
     });
   };
@@ -55,11 +57,11 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleProcessingIndexRebuildForObject');
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Přebudování Processing indexu pro objekt byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleProcessingIndexRebuildForObject');
       }
     });
   };
@@ -87,15 +89,15 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Změna viditelnosti")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleChangePolicyByPid')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar(`Proces Změna viditelnosti byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleChangePolicyByPid.1');
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Změna viditelnosti`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleChangePolicyByPid.2-4', {value: result});
       } else {
-        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Změna viditelnosti`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleChangePolicyByPid.more', {value: result});
       }
     });
   };
@@ -123,11 +125,11 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přidání licence")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleAddLicense')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Přidání licence byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleAddLicense');
       }
     });
   }
@@ -139,11 +141,11 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Odebrání licence")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleRemoveLicense')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Odebrání licence byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleRemoveLicense');
       }
     });
   }
@@ -155,22 +157,65 @@ export class RepositoryComponent implements OnInit {
 
 
   openNkpLogyDialog() {
-    const dialogRef = this.dialog.open(NkpLogyComponent, {
+    const dialogRef = this.dialog.open(GenerateNkpLogsDialogComponent, {
       width: '600px',
-      panelClass: 'app-nkp-logy-dialog'
+      panelClass: 'app-generate-nkp-logs-dialog'
     });
   }
 
   openDeleteStatisticsDialog() {
-    const dialogRef = this.dialog.open(DeleteStatisticsComponent, {
+    const dialogRef = this.dialog.open(DeleteStatisticsDialogComponent, {
       width: '600px',
-      panelClass: 'app-nkp-logy-dialog'
+      panelClass: 'app-delete-statistics-dialog'
     });
   }
 
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('repository.view', view);
+  }
+
+
+  openDeleteObjectsLowLevelDialog() {
+    const dialogRef = this.dialog.open(DeleteObjectsLowLevelDialogComponent, {
+      width: '600px',
+      panelClass: 'app-delete-objects-low-level-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.deleteObjectsLowLevel')
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else if (result == 1) {
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsLowLevel.1');
+      } else if (result == 2 || result == 3 || result == 4) {
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsLowLevel.2-4', {value: result});
+      } else {
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsLowLevel.more', {value: result});
+      }
+    });
+  }
+
+  openScheduleDeleteObjectsDialog() {
+    const dialogRef = this.dialog.open(ScheduleDeleteObjectsSmartComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-delete-objects-smart'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.deleteTreesOfObjects')
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else if (result == 1) {
+        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.1');
+      } else if (result == 2 || result == 3 || result == 4) {
+        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.2-4', {value: result});
+      } else {
+        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.more', {value: result});
+      }
+    });
   }
 
 

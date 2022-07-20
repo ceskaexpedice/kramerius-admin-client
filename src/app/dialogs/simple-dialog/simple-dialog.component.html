@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content class="mat-typography">
-  <div *ngIf="data.message" class="app-mb-4">{{ data.message }}</div>
+  <div *ngIf="data.message" class="app-mb-4" [innerHtml]="data.message "></div>
   <div *ngIf="data.html" [innerHtml]="data.html" class="app-mb-4"></div>
   <div *ngIf="data.checkbox" class="app-mb-4">
     <mat-checkbox [(ngModel)]="data.checkbox.checked">{{ data.checkbox.label }}</mat-checkbox>

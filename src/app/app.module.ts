@@ -43,13 +43,13 @@ import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-
 import { ScheduleAddLicenseDialogComponent } from './dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from './dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { AccessComponent } from './components/access/access.component';
-import { NewLicenseDialogComponent } from './dialogs/new-license-dialog/new-license-dialog.component';
+import { CreateOrEditLicenseDialogComponent } from './dialogs/create-or-edit-license-dialog/create-or-edit-license-dialog.component';
 import { LicensesComponent } from './components/access/licenses/licenses.component';
 import { RolesComponent } from './components/access/roles/roles.component';
-import { NewRoleDialogComponent } from './dialogs/new-role-dialog/new-role-dialog.component';
+import { CreateOrEditRoleDialogComponent } from './dialogs/create-or-edit-role-dialog/create-or-edit-role-dialog.component';
 import { LocalStorageService } from './services/local-storage.service';
 import { RightsComponent } from './components/access/rights/rights.component';
-import { NewRightDialogComponent } from './dialogs/new-right-dialog/new-right-dialog.component';
+import { CreateOrEditRightDialogComponent } from './dialogs/create-or-edit-right-dialog/create-or-edit-right-dialog.component';
 import { ParamsComponent } from './components/access/params/params.component';
 import { ImportComponent } from './components/import/import.component';
 import { ImportService } from './services/import.service';
@@ -68,13 +68,15 @@ import { BarChart } from 'echarts/charts';
 import { LineChart } from 'echarts/charts';
 import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { NkpLogyComponent } from './dialogs/nkp-logy/nkp-logy.component';
-import { DeleteStatisticsComponent } from './dialogs/delete-statistics/delete-statistics.component';
+import { GenerateNkpLogsDialogComponent } from './dialogs/generate-nkp-logs-dialog/generate-nkp-logs-dialog.component';
+import { DeleteStatisticsDialogComponent } from './dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PaginatorI18n } from './paginator-i18n';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
+import { DeleteObjectsLowLevelDialogComponent } from './dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
+import { ScheduleDeleteObjectsSmartComponent } from './dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -120,11 +122,11 @@ export function createCustomMatPaginatorIntl(
     ScheduleRemoveLicenseDialogComponent,
     AccessComponent,
     LicensesComponent,
-    NewLicenseDialogComponent,
+    CreateOrEditLicenseDialogComponent,
     RolesComponent,
-    NewRoleDialogComponent,
+    CreateOrEditRoleDialogComponent,
     RightsComponent,
-    NewRightDialogComponent,
+    CreateOrEditRightDialogComponent,
     ParamsComponent,
     ImportComponent,
     TreeComponent,
@@ -134,9 +136,11 @@ export function createCustomMatPaginatorIntl(
     AddItemsToCollectionDialogComponent,
     AddItemToCollectionDialogComponent,
     CollectionDetailComponent,
-    NkpLogyComponent,
-    DeleteStatisticsComponent,
-    CollectionNewComponent
+    GenerateNkpLogsDialogComponent,
+    DeleteStatisticsDialogComponent,
+    CollectionNewComponent,
+    DeleteObjectsLowLevelDialogComponent,
+    ScheduleDeleteObjectsSmartComponent
   ],
   imports: [
     BrowserModule,
@@ -191,9 +195,9 @@ export function createCustomMatPaginatorIntl(
     ScheduleImportNdkDialogComponent,
     ScheduleAddLicenseDialogComponent,
     ScheduleRemoveLicenseDialogComponent,
-    NewLicenseDialogComponent,
-    NewRoleDialogComponent,
-    NewRightDialogComponent
+    CreateOrEditLicenseDialogComponent,
+    CreateOrEditRoleDialogComponent,
+    CreateOrEditRightDialogComponent
   ],
   bootstrap: [AppComponent]
 })
