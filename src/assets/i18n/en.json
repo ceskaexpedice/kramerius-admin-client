@@ -258,6 +258,9 @@
       "message1": "One object will be deleted for each PID inserted.",
       "message2": "The object will be deleted from the repository and the search index. However, references to this object from other objects will not be updated. Nor will other referenced objects be deleted. There will also be no synchronization with regard to licenses and collections.",
       "message3": "This operation may cause inconsistencies in the Digital Library!"
+    },
+    "deletingStatistics": {
+      "title": "Deleting statistics"
     }
   },
   "snackbar": {
@@ -300,7 +303,9 @@
       "addThisToSuperCollection": "The object has been added to the collection",
       "rebuildProcessingIndexForObject": "The Process Rebuild Processing index for the object has been scheduled",
       "deleteObjectTreeWithProcess": "The deletion process has been scheduled",
-      "deleteObjectFromRepo": "The object has been deleted"
+      "deleteObjectFromRepo": "The object has been deleted",
+      "scheduleNkpLogsProcess": "The process of Generating logs for the period {{value1}} - {{value2}} scheduled",
+      "deleteStatistics": "Statistics for the period {{value1}} to {{value2}} deleted"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -409,6 +414,7 @@
     "theResultingVisibility": "The resulting visibility",
     "changeVisibilityFor": "Change visibility for",
     "skipInconsistentObjects": "Skip inconsistent objects",
-    "indexingType": "Indexing type"
+    "indexingType": "Indexing type",
+    "logs": "Logs"
   }
 }

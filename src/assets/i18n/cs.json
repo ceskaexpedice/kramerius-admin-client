@@ -258,6 +258,9 @@
       "message1": "Pro každý vložený PID bude vymazán jeden objekt.",
       "message2": "Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů. Ani nebudou mazány další odkazované objekty. Nedojde ani k synchronizaci s ohledem na licence a sbírky.",
       "message3": "Tato operace může způsobit nekonzistence v Digitální knihovně!"
+    },
+    "deletingStatistics": {
+      "title": "Mazání statistik"
     }
   },
   "snackbar": {
@@ -300,7 +303,9 @@
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
       "rebuildProcessingIndexForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
       "deleteObjectTreeWithProcess": "Mazací proces byl naplánován",
-      "deleteObjectFromRepo": "Objekt byl smazán"
+      "deleteObjectFromRepo": "Objekt byl smazán",
+      "scheduleNkpLogsProcess": "Proces Generování logů pro období {{value1}} - {{value2}} naplánován",
+      "deleteStatistics": "Statistiky pro období {{value1}} do {{value2}} smazány"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -409,6 +414,7 @@
     "theResultingVisibility": "Výsledná viditelnost",
     "changeVisibilityFor": "Změnit viditelnost pro",
     "skipInconsistentObjects": "Přeskakovat nekonzistentní objekty",
-    "indexingType": "Typ indexace"
+    "indexingType": "Typ indexace",
+    "logs": "Logy"
   }
 }

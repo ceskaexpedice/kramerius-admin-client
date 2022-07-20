@@ -27,11 +27,11 @@ export class DeleteStatisticsComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  delete() {
+  deleteStatistics() {
     this.adminApi.deleteStatistics(this.dateFrom.format('YYYY.MM.DD'), this.dateTo.format('YYYY.MM.DD'))
     .subscribe(response => {
       this.dialogRef.close("scheduled");
-      this.ui.showInfoSnackBar("Statistiky pro období "+this.dateFrom.format('YYYY.MM.DD')+" do "+this.dateTo.format('YYYY.MM.DD')+" smazány");
+      this.ui.showInfoSnackBar('snackbar.success.deleteStatistics', {value1: this.dateFrom.format('YYYY.MM.DD'), value2: this.dateTo.format('YYYY.MM.DD')});
     }, error => {
       console.log(error);
       this.dialogRef.close('error');

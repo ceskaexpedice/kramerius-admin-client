@@ -166,7 +166,7 @@ export class RepositoryComponent implements OnInit {
   openDeleteStatisticsDialog() {
     const dialogRef = this.dialog.open(DeleteStatisticsComponent, {
       width: '600px',
-      panelClass: 'app-nkp-logy-dialog'
+      panelClass: 'app-delete-statistics-dialog'
     });
   }
 

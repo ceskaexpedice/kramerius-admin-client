@@ -23,7 +23,7 @@ export class NkpLogyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  scheduleProcess() {
+  scheduleNkpLogsProcess() {
     this.adminApi.scheduleProcess({
       defid: 'nkplogs',
       params: {
@@ -33,7 +33,8 @@ export class NkpLogyComponent implements OnInit {
       }
     }).subscribe(response => {
       this.dialogRef.close("scheduled");
-      this.ui.showInfoSnackBar("Proces Generování logů pro období "+this.dateFrom.format('YYYY.MM.DD')+ " - "+this.dateTo.format('YYYY.MM.DD')+" naplánován");
+      //this.ui.showInfoSnackBar("Proces Generování logů pro období "+this.dateFrom.format('YYYY.MM.DD')+ " - "+this.dateTo.format('YYYY.MM.DD')+" naplánován");
+      this.ui.showInfoSnackBar('snackbar.success.scheduleNkpLogsProcess', {value1: this.dateFrom.format('YYYY.MM.DD'), value2: this.dateTo.format('YYYY.MM.DD')});
     }, error => {
       console.log(error);
       this.dialogRef.close('error');
