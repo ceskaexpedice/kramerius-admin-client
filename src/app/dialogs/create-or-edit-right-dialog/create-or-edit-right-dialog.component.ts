@@ -8,10 +8,11 @@ import { Role } from "src/app/models/roles.model";
 import { AdminApiService } from "src/app/services/admin-api.service";
 
 @Component({
-  templateUrl: './new-right-dialog.component.html',
-  styleUrls: ['./new-right-dialog.component.scss']
+  selector: 'app-create-or-edit-right-dialog',
+  templateUrl: './create-or-edit-right-dialog.component.html',
+  styleUrls: ['./create-or-edit-right-dialog.component.scss']
 })
-export class NewRightDialogComponent implements OnInit {
+export class CreateOrEditRightDialogComponent implements OnInit {
 
   right: Right;
   mode: string;
@@ -27,7 +28,7 @@ export class NewRightDialogComponent implements OnInit {
 
   
 
-  constructor(public dialogRef: MatDialogRef<NewRightDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<CreateOrEditRightDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private api: AdminApiService) {
   }

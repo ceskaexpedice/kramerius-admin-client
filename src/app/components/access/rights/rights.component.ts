@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NewRightDialogComponent } from 'src/app/dialogs/new-right-dialog/new-right-dialog.component';
+import { CreateOrEditRightDialogComponent } from 'src/app/dialogs/create-or-edit-right-dialog/create-or-edit-right-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { RightAction } from 'src/app/models/right-action.model';
@@ -50,13 +50,13 @@ export class RightsComponent implements OnInit {
   }
 
   onEditRight(right: Right) {
-    const dialogRef = this.dialog.open(NewRightDialogComponent, {
+    const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
       data : { 
         action: this.selectedAction.code,
         right: right.clone()
       },
       width: '600px',
-      panelClass: 'app-new-right-dialog'
+      panelClass: 'app-create-or-edit-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.right) {
@@ -97,10 +97,10 @@ export class RightsComponent implements OnInit {
   }
 
   onNewRight(action: RightAction) {
-    const dialogRef = this.dialog.open(NewRightDialogComponent, {
+    const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
       data : { action: this.selectedAction.code, pid: this.pid || 'uuid:1' },
       width: '600px',
-      panelClass: 'app-new-right-dialog'
+      panelClass: 'app-create-or-edit-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.right) {

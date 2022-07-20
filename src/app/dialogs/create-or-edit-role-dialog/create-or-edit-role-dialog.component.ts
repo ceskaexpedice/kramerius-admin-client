@@ -4,16 +4,17 @@ import { Role } from "src/app/models/roles.model";
 import { AdminApiService } from "src/app/services/admin-api.service";
 
 @Component({
-  templateUrl: './new-role-dialog.component.html',
-  styleUrls: ['./new-role-dialog.component.scss']
+  selector: 'app-create-or-edit-role-dialog',
+  templateUrl: './create-or-edit-role-dialog.component.html',
+  styleUrls: ['./create-or-edit-role-dialog.component.scss']
 })
-export class NewRoleDialogComponent implements OnInit {
+export class CreateOrEditRoleDialogComponent implements OnInit {
 
   role: Role;
   mode: string;
   errorMessage: string;
 
-  constructor(public dialogRef: MatDialogRef<NewRoleDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<CreateOrEditRoleDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private api: AdminApiService) {
   }

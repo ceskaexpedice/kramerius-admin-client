@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NewRoleDialogComponent } from 'src/app/dialogs/new-role-dialog/new-role-dialog.component';
+import { CreateOrEditRoleDialogComponent } from 'src/app/dialogs/create-or-edit-role-dialog/create-or-edit-role-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { Role } from 'src/app/models/roles.model';
@@ -31,9 +31,9 @@ export class RolesComponent implements OnInit {
   }
 
   onNewRole() {
-    const dialogRef = this.dialog.open(NewRoleDialogComponent, {
+    const dialogRef = this.dialog.open(CreateOrEditRoleDialogComponent, {
       width: '600px',
-      panelClass: 'app-new-right-dialog'
+      panelClass: 'app-create-or-edit-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.role) {
@@ -46,7 +46,7 @@ export class RolesComponent implements OnInit {
   onRemoveRole(role: Role) {
     const data: SimpleDialogData = {
       title: "Odstranění role",
-      message: `Opravdu chcete odstranit role ${role.name}?`,
+      message: `Opravdu chcete odstranit roli ${role.name}?`,
       btn1: {
         label: 'Odstranit',
         value: 'yes',
@@ -81,10 +81,10 @@ export class RolesComponent implements OnInit {
   }
 
   onEditRole(role: Role) {
-    const dialogRef = this.dialog.open(NewRoleDialogComponent, {
+    const dialogRef = this.dialog.open(CreateOrEditRoleDialogComponent, {
       data: { role: role },
       width: '600px',
-      panelClass: 'app-new-role-dialog'
+      panelClass: 'app-create-or-edit-role-dialog'
     } );
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.role) {

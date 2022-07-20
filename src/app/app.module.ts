@@ -43,13 +43,13 @@ import { ScheduleImportNdkDialogComponent } from './dialogs/schedule-import-ndk-
 import { ScheduleAddLicenseDialogComponent } from './dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from './dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { AccessComponent } from './components/access/access.component';
-import { NewLicenseDialogComponent } from './dialogs/new-license-dialog/new-license-dialog.component';
+import { CreateOrEditLicenseDialogComponent } from './dialogs/create-or-edit-license-dialog/create-or-edit-license-dialog.component';
 import { LicensesComponent } from './components/access/licenses/licenses.component';
 import { RolesComponent } from './components/access/roles/roles.component';
-import { NewRoleDialogComponent } from './dialogs/new-role-dialog/new-role-dialog.component';
+import { CreateOrEditRoleDialogComponent } from './dialogs/create-or-edit-role-dialog/create-or-edit-role-dialog.component';
 import { LocalStorageService } from './services/local-storage.service';
 import { RightsComponent } from './components/access/rights/rights.component';
-import { NewRightDialogComponent } from './dialogs/new-right-dialog/new-right-dialog.component';
+import { CreateOrEditRightDialogComponent } from './dialogs/create-or-edit-right-dialog/create-or-edit-right-dialog.component';
 import { ParamsComponent } from './components/access/params/params.component';
 import { ImportComponent } from './components/import/import.component';
 import { ImportService } from './services/import.service';
@@ -122,11 +122,11 @@ export function createCustomMatPaginatorIntl(
     ScheduleRemoveLicenseDialogComponent,
     AccessComponent,
     LicensesComponent,
-    NewLicenseDialogComponent,
+    CreateOrEditLicenseDialogComponent,
     RolesComponent,
-    NewRoleDialogComponent,
+    CreateOrEditRoleDialogComponent,
     RightsComponent,
-    NewRightDialogComponent,
+    CreateOrEditRightDialogComponent,
     ParamsComponent,
     ImportComponent,
     TreeComponent,
@@ -195,9 +195,9 @@ export function createCustomMatPaginatorIntl(
     ScheduleImportNdkDialogComponent,
     ScheduleAddLicenseDialogComponent,
     ScheduleRemoveLicenseDialogComponent,
-    NewLicenseDialogComponent,
-    NewRoleDialogComponent,
-    NewRightDialogComponent
+    CreateOrEditLicenseDialogComponent,
+    CreateOrEditRoleDialogComponent,
+    CreateOrEditRightDialogComponent
   ],
   bootstrap: [AppComponent]
 })
