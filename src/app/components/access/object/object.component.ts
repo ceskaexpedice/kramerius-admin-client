@@ -320,7 +320,7 @@ export class ObjectComponent implements OnInit {
     });
   }
 
-  onAddThisToSuperCollection() {
+  onAddThisToACollection() {
     const dialogRef = this.dialog.open(AddItemToCollectionDialogComponent, {
       data: {
         pid: this.pid,
