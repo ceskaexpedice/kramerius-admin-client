@@ -125,11 +125,11 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přidání licence")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleAddLicense')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Přidání licence byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleAddLicense');
       }
     });
   }
