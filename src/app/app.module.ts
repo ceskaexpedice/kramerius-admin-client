@@ -68,8 +68,8 @@ import { BarChart } from 'echarts/charts';
 import { LineChart } from 'echarts/charts';
 import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { NkpLogyComponent } from './dialogs/nkp-logy/nkp-logy.component';
-import { DeleteStatisticsComponent } from './dialogs/delete-statistics/delete-statistics.component';
+import { GenerateNkpLogsDialogComponent } from './dialogs/generate-nkp-logs-dialog/generate-nkp-logs-dialog.component';
+import { DeleteStatisticsDialogComponent } from './dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -136,8 +136,8 @@ export function createCustomMatPaginatorIntl(
     AddItemsToCollectionDialogComponent,
     AddItemToCollectionDialogComponent,
     CollectionDetailComponent,
-    NkpLogyComponent,
-    DeleteStatisticsComponent,
+    GenerateNkpLogsDialogComponent,
+    DeleteStatisticsDialogComponent,
     CollectionNewComponent,
     DeleteObjectsLowLevelDialogComponent,
     ScheduleDeleteObjectsSmartComponent

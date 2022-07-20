@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteStatisticsComponent } from 'src/app/dialogs/delete-statistics/delete-statistics.component';
-import { NkpLogyComponent } from 'src/app/dialogs/nkp-logy/nkp-logy.component';
+import { DeleteStatisticsDialogComponent } from 'src/app/dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
+import { GenerateNkpLogsDialogComponent } from 'src/app/dialogs/generate-nkp-logs-dialog/generate-nkp-logs-dialog.component';
 import { ScheduleAddLicenseDialogComponent } from 'src/app/dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
 import { ScheduleImportFoxmlDialogComponent } from 'src/app/dialogs/schedule-import-foxml-dialog/schedule-import-foxml-dialog.component';
@@ -157,14 +157,14 @@ export class RepositoryComponent implements OnInit {
 
 
   openNkpLogyDialog() {
-    const dialogRef = this.dialog.open(NkpLogyComponent, {
+    const dialogRef = this.dialog.open(GenerateNkpLogsDialogComponent, {
       width: '600px',
-      panelClass: 'app-nkp-logy-dialog'
+      panelClass: 'app-generate-nkp-logs-dialog'
     });
   }
 
   openDeleteStatisticsDialog() {
-    const dialogRef = this.dialog.open(DeleteStatisticsComponent, {
+    const dialogRef = this.dialog.open(DeleteStatisticsDialogComponent, {
       width: '600px',
       panelClass: 'app-delete-statistics-dialog'
     });

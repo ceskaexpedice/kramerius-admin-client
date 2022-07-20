@@ -5,17 +5,17 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  selector: 'app-nkp-logy',
-  templateUrl: './nkp-logy.component.html',
-  styleUrls: ['./nkp-logy.component.scss']
+  selector: 'app-generate-nkp-logs-dialog',
+  templateUrl: './generate-nkp-logs-dialog.component.html',
+  styleUrls: ['./generate-nkp-logs-dialog.component.scss']
 })
-export class NkpLogyComponent implements OnInit {
+export class GenerateNkpLogsDialogComponent implements OnInit {
 
   dateFrom:moment.Moment = moment().add(-1,"months");
   dateTo:moment.Moment = moment().add(1,"days");
 
   constructor(
-    public dialogRef: MatDialogRef<NkpLogyComponent>,
+    public dialogRef: MatDialogRef<GenerateNkpLogsDialogComponent>,
     private adminApi: AdminApiService,
     private ui: UIService
   ) { }

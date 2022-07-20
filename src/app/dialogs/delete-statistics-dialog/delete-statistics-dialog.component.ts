@@ -5,11 +5,11 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  selector: 'app-delete-statistics',
-  templateUrl: './delete-statistics.component.html',
-  styleUrls: ['./delete-statistics.component.scss']
+  selector: 'app-delete-statistics-dialog',
+  templateUrl: './delete-statistics-dialog.component.html',
+  styleUrls: ['./delete-statistics-dialog.component.scss']
 })
-export class DeleteStatisticsComponent implements OnInit {
+export class DeleteStatisticsDialogComponent implements OnInit {
 
   dateFrom:moment.Moment = moment().add(-2,"years");
   dateTo:moment.Moment = moment().add(-1,"years");
@@ -17,7 +17,7 @@ export class DeleteStatisticsComponent implements OnInit {
   maxDate:moment.Moment = moment().add(-1,"years");
 
   constructor(
-    public dialogRef: MatDialogRef<DeleteStatisticsComponent>,
+    public dialogRef: MatDialogRef<DeleteStatisticsDialogComponent>,
     private adminApi: AdminApiService,
     private ui: UIService
   ) { }
