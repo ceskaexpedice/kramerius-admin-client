@@ -14,6 +14,7 @@ import { UIService } from 'src/app/services/ui.service';
   styleUrls: ['./rights.component.scss']
 })
 export class RightsComponent implements OnInit {
+  //TODO: prejmenovat na ActionsComponent. Je to hlavně seznam (relevantních) akcí. Až sekundárně administrace práv nad konkrétními akcemi
 
   state: string;
   // roles: any[];
