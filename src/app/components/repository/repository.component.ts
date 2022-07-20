@@ -89,15 +89,15 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Změna viditelnosti")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleChangePolicyByPid')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar(`Proces Změna viditelnosti byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleChangePolicyByPid.1');
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Změna viditelnosti`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleChangePolicyByPid.2-4', {value: result});
       } else {
-        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Změna viditelnosti`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleChangePolicyByPid.more', {value: result});
       }
     });
   };

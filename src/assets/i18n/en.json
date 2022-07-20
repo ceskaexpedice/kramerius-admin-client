@@ -290,6 +290,11 @@
         "2-4": "The {{value}} object has been deleted",
         "more": "{{value}} objects were deleted"
       },
+      "scheduleChangePolicyByPid": {
+        "1": "The Change Visibility process has been scheduled",
+        "2-4": "{{value}} processes Change Visibility have been scheduled",
+        "more": "{{value}} processes have been scheduled to change visibility"
+      },
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",
@@ -315,7 +320,8 @@
       "deleteObjectTreeWithProcess": "Failed to schedule delete process",
       "deleteObjectFromRepo": "The object could not be deleted",
       "deleteTreesOfObjects": "Failed to schedule Delete Tree process(es).",
-      "deleteObjectsLowLevel": "Failed to delete objects"
+      "deleteObjectsLowLevel": "Failed to delete objects",
+      "scheduleChangePolicyByPid": "Failed to schedule process(es) Change Visibility"
     }
   },
   "desc": {

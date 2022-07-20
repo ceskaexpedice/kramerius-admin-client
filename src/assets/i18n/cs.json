@@ -290,6 +290,11 @@
         "2-4": "Byly smazány {{value}} objektyu",
         "more": "Bylo smazáno {{value}} objektů"
       },
+      "scheduleChangePolicyByPid": {
+        "1": "Proces Změna viditelnosti byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Změna viditelnosti",
+        "more": "Bylo naplánováno {{value}} procesů Změna viditelnosti"
+      },
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
@@ -315,7 +320,8 @@
       "deleteObjectTreeWithProcess": "Nepodařilo se naplánovat mazací proces",
       "deleteObjectFromRepo": "Objekt se nepodařilo smazat",
       "deleteTreesOfObjects": "Nepodařilo se naplánovat proces(y) Smazání stromu",
-      "deleteObjectsLowLevel": "Nepodařilo se smazat objekty"
+      "deleteObjectsLowLevel": "Nepodařilo se smazat objekty",
+      "scheduleChangePolicyByPid": "Nepodařilo se naplánovat proces(y) Změna viditelnosti"
     }
   },
   "desc": {
