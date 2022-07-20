@@ -25,7 +25,7 @@
             <a (click)="copyTextToClipboard(getCurrentRoute('string'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a><span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="getCollectionDescription(collection)" class="app-desc">{{ getCollectionDescription(collection) }}</span>
           </div>
           <div *ngIf="view === 'content'">
-            <a mat-flat-button color="primary" (click)="onAddItemsToCollection()">
+            <a mat-flat-button color="primary" (click)="onAddItemsToThisCollection()">
               <mat-icon>add_circle</mat-icon>{{ 'button.addToThisCollection' | translate }}
             </a>
           </div>
