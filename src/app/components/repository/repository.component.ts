@@ -205,15 +205,15 @@ export class RepositoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Smazání stromu")
+        this.ui.showErrorSnackBar('snackbar.error.deleteTreesOfObjects')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar(`Proces Smazání stromu byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.1');
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Smazání stromu`);
+        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.2-4', {value: result});
       } else {
-        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Smazání stromu`);
+        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.more', {value: result});
       }
     });
   }

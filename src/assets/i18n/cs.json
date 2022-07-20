@@ -245,6 +245,16 @@
     "deleteObjectFromRepo": {
       "title": "Smazání objektu (nízkoúrovňové)",
       "message": "Opravdu chcete objekt trvale smazat? Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů, nebudou mazány ani další odkazované objekty."
+    },
+    "scheduleDeleteObjectsSmart": {
+      "title": "Mazání stromů objektů",
+      "message1": "Pro každý vložený PID bude naplánován proces <strong><i>Smazání stromu od PID</i></strong>.",
+      "message2": "Proces postupně smaže všechny objekty ve stromě od PID<sup>*</sup> a to z repozitáře i vyhledávacího indexu.",
+      "message3": "Dále proces synchronizuje data relevantních procesů, které smazání ovlivní s ohledem na licence a sbírky.",
+      "explanation": "<sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek. Protože položky sbírky nejsou vlastními potomky sbírky, sbírka na ně jen ukazuje."
+    },
+    "DeleteObjectsLowLevel": {
+      
     }
   },
   "snackbar": {
@@ -266,6 +276,11 @@
         "1": "Proces Indexace byl naplánován",
         "2-4": "Byly naplánovány {{value}} procesy Indexace",
         "more": "Bylo naplánováno {{value}} procesů Indexace"
+      },
+      "deleteTreesOfObjects": {
+        "1": "Proces Smazání stromu byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Smazání stromu",
+        "more": "Bylo naplánováno {{value}} procesů Smazání stromu"
       },
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
@@ -290,7 +305,8 @@
       "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky",
       "rebuildProcessingIndexForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
       "deleteObjectTreeWithProcess": "Nepodařilo se naplánovat mazací proces",
-      "deleteObjectFromRepo": "Objekt se nepodařilo smazat"
+      "deleteObjectFromRepo": "Objekt se nepodařilo smazat",
+      "deleteTreesOfObjects": "Nepodařilo se naplánovat proces(y) Smazání stromu"
     }
   },
   "desc": {
