@@ -131,8 +131,8 @@
     "setPublicPrivate": "Set public / private",
     "removeLicense": "Remove license",
     "setPublicByDates": "Set public by dates",
-    "nkpLogs": "NKP logs",
-    "deletingStatistics": "Deleting statistics",
+    "generateNkpLogs": "Generate NKP logs",
+    "deleteStatistics": "Delete statistics",
     "index": "Index",
     "all": "All",
     "notIndexed": "Not indexed",
@@ -281,6 +281,9 @@
           "3": "turn on Solr"
         }
       }
+    },
+    "generateNkpLogs": {
+      "title": "Generating NKP logs"
     }
   },
   "snackbar": {

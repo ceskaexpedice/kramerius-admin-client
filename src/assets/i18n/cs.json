@@ -131,8 +131,8 @@
     "setPublicPrivate": "Nastavit public/private",
     "removeLicense": "Odebrat licenci",
     "setPublicByDates": "Nastavit public podle datumů",
-    "nkpLogs": "NKP logy",
-    "deletingStatistics": "Mazání statistik",
+    "generateNkpLogs": "Generovat NKP logy",
+    "deleteStatistics": "Promazat statistiky",
     "index": "Indexovat",
     "all": "Vše",
     "notIndexed": "Neindexováno",
@@ -281,6 +281,9 @@
           "3": "zapnout Solr"
         }
       }
+    },
+    "generateNkpLogs": {
+      "title": "Generování NKP logů"
     }
   },
   "snackbar": {
@@ -421,7 +424,7 @@
     "monograph": "Monografie",
     "periodical": "Periodika",
     "manuscript": "Rukopisy",
-    "collection": "Sbírky",
+    "collection": "Sbírka",
     "soundrecording": "Zvukové nahrávky",
     "version": "Verze",
     "availability": "Dostupnost",
