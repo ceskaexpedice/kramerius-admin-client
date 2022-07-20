@@ -261,6 +261,25 @@
     },
     "deletingStatistics": {
       "title": "Mazání statistik"
+    },
+    "scheduleProcessingIndexRebuild": {
+      "title": "Vybudování Processing indexu",
+      "message1": "Proces <strong><em>Vybudování Processing indexu</em></strong> smaže stávající Processing index a vyrobí nový index z dat v Repozitáři (Akubra).",
+      "message2": "Protože se prochází všechny FOXML objekty, jde o náročnou operaci, která může trvat i desítky hodin (podle velikosti repozitáře a dostupného výpočetního výkonu). Proto je doporučeno nejprve Processing index zálohovat.",
+      "instruction": {
+        "backup": {
+          "title": "Postup zálohy Processing indexu:",
+          "1": "vypnout Solr: <i>$SOLR_HOME/bin/solr stop</i>",
+          "2": "zálohovat datový adresář Processing indexu: typicky <i>$SOLR_HOME/server/solr/processing/data</i>",
+          "3": "zapnout Solr <i>$SOLR_HOME/bin/solr start</i>"
+        },
+        "recovery": {
+          "title": "Postup obnovy Processing indexu:",
+          "1": "vypnout Solr",
+          "2": "nahradit datový adresář Processing indexu zálohou",
+          "3": "zapnout Solr"
+        }
+      }
     }
   },
   "snackbar": {
@@ -305,7 +324,9 @@
       "deleteObjectTreeWithProcess": "Mazací proces byl naplánován",
       "deleteObjectFromRepo": "Objekt byl smazán",
       "scheduleNkpLogsProcess": "Proces Generování logů pro období {{value1}} - {{value2}} naplánován",
-      "deleteStatistics": "Statistiky pro období {{value1}} do {{value2}} smazány"
+      "deleteStatistics": "Statistiky pro období {{value1}} do {{value2}} smazány",
+      "scheduleProcessingIndexRebuild": "Proces Vybudování Processing indexu byl naplánován",
+      "scheduleProcessingIndexRebuildForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -326,7 +347,9 @@
       "deleteObjectFromRepo": "Objekt se nepodařilo smazat",
       "deleteTreesOfObjects": "Nepodařilo se naplánovat proces(y) Smazání stromu",
       "deleteObjectsLowLevel": "Nepodařilo se smazat objekty",
-      "scheduleChangePolicyByPid": "Nepodařilo se naplánovat proces(y) Změna viditelnosti"
+      "scheduleChangePolicyByPid": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
+      "scheduleProcessingIndexRebuild": "Nepodařilo se naplánovat proces Vybudování Processing indexu",
+      "scheduleProcessingIndexRebuildForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt"
     }
   },
   "desc": {

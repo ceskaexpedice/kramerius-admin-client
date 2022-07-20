@@ -1,32 +1,30 @@
 <form #f="ngForm" (ngSubmit)="schedule()">
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
-	<h2 mat-dialog-title>Vybudování Processing indexu</h2>
+	<h2 mat-dialog-title>{{ 'modal.scheduleProcessingIndexRebuild.title' | translate }}</h2>
 	<mat-dialog-content>
+		<div class="app-desc app-mb-4" [innerHtml]="'modal.scheduleProcessingIndexRebuild.message1' | translate"></div>
 		<div class="app-desc app-mb-4">
-			Proces <em>Vybudování Processing indexu</em> smaže stávající Processing index a vyrobí nový index z dat v Repozitáři (Akubra).
-		</div>
-		<div class="app-desc app-mb-4">
-			Protože se prochází všechny FOXML objekty, jde o náročnou operaci, která může trvat i desítky hodin (podle velikosti repozitáře a dostupného výpočetního výkonu). Proto je doporučeno nejprve Processing index zálohovat.
+			{{ 'modal.scheduleProcessingIndexRebuild.message2' | translate }}
 		</div>
 		<div class="app-mb-4">
-			<strong>Postup zálohy Processing indexu:</strong>
+			<strong>{{ 'modal.scheduleProcessingIndexRebuild.instruction.backup.title' | translate }}</strong>
 			<ol>
-				<li>vypnout Solr: <i>$SOLR_HOME/bin/solr stop</i></li>
-				<li>zálohovat datový adresář Processing indexu: typicky <i>$SOLR_HOME/server/solr/processing/data</i></li>
-				<li>zapnout Solr <i>$SOLR_HOME/bin/solr start</i></li>
+				<li [innerHtml]="'modal.scheduleProcessingIndexRebuild.instruction.backup.1' | translate"></li>
+				<li [innerHtml]="'modal.scheduleProcessingIndexRebuild.instruction.backup.2' | translate"></li>
+				<li [innerHtml]="'modal.scheduleProcessingIndexRebuild.instruction.backup.3' | translate"></li>
 			</ol>
 		</div>
 		<div class="app-mb-4">
-			<strong>Postup obnovy Processing indexu:</strong>
+			<strong>{{ 'modal.scheduleProcessingIndexRebuild.instruction.recovery.title' | translate }}</strong>
 			<ol>
-				<li>vypnout Solr</li>
-				<li>nahradit datový adresář Processing indexu zálohou</li>
-				<li>zapnout Solr</li>
+				<li>{{ 'modal.scheduleProcessingIndexRebuild.instruction.recovery.1' | translate }}</li>
+				<li>{{ 'modal.scheduleProcessingIndexRebuild.instruction.recovery.2' | translate }}</li>
+				<li>{{ 'modal.scheduleProcessingIndexRebuild.instruction.recovery.3' | translate }}</li>
 			</ol>
 		</div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress" color="primary" type="submit">Naplánovat</button>
-    <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
+		<button mat-flat-button [disabled]="inProgress" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+    <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>

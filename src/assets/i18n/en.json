@@ -261,6 +261,25 @@
     },
     "deletingStatistics": {
       "title": "Deleting statistics"
+    },
+    "scheduleProcessingIndexRebuild": {
+      "title": "Building the Processing index",
+      "message1": "The <strong><em>Build Processing index</em></strong> process deletes the existing Processing index and creates a new index from the data in the Repository (Akubra).",
+      "message2": "Since all FOXML objects are traversed, this is a demanding operation that can take tens of hours (depending on the size of the repository and the available computing power). Therefore, it is recommended to back up the Processing index first.",
+      "instruction": {
+        "backup": {
+          "title": "Processing index backup procedure:",
+          "1": "shutdown Solr: <i>$SOLR_HOME/bin/solr stop</i>",
+          "2": "backup the Processing index data directory: typically <i>$SOLR_HOME/server/solr/processing/data</i>",
+          "3": "start Solr <i>$SOLR_HOME/bin/solr start</i>"
+        },
+        "recovery": {
+          "title": "Processing index recovery procedure:",
+          "1": "turn off Solr",
+          "2": "replace the Processing index data directory with a backup",
+          "3": "turn on Solr"
+        }
+      }
     }
   },
   "snackbar": {
@@ -305,7 +324,9 @@
       "deleteObjectTreeWithProcess": "The deletion process has been scheduled",
       "deleteObjectFromRepo": "The object has been deleted",
       "scheduleNkpLogsProcess": "The process of Generating logs for the period {{value1}} - {{value2}} scheduled",
-      "deleteStatistics": "Statistics for the period {{value1}} to {{value2}} deleted"
+      "deleteStatistics": "Statistics for the period {{value1}} to {{value2}} deleted",
+      "scheduleProcessingIndexRebuild": "The Build Processing index process has been scheduled",
+      "scheduleProcessingIndexRebuildForObject": "The Process Rebuild Processing index for the object has been scheduled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -326,7 +347,9 @@
       "deleteObjectFromRepo": "The object could not be deleted",
       "deleteTreesOfObjects": "Failed to schedule Delete Tree process(es).",
       "deleteObjectsLowLevel": "Failed to delete objects",
-      "scheduleChangePolicyByPid": "Failed to schedule process(es) Change Visibility"
+      "scheduleChangePolicyByPid": "Failed to schedule process(es) Change Visibility",
+      "scheduleProcessingIndexRebuild": "Failed to schedule Build Processing index",
+      "scheduleProcessingIndexRebuildForObject": "Failed to schedule the Rebuild Processing index process for the object"
     }
   },
   "desc": {

@@ -41,11 +41,11 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Vybudování Processing indexu")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleProcessingIndexRebuild');
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Vybudování Processing indexu byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleProcessingIndexRebuild');
       }
     });
   };
@@ -57,11 +57,11 @@ export class RepositoryComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt")
+        this.ui.showErrorSnackBar('snackbar.error.scheduleProcessingIndexRebuildForObject');
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar(`Proces Přebudování Processing indexu pro objekt byl naplánován`);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleProcessingIndexRebuildForObject');
       }
     });
   };
