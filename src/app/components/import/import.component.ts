@@ -77,15 +77,15 @@ export class ImportComponent implements OnInit {
 
   submit() {
     const data: SimpleDialogData = {
-      title: "Spuštění importu",
-      message: "Opravdu chcete spustit import?",
+      title: this.ui.getTranslation('modal.startImport.title'),
+      message: this.ui.getTranslation('modal.startImport.message'),
       btn1: {
-        label: 'Spustit',
+        label: this.ui.getTranslation('button.schedule'),
         value: 'approve',
         color: 'primary'
       },
       btn2: {
-        label: 'Zrušit',
+        label: this.ui.getTranslation('button.cancel'),
         value: 'cancel',
         color: 'light'
       }
@@ -115,8 +115,9 @@ export class ImportComponent implements OnInit {
         startIndexer: this.scheduleIndexations,
       }
     }).subscribe(response => {
-      this.ui.showInfoSnackBar("Import byl naplánován")
+      this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
     }, error => {
+      this.ui.showInfoSnackBar('snackbar.error.scheduleImportProcess');
       console.log(error);
     });
   }
@@ -130,8 +131,9 @@ export class ImportComponent implements OnInit {
         startIndexer: this.scheduleIndexations,
       }
     }).subscribe(response => {
-      this.ui.showInfoSnackBar("Import byl naplánován")
+      this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
     }, error => {
+      this.ui.showInfoSnackBar('snackbar.error.scheduleImportProcess');
       console.log(error);
     });
   }

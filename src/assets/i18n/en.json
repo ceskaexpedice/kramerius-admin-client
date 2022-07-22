@@ -293,6 +293,10 @@
         "foxml": "<p>Schedule a process that imports FOXML files from the selected import directory on the server.</p><p>The root directory for FOXML imports is typically <strong><i>$HOME/.kramerius/import</i><strong>.</p>",
         "ndk": "<p>Schedule a process that converts NDK METS format files from the selected import directory on the server and imports the result.</p><p>The root directory for NDK METS imports is typically <strong><i>$HOME/.kramerius/ convert</i></strong>.</p>"
       }
+    },
+    "startImport": {
+      "title": "Starting the import",
+      "message": "Are you sure you want to start the import?"
     }
   },
   "snackbar": {
@@ -339,7 +343,8 @@
       "scheduleNkpLogsProcess": "The process of Generating logs for the period {{value1}} - {{value2}} scheduled",
       "deleteStatistics": "Statistics for the period {{value1}} to {{value2}} deleted",
       "scheduleProcessingIndexRebuild": "The Build Processing index process has been scheduled",
-      "scheduleProcessingIndexRebuildForObject": "The Process Rebuild Processing index for the object has been scheduled"
+      "scheduleProcessingIndexRebuildForObject": "The Process Rebuild Processing index for the object has been scheduled",
+      "scheduleImportProcess": "The import has been scheduled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -362,7 +367,8 @@
       "deleteObjectsLowLevel": "Failed to delete objects",
       "scheduleChangePolicyByPid": "Failed to schedule process(es) Change Visibility",
       "scheduleProcessingIndexRebuild": "Failed to schedule Build Processing index",
-      "scheduleProcessingIndexRebuildForObject": "Failed to schedule the Rebuild Processing index process for the object"
+      "scheduleProcessingIndexRebuildForObject": "Failed to schedule the Rebuild Processing index process for the object",
+      "scheduleImportProcess": "Failed to schedule import"
     }
   },
   "desc": {

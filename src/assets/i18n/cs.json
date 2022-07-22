@@ -293,6 +293,10 @@
         "foxml": "<p>Naplánujte proces, který importuje FOXML soubory ze zvoleného importního adresáře na serveru.</p><p>Kořenový adresář pro import FOXML je typicky <strong><i>$HOME/.kramerius/import</i><strong>.</p>",
         "ndk": "<p>Naplánujte proces, který konvertuje soubory ve formátu NDK METS ze zvoleného importního adresáře na serveru a výsledek importuje.</p><p>Kořenový adresář pro import NDK METS je typicky <strong><i>$HOME/.kramerius/convert</i></strong>.</p>"
       }
+    },
+    "startImport": {
+      "title": "Spuštění importu",
+      "message": "Opravdu chcete spustit import?"
     }
   },
   "snackbar": {
@@ -339,7 +343,8 @@
       "scheduleNkpLogsProcess": "Proces Generování logů pro období {{value1}} - {{value2}} naplánován",
       "deleteStatistics": "Statistiky pro období {{value1}} do {{value2}} smazány",
       "scheduleProcessingIndexRebuild": "Proces Vybudování Processing indexu byl naplánován",
-      "scheduleProcessingIndexRebuildForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován"
+      "scheduleProcessingIndexRebuildForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
+      "scheduleImportProcess": "Import byl naplánován"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -362,7 +367,8 @@
       "deleteObjectsLowLevel": "Nepodařilo se smazat objekty",
       "scheduleChangePolicyByPid": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
       "scheduleProcessingIndexRebuild": "Nepodařilo se naplánovat proces Vybudování Processing indexu",
-      "scheduleProcessingIndexRebuildForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt"
+      "scheduleProcessingIndexRebuildForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
+      "scheduleImportProcess": "Import se nepodařilo naplánovat"
     }
   },
   "desc": {
