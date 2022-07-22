@@ -21,6 +21,8 @@ export class AddItemToCollectionDialogComponent implements OnInit {
 
   inProgress = false;
 
+  query: string;
+
   constructor(public dialogRef: MatDialogRef<AddItemToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, private collectionApi: CollectionsService) {
     if (data) {
       this.pid = data.pid;
@@ -46,6 +48,7 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.query = "";
   }
 
   onAdd(formData) {
@@ -75,4 +78,7 @@ export class AddItemToCollectionDialogComponent implements OnInit {
     this.selectedSuperCollection = collection;
   }
 
+  onSearch() {
+   // to do
+  }
 }
