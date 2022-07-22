@@ -156,7 +156,8 @@
     "loadPidsFromFile": "Load PIDs from file",
     "schedule": "Schedule",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "showHelp": "Show help"
   },
   "field": {
     "archive": "Archive",
@@ -285,6 +286,13 @@
     },
     "generateNkpLogs": {
       "title": "Generating NKP logs"
+    },
+    "showHelp": {
+      "title": "Help",
+      "message": {
+        "foxml": "<p>Schedule a process that imports FOXML files from the selected import directory on the server.</p><p>The root directory for FOXML imports is typically <strong><i>$HOME/.kramerius/import</i><strong>.</p>",
+        "ndk": "<p>Schedule a process that converts NDK METS format files from the selected import directory on the server and imports the result.</p><p>The root directory for NDK METS imports is typically <strong><i>$HOME/.kramerius/ convert</i></strong>.</p>"
+      }
     }
   },
   "snackbar": {

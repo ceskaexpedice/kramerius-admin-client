@@ -156,7 +156,8 @@
     "loadPidsFromFile": "Načíst PIDy ze souboru",
     "schedule": "Naplánovat",
     "yes": "Ano",
-    "no": "Ne"
+    "no": "Ne",
+    "showHelp": "Zobrazit nápovědu"
   },
   "field": {
     "archive": "Archiv",
@@ -285,6 +286,13 @@
     },
     "generateNkpLogs": {
       "title": "Generování NKP logů"
+    },
+    "showHelp": {
+      "title": "Nápověda",
+      "message": {
+        "foxml": "<p>Naplánujte proces, který importuje FOXML soubory ze zvoleného importního adresáře na serveru.</p><p>Kořenový adresář pro import FOXML je typicky <strong><i>$HOME/.kramerius/import</i><strong>.</p>",
+        "ndk": "<p>Naplánujte proces, který konvertuje soubory ve formátu NDK METS ze zvoleného importního adresáře na serveru a výsledek importuje.</p><p>Kořenový adresář pro import NDK METS je typicky <strong><i>$HOME/.kramerius/convert</i></strong>.</p>"
+      }
     }
   },
   "snackbar": {

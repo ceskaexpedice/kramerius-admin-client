@@ -54,12 +54,12 @@ export class ImportComponent implements OnInit {
   showHelpDialog() {
     let html = "";
     if (this.type == 'foxml') {
-      html = "<p>Naplánujte proces, který importuje FOXML soubory ze zvoleného importního adresáře na serveru.</p><p>Kořenový adresář pro import FOXML je typicky <i>$HOME/.kramerius/import</i>.</p>";
+      html = this.ui.getTranslation('modal.showHelp.message.foxml');
     } else if (this.type == 'ndk') {
-      html = "<p>Naplánujte proces, který konvertuje soubory ve formátu NDK METS ze zvoleného importního adresáře na serveru a výsledek importuje.</p><p>Kořenový adresář pro import NDK METS je typicky <i>$HOME/.kramerius/convert</i>.</p>";
+      html = this.ui.getTranslation('modal.showHelp.message.ndk');
     }
     const data: SimpleDialogData = {
-      title: "Nápověda",
+      title: this.ui.getTranslation('modal.showHelp.title'),
       html: html,
       btn1: {
         label: 'OK',
