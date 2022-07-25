@@ -36,24 +36,30 @@ export class RolesComponent implements OnInit {
       panelClass: 'app-create-or-edit-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
-        if (result && result.role) {
-            const role = result.role;
-            this.roles.push(role);
+      if (result && result.role) {
+        const role = result.role;
+        this.roles.push(role);
+        this.ui.showInfoSnackBar('snackbar.success.createOrEditRole');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.createOrEditRole');
+          }
         }
+      }
     });
   }
 
   onRemoveRole(role: Role) {
     const data: SimpleDialogData = {
-      title: "Odstranění role",
-      message: `Opravdu chcete odstranit roli ${role.name}?`,
+      title: this.ui.getTranslation('modal.onRemoveRole.title'),
+      message: this.ui.getTranslation('modal.onRemoveRole.message', {value: role.name}),
       btn1: {
-        label: 'Odstranit',
+        label: this.ui.getTranslation('button.remove'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: ''
       }
@@ -67,13 +73,13 @@ export class RolesComponent implements OnInit {
       if (result === 'yes') {
         this.api.removeRole(role).subscribe(() => {
           this.roles.splice(this.roles.indexOf(role), 1);
-          this.ui.showInfoSnackBar("Role byla odstraněna")
+          this.ui.showInfoSnackBar('snackbar.success.onRemoveRole')
         },
         (error) => {
           if (error && error.error && error.error.status == 409) {
-            this.ui.showInfoSnackBar("Role je použita, není možné ji odstranit");
+            this.ui.showInfoSnackBar('snackbar.error.onRemoveRole.409');
           } else {
-            this.ui.showInfoSnackBar("Roli se nepodřilo odstranit");
+            this.ui.showErrorSnackBar('snackbar.error.onRemoveRole.failed');
           }
         });
       }
@@ -88,8 +94,13 @@ export class RolesComponent implements OnInit {
     } );
     dialogRef.afterClosed().subscribe(result => {
         if (result && result.role) {
-          this.ui.showInfoSnackBar("Role byla upravena.")
+          this.ui.showInfoSnackBar('snackbar.success.onEditRole');
           role.copyFrom(result.role);
+          (error) => {
+            if (error) {
+              this.ui.showErrorSnackBar('snackbar.error.onEditRole');
+            }
+          }
         }
     });
   }

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Role } from "src/app/models/roles.model";
 import { AdminApiService } from "src/app/services/admin-api.service";
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-create-or-edit-role-dialog',
@@ -15,8 +16,10 @@ export class CreateOrEditRoleDialogComponent implements OnInit {
   errorMessage: string;
 
   constructor(public dialogRef: MatDialogRef<CreateOrEditRoleDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private api: AdminApiService) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private api: AdminApiService,
+    private ui: UIService
+    ) {
   }
 
   ngOnInit() {
@@ -48,9 +51,9 @@ export class CreateOrEditRoleDialogComponent implements OnInit {
     },
     (error) => {
       if (error && error.error && error.error.status == 409) {
-        this.errorMessage = "Role s tímto názvem už exituje, zadejte jiný název.";
+        this.errorMessage = this.ui.getTranslation('alert.createOrEditRole.error1');
       } else {
-        this.errorMessage = "Roli se nepodařilo vytvořit.";
+        this.errorMessage = this.ui.getTranslation('alert.createOrEditRole.error2');
       }
     });
   }

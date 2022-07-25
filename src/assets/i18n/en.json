@@ -52,6 +52,10 @@
       "uuidValidation404": "Object not found",
       "uuidValidation403": "Insufficient access rights",
       "uuidValidationElse": "Error reading from repository: {{ value1 }}: {{ value2 }}"
+    },
+    "createOrEditRole": {
+      "error1": "The role with this name is already exited, please enter another name.",
+      "error2": "The role could not be created."
     }
   },
   "batch": {
@@ -297,6 +301,16 @@
     "startImport": {
       "title": "Starting the import",
       "message": "Are you sure you want to start the import?"
+    },
+    "createOrEditRole": {
+      "title": {
+        "new": "New role",
+        "edit": "Edit role"
+      }
+    },
+    "onRemoveRole": {
+      "title": "Delete a role",
+      "message": "Are you sure you want to delete the <strong><em>{{value}}</em></strong> role?"
     }
   },
   "snackbar": {
@@ -344,7 +358,10 @@
       "deleteStatistics": "Statistics for the period {{value1}} to {{value2}} deleted",
       "scheduleProcessingIndexRebuild": "The Build Processing index process has been scheduled",
       "scheduleProcessingIndexRebuildForObject": "The Process Rebuild Processing index for the object has been scheduled",
-      "scheduleImportProcess": "The import has been scheduled"
+      "scheduleImportProcess": "The import has been scheduled",
+      "createOrEditRole": "The role has been added",
+      "onRemoveRole": "The role has been removed",
+      "onEditRole": "The role has been edited"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -368,7 +385,13 @@
       "scheduleChangePolicyByPid": "Failed to schedule process(es) Change Visibility",
       "scheduleProcessingIndexRebuild": "Failed to schedule Build Processing index",
       "scheduleProcessingIndexRebuildForObject": "Failed to schedule the Rebuild Processing index process for the object",
-      "scheduleImportProcess": "Failed to schedule import"
+      "scheduleImportProcess": "Failed to schedule import",
+      "createOrEditRole": "Failed to add role",
+      "onRemoveRole": {
+        "409": "Role is used, cannot be removed",
+        "failed": "The role could not be deleted"
+      },
+      "onEditRole": "Failed to edit role"
     }
   },
   "desc": {

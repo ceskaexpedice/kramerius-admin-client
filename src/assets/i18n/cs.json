@@ -52,6 +52,10 @@
       "uuidValidation404": "Objekt nenalezen",
       "uuidValidation403": "Nedostatečná přístupová práva",
       "uuidValidationElse": "Chyba čtení z repozitáře: {{ value1 }}: {{ value2 }}"
+    },
+    "createOrEditRole": {
+      "error1": "Role s tímto názvem už exituje, zadejte jiný název.",
+      "error2": "Roli se nepodařilo vytvořit."
     }
   },
   "batch": {
@@ -297,6 +301,16 @@
     "startImport": {
       "title": "Spuštění importu",
       "message": "Opravdu chcete spustit import?"
+    },
+    "createOrEditRole": {
+      "title": {
+        "new": "Nová role",
+        "edit": "Úprava role"
+      }
+    },
+    "onRemoveRole": {
+      "title": "Odstranění role",
+      "message": "Opravdu chcete odstranit roli <strong><em>{{value}}</em></strong>?"
     }
   },
   "snackbar": {
@@ -344,7 +358,10 @@
       "deleteStatistics": "Statistiky pro období {{value1}} do {{value2}} smazány",
       "scheduleProcessingIndexRebuild": "Proces Vybudování Processing indexu byl naplánován",
       "scheduleProcessingIndexRebuildForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
-      "scheduleImportProcess": "Import byl naplánován"
+      "scheduleImportProcess": "Import byl naplánován",
+      "createOrEditRole": "Role byla přidána",
+      "onRemoveRole": "Role byla odstraněna",
+      "onEditRole": "Role byla upravena"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -368,7 +385,13 @@
       "scheduleChangePolicyByPid": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
       "scheduleProcessingIndexRebuild": "Nepodařilo se naplánovat proces Vybudování Processing indexu",
       "scheduleProcessingIndexRebuildForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
-      "scheduleImportProcess": "Import se nepodařilo naplánovat"
+      "scheduleImportProcess": "Import se nepodařilo naplánovat",
+      "createOrEditRole": "Roli se nepodařilo přidat",
+      "onRemoveRole": {
+        "409": "Role je použita, není možné ji odstranit",
+        "failed": "Roli se nepodřilo odstranit"
+      },
+      "onEditRole": "Roli se nepodařilo upravit"
     }
   },
   "desc": {
