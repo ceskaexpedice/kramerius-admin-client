@@ -39,25 +39,31 @@ export class LicensesComponent implements OnInit {
       panelClass: 'app-create-or-edit-license-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
-        if (result && result.license) {
-            const license = result.license;
-            this.licenses.push(license);
-            this.sortLicenses();
+      if (result && result.license) {
+        const license = result.license;
+        this.licenses.push(license);
+        this.sortLicenses();
+        this.ui.showInfoSnackBar('snackbar.success.createOrEditLicense');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.errorcreateOrEditLicense');
+          }
         }
+      }
     });
   }
 
   onRemoveLicese(license: License) {
     const data: SimpleDialogData = {
-      title: "Odstranění licence",
-      message: `Opravdu chcete odstranit licenci ${license.name}?`,
+      title: this.ui.getTranslation('modal.onRemoveLicese.title'),
+      message: this.ui.getTranslation('modal.onRemoveLicese.message', {value: license.name}),
       btn1: {
-        label: 'Odstranit',
+        label: this.ui.getTranslation('button.remove'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -71,13 +77,13 @@ export class LicensesComponent implements OnInit {
       if (result === 'yes') {
         this.api.removeLicense(license).subscribe(() => {
           this.licenses.splice(this.licenses.indexOf(license), 1);
-          this.ui.showInfoSnackBar("Licence byla odstraněna")
+          this.ui.showInfoSnackBar('snackbar.success.onRemoveLicese')
         },
         (error) => {
           if (error && error.error && error.error.status == 409) {
-            this.ui.showInfoSnackBar("Licence je použita, není možné ji odstranit");
+            this.ui.showInfoSnackBar('snackbar.error.onRemoveLicese.409');
           } else {
-            this.ui.showInfoSnackBar("Licenci se nepodřilo odstranit");
+            this.ui.showInfoSnackBar('snackbar.error.onRemoveLicese.failed');
           }
         });
       }
@@ -105,12 +111,17 @@ export class LicensesComponent implements OnInit {
       panelClass: 'app-create-or-edit-license-dialog'
     } );
     dialogRef.afterClosed().subscribe(result => {
-        if (result && result.license) {
-          this.ui.showInfoSnackBar("Licence byla upravena.")
-          license.copyFrom(result.license);
-          this.sortLicenses();
-          // this.reload();
+      if (result && result.license) {
+        this.ui.showInfoSnackBar('snackbar.success.onEditLicese');
+        license.copyFrom(result.license);
+        this.sortLicenses();
+        // this.reload();
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.onEditLicese');
+          }
         }
+      }
     });
   }
 

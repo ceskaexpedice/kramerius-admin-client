@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { License } from "src/app/models/license.model";
 import { AdminApiService } from "src/app/services/admin-api.service";
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-create-or-edit-license-dialog',
@@ -15,8 +16,10 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   errorMessage: string;
 
   constructor(public dialogRef: MatDialogRef<CreateOrEditLicenseDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private api: AdminApiService) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private api: AdminApiService,
+    private ui: UIService
+    ) {
   }
 
   ngOnInit() {
@@ -48,9 +51,9 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
     },
     (error) => {
       if (error && error.error && error.error.status == 409) {
-        this.errorMessage = "Licence s tímto názvem už exituje, zadejte jiný název.";
+        this.errorMessage = this.ui.getTranslation('alert.createOrEditLicense.error1');
       } else {
-        this.errorMessage = "Licenci se nepodařilo vytvořit.";
+        this.errorMessage = this.ui.getTranslation('alert.createOrEditLicense.error2');
       }
     });
   }

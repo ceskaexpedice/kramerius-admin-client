@@ -1,12 +1,12 @@
-<h2 mat-dialog-title>{{ mode == 'new' ? "Nová licence" : "Úprava licence" }}</h2>
+<h2 mat-dialog-title>{{ mode == 'new' ? ('modal.createOrEditLicense.title.new' | translate) : ('modal.createOrEditLicense.title.edit' | translate) }}</h2>
 <mat-dialog-content class="mat-typography">
   <mat-form-field class="app-w-100">
-    <mat-label>Název</mat-label>
-    <input matInput placeholder="Název" type="text" name="note" [(ngModel)]="license.name" autocomplete="off">
+    <mat-label>{{ 'desc.name' | translate }}</mat-label>
+    <input matInput [placeholder]="'desc.name' | translate" type="text" name="note" [(ngModel)]="license.name" autocomplete="off">
   </mat-form-field>
   <mat-form-field class="app-w-100">
-    <mat-label>Popis</mat-label>
-    <input matInput placeholder="Popis" type="text" name="description" [(ngModel)]="license.description" autocomplete="off">
+    <mat-label>{{ 'desc.description' | translate }}</mat-label>
+    <input matInput [placeholder]="'desc.description' | translate" type="text" name="description" [(ngModel)]="license.description" autocomplete="off">
   </mat-form-field>
 </mat-dialog-content>
 <mat-card class="app-view-alert app-warn" *ngIf="errorMessage">
@@ -15,7 +15,7 @@
   </mat-card-content>
 </mat-card>
 <mat-dialog-actions align="end">
-  <button mat-flat-button *ngIf="mode == 'new'" (click)="onSave()" color="primary">Vytvořit</button>
-  <button mat-flat-button *ngIf="mode == 'edit'" (click)="onSave()" color="primary">Upravit</button>
-  <button mat-flat-button (click)="onCancel()">Zrušit</button>  
+  <button mat-flat-button *ngIf="mode == 'new'" (click)="onSave()" color="primary">{{ 'button.create' | translate }}</button>
+  <button mat-flat-button *ngIf="mode == 'edit'" (click)="onSave()" color="primary">{{ 'button.edit' | translate }}</button>
+  <button mat-flat-button (click)="onCancel()">{{ 'button.cancel' | translate }}</button>  
 </mat-dialog-actions>

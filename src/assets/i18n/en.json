@@ -56,6 +56,10 @@
     "createOrEditRole": {
       "error1": "The role with this name is already exited, please enter another name.",
       "error2": "The role could not be created."
+    },
+    "createOrEditLicense": {
+      "error1": "The license with this name is already expired, please enter another name.",
+      "error2": "The license could not be created."
     }
   },
   "batch": {
@@ -311,6 +315,16 @@
     "onRemoveRole": {
       "title": "Delete a role",
       "message": "Are you sure you want to delete the <strong><em>{{value}}</em></strong> role?"
+    },
+    "createOrEditLicense": {
+      "title": {
+        "new": "New license",
+        "edit": "Edit license"
+      }
+    },
+    "onRemoveLicese": {
+      "title": "License removal",
+      "message": "Are you sure you want to remove the <strong><em>{{value}}</em></strong> license?"
     }
   },
   "snackbar": {
@@ -361,7 +375,10 @@
       "scheduleImportProcess": "The import has been scheduled",
       "createOrEditRole": "The role has been added",
       "onRemoveRole": "The role has been removed",
-      "onEditRole": "The role has been edited"
+      "onEditRole": "The role has been edited",
+      "createOrEditLicense": "The license has been added",
+      "onEditLicese": "The license has been modified",
+      "onRemoveLicese": "The license has been removed"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -391,7 +408,13 @@
         "409": "Role is used, cannot be removed",
         "failed": "The role could not be deleted"
       },
-      "onEditRole": "Failed to edit role"
+      "onEditRole": "Failed to edit role",
+      "createOrEditLicense": "Failed to add license",
+      "onEditLicese": "The license could not be modified",
+      "onRemoveLicese": {
+        "409": "The license is used, it cannot be deleted",
+        "failed": "The license could not be deleted"
+      }
     }
   },
   "desc": {

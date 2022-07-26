@@ -56,6 +56,10 @@
     "createOrEditRole": {
       "error1": "Role s tímto názvem už exituje, zadejte jiný název.",
       "error2": "Roli se nepodařilo vytvořit."
+    },
+    "createOrEditLicense": {
+      "error1": "Licence s tímto názvem už exituje, zadejte jiný název.",
+      "error2": "Licenci se nepodařilo vytvořit."
     }
   },
   "batch": {
@@ -311,6 +315,16 @@
     "onRemoveRole": {
       "title": "Odstranění role",
       "message": "Opravdu chcete odstranit roli <strong><em>{{value}}</em></strong>?"
+    },
+    "createOrEditLicense": {
+      "title": {
+        "new": "Nová licence",
+        "edit": "Úprava licence"
+      }
+    },
+    "onRemoveLicese": {
+      "title": "Odstranění licence",
+      "message": "Opravdu chcete odstranit licenci <strong><em>{{value}}</em></strong>?"
     }
   },
   "snackbar": {
@@ -361,7 +375,10 @@
       "scheduleImportProcess": "Import byl naplánován",
       "createOrEditRole": "Role byla přidána",
       "onRemoveRole": "Role byla odstraněna",
-      "onEditRole": "Role byla upravena"
+      "onEditRole": "Role byla upravena",
+      "createOrEditLicense": "Licence byla přidána",
+      "onEditLicese": "Licence byla upravena",
+      "onRemoveLicese": "Licence byla odstraněna"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -391,7 +408,13 @@
         "409": "Role je použita, není možné ji odstranit",
         "failed": "Roli se nepodřilo odstranit"
       },
-      "onEditRole": "Roli se nepodařilo upravit"
+      "onEditRole": "Roli se nepodařilo upravit",
+      "createOrEditLicense": "Licenci se nepodařilo přidat",
+      "onEditLicese": "Licenci se nepodařilo upravit",
+      "onRemoveLicese": {
+        "409": "Licence je použita, není možné ji odstranit",
+        "failed": "Licenci se nepodřilo odstranit"
+      }
     }
   },
   "desc": {
