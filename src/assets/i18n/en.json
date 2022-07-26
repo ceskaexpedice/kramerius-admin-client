@@ -325,6 +325,26 @@
     "onRemoveLicese": {
       "title": "License removal",
       "message": "Are you sure you want to remove the <strong><em>{{value}}</em></strong> license?"
+    },
+    "onNewParam": {
+      "title": "New parameter"
+    },
+    "onEditParam": {
+      "title": "Editing a parameter name"
+    },
+    "onRemoveParam": {
+      "title": "Deleting a parameter",
+      "message": "Are you sure you want to remove the <strong><em>{{value}}</em></strong> parameter?"
+    },
+    "onNewValue": {
+      "title": "New parameter value"
+    },
+    "onRemoveValue": {
+      "title": "Deleting a parameter value",
+      "message": "Are you sure you want to remove <strong><em>{{value}}</em></strong>?"
+    },
+    "onEditValue": {
+      "title": "Editing a parameter value"
     }
   },
   "snackbar": {
@@ -378,7 +398,13 @@
       "onEditRole": "The role has been edited",
       "createOrEditLicense": "The license has been added",
       "onEditLicese": "The license has been modified",
-      "onRemoveLicese": "The license has been removed"
+      "onRemoveLicese": "The license has been removed",
+      "onNewParam": "The parameter has been added",
+      "onEditParam": "The parameter has been modified",
+      "onRemoveParam": "The parameter has been removed",
+      "onNewValue": "The value has been added",
+      "onRemoveValue": "The parameter value has been removed",
+      "onEditValue": "The parameter value has been modified"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -414,7 +440,13 @@
       "onRemoveLicese": {
         "409": "The license is used, it cannot be deleted",
         "failed": "The license could not be deleted"
-      }
+      },
+      "onNewParam": "Failed to add parameter",
+      "onEditParam": "The parameter could not be edited",
+      "onRemoveParam": "The parameter could not be deleted",
+      "onNewValue": "Could not add value",
+      "onRemoveValue": "The parameter value failed to delete",
+      "onEditValue": "The parameter value could not be modified"
     }
   },
   "desc": {

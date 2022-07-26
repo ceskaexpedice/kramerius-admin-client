@@ -34,19 +34,19 @@ export class ParamsComponent implements OnInit {
 
   onNewParam() {
     const data: SimpleDialogData = {
-      title: "Nový parametr",
+      title: this.ui.getTranslation('modal.onNewParam.title'),
       message: "",
       textInput: {
-        label: "Název",
+        label: this.ui.getTranslation('desc.name'),
         value: ""
       },
       btn1: {
-        label: 'Vytvořit',
+        label: this.ui.getTranslation('button.create'),
         value: 'create',
         color: 'primary'
       },
       btn2: {
-        label: 'Zrušit',
+        label: this.ui.getTranslation('button.cancel'),
         value: 'cancel',
         color: 'light'
       }
@@ -67,25 +67,31 @@ export class ParamsComponent implements OnInit {
             console.log('cp', cp);
           });
         }
+        this.ui.showInfoSnackBar('snackbar.success.onNewParam');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.onNewParam');
+          }
+        }
       }
     });
   }
 
   onNewValue(param: ConditionParam) {
     const data: SimpleDialogData = {
-      title: "Nová hodnota parametru",
+      title: this.ui.getTranslation('modal.onNewValue.title'),
       message: "",
       textInput: {
-        label: "Hodnota",
+        label: this.ui.getTranslation('desc.value'),
         value: ""
       },
       btn1: {
-        label: 'Přidat',
+        label: this.ui.getTranslation('button.add'),
         value: 'create',
         color: 'primary'
       },
       btn2: {
-        label: 'Zrušit',
+        label: this.ui.getTranslation('button.cancel'),
         value: 'cancel',
         color: 'light'
       }
@@ -104,21 +110,27 @@ export class ParamsComponent implements OnInit {
             console.log('cp', cp);
           });
         }
+        this.ui.showInfoSnackBar('snackbar.success.onNewValue');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.onNewValue');
+          }
+        }
       }
     });
   }
 
   onRemoveValue(param: ConditionParam, index: number) {
     const data: SimpleDialogData = {
-      title: "Nová hodnota parametru",
-      message: `Opravdu chcete odebrat hodnotu ${param.values[index]}`,
+      title: this.ui.getTranslation('modal.onRemoveValue.title'),
+      message: this.ui.getTranslation('modal.onRemoveValue.message', {value: param.values[index]}),
       btn1: {
-        label: 'Odebrat',
+        label: this.ui.getTranslation('button.remove'),
         value: 'remove',
         color: 'warn'
       },
       btn2: {
-        label: 'Zrušit',
+        label: this.ui.getTranslation('button.cancel'),
         value: 'cancel',
         color: 'light'
       }
@@ -134,25 +146,31 @@ export class ParamsComponent implements OnInit {
         this.api.updateConditionParam(param).subscribe((cp: ConditionParam) => {
           console.log('cp', cp);
         });
+        this.ui.showInfoSnackBar('snackbar.success.onRemoveValue');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.onRemoveValue');
+          }
+        }
       }
     });
   }
 
   onEditValue(param: ConditionParam, index: number) {
     const data: SimpleDialogData = {
-      title: "Úprava hodnoty parametru",
+      title: this.ui.getTranslation('modal.onEditValue.title'),
       message: "",
       textInput: {
-        label: "Hodnota",
+        label: this.ui.getTranslation('desc.value'),
         value: param.values[index] + ''
       },
       btn1: {
-        label: 'Upravit',
+        label: this.ui.getTranslation('button.edit'),
         value: 'edit',
         color: 'primary'
       },
       btn2: {
-        label: 'Zrušit',
+        label: this.ui.getTranslation('button.cancel'),
         value: 'cancel',
         color: 'light'
       }
@@ -168,21 +186,27 @@ export class ParamsComponent implements OnInit {
         this.api.updateConditionParam(param).subscribe((cp: ConditionParam) => {
           console.log('cp', cp);
         });
+        this.ui.showInfoSnackBar('snackbar.success.onEditValue');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.onEditValue');
+          }
+        }
       }
     });
   }
 
   onRemoveParam(param: ConditionParam) {
     const data: SimpleDialogData = {
-      title: "Odstranění parametru",
-      message: `Opravdu chcete odstranit parametr ${param.description}?`,
+      title: this.ui.getTranslation('modal.onRemoveParam.title'),
+      message: this.ui.getTranslation('modal.onRemoveParam.message', {value: param.description}),
       btn1: {
-        label: 'Odstranit',
+        label: this.ui.getTranslation('button.remove'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'light'
       }
@@ -196,10 +220,10 @@ export class ParamsComponent implements OnInit {
       if (result === 'yes') {
         this.api.removeConditionParam(param).subscribe(() => {
           this.params.splice(this.params.indexOf(param), 1);
-          this.ui.showInfoSnackBar("parametr byl odstraněn")
+          this.ui.showInfoSnackBar('snackbar.success.onRemoveParam')
         },
         (error) => {
-          this.ui.showInfoSnackBar("parametr se nepodřilo odstranit");
+          this.ui.showInfoSnackBar('snackbar.error.onRemoveParam');
         });
       }
     });
@@ -207,19 +231,19 @@ export class ParamsComponent implements OnInit {
 
   onEditParam(param: ConditionParam) {
     const data: SimpleDialogData = {
-      title: "Úprava názvu parametru",
+      title: this.ui.getTranslation('modal.onEditParam.title'),
       message: "",
       textInput: {
-        label: "Název",
+        label: this.ui.getTranslation('desc.name'),
         value: param.description + ''
       },
       btn1: {
-        label: 'Upravit',
+        label: this.ui.getTranslation('button.edit'),
         value: 'edit',
         color: 'primary'
       },
       btn2: {
-        label: 'Zrušit',
+        label: this.ui.getTranslation('button.cancel'),
         value: 'cancel',
         color: 'light'
       }
@@ -235,6 +259,12 @@ export class ParamsComponent implements OnInit {
         this.api.updateConditionParam(param).subscribe((cp: ConditionParam) => {
           console.log('cp', cp);
         });
+        this.ui.showInfoSnackBar('snackbar.success.onEditParam');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.onEditParam');
+          }
+        }
       }
     });
   }

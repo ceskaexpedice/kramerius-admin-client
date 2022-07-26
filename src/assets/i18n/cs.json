@@ -325,6 +325,26 @@
     "onRemoveLicese": {
       "title": "Odstranění licence",
       "message": "Opravdu chcete odstranit licenci <strong><em>{{value}}</em></strong>?"
+    },
+    "onNewParam": {
+      "title": "Nový parametr"
+    },
+    "onEditParam": {
+      "title": "Úprava názvu parametru"
+    },
+    "onRemoveParam": {
+      "title": "Odstranění parametru",
+      "message": "Opravdu chcete odstranit parametr <strong><em>{{value}}</em></strong>?"
+    },
+    "onNewValue": {
+      "title": "Nová hodnota parametru"
+    },
+    "onRemoveValue": {
+      "title": "Odstranění hodnoty parametru",
+      "message": "Opravdu chcete odebrat hodnotu <strong><em>{{value}}</em></strong>?"
+    },
+    "onEditValue": {
+      "title": "Úprava hodnoty parametru"
     }
   },
   "snackbar": {
@@ -378,7 +398,13 @@
       "onEditRole": "Role byla upravena",
       "createOrEditLicense": "Licence byla přidána",
       "onEditLicese": "Licence byla upravena",
-      "onRemoveLicese": "Licence byla odstraněna"
+      "onRemoveLicese": "Licence byla odstraněna",
+      "onNewParam": "Parametr byl přidán",
+      "onEditParam": "Parametr byl upraven",
+      "onRemoveParam": "Parametr byl odstraněn",
+      "onNewValue": "Hodnota byla přidána",
+      "onRemoveValue": "Hodnota parametru byla odstraněna",
+      "onEditValue": "Hodnota parametru byla upravena"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -414,7 +440,13 @@
       "onRemoveLicese": {
         "409": "Licence je použita, není možné ji odstranit",
         "failed": "Licenci se nepodřilo odstranit"
-      }
+      },
+      "onNewParam": "Parametr se nepodařilo přidat",
+      "onEditParam": "Parametr se nepodařilo upravit",
+      "onRemoveParam": "Parametr se nepodřilo odstranit",
+      "onNewValue": "Hodnotu se nepodařilo přidat",
+      "onRemoveValue": "Hodnota parametru se nepodřila odstranit",
+      "onEditValue": "Hodnotu parametru se nepodařilo upravit"
     }
   },
   "desc": {
