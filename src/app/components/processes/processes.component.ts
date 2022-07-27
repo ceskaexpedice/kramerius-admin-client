@@ -233,15 +233,15 @@ export class ProcessesComponent implements OnInit {
     });
 
     const data: SimpleDialogData = {
-      title: "Zrušení naplánovaných procesů",
-      message: `Určitě chcete zrušit ${requests.length} naplánovaných procesů?`,
+      title: this.ui.getTranslation('modal.onKillAllScheduled.title'),
+      message: this.ui.getTranslation('modal.onKillAllScheduled.message', {value: requests.length}),
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'default'
       }
@@ -262,6 +262,12 @@ export class ProcessesComponent implements OnInit {
             this.reload();
           }
         });
+        this.ui.showInfoSnackBar('snackbar.success.onKillAllScheduled', {value: requests.length});
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.onKillAllScheduled');
+          }
+        }
       }
     });
   }

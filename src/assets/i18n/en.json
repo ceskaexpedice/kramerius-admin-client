@@ -345,6 +345,10 @@
     },
     "onEditValue": {
       "title": "Editing a parameter value"
+    },
+    "onKillAllScheduled": {
+      "title": "Canceling scheduled processes",
+      "message": "Are you sure you want to cancel {{value}} scheduled processes?"
     }
   },
   "snackbar": {
@@ -404,7 +408,8 @@
       "onRemoveParam": "The parameter has been removed",
       "onNewValue": "The value has been added",
       "onRemoveValue": "The parameter value has been removed",
-      "onEditValue": "The parameter value has been modified"
+      "onEditValue": "The parameter value has been modified",
+      "onKillAllScheduled": "Canceling {{value}} processes"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -446,7 +451,8 @@
       "onRemoveParam": "The parameter could not be deleted",
       "onNewValue": "Could not add value",
       "onRemoveValue": "The parameter value failed to delete",
-      "onEditValue": "The parameter value could not be modified"
+      "onEditValue": "The parameter value could not be modified",
+      "onKillAllScheduled": "Error while aborting processes"
     }
   },
   "desc": {

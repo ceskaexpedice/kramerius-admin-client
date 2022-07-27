@@ -345,6 +345,10 @@
     },
     "onEditValue": {
       "title": "Úprava hodnoty parametru"
+    },
+    "onKillAllScheduled": {
+      "title": "Zrušení naplánovaných procesů",
+      "message": "Určitě chcete zrušit {{value}} naplánovaných procesů?"
     }
   },
   "snackbar": {
@@ -404,7 +408,8 @@
       "onRemoveParam": "Parametr byl odstraněn",
       "onNewValue": "Hodnota byla přidána",
       "onRemoveValue": "Hodnota parametru byla odstraněna",
-      "onEditValue": "Hodnota parametru byla upravena"
+      "onEditValue": "Hodnota parametru byla upravena",
+      "onKillAllScheduled": "Ruší se {{value}} procesů"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -446,7 +451,8 @@
       "onRemoveParam": "Parametr se nepodřilo odstranit",
       "onNewValue": "Hodnotu se nepodařilo přidat",
       "onRemoveValue": "Hodnota parametru se nepodřila odstranit",
-      "onEditValue": "Hodnotu parametru se nepodařilo upravit"
+      "onEditValue": "Hodnotu parametru se nepodařilo upravit",
+      "onKillAllScheduled": "Chyba při rušení procesů"
     }
   },
   "desc": {
