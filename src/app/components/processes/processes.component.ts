@@ -182,7 +182,7 @@ export class ProcessesComponent implements OnInit {
           this.reloadProcesses();
           this.ui.showInfoSnackBar('snackbar.success.onKillProcess');
         }, error => {
-          this.ui.showErrorSnackBar('snackbar.error.onKillProcess')
+          this.ui.showErrorSnackBar('snackbar.error.onKillProcess');
           this.cancelingProcesses = false;
         });
       }

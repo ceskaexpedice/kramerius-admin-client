@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-process',
@@ -31,18 +32,19 @@ export class ProcessComponent implements OnInit {
     private adminApi: AdminApiService, 
     private dialog: MatDialog, 
     private router: Router,  
-    private local: LocalStorageService) { }
+    private local: LocalStorageService,
+    private ui: UIService) { }
 
   ngOnInit() {
     this.view = this.local.getStringProperty('processes.view', 'standardOutput');
 
     this.route.params.subscribe(params => {
       this.processId = params['id'];
-      this.reload();
+      this.reloadProcess();
     })
   }
 
-  reload() {
+  reloadProcess() {
     // fetch process detail
     this.adminApi.getProcess(this.processId)
       .subscribe(
@@ -54,17 +56,17 @@ export class ProcessComponent implements OnInit {
       );
   }
 
-  onKill(batch: Batch) {
+  onKillProcess(batch: Batch) {
     const data: SimpleDialogData = {
-      title: "Zrušení procesu/dávky",
-      message: "Určitě chcete zrušit proces/dávku?",
+      title: this.ui.getTranslation('modal.onKillProcess.title'),
+      message: this.ui.getTranslation('modal.onKillProcess.message'),
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'default'
       }
@@ -77,23 +79,26 @@ export class ProcessComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.adminApi.killBatch(batch.id).subscribe((result) => {
-          this.reload();
-        });
+          this.reloadProcess();
+          this.ui.showInfoSnackBar('snackbar.success.onKillProcess');
+        }, error => {
+          this.ui.showErrorSnackBar('snackbar.error.onKillProcess');
+       });
       }
     });
   }
 
-  onRemove(batch: Batch) {
+  onRemoveProcess(batch: Batch) {
     const data: SimpleDialogData = {
-      title: "Smazání procesu/dávky",
-      message: "Určitě chcete proces/dávku trvale smazat?",
+      title: this.ui.getTranslation('modal.onRemoveProcess.title'),
+      message: this.ui.getTranslation('modal.onRemoveProcess.message'),
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'default'
       }
@@ -108,6 +113,9 @@ export class ProcessComponent implements OnInit {
         this.adminApi.deleteProcessBatch(batch.id).subscribe(result => {
           //console.log(result)
           this.router.navigate(['..'], { relativeTo: this.route });
+          this.ui.showInfoSnackBar('snackbar.success.onRemoveProcess');
+        }, error => {
+          this.ui.showErrorSnackBar('snackbar.error.onRemoveProcess');
         });
       }
     });

@@ -70,8 +70,8 @@
                 </div>
               </mat-card-content>
               <mat-card-actions>
-                <button mat-flat-button *ngIf="batch.isKillable()" (click)="onKill(batch)" color="primary">{{ 'button.stop' | translate }}</button>
-                <button mat-flat-button *ngIf="batch.isDeletable()" (click)="onRemove(batch)" color="primary">{{ 'button.delete' | translate }}</button>
+                <button mat-flat-button *ngIf="batch.isKillable()" (click)="onKillProcess(batch)" color="primary">{{ 'button.stop' | translate }}</button>
+                <button mat-flat-button *ngIf="batch.isDeletable()" (click)="onRemoveProcess(batch)" color="primary">{{ 'button.delete' | translate }}</button>
               </mat-card-actions>
             </mat-card>
           </div>
