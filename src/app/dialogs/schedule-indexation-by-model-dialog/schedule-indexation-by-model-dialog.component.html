@@ -1,30 +1,28 @@
 <form #f="ngForm" (ngSubmit)="schedule(f.value)">
 	<mat-progress-bar *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
-	<h2 mat-dialog-title>Indexace modelu</h2>
+	<h2 mat-dialog-title>{{ 'modal.scheduleIndexationByModel.title' | translate }}</h2>
 	<mat-dialog-content>
 		<div class="app-mb-4">
       <strong>{{modelName}} (model:{{model}})</strong>
     </div>
 		<div class="app-desc app-mb-4">
-			Potvrzením naplánujete Proces, který bude iterovat všemi objekty vybraného modelu. Ty objekty, které splní stavový filtr, pak (re)indexuje - úplnou indexací včetně všech potomků.
+			{{ 'modal.scheduleIndexationByModel.message' | translate }}
 		</div>
 		<div class="app-mb-4">
-			<div class="app-label app-mb-1">Indexovat objekty ve stavech</div>
-			<mat-checkbox [ngModel]="true" name="index_not_indexed" color="primary">neindexováno</mat-checkbox><br />
-			<mat-checkbox [ngModel]="false" name="index_indexed" color="primary">indexováno (aktuální)</mat-checkbox><br />
-			<mat-checkbox [ngModel]="true" name="index_indexed_outdated" color="primary">indexováno (zastaralé)</mat-checkbox><br />
-			<mat-checkbox [ngModel]="false" name="index_running_or_error" color="primary">probíhá/chyba</mat-checkbox>
+			<div class="app-label app-mb-1">{{ 'modal.scheduleIndexationByModel.checkbox.title' | translate }}</div>
+			<mat-checkbox [ngModel]="true" name="index_not_indexed" color="primary">{{ 'modal.scheduleIndexationByModel.checkbox.label1' | translate }}</mat-checkbox><br />
+			<mat-checkbox [ngModel]="false" name="index_indexed" color="primary">{{ 'modal.scheduleIndexationByModel.checkbox.label2' | translate }}</mat-checkbox><br />
+			<mat-checkbox [ngModel]="true" name="index_indexed_outdated" color="primary">{{ 'modal.scheduleIndexationByModel.checkbox.label3' | translate }}</mat-checkbox><br />
+			<mat-checkbox [ngModel]="false" name="index_running_or_error" color="primary">{{ 'modal.scheduleIndexationByModel.checkbox.label4' | translate }}</mat-checkbox>
 		</div>
 		<mat-divider class="app-mb-4"></mat-divider>
 		<div class="app-mb-4">
-			<mat-checkbox [ngModel]="true" name="ignore_inconsistent_objects" color="primary">Přeskakovat nekonzistentní objekty *</mat-checkbox>
+			<mat-checkbox [ngModel]="true" name="ignore_inconsistent_objects" color="primary">{{ 'modal.scheduleIndexationByModel.checkbox.label5' | translate }}</mat-checkbox>
 		</div>
-		<div class="app-explanation">
-			* Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <em>Chyba</em>.
-		</div>
+		<div class="app-explanation" [innerHtml]="'modal.scheduleIndexationByModel.explanation' | translate"></div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">Naplánovat</button>
-		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
+		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>

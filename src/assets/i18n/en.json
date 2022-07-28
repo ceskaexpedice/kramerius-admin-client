@@ -357,6 +357,25 @@
     "onKillProcess": {
       "title": "Cancel process/batch",
       "message": "Are you sure you want to cancel the process/batch?"
+    },
+    "scheduleIndexationByModel": {
+      "title": "Model indexing",
+      "message": "By confirming, you schedule a Process that will iterate through all the objects of the selected model. It then (re)indexes those objects that meet the status filter - by full indexing including all descendants.",
+      "explanation": "* How the Indexer should behave if it encounters an object that cannot be indexed due to an incorrect binding structure. It can skip the object, log the error and continue. Or terminate the Process in <strong><em>Error</em></strong> state.",
+      "checkbox": {
+        "title": "Index objects in states",
+        "label1": "Not indexed",
+        "label2": "Indexed (Current)",
+        "label3": "Indexed (deprecated)",
+        "label4": "In progress/Error",
+        "label5": "Skip inconsistent objects *"
+      }
+    },
+    "scheduleIndexationsByMultiplePids": {
+      "title": "Indexing {{value}} objects",
+      "message": "Confirming will schedule <strong>{{value}}</strong> indexing Processes - one for each of the currently listed objects. It will be full indexing, i.e. including all descendants.",
+      "checkbox": "Skip inconsistent objects *",
+      "explanation": "* How the Indexer should behave if it encounters an object that cannot be indexed due to an incorrect binding structure. It can skip the object, log the error and continue. Or terminate the Process in <strong><em>Error</em></strong> state."
     }
   },
   "snackbar": {

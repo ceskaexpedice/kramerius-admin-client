@@ -357,6 +357,25 @@
     "onKillProcess": {
       "title": "Zrušení procesu/dávky",
       "message": "Určitě chcete zrušit proces/dávku?"
+    },
+    "scheduleIndexationByModel": {
+      "title": "Indexace modelu",
+      "message": "Potvrzením naplánujete Proces, který bude iterovat všemi objekty vybraného modelu. Ty objekty, které splní stavový filtr, pak (re)indexuje - úplnou indexací včetně všech potomků.",
+      "explanation": "* Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <strong><em>Chyba</em></strong>.",
+      "checkbox": {
+        "title": "Indexovat objekty ve stavech",
+        "label1": "Neindexováno",
+        "label2": "Indexováno (aktuální)",
+        "label3": "Indexováno (zastaralé)",
+        "label4": "Probíhá/chyba",
+        "label5": "Přeskakovat nekonzistentní objekty *"
+      }
+    },
+    "scheduleIndexationsByMultiplePids": {
+      "title": "Indexace {{value}} objektů",
+      "message": "Potvrzením naplánujete <strong>{{value}}</strong> indexačních Procesů - jeden pro každý z aktuálně vylistovaných objektů. Půjde o úplné indexace, tedy včetně všech potomků.",
+      "checkbox": "Přeskakovat nekonzistentní objekty *",
+      "explanation": "* Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <strong><em>Chyba</em></strong>."
     }
   },
   "snackbar": {

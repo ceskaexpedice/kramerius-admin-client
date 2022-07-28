@@ -1,19 +1,15 @@
 <form #f="ngForm" (ngSubmit)="schedule(f.value)">
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
-	<h2 mat-dialog-title>Indexace {{itemsCount}} objektů</h2>
+	<h2 mat-dialog-title>{{ 'modal.scheduleIndexationsByMultiplePids.title' | translate: {value: itemsCount} }}</h2>
 	<mat-dialog-content>
-		<div class="app-desc app-mb-4">
-			Potvrzením naplánujete {{itemsCount}} indexačních Procesů - jeden pro každý z aktuálně vylistovaných objektů. Půjde o úplné indexace, tedy včetně všech potomků.
-		</div>
+		<div class="app-desc app-mb-4" [innerHtml]="'modal.scheduleIndexationsByMultiplePids.message' | translate: {value: itemsCount}"></div>
 		<div class="app-mb-4">
-			<mat-checkbox [ngModel]="false" name="ignore_inconsistent_objects" color="primary">Přeskakovat nekonzistentní objekty *</mat-checkbox>
+			<mat-checkbox [ngModel]="false" name="ignore_inconsistent_objects" color="primary">{{ 'modal.scheduleIndexationsByMultiplePids.checkbox' | translate }}</mat-checkbox>
 		</div>
-		<div class="app-explanation">
-			* Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <em>Chyba</em>.
-		</div>
+		<div class="app-explanation" [innerHtml]="'modal.scheduleIndexationsByMultiplePids.explanation' | translate"></div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">Naplánovat</button>
-    <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
+		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+    <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>
