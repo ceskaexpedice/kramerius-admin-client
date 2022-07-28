@@ -349,6 +349,14 @@
     "onKillAllScheduled": {
       "title": "Canceling scheduled processes",
       "message": "Are you sure you want to cancel {{value}} scheduled processes?"
+    },
+    "onRemoveProcess": {
+      "title": "Deleting a process/batch",
+      "message": "Are you sure you want to permanently delete the process/batch?"
+    },
+    "onKillProcess": {
+      "title": "Cancel process/batch",
+      "message": "Are you sure you want to cancel the process/batch?"
     }
   },
   "snackbar": {
@@ -409,7 +417,9 @@
       "onNewValue": "The value has been added",
       "onRemoveValue": "The parameter value has been removed",
       "onEditValue": "The parameter value has been modified",
-      "onKillAllScheduled": "Canceling {{value}} processes"
+      "onKillAllScheduled": "Canceling {{value}} processes",
+      "onRemoveProcess": "The process/batch has been deleted",
+      "onKillProcess": "The process/batch was cancelled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -452,7 +462,11 @@
       "onNewValue": "Could not add value",
       "onRemoveValue": "The parameter value failed to delete",
       "onEditValue": "The parameter value could not be modified",
-      "onKillAllScheduled": "Error while aborting processes"
+      "onKillAllScheduled": "Error while aborting processes",
+      "onRemoveProcess": "Failed to delete process/batch",
+      "onKillProcess": "Failed to abort process/batch",
+      "reloadProcesses": "Failed to load processes",
+      "scheduleTestProcess": "Failed to schedule process"
     }
   },
   "desc": {

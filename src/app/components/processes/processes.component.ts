@@ -66,10 +66,10 @@ export class ProcessesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reload();
+    this.reloadProcesses();
   }
 
-  reload() {
+  reloadProcesses() {
     this.fetchingProcesses = true;
     this.batches = [];
     this.adminApi.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
@@ -78,7 +78,7 @@ export class ProcessesComponent implements OnInit {
       this.fetchingProcesses = false;
       this.loadedTimestamp = new Date();
     }, error => {
-      this.ui.showErrorSnackBar("Nepodařilo se načíst procesy")
+      this.ui.showErrorSnackBar('snackbar.error.reloadProcesses');
       this.fetchingProcesses = false;
     });
     this.fetchingOwners = true;
@@ -100,9 +100,9 @@ export class ProcessesComponent implements OnInit {
     }
     this.adminApi.scheduleProcess(params).subscribe(response => {
       this.schedulingProcesses = false;
-      this.reload();
+      this.reloadProcesses();
     }, error => {
-      this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces")
+      this.ui.showErrorSnackBar('snackbar.error.scheduleTestProcess')
       this.schedulingProcesses = false;
     });
   }
@@ -110,25 +110,25 @@ export class ProcessesComponent implements OnInit {
   onPageChanged(event: PageEvent) {
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
-    this.reload();
+    this.reloadProcesses();
   }
 
   onFiltersChanged() {
     this.pageIndex = 0;
-    this.reload();
+    this.reloadProcesses();
   }
 
-  onRemove(batch: Batch) {
+  onRemoveProcess(batch: Batch) {
     const data: SimpleDialogData = {
-      title: "Smazání procesu/dávky",
-      message: "Určitě chcete proces/dávku trvale smazat?",
+      title: this.ui.getTranslation('modal.onRemoveProcess.title'),
+      message: this.ui.getTranslation('modal.onRemoveProcess.message'),
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'default'
       }
@@ -144,26 +144,27 @@ export class ProcessesComponent implements OnInit {
         this.adminApi.deleteProcessBatch(batch.id).subscribe(result => {
           //console.log(result)
           this.deletingProcesses = false;
-          this.reload();
+          this.reloadProcesses();
+          this.ui.showInfoSnackBar('snackbar.success.onRemoveProcess');
         }, error => {
-          this.ui.showErrorSnackBar("Nepodařilo se smazat proces/dávku")
+          this.ui.showErrorSnackBar('snackbar.error.onRemoveProcess');
           this.deletingProcesses = false;
         });
       }
     });
   }
 
-  onKill(batch: Batch) {
+  onKillProcess(batch: Batch) {
     const data: SimpleDialogData = {
-      title: "Zrušení procesu/dávky",
-      message: "Určitě chcete zrušit proces/dávku?",
+      title: this.ui.getTranslation('modal.onKillProcess.title'),
+      message: this.ui.getTranslation('modal.onKillProcess.message'),
       btn1: {
-        label: 'Ano',
+        label: this.ui.getTranslation('button.yes'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: 'Ne',
+        label: this.ui.getTranslation('button.no'),
         value: 'no',
         color: 'default'
       }
@@ -178,9 +179,10 @@ export class ProcessesComponent implements OnInit {
         this.cancelingProcesses = true;
         this.adminApi.killBatch(batch.id).subscribe((result) => {
           this.cancelingProcesses = false;
-          this.reload();
+          this.reloadProcesses();
+          this.ui.showInfoSnackBar('snackbar.success.onKillProcess');
         }, error => {
-          this.ui.showErrorSnackBar("Nepodařilo se zrušit proces/dávku")
+          this.ui.showErrorSnackBar('snackbar.error.onKillProcess')
           this.cancelingProcesses = false;
         });
       }
@@ -188,7 +190,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   onSelectedOwnerChanged(event) {
-    this.reload();
+    this.reloadProcesses();
   }
 
   private buildProcessesParams(): any {
@@ -259,7 +261,7 @@ export class ProcessesComponent implements OnInit {
           console.log("killed " + result.length)
           if (result.length == requests.length) {//after last one
             this.cancelingProcesses = false;
-            this.reload();
+            this.reloadProcesses();
           }
         });
         this.ui.showInfoSnackBar('snackbar.success.onKillAllScheduled', {value: requests.length});

@@ -349,6 +349,14 @@
     "onKillAllScheduled": {
       "title": "Zrušení naplánovaných procesů",
       "message": "Určitě chcete zrušit {{value}} naplánovaných procesů?"
+    },
+    "onRemoveProcess": {
+      "title": "Smazání procesu/dávky",
+      "message": "Určitě chcete proces/dávku trvale smazat?"
+    },
+    "onKillProcess": {
+      "title": "Zrušení procesu/dávky",
+      "message": "Určitě chcete zrušit proces/dávku?"
     }
   },
   "snackbar": {
@@ -409,7 +417,9 @@
       "onNewValue": "Hodnota byla přidána",
       "onRemoveValue": "Hodnota parametru byla odstraněna",
       "onEditValue": "Hodnota parametru byla upravena",
-      "onKillAllScheduled": "Ruší se {{value}} procesů"
+      "onKillAllScheduled": "Ruší se {{value}} procesů",
+      "onRemoveProcess": "Proces/dávka byl smazán",
+      "onKillProcess": "Proces/dávka byla zrušena"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -452,7 +462,11 @@
       "onNewValue": "Hodnotu se nepodařilo přidat",
       "onRemoveValue": "Hodnota parametru se nepodřila odstranit",
       "onEditValue": "Hodnotu parametru se nepodařilo upravit",
-      "onKillAllScheduled": "Chyba při rušení procesů"
+      "onKillAllScheduled": "Chyba při rušení procesů",
+      "onRemoveProcess": "Nepodařilo se smazat proces/dávku",
+      "onKillProcess": "Nepodařilo se zrušit proces/dávku",
+      "reloadProcesses": "Nepodařilo se načíst procesy",
+      "scheduleTestProcess": "Nepodařilo se naplánovat proces"
     }
   },
   "desc": {
