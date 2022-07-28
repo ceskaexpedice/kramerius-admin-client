@@ -94,23 +94,23 @@ export class IndexingComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'scheduled') {
-        this.ui.showInfoSnackBar(`Indexace byla naplánována`);
+        this.ui.showInfoSnackBar(`snackbar.success.scheduleIndexationByPid`);
       } else if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexaci")
+        this.ui.showErrorSnackBar(`snackbar.error.scheduleIndexationByPid`)
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar("Nepodařilo se naplánovat proces(y) Indexace")
+        this.ui.showErrorSnackBar('snackbar.error.indexObjectWithProces')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar(`Proces Indexace byl naplánován`);
+        this.ui.showInfoSnackBar(`snackbar.success.indexObjectWithProces.1`);
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar(`Byly naplánovány ${result} procesy Indexace`);
+        this.ui.showInfoSnackBar('snackbar.success.indexObjectWithProces.2-4', {value: result});
       } else {
-        this.ui.showInfoSnackBar(`Bylo naplánováno ${result} procesů Indexace`);
+        this.ui.showInfoSnackBar('snackbar.success.indexObjectWithProces.more', {value: result});
       }
     });
   };
@@ -124,9 +124,9 @@ export class IndexingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       const modelTitle = this.modelNames[this.models.indexOf(this.selectedModel)] + " (model:" + this.selectedModel + ")";
       if (result === 'scheduled') {
-        this.ui.showInfoSnackBar(`Indexace modelu ${modelTitle} byla naplánována`, 3000);
+        this.ui.showInfoSnackBar('snackbar.success.scheduleIndexationByModel', {value: modelTitle}, 3000);
       } else if (result === 'error') {
-        this.ui.showErrorSnackBar(`Nepodařilo se naplánovat indexaci modelu ${modelTitle}`)
+        this.ui.showErrorSnackBar('snackbar.error.scheduleIndexationByModel', {value: modelTitle})
       }
     });
   }
@@ -157,12 +157,12 @@ export class IndexingComponent implements OnInit {
           );
         })
         forkJoin(requests).subscribe(result => {
-          this.ui.showInfoSnackBar(`Bylo naplánováno ${result.length} indexací`, 3000);
+          this.ui.showInfoSnackBar('snackbar.success.scheduleIndexationsByMultiplePids', {value: result.length}, 3000);
           this.scheduledIndexationsCounter = 0;
           this.loading = false;
         }, error => {
           this.loading = false;
-          this.ui.showErrorSnackBar("Nepodařilo se naplánovat indexace")
+          this.ui.showErrorSnackBar('snackbar.error.scheduleIndexationsByMultiplePids')
           console.log(error);
         });
       } else if (result === 'error' || result === 'cancel') {
@@ -250,12 +250,12 @@ export class IndexingComponent implements OnInit {
             this.loading = false;
           }
         }, error => {
-          this.ui.showErrorSnackBar("Nepodařilo se načíst data")
+          this.ui.showErrorSnackBar('nackbar.error.loadMoreItemsForBatch');
           this.loading = false;
         });
       }
     }, error => {
-      this.ui.showErrorSnackBar("Nepodařilo se načíst data")
+      this.ui.showErrorSnackBar('snackbar.error.loadMoreItemsForBatch');
       this.loading = false;
     });
   }

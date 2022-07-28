@@ -419,7 +419,10 @@
       "onEditValue": "The parameter value has been modified",
       "onKillAllScheduled": "Canceling {{value}} processes",
       "onRemoveProcess": "The process/batch has been deleted",
-      "onKillProcess": "The process/batch was cancelled"
+      "onKillProcess": "The process/batch was cancelled",
+      "scheduleIndexationByPid": "Indexing has been scheduled",
+      "scheduleIndexationByModel": "{{value}} model indexing has been scheduled",
+      "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -466,7 +469,11 @@
       "onRemoveProcess": "Failed to delete process/batch",
       "onKillProcess": "Failed to abort process/batch",
       "reloadProcesses": "Failed to load processes",
-      "scheduleTestProcess": "Failed to schedule process"
+      "scheduleTestProcess": "Failed to schedule process",
+      "scheduleIndexationByPid": "Failed to schedule index",
+      "scheduleIndexationByModel": "Failed to schedule model index {{value}}",
+      "scheduleIndexationsByMultiplePids": "Failed to schedule indexing",
+      "loadMoreItemsForBatch": "Failed to load data"
     }
   },
   "desc": {

@@ -419,7 +419,10 @@
       "onEditValue": "Hodnota parametru byla upravena",
       "onKillAllScheduled": "Ruší se {{value}} procesů",
       "onRemoveProcess": "Proces/dávka byl smazán",
-      "onKillProcess": "Proces/dávka byla zrušena"
+      "onKillProcess": "Proces/dávka byla zrušena",
+      "scheduleIndexationByPid": "Indexace byla naplánována",
+      "scheduleIndexationByModel": "Indexace modelu {{value}} byla naplánována",
+      "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -466,7 +469,11 @@
       "onRemoveProcess": "Nepodařilo se smazat proces/dávku",
       "onKillProcess": "Nepodařilo se zrušit proces/dávku",
       "reloadProcesses": "Nepodařilo se načíst procesy",
-      "scheduleTestProcess": "Nepodařilo se naplánovat proces"
+      "scheduleTestProcess": "Nepodařilo se naplánovat proces",
+      "scheduleIndexationByPid": "Nepodařilo se naplánovat indexaci",
+      "scheduleIndexationByModel": "Nepodařilo se naplánovat indexaci modelu {{value}}",
+      "scheduleIndexationsByMultiplePids": "Nepodařilo se naplánovat indexace",
+      "loadMoreItemsForBatch": "Nepodařilo se načíst data"
     }
   },
   "desc": {
