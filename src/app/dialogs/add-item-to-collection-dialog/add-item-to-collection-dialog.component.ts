@@ -17,6 +17,7 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   isCollection = false;
 
   potentialSuperCollections = [];
+  potentialSuperCollectionsAll = [];
   selectedSuperCollection;
 
   inProgress = false;
@@ -34,6 +35,7 @@ export class AddItemToCollectionDialogComponent implements OnInit {
         //TODO: handle offset, limit
         this.collectionApi.getCollections(0, 999).subscribe((data: [collections: Collection[], size: number]) => {
           this.potentialSuperCollections = data[0].filter(collection => collection.id != this.pid && !pidsOfCurrentSuperCollections.includes(collection.id))
+          this.potentialSuperCollectionsAll = this.potentialSuperCollections;
         }, (error) => {
           console.log(error);
           //TODO: handle error
@@ -79,6 +81,13 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   }
 
   onSearch() {
-   // to do
+    if (!!this.query) {
+      this.potentialSuperCollections = this.potentialSuperCollectionsAll.filter(collection => {
+        return collection.name_cze.toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) > -1
+      });
+    } else {
+      this.potentialSuperCollections = this.potentialSuperCollectionsAll;
+    }
   }
+  
 }

@@ -20,7 +20,7 @@
 			<strong>{{ 'desc.theCollectionItIsBeingAddedTo' | translate }}:</strong>
 		</div>
 		<div class="app-mb-4">
-			<input class="app-input-autocomplete app-w-100" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
+			<input class="app-input-autocomplete app-w-100" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off" name="collection_filter">
 		</div>
 		<mat-card *ngFor="let superCollection of potentialSuperCollections" class="app-card app-view-item app-view-hover app-cursor-pointer" (click)="selectSuperCollection(superCollection)" [class.app-selected]="superCollection == selectedSuperCollection">
 			<mat-card-header>
