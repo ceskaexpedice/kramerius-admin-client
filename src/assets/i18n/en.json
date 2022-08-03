@@ -348,7 +348,10 @@
     },
     "onKillAllScheduled": {
       "title": "Canceling scheduled processes",
-      "message": "Are you sure you want to cancel {{value}} scheduled processes?"
+      "message": {
+        "0": "The number of scheduled processes is <strong>{{value}}</strong>, there is no process to cancel.",
+        "more": "Are you sure you want to cancel <strong>{{value}}</strong> scheduled processes?"
+      }
     },
     "onRemoveProcess": {
       "title": "Deleting a process/batch",

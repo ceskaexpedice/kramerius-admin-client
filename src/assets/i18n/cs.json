@@ -348,7 +348,10 @@
     },
     "onKillAllScheduled": {
       "title": "Zrušení naplánovaných procesů",
-      "message": "Určitě chcete zrušit {{value}} naplánovaných procesů?"
+      "message": {
+        "0": "Počet naplánovaných procesů je <strong>{{value}}</strong>, není žádný proces ke zrušení.",
+        "more": "Určitě chcete zrušit  <strong>{{value}}</strong> naplánovaných procesů?"
+      }
     },
     "onRemoveProcess": {
       "title": "Smazání procesu/dávky",

@@ -226,6 +226,30 @@ export class ProcessesComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
+
+  getDialogTransValue(requestVal, type) {
+    if (requestVal === 0) {
+      switch (type) {
+        case 'message':
+          return 'modal.onKillAllScheduled.message.0';
+        case 'btn1':
+          return ' ';
+        case 'btn2':
+          return 'button.close';
+      }
+    } else {
+      switch (type) {
+        case 'message':
+          return 'modal.onKillAllScheduled.message.more';
+        case 'btn1':
+          return 'button.yes';
+        case 'btn2':
+          return 'button.no';
+      }
+    }
+  }
+
+
   onKillAllScheduled() {
     let requests = [];
     this.batches.forEach(batch => {
@@ -236,14 +260,14 @@ export class ProcessesComponent implements OnInit {
 
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.onKillAllScheduled.title'),
-      message: this.ui.getTranslation('modal.onKillAllScheduled.message', {value: requests.length}),
+      message: this.ui.getTranslation(this.getDialogTransValue(requests.length, 'message'), {value: requests.length}),
       btn1: {
-        label: this.ui.getTranslation('button.yes'),
+        label: this.ui.getTranslation(this.getDialogTransValue(requests.length, 'btn1')),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: this.ui.getTranslation('button.no'),
+        label: this.ui.getTranslation(this.getDialogTransValue(requests.length, 'btn2')),
         value: 'no',
         color: 'default'
       }
