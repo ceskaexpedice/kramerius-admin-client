@@ -76,8 +76,8 @@
           </button>
         </div>
         <div>
-          <button mat-flat-button (click)="onKillAllScheduled()" color="primary" [disabled]="isLoading()">
-            <mat-icon>clear</mat-icon>{{ 'button.cancelAllScheduledProcesses' | translate }}
+          <button mat-flat-button (click)="onCancelScheduledProcesses()" color="primary" [disabled]="isLoading() || batches_planned.length == 0">
+            <mat-icon>clear</mat-icon>{{ 'button.cancelScheduledProcesses' | translate }}
           </button>
         </div>
       </div>

@@ -10,6 +10,7 @@ import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.ser
 import { AppSettings } from 'src/app/services/app-settings';
 import { forkJoin, interval, Subscription } from 'rxjs';
 import { UIService } from 'src/app/services/ui.service';
+import { CancelScheduledProcessesDialogComponent } from 'src/app/dialogs/cancel-scheduled-processes-dialog/cancel-scheduled-processes-dialog.component';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class ProcessesComponent implements OnInit {
 
   batch_states = [];
   owners: ProcessOwner[] = []
-  batches: Batch[];
+  batches: Batch[] = []
+  batches_planned: Batch[] = [];
 
   fetchingProcesses = false;
   fetchingOwners = false;
@@ -72,8 +74,10 @@ export class ProcessesComponent implements OnInit {
   reloadProcesses() {
     this.fetchingProcesses = true;
     this.batches = [];
+    this.batches_planned = [];
     this.adminApi.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
       this.batches = batches;
+      this.batches_planned = batches.filter(batch => batch.state == 'PLANNED');
       this.resultCount = total;
       this.fetchingProcesses = false;
       this.loadedTimestamp = new Date();
@@ -133,7 +137,7 @@ export class ProcessesComponent implements OnInit {
         color: 'default'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
       data: data,
       width: '600px',
       panelClass: 'app-simple-dialog'
@@ -219,87 +223,33 @@ export class ProcessesComponent implements OnInit {
     return params;
   }
 
-  convertDate(date) { //01/02/2021 -> 2021-02-01
+  convertDate(date) { // 01/02/2021 -> 2021-02-01
     const year = date.slice(6, 10);
     const month = date.slice(3, 5);
     const day = date.slice(0, 2);
     return `${year}-${month}-${day}`;
   }
 
-
-  getDialogTransValue(requestVal, type) {
-    if (requestVal === 0) {
-      switch (type) {
-        case 'message':
-          return 'modal.onKillAllScheduled.message.0';
-        case 'btn1':
-          return ' ';
-        case 'btn2':
-          return 'button.close';
-      }
-    } else {
-      switch (type) {
-        case 'message':
-          return 'modal.onKillAllScheduled.message.more';
-        case 'btn1':
-          return 'button.yes';
-        case 'btn2':
-          return 'button.no';
-      }
-    }
-  }
-
-
-  onKillAllScheduled() {
-    let requests = [];
-    this.batches.forEach(batch => {
-      if (batch.state == Process.PLANNED) {
-        requests.push(this.adminApi.killBatch(batch.id));
-      }
-    });
-
-    const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.onKillAllScheduled.title'),
-      message: this.ui.getTranslation(this.getDialogTransValue(requests.length, 'message'), {value: requests.length}),
-      btn1: {
-        label: this.ui.getTranslation(this.getDialogTransValue(requests.length, 'btn1')),
-        value: 'yes',
-        color: 'warn'
-      },
-      btn2: {
-        label: this.ui.getTranslation(this.getDialogTransValue(requests.length, 'btn2')),
-        value: 'no',
-        color: 'default'
-      }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, {
-      data: data,
-      width: '600px',
-      panelClass: 'app-simple-dialog'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'yes') {
-        this.cancelingProcesses = true;
-        console.log("killing " + requests.length + " scheduled processes")
-        forkJoin(requests).subscribe(result => {
-          console.log("killed " + result.length)
-          if (result.length == requests.length) {//after last one
-            this.cancelingProcesses = false;
-            this.reloadProcesses();
-          }
-        });
-        this.ui.showInfoSnackBar('snackbar.success.onKillAllScheduled', {value: requests.length});
-        (error) => {
-          if (error) {
-            this.ui.showErrorSnackBar('snackbar.error.onKillAllScheduled');
-          }
-        }
-      }
-    });
-  }
-
   isLoading() {
     return this.fetchingOwners || this.fetchingProcesses || this.schedulingProcesses || this.deletingProcesses || this.cancelingProcesses;
+  }
+
+  onCancelScheduledProcesses() {
+    const dialogRef = this.dialog.open(CancelScheduledProcessesDialogComponent, {
+      data: this.buildProcessesParams(),
+      width: '600px',
+      panelClass: 'app-cancel-scheduled-processes-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.state) {
+        switch (result.state) {
+          case 'closed': break;
+          case 'killed':
+            this.ui.showInfoSnackBar('snackbar.success.onKillAllScheduled', { value: result.kills });
+        }
+      }
+      this.reloadProcesses();
+    });
   }
 
 }
