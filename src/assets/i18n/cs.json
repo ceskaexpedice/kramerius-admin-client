@@ -346,11 +346,19 @@
     "onEditValue": {
       "title": "Úprava hodnoty parametru"
     },
-    "onKillAllScheduled": {
+    "cancelScheduledProcesses": {
       "title": "Zrušení naplánovaných procesů",
-      "message": {
-        "0": "Počet naplánovaných procesů je <strong>{{value}}</strong>, není žádný proces ke zrušení.",
-        "more": "Určitě chcete zrušit  <strong>{{value}}</strong> naplánovaných procesů?"
+      "message1": {
+        "1": "Na stránce byl nalezen <strong>{{value}}</strong> naplánovaný proces, který lze zrušit.",
+        "2-4": "Na stránce byly nalezeny <strong>{{value}}</strong> naplánované procesy, které lze zrušit.",
+        "more": "Na stránce bylo nalezeno <strong>{{value}}</strong> naplánovaných procesů, které lze zrušit."
+      },
+      "message2": "Na stránce nebyly nalezeny žádné naplánované procesy ke zrušení.",
+      "message3": "Je možné, že existují procesy ve stavu NAPLÁNOVÁNO, které by bylo možné zrušit. Ale vzhledem k uplatněným filtrům (stav, vlastník, rozsah datumů, stránkování výsledků) nejsou zohledněny. Je také možné, že se u některého procesu zobrazuje stav NAPLÁNOVÁNO, ale tato informace je již zastaralá a proces ve skutečnosti běží, nebo je již ukončen.",
+      "button": {
+        "1": "Zrušit {{value}} proces",
+        "2-4": "Zrušit {{value}} procesy",
+        "more": "Zrušit {{value}} procesů"
       }
     },
     "onRemoveProcess": {

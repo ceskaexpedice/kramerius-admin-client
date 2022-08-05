@@ -1,42 +1,26 @@
-<h2 mat-dialog-title>{{ 'modal.onKillAllScheduled.title' | translate }}</h2>
+<h2 mat-dialog-title>{{ 'modal.cancelScheduledProcesses.title' | translate }}</h2>
 <mat-progress-bar mode="indeterminate" *ngIf="fetchingBatches"></mat-progress-bar>
 <mat-dialog-content class="mat-typography">
-
-    <ng-container *ngIf="!fetchingBatches && !fetchingErrorMsg && isSomethingToCancel()">
-        <!-- TODO: translate (1,2,3 procesy, 5-... procesů) -->
-        <div class="app-desc app-mb-4">
-            Na stránce bylo nalezeno {{batches.length}} naplánovaných procesů, které lze zrušit.
-        </div>
-    </ng-container>
-
-    <ng-container *ngIf="!fetchingBatches && !fetchingErrorMsg && !isSomethingToCancel()">
-        <!-- <div class="app-desc app-mb-4">{{ 'modal.onKillAllScheduled.message.0' | translate }}</div>   -->
-        <!-- TODO: translate, replace onKillAllScheduled.* -->
-        <div class="app-desc app-mb-4">
-            Na stránce nebyly nalezeny žádné naplánované procesy ke zrušení.
-        </div>
-        <div class="app-desc app-mb-4">
-            <!-- TODO: translate, replace onKillAllScheduled.* -->
-            Je možné, že existují procesy ve stavu NAPLÁNOVÁNO, které by bylo možné zrušit.
-            Ale vzhledem k uplatněným filtrům (stav, vlastník, rozsah datumů, stránkování výsledků) nejsou zohledněny.
-            Je také možné, že se u některého procesu zobrazuje stav NAPLÁNOVÁNO, ale tato informace je již zastaralá a
-            proces ve skutečnosti běží, nebo je již ukončen.
-        </div>
-    </ng-container>
+	<ng-container *ngIf="!fetchingBatches && !fetchingErrorMsg && isSomethingToCancel()">
+		<div class="app-desc app-mb-4" [ngSwitch]="true">
+			<span *ngSwitchCase="batches.length === 1" [innerHtml]="'modal.cancelScheduledProcesses.message1.1' | translate: {value: batches.length}"></span>
+			<span *ngSwitchCase="batches.length > 1 && batches.length <= 4" [innerHtml]="'modal.cancelScheduledProcesses.message1.2-4' | translate: {value: batches.length}"></span>
+			<span *ngSwitchDefault [innerHtml]="'modal.cancelScheduledProcesses.message1.more' | translate: {value: batches.length}"></span>
+		</div>
+	</ng-container>
+	<ng-container *ngIf="!fetchingBatches && !fetchingErrorMsg && !isSomethingToCancel()">
+		<div class="app-desc app-mb-4">{{ 'modal.cancelScheduledProcesses.message2' | translate }}</div>
+		<div class="app-desc app-mb-4">{{ 'modal.cancelScheduledProcesses.message3' | translate }}</div>
+	</ng-container>
 </mat-dialog-content>
 <mat-card class="app-view-alert app-warn" *ngIf="fetchingErrorMsg">
-    <mat-card-content>
-        <!-- TODO: translate -->
-        chyba: {{ fetchingErrorMsg }}
-    </mat-card-content>
+	<mat-card-content>{{ 'desc.error' | translate }}: {{ fetchingErrorMsg }}</mat-card-content>
 </mat-card>
-
 <mat-dialog-actions align="end">
-    <button mat-flat-button *ngIf="isSomethingToCancel()"
-        [disabled]="fetchingBatches || fetchingErrorMsg || cancelingBatches" (click)="onCancelAll()" color="warn">
-        <!-- TODO: translate (1,2,3 procesy, 5-... procesů), replace onKillAllScheduled.* -->
-        Zrušit {{batches.length}} procesů
-    </button>
-    <button mat-flat-button (click)="onClose()" [disabled]="fetchingBatches || cancelingBatches">{{ 'button.close' |
-        translate }}</button>
+	<button mat-flat-button *ngIf="isSomethingToCancel()" [disabled]="fetchingBatches || fetchingErrorMsg || cancelingBatches" (click)="onCancelAll()" color="warn" [ngSwitch]="true">
+		<span *ngSwitchCase="batches.length === 1">{{ 'modal.cancelScheduledProcesses.button.1' | translate: {value: batches.length} }}</span>
+		<span *ngSwitchCase="batches.length > 1 && batches.length <= 4">{{ 'modal.cancelScheduledProcesses.button.2-4' | translate: {value: batches.length} }}</span>
+		<span *ngSwitchDefault>{{ 'modal.cancelScheduledProcesses.button.more' | translate: {value: batches.length} }}</span>
+	</button>
+	<button mat-flat-button (click)="onClose()" [disabled]="fetchingBatches || cancelingBatches">{{ 'button.close' | translate }}</button>
 </mat-dialog-actions>

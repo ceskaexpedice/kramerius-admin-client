@@ -346,11 +346,19 @@
     "onEditValue": {
       "title": "Editing a parameter value"
     },
-    "onKillAllScheduled": {
+    "cancelScheduledProcesses": {
       "title": "Canceling scheduled processes",
-      "message": {
-        "0": "The number of scheduled processes is <strong>{{value}}</strong>, there is no process to cancel.",
-        "more": "Are you sure you want to cancel <strong>{{value}}</strong> scheduled processes?"
+      "message1": {
+        "1": "A <strong>{{value}}</strong> scheduled process was found on the page and can be canceled.",
+        "2-4": "The page found <strong>{{value}}</strong> scheduled processes that can be canceled.",
+        "more": "The page found <strong>{{value}}</strong> scheduled processes that can be canceled."
+      },
+      "message2": "No scheduled processes to cancel were found on the page.",
+      "message3": "It is possible that there are processes in the SCHEDULED state that could be canceled. But due to applied filters (status, owner, date range, results pagination) they are not taken into account. It is also possible that a process shows a SCHEDULED status, but this information is already out of date and the process is actually running or has already terminated.",
+      "button": {
+        "1": "Cancel {{value}} process",
+        "2-4": "Cancel {{value}} processes",
+        "more": "Cancel {{value}} processes"
       }
     },
     "onRemoveProcess": {
