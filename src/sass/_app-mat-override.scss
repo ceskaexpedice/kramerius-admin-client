@@ -236,6 +236,12 @@
 // tooltip
 .mat-tooltip {
   font-size: 14px;
+
+  &.app-alert-not-allowed {
+    @extend .app-text-center;
+    background-color: $app-color-warn;
+    color: $app-color-lightnes;
+  }
 }
 
 // table
@@ -261,6 +267,18 @@
       &:last-child {
         .mat-cell {
           border-bottom: none;
+        }
+      }
+
+      &.app-not-allowed {
+        color: $app-color-disabled !important; 
+  
+        .mat-cell, a, .mat-icon {
+          color: $app-color-disabled !important; 
+        }
+
+        .app-badge {
+          background-color: $app-color-disabled !important;
         }
       }
 

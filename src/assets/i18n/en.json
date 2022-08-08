@@ -60,7 +60,8 @@
     "createOrEditLicense": {
       "error1": "The license with this name is already expired, please enter another name.",
       "error2": "The license could not be created."
-    }
+    },
+    "notAllowed": "You do not have sufficient permissions for this action!"
   },
   "batch": {
     "PLANNED": "Scheduled",

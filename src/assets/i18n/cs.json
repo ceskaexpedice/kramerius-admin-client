@@ -60,7 +60,8 @@
     "createOrEditLicense": {
       "error1": "Licence s tímto názvem už exituje, zadejte jiný název.",
       "error2": "Licenci se nepodařilo vytvořit."
-    }
+    },
+    "notAllowed": "Na tuto akci nemáte dostatečná oprávnění!"
   },
   "batch": {
     "PLANNED": "Naplánováno",

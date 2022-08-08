@@ -229,6 +229,28 @@ a {
   list-style-position: inside;
 }
 
+.app-not-allowed {
+  color: $app-color-disabled !important;
+  cursor: not-allowed;
+}
+
+.app-avoid-click {
+  pointer-events: none;
+}
+
+/* .app-avoid-click {
+  pointer-events: none;
+  color: #bdbdbd !important; 
+  
+  .mat-cell, a, .mat-icon {
+    color: #bdbdbd !important; 
+  }
+
+  .app-badge {
+    background-color: #bdbdbd !important;
+  }
+} */
+
 // top bar
 .app-topbar {
   @extend .app-pt-8, .app-pl-4, .app-pr-4;

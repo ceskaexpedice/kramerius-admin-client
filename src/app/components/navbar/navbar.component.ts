@@ -11,6 +11,8 @@ import { UIService } from 'src/app/services/ui.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  // to test accesibility
+  notAllowed: boolean = false;
 
   constructor(
     public auth: AuthService, 

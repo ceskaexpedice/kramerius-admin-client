@@ -23,6 +23,9 @@ import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-de
 export class RepositoryComponent implements OnInit {
   view: string;
 
+  // to test accesibility
+  notAllowed: boolean = false;
+
   constructor(
     private dialog: MatDialog,
     private ui: UIService,
