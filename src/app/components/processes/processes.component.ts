@@ -30,6 +30,10 @@ export class ProcessesComponent implements OnInit {
   selectedTestProcessDuration = this.testProcessDuration[0];
 
   displayedColumns = ['expand', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner', 'action'];
+  // to test accesibility
+  notAllowed: boolean = false;
+  batchId: string = 'fixme';
+
 
   // Paginator
   resultCount = 0;

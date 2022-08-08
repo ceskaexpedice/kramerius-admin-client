@@ -11,7 +11,7 @@
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('repositoryManagement')" [active]="view == 'repositoryManagement'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.repositoryManagement' | translate }}</a>
           <!-- <a mat-tab-link (click)="changeView('imports')"  [active]="view == 'imports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.imports' | translate }}</a> -->
-          <a mat-tab-link (click)="changeView('exports')"  [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.exports' | translate }}</a>
+          <a *ngIf="!notAllowed" mat-tab-link (click)="changeView('exports')" [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.exports' | translate }}</a>
           <a mat-tab-link (click)="changeView('bulkDataEditing')"  [active]="view == 'bulkDataEditing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'tabnav.bulkDataEditing' | translate }}</a>
 					<a mat-tab-link (click)="changeView('statistics')"  [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.statistics' | translate }}</a>
         </nav>
@@ -22,7 +22,9 @@
         <mat-card fxLayout="column" class="app-card app-view-border">
 					<mat-card-content>
 						<ng-container *ngIf="view == 'repositoryManagement'">
-							<button mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2">{{ 'button.buildProcessingIndex' | translate }}</button>
+							<span [matTooltip]="notAllowed ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="notAllowed  ? 'app-alert-not-allowed' : null">
+								<button mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2" [disabled]="notAllowed">{{ 'button.buildProcessingIndex' | translate }}</button>
+							</span>
 							<button mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
 						</ng-container>
 						<ng-container *ngIf="view == 'exports'">

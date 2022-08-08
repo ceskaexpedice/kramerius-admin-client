@@ -23,6 +23,7 @@ $app-gray-9: mat-color($mat-gray, 900) !default;
 // custom colors
 $app-color-info: mat-color($mat-amber, 900) !default;
 $app-color-success: mat-color($mat-green, 800) !default;
+$app-color-disabled: $app-gray-4;
 
 // elements
 //$app-body-bg: $app-gray-1;

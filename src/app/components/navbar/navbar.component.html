@@ -18,7 +18,7 @@
     </a>
   </div>
   <div *ngIf="auth.isLoggedIn()">
-    <a routerLink="/object" routerLinkActive="active" mat-button>{{ 'navbar.object' | translate }}</a>
+    <a *ngIf="!notAllowed" routerLink="/object" routerLinkActive="active" mat-button>{{ 'navbar.object' | translate }}</a>
     <a routerLink="/import" routerLinkActive="active" mat-button>{{ 'navbar.import' | translate }}</a>
     <a routerLink="/access" routerLinkActive="active" mat-button>{{ 'navbar.rightOfAdministration' | translate }}</a>
     <a routerLink="/processes" routerLinkActive="active" mat-button>{{ 'navbar.processes' | translate }}</a>
