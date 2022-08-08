@@ -150,7 +150,7 @@ export class DevComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  deleteObjectFromRepo() {
+  deleteObjectLowLevel() {
     this.adminApi.deleteObject(this.pidForDeletion).subscribe(response => {
       console.log(`object ${this.pidForDeletion} deleted`)
     });

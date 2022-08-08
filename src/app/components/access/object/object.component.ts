@@ -164,17 +164,17 @@ export class ObjectComponent implements OnInit {
     }
   }
 
-  deleteObjectFromRepo() {
+  deleteObjectLowLevel() {
     const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.deleteObjectFromRepo.title'),
-      message: this.ui.getTranslation('modal.deleteObjectFromRepo.message'),
+      title: this.ui.getTranslation('modal.deleteObjectLowLevel.title'),
+      message: this.ui.getTranslation('modal.deleteObjectLowLevel.message'),
       btn1: {
-        label: this.ui.getTranslation('button.yes'),
+        label: this.ui.getTranslation('button.delete'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: this.ui.getTranslation('button.no'),
+        label: this.ui.getTranslation('button.cancel'),
         value: 'no',
         color: 'light'
       }
@@ -187,27 +187,27 @@ export class ObjectComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.adminApi.deleteObject(this.pid).subscribe(result => {
-          this.ui.showInfoSnackBar('snackbar.success.deleteObjectFromRepo');
+          this.ui.showInfoSnackBar('snackbar.success.deleteObjectLowLevel');
           this.router.navigate(['/object']);
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar('snackbar.error.deleteObjectFromRepo')
+          this.ui.showErrorSnackBar('snackbar.error.deleteObjectLowLevel')
         });
       }
     });
   }
 
-  deleteObjectTreeWithProcess() {
+  deleteObjectSmart() {
     const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.deleteObjectTreeWithProcess.title'),
-      message: this.ui.getTranslation('modal.deleteObjectTreeWithProcess.message'),
+      title: this.ui.getTranslation('modal.deleteObjectSmart.title'),
+      message: this.ui.getTranslation('modal.deleteObjectSmart.message'),
       btn1: {
-        label: this.ui.getTranslation('button.yes'),
+        label: this.ui.getTranslation('button.schedule'),
         value: 'yes',
         color: 'warn'
       },
       btn2: {
-        label: this.ui.getTranslation('button.no'),
+        label: this.ui.getTranslation('button.cancel'),
         value: 'no',
         color: 'light'
       }
@@ -227,11 +227,11 @@ export class ObjectComponent implements OnInit {
             title: this.title,
           }
         }).subscribe(result => {
-          this.ui.showInfoSnackBar("snackbar.success.deleteObjectTreeWithProcess");
+          this.ui.showInfoSnackBar("snackbar.success.deleteObjectSmart");
           //this.router.navigate(['/object']);
         }, (error) => {
           console.log(error);
-          this.ui.showErrorSnackBar("snackbar.error.deleteObjectTreeWithProcess");
+          this.ui.showErrorSnackBar("snackbar.error.deleteObjectSmart");
         });
       }
     });
@@ -421,11 +421,11 @@ export class ObjectComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar('snackbar.error.rebuildProcessingIndexForObject')
+        this.ui.showErrorSnackBar('snackbar.error.scheduleProcessingIndexRebuildForObject')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else {
-        this.ui.showInfoSnackBar('snackbar.success.rebuildProcessingIndexForObject');
+        this.ui.showInfoSnackBar('snackbar.success.scheduleProcessingIndexRebuildForObject');
       }
     });
   }

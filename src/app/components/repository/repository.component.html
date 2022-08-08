@@ -58,8 +58,8 @@
 							<mat-divider [inset]="true"></mat-divider>
 							<div class="app-mt-4">
 								<h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
-								<button mat-flat-button (click)="openScheduleDeleteObjectsDialog()" color="warn" class="app-mr-2">{{ 'button.deleteTheWholeTreesSmartly' | translate }}</button>
-								<button mat-flat-button (click)="openDeleteObjectsLowLevelDialog()" color="warn">{{ 'button.deleteFromRepositoryObjectsOnly' | translate }}</button>
+								<button mat-flat-button (click)="openScheduleDeleteObjectsSmartDialog()" color="warn" class="app-mr-2">{{ 'button.deleteObjectsSmart' | translate }}</button>
+								<button mat-flat-button (click)="openDeleteObjectsLowLevelDialog()" color="warn">{{ 'button.deleteObjectsLowLevel' | translate }}</button>
 							</div>
 						</ng-container>
 						<ng-container *ngIf="view == 'statistics'">

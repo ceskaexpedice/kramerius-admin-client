@@ -152,10 +152,10 @@
     "loadMore": "Load more",
     "changeAvailability": "Change availability",
     "reindexSearchIndex": "Reindex (search index)",
-    "deleteTheWholeTreeSmartly": "Delete the whole tree (smartly)",
-    "deleteTheWholeTreesSmartly": "Delete trees of objects",
-    "deleteFromRepositoryObjectOnly": "Delete from repository (object only)",
-    "deleteFromRepositoryObjectsOnly": "Delete objects from repository",
+    "deleteObjectSmart": "Delete (smart)",
+    "deleteObjectLowLevel": "Delete (low level)",
+    "deleteObjectsSmart": "Delete objects (smart)",
+    "deleteObjectsLowLevel": "Delete objects (low level)",
     "export": "Export",
     "copyTheTextToTheClipboard": "Copy the text to the clipboard",
     "add": "Add",
@@ -249,25 +249,25 @@
       "message3": "After the process is completed, the affected object (only it) needs to be re-indexed. And all the objects (in depth) that were assigned/removed under the object by manipulations with bindings in FOXML.",
       "message4": "<strong>Attention!</strong> The process does not repair bindings to this object. In the event of a more extensive intervention in the Repository data, this process needs to be started for each object whose bindings have been changed in the Repository. Alternatively, run a rebuild of the entire Processing index."
     },
-    "deleteObjectTreeWithProcess": {
-      "title": "Deleting the object tree (smartly)",
-      "message": "<div class=\"app-desc app-mb-4\">Are you sure you want to permanently delete the object including all its<sup>*</sup> content?</div><div class=\"app-desc app- mb-4\">A process will be scheduled that will gradually delete the entire object tree from the repository and the search index.</div><div class=\"app-desc app-mb-4\">The process will also synchronize the data of the relevant objects, which deletion will affect with regard to licenses and collections.</div><div class=\"app-explanation\"><sup>*</sup>Does not apply to the contents of collections. Deleting a collection does not include recursively deleting its items.</div>"
+    "deleteObjectSmart": {
+      "title": "Deleting object (smart)",
+      "message": "<div class=\"app-desc app-mb-4\">Are you sure you want to permanently delete this object including its own content?</div><div class=\"app-desc app-mb-4\">A <strong><i>Tree Deletion</i></strong> process will be scheduled. The process will delete this object and recursively all of its own content<sup>*</sup> from the repository and the search index.</div><div class=\"app-desc app-mb-4\">The process will also synchronize data of all relevant objects that will be affected by the deletion with regard to licenses and collections.</div><div class=\"app-explanation\"><sup>*</sup>Does not apply to content of collections. Deleting a collection does not include deleting its items.</div>"
     },
-    "deleteObjectFromRepo": {
-      "title": "Object deletion (low-level)",
-      "message": "Are you sure you want to permanently delete the object? The object will be deleted from the repository and the search index. However, references to this object from other objects will not be updated, nor will other referenced objects be deleted."
+    "deleteObjectLowLevel": {
+      "title": "Deleting object (low-level)",
+      "message": "<div class=\"app-desc app-mb-4\">Are you sure you want to permanently delete this object?</div><div class=\"app-desc app-mb-4\">The object will be deleted from the repository and the search index.</div><div class=\"app-desc app-mb-4\">However, objects referenced in this object's RELS-EXT will not be deleted. Nor will be updated RELS-EXT references to this object from other objects. There will also be no synchronization with regard to licenses and collections.</div><div class=\"app-desc app-color-warn app-mb-4\">This operation may cause inconsistencies in the Digital Library!</div>"
     },
-    "scheduleDeleteObjectsSmart": {
-      "title": "Deleting object trees",
-      "message1": "A <strong><i>PID Tree Delete</i></strong> process will be scheduled for each inserted PID.",
-      "message2": "The process gradually deletes all objects in the tree from PID<sup>*</sup>, both from the repository and the search index.",
-      "message3": "Furthermore, the process synchronizes the data of the relevant processes that the deletion will affect with regard to licenses and collections.",
-      "explanation": "<sup>*</sup>Does not apply to the contents of collections. Deleting a collection does not include recursive deletion of its items. Because collection items are not the collection's own children, the collection just points to them."
+    "deleteObjectsSmart": {
+      "title": "Deleting objects (smart)",
+      "message1": "A <strong><i>Tree Deletion</i></strong> process will be scheduled for each inserted PID.",
+      "message2": "The process will delete the object and recursively all of its own content* from the repository and the search index.",
+      "message3": "The process will also synchronize data of all relevant objects that will be affected by the deletion with regard to licenses and collections.",
+      "explanation": "<sup>*</sup>Does not apply to content of collections. Deleting a collection does not include deleting its items.</div>"
     },
     "deleteObjectsLowLevel": {
-      "title": "Deleting objects from the repository (low-level)",
-      "message1": "One object will be deleted for each PID inserted.",
-      "message2": "The object will be deleted from the repository and the search index. However, references to this object from other objects will not be updated. Nor will other referenced objects be deleted. There will also be no synchronization with regard to licenses and collections.",
+      "title": "Deleting objects (low-level)",
+      "message1": "One object will be deleted for each inserted PID.",
+      "message2": "The object will be deleted from the repository and the search index. However, objects referenced in this object's RELS-EXT will not be deleted. Nor will be updated RELS-EXT references to this object from other objects. There will also be no synchronization with regard to licenses and collections.",
       "message3": "This operation may cause inconsistencies in the Digital Library!"
     },
     "deletingStatistics": {
@@ -409,10 +409,10 @@
         "2-4": "{{value}} Indexing processes have been scheduled",
         "more": "{{value}} Indexing processes have been scheduled"
       },
-      "deleteTreesOfObjects": {
-        "1": "The Delete Tree process has been scheduled",
-        "2-4": "{{value}} Delete Tree processes have been scheduled",
-        "more": "{{value}} processes have been scheduled to delete the tree"
+      "deleteObjectsSmart": {
+        "1": "The Tree Deletion process has been scheduled",
+        "2-4": "{{value}} Tree Deletion processes have been scheduled",
+        "more": "{{value}} Tree Deletion processes have been scheduled"
       },
       "deleteObjectsLowLevel": {
         "1": "The object has been deleted",
@@ -427,9 +427,8 @@
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",
-      "rebuildProcessingIndexForObject": "The Process Rebuild Processing index for the object has been scheduled",
-      "deleteObjectTreeWithProcess": "The deletion process has been scheduled",
-      "deleteObjectFromRepo": "The object has been deleted",
+      "deleteObjectSmart": "The Tree Deletion process has been scheduled",
+      "deleteObjectLowLevel": "The object has been deleted",
       "scheduleNkpLogsProcess": "The process of Generating logs for the period {{value1}} - {{value2}} scheduled",
       "deleteStatistics": "Statistics for the period {{value1}} to {{value2}} deleted",
       "scheduleProcessingIndexRebuild": "The Build Processing index process has been scheduled",
@@ -465,18 +464,17 @@
       "collectionHasBeenCreated": "The collection could not be created",
       "visibilityChange": "Failed to schedule process(es) Change Visibility",
       "indexObjectWithProces": "Failed to schedule Indexing process(es).",
-      "scheduleAddLicense": "Failed to schedule the Add License process",
-      "scheduleRemoveLicense": "Failed to schedule the License Removal process",
+      "scheduleAddLicense": "Failed to schedule process Add License",
+      "scheduleRemoveLicense": "Failed to schedule process License Removal",
       "addThisToSuperCollection": "The object could not be added to the collection",
-      "rebuildProcessingIndexForObject": "Failed to schedule the Rebuild Processing index process for the object",
-      "deleteObjectTreeWithProcess": "Failed to schedule delete process",
-      "deleteObjectFromRepo": "The object could not be deleted",
-      "deleteTreesOfObjects": "Failed to schedule Delete Tree process(es).",
+      "deleteObjectSmart": "Failed to schedule process Tree Deletion",
+      "deleteObjectLowLevel": "The object could not be deleted",
+      "deleteObjectsSmart": "Failed to schedule Tree Deletion process(es).",
       "deleteObjectsLowLevel": "Failed to delete objects",
       "scheduleChangePolicyByPid": "Failed to schedule process(es) Change Visibility",
-      "scheduleProcessingIndexRebuild": "Failed to schedule Build Processing index",
+      "scheduleProcessingIndexRebuild": "Failed to schedule Build Processing Index process",
       "scheduleProcessingIndexRebuildForObject": "Failed to schedule the Rebuild Processing index process for the object",
-      "scheduleImportProcess": "Failed to schedule import",
+      "scheduleImportProcess": "Failed to schedule Import process",
       "createOrEditRole": "Failed to add role",
       "onRemoveRole": {
         "409": "Role is used, cannot be removed",
@@ -579,7 +577,7 @@
     "version": "Version",
     "availability": "Availability",
     "synchronization": "Synchronization",
-    "deleting": "Deleting",
+    "deleting": "Deletion",
     "exports": "Exports",
     "newCollection": "New collection",
     "barcode": "Barcode",

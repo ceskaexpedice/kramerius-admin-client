@@ -152,10 +152,10 @@
     "loadMore": "Načíst další",
     "changeAvailability": "Změnit dostupnost",
     "reindexSearchIndex": "Reindexovat (vyhledávací index)",
-    "deleteTheWholeTreeSmartly": "Smazat celý strom (chytře)",
-    "deleteTheWholeTreesSmartly": "Smazat stromy objektů",
-    "deleteFromRepositoryObjectOnly": "Smazat z repozitáře (jen objekt)",
-    "deleteFromRepositoryObjectsOnly": "Smazat objekty z repozitáře",
+    "deleteObjectSmart": "Smazat (chytře)",
+    "deleteObjectLowLevel": "Smazat (nízkoúrovňově)",
+    "deleteObjectsSmart": "Smazat objekty (chytře)",
+    "deleteObjectsLowLevel": "Smazat objekty (nízkoúrovňově)",
     "export": "Exportovat",
     "copyTheTextToTheClipboard": "Zkopirovat text do schránky",
     "add": "Přidat",
@@ -249,25 +249,25 @@
       "message3": "Po dokončení procesu je potřeba ještě přeindexovat dotčený objekt (jen on). A všechny objekty (do hloubky), které byly, manipulacemi s vazbami ve FOXML, pod objekt přiřazeny/odebrány.",
       "message4": "<strong>Pozor!</strong> Proces neopraví vazby vedoucí na tento objekt. Při rozsáhlejším zásahu v datech Repozitáře je potřeba tento proces spustit pro každý objekt, jehož vazby byly v Repozitáři změněny. Případně spustit rebuild celého Processing indexu."
     },
-    "deleteObjectTreeWithProcess": {
-      "title": "Smazání stromu objektu (chytře)",
-      "message": "<div class=\"app-desc app-mb-4\">Opravdu chcete trvale smazat objekt včetně jeho veškerého<sup>*</sup> obsahu?</div><div class=\"app-desc app-mb-4\">Bude naplánován proces, který postupně vymaže celý strom objektu z repozitáře i vyhledávacího indexu.</div><div class=\"app-desc app-mb-4\">Proces také synchronizuje data relevantních objektů, které smazání ovlivní s ohledem na licence a sbírky.</div><div class=\"app-explanation\"><sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek.</div>"
+    "deleteObjectSmart": {
+      "title": "Smazání objektu (chytré)",
+      "message": "<div class=\"app-desc app-mb-4\">Opravdu chcete trvale smazat objekt včetně jeho vlastního obsahu?</div><div class=\"app-desc app-mb-4\">Bude naplánován proces <strong><i>Smazání stromu</i></strong>, který smaže objekt a rekurzivně veškerý jeho vlastní obsah<sup>*</sup> z repozitáře i vyhledávacího indexu.</div><div class=\"app-desc app-mb-4\">Proces také synchronizuje data relevantních objektů, které smazání ovlivní s ohledem na licence a sbírky.</div><div class=\"app-explanation\"><sup>*</sup>Netýká se obsahu sbírek. Součástí smazání sbírky není smazání jejich položek.</div>"
     },
-    "deleteObjectFromRepo": {
+    "deleteObjectLowLevel": {
       "title": "Smazání objektu (nízkoúrovňové)",
-      "message": "Opravdu chcete objekt trvale smazat? Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů, nebudou mazány ani další odkazované objekty."
+      "message": "<div class=\"app-desc app-mb-4\">Opravdu chcete objekt trvale smazat?</div><div class=\"app-desc app-mb-4\">Objekt bude smazán z repozitáře i vyhledávácího indexu.</div><div class=\"app-desc app-mb-4\">Nebudou smazány objekty odkazované tímto objektem přes jeho RELS-EXT. Nebudou ani aktualizovány RELS-EXT odkazy na tento objekt z jiných objektů. A nedojde ani k synchronizaci s ohledem na licence a sbírky.</div><div class=\"app-desc app-color-warn app-mb-4\">Tato operace může způsobit nekonzistence v Digitální knihovně!</div>"
     },
-    "scheduleDeleteObjectsSmart": {
-      "title": "Mazání stromů objektů",
-      "message1": "Pro každý vložený PID bude naplánován proces <strong><i>Smazání stromu od PID</i></strong>.",
-      "message2": "Proces postupně smaže všechny objekty ve stromě od PID<sup>*</sup> a to z repozitáře i vyhledávacího indexu.",
+    "deleteObjectsSmart": {
+      "title": "Smazání objektů (chytré)",
+      "message1": "Pro každý vložený PID bude naplánován proces <strong><i>Smazání stromu</i></strong>.",
+      "message2": "Proces smaže objekt a rekurzivně veškerý jeho vlastní obsah<sup>*</sup> z repozitáře i vyhledávacího indexu.",
       "message3": "Dále proces synchronizuje data relevantních procesů, které smazání ovlivní s ohledem na licence a sbírky.",
-      "explanation": "<sup>*</sup>Netýká se obsahu sbírek. Součástí mazání sbírky není rekurzivní mazání jejich položek. Protože položky sbírky nejsou vlastními potomky sbírky, sbírka na ně jen ukazuje."
+      "explanation": "<sup>*</sup>Netýká se obsahu sbírek. Součástí smazání sbírky není smazání jejich položek."
     },
     "deleteObjectsLowLevel": {
-      "title": "Mazání objektů z repozitáře (nízkoúrovňové)",
-      "message1": "Pro každý vložený PID bude vymazán jeden objekt.",
-      "message2": "Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou ale aktualizovány odkazy na tento objekt z jiných objektů. Ani nebudou mazány další odkazované objekty. Nedojde ani k synchronizaci s ohledem na licence a sbírky.",
+      "title": "Smazání objektů (nízkoúrovňové)",
+      "message1": "Pro každý vložený PID bude smazán jeho objekt.",
+      "message2": "Objekt bude smazán z repozitáře i vyhledávácího indexu. Nebudou smazány objekty odkazované tímto objektem přes jeho RELS-EXT. Nebudou ani aktualizovány RELS-EXT odkazy na tento objekt z jiných objektů. A nedojde ani k synchronizaci s ohledem na licence a sbírky.",
       "message3": "Tato operace může způsobit nekonzistence v Digitální knihovně!"
     },
     "deletingStatistics": {
@@ -409,7 +409,7 @@
         "2-4": "Byly naplánovány {{value}} procesy Indexace",
         "more": "Bylo naplánováno {{value}} procesů Indexace"
       },
-      "deleteTreesOfObjects": {
+      "deleteObjectsSmart": {
         "1": "Proces Smazání stromu byl naplánován",
         "2-4": "Byly naplánovány {{value}} procesy Smazání stromu",
         "more": "Bylo naplánováno {{value}} procesů Smazání stromu"
@@ -427,9 +427,8 @@
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
-      "rebuildProcessingIndexForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
-      "deleteObjectTreeWithProcess": "Mazací proces byl naplánován",
-      "deleteObjectFromRepo": "Objekt byl smazán",
+      "deleteObjectSmart": "Proces Smazání stromu byl naplánován",
+      "deleteObjectLowLevel": "Objekt byl smazán",
       "scheduleNkpLogsProcess": "Proces Generování logů pro období {{value1}} - {{value2}} naplánován",
       "deleteStatistics": "Statistiky pro období {{value1}} do {{value2}} smazány",
       "scheduleProcessingIndexRebuild": "Proces Vybudování Processing indexu byl naplánován",
@@ -468,10 +467,9 @@
       "scheduleAddLicense": "Nepodařilo se naplánovat proces Přidání licence",
       "scheduleRemoveLicense": "Nepodařilo se naplánovat proces Odebrání licence",
       "addThisToSuperCollection": "Objekt se nepodařilo přidat do sbírky",
-      "rebuildProcessingIndexForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
-      "deleteObjectTreeWithProcess": "Nepodařilo se naplánovat mazací proces",
-      "deleteObjectFromRepo": "Objekt se nepodařilo smazat",
-      "deleteTreesOfObjects": "Nepodařilo se naplánovat proces(y) Smazání stromu",
+      "deleteObjectSmart": "Nepodařilo se naplánovat proces Smazání stromu",
+      "deleteObjectLowLevel": "Objekt se nepodařilo smazat",
+      "deleteObjectsSmart": "Nepodařilo se naplánovat proces(y) Smazání stromu",
       "deleteObjectsLowLevel": "Nepodařilo se smazat objekty",
       "scheduleChangePolicyByPid": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
       "scheduleProcessingIndexRebuild": "Nepodařilo se naplánovat proces Vybudování Processing indexu",
@@ -579,7 +577,7 @@
     "version": "Verze",
     "availability": "Dostupnost",
     "synchronization": "Synchronizace",
-    "deleting": "Mazání",
+    "deleting": "Smazání",
     "exports": "Exporty",
     "newCollection": "Nová sbírka",
     "barcode": "Čárový kód",

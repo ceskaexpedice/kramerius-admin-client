@@ -1,12 +1,12 @@
 <form #f="ngForm" (ngSubmit)="schedule(f.value)">
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
-	<h2 mat-dialog-title>{{ 'modal.scheduleDeleteObjectsSmart.title' | translate }}</h2>
+	<h2 mat-dialog-title>{{ 'modal.deleteObjectsSmart.title' | translate }}</h2>
 	<mat-dialog-content>
 		<ng-container *ngIf="!fixed">
-			<div class="app-desc app-mb-4" [innerHtml]="'modal.scheduleDeleteObjectsSmart.message1' | translate"></div>
-			<div class="app-desc app-mb-4" [innerHtml]="'modal.scheduleDeleteObjectsSmart.message2' | translate"></div>
-			<div class="app-desc app-mb-4">{{ 'modal.scheduleDeleteObjectsSmart.message3' | translate }}</div>
-			<div class="app-explanation app-mb-4" [innerHtml]="'modal.scheduleDeleteObjectsSmart.explanation' | translate"></div>
+			<div class="app-desc app-mb-4" [innerHtml]="'modal.deleteObjectsSmart.message1' | translate"></div>
+			<div class="app-desc app-mb-4" [innerHtml]="'modal.deleteObjectsSmart.message2' | translate"></div>
+			<div class="app-desc app-mb-4">{{ 'modal.deleteObjectsSmart.message3' | translate }}</div>
+			<div class="app-explanation app-mb-4" [innerHtml]="'modal.deleteObjectsSmart.explanation' | translate"></div>
 		</ng-container>
 		<div>
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
@@ -23,7 +23,7 @@
 		</div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !isValid(f)" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+		<button mat-flat-button [disabled]="inProgress || !isValid(f)" color="warn" type="submit">{{ 'button.schedule' | translate }}</button>
 		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>

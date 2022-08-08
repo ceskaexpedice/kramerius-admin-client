@@ -197,7 +197,7 @@ export class RepositoryComponent implements OnInit {
     });
   }
 
-  openScheduleDeleteObjectsDialog() {
+  openScheduleDeleteObjectsSmartDialog() {
     const dialogRef = this.dialog.open(ScheduleDeleteObjectsSmartComponent, {
       width: '600px',
       panelClass: 'app-schedule-delete-objects-smart'
@@ -205,15 +205,15 @@ export class RepositoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'error') {
-        this.ui.showErrorSnackBar('snackbar.error.deleteTreesOfObjects')
+        this.ui.showErrorSnackBar('snackbar.error.deleteObjectsSmart')
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       } else if (result == 1) {
-        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.1');
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsSmart.1');
       } else if (result == 2 || result == 3 || result == 4) {
-        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.2-4', {value: result});
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsSmart.2-4', {value: result});
       } else {
-        this.ui.showInfoSnackBar('snackbar.success.deleteTreesOfObjects.more', {value: result});
+        this.ui.showInfoSnackBar('snackbar.success.deleteObjectsSmart.more', {value: result});
       }
     });
   }

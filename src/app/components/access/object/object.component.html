@@ -137,8 +137,8 @@
             <mat-divider [inset]="true"></mat-divider>
             <div class="app-mt-4 app-mb-4">
               <h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
-              <button mat-flat-button (click)="deleteObjectTreeWithProcess()" color="warn" class="app-mr-2">{{ 'button.deleteTheWholeTreeSmartly' | translate }}</button>
-              <button mat-flat-button (click)="deleteObjectFromRepo()" color="warn">{{ 'button.deleteFromRepositoryObjectOnly' | translate }}</button>
+              <button mat-flat-button (click)="deleteObjectSmart()" color="warn" class="app-mr-2">{{ 'button.deleteObjectSmart' | translate }}</button>
+              <button mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' | translate }}</button>
             </div>
             <mat-divider [inset]="true"></mat-divider>
             <div class="app-mt-4">

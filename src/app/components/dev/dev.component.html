@@ -11,7 +11,7 @@
             <input matInput [(ngModel)]="pidForDeletion" placeholder="PID">
         </mat-form-field>
         <!-- tohle pouzivat fakt opatrne, neresi se uklid vyhledavaciho indexu, taky to kvuli cachovani neznamena, ze bude objekt skutecne smazan, muze byt potreba restratovat Tomcat -->
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="deleteObjectFromRepo()"
+        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="deleteObjectLowLevel()"
             [disabled]="!pidForDeletion" color="primary">Smazat objekt z repozitáře</button>
     </div>
 

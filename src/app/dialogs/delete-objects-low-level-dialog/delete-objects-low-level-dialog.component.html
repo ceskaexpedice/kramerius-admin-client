@@ -22,7 +22,7 @@
 		</div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !isValid(f)" color="primary" type="submit">{{ 'button.delete' | translate }}</button>
+		<button mat-flat-button [disabled]="inProgress || !isValid(f)" color="warn" type="submit">{{ 'button.delete' | translate }}</button>
 		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>
