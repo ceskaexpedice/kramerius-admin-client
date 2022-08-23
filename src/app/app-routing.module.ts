@@ -14,12 +14,13 @@ import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './components/repository/repository.component';
 import { AccessComponent } from './components/access/access.component';
 import { ImportComponent } from './components/import/import.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'keycloak', component: AuthComponent },
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'access', component: AccessComponent, canActivate: [AuthGuard] },
-  { path: 'import', component: ImportComponent, canActivate: [AuthGuard] }
+  { path: 'import', component: ImportComponent, canActivate: [AuthGuard] },
+  { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

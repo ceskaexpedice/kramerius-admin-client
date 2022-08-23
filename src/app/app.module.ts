@@ -78,6 +78,7 @@ import { CollectionNewComponent } from './components/collections/collection-new/
 import { DeleteObjectsLowLevelDialogComponent } from './dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
 import { ScheduleDeleteObjectsSmartComponent } from './dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 import { CancelScheduledProcessesDialogComponent } from './dialogs/cancel-scheduled-processes-dialog/cancel-scheduled-processes-dialog.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -142,7 +143,8 @@ export function createCustomMatPaginatorIntl(
     CollectionNewComponent,
     DeleteObjectsLowLevelDialogComponent,
     ScheduleDeleteObjectsSmartComponent,
-    CancelScheduledProcessesDialogComponent
+    CancelScheduledProcessesDialogComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
