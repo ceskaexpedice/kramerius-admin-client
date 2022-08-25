@@ -226,6 +226,12 @@ export class AdminApiService {
     )
   }
 
+  setChildrenOrder(parentPid: string, childernPids: string[]): Observable<any> {
+    return this.put(`/items/${parentPid}/children_order`, { parentPid: parentPid, childrenPids: childernPids }).pipe(
+      delay(300),
+    )
+  }
+
   setThumbFromPage(targetPid: string, sourcePid: string): Observable<any> {
     return this.put(`/items/${targetPid}/streams/IMG_THUMB?srcPid=${sourcePid}`, undefined).pipe(
       delay(300),
