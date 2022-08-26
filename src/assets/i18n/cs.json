@@ -13,6 +13,7 @@
     "collections": "Sbírky",
     "indexation": "Indexace",
     "repository": "Repozitář",
+    "statistics": "Statistiky",
     "logout": "Odhlásit"
   },
   "tabnav": {
@@ -169,19 +170,30 @@
     "showHelp": "Zobrazit nápovědu"
   },
   "field": {
-    "archive": "Archiv",
-    "article": "Článek",
-    "convolute": "Sbírka",
-    "graphic": "Grafika",
-    "map": "Mapa",
-    "monograph": "Monografie",
-    "periodical": "Časopis",
-    "soundrecording": "Zvuková nahrávka",
     "public": "Veřejné",
     "private": "Neveřejné",
     "TREE": "Objekt i s potomky",
     "OBJECT": "Jen objekt",
-    "TREE_AND_FOSTER_TREES": "Úplná"
+    "TREE_AND_FOSTER_TREES": "Úplná",
+
+    "monograph": "Knihy",
+    "periodical": "Periodika",
+    "soundrecording": "Zvukové nahrávky",
+    "map": "Mapy",
+    "graphic": "Grafiky",
+    "sheetmusic": "Hudebniny",
+    "archive": "Archiválie",
+    "manuscript": "Rukopisy",
+    "article": "Články",
+    "periodicalitem": "Čísla periodika",
+    "supplement": "Přílohy",
+    "periodicalvolume": "Ročníky periodika",
+    "monographunit": "Monographunit",
+    "track": "Track",
+    "soundunit": "Soundunit",
+    "internalpart": "Internalpart",
+    "convolute": "Konvoluty",
+    "picture": "Obrázky"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",

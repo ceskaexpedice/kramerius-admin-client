@@ -196,10 +196,26 @@ export class DevComponent implements OnInit {
     //   console.log(response);
     // })
 
-    //vrati lincence konkretniho objektu
-    const pid = "uuid:17fe155d-a975-11e0-a5e1-0050569d679d"
-    const query = `/items/${pid}/licenses`
-    this.adminApi.getGeneralQuery(query).subscribe(response => {
+    //vrati licence konkretniho objektu
+    // const pid = "uuid:17fe155d-a975-11e0-a5e1-0050569d679d"
+    // const query = `/items/${pid}/licenses`
+    // this.adminApi.getGeneralQuery(query).subscribe(response => {
+    //   console.log(response);
+    // })
+
+    //nastaveni poradi deti
+    this.adminApi.setChildrenOrder("uuid:17fe155d-a975-11e0-a5e1-0050569d679d",
+      [
+        "uuid:19603d70-a975-11e0-a5e1-0050569d679d", //third
+
+        "uuid:18b5cc9f-a975-11e0-a5e1-0050569d679d", //second
+
+        "uuid:17fed8ae-a975-11e0-a5e1-0050569d679d", //first
+
+
+        //"uuid:19603d7x-a975-11e0-a5e1-0050569d679d", //not there
+      ]
+    ).subscribe(response => {
       console.log(response);
     })
 

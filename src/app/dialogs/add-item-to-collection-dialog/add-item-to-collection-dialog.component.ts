@@ -64,18 +64,6 @@ export class AddItemToCollectionDialogComponent implements OnInit {
       });
   }
 
-  getCollectionName(collection: Collection) {
-    if (!!collection) {
-      return !!collection.name_cze ? collection.name_cze : collection.name_eng;
-    }
-  }
-
-  getCollectionDescription(collection: Collection) {
-    if (!!collection) {
-      return !!collection.description_cze ? collection.description_cze : collection.description_eng;
-    }
-  }
-
   selectSuperCollection(collection: Collection) {
     this.selectedSuperCollection = collection;
   }

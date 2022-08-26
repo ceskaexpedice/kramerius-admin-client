@@ -17,6 +17,14 @@ export class Collection {
   constructor() {
   }
 
+  getName() {
+    return !!this.name_cze ? this.name_cze : this.name_eng;
+  }
+
+  getDescription() {
+    return !!this.description_cze ? this.description_cze : this.description_eng;
+  }
+
   // static fromSolrJson(json): Collection {
   //   const collection = new Collection();
   //   collection.id = json['pid'];
