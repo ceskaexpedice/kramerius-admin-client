@@ -6,6 +6,7 @@ import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dial
 import { RightAction } from 'src/app/models/right-action.model';
 import { Right } from 'src/app/models/right.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -25,28 +26,43 @@ export class RightsComponent implements OnInit {
 
   @Input() pid: string;
 
-  constructor(private api: AdminApiService, 
+  constructor(private api: AdminApiService,
+    private authApi: AuthService, 
     private ui: UIService,
     private dialog: MatDialog) {}
 
   ngOnInit() {
     this.state = 'loading';
-    this.initActions();
+    //this.initActions();
     // this.api.getRoles().subscribe((roles: Role[]) => {
     //   this.roles = roles;
     //   this.state = 'success';
     //   console.log('roles', roles);
     // });
-    this.api.getRights(this.pid || 'uuid:1').subscribe((rights: Right[]) => {
-      for (const right of rights) {
-        if (this.actionMap[right.action]) {
-          this.actionMap[right.action].addRight(right);
+
+    this.authApi.getAuthorizedActions(this.pid || 'uuid:1').subscribe((rAct: RightAction[]) => {
+      this.actionMap = {};
+
+      rAct.forEach(a=> {
+        this.actionMap[a.code] = a;
+      });
+      this.actions = rAct;
+
+      // call rights
+      this.api.getRights(this.pid || 'uuid:1').subscribe((rights: Right[]) => {
+        for (const right of rights) {
+          if (this.actionMap[right.action]) {
+            this.actionMap[right.action].addRight(right);
+          }
         }
-      }
-      // this.roles = roles;
-      this.state = 'success';
-      console.log('rights', rights);
+        // this.roles = roles;
+        this.state = 'success';
+        console.log('rights', rights);
+      });
+  
+  
     });
+
   }
 
   onEditRight(right: Right) {
@@ -122,6 +138,7 @@ export class RightsComponent implements OnInit {
 
 
 
+  /*
 
   private initActions() {
     this.actions = [];
@@ -178,5 +195,5 @@ export class RightsComponent implements OnInit {
     this.actions.push(action);
     this.actionMap[code] = action;
   }
-
+ */
 }

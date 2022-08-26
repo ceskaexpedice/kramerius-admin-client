@@ -12,6 +12,7 @@ import { License } from '../models/license.model';
 import { Role } from '../models/roles.model';
 import { ConditionParam } from '../models/condition-param.model';
 import { Right } from '../models/right.model';
+import { RightAction } from '../models/right-action.model';
 
 @Injectable({
   providedIn: 'root'
@@ -334,6 +335,11 @@ export class AdminApiService {
     return this.delete(`/roles/${role.id}`);
   }
 
+  getActions(pid:String): Observable<any> {
+    return this.get(`/rights/actions/${pid}`).pipe(map(response =>
+      RightAction.fromJsonArray(response)));
+  }
+
   createLicense(license: License): Observable<License> {
     return this.post(`/licenses`, license.toJson()).pipe(map(response =>
       License.fromJson(response)));
@@ -343,6 +349,8 @@ export class AdminApiService {
     return this.get('/licenses').pipe(map(response =>
       License.fromJsonArray(response)));
   }
+
+  
 
   getLicensesOfObject(pid: string) {
     return this.get(`/items/${pid}/licenses`)

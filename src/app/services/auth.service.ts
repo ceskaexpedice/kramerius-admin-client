@@ -4,6 +4,7 @@ import { AppSettings } from './app-settings';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { RightAction } from '../models/right-action.model';
 
 @Injectable()
 export class AuthService {
@@ -15,8 +16,17 @@ export class AuthService {
   user: User;
   static token: string;
 
+  authorizedGlobalActions: string[];
+
   constructor(private http: HttpClient, private settings: AppSettings) {
     AuthService.token = localStorage.getItem('account.token');
+    this.getAuthorizedActions('uuid:1').subscribe((rAct: RightAction[]) => {
+      this.authorizedGlobalActions = [];
+      rAct.forEach(rA => {
+        this.authorizedGlobalActions.push(rA.code);
+      });
+    });
+    
   }
 
 
@@ -48,6 +58,18 @@ export class AuthService {
   isAuthorized() {
     return this.user && this.user.isAdmin();
   }
+
+  getAuthorizedActions(pid: string) {
+    return this.http.get(`${this.settings.clientApiBaseUrl}/user/actions?pid=${pid}`)
+        .pipe(map(response => RightAction.fromJsonArray(response)));
+  }
+
+  /*
+  private validateToken(): Observable<User> {
+    return this.http.get(`${this.settings.clientApiBaseUrl}/user`)
+        .pipe(map(response => User.fromJson(response)));
+  }*/
+
 
   getTextProfileImage(): string {
     if (!this.user) {
@@ -95,6 +117,7 @@ export class AuthService {
     return this.http.get(`${this.settings.clientApiBaseUrl}/user`)
         .pipe(map(response => User.fromJson(response)));
   }
+
 
   private logoutKramerius(): Observable<any> {
     return this.http.get(`${this.settings.clientApiBaseUrl}/user/logout`);

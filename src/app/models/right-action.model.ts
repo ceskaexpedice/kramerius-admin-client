@@ -16,5 +16,14 @@ export class RightAction {
     this.rights.push(right)
   }
 
+  static fromJsonArray(json): RightAction[] {
+    const result = [];
+    const acts = json["actions"];
+    for (const a of acts) {
+      result.push(new RightAction(a, a));
+    }
+    return result;
+  }
+
 }
 
