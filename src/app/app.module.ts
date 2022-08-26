@@ -79,6 +79,7 @@ import { DeleteObjectsLowLevelDialogComponent } from './dialogs/delete-objects-l
 import { ScheduleDeleteObjectsSmartComponent } from './dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 import { CancelScheduledProcessesDialogComponent } from './dialogs/cancel-scheduled-processes-dialog/cancel-scheduled-processes-dialog.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { CollectionContentComponent } from './components/collections/collection-content/collection-content.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -144,7 +145,8 @@ export function createCustomMatPaginatorIntl(
     DeleteObjectsLowLevelDialogComponent,
     ScheduleDeleteObjectsSmartComponent,
     CancelScheduledProcessesDialogComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    CollectionContentComponent
   ],
   imports: [
     BrowserModule,

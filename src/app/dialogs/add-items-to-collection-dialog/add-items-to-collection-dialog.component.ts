@@ -93,4 +93,12 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     return !!this.items_counter_total && (this.items_counter_added + this.items_counter_failed) == this.items_counter_total;
   }
 
+  onCloseAfterFinished() {
+    if (this.items_counter_added > 0) {
+      this.dialogRef.close('added');
+    } else {
+      this.dialogRef.close('closed');
+    }
+  }
+
 }

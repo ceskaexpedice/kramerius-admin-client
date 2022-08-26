@@ -38,6 +38,6 @@
 	<mat-dialog-actions align="end">
 		<button mat-flat-button [disabled]="inProgress || !f.valid || isFinished()" color="primary" type="submit">{{ 'button.add' | translate }}</button>
 		<button mat-flat-button *ngIf="!isFinished()" [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
-		<button mat-flat-button *ngIf="isFinished()" mat-dialog-close="close">{{ 'button.close' | translate }}</button>
+		<button mat-flat-button *ngIf="isFinished()" type="button" (click)="onCloseAfterFinished()">{{ 'button.close' | translate }}</button>
 	</mat-dialog-actions>
 </form>

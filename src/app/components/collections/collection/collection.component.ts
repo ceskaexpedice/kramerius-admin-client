@@ -47,6 +47,7 @@ export class CollectionComponent implements OnInit {
   }
 
   loadData(collectionId: string) {
+    this.state = 'loading';
     //console.log('loading data for ' + collectionId)
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
@@ -69,25 +70,7 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  getModel(model: string): string {
-    switch (model) {
-      case 'monograph': return 'Kniha'
-      case 'periodical': return 'Periodikum'
-      case 'page': return 'Stránka'
-      case 'periodicalitem': return 'Číslo periodika'
-      case 'periodicalvolume': return 'Ročník periodika'
-      default: return model
-    }
-  }
-
-  getName(item): string {
-    let name = item['title.search'];
-    if (item['date.str'] && ['page', 'periodicalitem', 'periodicalvolume'].indexOf(item['model']) >= 0) {
-      name += ' / ' + item['date.str'];
-    }
-    return name;
-  }
-
+  //TODO: remove after not needed
   getThumb(uuid: string): string {
     return this.clientApi.getThumb(uuid);
   }
@@ -98,12 +81,7 @@ export class CollectionComponent implements OnInit {
   }
 
   onUpdated() {
-    this.state = 'loading';
-    this.collectionsService.getCollection(this.collection.id).subscribe((collection: Collection) => {
-      this.collection = collection;
-      this.state = 'success';
-      //this.changeView('detail');
-    });
+    this.loadData(this.collection.id);
   }
 
   onDelete() {
@@ -217,7 +195,9 @@ export class CollectionComponent implements OnInit {
       panelClass: 'app-add-items-to-collection'
     });
     dialogRef.afterClosed().subscribe(result => {
-      //nothing, information about number of items added and failed to add is shown in the dialog  (it does not close automatically)
+      if (result === 'added') {
+        this.loadData(this.collection.id);
+      }
     });
   }
 
@@ -255,14 +235,7 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  filterCollections(items) {
-    return items.filter(item => item['model'] == 'collection');
-  }
-
-  filterNonCollections(items) {
-    return items.filter(item => item['model'] != 'collection');
-  }
-
+  //TODO: odstranit po zruseni zavislosti
   getCollectionName(collection: Collection) {
     if (!!collection) {
       return !!collection.name_cze ? collection.name_cze : collection.name_eng;
