@@ -2,21 +2,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
-import { Collection } from 'src/app/models/collection.model';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  selector: 'app-collection-content',
-  templateUrl: './collection-content.component.html',
-  styleUrls: ['./collection-content.component.scss']
+  selector: 'app-collection-context',
+  templateUrl: './collection-context.component.html',
+  styleUrls: ['./collection-context.component.scss']
 })
-export class CollectionContentComponent implements OnInit {
+export class CollectionContextComponent implements OnInit {
 
   @Input() collection;
   @Input() state;
-  @Input() items;
+  @Input() superCollections;
 
   @Output() updated = new EventEmitter<any>();
 
@@ -30,35 +29,8 @@ export class CollectionContentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getName(item): string {
-    let name = item['title.search'];
-    if (item['date.str'] && ['page', 'periodicalitem', 'periodicalvolume'].indexOf(item['model']) >= 0) {
-      name += ' / ' + item['date.str'];
-    }
-    return name;
-  }
-
-  getModel(model: string): string {
-    switch (model) {
-      case 'monograph': return 'Kniha'
-      case 'periodical': return 'Periodikum'
-      case 'page': return 'Stránka'
-      case 'periodicalitem': return 'Číslo periodika'
-      case 'periodicalvolume': return 'Ročník periodika'
-      default: return model
-    }
-  }
-
   getThumb(uuid: string): string {
     return this.clientApi.getThumb(uuid);
-  }
-
-  filterCollections(items) {
-    return items.filter(item => item['model'] == 'collection');
-  }
-
-  filterNonCollections(items) {
-    return items.filter(item => item['model'] != 'collection');
   }
 
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {

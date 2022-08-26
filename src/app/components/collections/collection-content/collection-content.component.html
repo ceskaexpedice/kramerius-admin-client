@@ -13,7 +13,7 @@
             <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
         </div>
         <div class="app-right app-actions">
-            <a (click)="onRemoveItemFromCollection(collection.id, getCollectionName(collection), item['pid'], getName(item)); $event.preventDefault(); $event.stopPropagation()"
+            <a (click)="onRemoveItemFromCollection(collection.id, collection.getName(), item['pid'], getName(item)); $event.preventDefault(); $event.stopPropagation()"
                 class="app-btn-warn" matTooltip="{{ 'button.removeFromThisCollection' | translate }}">
                 <mat-icon>cancel</mat-icon>
             </a>
@@ -33,7 +33,7 @@
             <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
         </div>
         <div class="app-right app-actions">
-            <a (click)="onRemoveItemFromCollection(collection.id, getCollectionName(collection), item['pid'], getName(item)); $event.preventDefault(); $event.stopPropagation()"
+            <a (click)="onRemoveItemFromCollection(collection.id, collection.getName(), item['pid'], getName(item)); $event.preventDefault(); $event.stopPropagation()"
                 class="app-btn-warn" [matTooltip]="'button.removeFromThisCollection' | translate">
                 <mat-icon>cancel</mat-icon>
             </a>

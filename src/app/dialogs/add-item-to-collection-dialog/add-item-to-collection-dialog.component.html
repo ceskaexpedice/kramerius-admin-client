@@ -26,9 +26,9 @@
 			<mat-card-header>
 				<mat-card-title class="app-mb-1" fxLayout="row" fxLayoutAlign="start center">
 					<mat-icon [class.app-color-accent]="superCollection == selectedSuperCollection">{{ superCollection == selectedSuperCollection ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
-					{{getCollectionName(superCollection)}}
+					{{superCollection.getName()}}
 				</mat-card-title>
-				<mat-card-subtitle class="app-m-0">{{ getCollectionDescription(superCollection )}}</mat-card-subtitle>
+				<mat-card-subtitle class="app-m-0">{{ superCollection.getDescription() }}</mat-card-subtitle>
 			</mat-card-header>
 		</mat-card>
 		<mat-progress-bar *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>

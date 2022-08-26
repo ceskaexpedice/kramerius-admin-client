@@ -24,8 +24,7 @@ export class CollectionComponent implements OnInit {
   availableCollections: any[];
   view: string;
 
-  items: any[];
-
+  items: any[]; //polozky ve sbirce
   superCollections: Collection[] = []; //sbirky obsahujici tuto sbirku
 
   constructor(
@@ -116,78 +115,6 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  // tato metoda neni nikde pouzita, zakomentovano 
-  /*  addThisToCollection(collection: { pid: string, 'title.search': string }) {
-     console.log(collection);
-     if (!this.collection) {
-       return;
-     }
-     const data: SimpleDialogData = {
-       title: "Smazání sbírky",
-       message: `Opravdu chcete tuto sbírku přidat do sbírky "${collection['title.search']}"?`,
-       btn1: {
-         label: 'Ano',
-         value: 'yes',
-         color: 'warn'
-       },
-       btn2: {
-         label: 'Ne',
-         value: 'no',
-         color: 'default'
-       }
-     };
-     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
-     dialogRef.afterClosed().subscribe(result => {
-       if (result === 'yes') {
-         this.collectionsService.addItemToCollection(collection.pid, this.collection.id).subscribe((res) => {
-           console.log(res);
-           this.ui.showInfoSnackBar(`Sbírka byla přidána do sbírky "${collection['title.search']}"`)
-         }, error => {
-           console.log(error);
-           this.ui.showErrorSnackBar("Sbírku se nepodařilo přidat");
-         });
-       }
-     });
-   } */
-
-  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
-    // TODO: i18n
-    const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
-      message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
-      btn1: {
-        label: this.ui.getTranslation('button.yes'),
-        value: 'yes',
-        color: 'warn'
-      },
-      btn2: {
-        label: this.ui.getTranslation('button.no'),
-        value: 'no',
-        color: 'light'
-      }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, {
-      data: data,
-      width: '600px',
-      panelClass: 'app-simple-dialog'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'yes') {
-        this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
-          this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`);
-          this.loadData(this.collection.id);
-          // (async () => {
-          //   await this.delay(0);
-          //   this.loadData(this.collection.id);
-          // })();
-        }, (error) => {
-          console.log(error);
-          this.ui.showErrorSnackBar("snackbar.error.removeFromThisCollection");
-        });
-      }
-    });
-  }
-
   onAddItemsToThisCollection() {
     const dialogRef = this.dialog.open(AddItemsToCollectionDialogComponent, {
       data: this.collection,
@@ -205,7 +132,7 @@ export class CollectionComponent implements OnInit {
     const dialogRef = this.dialog.open(AddItemToCollectionDialogComponent, {
       data: {
         pid: this.collection.id,
-        title: this.getCollectionName(this.collection),
+        title: this.collection.getName(),
         isCollection: true
       },
       width: '600px',
@@ -233,19 +160,6 @@ export class CollectionComponent implements OnInit {
         return a['title.search'].localeCompare(b['title.search'])
       });
     });
-  }
-
-  //TODO: odstranit po zruseni zavislosti
-  getCollectionName(collection: Collection) {
-    if (!!collection) {
-      return !!collection.name_cze ? collection.name_cze : collection.name_eng;
-    }
-  }
-
-  getCollectionDescription(collection: Collection) {
-    if (!!collection) {
-      return !!collection.description_cze ? collection.description_cze : collection.description_eng;
-    }
   }
 
   getCurrentRoute(type: string) {

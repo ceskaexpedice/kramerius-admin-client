@@ -274,19 +274,6 @@ export class ObjectComponent implements OnInit {
     return this.clientApi.getThumb(uuid);
   }
 
-  getCollectionName(collection: Collection) {
-    if (!!collection) {
-      return !!collection.name_cze ? collection.name_cze : collection.name_eng;
-    }
-  }
-
-  getCollectionDescription(collection: Collection) {
-    //console.log(collection)
-    if (!!collection) {
-      return !!collection.description_cze ? collection.description_cze : collection.description_eng;
-    }
-  }
-
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
