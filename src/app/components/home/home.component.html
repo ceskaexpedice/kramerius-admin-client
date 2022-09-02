@@ -1,168 +1,103 @@
 <div class="app-home app-h-100">
 	<div fxLayout="column" fxFlexFill>
     <div class="app-topbar">
-      <div class="app-breadcrumbs app-mb-4">
+      <div class="app-breadcrumbs app-mb-7">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <span class="app-last">home</span>
       </div>
-      <div>
+     <!--  <div>
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('statistics')" [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.statistics' | translate }}</a>
           <a mat-tab-link (click)="changeView('mostViewedDocuments')"  [active]="view == 'mostViewedDocuments'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'tabnav.mostViewedDocuments' | translate }}</a>
         </nav>
-      </div>
+      </div> -->
     </div>
-    <div fxFlex class="app-oa-y">
+    <div fxFlex class="app-oa-y app-pt-8">
 			<div class="app-container">
-				<div>
-					<mat-form-field class="app-mr-2">
-						<mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
-						<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
-						<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
-						<mat-datepicker #from></mat-datepicker>
-					</mat-form-field>
-					<mat-form-field class="app-mr-2">
-						<mat-label>{{ 'desc.dateTo' | translate }}</mat-label>
-						<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
-						<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
-						<mat-datepicker #to></mat-datepicker>
-					</mat-form-field>
-					<!-- redady to implement for each filter same as is in processes-->
-					<!-- <a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2">
-            <mat-icon>cancel</mat-icon>
-          </a> -->
-					<mat-form-field class="app-mr-2">
-						<mat-label>{{ 'desc.license' | translate }}</mat-label>
-						<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
-							<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
-						</mat-select>
-					</mat-form-field>
-					<!-- redady to implement for each filter same as is in processes-->
-					<!-- <a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2">
-            <mat-icon>cancel</mat-icon>
-          </a> -->
-					<mat-form-field>
-						<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
-						<input matInput placeholder="Pid / Čnb / Issn / Issbn" [(ngModel)]="identifier"  (keyup)="onIdentKeyUp($event.target)">
-					</mat-form-field>
-					<a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2" *ngIf="identifier" (click)="clearIdentifier($event.target)">
-            <mat-icon>cancel</mat-icon>
-          </a>
-				</div>
-				<ng-container  *ngIf="view == 'statistics'">
-					<div fxLayout="row" fxLayoutGap="16px">
-						<mat-card fxFlex class="app-card app-view-border">
-							<mat-card-header>
-								<mat-card-title>{{ 'desc.modelDisplayStatistics' | translate }}</mat-card-title>
-							</mat-card-header>
-							<mat-card-content *ngIf="isResultModel">
-								<div echarts [options]="modelsOpts" style="height: 350px;" ></div>
-								<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
-							</mat-card-content>
-							<mat-card *ngIf="!isResultModel" class="app-view-alert app-info">
-								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
-							</mat-card>
-						</mat-card>
-						<mat-card fxFlex class="app-card app-view-border">
-							<mat-card-header>
-								<mat-card-title>{{ 'desc.statisticsOfUsedLanguages' | translate }}</mat-card-title>
-							</mat-card-header>
-							<mat-card-content *ngIf="isResultLang">
-								<div echarts [options]="langOpts" style="height: 350px;" ></div>
-								<button mat-flat-button  (click)="csvLang()" color="primary"  class="app-mr-2">CSV</button>
-							</mat-card-content>
-							<mat-card *ngIf="!isResultLang" class="app-view-alert app-info">
-								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
-							</mat-card>
-						</mat-card>
-						<mat-card fxFlex class="app-card app-view-border">
-							<mat-card-header>
-								<mat-card-title>{{ 'desc.authorStatistics' | translate }}</mat-card-title>
-							</mat-card-header>
-							<mat-card-content *ngIf="isResultAuthor">
-								<div echarts [options]="authorOpts" style="height: 350px;" ></div>
-								<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
-							</mat-card-content>
-							<mat-card *ngIf="!isResultAuthor" class="app-view-alert app-info">
-								<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
-							</mat-card>
-						</mat-card>
-					</div>
-				</ng-container>
-				<ng-container  *ngIf="view == 'mostViewedDocuments'">
-					<mat-card  *ngIf="isResultModel" class="app-card app-view-border">
+				<div fxLayout="row" fxLayoutGap="32px">
+					<mat-card fxFlex="25%" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+						<mat-card-header>
+							<mat-card-title>Indexace</mat-card-title>
+							<mat-card-subtitle>Objekt</mat-card-subtitle>
+						</mat-card-header>
 						<mat-card-content>
-							<ng-container *ngFor="let item of table | keyvalue; let last = last">
-								<div class="app-mb-4" [class.app-mb-n4]="last">
-									<ng-container *ngIf="item.value.length > 0">
-										<h3 class="app-mt-0 app-mb-2">{{ 'field.' + item.key | translate }}</h3>
-										<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
-											<thead>
-												<tr>
-													<th class="app-first">{{ 'desc.numberOfImpressions' | translate }}</th>
-													<th>{{ 'desc.work' | translate }}</th>
-													<th class="app-last"></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr *ngFor="let v of item.value;">
-													<td>{{v.count}}</td>
-													<td [class.app-detail-expanded]="selection[v.pid]"> 
-														<div [class.app-text-cutter-wrapper]="!selection[v.pid]">
-															<div [class.app-text-cutter]="!selection[v.pid]">
-																<a href="{{appSettings.coreBaseUrl}}/../view/{{v.pid}}" target="_blank" [matTooltip]="v.title">{{ v.title }}</a>
-															</div>
-														</div>
-														<div *ngIf="selection[v.pid]" class="app-metadata">
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['author']"><label class="app-label">{{ 'desc.author' | translate }}:</label> {{descriptions[v.pid]['author']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['origininfo']"><label class="app-label">{{ 'desc.publishingData' | translate }}:</label> {{descriptions[v.pid]['origininfo']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['keywords'] && descriptions[v.pid]['keywords'].length > 0"><label class="app-label">{{ 'desc.keywords' | translate }}:</label> 
-																<span *ngFor="let k of descriptions[v.pid]['keywords']; let isLast=last">
-																	{{k}}{{isLast ? '' : ', '}}
-																</span>
-															</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['langs'] && descriptions[v.pid]['langs'].length > 0"><label class="app-label">{{ 'desc.language' | translate }}:</label> 
-																<ng-container *ngFor="let l of descriptions[v.pid]['langs']; let isLast=last">
-																	<span *ngIf="l && l!==''">
-																		{{ 'lang.'+ l | translate }}{{isLast ? '' : ', '}}
-																	</span>
-																</ng-container>
-															</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['location'] && descriptions[v.pid]['location'].length>0"><label class="app-label">{{ 'desc.storageLocation' | translate }}:</label> 
-																<ng-container *ngFor="let l of descriptions[v.pid]['location']; ; let isLast=last">
-																	<span *ngIf="l && l!==''">
-																		{{  'sigla.'+ l | translate }}{{isLast ? '' : ', '}}
-																	</span>
-																</ng-container>
-															</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['physicalDescription']"><label class="app-label">{{ 'desc.physicalDescription' | translate }}:</label> {{descriptions[v.pid]['physicalDescription']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['abstract']"><label class="app-label">{{ 'desc.abstract' | translate }}:</label> {{descriptions[v.pid]['abstract']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['note']"><label class="app-label">{{ 'desc.comment' | translate }}:</label> {{descriptions[v.pid]['note']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['isbn']"><label class="app-label">{{ 'Isbn' | translate }}:</label> {{descriptions[v.pid]['isbn']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['issn']"><label class="app-label">{{ 'Isbn' | translate }}:</label> {{descriptions[v.pid]['issn']}}</div>
-															<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['barcode']"><label class="app-label">{{ 'desc.barcode' | translate }}:</label> {{descriptions[v.pid]['barcode']}}</div>
-														</div>
-													</td>
-													<td class="app-col-detail">
-														<a (click)="showMore(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
-															<mat-icon>expand_more</mat-icon>
-															{{ selection[v.pid] ? ('button.hideDetail' | translate) : ('button.showDetail' | translate) }}
-														</a>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</ng-container>
-								</div>
-							</ng-container>
+							<div class="app-mark-rounded">
+								<mat-icon>data_object</mat-icon>
+							</div>
+							<div class="app-desc">
+								Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru.
+							</div>
 						</mat-card-content>
+						<mat-card-actions>
+							<button mat-flat-button color="accent">
+								<span>Přejít</span>
+								<mat-icon>arrow_forward</mat-icon>
+							</button>
+						</mat-card-actions>
 					</mat-card>
 
-					<mat-card *ngIf="!isResultModel" class="app-view-alert app-info">
-						<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+					<mat-card fxFlex="25%" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+						<mat-card-header>
+							<mat-card-title>Indexace</mat-card-title>
+							<mat-card-subtitle>Model</mat-card-subtitle>
+						</mat-card-header>
+						<mat-card-content>
+							<div class="app-mark-rounded" style="background-color: #FF6D00">
+								<mat-icon>category</mat-icon>
+							</div>
+							<div class="app-desc">
+								Indexace objektů (a jejich stromů), které mají vybraný model.
+							</div>
+						</mat-card-content>
+						<mat-card-actions>
+							<button mat-flat-button color="accent">
+								<span>Přejít</span>
+								<mat-icon>arrow_forward</mat-icon>
+							</button>
+						</mat-card-actions>
 					</mat-card>
 
-				</ng-container>
+					<mat-card fxFlex="25%" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+						<mat-card-header>
+							<mat-card-title>Repozitář</mat-card-title>
+							<mat-card-subtitle>Hromadné úpravy dat</mat-card-subtitle>
+						</mat-card-header>
+						<mat-card-content>
+							<div class="app-mark-rounded" style="background-color: #AA00FF">
+								<mat-icon>edit_note</mat-icon>
+							</div>
+							<div class="app-desc">
+								Na základě vložených PIDů, na základě dat, smazání.
+							</div>
+						</mat-card-content>
+						<mat-card-actions>
+							<button mat-flat-button color="accent">
+								<span>Přejít</span>
+								<mat-icon>arrow_forward</mat-icon>
+							</button>
+						</mat-card-actions>
+					</mat-card>
+
+					<mat-card fxFlex="25%" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+						<mat-card-header>
+							<mat-card-title>Sbírky</mat-card-title>
+						</mat-card-header>
+						<mat-card-content>
+							<div class="app-mark-rounded" style="background-color: #00B8D4">
+								<mat-icon>library_books</mat-icon>
+							</div>
+							<div class="app-desc">
+								Atlas zahrnuje zobrazení zemí, které podléhaly bezprostředně habsburským vladařům, další potom přináší materiál k suverénním říšským ...
+							</div>
+						</mat-card-content>
+						<mat-card-actions>
+							<button mat-flat-button color="accent">
+								<span>Přejít</span>
+								<mat-icon>arrow_forward</mat-icon>
+							</button>
+						</mat-card-actions>
+					</mat-card>
+				</div>				
 			</div>
 		</div>
   </div>

@@ -1,27 +1,48 @@
-.app-table {
-  thead {
-    tr {
-      th {
-        &.app-first {
-          width: 180px;
-        }
+@import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
 
-        &.app-last {
-          width: 140px;
-        }
+.mat-card {
+  padding-top: 40px;
+  position: relative;
+
+  .mat-card-header {
+    @extend .app-text-center;
+
+    .mat-card-subtitle {
+      @extend .app-mb-2;
+    }
+  }
+
+  .mat-card-content {
+    @extend .app-text-center, .app-h-100;
+    line-height: 22px;
+  }
+
+  .mat-card-actions {
+    .mat-flat-button {
+      .mat-icon {
+        @extend .app-ml-1, .app-mr-0;
       }
     }
   }
 
-  tbody {
-    tr {
-      td {
-        &:not(.app-col-detail) {
-          div {
-            line-height: 20px;
-          }
-        }       
-      }
-    }
+  .app-mark-rounded {
+    $app-size: 50px;
+
+    position: absolute;
+    top: calc(-#{$app-size} / 2);
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $app-size;
+    width: $app-size;
+    border-radius: 50%;
+    background-color: #5AB15E;
+    color: $app-color-lightnes;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
