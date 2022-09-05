@@ -20,7 +20,7 @@ import { ObjectComponent } from './components/access/object/object.component';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'keycloak', component: AuthComponent },
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
@@ -37,7 +37,8 @@ const routes: Routes = [
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'access', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'import', component: ImportComponent, canActivate: [AuthGuard] },
-  { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] }
+  { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
