@@ -48,6 +48,11 @@ $app-table-color-border: $app-card-border-color;
 $app-table-color-bg: $app-color-lightnes;
 $app-table-color-bg-hover: $app-gray-2;
 
+// home
+$app-home-card-gap: 32px !default;
+$app-home-card-width: 25% !default;
+
+
 // gaps
 $gaps: (
   "0": 0,
