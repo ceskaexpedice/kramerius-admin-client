@@ -13,22 +13,47 @@ export class AuthService {
   static AUTH_NOT_AUTHORIZED = 2;
   static AUTH_NOT_LOGGED_IN = 3;
 
+  static GLOBAL_ACTIONS_LOADED = 0;
+  static SPECIFIC_ACTIONS_LOADED = 0;
+
   user: User;
   static token: string;
 
+  // global actions
   authorizedGlobalActions: string[];
+
+  // specific actions
+  authorizedSpecificActions =  {};
 
   constructor(private http: HttpClient, private settings: AppSettings) {
     AuthService.token = localStorage.getItem('account.token');
+    this.loadGlobalAuthorizedActions((status: number) => {
+      console.log("Authorized actions loaded")
+    });
+  }
+
+  loadGlobalAuthorizedActions(callback: (number) => void) {
     this.getAuthorizedActions('uuid:1').subscribe((rAct: RightAction[]) => {
       this.authorizedGlobalActions = [];
       rAct.forEach(rA => {
         this.authorizedGlobalActions.push(rA.code);
       });
+      callback(AuthService.GLOBAL_ACTIONS_LOADED);
+    });
+  }
+
+  loadAuthorizedSpecificActions(pid: string, callback: (number) => void) {
+    this.getAuthorizedActions(pid).subscribe((rAct: RightAction[]) => {
+      let specActions = [];
+      rAct.forEach(rA => {
+        specActions.push(rA.code);
+      });
+      this.authorizedSpecificActions[pid]= specActions;
+      callback(AuthService.SPECIFIC_ACTIONS_LOADED);
     });
     
   }
-
+  
 
   baseUrl(): string {
     return location.origin + this.settings.deployPath;
@@ -56,13 +81,20 @@ export class AuthService {
   }
 
   isAuthorized() {
-    return this.user && this.user.isAdmin();
+    let flag = this.user && this.authorizedGlobalActions && this.authorizedGlobalActions.indexOf('a_admin_read') >=0; 
+    if (flag) {
+      return this.authorizedGlobalActions.indexOf("a_admin_read") >=0;
+    }    
+    return false;
   }
 
+  // return authorized actions
   getAuthorizedActions(pid: string) {
     return this.http.get(`${this.settings.clientApiBaseUrl}/user/actions?pid=${pid}`)
         .pipe(map(response => RightAction.fromJsonArray(response)));
   }
+
+
 
   /*
   private validateToken(): Observable<User> {
@@ -83,13 +115,17 @@ export class AuthService {
       callback(AuthService.AUTH_NOT_LOGGED_IN);
       return;
     }
+
     this.validateToken().subscribe((user: User) => {
       this.user = user;
-      if (this.isAuthorized()) {
-        callback(AuthService.AUTH_AUTHORIZED);
-      } else {
-        callback(AuthService.AUTH_NOT_AUTHORIZED);
-      }
+      // load global actions
+      this.loadGlobalAuthorizedActions((status:number)=> {
+        if (this.isAuthorized()) {
+          callback(AuthService.AUTH_AUTHORIZED);
+        } else {
+          callback(AuthService.AUTH_NOT_AUTHORIZED);
+        }
+      });
     },
     (error) => {
       callback(AuthService.AUTH_NOT_LOGGED_IN);

@@ -22,16 +22,19 @@
         <mat-card fxLayout="column" class="app-card app-view-border">
 					<mat-card-content>
 						<ng-container *ngIf="view == 'repositoryManagement'">
-							<span [matTooltip]="notAllowed ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="notAllowed  ? 'app-alert-not-allowed' : null">
-								<button mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2" [disabled]="notAllowed">{{ 'button.buildProcessingIndex' | translate }}</button>
+							<span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
+								<button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2" >{{ 'button.buildProcessingIndex' | translate }}</button>
 							</span>
-							<button mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+							<span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
+								<button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+							</span>								
 						</ng-container>
+								
 						<ng-container *ngIf="view == 'exports'">
 							<div class="app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.global' | translate }}</h3>
 								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportStatistics' | translate }}</button>
-								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportPidsOfDnntLicensedObjects' | translate }}</button> <!-- do CSV -->
+								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportPidsOfDnntLicensedObjects' | translate }}</button> 
 								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.generateAccessLogs' | translate }}</button>
 							</div>
 							<mat-divider [inset]="true"></mat-divider>
@@ -41,32 +44,50 @@
 								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportDocument' | translate }} (FOXML)</button>
 							</div>
 						</ng-container>
+
 						<ng-container *ngIf="view == 'bulkDataEditing'">
 							<div class="app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.basedOnEmbeddedPids' | translate }}</h3>
 								<!-- tj. změna viditelnosti -->
-								<button mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2">{{ 'button.setPublicPrivate' | translate }}</button>
+								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2">{{ 'button.setPublicPrivate' | translate }}</button>
+								</span>
+
 								<!-- DNNT, DNNT2 apod. -->
-								<button mat-flat-button (click)="openAddLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.addLicense' | translate }}</button>
+								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openAddLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.addLicense' | translate }}</button>
+								</span>
+
 								<!-- DNNT, DNNT2 apod. -->
-								<button mat-flat-button (click)="openRemoveLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.removeLicense' | translate }}</button>
+								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openRemoveLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.removeLicense' | translate }}</button>
+								</span>
 							</div>
 							<mat-divider [inset]="true"></mat-divider>
+							<!-- Pohybyliva zed - vypnuta
 							<div class="app-mt-4 app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.basedOnData' | translate }}</h3>
-								<!-- tj. pohyblivá zeď -->
 								<button mat-flat-button (click)="todo()" color="primary" disabled  class="app-mr-2">{{ 'button.setPublicByDates' | translate }}</button>
-							</div>		
+							</div>
+							-->		
 							<mat-divider [inset]="true"></mat-divider>
 							<div class="app-mt-4">
 								<h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
-								<button mat-flat-button (click)="openScheduleDeleteObjectsSmartDialog()" color="warn" class="app-mr-2">{{ 'button.deleteObjectsSmart' | translate }}</button>
-								<button mat-flat-button (click)="openDeleteObjectsLowLevelDialog()" color="warn">{{ 'button.deleteObjectsLowLevel' | translate }}</button>
+								<span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openScheduleDeleteObjectsSmartDialog()" color="warn" class="app-mr-2">{{ 'button.deleteObjectsSmart' | translate }}</button>
+								</span>
+								<span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openDeleteObjectsLowLevelDialog()" color="warn">{{ 'button.deleteObjectsLowLevel' | translate }}</button>
+								</span>
 							</div>
 						</ng-container>
 						<ng-container *ngIf="view == 'statistics'">
-							<button mat-flat-button color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">{{ 'button.generateNkpLogs' | translate }}</button>
-							<button mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button><!--od do-->
+							<span [matTooltip]="!allowedGlobalAction('a_generate_nkplogs') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_generate_nkplogs')  ? 'app-alert-not-allowed' : null">
+								<button [disabled]="!allowedGlobalAction('a_generate_nkplogs')" mat-flat-button color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">{{ 'button.generateNkpLogs' | translate }}</button>
+							</span>
+							<span [matTooltip]="!allowedGlobalAction('a_statistics_edit') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_statistics_edit')  ? 'app-alert-not-allowed' : null">
+								<button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button><!--od do-->
+							</span>
 							<!-- <button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button>
 							<button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button> -->
 						</ng-container>

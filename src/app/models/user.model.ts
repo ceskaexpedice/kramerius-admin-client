@@ -25,7 +25,8 @@ export class User {
     return this.authenticated;
   }
 
+  /*
   isAdmin(): boolean {
     return this.roles.indexOf('kramerius_admin') >= 0;
-  }
+  }*/
 }

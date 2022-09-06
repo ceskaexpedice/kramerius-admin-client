@@ -14,6 +14,7 @@ import { UIService } from 'src/app/services/ui.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { DeleteObjectsLowLevelDialogComponent } from 'src/app/dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
 import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-repository',
@@ -23,13 +24,14 @@ import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-de
 export class RepositoryComponent implements OnInit {
   view: string;
 
-  // to test accesibility
-  notAllowed: boolean = false;
+  // // to test accesibility
+  notAllowed: boolean = true;
 
   constructor(
     private dialog: MatDialog,
     private ui: UIService,
     private adminApi: AdminApiService,
+    private auth: AuthService,
     private local: LocalStorageService
   ) { }
 
@@ -158,6 +160,12 @@ export class RepositoryComponent implements OnInit {
     console.log('TODO: implement');
   }
 
+  allowedGlobalAction(name:string) {
+    if (this.auth.authorizedGlobalActions) {
+      let retval = this.auth.authorizedGlobalActions.indexOf(name) >= 0;
+      return retval;
+    } else return false;
+  }
 
   openNkpLogyDialog() {
     const dialogRef = this.dialog.open(GenerateNkpLogsDialogComponent, {

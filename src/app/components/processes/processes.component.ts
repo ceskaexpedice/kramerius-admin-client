@@ -11,6 +11,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { forkJoin, interval, Subscription } from 'rxjs';
 import { UIService } from 'src/app/services/ui.service';
 import { CancelScheduledProcessesDialogComponent } from 'src/app/dialogs/cancel-scheduled-processes-dialog/cancel-scheduled-processes-dialog.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -22,6 +23,13 @@ export class ProcessesComponent implements OnInit {
 
   //TODO: should be in it's own component
   //Test process
+
+  static ONWER_ACTION:string = 'a_owner_process_edit';
+  // cteni musi byt uz na strane backendu
+  static READ_ACTION:string = 'a_process_read';
+  static EDIT_ACTION:string = 'a_process_edit';
+
+
   testProcessFinalStates = ['FINISHED', 'FAILED', 'WARNING', 'RANDOM'];
   selectedtestProcessFinalState = this.testProcessFinalStates[0];
   testProcessProcessesInBatch = [1, 2, 3, 4, 5]
@@ -30,9 +38,10 @@ export class ProcessesComponent implements OnInit {
   selectedTestProcessDuration = this.testProcessDuration[0];
 
   displayedColumns = ['expand', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner', 'action'];
+
   // to test accesibility
-  notAllowed: boolean = false;
-  batchId: string = 'fixme';
+  //notAllowed: boolean = true;
+  //batchId: string = '94';
 
 
   // Paginator
@@ -62,6 +71,7 @@ export class ProcessesComponent implements OnInit {
 
   constructor(
     private adminApi: AdminApiService,
+    private auth: AuthService,
     private dialog: MatDialog,
     public appSettings: AppSettings,
     private ui: UIService
@@ -254,6 +264,23 @@ export class ProcessesComponent implements OnInit {
       }
       this.reloadProcesses();
     });
+  }
+
+  notAllowed(b:string) {
+    if (this.auth.user) {
+      if (this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.ONWER_ACTION) >= 0 && 
+            this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.READ_ACTION) >= 0) {
+
+            let ub =  this.batches.filter(batch => batch.id == Number(b));
+            if (ub.length > 0) {
+              return ub[0].ownerId !== this.auth.user.uid;
+            }
+
+      } else if (this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.EDIT_ACTION) >= 0) {
+        return false;
+      } 
+    } 
+    return true;
   }
 
 }

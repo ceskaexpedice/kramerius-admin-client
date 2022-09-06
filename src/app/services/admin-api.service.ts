@@ -342,9 +342,12 @@ export class AdminApiService {
   }
 
   getActions(pid:String): Observable<any> {
-    return this.get(`/rights/actions/${pid}`).pipe(map(response =>
+    return this.get(`/rights/actions?pid=${pid}`).pipe(map(response =>
       RightAction.fromJsonArray(response)));
   }
+
+  
+  
 
   createLicense(license: License): Observable<License> {
     return this.post(`/licenses`, license.toJson()).pipe(map(response =>

@@ -29,13 +29,13 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
+          <a *ngIf="specificAuthorizedActions.indexOf('a_rights_edit')>=0"  mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
             <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.actions' | translate }}
           </a>
-          <a mat-tab-link (click)="changeView('accessibility')" [active]="view == 'accessibility'">
+          <a *ngIf="specificAuthorizedActions.indexOf('a_set_accessibility')>=0" mat-tab-link (click)="changeView('accessibility')" [active]="view == 'accessibility'">
             <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'tabnav.accessibility' | translate }}
           </a>
-          <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
+          <a *ngIf="specificAuthorizedActions.indexOf('a_collections_edit')>=0"  mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
             <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'tabnav.inCollections' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
@@ -147,19 +147,20 @@
           <mat-card-content>
             <div class="app-mb-4">
               <h3 class="app-mt-0">{{ 'desc.synchronization' | translate }}</h3>
-              <button mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2">{{
+              <button  [disabled]="specificAuthorizedActions.indexOf('a_index') < 0" mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2">{{
                 'button.reindexSearchIndex' | translate }}</button>
-              <button mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{
+              <button [disabled]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0" mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{
                 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
             </div>
             <mat-divider [inset]="true"></mat-divider>
             <div class="app-mt-4 app-mb-4">
               <h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
-              <button mat-flat-button (click)="deleteObjectSmart()" color="warn" class="app-mr-2">{{
+              <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectSmart()" color="warn" class="app-mr-2">{{
                 'button.deleteObjectSmart' | translate }}</button>
-              <button mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' |
+              <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' |
                 translate }}</button>
             </div>
+            <!--
             <mat-divider [inset]="true"></mat-divider>
             <div class="app-mt-4">
               <h3 class="app-mt-0">{{ 'desc.exports' | translate }}</h3>
@@ -167,6 +168,7 @@
                 PDF</button>
               <button mat-flat-button disabled color="primary">{{ 'button.export' | translate }} FOXML</button>
             </div>
+            -->
           </mat-card-content>
         </mat-card>
       </div>

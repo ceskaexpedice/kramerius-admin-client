@@ -16,6 +16,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -43,7 +44,10 @@ export class ObjectComponent implements OnInit {
   licenses;
   policy;
 
+  specificAuthorizedActions = [];
+
   constructor(
+    private authApi: AuthService,
     private local: LocalStorageService,
     private router: Router,
     private route: ActivatedRoute,
@@ -60,10 +64,27 @@ export class ObjectComponent implements OnInit {
       this.pid = params['pid'];
       //this.title = this.pid;
       if (!!this.pid) {
-        this.loadData();
+
+        this.authApi.loadAuthorizedSpecificActions(this.pid, (res:number)=>{
+          this.specificAuthorizedActions =  this.authApi.authorizedSpecificActions[this.pid];
+
+          let indexEnabled  = this.specificAuthorizedActions.indexOf('a_index') >=0;
+          let rightsEnabled  = this.specificAuthorizedActions.indexOf('a_rights_edit') >=0;
+          let accessibilityEnabled  = this.specificAuthorizedActions.indexOf('a_set_accessibility') >=0;
+          let rebuildProcessingIndexEnabled  = this.specificAuthorizedActions.indexOf('a_rebuild_processing_index') >=0;
+          let deleteEEnabled  = this.specificAuthorizedActions.indexOf('a_delete') >=0;
+
+          if (indexEnabled || rightsEnabled || accessibilityEnabled || rebuildProcessingIndexEnabled || deleteEEnabled) {
+            this.loadData(); 
+          } else {
+            this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation403');
+          }
+        });
       }
     });
   }
+
+  
 
   loadData() {
     this.checkingPid = true;
@@ -100,24 +121,25 @@ export class ObjectComponent implements OnInit {
   }
 
   loadCollections() {
-    this.loadingCollections = true;
-    this.superCollections = undefined;
-    this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
-      this.superCollections = data[0];
-      this.loadingCollections = false;
-    }, (error) => {
-      console.log(error);
-      this.loadingCollections = false;
-      this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tento objekt")
-    });
-
-    // PEDRO -> chybel popisek, vzal jsem z collection.component.ts
-    this.collectionsService.getCollection(this.pid).subscribe((collection: Collection) => {
-      this.collection = collection;
-    }, (error) => {
-      console.log(error);
-      this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
-    });
+    if (this.specificAuthorizedActions.indexOf('a_collections_edit')>=0) {
+      this.loadingCollections = true;
+      this.superCollections = undefined;
+      this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
+        this.superCollections = data[0];
+        this.loadingCollections = false;
+      }, (error) => {
+        console.log(error);
+        this.loadingCollections = false;
+        this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tento objekt")
+      });
+      // PEDRO -> chybel popisek, vzal jsem z collection.component.ts
+      this.collectionsService.getCollection(this.pid).subscribe((collection: Collection) => {
+        this.collection = collection;
+      }, (error) => {
+        console.log(error);
+        this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
+      });
+    }
   }
 
   loadLicenses() {

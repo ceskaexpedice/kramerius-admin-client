@@ -33,14 +33,8 @@ export class RightsComponent implements OnInit {
 
   ngOnInit() {
     this.state = 'loading';
-    //this.initActions();
-    // this.api.getRoles().subscribe((roles: Role[]) => {
-    //   this.roles = roles;
-    //   this.state = 'success';
-    //   console.log('roles', roles);
-    // });
 
-    this.authApi.getAuthorizedActions(this.pid || 'uuid:1').subscribe((rAct: RightAction[]) => {
+    this.api.getActions(this.pid || 'uuid:1').subscribe((rAct: RightAction[]) => {
       this.actionMap = {};
 
       rAct.forEach(a=> {
@@ -59,8 +53,6 @@ export class RightsComponent implements OnInit {
         this.state = 'success';
         console.log('rights', rights);
       });
-  
-  
     });
 
   }
