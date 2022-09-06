@@ -25,5 +25,15 @@ export class RightAction {
     return result;
   }
 
+  static fromPidsMap(json):Map<string,RightAction[]>  {
+    const result = new Map<string,RightAction[]>();     
+    for (const key of Object.keys(json)) {
+      let actions = json[key].map((it:string) => new RightAction(it,it));
+      result[key] = actions;
+    }
+    return result;
+  }
+
+
 }
 

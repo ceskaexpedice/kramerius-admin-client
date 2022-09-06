@@ -5,6 +5,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-collections',
@@ -32,7 +33,10 @@ export class CollectionsComponent implements OnInit {
   dataSource = new MatTableDataSource(this.collections);
 
 
-  constructor(private collectionsService: CollectionsService, private router: Router, private locals: LocalStorageService) { }
+  constructor(
+    private auth:AuthService,
+    private collectionsService: CollectionsService, 
+    private router: Router, private locals: LocalStorageService) { }
 
   ngOnInit() {
     this.query = "";
@@ -60,10 +64,6 @@ export class CollectionsComponent implements OnInit {
     });
   }
 
-  // onPageChanged(event: PageEvent) {
-  //   this.pageIndex = event.pageIndex;
-  //   this.reload();
-  // }
 
 
   onNewCollections() {
@@ -99,6 +99,14 @@ export class CollectionsComponent implements OnInit {
   onStandaloneChange() {
     this.reloadTable();
   }
+
+  allowedGlobalAction(name:string) {
+    if (this.auth.authorizedGlobalActions) {
+      let retval = this.auth.authorizedGlobalActions.indexOf(name) >= 0;
+      return retval;
+    } else return false;
+  }
+
 
   private reloadTable() {
     this.collections = [];

@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Collection } from 'src/app/models/collection.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 
 
@@ -19,23 +20,48 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   potentialSuperCollections = [];
   potentialSuperCollectionsAll = [];
   selectedSuperCollection;
+  specificAuthorizedActions = [];
 
   inProgress = false;
 
   query: string;
 
-  constructor(public dialogRef: MatDialogRef<AddItemToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public data, private collectionApi: CollectionsService) {
+  allowedCollections: string[];
+
+  constructor(public dialogRef: MatDialogRef<AddItemToCollectionDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data,
+     private collectionApi: CollectionsService,
+     private authService: AuthService
+     ) {
     if (data) {
       this.pid = data.pid;
       this.title = data.title;
       this.isCollection = data.isCollection;
 
+      this.specificAuthorizedActions = data.specificAuthorizedActions ;
+
+ 
       this.collectionApi.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         let pidsOfCurrentSuperCollections = data[0].map(collection => collection.id);
         //TODO: handle offset, limit
         this.collectionApi.getCollections(0, 999).subscribe((data: [collections: Collection[], size: number]) => {
           this.potentialSuperCollections = data[0].filter(collection => collection.id != this.pid && !pidsOfCurrentSuperCollections.includes(collection.id))
           this.potentialSuperCollectionsAll = this.potentialSuperCollections;
+
+          this.authService.getPidsAuthorizedActions(this.potentialSuperCollectionsAll.map(c=> c.id)).subscribe((d:any) => {
+            this.allowedCollections = [];
+            this.potentialSuperCollectionsAll.forEach((cp)=> {
+              let actions = d[cp.id];
+              if (actions) {
+                actions.forEach((r)=> {
+                  if (r.code == 'a_collections_edit') {
+                    this.allowedCollections.push(cp.id);
+                  }
+                });
+              }
+            });
+          });
+
         }, (error) => {
           console.log(error);
           //TODO: handle error
@@ -51,6 +77,12 @@ export class AddItemToCollectionDialogComponent implements OnInit {
 
   ngOnInit() {
     this.query = "";
+
+  }
+
+  allowEditCollection(pid) {
+    let flag =  (this.allowedCollections && this.allowedCollections.includes(pid));
+    return flag;
   }
 
   onAdd(formData) {

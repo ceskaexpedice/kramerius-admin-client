@@ -94,6 +94,10 @@ export class AuthService {
         .pipe(map(response => RightAction.fromJsonArray(response)));
   }
 
+  getPidsAuthorizedActions(pids: string[]) {
+    return this.http.get(`${this.settings.clientApiBaseUrl}/user/pids_actions?pids=${pids.join(',')}`)
+        .pipe(map(response => RightAction.fromPidsMap(response)));
+  }
 
 
   /*

@@ -121,7 +121,9 @@ export class ObjectComponent implements OnInit {
   }
 
   loadCollections() {
-    if (this.specificAuthorizedActions.indexOf('a_collections_edit')>=0) {
+    // 
+    //if (this.specificAuthorizedActions.indexOf('a_collections_edit')>=0) {
+
       this.loadingCollections = true;
       this.superCollections = undefined;
       this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
@@ -139,7 +141,7 @@ export class ObjectComponent implements OnInit {
         console.log(error);
         this.ui.showErrorSnackBar("Sbírku se nepodařilo načíst")
       });
-    }
+    //}
   }
 
   loadLicenses() {
@@ -330,11 +332,15 @@ export class ObjectComponent implements OnInit {
   }
 
   onAddThisToACollection() {
+
+    
     const dialogRef = this.dialog.open(AddItemToCollectionDialogComponent, {
       data: {
         pid: this.pid,
         title: this.title,
         isCollection: false,
+        specificAuthorizedActions: this.specificAuthorizedActions
+
       },
       width: '600px',
       panelClass: 'app-add-item-to-collection'

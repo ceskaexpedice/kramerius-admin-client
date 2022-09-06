@@ -23,10 +23,14 @@
 			<input class="app-input-autocomplete app-w-100" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off" name="collection_filter">
 		</div>
 		<mat-card *ngFor="let superCollection of potentialSuperCollections" class="app-card app-view-item app-view-hover app-cursor-pointer" (click)="selectSuperCollection(superCollection)" [class.app-selected]="superCollection == selectedSuperCollection">
+			
+			<button [disabled]="!allowEditCollection(superCollection.id)"> ALLOWED </button>
+			<button [disabled]="allowEditCollection(superCollection.id)"> NOT ALLOWED </button>
+			
 			<mat-card-header>
 				<mat-card-title class="app-mb-1" fxLayout="row" fxLayoutAlign="start center">
 					<mat-icon [class.app-color-accent]="superCollection == selectedSuperCollection">{{ superCollection == selectedSuperCollection ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
-					{{superCollection.getName()}}
+					{{superCollection.getName() }}
 				</mat-card-title>
 				<mat-card-subtitle class="app-m-0">{{ superCollection.getDescription() }}</mat-card-subtitle>
 			</mat-card-header>
