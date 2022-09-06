@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/services/app-settings';
 import { UIService } from 'src/app/services/ui.service';
 import { RightAction } from 'src/app/models/right-action.model';
-import { AppState } from 'src/app/app-state';
 
 
 @Component({
@@ -22,8 +21,7 @@ export class NavbarComponent implements OnInit {
     private router: Router, 
     public settings: AppSettings, 
     public ui: UIService,
-    public appSettings: AppSettings,
-    public appState: AppState
+    public appSettings: AppSettings
     ) { }
 
   ngOnInit() {

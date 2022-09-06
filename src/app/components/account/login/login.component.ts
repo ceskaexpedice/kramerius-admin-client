@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import * as gitInfo from 'git-info.json'
-import { AppState } from 'src/app/app-state';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +17,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    public appSettings: AppSettings,
-    public appState: AppState
+    public appSettings: AppSettings
     ) { }
 
   ngOnInit() {
