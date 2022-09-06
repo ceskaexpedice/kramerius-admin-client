@@ -14,8 +14,8 @@
     </div>
     <div fxFlex class="app-oa-y app-pt-8">
 			<div class="app-container">
-				<div fxLayout="row" fxLayoutGap="32px">
-					<mat-card fxFlex="25%" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+				<div fxLayout="row wrap" fxLayoutAlign="center" class="app-cards-wrapper">
+					<mat-card class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
 						<mat-card-header>
 							<mat-card-title>Indexace</mat-card-title>
 							<mat-card-subtitle>Objekt</mat-card-subtitle>
@@ -36,7 +36,7 @@
 						</mat-card-actions>
 					</mat-card>
 
-					<mat-card fxFlex="25%" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+					<mat-card class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
 						<mat-card-header>
 							<mat-card-title>Indexace</mat-card-title>
 							<mat-card-subtitle>Model</mat-card-subtitle>
@@ -57,7 +57,7 @@
 						</mat-card-actions>
 					</mat-card>
 
-					<mat-card fxFlex="25%" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+					<mat-card class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
 						<mat-card-header>
 							<mat-card-title>Repozitář</mat-card-title>
 							<mat-card-subtitle>Hromadné úpravy dat</mat-card-subtitle>
@@ -78,7 +78,27 @@
 						</mat-card-actions>
 					</mat-card>
 
-					<mat-card fxFlex="25%" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+					<mat-card class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+						<mat-card-header>
+							<mat-card-title>Sbírky</mat-card-title>
+						</mat-card-header>
+						<mat-card-content>
+							<div class="app-mark-rounded" style="background-color: #00B8D4">
+								<mat-icon>library_books</mat-icon>
+							</div>
+							<div class="app-desc">
+								Atlas zahrnuje zobrazení zemí, které podléhaly bezprostředně habsburským vladařům, další potom přináší materiál k suverénním říšským ...
+							</div>
+						</mat-card-content>
+						<mat-card-actions>
+							<button mat-flat-button color="accent">
+								<span>Přejít</span>
+								<mat-icon>arrow_forward</mat-icon>
+							</button>
+						</mat-card-actions>
+					</mat-card>
+
+					<mat-card class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
 						<mat-card-header>
 							<mat-card-title>Sbírky</mat-card-title>
 						</mat-card-header>

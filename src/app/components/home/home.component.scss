@@ -2,7 +2,15 @@
 @import './src/sass/app-mixins.scss';
 @import './src/sass/app-global.scss';
 
+.app-cards-wrapper {
+  margin-left: -#{$app-home-card-gap};
+}
+
 .mat-card {
+  margin-right: $app-home-card-gap;
+  margin-bottom: $app-home-card-gap;
+  flex: 0 0 calc(#{$app-home-card-width} - #{$app-home-card-gap});
+  max-width: calc(#{$app-home-card-width} - #{$app-home-card-gap});
   padding-top: 40px;
   position: relative;
 
