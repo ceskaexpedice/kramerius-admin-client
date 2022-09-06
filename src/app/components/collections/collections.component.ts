@@ -27,7 +27,9 @@ export class CollectionsComponent implements OnInit {
   sortField: string;
   sortAsc: boolean;
 
-  displayedColumns = ['name_cze', 'description_cze', 'createdAt', 'modifiedAt'];
+  isAllowed: boolean = true;
+
+  displayedColumns = ['name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource(this.collections);
 

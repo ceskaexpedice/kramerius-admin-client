@@ -167,7 +167,8 @@
     "schedule": "Naplánovat",
     "yes": "Ano",
     "no": "Ne",
-    "showHelp": "Zobrazit nápovědu"
+    "showHelp": "Zobrazit nápovědu",
+    "changeCollectionRights": "Změnit práva ke sbírce"
   },
   "field": {
     "public": "Veřejné",
@@ -603,6 +604,7 @@
     "changeVisibilityFor": "Změnit viditelnost pro",
     "skipInconsistentObjects": "Přeskakovat nekonzistentní objekty",
     "indexingType": "Typ indexace",
-    "logs": "Logy"
+    "logs": "Logy",
+    "right": "Oprávnění"
   }
 }

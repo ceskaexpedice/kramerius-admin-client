@@ -167,7 +167,8 @@
     "schedule": "Schedule",
     "yes": "Yes",
     "no": "No",
-    "showHelp": "Show help"
+    "showHelp": "Show help",
+    "changeCollectionRights": "Change collection rights"
   },
   "field": {
     "public": "Public",
@@ -603,6 +604,7 @@
     "changeVisibilityFor": "Change visibility for",
     "skipInconsistentObjects": "Skip inconsistent objects",
     "indexingType": "Indexing type",
-    "logs": "Logs"
+    "logs": "Logs",
+    "right": "Right"
   }
 }
