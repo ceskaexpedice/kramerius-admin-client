@@ -40,6 +40,100 @@
     "others": "Others",
     "inCollections": "In collections"
   },
+  "rights": {
+    "a_read": {
+      "title": "Read",
+      "subtitle": "Basic right to access a document"
+    },
+    "a_pdf_read": {
+      "title": "Pdf and print",
+      "subtitle": "Access to generate pdf and print"
+    },
+    "a_delete": {
+      "title": "Delete",
+      "subtitle": "Starting a process to delete an object"
+    },
+    "a_process_edit": {
+      "title": "Process management",
+      "subtitle": "Process management"
+    },
+    "a_process_read": {
+      "title": "Reading process",
+      "subtitle": "Reading the process list"
+    },
+    "a_owner_process_edit": {
+      "title": "Managing own processes",
+      "subtitle": "Managing own processes"
+    },
+    "a_index": {
+      "title": "ndexing",
+      "subtitle": "Starting the indexing process"
+    },
+    "a_rebuild_processing_index": {
+      "title": "Rebuild the index process",
+      "subtitle": "Rebuild the index process"
+    },
+    "a_import": {
+      "title": "Import",
+      "subtitle": "Starting the import process"
+    },
+    "a_set_accessibility": {
+      "title": "Accessibility",
+      "subtitle": "Visibility flag setting or license setting"
+    },
+    "a_export_cdk": {
+      "title": "ČDK export",
+      "subtitle": "Setting rights for exporting to ČDK"
+    },
+    "a_statistics": {
+      "title": "Statistics",
+      "subtitle": "View statistics"
+    },
+    "a_statistics_edit": {
+      "title": "Editing statistics",
+      "subtitle": "Editing statistics"
+    },
+    "a_export_replications": {
+      "title": "Export replication",
+      "subtitle": "Document replication rights"
+    },
+    "a_import_replications": {
+      "title": "Import replication",
+      "subtitle": "Práva pro spuštění replikace"
+    },
+    "a_criteria_read": {
+      "title": "Criteria",
+      "subtitle": "Enable reading criteria"
+    },
+    "a_rights_edit": {
+      "title": "Edit rights",
+      "subtitle": "Edit rights"
+    },
+    "a_collections_read": {
+      "title": "Reading collections",
+      "subtitle": "Right to read collections"
+    },
+    "a_collections_edit": {
+      "title": "Editing of collections",
+      "subtitle": "Right to edit collections"
+    },
+    "a_generate_nkplogs": {
+      "title": "Generation of NKP logs",
+      "subtitle": "The right to start the NKP log generation process"
+    },
+    "a_roles_edit": {
+      "title": "Editing roles",
+      "subtitle": "Editing roles"
+    },
+    "a_roles_read": {
+      "title": "Role reading",
+      "subtitle": "Role reading"
+    },
+    "a_admin_read": {
+      "title": "Admin reading",
+      "subtitle": "Access to the administration interface"
+    }
+  },
   "alert": {
     "statistics": {
       "noData": "No data available"
@@ -167,7 +261,8 @@
     "schedule": "Schedule",
     "yes": "Yes",
     "no": "No",
-    "showHelp": "Show help"
+    "showHelp": "Show help",
+    "changeCollectionRights": "Change collection rights"
   },
   "field": {
     "public": "Public",
@@ -603,6 +698,7 @@
     "changeVisibilityFor": "Change visibility for",
     "skipInconsistentObjects": "Skip inconsistent objects",
     "indexingType": "Indexing type",
-    "logs": "Logs"
+    "logs": "Logs",
+    "right": "Right"
   }
 }

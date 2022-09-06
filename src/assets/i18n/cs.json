@@ -40,6 +40,100 @@
     "others": "Ostatní",
     "inCollections": "Ve sbírkách"
   },
+  "rights": {
+    "a_read": {
+      "title": "Čtení",
+      "subtitle": "Základní právo pro přístup k dokumentu"
+    },
+    "a_pdf_read": {
+      "title": "Pdf a tisk",
+      "subtitle": "Přístup pro generování pdf a tisku"
+    },
+    "a_delete": {
+      "title": "Mazání",
+      "subtitle": "Spuštění procesu pro mazání objektu"
+    },
+    "a_process_edit": {
+      "title": "Správa procesu",
+      "subtitle": "Správa procesu"
+    },
+    "a_process_read": {
+      "title": "Čtení procesu",
+      "subtitle": "Čtení seznamu procesu"
+    },
+    "a_owner_process_edit": {
+      "title": "Správa vlastních procesů",
+      "subtitle": "Správa vlastních procesů"
+    },
+    "a_index": {
+      "title": "Indexace",
+      "subtitle": "Spuštění procesu indexace"
+    },
+    "a_rebuild_processing_index": {
+      "title": "Rebuild procesu indexu",
+      "subtitle": "Rebuild procesu indexu"
+    },
+    "a_import": {
+      "title": "Import",
+      "subtitle": "Spuštění procesu importu"
+    },
+    "a_set_accessibility": {
+      "title": "Přístupnost",
+      "subtitle": "Nastavení příznaku viditelnosti nebo nastavení licence"
+    },
+    "a_export_cdk": {
+      "title": "Export ČDK",
+      "subtitle": "Nastavení práv pro exportování do ČDK"
+    },
+    "a_statistics": {
+      "title": "Statistiky",
+      "subtitle": "Zobrazení statistik"
+    },
+    "a_statistics_edit": {
+      "title": "Editace statistik",
+      "subtitle": "Editace statistik"
+    },
+    "a_export_replications": {
+      "title": "Export replikace",
+      "subtitle": "Práva pro replikaci dokumentu"
+    },
+    "a_import_replications": {
+      "title": "Import replikace",
+      "subtitle": "Práva pro spuštění replikace"
+    },
+    "a_criteria_read": {
+      "title": "Kritéria",
+      "subtitle": "Umožnění čtení kriterií"
+    },
+    "a_rights_edit": {
+      "title": "Editace práv",
+      "subtitle": "Editace práv"
+    },
+    "a_collections_read": {
+      "title": "Čtení sbírek",
+      "subtitle": "Právo pro čtení sbírek"
+    },
+    "a_collections_edit": {
+      "title": "Editace sbírek",
+      "subtitle": "Právo pro editaci sbírek"
+    },
+    "a_generate_nkplogs": {
+      "title": "Generování NKP logů",
+      "subtitle": "Právo spouštět proces generování NKP logů"
+    },
+    "a_roles_edit": {
+      "title": "Editace rolí",
+      "subtitle": "Editace rolí"
+    },
+    "a_roles_read": {
+      "title": "Čtení rolí",
+      "subtitle": "Čtení rolí"
+    },
+    "a_admin_read": {
+      "title": "Admin čtení",
+      "subtitle": "Přístup do administračního rozhraní"
+    }
+  },
   "alert": {
     "statistics": {
       "noData": "K dispozici nejsou žádná data"
@@ -167,7 +261,8 @@
     "schedule": "Naplánovat",
     "yes": "Ano",
     "no": "Ne",
-    "showHelp": "Zobrazit nápovědu"
+    "showHelp": "Zobrazit nápovědu",
+    "changeCollectionRights": "Změnit práva ke sbírce"
   },
   "field": {
     "public": "Veřejné",
@@ -603,6 +698,7 @@
     "changeVisibilityFor": "Změnit viditelnost pro",
     "skipInconsistentObjects": "Přeskakovat nekonzistentní objekty",
     "indexingType": "Typ indexace",
-    "logs": "Logy"
+    "logs": "Logy",
+    "right": "Oprávnění"
   }
 }

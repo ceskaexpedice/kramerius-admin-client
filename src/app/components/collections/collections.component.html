@@ -24,14 +24,14 @@
           <ng-container matColumnDef="name_cze">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-              <a [routerLink]="['/collections', element.id]">
+              <a [routerLink]="isAllowed ? ['/collections',  element.id] : null" [class.app-avoid-click]="!isAllowed">
                 {{ element.name_cze }}
               </a>
             </td>
           </ng-container>
           <ng-container matColumnDef="description_cze">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.description' | translate }}</th>
-            <td mat-cell *matCellDef="let element" [matTooltip]="element.description_cze">
+            <td mat-cell *matCellDef="let element" [matTooltip]="isAllowed ? element.description_cze : null">
               <div class="app-text-cutter-wrapper">
                 <div class="app-text-cutter">
                   {{ element.description_cze }}
@@ -47,65 +47,19 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.managed' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{ element.modifiedAt | date : 'dd.MM.yyyy' }}</td>
           </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <a [routerLink]="isAllowed ? ['/object',  element.id] : null" class="app-text-right" [class.app-avoid-click]="!isAllowed" [matTooltip]="isAllowed ? ('button.changeCollectionRights' | translate) : null">
+                <mat-icon>admin_panel_settings</mat-icon>
+              </a>
+            </td>
+          </ng-container>
       
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/collections', row.id]" class="app-cursor-pointer"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.app-not-allowed]="!isAllowed" [matTooltip]="!isAllowed ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!isAllowed ? 'app-alert-not-allowed' : null"></tr>
         </table>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-<!-- <div class="app-container-fluid app-collections app-h-100">
-  <div fxLayout="column" fxFlexFill>
-    <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="app-mb-4">
-      <div>
-        <button mat-flat-button color="primary" (click)="onNewCollections()">Vytvořit novou sbírku</button>
-      </div>
-      <div fxFlex>
-        <input class="app-input-autocomplete app-w-100" type="text" placeholder="Hledat sbírku" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
-      </div>
-      <div>
-        <mat-slide-toggle class="app-standalone-toggle" color="primary" (change)="onStandaloneChange()" [(ngModel)]="standaloneOnly">Pouze samostatné</mat-slide-toggle>
-      </div>
-    </div>
-    
-    <div class="app-h-100 app-oa-y">
-      <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
-      <table mat-table [dataSource]="dataSource" class="app-view-border app-w-100" matSort>
-        <ng-container matColumnDef="name_cze">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Název</th>
-          <td mat-cell *matCellDef="let element">
-            <a [routerLink]="['/collections', element.id]">
-              {{ element.name_cze }}
-            </a>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="description_cze">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Popis</th>
-          <td mat-cell *matCellDef="let element" [matTooltip]="element.description_cze">
-            <div class="app-text-cutter-wrapper">
-              <div class="app-text-cutter">
-                {{ element.description_cze }}
-              </div>
-            </div>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="createdAt">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Vytvořeno</th>
-          <td mat-cell *matCellDef="let element">{{ element.createdAt | date : 'dd.MM.yyyy' }}</td>
-        </ng-container>
-        <ng-container matColumnDef="modifiedAt">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Upraveno</th>
-          <td mat-cell *matCellDef="let element">{{ element.modifiedAt | date : 'dd.MM.yyyy' }}</td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/collections', row.id]" class="app-cursor-pointer"></tr>
-      </table>
-    </div>
-  </div>
-</div> -->

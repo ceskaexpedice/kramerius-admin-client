@@ -147,18 +147,22 @@
           <mat-card-content>
             <div class="app-mb-4">
               <h3 class="app-mt-0">{{ 'desc.synchronization' | translate }}</h3>
-              <button  [disabled]="specificAuthorizedActions.indexOf('a_index') < 0" mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2">{{
-                'button.reindexSearchIndex' | translate }}</button>
-              <button [disabled]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0" mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{
-                'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+              <span [matTooltip]="specificAuthorizedActions.indexOf('a_index') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_index') < 0 ? 'app-alert-not-allowed' : null">
+                <button  [disabled]="specificAuthorizedActions.indexOf('a_index') < 0" mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2" >{{ 'button.reindexSearchIndex' | translate }}</button>
+              </span>
+              <span [matTooltip]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0 ? 'app-alert-not-allowed' : null">
+                <button [disabled]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0" mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+              </span>
             </div>
             <mat-divider [inset]="true"></mat-divider>
             <div class="app-mt-4 app-mb-4">
               <h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
-              <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectSmart()" color="warn" class="app-mr-2">{{
-                'button.deleteObjectSmart' | translate }}</button>
-              <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' |
-                translate }}</button>
+              <span [matTooltip]="specificAuthorizedActions.indexOf('a_delete') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_delete') < 0 ? 'app-alert-not-allowed' : null">
+                <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectSmart()" color="warn" class="app-mr-2">{{'button.deleteObjectSmart' | translate }}</button>
+              </span>
+              <span [matTooltip]="specificAuthorizedActions.indexOf('a_delete') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_delete') < 0 ? 'app-alert-not-allowed' : null">
+                <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' | translate }}</button>
+              </span>
             </div>
             <!--
             <mat-divider [inset]="true"></mat-divider>
