@@ -142,6 +142,17 @@
     }
   }
 
+  &.app-not-allowed {
+    color: $app-color-disabled !important; 
+
+    .mat-card-header {
+      .mat-card-title,
+      .mat-card-subtitle {
+        color: $app-color-disabled !important;
+      }
+    }
+  }
+
   .app-button-wrapper {
     @extend .app-p-4;
     background-color: $app-card-bg-hover;
