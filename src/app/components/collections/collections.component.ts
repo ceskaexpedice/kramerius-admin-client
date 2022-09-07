@@ -17,10 +17,9 @@ export class CollectionsComponent implements OnInit {
 
   collections: Collection[] = [];
   allCollections: Collection[] = [];
-  // Paginator
-  // resultCount = 0;
-  // pageIndex = 0;
-  // pageSize = 50;
+  
+  collectionActions:Map<string,string[]> = new Map();
+
   state = 'none';
   query: string;
   standaloneOnly: boolean;
@@ -28,7 +27,8 @@ export class CollectionsComponent implements OnInit {
   sortField: string;
   sortAsc: boolean;
 
-  isAllowed: boolean = true;
+  //isAllowed: boolean = false;
+
 
   displayedColumns = ['name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
   @ViewChild(MatSort) sort: MatSort;
@@ -57,16 +57,43 @@ export class CollectionsComponent implements OnInit {
     // const offset = this.pageIndex * this.pageSize;
     // const limit = this.pageSize;
     this.collectionsService.getCollections(0, 5000).subscribe(([collections, count]: [Collection[], number]) => {
+
       this.allCollections = collections;
-      // this.resultCount = count;
-      this.reloadTable();
-      this.state = 'success';
-      this.dataSource = new MatTableDataSource(this.collections);
-      this.dataSource.sort = this.sort;
+
+      this.auth.getPidsAuthorizedActions(this.allCollections.map((c)=> c.id)).subscribe((d:any) => {
+
+        Object.keys(d).forEach((k)=> {
+          let actions = d[k].map((v)=> v.code);
+          this.collectionActions.set(k, actions);
+        });
+
+        this.reloadTable();
+        this.state = 'success';
+        this.dataSource = new MatTableDataSource(this.collections);
+        this.dataSource.sort = this.sort;
+  
+      });
     });
   }
 
 
+  allowEdit(pid) {
+    if (this.collectionActions.has(pid)) {
+      if (this.collectionActions.get(pid).includes('a_collections_edit')) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  allowRights(pid) {
+    if (this.collectionActions.has(pid)) {
+      if (this.collectionActions.get(pid).includes('a_rights_edit')) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   onNewCollections() {
     this.router.navigate(['/', 'collections', 'new']);
@@ -121,18 +148,6 @@ export class CollectionsComponent implements OnInit {
         this.collections.push(col);
       }
     }
-    /* this.collections.sort((a: Collection, b: Collection) => {
-      let r = 0;
-      if (this.sortField == 'createdAt' || this.sortField == 'modifiedAt') {
-        r = a[this.sortField].getTime() - b[this.sortField].getTime();
-      } else {
-        r = a[this.sortField].localeCompare(b[this.sortField]);
-      }
-      if (!this.sortAsc) {
-        r = -r;
-      }
-      return r;
-    }); */
     this.dataSource = new MatTableDataSource(this.collections);
     this.dataSource.sort = this.sort;
   }

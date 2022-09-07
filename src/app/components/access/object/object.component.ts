@@ -74,7 +74,9 @@ export class ObjectComponent implements OnInit {
           let rebuildProcessingIndexEnabled  = this.specificAuthorizedActions.indexOf('a_rebuild_processing_index') >=0;
           let deleteEEnabled  = this.specificAuthorizedActions.indexOf('a_delete') >=0;
 
-          if (indexEnabled || rightsEnabled || accessibilityEnabled || rebuildProcessingIndexEnabled || deleteEEnabled) {
+          let collectionEditEnabled  = this.specificAuthorizedActions.indexOf('a_collections_edit') >=0;
+
+          if (indexEnabled || rightsEnabled || accessibilityEnabled || rebuildProcessingIndexEnabled || deleteEEnabled || collectionEditEnabled) {
             this.loadData(); 
           } else {
             this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation403');

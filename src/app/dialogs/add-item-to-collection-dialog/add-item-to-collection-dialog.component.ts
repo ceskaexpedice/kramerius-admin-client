@@ -39,7 +39,6 @@ export class AddItemToCollectionDialogComponent implements OnInit {
       this.isCollection = data.isCollection;
 
       this.specificAuthorizedActions = data.specificAuthorizedActions ;
-
  
       this.collectionApi.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         let pidsOfCurrentSuperCollections = data[0].map(collection => collection.id);
