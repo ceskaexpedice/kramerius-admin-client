@@ -150,6 +150,11 @@
       .mat-card-subtitle {
         color: $app-color-disabled !important;
       }
+
+      img {
+        filter: grayscale(100%);
+        opacity: .5;
+      }
     }
   }
 
