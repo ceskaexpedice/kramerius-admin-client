@@ -1,9 +1,14 @@
+@import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
+
 .mat-cell {
   &.mat-column-description_cze {
     width: 70%;
   }
   
   &.mat-column-action {
+    @extend .app-pl-2;
     width: 50px;
   }
 }
