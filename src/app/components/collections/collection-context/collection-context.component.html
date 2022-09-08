@@ -3,14 +3,14 @@
     <strong>{{ 'desc.collectionsContainingThisCollection' | translate }}:</strong>
 </mat-card>
 <mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections"
-    [routerLink]="['/collections', superCollection['id']]">
+    [routerLink]="allowEdit(superCollection['id'])  ?  ['/collections', superCollection['id']] : null ">
     <mat-card-header fxLayout="row" fxLayoutGap="16px">
         <div>
             <img [src]="getThumb(superCollection['id'])" />
         </div>
         <div fxFlex class="app-left">
             <mat-card-title>
-                <mat-icon>link</mat-icon>{{ superCollection.getName() }}
+                <mat-icon *ngIf="allowEdit(superCollection['id'])">link</mat-icon>{{ superCollection.getName() }}
             </mat-card-title>
             <mat-card-subtitle>{{ superCollection.getDescription() }}</mat-card-subtitle>
         </div>

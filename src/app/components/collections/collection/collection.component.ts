@@ -62,17 +62,13 @@ export class CollectionComponent implements OnInit {
         //this.view = 'detail';
         this.view = this.local.getStringProperty('collection.view', 'detail');
         this.state = 'success';
-
+        // deti 
         this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid'])).subscribe((d:any) => {
           Object.keys(d).forEach((k)=> {
             let actions = d[k].map((v)=> v.code);
             this.collectionActions.set(k, actions);
           });
-
-          // reload 
-
         });
-  
       })
 
 
@@ -83,6 +79,15 @@ export class CollectionComponent implements OnInit {
     this.collectionsService.getCollectionsContainingItem(collectionId).subscribe((data: [collections: Collection[], size: number]) => {
       //console.log(data)
       this.superCollections = data[0];
+
+      this.auth.getPidsAuthorizedActions(this.superCollections.map(c=> c['id'])).subscribe((d:any) => {
+        Object.keys(d).forEach((k)=> {
+          let actions = d[k].map((v)=> v.code);
+          this.collectionActions.set(k, actions);
+        });
+      });
+
+
     }, (error) => {
       console.log(error);
       this.ui.showErrorSnackBar("snackbar.error.failedToLoadListOfCollectionsContainingThisCollection");

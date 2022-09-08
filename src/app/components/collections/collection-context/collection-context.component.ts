@@ -16,6 +16,8 @@ export class CollectionContextComponent implements OnInit {
   @Input() collection;
   @Input() state;
   @Input() superCollections;
+  @Input() collectionActions:Map<string,string[]>;
+
 
   @Output() updated = new EventEmitter<any>();
 
@@ -28,6 +30,17 @@ export class CollectionContextComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  allowEdit(pid) {
+    if (this.collectionActions.has(pid)) {
+      if (this.collectionActions.get(pid).includes('a_collections_edit')) {
+        console.log("Edit collection  true "+pid);
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   getThumb(uuid: string): string {
     return this.clientApi.getThumb(uuid);

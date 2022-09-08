@@ -1,7 +1,7 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
 <mat-card class="app-view-rights app-view-hover item-collection app-cursor-pointer"
     *ngFor="let item of filterCollections(items)" 
-    [routerLink]=" allowEdit(item['pid'])  ?  ['/collections', item['pid']] : null">
+    [routerLink]="allowEdit(item['pid'])  ?  ['/collections', item['pid']] : null">
     
     <mat-card-header fxLayout="row" fxLayoutGap="16px">
         <div>
