@@ -120,10 +120,9 @@
           </mat-card> -->
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
           <mat-card fxLayout="column" *ngIf="!loadingCollections" class="app-card app-view-border app-p-0">
-            <mat-card class="app-view-rights app-cursor-pointer" *ngFor="let superCollection of superCollections"
-              [routerLink]="allowCollectionEdit(superCollection['id']) ? '/collections/' + getCurrentRoute('string') : null">
+            <mat-card class="app-view-rights app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="allowCollectionEdit(superCollection['id']) ? '/collections/' + getCurrentRoute('string') : null" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowCollectionEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowCollectionEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
               <mat-card-header fxLayout="row" fxLayoutGap="16px">
-                <div>
+                <div *ngIf="getThumb(superCollection['id'])">
                   <img [src]="getThumb(superCollection['id'])" />
                 </div>
                 <div fxFlex class="app-left">
