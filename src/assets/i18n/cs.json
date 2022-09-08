@@ -156,6 +156,12 @@
       "error1": "Licence s tímto názvem už exituje, zadejte jiný název.",
       "error2": "Licenci se nepodařilo vytvořit."
     },
+    "collections": {
+      "noData": {
+        "content": "Tato sbírka neobsahuje žádné objekty ani sbírky.",
+        "context": "Tato sbírka není součástí žádné jiné sbírky."
+      }
+    },
     "notAllowed": "Na tuto akci nemáte dostatečná oprávnění!"
   },
   "batch": {

@@ -33,6 +33,14 @@ a {
   color: $app-color-warn !important;
 }
 
+.app-color-info {
+  color: $app-color-info !important;
+}
+
+.app-color-success {
+  color: $app-color-success !important;
+}
+
 // cleaners
 .app-cleanfix {
   @include cleanfix();

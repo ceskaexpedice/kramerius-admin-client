@@ -37,6 +37,8 @@ const routes: Routes = [
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'access', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'import', component: ImportComponent, canActivate: [AuthGuard] },
+  { path: 'import/foxml', component: ImportComponent, canActivate: [AuthGuard] },
+  { path: 'import/ndkmets', component: ImportComponent, canActivate: [AuthGuard] },
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];

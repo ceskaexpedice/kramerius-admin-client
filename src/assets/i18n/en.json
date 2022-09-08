@@ -156,6 +156,12 @@
       "error1": "The license with this name is already expired, please enter another name.",
       "error2": "The license could not be created."
     },
+    "collections": {
+      "noData": {
+        "content": "This collection does not contain any objects or collections.",
+        "context": "This collection is not part of any other collection."
+      }
+    },
     "notAllowed": "You do not have sufficient permissions for this action!"
   },
   "batch": {
