@@ -11,6 +11,7 @@ import { AddItemsToCollectionDialogComponent } from 'src/app/dialogs/add-items-t
 import { AddItemToCollectionDialogComponent } from 'src/app/dialogs/add-item-to-collection-dialog/add-item-to-collection-dialog.component';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-collection',
@@ -27,6 +28,9 @@ export class CollectionComponent implements OnInit {
   items: any[]; //polozky ve sbirce
   superCollections: Collection[] = []; //sbirky obsahujici tuto sbirku
 
+  collectionActions:Map<string,string[]> = new Map();
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -35,7 +39,8 @@ export class CollectionComponent implements OnInit {
     private clientApi: ClientApiService,
     private collectionsService: CollectionsService,
     private local: LocalStorageService,
-    private clipboard: Clipboard) {
+    private clipboard: Clipboard,
+    private auth:AuthService) {
   }
 
   ngOnInit() {
@@ -43,6 +48,8 @@ export class CollectionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.loadData(params['id']);
     })
+
+
   }
 
   loadData(collectionId: string) {
@@ -55,7 +62,20 @@ export class CollectionComponent implements OnInit {
         //this.view = 'detail';
         this.view = this.local.getStringProperty('collection.view', 'detail');
         this.state = 'success';
+
+        this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid'])).subscribe((d:any) => {
+          Object.keys(d).forEach((k)=> {
+            let actions = d[k].map((v)=> v.code);
+            this.collectionActions.set(k, actions);
+          });
+
+          // reload 
+
+        });
+  
       })
+
+
     }, (error) => {
       console.log(error);
       this.ui.showErrorSnackBar("snackbar.error.theCollectionCouldNotBeLoaded");

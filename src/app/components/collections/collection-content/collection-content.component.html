@@ -1,13 +1,16 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
 <mat-card class="app-view-rights app-view-hover item-collection app-cursor-pointer"
-    *ngFor="let item of filterCollections(items)" [routerLink]="['/collections', item['pid']]">
+    *ngFor="let item of filterCollections(items)" 
+    [routerLink]=" allowEdit(item['pid'])  ?  ['/collections', item['pid']] : null">
+    
     <mat-card-header fxLayout="row" fxLayoutGap="16px">
         <div>
             <img [src]="getThumb(item['pid'])" />
         </div>
         <div fxFlex class="app-left">
+            <div *ngIf="allowEdit(item['pid'])"> Allowed  </div>
             <mat-card-title>
-                <mat-icon>link</mat-icon>{{ getName(item) }} <ng-container
+                <mat-icon *ngIf="allowEdit(item['pid'])">link</mat-icon>{{ getName(item) }} <ng-container
                     *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container>
             </mat-card-title>
             <mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>

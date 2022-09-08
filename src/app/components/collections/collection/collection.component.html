@@ -68,13 +68,13 @@
 
           <mat-card fxLayout="column" *ngIf="view == 'content' && items"
             class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-content [collection]="collection" [state]="state" [items]="items" (updated)="onUpdated()">
+            <app-collection-content [collection]="collection" [state]="state" [items]="items" [collectionActions]="collectionActions"  (updated)="onUpdated()">
             </app-collection-content>
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections"
             class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-context [collection]="collection" [state]="state" [superCollections]="superCollections"
+            <app-collection-context [collection]="collection" [state]="state" [superCollections]="superCollections" 
               (updated)="onUpdated()">
             </app-collection-context>
           </mat-card>

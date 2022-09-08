@@ -61,12 +61,10 @@ export class CollectionsComponent implements OnInit {
       this.allCollections = collections;
 
       this.auth.getPidsAuthorizedActions(this.allCollections.map((c)=> c.id)).subscribe((d:any) => {
-
         Object.keys(d).forEach((k)=> {
           let actions = d[k].map((v)=> v.code);
           this.collectionActions.set(k, actions);
         });
-
         this.reloadTable();
         this.state = 'success';
         this.dataSource = new MatTableDataSource(this.collections);

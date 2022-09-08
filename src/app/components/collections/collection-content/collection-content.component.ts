@@ -18,6 +18,11 @@ export class CollectionContentComponent implements OnInit {
   @Input() state;
   @Input() items;
 
+  @Input() collectionActions:Map<string,string[]>;
+
+
+  //linkEnabled = false;
+
   @Output() updated = new EventEmitter<any>();
 
   constructor(
@@ -60,6 +65,16 @@ export class CollectionContentComponent implements OnInit {
   filterNonCollections(items) {
     return items.filter(item => item['model'] != 'collection');
   }
+
+  allowEdit(pid) {
+    if (this.collectionActions.has(pid)) {
+      if (this.collectionActions.get(pid).includes('a_collections_edit')) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
     const data: SimpleDialogData = {
