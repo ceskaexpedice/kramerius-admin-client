@@ -35,7 +35,8 @@
           <a *ngIf="specificAuthorizedActions.indexOf('a_set_accessibility')>=0" mat-tab-link (click)="changeView('accessibility')" [active]="view == 'accessibility'">
             <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'tabnav.accessibility' | translate }}
           </a>
-          <a *ngIf="specificAuthorizedActions.indexOf('a_collections_edit')>=0"  mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
+          <!-- musi mit prava pro vsechny sbirky --> 
+          <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
             <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'tabnav.inCollections' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
@@ -120,14 +121,14 @@
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
           <mat-card fxLayout="column" *ngIf="!loadingCollections" class="app-card app-view-border app-p-0">
             <mat-card class="app-view-rights app-cursor-pointer" *ngFor="let superCollection of superCollections"
-              [routerLink]="'/collections/' + getCurrentRoute('string')">
+              [routerLink]="allowCollectionEdit(superCollection['id']) ? '/collections/' + getCurrentRoute('string') : null">
               <mat-card-header fxLayout="row" fxLayoutGap="16px">
                 <div>
                   <img [src]="getThumb(superCollection['id'])" />
                 </div>
                 <div fxFlex class="app-left">
                   <mat-card-title>
-                    <mat-icon>link</mat-icon>{{ superCollection.getName() }}
+                    <mat-icon *ngIf="allowCollectionEdit(superCollection['id'])">link</mat-icon>{{ superCollection.getName() }}
                   </mat-card-title>
                   <mat-card-subtitle>{{ superCollection.getDescription() }}</mat-card-subtitle>
                 </div>

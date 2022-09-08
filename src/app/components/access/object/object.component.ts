@@ -44,7 +44,11 @@ export class ObjectComponent implements OnInit {
   licenses;
   policy;
 
+  // specificke akce spojene s objektem
   specificAuthorizedActions = [];
+  // specificke akce pro kolekce
+  collectionActions:Map<string,string[]> = new Map();
+
 
   constructor(
     private authApi: AuthService,
@@ -73,7 +77,6 @@ export class ObjectComponent implements OnInit {
           let accessibilityEnabled  = this.specificAuthorizedActions.indexOf('a_set_accessibility') >=0;
           let rebuildProcessingIndexEnabled  = this.specificAuthorizedActions.indexOf('a_rebuild_processing_index') >=0;
           let deleteEEnabled  = this.specificAuthorizedActions.indexOf('a_delete') >=0;
-
           let collectionEditEnabled  = this.specificAuthorizedActions.indexOf('a_collections_edit') >=0;
 
           if (indexEnabled || rightsEnabled || accessibilityEnabled || rebuildProcessingIndexEnabled || deleteEEnabled || collectionEditEnabled) {
@@ -115,6 +118,17 @@ export class ObjectComponent implements OnInit {
     })
   }
 
+
+  allowCollectionEdit(pid) {
+    if (this.collectionActions.has(pid)) {
+      if (this.collectionActions.get(pid).includes('a_collections_edit')) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   loadSolrData() {
     this.title = undefined;
     this.clientApi.getObjectByPidFromIndex(this.pid).subscribe(result => {
@@ -130,6 +144,14 @@ export class ObjectComponent implements OnInit {
       this.superCollections = undefined;
       this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         this.superCollections = data[0];
+
+        this.authApi.getPidsAuthorizedActions(this.superCollections.map(c=> c['id'])).subscribe((d:any) => {
+          Object.keys(d).forEach((k)=> {
+            let actions = d[k].map((v)=> v.code);
+            this.collectionActions.set(k, actions);
+          });
+        });
+  
         this.loadingCollections = false;
       }, (error) => {
         console.log(error);
