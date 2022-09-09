@@ -66,6 +66,7 @@ export class CollectionContentComponent implements OnInit {
     return items.filter(item => item['model'] != 'collection');
   }
 
+  // TODO: move to utils ts
   allowEdit(pid) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_collections_edit')) {
@@ -74,7 +75,15 @@ export class CollectionContentComponent implements OnInit {
     }
     return false;
   }
-
+  // TODO: Move to utils ts
+  allowEditRemove(pid) {
+    if (this.collectionActions.has(pid)) {
+      if (this.collectionActions.get(pid).includes('a_able_tobe_part_of_collections')) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
     const data: SimpleDialogData = {

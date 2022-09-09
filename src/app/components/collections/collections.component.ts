@@ -75,6 +75,16 @@ export class CollectionsComponent implements OnInit {
   }
 
 
+  allowBePartOfCollection(pid) {
+    if (this.collectionActions.has(pid)) {
+      if (this.collectionActions.get(pid).includes('a_able_tobe_part_of_collections')) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   allowEdit(pid) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_collections_edit')) {

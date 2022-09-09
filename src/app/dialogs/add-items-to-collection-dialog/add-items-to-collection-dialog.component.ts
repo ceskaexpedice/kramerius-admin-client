@@ -1,6 +1,8 @@
 import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Collection } from 'src/app/models/collection.model';
+import { RightAction } from 'src/app/models/right-action.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 
 
@@ -27,7 +29,10 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
   items_counter_added = 0;
   items_counter_failed = 0;
 
-  constructor(public dialogRef: MatDialogRef<AddItemsToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public collection: Collection, private collectionApi: CollectionsService) {
+  constructor(public dialogRef: MatDialogRef<AddItemsToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public collection: Collection, 
+  private collectionApi: CollectionsService,
+  private authService: AuthService
+  ) {
     if (collection) {
       this.collection_title = collection.name_cze;
       this.collection_pid = collection.id;
@@ -51,19 +56,34 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     const pids = this.splitPids(this.pids);
     this.items_counter_total = pids.length;
     pids.forEach(pid => {
-      this.collectionApi.addItemToCollection(this.collection.id, pid)
-        .subscribe(() => {
-          this.items_counter_added++;
-          if (this.isFinished()) {
-            this.inProgress = false;
-          }
-        }, error => {
-          this.items_counter_failed++;
-          console.log(error);
-          if (this.isFinished()) {
-            this.inProgress = false;
-          }
+      this.authService.getAuthorizedActions(pid).subscribe((rAct: RightAction[]) => {
+        let authActions = [];
+        rAct.forEach(rA => {
+          authActions.push(rA.code);
         });
+        
+        if (authActions.includes('a_able_tobe_part_of_collections')) {
+          this.collectionApi.addItemToCollection(this.collection.id, pid)
+          .subscribe(() => {
+            this.items_counter_added++;
+            if (this.isFinished()) {
+              this.inProgress = false;
+            }
+          }, error => {
+            this.items_counter_failed++;
+            console.log(error);
+            if (this.isFinished()) {
+              this.inProgress = false;
+            }
+          });
+        } else {
+          // nema prava
+          this.items_counter_failed++;
+          if (this.isFinished()) {
+            this.inProgress = false;
+          }
+        }
+      });
     })
     this.progressBarMode = 'determinate';
   }

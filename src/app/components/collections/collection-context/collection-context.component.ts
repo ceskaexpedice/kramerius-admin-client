@@ -34,14 +34,13 @@ export class CollectionContextComponent implements OnInit {
   allowEdit(pid) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_collections_edit')) {
-        console.log("Edit collection  true "+pid);
         return true;
       }
     }
     return false;
   }
 
-
+  
   getThumb(uuid: string): string {
     return this.clientApi.getThumb(uuid);
   }
