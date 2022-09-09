@@ -29,6 +29,11 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
   items_counter_added = 0;
   items_counter_failed = 0;
 
+  // chyby v pravech 
+  rightsErrors:string[] = [];
+  genericErrors: {};
+ 
+
   constructor(public dialogRef: MatDialogRef<AddItemsToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public collection: Collection, 
   private collectionApi: CollectionsService,
   private authService: AuthService
@@ -61,7 +66,9 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
         rAct.forEach(rA => {
           authActions.push(rA.code);
         });
-        
+  
+        this.rightsErrors = [];
+        this.genericErrors = {};
         if (authActions.includes('a_able_tobe_part_of_collections')) {
           this.collectionApi.addItemToCollection(this.collection.id, pid)
           .subscribe(() => {
@@ -70,7 +77,9 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
               this.inProgress = false;
             }
           }, error => {
+            // pid
             this.items_counter_failed++;
+            this.genericErrors[pid]= error;
             console.log(error);
             if (this.isFinished()) {
               this.inProgress = false;
@@ -78,15 +87,36 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
           });
         } else {
           // nema prava
+          // pid
           this.items_counter_failed++;
           if (this.isFinished()) {
             this.inProgress = false;
           }
+          this.rightsErrors.push(pid);
         }
       });
     })
     this.progressBarMode = 'determinate';
   }
+
+  containsGe() {
+    if (this.genericErrors) {
+      let rv = Object.keys(this.genericErrors).length > 0
+      return rv;
+  
+    } else return false;
+  }
+
+  genericErrorToText() {
+    let retval = '';
+    if (this.genericErrors) {
+      Object.keys(this.genericErrors).forEach((ge) => {
+        retval = retval +","+ ge+"("+this.genericErrors[ge]+")";
+      });
+    }
+    return retval;
+  }
+
 
   splitPids(pids: string) {
     //uuid:123 uuid:456,uuid:789;uuid:012, uuid:345; uuid:678    uuid:901

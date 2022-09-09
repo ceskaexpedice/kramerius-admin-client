@@ -27,6 +27,9 @@
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 		</div>
 		<mat-progress-bar mode="indeterminate" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
+		<span *ngIf="rightsErrors.length > 0">Rights error : {{rightsErrors.join(',')}} </span>
+		<span *ngIf="containsGe()">Genric errors : {{genericErrorToText()}} </span>
+
 		<mat-card *ngIf="!!items_counter_total" class="app-view-alert" [ngClass]="!!items_counter_failed ? 'app-warn' : 'app-success'">
 			<mat-card-content>
 				<div [innerHtml]="('alert.addItemsToCollection.success' | translate : {value1: items_counter_added, value2: items_counter_total}) + '!'"></div>
