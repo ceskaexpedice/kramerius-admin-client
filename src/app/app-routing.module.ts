@@ -31,6 +31,9 @@ const routes: Routes = [
   { path: 'collections/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
   { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },
+  { path: 'indexing/object', component: IndexingComponent, canActivate: [AuthGuard] },
+  { path: 'indexing/model', component: IndexingComponent, canActivate: [AuthGuard] },
+
   { path: 'config', component: ConfigComponent, canActivate: [AuthGuard] },
   { path: 'repository', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
