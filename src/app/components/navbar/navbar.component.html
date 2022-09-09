@@ -19,9 +19,9 @@
   </div>
   <div *ngIf="auth.isLoggedIn()">
     <a *ngIf="!notAllowed" routerLink="/object" routerLinkActive="active" mat-button>{{ 'navbar.object' | translate }}</a>
-    <a *ngIf="allowedGlobalAction('a_import')" routerLink="/import" routerLinkActive="active" mat-button>{{ 'navbar.import' | translate }}</a>
+    <a *ngIf="allowedGlobalAction('a_import')" routerLink="/import/foxml" routerLinkActive="active" mat-button (click)="setDefaultRoute('import.type','foxml')">{{ 'navbar.import' | translate }}</a>
     <!-- pravo pro objekt -->
-    <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access" routerLinkActive="active" mat-button>{{ 'navbar.rightOfAdministration' | translate }}</a>
+    <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access/rights" routerLinkActive="active" mat-button (click)="setDefaultRoute('access.view','rights')">{{ 'navbar.rightOfAdministration' | translate }}</a>
     <a *ngIf="allowedGlobalAction('a_process_edit') || allowedGlobalAction('a_process_read') || allowedGlobalAction('a_owner_process_edit')" routerLink="/processes" routerLinkActive="active" mat-button>{{ 'navbar.processes' | translate }}</a>
     <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" routerLink="/collections" routerLinkActive="active" mat-button>{{ 'navbar.collections' | translate }}</a>
     <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing" routerLinkActive="active" mat-button>{{ 'navbar.indexation' | translate }}</a>

@@ -39,6 +39,7 @@ export class ImportComponent implements OnInit {
   changeType(type: string) {
     this.type = type;
     this.local.setStringProperty('import.type', type);
+    this.router.navigate(['/import/', type]);
     this.initTree();
   }
 
@@ -144,7 +145,7 @@ export class ImportComponent implements OnInit {
   
   getCurrentRoute(type: string) {
     if (type === 'string') {
-      return this.router.url.replace('/', '');
+      return this.router.url.replace('/import/', '');
     } else {
       return this.router.url;
     }

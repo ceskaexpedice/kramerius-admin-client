@@ -24,5 +24,6 @@ export class AccessComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('access.view', view);
+    this.router.navigate(['/access/', view]);
   }
 }

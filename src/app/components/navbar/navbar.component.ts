@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/services/app-settings';
 import { UIService } from 'src/app/services/ui.service';
 import { RightAction } from 'src/app/models/right-action.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class NavbarComponent implements OnInit {
     private router: Router, 
     public settings: AppSettings, 
     public ui: UIService,
-    public appSettings: AppSettings
+    public appSettings: AppSettings,
+    private local: LocalStorageService
     ) { }
 
   ngOnInit() {
@@ -44,6 +46,10 @@ export class NavbarComponent implements OnInit {
 
   getVersion() {
     return this.appSettings.version;
+  }
+
+  setDefaultRoute(type: string, value: string) {
+    this.local.setStringProperty(type, value);
   }
 
 }
