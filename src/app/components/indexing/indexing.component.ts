@@ -12,6 +12,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-indexing',
@@ -55,7 +56,8 @@ export class IndexingComponent implements OnInit {
     private appSettings: AppSettings,
     private dialog: MatDialog,
     private ui: UIService,
-    private local: LocalStorageService
+    private local: LocalStorageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -275,5 +277,6 @@ export class IndexingComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('indexing.view', view);
+    this.router.navigate(['/indexing/', view]);
   }
 }
