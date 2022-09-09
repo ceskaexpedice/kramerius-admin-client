@@ -39,8 +39,6 @@ const routes: Routes = [
   { path: 'repository/exports', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/statistics', component: RepositoryComponent, canActivate: [AuthGuard] },
-
-
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'access', component: AccessComponent, canActivate: [AuthGuard] },
@@ -52,6 +50,8 @@ const routes: Routes = [
   { path: 'import/foxml', component: ImportComponent, canActivate: [AuthGuard] },
   { path: 'import/ndk', component: ImportComponent, canActivate: [AuthGuard] },
   { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
+  { path: 'statistics/statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
+  { path: 'statistics/most-viewed-documents', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
 

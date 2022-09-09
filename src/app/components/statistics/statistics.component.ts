@@ -216,7 +216,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.view = this.local.getStringProperty('home.view', 'statistics');
+    this.view = this.local.getStringProperty('statistics.view', 'statistics');
 
     this.reinitGraphs();
 
@@ -307,7 +307,8 @@ export class StatisticsComponent implements OnInit {
 
   changeView(view: string) {
     this.view = view;
-    this.local.setStringProperty('home.view', view);
+    this.local.setStringProperty('statistics.view', view);
+    this.router.navigate(['/statistics/', view]);
   }
 
   showMore(id: string) {
