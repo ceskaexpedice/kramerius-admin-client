@@ -9,10 +9,9 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('repositoryManagement')" [active]="view == 'repositoryManagement'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.repositoryManagement' | translate }}</a>
-          <!-- <a mat-tab-link (click)="changeView('imports')"  [active]="view == 'imports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.imports' | translate }}</a> -->
+          <a mat-tab-link (click)="changeView('repository-management')" [active]="view == 'repository-management'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.repositoryManagement' | translate }}</a>
           <a *ngIf="!notAllowed" mat-tab-link (click)="changeView('exports')" [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'tabnav.exports' | translate }}</a>
-          <a mat-tab-link (click)="changeView('bulkDataEditing')"  [active]="view == 'bulkDataEditing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'tabnav.bulkDataEditing' | translate }}</a>
+          <a mat-tab-link (click)="changeView('bulk-data-editing')"  [active]="view == 'bulk-data-editing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'tabnav.bulkDataEditing' | translate }}</a>
 					<a mat-tab-link (click)="changeView('statistics')"  [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.statistics' | translate }}</a>
         </nav>
       </div>
@@ -21,7 +20,7 @@
       <div class="app-container">
         <mat-card fxLayout="column" class="app-card app-view-border">
 					<mat-card-content>
-						<ng-container *ngIf="view == 'repositoryManagement'">
+						<ng-container *ngIf="view == 'repository-management'">
 							<span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
 								<button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2" >{{ 'button.buildProcessingIndex' | translate }}</button>
 							</span>
@@ -45,7 +44,7 @@
 							</div>
 						</ng-container>
 
-						<ng-container *ngIf="view == 'bulkDataEditing'">
+						<ng-container *ngIf="view == 'bulk-data-editing'">
 							<div class="app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.basedOnEmbeddedPids' | translate }}</h3>
 								<!-- tj. změna viditelnosti -->

@@ -25,7 +25,7 @@
     <a *ngIf="allowedGlobalAction('a_process_edit') || allowedGlobalAction('a_process_read') || allowedGlobalAction('a_owner_process_edit')" routerLink="/processes" routerLinkActive="active" mat-button>{{ 'navbar.processes' | translate }}</a>
     <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" routerLink="/collections" routerLinkActive="active" mat-button>{{ 'navbar.collections' | translate }}</a>
     <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing/object" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'navbar.indexation' | translate }}</a>
-    <a routerLink="/repository" routerLinkActive="active" mat-button>{{ 'navbar.repository' | translate }}</a>
+    <a routerLink="/repository/repository-management" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'navbar.repository' | translate }}</a>
     <a routerLink="/statistics" routerLinkActive="active" mat-button>{{ 'navbar.statistics' | translate }}</a>
     <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
     <a (click)="changeLang('cs')" mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>

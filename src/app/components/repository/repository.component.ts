@@ -15,6 +15,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { DeleteObjectsLowLevelDialogComponent } from 'src/app/dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
 import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-repository',
@@ -32,7 +33,8 @@ export class RepositoryComponent implements OnInit {
     private ui: UIService,
     private adminApi: AdminApiService,
     private auth: AuthService,
-    private local: LocalStorageService
+    private local: LocalStorageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -184,6 +186,7 @@ export class RepositoryComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('repository.view', view);
+    this.router.navigate(['/repository/', view]);
   }
 
 

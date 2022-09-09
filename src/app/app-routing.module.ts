@@ -33,9 +33,14 @@ const routes: Routes = [
   { path: 'indexing', component: IndexingComponent, canActivate: [AuthGuard] },
   { path: 'indexing/object', component: IndexingComponent, canActivate: [AuthGuard] },
   { path: 'indexing/model', component: IndexingComponent, canActivate: [AuthGuard] },
-
   { path: 'config', component: ConfigComponent, canActivate: [AuthGuard] },
   { path: 'repository', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/repository-management', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/exports', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/statistics', component: RepositoryComponent, canActivate: [AuthGuard] },
+
+
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'access', component: AccessComponent, canActivate: [AuthGuard] },
