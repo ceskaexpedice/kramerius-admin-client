@@ -132,6 +132,10 @@
     "a_admin_read": {
       "title": "Admin čtení",
       "subtitle": "Přístup do administračního rozhraní"
+    },
+    "a_able_tobe_part_of_collections": {
+      "title": "Možnost být zařazen do sbírky",
+      "subtitle": "Toto právo dává objektům možnost být zařazen do sbírky"
     }
   },
   "alert": {

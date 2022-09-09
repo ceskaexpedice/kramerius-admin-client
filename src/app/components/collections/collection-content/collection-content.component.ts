@@ -118,4 +118,9 @@ export class CollectionContentComponent implements OnInit {
     });
   }
 
+  removeItemFromCollection(item, collection, event) {
+    this.onRemoveItemFromCollection(collection.id, collection.getName(), item['pid'], this.getName(item)); 
+    event.preventDefault(); 
+    event.stopPropagation();
+  }
 }

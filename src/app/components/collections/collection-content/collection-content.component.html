@@ -26,8 +26,8 @@
 			<mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
 			<mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
 		</div>
-		<div *ngIf="allowEditRemove(item['pid'])" class="app-right app-actions">
-			<a (click)="onRemoveItemFromCollection(collection.id, collection.getName(), item['pid'], getName(item)); $event.preventDefault(); $event.stopPropagation()" class="app-btn-warn" [matTooltip]="'button.removeFromThisCollection' | translate">
+		<div class="app-right app-actions">
+			<a (click)="allowEditRemove(item['pid']) ? removeItemFromCollection(item, collection, $event) : null" class="app-btn-warn" [ngClass]="!allowEditRemove(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="allowEditRemove(item['pid']) ? ('button.removeFromThisCollection' | translate) : ('alert.notAllowed' | translate)" [matTooltipClass]="!allowEditRemove(item['pid']) ? 'app-alert-not-allowed' : null">
 				<mat-icon>cancel</mat-icon>
 			</a>
 		</div>

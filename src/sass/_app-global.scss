@@ -240,6 +240,10 @@ a {
 .app-not-allowed {
   color: $app-color-disabled !important;
   cursor: not-allowed;
+
+  .mat-icon {
+    @include setIcon($color: $app-color-disabled);
+  }
 }
 
 .app-avoid-click {

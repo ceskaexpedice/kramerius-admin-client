@@ -132,6 +132,10 @@
     "a_admin_read": {
       "title": "Admin reading",
       "subtitle": "Access to the administration interface"
+    },
+    "a_able_tobe_part_of_collections": {
+      "title": "Possibility to be included in the collection",
+      "subtitle": "This right gives the objects the possibility to be included in the collection"
     }
   },
   "alert": {
