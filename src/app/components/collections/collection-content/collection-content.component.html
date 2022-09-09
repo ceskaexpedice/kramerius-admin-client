@@ -34,7 +34,7 @@
 	</mat-card-header>
 </mat-card>
 
-<mat-card *ngIf="(filterCollections(items)?.length && filterNonCollections(items)?.length) === 0" class="app-color-info app-text-center">
+<mat-card *ngIf="(filterCollections(items)?.length || filterNonCollections(items)?.length) === 0" class="app-color-info app-text-center">
 	<mat-card-content fxLayout="row" fxLayoutAlign="center center">
 		<mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.content' | translate }}
 	</mat-card-content>
