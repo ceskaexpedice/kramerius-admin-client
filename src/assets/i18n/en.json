@@ -144,7 +144,8 @@
     },
     "addItemsToCollection": {
       "success": "Added <strong>{{ value1 }}/{{ value2 }}</strong> items",
-      "error": "Failed to add <strong>{{ value }}</strong> items"
+      "error": "Failed to add <strong>{{ value }}</strong> items",
+      "notAllowed": "You do not have rights to the items below"
     },
     "object": {
       "uuidValidation400": "Invalid UUID",

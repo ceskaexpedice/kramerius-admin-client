@@ -144,7 +144,8 @@
     },
     "addItemsToCollection": {
       "success": "Přidáno <strong>{{ value1 }}/{{ value2 }}</strong> položek",
-      "error": "Nepodařilo se přidat <strong>{{ value }}</strong> položek"
+      "error": "Nepodařilo se přidat <strong>{{ value }}</strong> položek",
+      "notAllowed": "Na níže uvedené položky nemáte práva"
     },
     "object": {
       "uuidValidation400": "Neplatné UUID",
