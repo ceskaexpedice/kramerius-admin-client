@@ -64,6 +64,7 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     this.rightsErrors = [];
     this.genericErrors = {};
 
+
     pids.forEach(pid => {
       this.authService.getAuthorizedActions(pid).subscribe((rAct: RightAction[]) => {
         let authActions = [];
@@ -78,11 +79,15 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
             if (this.isFinished()) {
               this.inProgress = false;
             }
-          }, error => {
+          }, response => {
             // pid
             this.items_counter_failed++;
-            this.genericErrors[pid]= error;
-            console.log(error);
+            if (response.error && response.error.error) {
+              this.genericErrors[pid]= response.error.error;
+            } else {
+              this.genericErrors[pid]= response;
+            }
+
             if (this.isFinished()) {
               this.inProgress = false;
             }
