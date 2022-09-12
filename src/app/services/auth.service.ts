@@ -5,6 +5,7 @@ import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RightAction } from '../models/right-action.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -25,10 +26,27 @@ export class AuthService {
   // specific actions
   authorizedSpecificActions =  {};
 
-  constructor(private http: HttpClient, private settings: AppSettings) {
+  constructor(
+    private http: HttpClient, 
+    private settings: AppSettings,
+    private router:Router
+    ) {
     AuthService.token = localStorage.getItem('account.token');
     this.loadGlobalAuthorizedActions((status: number) => {
       console.log("Authorized actions loaded")
+    });
+
+    this.settings.interceptresponse.subscribe((status_) => {
+      if (status_ === 403) {
+        this.loadGlobalAuthorizedActions((status: number) => {
+          // nema pravo cist admin rozhrani  - redirect
+          if (!this.authorizedGlobalActions.includes('a_admin_read')) {
+            this.router.navigate(['/login'], {
+              queryParams: { failure: 1 }
+           });
+          }
+        });
+      }
     });
   }
 

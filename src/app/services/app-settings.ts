@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 declare var APP_GLOBAL: any;
 
@@ -18,6 +18,9 @@ export class AppSettings {
   adminApiBaseUrl = this.coreBaseUrl + '/api/admin/v7.0';
 
   defaultLang = APP_GLOBAL.lang || 'cs';
+
+  interceptresponse: EventEmitter<number> = new EventEmitter<number>();
+
 
   constructor() {
   }
