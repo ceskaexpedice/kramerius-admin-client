@@ -14,7 +14,7 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('statistics')" [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.statistics' | translate }}</a>
+          <a mat-tab-link (click)="changeView('graphs')" [active]="view == 'graphs'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.graphs' | translate }}</a>
           <a mat-tab-link (click)="changeView('most-viewed-documents')"  [active]="view == 'most-viewed-documents'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'tabnav.mostViewedDocuments' | translate }}</a>
         </nav>
       </div>
@@ -56,7 +56,7 @@
             <mat-icon>cancel</mat-icon>
           </a>
 				</div>
-				<ng-container  *ngIf="view == 'statistics'">
+				<ng-container  *ngIf="view == 'graphs'">
 					<div fxLayout="row" fxLayoutGap="16px">
 						<mat-card fxFlex class="app-card app-view-border">
 							<mat-card-header>
