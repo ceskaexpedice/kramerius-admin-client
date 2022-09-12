@@ -216,7 +216,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.view = this.local.getStringProperty('statistics.view', 'statistics');
+    this.view = this.local.getStringProperty('statistics.view', 'graphs');
 
     this.reinitGraphs();
 

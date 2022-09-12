@@ -118,10 +118,11 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     let retval = '';
     if (this.genericErrors) {
       Object.keys(this.genericErrors).forEach((ge) => {
-        retval = retval +","+ ge+"("+this.genericErrors[ge]+")";
+        //retval = retval +","+ ge+"("+this.genericErrors[ge]+")";
+        retval = "<li>" + this.genericErrors[ge] + "</li>";
       });
     }
-    return retval;
+    return "<ul class=\"app-m-0\">" + retval + "</ul>";
   }
 
 
