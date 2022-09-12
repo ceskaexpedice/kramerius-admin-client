@@ -60,6 +60,10 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     this.inProgress = true;
     const pids = this.splitPids(this.pids);
     this.items_counter_total = pids.length;
+
+    this.rightsErrors = [];
+    this.genericErrors = {};
+
     pids.forEach(pid => {
       this.authService.getAuthorizedActions(pid).subscribe((rAct: RightAction[]) => {
         let authActions = [];
@@ -67,8 +71,6 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
           authActions.push(rA.code);
         });
   
-        this.rightsErrors = [];
-        this.genericErrors = {};
         if (authActions.includes('a_able_tobe_part_of_collections')) {
           this.collectionApi.addItemToCollection(this.collection.id, pid)
           .subscribe(() => {
