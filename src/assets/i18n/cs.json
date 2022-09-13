@@ -168,6 +168,11 @@
         "context": "Tato sbírka není součástí žádné jiné sbírky."
       }
     },
+    "login": {
+      "1": "Nedostatečná oprávnění",
+      "2": "Přihlášení se nezdařilo",
+      "3": "Vypršela platnost tokenu"
+    },
     "notAllowed": "Na tuto akci nemáte dostatečná oprávnění!"
   },
   "batch": {

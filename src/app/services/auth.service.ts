@@ -42,7 +42,7 @@ export class AuthService {
           // nema pravo cist admin rozhrani  - redirect
           if (!this.authorizedGlobalActions.includes('a_admin_read')) {
             this.router.navigate(['/login'], {
-              queryParams: { failure: 1 }
+              queryParams: { failure: 3 }
            });
           }
         });

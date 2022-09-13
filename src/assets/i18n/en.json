@@ -168,6 +168,11 @@
         "context": "This collection is not part of any other collection."
       }
     },
+    "login": {
+      "1": "Insufficient permissions",
+      "2": "Login failed",
+      "3": "Token has expired"
+    },
     "notAllowed": "You do not have sufficient permissions for this action!"
   },
   "batch": {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppSettings } from 'src/app/services/app-settings';
+import { UIService } from "src/app/services/ui.service";
 import * as gitInfo from 'git-info.json'
 
 @Component({
@@ -11,13 +12,14 @@ import * as gitInfo from 'git-info.json'
 })
 export class LoginComponent implements OnInit {
 
-  errorMessage: string;
+  errorMessage: string = '';
 
   constructor(
     private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    public appSettings: AppSettings
+    public appSettings: AppSettings,
+    private ui: UIService
     ) { }
 
   ngOnInit() {
@@ -28,9 +30,11 @@ export class LoginComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       const failureStatus = params.get('failure');
       if (failureStatus == '1') {
-        this.errorMessage = 'Nedostatečná oprávnění';
+        this.errorMessage = '1';
       } else if (failureStatus == '2') {
-        this.errorMessage = 'Přihlášení se nezdařilo';
+        this.errorMessage = '2';
+      } else if (failureStatus == '3') {
+        this.errorMessage = '3';
       }
     });
   }

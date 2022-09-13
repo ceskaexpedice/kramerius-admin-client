@@ -1,5 +1,8 @@
 <div class="app-container app-h-100">
 	<div fxLayout="column" fxFlexFill fxLayoutAlign="center center">
+		<mat-card class="app-view-alert app-warn" *ngIf="errorMessage">
+			<mat-card-content>{{ 'alert.login.' + errorMessage | translate }}</mat-card-content>
+		</mat-card>
 		<mat-card class="app-card app-view-border app-mb-4 app-mt-4">
 			<mat-card-content>	
 				<strong class="app-mr-2">k7Admin</strong>
@@ -8,9 +11,6 @@
 				<span class="app-pipe"></span>
 				<strong class="app-mr-2">{{ 'desc.connectedInstance' | translate }}: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
 			</mat-card-content>
-		</mat-card>
-		<mat-card class="app-view-alert app-warn app-mb-4" *ngIf="errorMessage">
-			<mat-card-content>{{ errorMessage }}</mat-card-content>
 		</mat-card>
 		<button mat-flat-button (click)="login()" color="primary">
 			{{ errorMessage ? ('button.signInAgain' | translate) : ('button.logIn' | translate) }}
