@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private settings: AppSettings) { }
 
-    public test = this.settings.homneDashboard;
+    public dashBoard = this.settings.homeDashboard;
 
   ngOnInit() {
     

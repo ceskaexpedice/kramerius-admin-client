@@ -1,4 +1,8 @@
-<!-- <div *ngFor="let item of test">{{ item.type }}</div> -->
+<!-- <div *ngFor="let item of dashBoard">
+	<ng-container *ngIf="item.display">
+		{{ item.type }} - {{ item.subtype }}<br />
+	</ng-container>
+</div> -->
 <div class="app-home app-h-100">
 	<div fxLayout="column" fxFlexFill>
     <div class="app-topbar">
