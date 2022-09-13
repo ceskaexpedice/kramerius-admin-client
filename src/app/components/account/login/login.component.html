@@ -6,12 +6,14 @@
 				<span class="app-badge app-version app-mr-2">{{ 'desc.version' | translate }} {{getVersion()}}</span>
 				<span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
 				<span class="app-pipe"></span>
-				<strong class="app-mr-2">Připojená instance: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
+				<strong class="app-mr-2">{{ 'desc.connectedInstance' | translate }}: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
 			</mat-card-content>
 		</mat-card>
 		<mat-card class="app-view-alert app-warn app-mb-4" *ngIf="errorMessage">
 			<mat-card-content>{{ errorMessage }}</mat-card-content>
 		</mat-card>
-		<button mat-flat-button (click)="login()" color="primary">Přihlásit se <span *ngIf="errorMessage">znovu</span></button>
+		<button mat-flat-button (click)="login()" color="primary">
+			{{ errorMessage ? ('button.signInAgain' | translate) : ('button.logIn' | translate) }}
+		</button>
 	</div>
 </div>

@@ -274,7 +274,9 @@
     "yes": "Yes",
     "no": "No",
     "showHelp": "Show help",
-    "changeCollectionRights": "Change collection rights"
+    "changeCollectionRights": "Change collection rights",
+    "logIn": "Log in",
+    "signInAgain": "Sign in again"
   },
   "field": {
     "public": "Public",
@@ -711,6 +713,7 @@
     "skipInconsistentObjects": "Skip inconsistent objects",
     "indexingType": "Indexing type",
     "logs": "Logs",
-    "right": "Right"
+    "right": "Right",
+    "connectedInstance": "Connected instance"
   }
 }
