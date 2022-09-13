@@ -19,6 +19,8 @@ export class AppSettings {
 
   defaultLang = APP_GLOBAL.lang || 'cs';
 
+  homeDashboard = APP_GLOBAL.homeDashboard;
+
   interceptresponse: EventEmitter<number> = new EventEmitter<number>();
 
 
