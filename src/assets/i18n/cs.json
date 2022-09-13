@@ -168,6 +168,11 @@
         "context": "Tato sbírka není součástí žádné jiné sbírky."
       }
     },
+    "login": {
+      "1": "Nedostatečná oprávnění",
+      "2": "Přihlášení se nezdařilo",
+      "3": "Vypršela platnost tokenu"
+    },
     "notAllowed": "Na tuto akci nemáte dostatečná oprávnění!"
   },
   "batch": {
@@ -274,7 +279,9 @@
     "yes": "Ano",
     "no": "Ne",
     "showHelp": "Zobrazit nápovědu",
-    "changeCollectionRights": "Změnit práva ke sbírce"
+    "changeCollectionRights": "Změnit práva ke sbírce",
+    "logIn": "Přihlásit se",
+    "signInAgain": "Přihlásit se znovu"
   },
   "field": {
     "public": "Veřejné",
@@ -711,6 +718,7 @@
     "skipInconsistentObjects": "Přeskakovat nekonzistentní objekty",
     "indexingType": "Typ indexace",
     "logs": "Logy",
-    "right": "Oprávnění"
+    "right": "Oprávnění",
+    "connectedInstance": "Připojená instance"
   }
 }

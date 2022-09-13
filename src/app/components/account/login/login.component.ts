@@ -11,7 +11,7 @@ import * as gitInfo from 'git-info.json'
 })
 export class LoginComponent implements OnInit {
 
-  errorMessage: string;
+  errorMessage: string = '';
 
   constructor(
     private auth: AuthService,
@@ -28,9 +28,11 @@ export class LoginComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       const failureStatus = params.get('failure');
       if (failureStatus == '1') {
-        this.errorMessage = 'Nedostatečná oprávnění';
+        this.errorMessage = '1';
       } else if (failureStatus == '2') {
-        this.errorMessage = 'Přihlášení se nezdařilo';
+        this.errorMessage = '2';
+      } else if (failureStatus == '3') {
+        this.errorMessage = '3';
       }
     });
   }

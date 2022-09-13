@@ -17,25 +17,30 @@
       </svg>  
     </a>
   </div>
-  <div *ngIf="auth.isLoggedIn()">
-    <a *ngIf="!notAllowed" routerLink="/object" routerLinkActive="active" mat-button>{{ 'navbar.object' | translate }}</a>
-    <a *ngIf="allowedGlobalAction('a_import')" routerLink="/import" routerLinkActive="active" mat-button (click)="setDefaultRoute('import.type','foxml')">{{ 'navbar.import' | translate }}</a>
-    <!-- pravo pro objekt -->
-    <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access" routerLinkActive="active" mat-button (click)="setDefaultRoute('access.view','rights')">{{ 'navbar.rightOfAdministration' | translate }}</a>
-    <a *ngIf="allowedGlobalAction('a_process_edit') || allowedGlobalAction('a_process_read') || allowedGlobalAction('a_owner_process_edit')" routerLink="/processes" routerLinkActive="active" mat-button>{{ 'navbar.processes' | translate }}</a>
-    <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" routerLink="/collections" routerLinkActive="active" mat-button>{{ 'navbar.collections' | translate }}</a>
-    <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'navbar.indexation' | translate }}</a>
-    <a routerLink="/repository" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'navbar.repository' | translate }}</a>
-    <a *ngIf="allowedGlobalAction('a_statistics')" routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'navbar.statistics' | translate }}</a>
-    <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
+  <div>
+    <ng-container *ngIf="auth.isLoggedIn()">
+      <a *ngIf="!notAllowed" routerLink="/object" routerLinkActive="active" mat-button>{{ 'navbar.object' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_import')" routerLink="/import" routerLinkActive="active" mat-button (click)="setDefaultRoute('import.type','foxml')">{{ 'navbar.import' | translate }}</a>
+      <!-- pravo pro objekt -->
+      <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access" routerLinkActive="active" mat-button (click)="setDefaultRoute('access.view','rights')">{{ 'navbar.rightOfAdministration' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_process_edit') || allowedGlobalAction('a_process_read') || allowedGlobalAction('a_owner_process_edit')" routerLink="/processes" routerLinkActive="active" mat-button>{{ 'navbar.processes' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" routerLink="/collections" routerLinkActive="active" mat-button>{{ 'navbar.collections' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'navbar.indexation' | translate }}</a>
+      <a routerLink="/repository" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'navbar.repository' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_statistics')" routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'navbar.statistics' | translate }}</a>
+      <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>  
+    </ng-container>
+    
     <a (click)="changeLang('cs')" mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
     <a (click)="changeLang('en')" mat-button *ngIf="ui.currentLang !== 'en'">EN</a>
 
-    <a [matMenuTriggerFor]="profile_menu" mat-button class="app-avatar">
-      <div fxLayout="row" fxLayoutAlign="center center">
-        {{ auth.getTextProfileImage() }}
-      </div>
-    </a>
+    <ng-container *ngIf="auth.isLoggedIn()">
+      <a [matMenuTriggerFor]="profile_menu" mat-button class="app-avatar">
+        <div fxLayout="row" fxLayoutAlign="center center">
+          {{ auth.getTextProfileImage() }}
+        </div>
+      </a>
+    </ng-container>
 
     <mat-menu #profile_menu="matMenu">
       <button mat-menu-item disabled *ngIf="auth.user">
@@ -48,5 +53,7 @@
       </button>
     </mat-menu>
   </div>
-  <div *ngIf="auth.isLoggedIn()"><span class="app-badge app-version-navbar app-mr-2">{{ 'desc.version' | translate }} {{getVersion()}}</span></div>
+  <ng-container *ngIf="auth.isLoggedIn()">
+    <span class="app-badge app-version-navbar app-mr-2">{{ 'desc.version' | translate }} {{getVersion()}}</span>
+  </ng-container>
 </mat-toolbar>

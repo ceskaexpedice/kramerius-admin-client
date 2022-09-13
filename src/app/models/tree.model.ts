@@ -60,7 +60,7 @@ export class Tree {
                 this.expandChildren(api);
             }
         }, error => {
-            console.error(error);
+            console.error('Debug => ' + error);
             if (onError) {
                 onError(`Chyba načítání dat: ${error.error.error}`);
             } else {
