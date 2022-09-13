@@ -82,8 +82,8 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
           }, response => {
             // pid
             this.items_counter_failed++;
-            if (response.error && response.error.error) {
-              this.genericErrors[pid]= response.error.error;
+            if (response.error && response.error.message) {
+              this.genericErrors[pid]= response.error.message;
             } else {
               this.genericErrors[pid]= response;
             }

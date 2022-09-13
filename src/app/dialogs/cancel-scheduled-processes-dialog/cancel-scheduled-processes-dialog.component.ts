@@ -26,8 +26,8 @@ export class CancelScheduledProcessesDialogComponent implements OnInit {
     this.adminApi.getProcesses(batch_params).subscribe(([batches, total]: [Batch[], number]) => {
       this.batches = batches;
       this.fetchingBatches = false;
-    }, error => {
-      this.fetchingErrorMsg = error.error.error;
+    }, errorResponse => {
+      this.fetchingErrorMsg = errorResponse.error.message;
       this.fetchingBatches = false;
     });
   }
