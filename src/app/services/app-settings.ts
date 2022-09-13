@@ -13,6 +13,7 @@ export class AppSettings {
 
   devMode = !!APP_GLOBAL.devMode; //pokud true, tak se zobrazuje zalozka DEV a dalsi testovaci veci (napr. spousteni testovaciho procesu)
   version = "1.1.6" + (this.devMode ? "-dev" : "");
+  homneDashboard = APP_GLOBAL.homeDashboard;
 
   clientApiBaseUrl = this.coreBaseUrl + '/api/client/v7.0';
   adminApiBaseUrl = this.coreBaseUrl + '/api/admin/v7.0';
