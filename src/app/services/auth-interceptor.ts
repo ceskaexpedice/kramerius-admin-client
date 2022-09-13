@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpRequest, HttpInterceptor, HttpHandler, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { AppSettings } from './app-settings';
-import { Observable,throwError } from 'rxjs';
+import { Observable,throwError, } from 'rxjs';
 import { map,catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -24,25 +24,24 @@ export class AuthInterceptor implements HttpInterceptor {
       });
     }
 
-    /** catch error  */
-    return next.handle(request).pipe(
+    return next.handle(request);
+
+    /** TODO: Check situation when  token expired  */
+    // return next.handle(request).pipe(
       
-        map(res => {
-            console.log("Passed through the interceptor in response");
-            return res
-        }),
+    //     map(res => {
+    //         //console.log("Passed through the interceptor in response");
+    //         return res
+    //     }),
                 
-        catchError((error: HttpErrorResponse) => {
+    //     catchError((error: HttpErrorResponse) => {
 
-          this.appSettings.interceptresponse.emit(error.status);
-          let errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-          return throwError(errorMsg);
-        })
-      );
-                
-                
-
-
-    //return next.handle(request);
+          
+    //       this.appSettings.interceptresponse.emit(error.status);
+    //       //let errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+    //       return Observable.of({'message':error.message});
+    //       //return of(error);
+    //     })
+    //   );
   }
 }
