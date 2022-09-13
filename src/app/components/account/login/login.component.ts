@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppSettings } from 'src/app/services/app-settings';
-import { UIService } from "src/app/services/ui.service";
 import * as gitInfo from 'git-info.json'
 
 @Component({
@@ -18,8 +17,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    public appSettings: AppSettings,
-    private ui: UIService
+    public appSettings: AppSettings
     ) { }
 
   ngOnInit() {
