@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateOrEditRightDialogComponent } from 'src/app/dialogs/create-or-edit-right-dialog/create-or-edit-right-dialog.component';
@@ -24,6 +25,9 @@ export class RightsComponent implements OnInit {
 
   actions: RightAction[];
 
+  errorMessage: string;
+  
+
   @Input() pid: string;
 
   constructor(private api: AdminApiService,
@@ -39,6 +43,7 @@ export class RightsComponent implements OnInit {
 
       rAct.forEach(a=> {
         this.actionMap[a.code] = a;
+        console.log(this.actionMap[a.code]);
       });
       this.actions = rAct;
 
@@ -53,6 +58,9 @@ export class RightsComponent implements OnInit {
         this.state = 'success';
         console.log('rights', rights);
       });
+    }, (error:HttpErrorResponse) => {
+      this.state = 'error';
+      this.errorMessage = error.error.message;
     });
 
   }

@@ -48,3 +48,9 @@
     </ng-container>
   </mat-card>
 </ng-container>
+
+<mat-card *ngIf="state=='error'" class="app-view-alert app-warn">
+  <mat-card-content>
+    <mat-icon>error</mat-icon>{{ errorMessage }}
+  </mat-card-content>
+</mat-card>
