@@ -5,6 +5,7 @@ import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dial
 import { ConditionParam } from 'src/app/models/condition-param.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-params',
@@ -17,7 +18,7 @@ export class ParamsComponent implements OnInit {
   params: ConditionParam[];
 
   selectedParam: ConditionParam;
-
+  errorMessage: string;
 
   constructor(private api: AdminApiService, 
     private ui: UIService,
@@ -29,7 +30,11 @@ export class ParamsComponent implements OnInit {
       this.params = params;
       this.state = 'success';
       console.log('params', params);
-    });
+    }, (error: HttpErrorResponse) => {
+      this.state = 'error';
+      this.errorMessage = error.error.message;
+    }
+    );
   }
 
   onNewParam() {
