@@ -24,10 +24,8 @@ export class RightsComponent implements OnInit {
   selectedAction: RightAction;
 
   actions: RightAction[];
-
   errorMessage: string;
   
-
   @Input() pid: string;
 
   constructor(private api: AdminApiService,

@@ -6,6 +6,7 @@ import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dial
 import { Role } from 'src/app/models/roles.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-roles',
@@ -17,6 +18,8 @@ export class RolesComponent implements OnInit {
   state: string;
   roles: any[];
 
+  errorMessage: string;
+
   constructor(private api: AdminApiService, 
     private ui: UIService,
     private dialog: MatDialog) {}
@@ -27,6 +30,9 @@ export class RolesComponent implements OnInit {
       this.roles = roles;
       this.state = 'success';
       console.log('roles', roles);
+    }, (error: HttpErrorResponse) => {
+      this.state = 'error';
+      this.errorMessage = error.error.message;
     });
   }
 
