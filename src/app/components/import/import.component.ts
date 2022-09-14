@@ -49,6 +49,7 @@ export class ImportComponent implements OnInit {
     delete this.inputDirError[this.type];
     this.tree.expand(this.api, false, error => {
       this.inputDirError[this.type] = error;
+      console.log(error);
     });
   }
 
