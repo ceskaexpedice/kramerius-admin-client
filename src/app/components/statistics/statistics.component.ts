@@ -87,11 +87,9 @@ export class StatisticsComponent implements OnInit {
       this.allLicenses = response["license"];
       this.allLicenses.unshift('All');
     }, (error: HttpErrorResponse) => {
-      console.log('HOVNO ------------->');
       this.errorMessage = error.error.message;
       this.errorState = true;
-    }
-    );
+    });
 
 
     // authors graph configuration
