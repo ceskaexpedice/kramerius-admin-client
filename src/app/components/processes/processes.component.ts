@@ -268,16 +268,14 @@ export class ProcessesComponent implements OnInit {
 
   notAllowed(b:string) {
     if (this.auth.user) {
-      if (this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.ONWER_ACTION) >= 0 && 
+      if (this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.EDIT_ACTION) >= 0) {
+          return false;
+      } else if (this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.ONWER_ACTION) >= 0 && 
             this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.READ_ACTION) >= 0) {
-
             let ub =  this.batches.filter(batch => batch.id == Number(b));
             if (ub.length > 0) {
               return ub[0].ownerId !== this.auth.user.uid;
             }
-
-      } else if (this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.EDIT_ACTION) >= 0) {
-        return false;
       } 
     } 
     return true;
