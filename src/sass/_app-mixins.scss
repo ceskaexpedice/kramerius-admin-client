@@ -60,6 +60,15 @@
   }
 }
 
+// set dashboard color
+@mixin setDashboardColor() {
+  @each $type, $color in $dashboard {
+    &.app-#{$type} {
+      background-color: $color !important;
+    }
+  }
+}
+
 // set icon size
 @mixin setIconSize() {
   @each $size, $val in $iconSize {

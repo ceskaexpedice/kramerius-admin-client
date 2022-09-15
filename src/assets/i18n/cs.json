@@ -41,6 +41,21 @@
     "others": "Ostatní",
     "inCollections": "Ve sbírkách"
   },
+  "homeDashboard": {
+    "indexing": {
+      "title": "Indexace",
+      "object": {
+        "subtitle": "Objekt",
+        "desc": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru.",
+        "icon": "data_object"
+      },
+      "model": {
+        "subtitle": "Model",
+        "desc": "Indexace objektů (a jejich stromů), které mají vybraný model.",
+        "icon": "category"
+      }
+    }
+  },
   "rights": {
     "a_read": {
       "title": "Čtení",
