@@ -6,6 +6,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-collections',
@@ -26,6 +27,10 @@ export class CollectionsComponent implements OnInit {
 
   sortField: string;
   sortAsc: boolean;
+
+  errorMessage: string;
+  errorState: boolean = false;
+  
 
   //isAllowed: boolean = false;
 
@@ -71,6 +76,9 @@ export class CollectionsComponent implements OnInit {
         this.dataSource.sort = this.sort;
   
       });
+    }, (error: HttpErrorResponse) => {
+      this.errorState = true;
+      this.errorMessage = error.error.message;
     });
   }
 

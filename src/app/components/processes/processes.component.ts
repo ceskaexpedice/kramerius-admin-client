@@ -12,6 +12,7 @@ import { forkJoin, interval, Subscription } from 'rxjs';
 import { UIService } from 'src/app/services/ui.service';
 import { CancelScheduledProcessesDialogComponent } from 'src/app/dialogs/cancel-scheduled-processes-dialog/cancel-scheduled-processes-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -69,6 +70,9 @@ export class ProcessesComponent implements OnInit {
   // when current data was loaded
   loadedTimestamp: Date;
 
+  errorMessage: string;
+  errorState: boolean = false;
+
   constructor(
     private adminApi: AdminApiService,
     private auth: AuthService,
@@ -95,9 +99,11 @@ export class ProcessesComponent implements OnInit {
       this.resultCount = total;
       this.fetchingProcesses = false;
       this.loadedTimestamp = new Date();
-    }, error => {
+    }, (error: HttpErrorResponse) => {
       this.ui.showErrorSnackBar('snackbar.error.reloadProcesses');
       this.fetchingProcesses = false;
+      this.errorState = true;
+      this.errorMessage = error.error.message;
     });
     this.fetchingOwners = true;
     this.adminApi.getProcessOwners().subscribe((owners: ProcessOwner[]) => {
