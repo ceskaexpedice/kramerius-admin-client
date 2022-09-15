@@ -19,6 +19,7 @@ export class LicensesComponent implements OnInit {
   licenses: any[];
 
   errorMessage: string;
+  errorState: boolean = false;
 
   constructor(private api: AdminApiService, 
     private ui: UIService,
@@ -34,7 +35,7 @@ export class LicensesComponent implements OnInit {
       this.licenses = licenses;
       this.state = 'success';
     }, (error: HttpErrorResponse) => {
-      this.state = 'error';
+      this.errorState = true;
       this.errorMessage = error.error.message;
     });
   }

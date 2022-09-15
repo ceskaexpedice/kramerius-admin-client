@@ -19,6 +19,8 @@ export class RolesComponent implements OnInit {
   roles: any[];
 
   errorMessage: string;
+  errorState: boolean = false;
+  
 
   constructor(private api: AdminApiService, 
     private ui: UIService,
@@ -31,7 +33,7 @@ export class RolesComponent implements OnInit {
       this.state = 'success';
       console.log('roles', roles);
     }, (error: HttpErrorResponse) => {
-      this.state = 'error';
+      this.errorState = true;
       this.errorMessage = error.error.message;
     });
   }

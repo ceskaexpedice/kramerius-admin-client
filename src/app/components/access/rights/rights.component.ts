@@ -25,6 +25,7 @@ export class RightsComponent implements OnInit {
 
   actions: RightAction[];
   errorMessage: string;
+  errorState: boolean = false;
   
   @Input() pid: string;
 
@@ -57,7 +58,7 @@ export class RightsComponent implements OnInit {
         console.log('rights', rights);
       });
     }, (error:HttpErrorResponse) => {
-      this.state = 'error';
+      this.errorState = true;
       this.errorMessage = error.error.message;
     });
 

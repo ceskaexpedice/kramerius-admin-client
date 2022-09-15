@@ -18,7 +18,9 @@ export class ParamsComponent implements OnInit {
   params: ConditionParam[];
 
   selectedParam: ConditionParam;
+  
   errorMessage: string;
+  errorState: boolean = false;
 
   constructor(private api: AdminApiService, 
     private ui: UIService,
@@ -31,7 +33,7 @@ export class ParamsComponent implements OnInit {
       this.state = 'success';
       console.log('params', params);
     }, (error: HttpErrorResponse) => {
-      this.state = 'error';
+      this.errorState = true;
       this.errorMessage = error.error.message;
     }
     );
