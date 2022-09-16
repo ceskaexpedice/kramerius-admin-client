@@ -5,14 +5,14 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <span class="app-last">{{ 'navbar.rightOfAdministration' | translate }}</span>
+        <span class="app-last">{{ 'sites.access.title' | translate }}</span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.actions' | translate }}</a>
-          <a mat-tab-link (click)="changeView('roles')" [active]="view == 'roles'"><mat-icon class="material-icons-outlined">manage_accounts</mat-icon>{{ 'tabnav.roles' | translate }}</a>
-          <a mat-tab-link (click)="changeView('licenses')" [active]="view == 'licenses'"><mat-icon class="material-icons-outlined">policy</mat-icon>{{ 'tabnav.licenses' | translate }}</a>
-          <a mat-tab-link (click)="changeView('params')" [active]="view == 'params'"><mat-icon class="material-icons-outlined">rule_folder</mat-icon>{{ 'tabnav.parameters' | translate }}</a>
+          <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.access.actions.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('roles')" [active]="view == 'roles'"><mat-icon class="material-icons-outlined">manage_accounts</mat-icon>{{ 'sites.access.roles.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('licenses')" [active]="view == 'licenses'"><mat-icon class="material-icons-outlined">policy</mat-icon>{{ 'sites.access.licenses.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('params')" [active]="view == 'params'"><mat-icon class="material-icons-outlined">rule_folder</mat-icon>{{ 'sites.access.parameters.title' | translate }}</a>
         </nav>
       </div>
     </div>

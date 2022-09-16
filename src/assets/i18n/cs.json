@@ -5,56 +5,154 @@
     "ger": "Němčina",
     "eng": "Angličtina"
   },
-  "navbar": {
-    "object": "Objekt",
-    "import": "Import",
-    "rightOfAdministration": "Správa oprávnění",
-    "processes": "Procesy",
-    "collections": "Sbírky",
-    "indexation": "Indexace",
-    "repository": "Repozitář",
-    "statistics": "Statistiky",
-    "logout": "Odhlásit"
-  },
-  "tabnav": {
-    "statistics": "Statistiky",
-    "graphs": "Grafy",
-    "mostViewedDocuments": "Nejvíce zobrazované dokumenty",
-    "rights": "Práva",
-    "actions": "Akce",
-    "roles": "Role",
-    "licenses": "Licence",
-    "parameters": "Parametry",
-    "standardOutput": "Standarní výstup",
-    "errorOutput": "Chybový výstup",
-    "accessibility": "Přístupnost",
-    "detail": "Detail",
-    "edit": "Editace",
-    "content": "Obsah",
-    "context": "Kontext",
-    "repositoryManagement": "Správa repozitáře",
-    "imports": "Importy",
-    "exports": "Exporty",
-    "bulkDataEditing": "Hromadné úpravy dat",
-    "object": "Objekt",
-    "model": "Model",
-    "others": "Ostatní",
-    "inCollections": "Ve sbírkách"
-  },
-  "homeDashboard": {
+  "sites": {
+    "object": {
+      "title": "Objekt",
+      "actions": {
+        "title": "Akce",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "admin_panel_settings"
+      },
+      "accessibility": {
+        "title": "Přístupnost",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "accessibility"
+      },
+      "in-collections": {
+        "title": "Ve sbírkách",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "collections"
+      },
+      "others": {
+        "title": "Ostatní",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "settings"
+      }
+    },
+    "import": {
+      "title": "Import",
+      "foxml": {
+        "title": "Foxml",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "code"
+      },
+      "ndk": {
+        "title": "Ndk",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "code"
+      }
+    },
+    "access": {
+      "title": "Správa oprávnění",
+      "actions": {
+        "title": "Akce",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "admin_panel_settings"
+      },
+      "roles": {
+        "title": "Role",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "manage_accounts"
+      },
+      "licenses": {
+        "title": "Licence",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "policy"
+      },
+      "parameters": {
+        "title": "Parametry",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "rule_folder"
+      }
+    },
+    "processes": {
+      "title": "Procesy",
+      "standard-output": {
+        "title": "Standarní výstup",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "output"
+      },
+      "error-output": {
+        "title": "Chybový výstup",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "error_outline"
+      }
+    },
+    "collections": {
+      "title": "Sbírky",
+      "detail": {
+        "title": "Detail",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "visibility"
+      },
+      "edit": {
+        "title": "Editace",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "edit"
+      },
+      "content": {
+        "title": "Obsah",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "segment"
+      },
+      "context": {
+        "title": "Kontext",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "source"
+      }
+    },
     "indexing": {
       "title": "Indexace",
       "object": {
-        "subtitle": "Objekt",
+        "title": "Objekt",
         "desc": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru.",
         "icon": "data_object"
       },
       "model": {
-        "subtitle": "Model",
-        "desc": "Indexace objektů (a jejich stromů), které mají vybraný model.",
+        "title": "Model",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "category"
-      }
+      } 
+    },
+    "repository": {
+      "title": "Repozitář",
+      "repository-management": {
+        "title": "Správa repozitáře",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "admin_panel_settings"
+      },
+      "exports": {
+        "title": "Exporty",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "import_export"
+      },
+      "bulk-data-editing": {
+        "title": "Hromadné úpravy dat",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "edit_note"
+      },
+      "statistics": {
+        "title": "Statistiky",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "bar_chart"
+      }  
+    },
+    "statistics": {
+      "title": "Statistiky",
+      "graphs": {
+        "title": "Grafy",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "bar_chart"
+      },
+      "most-viewed-documents": {
+        "title": "Nejvíce zobrazované dokumenty",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "preview"
+      } 
     }
+  },
+  "navbar": {
+    "logout": "Odhlásit"
   },
   "rights": {
     "a_read": {

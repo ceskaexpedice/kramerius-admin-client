@@ -5,41 +5,154 @@
     "ger": "German",
     "eng": "English"
   },
-  "navbar": {
-    "object": "Object",
-    "import": "Import",
-    "rightOfAdministration": "Right of administration",
-    "processes": "Processes",
-    "collections": "Collections",
-    "indexation": "Indexation",
-    "repository": "Repository",
-    "statistics": "Statistics",
-    "logout": "Logout"
+  "sites": {
+    "object": {
+      "title": "Object",
+      "actions": {
+        "title": "Actions",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "admin_panel_settings"
+      },
+      "accessibility": {
+        "title": "Accessibility",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "accessibility"
+      },
+      "in-collections": {
+        "title": "In collections",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "collections"
+      },
+      "others": {
+        "title": "Others",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "settings"
+      }
+    },
+    "import": {
+      "title": "Import",
+      "foxml": {
+        "title": "Foxml",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "code"
+      },
+      "ndk": {
+        "title": "Ndk",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "code"
+      }
+    },
+    "access": {
+      "title": "Right of administration",
+      "actions": {
+        "title": "Actions",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "admin_panel_settings"
+      },
+      "roles": {
+        "title": "Roles",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "manage_accounts"
+      },
+      "licenses": {
+        "title": "Licenses",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "policy"
+      },
+      "parameters": {
+        "title": "Parameters",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "rule_folder"
+      }
+    },
+    "processes": {
+      "title": "Processes",
+      "standard-output": {
+        "title": "Standard output",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "output"
+      },
+      "error-output": {
+        "title": "Error output",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "error_outline"
+      }
+    },
+    "collections": {
+      "title": "Collections",
+      "detail": {
+        "title": "Detail",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "visibility"
+      },
+      "edit": {
+        "title": "Edit",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "edit"
+      },
+      "content": {
+        "title": "Content",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "segment"
+      },
+      "context": {
+        "title": "Context",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "source"
+      }
+    },
+    "indexing": {
+      "title": "Indexing",
+      "object": {
+        "title": "Object",
+        "desc": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file.",
+        "icon": "data_object"
+      },
+      "model": {
+        "title": "Model",
+        "desc": "Indexing of objects (and their trees) that have the selected model.",
+        "icon": "category"
+      } 
+    },
+    "repository": {
+      "title": "Repository",
+      "repository-management": {
+        "title": "Repository management",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "admin_panel_settings"
+      },
+      "exports": {
+        "title": "Exports",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "import_export"
+      },
+      "bulk-data-editing": {
+        "title": "Bulk data editing",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "edit_note"
+      },
+      "statistics": {
+        "title": "Statistics",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "bar_chart"
+      }  
+    },
+    "statistics": {
+      "title": "Statistics",
+      "graphs": {
+        "title": "Graphs",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "bar_chart"
+      },
+      "most-viewed-documents": {
+        "title": "Most viewed documents",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "preview"
+      } 
+    }
   },
-  "tabnav": {
-    "statistics": "Statistics",
-    "graphs": "Graphs",
-    "mostViewedDocuments": "Most viewed documents",
-    "rights": "Rights",
-    "actions": "Actions",
-    "roles": "Roles",
-    "licenses": "Licenses",
-    "parameters": "Parameters",
-    "standardOutput": "Standard output",
-    "errorOutput": "Error output",
-    "accessibility": "Accessibility",
-    "detail": "Detail",
-    "edit": "Edit",
-    "content": "Content",
-    "context": "Context",
-    "repositoryManagement": "Repository management",
-    "imports": "Imports",
-    "exports": "Exports",
-    "bulkDataEditing": "Bulk data editing",
-    "object": "Object",
-    "model": "Model",
-    "others": "Others",
-    "inCollections": "In collections"
+  "navbar": {
+    "logout": "Logout"
   },
   "rights": {
     "a_read": {

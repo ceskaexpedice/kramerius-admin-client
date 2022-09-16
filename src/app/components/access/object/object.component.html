@@ -21,7 +21,7 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a routerLink="/object">{{ 'navbar.object' | translate }}</a>
+        <a routerLink="/object">{{ 'sites.object.title' | translate }}</a>
         <span class="app-separator">/</span>
         <span class="app-last app-text-cutter">
           <span [matTooltip]="title">{{ title }}</span>
@@ -30,17 +30,17 @@
       <div>
         <nav mat-tab-nav-bar>
           <a *ngIf="specificAuthorizedActions.indexOf('a_rights_edit')>=0"  mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
-            <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.actions' | translate }}
+            <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.object.actions.title' | translate }}
           </a>
           <a *ngIf="specificAuthorizedActions.indexOf('a_set_accessibility')>=0" mat-tab-link (click)="changeView('accessibility')" [active]="view == 'accessibility'">
-            <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'tabnav.accessibility' | translate }}
+            <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'sites.object.accessibility.title' | translate }}
           </a>
           <!-- musi mit prava pro vsechny sbirky --> 
           <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
-            <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'tabnav.inCollections' | translate }}
+            <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
-            <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'tabnav.others' | translate }}
+            <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'sites.object.others.title' | translate }}
           </a>
         </nav>
       </div>

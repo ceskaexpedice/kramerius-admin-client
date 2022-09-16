@@ -5,23 +5,23 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a routerLink="/collections">{{ 'navbar.collections' | translate }}</a>
+        <a routerLink="/collections">{{ 'sites.collections.title' | translate }}</a>
         <span class="app-separator">/</span>
         <span class="app-last" *ngIf="collection">{{ collection.getName()}}</span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('detail')" [active]="view == 'detail'">
-            <mat-icon class="material-icons-outlined">visibility</mat-icon>{{ 'tabnav.detail' | translate }}
+            <mat-icon class="material-icons-outlined">visibility</mat-icon>{{ 'sites.collections.detail.title' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('edit')" [active]="view == 'edit'">
-            <mat-icon class="material-icons-outlined">edit</mat-icon>{{ 'tabnav.edit' | translate }}
+            <mat-icon class="material-icons-outlined">edit</mat-icon>{{ 'sites.collections.edit.title' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('content')" [active]="view == 'content'">
-            <mat-icon class="material-icons-outlined">segment</mat-icon>{{ 'tabnav.content' | translate }}
+            <mat-icon class="material-icons-outlined">segment</mat-icon>{{ 'sites.collections.content.title' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('context')" [active]="view == 'context'">
-            <mat-icon class="material-icons-outlined">source</mat-icon>{{ 'tabnav.context' | translate }}
+            <mat-icon class="material-icons-outlined">source</mat-icon>{{ 'sites.collections.context.title' | translate }}
           </a>
         </nav>
       </div>

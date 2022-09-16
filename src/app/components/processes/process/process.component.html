@@ -5,7 +5,7 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a routerLink="/processes">{{ 'navbar.processes' | translate }}</a>
+        <a routerLink="/processes">{{ 'sites.processes.title' | translate }}</a>
         <span class="app-separator">/</span>
         <span class="app-last app-text-cutter">
           <span [matTooltip]="process.name">{{ process.name }}</span>
@@ -13,8 +13,8 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('standardOutput')" [active]="view == 'standardOutput'"><mat-icon class="material-icons-outlined">output</mat-icon>{{ 'tabnav.standardOutput' | translate }}</a>
-          <a mat-tab-link (click)="changeView('errorOutput')"  [active]="view == 'errorOutput'"><mat-icon class="material-icons-outlined">error_outline</mat-icon>{{ 'tabnav.errorOutput' | translate }}</a>
+          <a mat-tab-link (click)="changeView('standardOutput')" [active]="view == 'standardOutput'"><mat-icon class="material-icons-outlined">output</mat-icon>{{ 'sites.processes.standard-output.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('errorOutput')"  [active]="view == 'errorOutput'"><mat-icon class="material-icons-outlined">error_outline</mat-icon>{{ 'sites.processes.error-output.title' | translate }}</a>
         </nav>
       </div>
     </div>

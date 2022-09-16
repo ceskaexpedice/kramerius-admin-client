@@ -44,7 +44,7 @@ export class StatisticsComponent implements OnInit {
 
   identifier:string;
 
-  isPageStatistics: boolean = false;
+  isPageStatistics: boolean = true;
 
   errorMessage: string;
   errorState: boolean = false;
