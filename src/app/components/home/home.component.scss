@@ -37,6 +37,7 @@
 
   .app-mark-rounded {
     $app-size: 50px;
+    @include setDashboardColor();
 
     position: absolute;
     top: calc(-#{$app-size} / 2);
@@ -48,7 +49,7 @@
     height: $app-size;
     width: $app-size;
     border-radius: 50%;
-    background-color: #5AB15E;
+    background-color: $app-gray-6;
     color: $app-color-lightnes;
     margin-left: auto;
     margin-right: auto;

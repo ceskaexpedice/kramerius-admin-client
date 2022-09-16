@@ -15,41 +15,44 @@
       </div>
     </div>
     <div fxFlex fxLayout="column" fxFlexFill class="app-container">
-      <div fxLayout="row" fxLayoutAlign="start end" class="app-mb-4">
-        <div fxFlex>
-          <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
-          <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">{{ 'desc.post' | translate }}</mat-checkbox>
-        </div>
-        <div>
-          <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">{{ 'button.startImport' | translate }}</button>
-        </div>
-      </div>
-      <div fxFlex class="app-oh">
-        <mat-card fxLayout="column" fxFlexFill *ngIf="!this.inputDirError[this.type]" class="app-p-0 app-card app-view-border">
-          <div fxLayout="row" fxLayoutAlign="start center" class="app-path-bar app-mb-2">
-            <div fxFlex class="app-left">
-              <ng-container *ngIf="imports.selectedTree">
-                <a (click)="clearPath()" class="app-clear-filter app-mr-2" [matTooltip]="'button.deselect' | translate">
-                  <mat-icon>cancel</mat-icon>
-                </a>
-                <strong class="app-mr-2">{{ 'desc.selectedPath' | translate }}:</strong>
-              </ng-container>
-              <span class="app-path">{{ imports.selectedTree ? imports.selectedTree.getFullPath() : '' }}</span>
-            </div>
-            <div class="app-right">
-              <a (click)="showHelpDialog()" [matTooltip]="'button.showHelp' | translate"><mat-icon>help</mat-icon></a>
-            </div>
+      <ng-container *ngIf="!this.inputDirError[this.type]">
+        <div fxLayout="row" fxLayoutAlign="start end" class="app-mb-4">
+          <div fxFlex>
+            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
+            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">{{ 'desc.post' | translate }}</mat-checkbox>
           </div>
-          <div fxFlex class="app-oa-y app-pl-2 app-pr-2 app-pb-2">
-            <app-tree [tree]="tree"></app-tree>
+          <div>
+            <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">{{ 'button.startImport' | translate }}</button>
           </div>
-        </mat-card>
-        <mat-card *ngIf="this.inputDirError[this.type]" class="app-view-alert app-warn">
-          <mat-card-content>
-            <mat-icon>error</mat-icon>{{ this.inputDirError[this.type] }}
-          </mat-card-content>
-        </mat-card>
-      </div>
+        </div>
+        <div fxFlex class="app-oh">
+          <mat-card fxLayout="column" fxFlexFill *ngIf="!this.inputDirError[this.type]" class="app-p-0 app-card app-view-border">
+            <div fxLayout="row" fxLayoutAlign="start center" class="app-path-bar app-mb-2">
+              <div fxFlex class="app-left">
+                <ng-container *ngIf="imports.selectedTree">
+                  <a (click)="clearPath()" class="app-clear-filter app-mr-2" [matTooltip]="'button.deselect' | translate">
+                    <mat-icon>cancel</mat-icon>
+                  </a>
+                  <strong class="app-mr-2">{{ 'desc.selectedPath' | translate }}:</strong>
+                </ng-container>
+                <span class="app-path">{{ imports.selectedTree ? imports.selectedTree.getFullPath() : '' }}</span>
+              </div>
+              <div class="app-right">
+                <a (click)="showHelpDialog()" [matTooltip]="'button.showHelp' | translate"><mat-icon>help</mat-icon></a>
+              </div>
+            </div>
+            <div fxFlex class="app-oa-y app-pl-2 app-pr-2 app-pb-2">
+              <app-tree [tree]="tree"></app-tree>
+            </div>
+          </mat-card>
+        </div>
+      </ng-container>
+      
+      <mat-card *ngIf="this.inputDirError[this.type]" class="app-view-alert app-warn">
+        <mat-card-content>
+          <mat-icon>error</mat-icon>{{ this.inputDirError[this.type] }}
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>

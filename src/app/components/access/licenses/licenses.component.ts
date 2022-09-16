@@ -6,6 +6,7 @@ import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dial
 import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-licenses',
@@ -16,6 +17,9 @@ export class LicensesComponent implements OnInit {
 
   state: string;
   licenses: any[];
+
+  errorMessage: string;
+  errorState: boolean = false;
 
   constructor(private api: AdminApiService, 
     private ui: UIService,
@@ -30,6 +34,9 @@ export class LicensesComponent implements OnInit {
     this.api.getLicenses().subscribe((licenses: License[]) => {
       this.licenses = licenses;
       this.state = 'success';
+    }, (error: HttpErrorResponse) => {
+      this.errorState = true;
+      this.errorMessage = error.error.message;
     });
   }
 

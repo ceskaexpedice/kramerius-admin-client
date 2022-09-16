@@ -1,8 +1,3 @@
-<!-- <div *ngFor="let item of dashBoard">
-	<ng-container *ngIf="item.display">
-		{{ item.type }} - {{ item.subtype }}<br />
-	</ng-container>
-</div> -->
 <div class="app-home app-h-100">
 	<div fxLayout="column" fxFlexFill>
     <div class="app-topbar">
@@ -20,7 +15,35 @@
     <div fxFlex class="app-oa-y app-pt-8">
 			<div class="app-container">
 				<div fxLayout="row wrap" fxLayoutAlign="center" class="app-cards-wrapper">
-					<mat-card class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+					<ng-container *ngFor="let item of dashBoard">
+						<mat-card *ngIf="item.display" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
+							<mat-card-header>
+								<mat-card-title>{{ 'homeDashboard.' + item.type + '.title' | translate }}</mat-card-title>
+								<mat-card-subtitle>{{ 'homeDashboard.' + item.type + '.' + item.subtype + '.subtitle' | translate }}</mat-card-subtitle>
+							</mat-card-header>
+							<mat-card-content>
+								<div class="app-mark-rounded" [ngClass]="'app-' + item.type + '-' + item.subtype">
+									<mat-icon>{{ 'homeDashboard.' + item.type + '.' + item.subtype + '.icon' | translate }}</mat-icon>
+								</div>
+								<div class="app-desc">
+									{{ 'homeDashboard.' + item.type + '.' + item.subtype + '.desc' | translate }}
+								</div>
+							</mat-card-content>
+							<mat-card-actions>
+								<button mat-flat-button color="accent" [routerLink]="'/' + item.type + '/' + item.subtype">
+									<span>Přejít</span>
+									<mat-icon>arrow_forward</mat-icon>
+								</button>
+							</mat-card-actions>
+						</mat-card>
+					</ng-container>
+					
+
+
+
+
+
+					<!-- <mat-card class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
 						<mat-card-header>
 							<mat-card-title>Indexace</mat-card-title>
 							<mat-card-subtitle>Objekt</mat-card-subtitle>
@@ -121,7 +144,7 @@
 								<mat-icon>arrow_forward</mat-icon>
 							</button>
 						</mat-card-actions>
-					</mat-card>
+					</mat-card> -->
 				</div>				
 			</div>
 		</div>

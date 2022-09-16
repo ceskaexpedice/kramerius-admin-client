@@ -19,6 +19,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-statistics',
@@ -44,6 +45,9 @@ export class StatisticsComponent implements OnInit {
   identifier:string;
 
   isPageStatistics: boolean = false;
+
+  errorMessage: string;
+  errorState: boolean = false;
 
   
   // Debouncing 
@@ -82,6 +86,9 @@ export class StatisticsComponent implements OnInit {
     ).subscribe(response => {
       this.allLicenses = response["license"];
       this.allLicenses.unshift('All');
+    }, (error: HttpErrorResponse) => {
+      this.errorMessage = error.error.message;
+      this.errorState = true;
     });
 
 

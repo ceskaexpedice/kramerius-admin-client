@@ -60,11 +60,10 @@ export class Tree {
                 this.expandChildren(api);
             }
         }, error => {
-            console.error('Debug => ' + error);
             if (onError) {
-                onError(`Chyba načítání dat: ${error.error.error}`);
+                onError(`Chyba načítání dat: ${error.error.message}`);
             } else {
-                this.ui.showErrorSnackBar(`Chyba načítání dat: ${error.error.error}`)
+                this.ui.showErrorSnackBar(`Chyba načítání dat: ${error.error.message}`)
             }
         });
     }

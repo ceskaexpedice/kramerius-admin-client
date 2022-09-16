@@ -22,6 +22,8 @@ export class ImportComponent implements OnInit {
   scheduleIndexations: boolean;
   inputDirError = {};
 
+  errorState: boolean = false;
+
   constructor(private api: AdminApiService,
     private dialog: MatDialog,
     private ui: UIService,
@@ -49,6 +51,8 @@ export class ImportComponent implements OnInit {
     delete this.inputDirError[this.type];
     this.tree.expand(this.api, false, error => {
       this.inputDirError[this.type] = error;
+      this.errorState = true;
+      console.log(error);
     });
   }
 

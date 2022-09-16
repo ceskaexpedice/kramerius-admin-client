@@ -18,7 +18,7 @@
       </div>
     </div>
     <div fxFlex class="app-container-fluid app-oh">
-      <div class="app-table-wrapper app-maxh-100 app-view-border app-oa-y">
+      <div class="app-table-wrapper app-maxh-100 app-view-border app-oa-y" *ngIf="!errorState">
         <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
         <table mat-table [dataSource]="dataSource" class="app-w-100" matSort>
           <ng-container matColumnDef="name_cze">
@@ -60,6 +60,12 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.app-not-allowed]="!allowEdit(row.id)" [matTooltip]="!allowEdit(row.id) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(row.id) ? 'app-alert-not-allowed' : null"></tr>
         </table>
       </div>
+
+      <mat-card *ngIf="errorState" class="app-view-alert app-warn">
+        <mat-card-content>
+          <mat-icon>error</mat-icon>{{ errorMessage }}
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>
