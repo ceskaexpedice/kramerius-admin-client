@@ -12,7 +12,7 @@ export class AppSettings {
   keycloak = APP_GLOBAL.keycloak;
 
   devMode = !!APP_GLOBAL.devMode; //pokud true, tak se zobrazuje zalozka DEV a dalsi testovaci veci (napr. spousteni testovaciho procesu)
-  version = "1.1.7" + (this.devMode ? "-dev" : "");
+  version = "1.2.1" + (this.devMode ? "-dev" : "");
 
   clientApiBaseUrl = this.coreBaseUrl + '/api/client/v7.0';
   adminApiBaseUrl = this.coreBaseUrl + '/api/admin/v7.0';

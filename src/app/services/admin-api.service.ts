@@ -347,7 +347,6 @@ export class AdminApiService {
   }
 
   
-  
 
   createLicense(license: License): Observable<License> {
     return this.post(`/licenses`, license.toJson()).pipe(map(response =>
