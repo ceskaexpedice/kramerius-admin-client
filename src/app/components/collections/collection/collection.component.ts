@@ -30,7 +30,7 @@ export class CollectionComponent implements OnInit {
 
   collectionActions:Map<string,string[]> = new Map();
 
-  collectionId: string = '';
+  collectionId: string;
 
 
   constructor(

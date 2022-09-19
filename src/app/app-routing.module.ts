@@ -24,20 +24,19 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'keycloak', component: AuthComponent },
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
-  { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
+  { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
 
-  //{ path: 'collections/:id/edit', component: CollectionEditComponent, canActivate: [AuthGuard] },
-  { path: 'collections/new', component: CollectionNewComponent, canActivate: [AuthGuard] },
-  //{ path: 'collections/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'processes/standard-output/:id', component: ProcessComponent, canActivate: [AuthGuard] },
+  { path: 'processes/error-output/:id', component: ProcessComponent, canActivate: [AuthGuard] },
+
+
   { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
-
+  { path: 'collections/new', component: CollectionNewComponent, canActivate: [AuthGuard] },
   { path: 'collections/detail/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections/edit/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections/content/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections/context/:id', component: CollectionComponent, canActivate: [AuthGuard] },
-
-
   { path: 'indexing', redirectTo: 'indexing/object' },
   { path: 'indexing/object', component: IndexingComponent, canActivate: [AuthGuard] },
   { path: 'indexing/model', component: IndexingComponent, canActivate: [AuthGuard] },
