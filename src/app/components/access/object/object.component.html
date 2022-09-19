@@ -29,17 +29,17 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a *ngIf="specificAuthorizedActions.indexOf('a_rights_edit')>=0"  mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
+          <a *ngIf="specificAuthorizedActions.indexOf('a_rights_edit')>=0"  mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'">
             <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.object.actions.title' | translate }}
           </a>
           <a *ngIf="specificAuthorizedActions.indexOf('a_set_accessibility')>=0" mat-tab-link (click)="changeView('accessibility')" [active]="view == 'accessibility'">
             <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'sites.object.accessibility.title' | translate }}
           </a>
           <!-- musi mit prava pro vsechny sbirky --> 
-          <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
+          <a mat-tab-link (click)="changeView('in-collections')" [active]="view == 'in-collections'">
             <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}
           </a>
-          <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
+          <a mat-tab-link (click)="changeView('others')" [active]="view == 'others'">
             <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'sites.object.others.title' | translate }}
           </a>
         </nav>
@@ -48,8 +48,7 @@
 
     <div fxFlex class="app-oh app-oa-y">
       <div class="app-container">
-        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center"
-          fxLayoutGap="32px">
+        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
           <div fxFlex class="app-text-cutter">
             <a (click)="copyTextToClipboard(getCurrentRoute('string'))"
               [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
@@ -67,7 +66,7 @@
           </div>
         </mat-card>
 
-        <mat-card *ngIf="view == 'rights'" fxLayout="column" class="app-card app-view-border app-p-0">
+        <mat-card *ngIf="view == 'actions'" fxLayout="column" class="app-card app-view-border app-p-0">
           <app-rights [pid]="pid"></app-rights>
         </mat-card>
 
@@ -107,7 +106,7 @@
           </mat-card>
         </ng-container>
 
-        <ng-container *ngIf="view === 'collections'">
+        <ng-container *ngIf="view === 'in-collections'">
           <!-- <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
             <div fxFlex class="app-text-cutter">
               <a (click)="copyTextToClipboard(getCurrentRoute('string'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a><span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="collection.getDescription()" class="app-desc">{{ collection.getDescription() }}</span>
@@ -143,7 +142,7 @@
           </mat-card>
         </ng-container>
 
-        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'other'">
+        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'others'">
           <mat-card-content>
             <div class="app-mb-4">
               <h3 class="app-mt-0">{{ 'desc.synchronization' | translate }}</h3>

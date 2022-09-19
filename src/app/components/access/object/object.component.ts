@@ -97,7 +97,7 @@ export class ObjectComponent implements OnInit {
     this.inputPid = this.pid;
     this.adminApi.checkObject(this.pid).subscribe(result => {
       this.pidIsCorrect = true;
-      this.view = this.local.getStringProperty('object.view', 'accessibility');
+      this.view = this.local.getStringProperty('object.view', 'actions');
       this.checkingPid = false;
       this.loadSolrData();
       this.loadCollections();
@@ -190,6 +190,7 @@ export class ObjectComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('object.view', view);
+    this.router.navigate(['/object/' + view + '/', this.inputPid]);
   }
 
   assignUuid() {
@@ -201,7 +202,8 @@ export class ObjectComponent implements OnInit {
       this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation400');
       return;
     }
-    this.router.navigate(['/', 'object', this.inputPid]);
+    this.router.navigate(['/object/actions/', this.inputPid]);
+    this.local.setStringProperty('object.view', 'actions');
   }
 
   getCurrentRoute(type: string) {

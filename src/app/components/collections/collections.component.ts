@@ -167,4 +167,9 @@ export class CollectionsComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.collections);
     this.dataSource.sort = this.sort;
   }
+
+  routeToObject(id) {
+    this.router.navigate(['/object/actions/', id]);
+    this.locals.setStringProperty('object.view', 'actions');
+  }
 }
