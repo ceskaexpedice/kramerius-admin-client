@@ -30,6 +30,8 @@ export class CollectionComponent implements OnInit {
 
   collectionActions:Map<string,string[]> = new Map();
 
+  collectionId: string = '';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -47,9 +49,8 @@ export class CollectionComponent implements OnInit {
     this.state = 'loading';
     this.route.params.subscribe(params => {
       this.loadData(params['id']);
+      this.collectionId = params['id'];
     })
-
-
   }
 
   loadData(collectionId: string) {
@@ -60,7 +61,7 @@ export class CollectionComponent implements OnInit {
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
         this.items = res.filter(item => this.collection.items.includes(item['pid']))
         //this.view = 'detail';
-        this.view = this.local.getStringProperty('collection.view', 'detail');
+        this.view = this.local.getStringProperty('collection.view');
         this.state = 'success';
         // deti 
         this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid'])).subscribe((d:any) => {
@@ -102,6 +103,7 @@ export class CollectionComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('collection.view', view);
+    this.router.navigate(['/collections/' + view + '/', this.collectionId]);
   }
 
   onUpdated() {

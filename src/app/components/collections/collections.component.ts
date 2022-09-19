@@ -168,8 +168,8 @@ export class CollectionsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  routeToObject(id) {
-    this.router.navigate(['/object/actions/', id]);
-    this.locals.setStringProperty('object.view', 'actions');
+  setRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
+    this.router.navigate([path, id]);
+    this.locals.setStringProperty(viewProperty + '.view', viewValue);
   }
 }
