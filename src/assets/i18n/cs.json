@@ -110,7 +110,7 @@
       },
       "model": {
         "title": "Model",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "Indexace objektů (a jejich stromů), které mají vybraný model.",
         "icon": "category"
       } 
     },
@@ -394,7 +394,8 @@
     "showHelp": "Zobrazit nápovědu",
     "changeCollectionRights": "Změnit práva ke sbírce",
     "logIn": "Přihlásit se",
-    "signInAgain": "Přihlásit se znovu"
+    "signInAgain": "Přihlásit se znovu",
+    "goTo": "Přejít"
   },
   "field": {
     "public": "Veřejné",

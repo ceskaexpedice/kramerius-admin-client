@@ -394,7 +394,8 @@
     "showHelp": "Show help",
     "changeCollectionRights": "Change collection rights",
     "logIn": "Log in",
-    "signInAgain": "Sign in again"
+    "signInAgain": "Sign in again",
+    "goTo": "Go to"
   },
   "field": {
     "public": "Public",
