@@ -24,7 +24,6 @@
           <ng-container matColumnDef="name_cze">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-              <!-- <a [routerLink]="allowEdit(element.id) ? ['/collections',  element.id] : null" [class.app-avoid-click]="!allowEdit(element.id)"> -->
               <a (click)="allowEdit(element.id) ? setRouterLink('/collections/detail/', element.id, 'collection', 'detail') : null" [class.app-avoid-click]="!allowEdit(element.id)">
                 {{ element.name_cze }}
               </a>
