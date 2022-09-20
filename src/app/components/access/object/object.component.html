@@ -37,7 +37,9 @@
           </a>
           <!-- musi mit prava pro vsechny sbirky --> 
           <a mat-tab-link (click)="changeView('in-collections')" [active]="view == 'in-collections'">
-            <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}
+            <span [matBadge]="superCollections?.length">
+              <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}<span class="app-push-right"></span>
+            </span>
           </a>
           <a mat-tab-link (click)="changeView('others')" [active]="view == 'others'">
             <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'sites.object.others.title' | translate }}
@@ -50,14 +52,12 @@
       <div class="app-container">
         <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
           <div fxFlex class="app-text-cutter">
-            <a (click)="copyTextToClipboard(getCurrentRoute('string'))"
-              [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
+            <a (click)="copyTextToClipboard(getCurrentRoute('string', '/object/' + view + '/'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
             </a>
-            <span class="app-desc">{{ getCurrentRoute('string') }}</span>
-            <span class="app-pipe"></span>
-            <span *ngIf="collection && collection.getDescription()" [matTooltip]="collection.getDescription()"
-              class="app-desc">{{ collection.getDescription() }}</span>
+            <span class="app-desc">{{ getCurrentRoute('string', '/object/' + view + '/') }}</span>
+            <span class="app-pipe" *ngIf="collection && collection.getDescription()"></span>
+            <span *ngIf="collection && collection.getDescription()" [matTooltip]="collection.getDescription()" class="app-desc">{{ collection.getDescription() }}</span>
           </div>
           <div *ngIf="view === 'collections'">
             <a mat-flat-button color="primary" (click)="onAddThisToACollection()">
@@ -79,8 +79,7 @@
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <mat-icon class="app-20 app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon>
                   <strong>{{ 'field.' + policy | translate }}</strong>
-                  <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4">{{
-                    'button.changeAvailability' | translate }}</button>
+                  <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4">{{ 'button.changeAvailability' | translate }}</button>
                 </div>
               </div>
               <mat-divider [inset]="true"></mat-divider>
@@ -107,19 +106,9 @@
         </ng-container>
 
         <ng-container *ngIf="view === 'in-collections'">
-          <!-- <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
-            <div fxFlex class="app-text-cutter">
-              <a (click)="copyTextToClipboard(getCurrentRoute('string'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a><span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="collection.getDescription()" class="app-desc">{{ collection.getDescription() }}</span>
-            </div>
-            <div>
-              <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
-                <mat-icon>add_circle</mat-icon>{{ 'button.addToThisCollection' | translate }}
-              </a>
-            </div>
-          </mat-card> -->
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
           <mat-card fxLayout="column" *ngIf="!loadingCollections" class="app-card app-view-border app-p-0">
-            <mat-card class="app-view-rights app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="allowCollectionEdit(superCollection['id']) ? '/collections/' + getCurrentRoute('string') : null" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowCollectionEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowCollectionEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
+            <mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="allowCollectionEdit(superCollection['id']) ? '/collections/' + getCurrentRoute('string') : null" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowCollectionEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowCollectionEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
               <mat-card-header fxLayout="row" fxLayoutGap="16px">
                 <div *ngIf="getThumb(superCollection['id'])">
                   <img [src]="getThumb(superCollection['id'])" />
@@ -139,6 +128,12 @@
               </mat-card-header>
             </mat-card>
             <!-- TODO: sbírky, co ho obsahují nepřímo od rodiče (z indexu)? Jen pro informaci, nebo proklik na sbírku-->
+
+            <mat-card *ngIf="superCollections?.length === 0" class="app-card app-color-info app-text-center">
+              <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.context' | translate }}
+              </mat-card-content>
+            </mat-card>
           </mat-card>
         </ng-container>
 
@@ -163,15 +158,6 @@
                 <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' | translate }}</button>
               </span>
             </div>
-            <!--
-            <mat-divider [inset]="true"></mat-divider>
-            <div class="app-mt-4">
-              <h3 class="app-mt-0">{{ 'desc.exports' | translate }}</h3>
-              <button mat-flat-button disabled color="primary" class="app-mr-2">{{ 'button.export' | translate }}
-                PDF</button>
-              <button mat-flat-button disabled color="primary">{{ 'button.export' | translate }} FOXML</button>
-            </div>
-            -->
           </mat-card-content>
         </mat-card>
       </div>

@@ -206,14 +206,6 @@ export class ObjectComponent implements OnInit {
     this.local.setStringProperty('object.view', 'actions');
   }
 
-  getCurrentRoute(type: string) {
-    if (type === 'string') {
-      return this.router.url.replace('/object/', '');
-    } else {
-      return this.router.url;
-    }
-  }
-
   deleteObjectLowLevel() {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.deleteObjectLowLevel.title'),
@@ -469,6 +461,14 @@ export class ObjectComponent implements OnInit {
         this.ui.showInfoSnackBar('snackbar.success.scheduleProcessingIndexRebuildForObject');
       }
     });
+  }
+
+  getCurrentRoute(type: string, path: string = null) {
+    if (type === 'string') {
+      return this.router.url.replace(path, '');
+    } else {
+      return this.router.url;
+    }
   }
 
   copyTextToClipboard(val: string) {

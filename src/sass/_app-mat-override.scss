@@ -4,7 +4,7 @@
 .mat-card {
   &.app-card {
     @extend .app-clean-shadow, .app-clean-radius;
-    color: $app-body-color !important;
+    color: $app-body-color;
 
     .mat-card-header {
       .mat-card-header-text {
@@ -354,11 +354,29 @@
       &:not(.mat-tab-label-active) {
         color: $app-gray-6;
         font-weight: normal;
+
+        .mat-badge-content {
+          background-color: $app-gray-6;
+        }
       }
 
       .mat-icon {
         @extend .app-mr-2;
         @include setIcon(20);
+      }
+
+      .mat-badge {
+        .mat-icon {
+          @include setIcon($position: sub);
+        }
+
+        .mat-badge-content {
+          right: -6px;
+        }
+
+        .app-push-right {
+          margin-right: 24px;
+        }
       }
     }
   }
