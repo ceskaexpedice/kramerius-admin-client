@@ -18,7 +18,7 @@ export class AccessComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit() {
-    this.view = this.local.getStringProperty('access.view', 'roles');
+    this.view = this.local.getStringProperty('access.view');
   }
 
   changeView(view: string) {

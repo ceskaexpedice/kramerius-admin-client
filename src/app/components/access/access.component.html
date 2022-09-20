@@ -9,7 +9,7 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.access.actions.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.access.actions.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('roles')" [active]="view == 'roles'"><mat-icon class="material-icons-outlined">manage_accounts</mat-icon>{{ 'sites.access.roles.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('licenses')" [active]="view == 'licenses'"><mat-icon class="material-icons-outlined">policy</mat-icon>{{ 'sites.access.licenses.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('params')" [active]="view == 'params'"><mat-icon class="material-icons-outlined">rule_folder</mat-icon>{{ 'sites.access.parameters.title' | translate }}</a>
@@ -19,7 +19,7 @@
     <div fxFlex class="app-oa-y">
       <div class="app-container">
         <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
-          <app-rights *ngIf="view == 'rights'"></app-rights>
+          <app-rights *ngIf="view == 'actions'"></app-rights>
           <app-roles *ngIf="view == 'roles'"></app-roles>
           <app-licenses *ngIf="view == 'licenses'"></app-licenses>
           <app-params *ngIf="view == 'params'"></app-params>

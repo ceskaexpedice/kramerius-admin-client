@@ -22,7 +22,7 @@
       <a *ngIf="!notAllowed" routerLink="/object" routerLinkActive="active" mat-button>{{ 'sites.object.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_import')" routerLink="/import" routerLinkActive="active" mat-button (click)="setDefaultRoute('import.type','foxml')">{{ 'sites.import.title' | translate }}</a>
       <!-- pravo pro objekt -->
-      <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access" routerLinkActive="active" mat-button (click)="setDefaultRoute('access.view','rights')">{{ 'sites.access.title' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access" routerLinkActive="active" mat-button (click)="setDefaultRoute('access.view','actions')">{{ 'sites.access.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_process_edit') || allowedGlobalAction('a_process_read')" routerLink="/processes" routerLinkActive="active" mat-button>{{ 'sites.processes.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" routerLink="/collections" routerLinkActive="active" mat-button>{{ 'sites.collections.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'sites.indexing.title' | translate }}</a>
