@@ -189,9 +189,9 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  getCurrentRoute(type: string) {
+  getCurrentRoute(type: string, path: string = null) {
     if (type === 'string') {
-      return this.router.url.replace('/collections/', '');
+      return this.router.url.replace(path, '');
     } else {
       return this.router.url;
     }
