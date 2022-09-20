@@ -101,10 +101,14 @@ $states: (
 
 // dashboard
 $dashboard: (
+  collections: #00B0FF,
+  collections-detail: #0288D1,
+  collections-edit: #0097A7,
+  collections-content: #00796B,
+  collections-context: #388E3C,
   indexing-object: #5AB15E,
   indexing-model: #FF6D00,
   repository-repository-management: #AA00FF,
   repository-bulk-data-editing: #00B8D4,
   repository-statistics: #AFB42B
-
 );

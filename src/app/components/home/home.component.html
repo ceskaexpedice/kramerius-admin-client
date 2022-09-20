@@ -13,18 +13,18 @@
 						<mat-card *ngIf="!item.hidden" class="app-card app-view-border" fxLayout="column" fxLayoutAlign="start center">
 							<mat-card-header>
 								<mat-card-title>{{ 'sites.' + item.type + '.title' | translate }}</mat-card-title>
-								<mat-card-subtitle>{{ 'sites.' + item.type + '.' + item.subtype + '.title' | translate }}</mat-card-subtitle>
+								<mat-card-subtitle *ngIf="item.subtype">{{ 'sites.' + item.type + '.' + item.subtype + '.title' | translate }}</mat-card-subtitle>
 							</mat-card-header>
 							<mat-card-content>
-								<div class="app-mark-rounded" [ngClass]="'app-' + item.type + '-' + item.subtype">
-									<mat-icon>{{ 'sites.' + item.type + '.' + item.subtype + '.icon' | translate }}</mat-icon>
+								<div class="app-mark-rounded" [ngClass]="item.subtype ? ('app-' + item.type + '-' + item.subtype) : ('app-' + item.type)">
+									<mat-icon>{{ item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.icon' | translate) : ('sites.' + item.type + '.icon' | translate) }}</mat-icon>
 								</div>
 								<div class="app-desc">
-									{{ 'sites.' + item.type + '.' + item.subtype + '.desc' | translate }}
+									{{ item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.desc' | translate) : ('sites.' + item.type + '.desc' | translate) }}
 								</div>
 							</mat-card-content>
 							<mat-card-actions>
-								<button mat-flat-button color="accent" [routerLink]="'/' + item.type + '/' + item.subtype" (click)="item.subtype ? setDefaultRoute(item.type + '.view', item.subtype) : null">
+								<button mat-flat-button color="accent" [routerLink]="item.subtype ? ('/' + item.type + '/' + item.subtype) : ('/' + item.type)" (click)="item.subtype ? setDefaultRoute(item.type + '.view', item.subtype) : null">
 									<span>{{ 'button.goTo' | translate }}</span>
 									<mat-icon>arrow_forward</mat-icon>
 								</button>

@@ -80,6 +80,8 @@
     },
     "collections": {
       "title": "Sbírky",
+      "desc": "Seznam sbírek, kde můžete vytořit novou sbírku, podívat se na detail, editovat, vkládat do sbírky další objekty/sbírky, nebo vkládat sbírku do dalších sbírek",
+      "icon": "collections",
       "detail": {
         "title": "Detail",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
