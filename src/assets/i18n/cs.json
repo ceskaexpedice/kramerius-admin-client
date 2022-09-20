@@ -8,6 +8,8 @@
   "sites": {
     "object": {
       "title": "Objekt",
+      "desc": "U objektu můžete na základě zadaného UUID upravovat práva, měnit dostupnost, přidávat licenci, reindexovat, přebuildovat processing index nebo mazat.",
+      "icon": "data_object",
       "actions": {
         "title": "Akce",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
@@ -67,6 +69,8 @@
     },
     "processes": {
       "title": "Procesy",
+      "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+      "icon": "schedule",
       "standard-output": {
         "title": "Standarní výstup",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
@@ -80,7 +84,7 @@
     },
     "collections": {
       "title": "Sbírky",
-      "desc": "Seznam sbírek, kde můžete vytořit novou sbírku, podívat se na detail, editovat, vkládat do sbírky další objekty/sbírky, nebo vkládat sbírku do dalších sbírek",
+      "desc": "Seznam sbírek, kde můžete vytořit novou sbírku, podívat se na detail, editovat, vkládat do sbírky další objekty/sbírky, nebo vkládat sbírku do dalších sbírek.",
       "icon": "collections",
       "detail": {
         "title": "Detail",
@@ -120,7 +124,7 @@
       "title": "Repozitář",
       "repository-management": {
         "title": "Správa repozitáře",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "V této sekci můžete vybudovat processing index, přebudovat processing index pro objekt.",
         "icon": "admin_panel_settings"
       },
       "exports": {
@@ -130,12 +134,12 @@
       },
       "bulk-data-editing": {
         "title": "Hromadné úpravy dat",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "Na základě vložených PIDů můžete provádět tyto akce: nastavit public/private, přidat licenci, odebrat licenci. Dále můžete smazat objekty (chytře) nebo  Smazat objekty (nízkoúrovňově).",
         "icon": "edit_note"
       },
       "statistics": {
         "title": "Statistiky",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "Ve statistikách repozitáře můžete generovat NKP logy nebo promazat statistiky.",
         "icon": "bar_chart"
       }  
     },
@@ -143,12 +147,12 @@
       "title": "Statistiky",
       "graphs": {
         "title": "Grafy",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "Statistiky zobrazení modelů, statistiky použitých jazyků, statistiky autorů.",
         "icon": "bar_chart"
       },
       "most-viewed-documents": {
         "title": "Nejvíce zobrazované dokumenty",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "Statistiky zobrazující tabulku s počty zobrazení, jména děl, detail záznamu.",
         "icon": "preview"
       } 
     }

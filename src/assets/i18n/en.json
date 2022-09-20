@@ -8,6 +8,8 @@
   "sites": {
     "object": {
       "title": "Object",
+      "desc": "Based on the specified UUID, you can modify the rights, change the availability, add a license, reindex, rebuild the processing index or delete the object.",
+      "icon": "data_object",
       "actions": {
         "title": "Actions",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
@@ -67,6 +69,8 @@
     },
     "processes": {
       "title": "Processes",
+      "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+      "icon": "schedule",
       "standard-output": {
         "title": "Standard output",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
@@ -80,6 +84,8 @@
     },
     "collections": {
       "title": "Collections",
+      "desc": "List of collections, where you can create a new collection, look at the detail, edit, insert other objects/collections into the collection, or insert the collection into other collections.",
+      "icon": "collections",
       "detail": {
         "title": "Detail",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
@@ -118,7 +124,7 @@
       "title": "Repository",
       "repository-management": {
         "title": "Repository management",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "In this section you can build the processing index, rebuild the processing index for the object.",
         "icon": "admin_panel_settings"
       },
       "exports": {
@@ -128,12 +134,12 @@
       },
       "bulk-data-editing": {
         "title": "Bulk data editing",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "Based on the embedded PIDs, you can perform the following actions: set public/private, add license, remove license. You can also Delete Objects (Smart) or Delete Objects (Low Level).",
         "icon": "edit_note"
       },
       "statistics": {
         "title": "Statistics",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "In the repository statistics, you can generate NKP logs or delete statistics.",
         "icon": "bar_chart"
       }  
     },
@@ -141,12 +147,12 @@
       "title": "Statistics",
       "graphs": {
         "title": "Graphs",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "Statistics of model views, statistics of languages used, statistics of authors.",
         "icon": "bar_chart"
       },
       "most-viewed-documents": {
         "title": "Most viewed documents",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "desc": "Statistics showing a table with the number of views, names of works, detail of the record.",
         "icon": "preview"
       } 
     }

@@ -101,14 +101,37 @@ $states: (
 
 // dashboard
 $dashboard: (
-  collections: #00B0FF,
-  collections-detail: #0288D1,
-  collections-edit: #0097A7,
-  collections-content: #00796B,
-  collections-context: #388E3C,
-  indexing-object: #5AB15E,
-  indexing-model: #FF6D00,
-  repository-repository-management: #AA00FF,
-  repository-bulk-data-editing: #00B8D4,
-  repository-statistics: #AFB42B
+  object: mat-color($mat-blue-gray, 400),
+  object-actions: mat-color($mat-blue-gray, 400),
+  object-accessibility: mat-color($mat-blue-gray, 400),
+  object-in-collections: mat-color($mat-blue-gray, 400),
+  object-others: mat-color($mat-blue-gray, 400),
+
+  import-foxml: mat-color($mat-blue-gray, 400),
+  import-ndk: mat-color($mat-blue-gray, 400),
+
+  access-actions: mat-color($mat-red, 400),
+  access-roles: mat-color($mat-red, 400),
+  access-licenses: mat-color($mat-red, 400),
+  access-params: mat-color($mat-red, 400),
+
+  processes: mat-color($mat-teal, 400),
+  processes-standard-output: mat-color($mat-teal, 400),
+  processes-error-output: mat-color($mat-teal, 400),
+
+  collections: mat-color($mat-brown, 400),
+  collections-detail: mat-color($mat-brown, A400),
+  collections-edit: mat-color($mat-brown, A400),
+  collections-content: mat-color($mat-brown, A400),
+  collections-context: mat-color($mat-brown, A400),
+
+  indexing-object: mat-color($mat-green, 400),
+  indexing-model: mat-color($mat-orange, A700),
+
+  repository-repository-management: mat-color($mat-purple, A700),
+  repository-bulk-data-editing: mat-color($mat-cyan, A700),
+  repository-statistics: mat-color($mat-lime, 700),
+
+  statistics-graphs: mat-color($mat-orange, A700),
+  statistics-most-viewed-documents: mat-color($mat-orange, A700)
 );
