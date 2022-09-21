@@ -19,7 +19,7 @@
 								<div class="app-mark-rounded" [ngClass]="item.subtype ? ('app-' + item.type + '-' + item.subtype) : ('app-' + item.type)">
 									<mat-icon>{{ item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.icon' | translate) : ('sites.' + item.type + '.icon' | translate) }}</mat-icon>
 								</div>
-								<div class="app-desc">
+								<div class="app-desc app-text-cutter-vertical" [matTooltip]="item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.desc' | translate) : ('sites.' + item.type + '.desc' | translate)">
 									{{ item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.desc' | translate) : ('sites.' + item.type + '.desc' | translate) }}
 								</div>
 							</mat-card-content>
