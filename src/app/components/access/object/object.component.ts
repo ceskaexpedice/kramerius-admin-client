@@ -476,6 +476,18 @@ export class ObjectComponent implements OnInit {
     this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
   }
 
+  removeItemFromAnotherCollection(superCollection, collection, event) {
+    this.onRemoveItemFromCollection(superCollection.id, superCollection.getName(), collection['id'], collection.getName());
+    event.preventDefault(); 
+    event.stopPropagation();
+  }
+
+  setRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
+    this.router.navigate([path, id]);
+    this.local.setStringProperty(viewProperty + '.view', viewValue);
+    console.log(id);
+  }
+
 }
 
 
