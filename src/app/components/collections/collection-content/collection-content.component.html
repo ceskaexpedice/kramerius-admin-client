@@ -2,7 +2,7 @@
 <mat-card class="app-view-rights app-view-hover item-collection app-cursor-pointer" *ngFor="let item of filterCollections(items)" [routerLink]="allowEdit(item['pid'])  ?  ['/collections/content/', item['pid']] : null" [ngClass]="!allowEdit(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(item['pid']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(item['pid']) ? 'app-alert-not-allowed' : null">
 	<mat-card-header fxLayout="row" fxLayoutGap="16px">
 		<div *ngIf="getThumb(item['pid'])">
-			<img [src]="getThumb(item['pid'])" />
+			<img [src]="getThumb(item['pid'])" (error)="handleMissingImage($event)"/>
 		</div>
 		<div fxFlex class="app-left">
 			<mat-card-title>
