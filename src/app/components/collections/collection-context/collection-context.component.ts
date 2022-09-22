@@ -78,4 +78,10 @@ export class CollectionContextComponent implements OnInit {
     });
   }
 
+
+  removeItemFromAnotherCollection(superCollection, collection, event) {
+    this.onRemoveItemFromCollection(superCollection.id, superCollection.getName(), collection['id'], collection.getName());
+    event.preventDefault(); 
+    event.stopPropagation();
+  }
 }
