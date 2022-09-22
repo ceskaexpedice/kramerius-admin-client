@@ -2,7 +2,7 @@
 <mat-card class="app-card app-view-border-bottom">
 	<strong>{{ 'desc.collectionsContainingThisCollection' | translate }}:</strong>
 </mat-card>
-<mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="allowEdit(superCollection['id'])  ?  ['/collections', superCollection['id']] : null " [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
+<mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="allowEdit(superCollection['id'])  ?  ['/collections/context/', superCollection['id']] : null " [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
 	<mat-card-header fxLayout="row" fxLayoutGap="16px">
 		<div *ngIf="getThumb(superCollection['id'])">
 			<img [src]="getThumb(superCollection['id'])" />
