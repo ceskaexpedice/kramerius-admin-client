@@ -1,0 +1,12 @@
+<footer class="app-footer" fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="center center">
+  <div fxFlex class="app-left">
+    <strong>k7Admin</strong>
+    <span class="app-pipe"></span>
+    <span>{{ 'desc.version' | translate }} {{getVersion()}}</span>
+    <span class="app-pipe"></span>
+    <span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
+    <span class="app-pipe"></span>
+    <strong class="app-mr-2">{{ 'desc.connectedInstance' | translate }}: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
+  </div>
+  <div class="app-right">Developed by <a href="https://www.inovatika.cz" title="Inovatika" target="_blank"><img src="assets/shared/img/logo-inovatika.png" alt="Inovatika" /></a></div>
+</footer>

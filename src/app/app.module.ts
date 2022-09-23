@@ -81,6 +81,7 @@ import { CancelScheduledProcessesDialogComponent } from './dialogs/cancel-schedu
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { CollectionContentComponent } from './components/collections/collection-content/collection-content.component';
 import { CollectionContextComponent } from './components/collections/collection-context/collection-context.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -148,7 +149,8 @@ export function createCustomMatPaginatorIntl(
     CancelScheduledProcessesDialogComponent,
     StatisticsComponent,
     CollectionContentComponent,
-    CollectionContextComponent
+    CollectionContextComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

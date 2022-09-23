@@ -1,0 +1,24 @@
+@import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
+
+.app-footer {
+  @extend .app-p-4;
+  background-color: $app-footer-bg-color;
+  color: $app-footer-color;
+  font-size: 14px;
+
+  .app-left {
+    .app-pipe {
+      opacity: .5;
+    }
+  }
+
+  .app-right {
+    img {
+      @extend .app-ml-1;
+      height: 15px;
+      vertical-align: middle;
+    }
+  }
+}

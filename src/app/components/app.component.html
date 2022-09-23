@@ -1,4 +1,7 @@
 <app-navbar></app-navbar>
-<div class="app-content-wrapper">
-  <router-outlet></router-outlet>
+<div class="app-content-wrapper" fxLayout="column">
+  <div fxFlex>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
 </div>
