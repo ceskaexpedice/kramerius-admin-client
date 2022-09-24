@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AppSettings } from '../services/app-settings';
 import { UIService } from '../services/ui.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent {
     private ui: UIService,
     private route: ActivatedRoute,
     private router: Router,
-    private settings: AppSettings
+    private settings: AppSettings,
+    public auth: AuthService
   ) {}
   
   ngOnInit() {
