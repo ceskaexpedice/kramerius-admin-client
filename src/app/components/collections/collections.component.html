@@ -59,7 +59,15 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.app-not-allowed]="!allowEdit(row.id)" [matTooltip]="!allowEdit(row.id) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(row.id) ? 'app-alert-not-allowed' : null"></tr>
         </table>
-        <mat-paginator *ngIf="state !== 'loading'" [pageSizeOptions]="[50, 100, 1000]"></mat-paginator>
+        <!--
+        <mat-paginator *ngIf="state !== 'loading'" 
+          [pageSizeOptions]="[20, 50, 100]" 
+          [length]="numFound"
+          [pageSize]="rows"
+          [pageIndex]="page"
+          (page)="pageChanged($event)">
+        </mat-paginator>
+      -->
       </div>
 
       <mat-card *ngIf="errorState" class="app-view-alert app-warn">

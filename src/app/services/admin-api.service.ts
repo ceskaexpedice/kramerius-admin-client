@@ -173,8 +173,11 @@ export class AdminApiService {
   }
 
   getCollections(): Observable<any> {
-    //TODO: offset, limit
     return this.get(`/collections`);
+  }
+
+  getCollectionsByPrefix(rows: number, page: number, prefix:string): Observable<any> {
+    return this.get(`/collections/prefix?rows=${rows}&page=${page}&prefix=${prefix}`);
   }
 
   getCollectionsContainingItem(itemPid: String) {
@@ -467,6 +470,7 @@ export class AdminApiService {
     };
     return this.delete(`/statistics/`, options);
   }
+
 
 
 }

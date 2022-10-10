@@ -47,7 +47,7 @@ export class AddItemToCollectionDialogComponent implements OnInit {
           this.potentialSuperCollections = data[0].filter(collection => collection.id != this.pid && !pidsOfCurrentSuperCollections.includes(collection.id))
           this.potentialSuperCollectionsAll = this.potentialSuperCollections;
 
-          this.authService.getPidsAuthorizedActions(this.potentialSuperCollectionsAll.map(c=> c.id)).subscribe((d:any) => {
+          this.authService.getPidsAuthorizedActions(this.potentialSuperCollectionsAll.map(c=> c.id), null).subscribe((d:any) => {
             this.allowedCollections = [];
             this.potentialSuperCollectionsAll.forEach((cp)=> {
               let actions = d[cp.id];

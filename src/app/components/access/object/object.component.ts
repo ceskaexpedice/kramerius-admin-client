@@ -145,7 +145,7 @@ export class ObjectComponent implements OnInit {
       this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         this.superCollections = data[0];
 
-        this.authApi.getPidsAuthorizedActions(this.superCollections.map(c=> c['id'])).subscribe((d:any) => {
+        this.authApi.getPidsAuthorizedActions(this.superCollections.map(c=> c['id']), null).subscribe((d:any) => {
           Object.keys(d).forEach((k)=> {
             let actions = d[k].map((v)=> v.code);
             this.collectionActions.set(k, actions);

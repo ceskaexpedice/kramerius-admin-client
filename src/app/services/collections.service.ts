@@ -18,7 +18,7 @@ export class CollectionsService {
     return this.adminApi.createCollection(collection);
   }
 
-  getCollections(offset: number, limit: number): Observable<[Collection[], number]> {
+  getCollections(page: number, rows: number): Observable<[Collection[], number]> {
     //TODO: use offset, limit
     return this.adminApi.getCollections().pipe(
       map(response => {
@@ -26,6 +26,15 @@ export class CollectionsService {
         return [Collection.fromAdminApiJsonArray(response['collections']), parseInt(response['total_size'], 10)]
       }));
   }
+
+  getCollectionsByPrefix(page: number, rows: number, prefix:string): Observable<[Collection[], number]> {
+    return this.adminApi.getCollectionsByPrefix(rows, page, prefix).pipe(
+      map(response => {
+        return [Collection.fromAdminApiJsonArray(response['collections']), parseInt(response['total_size'], 10)]
+      }));
+  }
+
+
 
   getCollectionsContainingItem(itemPid: String): Observable<[Collection[], number]> {
     return this.adminApi.getCollectionsContainingItem(itemPid).pipe(

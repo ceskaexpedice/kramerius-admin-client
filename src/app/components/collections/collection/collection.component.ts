@@ -64,7 +64,7 @@ export class CollectionComponent implements OnInit {
         this.view = this.local.getStringProperty('collection.view');
         this.state = 'success';
         // deti 
-        this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid'])).subscribe((d:any) => {
+        this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid']), null).subscribe((d:any) => {
           Object.keys(d).forEach((k)=> {
             let actions = d[k].map((v)=> v.code);
             this.collectionActions.set(k, actions);
@@ -81,7 +81,7 @@ export class CollectionComponent implements OnInit {
       //console.log(data)
       this.superCollections = data[0];
 
-      this.auth.getPidsAuthorizedActions(this.superCollections.map(c=> c['id'])).subscribe((d:any) => {
+      this.auth.getPidsAuthorizedActions(this.superCollections.map(c=> c['id']),null).subscribe((d:any) => {
         Object.keys(d).forEach((k)=> {
           let actions = d[k].map((v)=> v.code);
           this.collectionActions.set(k, actions);

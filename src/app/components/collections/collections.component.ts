@@ -7,6 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-collections',
@@ -30,10 +31,12 @@ export class CollectionsComponent implements OnInit {
 
   errorMessage: string;
   errorState: boolean = false;
-  
 
-  //isAllowed: boolean = false;
-
+  // paging   
+  pageIndex: number = 0;
+  rows: number = 50;
+  page: number = 0;
+  numFound: number = 1000;
 
   displayedColumns = ['name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
   @ViewChild(MatSort) sort: MatSort;
@@ -61,21 +64,31 @@ export class CollectionsComponent implements OnInit {
     this.state = 'loading';
     // const offset = this.pageIndex * this.pageSize;
     // const limit = this.pageSize;
-    this.collectionsService.getCollections(0, 5000).subscribe(([collections, count]: [Collection[], number]) => {
-
+    this.collectionsService.getCollections(this.page, this.rows).subscribe(([collections, count]: [Collection[], number]) => {
+    
+      this.numFound = count;
       this.allCollections = collections;
 
-      this.auth.getPidsAuthorizedActions(this.allCollections.map((c)=> c.id)).subscribe((d:any) => {
+
+
+      this.reloadTable();
+      this.state = 'success';
+      this.dataSource = new MatTableDataSource(this.collections);
+      this.dataSource.sort = this.sort;
+
+      // defaultne je vse povoleno
+      this.allCollections.forEach((c)=>{
+        this.collectionActions.set(c.id, ['a_collections_edit', 'a_rights_edit']);
+      });
+      
+
+      this.auth.getPidsAuthorizedActions(this.allCollections.map((c)=> c.id), ['a_collections_edit', 'a_rights_edit']).subscribe((d:any) => {
         Object.keys(d).forEach((k)=> {
           let actions = d[k].map((v)=> v.code);
           this.collectionActions.set(k, actions);
         });
-        this.reloadTable();
-        this.state = 'success';
-        this.dataSource = new MatTableDataSource(this.collections);
-        this.dataSource.sort = this.sort;
-  
       });
+
     }, (error: HttpErrorResponse) => {
       this.errorState = true;
       this.errorMessage = error.error.message;
@@ -172,4 +185,11 @@ export class CollectionsComponent implements OnInit {
     this.router.navigate([path, id]);
     this.locals.setStringProperty(viewProperty + '.view', viewValue);
   }
+
+  pageChanged(e: PageEvent) {
+    this.page = e.pageIndex;
+    this.rows = e.pageSize;
+    this.reloadTable();
+  }
+
 }

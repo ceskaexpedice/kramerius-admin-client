@@ -113,11 +113,15 @@ export class AuthService {
   }
 
 
-  getPidsAuthorizedActions(pids: string[]) {
+  getPidsAuthorizedActions(pids: string[], actions:string[]) {
 
     const payload = {
         pids: pids
     };
+
+    if (actions) {
+      payload['actions'] = actions;
+    }
 
     return this.http.post(`${this.settings.clientApiBaseUrl}/user/pids_actions`, payload)
         .pipe(map(response => RightAction.fromPidsMap(response)));

@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
 
 declare var APP_GLOBAL: any;
 
@@ -24,7 +26,14 @@ export class AppSettings {
   interceptresponse: EventEmitter<number> = new EventEmitter<number>();
 
 
-  constructor() {
+
+  constructor(private http: HttpClient) {
   }
+
+
+  getCoreInfo(): Observable<any> {
+      return this.http.get(`${this.clientApiBaseUrl}/info`).pipe();
+  }
+
 
 }
