@@ -401,7 +401,8 @@
     "changeCollectionRights": "Změnit práva ke sbírce",
     "logIn": "Přihlásit se",
     "signInAgain": "Přihlásit se znovu",
-    "goTo": "Přejít"
+    "goTo": "Přejít",
+    "send": "Odeslat"
   },
   "field": {
     "public": "Veřejné",

@@ -5,6 +5,7 @@
         <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
           <mat-label>{{ 'desc.enterTheUuidOfTheObject' | translate }}</mat-label>
           <input matInput [(ngModel)]="inputPid" placeholder="{{pid}}" (keyup.enter)="assignUuid()" type="text">
+          <mat-icon (click)="assignUuid()" matSuffix color="primary" class="app-cursor-pointer" [matTooltip]="'button.send' | translate">send</mat-icon>
         </mat-form-field>
         <mat-error *ngIf="!!errorMessage">
           {{ errorMessage }}
