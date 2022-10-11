@@ -7,14 +7,10 @@
     <span>admin client commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
     <span class="app-pipe"></span>
     <strong class="app-mr-2">{{ 'desc.connectedInstance' | translate }}: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
-
     <span class="app-pipe"></span>
-
     <strong class="app-mr-2">{{ 'desc.version' | translate }}: </strong>  {{getCoreVersion()}}
     <span class="app-pipe"></span>
     <span>core commit <a href="https://github.com/ceskaexpedice/kramerius/commit/{{getCoreHashFull()}}" target="_blank">{{getCoreHashShort()}}</a></span>
-
-
   </div>
   <div class="app-right">Developed by <a href="https://www.inovatika.cz" title="Inovatika" target="_blank"><img src="assets/shared/img/logo-inovatika.png" alt="Inovatika" /></a></div>
 </footer>
