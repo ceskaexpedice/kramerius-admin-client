@@ -69,11 +69,19 @@ export class ClientApiService {
     if (prefix) {
       // jedno slovo = prefix, dve a vice slov - nazev 
       let tokenized = prefix.match(/\b\w+\b/g);
-      if (tokenized.length ==  1) {
+      if (!tokenized || tokenized.length ==  1) {
         filterQuery = filterQuery +  ' AND title.search:'+prefix+"*";
       } else {
 
-        filterQuery = filterQuery + encodeURIComponent('_query_:"{!edismax qf=title.search}')+prefix+'"'
+        let start = "{!";
+        let end = "}";
+        /*
+        let startEncoded = encodeURIComponent("{!");
+        let endEncoded = encodeURIComponent("}");
+        */
+        let edismax = '_query_:"'+start+'edismax qf=title.search'+end+prefix+'"';
+
+        filterQuery = filterQuery +' AND ' + edismax;
       }
     }
     return this.fullSearch({

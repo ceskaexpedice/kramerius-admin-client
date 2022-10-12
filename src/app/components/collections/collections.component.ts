@@ -137,6 +137,7 @@ export class CollectionsComponent implements OnInit {
 
     });    
   
+
     /*
     this.collectionsService.getCollectionsByPrefix(this.page, this.rows, this.query).subscribe(([collections, count]: [Collection[], number]) => {
       this.numFound = count;
@@ -151,7 +152,6 @@ export class CollectionsComponent implements OnInit {
       this.allCollections.forEach((c)=>{
         this.collectionActions.set(c.id, ['a_collections_edit', 'a_rights_edit']);
       });
-      
 
       this.auth.getPidsAuthorizedActions(this.allCollections.map((c)=> c.id), ['a_collections_edit', 'a_rights_edit']).subscribe((d:any) => {
         Object.keys(d).forEach((k)=> {
@@ -245,6 +245,8 @@ export class CollectionsComponent implements OnInit {
   private reloadTable() {
     this.collections = [];
     //console.log('this.standaloneOnly', this.standaloneOnly);
+    // Disabled - filtrovano backendem
+    /*
     for (const col of this.allCollections) {
       if (this.standaloneOnly && !col.standalone) {
         continue;
@@ -252,6 +254,9 @@ export class CollectionsComponent implements OnInit {
       if (!this.query || col.name_cze.toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) > -1) {
         this.collections.push(col);
       }
+    }*/
+    for (const col of this.allCollections) {
+      this.collections.push(col);
     }
     this.dataSource = new MatTableDataSource(this.collections);
     this.dataSource.sort = this.sort;
