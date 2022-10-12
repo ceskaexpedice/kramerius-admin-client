@@ -8,6 +8,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
+import { Subject } from 'rxjs';
+import { debounceTime } from "rxjs/operators";
+import { ClientApiService } from 'src/app/services/client-api.service';
 
 @Component({
   selector: 'app-collections',
@@ -16,6 +19,10 @@ import { PageEvent } from '@angular/material/paginator';
 })
 
 export class CollectionsComponent implements OnInit {
+
+  // Debouncing 
+  private subject: Subject<string> = new Subject();
+
 
   collections: Collection[] = [];
   allCollections: Collection[] = [];
@@ -46,13 +53,24 @@ export class CollectionsComponent implements OnInit {
   constructor(
     private auth:AuthService,
     private collectionsService: CollectionsService, 
-    private router: Router, private locals: LocalStorageService) { }
+    private router: Router, private locals: LocalStorageService,
+    private clientService: ClientApiService) { }
 
   ngOnInit() {
     this.query = "";
     this.standaloneOnly = false;
     this.sortField = this.locals.getStringProperty('collectoins.sort_field', 'name_cze');
     this.sortAsc = this.locals.getBoolProperty('collectoins.sort_asc', false);
+
+    this.subject.pipe(
+      debounceTime(400)
+    ).subscribe(searchTextValue => {
+      //this.query = searchTextValue;
+      console.log("Finding search text value "+searchTextValue);
+      this.reload();
+      //this.router.navigate([], { queryParams: q, queryParamsHandling: 'merge' });
+    });
+
     this.reload();
   }
 
@@ -60,19 +78,46 @@ export class CollectionsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  linkToDetail(id:string) {
+    if (this.allowEdit(id)) {
+      // load full collection
+      this.collectionsService.getCollection(id).subscribe((collection: Collection) => {
+
+        let aIndex = this.allCollections.findIndex(c => c.id ===id);
+        if (aIndex>=0) this.allCollections[aIndex] = collection;
+
+        let cIndex = this.collections.findIndex(c => c.id ===id);
+        if (cIndex >=0 ) this.collections[cIndex] = collection;
+
+        this.setRouterLink('/collections/detail/', id, 'collection', 'detail')
+      });
+    } else {
+      return null;
+    }
+  }
+
   reload() {
     this.state = 'loading';
-    // const offset = this.pageIndex * this.pageSize;
-    // const limit = this.pageSize;
-    this.collectionsService.getCollections(this.page, this.rows).subscribe(([collections, count]: [Collection[], number]) => {
-    
-      this.numFound = count;
-      this.allCollections = collections;
 
+    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query).subscribe((res)  => {
+      this.allCollections = res["docs"].map((d)=> {
+        let col:Collection = new Collection();
+        
+        col.id= d.pid;
+        col.standalone = d["collection.is_standalone"];
+        col.name_cze = d["title.search"];
+        if (d["collection.desc"] && d["collection.desc"][0]) {
+          col.description_cze = d["collection.desc"][0];
+        }
+        col.createdAt = d["created"]
+        col.modifiedAt = d["modified"]
+        return col;
+      });
 
+      this.numFound = res["numFound"];
 
       this.reloadTable();
-      this.state = 'success';
+      //this.state = 'success';
       this.dataSource = new MatTableDataSource(this.collections);
       this.dataSource.sort = this.sort;
 
@@ -87,12 +132,41 @@ export class CollectionsComponent implements OnInit {
           let actions = d[k].map((v)=> v.code);
           this.collectionActions.set(k, actions);
         });
+        this.state = 'success';
+      });
+
+    });    
+  
+    /*
+    this.collectionsService.getCollectionsByPrefix(this.page, this.rows, this.query).subscribe(([collections, count]: [Collection[], number]) => {
+      this.numFound = count;
+      this.allCollections = collections;
+
+      this.reloadTable();
+      //this.state = 'success';
+      this.dataSource = new MatTableDataSource(this.collections);
+      this.dataSource.sort = this.sort;
+
+      // defaultne je vse povoleno
+      this.allCollections.forEach((c)=>{
+        this.collectionActions.set(c.id, ['a_collections_edit', 'a_rights_edit']);
+      });
+      
+
+      this.auth.getPidsAuthorizedActions(this.allCollections.map((c)=> c.id), ['a_collections_edit', 'a_rights_edit']).subscribe((d:any) => {
+        Object.keys(d).forEach((k)=> {
+          let actions = d[k].map((v)=> v.code);
+          this.collectionActions.set(k, actions);
+        });
+        this.state = 'success';
       });
 
     }, (error: HttpErrorResponse) => {
       this.errorState = true;
       this.errorMessage = error.error.message;
     });
+    */
+
   }
 
 
@@ -149,13 +223,15 @@ export class CollectionsComponent implements OnInit {
     this.locals.setBoolProperty('products.sort_asc', this.sortAsc);
     this.reloadTable();
   }
-
+  
   onSearch() {
-    this.reloadTable();
+    this.subject.next(this.query);  
+    //this.reloadTable();
   }
 
   onStandaloneChange() {
-    this.reloadTable();
+    this.subject.next(this.query);  
+    //this.reloadTable();
   }
 
   allowedGlobalAction(name:string) {
@@ -189,7 +265,7 @@ export class CollectionsComponent implements OnInit {
   pageChanged(e: PageEvent) {
     this.page = e.pageIndex;
     this.rows = e.pageSize;
-    this.reloadTable();
+    this.reload();
   }
 
 }

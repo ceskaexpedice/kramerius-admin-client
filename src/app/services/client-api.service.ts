@@ -56,8 +56,39 @@ export class ClientApiService {
     return this.get('/search', params).pipe(map(response => response['response']['docs']));
   }
 
+  fullSearch(params): Observable<any[]> {
+    return this.get('/search', params).pipe(map(response => response['response']));
+  }
+
+
+  getCollections(rows:number, offset:number, standalone:boolean, prefix:string) {
+    let filterQuery:string = 'model:"collection"';
+    if (standalone) {
+      filterQuery = filterQuery + ' AND collection.is_standalone:'+standalone
+    }
+    if (prefix) {
+      // jedno slovo = prefix, dve a vice slov - nazev 
+      let tokenized = prefix.match(/\b\w+\b/g);
+      if (tokenized.length ==  1) {
+        filterQuery = filterQuery +  ' AND title.search:'+prefix+"*";
+      } else {
+
+        filterQuery = filterQuery + encodeURIComponent('_query_:"{!edismax qf=title.search}')+prefix+'"'
+      }
+    }
+    return this.fullSearch({
+      q: filterQuery,
+      //fq: filterQuery,
+      fl: 'model,pid,title.search,root.title,created,modified,collection.is_standalone,collection.desc',
+      sort: 'title.sort asc',
+      rows: rows,
+      start: offset,
+    });
+
+  }
+
   getCollectionChildren(uuid: string): Observable<any[]> {
-    //vrati obsah sbirky na zaklade priznaku ve vyhledavacim indexu (tj. korektni az eventually po reindexaci)
+    //vrati ofilterQuerybsah sbirky na zaklade priznaku ve vyhledavacim indexu (tj. korektni az eventually po reindexaci)
     //takze hned po pridani (spatne) ne, hned po odbrani (spatne) ano
     return this.search({
       q: `in_collections.direct:"${uuid}"`,
