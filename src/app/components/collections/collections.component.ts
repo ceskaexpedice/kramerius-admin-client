@@ -71,10 +71,7 @@ export class CollectionsComponent implements OnInit {
     this.subject.pipe(
       debounceTime(400)
     ).subscribe(searchTextValue => {
-      //this.query = searchTextValue;
-      console.log("Finding search text value "+searchTextValue);
       this.reload();
-      //this.router.navigate([], { queryParams: q, queryParamsHandling: 'merge' });
     });
 
     this.reload();

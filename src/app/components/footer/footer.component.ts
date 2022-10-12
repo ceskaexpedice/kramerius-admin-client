@@ -52,6 +52,19 @@ export class FooterComponent implements OnInit {
     } else return null;
   }
 
+  getTokenDeadline() {
+    if (AuthService.tokenDeadline) {
+      function padTo2Digits(num: number) {
+        return num.toString().padStart(2, '0');
+      }
+      return [
+        padTo2Digits(AuthService.tokenDeadline.getHours()),
+        padTo2Digits(AuthService.tokenDeadline.getMinutes()),
+        padTo2Digits(AuthService.tokenDeadline.getSeconds()),
+      ].join(':')
+    } else return '';
+  }
+
   getLastCommitHash() {
     const info = gitInfo;
     //console.log(info)

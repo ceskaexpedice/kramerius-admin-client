@@ -19,6 +19,8 @@ export class AuthService {
 
   user: User;
   static token: string;
+  static tokenTime: Date;
+  static tokenDeadline: Date;
 
   // global actions
   authorizedGlobalActions: string[];
@@ -32,20 +34,17 @@ export class AuthService {
     private router:Router
     ) {
     AuthService.token = localStorage.getItem('account.token');
+    AuthService.tokenTime = new Date(localStorage.getItem('account.token.time'));
     this.loadGlobalAuthorizedActions((status: number) => {
       console.log("Authorized actions loaded")
     });
 
-    this.settings.interceptresponse.subscribe((status_) => {
-      if (status_ === 403) {
-        this.loadGlobalAuthorizedActions((status: number) => {
-          // nema pravo cist admin rozhrani  - redirect
-          if (!this.authorizedGlobalActions.includes('a_admin_read')) {
-            this.router.navigate(['/login'], {
-              queryParams: { failure: 3 }
-           });
-          }
-        });
+    this.settings.interceptresponse.subscribe((event) => {
+      if (event.type && event.type === "token_expired") {
+        AuthService.token = null;
+        AuthService.tokenDeadline = null;
+        AuthService.tokenTime = null;
+        this.logout();
       }
     });
   }
@@ -85,7 +84,10 @@ export class AuthService {
 
   logout(suffix: string = "") {
     AuthService.token = null;
+    AuthService.tokenTime = null;
+    AuthService.tokenDeadline = null;
     localStorage.removeItem('account.token');
+    localStorage.removeItem('account.token.time');
     this.user = null;
     this.logoutKramerius().subscribe(() => {
       const redircetUri = `${this.baseUrl()}${suffix}`;
@@ -153,6 +155,14 @@ export class AuthService {
       // load global actions
       this.loadGlobalAuthorizedActions((status:number)=> {
         if (this.isAuthorized()) {
+          if (user.session) {
+            // expirace tokenu
+            if (user.session['expires_in'] && AuthService.tokenTime) {
+              let dd:Date =  new Date(AuthService.tokenTime);
+              dd.setSeconds(dd.getSeconds() + parseInt(user.session['expires_in']));
+              AuthService.tokenDeadline = dd;
+            }
+          }
           callback(AuthService.AUTH_AUTHORIZED);
         } else {
           callback(AuthService.AUTH_NOT_AUTHORIZED);
@@ -171,7 +181,9 @@ export class AuthService {
                 callback(AuthService.AUTH_NOT_LOGGED_IN);
             } else {
                 AuthService.token = token;
+                AuthService.tokenTime = new Date();
                 localStorage.setItem('account.token', token);
+                localStorage.setItem('account.token.time', new Date().toISOString());
                 this.checkToken(callback);
             }
         },
@@ -182,7 +194,7 @@ export class AuthService {
   }
 
   private validateToken(): Observable<User> {
-    return this.http.get(`${this.settings.clientApiBaseUrl}/user`)
+    return this.http.get(`${this.settings.clientApiBaseUrl}/user?sessionAttributes=true`)
         .pipe(map(response => User.fromJson(response)));
   }
 

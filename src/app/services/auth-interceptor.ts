@@ -17,41 +17,19 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     const token = AuthService.token;
     if (token) {
-      request = request.clone({
-        setHeaders: {
-          'Authorization': 'Bearer ' + token
-        }
-      });
-      //console.log(request.headers.get( 'Authorization'));
+      if (AuthService.tokenDeadline < new Date()) {
+        this.appSettings.interceptresponse.emit({
+          "type":"token_expired"
+        });
+      } else {
+        request = request.clone({
+          setHeaders: {
+            'Authorization': 'Bearer ' + token
+          }
+        });
+      }
     }
-
     return next.handle(request);
 
-    /** TODO: Check situation when  token expired  */
-    // return next.handle(request).pipe(
-    //     map(res => {
-    //         console.log("Passed through the interceptor in response");
-    //         return res
-    //     }),
-    //     catchError((error:HttpEvent<any>) => {
-    //       // testovani 403
-    //       if(error.type === HttpEventType.Response) {
-    //         console.log('Sent Event has been fired!', error);
-    //       }
-
-    //       return of(new HttpResponse({ body: {
-    //           "error": error["error"] 
-    //         }, status: 403 }));
-    //     }));
-
-        /*
-        ,
-        catchError((error: HttpErrorResponse) => {
-          this.appSettings.interceptresponse.emit(error.status);
-          //let errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-          //return Observable.of({'message':error.message});
-          return of(0); 
-        })*/
-      //);
   }
 }

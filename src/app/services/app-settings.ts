@@ -23,9 +23,8 @@ export class AppSettings {
 
   homeDashboard = APP_GLOBAL.homeDashboard || [];
 
-  interceptresponse: EventEmitter<number> = new EventEmitter<number>();
 
-
+  interceptresponse: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private http: HttpClient) {
   }
