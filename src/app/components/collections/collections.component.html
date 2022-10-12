@@ -21,7 +21,7 @@
     <div fxFlex class="app-container-fluid app-oh">
       <div class="app-table-wrapper app-maxh-100 app-view-border app-oa-y" *ngIf="!errorState">
         <mat-progress-bar mode="indeterminate" *ngIf="state === 'loading'"></mat-progress-bar>
-        <table mat-table [dataSource]="dataSource" class="app-w-100" matSort>
+        <table mat-table [dataSource]="dataSource" class="app-w-100" matSort (matSortChange)="changeSort($event)">
           <ng-container matColumnDef="name_cze">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let element">
@@ -41,11 +41,11 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="createdAt">
-            <th mat-header-cell *matHeaderCellDef>{{ 'desc.created' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.created' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{ element.createdAt | date : 'dd.MM.yyyy' }}</td>
           </ng-container>
           <ng-container matColumnDef="modifiedAt">
-            <th mat-header-cell *matHeaderCellDef>{{ 'desc.managed' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.managed' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{ element.modifiedAt | date : 'dd.MM.yyyy' }}</td>
           </ng-container>
           <ng-container matColumnDef="action">
@@ -64,7 +64,7 @@
           [pageSizeOptions]="[20, 50, 100]" 
           [length]="numFound"
           [pageSize]="rows"
-          [pageIndex]="page"
+          [(pageIndex)]="page"
           (page)="pageChanged($event)">
         </mat-paginator>
       </div>

@@ -44,7 +44,6 @@ export class ClientApiService {
   }
 
   getModsNewApi(uuid: string): Observable<string> {
-    ///client/v7.0/items/{pid}/metadata/mods
     return this.getText(`/items/${uuid}/metadata/mods`);
   }
 
@@ -61,7 +60,13 @@ export class ClientApiService {
   }
 
 
-  getCollections(rows:number, offset:number, standalone:boolean, prefix:string) {
+  getCollections(rows:number, offset:number, standalone:boolean, prefix:string, sort:string, sortDir: string) {
+
+    let iSort = 'title.sort asc';
+    if (sort && sortDir) {
+      iSort = sort +' '+sortDir;
+    }
+
     let filterQuery:string = 'model:"collection"';
     if (standalone) {
       filterQuery = filterQuery + ' AND collection.is_standalone:'+standalone
@@ -75,10 +80,7 @@ export class ClientApiService {
 
         let start = "{!";
         let end = "}";
-        /*
-        let startEncoded = encodeURIComponent("{!");
-        let endEncoded = encodeURIComponent("}");
-        */
+
         let edismax = '_query_:"'+start+'edismax qf=title.search'+end+prefix+'"';
 
         filterQuery = filterQuery +' AND ' + edismax;
@@ -88,7 +90,7 @@ export class ClientApiService {
       q: filterQuery,
       //fq: filterQuery,
       fl: 'model,pid,title.search,root.title,created,modified,collection.is_standalone,collection.desc',
-      sort: 'title.sort asc',
+      sort: iSort,
       rows: rows,
       start: offset,
     });
