@@ -401,7 +401,8 @@
     "changeCollectionRights": "Change collection rights",
     "logIn": "Log in",
     "signInAgain": "Sign in again",
-    "goTo": "Go to"
+    "goTo": "Go to",
+    "send": "Send"
   },
   "field": {
     "public": "Public",

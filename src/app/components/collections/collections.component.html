@@ -31,7 +31,7 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="description_cze">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.description' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.description' | translate }}</th>
             <td mat-cell *matCellDef="let element" [matTooltip]="allowEdit(element.id) ? element.description_cze : null">
               <div class="app-text-cutter-wrapper">
                 <div class="app-text-cutter">
@@ -41,11 +41,11 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="createdAt">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.created' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.created' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{ element.createdAt | date : 'dd.MM.yyyy' }}</td>
           </ng-container>
           <ng-container matColumnDef="modifiedAt">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.managed' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.managed' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{ element.modifiedAt | date : 'dd.MM.yyyy' }}</td>
           </ng-container>
           <ng-container matColumnDef="action">
