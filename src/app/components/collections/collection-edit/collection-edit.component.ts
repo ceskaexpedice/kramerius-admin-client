@@ -5,6 +5,8 @@ import '@ckeditor/ckeditor5-build-classic/build/translations/cs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { CollectionsService } from 'src/app/services/collections.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateNewCollectionComponent } from 'src/app/dialogs/create-new-collection/create-new-collection.component';
 
 @Component({
   selector: 'app-collection-edit',
@@ -37,7 +39,8 @@ export class CollectionEditComponent implements OnInit {
     private route: ActivatedRoute,
     private ui: UIService,
     private router: Router,
-    private collectionsService: CollectionsService) {
+    private collectionsService: CollectionsService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -72,7 +75,12 @@ export class CollectionEditComponent implements OnInit {
   onSave() {
     this.collectionsService.createCollection(this.collection).subscribe(response => {
       this.ui.showInfoSnackBar("snackbar.success.collectionHasBeenCreated");
-      this.router.navigate(['/collections', response['pid']]);
+      const dialogRef = this.dialog.open(CreateNewCollectionComponent, {
+        width: '600px',
+        panelClass: 'app-create-new-collection-dialog'
+      });
+      //this.router.navigate(['/collections', response['pid']]);
+      //this.router.navigate(['/collections']);
     },
       (error) => {
         console.log(error);
