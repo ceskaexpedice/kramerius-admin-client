@@ -23,6 +23,5 @@ export class CreateNewCollectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.collectionPid = this.data.pid;
-    //console.log(this.data.pid);
   }
 }
