@@ -65,8 +65,8 @@ export class CollectionsComponent implements OnInit {
   ngOnInit() {
     this.query = "";
     this.standaloneOnly = false;
-    this.sortField = this.locals.getStringProperty('collectoins.sort_field', 'name_cze');
-    this.sortAsc = this.locals.getBoolProperty('collectoins.sort_asc', false);
+    this.sortField = this.locals.getStringProperty('collectoins.sort_field', 'createdAt');
+    this.sortAsc = this.locals.getBoolProperty('collectoins.sort_asc', true);
 
     this.subject.pipe(
       debounceTime(400)
