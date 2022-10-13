@@ -840,6 +840,7 @@
     "indexingType": "Typ indexace",
     "logs": "Logy",
     "right": "Oprávnění",
-    "connectedInstance": "Připojená instance"
+    "connectedInstance": "Připojená instance",
+    "tokenExpiresAt": "Token vyprší ve"
   }
 }

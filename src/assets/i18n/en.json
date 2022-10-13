@@ -840,6 +840,7 @@
     "indexingType": "Indexing type",
     "logs": "Logs",
     "right": "Right",
-    "connectedInstance": "Connected instance"
+    "connectedInstance": "Connected instance",
+    "tokenExpiresAt": "Token expires at"
   }
 }
