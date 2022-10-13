@@ -402,7 +402,9 @@
     "logIn": "Přihlásit se",
     "signInAgain": "Přihlásit se znovu",
     "goTo": "Přejít",
-    "send": "Odeslat"
+    "send": "Odeslat",
+    "editThisCollection": "Editovat tuto sbírku",
+    "goToProcesses": "Přejít na procesy"
   },
   "field": {
     "public": "Veřejné",
@@ -635,6 +637,11 @@
       "message": "Potvrzením naplánujete <strong>{{value}}</strong> indexačních Procesů - jeden pro každý z aktuálně vylistovaných objektů. Půjde o úplné indexace, tedy včetně všech potomků.",
       "checkbox": "Přeskakovat nekonzistentní objekty *",
       "explanation": "* Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <strong><em>Chyba</em></strong>."
+    },
+    "createNewCollection": {
+      "title": "Vytvoření nové sbírky",
+      "alert": "Sbírka <strong><em>{{pid}}</em></strong> byla úspěšně vytvořena a zařazena do procesu k indexaci. Zobrazení sbírky v seznamu sbírek může chvíli trvat v závislosti na pořadí procesu indexace.",
+      "message": "Níže můžete editovat tuto nově vytvořenou sbírku, zkontrolovat proces indexace této sbírky nebo zavřít tento dialog a tím přejít na seznam sbírek."
     }
   },
   "snackbar": {

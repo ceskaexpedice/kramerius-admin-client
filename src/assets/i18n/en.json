@@ -402,7 +402,9 @@
     "logIn": "Log in",
     "signInAgain": "Sign in again",
     "goTo": "Go to",
-    "send": "Send"
+    "send": "Send",
+    "editThisCollection": "Edit this collection",
+    "goToProcesses": "Go to processes"
   },
   "field": {
     "public": "Public",
@@ -635,6 +637,11 @@
       "message": "Confirming will schedule <strong>{{value}}</strong> indexing Processes - one for each of the currently listed objects. It will be full indexing, i.e. including all descendants.",
       "checkbox": "Skip inconsistent objects *",
       "explanation": "* How the Indexer should behave if it encounters an object that cannot be indexed due to an incorrect binding structure. It can skip the object, log the error and continue. Or terminate the Process in <strong><em>Error</em></strong> state."
+    },
+    "createNewCollection": {
+      "title": "Creating a new collection",
+      "alert": "The collection <strong><em>{{pid}}</em></strong> has been successfully created and entered into the indexing process. It may take some time for the collection to appear in the collection list, depending on the order of the indexing process.",
+      "message": "Below you can edit this newly created collection, check the indexing process of this collection or close this dialog to go to the list of collections."
     }
   },
   "snackbar": {

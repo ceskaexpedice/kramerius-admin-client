@@ -74,13 +74,12 @@ export class CollectionEditComponent implements OnInit {
 
   onSave() {
     this.collectionsService.createCollection(this.collection).subscribe(response => {
-      this.ui.showInfoSnackBar("snackbar.success.collectionHasBeenCreated");
+      //this.ui.showInfoSnackBar("snackbar.success.collectionHasBeenCreated");
       const dialogRef = this.dialog.open(CreateNewCollectionComponent, {
+        data: response,
         width: '600px',
         panelClass: 'app-create-new-collection-dialog'
       });
-      //this.router.navigate(['/collections', response['pid']]);
-      //this.router.navigate(['/collections']);
     },
       (error) => {
         console.log(error);
@@ -110,5 +109,4 @@ export class CollectionEditComponent implements OnInit {
   onDelete() {
     this.delete.emit();
   }
-
 }

@@ -1,1 +1,17 @@
-<p>create-new-collection works!</p>
+<h2 mat-dialog-title>{{ 'modal.createNewCollection.title' | translate }}</h2>
+<mat-dialog-content>
+  <mat-card class="app-view-alert app-info app-mb-4">
+    <mat-card-content>
+      <mat-icon>info</mat-icon>
+      <span [innerHtml]="'modal.createNewCollection.alert' | translate : {pid: collectionPid}"></span>
+    </mat-card-content>
+  </mat-card>
+  <div class="app-desc app-mb-4">
+    {{ 'modal.createNewCollection.message' | translate }}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button [routerLink]="'/collections/edit/' + collectionPid" mat-dialog-close color="primary">{{ 'button.editThisCollection' | translate }}</button>
+  <button mat-flat-button routerLink="/processes" mat-dialog-close color="primary">{{ 'button.goToProcesses' | translate }}</button>
+  <button mat-flat-button routerLink="/collections" mat-dialog-close>{{ 'button.close' | translate }}</button>
+</mat-dialog-actions>
