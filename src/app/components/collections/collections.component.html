@@ -9,9 +9,9 @@
       </div>
       <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="app-mb-4">
         <div fxFlex>
-          <input class="app-input-autocomplete app-mr-4" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" 
-          (ngModelChange)="onSearch()" autocomplete="off">
-          <button  [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
+          <input class="app-input-autocomplete app-mr-4" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
+          <button  [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()" class="app-mr-1">{{ 'button.createNewCollection' | translate }}</button>
+          <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage()" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
         </div>
         <div>
           <mat-slide-toggle class="app-standalone-toggle" color="primary" (change)="onStandaloneChange()" [(ngModel)]="standaloneOnly">{{ 'button.showStandaloneOnly' | translate }}</mat-slide-toggle>

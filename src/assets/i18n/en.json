@@ -404,7 +404,8 @@
     "goTo": "Go to",
     "send": "Send",
     "editThisCollection": "Edit this collection",
-    "goToProcesses": "Go to processes"
+    "goToProcesses": "Go to processes",
+    "reloadThePage": "Reload the page"
   },
   "field": {
     "public": "Public",

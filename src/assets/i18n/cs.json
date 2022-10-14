@@ -404,7 +404,8 @@
     "goTo": "Přejít",
     "send": "Odeslat",
     "editThisCollection": "Editovat tuto sbírku",
-    "goToProcesses": "Přejít na procesy"
+    "goToProcesses": "Přejít na procesy",
+    "reloadThePage": "Znovunačíst stránku"
   },
   "field": {
     "public": "Veřejné",
