@@ -453,6 +453,7 @@
     },
     "removeCollection": {
       "title": "Deleting a collection",
+      "alert": "If you delete this collection, a reindexing process will be created and the collection can be displayed in the collection list until this process is finished.",
       "message": "Do you really want to permanently delete the collection"
     },
     "addItemsToCollection": {

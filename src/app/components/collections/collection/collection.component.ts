@@ -12,6 +12,7 @@ import { AddItemToCollectionDialogComponent } from 'src/app/dialogs/add-item-to-
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { AuthService } from 'src/app/services/auth.service';
+import { DeleteCollectionComponent } from 'src/app/dialogs/delete-collection/delete-collection.component';
 
 @Component({
   selector: 'app-collection',
@@ -114,7 +115,7 @@ export class CollectionComponent implements OnInit {
     if (!this.collection) {
       return;
     }
-    const data: SimpleDialogData = {
+    /* const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeCollection.title'),
       message: this.ui.getTranslation('modal.removeCollection.message') + '?',
       btn1: {
@@ -128,7 +129,11 @@ export class CollectionComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data }); */
+    const dialogRef = this.dialog.open(DeleteCollectionComponent, {
+      width: '600px',
+      panelClass: 'app-create-new-collection-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.collectionsService.deleteCollection(this.collection).subscribe(result => {

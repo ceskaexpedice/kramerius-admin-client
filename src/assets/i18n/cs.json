@@ -453,6 +453,7 @@
     },
     "removeCollection": {
       "title": "Smazání sbírky",
+      "alert": "Pokud smažete tuto sbírku, vytvoří se proces pro reindexaci a sbírka se Vám může zobrazovat v seznamu sbírek do doby, než tento proces bude ukončen.",
       "message": "Opravdu chcete sbírku trvale smazat"
     },
     "addItemsToCollection": {
