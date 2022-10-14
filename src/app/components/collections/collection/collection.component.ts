@@ -12,7 +12,7 @@ import { AddItemToCollectionDialogComponent } from 'src/app/dialogs/add-item-to-
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { AuthService } from 'src/app/services/auth.service';
-import { DeleteCollectionComponent } from 'src/app/dialogs/delete-collection/delete-collection.component';
+import { DeleteCollectionDialogComponent } from 'src/app/dialogs/delete-collection-dialog/delete-collection-dialog.component';
 
 @Component({
   selector: 'app-collection',
@@ -130,7 +130,7 @@ export class CollectionComponent implements OnInit {
       }
     };
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data }); */
-    const dialogRef = this.dialog.open(DeleteCollectionComponent, {
+    const dialogRef = this.dialog.open(DeleteCollectionDialogComponent, {
       width: '600px',
       panelClass: 'app-create-new-collection-dialog'
     });
