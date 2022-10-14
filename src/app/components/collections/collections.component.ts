@@ -287,5 +287,4 @@ export class CollectionsComponent implements OnInit {
   reloadPage() {
     location.reload();
   }
-
 }
