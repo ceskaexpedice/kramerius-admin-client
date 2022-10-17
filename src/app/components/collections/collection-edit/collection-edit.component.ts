@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateNewCollectionComponent } from 'src/app/dialogs/create-new-collection/create-new-collection.component';
+import { CreateNewCollectionDialogComponent } from 'src/app/dialogs/create-new-collection-dialog/create-new-collection-dialog.component';
 
 @Component({
   selector: 'app-collection-edit',
@@ -75,7 +75,7 @@ export class CollectionEditComponent implements OnInit {
   onSave() {
     this.collectionsService.createCollection(this.collection).subscribe(response => {
       //this.ui.showInfoSnackBar("snackbar.success.collectionHasBeenCreated");
-      const dialogRef = this.dialog.open(CreateNewCollectionComponent, {
+      const dialogRef = this.dialog.open(CreateNewCollectionDialogComponent, {
         data: response,
         width: '600px',
         panelClass: 'app-create-new-collection-dialog'
