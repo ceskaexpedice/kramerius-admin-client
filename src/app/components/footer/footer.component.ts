@@ -3,6 +3,8 @@ import { AppSettings } from 'src/app/services/app-settings';
 import * as gitInfo from 'git-info.json'
 import { AuthService } from 'src/app/services/auth.service';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { interval, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-footer',
@@ -12,6 +14,11 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 export class FooterComponent implements OnInit {
 
   coreInfo:any;
+  
+  tokenHours: string;
+  tokenMinutes: string;
+  tokenSeconds: string;
+  
 
   constructor(
     public appSettings: AppSettings,
@@ -20,6 +27,34 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCoreInfo();
+
+    interval(1000).subscribe(x => {
+      if (AuthService.tokenDeadline) {
+
+        function getDifference(date1, date2) {
+          const diffInMs = Math.abs(date2 - date1);
+          return diffInMs;
+        }
+
+        let diffInMs = Math.round(getDifference(new Date(), AuthService.tokenDeadline)/1000);
+        console.log(diffInMs);
+        if (diffInMs > 0) {
+          this.tokenHours = this.padTo2Digits( Math.trunc(diffInMs / (3600)));
+          diffInMs =  diffInMs % 3600        
+          this.tokenMinutes = this.padTo2Digits( Math.trunc(diffInMs / (60)));
+          diffInMs =  diffInMs % 60        
+          this.tokenSeconds = this.padTo2Digits( diffInMs);
+        } else {
+          this.tokenHours = this.padTo2Digits(0);
+          this.tokenMinutes = this.padTo2Digits(0);
+          this.tokenSeconds = this.padTo2Digits(0);
+        }
+      } else {
+        this.tokenHours = null;
+        this.tokenMinutes = null;
+        this.tokenSeconds = null;
+      }
+    });
   }
 
   getVersion() {
@@ -52,15 +87,16 @@ export class FooterComponent implements OnInit {
     } else return null;
   }
 
+   private padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
+
   getTokenDeadline() {
     if (AuthService.tokenDeadline) {
-      function padTo2Digits(num: number) {
-        return num.toString().padStart(2, '0');
-      }
       return [
-        padTo2Digits(AuthService.tokenDeadline.getHours()),
-        padTo2Digits(AuthService.tokenDeadline.getMinutes()),
-        padTo2Digits(AuthService.tokenDeadline.getSeconds()),
+        this.padTo2Digits(AuthService.tokenDeadline.getHours()),
+        this.padTo2Digits(AuthService.tokenDeadline.getMinutes()),
+        this.padTo2Digits(AuthService.tokenDeadline.getSeconds()),
       ].join(':')
     } else return '';
   }
