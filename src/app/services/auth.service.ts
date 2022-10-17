@@ -21,6 +21,7 @@ export class AuthService {
   static token: string;
   static tokenTime: Date;
   static tokenDeadline: Date;
+  static tokenCounter: number;
 
   // global actions
   authorizedGlobalActions: string[];
@@ -43,6 +44,7 @@ export class AuthService {
       if (event.type && event.type === "token_expired") {
         AuthService.token = null;
         AuthService.tokenDeadline = null;
+        AuthService.tokenCounter = null;
         AuthService.tokenTime = null;
         this.logout();
       }
@@ -86,6 +88,8 @@ export class AuthService {
     AuthService.token = null;
     AuthService.tokenTime = null;
     AuthService.tokenDeadline = null;
+    AuthService.tokenCounter = null;
+
     localStorage.removeItem('account.token');
     localStorage.removeItem('account.token.time');
     this.user = null;
@@ -160,6 +164,7 @@ export class AuthService {
             if (user.session['expires_in'] && AuthService.tokenTime) {
               let dd:Date =  new Date(AuthService.tokenTime);
               dd.setSeconds(dd.getSeconds() + parseInt(user.session['expires_in']));
+              AuthService.tokenCounter = parseInt(user.session['expires_in']);
               AuthService.tokenDeadline = dd;
             }
           }
