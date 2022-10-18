@@ -5,11 +5,11 @@ import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
 
 @Component({
-  selector: 'app-create-new-collection',
-  templateUrl: './create-new-collection.component.html',
-  styleUrls: ['./create-new-collection.component.scss']
+  selector: 'app-create-new-collection-dialog',
+  templateUrl: './create-new-collection-dialog.component.html',
+  styleUrls: ['./create-new-collection-dialog.component.scss']
 })
-export class CreateNewCollectionComponent implements OnInit {
+export class CreateNewCollectionDialogComponent implements OnInit {
 
   collection: Collection;
   data: any;

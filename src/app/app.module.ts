@@ -82,7 +82,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { CollectionContentComponent } from './components/collections/collection-content/collection-content.component';
 import { CollectionContextComponent } from './components/collections/collection-context/collection-context.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { CreateNewCollectionComponent } from './dialogs/create-new-collection/create-new-collection.component';
+import { CreateNewCollectionDialogComponent } from './dialogs/create-new-collection-dialog/create-new-collection-dialog.component';
 import { DeleteCollectionDialogComponent } from './dialogs/delete-collection-dialog/delete-collection-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -153,7 +153,7 @@ export function createCustomMatPaginatorIntl(
     CollectionContentComponent,
     CollectionContextComponent,
     FooterComponent,
-    CreateNewCollectionComponent,
+    CreateNewCollectionDialogComponent,
     DeleteCollectionDialogComponent
   ],
   imports: [
