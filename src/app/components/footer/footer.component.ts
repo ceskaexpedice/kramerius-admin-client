@@ -37,7 +37,6 @@ export class FooterComponent implements OnInit {
         }
 
         let diffInMs = Math.round(getDifference(new Date(), AuthService.tokenDeadline)/1000);
-        console.log(diffInMs);
         if (diffInMs > 0) {
           this.tokenHours = this.padTo2Digits( Math.trunc(diffInMs / (3600)));
           diffInMs =  diffInMs % 3600        

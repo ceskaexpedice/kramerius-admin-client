@@ -19,6 +19,8 @@ export class ImportComponent implements OnInit {
   type: string;
   tree: Tree;
   ndkPublic: boolean;
+  ndkIIPServer: boolean;
+
   scheduleIndexations: boolean;
   inputDirError = {};
 
@@ -118,6 +120,7 @@ export class ImportComponent implements OnInit {
         policy: this.ndkPublic ? 'PUBLIC' : 'PRIVATE',
         inputDataDir: this.imports.selectedTree.getFullPath(),
         startIndexer: this.scheduleIndexations,
+        useIIPServer: this.ndkIIPServer        
       }
     }).subscribe(response => {
       this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');

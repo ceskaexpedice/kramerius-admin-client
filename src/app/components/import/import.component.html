@@ -20,6 +20,7 @@
           <div fxFlex>
             <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
             <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">{{ 'desc.post' | translate }}</mat-checkbox>
+            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.iipserver' | translate }}</mat-checkbox>
           </div>
           <div>
             <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">{{ 'button.startImport' | translate }}</button>
