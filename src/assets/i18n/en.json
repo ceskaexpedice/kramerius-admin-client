@@ -782,6 +782,7 @@
     "page": "Page",
     "scheduleSubsequentIndexing": "Schedule subsequent indexing",
     "post": "Post",
+    "useIipServer": "Use IIP server",
     "selectedPath": "Selected path",
     "role": "Role",
     "condition": "Condition",

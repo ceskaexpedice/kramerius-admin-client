@@ -36,6 +36,7 @@ export class ImportComponent implements OnInit {
   ngOnInit() {
     this.ndkPublic = true;
     this.scheduleIndexations = true;
+    this.ndkIIPServer = true;
     this.type = this.local.getStringProperty('import.type', 'foxml');
     this.initTree();
   }
