@@ -1,5 +1,4 @@
-name: NodeJS with Webpack
-
+name: Build - main
 on:
   push:
     branches: [ "main" ]
