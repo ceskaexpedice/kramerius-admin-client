@@ -1,9 +1,9 @@
 name: Daily builds - dev
 on:
+  workflow_dispatch:
   schedule:
-   - cron: '12 9 * * 1,2,3,4'
-   - cron: '22 9 * * 4'
-   
+   - cron: '50 8 * * 1,2,3,4'
+
 jobs:
   build:
     runs-on: ubuntu-latest
