@@ -233,8 +233,6 @@ export class CollectionsComponent implements OnInit {
     if (sortState.direction) {
       this.sortField = sortState.active;
       this.sortAsc = sortState.direction === 'asc';
-      console.log(sortState.active);
-      console.log(sortState.direction);
       //this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
       this.standaloneOnly = false;
