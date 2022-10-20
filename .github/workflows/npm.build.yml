@@ -1,9 +1,9 @@
 name: Build - main
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main","dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main","dev" ]
 
 jobs:
   build:
@@ -25,3 +25,9 @@ jobs:
       run: |
         npm install
         npm run build
+        
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Package
+        path: dist/kramerius-admin
+        
