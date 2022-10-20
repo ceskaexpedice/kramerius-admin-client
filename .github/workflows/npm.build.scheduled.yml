@@ -1,6 +1,7 @@
 name: Daily builds - main
 
 on:
+  workflow_dispatch:
   schedule:
    - cron: '00 18 * * 1,2,3,4'
     
