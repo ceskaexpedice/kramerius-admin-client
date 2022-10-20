@@ -2,7 +2,8 @@ name: Daily builds - dev
 on:
   schedule:
    - cron: '12 9 * * 1,2,3,4'
-
+   - cron: '22 9 * * 4'
+   
 jobs:
   build:
     runs-on: ubuntu-latest
