@@ -1,5 +1,6 @@
 name: Daily builds - dev
 on:
+  workflow_dispatch:
   schedule:
    - cron: '50 8 * * 1,2,3,4'
 
