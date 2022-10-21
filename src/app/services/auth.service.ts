@@ -95,7 +95,7 @@ export class AuthService {
     this.user = null;
     this.logoutKramerius().subscribe(() => {
       const redircetUri = `${this.baseUrl()}${suffix}`;
-      const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout?redirect_uri=${redircetUri}`;
+      const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout`;
       window.open(url, '_top');
     });
   }
