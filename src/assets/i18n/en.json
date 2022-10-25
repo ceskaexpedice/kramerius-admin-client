@@ -155,6 +155,9 @@
         "desc": "Statistics showing a table with the number of views, names of works, detail of the record.",
         "icon": "preview"
       } 
+    },
+    "cdkProxy": {
+      "title": "Proxy"
     }
   },
   "navbar": {

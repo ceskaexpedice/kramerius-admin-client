@@ -155,6 +155,9 @@
         "desc": "Statistiky zobrazující tabulku s počty zobrazení, jména děl, detail záznamu.",
         "icon": "preview"
       } 
+    },
+    "cdkProxy": {
+      "title": "Proxy"
     }
   },
   "navbar": {
