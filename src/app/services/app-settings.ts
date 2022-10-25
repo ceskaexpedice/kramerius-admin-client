@@ -22,6 +22,7 @@ export class AppSettings {
   defaultLang = APP_GLOBAL.lang || 'cs';
 
   homeDashboard = APP_GLOBAL.homeDashboard || [];
+  cdkMode = !!APP_GLOBAL.cdkMode;
 
 
   interceptresponse: EventEmitter<any> = new EventEmitter<any>();
