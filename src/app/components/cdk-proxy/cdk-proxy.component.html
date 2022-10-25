@@ -25,12 +25,6 @@
               <mat-slide-toggle [checked]="element.state" [matTooltip]="element.state ? ('desc.state' | translate) + ': ' + 'Zapnuto' : ('desc.state' | translate) + ': ' + 'Vypnuto'"></mat-slide-toggle>
             </td>
           </ng-container>
-         <!--  <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef class="app-text-right">Zapnuto / Vypnuto</th>
-            <td mat-cell *matCellDef="let element" class="app-text-right">
-              <mat-slide-toggle [checked]=""></mat-slide-toggle>
-            </td>
-          </ng-container> -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
