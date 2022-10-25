@@ -18,6 +18,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
+import { CdkProxyComponent } from './components/cdk-proxy/cdk-proxy.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -58,6 +59,7 @@ const routes: Routes = [
   { path: 'statistics', redirectTo: 'statistics/graphs' },
   { path: 'statistics/graphs', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'statistics/most-viewed-documents', component: StatisticsComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-proxy', component: CdkProxyComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
 
