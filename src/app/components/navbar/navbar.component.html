@@ -28,7 +28,8 @@
       <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'sites.indexing.title' | translate }}</a>
       <a routerLink="/repository" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'sites.repository.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_statistics')" routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'sites.statistics.title' | translate }}</a>
-      <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>  
+      <a routerLink="/cdk-proxy" routerLinkActive="active" mat-button *ngIf="settings.cdkMode">Proxy</a>  
+      <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a> 
     </ng-container>
     
     <a (click)="changeLang('cs')" mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
