@@ -32,7 +32,7 @@ const ELEMENT_DATA: ProxyElement[] = [
 })
 export class CdkProxyComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'code', 'online',  'stateduration','state'];
+  displayedColumns: string[] = ['logo','name', 'code', 'online',  'stateduration','state'];
   dataSource:Library[];
   register:Map<String, any> = new Map();
   //register:any;
@@ -66,6 +66,11 @@ export class CdkProxyComponent implements OnInit {
     });
   }
 
+  logo(code) {
+    if (this.register.get(code) != null && this.register.get(code)['logo']) {
+      return this.register.get(code)['logo'];
+    } else return null;
+  }
 
   formatDuration(code) {
     if (this.register.get(code) != null && this.register.get(code)['state_duration']) {
