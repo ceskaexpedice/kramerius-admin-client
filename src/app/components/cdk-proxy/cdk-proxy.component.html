@@ -31,15 +31,15 @@
           </ng-container>
 
           <ng-container matColumnDef="online">
-            <th mat-header-cell *matHeaderCellDef class="app-text-right" >{{ 'desc.state' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef  >{{ 'Online/Offline' }}</th>
             <td mat-cell *matCellDef="let lib">
               <span *ngIf="register.get(lib.code) && register.get(lib.code)['alive']">{{ 'online' }} </span>
-              <span *ngIf="!register.get(lib.code) || !register.get(lib.code)['alive']">{{ 'offile' }} </span>
+              <span *ngIf="!register.get(lib.code) || !register.get(lib.code)['alive']">{{ 'offline' }} </span>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="stateduration">
-            <th mat-header-cell *matHeaderCellDef>{{ 'desc.stateduration' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'Online/Offline po dobu' }}</th>
             <td mat-cell *matCellDef="let lib">{{ formatDuration(lib.code) }}</td>
           </ng-container>
 
@@ -49,6 +49,7 @@
               <mat-slide-toggle [checked]="lib.status" (change)="toggle(lib.code, $event)" [matTooltip]="lib.status ? ('desc.state' | translate) + ': ' + 'Zapnuto' : ('desc.state' | translate) + ': ' + 'Vypnuto'"></mat-slide-toggle>
             </td>
           </ng-container>
+
 
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

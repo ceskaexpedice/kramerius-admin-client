@@ -80,9 +80,9 @@ export class CdkProxyComponent implements OnInit {
       let hours = Math.floor(mods /  3600);
       mods = mods % 3600;
       let minutes = Math.floor(mods/60);
-      if (days > 1) {
+      if (days > 0) {
         return `${days}d  ${hours}h ${minutes}min`      
-      } else if (hours > 1) {
+      } else if (hours > 0) {
         return `${hours}h ${minutes}min`      
       } else {
         return `${minutes}min`      
