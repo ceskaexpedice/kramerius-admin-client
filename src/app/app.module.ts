@@ -86,6 +86,7 @@ import { CreateNewCollectionDialogComponent } from './dialogs/create-new-collect
 import { DeleteCollectionDialogComponent } from './dialogs/delete-collection-dialog/delete-collection-dialog.component';
 import { CdkProxyComponent } from './components/cdk-proxy/cdk-proxy.component';
 import { CdkApiService } from './services/cdk-api.service';
+import { CdkProxyDetailComponent } from './components/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -157,7 +158,8 @@ export function createCustomMatPaginatorIntl(
     FooterComponent,
     CreateNewCollectionDialogComponent,
     DeleteCollectionDialogComponent,
-    CdkProxyComponent
+    CdkProxyComponent,
+    CdkProxyDetailComponent
   ],
   imports: [
     BrowserModule,
