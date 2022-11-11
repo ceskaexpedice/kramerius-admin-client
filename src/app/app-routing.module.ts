@@ -61,7 +61,7 @@ const routes: Routes = [
   { path: 'statistics/graphs', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'statistics/most-viewed-documents', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'cdk-proxy', component: CdkProxyComponent, canActivate: [AuthGuard] },
-  { path: 'cdk-proxy/detail/:id', component: CdkProxyDetailComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-proxy/:id', component: CdkProxyDetailComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
 
