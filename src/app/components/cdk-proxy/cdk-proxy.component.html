@@ -18,19 +18,19 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="name">
+          <ng-container matColumnDef="code">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.code' | translate }}</th>
             <td mat-cell *matCellDef="let lib"><strong>{{ lib.code }}</strong></td>
           </ng-container>
           
-          <ng-container matColumnDef="code">
+          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let lib">
               <a [routerLink]="lib.code">{{ register.get(lib.code) != null ? register.get(lib.code).name : '' }}</a>
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="online">
+          <ng-container matColumnDef="state">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.state' | translate }}</th>
             <td mat-cell *matCellDef="let lib">
               <div class="app-badge" [ngClass]="register.get(lib.code) && register.get(lib.code)['alive'] ? 'app-finished' : 'app-failed'">
@@ -39,12 +39,12 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="stateduration">
+          <ng-container matColumnDef="stateDuration">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.stateDuration' | translate }}</th>
             <td mat-cell *matCellDef="let lib">{{ formatDuration(lib.code) }}</td>
           </ng-container>
 
-          <ng-container matColumnDef="state">
+          <ng-container matColumnDef="switch">
             <th mat-header-cell *matHeaderCellDef class="app-text-right" >{{ 'desc.switch' | translate }}</th>
             <td mat-cell *matCellDef="let lib" class="app-text-right">
               <mat-slide-toggle [checked]="lib.status" (change)="toggle(lib.code, $event)" [matTooltip]="lib.status ? ('desc.state' | translate) + ': ' + 'Zapnuto' : ('desc.state' | translate) + ': ' + 'Vypnuto'"></mat-slide-toggle>
