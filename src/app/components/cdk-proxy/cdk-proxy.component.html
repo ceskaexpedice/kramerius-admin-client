@@ -31,26 +31,25 @@
           </ng-container>
 
           <ng-container matColumnDef="online">
-            <th mat-header-cell *matHeaderCellDef  >{{ 'Online/Offline' }}</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.state' | translate }}</th>
             <td mat-cell *matCellDef="let lib">
-              <span *ngIf="register.get(lib.code) && register.get(lib.code)['alive']">{{ 'online' }} </span>
-              <span *ngIf="!register.get(lib.code) || !register.get(lib.code)['alive']">{{ 'offline' }} </span>
+              <div class="app-badge" [ngClass]="register.get(lib.code) && register.get(lib.code)['alive'] ? 'app-finished' : 'app-failed'">
+                {{ register.get(lib.code) && register.get(lib.code)['alive'] ? 'online' : 'offline' }}
+              </div>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="stateduration">
-            <th mat-header-cell *matHeaderCellDef>{{ 'Online/Offline po dobu' }}</th>
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.stateDuration' | translate }}</th>
             <td mat-cell *matCellDef="let lib">{{ formatDuration(lib.code) }}</td>
           </ng-container>
 
           <ng-container matColumnDef="state">
-            <th mat-header-cell *matHeaderCellDef class="app-text-right" >{{ 'Přepinač'  }}</th>
+            <th mat-header-cell *matHeaderCellDef class="app-text-right" >{{ 'desc.switch' | translate }}</th>
             <td mat-cell *matCellDef="let lib" class="app-text-right">
               <mat-slide-toggle [checked]="lib.status" (change)="toggle(lib.code, $event)" [matTooltip]="lib.status ? ('desc.state' | translate) + ': ' + 'Zapnuto' : ('desc.state' | translate) + ': ' + 'Vypnuto'"></mat-slide-toggle>
             </td>
           </ng-container>
-
-
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

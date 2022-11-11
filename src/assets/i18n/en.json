@@ -854,6 +854,9 @@
     "logs": "Logs",
     "right": "Right",
     "connectedInstance": "Connected instance",
-    "tokenExpiresAt": "Token expires at"
+    "tokenExpiresAt": "Token expires at",
+    "code": "Code",
+    "stateDuration": "State duration",
+    "switch": "Switch"
   }
 }
