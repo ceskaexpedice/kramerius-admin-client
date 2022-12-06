@@ -857,6 +857,11 @@
     "tokenExpiresAt": "Token vyprší ve",
     "code": "Kód",
     "stateDuration": "Trvání stavu",
-    "switch": "Přepinač"
+    "switch": "Přepinač",
+    "priority": "Priorita",
+    "date": "Datum",
+    "type": "Typ",
+    "indexed": "Indexováno",
+    "updated": "Aktualizováno"
   }
 }

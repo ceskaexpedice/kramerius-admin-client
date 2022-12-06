@@ -857,6 +857,11 @@
     "tokenExpiresAt": "Token expires at",
     "code": "Code",
     "stateDuration": "State duration",
-    "switch": "Switch"
+    "switch": "Switch",
+    "priority": "Priority",
+    "date": "Date",
+    "type": "Type",
+    "indexed": "Indexed",
+    "updated": "Updated"
   }
 }
