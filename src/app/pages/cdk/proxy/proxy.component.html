@@ -15,7 +15,7 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>{{ 'desc.name' | translate }}</th>
       <td mat-cell *matCellDef="let lib">
-        <a [routerLink]="lib.code">{{ register.get(lib.code) != null ? register.get(lib.code).name : '' }}</a>
+        <a [routerLink]="'detail/'+lib.code">{{ register.get(lib.code) != null ? register.get(lib.code).name : '' }}</a>
       </td>
     </ng-container>
 

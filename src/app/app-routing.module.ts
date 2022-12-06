@@ -22,6 +22,7 @@ import { CdkProxyComponent } from './components/cdk-proxy/cdk-proxy.component';
 import { CdkProxyDetailComponent } from './components/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
 import { CdkComponent } from './pages/cdk/cdk.component';
 import { ProxyComponent } from './pages/cdk/proxy/proxy.component';
+import { DetailComponent } from './pages/cdk/proxy/detail/detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -65,7 +66,7 @@ const routes: Routes = [
 
   { path: 'cdk', redirectTo: 'cdk/proxy'},
   { path: 'cdk/proxy', component: CdkComponent, canActivate: [AuthGuard] },
-  { path: 'cdk/proxy/detail/:id', component: CdkComponent, canActivate: [AuthGuard] },
+  { path: 'cdk/proxy/detail/:id', component: DetailComponent, canActivate: [AuthGuard] },
   { path: 'cdk/europeanou', component: CdkComponent, canActivate: [AuthGuard] },
 
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
