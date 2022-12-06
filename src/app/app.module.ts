@@ -84,9 +84,7 @@ import { CollectionContextComponent } from './components/collections/collection-
 import { FooterComponent } from './components/footer/footer.component';
 import { CreateNewCollectionDialogComponent } from './dialogs/create-new-collection-dialog/create-new-collection-dialog.component';
 import { DeleteCollectionDialogComponent } from './dialogs/delete-collection-dialog/delete-collection-dialog.component';
-import { CdkProxyComponent } from './components/cdk-proxy/cdk-proxy.component';
 import { CdkApiService } from './services/cdk-api.service';
-import { CdkProxyDetailComponent } from './components/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
 import { CdkComponent } from './pages/cdk/cdk.component';
 import { ProxyComponent } from './pages/cdk/proxy/proxy.component';
 import { DetailComponent } from './pages/cdk/proxy/detail/detail.component';
@@ -162,8 +160,6 @@ export function createCustomMatPaginatorIntl(
     FooterComponent,
     CreateNewCollectionDialogComponent,
     DeleteCollectionDialogComponent,
-    CdkProxyComponent,
-    CdkProxyDetailComponent,
     CdkComponent,
     ProxyComponent,
     DetailComponent,
