@@ -158,6 +158,10 @@ a {
   }
 }
 
+.app-rotate-180 {
+  transform: rotate(180deg);
+}
+
 .app-text-cutter {
   white-space: nowrap;
   overflow: hidden;

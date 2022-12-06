@@ -416,7 +416,9 @@
     "send": "Send",
     "editThisCollection": "Edit this collection",
     "goToProcesses": "Go to processes",
-    "reloadThePage": "Reload the page"
+    "reloadThePage": "Reload the page",
+    "increasePriority": "Increase priority",
+    "decreasePriority": "Decrease priority"
   },
   "field": {
     "public": "Public",

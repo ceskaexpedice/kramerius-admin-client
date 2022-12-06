@@ -1,3 +1,17 @@
-.app-input {
-  width: 50px;
+.mat-row {
+  &.app-first {
+    .mat-column-priority {
+      .app-arrow-up {
+        display: none;
+      }
+    }
+  }
+
+  &.app-last {
+    .mat-column-priority {
+      .app-arrow-down {
+        display: none;
+      }
+    }
+  }
 }

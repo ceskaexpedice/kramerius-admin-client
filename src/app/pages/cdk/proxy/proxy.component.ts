@@ -255,7 +255,7 @@ export class ProxyComponent implements OnInit {
   cdkMock:any ={"svkhk":{"status":true},"kkp":{"status":true},"svkul":{"status":true},"knav":{"status":true},"uzei":{"status":true},"inovatika":{"status":true},"mzk":{"status":true}};
 
 
-  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'switch','priority'];
+  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'switch', 'priority'];
 
   dataSource:Library[];
   register:Map<String, any> = new Map();
