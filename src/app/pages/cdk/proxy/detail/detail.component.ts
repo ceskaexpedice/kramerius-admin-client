@@ -27,8 +27,10 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.route.params.subscribe(params => {
-      this.title = params['id'];      
+      this.title = params['id'];   
+         
       this.cdkApi.timestamps(params['id']).subscribe(resp=> {
         this.dataSource = resp;        
       });
