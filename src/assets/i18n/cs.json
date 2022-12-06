@@ -156,8 +156,8 @@
         "icon": "preview"
       } 
     },
-    "cdkProxy": {
-      "title": "Proxy"
+    "cdk": {
+      "title": "Cdk"
     }
   },
   "navbar": {
