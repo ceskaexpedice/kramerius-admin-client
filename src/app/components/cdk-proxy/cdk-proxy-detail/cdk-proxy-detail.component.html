@@ -7,7 +7,7 @@
         <span class="app-separator">/</span>
         <a routerLink="/cdk-proxy">{{ 'sites.cdkProxy.title' | translate }}</a>
         <span class="app-separator">/</span>
-        <span class="app-last">	Studijní a vědecká knihovna v Hradci Králové</span><!-- TDO: doplnit plny nazev knihovny -->
+        <span class="app-last">	{{ title }}</span><!-- TDO: doplnit plny nazev knihovny -->
       </div>
     </div>
     <div fxFlex class="app-container-fluid app-oh">
@@ -17,7 +17,12 @@
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.date' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{ element.date }}</td>
           </ng-container>
-        
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>{{ 'desc.type' | translate }}</th>
+            <td mat-cell *matCellDef="let element"><strong>{{ element.type }}</strong></td>
+          </ng-container>
+
           <ng-container matColumnDef="indexed">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.indexed' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{ element.indexed }}</td>
@@ -30,7 +35,7 @@
         
           <ng-container matColumnDef="error">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.error' | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.error }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.errors }}</td>
           </ng-container>
         
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

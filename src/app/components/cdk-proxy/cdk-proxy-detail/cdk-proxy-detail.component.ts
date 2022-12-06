@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StatusTimtamp } from 'src/app/models/cdk.library.model';
+import { CdkApiService } from 'src/app/services/cdk-api.service';
 
 export interface PeriodicElement { // TO DO: SMAZAT
   date: string;
@@ -7,13 +10,6 @@ export interface PeriodicElement { // TO DO: SMAZAT
   error: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [ // TO DO: SMAZAT
-  {date: '23.5.2003', indexed: 'Ano', updated: 'Ne', error: '404'},
-  {date: '23.5.2003', indexed: 'Ano', updated: 'Ne', error: '404'},
-  {date: '23.5.2003', indexed: 'Ano', updated: 'Ne', error: '404'},
-  {date: '23.5.2003', indexed: 'Ano', updated: 'Ne', error: '404'}
-];
-
 @Component({
   selector: 'app-cdk-proxy-detail',
   templateUrl: './cdk-proxy-detail.component.html',
@@ -21,12 +17,29 @@ const ELEMENT_DATA: PeriodicElement[] = [ // TO DO: SMAZAT
 })
 export class CdkProxyDetailComponent implements OnInit {
 
-  constructor() { }
+  dataSource:StatusTimtamp[];
+  title:string ='';
 
-  ngOnInit(): void {
+  constructor(private cdkApi: CdkApiService,
+    private router: Router,
+    private route: ActivatedRoute,
+    ) {
+
   }
 
-  displayedColumns: string[] = ['date', 'indexed', 'updated', 'error'];
-  dataSource = ELEMENT_DATA;
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.title = params['id'];      
+      this.cdkApi.timestamps(params['id']).subscribe(resp=> {
+        this.dataSource = resp;        
+      });
+
+      this.cdkApi.oneRegistrinfo(params['id']).subscribe(resp=> {
+          this.title = resp.name;
+      });
+    });
+  }
+
+  displayedColumns: string[] = ['date','type', 'indexed', 'updated', 'error'];
 
 }

@@ -10,10 +10,12 @@ import { CdkApiService } from 'src/app/services/cdk-api.service';
 })
 export class CdkProxyComponent implements OnInit {
 
-  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'switch'];
+  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'switch','priority'];
+
   dataSource:Library[];
   register:Map<String, any> = new Map();
   constructor(private cdkApi: CdkApiService) { 
+    
   }
 
   ngOnInit(): void {

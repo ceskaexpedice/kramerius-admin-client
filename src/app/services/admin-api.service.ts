@@ -52,12 +52,6 @@ export class AdminApiService {
     return this.http.post(this.baseUrl + path, body, options);
   }
 
-  /*
-  private delete(path: string): Observable<Object> {
-    return this.http.delete(this.baseUrl + path, {});
-  }
-  */
-
   private delete(path: string, options = {}): Observable<Object> {
     return this.http.delete(this.baseUrl + path, options);
   }

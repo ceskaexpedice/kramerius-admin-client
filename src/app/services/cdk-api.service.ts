@@ -13,7 +13,7 @@ import { Role } from '../models/roles.model';
 import { ConditionParam } from '../models/condition-param.model';
 import { Right } from '../models/right.model';
 import { RightAction } from '../models/right-action.model';
-import { Library } from '../models/cdk.library.model';
+import { Library, StatusTimtamp } from '../models/cdk.library.model';
 
 @Injectable({
   providedIn: 'root'
@@ -58,11 +58,25 @@ export class CdkApiService {
 
     connected(): Observable<any[]> {
         return this.doGet('/api/admin/v7.0/connected',{}).pipe(map(response => Library.libsFromJson(response)));
-
     }
-    
+
+
+    timestamps(code): Observable<any[]> {
+      //http://localhost:8080/search/api/admin/v7.0/connected/knav/timestamps
+      return this.doGet(`/api/admin/v7.0/connected/${code}/timestamps`,{}).pipe(map(response => StatusTimtamp.statusesFromJson(response)));
+    }
+
+
+
+
     // MOVE to server
     registrinfo():Observable<any> {
       return this.http.get("https://api.registr.digitalniknihovna.cz/api/libraries/", {}).pipe();
     } 
+
+    oneRegistrinfo(code:string):Observable<any> {
+      return this.http.get(`https://api.registr.digitalniknihovna.cz/api/libraries/${code}`, {}).pipe();
+    } 
+
+    
 }

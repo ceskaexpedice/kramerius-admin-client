@@ -19,7 +19,9 @@ export class AppSettings {
   clientApiBaseUrl = this.coreBaseUrl + '/api/client/v7.0';
   adminApiBaseUrl = this.coreBaseUrl + '/api/admin/v7.0';
 
-  cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl || 'https://cdk-client-devel.k7-test.mzk.cz/search'; 
+  cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl || 'http://localhost:8080/search'; 
+
+  //cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl || 'https://cdk-client-devel.k7-test.mzk.cz/search'; 
 
   defaultLang = APP_GLOBAL.lang || 'cs';
 
