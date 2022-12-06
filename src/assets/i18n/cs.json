@@ -157,7 +157,15 @@
       } 
     },
     "cdk": {
-      "title": "Cdk"
+      "title": "Cdk",
+      "proxy": {
+        "title": "Proxy",
+        "icon": "hub"
+      },
+      "europeanou": {
+        "title": "Europeanou",
+        "icon": "public"
+      }
     }
   },
   "navbar": {
