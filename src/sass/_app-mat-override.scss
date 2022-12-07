@@ -322,6 +322,30 @@
           max-width: 100%;
           align-self: center;
         }
+
+        .mat-form-field {
+          &.mat-form-field-appearance-fill {
+            &.mat-form-field-type-mat-select {
+              .mat-form-field-wrapper {
+                @extend .app-pb-0;
+  
+                .mat-form-field-flex,
+                .mat-form-field-infix {
+                  @extend .app-pt-0;
+                }
+
+                .mat-select-arrow-wrapper {
+                  display: flex;
+                  vertical-align: bottom;
+                }
+
+                .mat-form-field-underline {
+                  bottom: 0;
+                }
+              }
+            }
+          }
+        }
       } 
     }
   }

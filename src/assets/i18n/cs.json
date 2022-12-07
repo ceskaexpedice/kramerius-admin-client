@@ -418,7 +418,9 @@
     "goToProcesses": "Přejít na procesy",
     "reloadThePage": "Znovunačíst stránku",
     "increasePriority": "Zvýšit prioritu",
-    "decreasePriority": "Snížit prioritu"
+    "decreasePriority": "Snížit prioritu",
+    "addRow": "Přidat řádek",
+    "deleteRow": "Odstranit řádek"
   },
   "field": {
     "public": "Veřejné",
@@ -872,6 +874,9 @@
     "date": "Datum",
     "type": "Typ",
     "indexed": "Indexováno",
-    "updated": "Aktualizováno"
+    "updated": "Aktualizováno",
+    "chooseLicense": "Vyberte licenci",
+    "linkToLicenseDetail": "Odkaz na detail licence",
+    "noLicenseSelected": "Není vybrána licence"
   }
 }

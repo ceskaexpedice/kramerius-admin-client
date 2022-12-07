@@ -418,7 +418,9 @@
     "goToProcesses": "Go to processes",
     "reloadThePage": "Reload the page",
     "increasePriority": "Increase priority",
-    "decreasePriority": "Decrease priority"
+    "decreasePriority": "Decrease priority",
+    "addRow": "Add row",
+    "deleteRow": "Delete row"
   },
   "field": {
     "public": "Public",
@@ -872,6 +874,9 @@
     "date": "Date",
     "type": "Type",
     "indexed": "Indexed",
-    "updated": "Updated"
+    "updated": "Updated",
+    "chooseLicense": "Choose a license",
+    "linkToLicenseDetail": "Link to license detail",
+    "noLicenseSelected": "No license selected"
   }
 }

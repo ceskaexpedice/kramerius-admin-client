@@ -19,7 +19,6 @@ import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
 import { CdkComponent } from './pages/cdk/cdk.component';
-import { ProxyComponent } from './pages/cdk/proxy/proxy.component';
 import { DetailComponent } from './pages/cdk/proxy/detail/detail.component';
 
 const routes: Routes = [
