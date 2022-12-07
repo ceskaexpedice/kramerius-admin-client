@@ -19,7 +19,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
 import { CdkComponent } from './pages/cdk/cdk.component';
-import { DetailComponent } from './pages/cdk/proxy/detail/detail.component';
+import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -62,7 +62,7 @@ const routes: Routes = [
   { path: 'statistics/most-viewed-documents', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'cdk', redirectTo: 'cdk/proxy'},
   { path: 'cdk/proxy', component: CdkComponent, canActivate: [AuthGuard] },
-  { path: 'cdk/proxy/detail/:id', component: DetailComponent, canActivate: [AuthGuard] },
+  { path: 'cdk/proxy/detail/:id', component: CdkProxyDetailComponent, canActivate: [AuthGuard] },
   { path: 'cdk/europeanou', component: CdkComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];

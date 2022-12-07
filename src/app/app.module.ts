@@ -86,9 +86,9 @@ import { CreateNewCollectionDialogComponent } from './dialogs/create-new-collect
 import { DeleteCollectionDialogComponent } from './dialogs/delete-collection-dialog/delete-collection-dialog.component';
 import { CdkApiService } from './services/cdk-api.service';
 import { CdkComponent } from './pages/cdk/cdk.component';
-import { ProxyComponent } from './pages/cdk/proxy/proxy.component';
-import { DetailComponent } from './pages/cdk/proxy/detail/detail.component';
-import { EuropeanouComponent } from './pages/cdk/europeanou/europeanou.component';
+import { CdkProxyComponent } from './pages/cdk/cdk-proxy/cdk-proxy.component';
+import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
+import { CdkEuropeanouComponent } from './pages/cdk/cdk-europeanou/cdk-europeanou.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -161,9 +161,9 @@ export function createCustomMatPaginatorIntl(
     CreateNewCollectionDialogComponent,
     DeleteCollectionDialogComponent,
     CdkComponent,
-    ProxyComponent,
-    DetailComponent,
-    EuropeanouComponent
+    CdkProxyComponent,
+    CdkProxyDetailComponent,
+    CdkEuropeanouComponent
   ],
   imports: [
     BrowserModule,

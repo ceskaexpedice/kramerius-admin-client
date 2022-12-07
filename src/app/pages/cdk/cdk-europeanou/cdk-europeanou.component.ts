@@ -11,11 +11,11 @@ const ELEMENT_DATA: any[] = [
 ]; 
 
 @Component({
-  selector: 'app-europeanou',
-  templateUrl: './europeanou.component.html',
-  styleUrls: ['./europeanou.component.scss']
+  selector: 'app-cdk-europeanou',
+  templateUrl: './cdk-europeanou.component.html',
+  styleUrls: ['./cdk-europeanou.component.scss']
 })
-export class EuropeanouComponent implements OnInit {
+export class CdkEuropeanouComponent implements OnInit {
 
   displayedColumns: string[] = ['license', 'icon', 'licenseLink', 'licenseEuro', 'action'];
   dataSource = ELEMENT_DATA;

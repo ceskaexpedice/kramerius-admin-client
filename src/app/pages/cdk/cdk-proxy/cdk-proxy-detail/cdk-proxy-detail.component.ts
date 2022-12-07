@@ -12,11 +12,11 @@ export interface PeriodicElement { // TO DO: SMAZAT
 }
 
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  selector: 'app-cdk-proxy-detail',
+  templateUrl: './cdk-proxy-detail.component.html',
+  styleUrls: ['./cdk-proxy-detail.component.scss']
 })
-export class DetailComponent implements OnInit {
+export class CdkProxyDetailComponent implements OnInit {
 
   debug = true;
 

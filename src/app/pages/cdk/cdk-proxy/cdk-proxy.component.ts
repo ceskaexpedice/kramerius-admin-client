@@ -4,11 +4,11 @@ import { Library } from 'src/app/models/cdk.library.model';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 
 @Component({
-  selector: 'app-proxy',
-  templateUrl: './proxy.component.html',
-  styleUrls: ['./proxy.component.scss']
+  selector: 'app-cdk-proxy',
+  templateUrl: './cdk-proxy.component.html',
+  styleUrls: ['./cdk-proxy.component.scss']
 })
-export class ProxyComponent implements OnInit {
+export class CdkProxyComponent implements OnInit {
 
   /** mock data  */
   debug = true;
