@@ -1,3 +1,4 @@
+import { HtmlAstPath } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
@@ -19,6 +20,8 @@ export class CollectionContentComponent implements OnInit {
   @Input() items;
 
   @Input() collectionActions:Map<string,string[]>;
+
+  isThumb: boolean;
 
 
   //linkEnabled = false;
@@ -52,6 +55,10 @@ export class CollectionContentComponent implements OnInit {
       case 'periodicalvolume': return 'Ročník periodika'
       default: return model
     }
+  }
+
+  public handleMissingImage(event: Event) {
+    (event.target as HTMLImageElement).style.display = 'none';
   }
 
   getThumb(uuid: string): string {

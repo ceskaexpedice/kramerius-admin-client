@@ -13,12 +13,14 @@
   max-width: calc(#{$app-home-card-width} - #{$app-home-card-gap});
   padding-top: 40px;
   position: relative;
+  height: 260px;
 
   .mat-card-header {
     @extend .app-text-center;
 
     .mat-card-subtitle {
       @extend .app-mb-2;
+      font-size: 15px;
     }
   }
 

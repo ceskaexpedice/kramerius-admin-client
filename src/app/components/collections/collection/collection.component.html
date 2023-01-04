@@ -5,23 +5,27 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a routerLink="/collections">{{ 'navbar.collections' | translate }}</a>
+        <a routerLink="/collections">{{ 'sites.collections.title' | translate }}</a>
         <span class="app-separator">/</span>
         <span class="app-last" *ngIf="collection">{{ collection.getName()}}</span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('detail')" [active]="view == 'detail'">
-            <mat-icon class="material-icons-outlined">visibility</mat-icon>{{ 'tabnav.detail' | translate }}
+            <mat-icon class="material-icons-outlined">visibility</mat-icon>{{ 'sites.collections.detail.title' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('edit')" [active]="view == 'edit'">
-            <mat-icon class="material-icons-outlined">edit</mat-icon>{{ 'tabnav.edit' | translate }}
+            <mat-icon class="material-icons-outlined">edit</mat-icon>{{ 'sites.collections.edit.title' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('content')" [active]="view == 'content'">
-            <mat-icon class="material-icons-outlined">segment</mat-icon>{{ 'tabnav.content' | translate }}
+            <span [matBadge]="items?.length">
+              <mat-icon class="material-icons-outlined">segment</mat-icon>{{ 'sites.collections.content.title' | translate }}<span class="app-push-right"></span>
+            </span>
           </a>
           <a mat-tab-link (click)="changeView('context')" [active]="view == 'context'">
-            <mat-icon class="material-icons-outlined">source</mat-icon>{{ 'tabnav.context' | translate }}
+            <span [matBadge]="superCollections?.length">
+              <mat-icon class="material-icons-outlined">source</mat-icon>{{ 'sites.collections.context.title' | translate }}<span class="app-push-right"></span>
+            </span>
           </a>
         </nav>
       </div>
@@ -29,17 +33,14 @@
     <div fxFlex class="app-oa-y">
       <div class="app-container">
         
-        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center"
-          fxLayoutGap="32px">
+        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
           <div fxFlex class="app-text-cutter">
-            <a (click)="copyTextToClipboard(getCurrentRoute('string'))"
-              [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
+            <a (click)="copyTextToClipboard(getCurrentRoute('string', '/collections/' + view + '/'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
             </a>
-            <span class="app-desc">{{ getCurrentRoute('string') }}</span>
-            <span class="app-pipe"></span>
-            <span *ngIf="collection" [matTooltip]="collection.getDescription()" class="app-desc">{{
-              collection.getDescription() }}</span>
+            <span class="app-desc">{{ getCurrentRoute('string', '/collections/' + view + '/') }}</span>
+            <span class="app-pipe" *ngIf="collection && collection.getDescription()"></span>
+            <span *ngIf="collection" [matTooltip]="collection.getDescription()" class="app-desc">{{collection.getDescription() }}</span>
           </div>
           <div *ngIf="view === 'content'">
             <a mat-flat-button color="primary" (click)="onAddItemsToThisCollection()">
@@ -54,31 +55,21 @@
         </mat-card>
 
         <div *ngIf="collection">
-
-          <mat-card fxLayout="column" *ngIf="view == 'detail'"
-            class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+          <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
             <app-collection-detail [collection]="collection" [state]="state"></app-collection-detail>
           </mat-card>
 
-          <mat-card fxLayout="column" *ngIf="view == 'edit'"
-            class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-edit (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id">
-            </app-collection-edit>
+          <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+            <app-collection-edit (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-collection-edit>
           </mat-card>
 
-          <mat-card fxLayout="column" *ngIf="view == 'content' && items"
-            class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-content [collection]="collection" [state]="state" [items]="items" [collectionActions]="collectionActions"  (updated)="onUpdated()">
-            </app-collection-content>
+          <mat-card fxLayout="column" *ngIf="view == 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+            <app-collection-content [collection]="collection" [state]="state" [items]="items" [collectionActions]="collectionActions"  (updated)="onUpdated()"></app-collection-content>
           </mat-card>
 
-          <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections"
-            class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-context [collection]="collection" [state]="state" [superCollections]="superCollections" [collectionActions]="collectionActions"  
-              (updated)="onUpdated()">
-            </app-collection-context>
+          <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+            <app-collection-context [collection]="collection" [state]="state" [superCollections]="superCollections" [collectionActions]="collectionActions" (updated)="onUpdated()"></app-collection-context>
           </mat-card>
-
         </div>
       </div>
     </div>

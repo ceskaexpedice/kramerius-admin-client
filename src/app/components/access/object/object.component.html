@@ -5,6 +5,7 @@
         <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
           <mat-label>{{ 'desc.enterTheUuidOfTheObject' | translate }}</mat-label>
           <input matInput [(ngModel)]="inputPid" placeholder="{{pid}}" (keyup.enter)="assignUuid()" type="text">
+          <mat-icon (click)="assignUuid()" matSuffix color="primary" class="app-cursor-pointer" [matTooltip]="'button.send' | translate">send</mat-icon>
         </mat-form-field>
         <mat-error *ngIf="!!errorMessage">
           {{ errorMessage }}
@@ -21,7 +22,7 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a routerLink="/object">{{ 'navbar.object' | translate }}</a>
+        <a routerLink="/object">{{ 'sites.object.title' | translate }}</a>
         <span class="app-separator">/</span>
         <span class="app-last app-text-cutter">
           <span [matTooltip]="title">{{ title }}</span>
@@ -29,18 +30,20 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a *ngIf="specificAuthorizedActions.indexOf('a_rights_edit')>=0"  mat-tab-link (click)="changeView('rights')" [active]="view == 'rights'">
-            <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'tabnav.actions' | translate }}
+          <a *ngIf="specificAuthorizedActions.indexOf('a_rights_edit')>=0"  mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'">
+            <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.object.actions.title' | translate }}
           </a>
           <a *ngIf="specificAuthorizedActions.indexOf('a_set_accessibility')>=0" mat-tab-link (click)="changeView('accessibility')" [active]="view == 'accessibility'">
-            <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'tabnav.accessibility' | translate }}
+            <mat-icon class="material-icons-outlined">accessibility</mat-icon>{{ 'sites.object.accessibility.title' | translate }}
           </a>
           <!-- musi mit prava pro vsechny sbirky --> 
-          <a mat-tab-link (click)="changeView('collections')" [active]="view == 'collections'">
-            <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'tabnav.inCollections' | translate }}
+          <a mat-tab-link (click)="changeView('in-collections')" [active]="view == 'in-collections'">
+            <span [matBadge]="superCollections?.length">
+              <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}<span class="app-push-right"></span>
+            </span>
           </a>
-          <a mat-tab-link (click)="changeView('other')" [active]="view == 'other'">
-            <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'tabnav.others' | translate }}
+          <a mat-tab-link (click)="changeView('others')" [active]="view == 'others'">
+            <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'sites.object.others.title' | translate }}
           </a>
         </nav>
       </div>
@@ -48,17 +51,14 @@
 
     <div fxFlex class="app-oh app-oa-y">
       <div class="app-container">
-        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center"
-          fxLayoutGap="32px">
+        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
           <div fxFlex class="app-text-cutter">
-            <a (click)="copyTextToClipboard(getCurrentRoute('string'))"
-              [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
+            <a (click)="copyTextToClipboard(getCurrentRoute('string', '/object/' + view + '/'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
             </a>
-            <span class="app-desc">{{ getCurrentRoute('string') }}</span>
-            <span class="app-pipe"></span>
-            <span *ngIf="collection && collection.getDescription()" [matTooltip]="collection.getDescription()"
-              class="app-desc">{{ collection.getDescription() }}</span>
+            <span class="app-desc">{{ getCurrentRoute('string', '/object/' + view + '/') }}</span>
+            <span class="app-pipe" *ngIf="collection && collection.getDescription()"></span>
+            <span *ngIf="collection && collection.getDescription()" [matTooltip]="collection.getDescription()" class="app-desc">{{ collection.getDescription() }}</span>
           </div>
           <div *ngIf="view === 'collections'">
             <a mat-flat-button color="primary" (click)="onAddThisToACollection()">
@@ -67,7 +67,7 @@
           </div>
         </mat-card>
 
-        <mat-card *ngIf="view == 'rights'" fxLayout="column" class="app-card app-view-border app-p-0">
+        <mat-card *ngIf="view == 'actions'" fxLayout="column" class="app-card app-view-border app-p-0">
           <app-rights [pid]="pid"></app-rights>
         </mat-card>
 
@@ -80,8 +80,7 @@
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <mat-icon class="app-20 app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon>
                   <strong>{{ 'field.' + policy | translate }}</strong>
-                  <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4">{{
-                    'button.changeAvailability' | translate }}</button>
+                  <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4">{{ 'button.changeAvailability' | translate }}</button>
                 </div>
               </div>
               <mat-divider [inset]="true"></mat-divider>
@@ -107,20 +106,13 @@
           </mat-card>
         </ng-container>
 
-        <ng-container *ngIf="view === 'collections'">
-          <!-- <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
-            <div fxFlex class="app-text-cutter">
-              <a (click)="copyTextToClipboard(getCurrentRoute('string'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a><span class="app-desc">{{ getCurrentRoute('string') }}</span><span class="app-pipe"></span><span [matTooltip]="collection.getDescription()" class="app-desc">{{ collection.getDescription() }}</span>
-            </div>
-            <div>
-              <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
-                <mat-icon>add_circle</mat-icon>{{ 'button.addToThisCollection' | translate }}
-              </a>
-            </div>
-          </mat-card> -->
+        <ng-container *ngIf="view === 'in-collections'">
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
           <mat-card fxLayout="column" *ngIf="!loadingCollections" class="app-card app-view-border app-p-0">
-            <mat-card class="app-view-rights app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="allowCollectionEdit(superCollection['id']) ? '/collections/' + getCurrentRoute('string') : null" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowCollectionEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowCollectionEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
+            <mat-card class="app-card app-view-border-bottom">
+              <strong>{{ 'desc.collectionsContainingThisCollection' | translate }}:</strong>
+            </mat-card>
+            <mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections" (click)="allowCollectionEdit(superCollection['id']) ? setRouterLink('/collections/context', collection['id'], 'collection', 'context') : null" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowCollectionEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowCollectionEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
               <mat-card-header fxLayout="row" fxLayoutGap="16px">
                 <div *ngIf="getThumb(superCollection['id'])">
                   <img [src]="getThumb(superCollection['id'])" />
@@ -132,18 +124,23 @@
                   <mat-card-subtitle>{{ superCollection.getDescription() }}</mat-card-subtitle>
                 </div>
                 <div class="app-right app-actions">
-                  <a (click)="onRemoveItemFromCollection(superCollection['id'], superCollection.getName(), pid, title); $event.preventDefault(); $event.stopPropagation()"
-                    [matTooltip]="'button.removeFromCollection' | translate" class="app-btn-warn">
+                  <a (click)="allowCollectionEdit(superCollection['id']) ? removeItemFromAnotherCollection(superCollection, collection, $event) : null" [matTooltip]="allowCollectionEdit(superCollection['id']) ? ('button.removeFromCollection' | translate) : null" class="app-btn-warn" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null">
                     <mat-icon>cancel</mat-icon>
                   </a>
                 </div>
               </mat-card-header>
             </mat-card>
             <!-- TODO: sbírky, co ho obsahují nepřímo od rodiče (z indexu)? Jen pro informaci, nebo proklik na sbírku-->
+
+            <mat-card *ngIf="superCollections?.length === 0" class="app-card app-color-info app-text-center">
+              <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.context' | translate }}
+              </mat-card-content>
+            </mat-card>
           </mat-card>
         </ng-container>
 
-        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'other'">
+        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'others'">
           <mat-card-content>
             <div class="app-mb-4">
               <h3 class="app-mt-0">{{ 'desc.synchronization' | translate }}</h3>
@@ -164,15 +161,6 @@
                 <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' | translate }}</button>
               </span>
             </div>
-            <!--
-            <mat-divider [inset]="true"></mat-divider>
-            <div class="app-mt-4">
-              <h3 class="app-mt-0">{{ 'desc.exports' | translate }}</h3>
-              <button mat-flat-button disabled color="primary" class="app-mr-2">{{ 'button.export' | translate }}
-                PDF</button>
-              <button mat-flat-button disabled color="primary">{{ 'button.export' | translate }} FOXML</button>
-            </div>
-            -->
           </mat-card-content>
         </mat-card>
       </div>

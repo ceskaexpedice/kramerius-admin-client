@@ -52,12 +52,6 @@ export class AdminApiService {
     return this.http.post(this.baseUrl + path, body, options);
   }
 
-  /*
-  private delete(path: string): Observable<Object> {
-    return this.http.delete(this.baseUrl + path, {});
-  }
-  */
-
   private delete(path: string, options = {}): Observable<Object> {
     return this.http.delete(this.baseUrl + path, options);
   }
@@ -173,8 +167,11 @@ export class AdminApiService {
   }
 
   getCollections(): Observable<any> {
-    //TODO: offset, limit
     return this.get(`/collections`);
+  }
+
+  getCollectionsByPrefix(rows: number, page: number, prefix:string): Observable<any> {
+    return this.get(`/collections/prefix?rows=${rows}&page=${page}&prefix=${prefix}`);
   }
 
   getCollectionsContainingItem(itemPid: String) {
@@ -467,6 +464,7 @@ export class AdminApiService {
     };
     return this.delete(`/statistics/`, options);
   }
+
 
 
 }

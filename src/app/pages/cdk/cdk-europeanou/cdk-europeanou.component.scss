@@ -1,0 +1,31 @@
+@import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
+
+.mat-table {
+  .mat-column-action {
+    width: 60px;
+  }
+
+  .mat-column-icon {
+    @extend .app-text-center;
+    width: 400px;
+  }
+  
+  .mat-column-license,
+  .mat-column-licenseEuro {
+    width: 400px;
+  }
+  
+  .mat-column-licenseLink {
+    //@extend .app-pr-4;
+    min-width: 110px;
+
+    a {
+      display: block;
+      background-color: #008CC8;
+      padding: 8px;
+      width: 90px;
+    }
+  }
+}

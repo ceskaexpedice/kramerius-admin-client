@@ -5,12 +5,12 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <span class="app-last">{{ 'navbar.indexation' | translate }}</span>
+        <span class="app-last">{{ 'sites.indexing.title' | translate }}</span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('object')" [active]="view == 'object'"><mat-icon class="material-icons-outlined">data_object</mat-icon>{{ 'tabnav.object' | translate }}</a>
-          <a mat-tab-link (click)="changeView('model')"  [active]="view == 'model'"><mat-icon class="material-icons-outlined">category</mat-icon>{{ 'tabnav.model' | translate }}</a>
+          <a mat-tab-link (click)="changeView('object')" [active]="view == 'object'"><mat-icon class="material-icons-outlined">data_object</mat-icon>{{ 'sites.indexing.object.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('model')"  [active]="view == 'model'"><mat-icon class="material-icons-outlined">category</mat-icon>{{ 'sites.indexing.model.title' | translate }}</a>
         </nav>
       </div>
     </div>	

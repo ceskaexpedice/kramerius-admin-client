@@ -6,6 +6,8 @@ export class User {
   name: string;
   roles: string[];
 
+  session: any;
+
   static fromJson(json): User {
     if (json) {
       const user = new User();
@@ -13,6 +15,7 @@ export class User {
       user.name = (json['name'] || '').trim();
       user.uid = json['uid'];
       user.roles = json['roles'] || [];
+      user.session = json['session'] || {};
       return user;
     }
     return null;

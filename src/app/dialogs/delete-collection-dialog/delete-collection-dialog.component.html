@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{ 'modal.removeCollection.title' | translate }}</h2>
+<mat-dialog-content>
+  <mat-card class="app-view-alert app-info app-mb-4">
+    <mat-card-content>
+      <mat-icon>info</mat-icon>
+      {{ 'modal.removeCollection.alert' | translate }}
+    </mat-card-content>
+  </mat-card>
+  <div class="app-mb-4 app-text-center">
+    {{ 'modal.removeCollection.message' | translate }}?
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button (click)="onClose('yes')" mat-dialog-close color="warn">{{ 'button.yes' | translate }}</button>
+  <button mat-flat-button mat-dialog-close>{{ 'button.no' | translate }}</button>
+</mat-dialog-actions>

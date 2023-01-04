@@ -12,6 +12,7 @@ import { AddItemToCollectionDialogComponent } from 'src/app/dialogs/add-item-to-
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { AuthService } from 'src/app/services/auth.service';
+import { DeleteCollectionDialogComponent } from 'src/app/dialogs/delete-collection-dialog/delete-collection-dialog.component';
 
 @Component({
   selector: 'app-collection',
@@ -30,6 +31,8 @@ export class CollectionComponent implements OnInit {
 
   collectionActions:Map<string,string[]> = new Map();
 
+  collectionId: string;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -47,9 +50,8 @@ export class CollectionComponent implements OnInit {
     this.state = 'loading';
     this.route.params.subscribe(params => {
       this.loadData(params['id']);
+      this.collectionId = params['id'];
     })
-
-
   }
 
   loadData(collectionId: string) {
@@ -60,10 +62,10 @@ export class CollectionComponent implements OnInit {
       this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
         this.items = res.filter(item => this.collection.items.includes(item['pid']))
         //this.view = 'detail';
-        this.view = this.local.getStringProperty('collection.view', 'detail');
+        this.view = this.local.getStringProperty('collection.view');
         this.state = 'success';
         // deti 
-        this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid'])).subscribe((d:any) => {
+        this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid']), null).subscribe((d:any) => {
           Object.keys(d).forEach((k)=> {
             let actions = d[k].map((v)=> v.code);
             this.collectionActions.set(k, actions);
@@ -80,7 +82,7 @@ export class CollectionComponent implements OnInit {
       //console.log(data)
       this.superCollections = data[0];
 
-      this.auth.getPidsAuthorizedActions(this.superCollections.map(c=> c['id'])).subscribe((d:any) => {
+      this.auth.getPidsAuthorizedActions(this.superCollections.map(c=> c['id']),null).subscribe((d:any) => {
         Object.keys(d).forEach((k)=> {
           let actions = d[k].map((v)=> v.code);
           this.collectionActions.set(k, actions);
@@ -102,6 +104,7 @@ export class CollectionComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('collection.view', view);
+    this.router.navigate(['/collections/' + view + '/', this.collectionId]);
   }
 
   onUpdated() {
@@ -112,7 +115,7 @@ export class CollectionComponent implements OnInit {
     if (!this.collection) {
       return;
     }
-    const data: SimpleDialogData = {
+    /* const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeCollection.title'),
       message: this.ui.getTranslation('modal.removeCollection.message') + '?',
       btn1: {
@@ -126,7 +129,11 @@ export class CollectionComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data });
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data }); */
+    const dialogRef = this.dialog.open(DeleteCollectionDialogComponent, {
+      width: '600px',
+      panelClass: 'app-create-new-collection-dialog'
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
         this.collectionsService.deleteCollection(this.collection).subscribe(result => {
@@ -187,9 +194,9 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  getCurrentRoute(type: string) {
+  getCurrentRoute(type: string, path: string = null) {
     if (type === 'string') {
-      return this.router.url.replace('/collections/', '');
+      return this.router.url.replace(path, '');
     } else {
       return this.router.url;
     }

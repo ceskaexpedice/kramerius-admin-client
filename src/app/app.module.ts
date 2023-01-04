@@ -81,6 +81,14 @@ import { CancelScheduledProcessesDialogComponent } from './dialogs/cancel-schedu
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { CollectionContentComponent } from './components/collections/collection-content/collection-content.component';
 import { CollectionContextComponent } from './components/collections/collection-context/collection-context.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CreateNewCollectionDialogComponent } from './dialogs/create-new-collection-dialog/create-new-collection-dialog.component';
+import { DeleteCollectionDialogComponent } from './dialogs/delete-collection-dialog/delete-collection-dialog.component';
+import { CdkApiService } from './services/cdk-api.service';
+import { CdkComponent } from './pages/cdk/cdk.component';
+import { CdkProxyComponent } from './pages/cdk/cdk-proxy/cdk-proxy.component';
+import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
+import { CdkEuropeanouComponent } from './pages/cdk/cdk-europeanou/cdk-europeanou.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -148,7 +156,14 @@ export function createCustomMatPaginatorIntl(
     CancelScheduledProcessesDialogComponent,
     StatisticsComponent,
     CollectionContentComponent,
-    CollectionContextComponent
+    CollectionContextComponent,
+    FooterComponent,
+    CreateNewCollectionDialogComponent,
+    DeleteCollectionDialogComponent,
+    CdkComponent,
+    CdkProxyComponent,
+    CdkProxyDetailComponent,
+    CdkEuropeanouComponent
   ],
   imports: [
     BrowserModule,
@@ -185,6 +200,7 @@ export function createCustomMatPaginatorIntl(
     ImportService,
     HttpClient,
     TranslateService,
+    CdkApiService,
     {
       provide: MatPaginatorIntl, deps: [TranslateService],
       useFactory: createCustomMatPaginatorIntl

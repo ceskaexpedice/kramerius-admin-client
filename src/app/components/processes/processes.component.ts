@@ -13,6 +13,8 @@ import { UIService } from 'src/app/services/ui.service';
 import { CancelScheduledProcessesDialogComponent } from 'src/app/dialogs/cancel-scheduled-processes-dialog/cancel-scheduled-processes-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -78,7 +80,9 @@ export class ProcessesComponent implements OnInit {
     private auth: AuthService,
     private dialog: MatDialog,
     public appSettings: AppSettings,
-    private ui: UIService
+    private ui: UIService,
+    private router: Router, 
+    private local: LocalStorageService
   ) {
     for (const state of Process.BATCH_STATES) {
       this.batch_states.push({ key: state, label: Process.stateLabel(state) })
@@ -285,6 +289,11 @@ export class ProcessesComponent implements OnInit {
       } 
     } 
     return true;
+  }
+
+  setRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
+    this.router.navigate([path, id]);
+    this.local.setStringProperty(viewProperty + '.view', viewValue);
   }
 
 }

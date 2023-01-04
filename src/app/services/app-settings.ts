@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
 
 declare var APP_GLOBAL: any;
 
@@ -17,14 +19,24 @@ export class AppSettings {
   clientApiBaseUrl = this.coreBaseUrl + '/api/client/v7.0';
   adminApiBaseUrl = this.coreBaseUrl + '/api/admin/v7.0';
 
+  cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl || 'http://localhost:8080/search'; 
+  //cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl || 'https://cdk-client-devel.k7-test.mzk.cz/search'; 
+
   defaultLang = APP_GLOBAL.lang || 'cs';
 
   homeDashboard = APP_GLOBAL.homeDashboard || [];
+  cdkMode = !!APP_GLOBAL.cdkMode;
 
-  interceptresponse: EventEmitter<number> = new EventEmitter<number>();
 
+  interceptresponse: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
+
+
+  getCoreInfo(): Observable<any> {
+      return this.http.get(`${this.clientApiBaseUrl}/info`).pipe();
+  }
+
 
 }

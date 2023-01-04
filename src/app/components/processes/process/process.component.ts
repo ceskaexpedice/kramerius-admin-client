@@ -36,7 +36,7 @@ export class ProcessComponent implements OnInit {
     private ui: UIService) { }
 
   ngOnInit() {
-    this.view = this.local.getStringProperty('processes.view', 'standardOutput');
+    this.view = this.local.getStringProperty('processes.view');
 
     this.route.params.subscribe(params => {
       this.processId = params['id'];
@@ -151,6 +151,7 @@ export class ProcessComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('processes.view', view);
+    this.router.navigate(['/processes/' + view + '/', this.processId]);
   }
 
   getCurrentRoute(type: string) {

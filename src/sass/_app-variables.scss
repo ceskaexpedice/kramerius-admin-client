@@ -52,6 +52,10 @@ $app-table-color-bg-hover: $app-gray-2;
 $app-home-card-gap: 32px !default;
 $app-home-card-width: 25% !default;
 
+// footer
+$app-footer-bg-color: $app-color-darknes;
+$app-footer-color: $app-gray-5;
+
 
 // gaps
 $gaps: (
@@ -101,6 +105,37 @@ $states: (
 
 // dashboard
 $dashboard: (
-  indexing-object: #5AB15E,
-  indexing-model: #FF6D00
+  object: mat-color($mat-blue-gray, 400),
+  object-actions: mat-color($mat-blue-gray, 400),
+  object-accessibility: mat-color($mat-blue-gray, 400),
+  object-in-collections: mat-color($mat-blue-gray, 400),
+  object-others: mat-color($mat-blue-gray, 400),
+
+  import-foxml: mat-color($mat-blue-gray, 400),
+  import-ndk: mat-color($mat-blue-gray, 400),
+
+  access-actions: mat-color($mat-red, 400),
+  access-roles: mat-color($mat-red, 400),
+  access-licenses: mat-color($mat-red, 400),
+  access-params: mat-color($mat-red, 400),
+
+  processes: mat-color($mat-teal, 400),
+  processes-standard-output: mat-color($mat-teal, 400),
+  processes-error-output: mat-color($mat-teal, 400),
+
+  collections: mat-color($mat-brown, 400),
+  collections-detail: mat-color($mat-brown, A400),
+  collections-edit: mat-color($mat-brown, A400),
+  collections-content: mat-color($mat-brown, A400),
+  collections-context: mat-color($mat-brown, A400),
+
+  indexing-object: mat-color($mat-green, 400),
+  indexing-model: mat-color($mat-orange, A700),
+
+  repository-repository-management: mat-color($mat-purple, A700),
+  repository-bulk-data-editing: mat-color($mat-cyan, A700),
+  repository-statistics: mat-color($mat-lime, 700),
+
+  statistics-graphs: mat-color($mat-orange, A700),
+  statistics-most-viewed-documents: mat-color($mat-orange, A700)
 );

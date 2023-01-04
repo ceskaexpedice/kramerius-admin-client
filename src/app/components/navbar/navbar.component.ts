@@ -15,7 +15,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class NavbarComponent implements OnInit {
   // to test accesibility
   notAllowed: boolean = false;
-
+  cdkMode = this.settings.cdkMode;
 
   constructor(
     public auth: AuthService, 

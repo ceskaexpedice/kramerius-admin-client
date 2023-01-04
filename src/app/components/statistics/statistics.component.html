@@ -6,7 +6,7 @@
         <ng-container *ngIf="isPageStatistics">
           <a routerLink="/">home</a>
           <span class="app-separator">/</span>
-          <span class="app-last">{{ 'navbar.statistics' | translate }}</span>
+          <span class="app-last">{{ 'sites.statistics.title' | translate }}</span>
         </ng-container>
         <ng-container *ngIf="!isPageStatistics">
           <span class="app-last">home</span>
@@ -14,8 +14,8 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('graphs')" [active]="view == 'graphs'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'tabnav.graphs' | translate }}</a>
-          <a mat-tab-link (click)="changeView('most-viewed-documents')"  [active]="view == 'most-viewed-documents'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'tabnav.mostViewedDocuments' | translate }}</a>
+          <a mat-tab-link (click)="changeView('graphs')" [active]="view == 'graphs'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'sites.statistics.graphs.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('most-viewed-documents')"  [active]="view == 'most-viewed-documents'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'sites.statistics.most-viewed-documents.title' | translate }}</a>
         </nav>
       </div>
     </div>

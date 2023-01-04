@@ -19,16 +19,17 @@
   </div>
   <div>
     <ng-container *ngIf="auth.isLoggedIn()">
-      <a *ngIf="!notAllowed" routerLink="/object" routerLinkActive="active" mat-button>{{ 'navbar.object' | translate }}</a>
-      <a *ngIf="allowedGlobalAction('a_import')" routerLink="/import" routerLinkActive="active" mat-button (click)="setDefaultRoute('import.type','foxml')">{{ 'navbar.import' | translate }}</a>
+      <a *ngIf="!notAllowed" routerLink="/object" routerLinkActive="active" mat-button>{{ 'sites.object.title' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_import')" routerLink="/import" routerLinkActive="active" mat-button (click)="setDefaultRoute('import.type','foxml')">{{ 'sites.import.title' | translate }}</a>
       <!-- pravo pro objekt -->
-      <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access" routerLinkActive="active" mat-button (click)="setDefaultRoute('access.view','rights')">{{ 'navbar.rightOfAdministration' | translate }}</a>
-      <a *ngIf="allowedGlobalAction('a_process_edit') || allowedGlobalAction('a_process_read')" routerLink="/processes" routerLinkActive="active" mat-button>{{ 'navbar.processes' | translate }}</a>
-      <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" routerLink="/collections" routerLinkActive="active" mat-button>{{ 'navbar.collections' | translate }}</a>
-      <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'navbar.indexation' | translate }}</a>
-      <a routerLink="/repository" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'navbar.repository' | translate }}</a>
-      <a *ngIf="allowedGlobalAction('a_statistics')" routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'navbar.statistics' | translate }}</a>
-      <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>  
+      <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access" routerLinkActive="active" mat-button (click)="setDefaultRoute('access.view','actions')">{{ 'sites.access.title' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_process_edit') || allowedGlobalAction('a_process_read')" routerLink="/processes" routerLinkActive="active" mat-button>{{ 'sites.processes.title' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" routerLink="/collections" routerLinkActive="active" mat-button>{{ 'sites.collections.title' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'sites.indexing.title' | translate }}</a>
+      <a routerLink="/repository" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'sites.repository.title' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_statistics')" routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'sites.statistics.title' | translate }}</a>
+      <a routerLink="/cdk" routerLinkActive="active" mat-button (click)="setDefaultRoute('cdk.view','proxy')" *ngIf="settings.cdkMode">{{ 'sites.cdk.title' | translate }}</a>  
+      <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a> 
     </ng-container>
     
     <a (click)="changeLang('cs')" mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
@@ -53,7 +54,7 @@
       </button>
     </mat-menu>
   </div>
-  <ng-container *ngIf="auth.isLoggedIn()">
+  <!-- <ng-container *ngIf="auth.isLoggedIn()">
     <span class="app-badge app-version-navbar app-mr-2">{{ 'desc.version' | translate }} {{getVersion()}}</span>
-  </ng-container>
+  </ng-container> -->
 </mat-toolbar>

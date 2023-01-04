@@ -5,7 +5,7 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <span class="app-last">{{ 'navbar.import' | translate }}</span>
+        <span class="app-last">{{ 'sites.import.title' | translate }}</span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
@@ -19,7 +19,8 @@
         <div fxLayout="row" fxLayoutAlign="start end" class="app-mb-4">
           <div fxFlex>
             <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
-            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary">{{ 'desc.post' | translate }}</mat-checkbox>
+            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary" class="app-mr-4">{{ 'desc.post' | translate }}</mat-checkbox>
+            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
           </div>
           <div>
             <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">{{ 'button.startImport' | translate }}</button>

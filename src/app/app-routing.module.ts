@@ -18,18 +18,23 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
+import { CdkComponent } from './pages/cdk/cdk.component';
+import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
 
 const routes: Routes = [
-  { path: '', component: StatisticsComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'keycloak', component: AuthComponent },
   { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
-  { path: 'processes/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
-  { path: 'collections/:id/edit', component: CollectionEditComponent, canActivate: [AuthGuard] },
-  { path: 'collections/new', component: CollectionNewComponent, canActivate: [AuthGuard] },
-  { path: 'collections/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'processes/standard-output/:id', component: ProcessComponent, canActivate: [AuthGuard] },
+  { path: 'processes/error-output/:id', component: ProcessComponent, canActivate: [AuthGuard] },
   { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
+  { path: 'collections/new', component: CollectionNewComponent, canActivate: [AuthGuard] },
+  { path: 'collections/detail/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/edit/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/content/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/context/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'indexing', redirectTo: 'indexing/object' },
   { path: 'indexing/object', component: IndexingComponent, canActivate: [AuthGuard] },
   { path: 'indexing/model', component: IndexingComponent, canActivate: [AuthGuard] },
@@ -40,9 +45,12 @@ const routes: Routes = [
   { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/statistics', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
-  { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
-  { path: 'access', redirectTo: 'access/rights' },
-  { path: 'access/rights', component: AccessComponent, canActivate: [AuthGuard] },
+  { path: 'object/actions/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/accessibility/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/in-collections/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/others/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'access', redirectTo: 'access/actions' },
+  { path: 'access/actions', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'access/roles', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'access/licenses', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'access/params', component: AccessComponent, canActivate: [AuthGuard] },
@@ -52,6 +60,10 @@ const routes: Routes = [
   { path: 'statistics', redirectTo: 'statistics/graphs' },
   { path: 'statistics/graphs', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'statistics/most-viewed-documents', component: StatisticsComponent, canActivate: [AuthGuard] },
+  { path: 'cdk', redirectTo: 'cdk/proxy'},
+  { path: 'cdk/proxy', component: CdkComponent, canActivate: [AuthGuard] },
+  { path: 'cdk/proxy/detail/:id', component: CdkProxyDetailComponent, canActivate: [AuthGuard] },
+  { path: 'cdk/europeanou', component: CdkComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
 

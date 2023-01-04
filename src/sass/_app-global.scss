@@ -116,6 +116,10 @@ a {
   text-align: center;
 }
 
+.app-text-lowercase {
+  text-transform: lowercase;
+}
+
 .app-va-middle {
   vertical-align: middle;
 }
@@ -154,6 +158,10 @@ a {
   }
 }
 
+.app-rotate-180 {
+  transform: rotate(180deg);
+}
+
 .app-text-cutter {
   white-space: nowrap;
   overflow: hidden;
@@ -167,6 +175,13 @@ a {
     position: absolute;
     max-width: 100%;
   }
+}
+
+.app-text-cutter-vertical {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 
@@ -213,6 +228,7 @@ a {
   color: $app-color-lightnes;
   font-size: 12px;
   text-transform: uppercase;
+  background-color: $app-gray-6;
 
   &.app-version {
     color: $app-badge-version-color;

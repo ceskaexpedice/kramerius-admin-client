@@ -44,7 +44,6 @@ export class ClientApiService {
   }
 
   getModsNewApi(uuid: string): Observable<string> {
-    ///client/v7.0/items/{pid}/metadata/mods
     return this.getText(`/items/${uuid}/metadata/mods`);
   }
 
@@ -56,8 +55,50 @@ export class ClientApiService {
     return this.get('/search', params).pipe(map(response => response['response']['docs']));
   }
 
+  fullSearch(params): Observable<any[]> {
+    return this.get('/search', params).pipe(map(response => response['response']));
+  }
+
+
+  getCollections(rows:number, offset:number, standalone:boolean, prefix:string, sort:string, sortDir: string) {
+
+    let iSort = 'title.sort asc';
+    if (sort && sortDir) {
+      iSort = sort +' '+sortDir;
+    }
+
+    let filterQuery:string = 'model:"collection"';
+    if (standalone) {
+      filterQuery = filterQuery + ' AND collection.is_standalone:'+standalone
+    }
+    if (prefix) {
+      // jedno slovo = prefix, dve a vice slov - nazev 
+      let tokenized = prefix.match(/\b\w+\b/g);
+      if (!tokenized || tokenized.length ==  1) {
+        filterQuery = filterQuery +  ' AND title.search:'+prefix+"*";
+      } else {
+
+        let start = "{!";
+        let end = "}";
+
+        let edismax = '_query_:"'+start+'edismax qf=title.search'+end+prefix+'"';
+
+        filterQuery = filterQuery +' AND ' + edismax;
+      }
+    }
+    return this.fullSearch({
+      q: filterQuery,
+      //fq: filterQuery,
+      fl: 'model,pid,title.search,root.title,created,modified,collection.is_standalone,collection.desc',
+      sort: iSort,
+      rows: rows,
+      start: offset,
+    });
+
+  }
+
   getCollectionChildren(uuid: string): Observable<any[]> {
-    //vrati obsah sbirky na zaklade priznaku ve vyhledavacim indexu (tj. korektni az eventually po reindexaci)
+    //vrati ofilterQuerybsah sbirky na zaklade priznaku ve vyhledavacim indexu (tj. korektni az eventually po reindexaci)
     //takze hned po pridani (spatne) ne, hned po odbrani (spatne) ano
     return this.search({
       q: `in_collections.direct:"${uuid}"`,

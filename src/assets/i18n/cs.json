@@ -5,56 +5,171 @@
     "ger": "Němčina",
     "eng": "Angličtina"
   },
-  "navbar": {
-    "object": "Objekt",
-    "import": "Import",
-    "rightOfAdministration": "Správa oprávnění",
-    "processes": "Procesy",
-    "collections": "Sbírky",
-    "indexation": "Indexace",
-    "repository": "Repozitář",
-    "statistics": "Statistiky",
-    "logout": "Odhlásit"
-  },
-  "tabnav": {
-    "statistics": "Statistiky",
-    "graphs": "Grafy",
-    "mostViewedDocuments": "Nejvíce zobrazované dokumenty",
-    "rights": "Práva",
-    "actions": "Akce",
-    "roles": "Role",
-    "licenses": "Licence",
-    "parameters": "Parametry",
-    "standardOutput": "Standarní výstup",
-    "errorOutput": "Chybový výstup",
-    "accessibility": "Přístupnost",
-    "detail": "Detail",
-    "edit": "Editace",
-    "content": "Obsah",
-    "context": "Kontext",
-    "repositoryManagement": "Správa repozitáře",
-    "imports": "Importy",
-    "exports": "Exporty",
-    "bulkDataEditing": "Hromadné úpravy dat",
-    "object": "Objekt",
-    "model": "Model",
-    "others": "Ostatní",
-    "inCollections": "Ve sbírkách"
-  },
-  "homeDashboard": {
+  "sites": {
+    "object": {
+      "title": "Objekt",
+      "desc": "U objektu můžete na základě zadaného UUID upravovat práva, měnit dostupnost, přidávat licenci, reindexovat, přebuildovat processing index nebo mazat.",
+      "icon": "data_object",
+      "actions": {
+        "title": "Akce",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "admin_panel_settings"
+      },
+      "accessibility": {
+        "title": "Přístupnost",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "accessibility"
+      },
+      "in-collections": {
+        "title": "Ve sbírkách",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "collections"
+      },
+      "others": {
+        "title": "Ostatní",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "settings"
+      }
+    },
+    "import": {
+      "title": "Import",
+      "foxml": {
+        "title": "Foxml",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "code"
+      },
+      "ndk": {
+        "title": "Ndk",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "code"
+      }
+    },
+    "access": {
+      "title": "Správa oprávnění",
+      "actions": {
+        "title": "Akce",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "admin_panel_settings"
+      },
+      "roles": {
+        "title": "Role",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "manage_accounts"
+      },
+      "licenses": {
+        "title": "Licence",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "policy"
+      },
+      "parameters": {
+        "title": "Parametry",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "rule_folder"
+      }
+    },
+    "processes": {
+      "title": "Procesy",
+      "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+      "icon": "schedule",
+      "standard-output": {
+        "title": "Standarní výstup",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "output"
+      },
+      "error-output": {
+        "title": "Chybový výstup",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "error_outline"
+      }
+    },
+    "collections": {
+      "title": "Sbírky",
+      "desc": "Seznam sbírek, kde můžete vytořit novou sbírku, podívat se na detail, editovat, vkládat do sbírky další objekty/sbírky, nebo vkládat sbírku do dalších sbírek.",
+      "icon": "collections",
+      "detail": {
+        "title": "Detail",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "visibility"
+      },
+      "edit": {
+        "title": "Editace",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "edit"
+      },
+      "content": {
+        "title": "Obsah",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "segment"
+      },
+      "context": {
+        "title": "Kontext",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "source"
+      }
+    },
     "indexing": {
       "title": "Indexace",
       "object": {
-        "subtitle": "Objekt",
+        "title": "Objekt",
         "desc": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru.",
         "icon": "data_object"
       },
       "model": {
-        "subtitle": "Model",
+        "title": "Model",
         "desc": "Indexace objektů (a jejich stromů), které mají vybraný model.",
         "icon": "category"
+      } 
+    },
+    "repository": {
+      "title": "Repozitář",
+      "repository-management": {
+        "title": "Správa repozitáře",
+        "desc": "V této sekci můžete vybudovat processing index, přebudovat processing index pro objekt.",
+        "icon": "admin_panel_settings"
+      },
+      "exports": {
+        "title": "Exporty",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "import_export"
+      },
+      "bulk-data-editing": {
+        "title": "Hromadné úpravy dat",
+        "desc": "Na základě vložených PIDů můžete provádět tyto akce: nastavit public/private, přidat licenci, odebrat licenci. Dále můžete smazat objekty (chytře) nebo  Smazat objekty (nízkoúrovňově).",
+        "icon": "edit_note"
+      },
+      "statistics": {
+        "title": "Statistiky",
+        "desc": "Ve statistikách repozitáře můžete generovat NKP logy nebo promazat statistiky.",
+        "icon": "bar_chart"
+      }  
+    },
+    "statistics": {
+      "title": "Statistiky",
+      "graphs": {
+        "title": "Grafy",
+        "desc": "Statistiky zobrazení modelů, statistiky použitých jazyků, statistiky autorů.",
+        "icon": "bar_chart"
+      },
+      "most-viewed-documents": {
+        "title": "Nejvíce zobrazované dokumenty",
+        "desc": "Statistiky zobrazující tabulku s počty zobrazení, jména děl, detail záznamu.",
+        "icon": "preview"
+      } 
+    },
+    "cdk": {
+      "title": "Cdk",
+      "proxy": {
+        "title": "Proxy",
+        "icon": "hub"
+      },
+      "europeanou": {
+        "title": "Europeanou",
+        "icon": "public"
       }
     }
+  },
+  "navbar": {
+    "logout": "Odhlásit"
   },
   "rights": {
     "a_read": {
@@ -296,7 +411,16 @@
     "showHelp": "Zobrazit nápovědu",
     "changeCollectionRights": "Změnit práva ke sbírce",
     "logIn": "Přihlásit se",
-    "signInAgain": "Přihlásit se znovu"
+    "signInAgain": "Přihlásit se znovu",
+    "goTo": "Přejít",
+    "send": "Odeslat",
+    "editThisCollection": "Editovat tuto sbírku",
+    "goToProcesses": "Přejít na procesy",
+    "reloadThePage": "Znovunačíst stránku",
+    "increasePriority": "Zvýšit prioritu",
+    "decreasePriority": "Snížit prioritu",
+    "addRow": "Přidat řádek",
+    "deleteRow": "Odstranit řádek"
   },
   "field": {
     "public": "Veřejné",
@@ -344,6 +468,7 @@
     },
     "removeCollection": {
       "title": "Smazání sbírky",
+      "alert": "Pokud smažete tuto sbírku, vytvoří se proces pro reindexaci a sbírka se Vám může zobrazovat v seznamu sbírek do doby, než tento proces bude ukončen.",
       "message": "Opravdu chcete sbírku trvale smazat"
     },
     "addItemsToCollection": {
@@ -529,6 +654,11 @@
       "message": "Potvrzením naplánujete <strong>{{value}}</strong> indexačních Procesů - jeden pro každý z aktuálně vylistovaných objektů. Půjde o úplné indexace, tedy včetně všech potomků.",
       "checkbox": "Přeskakovat nekonzistentní objekty *",
       "explanation": "* Jak se má Indexer zachovat pokud narazí na objekt, který nelze zaindexovat kvůli chybné struktuře vazeb. Může objekt přeskočit, chybu zalogovat a pokračovat dále. Anebo ukončit Proces ve stavu <strong><em>Chyba</em></strong>."
+    },
+    "createNewCollection": {
+      "title": "Vytvoření nové sbírky",
+      "alert": "Sbírka <strong><em>{{pid}}</em></strong> byla úspěšně vytvořena a zařazena do procesu k indexaci. Zobrazení sbírky v seznamu sbírek může chvíli trvat v závislosti na pořadí procesu indexace.",
+      "message": "Níže můžete editovat tuto nově vytvořenou sbírku, zkontrolovat proces indexace této sbírky nebo zavřít tento dialog a tím přejít na seznam sbírek."
     }
   },
   "snackbar": {
@@ -667,6 +797,7 @@
     "page": "Strana",
     "scheduleSubsequentIndexing": "Naplánovat následnou indexaci",
     "post": "Zveřejnit",
+    "useIipServer": "Použít IIP server",
     "selectedPath": "Zvolená cesta",
     "role": "Role",
     "condition": "Podmínka",
@@ -734,6 +865,18 @@
     "indexingType": "Typ indexace",
     "logs": "Logy",
     "right": "Oprávnění",
-    "connectedInstance": "Připojená instance"
+    "connectedInstance": "Připojená instance",
+    "tokenExpiresAt": "Token vyprší ve",
+    "code": "Kód",
+    "stateDuration": "Trvání stavu",
+    "switch": "Přepinač",
+    "priority": "Priorita",
+    "date": "Datum",
+    "type": "Typ",
+    "indexed": "Indexováno",
+    "updated": "Aktualizováno",
+    "chooseLicense": "Vyberte licenci",
+    "linkToLicenseDetail": "Odkaz na detail licence",
+    "noLicenseSelected": "Není vybrána licence"
   }
 }

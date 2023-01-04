@@ -5,7 +5,7 @@
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
-        <a routerLink="/processes">{{ 'navbar.processes' | translate }}</a>
+        <a routerLink="/processes">{{ 'sites.processes.title' | translate }}</a>
         <span class="app-separator">/</span>
         <span class="app-last app-text-cutter">
           <span [matTooltip]="process.name">{{ process.name }}</span>
@@ -13,8 +13,8 @@
       </div>
       <div>
         <nav mat-tab-nav-bar>
-          <a mat-tab-link (click)="changeView('standardOutput')" [active]="view == 'standardOutput'"><mat-icon class="material-icons-outlined">output</mat-icon>{{ 'tabnav.standardOutput' | translate }}</a>
-          <a mat-tab-link (click)="changeView('errorOutput')"  [active]="view == 'errorOutput'"><mat-icon class="material-icons-outlined">error_outline</mat-icon>{{ 'tabnav.errorOutput' | translate }}</a>
+          <a mat-tab-link (click)="changeView('standard-output')" [active]="view == 'standard-output'"><mat-icon class="material-icons-outlined">output</mat-icon>{{ 'sites.processes.standard-output.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('error-output')"  [active]="view == 'error-output'"><mat-icon class="material-icons-outlined">error_outline</mat-icon>{{ 'sites.processes.error-output.title' | translate }}</a>
         </nav>
       </div>
     </div>
@@ -76,8 +76,8 @@
             </mat-card>
           </div>
           <mat-card fxFlex class="app-right" class="app-card app-view-border">
-            <app-process-logs *ngIf="view === 'standardOutput'" [process]="process" [logType]="'out'" [urlOutUrl]="logOutUrl()"></app-process-logs>
-            <app-process-logs *ngIf="view === 'errorOutput'" [process]="process" [logType]="'err'" [urlOutUrl]="logErrUrl()"></app-process-logs>
+            <app-process-logs *ngIf="view === 'standard-output'" [process]="process" [logType]="'out'" [urlOutUrl]="logOutUrl()"></app-process-logs>
+            <app-process-logs *ngIf="view === 'error-output'" [process]="process" [logType]="'err'" [urlOutUrl]="logErrUrl()"></app-process-logs>
           </mat-card>
         </div>
       </div>

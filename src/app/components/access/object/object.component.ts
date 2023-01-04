@@ -97,7 +97,7 @@ export class ObjectComponent implements OnInit {
     this.inputPid = this.pid;
     this.adminApi.checkObject(this.pid).subscribe(result => {
       this.pidIsCorrect = true;
-      this.view = this.local.getStringProperty('object.view', 'accessibility');
+      this.view = this.local.getStringProperty('object.view', 'actions');
       this.checkingPid = false;
       this.loadSolrData();
       this.loadCollections();
@@ -145,7 +145,7 @@ export class ObjectComponent implements OnInit {
       this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         this.superCollections = data[0];
 
-        this.authApi.getPidsAuthorizedActions(this.superCollections.map(c=> c['id'])).subscribe((d:any) => {
+        this.authApi.getPidsAuthorizedActions(this.superCollections.map(c=> c['id']), null).subscribe((d:any) => {
           Object.keys(d).forEach((k)=> {
             let actions = d[k].map((v)=> v.code);
             this.collectionActions.set(k, actions);
@@ -190,6 +190,7 @@ export class ObjectComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('object.view', view);
+    this.router.navigate(['/object/' + view + '/', this.inputPid]);
   }
 
   assignUuid() {
@@ -201,15 +202,8 @@ export class ObjectComponent implements OnInit {
       this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation400');
       return;
     }
-    this.router.navigate(['/', 'object', this.inputPid]);
-  }
-
-  getCurrentRoute(type: string) {
-    if (type === 'string') {
-      return this.router.url.replace('/object/', '');
-    } else {
-      return this.router.url;
-    }
+    this.router.navigate(['/object/actions/', this.inputPid]);
+    this.local.setStringProperty('object.view', 'actions');
   }
 
   deleteObjectLowLevel() {
@@ -469,9 +463,29 @@ export class ObjectComponent implements OnInit {
     });
   }
 
+  getCurrentRoute(type: string, path: string = null) {
+    if (type === 'string') {
+      return this.router.url.replace(path, '');
+    } else {
+      return this.router.url;
+    }
+  }
+
   copyTextToClipboard(val: string) {
     this.clipboard.copy(val);
     this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
+  }
+
+  removeItemFromAnotherCollection(superCollection, collection, event) {
+    this.onRemoveItemFromCollection(superCollection.id, superCollection.getName(), collection['id'], collection.getName());
+    event.preventDefault(); 
+    event.stopPropagation();
+  }
+
+  setRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
+    this.router.navigate([path, id]);
+    this.local.setStringProperty(viewProperty + '.view', viewValue);
+    console.log(id);
   }
 
 }
