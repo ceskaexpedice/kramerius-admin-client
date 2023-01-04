@@ -11,7 +11,7 @@ import { CdkApiService } from 'src/app/services/cdk-api.service';
 export class CdkProxyComponent implements OnInit {
 
   /** mock data  */
-  debug = true;
+  debug = false;
   registrMock:any = [{
     "id": 23,
     "code": "uzei",
