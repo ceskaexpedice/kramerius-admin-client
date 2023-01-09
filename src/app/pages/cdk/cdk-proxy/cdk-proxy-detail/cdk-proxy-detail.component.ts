@@ -18,7 +18,7 @@ export interface PeriodicElement { // TO DO: SMAZAT
 })
 export class CdkProxyDetailComponent implements OnInit {
 
-  debug = true;
+  debug = false;
 
   mockTimestamps:any= {
     "knav": [{"date":"2022-11-20T00:00:00Z","batches":0,"indexed":270,"name":"knav","id":"knav_1669330116640","type":"full","updated":0,"workers":0},{"date":"2022-11-24T22:52:29.129Z","batches":0,"indexed":0,"name":"knav","id":"knav_1669330349129","updated":0,"workers":0},{"date":"2022-11-24T22:55:05.172Z","batches":0,"indexed":0,"name":"knav","id":"knav_1669330505172","updated":0,"workers":0},{"date":"2022-11-24T22:57:23.755Z","batches":0,"indexed":0,"name":"knav","id":"knav_1669330643755","updated":0,"workers":0},{"date":"2022-11-24T23:04:35.654Z","batches":0,"indexed":0,"name":"knav","id":"knav_1669331075654","updated":0,"workers":0},{"date":"2022-11-24T23:04:46.836Z","batches":0,"indexed":0,"name":"knav","id":"knav_1669331086836","updated":0,"workers":0},{"date":"2022-11-24T23:15:49.451Z","batches":0,"indexed":0,"name":"knav","id":"knav_1669331749451","updated":0,"workers":0}],
