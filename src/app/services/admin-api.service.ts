@@ -170,7 +170,7 @@ export class AdminApiService {
     return this.get(`/collections`);
   }
 
-  getCollectionsByPrefix(rows: number, page: number, prefix:string): Observable<any> {
+  getCollectionsByPrefix(rows: number, page: number, prefix: string): Observable<any> {
     return this.get(`/collections/prefix?rows=${rows}&page=${page}&prefix=${prefix}`);
   }
 
@@ -202,6 +202,10 @@ export class AdminApiService {
 
   addItemToCollection(collectionPid: string, itemPid: string): Observable<Object> {
     return this.post(`/collections/${collectionPid}/items`, itemPid);
+  }
+
+  addItemsToCollection(collectionPid: string, itemsPids: string[]): Observable<Object> {
+    return this.post(`/collections/${collectionPid}/items`, itemsPids);
   }
 
   removeItemFromCollection(collectionPid: string, itemPid: string): Observable<Object> {
@@ -338,12 +342,11 @@ export class AdminApiService {
     return this.delete(`/roles/${role.id}`);
   }
 
-  getActions(pid:String): Observable<any> {
+  getActions(pid: String): Observable<any> {
     return this.get(`/rights/actions?pid=${pid}`).pipe(map(response =>
       RightAction.fromJsonArray(response)));
   }
 
-  
 
   createLicense(license: License): Observable<License> {
     return this.post(`/licenses`, license.toJson()).pipe(map(response =>
@@ -355,7 +358,6 @@ export class AdminApiService {
       License.fromJsonArray(response)));
   }
 
-  
 
   getLicensesOfObject(pid: string) {
     return this.get(`/items/${pid}/licenses`)
