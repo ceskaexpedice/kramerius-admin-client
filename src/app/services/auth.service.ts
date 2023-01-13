@@ -80,7 +80,19 @@ export class AuthService {
 
   login() {
     const redircetUri = `${this.baseUrl()}/keycloak`;
-    const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/auth?client_id=${this.settings.keycloak.clientId}&redirect_uri=${redircetUri}&response_type=code`;
+    let url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/auth?client_id=${this.settings.keycloak.clientId}&redirect_uri=${redircetUri}&response_type=code`;
+    if (this.settings.keycloak.loginUrl) {
+      const urlObject = new URL(this.settings.keycloak.loginUrl);
+      const redirect= urlObject.searchParams.get("redirect_uri");
+      if (redirect != null) {
+        if (!redirect.endsWith('/keycloak')) {
+          urlObject.searchParams.set("redirect_uri", redircetUri);
+        }
+      } else {
+        urlObject.searchParams.set("redirect_uri", redircetUri);
+      }
+      url = url.toString();
+    }
     window.open(url, '_top');
   }
 
@@ -94,8 +106,12 @@ export class AuthService {
     localStorage.removeItem('account.token.time');
     this.user = null;
     this.logoutKramerius().subscribe(() => {
+      
       const redircetUri = `${this.baseUrl()}${suffix}`;
-      const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout`;
+      let url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout`;
+      if (this.settings.keycloak.logoutUrl) {
+        url = this.settings.keycloak.logoutUrl;
+      }
       window.open(url, '_top');
     });
   }
