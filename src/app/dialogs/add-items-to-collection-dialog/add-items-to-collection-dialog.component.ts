@@ -73,6 +73,7 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
         });
   
         if (authActions.includes('a_able_tobe_part_of_collections')) {
+          //TODO: use collectionApi.addItemsToCollection instead
           this.collectionApi.addItemToCollection(this.collection.id, pid)
           .subscribe(() => {
             this.items_counter_added++;

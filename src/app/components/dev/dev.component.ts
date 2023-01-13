@@ -190,7 +190,7 @@ export class DevComponent implements OnInit {
 
   testAction() {
     //vrati globalne dostupne licence
-    //const query = `/licenses/items/${pid}/info/structure`
+    // const query = `/licenses/items/${pid}/info/structure`
     // const query = `/licenses`
     // this.adminApi.getGeneralQuery(query).subscribe(response => {
     //   console.log(response);
@@ -203,22 +203,43 @@ export class DevComponent implements OnInit {
     //   console.log(response);
     // })
 
-    //nastaveni poradi deti
-    this.adminApi.setChildrenOrder("uuid:17fe155d-a975-11e0-a5e1-0050569d679d",
-      [
-        "uuid:19603d70-a975-11e0-a5e1-0050569d679d", //third
+    // //nastaveni poradi deti
+    // this.adminApi.setChildrenOrder("uuid:17fe155d-a975-11e0-a5e1-0050569d679d",
+    //   [
+    //     "uuid:19603d70-a975-11e0-a5e1-0050569d679d", //third
+    //     "uuid:18b5cc9f-a975-11e0-a5e1-0050569d679d", //second
+    //     "uuid:17fed8ae-a975-11e0-a5e1-0050569d679d", //first
+    //     //"uuid:19603d7x-a975-11e0-a5e1-0050569d679d", //not there
+    //   ]
+    // ).subscribe(response => {
+    //   console.log(response);
+    // })
 
-        "uuid:18b5cc9f-a975-11e0-a5e1-0050569d679d", //second
 
-        "uuid:17fed8ae-a975-11e0-a5e1-0050569d679d", //first
+    //add items to collection
+    const collectionPid = 'uuid:94387274-3e5f-43b0-b9bb-7f5afc4190d0';
+    const itemsPids = [
+      //'blabla', //neplatny PID
+      //'uuid:94387274-3e5f-43b0-b9bb-7f5afc4190d0', //sbirka samotna
+      'uuid:94387274-3e5f-xxxx-b9bb-7f5afc4190d0', //neexistujici objekt
+      'uuid:834e7040-6a1b-11dd-9dfc-000d606f5dc6', //ok
+      //'uuid:ac050110-6a2b-11dd-b783-000d606f5dc6', //ok
+      'uuid:83474450-6a1b-11dd-9876-000d606f5dc6' //ok
+    ];
+    this.adminApi.addItemsToCollection(collectionPid, itemsPids)
+      .subscribe(response => {
+        console.log('add item: ok: ' + response)
+      }, response => { //error
+        console.log('add item: error: ' + response)
+      });
 
-
-        //"uuid:19603d7x-a975-11e0-a5e1-0050569d679d", //not there
-      ]
-    ).subscribe(response => {
-      console.log(response);
-    })
-
+    //addItemToCollection
+    // this.adminApi.addItemToCollection(collectionPid, itemsPids[0])
+    // .subscribe(response => {
+    //   console.log('add item: ok: ' + response)
+    // }, response => { //error
+    //   console.log('add item:  error: ' + response)
+    // });
 
     // const pid = "uuid:d4978b50-8dc3-11e7-aac2-5ef3fc9bb22f";
     // const query = `/items/${pid}/streams/BIBLIO_MODS`
