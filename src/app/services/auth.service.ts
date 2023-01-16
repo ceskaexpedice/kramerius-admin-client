@@ -34,6 +34,10 @@ export class AuthService {
     private settings: AppSettings,
     private router:Router
     ) {
+
+      console.log("this.settings.keycloak " + this.settings.keycloak);
+
+
     AuthService.token = localStorage.getItem('account.token');
     AuthService.tokenTime = new Date(localStorage.getItem('account.token.time'));
     this.loadGlobalAuthorizedActions((status: number) => {
@@ -81,8 +85,9 @@ export class AuthService {
   login() {
     const redircetUri = `${this.baseUrl()}/keycloak`;
     let url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/auth?client_id=${this.settings.keycloak.clientId}&redirect_uri=${redircetUri}&response_type=code`;
-    if (this.settings.keycloak.loginUrl) {
-      const urlObject = new URL(this.settings.keycloak.loginUrl);
+    let keycloakLoginUrl = this.settings.keycloak.loginUrl;
+    if (keycloakLoginUrl) {
+      const urlObject = new URL(keycloakLoginUrl);
       const redirect= urlObject.searchParams.get("redirect_uri");
       if (redirect != null) {
         if (!redirect.endsWith('/keycloak')) {
@@ -91,7 +96,7 @@ export class AuthService {
       } else {
         urlObject.searchParams.set("redirect_uri", redircetUri);
       }
-      url = url.toString();
+      url = urlObject.toString();
     }
     window.open(url, '_top');
   }
