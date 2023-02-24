@@ -230,7 +230,12 @@ export class AuthService {
   }
 
   private getToken(code: string): Observable<string> {
-    const url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/token`;
+    // url - realms
+    let url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/token`;
+    // checkToken 
+    let checkTokenUrl = this.settings.keycloak.tokenUrl;
+    if (checkTokenUrl) url = checkTokenUrl;
+    
     const redircetUri = `${this.baseUrl()}/keycloak`;
     const body = `grant_type=authorization_code&code=${code}&client_id=${this.settings.keycloak.clientId}&client_secret=${this.settings.keycloak.secret}&redirect_uri=${redircetUri}`; 
     const options = {
