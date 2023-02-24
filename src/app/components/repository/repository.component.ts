@@ -16,6 +16,7 @@ import { DeleteObjectsLowLevelDialogComponent } from 'src/app/dialogs/delete-obj
 import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { ScheduleSyncWithSdnntComponent } from 'src/app/dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
 
 @Component({
   selector: 'app-repository',
@@ -229,6 +230,14 @@ export class RepositoryComponent implements OnInit {
       } else {
         this.ui.showInfoSnackBar('snackbar.success.deleteObjectsSmart.more', {value: result});
       }
+    });
+  }
+
+
+  openScheduleSyncWithSdnntDialog() {
+    const dialogRef = this.dialog.open(ScheduleSyncWithSdnntComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-sync-with-sdnnt'
     });
   }
 
