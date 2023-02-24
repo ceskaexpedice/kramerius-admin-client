@@ -89,6 +89,7 @@ import { CdkComponent } from './pages/cdk/cdk.component';
 import { CdkProxyComponent } from './pages/cdk/cdk-proxy/cdk-proxy.component';
 import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
 import { CdkEuropeanouComponent } from './pages/cdk/cdk-europeanou/cdk-europeanou.component';
+import { ScheduleSyncWithSdnntComponent } from './dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -163,7 +164,8 @@ export function createCustomMatPaginatorIntl(
     CdkComponent,
     CdkProxyComponent,
     CdkProxyDetailComponent,
-    CdkEuropeanouComponent
+    CdkEuropeanouComponent,
+    ScheduleSyncWithSdnntComponent
   ],
   imports: [
     BrowserModule,
