@@ -420,7 +420,8 @@
     "increasePriority": "Increase priority",
     "decreasePriority": "Decrease priority",
     "addRow": "Add row",
-    "deleteRow": "Delete row"
+    "deleteRow": "Delete row",
+    "synchronizeWithSDNNT": "Synchronize with SDNNT"
   },
   "field": {
     "public": "Public",
@@ -877,6 +878,7 @@
     "updated": "Updated",
     "chooseLicense": "Choose a license",
     "linkToLicenseDetail": "Link to license detail",
-    "noLicenseSelected": "No license selected"
+    "noLicenseSelected": "No license selected",
+    "licenseSynchronization": "License synchronization"
   }
 }

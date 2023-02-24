@@ -70,13 +70,21 @@
 							</div>
 							-->		
 							<mat-divider [inset]="true"></mat-divider>
-							<div class="app-mt-4">
+							<div class="app-mt-4 app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
 								<span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openScheduleDeleteObjectsSmartDialog()" color="warn" class="app-mr-2">{{ 'button.deleteObjectsSmart' | translate }}</button>
 								</span>
 								<span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openDeleteObjectsLowLevelDialog()" color="warn">{{ 'button.deleteObjectsLowLevel' | translate }}</button>
+								</span>
+							</div>
+
+							<mat-divider [inset]="true"></mat-divider>
+							<div class="app-mt-4">
+								<h3 class="app-mt-0">{{ 'desc.licenseSynchronization' | translate }}</h3>
+								<span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openScheduleDeleteObjectsSmartDialog()" color="primary" class="app-mr-2">{{ 'button.synchronizeWithSDNNT' | translate }}</button>
 								</span>
 							</div>
 						</ng-container>

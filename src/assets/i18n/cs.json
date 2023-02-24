@@ -420,7 +420,8 @@
     "increasePriority": "Zvýšit prioritu",
     "decreasePriority": "Snížit prioritu",
     "addRow": "Přidat řádek",
-    "deleteRow": "Odstranit řádek"
+    "deleteRow": "Odstranit řádek",
+    "synchronizeWithSDNNT": "Synchronizovat se SDNNT"
   },
   "field": {
     "public": "Veřejné",
@@ -877,6 +878,7 @@
     "updated": "Aktualizováno",
     "chooseLicense": "Vyberte licenci",
     "linkToLicenseDetail": "Odkaz na detail licence",
-    "noLicenseSelected": "Není vybrána licence"
+    "noLicenseSelected": "Není vybrána licence",
+    "licenseSynchronization": "Synchronizace licencí"
   }
 }
