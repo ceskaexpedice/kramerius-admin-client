@@ -421,7 +421,8 @@
     "decreasePriority": "Decrease priority",
     "addRow": "Add row",
     "deleteRow": "Delete row",
-    "synchronizeWithSDNNT": "Synchronize with SDNNT"
+    "synchronizeWithSDNNT": "Synchronize with SDNNT",
+    "startTheSynchronizationProcess": "Start the synchronization process"
   },
   "field": {
     "public": "Public",

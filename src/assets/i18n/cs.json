@@ -421,7 +421,8 @@
     "decreasePriority": "Snížit prioritu",
     "addRow": "Přidat řádek",
     "deleteRow": "Odstranit řádek",
-    "synchronizeWithSDNNT": "Synchronizovat se SDNNT"
+    "synchronizeWithSDNNT": "Synchronizovat se SDNNT",
+    "startTheSynchronizationProcess": "Spustit proces synchronize"
   },
   "field": {
     "public": "Veřejné",

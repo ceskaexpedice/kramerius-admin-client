@@ -236,7 +236,7 @@ export class RepositoryComponent implements OnInit {
 
   openScheduleSyncWithSdnntDialog() {
     const dialogRef = this.dialog.open(ScheduleSyncWithSdnntComponent, {
-      width: '600px',
+      width: '1200px',
       panelClass: 'app-schedule-sync-with-sdnnt'
     });
   }

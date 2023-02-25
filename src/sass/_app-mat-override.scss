@@ -417,3 +417,15 @@
 .mat-icon {
   @include setIconSize();
 }
+
+// dialog
+.mat-dialog-container {
+  position: relative;
+
+  .mat-progress-bar {
+    @extend .app-m-0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
