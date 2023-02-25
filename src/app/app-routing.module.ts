@@ -45,10 +45,16 @@ const routes: Routes = [
   { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/statistics', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
-  { path: 'object/actions/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/:pid/actions', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/:pid/accessibility', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/:pid/in-collections', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/:pid/others', component: ObjectComponent, canActivate: [AuthGuard] },
+  // to delete after test
+  /* { path: 'object/actions/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/accessibility/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/in-collections/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
-  { path: 'object/others/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/others/:pid', component: ObjectComponent, canActivate: [AuthGuard] }, */
   { path: 'access', redirectTo: 'access/actions' },
   { path: 'access/actions', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'access/roles', component: AccessComponent, canActivate: [AuthGuard] },
