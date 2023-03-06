@@ -45,6 +45,9 @@
           <a mat-tab-link (click)="changeView('others')" [active]="view == 'others'">
             <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'sites.object.others.title' | translate }}
           </a>
+          <a mat-tab-link (click)="changeView('proarc')" [active]="view == 'proarc'">
+            <mat-icon class="material-icons-outlined">open_in_new</mat-icon>{{ 'sites.object.proarc.title' | translate }}
+          </a>
         </nav>
       </div>
     </div>
@@ -145,7 +148,7 @@
             <div class="app-mb-4">
               <h3 class="app-mt-0">{{ 'desc.synchronization' | translate }}</h3>
               <span [matTooltip]="specificAuthorizedActions.indexOf('a_index') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_index') < 0 ? 'app-alert-not-allowed' : null">
-                <button  [disabled]="specificAuthorizedActions.indexOf('a_index') < 0" mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2" >{{ 'button.reindexSearchIndex' | translate }}</button>
+                <button [disabled]="specificAuthorizedActions.indexOf('a_index') < 0" mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2" >{{ 'button.reindexSearchIndex' | translate }}</button>
               </span>
               <span [matTooltip]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0 ? 'app-alert-not-allowed' : null">
                 <button [disabled]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0" mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
@@ -159,6 +162,17 @@
               </span>
               <span [matTooltip]="specificAuthorizedActions.indexOf('a_delete') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_delete') < 0 ? 'app-alert-not-allowed' : null">
                 <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' | translate }}</button>
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'proarc'">
+          <mat-card-content>
+            <div>
+              <h3 class="app-mt-0">{{ 'desc.editingAnObjectInTheProarcApplication' | translate }}</h3>
+              <span>
+                <button mat-flat-button color="primary" (click)="openObjectInProarc()">{{ 'button.editObject' | translate }}</button>
               </span>
             </div>
           </mat-card-content>

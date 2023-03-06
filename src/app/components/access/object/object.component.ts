@@ -492,6 +492,9 @@ export class ObjectComponent implements OnInit {
     console.log(id);
   }
 
+  openObjectInProarc() {
+    window.open('https://proarc.inovatika.dev/repository/' + this.inputPid, "_blank");
+  }
 }
 
 

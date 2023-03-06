@@ -29,6 +29,11 @@
         "title": "Others",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "settings"
+      },
+      "proarc": {
+        "title": "ProArc",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "open_in_new"
       }
     },
     "import": {
@@ -422,7 +427,8 @@
     "addRow": "Add row",
     "deleteRow": "Delete row",
     "synchronizeWithSDNNT": "Synchronize with SDNNT",
-    "startTheSynchronizationProcess": "Start the synchronization process"
+    "startTheSynchronizationProcess": "Start the synchronization process",
+    "editObject": "Edit object"
   },
   "field": {
     "public": "Public",
@@ -880,6 +886,7 @@
     "chooseLicense": "Choose a license",
     "linkToLicenseDetail": "Link to license detail",
     "noLicenseSelected": "No license selected",
-    "licenseSynchronization": "License synchronization"
+    "licenseSynchronization": "License synchronization",
+    "editingAnObjectInTheProarcApplication": "Editing an object in the ProArc application"
   }
 }

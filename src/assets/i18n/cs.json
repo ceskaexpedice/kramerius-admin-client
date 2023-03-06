@@ -29,6 +29,11 @@
         "title": "Ostatní",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "settings"
+      },
+      "proarc": {
+        "title": "ProArc",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "open_in_new"
       }
     },
     "import": {
@@ -422,7 +427,8 @@
     "addRow": "Přidat řádek",
     "deleteRow": "Odstranit řádek",
     "synchronizeWithSDNNT": "Synchronizovat se SDNNT",
-    "startTheSynchronizationProcess": "Spustit proces synchronize"
+    "startTheSynchronizationProcess": "Spustit proces synchronize",
+    "editObject": "Editovat objekt"
   },
   "field": {
     "public": "Veřejné",
@@ -880,6 +886,7 @@
     "chooseLicense": "Vyberte licenci",
     "linkToLicenseDetail": "Odkaz na detail licence",
     "noLicenseSelected": "Není vybrána licence",
-    "licenseSynchronization": "Synchronizace licencí"
+    "licenseSynchronization": "Synchronizace licencí",
+    "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc"
   }
 }
