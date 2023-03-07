@@ -45,8 +45,8 @@
           <a mat-tab-link (click)="changeView('others')" [active]="view == 'others'">
             <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'sites.object.others.title' | translate }}
           </a>
-          <a mat-tab-link (click)="changeView('proarc')" [active]="view == 'proarc'">
-            <mat-icon class="material-icons-outlined">open_in_new</mat-icon>{{ 'sites.object.proarc.title' | translate }}
+          <a mat-tab-link (click)="changeView('editing')" [active]="view == 'editing'" *ngIf="proarcServers?.length > 0">
+            <mat-icon class="material-icons-outlined">edit</mat-icon>{{ 'sites.object.editing.title' | translate }}
           </a>
         </nav>
       </div>
@@ -56,10 +56,10 @@
       <div class="app-container">
         <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
           <div fxFlex class="app-text-cutter">
-            <a (click)="copyTextToClipboard(getCurrentRoute('string', '/object/' + view + '/'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
+            <a (click)="copyTextToClipboard(inputPid)" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
             </a>
-            <span class="app-desc">{{ getCurrentRoute('string', '/object/' + view + '/') }}</span>
+            <span class="app-desc">{{ inputPid }}</span>
             <span class="app-pipe" *ngIf="collection && collection.getDescription()"></span>
             <span *ngIf="collection && collection.getDescription()" [matTooltip]="collection.getDescription()" class="app-desc">{{ collection.getDescription() }}</span>
           </div>
@@ -167,13 +167,21 @@
           </mat-card-content>
         </mat-card>
 
-        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'proarc'">
+        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'editing' && proarcServers?.length > 0">
           <mat-card-content>
             <div>
               <h3 class="app-mt-0">{{ 'desc.editingAnObjectInTheProarcApplication' | translate }}</h3>
-              <span>
-                <button mat-flat-button color="primary" (click)="openObjectInProarc()">{{ 'button.editObject' | translate }}</button>
-              </span>
+              <mat-form-field class="app-w-100">
+                <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
+                <mat-select [(ngModel)]="selectedProarcServer">
+                  <mat-option *ngFor="let server of proarcServers" [value]="server.domain">
+                    <strong>{{ server.name }}</strong> - {{ server.domain }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>     
+              <div>
+                <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer)" [disabled]="!selectedProarcServer">{{ 'button.editObject' | translate }}</button>
+              </div>
             </div>
           </mat-card-content>
         </mat-card>

@@ -27,6 +27,8 @@ export class AppSettings {
   homeDashboard = APP_GLOBAL.homeDashboard || [];
   cdkMode = !!APP_GLOBAL.cdkMode;
 
+  proarc = APP_GLOBAL.proarc || [];
+
 
   interceptresponse: EventEmitter<any> = new EventEmitter<any>();
 

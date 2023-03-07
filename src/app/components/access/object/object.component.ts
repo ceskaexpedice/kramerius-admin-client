@@ -17,6 +17,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { AuthService } from 'src/app/services/auth.service';
+import { AppSettings } from 'src/app/services/app-settings';
 
 
 @Component({
@@ -49,6 +50,9 @@ export class ObjectComponent implements OnInit {
   // specificke akce pro kolekce
   collectionActions:Map<string,string[]> = new Map();
 
+  proarcServers = this.settings.proarc;
+  selectedProarcServer: string;
+
 
   constructor(
     private authApi: AuthService,
@@ -60,7 +64,8 @@ export class ObjectComponent implements OnInit {
     private ui: UIService,
     private collectionsService: CollectionsService,
     private clientApi: ClientApiService,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    public settings: AppSettings
   ) { }
 
   ngOnInit() {
@@ -492,8 +497,8 @@ export class ObjectComponent implements OnInit {
     console.log(id);
   }
 
-  openObjectInProarc() {
-    window.open('https://proarc.inovatika.dev/repository/' + this.inputPid, "_blank");
+  openObjectInProarc(server: string) {
+    window.open(server + '/kramerius/' + this.inputPid, "_blank");
   }
 }
 

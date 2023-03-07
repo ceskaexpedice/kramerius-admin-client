@@ -30,8 +30,8 @@
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "settings"
       },
-      "proarc": {
-        "title": "ProArc",
+      "editing": {
+        "title": "Editace",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "open_in_new"
       }
@@ -887,6 +887,7 @@
     "linkToLicenseDetail": "Odkaz na detail licence",
     "noLicenseSelected": "Není vybrána licence",
     "licenseSynchronization": "Synchronizace licencí",
-    "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc"
+    "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc",
+    "selectServer": "Vyberte server"
   }
 }

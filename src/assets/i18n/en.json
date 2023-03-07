@@ -30,8 +30,8 @@
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "settings"
       },
-      "proarc": {
-        "title": "ProArc",
+      "editing": {
+        "title": "Editing",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "open_in_new"
       }
@@ -887,6 +887,7 @@
     "linkToLicenseDetail": "Link to license detail",
     "noLicenseSelected": "No license selected",
     "licenseSynchronization": "License synchronization",
-    "editingAnObjectInTheProarcApplication": "Editing an object in the ProArc application"
+    "editingAnObjectInTheProarcApplication": "Editing an object in the ProArc application",
+    "selectServer": "Select a server"
   }
 }

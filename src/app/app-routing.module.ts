@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: 'object/:pid/accessibility', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid/in-collections', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid/others', component: ObjectComponent, canActivate: [AuthGuard] },
-  { path: 'object/:pid/proarc', component: ObjectComponent, canActivate: [AuthGuard] },
+  { path: 'object/:pid/editing', component: ObjectComponent, canActivate: [AuthGuard] },
   // to delete after test
   /* { path: 'object/actions/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/accessibility/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
