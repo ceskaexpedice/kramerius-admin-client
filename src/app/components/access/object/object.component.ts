@@ -27,6 +27,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 export class ObjectComponent implements OnInit {
 
   view: string;
+  routeView: string;
   pid: string;
   inputPid: string;
   pidIsCorrect = false;
@@ -103,6 +104,13 @@ export class ObjectComponent implements OnInit {
     this.adminApi.checkObject(this.pid).subscribe(result => {
       this.pidIsCorrect = true;
       this.view = this.local.getStringProperty('object.view', 'actions');
+      this.routeView = this.router.url.replace('/object/' + this.pid + '/', '' );
+      // if there is no view name in the url, but only the pid, it redirects to the default actions folder
+      if (this.routeView !== this.view) {
+        console.log('Neni');
+        this.router.navigate(['/object/' + this.pid + '/actions']);
+        this.view = 'actions';
+      }
       this.checkingPid = false;
       this.loadSolrData();
       this.loadCollections();
