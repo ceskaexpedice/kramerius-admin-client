@@ -107,7 +107,6 @@ export class ObjectComponent implements OnInit {
       this.routeView = this.router.url.replace('/object/' + this.pid + '/', '' );
       // if there is no view name in the url, but only the pid, it redirects to the default actions folder
       if (this.routeView !== this.view) {
-        console.log('Neni');
         this.router.navigate(['/object/' + this.pid + '/actions']);
         this.view = 'actions';
       }
