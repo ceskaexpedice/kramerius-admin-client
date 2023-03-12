@@ -255,12 +255,12 @@ export class CdkProxyComponent implements OnInit {
   cdkMock:any ={"svkhk":{"status":true},"kkp":{"status":true},"svkul":{"status":true},"knav":{"status":true},"uzei":{"status":true},"inovatika":{"status":true},"mzk":{"status":true}};
 
 
-  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'switch', 'priority'];
+  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'switch'];
 
   dataSource:Library[];
+
   register:Map<String, any> = new Map();
   constructor(private cdkApi: CdkApiService) { 
-    
   }
 
   ngOnInit(): void {
@@ -282,7 +282,6 @@ export class CdkProxyComponent implements OnInit {
       this.dataSource = resp;
       this.cdkApi.registrinfo().subscribe(resp=> {
         let codes = this.dataSource.map(l=> l.code);
-        
         let registerResponse = resp;
         registerResponse.forEach(one=> {
           let code = one.code;
@@ -327,6 +326,22 @@ export class CdkProxyComponent implements OnInit {
         return `${minutes}min`      
       }
     } 
+  }
+
+  up(lib) {
+    let index = this.dataSource.indexOf(lib);
+    if (index > 0) {
+      this.arraymove(this.dataSource, index, index-1);
+      console.log(this.dataSource);
+    }
+  }
+
+  down(lib) {}
+
+  arraymove(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
   }
 
 }

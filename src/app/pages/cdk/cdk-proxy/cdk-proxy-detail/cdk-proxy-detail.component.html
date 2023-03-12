@@ -28,12 +28,19 @@
 
           <ng-container matColumnDef="indexed">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.indexed' | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.indexed }}</td>
+            <td mat-cell *matCellDef="let element">
+                <ng-container *ngIf="element.indexed > 0"> <strong> {{ element.indexed }}</strong></ng-container>
+                <ng-container *ngIf="element.indexed <= 0">  {{ element.indexed }} </ng-container>
+            </td>
           </ng-container>
         
           <ng-container matColumnDef="updated">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.updated' | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.updated }}</td>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.updated > 0"> <strong> {{ element.updated }}</strong></ng-container>
+              <ng-container *ngIf="element.updated <= 0">  {{ element.updated }} </ng-container>
+             </td>
+
           </ng-container>
         
           <ng-container matColumnDef="error">

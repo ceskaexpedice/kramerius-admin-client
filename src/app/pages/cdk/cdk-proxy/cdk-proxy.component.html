@@ -40,13 +40,15 @@
       </td>
     </ng-container>
 
+    <!--
     <ng-container matColumnDef="priority">
       <th mat-header-cell *matHeaderCellDef class="app-text-right" >{{ 'desc.priority' | translate }}</th>
       <td mat-cell *matCellDef="let lib" class="app-text-right">
-        <a class="app-arrow-up" [matTooltip]="'button.increasePriority' | translate"><mat-icon>straight</mat-icon></a>
-        <a class="app-arrow-down" [matTooltip]="'button.decreasePriority' | translate"><mat-icon class="app-rotate-180">straight</mat-icon></a>
+        <a class="app-arrow-up" disabled="true" (click)="up(lib)"   [matTooltip]="'button.increasePriority' | translate"><mat-icon>straight</mat-icon></a>
+        <a class="app-arrow-down" (click)="down(lib)"  [matTooltip]="'button.decreasePriority' | translate"><mat-icon class="app-rotate-180">straight</mat-icon></a>
       </td>
     </ng-container>
+  -->
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns; let last = last; let first = first" [class.app-last]="last" [class.app-first]="first"></tr>

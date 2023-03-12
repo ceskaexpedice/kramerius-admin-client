@@ -129,7 +129,8 @@ export class AuthService {
     let flag = this.user && this.authorizedGlobalActions && this.authorizedGlobalActions.indexOf('a_admin_read') >=0; 
     if (flag) {
       return this.authorizedGlobalActions.indexOf("a_admin_read") >=0;
-    }    
+    }  
+    //return true;  
     return false;
   }
 
