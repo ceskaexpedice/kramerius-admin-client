@@ -202,8 +202,6 @@ export class ObjectComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('object.view', view);
-    // to delete after test
-    // this.router.navigate(['/object/' + view + '/', this.inputPid]);
     this.router.navigate(['/object/' + this.inputPid + '/' + view]);
   }
 
@@ -216,8 +214,6 @@ export class ObjectComponent implements OnInit {
       this.errorMessage = this.ui.getTranslation('alert.object.uuidValidation400');
       return;
     }
-    // to delete after test
-    //this.router.navigate(['/object/actions/', this.inputPid]);
     this.router.navigate(['/object/' + this.inputPid + '/actions']);
     this.local.setStringProperty('object.view', 'actions');
   }
