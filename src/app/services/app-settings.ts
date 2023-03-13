@@ -28,6 +28,7 @@ export class AppSettings {
   cdkMode = !!APP_GLOBAL.cdkMode;
 
   proarc = APP_GLOBAL.proarc || [];
+  krameriusInstance = APP_GLOBAL.krameriusInstance || '';
 
 
   interceptresponse: EventEmitter<any> = new EventEmitter<any>();

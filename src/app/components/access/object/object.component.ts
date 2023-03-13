@@ -505,7 +505,7 @@ export class ObjectComponent implements OnInit {
   }
 
   openObjectInProarc(server: string) {
-    window.open(server + '/kramerius/' + this.inputPid, "_blank");
+    window.open(server + '/kramerius/' + this.inputPid + '?instance=' + this.settings.krameriusInstance, "_blank");
   }
 }
 
