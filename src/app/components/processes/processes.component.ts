@@ -296,4 +296,8 @@ export class ProcessesComponent implements OnInit {
     this.local.setStringProperty(viewProperty + '.view', viewValue);
   }
 
+  getRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
+    this.local.setStringProperty(viewProperty + '.view', viewValue);
+    return path + id;
+  }
 }
