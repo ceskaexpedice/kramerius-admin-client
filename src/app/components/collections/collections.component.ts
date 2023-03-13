@@ -84,7 +84,7 @@ export class CollectionsComponent implements OnInit {
   linkToDetail(id:string) {
     if (this.allowEdit(id)) {
       // load full collection
-      this.collectionsService.getCollection(id).subscribe((collection: Collection) => {
+     /*  this.collectionsService.getCollection(id).subscribe((collection: Collection) => {
 
         let aIndex = this.allCollections.findIndex(c => c.id ===id);
         if (aIndex>=0) this.allCollections[aIndex] = collection;
@@ -92,8 +92,10 @@ export class CollectionsComponent implements OnInit {
         let cIndex = this.collections.findIndex(c => c.id ===id);
         if (cIndex >=0 ) this.collections[cIndex] = collection;
 
-        this.setRouterLink('/collections/detail/', id, 'collection', 'detail')
-      });
+        this.setRouterLink('/collections/detail/', id, 'collection', 'detail');
+      }); */
+      this.locals.setStringProperty('collection.view', 'detail');
+      return '/collections/detail/' + id;
     } else {
       return null;
     }
