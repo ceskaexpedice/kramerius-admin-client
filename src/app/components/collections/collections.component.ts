@@ -84,7 +84,7 @@ export class CollectionsComponent implements OnInit {
   linkToDetail(id:string) {
     if (this.allowEdit(id)) {
       // load full collection
-     /*  this.collectionsService.getCollection(id).subscribe((collection: Collection) => {
+      this.collectionsService.getCollection(id).subscribe((collection: Collection) => {
 
         let aIndex = this.allCollections.findIndex(c => c.id ===id);
         if (aIndex>=0) this.allCollections[aIndex] = collection;
@@ -92,10 +92,8 @@ export class CollectionsComponent implements OnInit {
         let cIndex = this.collections.findIndex(c => c.id ===id);
         if (cIndex >=0 ) this.collections[cIndex] = collection;
 
-        this.setRouterLink('/collections/detail/', id, 'collection', 'detail');
-      }); */
-      this.locals.setStringProperty('collection.view', 'detail');
-      return '/collections/detail/' + id;
+        //this.setRouterLink('/collections/detail/', id, 'collection', 'detail')
+      });
     } else {
       return null;
     }
@@ -276,6 +274,11 @@ export class CollectionsComponent implements OnInit {
   setRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
     this.router.navigate([path, id]);
     this.locals.setStringProperty(viewProperty + '.view', viewValue);
+  }
+
+  getRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
+    this.locals.setStringProperty(viewProperty + '.view', viewValue);
+    return path + id;
   }
 
   pageChanged(e: PageEvent) {
