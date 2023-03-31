@@ -16,12 +16,13 @@
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('graphs')" [active]="view == 'graphs'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'sites.statistics.graphs.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('most-viewed-documents')"  [active]="view == 'most-viewed-documents'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'sites.statistics.most-viewed-documents.title' | translate }}</a>
+					<a mat-tab-link (click)="changeView('generating-logs-for-nk')"  [active]="view == 'generating-logs-for-nk'"><mat-icon class="material-icons-outlined">fitbit</mat-icon>{{ 'sites.statistics.generating-logs-for-nk.title' | translate }}</a>
         </nav>
       </div>
     </div>
     <div fxFlex class="app-oa-y">
 			<div class="app-container">
-				<ng-container *ngIf="!errorState">
+				<ng-container *ngIf="!errorState && view !== 'generating-logs-for-nk'">
 					<div>
 						<mat-form-field class="app-mr-2">
 							<mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
@@ -169,6 +170,18 @@
 							<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
 						</mat-card>
 					</ng-container>
+				</ng-container>
+				<ng-container  *ngIf="view == 'generating-logs-for-nk'">
+					<mat-card fxLayout="column" class="app-card app-view-border">
+						<mat-card-content>
+							<span [matTooltip]="!allowedGlobalAction('a_generate_nkplogs') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_generate_nkplogs')  ? 'app-alert-not-allowed' : null">
+								<button [disabled]="!allowedGlobalAction('a_generate_nkplogs')" mat-flat-button color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">{{ 'button.generateNkpLogs' | translate }}</button>
+							</span>
+							<span [matTooltip]="!allowedGlobalAction('a_statistics_edit') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_statistics_edit')  ? 'app-alert-not-allowed' : null">
+								<button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button><!--od do-->
+							</span>
+						</mat-card-content>
+					</mat-card>
 				</ng-container>
 
 				<mat-card *ngIf="errorState" class="app-view-alert app-warn">

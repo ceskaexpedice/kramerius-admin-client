@@ -141,12 +141,7 @@
         "title": "Bulk data editing",
         "desc": "Based on the embedded PIDs, you can perform the following actions: set public/private, add license, remove license. You can also Delete Objects (Smart) or Delete Objects (Low Level).",
         "icon": "edit_note"
-      },
-      "statistics": {
-        "title": "Statistics",
-        "desc": "In the repository statistics, you can generate NKP logs or delete statistics.",
-        "icon": "bar_chart"
-      }  
+      }
     },
     "statistics": {
       "title": "Statistics",
@@ -159,6 +154,11 @@
         "title": "Most viewed documents",
         "desc": "Statistics showing a table with the number of views, names of works, detail of the record.",
         "icon": "preview"
+      },
+      "generating-logs-for-nk": {
+        "title": "Generating logs for NK",
+        "desc": "Generating logs for NK.",
+        "icon": "fitbit"
       } 
     },
     "cdk": {

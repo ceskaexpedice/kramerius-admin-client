@@ -141,12 +141,7 @@
         "title": "Hromadné úpravy dat",
         "desc": "Na základě vložených PIDů můžete provádět tyto akce: nastavit public/private, přidat licenci, odebrat licenci. Dále můžete smazat objekty (chytře) nebo  Smazat objekty (nízkoúrovňově).",
         "icon": "edit_note"
-      },
-      "statistics": {
-        "title": "Statistiky",
-        "desc": "Ve statistikách repozitáře můžete generovat NKP logy nebo promazat statistiky.",
-        "icon": "bar_chart"
-      }  
+      }
     },
     "statistics": {
       "title": "Statistiky",
@@ -159,6 +154,11 @@
         "title": "Nejvíce zobrazované dokumenty",
         "desc": "Statistiky zobrazující tabulku s počty zobrazení, jména děl, detail záznamu.",
         "icon": "preview"
+      },
+      "generating-logs-for-nk": {
+        "title": "Generování logů pro NK",
+        "desc": "Generování logů pro NK.",
+        "icon": "fitbit"
       } 
     },
     "cdk": {

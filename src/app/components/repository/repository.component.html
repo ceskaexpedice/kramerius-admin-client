@@ -12,7 +12,7 @@
           <a mat-tab-link (click)="changeView('repository-management')" [active]="view == 'repository-management'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.repository.repository-management.title' | translate }}</a>
           <a *ngIf="!notAllowed" mat-tab-link (click)="changeView('exports')" [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'sites.repository.exports.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('bulk-data-editing')"  [active]="view == 'bulk-data-editing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'sites.repository.bulk-data-editing.title' | translate }}</a>
-					<a mat-tab-link (click)="changeView('statistics')"  [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'sites.repository.statistics.title' | translate }}</a>
+					<!-- to delete after test <a mat-tab-link (click)="changeView('statistics')"  [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'sites.repository.statistics.title' | translate }}</a> -->
         </nav>
       </div>
     </div>
@@ -88,16 +88,14 @@
 								</span>
 							</div>
 						</ng-container>
-						<ng-container *ngIf="view == 'statistics'">
+						<!-- to delete after test <ng-container *ngIf="view == 'statistics'">
 							<span [matTooltip]="!allowedGlobalAction('a_generate_nkplogs') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_generate_nkplogs')  ? 'app-alert-not-allowed' : null">
 								<button [disabled]="!allowedGlobalAction('a_generate_nkplogs')" mat-flat-button color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">{{ 'button.generateNkpLogs' | translate }}</button>
 							</span>
 							<span [matTooltip]="!allowedGlobalAction('a_statistics_edit') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_statistics_edit')  ? 'app-alert-not-allowed' : null">
-								<button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button><!--od do-->
+								<button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button>
 							</span>
-							<!-- <button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button>
-							<button mat-flat-button color="primary" class="app-mr-2">Refresh statistik</button> -->
-						</ng-container>
+						</ng-container> -->
 					</mat-card-content>
         </mat-card>
       </div>
