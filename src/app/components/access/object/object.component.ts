@@ -52,7 +52,7 @@ export class ObjectComponent implements OnInit {
   collectionActions:Map<string,string[]> = new Map();
 
   proarcServers = this.settings.proarc;
-  selectedProarcServer: string;
+  selectedProarcServer: any = [];
 
 
   constructor(
@@ -500,8 +500,8 @@ export class ObjectComponent implements OnInit {
     console.log(id);
   }
 
-  openObjectInProarc(server: string) {
-    window.open(server + '/kramerius/' + this.inputPid + '?instance=' + this.settings.krameriusInstance, "_blank");
+  openObjectInProarc(domain: string, krameriusInstance: string) {
+    window.open(domain + '/kramerius/' + this.inputPid + '?instance=' + krameriusInstance, "_blank");
   }
 }
 

@@ -174,13 +174,13 @@
               <mat-form-field class="app-w-100">
                 <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
                 <mat-select [(ngModel)]="selectedProarcServer">
-                  <mat-option *ngFor="let server of proarcServers" [value]="server.domain">
+                  <mat-option *ngFor="let server of proarcServers" [value]="server">
                     <strong>{{ server.name }}</strong> - {{ server.domain }}
                   </mat-option>
                 </mat-select>
-              </mat-form-field>     
+              </mat-form-field>
               <div>
-                <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer)" [disabled]="!selectedProarcServer">{{ 'button.editObject' | translate }}</button>
+                <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer.domain, selectedProarcServer.krameriusInstance)" [disabled]="!selectedProarcServer.domain">{{ 'button.editObject' | translate }}</button>
               </div>
             </div>
           </mat-card-content>
