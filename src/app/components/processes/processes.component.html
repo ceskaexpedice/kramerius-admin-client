@@ -128,13 +128,13 @@
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.state' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
-                <div class="app-badge" [ngClass]="element.getStateClass()">
+                <div class="app-badge" [ngClass]="'app-' + element.state.toLowerCase()">
                   {{ 'batch.' + element.state | translate }}
                 </div>
               </span>
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded">
-                  <div class="app-badge" [ngClass]="element.getStateClass()">
+                  <div class="app-badge" [ngClass]="'app-' + p.state.toLowerCase()">
                     {{ 'batch.' + p.state | translate }}
                   </div>
                 </div>
