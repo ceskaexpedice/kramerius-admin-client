@@ -51,7 +51,7 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <a (click)="allowRights(element.id) ? setRouterLink('/object/actions/', element.id, 'object', 'actions') : null" class="app-text-right" [ngClass]="!allowRights(element.id) ? 'app-not-allowed' : null " [matTooltip]="allowRights(element.id) ? ('button.changeCollectionRights' | translate) : null || allowEdit(element.id) && !allowRights(element.id) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowRights(element.id) ? 'app-alert-not-allowed' : null">
+              <a (click)="allowRights(element.id) ? setRouterLink('/object/' + element.id + '/actions', 'object', 'actions') : null" class="app-text-right" [ngClass]="!allowRights(element.id) ? 'app-not-allowed' : null " [matTooltip]="allowRights(element.id) ? ('button.changeCollectionRights' | translate) : null || allowEdit(element.id) && !allowRights(element.id) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowRights(element.id) ? 'app-alert-not-allowed' : null">
                 <mat-icon>admin_panel_settings</mat-icon>
               </a>
             </td>
