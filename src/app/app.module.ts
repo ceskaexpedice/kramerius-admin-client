@@ -78,7 +78,7 @@ import { CollectionNewComponent } from './components/collections/collection-new/
 import { DeleteObjectsLowLevelDialogComponent } from './dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
 import { ScheduleDeleteObjectsSmartComponent } from './dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 import { CancelScheduledProcessesDialogComponent } from './dialogs/cancel-scheduled-processes-dialog/cancel-scheduled-processes-dialog.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { CollectionContentComponent } from './components/collections/collection-content/collection-content.component';
 import { CollectionContextComponent } from './components/collections/collection-context/collection-context.component';
 import { FooterComponent } from './components/footer/footer.component';

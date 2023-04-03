@@ -14,7 +14,7 @@ import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './pages/repository/repository.component';
 import { AccessComponent } from './components/access/access.component';
 import { ImportComponent } from './components/import/import.component';
-import { StatisticsComponent } from './components/statistics/statistics.component';
+import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './components/access/object/object.component';
 import { CollectionNewComponent } from './components/collections/collection-new/collection-new.component';
