@@ -13,7 +13,7 @@ import { IndexingComponent } from './pages/indexing/indexing.component';
 import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './pages/repository/repository.component';
 import { AccessComponent } from './pages/access/access.component';
-import { ImportComponent } from './components/import/import.component';
+import { ImportComponent } from './pages/import/import.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { ObjectComponent } from './pages/access/object/object.component';
