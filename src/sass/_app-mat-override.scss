@@ -272,6 +272,24 @@
     border-color: $app-table-color-border;
   }
 
+  .mat-column-select {
+    @extend .app-pr-2;
+  }
+
+  thead {
+    .mat-header-row {
+      .mat-header-cell {
+        &:first-of-type {
+          @extend .app-pl-4;
+        }
+
+        &:last-of-type {
+          @extend .app-pr-4;
+        }
+      }
+    }
+  }
+
   tbody {
     .mat-row {
       &:hover {
