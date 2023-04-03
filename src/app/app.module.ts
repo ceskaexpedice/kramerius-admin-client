@@ -8,7 +8,7 @@ import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProcessesComponent } from './pages/processes/processes.component';
-import { LoginComponent } from './components/account/login/login.component';
+import { LoginComponent } from './pages/account/login/login.component';
 import { AuthService } from './services/auth.service';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
