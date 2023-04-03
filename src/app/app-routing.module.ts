@@ -8,7 +8,7 @@ import { ProcessComponent } from './components/processes/process/process.compone
 import { CollectionsComponent } from './components/collections/collections.component';
 import { CollectionEditComponent } from './components/collections/collection-edit/collection-edit.component';
 import { CollectionComponent } from './components/collections/collection/collection.component';
-import { DevComponent } from './components/dev/dev.component';
+import { DevComponent } from './pages/dev/dev.component';
 import { IndexingComponent } from './components/indexing/indexing.component';
 import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './pages/repository/repository.component';
