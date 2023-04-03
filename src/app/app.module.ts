@@ -29,7 +29,7 @@ import { AdminApiService } from './services/admin-api.service';
 import { ClientApiService } from './services/client-api.service';
 import { CollectionsService } from './services/collections.service';
 import { DevComponent } from './pages/dev/dev.component';
-import { IndexingComponent } from './components/indexing/indexing.component';
+import { IndexingComponent } from './pages/indexing/indexing.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ConfigComponent } from './components/config/config.component';
 import { ScheduleIndexationByPidDialogComponent } from './dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';

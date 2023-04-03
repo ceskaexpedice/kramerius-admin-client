@@ -9,7 +9,7 @@ import { CollectionsComponent } from './components/collections/collections.compo
 import { CollectionEditComponent } from './components/collections/collection-edit/collection-edit.component';
 import { CollectionComponent } from './components/collections/collection/collection.component';
 import { DevComponent } from './pages/dev/dev.component';
-import { IndexingComponent } from './components/indexing/indexing.component';
+import { IndexingComponent } from './pages/indexing/indexing.component';
 import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './pages/repository/repository.component';
 import { AccessComponent } from './components/access/access.component';
