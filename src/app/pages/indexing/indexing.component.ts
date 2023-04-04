@@ -46,7 +46,7 @@ export class IndexingComponent implements OnInit {
 
   view: string;
   
-  displayedColumns = ['select', 'pid', 'title', 'indexerVersion', 'action'];
+  displayedColumns = ['select', 'pid', 'title', 'indexerVersion'];
   @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource(this.itemsLoaded);;
   selection = new SelectionModel<any>(true, []);

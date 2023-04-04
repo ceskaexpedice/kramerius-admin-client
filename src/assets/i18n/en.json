@@ -428,7 +428,10 @@
     "deleteRow": "Delete row",
     "synchronizeWithSDNNT": "Synchronize with SDNNT",
     "startTheSynchronizationProcess": "Start the synchronization process",
-    "editObject": "Edit object"
+    "editObject": "Edit object",
+    "indexSelectedObjects": "Index selected objects",
+    "indexTheModel": "Index the model",
+    "indexTheObject": "Index the object"
   },
   "field": {
     "public": "Public",
@@ -888,6 +891,9 @@
     "noLicenseSelected": "No license selected",
     "licenseSynchronization": "License synchronization",
     "editingAnObjectInTheProarcApplication": "Editing an object in the ProArc application",
-    "selectServer": "Select a server"
+    "selectServer": "Select a server",
+    "selectAllObjects": "Select all objects",
+    "selectAnObject": "Select an object",
+    "noRecordFound": "No record found"
   }
 }

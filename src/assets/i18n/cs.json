@@ -428,7 +428,10 @@
     "deleteRow": "Odstranit řádek",
     "synchronizeWithSDNNT": "Synchronizovat se SDNNT",
     "startTheSynchronizationProcess": "Spustit proces synchronize",
-    "editObject": "Editovat objekt"
+    "editObject": "Editovat objekt",
+    "indexSelectedObjects": "Indexovat vybrané objekty",
+    "indexTheModel": "Indexovat model",
+    "indexTheObject": "Indexovat objekt"
   },
   "field": {
     "public": "Veřejné",
@@ -888,6 +891,9 @@
     "noLicenseSelected": "Není vybrána licence",
     "licenseSynchronization": "Synchronizace licencí",
     "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc",
-    "selectServer": "Vyberte server"
+    "selectServer": "Vyberte server",
+    "selectAllObjects": "Vybrat všechny objekty",
+    "selectAnObject": "Vybrat objekt",
+    "noRecordFound": "Žádný záznam nenalezen"
   }
 }
