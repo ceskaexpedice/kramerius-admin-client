@@ -132,7 +132,7 @@ export class CollectionComponent implements OnInit {
     const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data }); */
     const dialogRef = this.dialog.open(DeleteCollectionDialogComponent, {
       width: '600px',
-      panelClass: 'app-create-new-collection-dialog'
+      panelClass: 'app-delete-collection-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {

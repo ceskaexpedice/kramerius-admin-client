@@ -431,7 +431,8 @@
     "editObject": "Editovat objekt",
     "indexSelectedObjects": "Indexovat vybrané objekty",
     "indexTheModel": "Indexovat model",
-    "indexTheObject": "Indexovat objekt"
+    "indexTheObject": "Indexovat objekt",
+    "deleteSelectedCollections": "Vymazat vybrané sbírky"
   },
   "field": {
     "public": "Veřejné",
@@ -670,6 +671,11 @@
       "title": "Vytvoření nové sbírky",
       "alert": "Sbírka <strong><em>{{pid}}</em></strong> byla úspěšně vytvořena a zařazena do procesu k indexaci. Zobrazení sbírky v seznamu sbírek může chvíli trvat v závislosti na pořadí procesu indexace.",
       "message": "Níže můžete editovat tuto nově vytvořenou sbírku, zkontrolovat proces indexace této sbírky nebo zavřít tento dialog a tím přejít na seznam sbírek."
+    },
+    "deleteSelectedCollections": {
+      "title": "Smazání vybraných sbírek",
+      "alert": "Pokud smažete vybrané sbírky, vytvoří se proces pro reindexaci a sbírky se Vám můžou zobrazovat v seznamu sbírek do doby, než tento proces bude ukončen.",
+      "message": "Opravdu chcete vybrané sbírky trvale smazat"
     }
   },
   "snackbar": {
@@ -893,7 +899,9 @@
     "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc",
     "selectServer": "Vyberte server",
     "selectAllObjects": "Vybrat všechny objekty",
-    "selectAnObject": "Vybrat objekt",
-    "noRecordFound": "Žádný záznam nenalezen"
+    "selectThisObject": "Vybrat tento objekt",
+    "noRecordFound": "Žádný záznam nenalezen",
+    "selectAllCollections": "Vybrat všechny sbírky",
+    "selectThisCollection": "Vybrat tuto sbírku"
   }
 }

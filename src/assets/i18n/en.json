@@ -431,7 +431,8 @@
     "editObject": "Edit object",
     "indexSelectedObjects": "Index selected objects",
     "indexTheModel": "Index the model",
-    "indexTheObject": "Index the object"
+    "indexTheObject": "Index the object",
+    "deleteSelectedCollections": "Delete selected collections"
   },
   "field": {
     "public": "Public",
@@ -670,6 +671,11 @@
       "title": "Creating a new collection",
       "alert": "The collection <strong><em>{{pid}}</em></strong> has been successfully created and entered into the indexing process. It may take some time for the collection to appear in the collection list, depending on the order of the indexing process.",
       "message": "Below you can edit this newly created collection, check the indexing process of this collection or close this dialog to go to the list of collections."
+    },
+    "deleteSelectedCollections": {
+      "title": "Deleting selected collections",
+      "alert": "If you delete the selected collections, a reindexing process is created and the collections can be displayed in the collection list until this process is finished.",
+      "message": "Do you really want to permanently delete the selected collections?"
     }
   },
   "snackbar": {
@@ -893,7 +899,9 @@
     "editingAnObjectInTheProarcApplication": "Editing an object in the ProArc application",
     "selectServer": "Select a server",
     "selectAllObjects": "Select all objects",
-    "selectAnObject": "Select an object",
-    "noRecordFound": "No record found"
+    "selectThisObject": "Select this object",
+    "noRecordFound": "No record found",
+    "selectAllCollections": "Select all collections",
+    "selectThisCollection": "Select this collection"
   }
 }
