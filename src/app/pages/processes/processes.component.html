@@ -145,11 +145,11 @@
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.scheduled' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
-                {{ element.planned | date : 'dd.MM.yyyy hh:mm' }}
+                {{ element.planned | date : 'dd.MM.yyyy H:mm' }}
               </span>
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded">
-                  {{ p.planned | date : 'dd.MM.yyyy hh:mm' }}
+                  {{ p.planned | date : 'dd.MM.yyyy H:mm' }}
                 </div>
               </ng-container>
             </td>
@@ -158,11 +158,11 @@
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.running' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
-                {{ element.started | date : 'dd.MM.yyyy hh:mm' }}
+                {{ element.started | date : 'dd.MM.yyyy H:mm' }}
               </span>
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded">
-                  {{ p.started | date : 'dd.MM.yyyy hh:mm' }}
+                  {{ p.started | date : 'dd.MM.yyyy H:mm' }}
                 </div>
               </ng-container>
             </td>
@@ -171,11 +171,11 @@
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.finished' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
-                {{ element.finished | date : 'dd.MM.yyyy hh:mm' }}
+                {{ element.finished | date : 'dd.MM.yyyy H:mm' }}
               </span>
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded">
-                  {{ p.finished | date : 'dd.MM.yyyy hh:mm' }}
+                  {{ p.finished | date : 'dd.MM.yyyy H:mm' }}
                 </div>
               </ng-container>
             </td>
