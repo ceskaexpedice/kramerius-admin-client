@@ -38,9 +38,8 @@
           </a>
           <!-- musi mit prava pro vsechny sbirky --> 
           <a mat-tab-link (click)="changeView('in-collections')" [active]="view == 'in-collections'">
-            <span [matBadge]="superCollections?.length">
-              <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}<span class="app-push-right"></span>
-            </span>
+            <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}<span class="app-push-right"></span>
+            <span class="app-badge app-count">{{ superCollections?.length }}</span>
           </a>
           <a mat-tab-link (click)="changeView('others')" [active]="view == 'others'">
             <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'sites.object.others.title' | translate }}

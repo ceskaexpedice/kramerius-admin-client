@@ -37,9 +37,10 @@ $app-toolbar-height: 64px !default;
 $app-container: 1280px !default;
 $app-button-height: 32px !default;
 $app-badge-size: 20px !default;
+$app-badge-border-radius: calc(#{$app-badge-size} / 2) !default;
+$app-badge-version-color: $app-color-accent;
 $app-avatar-size: 40px !default;
 $app-avatar-color: mat-color($mat-amber, 900) !default;
-$app-badge-version-color: $app-color-accent;
 $app-mat-radio-button-size: 16px !default;
 
 $app-table-row-height: 48px !default;

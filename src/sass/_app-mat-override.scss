@@ -397,7 +397,8 @@
         color: $app-gray-6;
         font-weight: normal;
 
-        .mat-badge-content {
+        .mat-badge-content,
+        .app-badge {
           background-color: $app-gray-5;
         }
       }

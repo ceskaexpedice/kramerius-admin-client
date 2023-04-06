@@ -4,7 +4,9 @@
     <mat-card class="app-view-rights app-view-hover" *ngFor="let action of actions" [class.app-card-expanded]="selectedAction == action">
       <mat-card-header fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex class="app-left">
-          <mat-card-title><span [matBadge]="action.rights.length" matBadgeOverlap="false" matBadgeColor="primary">{{ 'rights.' + action.code + '.title' | translate }}</span></mat-card-title>
+          <mat-card-title>
+            {{ 'rights.' + action.code + '.title' | translate }}<span class="app-badge app-count">{{ action.rights.length }}</span>
+          </mat-card-title>
           <mat-card-subtitle>{{ 'rights.' + action.description + '.subtitle' | translate }}</mat-card-subtitle>
         </div>
         <div class="app-right app-actions">

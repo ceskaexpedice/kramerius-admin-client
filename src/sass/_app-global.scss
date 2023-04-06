@@ -224,24 +224,22 @@ a {
   @include setStateColor();
   @extend .app-pr-2, .app-pl-2;
   display: inline-flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
+  min-width: 20px;
   height: 20px;
-  border-radius: $app-border-radius;
+  border-radius: $app-badge-border-radius;
   color: $app-color-lightnes;
   font-size: 12px;
-  text-transform: uppercase;
-  background-color: $app-gray-6;
+  font-weight: 500;
+  background-color: $app-color-primary;
 
   &.app-version {
-    color: $app-badge-version-color;
-    border: 1px solid rgba($app-badge-version-color, .3);
-    background-color: rgba($app-badge-version-color, .05);
+    background-color: $app-badge-version-color;
   }
 
-  &.app-version-navbar {
-    opacity: .7;
+  &.app-count {
+    @extend .app-pr-1, .app-pl-1, .app-ml-2;
   }
 }
 
@@ -391,4 +389,20 @@ table {
       }
     }
   }
+}
+
+
+
+
+.app-badge-test {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: $app-color-primary;
+  color: $app-color-lightnes;
+  padding: 0 4px;
+  margin-left: 8px;
 }
