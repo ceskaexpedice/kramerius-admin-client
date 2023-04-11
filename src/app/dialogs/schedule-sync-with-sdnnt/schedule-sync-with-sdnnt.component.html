@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>{{ 'Synchronizace licencí' | translate }}</h2>
+<h2 mat-dialog-title>{{ 'Synchronizace licencí' | translate }}  - MZK - 11.4.2023</h2>
+
+<h3> - MZK/11.4.2023 - </h3>
+
 <mat-dialog-content>
   <div class="app-oh">
   <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
@@ -13,14 +16,25 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="uuid">
-        <th mat-header-cell *matHeaderCellDef>UUID</th>
-        <td mat-cell *matCellDef="let element">{{ element.uuid }}</td>
+      
+      <ng-container matColumnDef="catalog">
+        <th mat-header-cell *matHeaderCellDef>catalog</th>
+        <td mat-cell *matCellDef="let element">
+          <a  target="_blank" href="https://sdnnt.nkp.cz/sdnnt/search?q={{ element.catalog }}">{{ element.catalog }}</a></td>
       </ng-container>
 
+      <ng-container matColumnDef="pid">
+        <th mat-header-cell *matHeaderCellDef>pid</th>
+        <td mat-cell *matCellDef="let element">
+          <a  target="_blank" href="https://ndk.cz/uuid/{{ element.pid }}">{{ element.pid }}</a>
+        
+        </td>
+      </ng-container>
+
+      
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Jmeno</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
       </ng-container>
   
       <ng-container matColumnDef="licenseIn">
@@ -33,6 +47,12 @@
         <td mat-cell *matCellDef="let element">{{ element.licenseOut }}</td>
       </ng-container>
   
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>action</th>
+        <td mat-cell *matCellDef="let element">{{ element.sync_actions }}</td>
+      </ng-container>
+
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
@@ -42,5 +62,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
 <button mat-flat-button color="primary" type="submit">{{ 'button.startTheSynchronizationProcess' | translate }}</button>
+<button mat-flat-button color="primary" type="submit">{{ 'button.refreshTheSynchronization' | translate }}</button>
 <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>
