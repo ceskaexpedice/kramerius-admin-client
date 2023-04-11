@@ -141,12 +141,7 @@
         "title": "Hromadné úpravy dat",
         "desc": "Na základě vložených PIDů můžete provádět tyto akce: nastavit public/private, přidat licenci, odebrat licenci. Dále můžete smazat objekty (chytře) nebo  Smazat objekty (nízkoúrovňově).",
         "icon": "edit_note"
-      },
-      "statistics": {
-        "title": "Statistiky",
-        "desc": "Ve statistikách repozitáře můžete generovat NKP logy nebo promazat statistiky.",
-        "icon": "bar_chart"
-      }  
+      }
     },
     "statistics": {
       "title": "Statistiky",
@@ -159,6 +154,11 @@
         "title": "Nejvíce zobrazované dokumenty",
         "desc": "Statistiky zobrazující tabulku s počty zobrazení, jména děl, detail záznamu.",
         "icon": "preview"
+      },
+      "generating-logs-for-nk": {
+        "title": "Generování logů pro NK",
+        "desc": "Generování logů pro NK.",
+        "icon": "fitbit"
       } 
     },
     "cdk": {
@@ -428,7 +428,11 @@
     "deleteRow": "Odstranit řádek",
     "synchronizeWithSDNNT": "Synchronizovat se SDNNT",
     "startTheSynchronizationProcess": "Spustit proces synchronize",
-    "editObject": "Editovat objekt"
+    "editObject": "Editovat objekt",
+    "indexSelectedObjects": "Indexovat vybrané objekty",
+    "indexTheModel": "Indexovat model",
+    "indexTheObject": "Indexovat objekt",
+    "deleteSelectedCollections": "Vymazat vybrané sbírky"
   },
   "field": {
     "public": "Veřejné",
@@ -667,6 +671,11 @@
       "title": "Vytvoření nové sbírky",
       "alert": "Sbírka <strong><em>{{pid}}</em></strong> byla úspěšně vytvořena a zařazena do procesu k indexaci. Zobrazení sbírky v seznamu sbírek může chvíli trvat v závislosti na pořadí procesu indexace.",
       "message": "Níže můžete editovat tuto nově vytvořenou sbírku, zkontrolovat proces indexace této sbírky nebo zavřít tento dialog a tím přejít na seznam sbírek."
+    },
+    "deleteSelectedCollections": {
+      "title": "Smazání vybraných sbírek",
+      "alert": "Pokud smažete vybrané sbírky, vytvoří se proces pro reindexaci a sbírky se Vám můžou zobrazovat v seznamu sbírek do doby, než tento proces bude ukončen.",
+      "message": "Opravdu chcete vybrané sbírky trvale smazat"
     }
   },
   "snackbar": {
@@ -888,6 +897,11 @@
     "noLicenseSelected": "Není vybrána licence",
     "licenseSynchronization": "Synchronizace licencí",
     "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc",
-    "selectServer": "Vyberte server"
+    "selectServer": "Vyberte server",
+    "selectAllObjects": "Vybrat všechny objekty",
+    "selectThisObject": "Vybrat tento objekt",
+    "noRecordFound": "Žádný záznam nenalezen",
+    "selectAllCollections": "Vybrat všechny sbírky",
+    "selectThisCollection": "Vybrat tuto sbírku"
   }
 }

@@ -65,9 +65,10 @@ export class Batch {
     return Process.stateColor(this.state);
   }
 
+  /* to delete after testing 
   getStateClass(): string {
     return Process.stateClass(this.state);
-  }
+  } */
 
   getName(): string {
     if (this.processes.length > 0) {

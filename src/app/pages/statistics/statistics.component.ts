@@ -20,6 +20,10 @@ import { debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
+import { GenerateNkpLogsDialogComponent } from 'src/app/dialogs/generate-nkp-logs-dialog/generate-nkp-logs-dialog.component';
+import { DeleteStatisticsDialogComponent } from 'src/app/dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-statistics',
@@ -73,7 +77,9 @@ export class StatisticsComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document, 
     private local: LocalStorageService,
     private router: Router,
-    private ui: UIService) { }
+    private ui: UIService,
+    private auth: AuthService,
+    private dialog: MatDialog) { }
 
   reinitGraphs() {
   
@@ -460,48 +466,69 @@ export class StatisticsComponent implements OnInit {
     
   /** Utilitni metody ??  Presunout ?? */
 
-    // date formatting 
-    private format(date) {
-      let d = new Date(date);
-      let month = (d.getMonth() + 1).toString();
-      let day = d.getDate().toString();
-      let year = d.getFullYear();
-      if (month.length < 2) {
-        month = '0' + month;
-      }
-      if (day.length < 2) {
-        day = '0' + day;
-      }
-      return [year, month, day].join('.');
+  // date formatting 
+  private format(date) {
+    let d = new Date(date);
+    let month = (d.getMonth() + 1).toString();
+    let day = d.getDate().toString();
+    let year = d.getFullYear();
+    if (month.length < 2) {
+      month = '0' + month;
     }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+    return [year, month, day].join('.');
+  }
 
-    private texts(elms) {
-      let texts = elms.map(elm=> {
-        return elm.content;
+  private texts(elms) {
+    let texts = elms.map(elm=> {
+      return elm.content;
+    });
+    return texts.join(' ');      
+  }
+
+  private first(parent, name) {
+    let first = parent.children.find((obj)=> {
+      return obj.name === name || obj.name.includes(':'+name);
+    });     
+    return first;     
+  }
+
+  private elms(parent, name,  attrName, attrValue) {
+    let elms = parent.children.filter((obj)=> {
+      return obj.name === name || obj.name.includes(':'+name);
+    });     
+    if (attrName != null) {
+      let tt =  elms.filter((obj)=> {
+        if (attrValue != null) {
+          return obj.attributes[attrName] === attrValue;
+        } else {
+          return attrName in obj.attributes;
+        }
       });
-      return texts.join(' ');      
-    }
+      return tt;  
+    } else return elms;
+  }
 
-    private first(parent, name) {
-      let first = parent.children.find((obj)=> {
-        return obj.name === name || obj.name.includes(':'+name);
-      });     
-      return first;     
-    }
+  allowedGlobalAction(name:string) {
+    if (this.auth.authorizedGlobalActions) {
+      let retval = this.auth.authorizedGlobalActions.indexOf(name) >= 0;
+      return retval;
+    } else return false;
+  }
 
-    private elms(parent, name,  attrName, attrValue) {
-      let elms = parent.children.filter((obj)=> {
-        return obj.name === name || obj.name.includes(':'+name);
-      });     
-      if (attrName != null) {
-        let tt =  elms.filter((obj)=> {
-          if (attrValue != null) {
-            return obj.attributes[attrName] === attrValue;
-          } else {
-            return attrName in obj.attributes;
-          }
-        });
-        return tt;  
-      } else return elms;
-    }
+  openNkpLogyDialog() {
+    const dialogRef = this.dialog.open(GenerateNkpLogsDialogComponent, {
+      width: '600px',
+      panelClass: 'app-generate-nkp-logs-dialog'
+    });
+  }
+
+  openDeleteStatisticsDialog() {
+    const dialogRef = this.dialog.open(DeleteStatisticsDialogComponent, {
+      width: '600px',
+      panelClass: 'app-delete-statistics-dialog'
+    });
+  }
 }

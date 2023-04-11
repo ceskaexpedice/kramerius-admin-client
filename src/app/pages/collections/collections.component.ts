@@ -11,6 +11,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { debounceTime } from "rxjs/operators";
 import { ClientApiService } from 'src/app/services/client-api.service';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteSelectedCollectionsDialogComponent } from 'src/app/dialogs/delete-selected-collections-dialog/delete-selected-collections-dialog.component';
 
 @Component({
   selector: 'app-collections',
@@ -45,7 +48,8 @@ export class CollectionsComponent implements OnInit {
   page: number = 0;
   numFound: number = 1000;
 
-  displayedColumns = ['name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
+  displayedColumns = ['select', 'name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
+  selection = new SelectionModel<any>(true, []);
   columnMapping = {
     'name_cze':'title.sort',
     'createdAt':'created',
@@ -60,7 +64,8 @@ export class CollectionsComponent implements OnInit {
     private auth:AuthService,
     private collectionsService: CollectionsService, 
     private router: Router, private locals: LocalStorageService,
-    private clientService: ClientApiService) { }
+    private clientService: ClientApiService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.query = "";
@@ -271,8 +276,8 @@ export class CollectionsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  setRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
-    this.router.navigate([path, id]);
+  setRouterLink(path: string = null, viewProperty: string = null, viewValue: string = null) {
+    this.router.navigate([path]);
     this.locals.setStringProperty(viewProperty + '.view', viewValue);
   }
 
@@ -289,5 +294,34 @@ export class CollectionsComponent implements OnInit {
 
   reloadPage() {
     location.reload();
+  }
+
+  // Whether the number of selected elements matches the total number of rows
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  // Selects all rows if they are not all selected; otherwise clear selection.
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  // The label for the checkbox on the passed row
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+  deleteSelectedCollections() {
+    const dialogRef = this.dialog.open(DeleteSelectedCollectionsDialogComponent, {
+      width: '600px',
+      panelClass: 'app-delete-selected-collections-dialog'
+    });
   }
 }

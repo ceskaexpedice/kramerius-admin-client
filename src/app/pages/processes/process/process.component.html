@@ -27,7 +27,7 @@
                 <mat-card-title>{{ 'desc.process' | translate }}</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <div class="app-badge app-mb-4" [ngClass]="batch.getStateClass()">{{ 'batch.' + process.state | translate }}</div>
+                <div class="app-badge app-mb-4" [ngClass]="'app-' + process.state.toLowerCase()">{{ 'batch.' + process.state | translate }}</div>
                 <div *ngIf="process.planned" class="app-mb-4">
                   <div class="app-label">{{ 'desc.scheduled' | translate }}</div>
                   <div>{{ process.planned | appDatetime }}</div>
@@ -51,7 +51,7 @@
                 <mat-card-title>{{ 'desc.batch' | translate }}</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <div class="app-badge app-mb-4" [ngClass]="batch.getStateClass()">{{ 'batch.' + process.state | translate }}</div>
+                <div class="app-badge app-mb-4" [ngClass]="'app-' + process.state.toLowerCase()">{{ 'batch.' + process.state | translate }}</div>
                 <div *ngIf="process.planned" class="app-mb-4">
                   <div class="app-label">{{ 'desc.scheduled' | translate }}</div>
                   <div>{{ batch.planned | appDatetime }}</div>

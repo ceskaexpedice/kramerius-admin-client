@@ -38,9 +38,8 @@
           </a>
           <!-- musi mit prava pro vsechny sbirky --> 
           <a mat-tab-link (click)="changeView('in-collections')" [active]="view == 'in-collections'">
-            <span [matBadge]="superCollections?.length">
-              <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}<span class="app-push-right"></span>
-            </span>
+            <mat-icon class="material-icons-outlined">collections</mat-icon>{{ 'sites.object.in-collections.title' | translate }}<span class="app-push-right"></span>
+            <span class="app-badge app-count">{{ superCollections?.length }}</span>
           </a>
           <a mat-tab-link (click)="changeView('others')" [active]="view == 'others'">
             <mat-icon class="material-icons-outlined">settings</mat-icon>{{ 'sites.object.others.title' | translate }}
@@ -174,13 +173,13 @@
               <mat-form-field class="app-w-100">
                 <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
                 <mat-select [(ngModel)]="selectedProarcServer">
-                  <mat-option *ngFor="let server of proarcServers" [value]="server.domain">
+                  <mat-option *ngFor="let server of proarcServers" [value]="server">
                     <strong>{{ server.name }}</strong> - {{ server.domain }}
                   </mat-option>
                 </mat-select>
-              </mat-form-field>     
+              </mat-form-field>
               <div>
-                <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer)" [disabled]="!selectedProarcServer">{{ 'button.editObject' | translate }}</button>
+                <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer.domain, selectedProarcServer.krameriusInstance)" [disabled]="!selectedProarcServer.domain">{{ 'button.editObject' | translate }}</button>
               </div>
             </div>
           </mat-card-content>

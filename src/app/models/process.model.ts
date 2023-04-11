@@ -77,6 +77,7 @@ export class Process {
     return '#000';
   }
 
+  /* to delete after testing 
   static stateClass(state: string): string {
     switch (state) {
       case Process.PLANNED: return 'app-planned';
@@ -88,7 +89,7 @@ export class Process {
       case Process.WARNING: return 'app-warning';
     }
     return 'app-default';
-  }
+  } */
 
   static fromJson(json): Process {
     const process = new Process();

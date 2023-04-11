@@ -18,14 +18,12 @@
             <mat-icon class="material-icons-outlined">edit</mat-icon>{{ 'sites.collections.edit.title' | translate }}
           </a>
           <a mat-tab-link (click)="changeView('content')" [active]="view == 'content'">
-            <span [matBadge]="items?.length">
-              <mat-icon class="material-icons-outlined">segment</mat-icon>{{ 'sites.collections.content.title' | translate }}<span class="app-push-right"></span>
-            </span>
+            <mat-icon class="material-icons-outlined">segment</mat-icon>{{ 'sites.collections.content.title' | translate }}
+            <span class="app-badge app-count">{{ items?.length }}</span>
           </a>
           <a mat-tab-link (click)="changeView('context')" [active]="view == 'context'">
-            <span [matBadge]="superCollections?.length">
-              <mat-icon class="material-icons-outlined">source</mat-icon>{{ 'sites.collections.context.title' | translate }}<span class="app-push-right"></span>
-            </span>
+            <mat-icon class="material-icons-outlined">source</mat-icon>{{ 'sites.collections.context.title' | translate }}
+            <span class="app-badge app-count">{{ superCollections?.length }}</span>
           </a>
         </nav>
       </div>

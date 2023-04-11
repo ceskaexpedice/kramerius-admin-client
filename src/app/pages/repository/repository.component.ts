@@ -170,7 +170,7 @@ export class RepositoryComponent implements OnInit {
     } else return false;
   }
 
-  openNkpLogyDialog() {
+  /* to delete after test openNkpLogyDialog() {
     const dialogRef = this.dialog.open(GenerateNkpLogsDialogComponent, {
       width: '600px',
       panelClass: 'app-generate-nkp-logs-dialog'
@@ -182,7 +182,7 @@ export class RepositoryComponent implements OnInit {
       width: '600px',
       panelClass: 'app-delete-statistics-dialog'
     });
-  }
+  } */
 
   changeView(view: string) {
     this.view = view;
