@@ -771,7 +771,8 @@
       "onKillProcess": "Proces/dávka byla zrušena",
       "scheduleIndexationByPid": "Indexace byla naplánována",
       "scheduleIndexationByModel": "Indexace modelu {{value}} byla naplánována",
-      "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací"
+      "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací",
+      "scheduleStartTheSdnntReviewProcess": "Spuštění procesu kontroly SDNNT/Kramerius bylo naplánováno"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -822,7 +823,8 @@
       "scheduleIndexationByPid": "Nepodařilo se naplánovat indexaci",
       "scheduleIndexationByModel": "Nepodařilo se naplánovat indexaci modelu {{value}}",
       "scheduleIndexationsByMultiplePids": "Nepodařilo se naplánovat indexace",
-      "loadMoreItemsForBatch": "Nepodařilo se načíst data"
+      "loadMoreItemsForBatch": "Nepodařilo se načíst data",
+      "scheduleStartTheSdnntReviewProcess": "Chyba při spuštění procesu kontroly SDNNT/Kramerius"
     }
   },
   "desc": {

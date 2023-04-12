@@ -771,7 +771,8 @@
       "onKillProcess": "The process/batch was cancelled",
       "scheduleIndexationByPid": "Indexing has been scheduled",
       "scheduleIndexationByModel": "{{value}} model indexing has been scheduled",
-      "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing"
+      "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing",
+      "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -822,7 +823,8 @@
       "scheduleIndexationByPid": "Failed to schedule index",
       "scheduleIndexationByModel": "Failed to schedule model index {{value}}",
       "scheduleIndexationsByMultiplePids": "Failed to schedule indexing",
-      "loadMoreItemsForBatch": "Failed to load data"
+      "loadMoreItemsForBatch": "Failed to load data",
+      "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process"
     }
   },
   "desc": {

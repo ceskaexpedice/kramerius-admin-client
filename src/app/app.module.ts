@@ -91,6 +91,7 @@ import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/
 import { CdkEuropeanouComponent } from './pages/cdk/cdk-europeanou/cdk-europeanou.component';
 import { ScheduleSyncWithSdnntComponent } from './dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
 import { DeleteSelectedCollectionsDialogComponent } from './dialogs/delete-selected-collections-dialog/delete-selected-collections-dialog.component';
+import { ScheduleStartTheSdnntReviewProcessComponent } from './dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -167,7 +168,8 @@ export function createCustomMatPaginatorIntl(
     CdkProxyDetailComponent,
     CdkEuropeanouComponent,
     ScheduleSyncWithSdnntComponent,
-    DeleteSelectedCollectionsDialogComponent
+    DeleteSelectedCollectionsDialogComponent,
+    ScheduleStartTheSdnntReviewProcessComponent
   ],
   imports: [
     BrowserModule,

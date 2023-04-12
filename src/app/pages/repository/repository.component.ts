@@ -17,6 +17,7 @@ import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-de
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ScheduleSyncWithSdnntComponent } from 'src/app/dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
+import { ScheduleStartTheSdnntReviewProcessComponent } from 'src/app/dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
 
 @Component({
   selector: 'app-repository',
@@ -241,17 +242,10 @@ export class RepositoryComponent implements OnInit {
     });
   }
 
-  startsyncProcess() {
-    this.adminApi.scheduleProcess({
-      defid: 'sdnnt-sync',
-      params: {
-      }
-    }).subscribe(response => {
-      this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
-    }, error => {
-      this.ui.showInfoSnackBar('snackbar.error.scheduleImportProcess');
-      console.log(error);
+  openScheduleStartTheSdnntReviewProcessDialog() {
+    const dialogRef = this.dialog.open(ScheduleStartTheSdnntReviewProcessComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-start-the-sdnnt-review-process'
     });
   }
-
 }
