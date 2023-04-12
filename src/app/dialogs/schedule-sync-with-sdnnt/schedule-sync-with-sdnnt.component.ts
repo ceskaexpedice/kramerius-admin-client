@@ -36,16 +36,11 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
     private api: AdminApiService,
     private ui: UIService
 
-  ) { 
-
-
-  }
+  ) { }
 
 
   ngOnInit(): void {
-
-        this.reloadData();
-    
+    this.reloadData();
   }
 
   handlePageEvent(e: PageEvent) {
@@ -80,6 +75,9 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
     });
   }
 
+  getChildren() {
+    // to do
+  }
 }
 
 export interface PeriodicElement {

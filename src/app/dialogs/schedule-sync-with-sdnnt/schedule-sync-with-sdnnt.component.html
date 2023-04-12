@@ -20,7 +20,10 @@
                 </div>
               </ng-container>
               <ng-container *ngSwitchCase="'sync_actions'">
-                <span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column] | translate" fxLayout="row" fxLayoutAlign="start center"></span>
+                <ng-container [ngSwitch]="element[column]?.length">
+                  <ng-container *ngSwitchCase="1"><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column] | translate" fxLayout="row" fxLayoutAlign="start center"></span></ng-container>
+                  <ng-container *ngSwitchDefault>{{ 'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column][0] + '.title' | translate }}</ng-container>
+                </ng-container>
               </ng-container>
               <ng-container *ngSwitchDefault>{{ element[column] }}</ng-container>
             </ng-container>
@@ -30,7 +33,7 @@
         <ng-container matColumnDef="expand">
           <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
           <td mat-cell *matCellDef="let element" class="app-text-right">
-            <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()" *ngIf="element.children?.length > 0" [matTooltip]="'Zobrazit ostatni zaznamy'">
+            <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation(); getChildren()" *ngIf="element.sync_actions.includes('partial_change')" [matTooltip]="'Zobrazit ostatni zaznamy'">
               <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
               <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
             </button>
@@ -60,21 +63,16 @@
           </td>
         </ng-container>
 
-
         <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
         <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="app-element-row" [class.app-expanded-row]="expandedElement === element"></tr><!--(click)=" element.children?.length > 0 ? (expandedElement = expandedElement === element ? null : element) : null"-->
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let element;" class="app-detail-row" [class.app-expanded-row]="expandedElement === element"></tr>
       </table>
-     
-
-      
-     
-    <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" showFirstLastButtons></mat-paginator>
-  </div>
+      <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" showFirstLastButtons></mat-paginator>
+    </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-<button mat-flat-button color="primary"  type="submit">{{ 'button.startTheSynchronizationProcess' | translate }}</button>
-<button mat-flat-button color="primary" (click)="scheduleSync()" type="submit">{{ 'button.refreshTheSynchronization' | translate }}</button>
-<button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+  <button mat-flat-button color="primary"  type="submit">{{ 'button.startTheSynchronizationProcess' | translate }}</button>
+  <button mat-flat-button color="primary" (click)="scheduleSync()" type="submit">{{ 'button.refreshTheSynchronization' | translate }}</button>
+  <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>
