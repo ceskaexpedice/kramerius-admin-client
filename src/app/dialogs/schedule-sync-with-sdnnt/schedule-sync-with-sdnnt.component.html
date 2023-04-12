@@ -60,16 +60,21 @@
           </td>
         </ng-container>
 
+
         <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
         <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="app-element-row" [class.app-expanded-row]="expandedElement === element"></tr><!--(click)=" element.children?.length > 0 ? (expandedElement = expandedElement === element ? null : element) : null"-->
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let element;" class="app-detail-row" [class.app-expanded-row]="expandedElement === element"></tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>
+     
+
+      
+     
+    <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" showFirstLastButtons></mat-paginator>
+  </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-<button mat-flat-button color="primary" type="submit">{{ 'button.startTheSynchronizationProcess' | translate }}</button>
-<button mat-flat-button color="primary" type="submit">{{ 'button.refreshTheSynchronization' | translate }}</button>
+<button mat-flat-button color="primary"  type="submit">{{ 'button.startTheSynchronizationProcess' | translate }}</button>
+<button mat-flat-button color="primary" (click)="scheduleSync()" type="submit">{{ 'button.refreshTheSynchronization' | translate }}</button>
 <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

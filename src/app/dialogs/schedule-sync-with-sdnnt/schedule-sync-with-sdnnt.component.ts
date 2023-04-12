@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { AdminApiService } from 'src/app/services/admin-api.service';
+import { UIService } from 'src/app/services/ui.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SdnntItem, SdnntSync } from 'src/app/models/sdnnt.model';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-schedule-sync-with-sdnnt',
@@ -20,11 +25,59 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: PeriodicElement | null;
 
-  dataSource = ELEMENT_DATA;
+  dataSource = [];
 
-  constructor() { }
+  length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
+  constructor(
+    private api: AdminApiService,
+    private ui: UIService
+
+  ) { 
+
+
+  }
+
 
   ngOnInit(): void {
+
+        this.reloadData();
+    
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.reloadData();
+  }
+
+  reloadData() {
+    this.api.getSdntSyncData(this.pageSize,this.pageIndex).subscribe((data:SdnntSync) =>  {
+      this.length = data.numberOfRec;
+      this.dataSource = data.docs;
+      console.log(this.dataSource.length)
+    },  (error:HttpErrorResponse) => {
+      console.log("error "+error);
+      //this.errorState = true;
+      //this.errorMessage = error.error.message;
+    });
+  }
+
+  scheduleSync() {
+    this.api.scheduleProcess({
+      defid: 'sdnnt-sync',
+      params: {
+      }
+    }).subscribe(response => {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
+    }, error => {
+      this.ui.showInfoSnackBar('snackbar.error.scheduleImportProcess');
+      console.log(error);
+    });
   }
 
 }

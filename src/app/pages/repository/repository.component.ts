@@ -241,5 +241,17 @@ export class RepositoryComponent implements OnInit {
     });
   }
 
+  startsyncProcess() {
+    this.adminApi.scheduleProcess({
+      defid: 'sdnnt-sync',
+      params: {
+      }
+    }).subscribe(response => {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
+    }, error => {
+      this.ui.showInfoSnackBar('snackbar.error.scheduleImportProcess');
+      console.log(error);
+    });
+  }
 
 }
