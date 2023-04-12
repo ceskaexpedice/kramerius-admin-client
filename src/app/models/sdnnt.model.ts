@@ -50,7 +50,6 @@ export class SdnntItem {
         item.type_of_rec = json['type_of_rec'];
         item.license = json['license'];
         item.title = json['title'];
-        item.title = json['title'];
         item.sync_actions=json['sync_actions'];
 
         if (json['parent_id']) {
