@@ -75,8 +75,19 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
     });
   }
 
-  getChildren() {
-    // to do
+  getChildren(id:string) {
+    this.api.getSdntSyncDataGranularity (id).subscribe((data:SdnntItem[]) =>  {
+      this.dataSource.forEach((itm:SdnntItem) => {
+        if (itm.id === id) {
+          itm.children = data;
+        }
+      });
+    },  (error:HttpErrorResponse) => {
+      console.log("error "+error);
+      //this.errorState = true;
+      //this.errorMessage = error.error.message;
+    });
+ 
   }
 }
 

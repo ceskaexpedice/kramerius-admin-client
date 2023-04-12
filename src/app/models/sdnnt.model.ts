@@ -51,6 +51,7 @@ export class SdnntItem {
         item.license = json['license'];
         item.title = json['title'];
         item.sync_actions=json['sync_actions'];
+        item.sync_actions.includes
 
         if (json['parent_id']) {
           item.parent_id = json['parent_id']

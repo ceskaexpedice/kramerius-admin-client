@@ -33,7 +33,7 @@
         <ng-container matColumnDef="expand">
           <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
           <td mat-cell *matCellDef="let element" class="app-text-right">
-            <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation(); getChildren()" *ngIf="element.sync_actions.includes('partial_change')" [matTooltip]="'Zobrazit ostatni zaznamy'">
+            <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation(); getChildren(element.id)" *ngIf="element.sync_actions.includes('partial_change')" [matTooltip]="'Zobrazit ostatni zaznamy'">
               <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
               <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
             </button>

@@ -189,8 +189,11 @@ export class AdminApiService {
   }
 
   getSdntSyncDataGranularity(id:string): Observable<SdnntItem[]> {
-    return this.get(`/sdnnt/sync/${id}`).pipe(map(response => SdnntItem.fromJsonArray(response[id])));
-  }
+    return this.get(`/sdnnt/sync/granularity/${id}`).pipe(map((response) => {
+      let val = response[id];
+      return SdnntItem.fromJsonArray(val);
+    }));
+}
 
   updateCollection(collection: Collection): Observable<any> {
     const payload = {
