@@ -434,7 +434,8 @@
     "indexSelectedObjects": "Indexovat vybrané objekty",
     "indexTheModel": "Indexovat model",
     "indexTheObject": "Indexovat objekt",
-    "deleteSelectedCollections": "Vymazat vybrané sbírky"
+    "deleteSelectedCollections": "Vymazat vybrané sbírky",
+    "refreshTheSynchronization": "Obnovit synchronizaci"
   },
   "field": {
     "public": "Veřejné",
@@ -678,6 +679,21 @@
       "title": "Smazání vybraných sbírek",
       "alert": "Pokud smažete vybrané sbírky, vytvoří se proces pro reindexaci a sbírky se Vám můžou zobrazovat v seznamu sbírek do doby, než tento proces bude ukončen.",
       "message": "Opravdu chcete vybrané sbírky trvale smazat"
+    },
+    "scheduleSyncWithSdnnt": {
+      "title": "Synchronizace licencí",
+      "timeInfo": "Datum a čas poslední synchronizace",
+      "field": {
+        "pid": "Pid",
+        "catalog": "Sdnt",
+        "title": "Titulek",
+        "sync_actions": {
+          "title": "Navrhovaná změna",
+          "add_dnnto": "přídání licence <span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
+          "change_dnntt_dnnto": "změna licence <strong class=\"app-ml-1 \">dnntt</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnnto</strong>",
+          "partial_change": "částečná změna"
+        }
+      }
     }
   },
   "snackbar": {
