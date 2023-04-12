@@ -1,64 +1,72 @@
-<h2 mat-dialog-title>{{ 'Synchronizace licencí' | translate }}  - MZK - 11.4.2023</h2>
+<h2 mat-dialog-title>{{ 'modal.scheduleSyncWithSdnnt.title' | translate }}  - MZK - 11.4.2023</h2>
 
-<h3> - MZK/11.4.2023 - </h3>
-
-<mat-dialog-content>
+<mat-dialog-content class="mat-typography">
+  <h3>{{ 'modal.scheduleSyncWithSdnnt.timeInfo' | translate }}: <strong>22.05.2023 11:09</strong></h3>
   <div class="app-oh">
-  <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
-    <table mat-table [dataSource]="dataSource" class="app-w-100">
-      <ng-container matColumnDef="library">
-        <th mat-header-cell *matHeaderCellDef>Knihovna</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.library }}
-          <ng-container *ngFor="let item of element.children">
-            <div>{{ item.rocnik }} => {{ item.licenseOut }}</div>
-          </ng-container>
-        </td>
-      </ng-container>
+    <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="app-w-100">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+          <th mat-header-cell *matHeaderCellDef [ngSwitch]="column">
+            <ng-container *ngSwitchCase="'sync_actions'">{{ 'modal.scheduleSyncWithSdnnt.field.' + column + '.title' | translate }}</ng-container>
+            <ng-container *ngSwitchDefault>{{ 'modal.scheduleSyncWithSdnnt.field.' + column | translate }}</ng-container>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container [ngSwitch]="column">
+              <ng-container *ngSwitchCase="'pid'"><a [href]="'https://ndk.cz/uuid/' + element[column]" target="_blank" >{{ element[column] }}</a></ng-container>
+              <ng-container *ngSwitchCase="'catalog'"><a [href]="'https://sdnnt.nkp.cz/sdnnt/search?q=' + element[column]" target="_blank">{{ element[column] }}</a></ng-container>
+              <ng-container *ngSwitchCase="'title'">
+                <div class="app-text-cutter-wrapper" [matTooltip]="element[column]">
+                  <div class="app-text-cutter">{{ element[column] }}</div>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="'sync_actions'">
+                <span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column] | translate" fxLayout="row" fxLayoutAlign="start center"></span>
+              </ng-container>
+              <ng-container *ngSwitchDefault>{{ element[column] }}</ng-container>
+            </ng-container>
+          </td>
+        </ng-container>
 
-      
-      <ng-container matColumnDef="catalog">
-        <th mat-header-cell *matHeaderCellDef>catalog</th>
-        <td mat-cell *matCellDef="let element">
-          <a  target="_blank" href="https://sdnnt.nkp.cz/sdnnt/search?q={{ element.catalog }}">{{ element.catalog }}</a></td>
-      </ng-container>
+        <ng-container matColumnDef="expand">
+          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <td mat-cell *matCellDef="let element" class="app-text-right">
+            <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()" *ngIf="element.children?.length > 0" [matTooltip]="'Zobrazit ostatni zaznamy'">
+              <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+              <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="pid">
-        <th mat-header-cell *matHeaderCellDef>pid</th>
-        <td mat-cell *matCellDef="let element">
-          <a  target="_blank" href="https://ndk.cz/uuid/{{ element.pid }}">{{ element.pid }}</a>
-        
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length" class="app-pt-0 app-pb-0">
+            <div class="app-element-detail app-oh" fxLayout="row" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <table class="app-table app-mb-4">
+                <thead>
+                  <tr>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.pid' | translate }}</th>
+                    <th>Id</th>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.sync_actions.title' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let child of element.children">
+                    <td>{{ child.pid }}</td>
+                    <td>{{ child.id }}</td>
+                    <td><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.sync_actions.' + child.sync_actions | translate" fxLayout="row" fxLayoutAlign="start center"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </ng-container>
 
-      
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Jmeno</th>
-        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="licenseIn">
-        <th mat-header-cell *matHeaderCellDef>Licence puvodni</th>
-        <td mat-cell *matCellDef="let element">{{ element.licenseIn }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="licenseOut">
-        <th mat-header-cell *matHeaderCellDef>Zmena licence</th>
-        <td mat-cell *matCellDef="let element">{{ element.licenseOut }}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>action</th>
-        <td mat-cell *matCellDef="let element">{{ element.sync_actions }}</td>
-      </ng-container>
-
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="app-element-row" [class.app-expanded-row]="expandedElement === element"></tr><!--(click)=" element.children?.length > 0 ? (expandedElement = expandedElement === element ? null : element) : null"-->
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let element;" class="app-detail-row" [class.app-expanded-row]="expandedElement === element"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
   </div>
-</div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
 <button mat-flat-button color="primary" type="submit">{{ 'button.startTheSynchronizationProcess' | translate }}</button>

@@ -432,7 +432,8 @@
     "indexSelectedObjects": "Index selected objects",
     "indexTheModel": "Index the model",
     "indexTheObject": "Index the object",
-    "deleteSelectedCollections": "Delete selected collections"
+    "deleteSelectedCollections": "Delete selected collections",
+    "refreshTheSynchronization": "Refresh the synchronization"
   },
   "field": {
     "public": "Public",
@@ -676,6 +677,21 @@
       "title": "Deleting selected collections",
       "alert": "If you delete the selected collections, a reindexing process is created and the collections can be displayed in the collection list until this process is finished.",
       "message": "Do you really want to permanently delete the selected collections?"
+    },
+    "scheduleSyncWithSdnnt": {
+      "title": "Synchronization of licenses",
+      "timeInfo": "Date and time of last synchronization",
+      "field": {
+        "pid": "Pid",
+        "catalog": "Sdnt",
+        "title": "Title",
+        "sync_actions": {
+          "title": "Proposed change",
+          "add_dnnto": "add license <span class=\"material-icons app-ml-1\">add_circle_outline</span><strong class=\"app-ml-1 \">dnnto</strong>",
+          "change_dnntt_dnnto": "license change <strong class=\"app-ml-1 \">dnntt</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong >dnnto</strong>",
+          "partial_change": "partial change"
+        }
+      }
     }
   },
   "snackbar": {
