@@ -82,9 +82,12 @@
 
 							<mat-divider [inset]="true"></mat-divider>
 							<div class="app-mt-4">
-								<h3 class="app-mt-0">{{ 'desc.licenseSynchronization' | translate }}</h3>
-								<span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openScheduleSyncWithSdnntDialog()" color="primary" class="app-mr-2">{{ 'button.synchronizeWithSDNNT' | translate }}</button>
+								<h3 class="app-mt-0">{{ 'desc.licenseSynchronizationFetch' | translate }}</h3>
+								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="startsyncProcess()" color="primary" class="app-mr-2">{{ 'button.startSynchronizationWithSDNNT' | translate }}</button>
+								</span>
+								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleSyncWithSdnntDialog()" color="primary" class="app-mr-2">{{ 'button.showSynchronzationResults' | translate }}</button>
 								</span>
 							</div>
 						</ng-container>

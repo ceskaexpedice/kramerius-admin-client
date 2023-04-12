@@ -13,6 +13,7 @@ import { Role } from '../models/roles.model';
 import { ConditionParam } from '../models/condition-param.model';
 import { Right } from '../models/right.model';
 import { RightAction } from '../models/right-action.model';
+import { SdnntItem, SdnntSync } from '../models/sdnnt.model';
 
 @Injectable({
   providedIn: 'root'
@@ -181,6 +182,14 @@ export class AdminApiService {
 
   getCollection(id: string): Observable<any> {
     return this.get(`/collections/${id}`);
+  }
+
+  getSdntSyncData(rows: number, page: number): Observable<SdnntSync> {
+   return this.get(`/sdnnt/sync?rows=${rows}&page=${page}`).pipe(map(response => SdnntSync.fromJson(response)));
+  }
+
+  getSdntSyncDataGranularity(id:string): Observable<SdnntItem[]> {
+    return this.get(`/sdnnt/sync/${id}`).pipe(map(response => SdnntItem.fromJsonArray(response[id])));
   }
 
   updateCollection(collection: Collection): Observable<any> {
