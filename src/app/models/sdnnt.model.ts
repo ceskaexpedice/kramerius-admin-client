@@ -51,33 +51,15 @@ export class SdnntItem {
         item.license = json['license'];
         item.title = json['title'];
         item.title = json['title'];
+        item.sync_actions=json['sync_actions'];
 
+        if (json['parent_id']) {
+          item.parent_id = json['parent_id']
+        }
+    
         return item;
     }
 }
 
-export class GranularityItem  {
-  
-  parent_id:string;
-
-  static fromJson(json): SdnntItem {
-    const item = new SdnntItem();
-    item.id = json['id'];
-    item.pid = json['pid'];
-    item.catalog = json['catalog'];
-    item.state = json['state'];
-    item.type = json['type'];
-    item.type_of_rec = json['type_of_rec'];
-    item.license = json['license'];
-    item.title = json['title'];
-    item.sync_actions=json['sync_actions'];
 
 
-    if (json['parent_id']) {
-      item.parent_id = json['parent_id']
-    }
-
-    return item;
-  }
-
-}
