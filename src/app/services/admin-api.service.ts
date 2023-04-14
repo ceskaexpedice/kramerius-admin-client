@@ -184,6 +184,15 @@ export class AdminApiService {
     return this.get(`/collections/${id}`);
   }
 
+  getSdntSyncInfo(): Observable<any> {
+    return this.get(`/sdnnt/info`);
+  }
+
+  getSdntSyncTimestamp(): Observable<any> {
+    return this.get(`/sdnnt/sync/timestamp`);
+  }
+
+  
   getSdntSyncData(rows: number, page: number): Observable<SdnntSync> {
    return this.get(`/sdnnt/sync?rows=${rows}&page=${page}`).pipe(map(response => SdnntSync.fromJson(response)));
   }

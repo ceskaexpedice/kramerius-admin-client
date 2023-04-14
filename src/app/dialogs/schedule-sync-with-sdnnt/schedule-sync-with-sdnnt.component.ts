@@ -5,6 +5,7 @@ import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SdnntItem, SdnntSync } from 'src/app/models/sdnnt.model';
 import { PageEvent } from '@angular/material/paginator';
+import { AppSettings } from 'src/app/services/app-settings';
 
 @Component({
   selector: 'app-schedule-sync-with-sdnnt',
@@ -23,7 +24,8 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
 
   columnsToDisplay = ['pid','catalog', 'title', 'sync_actions'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement: PeriodicElement | null;
+
+  expandedElement: SdnntItem | null;
 
   dataSource = [];
 
@@ -31,11 +33,13 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
   pageSize = 10;
   pageIndex = 0;
   pageSizeOptions = [5, 10, 25];
+  info:any;
+  lasttimestamp:any;
 
   constructor(
+    public appSettings: AppSettings,
     private api: AdminApiService,
     private ui: UIService
-
   ) { }
 
 
@@ -51,6 +55,21 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
   }
 
   reloadData() {
+
+    this.api.getSdntSyncInfo().subscribe((data:any)=> {
+      this.info = data;
+    });
+
+    this.api.getSdntSyncTimestamp().subscribe((data:any)=> {
+      let docs = data['docs'];
+      if (docs.length > 0) {
+        this.lasttimestamp = docs[0]['fetched'];
+      } else {
+        this.lasttimestamp = 'none';
+      }
+    });
+
+
     this.api.getSdntSyncData(this.pageSize,this.pageIndex).subscribe((data:SdnntSync) =>  {
       this.length = data.numberOfRec;
       this.dataSource = data.docs;
@@ -91,6 +110,7 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
   }
 }
 
+/*
 export interface PeriodicElement {
   id: string;
   catalog: string;
@@ -104,7 +124,8 @@ export interface PeriodicElement {
   sync_actions: any; 
   children: any;
 }
-
+*/
+/*
 const ELEMENT_DATA: PeriodicElement[] = [
   {
     id:'oai:aleph-nkp.cz:SKC01-000949099_1',
@@ -177,5 +198,5 @@ const ELEMENT_DATA: PeriodicElement[] = [
     ]
   }
 ];
-  
+*/
 

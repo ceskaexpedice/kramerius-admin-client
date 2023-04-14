@@ -1,7 +1,7 @@
-<h2 mat-dialog-title>{{ 'modal.scheduleSyncWithSdnnt.title' | translate }}  - MZK - 11.4.2023</h2>
+<h2 mat-dialog-title>{{ 'modal.scheduleSyncWithSdnnt.title' | translate }} </h2>
 
 <mat-dialog-content class="mat-typography">
-  <h3>{{ 'modal.scheduleSyncWithSdnnt.timeInfo' | translate }}: <strong>22.05.2023 11:09</strong></h3>
+  <h3>{{ 'modal.scheduleSyncWithSdnnt.timeInfo' | translate }}: <strong>{{lasttimestamp}}</strong></h3>
   <div class="app-oh">
     <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
       <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="app-w-100">
@@ -12,7 +12,10 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <ng-container [ngSwitch]="column">
-              <ng-container *ngSwitchCase="'pid'"><a [href]="'https://ndk.cz/uuid/' + element[column]" target="_blank" >{{ element[column] }}</a></ng-container>
+              
+              <ng-container *ngSwitchCase="'pid'"><a [href]="appSettings.coreBaseUrl+'/../view/'+element[column]" 
+                target="_blank" >{{ element[column] }}</a></ng-container>
+
               <ng-container *ngSwitchCase="'catalog'"><a [href]="'https://sdnnt.nkp.cz/sdnnt/search?q=' + element[column]" target="_blank">{{ element[column] }}</a></ng-container>
               <ng-container *ngSwitchCase="'title'">
                 <div class="app-text-cutter-wrapper" [matTooltip]="element[column]">
@@ -53,7 +56,14 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let child of element.children">
-                    <td>{{ child.pid }}</td>
+
+
+                    <td>
+                      <a [href]="appSettings.coreBaseUrl+'/../view/'+child.pid" 
+                      target="_blank" >{{ child.pid }}</a>
+
+                    </td>
+                    
                     <td>{{ child.id }}</td>
                     <td><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.sync_actions.' + child.sync_actions | translate" fxLayout="row" fxLayoutAlign="start center"></span></td>
                   </tr>
@@ -64,15 +74,18 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="app-element-row" [class.app-expanded-row]="expandedElement === element"></tr><!--(click)=" element.children?.length > 0 ? (expandedElement = expandedElement === element ? null : element) : null"-->
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let element;" class="app-detail-row" [class.app-expanded-row]="expandedElement === element"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="app-element-row" 
+        
+        [class.app-expanded-row]="expandedElement === element"></tr><!--(click)=" element.children?.length > 0 ? (expandedElement = expandedElement === element ? null : element) : null"-->
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let element;" class="app-detail-row" 
+        
+        [class.app-expanded-row]="expandedElement === element"></tr>
       </table>
       <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" showFirstLastButtons></mat-paginator>
     </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary"  type="submit">{{ 'button.startTheSynchronizationProcess' | translate }}</button>
-  <button mat-flat-button color="primary" (click)="scheduleSync()" type="submit">{{ 'button.refreshTheSynchronization' | translate }}</button>
-  <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+  <button mat-flat-button color="primary"  type="submit">{{ 'button.acceptChanges' | translate }}</button>
+  <button mat-flat-button mat-dialog-close=" cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

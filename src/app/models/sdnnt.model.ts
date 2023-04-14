@@ -30,6 +30,8 @@ export class SdnntItem {
     children:SdnntItem[];
     parent_id:string;
 
+    has_granularity:boolean;
+
     //children: any;
 
     static fromJsonArray(jsonArray): SdnntItem[] {
@@ -52,6 +54,8 @@ export class SdnntItem {
         item.title = json['title'];
         item.sync_actions=json['sync_actions'];
         item.sync_actions.includes
+
+        item.has_granularity = json['has_granularity'] ? json['has_granularity'] : false;
 
         if (json['parent_id']) {
           item.parent_id = json['parent_id']

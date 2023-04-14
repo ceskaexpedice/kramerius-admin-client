@@ -1,6 +1,13 @@
 <h2 mat-dialog-title>Titulek</h2>
 <mat-dialog-content class="mat-typography">
-  Happy, dopln co chces, titulek, cokoliv, ja to pak prelozim a upravim ...
+  Spuštění procesu synchrnoziace. 
+
+  <ul>
+    <li>Instance krameria: <b> {{appSettings.coreBaseUrl}} </b></li>
+    <li>Zkratka krameria: <b>{{info.acronym}} </b></li>
+    <li>Sdnnt isntance: <b>{{info.endpoint}}</b></li>
+  </ul>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button color="primary" (click)="startsyncProcess()" mat-dialog-close>{{ 'button.schedule' | translate }}</button>

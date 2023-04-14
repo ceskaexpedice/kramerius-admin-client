@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { AppSettings } from 'src/app/services/app-settings';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -9,12 +10,23 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class ScheduleStartTheSdnntReviewProcessComponent implements OnInit {
 
+  info:any ={};
+
   constructor(
+    public appSettings: AppSettings,
+    private api: AdminApiService,
     private ui: UIService,
     private adminApi: AdminApiService,
-  ) { }
+  ) { 
+
+
+  }
 
   ngOnInit(): void {
+    this.api.getSdntSyncInfo().subscribe((data:any)=> {
+      this.info = data;
+      console.log("information "+this.info);
+    });
   }
 
 
