@@ -22,7 +22,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 export class ScheduleSyncWithSdnntComponent implements OnInit {
   displayedColumns = ['pid','catalog', 'name', 'sync_actions'];
 
-  columnsToDisplay = ['pid','catalog', 'title', 'sync_actions'];
+  columnsToDisplay = ['pid','catalog', 'title', 'sync_actions', 'process_id'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
 
   expandedElement: SdnntItem | null;
@@ -52,6 +52,71 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
     this.reloadData();
+  }
+
+
+
+  applyChanges() {
+    let actions:string[] = ['add_dnnto','add_dnntt','remove_dnnto','remove_dnntt','change_dnntt_dnnto','change_dnnto_dnntt' ];
+    this.api.getSdntSyncBatches().subscribe((response:any)=> {
+
+      console.log(response);
+      this.ui.showInfoSnackBar('snackbar.success.action_');
+      /*
+      data.forEach(oneBatch=> {
+        console.log("Schedule "+oneBatch);
+        this.api.scheduleProcess(
+          oneBatch
+        ).subscribe(response => {
+          console.log(response);
+          this.ui.showInfoSnackBar('snackbar.success.action_'+action);
+        }, error => {
+          this.ui.showInfoSnackBar('snackbar.fail.action_'+action);
+        });
+      });*/
+
+    }, error => {
+      this.ui.showInfoSnackBar('snackbar.fail.action_');
+    });
+
+
+    /*
+    let pidlist = "";
+    let pidslist = "";
+    this.api.scheduleProcess({
+      defid: 'add_license',
+      params: {
+        license: license,
+        pidlist: pidlist.length == 1 ? undefined : pidlist,
+        pid: pidlist.length == 1 ? pidlist[0] : undefined,
+      }
+    }).subscribe(response => {
+      this.dialogRef.close("scheduled");
+    }, error => {
+      console.log(error);
+      this.dialogRef.close('error');
+    });
+    */
+    /* 
+    schedule(formData) {
+      this.inProgress = true;
+      const pidlist = this.splitPids(this.pids);
+      const license = this.license; //formData.license;
+      this.adminApi.scheduleProcess({
+        defid: 'add_license',
+        params: {
+          license: license,
+          pidlist: pidlist.length == 1 ? undefined : pidlist,
+          pid: pidlist.length == 1 ? pidlist[0] : undefined,
+        }
+      }).subscribe(response => {
+        this.dialogRef.close("scheduled");
+      }, error => {
+        console.log(error);
+        this.dialogRef.close('error');
+      });
+    }*/
+  
   }
 
   reloadData() {

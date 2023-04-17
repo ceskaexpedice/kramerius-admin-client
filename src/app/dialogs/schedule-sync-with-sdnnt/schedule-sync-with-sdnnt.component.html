@@ -28,6 +28,10 @@
                   <ng-container *ngSwitchDefault>{{ 'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column][0] + '.title' | translate }}</ng-container>
                 </ng-container>
               </ng-container>
+              <ng-container *ngSwitchCase="'process_id'">
+                <ng-container *ngFor="let p_ids of element[column]">
+                  <a [href]="'processes/standard-output/' + p_ids" target="_blank">{{ p_ids }}</a></ng-container>
+                </ng-container>
               <ng-container *ngSwitchDefault>{{ element[column] }}</ng-container>
             </ng-container>
           </td>
@@ -52,12 +56,11 @@
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.pid' | translate }}</th>
                     <th>Id</th>
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.sync_actions.title' | translate }}</th>
+                    <th>{{ 'process' }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let child of element.children">
-
-
                     <td>
                       <a [href]="appSettings.coreBaseUrl+'/../view/'+child.pid" 
                       target="_blank" >{{ child.pid }}</a>
@@ -66,6 +69,10 @@
                     
                     <td>{{ child.id }}</td>
                     <td><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.sync_actions.' + child.sync_actions | translate" fxLayout="row" fxLayoutAlign="start center"></span></td>
+                    <td>                      
+                      
+                      <a [href]="'processes/standard-output/'+child.process_id" 
+                            target="_blank" > {{child.process_id}}</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -86,6 +93,6 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary"  type="submit">{{ 'button.acceptChanges' | translate }}</button>
+  <button mat-flat-button color="primary"  (click)="applyChanges();"   mat-dialog-close>{{ 'button.acceptChanges' | translate }}</button>
   <button mat-flat-button mat-dialog-close=" cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

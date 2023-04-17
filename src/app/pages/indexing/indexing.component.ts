@@ -135,7 +135,7 @@ export class IndexingComponent implements OnInit {
   }
 
   openIndexationsByMultiplePidsDialog() {
-    const items = this.getCurrentItems();
+    const items = this.getSelectedItems();
     const dialogRef = this.dialog.open(ScheduleIndexationsByMultiplePidsDialogComponent, { 
       data: items.length,
       width: '600px',
@@ -147,6 +147,7 @@ export class IndexingComponent implements OnInit {
         this.loading = true;
         let requests = [];
         items.forEach(object => {
+          
           requests.push(
             this.adminApi.scheduleProcess({
               defid: 'new_indexer_index_object',
@@ -262,6 +263,18 @@ export class IndexingComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  getSelectedItems() {
+    let retvals = [];
+    let itms = this.getCurrentItems();
+    itms.forEach(row=> {
+      if (this.selection.isSelected(row)) {
+        retvals.push(row);
+      }
+    });
+    return retvals;
+  }
+
 
   getCurrentItems() {
     if (this.itemsToShow >= this.itemsLoaded.length) {

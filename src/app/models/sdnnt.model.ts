@@ -24,6 +24,9 @@ export class SdnntItem {
     pid: string;
     license:string;
     type: string;
+    process_id:string;
+    process_uuid:string;
+
     real_kram_licenses:string[];
     sync_actions:string[]; 
 
@@ -60,7 +63,15 @@ export class SdnntItem {
         if (json['parent_id']) {
           item.parent_id = json['parent_id']
         }
-    
+
+        if (json['process_id']) {
+          item.process_id = json['process_id']
+        }
+
+        if (json['process_uuid']) {
+          item.process_uuid = json['process_uuid']
+        }
+
         return item;
     }
 }

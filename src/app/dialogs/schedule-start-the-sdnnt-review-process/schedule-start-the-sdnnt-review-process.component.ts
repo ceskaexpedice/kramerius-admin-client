@@ -25,7 +25,7 @@ export class ScheduleStartTheSdnntReviewProcessComponent implements OnInit {
   ngOnInit(): void {
     this.api.getSdntSyncInfo().subscribe((data:any)=> {
       this.info = data;
-      console.log("information "+this.info);
+      //console.log("information "+this.info);
     });
   }
 

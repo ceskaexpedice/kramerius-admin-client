@@ -192,7 +192,10 @@ export class AdminApiService {
     return this.get(`/sdnnt/sync/timestamp`);
   }
 
-  
+  getSdntSyncBatches(): Observable<any> {
+    return this.get(`/sdnnt/sync/batches`);
+  }
+
   getSdntSyncData(rows: number, page: number): Observable<SdnntSync> {
    return this.get(`/sdnnt/sync?rows=${rows}&page=${page}`).pipe(map(response => SdnntSync.fromJson(response)));
   }
