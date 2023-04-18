@@ -319,9 +319,25 @@ export class CollectionsComponent implements OnInit {
   }
 
   deleteSelectedCollections() {
+    let toDelete = [];
+    this.collections.forEach(c=> {
+      if (this.selection.isSelected(c)) {
+        toDelete.push(c);
+      }
+    })
+
     const dialogRef = this.dialog.open(DeleteSelectedCollectionsDialogComponent, {
+      data : { selection: toDelete },
       width: '600px',
       panelClass: 'app-delete-selected-collections-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(routernLink => {
+      if (routernLink === 'processes') {
+        this.router.navigate(['/', routernLink]);
+      } else {
+        this.reloadPage();
+      }
     });
   }
 }

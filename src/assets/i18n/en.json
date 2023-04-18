@@ -312,12 +312,23 @@
   },
   "batch": {
     "PLANNED": "Scheduled",
-    "RUNNING": "Waiting",
+    "PLANNED_BATCH": "Naplánováno",
+
+    "RUNNING": "Running",
+    "RUNNING_BATCH": "Waiting",
+
     "FINISHED": "Finished",
+    "FINISHED_BATCH": "Dokončeno",
+
     "FAILED": "Failed",
-    "KILLED": "Killed",
+    "FAILED_BATCH": "Chyba",
+
     "NOT_RUNNING": "Not running",
     "WARNING": "Warning",
+
+    "KILLED": "Killed",
+    "KILLED_BATCH": "Killed",
+
     "currentVersionOfTheIndexer": "Current version of the indexer"
   },
   "paginator": {

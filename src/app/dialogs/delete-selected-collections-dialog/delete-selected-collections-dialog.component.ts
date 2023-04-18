@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CollectionsService } from 'src/app/services/collections.service';
+import { Observable, Subject } from 'rxjs'; // autocomplete
+import { debounceTime } from 'rxjs/operators';
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-delete-selected-collections-dialog',
@@ -7,12 +13,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteSelectedCollectionsDialogComponent implements OnInit {
 
-  constructor() { }
+  private subject: Subject<string> = new Subject();
+  private routerLink:string = 'processes';
+
+  constructor(public dialogRef: MatDialogRef<DeleteSelectedCollectionsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private router: Router,
+    private colApi: CollectionsService) { }
 
   ngOnInit(): void {
+  
+    this.subject.pipe(
+      debounceTime(400)
+    ).subscribe(searchTextValue => {
+      this.router.navigate(['/', this.routerLink]);
+      this.dialogRef.close("scheduled");
+    });
   }
 
-  deleteSelectedCollections() {
-    // to do
+  
+
+  deleteSelectedCollections(routerLink) {
+    this.routerLink = routerLink;
+    this.data.selection.forEach(one=> {
+      this.colApi.deleteCollection(one).subscribe(res=> {
+        this.subject.next(one);
+      },(error)=>{
+        console.log("not deleted "+error);
+      })
+    });
+
   }
 }

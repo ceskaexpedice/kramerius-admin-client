@@ -312,10 +312,20 @@
   },
   "batch": {
     "PLANNED": "Naplánováno",
-    "RUNNING": "Čeká",
+    "PLANNED_BATCH": "Naplánováno",
+
+    "RUNNING": "Běží",
+    "RUNNING_BATCH": "Čeká",
+
     "FINISHED": "Dokončeno",
+    "FINISHED_BATCH": "Dokončeno",
+
     "FAILED": "Chyba",
+    "FAILED_BATCH": "Chyba",
+
     "KILLED": "Zrušeno",
+    "KILLED_BATCH": "Zrušeno",
+
     "NOT_RUNNING": "Nespuštěno",
     "WARNING": "Varování",
     "currentVersionOfTheIndexer": "Aktuální verze indexeru"
