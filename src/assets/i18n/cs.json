@@ -312,7 +312,7 @@
   },
   "batch": {
     "PLANNED": "Naplánováno",
-    "RUNNING": "Běží",
+    "RUNNING": "Čeká",
     "FINISHED": "Dokončeno",
     "FAILED": "Chyba",
     "KILLED": "Zrušeno",

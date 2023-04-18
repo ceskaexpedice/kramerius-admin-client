@@ -312,7 +312,7 @@
   },
   "batch": {
     "PLANNED": "Scheduled",
-    "RUNNING": "Running",
+    "RUNNING": "Waiting",
     "FINISHED": "Finished",
     "FAILED": "Failed",
     "KILLED": "Killed",

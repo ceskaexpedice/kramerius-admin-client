@@ -4,6 +4,7 @@ export class Batch {
 
   id: number;
   state: string;
+  batchState:string;
   started: Date;
   finished: Date;
   planned: Date;
@@ -31,6 +32,9 @@ export class Batch {
     }
     if (jBatch['planned']) {
       batch.planned = new Date(jBatch['planned']);
+    }
+    if (jBatch['batchState']) {
+      batch.batchState = jBatch['batchState'];
     }
     batch.processes = [];
     if (jProcesses) {
@@ -79,6 +83,7 @@ export class Batch {
   hasSubprocesses(): boolean {
     return this.processes.length > 1;
   }
+
 
   getDuration(now: Date): number {
     if (!this.started) {
