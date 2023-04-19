@@ -26,8 +26,8 @@ export class DeleteSelectedCollectionsDialogComponent implements OnInit {
     this.subject.pipe(
       debounceTime(400)
     ).subscribe(searchTextValue => {
-      this.router.navigate(['/', this.routerLink]);
-      this.dialogRef.close("scheduled");
+      //this.router.navigate(['/', this.routerLink]);
+      this.dialogRef.close(this.routerLink);
     });
   }
 
