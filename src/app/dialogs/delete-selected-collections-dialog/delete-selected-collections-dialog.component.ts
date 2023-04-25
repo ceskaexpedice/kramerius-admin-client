@@ -42,6 +42,6 @@ export class DeleteSelectedCollectionsDialogComponent implements OnInit {
         console.log("not deleted "+error);
       })
     });
-
+    this.router.navigate(['/', this.routerLink]);
   }
 }
