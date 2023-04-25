@@ -84,20 +84,7 @@ export class AuthService {
 
   login() {
     const redircetUri = `${this.baseUrl()}/keycloak`;
-    let url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/auth?client_id=${this.settings.keycloak.clientId}&redirect_uri=${redircetUri}&response_type=code`;
-    let keycloakLoginUrl = this.settings.keycloak.loginUrl;
-    if (keycloakLoginUrl) {
-      const urlObject = new URL(keycloakLoginUrl);
-      const redirect= urlObject.searchParams.get("redirect_uri");
-      if (redirect != null) {
-        if (!redirect.endsWith('/keycloak')) {
-          urlObject.searchParams.set("redirect_uri", redircetUri);
-        }
-      } else {
-        urlObject.searchParams.set("redirect_uri", redircetUri);
-      }
-      url = urlObject.toString();
-    }
+    let url = `${this.settings.clientApiBaseUrl}/user/auth/login?&redirect_uri=${redircetUri}`;
     window.open(url, '_top');
   }
 
@@ -110,15 +97,14 @@ export class AuthService {
     localStorage.removeItem('account.token');
     localStorage.removeItem('account.token.time');
     this.user = null;
-    this.logoutKramerius().subscribe(() => {
-      
-      const redircetUri = `${this.baseUrl()}${suffix}`;
-      let url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout`;
-      if (this.settings.keycloak.logoutUrl) {
-        url = this.settings.keycloak.logoutUrl;
-      }
-      window.open(url, '_top');
-    });
+
+    const redircetUri = `${this.baseUrl()}${suffix}`;
+    //let url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/logout`;
+    let url = `${this.settings.clientApiBaseUrl}/user/auth/logout`;
+    if (this.settings.keycloak.logoutUrl) {
+      url = this.settings.keycloak.logoutUrl;
+    }
+    window.open(url, '_top');
   }
 
   isLoggedIn() {
@@ -231,9 +217,15 @@ export class AuthService {
   }
 
   private getToken(code: string): Observable<string> {
-    // url - realms
+    const redircetUri = `${this.baseUrl()}/keycloak`;
+    // let url = `${this.settings.clientApiBaseUrl}/user/auth/login?&redirect_uri=${redircetUri}`;
+    let url = `${this.settings.clientApiBaseUrl}/user/auth/token?code=${code}&redirect_uri=${redircetUri}`;
+    return this.http.get(url).pipe(map(response => 
+      response['access_token'])
+    );
+
+    /*
     let url = `${this.settings.keycloak.baseUrl}/realms/kramerius/protocol/openid-connect/token`;
-    // checkToken 
     let checkTokenUrl = this.settings.keycloak.tokenUrl;
     if (checkTokenUrl) url = checkTokenUrl;
     
@@ -244,7 +236,9 @@ export class AuthService {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         })
     };
-    return this.http.post(url, body, options).pipe(map(response => response['access_token']));
-}
+    return this.http.post(url, body, options).pipe(map(response => 
+      response['access_token'])
+    );*/
+  }
   
 }
