@@ -13,10 +13,10 @@
           <td mat-cell *matCellDef="let element">
             <ng-container [ngSwitch]="column">
               
-              <ng-container *ngSwitchCase="'pid'"><a [href]="appSettings.coreBaseUrl+'/../view/'+element[column]" 
+              <ng-container *ngSwitchCase="'pid'"><a [href]="kramInstance+element[column]" 
                 target="_blank" >{{ element[column] }}</a></ng-container>
 
-              <ng-container *ngSwitchCase="'catalog'"><a [href]="'https://sdnnt.nkp.cz/sdnnt/search?q=' + element[column]" target="_blank">{{ element[column] }}</a></ng-container>
+              <ng-container *ngSwitchCase="'catalog'"><a [href]=" sdnntInstance +'?q=' + element[column]" target="_blank">{{ element[column] }}</a></ng-container>
               <ng-container *ngSwitchCase="'title'">
                 <div class="app-text-cutter-wrapper" [matTooltip]="element[column]">
                   <div class="app-text-cutter">{{ element[column] }}</div>
@@ -62,7 +62,7 @@
                 <tbody>
                   <tr *ngFor="let child of element.children">
                     <td>
-                      <a [href]="appSettings.coreBaseUrl+'/../view/'+child.pid" 
+                      <a [href]="kramInstance+child.pid" 
                       target="_blank" >{{ child.pid }}</a>
 
                     </td>

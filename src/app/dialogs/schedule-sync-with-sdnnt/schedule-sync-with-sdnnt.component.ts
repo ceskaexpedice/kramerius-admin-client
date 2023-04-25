@@ -35,6 +35,8 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
   pageSizeOptions = [5, 10, 25];
   info:any;
   lasttimestamp:any;
+  sdnntInstance:string ;
+  kramInstance:string ; 
 
   constructor(
     public appSettings: AppSettings,
@@ -120,10 +122,35 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
   }
 
   reloadData() {
+    this.sdnntInstance = 'https://sdnnt.nkp.cz/sdnnt/search';
+    this.kramInstance =  this.appSettings.coreBaseUrl+'/../uuid/';
 
     this.api.getSdntSyncInfo().subscribe((data:any)=> {
       this.info = data;
+
+      let sindex = this.info.endpoint.indexOf('/api/v1.0/lists/changes');
+      if (sindex > -1) {
+        this.sdnntInstance = this.info.endpoint.substring(0, sindex)+"/search";
+      }
+
+      if (this.info.version === 'v7') {
+        let kindex = this.info.kramerius.indexOf('/search/api/client/v7.0');
+        if (kindex > -1) {
+          this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
+        }
+      } else {
+        let kindex = this.info.kramerius.indexOf('/search/api/v5.0');
+        if (kindex > -1) {
+          this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
+        }
+
+      }
+
+
+
     });
+
+
 
     this.api.getSdntSyncTimestamp().subscribe((data:any)=> {
       let docs = data['docs'];
