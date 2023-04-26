@@ -41,6 +41,7 @@ export class DeleteSelectedCollectionsDialogComponent implements OnInit {
     }, error => {
       this.dialogRef.close('error');
     });
+
   }
 
 

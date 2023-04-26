@@ -328,6 +328,7 @@
 
     "NOT_RUNNING": "Nespuštěno",
     "WARNING": "Varování",
+
     "currentVersionOfTheIndexer": "Aktuální verze indexeru"
   },
   "paginator": {
@@ -688,7 +689,11 @@
     "deleteSelectedCollections": {
       "title": "Smazání vybraných sbírek",
       "alert": "Pokud smažete vybrané sbírky, vytvoří se proces pro reindexaci a sbírky se Vám můžou zobrazovat v seznamu sbírek do doby, než tento proces bude ukončen.",
-      "message": "Opravdu chcete vybrané sbírky trvale smazat"
+      "message": "Opravdu chcete vybrané sbírky trvale smazat",
+      "button": {
+        "process": "Ano a přejít na seznam procesů",
+        "collection": "Ano a zůstat ve sbírkách"
+      }
     },
     "scheduleSyncWithSdnnt": {
       "title": "Synchronizace licencí",

@@ -323,11 +323,11 @@
     "FAILED": "Failed",
     "FAILED_BATCH": "Chyba",
 
-    "NOT_RUNNING": "Not running",
-    "WARNING": "Warning",
-
     "KILLED": "Killed",
     "KILLED_BATCH": "Killed",
+
+    "NOT_RUNNING": "Not running",
+    "WARNING": "Warning",
 
     "currentVersionOfTheIndexer": "Current version of the indexer"
   },
@@ -689,7 +689,11 @@
     "deleteSelectedCollections": {
       "title": "Deleting selected collections",
       "alert": "If you delete the selected collections, a reindexing process is created and the collections can be displayed in the collection list until this process is finished.",
-      "message": "Do you really want to permanently delete the selected collections?"
+      "message": "Do you really want to permanently delete the selected collections?",
+      "button": {
+        "process": "Yes and go to the process list",
+        "collection": "Yes and stay in collections"
+      }
     },
     "scheduleSyncWithSdnnt": {
       "title": "Synchronization of licenses",
