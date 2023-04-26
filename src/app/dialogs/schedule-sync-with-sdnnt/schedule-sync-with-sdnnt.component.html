@@ -1,5 +1,4 @@
 <h2 mat-dialog-title>{{ 'modal.scheduleSyncWithSdnnt.title' | translate }} </h2>
-
 <mat-dialog-content class="mat-typography">
   <h3>{{ 'modal.scheduleSyncWithSdnnt.timeInfo' | translate }}: <strong>{{ lasttimestamp | date : 'dd.MM.yyyy H:mm' }}</strong></h3>
   <div class="app-oh">
@@ -50,7 +49,6 @@
                 <thead>
                   <tr>
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.pid' | translate }}</th>
-                    <!-- <th>Id</th> -->
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.sync_actions.title' | translate }}</th>
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.process' | translate }}</th>
                   </tr>
@@ -58,7 +56,6 @@
                 <tbody>
                   <tr *ngFor="let child of element.children">
                     <td><a [href]="kramInstance+child.pid" target="_blank" >{{ child.pid }}</a></td>             
-                    <!-- <td>{{ child.id }}</td> -->
                     <td><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.sync_actions.' + child.sync_actions | translate" fxLayout="row" fxLayoutAlign="start center"></span></td>
                     <td><a [href]="'processes/standard-output/'+child.process_id" target="_blank" > {{child.process_id}}</a></td>
                   </tr>
