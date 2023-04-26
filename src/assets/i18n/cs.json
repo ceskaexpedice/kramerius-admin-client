@@ -446,7 +446,7 @@
     "indexTheModel": "Indexovat model",
     "indexTheObject": "Indexovat objekt",
     "deleteSelectedCollections": "Vymazat vybrané sbírky",
-    "refreshTheSynchronization": "Obnovit synchronizaci"
+    "acceptChanges": "Akceptovat změny"
   },
   "field": {
     "public": "Veřejné",

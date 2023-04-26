@@ -446,7 +446,7 @@
     "indexTheModel": "Index the model",
     "indexTheObject": "Index the object",
     "deleteSelectedCollections": "Delete selected collections",
-    "refreshTheSynchronization": "Refresh the synchronization"
+    "acceptChanges": "Accept changes"
   },
   "field": {
     "public": "Public",
