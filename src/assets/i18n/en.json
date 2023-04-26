@@ -721,6 +721,14 @@
           }
         }
       }
+    },
+    "scheduleStartTheSdnntReviewProcess": {
+      "title": "Starting the license synchronization process",
+      "desc": {
+        "krameriusInstance": "Krameria instance",
+        "abbreviationOfKramerius": "Abbreviation of kramerius",
+        "sdnntInstance": "Sdnnt instance"
+      }
     }
   },
   "snackbar": {

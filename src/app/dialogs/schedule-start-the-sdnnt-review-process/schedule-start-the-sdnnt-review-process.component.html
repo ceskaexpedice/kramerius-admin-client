@@ -1,13 +1,10 @@
-<h2 mat-dialog-title>Titulek</h2>
+<h2 mat-dialog-title>{{ 'modal.scheduleStartTheSdnntReviewProcess.title' | translate }}</h2>
 <mat-dialog-content class="mat-typography">
-  Spuštění procesu synchrnoziace. 
-
   <ul>
-    <li>Instance krameria: <b> {{info.kramerius}} </b></li>
-    <li>Zkratka krameria: <b>{{info.acronym}} </b></li>
-    <li>Sdnnt instance: <b>{{info.endpoint}}</b></li>
+    <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.krameriusInstance' | translate }}: <strong> {{ info.kramerius}} </strong></li>
+    <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>{{ info.acronym }} </strong></li>
+    <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.sdnntInstance' | translate }}: <strong>{{ info.endpoint }}</strong></li>
   </ul>
-
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button color="primary" (click)="startsyncProcess()" mat-dialog-close>{{ 'button.schedule' | translate }}</button>

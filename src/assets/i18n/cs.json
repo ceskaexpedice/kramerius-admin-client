@@ -721,6 +721,14 @@
           }
         }
       }
+    },
+    "scheduleStartTheSdnntReviewProcess": {
+      "title": "Spuštění procesu synchronizace licencí",
+      "desc": {
+        "krameriusInstance": "Instance krameria",
+        "abbreviationOfKramerius": "Zkratka krameria",
+        "sdnntInstance": "Sdnnt instance"
+      }
     }
   },
   "snackbar": {
