@@ -446,7 +446,7 @@
     "indexTheModel": "Indexovat model",
     "indexTheObject": "Indexovat objekt",
     "deleteSelectedCollections": "Vymazat vybrané sbírky",
-    "refreshTheSynchronization": "Obnovit synchronizaci"
+    "acceptChanges": "Akceptovat změny"
   },
   "field": {
     "public": "Veřejné",
@@ -721,6 +721,14 @@
           }
         }
       }
+    },
+    "scheduleStartTheSdnntReviewProcess": {
+      "title": "Spuštění procesu synchronizace licencí",
+      "desc": {
+        "krameriusInstance": "Instance krameria",
+        "abbreviationOfKramerius": "Zkratka krameria",
+        "sdnntInstance": "Sdnnt instance"
+      }
     }
   },
   "snackbar": {
@@ -787,7 +795,8 @@
       "scheduleIndexationByPid": "Indexace byla naplánována",
       "scheduleIndexationByModel": "Indexace modelu {{value}} byla naplánována",
       "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací",
-      "scheduleStartTheSdnntReviewProcess": "Spuštění procesu kontroly SDNNT/Kramerius bylo naplánováno"
+      "scheduleStartTheSdnntReviewProcess": "Spuštění procesu kontroly SDNNT/Kramerius bylo naplánováno",
+      "deleteSelectedCollections": "Proces smazaní vybraných sbirek byl úspěšně spuštěn"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -839,7 +848,8 @@
       "scheduleIndexationByModel": "Nepodařilo se naplánovat indexaci modelu {{value}}",
       "scheduleIndexationsByMultiplePids": "Nepodařilo se naplánovat indexace",
       "loadMoreItemsForBatch": "Nepodařilo se načíst data",
-      "scheduleStartTheSdnntReviewProcess": "Chyba při spuštění procesu kontroly SDNNT/Kramerius"
+      "scheduleStartTheSdnntReviewProcess": "Chyba při spuštění procesu kontroly SDNNT/Kramerius",
+      "deleteSelectedCollections": "Došlo k chybě při smazaní vybraných sbírek"
     }
   },
   "desc": {

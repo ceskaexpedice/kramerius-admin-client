@@ -4,6 +4,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 import { Observable, Subject, forkJoin } from 'rxjs'; // autocomplete
 import { debounceTime } from 'rxjs/operators';
 import { Router } from "@angular/router";
+import { UIService } from 'src/app/services/ui.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class DeleteSelectedCollectionsDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DeleteSelectedCollectionsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private router: Router,
-    private colApi: CollectionsService) { }
+    private colApi: CollectionsService,
+    private ui: UIService) { }
 
   ngOnInit(): void {
   
@@ -36,10 +38,12 @@ export class DeleteSelectedCollectionsDialogComponent implements OnInit {
     });
 
     forkJoin(requests).subscribe(result => {
-      console.log(" Result is "+result);
+      //console.log(" Result is "+result);
       this.dialogRef.close(this.routerLink);
+      this.ui.showInfoSnackBar('snackbar.success.deleteSelectedCollections');
     }, error => {
       this.dialogRef.close('error');
+      this.ui.showErrorSnackBar("snackbar.error.deleteSelectedCollections");
     });
 
   }

@@ -446,7 +446,7 @@
     "indexTheModel": "Index the model",
     "indexTheObject": "Index the object",
     "deleteSelectedCollections": "Delete selected collections",
-    "refreshTheSynchronization": "Refresh the synchronization"
+    "acceptChanges": "Accept changes"
   },
   "field": {
     "public": "Public",
@@ -721,6 +721,14 @@
           }
         }
       }
+    },
+    "scheduleStartTheSdnntReviewProcess": {
+      "title": "Starting the license synchronization process",
+      "desc": {
+        "krameriusInstance": "Krameria instance",
+        "abbreviationOfKramerius": "Abbreviation of kramerius",
+        "sdnntInstance": "Sdnnt instance"
+      }
     }
   },
   "snackbar": {
@@ -787,7 +795,8 @@
       "scheduleIndexationByPid": "Indexing has been scheduled",
       "scheduleIndexationByModel": "{{value}} model indexing has been scheduled",
       "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing",
-      "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled"
+      "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled",
+      "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -839,7 +848,8 @@
       "scheduleIndexationByModel": "Failed to schedule model index {{value}}",
       "scheduleIndexationsByMultiplePids": "Failed to schedule indexing",
       "loadMoreItemsForBatch": "Failed to load data",
-      "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process"
+      "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process",
+      "deleteSelectedCollections": "An error occurred while deleting the selected collections"
     }
   },
   "desc": {
