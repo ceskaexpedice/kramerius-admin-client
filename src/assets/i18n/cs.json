@@ -702,6 +702,7 @@
         "pid": "Pid",
         "catalog": "Sdnt",
         "title": "Titulek",
+        "process": "Proces",
         "sync_actions": {
           "title": "Navrhovaná změna",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -710,15 +711,7 @@
           "remove_dnntt": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnntt</strong>",
           "change_dnntt_dnnto": "<strong class=\"app-ml-1 \">dnntt</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnnto</strong>",
           "change_dnnto_dnntt": "<strong class=\"app-ml-1 \">dnnto</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnntt</strong>",
-          "partial_change": {
-            "title": "částečná změna",
-            "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
-            "add_dnntt": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnntt</strong>",
-            "remove_dnnto": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnnto</strong>",
-            "remove_dnntt": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnntt</strong>",
-            "change_dnntt_dnnto": "<strong class=\"app-ml-1 \">dnntt</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnnto</strong>",
-            "change_dnnto_dnntt": "<strong class=\"app-ml-1 \">dnnto</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnntt</strong>"
-          }
+          "partial_change": "<strong>částečná změna</strong>"
         }
       }
     },

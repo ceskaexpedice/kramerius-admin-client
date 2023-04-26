@@ -1,21 +1,19 @@
 <h2 mat-dialog-title>{{ 'modal.scheduleSyncWithSdnnt.title' | translate }} </h2>
 
 <mat-dialog-content class="mat-typography">
-  <h3>{{ 'modal.scheduleSyncWithSdnnt.timeInfo' | translate }}: <strong>{{lasttimestamp}}</strong></h3>
+  <h3>{{ 'modal.scheduleSyncWithSdnnt.timeInfo' | translate }}: <strong>{{ lasttimestamp | date : 'dd.MM.yyyy H:mm' }}</strong></h3>
   <div class="app-oh">
     <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
       <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="app-w-100">
         <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
           <th mat-header-cell *matHeaderCellDef [ngSwitch]="column">
             <ng-container *ngSwitchCase="'sync_actions'">{{ 'modal.scheduleSyncWithSdnnt.field.' + column + '.title' | translate }}</ng-container>
+            <ng-container *ngSwitchCase="'process_id'">{{ 'modal.scheduleSyncWithSdnnt.field.process' | translate }}</ng-container>
             <ng-container *ngSwitchDefault>{{ 'modal.scheduleSyncWithSdnnt.field.' + column | translate }}</ng-container>
           </th>
           <td mat-cell *matCellDef="let element">
             <ng-container [ngSwitch]="column">
-              
-              <ng-container *ngSwitchCase="'pid'"><a [href]="kramInstance+element[column]" 
-                target="_blank" >{{ element[column] }}</a></ng-container>
-
+              <ng-container *ngSwitchCase="'pid'"><a [href]="kramInstance+element[column]" target="_blank" >{{ element[column] }}</a></ng-container>
               <ng-container *ngSwitchCase="'catalog'"><a [href]=" sdnntInstance +'?q=' + element[column]" target="_blank">{{ element[column] }}</a></ng-container>
               <ng-container *ngSwitchCase="'title'">
                 <div class="app-text-cutter-wrapper" [matTooltip]="element[column]">
@@ -23,15 +21,13 @@
                 </div>
               </ng-container>
               <ng-container *ngSwitchCase="'sync_actions'">
-                <ng-container [ngSwitch]="element[column]?.length">
-                  <ng-container *ngSwitchCase="1"><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column] | translate" fxLayout="row" fxLayoutAlign="start center"></span></ng-container>
-                  <ng-container *ngSwitchDefault>{{ 'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column][0] + '.title' | translate }}</ng-container>
-                </ng-container>
+                <span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column] | translate" fxLayout="row" fxLayoutAlign="start center"></span>
               </ng-container>
               <ng-container *ngSwitchCase="'process_id'">
                 <ng-container *ngFor="let p_ids of element[column]">
-                  <a [href]="'processes/standard-output/' + p_ids" target="_blank">{{ p_ids }}</a></ng-container>
+                  <a [href]="'processes/standard-output/' + p_ids" target="_blank">{{ p_ids }}</a>
                 </ng-container>
+              </ng-container>
               <ng-container *ngSwitchDefault>{{ element[column] }}</ng-container>
             </ng-container>
           </td>
@@ -54,25 +50,17 @@
                 <thead>
                   <tr>
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.pid' | translate }}</th>
-                    <th>Id</th>
+                    <!-- <th>Id</th> -->
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.sync_actions.title' | translate }}</th>
-                    <th>{{ 'process' }}</th>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.process' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let child of element.children">
-                    <td>
-                      <a [href]="kramInstance+child.pid" 
-                      target="_blank" >{{ child.pid }}</a>
-
-                    </td>
-                    
-                    <td>{{ child.id }}</td>
+                    <td><a [href]="kramInstance+child.pid" target="_blank" >{{ child.pid }}</a></td>             
+                    <!-- <td>{{ child.id }}</td> -->
                     <td><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.sync_actions.' + child.sync_actions | translate" fxLayout="row" fxLayoutAlign="start center"></span></td>
-                    <td>                      
-                      
-                      <a [href]="'processes/standard-output/'+child.process_id" 
-                            target="_blank" > {{child.process_id}}</a></td>
+                    <td><a [href]="'processes/standard-output/'+child.process_id" target="_blank" > {{child.process_id}}</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -81,12 +69,8 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="app-element-row" 
-        
-        [class.app-expanded-row]="expandedElement === element"></tr><!--(click)=" element.children?.length > 0 ? (expandedElement = expandedElement === element ? null : element) : null"-->
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let element;" class="app-detail-row" 
-        
-        [class.app-expanded-row]="expandedElement === element"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="app-element-row" [class.app-expanded-row]="expandedElement === element"></tr><!--(click)=" element.children?.length > 0 ? (expandedElement = expandedElement === element ? null : element) : null"-->
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let element;" class="app-detail-row" [class.app-expanded-row]="expandedElement === element"></tr>
       </table>
       <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" showFirstLastButtons></mat-paginator>
     </div>

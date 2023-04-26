@@ -7,6 +7,6 @@
   </ul>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" (click)="startsyncProcess()" mat-dialog-close>{{ 'button.schedule' | translate }}</button>
+  <button mat-flat-button color="primary" (click)="startsyncProcess()" mat-dialog-close [disabled]="!info.kramerius || !info.acronym || !info.endpoint">{{ 'button.schedule' | translate }}</button>
   <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>
