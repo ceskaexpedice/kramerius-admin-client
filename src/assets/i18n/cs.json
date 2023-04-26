@@ -721,7 +721,8 @@
         "krameriusInstance": "Instance krameria",
         "abbreviationOfKramerius": "Zkratka krameria",
         "sdnntInstance": "Sdnnt instance"
-      }
+      },
+      "alert": "Následující proměnné musí být nakonfigurovány"
     }
   },
   "snackbar": {

@@ -721,7 +721,8 @@
         "krameriusInstance": "Krameria instance",
         "abbreviationOfKramerius": "Abbreviation of kramerius",
         "sdnntInstance": "Sdnnt instance"
-      }
+      },
+      "alert": "The following variables must be configured"
     }
   },
   "snackbar": {

@@ -5,6 +5,15 @@
     <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>{{ info.acronym }} </strong></li>
     <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.sdnntInstance' | translate }}: <strong>{{ info.endpoint }}</strong></li>
   </ul>
+  <mat-card class="app-view-alert app-warn" *ngIf="!info.kramerius || !info.acronym || !info.endpoint">
+    <mat-card-content>
+      <mat-icon>error</mat-icon>
+      <div>
+        {{ 'modal.scheduleStartTheSdnntReviewProcess.alert' | translate }}:<br />
+        <strong>promenna 1</strong>, <strong>promenna 2</strong>, <strong>promenna 3</strong>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button color="primary" (click)="startsyncProcess()" mat-dialog-close [disabled]="!info.kramerius || !info.acronym || !info.endpoint">{{ 'button.schedule' | translate }}</button>
