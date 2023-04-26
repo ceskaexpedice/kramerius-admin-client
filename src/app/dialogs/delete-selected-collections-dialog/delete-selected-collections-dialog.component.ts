@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CollectionsService } from 'src/app/services/collections.service';
-import { Observable, Subject } from 'rxjs'; // autocomplete
+import { Observable, Subject, forkJoin } from 'rxjs'; // autocomplete
 import { debounceTime } from 'rxjs/operators';
 import { Router } from "@angular/router";
 
@@ -23,25 +23,27 @@ export class DeleteSelectedCollectionsDialogComponent implements OnInit {
 
   ngOnInit(): void {
   
-    this.subject.pipe(
-      debounceTime(400)
-    ).subscribe(searchTextValue => {
-      //this.router.navigate(['/', this.routerLink]);
-      this.dialogRef.close(this.routerLink);
-    });
   }
 
   
 
   deleteSelectedCollections(routerLink) {
     this.routerLink = routerLink;
-    this.data.selection.forEach(one=> {
-      this.colApi.deleteCollection(one).subscribe(res=> {
-        this.subject.next(one);
-      },(error)=>{
-        console.log("not deleted "+error);
-      })
+
+    let requests = [];
+    this.data.selection.forEach(one=>{
+      requests.push(this.colApi.deleteCollection(one));
     });
 
+    forkJoin(requests).subscribe(result => {
+      console.log(" Result is "+result);
+      this.dialogRef.close(this.routerLink);
+    }, error => {
+      this.dialogRef.close('error');
+    });
   }
+
+
+
+  
 }

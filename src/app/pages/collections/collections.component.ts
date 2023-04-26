@@ -335,8 +335,10 @@ export class CollectionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(routernLink => {
       if (routernLink === 'processes') {
         this.router.navigate(['/', routernLink]);
-      } else {
+      } else if (routernLink === 'collections') {
         this.reloadPage();
+      } else {
+        //this.reloadPage();
       }
     });
   }
