@@ -76,6 +76,9 @@ export class IndexingComponent implements OnInit {
   onSelectModel(event: MatSelectChange) {
     this.stateFilter = 'all';
     if (event.value) {
+      this.itemsLoaded = [];
+      this.dataSource = new MatTableDataSource(this.itemsLoaded);
+
       this.loadFirstBatchOfItems();
     }
   }
@@ -209,6 +212,7 @@ export class IndexingComponent implements OnInit {
 
       if (itemsFromRepo.length == 0) { //no more items in repo
         console.log('no more items in repo')
+
         this.loading = false;
       } else {
         this.repoNextOffset += pidsFromRepo.length;
