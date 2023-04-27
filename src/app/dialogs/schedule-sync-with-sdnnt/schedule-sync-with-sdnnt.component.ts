@@ -135,12 +135,12 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
 
       if (this.info.version === 'v7') {
         let kindex = this.info.kramerius.indexOf('/search/api/client/v7.0');
-        if (kindex > -1) {
+        if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
           this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
         }
       } else {
         let kindex = this.info.kramerius.indexOf('/search/api/v5.0');
-        if (kindex > -1) {
+        if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
           this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
         }
 
