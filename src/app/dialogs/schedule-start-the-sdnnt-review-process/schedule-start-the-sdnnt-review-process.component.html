@@ -10,7 +10,13 @@
       <mat-icon>error</mat-icon>
       <div>
         {{ 'modal.scheduleStartTheSdnntReviewProcess.alert' | translate }}:<br />
-        <strong>promenna 1</strong>, <strong>promenna 2</strong>, <strong>promenna 3</strong>
+
+        <ul>
+          <li> {{ 'modal.scheduleStartTheSdnntReviewProcess.desc.krameriusInstance' | translate }}:   <strong *ngIf="!info.acronym">sdnnt.check.local.api</strong> </li>
+          <li> {{ 'modal.scheduleStartTheSdnntReviewProcess.desc.abbreviationOfKramerius' | translate }}:   <strong *ngIf="!info.acronym">sdnnt.check.acronym</strong> </li>
+          <li> {{ 'modal.scheduleStartTheSdnntReviewProcess.desc.sdnntInstance' | translate }}:   <strong *ngIf="!info.acronym">sdnnt.check.endpoint</strong> </li>
+        </ul>
+
       </div>
     </mat-card-content>
   </mat-card>

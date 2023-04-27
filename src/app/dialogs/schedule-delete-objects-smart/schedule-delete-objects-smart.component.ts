@@ -17,6 +17,7 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
   pids;
   title;
   fixed = false;
+  ignoreIncosistencies:boolean = false;
 
   pidsCounter = 0;
   scheduledCounter = 0;
@@ -33,6 +34,11 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  modelChange() {
+    console.log("Model change");
+  }
+
   schedule(formData) {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
@@ -44,6 +50,7 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
           params: {
             pid: pid,
             title: this.title,
+            ignoreIncosistencies:  formData['ignoreIncosistencies']
           }
         })
       );

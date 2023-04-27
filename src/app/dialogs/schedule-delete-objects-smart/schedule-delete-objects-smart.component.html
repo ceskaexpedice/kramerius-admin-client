@@ -9,10 +9,15 @@
 			<div class="app-explanation app-mb-4" [innerHtml]="'modal.deleteObjectsSmart.explanation' | translate"></div>
 		</ng-container>
 		<div>
+			<mat-checkbox class="app-desc app-mb-4" [(ngModel)]="ignoreIncosistencies"
+					name="ignoreIncosistencies">Pokračuj pokud není dokument v akubra repositáři
+				
+				</mat-checkbox>  
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
 				<mat-label>{{fixed ? 'PID' : ('desc.pids' | translate) }}</mat-label>
 				<textarea matInput type="text" id="inputPids" name="pids" autofocus [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate ) + '...'" [disabled]="inProgress || fixed" required rows="{{fixed ? 1 : 4}}"></textarea>
 				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed" class="app-cursor-pointer">file_download</mat-icon>
+
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 		</div>
