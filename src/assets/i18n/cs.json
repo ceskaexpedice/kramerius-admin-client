@@ -446,7 +446,8 @@
     "indexTheModel": "Indexovat model",
     "indexTheObject": "Indexovat objekt",
     "deleteSelectedCollections": "Vymazat vybrané sbírky",
-    "acceptChanges": "Akceptovat změny"
+    "acceptChanges": "Akceptovat změny",
+    "deleteSelectedItems": "Vymazat vybrané položky"
   },
   "field": {
     "public": "Veřejné",
@@ -693,6 +694,15 @@
       "button": {
         "process": "Ano a přejít na seznam procesů",
         "collection": "Ano a zůstat ve sbírkách"
+      }
+    },
+    "deleteSelectedItemsFromCollection": {
+      "title": "Smazání vybraných položek ze sbírky",
+      "alert": "Pokud smažete vybrané položky ze sbírky, vytvoří se proces pro reindexaci a položky se Vám můžou zobrazovat v seznamu sbírky do doby, než tento proces bude ukončen.",
+      "message": "Opravdu chcete vybrané položky ze sbírky trvale smazat",
+      "button": {
+        "process": "Ano a přejít na seznam procesů",
+        "collection": "Ano a zůstat ve sbírce"
       }
     },
     "scheduleSyncWithSdnnt": {
@@ -956,6 +966,8 @@
     "selectThisObject": "Vybrat tento objekt",
     "noRecordFound": "Žádný záznam nenalezen",
     "selectAllCollections": "Vybrat všechny sbírky",
-    "selectThisCollection": "Vybrat tuto sbírku"
+    "selectThisCollection": "Vybrat tuto sbírku",
+    "selectAllItems": "Vybrat všechny položky",
+    "selectThisItem": "Vybrat tuto položku"
   }
 }
