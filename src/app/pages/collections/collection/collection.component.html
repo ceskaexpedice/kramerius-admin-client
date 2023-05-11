@@ -30,8 +30,10 @@
     </div>
     <div fxFlex class="app-oa-y">
       <div class="app-container">
-        
-        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+          <div>
+            <mat-checkbox [matTooltip]="'desc.selectAllItems' | translate" (change)="selectAllCollections()" [checked]="selectedAllCollections" [indeterminate]="selectedAllCollections"></mat-checkbox>
+          </div>
           <div fxFlex class="app-text-cutter">
             <a (click)="copyTextToClipboard(getCurrentRoute('string', '/collections/' + view + '/'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
@@ -41,14 +43,11 @@
             <span *ngIf="collection" [matTooltip]="collection.getDescription()" class="app-desc">{{collection.getDescription() }}</span>
           </div>
           <div *ngIf="view === 'content'">
-            <a mat-flat-button color="primary" (click)="onAddItemsToThisCollection()">
-              <mat-icon>add_circle</mat-icon>{{ 'button.addToThisCollection' | translate }}
-            </a>
+            <button mat-flat-button color="primary" (click)="onAddItemsToThisCollection()"  class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
+            <button [disabled]="!selectedAllCollections" mat-flat-button color="warn" (click)="deleteSelectedItemsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
           </div>
           <div *ngIf="view === 'context'">
-            <a mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">
-              <mat-icon>add_circle</mat-icon>{{ 'button.addThisCollectionToAnotherCollection' | translate }}
-            </a>
+            <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
           </div>
         </mat-card>
 

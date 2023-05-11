@@ -1,10 +1,13 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-<mat-card class="app-view-rights app-view-hover item-collection app-cursor-pointer" *ngFor="let item of filterCollections(items)" [routerLink]="allowEdit(item['pid'])  ?  ['/collections/content/', item['pid']] : null" [ngClass]="!allowEdit(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(item['pid']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(item['pid']) ? 'app-alert-not-allowed' : null">
+<mat-card class="app-view-rights app-view-hover item-collection app-cursor-pointer" *ngFor="let item of filterCollections(items)" [ngClass]="!allowEdit(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(item['pid']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(item['pid']) ? 'app-alert-not-allowed' : null">
 	<mat-card-header fxLayout="row" fxLayoutGap="16px">
-		<div *ngIf="getThumb(item['pid'])">
+		<div>
+			<mat-checkbox [matTooltip]="'desc.selectThisItem' | translate"></mat-checkbox>
+		</div>
+		<div *ngIf="getThumb(item['pid'])" [routerLink]="allowEdit(item['pid'])  ?  ['/collections/content/', item['pid']] : null">
 			<img [src]="getThumb(item['pid'])" (error)="handleMissingImage($event)"/>
 		</div>
-		<div fxFlex class="app-left">
+		<div fxFlex class="app-left" [routerLink]="allowEdit(item['pid'])  ?  ['/collections/content/', item['pid']] : null">
 			<mat-card-title>
 				<mat-icon *ngIf="allowEdit(item['pid'])">link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container>
 			</mat-card-title>
@@ -19,6 +22,9 @@
 </mat-card>
 <mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}">
 	<mat-card-header fxLayout="row" fxLayoutGap="16px">
+		<div>
+			<mat-checkbox [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
+		</div>
 		<div *ngIf="getThumb(item['pid'])">
 			<img [src]="getThumb(item['pid'])" />
 		</div>

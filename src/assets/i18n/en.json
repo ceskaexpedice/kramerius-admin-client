@@ -446,7 +446,8 @@
     "indexTheModel": "Index the model",
     "indexTheObject": "Index the object",
     "deleteSelectedCollections": "Delete selected collections",
-    "acceptChanges": "Accept changes"
+    "acceptChanges": "Accept changes",
+    "deleteSelectedItems": "Delete selected items"
   },
   "field": {
     "public": "Public",
@@ -693,6 +694,15 @@
       "button": {
         "process": "Yes and go to the process list",
         "collection": "Yes and stay in collections"
+      }
+    },
+    "deleteSelectedItemsFromCollection": {
+      "title": "Deleting selected items from the collection",
+      "alert": "If you delete selected items from the collection, a reindexing process is created and the items can be displayed in the collection list until this process is finished.",
+      "message": "Do you really want to permanently delete the selected items from the collection",
+      "button": {
+        "process": "Yes and go to process list",
+        "collection": "Yes and stay in the collection"
       }
     },
     "scheduleSyncWithSdnnt": {
@@ -956,6 +966,8 @@
     "selectThisObject": "Select this object",
     "noRecordFound": "No record found",
     "selectAllCollections": "Select all collections",
-    "selectThisCollection": "Select this collection"
+    "selectThisCollection": "Select this collection",
+    "selectAllItems": "Select all items",
+    "selectThisItem": "Select this item"
   }
 }

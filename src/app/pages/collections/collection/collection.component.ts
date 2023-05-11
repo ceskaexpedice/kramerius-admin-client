@@ -13,6 +13,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { AuthService } from 'src/app/services/auth.service';
 import { DeleteCollectionDialogComponent } from 'src/app/dialogs/delete-collection-dialog/delete-collection-dialog.component';
+import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
 
 @Component({
   selector: 'app-collection',
@@ -32,6 +33,8 @@ export class CollectionComponent implements OnInit {
   collectionActions:Map<string,string[]> = new Map();
 
   collectionId: string;
+
+  selectedAllCollections: boolean = false;
 
 
   constructor(
@@ -207,4 +210,27 @@ export class CollectionComponent implements OnInit {
     this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
   }
 
+  selectAllCollections() {
+    this.selectedAllCollections =! this.selectedAllCollections;
+  }
+
+  deleteSelectedCollections() {
+    // to do
+  }
+
+  deleteSelectedItemsFromCollection() {
+    const dialogRef = this.dialog.open(DeleteSelectedItemsFromCollectionComponent, {
+      //data : { selection: toDelete },
+      width: '600px',
+      panelClass: 'app-delete-selected-itemss-from-collection-dialog'
+    });
+
+    /* dialogRef.afterClosed().subscribe(routernLink => {
+      if (routernLink === 'processes') {
+        this.router.navigate(['/', routernLink]);
+      } else if (routernLink === 'collections') {
+        this.reloadPage();
+      }
+    }); */
+  }
 }
