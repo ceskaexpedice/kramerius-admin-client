@@ -18,6 +18,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ScheduleSyncWithSdnntComponent } from 'src/app/dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
 import { ScheduleStartTheSdnntReviewProcessComponent } from 'src/app/dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
+import { ScheduleChangeFlagOnLicenseDialogComponent } from 'src/app/dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
 
 @Component({
   selector: 'app-repository',
@@ -246,6 +247,13 @@ export class RepositoryComponent implements OnInit {
     const dialogRef = this.dialog.open(ScheduleStartTheSdnntReviewProcessComponent, {
       width: '600px',
       panelClass: 'app-schedule-start-the-sdnnt-review-process'
+    });
+  }
+
+  openScheduleChangeFlagOnLicenseDialog() {
+    const dialogRef = this.dialog.open(ScheduleChangeFlagOnLicenseDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-change-flag-on-license-dialog'
     });
   }
 }

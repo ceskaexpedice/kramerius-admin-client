@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ 'modal.scheduleChangeFlagOnLicense.title' | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  <ul>
+    <li>{{ 'desc.symptom' | translate }} <strong>policy:public</strong><mat-icon class="app-ml-1 app-mr-1 app-va-middle">trending_flat</mat-icon>{{ 'desc.license' | translate }} <strong>public</strong></li>
+    <li>{{ 'desc.symptom' | translate }} <strong>policy:private</strong><mat-icon class="app-ml-1 app-mr-1 app-va-middle">trending_flat</mat-icon>{{ 'desc.license' | translate }} <strong>onsite</strong></li>
+  </ul>
+  <mat-checkbox>{{ 'modal.scheduleChangeFlagOnLicense.checkbox' | translate }}</mat-checkbox>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" (click)="changeFlagOnLicense()" mat-dialog-close>{{ 'button.change' | translate }}</button>
+  <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+</mat-dialog-actions>

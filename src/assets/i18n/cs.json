@@ -447,7 +447,9 @@
     "indexTheObject": "Indexovat objekt",
     "deleteSelectedCollections": "Vymazat vybrané sbírky",
     "acceptChanges": "Akceptovat změny",
-    "deleteSelectedItems": "Vymazat vybrané položky"
+    "deleteSelectedItems": "Vymazat vybrané položky",
+    "changeFlagOnLicense": "Změnit príznak na licenci",
+    "change": "Změnit"
   },
   "field": {
     "public": "Veřejné",
@@ -733,6 +735,10 @@
         "sdnntInstance": "Sdnnt instance"
       },
       "alert": "Následující proměnné musí být nakonfigurovány"
+    },
+    "scheduleChangeFlagOnLicense": {
+      "title": "Změna príznaku na licenci",
+      "checkbox": "Rovněž odebrat príznak policy"
     }
   },
   "snackbar": {
@@ -959,7 +965,7 @@
     "linkToLicenseDetail": "Odkaz na detail licence",
     "noLicenseSelected": "Není vybrána licence",
     "licenseSynchronization": "Synchronizace licencí",
-    "licenseSynchronizationFetch": "Spustit synchronizaci licenci",
+    "licenseSynchronizationFetch": "Spuštění synchronizace licencí",
     "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc",
     "selectServer": "Vyberte server",
     "selectAllObjects": "Vybrat všechny objekty",
@@ -968,6 +974,8 @@
     "selectAllCollections": "Vybrat všechny sbírky",
     "selectThisCollection": "Vybrat tuto sbírku",
     "selectAllItems": "Vybrat všechny položky",
-    "selectThisItem": "Vybrat tuto položku"
+    "selectThisItem": "Vybrat tuto položku",
+    "changeFlagOnLicense": "Změna príznaku na licenci",
+    "symptom": "Příznak"
   }
 }

@@ -447,7 +447,9 @@
     "indexTheObject": "Index the object",
     "deleteSelectedCollections": "Delete selected collections",
     "acceptChanges": "Accept changes",
-    "deleteSelectedItems": "Delete selected items"
+    "deleteSelectedItems": "Delete selected items",
+    "changeFlagOnLicense": "Change flag on license",
+    "change": "Change"
   },
   "field": {
     "public": "Public",
@@ -733,6 +735,10 @@
         "sdnntInstance": "Sdnnt instance"
       },
       "alert": "The following variables must be configured"
+    },
+    "scheduleChangeFlagOnLicense": {
+      "title": "Change flag on license",
+      "checkbox": "Also remove the policy flag"
     }
   },
   "snackbar": {
@@ -968,6 +974,8 @@
     "selectAllCollections": "Select all collections",
     "selectThisCollection": "Select this collection",
     "selectAllItems": "Select all items",
-    "selectThisItem": "Select this item"
+    "selectThisItem": "Select this item",
+    "changeFlagOnLicense": "Change flag on license",
+    "symptom": "Symptom"
   }
 }
