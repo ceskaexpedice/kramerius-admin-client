@@ -253,10 +253,6 @@ export class StatisticsComponent implements OnInit {
     this.identifier = null;
     this.subject.next(target.value);
   }
-  
-  getVersion() {
-    return this.appSettings.version;
-  }
 
   getUserClientUrl() {
     return this.appSettings.userClientBaseUrl;

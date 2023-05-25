@@ -57,7 +57,7 @@ export class FooterComponent implements OnInit {
   }
 
   getVersion() {
-    return this.appSettings.version;
+    return AppSettings.adminClientVersion;
   }
 
 
