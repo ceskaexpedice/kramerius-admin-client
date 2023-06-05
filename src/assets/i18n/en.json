@@ -976,6 +976,8 @@
     "selectAllItems": "Select all items",
     "selectThisItem": "Select this item",
     "changeFlagOnLicense": "Change flag on license",
-    "symptom": "Symptom"
+    "symptom": "Symptom",
+    "localLibraryLicense": "Local Library License",
+    "globalLicense": "Global License"
   }
 }

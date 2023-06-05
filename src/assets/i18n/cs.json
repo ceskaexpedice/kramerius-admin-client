@@ -976,6 +976,8 @@
     "selectAllItems": "Vybrat všechny položky",
     "selectThisItem": "Vybrat tuto položku",
     "changeFlagOnLicense": "Změna príznaku na licenci",
-    "symptom": "Příznak"
+    "symptom": "Příznak",
+    "localLibraryLicense": "Lokální licence knihovny",
+    "globalLicense": "Globální licence"
   }
 }
