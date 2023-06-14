@@ -86,6 +86,12 @@ export class FooterComponent implements OnInit {
     } else return null;
   }
 
+  getAcronym() {
+    if (this.coreInfo && this.coreInfo['instance'] && this.coreInfo['instance']['acronym']) {
+      return this.coreInfo['instance']['acronym'];
+    } else return null;
+  }
+
    private padTo2Digits(num: number) {
     return num.toString().padStart(2, '0');
   }

@@ -1,4 +1,3 @@
-
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ConditionParam } from "src/app/models/condition-param.model";
@@ -106,7 +105,7 @@ export class CreateOrEditRightDialogComponent implements OnInit {
         }
       });
 
-      this.api.getLicenses().subscribe((licenses: License[]) => {
+      this.api.getAllLicenses().subscribe((licenses: License[]) => {
         this.licenses = licenses.map((lic) => lic.name );
         if (this.data.right?.condition.license) {
           let license =  this.licenses.find((license) => {

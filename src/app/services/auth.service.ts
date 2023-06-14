@@ -34,10 +34,6 @@ export class AuthService {
     private settings: AppSettings,
     private router:Router
     ) {
-
-      console.log("this.settings.keycloak " + this.settings.keycloak);
-
-
     AuthService.token = localStorage.getItem('account.token');
     AuthService.tokenTime = new Date(localStorage.getItem('account.token.time'));
     this.loadGlobalAuthorizedActions((status: number) => {

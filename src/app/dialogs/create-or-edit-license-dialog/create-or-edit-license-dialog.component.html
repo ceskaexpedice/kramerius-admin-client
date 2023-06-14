@@ -1,14 +1,40 @@
 <h2 mat-dialog-title>{{ mode == 'new' ? ('modal.createOrEditLicense.title.new' | translate) : ('modal.createOrEditLicense.title.edit' | translate) }}</h2>
 <mat-dialog-content class="mat-typography">
-  <mat-form-field class="app-w-100">
-    <mat-label>{{ 'desc.name' | translate }}</mat-label>
-    <input matInput [placeholder]="'desc.name' | translate" type="text" name="note" [(ngModel)]="license.name" autocomplete="off">
+
+<form  [formGroup]="licenseForm">
+
+    <mat-form-field class="app-w-100">
+
+    <mat-label>{{ 'desc.name' | translate }} / Prefix {{libraryName}}  </mat-label>
+
+    <input matInput [placeholder]="'desc.name' | translate" [readonly]="mode=='edit'" type="text" name="note" 
+     [(ngModel)]="license.name" 
+    (keyup)="onKeyUp()" autocomplete="off"
+     id="licenseName" formControlName="licenseName" >
+
+    <div class="app-view-alert app-warn" *ngIf="licenseName.invalid && (licenseName.dirty || licenseName.touched)">
+      <div *ngIf="licenseName.errors.required">Jmeno je vyzdavoano</div>
+      <div *ngIf="licenseName.errors.pattern">Jmeno musi zacinat na  '{{ libraryName }}'</div>
+      <div *ngIf="licenseName.hasError('alreadyUsed')">Jmeno je jiz pouzite  '{{ libraryName }}'</div>
+    </div>
+
   </mat-form-field>
+
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.description' | translate }}</mat-label>
-    <input matInput [placeholder]="'desc.description' | translate" type="text" name="description" [(ngModel)]="license.description" autocomplete="off">
+    <input matInput [placeholder]="'desc.description' | translate" type="text" name="description" [(ngModel)]="license.description" autocomplete="off"
+     id="licenseDesc" formControlName="licenseDesc">
+
+     <div class="app-view-alert app-warn" *ngIf="licenseDesc.invalid && (licenseDesc.dirty || licenseDesc.touched)">
+      <div *ngIf="licenseDesc.errors.required">Popisek je vyzadovan</div>
+    </div>
+
   </mat-form-field>
+
+</form>
+
 </mat-dialog-content>
+
 <mat-card class="app-view-alert app-warn" *ngIf="errorMessage">
   <mat-card-content>
     {{ errorMessage }}

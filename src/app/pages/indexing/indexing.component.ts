@@ -22,6 +22,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class IndexingComponent implements OnInit {
 
+  /** should be removed from combo box  */
+  readonly REMOVED_FROM_INDEXATION = ['page'];
+
+
   //Indexační procesy (všechny objekty v modelu)
   models = ['archive', 'graphic', 'sheetmusic', 'convolute', 'map', 'monograph', 'periodical', 'manuscript', 'collection', 'soundrecording'];
   modelNames = ['Archiválie', 'Grafiky', 'Hudebniny', 'Konvoluty', 'Mapy', 'Monografie', 'Periodika', 'Rukopisy', 'Sbírky', 'Zvukové nahrávky'];
@@ -62,6 +66,27 @@ export class IndexingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+     this.clientApi.getAllModelsFromIndex().subscribe(any=> {
+      if (any['model']) {
+        let pmodels = [];
+        let names = [];
+        let resultModel = any['model'];
+        for(let i=0;i<resultModel.length;i++) {
+          if (i % 2==0) {
+              let model = resultModel[i];
+              if (!this.REMOVED_FROM_INDEXATION.includes(model)) {
+                pmodels.push(model);
+                let translation = this.ui.getTranslation('field.'+model);
+                names.push(translation);
+              }
+            }
+        }
+        this.models = pmodels;
+        this.modelNames = names;
+      }
+     });
+
     this.view = this.local.getStringProperty('indexing.view', 'object');
 
     this.clientApi.getInfo().subscribe(data => {

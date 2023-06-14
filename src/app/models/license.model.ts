@@ -5,6 +5,7 @@ export class License {
   name: string;
   description: string;
   priority: number;
+  group:string;
 
   constructor() {
     this.id = 0;
@@ -17,7 +18,10 @@ export class License {
     license.name = json['name'];
     license.description = json['description'] || '';
     license.priority = json['priority'];
+    license.group = json['group'];
+
     return license;
+
   }
 
   static fromJsonArray(json): License[] {

@@ -38,7 +38,7 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
 
   fetchAvailableLicenses(licensesToExclude = []) {
     this.inProgress = true;
-    this.adminApi.getLicenses().subscribe((licenses: License[]) => {
+    this.adminApi.getAllLicenses().subscribe((licenses: License[]) => {
       this.licenses = licenses.map((lic) => lic.name).filter(lic => licensesToExclude.indexOf(lic) == -1)
       this.inProgress = false;
     });
