@@ -1,11 +1,15 @@
 
 export class License {
 
+
   id: number;
   name: string;
   description: string;
   priority: number;
   group:string;
+
+
+
 
   constructor() {
     this.id = 0;

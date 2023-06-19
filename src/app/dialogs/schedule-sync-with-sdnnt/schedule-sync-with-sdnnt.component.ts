@@ -20,9 +20,13 @@ import { AppSettings } from 'src/app/services/app-settings';
   ],
 })
 export class ScheduleSyncWithSdnntComponent implements OnInit {
-  displayedColumns = ['pid','catalog', 'name', 'sync_actions'];
 
-  columnsToDisplay = ['pid','catalog', 'title', 'sync_actions', 'process_id'];
+  coreInfo:any;
+
+  displayedColumns = ['pid', 'sdnntModel','sdnntDate','sdnntCatalog', 'name', 'sync_actions'];
+
+  columnsToDisplay = ['pid','sdnntModel','sdnntDate','sdnntCatalog',  'sync_actions', 'process_id'];
+
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
 
   expandedElement: SdnntItem | null;
@@ -122,33 +126,39 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
   }
 
   reloadData() {
+  
+  
     this.sdnntInstance = 'https://sdnnt.nkp.cz/sdnnt/search';
     this.kramInstance =  this.appSettings.coreBaseUrl+'/../uuid/';
 
     this.api.getSdntSyncInfo().subscribe((data:any)=> {
       this.info = data;
 
-      let sindex = this.info.endpoint.indexOf('/api/v1.0/lists/changes');
-      if (sindex > -1) {
-        this.sdnntInstance = this.info.endpoint.substring(0, sindex)+"/search";
-      }
+      this.appSettings.getCoreInfo().subscribe(response => {
+        this.coreInfo = response;
 
-      if (this.info.version === 'v7') {
-        let kindex = this.info.kramerius.indexOf('/search/api/client/v7.0');
-        if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
-          this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
-        }
-      } else {
-        let kindex = this.info.kramerius.indexOf('/search/api/v5.0');
-        if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
-          this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
+        let sindex = this.info.endpoint.indexOf('/api/v1.0/lists/changes');
+        if (sindex > -1) {
+          this.sdnntInstance = this.info.endpoint.substring(0, sindex)+"/search";
         }
 
+        if ( this.coreInfo?.instance?.client) {
+          this.kramInstance = this.coreInfo.instance.client+"/uuid/";
+        } else {
+          if (this.info.version === 'v7') {
+            let kindex = this.info.kramerius.indexOf('/search/api/client/v7.0');
+            if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
+              this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
+            }
+          } else {
+            let kindex = this.info.kramerius.indexOf('/search/api/v5.0');
+            if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
+              this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
+            }
+          }
       }
-
-
-
     });
+  });
 
 
 
@@ -195,10 +205,7 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
       });
     },  (error:HttpErrorResponse) => {
       console.log("error "+error);
-      //this.errorState = true;
-      //this.errorMessage = error.error.message;
     });
- 
   }
 }
 

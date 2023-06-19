@@ -25,14 +25,10 @@ export class ScheduleChangeFlagOnLicenseDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.adminApi.getConfFlagToLicense().subscribe(res=> {
       this.models = res['processess.flag_to_license.models'];
     });
-
   }
-
-
 
   changeFlagOnLicense() {
     this.adminApi.scheduleProcess({

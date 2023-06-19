@@ -711,10 +711,15 @@
       "title": "Synchronizace licencí",
       "timeInfo": "Datum a čas poslední synchronizace",
       "field": {
-        "pid": "Pid",
+        "pid": "Pid/Odkaz do DK",
         "catalog": "Sdnt",
         "title": "Titulek",
         "process": "Proces",
+        "sdnntModel": "Model",
+        "sdnntCatalog":"Katalog/Odkaz do SDNNT",
+        "sdnntDate": "Datum vydání",
+        "real_kram_model":"Model",
+		    "real_kram_date":"Ročník/Výtisk",
         "sync_actions": {
           "title": "Navrhovaná změna",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -929,6 +934,9 @@
     "convolute": "Konvoluty",
     "map": "Mapy",
     "monograph": "Monografie",
+    "monographunit":"Svazek",
+    "multivolumemonograph":"Vícesvazková monografie",
+
     "periodical": "Periodika",
     "manuscript": "Rukopisy",
     "collection": "Sbírka",

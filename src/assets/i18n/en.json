@@ -711,10 +711,15 @@
       "title": "Synchronization of licenses",
       "timeInfo": "Date and time of last synchronization",
       "field": {
-        "pid": "Pid",
-        "catalog": "Sdnt",
+        "pid": "Pid/Link to DL",
+        "catalog": "Sdnnt",
         "title": "Title",
         "process": "Process",
+        "sdnntModel": "Model",
+        "sdnntCatalog":"Catalog id /Link to SDNNT",
+        "sdnntDate": "Publishing date",
+        "real_kram_model":"Model",
+		    "real_kram_date":"Ročník/Výtisk",
         "sync_actions": {
           "title": "Proposed change",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -929,6 +934,10 @@
     "convolute": "Convolute",
     "map": "Map",
     "monograph": "Monograph",
+    "monographunit":"Monograph unit",
+
+    "multivolumemonograph":"Multi=volume monograph",
+
     "periodical": "Periodical",
     "manuscript": "Manuscript",
     "collection": "Collection",

@@ -6,14 +6,35 @@
       <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="app-w-100">
         <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
           <th mat-header-cell *matHeaderCellDef [ngSwitch]="column">
+
             <ng-container *ngSwitchCase="'sync_actions'">{{ 'modal.scheduleSyncWithSdnnt.field.' + column + '.title' | translate }}</ng-container>
             <ng-container *ngSwitchCase="'process_id'">{{ 'modal.scheduleSyncWithSdnnt.field.process' | translate }}</ng-container>
+
             <ng-container *ngSwitchDefault>{{ 'modal.scheduleSyncWithSdnnt.field.' + column | translate }}</ng-container>
           </th>
           <td mat-cell *matCellDef="let element">
             <ng-container [ngSwitch]="column">
-              <ng-container *ngSwitchCase="'pid'"><a [href]="kramInstance+element[column]" target="_blank" >{{ element[column] }}</a></ng-container>
-              <ng-container *ngSwitchCase="'catalog'"><a [href]=" sdnntInstance +'?q=' + element[column]" target="_blank">{{ element[column] }}</a></ng-container>
+
+              <ng-container *ngSwitchCase="'pid'">
+                <a *ngIf="element.pid && element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" > {{ element['real_kram_titles_search'] }}</a>
+                <a *ngIf="element.pid && !element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" > {{ element['pid'] }}</a>
+                <strong *ngIf="!element.pid && element.real_kram_titles_search">{{ element['real_kram_titles_search'] }}</strong>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'real_kram_model'"> <strong>{{ element[column] }} </strong></ng-container>
+              <ng-container *ngSwitchCase="'real_kram_date'"> <strong>{{ element[column] }} </strong></ng-container>
+              <ng-container *ngSwitchCase="'type_of_rec'"> <strong>{{ element[column] }} </strong></ng-container>
+
+              <ng-container *ngSwitchCase="'sdnntModel'"> 
+                <strong>{{ 'desc.'+element[column] | translate }} </strong>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'sdnntDate'"> | <strong>{{ element[column] }} </strong></ng-container>
+
+              <ng-container *ngSwitchCase="'sdnntCatalog'">
+                <a [href]=" sdnntInstance +'?q=' + element['catalog']" target="_blank">{{ element['sdnntCatalog'] }}</a>
+              </ng-container>
+
               <ng-container *ngSwitchCase="'title'">
                 <div class="app-text-cutter-wrapper" [matTooltip]="element[column]">
                   <div class="app-text-cutter">{{ element[column] }}</div>
@@ -49,13 +70,20 @@
                 <thead>
                   <tr>
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.pid' | translate }}</th>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.real_kram_date' | translate }}</th>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.real_kram_model' | translate }}</th>
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.sync_actions.title' | translate }}</th>
                     <th>{{ 'modal.scheduleSyncWithSdnnt.field.process' | translate }}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let child of element.children">
-                    <td><a [href]="kramInstance+child.pid" target="_blank" >{{ child.pid }}</a></td>             
+                    <td><a [href]="kramInstance+child.pid" target="_blank" >{{ child.real_kram_titles_search }}</a></td>             
+
+
+                    <td>{{ child.real_kram_date }}</td>             
+                    <td>{{ 'desc.'+child.real_kram_model | translate }}</td>             
+      
                     <td><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.sync_actions.' + child.sync_actions | translate" fxLayout="row" fxLayoutAlign="start center"></span></td>
                     <td><a [href]="'processes/standard-output/'+child.process_id" target="_blank" > {{child.process_id}}</a></td>
                   </tr>
