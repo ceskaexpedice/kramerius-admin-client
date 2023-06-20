@@ -449,7 +449,8 @@
     "acceptChanges": "Akceptovat změny",
     "deleteSelectedItems": "Vymazat vybrané položky",
     "changeFlagOnLicense": "Změnit príznak na licenci",
-    "change": "Změnit"
+    "change": "Změnit",
+    "removeTheVisibilityFlag": "Odebrat příznak viditelnosti"
   },
   "field": {
     "public": "Veřejné",
@@ -746,6 +747,10 @@
     "scheduleChangeFlagOnLicense": {
       "title": "Změna príznaku na licenci",
       "checkbox": "Rovněž odebrat príznak policy"
+    },
+    "scheduleRemoveTheVisibilityFlag": {
+      "title": "Odebrání příznaku viditelnosti",
+      "message": "Pro každý vložený PID bude naplánován proces Odebrání příznaku, který ruší příznak POLICY."
     }
   },
   "snackbar": {

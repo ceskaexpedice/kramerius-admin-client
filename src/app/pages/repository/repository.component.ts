@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { ScheduleSyncWithSdnntComponent } from 'src/app/dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
 import { ScheduleStartTheSdnntReviewProcessComponent } from 'src/app/dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
 import { ScheduleChangeFlagOnLicenseDialogComponent } from 'src/app/dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
+import { ScheduleRemoveTheVisibilityFlagDialogComponent } from 'src/app/dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 
 @Component({
   selector: 'app-repository',
@@ -256,4 +257,12 @@ export class RepositoryComponent implements OnInit {
       panelClass: 'app-schedule-change-flag-on-license-dialog'
     });
   }
+
+  openRemoveTheVisibilityFlagDialog() {
+    const dialogRef = this.dialog.open(ScheduleRemoveTheVisibilityFlagDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-remove-the-visibility-flag-dialog'
+    });
+  }
+
 }

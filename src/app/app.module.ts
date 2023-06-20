@@ -94,6 +94,7 @@ import { DeleteSelectedCollectionsDialogComponent } from './dialogs/delete-selec
 import { ScheduleStartTheSdnntReviewProcessComponent } from './dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
 import { DeleteSelectedItemsFromCollectionComponent } from './dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
 import { ScheduleChangeFlagOnLicenseDialogComponent } from './dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
+import { ScheduleRemoveTheVisibilityFlagDialogComponent } from './dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -173,7 +174,8 @@ export function createCustomMatPaginatorIntl(
     DeleteSelectedCollectionsDialogComponent,
     ScheduleStartTheSdnntReviewProcessComponent,
     DeleteSelectedItemsFromCollectionComponent,
-    ScheduleChangeFlagOnLicenseDialogComponent
+    ScheduleChangeFlagOnLicenseDialogComponent,
+    ScheduleRemoveTheVisibilityFlagDialogComponent
   ],
   imports: [
     BrowserModule,

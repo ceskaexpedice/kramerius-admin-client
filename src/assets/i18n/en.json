@@ -449,7 +449,8 @@
     "acceptChanges": "Accept changes",
     "deleteSelectedItems": "Delete selected items",
     "changeFlagOnLicense": "Change flag on license",
-    "change": "Change"
+    "change": "Change",
+    "removeTheVisibilityFlag": "Remove the visibility flag"
   },
   "field": {
     "public": "Public",
@@ -746,6 +747,10 @@
     "scheduleChangeFlagOnLicense": {
       "title": "Change flag on license",
       "checkbox": "Also remove the policy flag"
+    },
+    "scheduleRemoveTheVisibilityFlag": {
+      "title": "Removing the visibility flag",
+      "message": "A Remove Flag process will be scheduled for each embedded PID, which clears the POLICY flag."
     }
   },
   "snackbar": {
