@@ -17,8 +17,8 @@
                 <div class="app-text-cutter-wrapper">
                   <div class="app-text-cutter">
                     <a *ngIf="element.pid && element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" [matTooltip]="element['real_kram_titles_search']">{{ element['real_kram_titles_search'] }}</a>
-                    <a *ngIf="element.pid && !element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" > {{ element['pid'] }}</a>
-                    <strong *ngIf="!element.pid ">{{ element['title'] }}</strong>
+                    <a *ngIf="element.pid && !element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" [matTooltip]="element['pid']">{{ element['pid'] }}</a>
+                    <strong *ngIf="!element.pid " [matTooltip]="'modal.scheduleSyncWithSdnnt.field.linkMissing' | translate">{{ element['title'] }}</strong>
                   </div>
                 </div>   
               </ng-container>
@@ -88,13 +88,10 @@
                         </div>
                       </div>  
                     </td>             
-
-
                     <td>{{ child.real_kram_date }}</td>             
-                    <td>{{ 'desc.'+child.real_kram_model | translate }}</td>             
-      
+                    <td>{{ 'field.' + child.real_kram_model | translate }}</td>             
                     <td><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.sync_actions.' + child.sync_actions | translate" fxLayout="row" fxLayoutAlign="start center"></span></td>
-                    <td><a [href]="'processes/standard-output/'+child.process_id" target="_blank" > {{child.process_id}}</a></td>
+                    <td><a [href]="'processes/standard-output/' + child.process_id" target="_blank" > {{child.process_id}}</a></td>
                   </tr>
                 </tbody>
               </table>

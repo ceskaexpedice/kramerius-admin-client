@@ -475,7 +475,8 @@
     "soundunit": "Soundunit",
     "internalpart": "Internalpart",
     "convolute": "Konvoluty",
-    "picture": "Obrázky"
+    "picture": "Obrázky",
+    "multivolumemonograph":"Vícesvazková monografie"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
@@ -720,6 +721,7 @@
         "sdnntDate": "Datum vydání",
         "real_kram_model":"Model",
 		    "real_kram_date":"Ročník/Výtisk",
+        "linkMissing": "V SDNNT chybí odkaz na periodikum nebo vícesvazkovou monografii proto není reprezentováno odkazem.",
         "sync_actions": {
           "title": "Navrhovaná změna",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -936,7 +938,6 @@
     "monograph": "Monografie",
     "monographunit":"Svazek",
     "multivolumemonograph":"Vícesvazková monografie",
-
     "periodical": "Periodika",
     "manuscript": "Rukopisy",
     "collection": "Sbírka",

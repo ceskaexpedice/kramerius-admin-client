@@ -475,7 +475,8 @@
     "soundunit": "Sound Units",
     "internalpart": "Internal Parts",
     "convolute": "Convolute",
-    "picture": "Pictures"
+    "picture": "Pictures",
+    "multivolumemonograph":"Multivolume monograph"
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
@@ -720,6 +721,7 @@
         "sdnntDate": "Publishing date",
         "real_kram_model":"Model",
 		    "real_kram_date":"Ročník/Výtisk",
+        "linkMissing": "A reference to a periodical or a multi-volume monograph is missing in SDNNT, therefore it is not represented by a link.",
         "sync_actions": {
           "title": "Proposed change",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -935,9 +937,7 @@
     "map": "Map",
     "monograph": "Monograph",
     "monographunit":"Monograph unit",
-
-    "multivolumemonograph":"Multi=volume monograph",
-
+    "multivolumemonograph":"Multivolume monograph",
     "periodical": "Periodical",
     "manuscript": "Manuscript",
     "collection": "Collection",
