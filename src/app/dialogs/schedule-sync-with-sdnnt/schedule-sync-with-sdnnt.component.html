@@ -1,24 +1,26 @@
-<h2 mat-dialog-title>{{ 'modal.scheduleSyncWithSdnnt.title' | translate }} </h2>
+<h2 mat-dialog-title>{{ 'modal.scheduleSyncWithSdnnt.title' | translate }}</h2>
 <mat-dialog-content class="mat-typography">
   <h3>{{ 'modal.scheduleSyncWithSdnnt.timeInfo' | translate }}: <strong>{{ lasttimestamp | date : 'dd.MM.yyyy H:mm' }}</strong></h3>
   <div class="app-oh">
     <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
       <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="app-w-100">
-        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+        <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
           <th mat-header-cell *matHeaderCellDef [ngSwitch]="column">
-
             <ng-container *ngSwitchCase="'sync_actions'">{{ 'modal.scheduleSyncWithSdnnt.field.' + column + '.title' | translate }}</ng-container>
             <ng-container *ngSwitchCase="'process_id'">{{ 'modal.scheduleSyncWithSdnnt.field.process' | translate }}</ng-container>
-
             <ng-container *ngSwitchDefault>{{ 'modal.scheduleSyncWithSdnnt.field.' + column | translate }}</ng-container>
           </th>
           <td mat-cell *matCellDef="let element">
+            
             <ng-container [ngSwitch]="column">
-
               <ng-container *ngSwitchCase="'pid'">
-                <a *ngIf="element.pid && element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" > {{ element['real_kram_titles_search'] }}</a>
-                <a *ngIf="element.pid && !element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" > {{ element['pid'] }}</a>
-                <strong *ngIf="!element.pid && element.real_kram_titles_search">{{ element['real_kram_titles_search'] }}</strong>
+                <div class="app-text-cutter-wrapper">
+                  <div class="app-text-cutter">
+                    <a *ngIf="element.pid && element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" [matTooltip]="element['real_kram_titles_search']">{{ element['real_kram_titles_search'] }}</a>
+                    <a *ngIf="element.pid && !element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" > {{ element['pid'] }}</a>
+                    <strong *ngIf="!element.pid && element.real_kram_titles_search">{{ element['real_kram_titles_search'] }}</strong>
+                  </div>
+                </div>   
               </ng-container>
 
               <ng-container *ngSwitchCase="'real_kram_model'"> <strong>{{ element[column] }} </strong></ng-container>
@@ -29,7 +31,7 @@
                 <strong>{{ 'desc.'+element[column] | translate }} </strong>
               </ng-container>
 
-              <ng-container *ngSwitchCase="'sdnntDate'"> | <strong>{{ element[column] }} </strong></ng-container>
+              <ng-container *ngSwitchCase="'sdnntDate'"><strong>{{ element[column] }}</strong></ng-container>
 
               <ng-container *ngSwitchCase="'sdnntCatalog'">
                 <a [href]=" sdnntInstance +'?q=' + element['catalog']" target="_blank">{{ element['sdnntCatalog'] }}</a>
@@ -78,7 +80,13 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let child of element.children">
-                    <td><a [href]="kramInstance+child.pid" target="_blank" >{{ child.real_kram_titles_search }}</a></td>             
+                    <td>
+                      <div class="app-text-cutter-wrapper">
+                        <div class="app-text-cutter">
+                          <a [href]="kramInstance+child.pid" target="_blank" [matTooltip]="child.real_kram_titles_search">{{ child.real_kram_titles_search }}</a>
+                        </div>
+                      </div>  
+                    </td>             
 
 
                     <td>{{ child.real_kram_date }}</td>             
