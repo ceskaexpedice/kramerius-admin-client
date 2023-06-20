@@ -820,7 +820,8 @@
       "scheduleIndexationByModel": "{{value}} model indexing has been scheduled",
       "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing",
       "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled",
-      "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started"
+      "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started",
+      "changeFlagOnLicense": "The license flag change process has been scheduled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",

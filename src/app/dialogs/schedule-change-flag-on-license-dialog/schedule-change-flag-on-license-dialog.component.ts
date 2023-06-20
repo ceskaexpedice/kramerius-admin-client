@@ -38,7 +38,7 @@ export class ScheduleChangeFlagOnLicenseDialogComponent implements OnInit {
       }
     }).subscribe(response => {
       this.dialogRef.close("scheduled");
-      this.ui.showInfoSnackBar('snackbar.success.changeFlagToLicense');
+      this.ui.showInfoSnackBar('snackbar.success.changeFlagOnLicense');
     }, error => {
       console.log(error);
       this.dialogRef.close('error');
