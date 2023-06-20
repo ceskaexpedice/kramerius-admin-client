@@ -52,6 +52,11 @@
 									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2">{{ 'button.setPublicPrivate' | translate }}</button>
 								</span>
 
+								<!-- odebrani viditelnosti -->
+								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2">{{ 'button.removePublicPrivate' | translate }}</button>
+								</span>
+								
 								<!-- DNNT, DNNT2 apod. -->
 								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openAddLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.addLicense' | translate }}</button>

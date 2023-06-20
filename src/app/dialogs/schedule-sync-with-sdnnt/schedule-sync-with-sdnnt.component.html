@@ -18,7 +18,7 @@
               <ng-container *ngSwitchCase="'pid'">
                 <a *ngIf="element.pid && element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" > {{ element['real_kram_titles_search'] }}</a>
                 <a *ngIf="element.pid && !element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" > {{ element['pid'] }}</a>
-                <strong *ngIf="!element.pid && element.real_kram_titles_search">{{ element['real_kram_titles_search'] }}</strong>
+                <strong *ngIf="!element.pid ">{{ element['title'] }}</strong>
               </ng-container>
 
               <ng-container *ngSwitchCase="'real_kram_model'"> <strong>{{ element[column] }} </strong></ng-container>
@@ -44,8 +44,9 @@
                 <span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column] | translate" fxLayout="row" fxLayoutAlign="start center"></span>
               </ng-container>
               <ng-container *ngSwitchCase="'process_id'">
-                <ng-container *ngFor="let p_ids of element[column]">
+                <ng-container *ngFor="let p_ids of element[column]; let i = index">
                   <a [href]="'processes/standard-output/' + p_ids" target="_blank">{{ p_ids }}</a>
+                  <span *ngIf="i !== element[column].length - 1"> | </span>
                 </ng-container>
               </ng-container>
               <ng-container *ngSwitchDefault>{{ element[column] }}</ng-container>
