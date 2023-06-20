@@ -1,14 +1,14 @@
 <h2 mat-dialog-title>{{ 'modal.scheduleChangeFlagOnLicense.title' | translate }}</h2>
 
 <mat-dialog-content class="app-scrollbar-fix">
-  <h4 class="app-mt-0">Licence budou přidělovány pro následující modely:</h4>
+  <h4 class="app-mt-0">{{ 'modal.scheduleChangeFlagOnLicense.section1' | translate }}:</h4>
   <ul>
     <li *ngFor="let model of models"><strong> {{ 'field.'+ model | translate }}</strong></li>
   </ul>
   <mat-divider class="app-mb-4"></mat-divider>
 
 
-  <h4>Příznaky se mapují pro následovně:</h4>
+  <h4>{{ 'modal.scheduleChangeFlagOnLicense.section2' | translate }}:</h4>
   <ul>
     <li>{{ 'desc.symptom' | translate }} <strong>policy:public</strong><mat-icon class="app-ml-1 app-mr-1 app-va-middle">trending_flat</mat-icon>{{ 'desc.license' | translate }} <strong>public</strong></li>
     <li>{{ 'desc.symptom' | translate }} <strong>policy:private</strong><mat-icon class="app-ml-1 app-mr-1 app-va-middle">trending_flat</mat-icon>{{ 'desc.license' | translate }} <strong>onsite</strong></li>

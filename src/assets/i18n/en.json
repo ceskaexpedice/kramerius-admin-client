@@ -746,7 +746,9 @@
     },
     "scheduleChangeFlagOnLicense": {
       "title": "Change flag on license",
-      "checkbox": "Also remove the policy flag"
+      "checkbox": "Also remove the policy flag",
+      "section1": "Licenses will be allocated for the following models",
+      "section2": "Symptoms are mapped for the following"
     },
     "scheduleRemoveTheVisibilityFlag": {
       "title": "Removing the visibility flag",

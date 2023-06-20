@@ -746,7 +746,9 @@
     },
     "scheduleChangeFlagOnLicense": {
       "title": "Změna príznaku na licenci",
-      "checkbox": "Rovněž odebrat príznak policy"
+      "checkbox": "Rovněž odebrat príznak policy",
+      "section1": "Licence budou přidělovány pro následující modely",
+      "section2": "Příznaky se mapují pro následovně"
     },
     "scheduleRemoveTheVisibilityFlag": {
       "title": "Odebrání příznaku viditelnosti",
