@@ -67,7 +67,7 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
     this.api.getSdntSyncBatches().subscribe((response:any)=> {
 
       console.log(response);
-      this.ui.showInfoSnackBar('snackbar.success.action_');
+      this.ui.showInfoSnackBar('snackbar.success.scheduleSdnntSyncProcess');
       /*
       data.forEach(oneBatch=> {
         console.log("Schedule "+oneBatch);
@@ -82,7 +82,7 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
       });*/
 
     }, error => {
-      this.ui.showInfoSnackBar('snackbar.fail.action_');
+      this.ui.showInfoSnackBar('snackbar.error.scheduleSdnntSyncProcess');
     });
 
 
