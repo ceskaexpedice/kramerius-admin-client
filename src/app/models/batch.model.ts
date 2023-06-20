@@ -88,7 +88,7 @@ export class Batch {
   getAllProcessDuration(): number {
     let acumulator:number = 0;
     this.processes.forEach(p=> {
-      if (p.finished) {
+      if (p && p.finished && p.started) {
         let number = p.finished.getTime() - p.started.getTime();
         acumulator += number;
       }
@@ -101,7 +101,7 @@ export class Batch {
     if (!this.started) {
       return undefined;
     }
-    if (this.finished) {
+    if (this.finished && this.started) {
       return this.finished.getTime() - this.started.getTime();
     }
     if (now) {
