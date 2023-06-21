@@ -40,8 +40,15 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
   fetchAvailableLicenses() {
     this.inProgress = true;
     this.adminApi.getAllLicenses().subscribe((licenses: License[]) => {
-      this.licenses = licenses.map((lic) => lic.name);
-      this.license = this.licenses[0];
+      //this.licenses = licenses.map((lic) => lic.name);
+      this.license = licenses[0];
+
+      let tmpLicenses =  licenses;
+      let globalLicenses = tmpLicenses.filter(lic=> lic.group !='local'); 
+      let localLicenses = tmpLicenses.filter(lic=> lic.group =='local');
+
+      this.licenses = globalLicenses.concat(localLicenses);
+
       this.inProgress = false;
     });
   }

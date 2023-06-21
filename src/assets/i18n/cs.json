@@ -790,6 +790,12 @@
         "2-4": "Byly naplánovány {{value}} procesy Změna viditelnosti",
         "more": "Bylo naplánováno {{value}} procesů Změna viditelnosti"
       },
+      "scheduleRemovePolicyByPid": {
+        "1": "Proces Odebrání příznaku viditelnosti byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Odebrání příznaku viditelnosti",
+        "more": "Bylo naplánováno {{value}} procesů Odebrání příznaku viditelnosti"
+      },
+
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",

@@ -790,6 +790,12 @@
         "2-4": "{{value}} processes Change Visibility have been scheduled",
         "more": "{{value}} processes have been scheduled to change visibility"
       },
+      "scheduleRemovePolicyByPid": {
+        "1": "The Remove Visibility Flag process has been scheduled",
+        "2-4": "{{value}} processes Remove Visibility flag have been scheduled",
+        "more": "{{value}} processes have been scheduled to remove visibility flag"
+      },
+
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",

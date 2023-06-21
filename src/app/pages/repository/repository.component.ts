@@ -263,6 +263,23 @@ export class RepositoryComponent implements OnInit {
       width: '600px',
       panelClass: 'app-schedule-remove-the-visibility-flag-dialog'
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+    if (result === 'error') {
+      this.ui.showErrorSnackBar('snackbar.error.scheduleRemovePolicyByPid')
+    } else if (result === 'cancel' || result === undefined) {
+      //nothing, dialog was closed
+    } else if (result == 1) {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.1');
+    } else if (result == 2 || result == 3 || result == 4) {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.2-4', {value: result});
+    } else {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.more', {value: result});
+    }
+  });
+
+
+
   }
 
 }
