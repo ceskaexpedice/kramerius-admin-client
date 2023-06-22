@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   getVersion() {
-    return this.appSettings.version;
+    return AppSettings.adminClientVersion;
   }
 
   getLastCommitHash() {

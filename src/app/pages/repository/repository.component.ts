@@ -18,6 +18,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { ScheduleSyncWithSdnntComponent } from 'src/app/dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
 import { ScheduleStartTheSdnntReviewProcessComponent } from 'src/app/dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
+import { ScheduleChangeFlagOnLicenseDialogComponent } from 'src/app/dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
+import { ScheduleRemoveTheVisibilityFlagDialogComponent } from 'src/app/dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 
 @Component({
   selector: 'app-repository',
@@ -248,4 +250,36 @@ export class RepositoryComponent implements OnInit {
       panelClass: 'app-schedule-start-the-sdnnt-review-process'
     });
   }
+
+  openScheduleChangeFlagOnLicenseDialog() {
+    const dialogRef = this.dialog.open(ScheduleChangeFlagOnLicenseDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-change-flag-on-license-dialog'
+    });
+  }
+
+  openRemoveTheVisibilityFlagDialog() {
+    const dialogRef = this.dialog.open(ScheduleRemoveTheVisibilityFlagDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-remove-the-visibility-flag-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    if (result === 'error') {
+      this.ui.showErrorSnackBar('snackbar.error.scheduleRemovePolicyByPid')
+    } else if (result === 'cancel' || result === undefined) {
+      //nothing, dialog was closed
+    } else if (result == 1) {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.1');
+    } else if (result == 2 || result == 3 || result == 4) {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.2-4', {value: result});
+    } else {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.more', {value: result});
+    }
+  });
+
+
+
+  }
+
 }

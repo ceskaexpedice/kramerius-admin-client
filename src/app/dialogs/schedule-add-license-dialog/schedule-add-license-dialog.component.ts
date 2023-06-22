@@ -38,8 +38,16 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
 
   fetchAvailableLicenses(licensesToExclude = []) {
     this.inProgress = true;
-    this.adminApi.getLicenses().subscribe((licenses: License[]) => {
-      this.licenses = licenses.map((lic) => lic.name).filter(lic => licensesToExclude.indexOf(lic) == -1)
+    this.adminApi.getAllLicenses().subscribe((licenses: License[]) => {
+
+      let tmpLicenses =  licenses.filter(lic => licensesToExclude.indexOf(lic.name) == -1);
+      let globalLicenses = tmpLicenses.filter(lic=> lic.group !='local'); 
+      let localLicenses = tmpLicenses.filter(lic=> lic.group =='local');
+
+      this.licenses = globalLicenses.concat(localLicenses);
+
+
+      //this.licenses = licenses.map((lic) => lic.name).filter(lic => licensesToExclude.indexOf(lic) == -1)
       this.inProgress = false;
     });
   }
@@ -50,7 +58,7 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
   schedule(formData) {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
-    const license = this.license; //formData.license;
+    const license = this.license; 
     this.adminApi.scheduleProcess({
       defid: 'add_license',
       params: {

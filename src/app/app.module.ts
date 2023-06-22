@@ -93,13 +93,15 @@ import { ScheduleSyncWithSdnntComponent } from './dialogs/schedule-sync-with-sdn
 import { DeleteSelectedCollectionsDialogComponent } from './dialogs/delete-selected-collections-dialog/delete-selected-collections-dialog.component';
 import { ScheduleStartTheSdnntReviewProcessComponent } from './dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
 import { DeleteSelectedItemsFromCollectionComponent } from './dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
+import { ScheduleChangeFlagOnLicenseDialogComponent } from './dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
+import { ScheduleRemoveTheVisibilityFlagDialogComponent } from './dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json?' + AppSettings.adminClientVersion);
 }
 
 
@@ -171,7 +173,9 @@ export function createCustomMatPaginatorIntl(
     ScheduleSyncWithSdnntComponent,
     DeleteSelectedCollectionsDialogComponent,
     ScheduleStartTheSdnntReviewProcessComponent,
-    DeleteSelectedItemsFromCollectionComponent
+    DeleteSelectedItemsFromCollectionComponent,
+    ScheduleChangeFlagOnLicenseDialogComponent,
+    ScheduleRemoveTheVisibilityFlagDialogComponent
   ],
   imports: [
     BrowserModule,

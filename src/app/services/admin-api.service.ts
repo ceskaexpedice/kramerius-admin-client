@@ -373,12 +373,22 @@ export class AdminApiService {
 
 
   createLicense(license: License): Observable<License> {
-    return this.post(`/licenses`, license.toJson()).pipe(map(response =>
+    return this.post(`/licenses/local`, license.toJson()).pipe(map(response =>
       License.fromJson(response)));
   }
 
-  getLicenses(): Observable<License[]> {
+  getAllLicenses(): Observable<License[]> {
     return this.get('/licenses').pipe(map(response =>
+      License.fromJsonArray(response)));
+  }
+
+  getGlobalLicenses(): Observable<License[]> {
+    return this.get('/licenses/global').pipe(map(response =>
+      License.fromJsonArray(response)));
+  }
+
+  getLocalLicenses(): Observable<License[]> {
+    return this.get('/licenses/local').pipe(map(response =>
       License.fromJsonArray(response)));
   }
 
@@ -388,8 +398,9 @@ export class AdminApiService {
     //.pipe(delay(3000));
   }
 
-  updateLicense(license: License): Observable<License> {
-    return this.put(`/licenses/${license.id}`, license.toJson()).pipe(map(response =>
+  updateLocalLicense(license: License): Observable<License> {
+    let url = `/licenses/local/${license.id}`;
+    return this.put(`/licenses/local/${license.id}`, license.toJson()).pipe(map(response =>
       License.fromJson(response)));
   }
 
@@ -402,7 +413,7 @@ export class AdminApiService {
   }
 
   removeLicense(license: License): Observable<any> {
-    return this.delete(`/licenses/${license.id}`);
+    return this.delete(`/licenses/local/${license.id}`);
   }
 
 
@@ -491,6 +502,12 @@ export class AdminApiService {
     return this.delete(`/statistics/`, options);
   }
 
+
+  /** Specific for processes */
+  /** flag_to_license process */
+  getConfFlagToLicense() {
+    return this.get(`/conf/flagtolicense`)
+  }
 
 
 }

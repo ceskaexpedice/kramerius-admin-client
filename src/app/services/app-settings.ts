@@ -6,6 +6,7 @@ declare var APP_GLOBAL: any;
 
 @Injectable()
 export class AppSettings {
+  static adminClientVersion = "1.4.2" + (!!APP_GLOBAL.devMode ? "-dev" : "");
 
   // external properties from /assets/shared/globals.js
   userClientBaseUrl = APP_GLOBAL.userClientBaseUrl;
@@ -14,7 +15,6 @@ export class AppSettings {
   keycloak = APP_GLOBAL.keycloak;
 
   devMode = !!APP_GLOBAL.devMode; //pokud true, tak se zobrazuje zalozka DEV a dalsi testovaci veci (napr. spousteni testovaciho procesu)
-  version = "1.4.1" + (this.devMode ? "-dev" : "");
 
   clientApiBaseUrl = this.coreBaseUrl + '/api/client/v7.0';
   adminApiBaseUrl = this.coreBaseUrl + '/api/admin/v7.0';
@@ -38,8 +38,6 @@ export class AppSettings {
 
 
   getCoreInfo(): Observable<any> {
-      return this.http.get(`${this.clientApiBaseUrl}/info`).pipe();
+    return this.http.get(`${this.clientApiBaseUrl}/info`).pipe();
   }
-
-
 }

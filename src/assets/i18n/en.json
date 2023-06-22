@@ -447,7 +447,10 @@
     "indexTheObject": "Index the object",
     "deleteSelectedCollections": "Delete selected collections",
     "acceptChanges": "Accept changes",
-    "deleteSelectedItems": "Delete selected items"
+    "deleteSelectedItems": "Delete selected items",
+    "changeFlagOnLicense": "Change flag on license",
+    "change": "Change",
+    "removeTheVisibilityFlag": "Remove the visibility flag"
   },
   "field": {
     "public": "Public",
@@ -473,7 +476,8 @@
     "soundunit": "Sound Units",
     "internalpart": "Internal Parts",
     "convolute": "Convolute",
-    "picture": "Pictures"
+    "picture": "Pictures",
+    "multivolumemonograph":"Multivolume monograph"
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
@@ -709,10 +713,16 @@
       "title": "Synchronization of licenses",
       "timeInfo": "Date and time of last synchronization",
       "field": {
-        "pid": "Pid",
-        "catalog": "Sdnt",
+        "pid": "Pid/Link to DL",
+        "catalog": "Sdnnt",
         "title": "Title",
         "process": "Process",
+        "sdnntModel": "Model",
+        "sdnntCatalog":"Catalog id /Link to SDNNT",
+        "sdnntDate": "Publishing date",
+        "real_kram_model":"Model",
+		    "real_kram_date":"Ročník/Výtisk",
+        "linkMissing": "A reference to a periodical or a multi-volume monograph is missing in SDNNT, therefore it is not represented by a link.",
         "sync_actions": {
           "title": "Proposed change",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -733,6 +743,16 @@
         "sdnntInstance": "Sdnnt instance"
       },
       "alert": "The following variables must be configured"
+    },
+    "scheduleChangeFlagOnLicense": {
+      "title": "Change flag on license",
+      "checkbox": "Also remove the policy flag",
+      "section1": "Licenses will be allocated for the following models",
+      "section2": "Symptoms are mapped for the following"
+    },
+    "scheduleRemoveTheVisibilityFlag": {
+      "title": "Removing the visibility flag",
+      "message": "A Remove Flag process will be scheduled for each embedded PID, which clears the POLICY flag."
     }
   },
   "snackbar": {
@@ -770,6 +790,12 @@
         "2-4": "{{value}} processes Change Visibility have been scheduled",
         "more": "{{value}} processes have been scheduled to change visibility"
       },
+      "scheduleRemovePolicyByPid": {
+        "1": "The Remove Visibility Flag process has been scheduled",
+        "2-4": "{{value}} processes Remove Visibility flag have been scheduled",
+        "more": "{{value}} processes have been scheduled to remove visibility flag"
+      },
+
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",
@@ -800,7 +826,8 @@
       "scheduleIndexationByModel": "{{value}} model indexing has been scheduled",
       "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing",
       "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled",
-      "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started"
+      "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started",
+      "changeFlagOnLicense": "The license flag change process has been scheduled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -923,6 +950,8 @@
     "convolute": "Convolute",
     "map": "Map",
     "monograph": "Monograph",
+    "monographunit":"Monograph unit",
+    "multivolumemonograph":"Multivolume monograph",
     "periodical": "Periodical",
     "manuscript": "Manuscript",
     "collection": "Collection",
@@ -968,6 +997,10 @@
     "selectAllCollections": "Select all collections",
     "selectThisCollection": "Select this collection",
     "selectAllItems": "Select all items",
-    "selectThisItem": "Select this item"
+    "selectThisItem": "Select this item",
+    "changeFlagOnLicense": "Change flag on license",
+    "symptom": "Symptom",
+    "localLibraryLicense": "Local Library License",
+    "globalLicense": "Global License"
   }
 }

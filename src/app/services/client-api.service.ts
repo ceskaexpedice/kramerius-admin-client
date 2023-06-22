@@ -55,6 +55,10 @@ export class ClientApiService {
     return this.get('/search', params).pipe(map(response => response['response']['docs']));
   }
 
+  facets(params): Observable<any[]> {
+    return this.get('/search', params).pipe(map(response => response['facet_counts']['facet_fields']));
+  }
+
   fullSearch(params): Observable<any[]> {
     return this.get('/search', params).pipe(map(response => response['response']));
   }
@@ -123,6 +127,16 @@ export class ClientApiService {
       .pipe(
         map(items => items[0])
       );
+  }
+
+  getAllModelsFromIndex(): Observable<any[]> {
+    return this.facets({
+      q: '*',
+      fl: 'pid', //'pid,title.search',
+      rows: '0',
+      facet: 'true',
+      'facet.field':'model'
+    });
   }
 
   getObjectsByModelFromIndex(model: string) {

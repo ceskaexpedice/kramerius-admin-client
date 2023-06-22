@@ -20,8 +20,13 @@
 		</div>
 		<div>
 			<mat-form-field class="app-w-100">
+
 				<mat-select [placeholder]="'desc.license' | translate" [(value)]="license" name="license" required>
-					<mat-option *ngFor="let lic of licenses" [value]="lic">{{lic }}</mat-option>
+		
+					<mat-option *ngFor="let lic of licenses" [value]="lic.name">
+							{{lic.name }}
+							<i *ngIf="lic.description">  - {{lic.description}} </i>
+					</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>

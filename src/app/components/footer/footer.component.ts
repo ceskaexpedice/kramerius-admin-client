@@ -57,7 +57,7 @@ export class FooterComponent implements OnInit {
   }
 
   getVersion() {
-    return this.appSettings.version;
+    return AppSettings.adminClientVersion;
   }
 
 
@@ -83,6 +83,12 @@ export class FooterComponent implements OnInit {
   getCoreHashFull() {
     if (this.coreInfo && this.coreInfo['hash']) {
       return this.coreInfo['hash'];
+    } else return null;
+  }
+
+  getAcronym() {
+    if (this.coreInfo && this.coreInfo['instance'] && this.coreInfo['instance']['acronym']) {
+      return this.coreInfo['instance']['acronym'];
     } else return null;
   }
 

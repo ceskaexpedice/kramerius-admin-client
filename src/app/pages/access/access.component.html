@@ -18,12 +18,16 @@
     </div>
     <div fxFlex class="app-oa-y">
       <div class="app-container">
-        <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
+        <!-- <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
           <app-rights *ngIf="view == 'actions'"></app-rights>
           <app-roles *ngIf="view == 'roles'"></app-roles>
           <app-licenses *ngIf="view == 'licenses'"></app-licenses>
           <app-params *ngIf="view == 'params'"></app-params>
-        </mat-card>
+        </mat-card> -->
+        <app-rights *ngIf="view == 'actions'"></app-rights>
+        <app-roles *ngIf="view == 'roles'"></app-roles>
+        <app-licenses *ngIf="view == 'licenses'"></app-licenses>
+        <app-params *ngIf="view == 'params'"></app-params>
       </div>
     </div>
   </div>

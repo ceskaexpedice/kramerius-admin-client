@@ -447,7 +447,10 @@
     "indexTheObject": "Indexovat objekt",
     "deleteSelectedCollections": "Vymazat vybrané sbírky",
     "acceptChanges": "Akceptovat změny",
-    "deleteSelectedItems": "Vymazat vybrané položky"
+    "deleteSelectedItems": "Vymazat vybrané položky",
+    "changeFlagOnLicense": "Změnit príznak na licenci",
+    "change": "Změnit",
+    "removeTheVisibilityFlag": "Odebrat příznak viditelnosti"
   },
   "field": {
     "public": "Veřejné",
@@ -468,12 +471,13 @@
     "periodicalitem": "Čísla periodika",
     "supplement": "Přílohy",
     "periodicalvolume": "Ročníky periodika",
-    "monographunit": "Monographunit",
+    "monographunit": "Části monografie",
     "track": "Track",
     "soundunit": "Soundunit",
     "internalpart": "Internalpart",
     "convolute": "Konvoluty",
-    "picture": "Obrázky"
+    "picture": "Obrázky",
+    "multivolumemonograph":"Vícesvazková monografie"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
@@ -709,10 +713,16 @@
       "title": "Synchronizace licencí",
       "timeInfo": "Datum a čas poslední synchronizace",
       "field": {
-        "pid": "Pid",
+        "pid": "Pid/Odkaz do DK",
         "catalog": "Sdnt",
         "title": "Titulek",
         "process": "Proces",
+        "sdnntModel": "Model",
+        "sdnntCatalog":"Katalog/Odkaz do SDNNT",
+        "sdnntDate": "Datum vydání",
+        "real_kram_model":"Model",
+		    "real_kram_date":"Ročník/Výtisk",
+        "linkMissing": "V SDNNT chybí odkaz na periodikum nebo vícesvazkovou monografii proto není reprezentováno odkazem.",
         "sync_actions": {
           "title": "Navrhovaná změna",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -733,6 +743,16 @@
         "sdnntInstance": "Sdnnt instance"
       },
       "alert": "Následující proměnné musí být nakonfigurovány"
+    },
+    "scheduleChangeFlagOnLicense": {
+      "title": "Změna príznaku na licenci",
+      "checkbox": "Rovněž odebrat príznak policy",
+      "section1": "Licence budou přidělovány pro následující modely",
+      "section2": "Příznaky se mapují pro následovně"
+    },
+    "scheduleRemoveTheVisibilityFlag": {
+      "title": "Odebrání příznaku viditelnosti",
+      "message": "Pro každý vložený PID bude naplánován proces Odebrání příznaku, který ruší příznak POLICY."
     }
   },
   "snackbar": {
@@ -770,6 +790,12 @@
         "2-4": "Byly naplánovány {{value}} procesy Změna viditelnosti",
         "more": "Bylo naplánováno {{value}} procesů Změna viditelnosti"
       },
+      "scheduleRemovePolicyByPid": {
+        "1": "Proces Odebrání příznaku viditelnosti byl naplánován",
+        "2-4": "Byly naplánovány {{value}} procesy Odebrání příznaku viditelnosti",
+        "more": "Bylo naplánováno {{value}} procesů Odebrání příznaku viditelnosti"
+      },
+
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
@@ -800,7 +826,8 @@
       "scheduleIndexationByModel": "Indexace modelu {{value}} byla naplánována",
       "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací",
       "scheduleStartTheSdnntReviewProcess": "Spuštění procesu kontroly SDNNT/Kramerius bylo naplánováno",
-      "deleteSelectedCollections": "Proces smazaní vybraných sbirek byl úspěšně spuštěn"
+      "deleteSelectedCollections": "Proces smazaní vybraných sbirek byl úspěšně spuštěn",
+      "changeFlagOnLicense": "Proces změny příznaku na licenci byl naplánován"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -923,6 +950,8 @@
     "convolute": "Konvoluty",
     "map": "Mapy",
     "monograph": "Monografie",
+    "monographunit":"Svazek",
+    "multivolumemonograph":"Vícesvazková monografie",
     "periodical": "Periodika",
     "manuscript": "Rukopisy",
     "collection": "Sbírka",
@@ -959,7 +988,7 @@
     "linkToLicenseDetail": "Odkaz na detail licence",
     "noLicenseSelected": "Není vybrána licence",
     "licenseSynchronization": "Synchronizace licencí",
-    "licenseSynchronizationFetch": "Spustit synchronizaci licenci",
+    "licenseSynchronizationFetch": "Spuštění synchronizace licencí",
     "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc",
     "selectServer": "Vyberte server",
     "selectAllObjects": "Vybrat všechny objekty",
@@ -968,6 +997,10 @@
     "selectAllCollections": "Vybrat všechny sbírky",
     "selectThisCollection": "Vybrat tuto sbírku",
     "selectAllItems": "Vybrat všechny položky",
-    "selectThisItem": "Vybrat tuto položku"
+    "selectThisItem": "Vybrat tuto položku",
+    "changeFlagOnLicense": "Změna príznaku na licenci",
+    "symptom": "Příznak",
+    "localLibraryLicense": "Lokální licence knihovny",
+    "globalLicense": "Globální licence"
   }
 }

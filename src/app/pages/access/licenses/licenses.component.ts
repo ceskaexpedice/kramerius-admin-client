@@ -7,6 +7,7 @@ import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ClientApiService } from 'src/app/services/client-api.service';
 
 @Component({
   selector: 'app-licenses',
@@ -15,14 +16,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LicensesComponent implements OnInit {
 
+  // must be set 
+  libraryName: string = 'KNAV';
+
   state: string;
+
   licenses: any[];
+  //globalLicenses:any[];
 
   errorMessage: string;
   errorState: boolean = false;
 
   constructor(private api: AdminApiService, 
     private ui: UIService,
+    private clientApi: ClientApiService,
     private dialog: MatDialog) {}
 
   ngOnInit() {
@@ -31,7 +38,18 @@ export class LicensesComponent implements OnInit {
 
   reload() {
     this.state = 'loading';
-    this.api.getLicenses().subscribe((licenses: License[]) => {
+
+    this.clientApi.getInfo().subscribe(data => {
+      if (data['instance'] && data['instance']['acronym']) {
+        this.libraryName = data['instance']['acronym'];
+       } else {
+        this.libraryName = null;
+       }
+    });
+
+
+
+    this.api.getAllLicenses().subscribe((licenses: License[]) => {
       this.licenses = licenses;
       this.state = 'success';
     }, (error: HttpErrorResponse) => {
@@ -40,8 +58,23 @@ export class LicensesComponent implements OnInit {
     });
   }
 
+  acronymSet() {
+    return this.libraryName && this.libraryName != '';
+  }
+
+  isValidLicense(license:License) {
+
+  }
+
+
+
   onNewLicence() {
     const dialogRef = this.dialog.open(CreateOrEditLicenseDialogComponent, {
+
+      data : { 
+          libraryName: this.libraryName,
+          licenseNames: this.licenses.map((lic) => lic.name).concat(this.licenses.map((lic) => lic.name))
+      },
       width: '600px',
       panelClass: 'app-create-or-edit-license-dialog'
     });
@@ -113,7 +146,13 @@ export class LicensesComponent implements OnInit {
 
   onEditLicese(license: License) {
     const dialogRef = this.dialog.open(CreateOrEditLicenseDialogComponent, {
-      data: { license: license },
+      data: { 
+        license: license,
+        
+        libraryName: this.libraryName,
+        licenseNames: this.licenses.map((lic) => lic.name).concat(this.licenses.map((lic) => lic.name))
+
+      },
       width: '600px',
       panelClass: 'app-create-or-edit-license-dialog'
     } );

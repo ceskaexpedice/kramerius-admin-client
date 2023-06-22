@@ -44,10 +44,6 @@ export class NavbarComponent implements OnInit {
     this.ui.changeLang(lang);
   }
 
-  getVersion() {
-    return this.appSettings.version;
-  }
-
   setDefaultRoute(type: string, value: string) {
     this.local.setStringProperty(type, value);
   }

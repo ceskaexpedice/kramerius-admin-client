@@ -447,4 +447,16 @@
     top: 0;
     left: 0;
   }
+
+  .mat-dialog-content {
+    &.app-scrollbar-fix {
+      margin-bottom: -10px;
+
+      &:after {
+        content: " ";
+        display: block;
+        height: 10px;
+      }
+    }
+  }
 }
