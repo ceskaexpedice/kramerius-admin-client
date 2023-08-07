@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>{{ 'modal.about.title' | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  <p>
+    {{ 'modal.about.desc' | translate }}
+  </p>
+  <div class="app-mb-4">
+    <h3 class="app-m-0">{{ 'desc.client' | translate }}</h3>
+    <span class="app-label">{{ 'desc.version' | translate }}: </span>
+    <strong>{{getVersion()}}</strong><br />
+    <span class="app-label">Commit: </span>
+    <strong><a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></strong>
+  </div>
+ 
+  
+ <!--  <mat-divider class="app-mt-4 app-mb-4"></mat-divider> -->
+  <div>
+    <h3 class="app-m-0">{{ 'desc.core' | translate }}</h3>
+    <span class="app-label">{{ 'desc.version' | translate }}: </span>
+    <strong>{{getCoreVersion()}}</strong><br />
+    <span class="app-label">Commit: </span>
+    <strong><a href="https://github.com/ceskaexpedice/kramerius/commit/{{getCoreHashFull()}}" target="_blank">{{getCoreHashShort()}}</a></strong><br />
+    <span class="app-label">{{ 'desc.connectedInstance' | translate }}: </span>
+    <strong><a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a></strong>
+  </div>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close=" cancel">{{ 'button.close' | translate }}</button>
+</mat-dialog-actions>

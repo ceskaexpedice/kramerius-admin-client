@@ -754,6 +754,10 @@
     "scheduleRemoveTheVisibilityFlag": {
       "title": "Odebrání příznaku viditelnosti",
       "message": "Pro každý vložený PID bude naplánován proces Odebrání příznaku, který ruší příznak POLICY."
+    },
+    "about": {
+      "title": "O aplikaci",
+      "desc": "Administrátorské rozhraní Krameria 7."
     }
   },
   "snackbar": {
@@ -1002,6 +1006,8 @@
     "changeFlagOnLicense": "Změna príznaku na licenci",
     "symptom": "Příznak",
     "localLibraryLicense": "Lokální licence knihovny",
-    "globalLicense": "Globální licence"
+    "globalLicense": "Globální licence",
+    "client": "Klient",
+    "core": "Jádro"
   }
 }

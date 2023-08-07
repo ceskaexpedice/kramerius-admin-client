@@ -1,15 +1,8 @@
 <footer class="app-footer" fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="center center">
   <div fxFlex class="app-left">
-    <strong>k7Admin</strong> -
-    <span class="app-text-lowercase">{{ 'desc.version' | translate }}: {{getVersion()}}</span> -
-    commit: <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a>
+    <strong>K7 Admin © {{ currentYear }}</strong>
     <span class="app-pipe"></span>
-
-    <strong>{{ 'desc.connectedInstance' | translate }}: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a> -
-    <span class=" app-text-lowercase">{{ 'desc.version' | translate }}:</span> {{getCoreVersion()}} -
-    commit: <a href="https://github.com/ceskaexpedice/kramerius/commit/{{getCoreHashFull()}}" target="_blank">{{getCoreHashShort()}}</a>
-    <span class="app-pipe"></span>
-    <strong>{{ 'desc.tokenExpiresAt' | translate }}</strong>: {{ getTokenDeadline() }} <!-- {{getTokenDeadline() +" ("+ tokenHours+":"+tokenMinutes+":"+tokenSeconds+")"}}-->
+    {{ 'desc.tokenExpiresAt' | translate }}: <strong>{{ getTokenDeadline() }}</strong> <!-- {{getTokenDeadline() +" ("+ tokenHours+":"+tokenMinutes+":"+tokenSeconds+")"}}-->
   </div>
   <div class="app-right">Developed by <a href="https://www.inovatika.cz" title="Inovatika" target="_blank"><img src="assets/shared/img/logo-inovatika.png" alt="Inovatika" /></a></div>
 </footer>

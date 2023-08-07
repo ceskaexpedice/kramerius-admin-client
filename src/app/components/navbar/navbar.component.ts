@@ -6,6 +6,8 @@ import { UIService } from 'src/app/services/ui.service';
 import { RightAction } from 'src/app/models/right-action.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { interval, Subscription } from 'rxjs';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AboutDialogComponent } from 'src/app/dialogs/about-dialog/about-dialog.component';
 
 
 @Component({
@@ -28,7 +30,8 @@ export class NavbarComponent implements OnInit {
     public settings: AppSettings, 
     public ui: UIService,
     public appSettings: AppSettings,
-    private local: LocalStorageService
+    private local: LocalStorageService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit():void  {
@@ -92,6 +95,13 @@ export class NavbarComponent implements OnInit {
 
   setDefaultRoute(type: string, value: string) {
     this.local.setStringProperty(type, value);
+  }
+
+  openAboutDialog() {
+    const dialogRef = this.dialog.open(AboutDialogComponent, {
+      panelClass: 'app-about-dialog',
+      width: '600px'
+    });
   }
 
 }

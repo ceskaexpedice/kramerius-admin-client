@@ -754,6 +754,10 @@
     "scheduleRemoveTheVisibilityFlag": {
       "title": "Removing the visibility flag",
       "message": "A Remove Flag process will be scheduled for each embedded PID, which clears the POLICY flag."
+    },
+    "about": {
+      "title": "About",
+      "desc": "Kramerius 7 admin interface."
     }
   },
   "snackbar": {
@@ -1002,6 +1006,8 @@
     "changeFlagOnLicense": "Change flag on license",
     "symptom": "Symptom",
     "localLibraryLicense": "Local Library License",
-    "globalLicense": "Global License"
+    "globalLicense": "Global License",
+    "client": "Client",
+    "core": "Core"
   }
 }
