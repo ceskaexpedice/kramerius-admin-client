@@ -5,6 +5,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { UIService } from 'src/app/services/ui.service';
 import { RightAction } from 'src/app/models/right-action.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { interval, Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,6 +18,10 @@ export class NavbarComponent implements OnInit {
   notAllowed: boolean = false;
   cdkMode = this.settings.cdkMode;
 
+  tokenHours: string;
+  tokenMinutes: string;
+  tokenSeconds: string;
+  
   constructor(
     public auth: AuthService, 
     private router: Router, 
@@ -26,7 +31,48 @@ export class NavbarComponent implements OnInit {
     private local: LocalStorageService
     ) { }
 
-  ngOnInit() {
+  ngOnInit():void  {
+    interval(1000).subscribe(x => {
+      if (AuthService.tokenDeadline) {
+
+        function getDifference(date1, date2) {
+          const diffInMs = Math.abs(date2 - date1);
+          return diffInMs;
+        }
+
+        let diffInMs = Math.round(getDifference(new Date(), AuthService.tokenDeadline)/1000);
+        if (diffInMs > 0) {
+          this.tokenHours = this.padTo2Digits( Math.trunc(diffInMs / (3600)));
+          diffInMs =  diffInMs % 3600        
+          this.tokenMinutes = this.padTo2Digits( Math.trunc(diffInMs / (60)));
+          diffInMs =  diffInMs % 60        
+          this.tokenSeconds = this.padTo2Digits( diffInMs);
+        } else {
+          this.tokenHours = this.padTo2Digits(0);
+          this.tokenMinutes = this.padTo2Digits(0);
+          this.tokenSeconds = this.padTo2Digits(0);
+          window.location.href='/login';
+        }
+      } else {
+        this.tokenHours = null;
+        this.tokenMinutes = null;
+        this.tokenSeconds = null;
+      }
+    });
+  }
+
+  private padTo2Digits(num: number) {
+    return num.toString().padStart(2, '0');
+  }
+
+  getTokenDeadline() {
+    if (AuthService.tokenDeadline) {
+      return [
+        this.padTo2Digits(AuthService.tokenDeadline.getHours()),
+        this.padTo2Digits(AuthService.tokenDeadline.getMinutes()),
+        this.padTo2Digits(AuthService.tokenDeadline.getSeconds()),
+      ].join(':')
+    } else return '';
   }
 
 

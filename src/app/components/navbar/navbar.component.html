@@ -41,6 +41,7 @@
           {{ auth.getTextProfileImage() }}
         </div>
       </a>
+      <div class="app-badge app-session" [matTooltip]="'batch.sessionExpire' | translate">{{ tokenHours+":"+tokenMinutes+":"+tokenSeconds }}</div>
     </ng-container>
 
     <mat-menu #profile_menu="matMenu">

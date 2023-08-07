@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { interval, Subscription } from 'rxjs';
 
-
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -22,7 +21,7 @@ export class FooterComponent implements OnInit {
 
   constructor(
     public appSettings: AppSettings,
-    private adminApi: AdminApiService 
+    private adminApi: AdminApiService
   ) { }
 
   ngOnInit(): void {

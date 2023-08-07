@@ -329,7 +329,8 @@
     "NOT_RUNNING": "Not running",
     "WARNING": "Warning",
 
-    "currentVersionOfTheIndexer": "Current version of the indexer"
+    "currentVersionOfTheIndexer": "Current version of the indexer",
+    "sessionExpire": "It remains until logout"
   },
   "paginator": {
     "desc": {
@@ -975,7 +976,7 @@
     "logs": "Logs",
     "right": "Right",
     "connectedInstance": "Connected instance",
-    "tokenExpiresAt": "Token expires at",
+    "tokenExpiresAt": "You will be logged out of the application",
     "code": "Code",
     "stateDuration": "State duration",
     "switch": "Switch",

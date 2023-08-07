@@ -238,6 +238,10 @@ a {
     background-color: $app-badge-version-color;
   }
 
+  &.app-session {
+    color: $app-color-primary;
+  }
+
   &.app-count {
     @extend .app-pr-1, .app-pl-1, .app-ml-2;
   }
