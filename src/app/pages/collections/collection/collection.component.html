@@ -43,7 +43,8 @@
             <span *ngIf="collection" [matTooltip]="collection.getDescription()" class="app-desc">{{collection.getDescription() }}</span>
           </div>
           <div *ngIf="view === 'content'">
-            <button mat-flat-button color="primary" (click)="onAddItemsToThisCollection()"  class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
+            <button mat-flat-button color="primary" (click)="onAddItemsToThisCollection()" class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
+            <button [disabled]="!isItemChildDraged" mat-flat-button color="primary" (click)="openScheduleChangeOrderDocumentsInCollectionDialog()" class="app-mr-2">{{ 'button.saveOrderChange' | translate }}</button>
             <button [disabled]="!selectedAllCollections" mat-flat-button color="warn" (click)="deleteSelectedItemsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
           </div>
           <div *ngIf="view === 'context'">
@@ -61,7 +62,7 @@
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view == 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-content [collection]="collection" [state]="state" [items]="items" [collectionActions]="collectionActions"  (updated)="onUpdated()"></app-collection-content>
+            <app-collection-content [collection]="collection" [state]="state" [items]="items" (dragEvent)="getChildItemDragState($event)" [collectionActions]="collectionActions" (updated)="onUpdated()"></app-collection-content>
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">

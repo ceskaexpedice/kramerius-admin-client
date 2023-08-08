@@ -451,7 +451,8 @@
     "deleteSelectedItems": "Vymazat vybrané položky",
     "changeFlagOnLicense": "Změnit príznak na licenci",
     "change": "Změnit",
-    "removeTheVisibilityFlag": "Odebrat příznak viditelnosti"
+    "removeTheVisibilityFlag": "Odebrat příznak viditelnosti",
+    "saveOrderChange": "Uložit změnu pořadí"
   },
   "field": {
     "public": "Veřejné",
@@ -758,6 +759,14 @@
     "about": {
       "title": "O aplikaci",
       "desc": "Administrátorské rozhraní Krameria 7."
+    },
+    "scheduleChangeOrderDocumentsInCollection": {
+      "title": "Změna pořadí dokumenů ve sbírce",
+      "alert": "Pokud změníte pořadí dokumentů ve sbírce, vytvoří se proces pro reindexaci a položky se Vám můžou zobrazovat v původním pořadí v seznamu do doby, než tento proces bude ukončen.",
+      "button": {
+        "process": "Uložit a přejít na seznam procesů",
+        "collection": "Uložit a zůstat ve sbírce"
+      }
     }
   },
   "snackbar": {

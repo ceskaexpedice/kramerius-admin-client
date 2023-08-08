@@ -14,6 +14,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { AuthService } from 'src/app/services/auth.service';
 import { DeleteCollectionDialogComponent } from 'src/app/dialogs/delete-collection-dialog/delete-collection-dialog.component';
 import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
+import { ScheduleChangeOrderDocumentsInCollectionDialogComponent } from 'src/app/dialogs/schedule-change-order-documents-in-collection-dialog/schedule-change-order-documents-in-collection-dialog.component';
 
 @Component({
   selector: 'app-collection',
@@ -35,6 +36,8 @@ export class CollectionComponent implements OnInit {
   collectionId: string;
 
   selectedAllCollections: boolean = false;
+
+  public isItemChildDraged: boolean;
 
 
   constructor(
@@ -232,5 +235,16 @@ export class CollectionComponent implements OnInit {
         this.reloadPage();
       }
     }); */
+  }
+
+  getChildItemDragState(draged: boolean): void{
+    this.isItemChildDraged= draged;
+  }
+
+  openScheduleChangeOrderDocumentsInCollectionDialog() {
+    const dialogRef = this.dialog.open(ScheduleChangeOrderDocumentsInCollectionDialogComponent, {
+      panelClass: 'app-schedule-change-order-documents-in-collection-dialog',
+      width: '600px'
+    });
   }
 }

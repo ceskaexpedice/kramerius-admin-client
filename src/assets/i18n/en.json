@@ -451,7 +451,8 @@
     "deleteSelectedItems": "Delete selected items",
     "changeFlagOnLicense": "Change flag on license",
     "change": "Change",
-    "removeTheVisibilityFlag": "Remove the visibility flag"
+    "removeTheVisibilityFlag": "Remove the visibility flag",
+    "saveOrderChange": "Save order change"
   },
   "field": {
     "public": "Public",
@@ -758,6 +759,14 @@
     "about": {
       "title": "About",
       "desc": "Kramerius 7 admin interface."
+    },
+    "scheduleChangeOrderDocumentsInCollection": {
+      "title": "Changing the order of documents in the collection",
+      "alert": "If you change the order of the documents in the collection, a reindexing process is created and the items can be displayed in their original order in the list until this process is finished.",
+      "button": {
+        "process": "Save and go to process list",
+        "collection": "Save and stay in your collection"
+      }
     }
   },
   "snackbar": {

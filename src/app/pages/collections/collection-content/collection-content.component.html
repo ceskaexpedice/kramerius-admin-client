@@ -20,7 +20,29 @@
 		</div>
 	</mat-card-header>
 </mat-card>
-<mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}">
+<!-- <h1>{{ dragEventState }}</h1> -->
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+	<mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}" cdkDrag>
+		<mat-card-header fxLayout="row" fxLayoutGap="16px">
+			<div>
+				<mat-checkbox [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
+			</div>
+			<div *ngIf="getThumb(item['pid'])">
+				<img [src]="getThumb(item['pid'])" />
+			</div>
+			<div fxFlex class="app-left">
+				<mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
+				<mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
+			</div>
+			<div class="app-right app-actions">
+				<a (click)="allowEditRemove(item['pid']) ? removeItemFromCollection(item, collection, $event) : null" class="app-btn-warn" [ngClass]="!allowEditRemove(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="allowEditRemove(item['pid']) ? ('button.removeFromThisCollection' | translate) : ('alert.notAllowed' | translate)" [matTooltipClass]="!allowEditRemove(item['pid']) ? 'app-alert-not-allowed' : null">
+					<mat-icon>cancel</mat-icon>
+				</a>
+			</div>
+		</mat-card-header>
+	</mat-card>
+</div>
+<!-- <mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}">
 	<mat-card-header fxLayout="row" fxLayoutGap="16px">
 		<div>
 			<mat-checkbox [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
@@ -38,7 +60,7 @@
 			</a>
 		</div>
 	</mat-card-header>
-</mat-card>
+</mat-card> -->
 
 <mat-card *ngIf="(filterCollections(items)?.length || filterNonCollections(items)?.length) === 0" class="app-color-info app-text-center">
 	<mat-card-content fxLayout="row" fxLayoutAlign="center center">

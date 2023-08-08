@@ -7,6 +7,7 @@ import { Collection } from 'src/app/models/collection.model';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { UIService } from 'src/app/services/ui.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-collection-content',
@@ -22,11 +23,13 @@ export class CollectionContentComponent implements OnInit {
   @Input() collectionActions:Map<string,string[]>;
 
   isThumb: boolean;
-
+  
+  public draged: boolean;
 
   //linkEnabled = false;
 
   @Output() updated = new EventEmitter<any>();
+  @Output() dragEvent = new EventEmitter<any>();
 
   constructor(
     private collectionsService: CollectionsService,
@@ -129,5 +132,12 @@ export class CollectionContentComponent implements OnInit {
     this.onRemoveItemFromCollection(collection.id, collection.getName(), item['pid'], this.getName(item)); 
     event.preventDefault(); 
     event.stopPropagation();
+  }
+
+  // drag and drop sorting
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.draged = true;
+    this.dragEvent.emit(this.draged);
   }
 }
