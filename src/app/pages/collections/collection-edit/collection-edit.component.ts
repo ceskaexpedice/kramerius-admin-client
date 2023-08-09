@@ -74,7 +74,6 @@ export class CollectionEditComponent implements OnInit {
 
   onSave() {
     this.collectionsService.createCollection(this.collection).subscribe(response => {
-      //this.ui.showInfoSnackBar("snackbar.success.collectionHasBeenCreated");
       const dialogRef = this.dialog.open(CreateNewCollectionDialogComponent, {
         data: response,
         width: '600px',

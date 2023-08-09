@@ -777,7 +777,7 @@
       "copyToClipboard": "The text has been successfully copied to the clipboard",
       "addToTheCollection": "The collection has been added",
       "theCollectionHasBeenModified": "The collection has been modified",
-      "collectionHasBeenCreated": "Collection has been created",
+      "collectionHasBeenCreated": "The collection was created successfully",
       "theRightHasBeenRemoved": "The right has been removed",
       "visibilityChange": {
         "1": "The Change Visibility process has been scheduled",
