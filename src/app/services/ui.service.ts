@@ -19,6 +19,10 @@ export class UIService {
     this.snackBar.open(this.getTranslation(message, params), '', { duration: duration, verticalPosition: 'top' });
   }
 
+  showAlertSnackBar(message: string, params?: Object, duration: number = 10000) {
+    this.snackBar.open(this.getTranslation(message, params), '', { duration: duration, verticalPosition: 'top', panelClass: 'app-alert' });
+  }
+
   showErrorSnackBar(message: string, params?: Object, duration: number = 4000) {
     this.snackBar.open(this.getTranslation(message, params), this.getTranslation('desc.error'), { duration: duration, verticalPosition: 'top' });
   }

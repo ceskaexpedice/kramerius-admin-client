@@ -487,3 +487,10 @@
     }
   }
 }
+
+// snack bar
+.mat-snack-bar-container {
+  &.app-alert {
+    background-color: $app-color-warn;
+  }
+}

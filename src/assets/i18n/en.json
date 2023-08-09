@@ -844,7 +844,8 @@
       "changeFlagOnLicense": "The license flag change process has been scheduled",
       "changeItemsOrder": "The order of the items has been changed",
       "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started",
-      "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started"
+      "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started",
+      "tokenTimeExpireInfo": "You will be automatically logged out of the application in 2 minutes"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
