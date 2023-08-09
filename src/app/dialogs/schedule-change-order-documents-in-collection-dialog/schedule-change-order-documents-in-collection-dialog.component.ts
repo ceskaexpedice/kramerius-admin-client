@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
+import { UIService } from 'src/app/services/ui.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-schedule-change-order-documents-in-collection-dialog',
@@ -7,13 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleChangeOrderDocumentsInCollectionDialogComponent implements OnInit {
 
-  constructor() { }
+  private routerLink: string = 'processes';
+
+  constructor(
+    public dialogRef: MatDialogRef<ScheduleChangeOrderDocumentsInCollectionDialogComponent>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private ui: UIService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  scheduleChangeOrderDocumentsInCollection(route) {
+  getCurrentRoute() {
+    return this.router.url;
+  }
 
+  scheduleChangeOrderDocumentsInCollection(routerLink) {
+    this.routerLink = routerLink;
+    this.ui.showInfoSnackBar('snackbar.success.scheduleChangeItemsOrder');
+    this.dialogRef.close(
+      setTimeout(() => {
+        window.location.href=this.routerLink
+      }, 800)
+    );
+
+    // todo - this snackbar is ready for error state
+    // this.ui.showInfoSnackBar('snackbar.error.scheduleChangeItemsOrder');
   }
 
 }

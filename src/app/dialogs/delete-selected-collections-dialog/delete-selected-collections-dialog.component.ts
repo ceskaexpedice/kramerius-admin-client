@@ -15,7 +15,7 @@ import { UIService } from 'src/app/services/ui.service';
 export class DeleteSelectedCollectionsDialogComponent implements OnInit {
 
   private subject: Subject<string> = new Subject();
-  private routerLink:string = 'processes';
+  private routerLink: string = 'processes';
 
   constructor(public dialogRef: MatDialogRef<DeleteSelectedCollectionsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

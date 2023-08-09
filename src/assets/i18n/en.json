@@ -842,7 +842,8 @@
       "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled",
       "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started",
       "changeFlagOnLicense": "The license flag change process has been scheduled",
-      "changeItemsOrder": "The order of the items has been changed"
+      "changeItemsOrder": "The order of the items has been changed",
+      "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -895,7 +896,8 @@
       "scheduleIndexationsByMultiplePids": "Failed to schedule indexing",
       "loadMoreItemsForBatch": "Failed to load data",
       "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process",
-      "deleteSelectedCollections": "An error occurred while deleting the selected collections"
+      "deleteSelectedCollections": "An error occurred while deleting the selected collections",
+      "scheduleChangeItemsOrder": "An error occurred while saving the item order change"
     }
   },
   "desc": {

@@ -9,6 +9,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button (click)="scheduleChangeOrderDocumentsInCollection('processes')"  color="primary">{{ 'modal.scheduleChangeOrderDocumentsInCollection.button.process' | translate }}</button>
-  <button mat-flat-button (click)="scheduleChangeOrderDocumentsInCollection('collections')" color="primary">{{ 'modal.scheduleChangeOrderDocumentsInCollection.button.collection' | translate }}</button>
+  <button mat-flat-button (click)="scheduleChangeOrderDocumentsInCollection(getCurrentRoute())" color="primary">{{ 'modal.scheduleChangeOrderDocumentsInCollection.button.collection' | translate }}</button>
   <button mat-flat-button mat-dialog-close>{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>
