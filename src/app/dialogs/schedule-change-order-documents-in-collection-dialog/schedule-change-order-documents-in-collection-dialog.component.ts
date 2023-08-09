@@ -29,9 +29,8 @@ export class ScheduleChangeOrderDocumentsInCollectionDialogComponent implements 
     this.routerLink = routerLink;
     this.ui.showInfoSnackBar('snackbar.success.scheduleChangeItemsOrder');
     this.dialogRef.close(
-      setTimeout(() => {
-        window.location.href=this.routerLink
-      }, 800)
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([routerLink]))
     );
 
     // todo - this snackbar is ready for error state

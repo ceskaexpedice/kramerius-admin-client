@@ -38,14 +38,15 @@ export class DeleteSelectedCollectionsDialogComponent implements OnInit {
     });
 
     forkJoin(requests).subscribe(result => {
-      //console.log(" Result is "+result);
-      this.dialogRef.close(this.routerLink);
+      this.dialogRef.close(
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate([routerLink]))
+      );
       this.ui.showInfoSnackBar('snackbar.success.deleteSelectedCollections');
     }, error => {
       this.dialogRef.close('error');
       this.ui.showErrorSnackBar("snackbar.error.deleteSelectedCollections");
     });
-
   }
 
 
