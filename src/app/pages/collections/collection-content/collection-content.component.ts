@@ -137,7 +137,11 @@ export class CollectionContentComponent implements OnInit {
   // drag and drop sorting
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-    this.draged = true;
+    if (event.previousIndex !== event.currentIndex) {
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+      this.draged = true;
+    }
     this.dragEvent.emit(this.draged);
+    //console.log(event.previousIndex + "---" + event.currentIndex);
   }
 }

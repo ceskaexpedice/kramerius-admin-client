@@ -841,7 +841,8 @@
       "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací",
       "scheduleStartTheSdnntReviewProcess": "Spuštění procesu kontroly SDNNT/Kramerius bylo naplánováno",
       "deleteSelectedCollections": "Proces smazaní vybraných sbirek byl úspěšně spuštěn",
-      "changeFlagOnLicense": "Proces změny příznaku na licenci byl naplánován"
+      "changeFlagOnLicense": "Proces změny příznaku na licenci byl naplánován",
+      "changeItemsOrder": "Pořadí položek bylo změněno"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",

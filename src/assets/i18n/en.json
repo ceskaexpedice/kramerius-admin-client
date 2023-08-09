@@ -841,7 +841,8 @@
       "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing",
       "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled",
       "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started",
-      "changeFlagOnLicense": "The license flag change process has been scheduled"
+      "changeFlagOnLicense": "The license flag change process has been scheduled",
+      "changeItemsOrder": "The order of the items has been changed"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
