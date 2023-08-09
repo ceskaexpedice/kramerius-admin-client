@@ -20,7 +20,6 @@
 		</div>
 	</mat-card-header>
 </mat-card>
-<!-- <h1>{{ dragEventState }}</h1> -->
 <div cdkDropList (cdkDropListDropped)="drop($event)">
 	<mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}" cdkDrag>
 		<mat-card-header fxLayout="row" fxLayoutGap="16px">
@@ -42,7 +41,8 @@
 		</mat-card-header>
 	</mat-card>
 </div>
-<!-- <mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}">
+<!-- to delete after finish and testing
+<mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}">
 	<mat-card-header fxLayout="row" fxLayoutGap="16px">
 		<div>
 			<mat-checkbox [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>

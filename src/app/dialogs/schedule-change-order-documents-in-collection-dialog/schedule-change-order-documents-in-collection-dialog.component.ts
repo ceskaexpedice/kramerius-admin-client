@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { ActivatedRoute } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -16,7 +15,6 @@ export class ScheduleChangeOrderDocumentsInCollectionDialogComponent implements 
   constructor(
     public dialogRef: MatDialogRef<ScheduleChangeOrderDocumentsInCollectionDialogComponent>,
     private router: Router,
-    private route: ActivatedRoute,
     private ui: UIService
   ) { }
 

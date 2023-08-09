@@ -12,6 +12,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button (click)="scheduleDeleteSelectedItemsFromCollection('processes')"  color="warn">{{ 'modal.deleteSelectedItemsFromCollection.button.process' | translate }}</button>
-  <button mat-flat-button (click)="scheduleDeleteSelectedItemsFromCollection('collections')" color="warn">{{ 'modal.deleteSelectedItemsFromCollection.button.collection' | translate }}</button>
+  <button mat-flat-button (click)="scheduleDeleteSelectedItemsFromCollection(getCurrentRoute())" color="warn">{{ 'modal.deleteSelectedItemsFromCollection.button.collection' | translate }}</button>
   <button mat-flat-button mat-dialog-close>{{ 'button.no' | translate }}</button>
 </mat-dialog-actions>

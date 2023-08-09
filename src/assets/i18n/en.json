@@ -843,7 +843,8 @@
       "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started",
       "changeFlagOnLicense": "The license flag change process has been scheduled",
       "changeItemsOrder": "The order of the items has been changed",
-      "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started"
+      "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started",
+      "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -897,7 +898,8 @@
       "loadMoreItemsForBatch": "Failed to load data",
       "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process",
       "deleteSelectedCollections": "An error occurred while deleting the selected collections",
-      "scheduleChangeItemsOrder": "An error occurred while saving the item order change"
+      "scheduleChangeItemsOrder": "An error occurred while saving the item order change",
+      "scheduleDeleteSelectedItemsFromCollection": "An error occurred while deleting the selected items from the collection"
     }
   },
   "desc": {
