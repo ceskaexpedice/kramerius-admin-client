@@ -12,7 +12,7 @@
           <input class="app-input-autocomplete app-mr-4" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
           <button [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()" class="app-mr-2">{{ 'button.createNewCollection' | translate }}</button>
           <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="warn" (click)="deleteSelectedCollections()" class="app-mr-1">{{ 'button.deleteSelectedCollections' | translate }}</button>
-          <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage()" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
+          <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage('collections')" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
         </div>
         <div>
           <mat-slide-toggle class="app-standalone-toggle" color="primary" (change)="onStandaloneChange()" [(ngModel)]="standaloneOnly">{{ 'button.showStandaloneOnly' | translate }}</mat-slide-toggle>

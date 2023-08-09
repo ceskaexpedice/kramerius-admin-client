@@ -292,8 +292,10 @@ export class CollectionsComponent implements OnInit {
     this.reload();
   }
 
-  reloadPage() {
-    location.reload();
+  reloadPage(routerLink) {
+    //location.reload();
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate([routerLink]))
   }
 
   // Whether the number of selected elements matches the total number of rows
@@ -330,16 +332,6 @@ export class CollectionsComponent implements OnInit {
       data : { selection: toDelete },
       width: '600px',
       panelClass: 'app-delete-selected-collections-dialog'
-    });
-
-    dialogRef.afterClosed().subscribe(routernLink => {
-      if (routernLink === 'processes') {
-        this.router.navigate(['/', routernLink]);
-      } else if (routernLink === 'collections') {
-        this.reloadPage();
-      } else {
-        //this.reloadPage();
-      }
     });
   }
 }
