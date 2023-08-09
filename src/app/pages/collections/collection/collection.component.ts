@@ -227,14 +227,6 @@ export class CollectionComponent implements OnInit {
       width: '600px',
       panelClass: 'app-delete-selected-itemss-from-collection-dialog'
     });
-
-    /* dialogRef.afterClosed().subscribe(routernLink => {
-      if (routernLink === 'processes') {
-        this.router.navigate(['/', routernLink]);
-      } else if (routernLink === 'collections') {
-        this.reloadPage();
-      }
-    }); */
   }
 
   getChildItemDragState(draged: boolean): void{
