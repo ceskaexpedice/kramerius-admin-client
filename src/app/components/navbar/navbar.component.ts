@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
           this.tokenSeconds = this.padTo2Digits( diffInMs);
           let time = this.tokenHours+":"+this.tokenMinutes+":"+this.tokenSeconds;
           if(time === '00:02:00') {
-            this.ui.showAlertSnackBar('snackbar.success.tokenTimeExpireInfo');
+            this.ui.showAlertSnackBar('snackbar.alert.tokenTimeExpireInfo');
           }
         } else {
           this.tokenHours = this.padTo2Digits(0);

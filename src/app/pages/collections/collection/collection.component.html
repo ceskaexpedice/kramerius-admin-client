@@ -31,7 +31,7 @@
     <div fxFlex class="app-oa-y">
       <div class="app-container">
         <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <div>
+          <div *ngIf="view === 'content'">
             <mat-checkbox [matTooltip]="'desc.selectAllItems' | translate" (change)="selectAllCollections()" [checked]="selectedAllCollections" [indeterminate]="selectedAllCollections"></mat-checkbox>
           </div>
           <div fxFlex class="app-text-cutter">
