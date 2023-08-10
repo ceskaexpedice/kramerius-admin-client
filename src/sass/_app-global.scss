@@ -394,19 +394,3 @@ table {
     }
   }
 }
-
-
-
-
-.app-badge-test {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background-color: $app-color-primary;
-  color: $app-color-lightnes;
-  padding: 0 4px;
-  margin-left: 8px;
-}

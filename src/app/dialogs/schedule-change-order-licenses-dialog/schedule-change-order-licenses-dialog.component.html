@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{ 'modal.scheduleChangeOrderLicenses.title' | translate }}</h2>
+<mat-dialog-content>
+  <mat-card class="app-view-alert app-info app-mb-4">
+    <mat-card-content>
+      <mat-icon>info</mat-icon>
+      {{ 'modal.scheduleChangeOrderLicenses.alert' | translate }}
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button (click)="scheduleChangeOrderLicenses('processes')"  color="primary">{{ 'modal.scheduleChangeOrderLicenses.button.process' | translate }}</button>
+  <button mat-flat-button (click)="scheduleChangeOrderLicenses(getCurrentRoute())" color="primary">{{ 'modal.scheduleChangeOrderLicenses.button.licenses' | translate }}</button>
+  <button mat-flat-button mat-dialog-close>{{ 'button.cancel' | translate }}</button>
+</mat-dialog-actions>

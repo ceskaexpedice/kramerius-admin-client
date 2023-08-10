@@ -767,6 +767,14 @@
         "process": "Uložit a přejít na seznam procesů",
         "collection": "Uložit a zůstat ve sbírce"
       }
+    },
+    "scheduleChangeOrderLicenses": {
+      "title": "Změna pořadí licencí",
+      "alert": "Pokud změníte pořadí licencí, vytvoří se proces pro reindexaci a položky se Vám můžou zobrazovat v původním pořadí v seznamu do doby, než tento proces bude ukončen.",
+      "button": {
+        "process": "Uložit a přejít na seznam procesů",
+        "licenses": "Uložit a zůstat v licencích"
+      }
     }
   },
   "snackbar": {

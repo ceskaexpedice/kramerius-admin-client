@@ -767,6 +767,14 @@
         "process": "Save and go to process list",
         "collection": "Save and stay in your collection"
       }
+    },
+    "scheduleChangeOrderLicenses": {
+      "title": "Change order of licenses",
+      "alert": "If you change the order of the licenses, a reindexing process will be created and the items may appear in their original order in the list until this process is finished.",
+      "button": {
+        "process": "Save and go to process list",
+        "licenses": "Save and stay in licenses"
+      }
     }
   },
   "snackbar": {

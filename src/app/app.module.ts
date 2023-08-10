@@ -97,6 +97,7 @@ import { ScheduleChangeFlagOnLicenseDialogComponent } from './dialogs/schedule-c
 import { ScheduleRemoveTheVisibilityFlagDialogComponent } from './dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 import { AboutDialogComponent } from './dialogs/about-dialog/about-dialog.component';
 import { ScheduleChangeOrderDocumentsInCollectionDialogComponent } from './dialogs/schedule-change-order-documents-in-collection-dialog/schedule-change-order-documents-in-collection-dialog.component';
+import { ScheduleChangeOrderLicensesDialogComponent } from './dialogs/schedule-change-order-licenses-dialog/schedule-change-order-licenses-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -179,7 +180,8 @@ export function createCustomMatPaginatorIntl(
     ScheduleChangeFlagOnLicenseDialogComponent,
     ScheduleRemoveTheVisibilityFlagDialogComponent,
     AboutDialogComponent,
-    ScheduleChangeOrderDocumentsInCollectionDialogComponent
+    ScheduleChangeOrderDocumentsInCollectionDialogComponent,
+    ScheduleChangeOrderLicensesDialogComponent
   ],
   imports: [
     BrowserModule,

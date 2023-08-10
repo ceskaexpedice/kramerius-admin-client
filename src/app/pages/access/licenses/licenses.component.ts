@@ -8,6 +8,8 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ClientApiService } from 'src/app/services/client-api.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ScheduleChangeOrderLicensesDialogComponent } from 'src/app/dialogs/schedule-change-order-licenses-dialog/schedule-change-order-licenses-dialog.component';
 
 @Component({
   selector: 'app-licenses',
@@ -26,6 +28,8 @@ export class LicensesComponent implements OnInit {
 
   errorMessage: string;
   errorState: boolean = false;
+
+  public isItemChildDraged: boolean;
 
   constructor(private api: AdminApiService, 
     private ui: UIService,
@@ -175,6 +179,22 @@ export class LicensesComponent implements OnInit {
     this.licenses.sort((a: License, b: License) => {
       return a.priority - b.priority;
     });
+  }
+
+  openScheduleChangeOrderLicensesDialog() {
+    const dialogRef = this.dialog.open(ScheduleChangeOrderLicensesDialogComponent, {
+      panelClass: 'app-schedule-change-order-licenses-dialog',
+      width: '600px'
+    });
+  }
+
+  // drag and drop sorting
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.licenses, event.previousIndex, event.currentIndex);
+    if (event.previousIndex !== event.currentIndex) {
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+      this.isItemChildDraged = true;
+    }
   }
 
 }
