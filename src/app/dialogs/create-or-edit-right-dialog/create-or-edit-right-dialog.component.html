@@ -22,11 +22,19 @@
   <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.paramsNecessary">
     <mat-label>{{ 'desc.parameter' | translate }}</mat-label>
     <mat-select [(value)]="right.condition.params">
+      <mat-option (click)="openAddNewParamDialog()" class="app-add">
+        <mat-icon>add_circle</mat-icon>{{ 'Přidat nový parametr' | translate }}
+      </mat-option>
+      <mat-divider></mat-divider>
       <mat-option value="-" (click)="selectParam(null)">-</mat-option>
       <mat-option *ngFor="let param of params" (click)="selectParam(param)" [value]="param">
         {{ param.description }}
       </mat-option>
     </mat-select>
+    <!-- alternativ to add new parameter
+    <div matSuffix class="app-ml-2">
+      <mat-icon (click)="openNewParamDialog()" color="primary">add_circle</mat-icon>
+    </div> -->
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.isLabelAssignable">

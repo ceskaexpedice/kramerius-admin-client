@@ -280,6 +280,21 @@
   }
 }
 
+// mat select
+.mat-select-panel-wrap {
+  .mat-option {
+    .mat-icon {
+      @extend .app-mr-2;
+      @include setIcon(20);
+    }
+
+    &.app-add {
+      font-weight: 800;
+      color: $app-color-primary;
+    }
+  }
+}
+
 // tooltip
 .mat-tooltip {
   font-size: 14px;

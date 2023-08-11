@@ -5,6 +5,10 @@ import { License } from "src/app/models/license.model";
 import { Condition, Right } from "src/app/models/right.model";
 import { Role } from "src/app/models/roles.model";
 import { AdminApiService } from "src/app/services/admin-api.service";
+import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
+import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { UIService } from "src/app/services/ui.service";
 
 @Component({
   selector: 'app-create-or-edit-right-dialog',
@@ -29,7 +33,9 @@ export class CreateOrEditRightDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CreateOrEditRightDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private api: AdminApiService) {
+              private api: AdminApiService,
+              private dialog: MatDialog,
+              private ui: UIService) {
   }
 
   ngOnInit() {
@@ -165,6 +171,53 @@ export class CreateOrEditRightDialogComponent implements OnInit {
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  openAddNewParamDialog() {
+    // if we will use suffix icon, remove this comment
+    //  event.stopPropagation();
+    const data: SimpleDialogData = {
+      title: this.ui.getTranslation('modal.onNewParam.title'),
+      message: "",
+      textInput: {
+        label: this.ui.getTranslation('desc.name'),
+        value: ""
+      },
+      btn1: {
+        label: this.ui.getTranslation('button.create'),
+        value: 'create',
+        color: 'primary'
+      },
+      btn2: {
+        label: this.ui.getTranslation('button.cancel'),
+        value: 'cancel',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'create') {
+        const value = data.textInput.value;
+        if (value) {
+          const param = new ConditionParam();
+          param.description = value;
+          this.api.createConditionParam(param).subscribe((cp: ConditionParam) => {
+            this.params.push(cp);
+            console.log('cp', cp);
+          });
+        }
+        this.ui.showInfoSnackBar('snackbar.success.onNewParam');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.onNewParam');
+          }
+        }
+      }
+    });
   }
 
 }
