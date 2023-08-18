@@ -62,6 +62,10 @@ a {
   box-shadow: none !important;
 }
 
+.app-clean-outline {
+  outline: none !important;
+}
+
 .app-dn {
   display: none;
 }
@@ -374,6 +378,14 @@ table {
           .app-metadata {
             line-height: 20px;
             font-size: 13px;
+          }
+
+          input {
+            &[type=text] {
+              &:focus {
+                @extend .app-clean-outline;
+              }
+            }
           }
         }
 

@@ -9,6 +9,7 @@ import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dial
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { UIService } from "src/app/services/ui.service";
+import { AddNewParameterDialogComponent } from "../add-new-parameter-dialog/add-new-parameter-dialog.component";
 
 @Component({
   selector: 'app-create-or-edit-right-dialog',
@@ -194,10 +195,10 @@ export class CreateOrEditRightDialogComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+    const dialogRef = this.dialog.open(AddNewParameterDialogComponent, { 
       data: data,
       width: '600px',
-      panelClass: 'app-simple-dialog'
+      panelClass: 'app-add-new-parameter-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'create') {

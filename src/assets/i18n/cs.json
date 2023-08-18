@@ -452,7 +452,8 @@
     "changeFlagOnLicense": "Změnit príznak na licenci",
     "change": "Změnit",
     "removeTheVisibilityFlag": "Odebrat příznak viditelnosti",
-    "saveOrderChange": "Uložit změnu pořadí"
+    "saveOrderChange": "Uložit změnu pořadí",
+    "addNewValue": "Přidat novou hodnotu"
   },
   "field": {
     "public": "Veřejné",
@@ -1033,6 +1034,7 @@
     "localLibraryLicense": "Lokální licence knihovny",
     "globalLicense": "Globální licence",
     "client": "Klient",
-    "core": "Jádro"
+    "core": "Jádro",
+    "enterTheParameterValue": "Zadejte hodnotu parametru"
   }
 }

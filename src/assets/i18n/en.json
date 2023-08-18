@@ -452,7 +452,8 @@
     "changeFlagOnLicense": "Change flag on license",
     "change": "Change",
     "removeTheVisibilityFlag": "Remove the visibility flag",
-    "saveOrderChange": "Save order change"
+    "saveOrderChange": "Save order change",
+    "addNewValue": "Add new value"
   },
   "field": {
     "public": "Public",
@@ -1033,6 +1034,7 @@
     "localLibraryLicense": "Local Library License",
     "globalLicense": "Global License",
     "client": "Client",
-    "core": "Core"
+    "core": "Core",
+    "enterTheParameterValue": "Enter the parameter value"
   }
 }
