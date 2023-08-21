@@ -10,6 +10,7 @@ import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { UIService } from "src/app/services/ui.service";
 import { AddNewParameterDialogComponent } from "../add-new-parameter-dialog/add-new-parameter-dialog.component";
+import { CreateOrEditRoleDialogComponent } from "../create-or-edit-role-dialog/create-or-edit-role-dialog.component";
 
 @Component({
   selector: 'app-create-or-edit-right-dialog',
@@ -194,6 +195,25 @@ export class CreateOrEditRightDialogComponent implements OnInit {
         }
       });
     });
+  }
+
+  openAddNewRoleDialog() {
+    const dialogRef = this.dialog.open(CreateOrEditRoleDialogComponent, {
+      width: '600px',
+      panelClass: 'app-create-or-edit-role-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.role) {
+        const role = result.role;
+        this.roles.push(role);
+        this.ui.showInfoSnackBar('snackbar.success.createOrEditRole');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.createOrEditRole');
+          }
+        }
+      }
+    });  
   }
 
 }

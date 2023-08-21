@@ -1035,6 +1035,8 @@
     "globalLicense": "Globální licence",
     "client": "Klient",
     "core": "Jádro",
-    "enterTheParameterValue": "Zadejte hodnotu parametru"
+    "enterTheParameterValue": "Zadejte hodnotu parametru",
+    "addNewParameter": "Přidat nový parametr",
+    "addNewRole": "Přidat novou roli"
   }
 }

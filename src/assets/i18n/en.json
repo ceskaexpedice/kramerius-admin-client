@@ -1035,6 +1035,8 @@
     "globalLicense": "Global License",
     "client": "Client",
     "core": "Core",
-    "enterTheParameterValue": "Enter the parameter value"
+    "enterTheParameterValue": "Enter the parameter value",
+    "addNewParameter": "Add new parameter",
+    "addNewRole": "Add new role"
   }
 }
