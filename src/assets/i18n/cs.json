@@ -892,7 +892,10 @@
       },
       "onNewParam": "Parametr se nepodařilo přidat",
       "onEditParam": "Parametr se nepodařilo upravit",
-      "onRemoveParam": "Parametr se nepodřilo odstranit",
+      "onRemoveParam": {
+        "409": "Parametr je použit, není možné ho odstranit",
+        "failed": "Parametr se nepodřilo odstranit"
+      },
       "onNewValue": "Hodnotu se nepodařilo přidat",
       "onRemoveValue": "Hodnota parametru se nepodřila odstranit",
       "onEditValue": "Hodnotu parametru se nepodařilo upravit",

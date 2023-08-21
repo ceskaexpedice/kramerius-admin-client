@@ -230,7 +230,11 @@ export class ParamsComponent implements OnInit {
           this.ui.showInfoSnackBar('snackbar.success.onRemoveParam')
         },
         (error) => {
-          this.ui.showInfoSnackBar('snackbar.error.onRemoveParam');
+          if (error && error.error && error.error.status == 409) {
+            this.ui.showInfoSnackBar('snackbar.error.onRemoveParam.409');
+          } else {
+            this.ui.showErrorSnackBar('snackbar.error.onRemoveParam.failed');
+          }
         });
       }
     });

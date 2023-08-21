@@ -892,7 +892,10 @@
       },
       "onNewParam": "Failed to add parameter",
       "onEditParam": "The parameter could not be edited",
-      "onRemoveParam": "The parameter could not be deleted",
+      "onRemoveParam": {
+        "409": "The parameter is used, it cannot be deleted",
+        "failed": "Failed to delete parameter"
+      },
       "onNewValue": "Could not add value",
       "onRemoveValue": "The parameter value failed to delete",
       "onEditValue": "The parameter value could not be modified",
