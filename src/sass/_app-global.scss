@@ -382,6 +382,8 @@ table {
 
           input {
             &[type=text] {
+              @extend .app-clean-bg;
+              
               &:focus {
                 @extend .app-clean-outline;
               }

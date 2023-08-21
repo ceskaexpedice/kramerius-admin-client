@@ -13,14 +13,14 @@ export class AddNewParameterDialogComponent implements OnInit {
   public param: string;
   public value: string;
   public isParamCreated: boolean = false;
-  params: ConditionParam[];
+  public activeParam: ConditionParam;
 
   constructor(
     private api: AdminApiService,
     private ui: UIService
   ) { }
 
-  public values:any = [];
+  public values: any = [];
 
   ngOnInit(): void {
   }
@@ -28,10 +28,11 @@ export class AddNewParameterDialogComponent implements OnInit {
   createNewParam() {
     const value = this.param;
     if (value) {
-      const param = new ConditionParam();
-      param.description = value;
-      this.api.createConditionParam(param).subscribe((cp: ConditionParam) => {
-        this.params.push(cp);
+      const tmp = new ConditionParam();
+      tmp.description = value;
+      this.api.createConditionParam(tmp).subscribe((cp: ConditionParam) => {
+        this.activeParam = cp;
+        this.activeParam.values = [];
         console.log('cp', cp);
       });
       this.isParamCreated = true;
@@ -44,13 +45,14 @@ export class AddNewParameterDialogComponent implements OnInit {
     }
   }
 
-  addNewParamValue(param?: ConditionParam) {
+  addNewParamValue() {
     const value = this.value;
     if (value) {
-      param.values.push(value);
-      this.api.updateConditionParam(param).subscribe((cp: ConditionParam) => {
+      this.activeParam.values.push(value);
+      this.value = '';
+      this.api.updateConditionParam(this.activeParam).subscribe((cp: ConditionParam) => {
+        this.activeParam = cp;
         console.log('cp', cp);
-        console.log('test');
       });
     }
   }

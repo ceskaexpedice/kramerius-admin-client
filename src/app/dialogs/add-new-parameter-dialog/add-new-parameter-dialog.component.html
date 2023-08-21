@@ -12,8 +12,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let value of values; let index = index">
-        <td> {{ value }}</td>
+      <tr *ngFor="let value of activeParam.values; let index = index">
+        <td>{{ value }}</td>
+        <td></td>
       </tr>
       <tr>
         <td><input type="text" [placeholder]="'desc.enterTheParameterValue' | translate" class="app-w-100 app-clean-border" [(ngModel)]="value"  /></td>

@@ -175,49 +175,24 @@ export class CreateOrEditRightDialogComponent implements OnInit {
   }
 
   openAddNewParamDialog() {
-    // if we will use suffix icon, remove this comment
-    //  event.stopPropagation();
-    const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.onNewParam.title'),
-      message: "",
-      textInput: {
-        label: this.ui.getTranslation('desc.name'),
-        value: ""
-      },
-      btn1: {
-        label: this.ui.getTranslation('button.create'),
-        value: 'create',
-        color: 'primary'
-      },
-      btn2: {
-        label: this.ui.getTranslation('button.cancel'),
-        value: 'cancel',
-        color: 'light'
-      }
-    };
     const dialogRef = this.dialog.open(AddNewParameterDialogComponent, { 
-      data: data,
       width: '600px',
       panelClass: 'app-add-new-parameter-dialog'
     });
+
+    // update list of parameters after dialog is closed
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'create') {
-        const value = data.textInput.value;
-        if (value) {
-          const param = new ConditionParam();
-          param.description = value;
-          this.api.createConditionParam(param).subscribe((cp: ConditionParam) => {
-            this.params.push(cp);
-            console.log('cp', cp);
+      this.api.getConditionParams().subscribe((params: ConditionParam[]) => {
+        this.params = params;
+        if (this.data.right?.condition.params) {
+          let params =  this.params.find((p) => {
+            return p.id ==this.data.right.condition.params.id; 
           });
-        }
-        this.ui.showInfoSnackBar('snackbar.success.onNewParam');
-        (error) => {
-          if (error) {
-            this.ui.showErrorSnackBar('snackbar.error.onNewParam');
+          if (params) {
+            this.right.condition.params = params;
           }
         }
-      }
+      });
     });
   }
 
