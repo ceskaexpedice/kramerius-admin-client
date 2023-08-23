@@ -26,8 +26,11 @@ export class CollectionContentComponent implements OnInit {
   
   public draged: boolean;
 
-  //linkEnabled = false;
+  /** vybrane sbirky */
+  public selection: { [key: string]: boolean } = {};
 
+
+  // update event
   @Output() updated = new EventEmitter<any>();
   @Output() dragEvent = new EventEmitter<any>();
 
@@ -76,6 +79,14 @@ export class CollectionContentComponent implements OnInit {
     return items.filter(item => item['model'] != 'collection');
   }
 
+  isChecked(pid) {
+    return this.selection[pid];
+  }
+
+  onCheckboxChange(isChecked: boolean, pid: string) {
+    this.selection[pid] = isChecked;
+  }
+
   // TODO: move to utils ts
   allowEdit(pid) {
     if (this.collectionActions.has(pid)) {
@@ -85,6 +96,8 @@ export class CollectionContentComponent implements OnInit {
     }
     return false;
   }
+
+
   // TODO: Move to utils ts
   allowEditRemove(pid) {
     if (this.collectionActions.has(pid)) {
@@ -94,6 +107,8 @@ export class CollectionContentComponent implements OnInit {
     }
     return false;
   }
+
+
 
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
     const data: SimpleDialogData = {
