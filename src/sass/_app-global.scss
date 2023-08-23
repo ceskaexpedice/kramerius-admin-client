@@ -289,6 +289,10 @@ a {
   }
 } */
 
+.app-view-border-bottom {
+  border-bottom: 1px solid $app-card-border-color;
+}
+
 // top bar
 .app-topbar {
   @extend .app-pt-8, .app-pl-4, .app-pr-4;
@@ -383,7 +387,7 @@ table {
           input {
             &[type=text] {
               @extend .app-clean-bg;
-              
+
               &:focus {
                 @extend .app-clean-outline;
               }

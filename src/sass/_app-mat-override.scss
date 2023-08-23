@@ -164,7 +164,9 @@
 
   // drag and drop view
   &.cdk-drag {
-    cursor: move;
+    &:not(.cdk-drag-disabled) {
+      cursor: move;
+    }
     
     &.cdk-drag-preview {
       box-sizing: border-box;
