@@ -15,6 +15,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DeleteCollectionDialogComponent } from 'src/app/dialogs/delete-collection-dialog/delete-collection-dialog.component';
 import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
 import { ScheduleChangeOrderDocumentsInCollectionDialogComponent } from 'src/app/dialogs/schedule-change-order-documents-in-collection-dialog/schedule-change-order-documents-in-collection-dialog.component';
+import { SelectionModel } from '@angular/cdk/collections';
+import { forkJoin } from 'rxjs';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   selector: 'app-collection',
@@ -23,12 +26,17 @@ import { ScheduleChangeOrderDocumentsInCollectionDialogComponent } from 'src/app
 })
 export class CollectionComponent implements OnInit {
 
+  /** kolekce  */
   collection: Collection;
   state = 'none';
   availableCollections: any[];
   view: string;
 
-  items: any[]; //polozky ve sbirce
+  /** vsechny polozky ve sbirce  */
+  items: any[] = []; 
+  /** orderings  */
+  orderings: any[] = [];
+
   superCollections: Collection[] = []; //sbirky obsahujici tuto sbirku
 
   collectionActions:Map<string,string[]> = new Map();
@@ -38,6 +46,10 @@ export class CollectionComponent implements OnInit {
   selectedAllCollections: boolean = false;
 
   public isItemChildDraged: boolean;
+
+  // item selection model 
+  public selection = new SelectionModel<any>(true, []);
+
 
 
   constructor(
@@ -49,7 +61,9 @@ export class CollectionComponent implements OnInit {
     private collectionsService: CollectionsService,
     private local: LocalStorageService,
     private clipboard: Clipboard,
-    private auth:AuthService) {
+    private auth:AuthService,
+    private adminApi: AdminApiService
+    ) {
   }
 
   ngOnInit() {
@@ -65,19 +79,39 @@ export class CollectionComponent implements OnInit {
     //console.log('loading data for ' + collectionId)
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
-      this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
-        this.items = res.filter(item => this.collection.items.includes(item['pid']))
-        //this.view = 'detail';
-        this.view = this.local.getStringProperty('collection.view');
-        this.state = 'success';
-        // deti 
-        this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid']), null).subscribe((d:any) => {
-          Object.keys(d).forEach((k)=> {
-            let actions = d[k].map((v)=> v.code);
-            this.collectionActions.set(k, actions);
+      //this.clientApi
+      
+      this.clientApi.getStructure(collectionId).subscribe((response)=> {
+        let children = response['children'];
+
+        let fosterChildren = children['foster'].map(obj=> obj['pid']);
+        
+        this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
+          this.items = res.filter(item => this.collection.items.includes(item['pid']))
+          //this.items = this.items.filter(item = > fosterChildren.)
+
+          this.items.sort((a, b) => {
+            const indexA = fosterChildren.indexOf(a['pid']);
+            const indexB = fosterChildren.indexOf(b['pid']);
+            return indexA - indexB;
           });
-        });
-      })
+
+          //this.view = 'detail';
+          this.view = this.local.getStringProperty('collection.view');
+          this.state = 'success';
+          this.selection.clear();
+  
+          // deti 
+          this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid']), null).subscribe((d:any) => {
+            Object.keys(d).forEach((k)=> {
+              let actions = d[k].map((v)=> v.code);
+              this.collectionActions.set(k, actions);
+            });
+          });
+        })
+  
+  
+      });
 
 
     }, (error) => {
@@ -113,30 +147,33 @@ export class CollectionComponent implements OnInit {
     this.router.navigate(['/collections/' + view + '/', this.collectionId]);
   }
 
+  /** Vraci true, pokud je vse vybrano */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.items.length;
+    return numSelected === numRows;
+  }
+  
+  /** Vybere nebo odvybere vsechny polozky */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.items.forEach(itm => {
+            this.selection.select(itm);
+        });
+  }
+
+  /** udalost pro update dat; relaod from server  */  
   onUpdated() {
     this.loadData(this.collection.id);
   }
 
+  /** udalost pro mazani cele sbirky */
   onDelete() {
     if (!this.collection) {
       return;
     }
-    /* const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.removeCollection.title'),
-      message: this.ui.getTranslation('modal.removeCollection.message') + '?',
-      btn1: {
-        label: this.ui.getTranslation('button.yes'),
-        value: 'yes',
-        color: 'warn'
-      },
-      btn2: {
-        label: this.ui.getTranslation('button.no'),
-        value: 'no',
-        color: 'light'
-      }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { data: data }); */
-    const dialogRef = this.dialog.open(DeleteCollectionDialogComponent, {
+   const dialogRef = this.dialog.open(DeleteCollectionDialogComponent, {
       width: '600px',
       panelClass: 'app-delete-collection-dialog'
     });
@@ -218,25 +255,125 @@ export class CollectionComponent implements OnInit {
   }
 
   deleteSelectedCollections() {
-    // to do
+
   }
 
+  // delete one item
   deleteSelectedItemsFromCollection() {
-    const dialogRef = this.dialog.open(DeleteSelectedItemsFromCollectionComponent, {
-      //data : { selection: toDelete },
-      width: '600px',
-      panelClass: 'app-delete-selected-itemss-from-collection-dialog'
+ 
+    let toDelete:string[] = [];
+    this.items.forEach(itm => {
+      if (this.selection.isSelected(itm)) {
+        toDelete.push(itm.pid);
+      }
     });
+
+
+    const dialogRef2 = this.dialog.open(DeleteSelectedItemsFromCollectionComponent, {
+      data: {
+        "pid":this.collection.id,
+        "todelete":toDelete
+      },
+      width: '600px',
+      panelClass: 'app-add-items-to-collection'
+    });
+    dialogRef2.afterClosed().subscribe(result => {
+      if (result === 'deleted') {
+        this.selection.clear();        
+        this.items = this.items.filter(item =>  {
+          let pid = item['pid'];
+          return !toDelete.includes(pid)
+        });
+      }
+    });
+
+
+
   }
 
-  getChildItemDragState(draged: boolean): void{
-    this.isItemChildDraged= draged;
+  changeOrderings(ordereditems:any[]): void{
+    this.orderings = ordereditems;
   }
 
   openScheduleChangeOrderDocumentsInCollectionDialog() {
-    const dialogRef = this.dialog.open(ScheduleChangeOrderDocumentsInCollectionDialogComponent, {
-      panelClass: 'app-schedule-change-order-documents-in-collection-dialog',
-      width: '600px'
+    const data: SimpleDialogData = {
+      title: this.ui.getTranslation('modal.scheduleChangeOrderDocumentsInCollection.title'),
+      message: this.ui.getTranslation('modal.scheduleChangeOrderDocumentsInCollection.alert') + '?',
+      btn1: {
+        label: this.ui.getTranslation('button.yes'),
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: this.ui.getTranslation('button.no'),
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        this.adminApi.changeOrdering(this.collection.id, this.orderings).subscribe(() => {
+          this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+          this.orderings = [];
+        },(error) => {
+          console.log(error.status);
+          this.ui.showInfoSnackBar(`snackbar.error.changeItemsOrder`);
+          this.orderings = [];
+        });
+      }
+
     });
   }
+
+  onRemoveItemsFromCollection(collectionPid: string, collectionName: string, itemPids: string[], itemName) {
+    const data: SimpleDialogData = {
+      title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
+      message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
+      btn1: {
+        label: this.ui.getTranslation('button.yes'),
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: this.ui.getTranslation('button.no'),
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+
+        const observables = [];
+
+        itemPids.forEach(ipid=> {
+          observables.push(this.collectionsService.removeItemFromCollection(collectionPid, ipid));
+        });
+
+        forkJoin(observables).subscribe(
+          () => {
+            this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+    });
+  }
+
+
+
+
 }

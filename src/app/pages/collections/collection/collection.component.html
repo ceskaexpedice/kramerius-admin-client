@@ -32,7 +32,10 @@
       <div class="app-container">
         <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
           <div *ngIf="view === 'content'">
-            <mat-checkbox [matTooltip]="'desc.selectAllItems' | translate" (change)="selectAllCollections()" [checked]="selectedAllCollections" [indeterminate]="selectedAllCollections"></mat-checkbox>
+
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"  [matTooltip]="'desc.selectAllCollections' | translate"></mat-checkbox>
+
+
           </div>
           <div fxFlex class="app-text-cutter">
             <a (click)="copyTextToClipboard(getCurrentRoute('string', '/collections/' + view + '/'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
@@ -43,9 +46,12 @@
             <span *ngIf="collection" [matTooltip]="collection.getDescription()" class="app-desc">{{collection.getDescription() }}</span>
           </div>
           <div *ngIf="view === 'content'">
+
             <button mat-flat-button color="primary" (click)="onAddItemsToThisCollection()" class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
-            <button [disabled]="!isItemChildDraged" mat-flat-button color="primary" (click)="openScheduleChangeOrderDocumentsInCollectionDialog()" class="app-mr-2">{{ 'button.saveOrderChange' | translate }}</button>
-            <button [disabled]="!selectedAllCollections" mat-flat-button color="warn" (click)="deleteSelectedItemsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
+            <!-- drag&drop ordering -->
+            <button [disabled]="orderings.length == 0" mat-flat-button color="primary" (click)="openScheduleChangeOrderDocumentsInCollectionDialog()" class="app-mr-2">{{ 'button.saveOrderChange' | translate }}</button>
+            <!-- remove from collection -->
+            <button [disabled]="!selection.hasValue()" mat-flat-button color="warn" (click)="deleteSelectedItemsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
           </div>
           <div *ngIf="view === 'context'">
             <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
@@ -62,7 +68,7 @@
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view == 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-content [collection]="collection" [state]="state" [items]="items" (dragEvent)="getChildItemDragState($event)" [collectionActions]="collectionActions" (updated)="onUpdated()"></app-collection-content>
+            <app-collection-content  [selection]="selection" [collection]="collection" [state]="state" [items]="items" (dragEvent)="changeOrderings($event)" [collectionActions]="collectionActions" (updated)="onUpdated()"></app-collection-content>
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">

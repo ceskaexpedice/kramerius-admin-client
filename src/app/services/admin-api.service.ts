@@ -236,6 +236,14 @@ export class AdminApiService {
     return this.delete(`/collections/${collectionPid}/items/${itemPid}`);
   }
 
+  removeItemsBatchFromCollection(collectionPid: string, itemPids: string[]): Observable<Object> {
+    const payload = {
+      pids: itemPids
+    }
+    return this.put(`/collections/${collectionPid}/items/delete_batch_items`, payload);
+  }
+
+
   deleteObject(pid: string): Observable<any> {
     return this.delete(`/items/${pid}`);
   }
@@ -308,6 +316,7 @@ export class AdminApiService {
   getConditions(): Observable<any> {
     return this.get('/rights/criteria');
   }
+
 
   getRights(pid: string): Observable<Right[]> {
     return this.get('/rights', { pids: pid }).pipe(map(response =>
@@ -416,6 +425,14 @@ export class AdminApiService {
     return this.delete(`/licenses/local/${license.id}`);
   }
 
+
+  changeOrdering(parent:string, items:string[]): Observable<any> {
+    let json =  {
+      childrenPids: items
+    };
+    let url = `/items/${parent}/children_order`;
+    return this.put(url, json);
+  }
 
   /** Statistiky  */
   statisticsLicenseFilter(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {

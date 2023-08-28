@@ -21,6 +21,7 @@ export class CollectionContextComponent implements OnInit {
 
   @Output() updated = new EventEmitter<any>();
 
+
   constructor(
     private collectionsService: CollectionsService,
     private ui: UIService,

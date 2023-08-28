@@ -1,6 +1,8 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
+
+
 <div cdkDropList (cdkDropListDropped)="drop($event)" class="app-view-border-bottom">
-	<mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let item of filterCollections(items)" [ngClass]="!allowEdit(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(item['pid']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(item['pid']) ? 'app-alert-not-allowed' : null" cdkDrag [cdkDragDisabled]="filterCollections(items).length === 1">
+	<mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let item of collectionItems" [ngClass]="!allowEdit(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(item['pid']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(item['pid']) ? 'app-alert-not-allowed' : null" cdkDrag [cdkDragDisabled]="collectionItems.length === 1">
 		<mat-card-header fxLayout="row" fxLayoutGap="16px">
 			<div>
 				<mat-checkbox [matTooltip]="'desc.selectThisItem' | translate"></mat-checkbox>
@@ -28,11 +30,11 @@
 </div>
 
 <div cdkDropList (cdkDropListDropped)="drop($event)">
-	<mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}" cdkDrag>
+	<mat-card class="app-view-rights app-view-hover" *ngFor="let item of noncollectionItems" [ngClass]="{'item-collection':item['model'] == 'collection'}" cdkDrag>
 		<mat-card-header fxLayout="row" fxLayoutGap="16px">
 			
 			<div>
-				<mat-checkbox [matTooltip]="'desc.selectThisCollection' | translate"   [checked]="isChecked(item.pid)" (checkboxChange)="onCheckboxChange($event, item.pid)"></mat-checkbox>
+				<mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? selection.toggle(item) : null" [checked]="selection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
 			</div>
 			
 			<div *ngIf="getThumb(item['pid'])">
@@ -42,14 +44,13 @@
 			<div fxFlex class="app-left">
 
 				<mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
-				<!--
-				<mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
-				-->
 				<mat-card-subtitle>{{ 'desc.'+item['model'] | translate }}</mat-card-subtitle>
 			</div>
 
 			<div class="app-right app-actions">
+
 				<a (click)="allowEditRemove(item['pid']) ? removeItemFromCollection(item, collection, $event) : null" class="app-btn-warn" [ngClass]="!allowEditRemove(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="allowEditRemove(item['pid']) ? ('button.removeFromThisCollection' | translate) : ('alert.notAllowed' | translate)" [matTooltipClass]="!allowEditRemove(item['pid']) ? 'app-alert-not-allowed' : null">
+					
 					<mat-icon>cancel</mat-icon>
 				</a>
 			</div>
@@ -57,7 +58,7 @@
 	</mat-card>
 </div>	
 
-<mat-card *ngIf="(filterCollections(items)?.length || filterNonCollections(items)?.length) === 0" class="app-color-info app-text-center">
+<mat-card *ngIf="(collectionItems?.length || noncollectionItems?.length) === 0" class="app-color-info app-text-center">
 	<mat-card-content fxLayout="row" fxLayoutAlign="center center">
 		<mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.content' | translate }}
 	</mat-card-content>

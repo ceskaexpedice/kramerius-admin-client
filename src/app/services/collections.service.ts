@@ -70,5 +70,9 @@ export class CollectionsService {
     return this.adminApi.removeItemFromCollection(collectionPid, itemPid);
   }
 
+  removeBatchItemsFromCollection(collectionPid: string, itemPids: string[]): Observable<Object> {
+    return this.adminApi.removeItemsBatchFromCollection(collectionPid, itemPids);
+  }
+
 
 }

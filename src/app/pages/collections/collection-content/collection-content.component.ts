@@ -8,6 +8,12 @@ import { ClientApiService } from 'src/app/services/client-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { UIService } from 'src/app/services/ui.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { SelectionModel } from '@angular/cdk/collections';
+import { forkJoin } from 'rxjs';
+import { delay, map, tap } from 'rxjs/operators';
+
+import { AdminApiService } from 'src/app/services/admin-api.service';
+import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
 
 @Component({
   selector: 'app-collection-content',
@@ -21,27 +27,37 @@ export class CollectionContentComponent implements OnInit {
   @Input() items;
 
   @Input() collectionActions:Map<string,string[]>;
+  @Input() selection:SelectionModel<any>;
 
   isThumb: boolean;
   
-  public draged: boolean;
-
-  /** vybrane sbirky */
-  public selection: { [key: string]: boolean } = {};
-
+  public orderingChanged: boolean = false;
 
   // update event
   @Output() updated = new EventEmitter<any>();
   @Output() dragEvent = new EventEmitter<any>();
 
+  @Output() deleteitems = new EventEmitter<any>();
+
+  collectionItems;
+  noncollectionItems;
+
   constructor(
     private collectionsService: CollectionsService,
     private ui: UIService,
     private dialog: MatDialog,
-    private clientApi: ClientApiService
-  ) { }
+    private clientApi: ClientApiService,
+    private adminApi: AdminApiService
+  ) { 
+
+
+  }
 
   ngOnInit(): void {
+    
+    //this.collectionItems = this.items.filter(item => item['model'] == 'collection');
+    this.collectionItems = [];
+    this.noncollectionItems =  this.items;
   }
 
   getName(item): string {
@@ -52,16 +68,6 @@ export class CollectionContentComponent implements OnInit {
     return name;
   }
 
-  getModel(model: string): string {
-    switch (model) {
-      case 'monograph': return 'Kniha'
-      case 'periodical': return 'Periodikum'
-      case 'page': return 'Stránka'
-      case 'periodicalitem': return 'Číslo periodika'
-      case 'periodicalvolume': return 'Ročník periodika'
-      default: return model
-    }
-  }
 
   public handleMissingImage(event: Event) {
     (event.target as HTMLImageElement).style.display = 'none';
@@ -71,21 +77,22 @@ export class CollectionContentComponent implements OnInit {
     return this.clientApi.getThumb(uuid);
   }
 
-  filterCollections(items) {
-    return items.filter(item => item['model'] == 'collection');
+  // Whether the number of selected elements matches the total number of rows
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.items.length;
+    return numSelected === numRows;
   }
-
-  filterNonCollections(items) {
-    return items.filter(item => item['model'] != 'collection');
-  }
-
-  isChecked(pid) {
-    return this.selection[pid];
-  }
-
-  onCheckboxChange(isChecked: boolean, pid: string) {
-    this.selection[pid] = isChecked;
-  }
+  
+    // Selects all rows if they are not all selected; otherwise clear selection.
+    masterToggle() {
+      this.isAllSelected() ?
+          this.selection.clear() :
+          this.items.forEach(itm => {
+              this.selection.select(itm);
+          });
+    }
+  
 
   // TODO: move to utils ts
   allowEdit(pid) {
@@ -110,7 +117,7 @@ export class CollectionContentComponent implements OnInit {
 
 
 
-  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
+  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPids: string[], itemName) {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
       message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
@@ -130,33 +137,46 @@ export class CollectionContentComponent implements OnInit {
       width: '600px',
       panelClass: 'app-simple-dialog'
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        this.collectionsService.removeItemFromCollection(collectionPid, itemPid).subscribe(() => {
-          this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`);
-          this.updated.emit();
-        }, (error) => {
-          console.log(error);
-          this.ui.showErrorSnackBar("snackbar.error.removeFromThisCollection");
+ 
+       const observables = [];
+       itemPids.forEach(ipid=> {
+          observables.push(this.collectionsService.removeItemFromCollection(collectionPid, ipid));
         });
+
+        forkJoin(observables).subscribe(
+          () => {
+            
+            delay(300),
+            this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`);
+            this.updated.emit();
+          },
+          error => {
+            console.log(error);
+          }
+        );
       }
     });
   }
 
   removeItemFromCollection(item, collection, event) {
-    this.onRemoveItemFromCollection(collection.id, collection.getName(), item['pid'], this.getName(item)); 
+    let itempids:string[] = [item['pid']];
+    this.onRemoveItemFromCollection(collection.id, collection.getName(), itempids, this.getName(item)); 
     event.preventDefault(); 
     event.stopPropagation();
   }
 
+  
   // drag and drop sorting
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.filterNonCollections(this.items), event.previousIndex, event.currentIndex);
+    moveItemInArray(this.noncollectionItems, event.previousIndex, event.currentIndex);
     if (event.previousIndex !== event.currentIndex) {
-      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
-      this.draged = true;
+      this.orderingChanged = true;
+      let arr = this.noncollectionItems.map(obj=> obj['pid']);
+      this.dragEvent.emit(arr);
     }
-    this.dragEvent.emit(this.draged);
-    //console.log(event.previousIndex + "---" + event.currentIndex);
   }
+
 }

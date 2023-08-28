@@ -49,7 +49,9 @@ export class CollectionsComponent implements OnInit {
   numFound: number = 1000;
 
   displayedColumns = ['select', 'name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
+
   selection = new SelectionModel<any>(true, []);
+
   columnMapping = {
     'name_cze':'title.sort',
     'createdAt':'created',
