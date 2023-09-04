@@ -143,7 +143,7 @@ export class LicensesComponent implements OnInit {
 
   onMoveLiceseDown(license: License) {
     this.api.moveLicenseDown(license).subscribe(result => {
-      console.log('moveDown', result);
+      //console.log('moveDown', result);
       this.reload();
     });
   }
@@ -181,11 +181,12 @@ export class LicensesComponent implements OnInit {
     });
   }
 
-  openScheduleChangeOrderLicensesDialog() {
-    const dialogRef = this.dialog.open(ScheduleChangeOrderLicensesDialogComponent, {
-      panelClass: 'app-schedule-change-order-licenses-dialog',
-      width: '600px'
+  changeOrder() {
+    this.api.changeLicenseOrdering(this.licenses).subscribe(result => {
+      this.isItemChildDraged = false;
+      this.reload();
     });
+
   }
 
   // drag and drop sorting
@@ -193,6 +194,16 @@ export class LicensesComponent implements OnInit {
     moveItemInArray(this.licenses, event.previousIndex, event.currentIndex);
     if (event.previousIndex !== event.currentIndex) {
       this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+      let priorities = this.licenses.map(l=>  parseInt(l.priority));
+
+      priorities = priorities.sort((a, b) => {
+        return a - b;
+      });
+
+      for(let i =0;i<priorities.length;i++) {
+        this.licenses[i].priority = priorities[i];
+      }
+
       this.isItemChildDraged = true;
     }
   }

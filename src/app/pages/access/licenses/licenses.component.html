@@ -6,7 +6,7 @@
         {{ 'desc.localLibraryLicense' | translate }}: <strong>{{ libraryName }}</strong>
       </div>
       <div>
-        <button [disabled]="!isItemChildDraged" mat-flat-button color="primary" (click)="openScheduleChangeOrderLicensesDialog()">{{ 'button.saveOrderChange' | translate }}</button>
+        <button [disabled]="!isItemChildDraged" mat-flat-button color="primary" (click)="changeOrder()">{{ 'button.saveOrderChange' | translate }}</button>
       </div>
     </mat-card>
     <mat-card *ngIf="!errorState" class="app-card app-view-border app-p-0" cdkDropList (cdkDropListDropped)="drop($event)">

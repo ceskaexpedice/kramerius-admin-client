@@ -425,6 +425,14 @@ export class AdminApiService {
     return this.delete(`/licenses/local/${license.id}`);
   }
 
+  changeLicenseOrdering(licenses: License[]) {
+    let licensesJS = licenses.map(l=> l.toJson());
+    let json =  {
+      licenses: licensesJS
+    };
+
+    return this.put(`/licenses/changeOrdering`, json);
+  }
 
   changeOrdering(parent:string, items:string[]): Observable<any> {
     let json =  {

@@ -173,6 +173,8 @@ export class CollectionContentComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.noncollectionItems, event.previousIndex, event.currentIndex);
     if (event.previousIndex !== event.currentIndex) {
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+
       this.orderingChanged = true;
       let arr = this.noncollectionItems.map(obj=> obj['pid']);
       this.dragEvent.emit(arr);
