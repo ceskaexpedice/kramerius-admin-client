@@ -96,8 +96,6 @@ import { DeleteSelectedItemsFromCollectionComponent } from './dialogs/delete-sel
 import { ScheduleChangeFlagOnLicenseDialogComponent } from './dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
 import { ScheduleRemoveTheVisibilityFlagDialogComponent } from './dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 import { AboutDialogComponent } from './dialogs/about-dialog/about-dialog.component';
-import { ScheduleChangeOrderDocumentsInCollectionDialogComponent } from './dialogs/schedule-change-order-documents-in-collection-dialog/schedule-change-order-documents-in-collection-dialog.component';
-import { ScheduleChangeOrderLicensesDialogComponent } from './dialogs/schedule-change-order-licenses-dialog/schedule-change-order-licenses-dialog.component';
 import { AddNewParameterDialogComponent } from './dialogs/add-new-parameter-dialog/add-new-parameter-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -181,8 +179,6 @@ export function createCustomMatPaginatorIntl(
     ScheduleChangeFlagOnLicenseDialogComponent,
     ScheduleRemoveTheVisibilityFlagDialogComponent,
     AboutDialogComponent,
-    ScheduleChangeOrderDocumentsInCollectionDialogComponent,
-    ScheduleChangeOrderLicensesDialogComponent,
     AddNewParameterDialogComponent
   ],
   imports: [

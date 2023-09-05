@@ -852,6 +852,7 @@
       "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started",
       "changeFlagOnLicense": "The license flag change process has been scheduled",
       "changeItemsOrder": "The order of the items has been changed",
+      "changeItemsOrderSaved": "The change in order of items has been saved",
       "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started",
       "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started"
     },
@@ -911,7 +912,8 @@
       "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process",
       "deleteSelectedCollections": "An error occurred while deleting the selected collections",
       "scheduleChangeItemsOrder": "An error occurred while saving the item order change",
-      "scheduleDeleteSelectedItemsFromCollection": "An error occurred while deleting the selected items from the collection"
+      "scheduleDeleteSelectedItemsFromCollection": "An error occurred while deleting the selected items from the collection",
+      "anErrorOccurredWhileSaving": "An error occurred while saving"
     },
     "alert": {
       "tokenTimeExpireInfo": "You will be automatically logged out of the application in 2 minutes"

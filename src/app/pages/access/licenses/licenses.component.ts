@@ -9,7 +9,6 @@ import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ScheduleChangeOrderLicensesDialogComponent } from 'src/app/dialogs/schedule-change-order-licenses-dialog/schedule-change-order-licenses-dialog.component';
 
 @Component({
   selector: 'app-licenses',
@@ -152,10 +151,8 @@ export class LicensesComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateOrEditLicenseDialogComponent, {
       data: { 
         license: license,
-        
         libraryName: this.libraryName,
         licenseNames: this.licenses.map((lic) => lic.name).concat(this.licenses.map((lic) => lic.name))
-
       },
       width: '600px',
       panelClass: 'app-create-or-edit-license-dialog'
@@ -184,6 +181,7 @@ export class LicensesComponent implements OnInit {
   changeOrder() {
     this.api.changeLicenseOrdering(this.licenses).subscribe(result => {
       this.isItemChildDraged = false;
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrderSaved`);
       this.reload();
     });
 

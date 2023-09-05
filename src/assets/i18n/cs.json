@@ -852,6 +852,7 @@
       "deleteSelectedCollections": "Proces smazaní vybraných sbirek byl úspěšně spuštěn",
       "changeFlagOnLicense": "Proces změny příznaku na licenci byl naplánován",
       "changeItemsOrder": "Pořadí položek bylo změněno",
+      "changeItemsOrderSaved": "Změna pořadí položek byla uložena",
       "scheduleChangeItemsOrder": "Proces uložení změny pořadí položek byl úspěšně spuštěn",
       "scheduleDeleteSelectedItemsFromCollection": "Proces smazaní vybraných položek ze sbírky byl úspěšně spuštěn"
     },
@@ -911,7 +912,8 @@
       "scheduleStartTheSdnntReviewProcess": "Chyba při spuštění procesu kontroly SDNNT/Kramerius",
       "deleteSelectedCollections": "Došlo k chybě při smazaní vybraných sbírek",
       "scheduleChangeItemsOrder": "Došlo k chybě při ukládání změny pořadí položek",
-      "scheduleDeleteSelectedItemsFromCollection": "Došlo k chybě při smazaní vybraných položek ze sbírky"
+      "scheduleDeleteSelectedItemsFromCollection": "Došlo k chybě při smazaní vybraných položek ze sbírky",
+      "anErrorOccurredWhileSaving": "Došlo k chybě při ukládání"
     },
     "alert": {
       "tokenTimeExpireInfo": "Za 2 minuty dojde k automatickému odhlášení z aplikace"

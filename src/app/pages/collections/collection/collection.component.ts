@@ -14,7 +14,6 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { AuthService } from 'src/app/services/auth.service';
 import { DeleteCollectionDialogComponent } from 'src/app/dialogs/delete-collection-dialog/delete-collection-dialog.component';
 import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
-import { ScheduleChangeOrderDocumentsInCollectionDialogComponent } from 'src/app/dialogs/schedule-change-order-documents-in-collection-dialog/schedule-change-order-documents-in-collection-dialog.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
@@ -299,11 +298,11 @@ export class CollectionComponent implements OnInit {
 
   saveReorderingOfItems() {
     this.adminApi.changeOrdering(this.collection.id, this.orderings).subscribe(() => {
-      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrderSaved`);
       this.orderings = [];
     },(error) => {
       console.log(error.status);
-      this.ui.showInfoSnackBar(`snackbar.error.changeItemsOrder`);
+      this.ui.showInfoSnackBar(`snackbar.error.anErrorOccurredWhileSaving`);
       this.orderings = [];
     });
   }
