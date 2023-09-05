@@ -8,6 +8,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { interval, Subscription } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AboutDialogComponent } from 'src/app/dialogs/about-dialog/about-dialog.component';
+import { UserInfoDialogComponent } from 'src/app/dialogs/user-info-dialog/user-info-dialog.component';
 
 
 @Component({
@@ -108,4 +109,10 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  openUserInfoDialog() {
+    const dialogRef = this.dialog.open(UserInfoDialogComponent, {
+      panelClass: 'app-user-info-dialog',
+      width: '600px'
+    });
+  }
 }

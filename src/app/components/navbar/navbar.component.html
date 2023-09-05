@@ -46,7 +46,7 @@
     </ng-container>
 
     <mat-menu #profile_menu="matMenu">
-      <button mat-menu-item disabled *ngIf="auth.user">
+      <button mat-menu-item *ngIf="auth.user" (click)="openUserInfoDialog()">
         <mat-icon>person</mat-icon>
         <span>{{ auth.user.name || auth.user.uid }}</span>
       </button>
