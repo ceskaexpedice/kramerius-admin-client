@@ -291,45 +291,23 @@ export class CollectionComponent implements OnInit {
 
   }
 
+
   changeOrderings(ordereditems:any[]): void{
     this.orderings = ordereditems;
   }
+  
 
-  openScheduleChangeOrderDocumentsInCollectionDialog() {
-    const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.scheduleChangeOrderDocumentsInCollection.title'),
-      message: this.ui.getTranslation('modal.scheduleChangeOrderDocumentsInCollection.alert') + '?',
-      btn1: {
-        label: this.ui.getTranslation('button.yes'),
-        value: 'yes',
-        color: 'warn'
-      },
-      btn2: {
-        label: this.ui.getTranslation('button.no'),
-        value: 'no',
-        color: 'light'
-      }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, {
-      data: data,
-      width: '600px',
-      panelClass: 'app-simple-dialog'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'yes') {
-        this.adminApi.changeOrdering(this.collection.id, this.orderings).subscribe(() => {
-          this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
-          this.orderings = [];
-        },(error) => {
-          console.log(error.status);
-          this.ui.showInfoSnackBar(`snackbar.error.changeItemsOrder`);
-          this.orderings = [];
-        });
-      }
-
+  saveReorderingOfItems() {
+    this.adminApi.changeOrdering(this.collection.id, this.orderings).subscribe(() => {
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+      this.orderings = [];
+    },(error) => {
+      console.log(error.status);
+      this.ui.showInfoSnackBar(`snackbar.error.changeItemsOrder`);
+      this.orderings = [];
     });
   }
+
 
   onRemoveItemsFromCollection(collectionPid: string, collectionName: string, itemPids: string[], itemName) {
     const data: SimpleDialogData = {
