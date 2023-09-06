@@ -776,6 +776,9 @@
         "process": "Uložit a přejít na seznam procesů",
         "licenses": "Uložit a zůstat v licencích"
       }
+    },
+    "userInfo": {
+      "title": "Informace o uživateli"
     }
   },
   "snackbar": {
@@ -957,6 +960,7 @@
     "from": "Od",
     "to": "Do",
     "name": "Název",
+    "humanName": "Jméno",
     "finalState": "Konečný stav",
     "processInTheBatch": "Proces v dávce",
     "durationOfTheProcess": "Trvání procesu",

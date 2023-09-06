@@ -776,6 +776,9 @@
         "process": "Save and go to process list",
         "licenses": "Save and stay in licenses"
       }
+    },
+    "userInfo": {
+      "title": "User info"
     }
   },
   "snackbar": {
@@ -957,6 +960,7 @@
     "from": "From",
     "to": "To",
     "name": "Name",
+    "humanName": "Name",
     "finalState": "Final state",
     "processInTheBatch": "Process in the batch",
     "durationOfTheProcess": "Duration of the process",

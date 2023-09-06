@@ -1,11 +1,11 @@
-<h2 mat-dialog-title>{{ 'modal.userInfo.title' | translate }}</h2>
+<h2 mat-dialog-title>{{ 'modal.userInfo.title' | translate }} - {{ auth.user.uid }}</h2>
 
 <mat-dialog-content class="mat-typography">
   <div *ngFor="let item of userInfo">
     <div><span class="app-label">{{ 'Uid' | translate }}: </span><strong>{{ item.uid }}</strong></div>
     <div><span class="app-label">{{ 'Authenticated' | translate }}: </span><strong>{{ item.authenticated }}</strong></div>
     <div>
-      <span class="app-label">{{ 'Licenses' | translate }}: </span>
+      <span class="app-label">{{ 'desc.license' | translate }}: </span>
       <ng-container *ngFor="let license of item.licenses; let last = last">
         <strong>{{ license }}</strong><span></span><ng-container *ngIf="!last">,&#160;</ng-container>
       </ng-container>
@@ -21,12 +21,12 @@
     <div><span class="app-label">{{ 'Nezbeda' | translate }}: </span><strong>{{ item.session.nezbeda }}</strong></div>
     <div><span class="app-label">{{ 'Authentication_time' | translate }}: </span><strong>{{ item.session.authentication_time}}</strong></div>
     <div>
-      <span class="app-label">{{ 'Roles' | translate }}: </span>
+      <span class="app-label">{{ 'desc.role' | translate }}: </span>
       <ng-container *ngFor="let role of item.roles; let last = last">
         <strong>{{ role }}</strong><span></span><ng-container *ngIf="!last">,&#160;</ng-container>
       </ng-container>
     </div>
-    <div><span class="app-label">{{ 'Name' | translate }}: </span><strong>{{ item.name }}</strong></div>
+    <div><span class="app-label">{{ 'desc.humanName' | translate }}: </span><strong>{{ item.name }}</strong></div>
   </div>
 </mat-dialog-content>
 
