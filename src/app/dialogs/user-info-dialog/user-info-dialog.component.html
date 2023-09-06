@@ -1,33 +1,26 @@
-<h2 mat-dialog-title>{{ 'modal.userInfo.title' | translate }} - {{ auth.user.uid }}</h2>
+<h2 mat-dialog-title>{{ 'modal.userInfo.title' | translate }} - {{ userInfo.uid }}</h2>
 
 <mat-dialog-content class="mat-typography">
-  <div *ngFor="let item of userInfo">
-    <div><span class="app-label">{{ 'Uid' | translate }}: </span><strong>{{ item.uid }}</strong></div>
-    <div><span class="app-label">{{ 'Authenticated' | translate }}: </span><strong>{{ item.authenticated }}</strong></div>
-    <div>
-      <span class="app-label">{{ 'desc.license' | translate }}: </span>
-      <ng-container *ngFor="let license of item.licenses; let last = last">
-        <strong>{{ license }}</strong><span></span><ng-container *ngIf="!last">,&#160;</ng-container>
-      </ng-container>
-    </div>
-    <div><span class="app-label">{{ 'Token_id' | translate }}: </span><strong>{{ item.session.token_id }}</strong></div>
-    <div><span class="app-label">{{ 'Affiliation' | translate }}: </span><strong>{{ item.session.affiliation }}</strong></div>
-    <div><span class="app-label">{{ 'Expiration_time' | translate }}: </span><strong>{{ item.session.expiration_time }}</strong></div>
-    <div><span class="app-label">{{ 'EduPersonPrincipalName' | translate }}: </span><strong>{{ item.session.eduPersonPrincipalName }}</strong></div>
-    <div><span class="app-label">{{ 'EduPersonUniqueId' | translate }}: </span><strong>{{ item.session.eduPersonUniqueId }}</strong></div>
-    <div><span class="app-label">{{ 'Expires_in' | translate }}: </span><strong>{{ item.session.expires_in }}</strong></div>
-    <div><span class="app-label">{{ 'Preffered_user_name' | translate }}: </span><strong>{{ item.session.preffered_user_name }}</strong></div>
-    <div><span class="app-label">{{ 'Email' | translate }}: </span><strong>{{ item.session.email }}</strong></div>
-    <div><span class="app-label">{{ 'Nezbeda' | translate }}: </span><strong>{{ item.session.nezbeda }}</strong></div>
-    <div><span class="app-label">{{ 'Authentication_time' | translate }}: </span><strong>{{ item.session.authentication_time}}</strong></div>
-    <div>
-      <span class="app-label">{{ 'desc.role' | translate }}: </span>
-      <ng-container *ngFor="let role of item.roles; let last = last">
-        <strong>{{ role }}</strong><span></span><ng-container *ngIf="!last">,&#160;</ng-container>
-      </ng-container>
-    </div>
-    <div><span class="app-label">{{ 'desc.humanName' | translate }}: </span><strong>{{ item.name }}</strong></div>
+  <div *ngIf="userInfo.roles?.length !== 0">
+    <span class="app-label">{{ 'desc.role' | translate }}: </span>
+    <ng-container *ngFor="let role of userInfo.roles; let last = last">
+      <strong>{{ role }}</strong><span></span><ng-container *ngIf="!last">,&#160;</ng-container>
+    </ng-container>
   </div>
+  <div *ngIf="userInfo.licenses?.length !== 0">
+    <span class="app-label">{{ 'desc.license' | translate }}: </span>
+    <ng-container *ngFor="let license of userInfo.licenses; let last = last">
+      <strong>{{ license }}</strong><span></span><ng-container *ngIf="!last">,&#160;</ng-container>
+    </ng-container>
+  </div>
+  <mat-divider class="app-mt-2 app-mb-2" *ngIf="userInfo.roles?.length !== 0 || userInfo.licenses?.length !== 0"></mat-divider>
+  <div *ngIf="userInfo.session.affiliation"><span class="app-label">{{ 'desc.affiliation' | translate }}: </span><strong>{{ userInfo.session.affiliation }}</strong></div>
+  <div *ngIf="userInfo.session.eduPersonPrincipalName"><span class="app-label">{{ 'desc.eduPersonPrincipalName' | translate }}: </span><strong>{{ userInfo.session.eduPersonPrincipalName }}</strong></div>
+  <div *ngIf="userInfo.session.eduPersonUniqueId"><span class="app-label">{{ 'desc.eduPersonUniqueId' | translate }}: </span><strong>{{ userInfo.session.eduPersonUniqueId }}</strong></div>
+  <mat-divider class="app-mt-2 app-mb-2" *ngIf="userInfo.session.affiliation || userInfo.session.eduPersonPrincipalNam || userInfo.session.eduPersonUniqueId"></mat-divider>
+  <div *ngIf="userInfo.session.preffered_user_name"><span class="app-label">{{ 'desc.prefferedUserName' | translate }}: </span><strong>{{ userInfo.session.preffered_user_name }}</strong></div>
+  <div *ngIf="userInfo.session.email"><span class="app-label">{{ 'Email' | translate }}: </span><strong>{{ userInfo.session.email }}</strong></div> 
+  <div *ngIf="userInfo.name"><span class="app-label">{{ 'desc.humanName' | translate }}: </span><strong>{{ userInfo.name }}</strong></div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

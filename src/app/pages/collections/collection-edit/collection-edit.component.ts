@@ -30,6 +30,7 @@ export class CollectionEditComponent implements OnInit {
   state = 'none';
 
   @Input() colId;
+  @Input() lang;
 
   @Output() updated = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();

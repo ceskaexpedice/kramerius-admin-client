@@ -3,7 +3,11 @@
     "lat": "Latina",
     "cze": "Čeština",
     "ger": "Němčina",
-    "eng": "Angličtina"
+    "eng": "Angličtina",
+
+    "cs": "Čeština",
+    "en": "Angličtina",
+    "de": "Němčina"
   },
   "sites": {
     "object": {
@@ -1046,6 +1050,10 @@
     "core": "Jádro",
     "enterTheParameterValue": "Zadejte hodnotu parametru",
     "addNewParameter": "Přidat nový parametr",
-    "addNewRole": "Přidat novou roli"
+    "addNewRole": "Přidat novou roli",
+    "affiliation": "Afiliace",
+    "eduPersonPrincipalName": "Edu hlavní jméno osoby",
+    "eduPersonUniqueId": "Edu jedinečné ID osoby",
+    "prefferedUserName": "Preferované uživatelské jméno"
   }
 }

@@ -24,6 +24,8 @@ export class AppSettings {
 
   defaultLang = APP_GLOBAL.lang || 'cs';
 
+  languages = APP_GLOBAL.languages || [];
+
   homeDashboard = APP_GLOBAL.homeDashboard || [];
   cdkMode = !!APP_GLOBAL.cdkMode;
 

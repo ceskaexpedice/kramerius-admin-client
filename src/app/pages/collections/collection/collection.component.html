@@ -43,7 +43,6 @@
             <span *ngIf="collection" [matTooltip]="collection.getDescription()" class="app-desc">{{collection.getDescription() }}</span>
           </div>
           <div *ngIf="view === 'content'">
-
             <button mat-flat-button color="primary" (click)="onAddItemsToThisCollection()" class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
             <!-- drag&drop ordering -->
             <button [disabled]="orderings.length == 0" mat-flat-button color="primary" (click)="saveReorderingOfItems()" class="app-mr-2">{{ 'button.saveOrderChange' | translate }}</button>
@@ -53,6 +52,12 @@
           <div *ngIf="view === 'context'">
             <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
           </div>
+          <div *ngIf="view === 'edit'">
+            <button mat-flat-button color="primary" [matMenuTriggerFor]="menuLang" class="app-pr-1"><span class="app-mr-2">{{ 'lang.' + langSelected | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
+            <mat-menu #menuLang="matMenu">
+              <button mat-menu-item *ngFor="let language of languages" (click)="setLang(language)">{{ 'lang.' + language | translate  }}</button>
+            </mat-menu>
+          </div>
         </mat-card>
 
         <div *ngIf="collection">
@@ -61,7 +66,7 @@
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-edit (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id"></app-collection-edit>
+            <app-collection-edit (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id" [lang]="langSelected"></app-collection-edit>
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view == 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">

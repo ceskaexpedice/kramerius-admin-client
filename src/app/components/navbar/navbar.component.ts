@@ -24,6 +24,8 @@ export class NavbarComponent implements OnInit {
   tokenHours: string;
   tokenMinutes: string;
   tokenSeconds: string;
+
+  public languages = this.appSettings.languages;
   
   constructor(
     public auth: AuthService, 

@@ -17,6 +17,7 @@ import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/dele
 import { SelectionModel } from '@angular/cdk/collections';
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { AppSettings } from 'src/app/services/app-settings';
 
 @Component({
   selector: 'app-collection',
@@ -49,6 +50,10 @@ export class CollectionComponent implements OnInit {
   // item selection model 
   public selection = new SelectionModel<any>(true, []);
 
+  public languages = this.appSettings.languages;
+  public langSelected: string = 'cs';
+
+
 
 
   constructor(
@@ -61,7 +66,8 @@ export class CollectionComponent implements OnInit {
     private local: LocalStorageService,
     private clipboard: Clipboard,
     private auth:AuthService,
-    private adminApi: AdminApiService
+    private adminApi: AdminApiService,
+    public appSettings: AppSettings
     ) {
   }
 
@@ -350,7 +356,8 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-
-
+  setLang(lang) {
+    this.langSelected = lang;
+  }
 
 }

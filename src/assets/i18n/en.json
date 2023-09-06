@@ -3,7 +3,11 @@
     "lat": "Latin",
     "cze": "Czech",
     "ger": "German",
-    "eng": "English"
+    "eng": "English",
+
+    "cs": "Czech",
+    "en": "English",
+    "de": "German"
   },
   "sites": {
     "object": {
@@ -1046,6 +1050,10 @@
     "core": "Core",
     "enterTheParameterValue": "Enter the parameter value",
     "addNewParameter": "Add new parameter",
-    "addNewRole": "Add new role"
+    "addNewRole": "Add new role",
+    "affiliation": "Affiliation",
+    "eduPersonPrincipalName": "Edu person principal name",
+    "eduPersonUniqueId": "Edu person unique id",
+    "prefferedUserName": "Preffered user name"
   }
 }

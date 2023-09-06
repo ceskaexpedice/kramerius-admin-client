@@ -5,7 +5,7 @@ export class User {
   uid: string;
   name: string;
   roles: string[];
-
+  licenses: string[];
   session: any;
 
   static fromJson(json): User {
@@ -16,6 +16,7 @@ export class User {
       user.uid = json['uid'];
       user.roles = json['roles'] || [];
       user.session = json['session'] || {};
+      user.licenses = json['licenses'] || [];
       return user;
     }
     return null;
