@@ -1,22 +1,18 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state!='success'"></mat-progress-bar>
 <div class="app-p-4">
-  <div fxLayout="row" fxLayoutGap="16px">
-    <mat-form-field fxFlex>
-      <mat-label>{{ 'desc.collectionName'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
-      <input matInput [(ngModel)]="collection.name_cze">
-    </mat-form-field>
-  </div>
-  <div fxLayout="row" fxLayoutGap="16px">
-    <mat-form-field fxFlex>
-      <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
-      <textarea matInput [(ngModel)]="collection.description_cze" rows="4"></textarea>
-    </mat-form-field>
-  </div>
-  <div class="app-mb-4">
+  <mat-form-field class="app-w-100">
+    <mat-label>{{ 'desc.collectionName'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
+    <input matInput [(ngModel)]="collection.name_cze">
+  </mat-form-field>
+  <mat-form-field class="app-w-100">
+    <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
+    <textarea matInput [(ngModel)]="collection.description_cze" rows="4"></textarea>
+  </mat-form-field>
+  <div class="app-w-100 app-mb-4">
     <div class="app-label app-mb-2">{{ 'desc.separateCollection'  | translate }}</div>
     <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="collection.standalone">{{ 'desc.yes' | translate }}</mat-checkbox>
   </div>
-  <div class="app-mb-4">
+  <div class="app-w-100 app-mb-4">
     <div class="app-label app-mb-2">{{ 'desc.fullDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</div>
     <ckeditor [config]="editorConfig" [editor]="editorCze" required [(ngModel)]="collection.content_cze" data="" name="text"></ckeditor>
   </div>
