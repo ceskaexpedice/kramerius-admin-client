@@ -9,9 +9,8 @@ export class CollectionDetailComponent implements OnInit {
 
   @Input() collection;
   @Input() state;
+  @Input() lang;
 
-
-  
   constructor() { }
 
   ngOnInit() {

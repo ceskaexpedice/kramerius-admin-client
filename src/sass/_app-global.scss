@@ -41,6 +41,10 @@ a {
   color: $app-color-success !important;
 }
 
+.app-color-disabled {
+  color: $app-color-disabled !important;
+}
+
 // cleaners
 .app-cleanfix {
   @include cleanfix();

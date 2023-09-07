@@ -52,8 +52,8 @@
           <div *ngIf="view === 'context'">
             <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
           </div>
-          <div *ngIf="view === 'edit'">
-            <button mat-flat-button color="primary" [matMenuTriggerFor]="menuLang" class="app-pr-1"><span class="app-mr-2">{{ 'lang.' + langSelected | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
+          <div *ngIf="view === 'edit' || view === 'detail'">
+            <button mat-stroked-button [matMenuTriggerFor]="menuLang" class="app-pr-1"><!-- <mat-icon class="app-mr-2">language</mat-icon> --><span class="app-mr-2">{{ 'lang.' + langSelected | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
             <mat-menu #menuLang="matMenu">
               <button mat-menu-item *ngFor="let language of languages" (click)="setLang(language)">{{ 'lang.' + language | translate  }}</button>
             </mat-menu>
@@ -62,7 +62,7 @@
 
         <div *ngIf="collection">
           <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-detail [collection]="collection" [state]="state"></app-collection-detail>
+            <app-collection-detail [collection]="collection" [state]="state" [lang]="langSelected"></app-collection-detail>
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
