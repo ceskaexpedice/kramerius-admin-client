@@ -159,7 +159,7 @@ export class CollectionsComponent implements OnInit {
             if (!col.names[conv]) {
               col.names[conv] = d["title.search"] ;
             }
-            if (!col.descriptions[conv]) {
+            if (!col.descriptions[conv] && d["collection.desc"] && d["collection.desc"][0]) {
               col.descriptions[conv] = d["collection.desc"][0];
             }
           });
