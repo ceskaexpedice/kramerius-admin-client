@@ -27,6 +27,7 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   query: string;
 
   allowedCollections: string[];
+  language:string = 'cze';
 
   constructor(public dialogRef: MatDialogRef<AddItemToCollectionDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data,
@@ -34,16 +35,17 @@ export class AddItemToCollectionDialogComponent implements OnInit {
      private authService: AuthService
      ) {
     if (data) {
+      this.language = data.language ? data.language : 'cze';
       this.pid = data.pid;
       this.title = data.title;
       this.isCollection = data.isCollection;
 
       this.specificAuthorizedActions = data.specificAuthorizedActions ;
  
-      this.collectionApi.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
+      this.collectionApi.getCollectionsContainingItem( this.language, this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         let pidsOfCurrentSuperCollections = data[0].map(collection => collection.id);
         //TODO: handle offset, limit
-        this.collectionApi.getCollections(0, 999).subscribe((data: [collections: Collection[], size: number]) => {
+        this.collectionApi.getCollections(this.language, 0, 999).subscribe((data: [collections: Collection[], size: number]) => {
           this.potentialSuperCollections = data[0].filter(collection => collection.id != this.pid && !pidsOfCurrentSuperCollections.includes(collection.id))
           this.potentialSuperCollectionsAll = this.potentialSuperCollections;
 

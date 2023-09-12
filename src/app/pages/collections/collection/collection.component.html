@@ -7,7 +7,7 @@
         <span class="app-separator">/</span>
         <a routerLink="/collections">{{ 'sites.collections.title' | translate }}</a>
         <span class="app-separator">/</span>
-        <span class="app-last" *ngIf="collection">{{ collection.getName()}}</span>
+        <span class="app-last" *ngIf="collection">{{ collection.getName(langTranslated[0])}}</span>
       </div>
       <div>
         <nav mat-tab-nav-bar>
@@ -39,8 +39,8 @@
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
             </a>
             <span class="app-desc">{{ getCurrentRoute('string', '/collections/' + view + '/') }}</span>
-            <span class="app-pipe" *ngIf="collection && collection.getDescription()"></span>
-            <span *ngIf="collection" [matTooltip]="collection.getDescription()" class="app-desc">{{collection.getDescription() }}</span>
+            <span class="app-pipe" *ngIf="collection && collection.getDescription(langTranslated[0])"></span>
+            <span *ngIf="collection" [matTooltip]="collection.getDescription(langTranslated[0])" class="app-desc">{{collection.getDescription(langTranslated[0]) }}</span>
           </div>
           <div *ngIf="view === 'content'">
             <button mat-flat-button color="primary" (click)="onAddItemsToThisCollection()" class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
@@ -53,7 +53,7 @@
             <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
           </div>
           <div *ngIf="view === 'edit' || view === 'detail'">
-            <button mat-stroked-button [matMenuTriggerFor]="menuLang" class="app-pr-1"><!-- <mat-icon class="app-mr-2">language</mat-icon> --><span class="app-mr-2">{{ 'lang.' + langSelected | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
+            <button mat-stroked-button [matMenuTriggerFor]="menuLang" class="app-pr-1"><!-- <mat-icon class="app-mr-2">language</mat-icon> --><span class="app-mr-2">{{ 'lang.' + lang | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
             <mat-menu #menuLang="matMenu">
               <button mat-menu-item *ngFor="let language of languages" (click)="setLang(language)">{{ 'lang.' + language | translate  }}</button>
             </mat-menu>
@@ -62,11 +62,11 @@
 
         <div *ngIf="collection">
           <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-detail [collection]="collection" [state]="state" [lang]="langSelected"></app-collection-detail>
+            <app-collection-detail  [collection]="collection" [state]="state" [lang]="lang"></app-collection-detail>
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-edit (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id" [lang]="langSelected"></app-collection-edit>
+            <app-collection-edit (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id" [lang]="lang"></app-collection-edit>
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view == 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">

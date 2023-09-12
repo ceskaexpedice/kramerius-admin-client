@@ -54,6 +54,8 @@ export class ObjectComponent implements OnInit {
   proarcServers = this.settings.proarc;
   selectedProarcServer: any = [];
 
+  //TODO:  language from component
+  language:string  = 'cze';
 
   constructor(
     private authApi: AuthService,
@@ -154,7 +156,7 @@ export class ObjectComponent implements OnInit {
 
       this.loadingCollections = true;
       this.superCollections = undefined;
-      this.collectionsService.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
+      this.collectionsService.getCollectionsContainingItem(this.language,this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         this.superCollections = data[0];
 
         this.authApi.getPidsAuthorizedActions(this.superCollections.map(c=> c['id']), null).subscribe((d:any) => {
@@ -366,6 +368,7 @@ export class ObjectComponent implements OnInit {
     
     const dialogRef = this.dialog.open(AddItemToCollectionDialogComponent, {
       data: {
+        language: this.language,
         pid: this.pid,
         title: this.title,
         isCollection: false,

@@ -31,20 +31,21 @@
               <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
             </td>
           </ng-container>
+
           <ng-container matColumnDef="name_cze">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <a [routerLink]="getRouterLink('/collections/detail/', element.id, 'collection', 'detail')" (click)="linkToDetail(element.id)" [class.app-avoid-click]="!allowEdit(element.id)">
-                {{ element.name_cze }}
+                {{ element.names[displayLanguage()] }}
               </a>
             </td>
           </ng-container>
           <ng-container matColumnDef="description_cze">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.description' | translate }}</th>
-            <td mat-cell *matCellDef="let element" [matTooltip]="allowEdit(element.id) ? element.description_cze : null">
+            <td mat-cell *matCellDef="let element" [matTooltip]="allowEdit(element.id) ? element.descriptions[displayLanguage()] : null">
               <div class="app-text-cutter-wrapper">
                 <div class="app-text-cutter">
-                  {{ element.description_cze }}
+                  {{ element.descriptions[displayLanguage()] }}
                 </div>
               </div>
             </td>

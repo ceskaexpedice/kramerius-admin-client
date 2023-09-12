@@ -2,19 +2,19 @@
 <div class="app-p-4">
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.collectionName'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
-    <input matInput [ngModel]="lang === 'cs' ? collection.name_cze : collection.name_eng">
+    <input matInput [(ngModel)]="name" (ngModelChange)="onModelLangChange('names',$event)" >
   </mat-form-field>
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
-    <textarea matInput [ngModel]="lang === 'cs' ? collection.description_cze : collection.description_eng" rows="4"></textarea>
+    <textarea matInput [(ngModel)]="description" rows="4" (ngModelChange)="onModelLangChange('descriptions',$event)"></textarea>
   </mat-form-field>
   <div class="app-w-100 app-mb-4">
     <div class="app-label app-mb-2">{{ 'desc.separateCollection'  | translate }}</div>
-    <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="collection.standalone">{{ 'desc.yes' | translate }}</mat-checkbox>
+    <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="standalone" (ngModelChange)="onStandaloChange($event)">{{ 'desc.yes' | translate }}</mat-checkbox>
   </div>
   <div class="app-w-100 app-mb-4">
     <div class="app-label app-mb-2">{{ 'desc.fullDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</div>
-    <ckeditor [config]="editorConfig" [editor]="editorCze" required [ngModel]="lang === 'cs' ? collection.content_cze : collection.content_eng" data="" name="text"></ckeditor>
+    <ckeditor [config]="editorConfig" [editor]="editorCze" required [ngModel]="content" (ngModelChange)="onModelLangChange('contents', $event)" data="" name="text"></ckeditor>
   </div>
   <div>
     <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">{{ 'button.create'  | translate }}</button>

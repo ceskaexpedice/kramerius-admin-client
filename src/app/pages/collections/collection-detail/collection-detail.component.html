@@ -2,11 +2,11 @@
 <div class="app-p-4">
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.collectionName'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
-    <input matInput [(ngModel)]="lang === 'cs' ? collection.name_cze : collection.name_eng" disabled>
+    <input matInput [(ngModel)]="name" disabled>
   </mat-form-field>
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
-    <textarea matInput [(ngModel)]="lang === 'cs' ? collection.description_cze : collection.description_eng" rows="4" disabled></textarea>
+    <textarea matInput [(ngModel)]="description" rows="4" disabled></textarea>
   </mat-form-field>
   <div class="app-w-100 app-mb-4">
     <div class="app-label app-mb-2">{{ 'desc.separateCollection'  | translate }}</div>
@@ -14,7 +14,7 @@
   </div>
   <div class="app-w-100">
     <div class="app-label app-mb-2">{{ 'desc.fullDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</div>
-    <div [innerHTML]="lang === 'cs' ? collection.content_cze : collection.content_eng" class="app-color-disabled"></div>
+    <div [innerHTML]="content" class="app-color-disabled"></div>
   </div>
 </div>
 

@@ -94,7 +94,7 @@ export class ClientApiService {
     return this.fullSearch({
       q: filterQuery,
       //fq: filterQuery,
-      fl: 'model,pid,title.search,root.title,created,modified,collection.is_standalone,collection.desc',
+      fl: '*',
       sort: iSort,
       rows: rows,
       start: offset,

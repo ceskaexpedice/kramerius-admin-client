@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+
 import { Collection } from 'src/app/models/collection.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
@@ -18,6 +19,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
+import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 @Component({
   selector: 'app-collection',
@@ -49,11 +51,12 @@ export class CollectionComponent implements OnInit {
 
   // item selection model 
   public selection = new SelectionModel<any>(true, []);
-
+  // all configured languages
   public languages = this.appSettings.languages;
-  public langSelected: string = 'cs';
 
-
+  public lang: string = 'cs';
+  // seznam vsech jazyku
+  public langTranslated:string[] = ['cze', 'ces'];
 
 
   constructor(
@@ -67,6 +70,7 @@ export class CollectionComponent implements OnInit {
     private clipboard: Clipboard,
     private auth:AuthService,
     private adminApi: AdminApiService,
+    private isoConvert: IsoConvertService,
     public appSettings: AppSettings
     ) {
   }
@@ -123,7 +127,7 @@ export class CollectionComponent implements OnInit {
       console.log(error);
       this.ui.showErrorSnackBar("snackbar.error.theCollectionCouldNotBeLoaded");
     });
-    this.collectionsService.getCollectionsContainingItem(collectionId).subscribe((data: [collections: Collection[], size: number]) => {
+    this.collectionsService.getCollectionsContainingItem(this.langTranslated[0], collectionId).subscribe((data: [collections: Collection[], size: number]) => {
       //console.log(data)
       this.superCollections = data[0];
 
@@ -211,8 +215,9 @@ export class CollectionComponent implements OnInit {
   onAddThisToSuperCollection() {
     const dialogRef = this.dialog.open(AddItemToCollectionDialogComponent, {
       data: {
+        language: this.langTranslated[0],
         pid: this.collection.id,
-        title: this.collection.getName(),
+        title: this.collection.getName(this.langTranslated[0]),
         isCollection: true
       },
       width: '600px',
@@ -357,7 +362,10 @@ export class CollectionComponent implements OnInit {
   }
 
   setLang(lang) {
-    this.langSelected = lang;
+    this.lang = lang;
+
+//    this.langTranslated = this.isoConvert.isTranslatable(this.langSelected) ? this.isoConvert.convert(this.langSelected) : [this.langSelected];
+//    this.changeLang.emit(this.langTranslated);
   }
 
 }

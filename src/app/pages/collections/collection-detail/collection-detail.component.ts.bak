@@ -47,6 +47,7 @@ export class CollectionDetailComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    // Tato metoda se zavolá, když se změní vstupní parametr 'lang'.
     if (changes.lang) {
       const newLang = changes.lang.currentValue;
       this.initLangs();
