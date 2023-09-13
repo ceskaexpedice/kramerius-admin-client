@@ -43,7 +43,6 @@ export class CollectionDetailComponent implements OnInit {
         this.content = this.collection.contents[l];
       }
     });
-    console.log("content "+this.content);
   }
 
   ngOnChanges(changes: SimpleChanges) {

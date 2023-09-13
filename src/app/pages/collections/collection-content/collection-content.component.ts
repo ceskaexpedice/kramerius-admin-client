@@ -1,5 +1,5 @@
 import { HtmlAstPath } from '@angular/compiler';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -20,7 +20,7 @@ import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/dele
   templateUrl: './collection-content.component.html',
   styleUrls: ['./collection-content.component.scss']
 })
-export class CollectionContentComponent implements OnInit {
+export class CollectionContentComponent implements OnInit, OnChanges {
 
   @Input() collection;
   @Input() state;
@@ -54,10 +54,15 @@ export class CollectionContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    //this.collectionItems = this.items.filter(item => item['model'] == 'collection');
     this.collectionItems = [];
     this.noncollectionItems =  this.items;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.items) {
+      this.collectionItems = [];
+      this.noncollectionItems =  changes.items.currentValue;
+    }
   }
 
   getName(item): string {

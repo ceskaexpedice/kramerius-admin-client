@@ -98,7 +98,6 @@ export class CollectionComponent implements OnInit {
         this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
           this.items = res.filter(item => this.collection.items.includes(item['pid']))
           //this.items = this.items.filter(item = > fosterChildren.)
-
           this.items.sort((a, b) => {
             const indexA = fosterChildren.indexOf(a['pid']);
             const indexB = fosterChildren.indexOf(b['pid']);
@@ -277,7 +276,6 @@ export class CollectionComponent implements OnInit {
         toDelete.push(itm.pid);
       }
     });
-
 
     const dialogRef2 = this.dialog.open(DeleteSelectedItemsFromCollectionComponent, {
       data: {
