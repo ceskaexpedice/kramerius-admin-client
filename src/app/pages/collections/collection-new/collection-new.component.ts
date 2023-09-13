@@ -10,9 +10,12 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class CollectionNewComponent implements OnInit {
 
+  //lang: string;
 
+  // all configured languages
+  public languages = this.appSettings.languages;
 
-  lang:string;
+  public lang: string = 'cs';
 
   constructor(
     private router: Router,
@@ -22,7 +25,7 @@ export class CollectionNewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.lang = this.uiService.currentLang;
+    //this.lang = this.uiService.currentLang;
   }
 
   getCurrentRoute(type: string) {
@@ -31,6 +34,10 @@ export class CollectionNewComponent implements OnInit {
     } else {
       return this.router.url;
     }
+  }
+
+  setLang(lang) {
+    this.lang = lang;
   }
 
 }

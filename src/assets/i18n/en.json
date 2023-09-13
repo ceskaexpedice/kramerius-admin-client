@@ -457,7 +457,8 @@
     "change": "Change",
     "removeTheVisibilityFlag": "Remove the visibility flag",
     "saveOrderChange": "Save order change",
-    "addNewValue": "Add new value"
+    "addNewValue": "Add new value",
+    "languageForEditing": "Language for editing"
   },
   "field": {
     "public": "Public",

@@ -59,6 +59,10 @@ export class CollectionsComponent implements OnInit {
   // seznam vsech jazyku
   public langTranslated:string[] = ['cze', 'ces'];
 
+  // all configured languages
+  public languages = this.appSettings.languages;
+  public lang: string = 'cs';
+
 
   columnMapping = {
     'name_cze':'title.sort',
@@ -382,5 +386,10 @@ export class CollectionsComponent implements OnInit {
       width: '600px',
       panelClass: 'app-delete-selected-collections-dialog'
     });
+  }
+
+  setLang(lang) {
+    this.lang = lang;
+    this.reload();
   }
 }

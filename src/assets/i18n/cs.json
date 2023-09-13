@@ -457,7 +457,8 @@
     "change": "Změnit",
     "removeTheVisibilityFlag": "Odebrat příznak viditelnosti",
     "saveOrderChange": "Uložit změnu pořadí",
-    "addNewValue": "Přidat novou hodnotu"
+    "addNewValue": "Přidat novou hodnotu",
+    "languageForEditing": "Jazyk pro editaci"
   },
   "field": {
     "public": "Veřejné",

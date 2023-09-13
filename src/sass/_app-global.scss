@@ -45,6 +45,10 @@ a {
   color: $app-color-disabled !important;
 }
 
+.app-bg-white {
+  background-color: $app-color-lightnes !important;
+}
+
 // cleaners
 .app-cleanfix {
   @include cleanfix();

@@ -1,11 +1,19 @@
 <div class="app-collections app-h-100">
   <div fxLayout="column" fxFlexFill>
     <div class="app-topbar">
-      <div class="app-breadcrumbs app-mb-4">
-        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
-        <a routerLink="/">home</a>
-        <span class="app-separator">/</span>
-        <span class="app-last">{{ 'sites.collections.title' | translate }}</span>
+      <div fxLayout="row" class="app-mb-2">
+        <div fxFlex class="app-breadcrumbs">
+          <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+          <a routerLink="/">home</a>
+          <span class="app-separator">/</span>
+          <span class="app-last">{{ 'sites.collections.title' | translate }}</span>
+        </div>
+        <div>
+          <button mat-stroked-button [matMenuTriggerFor]="menuLang" class="app-bg-white app-pr-1" [matTooltip]="'button.languageForEditing' | translate"><span class="app-mr-2">{{ 'lang.' + lang | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
+          <mat-menu #menuLang="matMenu">
+            <button mat-menu-item *ngFor="let language of languages" (click)="setLang(language)">{{ 'lang.' + language | translate  }}</button>
+          </mat-menu>
+        </div>
       </div>
       <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="app-mb-4">
         <div fxFlex>
