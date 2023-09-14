@@ -161,10 +161,10 @@ export class CollectionsComponent implements OnInit {
           let converted:string[] = this.isoConvert.convert(lang);
           converted.forEach(conv => {
             if (!col.names[conv]) {
-              col.names[conv] = '-no-name' ;
+              col.names[conv] = '-undefined-' ;
             }
             if (!col.descriptions[conv] && d["collection.desc"] && d["collection.desc"][0]) {
-              col.descriptions[conv] = '-no-comment';
+              col.descriptions[conv] = '-undefined-';
             }
           });
         });

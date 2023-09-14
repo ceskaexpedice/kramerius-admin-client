@@ -8,7 +8,7 @@
 			</div>
 			
 			<div *ngIf="getThumb(item['pid'])">
-				<img [src]="getThumb(item['pid'])" />
+				<img [src]="getThumb(item['pid'])" onerror="this.src='assets/shared/img/no-image.png'" />
 			</div>
 			
 			<div fxFlex class="app-left">
