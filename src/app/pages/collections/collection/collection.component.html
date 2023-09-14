@@ -8,7 +8,7 @@
           <span class="app-separator">/</span>
           <a routerLink="/collections">{{ 'sites.collections.title' | translate }}</a>
           <span class="app-separator">/</span>
-          <span class="app-last" *ngIf="collection">{{ collection.getName(langTranslated[0])}}</span>
+          <span class="app-last" *ngIf="collection">{{ getBreadcrumb()}}</span>
         </div>
         <div>
           <button mat-stroked-button [matMenuTriggerFor]="menuLang" class="app-bg-white app-pr-1" [matTooltip]="'button.languageForEditing' | translate"><!-- <mat-icon class="app-mr-2">language</mat-icon> --><span class="app-mr-2">{{ 'lang.' + lang | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>

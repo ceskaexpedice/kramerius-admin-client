@@ -294,9 +294,11 @@ export class CollectionComponent implements OnInit {
         });
       }
     });
+  }
 
-
-
+  getBreadcrumb() {
+    let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
+    return this.collection.names[langs[0]] || '-undefined-'
   }
 
 

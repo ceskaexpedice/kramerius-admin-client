@@ -80,8 +80,8 @@ export class Collection {
       items.push(Collection.fromAdminApiJson(obj));
     }
     items.sort((a: Collection, b: Collection) => {
-      let aName = a.names[lang];
-      let bName = b.names[lang];
+      let aName = a.names[lang] || '';
+      let bName = b.names[lang] || '';
       return aName.localeCompare(bName);
     });
     return items;
