@@ -121,11 +121,10 @@ export class CollectionsComponent implements OnInit {
   }
 
   displayLanguage() {
-    let clang = this.uiService.currentLang;
-    if (this.isoConvert.isTranslatable(clang)) {
-      return this.isoConvert.convert(clang)[0];
+    if (this.isoConvert.isTranslatable(this.lang)) {
+      return this.isoConvert.convert(this.lang)[0];
     }
-    return clang;
+    return this.lang;
   }
 
   reload() {

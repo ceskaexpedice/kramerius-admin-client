@@ -107,7 +107,7 @@ export class ClientApiService {
     //takze hned po pridani (spatne) ne, hned po odbrani (spatne) ano
     return this.search({
       q: `in_collections.direct:"${uuid}"`,
-      fl: 'model,pid,title.search,root.title,date.str,level',
+      fl: 'model,pid,title.search,root.title,date.str,level,title.search_*',
       //sort: 'rels_ext_index.sort asc',
       rows: '400'
     });

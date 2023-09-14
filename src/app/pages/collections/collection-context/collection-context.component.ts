@@ -4,6 +4,7 @@ import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
+import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class CollectionContextComponent implements OnInit {
   @Input() superCollections;
   @Input() collectionActions:Map<string,string[]>;
 
+  @Input() lang:string;
 
   @Output() updated = new EventEmitter<any>();
 
@@ -26,10 +28,12 @@ export class CollectionContextComponent implements OnInit {
     private collectionsService: CollectionsService,
     private ui: UIService,
     private dialog: MatDialog,
-    private clientApi: ClientApiService
+    private clientApi: ClientApiService,
+    private isoConvert: IsoConvertService
   ) { }
 
   ngOnInit(): void {
+
   }
 
   allowEdit(pid) {
@@ -39,6 +43,18 @@ export class CollectionContextComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  getName(item): string {
+    let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
+    return item.names[langs[0]];
+  }
+
+
+  getDescription(item):string {
+    let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
+    return item.descriptions[langs[0]];
+
   }
 
   

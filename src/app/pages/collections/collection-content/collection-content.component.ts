@@ -14,6 +14,7 @@ import { delay, map, tap } from 'rxjs/operators';
 
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
+import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 @Component({
   selector: 'app-collection-content',
@@ -25,6 +26,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   @Input() collection;
   @Input() state;
   @Input() items;
+  @Input() lang;
 
   @Input() collectionActions:Map<string,string[]>;
   @Input() selection:SelectionModel<any>;
@@ -47,7 +49,8 @@ export class CollectionContentComponent implements OnInit, OnChanges {
     private ui: UIService,
     private dialog: MatDialog,
     private clientApi: ClientApiService,
-    private adminApi: AdminApiService
+    private adminApi: AdminApiService,
+    private isoService: IsoConvertService
   ) { 
 
 
@@ -66,7 +69,13 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   }
 
   getName(item): string {
+    let langs = this.isoService.isTranslatable(this.lang) ? this.isoService.convert(this.lang) : [this.lang];
+
     let name = item['title.search'];
+    if (item['title.search_'+langs[0]]) {
+      name = item['title.search_'+langs[0]];
+    }
+    
     if (item['date.str'] && ['page', 'periodicalitem', 'periodicalvolume'].indexOf(item['model']) >= 0) {
       name += ' / ' + item['date.str'];
     }
