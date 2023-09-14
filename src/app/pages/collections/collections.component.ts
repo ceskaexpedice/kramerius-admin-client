@@ -127,6 +127,7 @@ export class CollectionsComponent implements OnInit {
     return this.lang;
   }
 
+
   reload() {
     this.state = 'loading';
 
@@ -160,10 +161,10 @@ export class CollectionsComponent implements OnInit {
           let converted:string[] = this.isoConvert.convert(lang);
           converted.forEach(conv => {
             if (!col.names[conv]) {
-              col.names[conv] = d["title.search"] ;
+              col.names[conv] = '-no-name' ;
             }
             if (!col.descriptions[conv] && d["collection.desc"] && d["collection.desc"][0]) {
-              col.descriptions[conv] = d["collection.desc"][0];
+              col.descriptions[conv] = '-no-comment';
             }
           });
         });
