@@ -3,7 +3,11 @@
     "lat": "Latin",
     "cze": "Czech",
     "ger": "German",
-    "eng": "English"
+    "eng": "English",
+
+    "cs": "Czech",
+    "en": "English",
+    "de": "German"
   },
   "sites": {
     "object": {
@@ -329,7 +333,8 @@
     "NOT_RUNNING": "Not running",
     "WARNING": "Warning",
 
-    "currentVersionOfTheIndexer": "Current version of the indexer"
+    "currentVersionOfTheIndexer": "Current version of the indexer",
+    "sessionExpire": "It remains until logout"
   },
   "paginator": {
     "desc": {
@@ -450,7 +455,10 @@
     "deleteSelectedItems": "Delete selected items",
     "changeFlagOnLicense": "Change flag on license",
     "change": "Change",
-    "removeTheVisibilityFlag": "Remove the visibility flag"
+    "removeTheVisibilityFlag": "Remove the visibility flag",
+    "saveOrderChange": "Save order change",
+    "addNewValue": "Add new value",
+    "languageForEditing": "Language for editing"
   },
   "field": {
     "public": "Public",
@@ -753,6 +761,29 @@
     "scheduleRemoveTheVisibilityFlag": {
       "title": "Removing the visibility flag",
       "message": "A Remove Flag process will be scheduled for each embedded PID, which clears the POLICY flag."
+    },
+    "about": {
+      "title": "About",
+      "desc": "Kramerius 7 admin interface."
+    },
+    "scheduleChangeOrderDocumentsInCollection": {
+      "title": "Changing the order of documents in the collection",
+      "alert": "If you change the order of the documents in the collection, a reindexing process is created and the items can be displayed in their original order in the list until this process is finished.",
+      "button": {
+        "process": "Save and go to process list",
+        "collection": "Save and stay in your collection"
+      }
+    },
+    "scheduleChangeOrderLicenses": {
+      "title": "Change order of licenses",
+      "alert": "If you change the order of the licenses, a reindexing process will be created and the items may appear in their original order in the list until this process is finished.",
+      "button": {
+        "process": "Save and go to process list",
+        "licenses": "Save and stay in licenses"
+      }
+    },
+    "userInfo": {
+      "title": "User info"
     }
   },
   "snackbar": {
@@ -763,7 +794,7 @@
       "copyToClipboard": "The text has been successfully copied to the clipboard",
       "addToTheCollection": "The collection has been added",
       "theCollectionHasBeenModified": "The collection has been modified",
-      "collectionHasBeenCreated": "Collection has been created",
+      "collectionHasBeenCreated": "The collection was created successfully",
       "theRightHasBeenRemoved": "The right has been removed",
       "visibilityChange": {
         "1": "The Change Visibility process has been scheduled",
@@ -827,7 +858,11 @@
       "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing",
       "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled",
       "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started",
-      "changeFlagOnLicense": "The license flag change process has been scheduled"
+      "changeFlagOnLicense": "The license flag change process has been scheduled",
+      "changeItemsOrder": "The order of the items has been changed",
+      "changeItemsOrderSaved": "The change in order of items has been saved",
+      "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started",
+      "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -866,7 +901,10 @@
       },
       "onNewParam": "Failed to add parameter",
       "onEditParam": "The parameter could not be edited",
-      "onRemoveParam": "The parameter could not be deleted",
+      "onRemoveParam": {
+        "409": "The parameter is used, it cannot be deleted",
+        "failed": "Failed to delete parameter"
+      },
       "onNewValue": "Could not add value",
       "onRemoveValue": "The parameter value failed to delete",
       "onEditValue": "The parameter value could not be modified",
@@ -880,7 +918,13 @@
       "scheduleIndexationsByMultiplePids": "Failed to schedule indexing",
       "loadMoreItemsForBatch": "Failed to load data",
       "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process",
-      "deleteSelectedCollections": "An error occurred while deleting the selected collections"
+      "deleteSelectedCollections": "An error occurred while deleting the selected collections",
+      "scheduleChangeItemsOrder": "An error occurred while saving the item order change",
+      "scheduleDeleteSelectedItemsFromCollection": "An error occurred while deleting the selected items from the collection",
+      "anErrorOccurredWhileSaving": "An error occurred while saving"
+    },
+    "alert": {
+      "tokenTimeExpireInfo": "You will be automatically logged out of the application in 2 minutes"
     }
   },
   "desc": {
@@ -921,6 +965,7 @@
     "from": "From",
     "to": "To",
     "name": "Name",
+    "humanName": "Name",
     "finalState": "Final state",
     "processInTheBatch": "Process in the batch",
     "durationOfTheProcess": "Duration of the process",
@@ -975,7 +1020,7 @@
     "logs": "Logs",
     "right": "Right",
     "connectedInstance": "Connected instance",
-    "tokenExpiresAt": "Token expires at",
+    "tokenExpiresAt": "You will be logged out of the application",
     "code": "Code",
     "stateDuration": "State duration",
     "switch": "Switch",
@@ -1001,6 +1046,15 @@
     "changeFlagOnLicense": "Change flag on license",
     "symptom": "Symptom",
     "localLibraryLicense": "Local Library License",
-    "globalLicense": "Global License"
+    "globalLicense": "Global License",
+    "client": "Client",
+    "core": "Core",
+    "enterTheParameterValue": "Enter the parameter value",
+    "addNewParameter": "Add new parameter",
+    "addNewRole": "Add new role",
+    "affiliation": "Affiliation",
+    "eduPersonPrincipalName": "Edu person principal name",
+    "eduPersonUniqueId": "Edu person unique id",
+    "prefferedUserName": "Preffered user name"
   }
 }

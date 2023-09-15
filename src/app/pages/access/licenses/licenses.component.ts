@@ -8,6 +8,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ClientApiService } from 'src/app/services/client-api.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-licenses',
@@ -26,6 +27,8 @@ export class LicensesComponent implements OnInit {
 
   errorMessage: string;
   errorState: boolean = false;
+
+  public isItemChildDraged: boolean;
 
   constructor(private api: AdminApiService, 
     private ui: UIService,
@@ -139,7 +142,7 @@ export class LicensesComponent implements OnInit {
 
   onMoveLiceseDown(license: License) {
     this.api.moveLicenseDown(license).subscribe(result => {
-      console.log('moveDown', result);
+      //console.log('moveDown', result);
       this.reload();
     });
   }
@@ -148,10 +151,8 @@ export class LicensesComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateOrEditLicenseDialogComponent, {
       data: { 
         license: license,
-        
         libraryName: this.libraryName,
         licenseNames: this.licenses.map((lic) => lic.name).concat(this.licenses.map((lic) => lic.name))
-
       },
       width: '600px',
       panelClass: 'app-create-or-edit-license-dialog'
@@ -175,6 +176,34 @@ export class LicensesComponent implements OnInit {
     this.licenses.sort((a: License, b: License) => {
       return a.priority - b.priority;
     });
+  }
+
+  changeOrder() {
+    this.api.changeLicenseOrdering(this.licenses).subscribe(result => {
+      this.isItemChildDraged = false;
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrderSaved`);
+      this.reload();
+    });
+
+  }
+
+  // drag and drop sorting
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.licenses, event.previousIndex, event.currentIndex);
+    if (event.previousIndex !== event.currentIndex) {
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+      let priorities = this.licenses.map(l=>  parseInt(l.priority));
+
+      priorities = priorities.sort((a, b) => {
+        return a - b;
+      });
+
+      for(let i =0;i<priorities.length;i++) {
+        this.licenses[i].priority = priorities[i];
+      }
+
+      this.isItemChildDraged = true;
+    }
   }
 
 }

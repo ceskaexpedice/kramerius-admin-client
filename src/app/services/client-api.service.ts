@@ -55,6 +55,7 @@ export class ClientApiService {
     return this.get('/search', params).pipe(map(response => response['response']['docs']));
   }
 
+  /** facets from search index */
   facets(params): Observable<any[]> {
     return this.get('/search', params).pipe(map(response => response['facet_counts']['facet_fields']));
   }
@@ -93,7 +94,7 @@ export class ClientApiService {
     return this.fullSearch({
       q: filterQuery,
       //fq: filterQuery,
-      fl: 'model,pid,title.search,root.title,created,modified,collection.is_standalone,collection.desc',
+      fl: '*',
       sort: iSort,
       rows: rows,
       start: offset,
@@ -106,8 +107,8 @@ export class ClientApiService {
     //takze hned po pridani (spatne) ne, hned po odbrani (spatne) ano
     return this.search({
       q: `in_collections.direct:"${uuid}"`,
-      fl: 'model,pid,title.search,root.title,date.str,level',
-      sort: 'rels_ext_index.sort asc',
+      fl: 'model,pid,title.search,root.title,date.str,level,title.search_*',
+      //sort: 'rels_ext_index.sort asc',
       rows: '400'
     });
   }
@@ -128,6 +129,8 @@ export class ClientApiService {
         map(items => items[0])
       );
   }
+
+  // getAllModelsFromProcessingIndex
 
   getAllModelsFromIndex(): Observable<any[]> {
     return this.facets({
@@ -164,6 +167,12 @@ export class ClientApiService {
 
   getInfo(): Observable<any> {
     return this.get(`/info`);
+  }
+
+
+  getStructure(pid: string, params = {}):  Observable<any> {
+    let path =  `/items/${pid}/info/structure`;
+    return this.doGet(path, params);
   }
 
 }

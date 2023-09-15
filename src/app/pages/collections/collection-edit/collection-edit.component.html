@@ -1,5 +1,30 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state!='success'"></mat-progress-bar>
 <div class="app-p-4">
+  <mat-form-field class="app-w-100">
+    <mat-label>{{ 'desc.collectionName'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
+    <input matInput [(ngModel)]="name" (ngModelChange)="onModelLangChange('names',$event)" >
+  </mat-form-field>
+  <mat-form-field class="app-w-100">
+    <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
+    <textarea matInput [(ngModel)]="description" rows="4" (ngModelChange)="onModelLangChange('descriptions',$event)"></textarea>
+  </mat-form-field>
+  <div class="app-w-100 app-mb-4">
+    <div class="app-label app-mb-2">{{ 'desc.separateCollection'  | translate }}</div>
+    <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="standalone" (ngModelChange)="onStandaloChange($event)">{{ 'desc.yes' | translate }}</mat-checkbox>
+  </div>
+  <div class="app-w-100 app-mb-4">
+    <div class="app-label app-mb-2">{{ 'desc.fullDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</div>
+    <ckeditor [config]="editorConfig" [editor]="editorCze" required [ngModel]="content" (ngModelChange)="onModelLangChange('contents', $event)" data="" name="text"></ckeditor>
+  </div>
+  <div>
+    <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">{{ 'button.create'  | translate }}</button>
+    <button mat-flat-button color="primary" *ngIf="mode === 'edit'" (click)="onUpdate()" class="app-mr-2">{{ 'button.edit'  | translate }}</button>
+    <button mat-flat-button color="warn" *ngIf="mode === 'edit'" (click)="onDelete()" class="app-mr-2">{{ 'button.remove'  | translate }}</button>
+  </div>
+</div>
+
+<!-- to delete after testing
+<div class="app-p-4">
   <div fxLayout="row" fxLayoutGap="16px">
     <mat-form-field fxFlex>
       <mat-label>{{ 'desc.collectionName'  | translate }}</mat-label>
@@ -38,4 +63,4 @@
     <button mat-flat-button color="primary" *ngIf="mode === 'edit'" (click)="onUpdate()" class="app-mr-2">{{ 'button.edit'  | translate }}</button>
     <button mat-flat-button color="warn" *ngIf="mode === 'edit'" (click)="onDelete()" class="app-mr-2">{{ 'button.remove'  | translate }}</button>
   </div>
-</div>
+</div> -->

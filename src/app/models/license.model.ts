@@ -45,6 +45,8 @@ export class License {
 
   toJson() {
     return {
+      id: this.id,
+      priority: this.priority,
       name: this.name,
       description: this.description || ''
     }

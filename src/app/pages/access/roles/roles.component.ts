@@ -41,7 +41,7 @@ export class RolesComponent implements OnInit {
   onNewRole() {
     const dialogRef = this.dialog.open(CreateOrEditRoleDialogComponent, {
       width: '600px',
-      panelClass: 'app-create-or-edit-right-dialog'
+      panelClass: 'app-create-or-edit-role-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.role) {

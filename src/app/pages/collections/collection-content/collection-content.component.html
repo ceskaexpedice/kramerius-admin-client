@@ -1,46 +1,25 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-<mat-card class="app-view-rights app-view-hover item-collection app-cursor-pointer" *ngFor="let item of filterCollections(items)" [ngClass]="!allowEdit(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(item['pid']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(item['pid']) ? 'app-alert-not-allowed' : null">
-	<mat-card-header fxLayout="row" fxLayoutGap="16px">
-		<div>
-			<mat-checkbox [matTooltip]="'desc.selectThisItem' | translate"></mat-checkbox>
-		</div>
-		<div *ngIf="getThumb(item['pid'])" [routerLink]="allowEdit(item['pid'])  ?  ['/collections/content/', item['pid']] : null">
-			<img [src]="getThumb(item['pid'])" (error)="handleMissingImage($event)"/>
-		</div>
-		<div fxFlex class="app-left" [routerLink]="allowEdit(item['pid'])  ?  ['/collections/content/', item['pid']] : null">
-			<mat-card-title>
-				<mat-icon *ngIf="allowEdit(item['pid'])">link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{ item['root.title'] }})</ng-container>
-			</mat-card-title>
-			<mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
-		</div>
-		<div *ngIf="allowEditRemove(item['pid'])" class="app-right app-actions">
-			<a (click)="onRemoveItemFromCollection(collection.id, collection.getName(), item['pid'], getName(item)); $event.preventDefault(); $event.stopPropagation()" class="app-btn-warn" matTooltip="{{ 'button.removeFromThisCollection' | translate }}">
-				<mat-icon>cancel</mat-icon>
-			</a>
-		</div>
-	</mat-card-header>
-</mat-card>
-<mat-card class="app-view-rights app-view-hover" *ngFor="let item of filterNonCollections(items)" [ngClass]="{'item-collection':item['model'] == 'collection'}">
-	<mat-card-header fxLayout="row" fxLayoutGap="16px">
-		<div>
-			<mat-checkbox [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
-		</div>
-		<div *ngIf="getThumb(item['pid'])">
-			<img [src]="getThumb(item['pid'])" />
-		</div>
-		<div fxFlex class="app-left">
-			<mat-card-title>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
-			<mat-card-subtitle>{{ getModel(item['model']) }}</mat-card-subtitle>
-		</div>
-		<div class="app-right app-actions">
-			<a (click)="allowEditRemove(item['pid']) ? removeItemFromCollection(item, collection, $event) : null" class="app-btn-warn" [ngClass]="!allowEditRemove(item['pid']) ? 'app-not-allowed' : null" [matTooltip]="allowEditRemove(item['pid']) ? ('button.removeFromThisCollection' | translate) : ('alert.notAllowed' | translate)" [matTooltipClass]="!allowEditRemove(item['pid']) ? 'app-alert-not-allowed' : null">
-				<mat-icon>cancel</mat-icon>
-			</a>
-		</div>
-	</mat-card-header>
-</mat-card>
 
-<mat-card *ngIf="(filterCollections(items)?.length || filterNonCollections(items)?.length) === 0" class="app-color-info app-text-center">
+<div cdkDropList (cdkDropListDropped)="drop($event)">
+	<mat-card class="app-view-rights app-view-hover" *ngFor="let item of noncollectionItems" [ngClass]="{'item-collection':item['model'] == 'collection'}" cdkDrag>
+		<mat-card-header fxLayout="row" fxLayoutGap="16px">
+			<div>
+				<mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? selection.toggle(item) : null" [checked]="selection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
+			</div>
+			
+			<div *ngIf="getThumb(item['pid'])">
+				<img [src]="getThumb(item['pid'])" onerror="this.src='assets/shared/img/no-image.png'" />
+			</div>
+			
+			<div fxFlex class="app-left">
+				<mat-card-title [routerLink]="allowEdit(item['pid']) && item['model'] == 'collection' ?  ['/collections/content/', item['pid']] : null" [class.app-cursor-pointer]="allowEdit(item['pid']) && item['model'] == 'collection'"><mat-icon *ngIf="allowEdit(item['pid']) && item['model'] == 'collection'">link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
+				<mat-card-subtitle>{{ 'desc.'+item['model'] | translate }}</mat-card-subtitle>
+			</div>
+		</mat-card-header>
+	</mat-card>
+</div>	
+
+<mat-card *ngIf="(collectionItems?.length || noncollectionItems?.length) === 0" class="app-color-info app-text-center">
 	<mat-card-content fxLayout="row" fxLayoutAlign="center center">
 		<mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.content' | translate }}
 	</mat-card-content>

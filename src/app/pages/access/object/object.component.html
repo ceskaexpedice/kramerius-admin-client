@@ -59,8 +59,8 @@
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
             </a>
             <span class="app-desc">{{ inputPid }}</span>
-            <span class="app-pipe" *ngIf="collection && collection.getDescription()"></span>
-            <span *ngIf="collection && collection.getDescription()" [matTooltip]="collection.getDescription()" class="app-desc">{{ collection.getDescription() }}</span>
+            <span class="app-pipe" *ngIf="collection && collection.getDescription('cze')"></span>
+            <span *ngIf="collection && collection.getDescription('cze')" [matTooltip]="collection.getDescription('cze')" class="app-desc">{{ collection.getDescription('cze') }}</span>
           </div>
           <div *ngIf="view === 'collections'">
             <a mat-flat-button color="primary" (click)="onAddThisToACollection()">

@@ -5,6 +5,12 @@ import { License } from "src/app/models/license.model";
 import { Condition, Right } from "src/app/models/right.model";
 import { Role } from "src/app/models/roles.model";
 import { AdminApiService } from "src/app/services/admin-api.service";
+import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
+import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { UIService } from "src/app/services/ui.service";
+import { AddNewParameterDialogComponent } from "../add-new-parameter-dialog/add-new-parameter-dialog.component";
+import { CreateOrEditRoleDialogComponent } from "../create-or-edit-role-dialog/create-or-edit-role-dialog.component";
 
 @Component({
   selector: 'app-create-or-edit-right-dialog',
@@ -29,7 +35,9 @@ export class CreateOrEditRightDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CreateOrEditRightDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private api: AdminApiService) {
+              private api: AdminApiService,
+              private dialog: MatDialog,
+              private ui: UIService) {
   }
 
   ngOnInit() {
@@ -165,6 +173,47 @@ export class CreateOrEditRightDialogComponent implements OnInit {
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  openAddNewParamDialog() {
+    const dialogRef = this.dialog.open(AddNewParameterDialogComponent, { 
+      width: '600px',
+      panelClass: 'app-add-new-parameter-dialog'
+    });
+
+    // update list of parameters after dialog is closed
+    dialogRef.afterClosed().subscribe(result => {
+      this.api.getConditionParams().subscribe((params: ConditionParam[]) => {
+        this.params = params;
+        if (this.data.right?.condition.params) {
+          let params =  this.params.find((p) => {
+            return p.id ==this.data.right.condition.params.id; 
+          });
+          if (params) {
+            this.right.condition.params = params;
+          }
+        }
+      });
+    });
+  }
+
+  openAddNewRoleDialog() {
+    const dialogRef = this.dialog.open(CreateOrEditRoleDialogComponent, {
+      width: '600px',
+      panelClass: 'app-create-or-edit-role-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.role) {
+        const role = result.role;
+        this.roles.push(role);
+        this.ui.showInfoSnackBar('snackbar.success.createOrEditRole');
+        (error) => {
+          if (error) {
+            this.ui.showErrorSnackBar('snackbar.error.createOrEditRole');
+          }
+        }
+      }
+    });  
   }
 
 }

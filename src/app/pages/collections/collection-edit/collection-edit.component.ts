@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic/';
 import '@ckeditor/ckeditor5-build-classic/build/translations/cs';
@@ -7,6 +7,7 @@ import { UIService } from 'src/app/services/ui.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateNewCollectionDialogComponent } from 'src/app/dialogs/create-new-collection-dialog/create-new-collection-dialog.component';
+import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 @Component({
   selector: 'app-collection-edit',
@@ -29,7 +30,16 @@ export class CollectionEditComponent implements OnInit {
   mode = 'none';
   state = 'none';
 
+  //test ='testovacimodel'
+
+  name:string;
+  description:string;
+  content: string;
+  standalone:boolean = false;
+  langs:string[];
+
   @Input() colId;
+  @Input() lang:any;
 
   @Output() updated = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
@@ -40,15 +50,19 @@ export class CollectionEditComponent implements OnInit {
     private ui: UIService,
     private router: Router,
     private collectionsService: CollectionsService,
+    private isoConvert: IsoConvertService,
     private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    //this.initLangs();
+
     this.state = 'loading';
     if (this.colId) {
       this.collectionsService.getCollection(this.colId).subscribe((collection: Collection) => {
+
         this.collection = collection;
-        this.collectionName = collection.name_cze ? collection.name_cze : collection.name_eng;
+        this.collectionName = collection.names[this.langs[0]];
         this.init('edit');
       });
     } else {
@@ -56,7 +70,7 @@ export class CollectionEditComponent implements OnInit {
         if (params['id']) {
           this.collectionsService.getCollection(params['id']).subscribe((collection: Collection) => {
             this.collection = collection;
-            this.collectionName = collection.name_cze ? collection.name_cze : collection.name_eng;
+            this.collectionName = collection.names[this.langs[0]];
             this.init('edit');
           });
         } else {
@@ -67,14 +81,57 @@ export class CollectionEditComponent implements OnInit {
     }
   }
 
+  private initCollectionLangValues() {
+    this.langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
+    
+    this.name = '';// + this.langs;
+    this.description = '';
+    this.content = '';
+    this.standalone = false;
+
+    if (this.collection) {
+      this.langs.forEach(l => {
+        if (this.collection.names[l]) {
+          this.name = this.collection.names[l];
+        }      
+        if (this.collection.descriptions[l]) {
+          this.description = this.collection.descriptions[l];
+        }      
+        if (this.collection.contents[l]) {
+          this.content = this.collection.contents[l];
+        }
+      });
+      this.standalone = this.collection.standalone;
+    }
+  }
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.lang) {
+      const newLang = changes.lang.currentValue;
+      this.initCollectionLangValues();
+    }
+  }
+
   private init(mode: string) {
     this.mode = mode;
     this.state = 'success';
+    this.initCollectionLangValues();
+  }
+
+  onModelLangChange(key:string, newValue: string) {
+    this.langs.forEach(l => {
+      this.collection[key][l] = newValue;
+    });
+  }
+
+  onStandaloChange(std:boolean) {
+    this.collection.standalone = std;
   }
 
   onSave() {
+
     this.collectionsService.createCollection(this.collection).subscribe(response => {
-      //this.ui.showInfoSnackBar("snackbar.success.collectionHasBeenCreated");
       const dialogRef = this.dialog.open(CreateNewCollectionDialogComponent, {
         data: response,
         width: '600px',
@@ -109,4 +166,6 @@ export class CollectionEditComponent implements OnInit {
   onDelete() {
     this.delete.emit();
   }
+
+
 }

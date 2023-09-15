@@ -3,6 +3,10 @@
   <mat-form-field appearance="fill" class="app-w-100">
     <mat-label>{{ 'desc.role' | translate }}</mat-label>
     <mat-select [(value)]="right.role">
+      <mat-option (click)="openAddNewRoleDialog()" class="app-add">
+        <mat-icon>add_circle</mat-icon>{{ 'desc.addNewRole' | translate }}
+      </mat-option>
+      <mat-divider></mat-divider>
       <mat-option *ngFor="let role of roles" (click)="right.role = role" [value]="role" >
         {{ role ? role.name : '-'  }}
       </mat-option>
@@ -22,11 +26,19 @@
   <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.paramsNecessary">
     <mat-label>{{ 'desc.parameter' | translate }}</mat-label>
     <mat-select [(value)]="right.condition.params">
+      <mat-option (click)="openAddNewParamDialog()" class="app-add">
+        <mat-icon>add_circle</mat-icon>{{ 'desc.addNewParameter' | translate }}
+      </mat-option>
+      <mat-divider></mat-divider>
       <mat-option value="-" (click)="selectParam(null)">-</mat-option>
       <mat-option *ngFor="let param of params" (click)="selectParam(param)" [value]="param">
         {{ param.description }}
       </mat-option>
     </mat-select>
+    <!-- alternativ to add new parameter
+    <div matSuffix class="app-ml-2">
+      <mat-icon (click)="openNewParamDialog()" color="primary">add_circle</mat-icon>
+    </div> -->
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.isLabelAssignable">

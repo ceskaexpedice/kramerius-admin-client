@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>{{ 'modal.onNewParam.title' | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-form-field class="app-w-100">
+    <mat-label>{{ 'desc.name' | translate }}</mat-label>
+    <input matInput [placeholder]="'desc.name' | translate" type="text" [(ngModel)]="param" [disabled]="isParamCreated">
+  </mat-form-field>
+  <table [cellPadding]="0" [cellSpacing]="0" class="app-table" *ngIf="isParamCreated">
+    <thead>
+      <tr>
+        <th>{{ 'desc.value' | translate }}</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let value of activeParam.values; let index = index">
+        <td>{{ value }}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><input type="text" [placeholder]="'desc.enterTheParameterValue' | translate" class="app-w-100 app-clean-border" [(ngModel)]="value"  /></td>
+        <td class="app-col-action">
+          <a (click)="addNewParamValue()" [matTooltip]="'button.addNewValue' | translate"><mat-icon>add</mat-icon></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" (click)="createNewParam()" *ngIf="!isParamCreated">{{ 'button.create' | translate }}</button>
+  <button mat-flat-button matDialogClose>{{ 'button.close' | translate }}</button>
+</mat-dialog-actions>

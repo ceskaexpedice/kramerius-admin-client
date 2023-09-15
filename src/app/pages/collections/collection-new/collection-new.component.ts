@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppSettings } from 'src/app/services/app-settings';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-collection-new',
@@ -8,14 +10,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CollectionNewComponent implements OnInit {
 
+  //lang: string;
+
+  // all configured languages
+  public languages = this.appSettings.languages;
+
+  public lang: string = 'cs';
+
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private appSettings: AppSettings,
+    private uiService: UIService
   ) { }
 
   ngOnInit(): void {
+    //this.lang = this.uiService.currentLang;
   }
-
 
   getCurrentRoute(type: string) {
     if (type === 'string') {
@@ -23,6 +34,10 @@ export class CollectionNewComponent implements OnInit {
     } else {
       return this.router.url;
     }
+  }
+
+  setLang(lang) {
+    this.lang = lang;
   }
 
 }

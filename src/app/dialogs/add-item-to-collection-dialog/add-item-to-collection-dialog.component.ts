@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Collection } from 'src/app/models/collection.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CollectionsService } from 'src/app/services/collections.service';
+import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 
 @Component({
@@ -27,23 +28,26 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   query: string;
 
   allowedCollections: string[];
+  language:string = 'cze';
 
   constructor(public dialogRef: MatDialogRef<AddItemToCollectionDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data,
      private collectionApi: CollectionsService,
-     private authService: AuthService
+     private authService: AuthService,
+     private isoConvert: IsoConvertService
      ) {
     if (data) {
+      this.language = data.language ? data.language : 'cze';
       this.pid = data.pid;
       this.title = data.title;
       this.isCollection = data.isCollection;
 
       this.specificAuthorizedActions = data.specificAuthorizedActions ;
  
-      this.collectionApi.getCollectionsContainingItem(this.pid).subscribe((data: [collections: Collection[], size: number]) => {
+      this.collectionApi.getCollectionsContainingItem( this.language, this.pid).subscribe((data: [collections: Collection[], size: number]) => {
         let pidsOfCurrentSuperCollections = data[0].map(collection => collection.id);
         //TODO: handle offset, limit
-        this.collectionApi.getCollections(0, 999).subscribe((data: [collections: Collection[], size: number]) => {
+        this.collectionApi.getCollections(this.language, 0, 999).subscribe((data: [collections: Collection[], size: number]) => {
           this.potentialSuperCollections = data[0].filter(collection => collection.id != this.pid && !pidsOfCurrentSuperCollections.includes(collection.id))
           this.potentialSuperCollectionsAll = this.potentialSuperCollections;
 
@@ -100,13 +104,29 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   }
 
   onSearch() {
+    let langs = this.isoConvert.isTranslatable(this.language) ? this.isoConvert.convert(this.language) : [this.language];
+    //return item.names[langs[0]];
+
     if (!!this.query) {
       this.potentialSuperCollections = this.potentialSuperCollectionsAll.filter(collection => {
-        return collection.name_cze.toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) > -1
+        let name = collection.names[langs[0]] ? collection.names[langs[0]] : '';
+        return name.toLocaleLowerCase().indexOf(this.query.toLocaleLowerCase()) > -1
       });
     } else {
       this.potentialSuperCollections = this.potentialSuperCollectionsAll;
     }
   }
   
+
+  getName(item): string {
+    let langs = this.isoConvert.isTranslatable(this.language) ? this.isoConvert.convert(this.language) : [this.language];
+    return item.names[langs[0]];
+  }
+
+
+  getDescription(item):string {
+    let langs = this.isoConvert.isTranslatable(this.language) ? this.isoConvert.convert(this.language) : [this.language];
+    return item.descriptions[langs[0]];
+
+  }
 }

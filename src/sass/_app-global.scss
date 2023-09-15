@@ -41,6 +41,14 @@ a {
   color: $app-color-success !important;
 }
 
+.app-color-disabled {
+  color: $app-color-disabled !important;
+}
+
+.app-bg-white {
+  background-color: $app-color-lightnes !important;
+}
+
 // cleaners
 .app-cleanfix {
   @include cleanfix();
@@ -60,6 +68,10 @@ a {
 
 .app-clean-shadow {
   box-shadow: none !important;
+}
+
+.app-clean-outline {
+  outline: none !important;
 }
 
 .app-dn {
@@ -238,6 +250,10 @@ a {
     background-color: $app-badge-version-color;
   }
 
+  &.app-session {
+    color: $app-color-primary;
+  }
+
   &.app-count {
     @extend .app-pr-1, .app-pl-1, .app-ml-2;
   }
@@ -280,6 +296,10 @@ a {
     background-color: #bdbdbd !important;
   }
 } */
+
+.app-view-border-bottom {
+  border-bottom: 1px solid $app-card-border-color;
+}
 
 // top bar
 .app-topbar {
@@ -371,6 +391,16 @@ table {
             line-height: 20px;
             font-size: 13px;
           }
+
+          input {
+            &[type=text] {
+              @extend .app-clean-bg;
+
+              &:focus {
+                @extend .app-clean-outline;
+              }
+            }
+          }
         }
 
         &:hover {
@@ -389,20 +419,4 @@ table {
       }
     }
   }
-}
-
-
-
-
-.app-badge-test {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background-color: $app-color-primary;
-  color: $app-color-lightnes;
-  padding: 0 4px;
-  margin-left: 8px;
 }

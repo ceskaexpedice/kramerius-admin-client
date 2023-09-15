@@ -14,6 +14,9 @@ import { ClientApiService } from 'src/app/services/client-api.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteSelectedCollectionsDialogComponent } from 'src/app/dialogs/delete-selected-collections-dialog/delete-selected-collections-dialog.component';
+import { UIService } from 'src/app/services/ui.service';
+import { IsoConvertService } from 'src/app/services/isoconvert.service';
+import { AppSettings } from 'src/app/services/app-settings';
 
 @Component({
   selector: 'app-collections',
@@ -49,7 +52,18 @@ export class CollectionsComponent implements OnInit {
   numFound: number = 1000;
 
   displayedColumns = ['select', 'name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
+
   selection = new SelectionModel<any>(true, []);
+
+  public langSelected: string = 'cs';
+  // seznam vsech jazyku
+  public langTranslated:string[] = ['cze', 'ces'];
+
+  // all configured languages
+  public languages = this.appSettings.languages;
+  public lang: string = 'cs';
+
+
   columnMapping = {
     'name_cze':'title.sort',
     'createdAt':'created',
@@ -65,6 +79,9 @@ export class CollectionsComponent implements OnInit {
     private collectionsService: CollectionsService, 
     private router: Router, private locals: LocalStorageService,
     private clientService: ClientApiService,
+    private uiService: UIService,
+    private isoConvert: IsoConvertService,
+    private appSettings:AppSettings,
     private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -97,12 +114,19 @@ export class CollectionsComponent implements OnInit {
         let cIndex = this.collections.findIndex(c => c.id ===id);
         if (cIndex >=0 ) this.collections[cIndex] = collection;
 
-        //this.setRouterLink('/collections/detail/', id, 'collection', 'detail')
       });
     } else {
       return null;
     }
   }
+
+  displayLanguage() {
+    if (this.isoConvert.isTranslatable(this.lang)) {
+      return this.isoConvert.convert(this.lang)[0];
+    }
+    return this.lang;
+  }
+
 
   reload() {
     this.state = 'loading';
@@ -110,13 +134,42 @@ export class CollectionsComponent implements OnInit {
     this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc').subscribe((res)  => {
       this.allCollections = res["docs"].map((d)=> {
         let col:Collection = new Collection();
-        
+        // zjistit jazyk a pokud neni, search.title, collection.desc atd..         
         col.id= d.pid;
         col.standalone = d["collection.is_standalone"];
-        col.name_cze = d["title.search"];
-        if (d["collection.desc"] && d["collection.desc"][0]) {
-          col.description_cze = d["collection.desc"][0];
+        
+        col.names = {};
+        
+        for (const key in d) {
+          if (key.startsWith("title.search_")) {
+            // Extrahujeme klíč za podtržítkem
+            const newKey = key.substring("title.search_".length);
+            
+            // Přidáme nový klíč a hodnotu do objektu titles
+            col.names[newKey] = d[key];
+          }
+          if (key.startsWith("collection.desc_")) {
+            // Extrahujeme klíč za podtržítkem
+            const newKey = key.substring("collection.desc_".length);
+            
+            // Přidáme nový klíč a hodnotu do objektu titles
+            col.descriptions[newKey] = d[key];
+          }
         }
+        let languages = this.appSettings.languages;
+        languages.forEach(lang => {
+          let converted:string[] = this.isoConvert.convert(lang);
+          converted.forEach(conv => {
+            if (!col.names[conv]) {
+              col.names[conv] = '-undefined-' ;
+            }
+            if (!col.descriptions[conv] && d["collection.desc"] && d["collection.desc"][0]) {
+              col.descriptions[conv] = '-undefined-';
+            }
+          });
+        });
+
+ 
         col.createdAt = d["created"]
         col.modifiedAt = d["modified"]
         return col;
@@ -292,8 +345,10 @@ export class CollectionsComponent implements OnInit {
     this.reload();
   }
 
-  reloadPage() {
-    location.reload();
+  reloadPage(routerLink) {
+    //location.reload();
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate([routerLink]))
   }
 
   // Whether the number of selected elements matches the total number of rows
@@ -331,15 +386,10 @@ export class CollectionsComponent implements OnInit {
       width: '600px',
       panelClass: 'app-delete-selected-collections-dialog'
     });
+  }
 
-    dialogRef.afterClosed().subscribe(routernLink => {
-      if (routernLink === 'processes') {
-        this.router.navigate(['/', routernLink]);
-      } else if (routernLink === 'collections') {
-        this.reloadPage();
-      } else {
-        //this.reloadPage();
-      }
-    });
+  setLang(lang) {
+    this.lang = lang;
+    this.reload();
   }
 }

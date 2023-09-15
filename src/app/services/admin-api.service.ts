@@ -156,12 +156,9 @@ export class AdminApiService {
 
   createCollection(collection: Collection): Observable<any> {
     const payload = {
-      name_cze: collection.name_cze,
-      name_eng: collection.name_eng,
-      description_cze: collection.description_cze,
-      description_eng: collection.description_eng,
-      content_cze: collection.content_cze,
-      content_eng: collection.content_eng,
+      names: collection.names,
+      descriptions: collection.descriptions,
+      contents:collection.contents,
       standalone: collection.standalone
     }
     return this.post(`/collections`, payload);
@@ -209,12 +206,9 @@ export class AdminApiService {
 
   updateCollection(collection: Collection): Observable<any> {
     const payload = {
-      name_cze: collection.name_cze,
-      name_eng: collection.name_eng,
-      description_cze: collection.description_cze,
-      description_eng: collection.description_eng,
-      content_cze: collection.content_cze,
-      content_eng: collection.content_eng,
+      names: collection.names,
+      descriptions: collection.descriptions,
+      contents: collection.contents,
       standalone: collection.standalone
     }
     return this.put(`/collections/${collection.id}`, payload);
@@ -235,6 +229,14 @@ export class AdminApiService {
   removeItemFromCollection(collectionPid: string, itemPid: string): Observable<Object> {
     return this.delete(`/collections/${collectionPid}/items/${itemPid}`);
   }
+
+  removeItemsBatchFromCollection(collectionPid: string, itemPids: string[]): Observable<Object> {
+    const payload = {
+      pids: itemPids
+    }
+    return this.put(`/collections/${collectionPid}/items/delete_batch_items`, payload);
+  }
+
 
   deleteObject(pid: string): Observable<any> {
     return this.delete(`/items/${pid}`);
@@ -308,6 +310,7 @@ export class AdminApiService {
   getConditions(): Observable<any> {
     return this.get('/rights/criteria');
   }
+
 
   getRights(pid: string): Observable<Right[]> {
     return this.get('/rights', { pids: pid }).pipe(map(response =>
@@ -416,6 +419,22 @@ export class AdminApiService {
     return this.delete(`/licenses/local/${license.id}`);
   }
 
+  changeLicenseOrdering(licenses: License[]) {
+    let licensesJS = licenses.map(l=> l.toJson());
+    let json =  {
+      licenses: licensesJS
+    };
+
+    return this.put(`/licenses/changeOrdering`, json);
+  }
+
+  changeOrdering(parent:string, items:string[]): Observable<any> {
+    let json =  {
+      childrenPids: items
+    };
+    let url = `/items/${parent}/children_order`;
+    return this.put(url, json);
+  }
 
   /** Statistiky  */
   statisticsLicenseFilter(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {

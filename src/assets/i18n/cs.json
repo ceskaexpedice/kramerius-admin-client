@@ -3,7 +3,11 @@
     "lat": "Latina",
     "cze": "Čeština",
     "ger": "Němčina",
-    "eng": "Angličtina"
+    "eng": "Angličtina",
+
+    "cs": "Čeština",
+    "en": "Angličtina",
+    "de": "Němčina"
   },
   "sites": {
     "object": {
@@ -329,7 +333,8 @@
     "NOT_RUNNING": "Nespuštěno",
     "WARNING": "Varování",
 
-    "currentVersionOfTheIndexer": "Aktuální verze indexeru"
+    "currentVersionOfTheIndexer": "Aktuální verze indexeru",
+    "sessionExpire": "Do odhlášení zbýva"
   },
   "paginator": {
     "desc": {
@@ -450,7 +455,10 @@
     "deleteSelectedItems": "Vymazat vybrané položky",
     "changeFlagOnLicense": "Změnit príznak na licenci",
     "change": "Změnit",
-    "removeTheVisibilityFlag": "Odebrat příznak viditelnosti"
+    "removeTheVisibilityFlag": "Odebrat příznak viditelnosti",
+    "saveOrderChange": "Uložit změnu pořadí",
+    "addNewValue": "Přidat novou hodnotu",
+    "languageForEditing": "Jazyk pro editaci"
   },
   "field": {
     "public": "Veřejné",
@@ -753,6 +761,29 @@
     "scheduleRemoveTheVisibilityFlag": {
       "title": "Odebrání příznaku viditelnosti",
       "message": "Pro každý vložený PID bude naplánován proces Odebrání příznaku, který ruší příznak POLICY."
+    },
+    "about": {
+      "title": "O aplikaci",
+      "desc": "Administrátorské rozhraní Krameria 7."
+    },
+    "scheduleChangeOrderDocumentsInCollection": {
+      "title": "Změna pořadí dokumenů ve sbírce",
+      "alert": "Pokud změníte pořadí dokumentů ve sbírce, vytvoří se proces pro reindexaci a položky se Vám můžou zobrazovat v původním pořadí v seznamu do doby, než tento proces bude ukončen.",
+      "button": {
+        "process": "Uložit a přejít na seznam procesů",
+        "collection": "Uložit a zůstat ve sbírce"
+      }
+    },
+    "scheduleChangeOrderLicenses": {
+      "title": "Změna pořadí licencí",
+      "alert": "Pokud změníte pořadí licencí, vytvoří se proces pro reindexaci a položky se Vám můžou zobrazovat v původním pořadí v seznamu do doby, než tento proces bude ukončen.",
+      "button": {
+        "process": "Uložit a přejít na seznam procesů",
+        "licenses": "Uložit a zůstat v licencích"
+      }
+    },
+    "userInfo": {
+      "title": "Informace o uživateli"
     }
   },
   "snackbar": {
@@ -763,7 +794,7 @@
       "copyToClipboard": "Text byl úspěšně zkopírován do schánky",
       "addToTheCollection": "Sbírka byla přidána",
       "theCollectionHasBeenModified": "Sbírka byla upravena",
-      "collectionHasBeenCreated": "Sbírka byla vytvořena",
+      "collectionHasBeenCreated": "Sbírka byla úspěšně vytvořena",
       "theRightHasBeenRemoved": "Právo bylo odstraněno",
       "visibilityChange": {
         "1": "Proces Změna viditelnosti byl naplánován",
@@ -827,7 +858,11 @@
       "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací",
       "scheduleStartTheSdnntReviewProcess": "Spuštění procesu kontroly SDNNT/Kramerius bylo naplánováno",
       "deleteSelectedCollections": "Proces smazaní vybraných sbirek byl úspěšně spuštěn",
-      "changeFlagOnLicense": "Proces změny příznaku na licenci byl naplánován"
+      "changeFlagOnLicense": "Proces změny příznaku na licenci byl naplánován",
+      "changeItemsOrder": "Pořadí položek bylo změněno",
+      "changeItemsOrderSaved": "Změna pořadí položek byla uložena",
+      "scheduleChangeItemsOrder": "Proces uložení změny pořadí položek byl úspěšně spuštěn",
+      "scheduleDeleteSelectedItemsFromCollection": "Proces smazaní vybraných položek ze sbírky byl úspěšně spuštěn"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -866,7 +901,10 @@
       },
       "onNewParam": "Parametr se nepodařilo přidat",
       "onEditParam": "Parametr se nepodařilo upravit",
-      "onRemoveParam": "Parametr se nepodřilo odstranit",
+      "onRemoveParam": {
+        "409": "Parametr je použit, není možné ho odstranit",
+        "failed": "Parametr se nepodřilo odstranit"
+      },
       "onNewValue": "Hodnotu se nepodařilo přidat",
       "onRemoveValue": "Hodnota parametru se nepodřila odstranit",
       "onEditValue": "Hodnotu parametru se nepodařilo upravit",
@@ -880,7 +918,13 @@
       "scheduleIndexationsByMultiplePids": "Nepodařilo se naplánovat indexace",
       "loadMoreItemsForBatch": "Nepodařilo se načíst data",
       "scheduleStartTheSdnntReviewProcess": "Chyba při spuštění procesu kontroly SDNNT/Kramerius",
-      "deleteSelectedCollections": "Došlo k chybě při smazaní vybraných sbírek"
+      "deleteSelectedCollections": "Došlo k chybě při smazaní vybraných sbírek",
+      "scheduleChangeItemsOrder": "Došlo k chybě při ukládání změny pořadí položek",
+      "scheduleDeleteSelectedItemsFromCollection": "Došlo k chybě při smazaní vybraných položek ze sbírky",
+      "anErrorOccurredWhileSaving": "Došlo k chybě při ukládání"
+    },
+    "alert": {
+      "tokenTimeExpireInfo": "Za 2 minuty dojde k automatickému odhlášení z aplikace"
     }
   },
   "desc": {
@@ -921,6 +965,7 @@
     "from": "Od",
     "to": "Do",
     "name": "Název",
+    "humanName": "Jméno",
     "finalState": "Konečný stav",
     "processInTheBatch": "Proces v dávce",
     "durationOfTheProcess": "Trvání procesu",
@@ -975,7 +1020,7 @@
     "logs": "Logy",
     "right": "Oprávnění",
     "connectedInstance": "Připojená instance",
-    "tokenExpiresAt": "Token vyprší ve",
+    "tokenExpiresAt": "K odhlášení z aplikace dojde ve",
     "code": "Kód",
     "stateDuration": "Trvání stavu",
     "switch": "Přepinač",
@@ -1001,6 +1046,15 @@
     "changeFlagOnLicense": "Změna príznaku na licenci",
     "symptom": "Příznak",
     "localLibraryLicense": "Lokální licence knihovny",
-    "globalLicense": "Globální licence"
+    "globalLicense": "Globální licence",
+    "client": "Klient",
+    "core": "Jádro",
+    "enterTheParameterValue": "Zadejte hodnotu parametru",
+    "addNewParameter": "Přidat nový parametr",
+    "addNewRole": "Přidat novou roli",
+    "affiliation": "Afiliace",
+    "eduPersonPrincipalName": "Edu hlavní jméno osoby",
+    "eduPersonUniqueId": "Edu jedinečné ID osoby",
+    "prefferedUserName": "Preferované uživatelské jméno"
   }
 }

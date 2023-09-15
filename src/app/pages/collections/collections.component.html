@@ -1,18 +1,26 @@
 <div class="app-collections app-h-100">
   <div fxLayout="column" fxFlexFill>
     <div class="app-topbar">
-      <div class="app-breadcrumbs app-mb-4">
-        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
-        <a routerLink="/">home</a>
-        <span class="app-separator">/</span>
-        <span class="app-last">{{ 'sites.collections.title' | translate }}</span>
+      <div fxLayout="row" class="app-mb-2">
+        <div fxFlex class="app-breadcrumbs">
+          <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+          <a routerLink="/">home</a>
+          <span class="app-separator">/</span>
+          <span class="app-last">{{ 'sites.collections.title' | translate }}</span>
+        </div>
+        <div>
+          <button mat-stroked-button [matMenuTriggerFor]="menuLang" class="app-bg-white app-pr-1" [matTooltip]="'button.languageForEditing' | translate"><span class="app-mr-2">{{ 'lang.' + lang | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
+          <mat-menu #menuLang="matMenu">
+            <button mat-menu-item *ngFor="let language of languages" (click)="setLang(language)">{{ 'lang.' + language | translate  }}</button>
+          </mat-menu>
+        </div>
       </div>
       <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="app-mb-4">
         <div fxFlex>
           <input class="app-input-autocomplete app-mr-4" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
           <button [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()" class="app-mr-2">{{ 'button.createNewCollection' | translate }}</button>
           <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="warn" (click)="deleteSelectedCollections()" class="app-mr-1">{{ 'button.deleteSelectedCollections' | translate }}</button>
-          <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage()" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
+          <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage('collections')" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
         </div>
         <div>
           <mat-slide-toggle class="app-standalone-toggle" color="primary" (change)="onStandaloneChange()" [(ngModel)]="standaloneOnly">{{ 'button.showStandaloneOnly' | translate }}</mat-slide-toggle>
@@ -31,20 +39,21 @@
               <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
             </td>
           </ng-container>
+
           <ng-container matColumnDef="name_cze">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <a [routerLink]="getRouterLink('/collections/detail/', element.id, 'collection', 'detail')" (click)="linkToDetail(element.id)" [class.app-avoid-click]="!allowEdit(element.id)">
-                {{ element.name_cze }}
+                {{ element.names[displayLanguage()] }}
               </a>
             </td>
           </ng-container>
           <ng-container matColumnDef="description_cze">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.description' | translate }}</th>
-            <td mat-cell *matCellDef="let element" [matTooltip]="allowEdit(element.id) ? element.description_cze : null">
+            <td mat-cell *matCellDef="let element" [matTooltip]="allowEdit(element.id) ? element.descriptions[displayLanguage()] : null">
               <div class="app-text-cutter-wrapper">
                 <div class="app-text-cutter">
-                  {{ element.description_cze }}
+                  {{ element.descriptions[displayLanguage()] }}
                 </div>
               </div>
             </td>

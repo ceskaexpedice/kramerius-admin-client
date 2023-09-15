@@ -33,13 +33,14 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
   rightsErrors:string[] = [];
   genericErrors: {};
  
+  lang:string ='cze';
 
   constructor(public dialogRef: MatDialogRef<AddItemsToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public collection: Collection, 
   private collectionApi: CollectionsService,
   private authService: AuthService
   ) {
     if (collection) {
-      this.collection_title = collection.name_cze;
+      this.collection_title = collection.names['cze'];
       this.collection_pid = collection.id;
     }
   }

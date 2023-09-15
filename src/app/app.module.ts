@@ -85,6 +85,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CreateNewCollectionDialogComponent } from './dialogs/create-new-collection-dialog/create-new-collection-dialog.component';
 import { DeleteCollectionDialogComponent } from './dialogs/delete-collection-dialog/delete-collection-dialog.component';
 import { CdkApiService } from './services/cdk-api.service';
+import { IsoConvertService } from './services/isoconvert.service';
 import { CdkComponent } from './pages/cdk/cdk.component';
 import { CdkProxyComponent } from './pages/cdk/cdk-proxy/cdk-proxy.component';
 import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
@@ -95,6 +96,9 @@ import { ScheduleStartTheSdnntReviewProcessComponent } from './dialogs/schedule-
 import { DeleteSelectedItemsFromCollectionComponent } from './dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
 import { ScheduleChangeFlagOnLicenseDialogComponent } from './dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
 import { ScheduleRemoveTheVisibilityFlagDialogComponent } from './dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
+import { AboutDialogComponent } from './dialogs/about-dialog/about-dialog.component';
+import { AddNewParameterDialogComponent } from './dialogs/add-new-parameter-dialog/add-new-parameter-dialog.component';
+import { UserInfoDialogComponent } from './dialogs/user-info-dialog/user-info-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -175,7 +179,10 @@ export function createCustomMatPaginatorIntl(
     ScheduleStartTheSdnntReviewProcessComponent,
     DeleteSelectedItemsFromCollectionComponent,
     ScheduleChangeFlagOnLicenseDialogComponent,
-    ScheduleRemoveTheVisibilityFlagDialogComponent
+    ScheduleRemoveTheVisibilityFlagDialogComponent,
+    AboutDialogComponent,
+    AddNewParameterDialogComponent,
+    UserInfoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -213,6 +220,7 @@ export function createCustomMatPaginatorIntl(
     HttpClient,
     TranslateService,
     CdkApiService,
+    IsoConvertService,
     {
       provide: MatPaginatorIntl, deps: [TranslateService],
       useFactory: createCustomMatPaginatorIntl

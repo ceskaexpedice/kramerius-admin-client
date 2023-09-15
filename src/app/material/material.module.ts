@@ -25,6 +25,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSortModule } from '@angular/material/sort';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 const components = [
@@ -52,7 +53,8 @@ const components = [
   MatSlideToggleModule,
   MatDividerModule,
   MatSortModule,
-  ClipboardModule
+  ClipboardModule,
+  DragDropModule
 ];
 
 const providers = [

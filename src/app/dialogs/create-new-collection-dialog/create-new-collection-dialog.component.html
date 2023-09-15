@@ -11,7 +11,7 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button [routerLink]="'/collections/edit/' + collectionPid" mat-dialog-close color="primary">{{ 'button.editThisCollection' | translate }}</button>
-  <button mat-flat-button routerLink="/processes" mat-dialog-close color="primary">{{ 'button.goToProcesses' | translate }}</button>
-  <button mat-flat-button routerLink="/collections" mat-dialog-close>{{ 'button.close' | translate }}</button>
+  <button mat-flat-button (click)="goToRoute('/collections/edit/' + collectionPid)" mat-dialog-close color="primary">{{ 'button.editThisCollection' | translate }}</button>
+  <button mat-flat-button (click)="goToRoute('/processes')" mat-dialog-close color="primary">{{ 'button.goToProcesses' | translate }}</button>
+  <button mat-flat-button (click)="goToRoute('/collections')" mat-dialog-close>{{ 'button.close' | translate }}</button>
 </mat-dialog-actions>

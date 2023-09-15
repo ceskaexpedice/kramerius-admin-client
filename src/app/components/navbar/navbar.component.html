@@ -29,7 +29,8 @@
       <a routerLink="/repository" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'sites.repository.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_statistics')" routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'sites.statistics.title' | translate }}</a>
       <a routerLink="/cdk" routerLinkActive="active" mat-button (click)="setDefaultRoute('cdk.view','proxy')" *ngIf="settings.cdkMode">{{ 'sites.cdk.title' | translate }}</a>  
-      <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a> 
+      <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
+      <a (click)="openAboutDialog()" mat-button>{{ 'modal.about.title' | translate }}</a> 
     </ng-container>
     
     <a (click)="changeLang('cs')" mat-button *ngIf="ui.currentLang !== 'cs'">CS</a>
@@ -41,10 +42,11 @@
           {{ auth.getTextProfileImage() }}
         </div>
       </a>
+      <div class="app-badge app-session" [matTooltip]="'batch.sessionExpire' | translate">{{ tokenHours+":"+tokenMinutes+":"+tokenSeconds }}</div>
     </ng-container>
 
     <mat-menu #profile_menu="matMenu">
-      <button mat-menu-item disabled *ngIf="auth.user">
+      <button mat-menu-item *ngIf="auth.user" (click)="openUserInfoDialog()">
         <mat-icon>person</mat-icon>
         <span>{{ auth.user.name || auth.user.uid }}</span>
       </button>

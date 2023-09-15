@@ -88,7 +88,7 @@ export class DevComponent implements OnInit {
     this.pids_of_collections_having_item = {}
     this.pids_of_collections_missing_item = {}
     this.collections_by_id = {};
-    this.collectionsService.getCollections(0, 100).subscribe(([collections, count]: [Collection[], number]) => {
+    this.collectionsService.getCollections('cze',0, 100).subscribe(([collections, count]: [Collection[], number]) => {
       collections.forEach(collection => {
         this.collections_by_id[collection.id] = collection;
       });
@@ -96,7 +96,7 @@ export class DevComponent implements OnInit {
       //console.log(collections);
       this.items.forEach(item => {
         //console.log(item);
-        this.collectionsService.getCollectionsContainingItem(item).subscribe(([collectionsWithItem, count]: [Collection[], number]) => {
+        this.collectionsService.getCollectionsContainingItem('cze',item).subscribe(([collectionsWithItem, count]: [Collection[], number]) => {
           //console.log("collections of " + item);
           //console.log(collectionsWithItem);
           this.pids_of_collections_having_item[item] = [];

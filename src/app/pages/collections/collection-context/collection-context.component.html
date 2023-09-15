@@ -9,9 +9,10 @@
 		</div>
 		<div fxFlex class="app-left">
 			<mat-card-title>
-				<mat-icon *ngIf="allowEdit(superCollection['id'])">link</mat-icon>{{ superCollection.getName() }}
+				
+				<mat-icon *ngIf="allowEdit(superCollection['id'])">link</mat-icon>{{ getName(superCollection) }}
 			</mat-card-title>
-			<mat-card-subtitle>{{ superCollection.getDescription() }}</mat-card-subtitle>
+			<mat-card-subtitle>{{ getDescription(superCollection) }}</mat-card-subtitle>
 		</div>
 		<div class="app-right app-actions">
 			<a (click)="allowEdit(superCollection['id']) ? removeItemFromAnotherCollection(superCollection, collection, $event) : null" [matTooltip]="allowEdit(superCollection['id']) ? ('button.removeFromCollection' | translate) : null" class="app-btn-warn" [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null">	

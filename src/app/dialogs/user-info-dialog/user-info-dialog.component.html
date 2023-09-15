@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{ 'modal.userInfo.title' | translate }} - {{ userInfo.uid }}</h2>
+
+<mat-dialog-content class="mat-typography">
+  <div *ngIf="userInfo.roles?.length !== 0">
+    <span class="app-label">{{ 'desc.role' | translate }}: </span>
+    <ng-container *ngFor="let role of userInfo.roles; let last = last">
+      <strong>{{ role }}</strong><span></span><ng-container *ngIf="!last">,&#160;</ng-container>
+    </ng-container>
+  </div>
+  <div *ngIf="userInfo.licenses?.length !== 0">
+    <span class="app-label">{{ 'desc.license' | translate }}: </span>
+    <ng-container *ngFor="let license of userInfo.licenses; let last = last">
+      <strong>{{ license }}</strong><span></span><ng-container *ngIf="!last">,&#160;</ng-container>
+    </ng-container>
+  </div>
+  <mat-divider class="app-mt-2 app-mb-2" *ngIf="userInfo.roles?.length !== 0 || userInfo.licenses?.length !== 0"></mat-divider>
+  <div *ngIf="userInfo.session.affiliation"><span class="app-label">{{ 'desc.affiliation' | translate }}: </span><strong>{{ userInfo.session.affiliation }}</strong></div>
+  <div *ngIf="userInfo.session.eduPersonPrincipalName"><span class="app-label">{{ 'desc.eduPersonPrincipalName' | translate }}: </span><strong>{{ userInfo.session.eduPersonPrincipalName }}</strong></div>
+  <div *ngIf="userInfo.session.eduPersonUniqueId"><span class="app-label">{{ 'desc.eduPersonUniqueId' | translate }}: </span><strong>{{ userInfo.session.eduPersonUniqueId }}</strong></div>
+  <mat-divider class="app-mt-2 app-mb-2" *ngIf="userInfo.session.affiliation || userInfo.session.eduPersonPrincipalNam || userInfo.session.eduPersonUniqueId"></mat-divider>
+  <div *ngIf="userInfo.session.preffered_user_name"><span class="app-label">{{ 'desc.prefferedUserName' | translate }}: </span><strong>{{ userInfo.session.preffered_user_name }}</strong></div>
+  <div *ngIf="userInfo.session.email"><span class="app-label">{{ 'Email' | translate }}: </span><strong>{{ userInfo.session.email }}</strong></div> 
+  <div *ngIf="userInfo.name"><span class="app-label">{{ 'desc.humanName' | translate }}: </span><strong>{{ userInfo.name }}</strong></div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close>{{ 'button.close' | translate }}</button>
+</mat-dialog-actions>
