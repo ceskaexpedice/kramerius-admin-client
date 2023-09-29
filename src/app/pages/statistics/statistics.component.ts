@@ -24,6 +24,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { GenerateNkpLogsDialogComponent } from 'src/app/dialogs/generate-nkp-logs-dialog/generate-nkp-logs-dialog.component';
 import { DeleteStatisticsDialogComponent } from 'src/app/dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FileDownloadService } from 'src/app/services/file-download';
 
 @Component({
   selector: 'app-statistics',
@@ -69,11 +70,16 @@ export class StatisticsComponent implements OnInit {
   public isResultLang: boolean = false;
   public isResultAuthor: boolean = false;
 
+  // nkplog files
+
+  logfiles:any [] = [];
+
   // pripojena instance
   constructor(
     public appSettings: AppSettings, 
     private adminApi: AdminApiService, 
     private clientApi: ClientApiService, 
+    private downloadService: FileDownloadService,
     @Inject(DOCUMENT) private document: Document, 
     private local: LocalStorageService,
     private router: Router,
@@ -243,6 +249,33 @@ export class StatisticsComponent implements OnInit {
     if (this.router.url.replace('/', '') === 'statistics') {
       return this.isPageStatistics = true;
     }
+
+    //this.adminApi.getOutputNKPLogsDirFiles().
+
+    this.adminApi.getOutputNKPLogsDirFiles().subscribe(response => {
+      this.logfiles = [];
+      //TODO: neresi se prochazeni do hloubky, ale berou se jen adresare prvni urovne
+      response.files.forEach(file => {
+          this.logfiles.push(file);
+      });
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  download(logfile) {
+    console.log(logfile);
+
+
+
+    this.adminApi.getOutputNKPLogsFile( logfile.name ).subscribe(response => {
+      let downloadlink = this.adminApi.getOutputDownloadLinks(response.downloadlink);
+      console.log(downloadlink);
+      this.downloadService.downloadFile(downloadlink, logfile.name);
+      //const newWindow = window.open( this.adminApi.getOutputDownloadLinks(response.downloadlink), '_blank');
+    }, error => {
+      console.log(error);
+    })
   }
 
   onIdentKeyUp(target) {

@@ -298,6 +298,23 @@ export class AdminApiService {
     )
   }
 
+  //output-data-dir-for_nkplogs
+  getOutputNKPLogsDirFiles(): Observable<any> {
+    return this.get(`/files/output-data-dir-for_nkplogs/`).pipe(
+    )
+  }
+
+
+  getOutputNKPLogsFile(file): Observable<any> {
+    return this.get(`/files/output-data-dir-for_nkplogs/`+file+"?generatedownloads=true").pipe(
+    )
+  }
+
+  getOutputDownloadLinks(link): string {
+    //http://localhost:8080/search/api/admin/v7.0/files/download-path/b8dbeb7a5617a33e168a6d5a1cb26c2b
+    return this.baseUrl +"/files/download-path/"+ link;
+  }
+
   //deprecated (use getImportFiles instead)
   getConvertAndImportNdkInputDirFiles(): Observable<any> {
     return this.get(`/files/input-data-dir-for_convert-and-import-ndk/`);

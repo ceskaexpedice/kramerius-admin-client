@@ -180,6 +180,18 @@
 							<span [matTooltip]="!allowedGlobalAction('a_statistics_edit') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_statistics_edit')  ? 'app-alert-not-allowed' : null">
 								<button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button><!--od do-->
 							</span>
+
+							<div>
+								<h3>Seznam vygenerovaných logů v adresáří </h3>
+								<ul>
+									<li  *ngFor="let logfile of logfiles" type="1">
+										<a (click)="download(logfile)" style="cursor: pointer;">
+										  <mat-icon>archive</mat-icon> <!-- Ikona zip souboru -->
+										  {{ logfile.name }}
+										</a>
+									  </li>
+								</ul>
+							  </div>
 						</mat-card-content>
 					</mat-card>
 				</ng-container>

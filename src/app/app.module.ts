@@ -99,6 +99,8 @@ import { ScheduleRemoveTheVisibilityFlagDialogComponent } from './dialogs/schedu
 import { AboutDialogComponent } from './dialogs/about-dialog/about-dialog.component';
 import { AddNewParameterDialogComponent } from './dialogs/add-new-parameter-dialog/add-new-parameter-dialog.component';
 import { UserInfoDialogComponent } from './dialogs/user-info-dialog/user-info-dialog.component';
+import { FileDownloadService } from './services/file-download';
+//import { FileSaverModule } from 'ngx-filesaver';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -196,6 +198,7 @@ export function createCustomMatPaginatorIntl(
     CKEditorModule,
     FlexLayoutModule,
     MatBadgeModule,
+    //FileSaverModule,
     NgxEchartsModule.forRoot({
       echarts
     }),
@@ -220,6 +223,7 @@ export function createCustomMatPaginatorIntl(
     HttpClient,
     TranslateService,
     CdkApiService,
+    FileDownloadService,
     IsoConvertService,
     {
       provide: MatPaginatorIntl, deps: [TranslateService],
