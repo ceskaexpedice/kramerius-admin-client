@@ -1059,6 +1059,7 @@
     "download": "Download",
     "fileName": "File name",
     "creationDate": "Creation date",
-    "listOfGeneratedLogsInDirectories": "List of generated logs in directories"
+    "listOfGeneratedLogsInDirectories": "List of generated logs in directories",
+    "sendByEmail": "Send by e-mail"
   }
 }

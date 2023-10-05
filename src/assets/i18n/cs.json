@@ -1059,6 +1059,7 @@
     "download": "Stáhnout",
     "fileName": "Jméno souboru",
     "creationDate": "Datum vytvoření",
-    "listOfGeneratedLogsInDirectories": "Seznam vygenerovaných logů v adresáří"
+    "listOfGeneratedLogsInDirectories": "Seznam vygenerovaných logů v adresáří",
+    "sendByEmail": "Poslat emailem"
   }
 }

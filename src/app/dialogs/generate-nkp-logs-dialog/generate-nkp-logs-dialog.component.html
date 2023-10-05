@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>{{ 'modal.generateNkpLogs.title' | translate }}</h2>
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content class="mat-typography app-scrollbar-fix">
   <div fxLayout="row" fxLayoutGap="16px">
     <mat-form-field fxFlex>
       <mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
@@ -14,6 +14,7 @@
       <mat-datepicker #to></mat-datepicker>
     </mat-form-field>
   </div>
+  <mat-checkbox class="example-margin">{{ 'desc.sendByEmail' | translate }}</mat-checkbox>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button color="primary" (click)="scheduleNkpLogsProcess()">{{ 'button.schedule' | translate }}</button>
