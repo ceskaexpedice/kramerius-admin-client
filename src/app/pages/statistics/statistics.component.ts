@@ -63,6 +63,7 @@ export class StatisticsComponent implements OnInit {
   descriptions: any = {};
 
   view: string;
+  path: string;
 
   public selection: any = [];
 
@@ -235,7 +236,8 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.view = this.local.getStringProperty('statistics.view', 'graphs');
+    //this.view = this.local.getStringProperty('statistics.view', 'graphs');
+    this.view = this.router.url.replace('/statistics/', '');
 
     this.reinitGraphs();
 

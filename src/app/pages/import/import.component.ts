@@ -37,7 +37,8 @@ export class ImportComponent implements OnInit {
     this.ndkPublic = true;
     this.scheduleIndexations = true;
     this.ndkIIPServer = true;
-    this.type = this.local.getStringProperty('import.type', 'foxml');
+    //this.type = this.local.getStringProperty('import.type', 'foxml');
+    this.type = this.router.url.replace('/import/', '');
     this.initTree();
   }
 
