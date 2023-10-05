@@ -36,12 +36,13 @@ export class ProcessComponent implements OnInit {
     private ui: UIService) { }
 
   ngOnInit() {
-    this.view = this.local.getStringProperty('processes.view');
-
     this.route.params.subscribe(params => {
       this.processId = params['id'];
       this.reloadProcess();
     })
+
+    //this.view = this.local.getStringProperty('processes.view');
+    this.view = this.router.url.replace('/processes/', '').replace('/' + this.processId, '');
   }
 
   reloadProcess() {
