@@ -104,8 +104,9 @@ export class CollectionComponent implements OnInit {
             return indexA - indexB;
           });
 
-          //this.view = 'detail';
-          this.view = this.local.getStringProperty('collection.view');
+          //this.view = this.local.getStringProperty('collection.view');
+          this.view = this.router.url.replace('/collections/', '').replace('/' + this.collectionId, '');
+          console.log(this.view);
           this.state = 'success';
           this.selection.clear();
   
