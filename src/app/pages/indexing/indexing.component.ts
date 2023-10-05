@@ -87,7 +87,8 @@ export class IndexingComponent implements OnInit {
       }
      });
 
-    this.view = this.local.getStringProperty('indexing.view', 'object');
+    //this.view = this.local.getStringProperty('indexing.view', 'object');
+    this.view = this.router.url.replace('/indexing/', '');
 
     this.clientApi.getInfo().subscribe(data => {
       this.currentIndexerVersion = data.indexerVersion;

@@ -42,7 +42,8 @@ export class RepositoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.view = this.local.getStringProperty('repository.view', 'repositoryManagement');
+    //this.view = this.local.getStringProperty('repository.view', 'repositoryManagement');
+    this.view = this.router.url.replace('/repository/', '');
   }
 
   openscheduleProcessingIndexRebuildDialog() {
