@@ -105,10 +105,10 @@ export class ObjectComponent implements OnInit {
     this.inputPid = this.pid;
     this.adminApi.checkObject(this.pid).subscribe(result => {
       this.pidIsCorrect = true;
-      this.view = this.local.getStringProperty('object.view', 'actions');
-      this.routeView = this.router.url.replace('/object/' + this.pid + '/', '' );
+      //this.view = this.local.getStringProperty('object.view', 'actions');
+      this.view = this.router.url.replace('/object/' + this.pid + '/', '' );
       // if there is no view name in the url, but only the pid, it redirects to the default actions folder
-      if (this.routeView !== this.view) {
+      if (this.view !== 'actions' && this.view !== 'accessibility' && this.view !== 'in-collections' && this.view !== 'others' && this.view !== 'editing') {
         this.router.navigate(['/object/' + this.pid + '/actions']);
         this.view = 'actions';
       }
