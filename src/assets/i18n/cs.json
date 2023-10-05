@@ -1055,6 +1055,10 @@
     "affiliation": "Afiliace",
     "eduPersonPrincipalName": "Edu hlavní jméno osoby",
     "eduPersonUniqueId": "Edu jedinečné ID osoby",
-    "prefferedUserName": "Preferované uživatelské jméno"
+    "prefferedUserName": "Preferované uživatelské jméno",
+    "download": "Stáhnout",
+    "fileName": "Jméno souboru",
+    "creationDate": "Datum vytvoření",
+    "listOfGeneratedLogsInDirectories": "Seznam vygenerovaných logů v adresáří"
   }
 }

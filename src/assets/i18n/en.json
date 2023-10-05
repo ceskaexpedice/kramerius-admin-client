@@ -1055,6 +1055,10 @@
     "affiliation": "Affiliation",
     "eduPersonPrincipalName": "Edu person principal name",
     "eduPersonUniqueId": "Edu person unique id",
-    "prefferedUserName": "Preffered user name"
+    "prefferedUserName": "Preffered user name",
+    "download": "Download",
+    "fileName": "File name",
+    "creationDate": "Creation date",
+    "listOfGeneratedLogsInDirectories": "List of generated logs in directories"
   }
 }

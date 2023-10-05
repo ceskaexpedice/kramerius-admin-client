@@ -181,17 +181,23 @@
 								<button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button><!--od do-->
 							</span>
 
-							<div>
-								<h3>Seznam vygenerovaných logů v adresáří </h3>
-								<ul>
-									<li  *ngFor="let logfile of logfiles" type="1">
-										<a (click)="download(logfile)" style="cursor: pointer;">
-										  <mat-icon>archive</mat-icon> <!-- Ikona zip souboru -->
-										  {{ logfile.name }}
-										</a>
-									  </li>
-								</ul>
-							  </div>
+							<h3>{{ 'desc.listOfGeneratedLogsInDirectories' | translate }}</h3>
+							<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
+								<thead>
+									<tr>
+										<th>{{ 'desc.fileName' | translate }}</th>
+										<th>{{ 'desc.creationDate' | translate }}</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let logfile of logfiles">
+										<td><a (click)="download(logfile)">{{ logfile.name }}</a></td>
+										<td>18.02.2009</td>
+										<td class="app-col-action"><a (click)="download(logfile)" [matTooltip]="'desc.download' | translate"><mat-icon>file_download</mat-icon></a></td>
+									</tr>
+								</tbody>
+							</table>
 						</mat-card-content>
 					</mat-card>
 				</ng-container>
