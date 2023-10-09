@@ -458,7 +458,9 @@
     "removeTheVisibilityFlag": "Remove the visibility flag",
     "saveOrderChange": "Save order change",
     "addNewValue": "Add new value",
-    "languageForEditing": "Language for editing"
+    "languageForEditing": "Language for editing",
+    "representativePage": "Representative page",
+    "setThisPageAsRepresentative": "Set this page as representative"
   },
   "field": {
     "public": "Public",
@@ -862,7 +864,8 @@
       "changeItemsOrder": "The order of the items has been changed",
       "changeItemsOrderSaved": "The change in order of items has been saved",
       "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started",
-      "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started"
+      "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started",
+      "setRepresentativePage": "Setup of the representative page was successful"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",

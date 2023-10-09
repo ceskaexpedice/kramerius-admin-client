@@ -458,7 +458,9 @@
     "removeTheVisibilityFlag": "Odebrat příznak viditelnosti",
     "saveOrderChange": "Uložit změnu pořadí",
     "addNewValue": "Přidat novou hodnotu",
-    "languageForEditing": "Jazyk pro editaci"
+    "languageForEditing": "Jazyk pro editaci",
+    "representativePage": "Reprezentativni stránka",
+    "setThisPageAsRepresentative": "Nastavit tuto stránku jako reprezentativní"
   },
   "field": {
     "public": "Veřejné",
@@ -862,7 +864,8 @@
       "changeItemsOrder": "Pořadí položek bylo změněno",
       "changeItemsOrderSaved": "Změna pořadí položek byla uložena",
       "scheduleChangeItemsOrder": "Proces uložení změny pořadí položek byl úspěšně spuštěn",
-      "scheduleDeleteSelectedItemsFromCollection": "Proces smazaní vybraných položek ze sbírky byl úspěšně spuštěn"
+      "scheduleDeleteSelectedItemsFromCollection": "Proces smazaní vybraných položek ze sbírky byl úspěšně spuštěn",
+      "setRepresentativePage": "Nastavení reprezentativní stránky proběhlo úspěšně"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",

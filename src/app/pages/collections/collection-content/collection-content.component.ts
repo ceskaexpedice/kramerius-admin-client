@@ -44,6 +44,8 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   collectionItems;
   noncollectionItems;
 
+  public isRepresentativePageSelected: any = [];
+
   constructor(
     private collectionsService: CollectionsService,
     private ui: UIService,
@@ -192,6 +194,15 @@ export class CollectionContentComponent implements OnInit, OnChanges {
       this.orderingChanged = true;
       let arr = this.noncollectionItems.map(obj=> obj['pid']);
       this.dragEvent.emit(arr);
+    }
+  }
+
+  setRepresentativePage(id: number) {
+    if (this.isRepresentativePageSelected[id]) {
+      this.isRepresentativePageSelected[id] =! this.isRepresentativePageSelected[id];
+    } else {
+      this.isRepresentativePageSelected[id] = true;
+      this.ui.showInfoSnackBar(`snackbar.success.setRepresentativePage`);
     }
   }
 
