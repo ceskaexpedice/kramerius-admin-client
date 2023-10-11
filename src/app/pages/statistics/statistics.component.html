@@ -193,7 +193,7 @@
 								<tbody>
 									<tr *ngFor="let logfile of logfiles">
 										<td><a (click)="download(logfile)">{{ logfile.name }}</a></td>
-										<td>18.02.2009</td>
+										<td>{{modifiedLogFile(logfile)}}</td>
 										<td class="app-col-action"><a (click)="download(logfile)" [matTooltip]="'desc.download' | translate"><mat-icon>file_download</mat-icon></a></td>
 									</tr>
 								</tbody>

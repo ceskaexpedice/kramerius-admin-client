@@ -25,6 +25,7 @@ import { GenerateNkpLogsDialogComponent } from 'src/app/dialogs/generate-nkp-log
 import { DeleteStatisticsDialogComponent } from 'src/app/dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FileDownloadService } from 'src/app/services/file-download';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-statistics',
@@ -265,14 +266,22 @@ export class StatisticsComponent implements OnInit {
     })
   }
 
+  modifiedLogFile(logfile) {
+    
+    if (logfile.lastModifiedTime) {
+
+      const date = moment(logfile.lastModifiedTime);
+      const formattedDateTime = date.format('DD/MM/YYYY HH:mm:ss');
+      return formattedDateTime;
+      
+    } else return 'none';
+  }
+
   download(logfile) {
-    console.log(logfile);
-
-
 
     this.adminApi.getOutputNKPLogsFile( logfile.name ).subscribe(response => {
       let downloadlink = this.adminApi.getOutputDownloadLinks(response.downloadlink);
-      console.log(downloadlink);
+     
       this.downloadService.downloadFile(downloadlink, logfile.name);
       //const newWindow = window.open( this.adminApi.getOutputDownloadLinks(response.downloadlink), '_blank');
     }, error => {

@@ -13,6 +13,7 @@ export class GenerateNkpLogsDialogComponent implements OnInit {
 
   dateFrom:moment.Moment = moment().add(-1,"months");
   dateTo:moment.Moment = moment().add(1,"days");
+  emailNotification: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<GenerateNkpLogsDialogComponent>,
@@ -29,11 +30,13 @@ export class GenerateNkpLogsDialogComponent implements OnInit {
       params: {
         //yyyy.MM.dd
         dateFrom: this.dateFrom.format('YYYY.MM.DD'),
-        dateTo:  this.dateTo.format('YYYY.MM.DD')
+        dateTo:  this.dateTo.format('YYYY.MM.DD'),
+
+        emailNotification: this.emailNotification
+
       }
     }).subscribe(response => {
       this.dialogRef.close("scheduled");
-      //this.ui.showInfoSnackBar("Proces Generování logů pro období "+this.dateFrom.format('YYYY.MM.DD')+ " - "+this.dateTo.format('YYYY.MM.DD')+" naplánován");
       this.ui.showInfoSnackBar('snackbar.success.scheduleNkpLogsProcess', {value1: this.dateFrom.format('YYYY.MM.DD'), value2: this.dateTo.format('YYYY.MM.DD')});
     }, error => {
       console.log(error);

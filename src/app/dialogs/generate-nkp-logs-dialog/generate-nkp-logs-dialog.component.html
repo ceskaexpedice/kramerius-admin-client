@@ -14,7 +14,8 @@
       <mat-datepicker #to></mat-datepicker>
     </mat-form-field>
   </div>
-  <mat-checkbox class="example-margin">{{ 'desc.sendByEmail' | translate }}</mat-checkbox>
+  <mat-checkbox class="example-margin" [checked]="emailNotification" (change)="emailNotification = !emailNotification" >{{ 'desc.sendByEmail' | translate }}</mat-checkbox>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button color="primary" (click)="scheduleNkpLogsProcess()">{{ 'button.schedule' | translate }}</button>
