@@ -172,7 +172,10 @@ export class ObjectComponent implements OnInit {
         this.loadingCollections = false;
         this.ui.showErrorSnackBar("Nepodařil načíst seznam sbírek obsahujích tento objekt")
       });
+
+
       // PEDRO -> chybel popisek, vzal jsem z collection.component.ts
+      // PS: TODO -  Remove 
       this.collectionsService.getCollection(this.pid).subscribe((collection: Collection) => {
         this.collection = collection;
       }, (error) => {
@@ -199,6 +202,10 @@ export class ObjectComponent implements OnInit {
 
   correctPid() {
     return this.pid && this.pidIsCorrect;
+  }
+
+  getCollectionDefaultName(col) {
+    return col.names['cze']
   }
 
   changeView(view: string) {
@@ -333,7 +340,9 @@ export class ObjectComponent implements OnInit {
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
-      message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
+      //message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
+      message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1:  collectionName }) + '?',
+
       btn1: {
         label: this.ui.getTranslation('button.yes'),
         value: 'yes',
@@ -492,7 +501,7 @@ export class ObjectComponent implements OnInit {
   }
 
   removeItemFromAnotherCollection(superCollection, collection, event) {
-    this.onRemoveItemFromCollection(superCollection.id, superCollection.getName(), collection['id'], collection.getName());
+    this.onRemoveItemFromCollection(superCollection.id,  this.getCollectionDefaultName( superCollection) , collection['id'], collection.getName());
     event.preventDefault(); 
     event.stopPropagation();
   }

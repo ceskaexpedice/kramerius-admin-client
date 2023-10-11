@@ -505,7 +505,7 @@
   "modal": {
     "removeFromThisCollection": {
       "title": "Odebrání ze sbírky",
-      "message": "Opravdu chcete odebrat <strong>{{value1}}</strong> ze sbírky <strong>{{value2}}</strong>"
+      "message": "Opravdu chcete odebrat objekt ze sbírky <strong>{{value1}}</strong>"
     },
     "removeCollection": {
       "title": "Smazání sbírky",

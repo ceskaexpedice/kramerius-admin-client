@@ -121,7 +121,7 @@
                 </div>
                 <div fxFlex class="app-left">
                   <mat-card-title>
-                    <mat-icon *ngIf="allowCollectionEdit(superCollection['id'])">link</mat-icon>{{ superCollection.getName() }}
+                    <mat-icon *ngIf="allowCollectionEdit(superCollection['id'])">link</mat-icon>{{ getCollectionDefaultName( superCollection) }}
                   </mat-card-title>
                   <mat-card-subtitle>{{ superCollection.getDescription() }}</mat-card-subtitle>
                 </div>

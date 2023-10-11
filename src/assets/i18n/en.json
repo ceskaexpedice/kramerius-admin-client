@@ -505,7 +505,7 @@
   "modal": {
     "removeFromThisCollection": {
       "title": "Removal from collection",
-      "message": "Do you really want to remove <strong>{{value1}}</strong> from the collection <strong>{{value2}}</strong>"
+      "message": "Do you really want to remove this object from the collection <strong>{{value1}}</strong>"
     },
     "removeCollection": {
       "title": "Deleting a collection",
