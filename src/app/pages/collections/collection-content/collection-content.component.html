@@ -15,11 +15,13 @@
 				<mat-card-title [routerLink]="allowEdit(item['pid']) && item['model'] == 'collection' ?  ['/collections/content/', item['pid']] : null" [class.app-cursor-pointer]="allowEdit(item['pid']) && item['model'] == 'collection'"><mat-icon *ngIf="allowEdit(item['pid']) && item['model'] == 'collection'">link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
 				<mat-card-subtitle>{{ 'desc.'+item['model'] | translate }}</mat-card-subtitle>
 			</div>
+			<!--
 			<div class="app-right">
 				<a (click)="setRepresentativePage(item['pid'])" [class.app-color-disabled]="!isRepresentativePageSelected[item['pid']]" [matTooltip]="!isRepresentativePageSelected[item['pid']] ? ('button.setThisPageAsRepresentative' | translate) : ('button.representativePage' | translate)">
 					<mat-icon>image</mat-icon>
 				</a>
 			</div>
+			-->
 		</mat-card-header>
 	</mat-card>
 </div>	

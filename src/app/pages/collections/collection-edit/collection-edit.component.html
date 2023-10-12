@@ -5,9 +5,11 @@
     <input matInput [(ngModel)]="name" (ngModelChange)="onModelLangChange('names',$event)" >
   </mat-form-field>
   <div fxLayout="row" fxLayoutGap="24px">
+    <!--
     <div>
       <img onerror="this.src='assets/img/no-image.png'" src="https://k7.inovatika.dev/search/api/client/v7.0/items/uuid:e6283a8b-59d7-11ed-a39a-001b63bd97ba/image/thumb" class="app-representative-page" [matTooltip]="'button.representativePage' | translate">
     </div>
+    -->
     <div fxFlex>
       <mat-form-field class="app-w-100">
         <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
