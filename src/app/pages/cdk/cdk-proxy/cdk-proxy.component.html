@@ -36,7 +36,7 @@
     <ng-container matColumnDef="showMapping">
       <th mat-header-cell *matHeaderCellDef>{{ 'desc.showMapping' | translate }}</th>
       <td mat-cell *matCellDef="let lib">
-        <a [matTooltip]="'desc.showMapping' | translate">
+        <a (click)="showMappingDialog(lib.code)" [matTooltip]="'desc.showMapping' | translate">
           <mat-icon>open_in_browser</mat-icon>
         </a>
       </td>

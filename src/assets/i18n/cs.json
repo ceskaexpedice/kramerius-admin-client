@@ -1064,6 +1064,9 @@
     "creationDate": "Datum vytvoření",
     "listOfGeneratedLogsInDirectories": "Seznam vygenerovaných logů v adresáří",
     "sendByEmail": "Poslat emailem",
-    "showMapping": "Zobrazit mapování"
+    "showMapping": "Zobrazit mapování",
+    "mappingTable": "Tabulka mapování",
+    "providingDk": "Poskytující DK",
+    "nameAndLinkToTheRegistry": "Název a odkaz do registru"
   }
 }

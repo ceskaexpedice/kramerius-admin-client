@@ -1064,6 +1064,9 @@
     "creationDate": "Creation date",
     "listOfGeneratedLogsInDirectories": "List of generated logs in directories",
     "sendByEmail": "Send by e-mail",
-    "showMapping": "Show mapping"
+    "showMapping": "Show mapping",
+    "mappingTable": "Mapping table",
+    "providingDk": "Providing DK",
+    "nameAndLinkToTheRegistry": "Name and link to the registry"
   }
 }
