@@ -1063,6 +1063,7 @@
     "fileName": "Jméno souboru",
     "creationDate": "Datum vytvoření",
     "listOfGeneratedLogsInDirectories": "Seznam vygenerovaných logů v adresáří",
-    "sendByEmail": "Poslat emailem"
+    "sendByEmail": "Poslat emailem",
+    "showMapping": "Zobrazit mapování"
   }
 }

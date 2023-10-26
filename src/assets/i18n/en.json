@@ -1063,6 +1063,7 @@
     "fileName": "File name",
     "creationDate": "Creation date",
     "listOfGeneratedLogsInDirectories": "List of generated logs in directories",
-    "sendByEmail": "Send by e-mail"
+    "sendByEmail": "Send by e-mail",
+    "showMapping": "Show mapping"
   }
 }
