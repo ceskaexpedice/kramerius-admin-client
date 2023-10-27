@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let library of mappingTableData">
+      <ng-container *ngFor="let library of mappingTableData; let last = last">
         <ng-container *ngIf="library.code === data">
           <tr *ngFor="let item of library.items">
             <td>{{ item.sigla }}</td>
@@ -18,6 +18,9 @@
           </tr>
         </ng-container>
       </ng-container>
+      <tr *ngIf="!getResult(data)">
+        <td colspan="3" class="app-color-info">{{ 'alert.noResults' | translate }}</td>
+      </tr>
     </tbody>
   </table>
 </mat-dialog-content>

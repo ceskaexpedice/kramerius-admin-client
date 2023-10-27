@@ -312,7 +312,8 @@
       "2": "Přihlášení se nezdařilo",
       "3": "Vypršela platnost tokenu"
     },
-    "notAllowed": "Na tuto akci nemáte dostatečná oprávnění!"
+    "notAllowed": "Na tuto akci nemáte dostatečná oprávnění!",
+    "noResults": "Nebyly nalezeny žádné výsledky"
   },
   "batch": {
     "PLANNED": "Naplánováno",

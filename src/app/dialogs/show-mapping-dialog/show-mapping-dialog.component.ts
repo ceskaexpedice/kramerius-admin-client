@@ -9,6 +9,8 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class ShowMappingDialogComponent implements OnInit {
 
+  public isResult: boolean;
+
   public mappingTableData: Array<any> = [
     {
       code: "ndk",
@@ -94,6 +96,10 @@ export class ShowMappingDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+  }
+
+  getResult(val) {
+    return this.isResult = this.mappingTableData.some(e => e.code === val);
   }
 
 }

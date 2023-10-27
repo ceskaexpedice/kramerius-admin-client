@@ -312,7 +312,8 @@
       "2": "Login failed",
       "3": "Token has expired"
     },
-    "notAllowed": "You do not have sufficient permissions for this action!"
+    "notAllowed": "You do not have sufficient permissions for this action!",
+    "noResults": "There are no results"
   },
   "batch": {
     "PLANNED": "Scheduled",
