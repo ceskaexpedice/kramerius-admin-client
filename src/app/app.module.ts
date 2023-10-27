@@ -100,6 +100,7 @@ import { AboutDialogComponent } from './dialogs/about-dialog/about-dialog.compon
 import { AddNewParameterDialogComponent } from './dialogs/add-new-parameter-dialog/add-new-parameter-dialog.component';
 import { UserInfoDialogComponent } from './dialogs/user-info-dialog/user-info-dialog.component';
 import { FileDownloadService } from './services/file-download';
+import { ShowMappingDialogComponent } from './dialogs/show-mapping-dialog/show-mapping-dialog.component';
 //import { FileSaverModule } from 'ngx-filesaver';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -184,7 +185,8 @@ export function createCustomMatPaginatorIntl(
     ScheduleRemoveTheVisibilityFlagDialogComponent,
     AboutDialogComponent,
     AddNewParameterDialogComponent,
-    UserInfoDialogComponent
+    UserInfoDialogComponent,
+    ShowMappingDialogComponent
   ],
   imports: [
     BrowserModule,

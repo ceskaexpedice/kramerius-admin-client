@@ -129,11 +129,15 @@ a {
 }
 
 .app-text-center {
-  text-align: center;
+  text-align: center !important;
 }
 
 .app-text-lowercase {
   text-transform: lowercase;
+}
+
+.app-text-uppercase {
+  text-transform: uppercase;
 }
 
 .app-va-middle {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ShowMappingDialogComponent } from 'src/app/dialogs/show-mapping-dialog/show-mapping-dialog.component';
 import { Library } from 'src/app/models/cdk.library.model';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 
@@ -255,12 +257,15 @@ export class CdkProxyComponent implements OnInit {
   cdkMock:any ={"svkhk":{"status":true},"kkp":{"status":true},"svkul":{"status":true},"knav":{"status":true},"uzei":{"status":true},"inovatika":{"status":true},"mzk":{"status":true}};
 
 
-  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'switch'];
+  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'showMapping', 'switch'];
 
   dataSource:Library[];
 
   register:Map<String, any> = new Map();
-  constructor(private cdkApi: CdkApiService) { 
+  constructor(
+    private cdkApi: CdkApiService,
+    public dialog: MatDialog
+    ) { 
   }
 
   ngOnInit(): void {
@@ -342,6 +347,14 @@ export class CdkProxyComponent implements OnInit {
     var element = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, element);
+  }
+
+  showMappingDialog(code: any) {
+    const dialogRef = this.dialog.open(ShowMappingDialogComponent, {
+      data: code,
+      panelClass: 'app-show-mapping-dialog',
+      width: '800px'
+    });
   }
 
 }
