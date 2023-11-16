@@ -467,7 +467,8 @@
     "languageForEditing": "Language for editing",
     "representativePage": "Representative page",
     "setThisPageAsRepresentative": "Set this page as representative",
-    "reHarvestSpecificPids": "Re-harvest specific pids"
+    "reHarvestSpecificPids": "Re-harvest specific pids",
+    "migrateCollections": "Migrate collections"
   },
   "field": {
     "public": "Public",
@@ -797,6 +798,9 @@
     "scheduleReHarvestSpecificPids": {
       "title": "Object reharvest",
       "message": "popis happy - doplnit"
+    },
+    "scheduleMigrateCollections": {
+      "title": "Migrate collections"
     }
   },
   "snackbar": {
@@ -1078,6 +1082,8 @@
     "showMapping": "Show mapping",
     "mappingTable": "Mapping table",
     "providingDk": "Providing DK",
-    "nameAndLinkToTheRegistry": "Name and link to the registry"
+    "nameAndLinkToTheRegistry": "Name and link to the registry",
+    "migrationOfCollectionsFromK5": "Migration of collections from k5",
+    "completeTheInstance": "Complete the instance"
   }
 }

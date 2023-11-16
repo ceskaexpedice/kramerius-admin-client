@@ -467,7 +467,8 @@
     "languageForEditing": "Jazyk pro editaci",
     "representativePage": "Reprezentativni stránka",
     "setThisPageAsRepresentative": "Nastavit tuto stránku jako reprezentativní",
-    "reHarvestSpecificPids": "Znovu sklidit konkrétní pidy"
+    "reHarvestSpecificPids": "Znovu sklidit konkrétní pidy",
+    "migrateCollections": "Migrovat sbírky"
   },
   "field": {
     "public": "Veřejné",
@@ -797,6 +798,9 @@
     "scheduleReHarvestSpecificPids": {
       "title": "Reharvest objektu",
       "message": "popis happy - doplnit"
+    },
+    "scheduleMigrateCollections": {
+      "title": "Migrovat sbírky"
     }
   },
   "snackbar": {
@@ -1078,6 +1082,8 @@
     "showMapping": "Zobrazit mapování",
     "mappingTable": "Tabulka mapování",
     "providingDk": "Poskytující DK",
-    "nameAndLinkToTheRegistry": "Název a odkaz do registru"
+    "nameAndLinkToTheRegistry": "Název a odkaz do registru",
+    "migrationOfCollectionsFromK5": "Migrace sbírek z k5",
+    "completeTheInstance": "Vyplňte instanci"
   }
 }

@@ -22,6 +22,7 @@ import { ScheduleChangeFlagOnLicenseDialogComponent } from 'src/app/dialogs/sche
 import { ScheduleRemoveTheVisibilityFlagDialogComponent } from 'src/app/dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 import { AppSettings } from 'src/app/services/app-settings';
 import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
+import { ScheduleMigrateCollectionsDialogComponent } from 'src/app/dialogs/schedule-migrate-collections-dialog/schedule-migrate-collections-dialog.component';
 
 @Component({
   selector: 'app-repository',
@@ -286,6 +287,13 @@ export class RepositoryComponent implements OnInit {
     const dialogRef = this.dialog.open(ScheduleReHarvestSpecificPidsDialogComponent, {
       width: '600px',
       panelClass: 'app-schedule-re-harvest-specific-pids-dialog'
+    });
+  }
+
+  openScheduleMigrateCollectionsDialog() {
+    const dialogRef = this.dialog.open(ScheduleMigrateCollectionsDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-migrate-collections-dialog'
     });
   }
 

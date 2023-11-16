@@ -97,10 +97,18 @@
 							</div>
 
 							<mat-divider [inset]="true"></mat-divider>
-							<div class="app-mt-4">
+							<div class="app-mt-4 app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.changeFlagOnLicense' | translate }}</h3>
 								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleChangeFlagOnLicenseDialog()" color="primary" class="app-mr-2">{{ 'button.changeFlagOnLicense' | translate }}</button>
+								</span>
+							</div>
+
+							<mat-divider [inset]="true"></mat-divider>
+							<div class="app-mt-4">
+								<h3 class="app-mt-0">{{ 'desc.migrationOfCollectionsFromK5' | translate }}</h3>
+								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleMigrateCollectionsDialog()" color="primary" class="app-mr-2">{{ 'button.migrateCollections' | translate }}</button>
 								</span>
 							</div>
 						</ng-container>
