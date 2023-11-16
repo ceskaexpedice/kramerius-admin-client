@@ -20,6 +20,9 @@ import { ScheduleSyncWithSdnntComponent } from 'src/app/dialogs/schedule-sync-wi
 import { ScheduleStartTheSdnntReviewProcessComponent } from 'src/app/dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
 import { ScheduleChangeFlagOnLicenseDialogComponent } from 'src/app/dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
 import { ScheduleRemoveTheVisibilityFlagDialogComponent } from 'src/app/dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
+import { AppSettings } from 'src/app/services/app-settings';
+import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
+import { ScheduleMigrateCollectionsDialogComponent } from 'src/app/dialogs/schedule-migrate-collections-dialog/schedule-migrate-collections-dialog.component';
 
 @Component({
   selector: 'app-repository',
@@ -38,7 +41,8 @@ export class RepositoryComponent implements OnInit {
     private adminApi: AdminApiService,
     private auth: AuthService,
     private local: LocalStorageService,
-    private router: Router
+    private router: Router,
+    public settings: AppSettings
   ) { }
 
   ngOnInit() {
@@ -276,11 +280,21 @@ export class RepositoryComponent implements OnInit {
       this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.2-4', {value: result});
     } else {
       this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.more', {value: result});
-    }
-  });
+    }})
+  }
 
+  openScheduledReHarvestSpecificPidsDialog() {
+    const dialogRef = this.dialog.open(ScheduleReHarvestSpecificPidsDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-re-harvest-specific-pids-dialog'
+    });
+  }
 
-
+  openScheduleMigrateCollectionsDialog() {
+    const dialogRef = this.dialog.open(ScheduleMigrateCollectionsDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-migrate-collections-dialog'
+    });
   }
 
 }

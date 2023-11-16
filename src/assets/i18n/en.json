@@ -145,6 +145,11 @@
         "title": "Bulk data editing",
         "desc": "Based on the embedded PIDs, you can perform the following actions: set public/private, add license, remove license. You can also Delete Objects (Smart) or Delete Objects (Low Level).",
         "icon": "edit_note"
+      },
+      "cdk": {
+        "title": "Cdk",
+        "desc": "Center for the Study of Democracy and Culture",
+        "icon": "local_library"
       }
     },
     "statistics": {
@@ -461,7 +466,15 @@
     "addNewValue": "Add new value",
     "languageForEditing": "Language for editing",
     "representativePage": "Representative page",
-    "setThisPageAsRepresentative": "Set this page as representative"
+    "setThisPageAsRepresentative": "Set this page as representative",
+    "reHarvestSpecificPids": "Re-harvest specific pids",
+    "migrateCollections": "Migrate collections",
+    "createBackup": "Create a backup",
+    "restoreFromBackup": "Restore from backup",
+    "createAndGoToProcessList": "Create and go to process list",
+    "createAndStayInCollections": "Create and stay in collections",
+    "restoreAndGoToProcessList": "Restore and go to process list",
+    "restoreAndStayInCollections": "Restore and stay in collections"
   },
   "field": {
     "public": "Public",
@@ -787,6 +800,19 @@
     },
     "userInfo": {
       "title": "User info"
+    },
+    "scheduleReHarvestSpecificPids": {
+      "title": "Object reharvest",
+      "message": "popis happy - doplnit"
+    },
+    "scheduleMigrateCollections": {
+      "title": "Migrate collections"
+    },
+    "createCollectionBackup": {
+      "title": "Creating a backup of selected collections"
+    },
+    "restoreFromCollectionBackup": {
+      "title": "Recovery of collections for advances"
     }
   },
   "snackbar": {
@@ -866,7 +892,8 @@
       "changeItemsOrderSaved": "The change in order of items has been saved",
       "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started",
       "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started",
-      "setRepresentativePage": "Setup of the representative page was successful"
+      "setRepresentativePage": "Setup of the representative page was successful",
+      "startTheProcess": "The process was successfully scheduled"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -925,7 +952,8 @@
       "deleteSelectedCollections": "An error occurred while deleting the selected collections",
       "scheduleChangeItemsOrder": "An error occurred while saving the item order change",
       "scheduleDeleteSelectedItemsFromCollection": "An error occurred while deleting the selected items from the collection",
-      "anErrorOccurredWhileSaving": "An error occurred while saving"
+      "anErrorOccurredWhileSaving": "An error occurred while saving",
+      "startTheProcess": "An error occurred while starting the process"
     },
     "alert": {
       "tokenTimeExpireInfo": "You will be automatically logged out of the application in 2 minutes"
@@ -1068,6 +1096,9 @@
     "showMapping": "Show mapping",
     "mappingTable": "Mapping table",
     "providingDk": "Providing DK",
-    "nameAndLinkToTheRegistry": "Name and link to the registry"
+    "nameAndLinkToTheRegistry": "Name and link to the registry",
+    "migrationOfCollectionsFromK5": "Migration of collections from k5",
+    "completeTheInstance": "Complete the instance",
+    "nameOfBackup": "Name of backup"
   }
 }

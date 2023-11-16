@@ -145,6 +145,11 @@
         "title": "Hromadné úpravy dat",
         "desc": "Na základě vložených PIDů můžete provádět tyto akce: nastavit public/private, přidat licenci, odebrat licenci. Dále můžete smazat objekty (chytře) nebo  Smazat objekty (nízkoúrovňově).",
         "icon": "edit_note"
+      },
+      "cdk": {
+        "title": "Cdk",
+        "desc": "Centrum pro studium demokracie a kultury",
+        "icon": "local_library"
       }
     },
     "statistics": {
@@ -461,7 +466,15 @@
     "addNewValue": "Přidat novou hodnotu",
     "languageForEditing": "Jazyk pro editaci",
     "representativePage": "Reprezentativni stránka",
-    "setThisPageAsRepresentative": "Nastavit tuto stránku jako reprezentativní"
+    "setThisPageAsRepresentative": "Nastavit tuto stránku jako reprezentativní",
+    "reHarvestSpecificPids": "Znovu sklidit konkrétní pidy",
+    "migrateCollections": "Migrovat sbírky",
+    "createBackup": "Vytvořit zálohu",
+    "restoreFromBackup": "Obnovit ze zálohy",
+    "createAndGoToProcessList": "Vytvořit a přejít na seznam procesů",
+    "createAndStayInCollections": "Vytvořit a zůstat ve sbírkách",
+    "restoreAndGoToProcessList": "Obnovit a přejít na seznam procesů",
+    "restoreAndStayInCollections": "Obnovit a zůstat ve sbírkách"
   },
   "field": {
     "public": "Veřejné",
@@ -787,6 +800,19 @@
     },
     "userInfo": {
       "title": "Informace o uživateli"
+    },
+    "scheduleReHarvestSpecificPids": {
+      "title": "Reharvest objektu",
+      "message": "popis happy - doplnit"
+    },
+    "scheduleMigrateCollections": {
+      "title": "Migrovat sbírky"
+    },
+    "createCollectionBackup": {
+      "title": "Vytvoření zálohy vybraných sbírek"
+    },
+    "restoreFromCollectionBackup": {
+      "title": "Obnova sbírek za zálohy"
     }
   },
   "snackbar": {
@@ -866,7 +892,8 @@
       "changeItemsOrderSaved": "Změna pořadí položek byla uložena",
       "scheduleChangeItemsOrder": "Proces uložení změny pořadí položek byl úspěšně spuštěn",
       "scheduleDeleteSelectedItemsFromCollection": "Proces smazaní vybraných položek ze sbírky byl úspěšně spuštěn",
-      "setRepresentativePage": "Nastavení reprezentativní stránky proběhlo úspěšně"
+      "setRepresentativePage": "Nastavení reprezentativní stránky proběhlo úspěšně",
+      "startTheProcess": "Proces byl úspěšně naplánován"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -925,7 +952,8 @@
       "deleteSelectedCollections": "Došlo k chybě při smazaní vybraných sbírek",
       "scheduleChangeItemsOrder": "Došlo k chybě při ukládání změny pořadí položek",
       "scheduleDeleteSelectedItemsFromCollection": "Došlo k chybě při smazaní vybraných položek ze sbírky",
-      "anErrorOccurredWhileSaving": "Došlo k chybě při ukládání"
+      "anErrorOccurredWhileSaving": "Došlo k chybě při ukládání",
+      "startTheProcess": "Došlo k chybě při spuštění procesu"
     },
     "alert": {
       "tokenTimeExpireInfo": "Za 2 minuty dojde k automatickému odhlášení z aplikace"
@@ -1068,6 +1096,9 @@
     "showMapping": "Zobrazit mapování",
     "mappingTable": "Tabulka mapování",
     "providingDk": "Poskytující DK",
-    "nameAndLinkToTheRegistry": "Název a odkaz do registru"
+    "nameAndLinkToTheRegistry": "Název a odkaz do registru",
+    "migrationOfCollectionsFromK5": "Migrace sbírek z k5",
+    "completeTheInstance": "Vyplňte instanci",
+    "nameOfBackup": "Název zálohy"
   }
 }

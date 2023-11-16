@@ -1,0 +1,14 @@
+<form #f="ngForm">
+	<mat-progress-bar class="progress-bar"></mat-progress-bar>
+	<h2 mat-dialog-title>{{ 'modal.scheduleMigrateCollections.title' | translate }}</h2>
+	<mat-dialog-content>
+    <mat-form-field class="app-w-100" formControl>
+      <mat-label>{{ 'desc.completeTheInstance' | translate }}</mat-label>
+      <input type="text" matInput [placeholder]="'desc.completeTheInstance' | translate">
+    </mat-form-field>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-flat-button color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+		<button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+	</mat-dialog-actions>
+</form>

@@ -12,7 +12,7 @@
           <a mat-tab-link (click)="changeView('repository-management')" [active]="view == 'repository-management'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.repository.repository-management.title' | translate }}</a>
           <a *ngIf="!notAllowed" mat-tab-link (click)="changeView('exports')" [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'sites.repository.exports.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('bulk-data-editing')"  [active]="view == 'bulk-data-editing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'sites.repository.bulk-data-editing.title' | translate }}</a>
-					<!-- to delete after test <a mat-tab-link (click)="changeView('statistics')"  [active]="view == 'statistics'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'sites.repository.statistics.title' | translate }}</a> -->
+					<a mat-tab-link (click)="changeView('cdk')" [active]="view == 'cdk'" *ngIf="settings.cdkMode"><mat-icon class="material-icons-outlined">local_library</mat-icon>{{ 'sites.repository.cdk.title' | translate }}</a>
         </nav>
       </div>
     </div>
@@ -97,12 +97,26 @@
 							</div>
 
 							<mat-divider [inset]="true"></mat-divider>
-							<div class="app-mt-4">
+							<div class="app-mt-4 app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.changeFlagOnLicense' | translate }}</h3>
 								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleChangeFlagOnLicenseDialog()" color="primary" class="app-mr-2">{{ 'button.changeFlagOnLicense' | translate }}</button>
 								</span>
 							</div>
+
+							<mat-divider [inset]="true"></mat-divider>
+							<div class="app-mt-4">
+								<h3 class="app-mt-0">{{ 'desc.migrationOfCollectionsFromK5' | translate }}</h3>
+								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleMigrateCollectionsDialog()" color="primary" class="app-mr-2">{{ 'button.migrateCollections' | translate }}</button>
+								</span>
+							</div>
+						</ng-container>
+
+						<ng-container *ngIf="view == 'cdk'">
+							<span>
+								<button mat-flat-button (click)="openScheduledReHarvestSpecificPidsDialog()" color="primary" class="app-mr-2" >{{ 'button.reHarvestSpecificPids' | translate }}</button>
+							</span>				
 						</ng-container>
 					</mat-card-content>
         </mat-card>

@@ -17,6 +17,8 @@ import { DeleteSelectedCollectionsDialogComponent } from 'src/app/dialogs/delete
 import { UIService } from 'src/app/services/ui.service';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { AppSettings } from 'src/app/services/app-settings';
+import { CreateCollectionBackupDialogComponent } from 'src/app/dialogs/create-collection-backup-dialog/create-collection-backup-dialog.component';
+import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
 
 @Component({
   selector: 'app-collections',
@@ -391,5 +393,19 @@ export class CollectionsComponent implements OnInit {
   setLang(lang) {
     this.lang = lang;
     this.reload();
+  }
+
+  openCreateCollectionBackupDialog() {
+    const dialogRef = this.dialog.open(CreateCollectionBackupDialogComponent, {
+      width: '600px',
+      panelClass: 'app-create-collection-backup-dialog'
+    });
+  }
+
+  openRestoreFromCollectionBackupDialog() {
+    const dialogRef = this.dialog.open(RestoreFromCollectionBackupDialogComponent, {
+      width: '800px',
+      panelClass: 'app-restore-from-collection-backup-dialog'
+    });
   }
 }

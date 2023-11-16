@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ 'modal.createCollectionBackup.title' | translate }}</h2>
+<mat-dialog-content>
+  <mat-form-field class="app-w-100" formControl>
+    <mat-label>{{ 'desc.nameOfBackup' | translate }}</mat-label>
+    <input type="text" matInput [placeholder]="'desc.nameOfBackup' | translate">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" type="submit" (click)="createCollectionBackup('processes')">{{ 'button.createAndGoToProcessList' | translate }}</button>
+  <button mat-flat-button color="primary" type="submit" (click)="createCollectionBackup('collections')">{{ 'button.createAndStayInCollections' | translate }}</button>
+  <button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+</mat-dialog-actions>

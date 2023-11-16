@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'repository/repository-management', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/exports', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/cdk', component: RepositoryComponent, canActivate: [AuthGuard] },
   /* to delete after testing { path: 'repository/statistics', component: RepositoryComponent, canActivate: [AuthGuard] }, */
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },
