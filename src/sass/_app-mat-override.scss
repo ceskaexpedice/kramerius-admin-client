@@ -512,3 +512,29 @@
     color: $app-color-lightnes;
   }
 }
+
+// radio button
+.mat-radio-button {
+  &:not(:last-child) {
+    @extend .app-mr-4;
+  }
+
+  .mat-radio-container {
+    width: $app-mat-radio-button-size;
+    height: $app-mat-radio-button-size;
+
+    .mat-radio-outer-circle,
+    .mat-radio-inner-circle {
+      width: $app-mat-radio-button-size;
+      height: $app-mat-radio-button-size;
+    }
+
+    .mat-radio-ripple {
+      display: none !important;
+      width: calc($app-mat-radio-button-size * 2);
+      height: calc($app-mat-radio-button-size * 2);
+      left: calc(50% - #{$app-mat-radio-button-size});
+      top: calc(50% - #{$app-mat-radio-button-size});
+    }
+  }
+}

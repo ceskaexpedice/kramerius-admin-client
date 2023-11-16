@@ -103,6 +103,8 @@ import { FileDownloadService } from './services/file-download';
 import { ShowMappingDialogComponent } from './dialogs/show-mapping-dialog/show-mapping-dialog.component';
 import { ScheduleReHarvestSpecificPidsDialogComponent } from './dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 import { ScheduleMigrateCollectionsDialogComponent } from './dialogs/schedule-migrate-collections-dialog/schedule-migrate-collections-dialog.component';
+import { CreateCollectionBackupDialogComponent } from './dialogs/create-collection-backup-dialog/create-collection-backup-dialog.component';
+import { RestoreFromCollectionBackupDialogComponent } from './dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
 //import { FileSaverModule } from 'ngx-filesaver';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -190,7 +192,9 @@ export function createCustomMatPaginatorIntl(
     UserInfoDialogComponent,
     ShowMappingDialogComponent,
     ScheduleReHarvestSpecificPidsDialogComponent,
-    ScheduleMigrateCollectionsDialogComponent
+    ScheduleMigrateCollectionsDialogComponent,
+    CreateCollectionBackupDialogComponent,
+    RestoreFromCollectionBackupDialogComponent
   ],
   imports: [
     BrowserModule,
