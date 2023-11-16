@@ -27,6 +27,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   @Input() state;
   @Input() items;
   @Input() lang;
+  @Input() contentView;
 
   @Input() collectionActions:Map<string,string[]>;
   @Input() selection:SelectionModel<any>;

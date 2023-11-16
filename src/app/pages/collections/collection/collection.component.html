@@ -17,8 +17,8 @@
           </mat-menu>
         </div>
       </div>
-      <div>
-        <nav mat-tab-nav-bar>
+      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+        <nav mat-tab-nav-bar fxFlex>
           <a mat-tab-link (click)="changeView('detail')" [active]="view == 'detail'">
             <mat-icon class="material-icons-outlined">visibility</mat-icon>{{ 'sites.collections.detail.title' | translate }}
           </a>
@@ -34,6 +34,12 @@
             <span class="app-badge app-count">{{ superCollections?.length }}</span>
           </a>
         </nav>
+        <div *ngIf="view == 'content'">
+          <mat-radio-group [(ngModel)]="contentView">
+            <mat-radio-button value="object" checked="true">{{ 'desc.displayObjects' | translate }}</mat-radio-button>
+            <mat-radio-button value="cuttings">{{ 'desc.displayCuttings' | translate }}</mat-radio-button>
+          </mat-radio-group>
+        </div>
       </div>
     </div>
     <div fxFlex class="app-oa-y">
@@ -50,7 +56,7 @@
             <span class="app-pipe" *ngIf="collection && collection.getDescription(langTranslated[0])"></span>
             <span *ngIf="collection" [matTooltip]="collection.getDescription(langTranslated[0])" class="app-desc">{{collection.getDescription(langTranslated[0]) }}</span>
           </div>
-          <div *ngIf="view === 'content'">
+          <div *ngIf="view === 'content' && contentView === 'object'">
             <button mat-flat-button color="primary" (click)="onAddItemsToThisCollection()" class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
             <!-- drag&drop ordering -->
             <button [disabled]="orderings.length == 0" mat-flat-button color="primary" (click)="saveReorderingOfItems()" class="app-mr-2">{{ 'button.saveOrderChange' | translate }}</button>
@@ -59,6 +65,9 @@
           </div>
           <div *ngIf="view === 'context'">
             <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
+          </div>
+          <div *ngIf="view === 'content' && contentView === 'cuttings'">
+            <button mat-flat-button color="primary" (click)="openAddCuttingDialog()">{{ 'button.addCutting' | translate }}</button>
           </div>
         </mat-card>
 
@@ -72,7 +81,7 @@
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view == 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
-            <app-collection-content  [selection]="selection" [collection]="collection" [state]="state" [items]="items" (dragEvent)="changeOrderings($event)" [collectionActions]="collectionActions" (updated)="onUpdated()" [lang]="lang"></app-collection-content>
+            <app-collection-content  [selection]="selection" [collection]="collection" [state]="state" [items]="items" (dragEvent)="changeOrderings($event)" [collectionActions]="collectionActions" (updated)="onUpdated()" [lang]="lang" [contentView]="contentView"></app-collection-content>
           </mat-card>
 
           <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">

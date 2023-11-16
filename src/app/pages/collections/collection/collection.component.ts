@@ -20,6 +20,7 @@ import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
+import { AddCuttingDialogComponent } from 'src/app/dialogs/add-cutting-dialog/add-cutting-dialog.component';
 
 @Component({
   selector: 'app-collection',
@@ -33,6 +34,7 @@ export class CollectionComponent implements OnInit {
   state = 'none';
   availableCollections: any[];
   view: string;
+  contentView: string = 'object';
 
   /** vsechny polozky ve sbirce  */
   items: any[] = []; 
@@ -366,6 +368,13 @@ export class CollectionComponent implements OnInit {
 
 //    this.langTranslated = this.isoConvert.isTranslatable(this.langSelected) ? this.isoConvert.convert(this.langSelected) : [this.langSelected];
 //    this.changeLang.emit(this.langTranslated);
+  }
+
+  openAddCuttingDialog() {
+    const dialogRef = this.dialog.open(AddCuttingDialogComponent, {
+      width: '600px',
+      panelClass: 'app-add-cutting-dialog'
+    });
   }
 
 }

@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{ 'modal.addCutting.title' | translate }}</h2>
+<mat-dialog-content>
+  <mat-form-field class="app-w-100" formControl>
+    <mat-label>{{ 'desc.cuttingName' | translate }}</mat-label>
+    <input type="text" matInput [placeholder]="'desc.cuttingName' | translate">
+  </mat-form-field>
+  <mat-form-field class="app-w-100" formControl>
+    <mat-label>{{ 'desc.cuttingDesc' | translate }}</mat-label>
+    <input type="text" matInput [placeholder]="'desc.cuttingDesc' | translate">
+  </mat-form-field>
+  <mat-form-field class="app-w-100" formControl>
+    <mat-label>{{ 'desc.cuttingUrl' | translate }}</mat-label>
+    <input type="text" matInput [placeholder]="'desc.cuttingUrl' | translate">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" type="submit">{{ 'button.add' | translate }}</button>
+  <button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+</mat-dialog-actions>
