@@ -101,6 +101,7 @@ import { AddNewParameterDialogComponent } from './dialogs/add-new-parameter-dial
 import { UserInfoDialogComponent } from './dialogs/user-info-dialog/user-info-dialog.component';
 import { FileDownloadService } from './services/file-download';
 import { ShowMappingDialogComponent } from './dialogs/show-mapping-dialog/show-mapping-dialog.component';
+import { ScheduleReHarvestSpecificPidsDialogComponent } from './dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 //import { FileSaverModule } from 'ngx-filesaver';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -186,7 +187,8 @@ export function createCustomMatPaginatorIntl(
     AboutDialogComponent,
     AddNewParameterDialogComponent,
     UserInfoDialogComponent,
-    ShowMappingDialogComponent
+    ShowMappingDialogComponent,
+    ScheduleReHarvestSpecificPidsDialogComponent
   ],
   imports: [
     BrowserModule,

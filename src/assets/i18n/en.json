@@ -145,6 +145,11 @@
         "title": "Bulk data editing",
         "desc": "Based on the embedded PIDs, you can perform the following actions: set public/private, add license, remove license. You can also Delete Objects (Smart) or Delete Objects (Low Level).",
         "icon": "edit_note"
+      },
+      "cdk": {
+        "title": "Cdk",
+        "desc": "Center for the Study of Democracy and Culture",
+        "icon": "local_library"
       }
     },
     "statistics": {
@@ -461,7 +466,8 @@
     "addNewValue": "Add new value",
     "languageForEditing": "Language for editing",
     "representativePage": "Representative page",
-    "setThisPageAsRepresentative": "Set this page as representative"
+    "setThisPageAsRepresentative": "Set this page as representative",
+    "reHarvestSpecificPids": "Re-harvest specific pids"
   },
   "field": {
     "public": "Public",
@@ -787,6 +793,10 @@
     },
     "userInfo": {
       "title": "User info"
+    },
+    "scheduleReHarvestSpecificPids": {
+      "title": "Object reharvest",
+      "message": "popis happy - doplnit"
     }
   },
   "snackbar": {

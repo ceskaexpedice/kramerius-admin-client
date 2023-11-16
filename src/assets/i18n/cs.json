@@ -145,6 +145,11 @@
         "title": "Hromadné úpravy dat",
         "desc": "Na základě vložených PIDů můžete provádět tyto akce: nastavit public/private, přidat licenci, odebrat licenci. Dále můžete smazat objekty (chytře) nebo  Smazat objekty (nízkoúrovňově).",
         "icon": "edit_note"
+      },
+      "cdk": {
+        "title": "Cdk",
+        "desc": "Centrum pro studium demokracie a kultury",
+        "icon": "local_library"
       }
     },
     "statistics": {
@@ -461,7 +466,8 @@
     "addNewValue": "Přidat novou hodnotu",
     "languageForEditing": "Jazyk pro editaci",
     "representativePage": "Reprezentativni stránka",
-    "setThisPageAsRepresentative": "Nastavit tuto stránku jako reprezentativní"
+    "setThisPageAsRepresentative": "Nastavit tuto stránku jako reprezentativní",
+    "reHarvestSpecificPids": "Znovu sklidit konkrétní pidy"
   },
   "field": {
     "public": "Veřejné",
@@ -787,6 +793,10 @@
     },
     "userInfo": {
       "title": "Informace o uživateli"
+    },
+    "scheduleReHarvestSpecificPids": {
+      "title": "Reharvest objektu",
+      "message": "popis happy - doplnit"
     }
   },
   "snackbar": {
