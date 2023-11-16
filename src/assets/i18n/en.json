@@ -1099,6 +1099,7 @@
     "nameAndLinkToTheRegistry": "Name and link to the registry",
     "migrationOfCollectionsFromK5": "Migration of collections from k5",
     "completeTheInstance": "Complete the instance",
-    "nameOfBackup": "Name of backup"
+    "nameOfBackup": "Name of backup",
+    "addKeyword": "Add keyword"
   }
 }
