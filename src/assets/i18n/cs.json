@@ -474,7 +474,8 @@
     "createAndGoToProcessList": "Vytvořit a přejít na seznam procesů",
     "createAndStayInCollections": "Vytvořit a zůstat ve sbírkách",
     "restoreAndGoToProcessList": "Obnovit a přejít na seznam procesů",
-    "restoreAndStayInCollections": "Obnovit a zůstat ve sbírkách"
+    "restoreAndStayInCollections": "Obnovit a zůstat ve sbírkách",
+    "addCutting": "Přidat výstřižek"
   },
   "field": {
     "public": "Veřejné",
@@ -813,6 +814,9 @@
     },
     "restoreFromCollectionBackup": {
       "title": "Obnova sbírek za zálohy"
+    },
+    "addCutting": {
+      "title": "Přidání výstřižku"
     }
   },
   "snackbar": {
@@ -1099,6 +1103,12 @@
     "nameAndLinkToTheRegistry": "Název a odkaz do registru",
     "migrationOfCollectionsFromK5": "Migrace sbírek z k5",
     "completeTheInstance": "Vyplňte instanci",
-    "nameOfBackup": "Název zálohy"
+    "nameOfBackup": "Název zálohy",
+    "addKeyword": "Přidat klíčové slovo",
+    "displayCuttings": "Zobrazit výstřižky",
+    "displayObjects": "Zobrazit objekty",
+    "cuttingName": "Název výstřižku",
+    "cuttingDesc": "Popis výstřižku",
+    "cuttingUrl": "Url výstřižku"
   }
 }

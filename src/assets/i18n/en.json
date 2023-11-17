@@ -474,7 +474,8 @@
     "createAndGoToProcessList": "Create and go to process list",
     "createAndStayInCollections": "Create and stay in collections",
     "restoreAndGoToProcessList": "Restore and go to process list",
-    "restoreAndStayInCollections": "Restore and stay in collections"
+    "restoreAndStayInCollections": "Restore and stay in collections",
+    "addCutting": "Add cutting"
   },
   "field": {
     "public": "Public",
@@ -813,6 +814,9 @@
     },
     "restoreFromCollectionBackup": {
       "title": "Recovery of collections for advances"
+    },
+    "addCutting": {
+      "title": "Adding a cutting"
     }
   },
   "snackbar": {
@@ -1099,6 +1103,12 @@
     "nameAndLinkToTheRegistry": "Name and link to the registry",
     "migrationOfCollectionsFromK5": "Migration of collections from k5",
     "completeTheInstance": "Complete the instance",
-    "nameOfBackup": "Name of backup"
+    "nameOfBackup": "Name of backup",
+    "addKeyword": "Add keyword",
+    "displayCuttings": "Display cuttings",
+    "displayObjects": "Display objects",
+    "cuttingName": "Cutting name",
+    "cuttingDesc": "Cutting description",
+    "cuttingUrl": "Cutting url"
   }
 }

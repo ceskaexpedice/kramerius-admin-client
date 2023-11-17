@@ -105,6 +105,7 @@ import { ScheduleReHarvestSpecificPidsDialogComponent } from './dialogs/schedule
 import { ScheduleMigrateCollectionsDialogComponent } from './dialogs/schedule-migrate-collections-dialog/schedule-migrate-collections-dialog.component';
 import { CreateCollectionBackupDialogComponent } from './dialogs/create-collection-backup-dialog/create-collection-backup-dialog.component';
 import { RestoreFromCollectionBackupDialogComponent } from './dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
+import { AddCuttingDialogComponent } from './dialogs/add-cutting-dialog/add-cutting-dialog.component';
 //import { FileSaverModule } from 'ngx-filesaver';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -194,7 +195,8 @@ export function createCustomMatPaginatorIntl(
     ScheduleReHarvestSpecificPidsDialogComponent,
     ScheduleMigrateCollectionsDialogComponent,
     CreateCollectionBackupDialogComponent,
-    RestoreFromCollectionBackupDialogComponent
+    RestoreFromCollectionBackupDialogComponent,
+    AddCuttingDialogComponent
   ],
   imports: [
     BrowserModule,

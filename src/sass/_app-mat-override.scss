@@ -537,4 +537,8 @@
       top: calc(50% - #{$app-mat-radio-button-size});
     }
   }
+
+  .mat-radio-label-content {
+    font-size: 14px;
+  }
 }
