@@ -7,7 +7,8 @@ import { delay, map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
-import { File } from '../models/tree.model';
+import { File  as TreeFile} from '../models/tree.model';
+
 import { License } from '../models/license.model';
 import { Role } from '../models/roles.model';
 import { ConditionParam } from '../models/condition-param.model';
@@ -154,12 +155,24 @@ export class AdminApiService {
     )
   }
 
+
+  uploadCollectionThumbnail(collectionPid:string, file:File):Observable<any> {
+    let formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    console.log("Form data "+formData);
+    let tf = formData.get('file');
+    console.log("TF "+tf);
+
+    return this.post(`/collections/${collectionPid}/image/thumb`, formData);
+  }  
+  
   createCollection(collection: Collection): Observable<any> {
     const payload = {
       names: collection.names,
       descriptions: collection.descriptions,
       contents:collection.contents,
-      standalone: collection.standalone
+      standalone: collection.standalone,
+      thumbnail:collection.thumbnail
     }
     return this.post(`/collections`, payload);
   }
@@ -209,7 +222,9 @@ export class AdminApiService {
       names: collection.names,
       descriptions: collection.descriptions,
       contents: collection.contents,
-      standalone: collection.standalone
+      keywords:collection.keywords,
+      standalone: collection.standalone,
+      author: collection.author
     }
     return this.put(`/collections/${collection.id}`, payload);
   }
@@ -225,6 +240,20 @@ export class AdminApiService {
   addItemsToCollection(collectionPid: string, itemsPids: string[]): Observable<Object> {
     return this.post(`/collections/${collectionPid}/items`, itemsPids);
   }
+
+  addCuttingItemToCollection(collectionPid, cutting:any) : Observable<Object> {
+    return this.post(`/collections/${collectionPid}/add_clip_item`, cutting);
+  }
+
+  removeCuttingItemToCollection(collectionPid, cutting:any) : Observable<Object> {
+    return this.put(`/collections/${collectionPid}/delete_clip_item`, cutting);
+  }
+
+  removeBatchCuttingItemsToCollection(collectionPid, cutting:any[]) : Observable<Object> {
+    return this.put(`/collections/${collectionPid}/delete_batch_clipitems`, {"clipitems":cutting});
+  }
+
+
 
   removeItemFromCollection(collectionPid: string, itemPid: string): Observable<Object> {
     return this.delete(`/collections/${collectionPid}/items/${itemPid}`);
@@ -273,7 +302,7 @@ export class AdminApiService {
     )
   }
 
-  getImportFiles(type: string, path: string): Observable<File[]> {
+  getImportFiles(type: string, path: string): Observable<TreeFile[]> {
     console.log('type', type);
     let fullPath = '/files/';
     if (type == 'foxml') {
@@ -298,12 +327,21 @@ export class AdminApiService {
     )
   }
 
-  //output-data-dir-for_nkplogs
   getOutputNKPLogsDirFiles(): Observable<any> {
     return this.get(`/files/output-data-dir-for_nkplogs/`).pipe(
     )
   }
 
+  //output-data-dir-for_nkplogs
+  getOutputCollectionsBackupsDirFiles(): Observable<any> {
+    return this.get(`/files/output-data-dir-for_collectionsbackup/`).pipe(
+    )
+  }
+
+  getOutputCollectionsBackupsFile(file): Observable<any> {
+      return this.get(`/files/output-data-dir-for_collectionsbackup/`+file+"?generatedownloads=true").pipe(
+    )
+  }
 
   getOutputNKPLogsFile(file): Observable<any> {
     return this.get(`/files/output-data-dir-for_nkplogs/`+file+"?generatedownloads=true").pipe(

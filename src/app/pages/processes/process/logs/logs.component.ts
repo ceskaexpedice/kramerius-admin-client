@@ -36,6 +36,14 @@ export class LogsComponent implements OnInit {
     this.reload();
   }
 
+  isSevereOrWarning(line) {
+    return line.indexOf('WARNING') || line.indexOf('SEVERE')
+  }
+
+  isInfoLine(line) {
+    return line.indexOf('INFO')
+  }
+
   reload() {
     const offset = this.pageIndex * this.pageSize;
     const limit = this.pageSize;

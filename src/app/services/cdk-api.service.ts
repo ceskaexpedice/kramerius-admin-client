@@ -60,6 +60,9 @@ export class CdkApiService {
         return this.doGet('/api/admin/v7.0/connected',{}).pipe(map(response => Library.libsFromJson(response)));
     }
 
+    mapping(code): Observable<any> {
+      return this.doGet(`/api/admin/v7.0/connected/${code}/associations`,{}).pipe();
+    }
 
     timestamps(code): Observable<any[]> {
       //http://localhost:8080/search/api/admin/v7.0/connected/knav/timestamps

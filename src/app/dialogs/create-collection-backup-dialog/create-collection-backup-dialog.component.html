@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <mat-form-field class="app-w-100" formControl>
     <mat-label>{{ 'desc.nameOfBackup' | translate }}</mat-label>
-    <input type="text" matInput [placeholder]="'desc.nameOfBackup' | translate">
+    <input type="text" [(ngModel)]="backupname" matInput [placeholder]="'desc.nameOfBackup' | translate">
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

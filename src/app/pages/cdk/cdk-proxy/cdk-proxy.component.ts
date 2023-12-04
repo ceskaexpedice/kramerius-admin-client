@@ -349,9 +349,12 @@ export class CdkProxyComponent implements OnInit {
     arr.splice(toIndex, 0, element);
   }
 
-  showMappingDialog(code: any) {
+  showMappingDialog(lib: any) {
     const dialogRef = this.dialog.open(ShowMappingDialogComponent, {
-      data: code,
+      data: {
+        "code": lib.code,
+        "register":this.register
+      },
       panelClass: 'app-show-mapping-dialog',
       width: '800px'
     });

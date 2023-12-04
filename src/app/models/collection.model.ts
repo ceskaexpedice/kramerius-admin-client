@@ -1,16 +1,22 @@
 export class Collection {
 
+  // thumbnail :  "thumb"
   id: string;
   names:any = {};
   descriptions:any = {};
   contents:any = {};
+  keywords:any={};
+  author:string = "";
+  thumbnail:"none";
 
   standalone: boolean = false;
 
   createdAt: Date;
   modifiedAt: Date;
-
+  // objects
   items: string[];
+  // clippings
+  clipitems:any[];
 
   constructor() {
   }
@@ -23,45 +29,17 @@ export class Collection {
     return this.descriptions[lang];
   }
 
-  // static fromSolrJson(json): Collection {
-  //   const collection = new Collection();
-  //   collection.id = json['pid'];
-  //   collection.name = json['title.search'];
-  //   collection.description = json['collection.desc'];
-  //   if (json['created']) {
-  //     collection.createdAt = new Date(json['created']);
-  //   }
-  //   if (json['modified']) {
-  //     collection.modifiedAt = new Date(json['modified']);
-  //   }
-  //   return collection;
-  // }
-
-  // static fromSolrJsonArray(json): Collection[] {
-  //   const items = [];
-  //   for (const obj of json) {
-  //     items.push(Collection.fromSolrJson(obj));
-  //   }
-  //   return items;
-  // }
 
   static fromAdminApiJson(json): Collection {
-    //console.log('json', json);
     const collection = new Collection();
     collection.id = json['pid'];
-    //collection.name_cze = json['name_cze'] || "";
-    //collection.name_eng = json['name_eng'] || "";
     collection.names = json['names'] || {};
 
-    //collection.description_cze = json['description_cze'];
-    //collection.description_eng = json['description_eng'];
     collection.descriptions = json['descriptions'] || {};
+    collection.keywords = json['keywords'] || {};
 
-
-    //collection.content_cze = json['content_cze'] || "";
-    //collection.content_eng = json['content_eng'] || "";
     collection.contents = json['contents'] || {};
-
+    collection.author = json['author'] || "";
 
     collection.standalone = json['standalone'];
     if (json['created']) {
@@ -70,7 +48,13 @@ export class Collection {
     if (json['modified']) {
       collection.modifiedAt = new Date(json['modified']);
     }
+    if (json["thumbnail"]) {
+      collection.thumbnail = json['thumbnail'] || 'none';
+    }
     collection.items = json['items'];
+
+    collection.clipitems = json['clippingitems'] || [];
+
     return collection;
   }
 

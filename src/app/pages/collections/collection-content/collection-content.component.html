@@ -4,7 +4,7 @@
 	<mat-card class="app-view-rights app-view-hover" *ngFor="let item of noncollectionItems" [ngClass]="{'item-collection':item['model'] == 'collection'}" cdkDrag>
 		<mat-card-header fxLayout="row" fxLayoutGap="16px">
 			<div>
-				<mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? selection.toggle(item) : null" [checked]="selection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
+				<mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? itemSelection.toggle(item) : null" [checked]="itemSelection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
 			</div>
 			
 			<div *ngIf="getThumb(item['pid'])">
@@ -27,21 +27,35 @@
 </div>	
 
 <mat-card class="app-view-rights app-view-hover" *ngIf="contentView === 'cuttings'">
-	<mat-card-header fxLayout="row" fxLayoutGap="16px">
+	<mat-card-header fxLayout="row" fxLayoutGap="16px" *ngFor="let item of clippingItems">
+
 		<div>
+			<mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? cuttingsSelection.toggle(item) : null" [checked]="cuttingsSelection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
+		</div>
+
+		<div *ngIf="!item['thumb']">
 			<img [src]="'assets/img/no-image.png'" onerror="this.src='assets/img/no-image.png'" />
 		</div>
+		<div *ngIf="item['thumb']">
+			<img [src]="appSettings.clientApiBaseUrl + '/items/' + collection.id + '/collection/cuttings/image/' + item['thumb']" onerror="this.src='assets/img/no-image.png'" />
+		  </div>
 		<div fxFlex class="app-left">
-			<mat-card-title>Title - blalalalalalal asdfa asdfas asdfas</mat-card-title>
-			<mat-card-subtitle>Description - xxxxxxxx</mat-card-subtitle>
+			<mat-card-title>{{item["name"]}}</mat-card-title>
+			<mat-card-subtitle>{{item["description"]}}</mat-card-subtitle>
 			<div class="app-mb-1"></div>
-			<em><small>https://k7.inovatika.dev/view/uuid:058326bc-a5c5-4f8e-a8b0-6a65aa01e63d?page=uuid:5397eae1-991c-4371-8077-76b004a439aa</small></em>
+			<em><small> <a [href]="item['url']" target="_blank"> {{item["url"]}}</a></small></em>
 		</div>
 	</mat-card-header>
 </mat-card>
 
-<mat-card *ngIf="(collectionItems?.length || noncollectionItems?.length) === 0" class="app-color-info app-text-center">
+<mat-card *ngIf="(collectionItems?.length || noncollectionItems?.length) === 0 && contentView === 'object'" class="app-color-info app-text-center">
 	<mat-card-content fxLayout="row" fxLayoutAlign="center center">
 		<mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.content' | translate }}
+	</mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(clippingItems?.length || clippingItems?.length) === 0 && contentView === 'cuttings'" class="app-color-info app-text-center">
+	<mat-card-content fxLayout="row" fxLayoutAlign="center center">
+		<mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.cutters' | translate }}
 	</mat-card-content>
 </mat-card>

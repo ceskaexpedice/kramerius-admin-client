@@ -15,6 +15,7 @@ import { delay, map, tap } from 'rxjs/operators';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
+import { AppSettings } from 'src/app/services/app-settings';
 
 @Component({
   selector: 'app-collection-content',
@@ -30,7 +31,9 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   @Input() contentView;
 
   @Input() collectionActions:Map<string,string[]>;
-  @Input() selection:SelectionModel<any>;
+
+  @Input() itemSelection:SelectionModel<any>;
+  @Input() cuttingsSelection:SelectionModel<any>;
 
   isThumb: boolean;
   
@@ -44,10 +47,12 @@ export class CollectionContentComponent implements OnInit, OnChanges {
 
   collectionItems;
   noncollectionItems;
+  clippingItems;
 
   public isRepresentativePageSelected: any = [];
 
   constructor(
+    public appSettings: AppSettings,
     private collectionsService: CollectionsService,
     private ui: UIService,
     private dialog: MatDialog,
@@ -62,12 +67,15 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.collectionItems = [];
     this.noncollectionItems =  this.items;
+    this.clippingItems = this.collection.clipitems;
   }
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.items) {
       this.collectionItems = [];
       this.noncollectionItems =  changes.items.currentValue;
+      this.clippingItems = this.collection.clipitems;
     }
   }
 
@@ -96,7 +104,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
 
   // Whether the number of selected elements matches the total number of rows
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
+    const numSelected = this.itemSelection.selected.length;
     const numRows = this.items.length;
     return numSelected === numRows;
   }
@@ -104,9 +112,9 @@ export class CollectionContentComponent implements OnInit, OnChanges {
     // Selects all rows if they are not all selected; otherwise clear selection.
     masterToggle() {
       this.isAllSelected() ?
-          this.selection.clear() :
+          this.itemSelection.clear() :
           this.items.forEach(itm => {
-              this.selection.select(itm);
+              this.itemSelection.select(itm);
           });
     }
   
@@ -131,7 +139,6 @@ export class CollectionContentComponent implements OnInit, OnChanges {
     }
     return false;
   }
-
 
 
   onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPids: string[], itemName) {

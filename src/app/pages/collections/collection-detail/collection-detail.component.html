@@ -1,5 +1,6 @@
 <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'" class="app-mn-4"></mat-progress-bar>
 <div class="app-p-4">
+
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.collectionName'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
     <input matInput [(ngModel)]="name" disabled>
@@ -8,18 +9,27 @@
     <mat-label>{{ 'desc.shortDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
     <textarea matInput [(ngModel)]="description" rows="4" disabled></textarea>
   </mat-form-field>
+
+  
+  <div fxLayout="row" fxLayoutGap="24px">
+    <img onerror="this.src='assets/img/no-image.png'" [src]="getThumb(collection)" class="app-representative-page" [matTooltip]="'button.representativePage' | translate">
+    <p> Reprezentativní obrázek  </p>
+  </div>
+
+
   <div fxLayout="row" fxLayoutGap="24px" fxLayoutAlign="start center">
     <mat-form-field fxFlex="300px">
       <mat-label>{{ 'desc.keywords'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
       <input matInput disabled>
     </mat-form-field>
-    <div fxFlex>
-      <span class="app-badge app-mr-1">zlin</span><span class="app-badge app-mr-1">bratislava</span><span class="app-badge app-mr-1">myslivost a berani rohy</span>
-    </div>
+
+    <div *ngIf="getKeywords()" fxFlex>
+      <span  *ngFor="let keyword of getKeywords()"  class="app-badge app-mr-1 app-cursor-pointer">{{keyword}}</span>
   </div>
+  
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.author'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
-    <input matInput disabled>
+    <input matInput disabled [(ngModel)]="collection.author">
   </mat-form-field>
   <div class="app-w-100 app-mb-4">
     <div class="app-label app-mb-2">{{ 'desc.separateCollection'  | translate }}</div>

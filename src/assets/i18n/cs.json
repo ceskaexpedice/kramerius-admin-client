@@ -309,6 +309,7 @@
     "collections": {
       "noData": {
         "content": "Tato sbírka neobsahuje žádné objekty ani sbírky.",
+        "cutters": "Tato sbírka neobsahuje žádné výstřižky.",
         "context": "Tato sbírka není součástí žádné jiné sbírky."
       }
     },
@@ -518,6 +519,10 @@
     "indexationScheduledByIndexing": "Naplánováno <strong>{{value}}</strong> indexací"
   },
   "modal": {
+    "removeCuttersFromCollection": {
+      "title": "Odebrání výstřižků ze sbírky",
+      "message": "Opravdu chcete odebrat výstrižky ze sbírky"
+    },
     "removeFromThisCollection": {
       "title": "Odebrání ze sbírky",
       "message": "Opravdu chcete odebrat objekt ze sbírky <strong>{{value1}}</strong>"
@@ -804,7 +809,7 @@
     },
     "scheduleReHarvestSpecificPids": {
       "title": "Reharvest objektu",
-      "message": "popis happy - doplnit"
+      "message": "Znovu sklidit konkrétní objekty"
     },
     "scheduleMigrateCollections": {
       "title": "Migrovat sbírky"

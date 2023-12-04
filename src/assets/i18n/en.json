@@ -309,6 +309,7 @@
     "collections": {
       "noData": {
         "content": "This collection does not contain any objects or collections.",
+        "cutters": "This collection does not contain any cutters.",
         "context": "This collection is not part of any other collection."
       }
     },
@@ -518,6 +519,10 @@
     "indexationScheduledByIndexing": "Scheduled by <strong>{{value}}</strong> indexing"
   },
   "modal": {
+    "removeCuttersFromCollection": {
+      "title": "Removal clips from the collection",
+      "message": "Do you really want to remove  objects from the collection?"
+    },
     "removeFromThisCollection": {
       "title": "Removal from collection",
       "message": "Do you really want to remove this object from the collection <strong>{{value1}}</strong>"
@@ -804,7 +809,7 @@
     },
     "scheduleReHarvestSpecificPids": {
       "title": "Object reharvest",
-      "message": "popis happy - doplnit"
+      "message": "Reharvest object"
     },
     "scheduleMigrateCollections": {
       "title": "Migrate collections"

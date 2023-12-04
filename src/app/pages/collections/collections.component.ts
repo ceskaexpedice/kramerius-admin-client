@@ -19,6 +19,7 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { CreateCollectionBackupDialogComponent } from 'src/app/dialogs/create-collection-backup-dialog/create-collection-backup-dialog.component';
 import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   selector: 'app-collections',
@@ -84,7 +85,11 @@ export class CollectionsComponent implements OnInit {
     private uiService: UIService,
     private isoConvert: IsoConvertService,
     private appSettings:AppSettings,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private ui: UIService,
+    private adminApi: AdminApiService,
+
+    ) { }
 
   ngOnInit() {
     this.query = "";
@@ -400,6 +405,38 @@ export class CollectionsComponent implements OnInit {
       width: '600px',
       panelClass: 'app-create-collection-backup-dialog'
     });
+
+    // this.routerLink = routerLink;
+
+
+    let toDelete:string[] = [];
+    this.dataSource.data.forEach(itm => {
+      if (this.selection.isSelected(itm)) {
+        toDelete.push(itm.id);
+      }
+    });
+    
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.routerLink) {
+        this.adminApi.scheduleProcess({
+          defid: 'backup-collections',
+          params: {
+            pidlist:toDelete,
+            backupname: result.backupname
+    
+          }
+        }).subscribe(response => {
+
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+          this.router.navigate([result.routerLink]))
+          this.ui.showInfoSnackBar('snackbar.success.startTheProcess');
+  
+        }, error => {
+          console.log(error);
+        });
+      }
+   });
   }
 
   openRestoreFromCollectionBackupDialog() {
@@ -407,5 +444,32 @@ export class CollectionsComponent implements OnInit {
       width: '800px',
       panelClass: 'app-restore-from-collection-backup-dialog'
     });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.routerLink) {
+        this.adminApi.scheduleProcess({
+          defid: 'restore-collections',
+          params: {
+            backupname: result.backupname
+          }
+        }).subscribe(response => {
+
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+          this.router.navigate([result.routerLink]))
+          this.ui.showInfoSnackBar('snackbar.success.startTheProcess');
+  
+        }, error => {
+          console.log(error);
+        });
+      }
+    });
+    // this.routerLink = routerLink;
+
+    // this.dialogRef.close(
+    //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    //   this.router.navigate([routerLink]))
+    // );
+
+    // this.ui.showInfoSnackBar('snackbar.success.startTheProcess');
+
   }
 }

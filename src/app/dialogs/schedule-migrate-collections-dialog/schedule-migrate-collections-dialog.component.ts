@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-schedule-migrate-collections-dialog',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleMigrateCollectionsDialogComponent implements OnInit {
 
-  constructor() { }
+  k5instance="";
+
+  constructor(public dialogRef: MatDialogRef<ScheduleMigrateCollectionsDialogComponent>) { }
 
   ngOnInit(): void {
+  }
+
+  migrate() {
+    this.dialogRef.close({ k5: this.k5instance });
   }
 
 }

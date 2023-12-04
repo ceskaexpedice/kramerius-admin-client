@@ -257,7 +257,6 @@ export class StatisticsComponent implements OnInit {
 
     this.adminApi.getOutputNKPLogsDirFiles().subscribe(response => {
       this.logfiles = [];
-      //TODO: neresi se prochazeni do hloubky, ale berou se jen adresare prvni urovne
       response.files.forEach(file => {
           this.logfiles.push(file);
       });

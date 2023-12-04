@@ -29,30 +29,38 @@ import { AddCuttingDialogComponent } from 'src/app/dialogs/add-cutting-dialog/ad
 })
 export class CollectionComponent implements OnInit {
 
-  /** kolekce  */
+  /** Collection object  */
   collection: Collection;
   state = 'none';
   availableCollections: any[];
+  /** tab name */ 
   view: string;
+  // contains object or cuttings
   contentView: string = 'object';
 
-  /** vsechny polozky ve sbirce  */
+  /** all items in this collection  */
   items: any[] = []; 
+  /** all cuttings in the collection */
+  cuttings:any[] = [];
+
   /** orderings  */
   orderings: any[] = [];
 
   superCollections: Collection[] = []; //sbirky obsahujici tuto sbirku
-
+  // rights 
   collectionActions:Map<string,string[]> = new Map();
-
+  /** collection id  */
   collectionId: string;
 
   selectedAllCollections: boolean = false;
 
   public isItemChildDraged: boolean;
 
-  // item selection model 
-  public selection = new SelectionModel<any>(true, []);
+  /** selection model for items - object select box  */ 
+  public itemSelection = new SelectionModel<any>(true, []);
+  /** selection model for cuttings - cuttins select box  */
+  public cuttingsSelection = new SelectionModel<any>(true, []);
+
   // all configured languages
   public languages = this.appSettings.languages;
 
@@ -90,7 +98,8 @@ export class CollectionComponent implements OnInit {
     //console.log('loading data for ' + collectionId)
     this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
       this.collection = collection;
-      //this.clientApi
+      //cuttings          
+      this.cuttings = this.collection.clipitems;
       
       this.clientApi.getStructure(collectionId).subscribe((response)=> {
         let children = response['children'];
@@ -98,19 +107,23 @@ export class CollectionComponent implements OnInit {
         let fosterChildren = children['foster'].map(obj=> obj['pid']);
         
         this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
+          // items
           this.items = res.filter(item => this.collection.items.includes(item['pid']))
-          //this.items = this.items.filter(item = > fosterChildren.)
           this.items.sort((a, b) => {
             const indexA = fosterChildren.indexOf(a['pid']);
             const indexB = fosterChildren.indexOf(b['pid']);
             return indexA - indexB;
           });
 
+
+
           //this.view = this.local.getStringProperty('collection.view');
           this.view = this.router.url.replace('/collections/', '').replace('/' + this.collectionId, '');
           this.state = 'success';
-          this.selection.clear();
-  
+
+          this.itemSelection.clear();
+          this.cuttingsSelection.clear();
+
           // deti 
           this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid']), null).subscribe((d:any) => {
             Object.keys(d).forEach((k)=> {
@@ -157,28 +170,43 @@ export class CollectionComponent implements OnInit {
     this.router.navigate(['/collections/' + view + '/', this.collectionId]);
   }
 
-  /** Vraci true, pokud je vse vybrano */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
+  /** Returns true if all items are selected */
+  isAllItemsSelected() {
+    const numSelected = this.itemSelection.selected.length;
     const numRows = this.items.length;
     return numSelected === numRows;
   }
   
-  /** Vybere nebo odvybere vsechny polozky */
+  /** Returns true if all cuttings are selected */
+  isAllCuttingsSelected() {
+    const numSelected = this.cuttingsSelection.selected.length;
+    const numRows = this.cuttings.length;
+    return numSelected === numRows;
+
+  }
+  
+  /** Select or deselect all items */
   masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
+    this.isAllItemsSelected() ?
+        this.itemSelection.clear() :
         this.items.forEach(itm => {
-            this.selection.select(itm);
+            this.itemSelection.select(itm);
         });
   }
 
-  /** udalost pro update dat; relaod from server  */  
+  /** Select or deselect all cuttings */
+  masterCuttingToggle() {
+    this.isAllCuttingsSelected() ? this.cuttingsSelection.clear() : this.cuttings.forEach(itm=> {
+      this.cuttingsSelection.select(itm);
+    });
+  }
+
+  /** Update event - data referesh  */  
   onUpdated() {
     this.loadData(this.collection.id);
   }
 
-  /** udalost pro mazani cele sbirky */
+  /** Delete event -  Delete whole collection */
   onDelete() {
     if (!this.collection) {
       return;
@@ -269,12 +297,71 @@ export class CollectionComponent implements OnInit {
 
   }
 
-  // delete one item
+  deleteSelectedCuttingsFromCollection() {
+    let toDelete:string[] = [];
+    this.cuttings.forEach(itm => {
+      if (this.cuttingsSelection.isSelected(itm)) {
+        toDelete.push(itm);
+      }
+    });
+
+    const data: SimpleDialogData = {
+      title: this.ui.getTranslation('modal.removeCuttersFromCollection.title'),
+      message: this.ui.getTranslation('modal.removeCuttersFromCollection.message'),
+      btn1: {
+        label: this.ui.getTranslation('button.yes'),
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: this.ui.getTranslation('button.no'),
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.collectionsService.removeBatchCuttingsFromCollection(this.collection.id, toDelete).subscribe((collections: any[]) => {
+          this.loadData(this.collection.id);
+      });
+    });
+
+
+    // this.collectionsService.removeBatchItemsFromCollection(colid, todelete).subscribe( () => {
+    //   this.dialogRef.close('deleted');
+    //   this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`); 
+    // });
+
+
+    // const dialogRef2 = this.dialog.open(DeleteSelectedItemsFromCollectionComponent, {
+    //   data: {
+    //     "pid":this.collection.id,
+    //     "todelete":toDelete
+    //   },
+    //   width: '600px',
+    //   panelClass: 'app-add-items-to-collection'
+    // });
+    // dialogRef2.afterClosed().subscribe(result => {
+    //   if (result === 'deleted') {
+    //     this.itemSelection.clear();        
+    //     this.items = this.items.filter(item =>  {
+    //       let pid = item['pid'];
+    //       return !toDelete.includes(pid)
+    //     });
+    //   }
+    // });
+
+  }
+
   deleteSelectedItemsFromCollection() {
- 
     let toDelete:string[] = [];
     this.items.forEach(itm => {
-      if (this.selection.isSelected(itm)) {
+      if (this.itemSelection.isSelected(itm)) {
         toDelete.push(itm.pid);
       }
     });
@@ -289,7 +376,7 @@ export class CollectionComponent implements OnInit {
     });
     dialogRef2.afterClosed().subscribe(result => {
       if (result === 'deleted') {
-        this.selection.clear();        
+        this.itemSelection.clear();        
         this.items = this.items.filter(item =>  {
           let pid = item['pid'];
           return !toDelete.includes(pid)
@@ -372,9 +459,38 @@ export class CollectionComponent implements OnInit {
 
   openAddCuttingDialog() {
     const dialogRef = this.dialog.open(AddCuttingDialogComponent, {
+      data:{
+        collection: this.collection
+      },
       width: '600px',
       panelClass: 'app-add-cutting-dialog'
     });
+    
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'added') {
+        this.ui.showInfoSnackBar(`snackbar.success.addThisCollectionToAnotherCollection`);
+        this.loadData(this.collection.id)
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar("snackbar.error.addThisCollectionToAnotherCollection");
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      }
+    });
+  }
+
+
+  getAllItemsSizeTitle() {
+    if (this.items || this.cuttings) {
+      if (this.items.length && this.cuttings.length) {
+        return this.items.length +"/"+this.cuttings.length;
+      } else if (this.cuttings.length) {
+        return "0/"+this.cuttings.length;
+      } else if (this.items.length) {
+        return this.items.length;
+      }
+    } 
+    return "0";
   }
 
 }

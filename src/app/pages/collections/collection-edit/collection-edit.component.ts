@@ -8,6 +8,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateNewCollectionDialogComponent } from 'src/app/dialogs/create-new-collection-dialog/create-new-collection-dialog.component';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
+import { ClientApiService } from 'src/app/services/client-api.service';
 
 @Component({
   selector: 'app-collection-edit',
@@ -25,12 +26,17 @@ export class CollectionEditComponent implements OnInit {
     toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'],
   };
 
+  showDeleteIcon:string = '';
+
   collection: Collection;
   collectionName: string;
   mode = 'none';
   state = 'none';
+  author='';
 
   //test ='testovacimodel'
+
+  keyword:string;
 
   name:string;
   description:string;
@@ -50,6 +56,7 @@ export class CollectionEditComponent implements OnInit {
     private ui: UIService,
     private router: Router,
     private collectionsService: CollectionsService,
+    private clientService: ClientApiService,
     private isoConvert: IsoConvertService,
     private dialog: MatDialog) {
   }
@@ -88,6 +95,7 @@ export class CollectionEditComponent implements OnInit {
     this.description = '';
     this.content = '';
     this.standalone = false;
+    this.author = '';
 
     if (this.collection) {
       this.langs.forEach(l => {
@@ -101,6 +109,9 @@ export class CollectionEditComponent implements OnInit {
           this.content = this.collection.contents[l];
         }
       });
+      
+      this.author = this.collection.author;
+
       this.standalone = this.collection.standalone;
     }
   }
@@ -128,6 +139,82 @@ export class CollectionEditComponent implements OnInit {
   onStandaloChange(std:boolean) {
     this.collection.standalone = std;
   }
+
+  onAuthorChange(auth:string) {
+    this.collection.author = auth;
+  }
+
+  reloadtimestamp:number;
+
+  getThumb(col) {
+    if (col) {
+      if (this.reloadtimestamp) {
+        return this.clientService.getThumb(col.id)+"?reloadtimestap="+this.reloadtimestamp;
+
+      } else {
+        return this.clientService.getThumb(col.id);
+      }
+    }     
+    else return 'assets/img/no-image.png';
+  }
+
+  onFileSelected(event: any) {
+
+    const file: File = event.target.files[0];
+    if (file) {
+      this.collectionsService.uploadCollectionThumbnail(this.colId, file).subscribe(s=> {
+        this.reloadtimestamp = (new Date()).getTime();
+        console.log(s);
+      }, error => {
+        console.log(error);
+    }); 
+  }
+  // }).subscribe(response => {
+  //   this.dialogRef.close("scheduled");
+  //   this.ui.showInfoSnackBar('snackbar.success.changeFlagOnLicense');
+  // }, error => {
+  //   console.log(error);
+  //   this.dialogRef.close('error');
+  // });
+
+  }
+
+  getKeywords() {
+    let retvals = [];
+    if (this.collection) {
+      let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
+      langs.forEach(l=> {
+        if (this.collection.keywords[l]) {
+
+          this.collection.keywords[l].forEach(k=>{
+            retvals.push(k);
+          });
+        }
+      });
+    }
+    return retvals;
+  }
+
+
+  newKeyword() {
+
+    let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
+    langs.forEach(l=> {
+
+      if (!this.collection.keywords[l]) {
+        this.collection.keywords[l] = [];
+      }
+  
+      if (this.keyword) {
+        this.collection.keywords[l].push(this.keyword);
+        this.keyword = '';
+      }
+    });
+
+  }
+
+  
+
 
   onSave() {
 
@@ -167,5 +254,10 @@ export class CollectionEditComponent implements OnInit {
     this.delete.emit();
   }
 
-
+  deleteKeyword(keyword: string) {
+    let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
+    langs.forEach(l=> {
+      this.collection.keywords[l] = this.collection.keywords[l].filter(item => item !== keyword);
+    });
+  }
 }

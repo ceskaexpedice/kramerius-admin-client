@@ -26,6 +26,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 })
 export class ObjectComponent implements OnInit {
 
+
   view: string;
   routeView: string;
   pid: string;

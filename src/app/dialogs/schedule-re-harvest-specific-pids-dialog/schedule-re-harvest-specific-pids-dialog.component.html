@@ -1,4 +1,4 @@
-<form #f="ngForm">
+<form #f="ngForm" (ngSubmit)="schedule(f.value)">
 	<mat-progress-bar></mat-progress-bar>
 	<h2 mat-dialog-title>{{ 'modal.scheduleReHarvestSpecificPids.title' | translate }}</h2>
 	<mat-dialog-content>
@@ -6,7 +6,7 @@
 		<div>
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
 				<mat-label>{{ 'desc.pids' | translate }}</mat-label>
-				<textarea [disabled]="false" matInput type="text" id="inputPids" name="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus></textarea>
+				<textarea [disabled]="false" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus></textarea>
 				<mat-icon matSuffix [matTooltip]="'button.loadPidsFromFile' | translate" class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" accept=".txt" />

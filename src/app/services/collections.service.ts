@@ -66,6 +66,10 @@ export class CollectionsService {
     return this.adminApi.addItemsToCollection(collectionPid, itemsPids);
   }
 
+  addCuttingtoColllection(collectionPid, cutting): Observable<Object> {
+    return this.adminApi.addCuttingItemToCollection(collectionPid, cutting);
+  }
+
   removeItemFromCollection(collectionPid: string, itemPid: string): Observable<Object> {
     return this.adminApi.removeItemFromCollection(collectionPid, itemPid);
   }
@@ -74,5 +78,13 @@ export class CollectionsService {
     return this.adminApi.removeItemsBatchFromCollection(collectionPid, itemPids);
   }
 
+  removeBatchCuttingsFromCollection(collectionPid: string, cuttings:any[]): Observable<Object> { 
+    return this.adminApi.removeBatchCuttingItemsToCollection(collectionPid, cuttings);    
+  }
+
+
+  uploadCollectionThumbnail(collectionPid: string, file:File):Observable<any> {
+    return this.adminApi.uploadCollectionThumbnail(collectionPid, file);
+  }
 
 }

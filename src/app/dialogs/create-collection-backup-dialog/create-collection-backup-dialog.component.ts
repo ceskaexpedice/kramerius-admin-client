@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -10,12 +11,15 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class CreateCollectionBackupDialogComponent implements OnInit {
   
-  private routerLink: string = 'processes';
+  public routerLink: string = 'processes';
+  public backupname:string ='';
 
   constructor(
     public dialogRef: MatDialogRef<CreateCollectionBackupDialogComponent>,
     private router: Router,
-    private ui: UIService
+    private ui: UIService,
+    private adminApi: AdminApiService
+
   ) { }
 
   ngOnInit(): void {
@@ -23,16 +27,10 @@ export class CreateCollectionBackupDialogComponent implements OnInit {
 
 
   createCollectionBackup(routerLink) {
-    this.routerLink = routerLink;
-
-    this.dialogRef.close(
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate([routerLink]))
-    );
-
-    this.ui.showInfoSnackBar('snackbar.success.startTheProcess');
-    // todo error snack bar is ready as bellow
-    //this.ui.showErrorSnackBar('snackbar.error.startTheProcess');
+    this.dialogRef.close({
+       "routerLink": routerLink,
+       "backupname": this.backupname
+    });
   }
 
 }
