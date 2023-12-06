@@ -214,4 +214,10 @@ export class CollectionContentComponent implements OnInit, OnChanges {
     }
   }
 
+  generateLiveClip(url:string): string {
+      // Nahradíme hodnotu 'max' za '^!128,128'
+      const novaUrl = url.replace('/max/', '/^!128,128/');
+      return novaUrl;
+  }
+
 }
