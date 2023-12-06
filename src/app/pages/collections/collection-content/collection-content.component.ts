@@ -214,10 +214,32 @@ export class CollectionContentComponent implements OnInit, OnChanges {
     }
   }
 
+   parseClientUrl(inputUrl: string): { uuid: string, bb: string } | null {
+    const uuidRegex = /uuid:([a-fA-F0-9-]+)\?/;
+    const bbRegex = /bb=([^&]+)/;
+
+    const uuidMatch = inputUrl.match(uuidRegex);
+    const bbMatch = inputUrl.match(bbRegex);
+
+    if (uuidMatch && bbMatch) {
+        const uuid = uuidMatch[1];
+        const bb = bbMatch[1];
+
+        return { "uuid":"uuid:"+uuid, "bb":bb };
+    }
+
+    return null;
+}
+
   generateLiveClip(url:string): string {
-      // Nahradíme hodnotu 'max' za '^!128,128'
-      const novaUrl = url.replace('/max/', '/^!128,128/');
-      return novaUrl;
+    if (url.indexOf('bb=') > 0) {
+      let struct = this.parseClientUrl(url);
+      const nurl = this.appSettings.clientApiBaseUrl+`/items/${struct.uuid}/image/iiif/${struct.bb}/^!128,128/0/default.jpg`;
+      return nurl;
+    } else {
+      const nurl = url.replace('/max/', '/^!128,128/');
+      return nurl;
+    }
   }
 
 }
