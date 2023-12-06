@@ -74,9 +74,7 @@
             <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
           </div>
           <div *ngIf="view === 'content' && contentView === 'cuttings'">
-            <button mat-flat-button color="primary" (click)="openAddCuttingDialog()">{{ 'button.addCutting' | translate }}</button>
-
-            <!-- remove cutitem from collection -->
+            <button mat-flat-button color="primary" (click)="openAddCuttingDialog()" class="app-mr-2">{{ 'button.addCutting' | translate }}</button>
             <button [disabled]="!cuttingsSelection.hasValue()" mat-flat-button color="warn" (click)="deleteSelectedCuttingsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
           </div>
         </mat-card>

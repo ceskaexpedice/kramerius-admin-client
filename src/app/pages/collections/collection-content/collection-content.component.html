@@ -6,12 +6,10 @@
 			<div>
 				<mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? itemSelection.toggle(item) : null" [checked]="itemSelection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
 			</div>
-			
+
 			<div *ngIf="getThumb(item['pid'])">
 				<img [src]="getThumb(item['pid'])" onerror="this.src='assets/img/no-image.png'" />
 			</div>
-
-			
 
 			<div fxFlex class="app-left">
 				<mat-card-title [routerLink]="allowEdit(item['pid']) && item['model'] == 'collection' ?  ['/collections/content/', item['pid']] : null" [class.app-cursor-pointer]="allowEdit(item['pid']) && item['model'] == 'collection'"><mat-icon *ngIf="allowEdit(item['pid']) && item['model'] == 'collection'">link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
@@ -28,33 +26,34 @@
 	</mat-card>
 </div>	
 
-<mat-card class="app-view-rights app-view-hover" *ngIf="contentView === 'cuttings'">
-	<mat-card-header fxLayout="row" fxLayoutGap="16px" *ngFor="let item of clippingItems">
-
-		<div>
-			<mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? cuttingsSelection.toggle(item) : null" [checked]="cuttingsSelection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
-		</div>
-
-		<div *ngIf="!item['thumb']">
-			<img [src]="'assets/img/no-image.png'" onerror="this.src='assets/img/no-image.png'" />
-		</div>
-		<div *ngIf="item['thumb']">
-			<img [src]="appSettings.clientApiBaseUrl + '/items/' + collection.id + '/collection/cuttings/image/' + item['thumb']" onerror="this.src='assets/img/no-image.png'" />
-		  </div>
-
-		  <div *ngIf="item['thumb']">
-			<!-- generate; live thumbnail -->
-			<img [src]="generateLiveClip(item['url'])" />
-		</div>
-
-		<div fxFlex class="app-left">
-			<mat-card-title>{{item["name"]}}</mat-card-title>
-			<mat-card-subtitle>{{item["description"]}}</mat-card-subtitle>
-			<div class="app-mb-1"></div>
-			<em><small> <a [href]="item['url']" target="_blank"> {{item["url"]}}</a></small></em>
-		</div>
-	</mat-card-header>
-</mat-card>
+<div *ngIf="contentView === 'cuttings'">
+	<mat-card class="app-view-rights app-view-hover" *ngFor="let item of clippingItems">
+		<mat-card-header fxLayout="row" fxLayoutGap="16px">
+			<div>
+				<mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? cuttingsSelection.toggle(item) : null" [checked]="cuttingsSelection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
+			</div>
+			<div *ngIf="!item['thumb']">
+				<img [src]="'assets/img/no-image.png'" onerror="this.src='assets/img/no-image.png'" />
+			</div>
+			<div *ngIf="item['thumb']">
+				<img [src]="appSettings.clientApiBaseUrl + '/items/' + collection.id + '/collection/cuttings/image/' + item['thumb']" onerror="this.src='assets/img/no-image.png'" />
+			</div>
+			<div *ngIf="item['thumb']" class="app-img-cutting-wrapper">
+				<img [src]="generateLiveClip(item['url'])" />
+			</div>
+	
+			<div fxFlex class="app-left">
+				<mat-card-title>{{item["name"]}}</mat-card-title>
+				<mat-card-subtitle>{{item["description"]}}</mat-card-subtitle>
+				<div fxLayout="row" fxLayoutAlign="start center" class="app-mt-1">
+					<mat-icon color="primary" class="app-18 app-mr-1">launch</mat-icon>
+					<a [href]="item['url']" target="_blank">{{item["url"]}}</a>
+				</div>
+						
+			</div>
+		</mat-card-header>
+	</mat-card>
+</div>
 
 <mat-card *ngIf="(collectionItems?.length || noncollectionItems?.length) === 0 && contentView === 'object'" class="app-color-info app-text-center">
 	<mat-card-content fxLayout="row" fxLayoutAlign="center center">
