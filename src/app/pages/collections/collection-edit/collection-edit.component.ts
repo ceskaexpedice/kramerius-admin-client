@@ -26,7 +26,7 @@ export class CollectionEditComponent implements OnInit {
     toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'],
   };
 
-  showDeleteIcon:string = '';
+  keywordToDelete: string = '';
 
   collection: Collection;
   collectionName: string;
