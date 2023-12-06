@@ -15,56 +15,44 @@
     </div>
   </div>
 
-  <div fxLayout="row" fxLayoutGap="24px">
+  <div fxLayout="row" fxLayoutGap="24px" class="app-mb-4">
     <img onerror="this.src='assets/img/no-image.png'" [src]="getThumb(collection)" class="app-representative-page" [matTooltip]="'button.representativePage' | translate">
+    <div>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput class="app-dn">
+      <button mat-flat-button color="primary" (click)="fileInput.click()">
+        {{ 'button.changeRepresentativeView' | translate }}
+      </button>
+    </div>
   </div>
-
-  <div fxLayout="row" fxLayoutGap="5px">
-    <span>&nbsp;</span>
-  </div>
-
-  <div fxLayout="row" fxLayoutGap="24px">
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput style="display:none">
-    <button mat-raised-button color="primary" (click)="fileInput.click()">
-      {{ 'Reprezentativní obrázek' }}
-    </button>
-  </div>
-
-
 
   <div fxLayout="row" fxLayoutGap="24px" fxLayoutAlign="start center">
     <mat-form-field fxFlex="300px">
       <mat-label>{{ 'desc.keywords'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
       <input matInput [(ngModel)]="keyword">
-      <button (click)="newKeyword()" matSuffix mat-icon-button color="accent" [matTooltip]="'desc.addKeyword' | translate" [matTooltipPosition]="'above'">
-        <mat-icon (click)="newKeyword()">add</mat-icon>
-      </button>
+      <mat-icon matSuffix (click)="newKeyword()" class="app-action app-cursor-pointer" [matTooltip]="'desc.addKeyword' | translate" [matTooltipPosition]="'above'">add_circle</mat-icon>
     </mat-form-field>
     <div *ngIf="getKeywords()" fxFlex>
-
-      <span  *ngFor="let keyword of getKeywords()" 
-      (mouseover)="showDeleteIcon = keyword"
-      (mouseleave)="showDeleteIcon = '' "
-      (click)="deleteKeyword( keyword)"
-      class="app-badge app-mr-1 app-cursor-pointer">{{keyword}}
-
-        <span *ngIf="showDeleteIcon === keyword" class="delete-icon" (click)="deleteKeyword( keyword)"  class="app-cursor-pointer" >🗑️</span>
-    </span>
-
+      <span  *ngFor="let keyword of getKeywords()" (mouseover)="keywordToDelete = keyword" (mouseleave)="keywordToDelete = '' " (click)="deleteKeyword( keyword)" class="app-badge app-mr-1 app-cursor-pointer" [ngClass]="keywordToDelete === keyword ? 'app-failed' : 'app-keyword'" [matTooltip]="'button.delete' | translate" [matTooltipPosition]="'above'">
+        {{ keyword }}<mat-icon class="app-ml-1" (click)="deleteKeyword( keyword)">close</mat-icon>
+      </span>
     </div>
   </div>
+
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.author'  | translate }} ({{ 'lang.' + lang | translate }})</mat-label>
     <input matInput [(ngModel)]="author" (ngModelChange)="onAuthorChange($event)">
   </mat-form-field>
+
   <div class="app-w-100 app-mb-4">
     <div class="app-label app-mb-2">{{ 'desc.separateCollection'  | translate }}</div>
     <mat-checkbox [disableRipple]="true" color="primary" [(ngModel)]="standalone" (ngModelChange)="onStandaloChange($event)">{{ 'desc.yes' | translate }}</mat-checkbox>
   </div>
+
   <div class="app-w-100 app-mb-4">
     <div class="app-label app-mb-2">{{ 'desc.fullDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</div>
     <ckeditor [config]="editorConfig" [editor]="editorCze" required [ngModel]="content" (ngModelChange)="onModelLangChange('contents', $event)" data="" name="text"></ckeditor>
   </div>
+
   <div>
     <button mat-flat-button color="primary" *ngIf="mode === 'new'" (click)="onSave()" class="app-mr-2">{{ 'button.create'  | translate }}</button>
     <button mat-flat-button color="primary" *ngIf="mode === 'edit'" (click)="onUpdate()" class="app-mr-2">{{ 'button.edit'  | translate }}</button>

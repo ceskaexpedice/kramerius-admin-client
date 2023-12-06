@@ -99,11 +99,12 @@ $states: (
   planned: #7b7b7b,
   running: #456aa5,
   finished: #45a55a,
-  failed: #ab493f,
+  failed: $app-color-warn,
   killed: #ca7023,
   not-running: #ca7023,
   warning: #ab493f,
   session: $app-color-lightnes,
+  keyword: $app-color-darknes,
   default: $app-gray-6
 );
 

@@ -280,6 +280,14 @@
       right: 8px;
     }
   }
+
+  .mat-form-field-suffix {
+    .mat-icon {
+      &.app-action {
+        @include setIcon(20, $app-color-primary, sub);
+      }
+    }
+  }
 }
 
 // mat select

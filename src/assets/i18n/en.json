@@ -476,7 +476,8 @@
     "createAndStayInCollections": "Create and stay in collections",
     "restoreAndGoToProcessList": "Restore and go to process list",
     "restoreAndStayInCollections": "Restore and stay in collections",
-    "addCutting": "Add cutting"
+    "addCutting": "Add cutting",
+    "changeRepresentativeView": "Change representative view"
   },
   "field": {
     "public": "Public",

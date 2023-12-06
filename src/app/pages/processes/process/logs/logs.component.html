@@ -11,6 +11,6 @@
 		</div>
 	</div>
 	<div class="app-oa-y">
-		<div *ngFor="let line of lines" [ngClass]="{ 'severe-line': (line.startsWith('SEVERE') ||line.startsWith('WARNING'))}">{{  line }}</div>
+		<div *ngFor="let line of lines" [ngClass]="{ 'app-color-warn': (line.startsWith('SEVERE') || line.startsWith('WARNING'))}">{{  line }}</div>
 	</div>
 </div>

@@ -476,7 +476,8 @@
     "createAndStayInCollections": "Vytvořit a zůstat ve sbírkách",
     "restoreAndGoToProcessList": "Obnovit a přejít na seznam procesů",
     "restoreAndStayInCollections": "Obnovit a zůstat ve sbírkách",
-    "addCutting": "Přidat výstřižek"
+    "addCutting": "Přidat výstřižek",
+    "changeRepresentativeView": "Změnit reprezentativní náhled"
   },
   "field": {
     "public": "Veřejné",

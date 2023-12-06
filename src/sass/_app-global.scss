@@ -261,6 +261,10 @@ a {
   &.app-count {
     @extend .app-pr-1, .app-pl-1, .app-ml-2;
   }
+
+  .mat-icon {
+    @include setIcon($size: 16);
+  }
 }
 
 .app-input-autocomplete {
