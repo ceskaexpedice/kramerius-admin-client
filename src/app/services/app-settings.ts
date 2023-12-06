@@ -6,7 +6,7 @@ declare var APP_GLOBAL: any;
 
 @Injectable()
 export class AppSettings {
-  static adminClientVersion = "1.4.4" + (!!APP_GLOBAL.devMode ? "-dev" : "");
+  static adminClientVersion = "1.4.5" + (!!APP_GLOBAL.devMode ? "-dev" : "");
 
 
   // external properties from /assets/shared/globals.js
