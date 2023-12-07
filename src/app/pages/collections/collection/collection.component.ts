@@ -327,10 +327,12 @@ export class CollectionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.collectionsService.removeBatchCuttingsFromCollection(this.collection.id, toDelete).subscribe((collections: any[]) => {
-          this.loadData(this.collection.id);
+        this.ui.showInfoSnackBar(`snackbar.success.deletingItem`);
+        this.loadData(this.collection.id);
       });
+      // snackbar ready for error
+      // this.ui.showErrorSnackBar(`snackbar.error.deletingItem`);
     });
-
 
     // this.collectionsService.removeBatchItemsFromCollection(colid, todelete).subscribe( () => {
     //   this.dialogRef.close('deleted');
@@ -469,10 +471,10 @@ export class CollectionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'added') {
-        this.ui.showInfoSnackBar(`snackbar.success.addThisCollectionToAnotherCollection`);
+        this.ui.showInfoSnackBar(`snackbar.success.addingAnItem`);
         this.loadData(this.collection.id)
       } else if (result === 'error') {
-        this.ui.showErrorSnackBar("snackbar.error.addThisCollectionToAnotherCollection");
+        this.ui.showErrorSnackBar("snackbar.error.addingAnItem");
       } else if (result === 'cancel' || result === undefined) {
         //nothing, dialog was closed
       }
