@@ -340,6 +340,8 @@
     "NOT_RUNNING": "Not running",
     "WARNING": "Warning",
 
+    "WARNING_BATCH":  "Warning",
+
     "currentVersionOfTheIndexer": "Current version of the indexer",
     "sessionExpire": "It remains until logout"
   },
