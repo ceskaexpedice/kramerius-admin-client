@@ -326,15 +326,18 @@ export class CollectionComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
       this.collectionsService.removeBatchCuttingsFromCollection(this.collection.id, toDelete).subscribe((collections: any[]) => {
-          this.loadData(this.collection.id);
+        this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`); 
+        this.loadData(this.collection.id);
       });
+      }
+
     });
 
 
     // this.collectionsService.removeBatchItemsFromCollection(colid, todelete).subscribe( () => {
     //   this.dialogRef.close('deleted');
-    //   this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`); 
     // });
 
 

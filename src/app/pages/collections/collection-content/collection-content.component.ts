@@ -234,10 +234,10 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   generateLiveClip(url:string): string {
     if (url.indexOf('bb=') > 0) {
       let struct = this.parseClientUrl(url);
-      const nurl = this.appSettings.clientApiBaseUrl+`/items/${struct.uuid}/image/iiif/${struct.bb}/^!128,128/0/default.jpg`;
+      const nurl = this.appSettings.clientApiBaseUrl+`/items/${struct.uuid}/image/iiif/${struct.bb}/!128,128/0/default.jpg`;
       return nurl;
     } else {
-      const nurl = url.replace('/max/', '/^!128,128/');
+      const nurl = url.replace('/max/', '/!128,128/');
       return nurl;
     }
   }
