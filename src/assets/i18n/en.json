@@ -903,7 +903,9 @@
       "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started",
       "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started",
       "setRepresentativePage": "Setup of the representative page was successful",
-      "startTheProcess": "The process was successfully scheduled"
+      "startTheProcess": "The process was successfully scheduled",
+      "addingAnItem": "Item added successfully",
+      "deletingItem": "The item have been successfully deleted"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -963,7 +965,9 @@
       "scheduleChangeItemsOrder": "An error occurred while saving the item order change",
       "scheduleDeleteSelectedItemsFromCollection": "An error occurred while deleting the selected items from the collection",
       "anErrorOccurredWhileSaving": "An error occurred while saving",
-      "startTheProcess": "An error occurred while starting the process"
+      "startTheProcess": "An error occurred while starting the process",
+      "addingAnItem": "Error adding item",
+      "deletingItem": "Error deleting item"
     },
     "alert": {
       "tokenTimeExpireInfo": "You will be automatically logged out of the application in 2 minutes"

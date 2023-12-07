@@ -47,7 +47,7 @@
 				<mat-card-subtitle>{{item["description"]}}</mat-card-subtitle>
 				<div fxLayout="row" fxLayoutAlign="start center" class="app-mt-1">
 					<mat-icon color="primary" class="app-18 app-mr-1">launch</mat-icon>
-					<a [href]="item['url']" target="_blank">{{item["url"]}}</a>
+					<small><a [href]="item['url']" target="_blank">{{ item["url"] }}</a></small>
 				</div>			
 			</div>
 		</mat-card-header>

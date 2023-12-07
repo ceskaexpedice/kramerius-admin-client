@@ -903,7 +903,9 @@
       "scheduleChangeItemsOrder": "Proces uložení změny pořadí položek byl úspěšně spuštěn",
       "scheduleDeleteSelectedItemsFromCollection": "Proces smazaní vybraných položek ze sbírky byl úspěšně spuštěn",
       "setRepresentativePage": "Nastavení reprezentativní stránky proběhlo úspěšně",
-      "startTheProcess": "Proces byl úspěšně naplánován"
+      "startTheProcess": "Proces byl úspěšně naplánován",
+      "addingAnItem": "Položka byla úspěšně přidána",
+      "deletingItem": "Položka byla úspěšně smazána"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -963,7 +965,9 @@
       "scheduleChangeItemsOrder": "Došlo k chybě při ukládání změny pořadí položek",
       "scheduleDeleteSelectedItemsFromCollection": "Došlo k chybě při smazaní vybraných položek ze sbírky",
       "anErrorOccurredWhileSaving": "Došlo k chybě při ukládání",
-      "startTheProcess": "Došlo k chybě při spuštění procesu"
+      "startTheProcess": "Došlo k chybě při spuštění procesu",
+      "addingAnItem": "Chyba při přidání položky",
+      "deletingItem": "Chyba při smazání položky"
     },
     "alert": {
       "tokenTimeExpireInfo": "Za 2 minuty dojde k automatickému odhlášení z aplikace"
