@@ -23,6 +23,7 @@ import { ScheduleRemoveTheVisibilityFlagDialogComponent } from 'src/app/dialogs/
 import { AppSettings } from 'src/app/services/app-settings';
 import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 import { ScheduleMigrateCollectionsDialogComponent } from 'src/app/dialogs/schedule-migrate-collections-dialog/schedule-migrate-collections-dialog.component';
+import { EditSetDialogComponent } from 'src/app/dialogs/edit-set-dialog/edit-set-dialog.component';
 
 @Component({
   selector: 'app-repository',
@@ -31,6 +32,7 @@ import { ScheduleMigrateCollectionsDialogComponent } from 'src/app/dialogs/sched
 })
 export class RepositoryComponent implements OnInit {
   view: string;
+  implicitSetHasChanged: boolean = false;
 
   // // to test accesibility
   notAllowed: boolean = true;
@@ -329,6 +331,22 @@ export class RepositoryComponent implements OnInit {
       }
     });
 
+  }
+
+  saveImplicitSet() {
+    // to do
+
+    // ready for success
+    this.ui.showInfoSnackBar('snackbar.success.savingAnItem');
+    // ready for error
+    //this.ui.showErrorSnackBar('snackbar.error.savingAnItem')
+  }
+
+  openEditSetDialog() {
+    const dialogRef = this.dialog.open(EditSetDialogComponent, {
+      width: '600px',
+      panelClass: 'app-edit-set-dialog'
+    });
   }
 
 }

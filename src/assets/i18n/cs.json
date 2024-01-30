@@ -146,6 +146,11 @@
         "desc": "Na základě vložených PIDů můžete provádět tyto akce: nastavit public/private, přidat licenci, odebrat licenci. Dále můžete smazat objekty (chytře) nebo  Smazat objekty (nízkoúrovňově).",
         "icon": "edit_note"
       },
+      "oai": {
+        "title": "Oai",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "api"
+      },
       "cdk": {
         "title": "Cdk",
         "desc": "Centrum pro studium demokracie a kultury",
@@ -479,7 +484,8 @@
     "restoreAndGoToProcessList": "Obnovit a přejít na seznam procesů",
     "restoreAndStayInCollections": "Obnovit a zůstat ve sbírkách",
     "addCutting": "Přidat výstřižek",
-    "changeRepresentativeView": "Změnit reprezentativní náhled"
+    "changeRepresentativeView": "Změnit reprezentativní náhled",
+    "save": "Uložit"
   },
   "field": {
     "public": "Veřejné",
@@ -825,6 +831,9 @@
     },
     "addCutting": {
       "title": "Přidání výstřižku"
+    },
+    "editSet": {
+      "title": "Editace setu"
     }
   },
   "snackbar": {
@@ -907,7 +916,9 @@
       "setRepresentativePage": "Nastavení reprezentativní stránky proběhlo úspěšně",
       "startTheProcess": "Proces byl úspěšně naplánován",
       "addingAnItem": "Položka byla úspěšně přidána",
-      "deletingItem": "Položka byla úspěšně smazána"
+      "deletingItem": "Položka byla úspěšně smazána",
+      "savingAnItem": "Položka byla úspěšně uložena",
+      "savingAnRecord": "Záznam byl úspěšně uložen"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -969,7 +980,9 @@
       "anErrorOccurredWhileSaving": "Došlo k chybě při ukládání",
       "startTheProcess": "Došlo k chybě při spuštění procesu",
       "addingAnItem": "Chyba při přidání položky",
-      "deletingItem": "Chyba při smazání položky"
+      "deletingItem": "Chyba při smazání položky",
+      "savingAnItem": "Chyba při ukládání položky",
+      "savingAnRecord": "Chyba při ukládání záznamu"
     },
     "alert": {
       "tokenTimeExpireInfo": "Za 2 minuty dojde k automatickému odhlášení z aplikace"
@@ -1121,6 +1134,9 @@
     "displayObjects": "Zobrazit objekty",
     "cuttingName": "Název výstřižku",
     "cuttingDesc": "Popis výstřižku",
-    "cuttingUrl": "Url výstřižku"
+    "cuttingUrl": "Url výstřižku",
+    "filter": "Filtr",
+    "listOfSets": "Seznam setů",
+    "implicitSet": "Implicitní set"
   }
 }
