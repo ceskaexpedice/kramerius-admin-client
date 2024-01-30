@@ -24,6 +24,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 import { ScheduleMigrateCollectionsDialogComponent } from 'src/app/dialogs/schedule-migrate-collections-dialog/schedule-migrate-collections-dialog.component';
 import { EditSetDialogComponent } from 'src/app/dialogs/edit-set-dialog/edit-set-dialog.component';
+import { AddNewSetDialogComponent } from 'src/app/dialogs/add-new-set-dialog/add-new-set-dialog.component';
 
 @Component({
   selector: 'app-repository',
@@ -342,11 +343,27 @@ export class RepositoryComponent implements OnInit {
     //this.ui.showErrorSnackBar('snackbar.error.savingAnItem')
   }
 
+  openAddNewSetDialog() {
+    const dialogRef = this.dialog.open(AddNewSetDialogComponent, {
+      width: '600px',
+      panelClass: 'app-add-new-set-dialog'
+    });
+  }
+
   openEditSetDialog() {
     const dialogRef = this.dialog.open(EditSetDialogComponent, {
       width: '600px',
       panelClass: 'app-edit-set-dialog'
     });
+  }
+
+  deleteSet() {
+    // to do
+
+    // ready for success
+    this.ui.showInfoSnackBar('snackbar.success.deletingItem');
+    // ready for error
+    //this.ui.showErrorSnackBar('snackbar.error.deletingItem')
   }
 
 }

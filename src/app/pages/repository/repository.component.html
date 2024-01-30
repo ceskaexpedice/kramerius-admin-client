@@ -121,7 +121,8 @@
 									<input matInput [placeholder]="'desc.implicitSet' | translate" [(ngModel)]="implicitSetHasChanged">
 								</mat-form-field>
 								<div>
-									<button mat-flat-button color="primary" [disabled]="!implicitSetHasChanged" (click)="saveImplicitSet()">{{ 'button.save' | translate }}</button>
+									<button mat-flat-button color="primary" [disabled]="!implicitSetHasChanged" (click)="saveImplicitSet()" class="app-mr-2">{{ 'button.save' | translate }}</button>
+									<button mat-flat-button color="primary" (click)="openAddNewSetDialog()">{{ 'button.addNewSet' | translate }}</button>
 								</div>
 							</div>
 							<h3 class="app-mt-0 app-mb-2">{{ 'desc.listOfSets' | translate }}</h3>
@@ -132,6 +133,7 @@
 										<th>{{ 'desc.description' | translate }}</th>
 										<th>{{ 'desc.filter' | translate }}</th>
 										<th></th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -140,12 +142,14 @@
 										<td>value</td>
 										<td>value</td>
 										<td class="app-col-action"><a (click)="openEditSetDialog()" [matTooltip]="'button.edit' | translate"><mat-icon>edit</mat-icon></a></td>
+										<td class="app-col-action"><a (click)="deleteSet()" [matTooltip]="'button.delete' | translate"><mat-icon>delete</mat-icon></a></td>
 									</tr>
 									<tr>
 										<td>value</td>
 										<td>value</td>
 										<td>value</td>
 										<td class="app-col-action"><a (click)="openEditSetDialog()" [matTooltip]="'button.edit' | translate"><mat-icon>edit</mat-icon></a></td>
+										<td class="app-col-action"><a (click)="deleteSet()" [matTooltip]="'button.delete' | translate"><mat-icon>delete</mat-icon></a></td>
 									</tr>
 								</tbody>
 							</table>

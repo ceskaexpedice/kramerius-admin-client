@@ -107,6 +107,7 @@ import { CreateCollectionBackupDialogComponent } from './dialogs/create-collecti
 import { RestoreFromCollectionBackupDialogComponent } from './dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
 import { AddCuttingDialogComponent } from './dialogs/add-cutting-dialog/add-cutting-dialog.component';
 import { EditSetDialogComponent } from './dialogs/edit-set-dialog/edit-set-dialog.component';
+import { AddNewSetDialogComponent } from './dialogs/add-new-set-dialog/add-new-set-dialog.component';
 //import { FileSaverModule } from 'ngx-filesaver';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -198,7 +199,8 @@ export function createCustomMatPaginatorIntl(
     CreateCollectionBackupDialogComponent,
     RestoreFromCollectionBackupDialogComponent,
     AddCuttingDialogComponent,
-    EditSetDialogComponent
+    EditSetDialogComponent,
+    AddNewSetDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -485,7 +485,8 @@
     "restoreAndStayInCollections": "Obnovit a zůstat ve sbírkách",
     "addCutting": "Přidat výstřižek",
     "changeRepresentativeView": "Změnit reprezentativní náhled",
-    "save": "Uložit"
+    "save": "Uložit",
+    "addNewSet": "Přidat nový set"
   },
   "field": {
     "public": "Veřejné",
@@ -834,6 +835,9 @@
     },
     "editSet": {
       "title": "Editace setu"
+    },
+    "addNewtSet": {
+      "title": "Přidání nového setu"
     }
   },
   "snackbar": {

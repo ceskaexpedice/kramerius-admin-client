@@ -485,7 +485,8 @@
     "restoreAndStayInCollections": "Restore and stay in collections",
     "addCutting": "Add cutting",
     "changeRepresentativeView": "Change representative view",
-    "save": "Save"
+    "save": "Save",
+    "addNewSet": "Add new set"
   },
   "field": {
     "public": "Public",
@@ -834,6 +835,9 @@
     },
     "editSet": {
       "title": "Edit set"
+    },
+    "addNewtSet": {
+      "title": "Adding a new set"
     }
   },
   "snackbar": {
