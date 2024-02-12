@@ -147,13 +147,13 @@
         "icon": "edit_note"
       },
       "oai": {
-        "title": "Oai",
-        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "title": "OAI-PMH",
+        "desc": "OAI PMH protocol",
         "icon": "api"
       },
       "cdk": {
         "title": "Cdk",
-        "desc": "Center for the Study of Democracy and Culture",
+        "desc": "Czech digital library",
         "icon": "local_library"
       }
     },
@@ -176,9 +176,9 @@
       } 
     },
     "cdk": {
-      "title": "Cdk",
+      "title": "ČDK",
       "proxy": {
-        "title": "Proxy",
+        "title": "Proxy - connected libraries",
         "icon": "hub"
       },
       "europeanou": {

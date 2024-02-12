@@ -39,6 +39,7 @@ export class ClientApiService {
     return this.getText(query);
   }
 
+
   getMods(uuid: string): Observable<string> {
     return this.getText(`/items/${uuid}/streams/BIBLIO_MODS`);
   }

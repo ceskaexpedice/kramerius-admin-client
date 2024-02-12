@@ -25,6 +25,8 @@ import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/sc
 import { ScheduleMigrateCollectionsDialogComponent } from 'src/app/dialogs/schedule-migrate-collections-dialog/schedule-migrate-collections-dialog.component';
 import { EditSetDialogComponent } from 'src/app/dialogs/edit-set-dialog/edit-set-dialog.component';
 import { AddNewSetDialogComponent } from 'src/app/dialogs/add-new-set-dialog/add-new-set-dialog.component';
+import { OAISet } from 'src/app/models/oaiset';
+import { OAIApiService } from 'src/app/services/oai-api.services';
 
 @Component({
   selector: 'app-repository',
@@ -33,25 +35,159 @@ import { AddNewSetDialogComponent } from 'src/app/dialogs/add-new-set-dialog/add
 })
 export class RepositoryComponent implements OnInit {
   view: string;
-  implicitSetHasChanged: boolean = false;
+  //implicitSetHasChanged: boolean = false;
 
   // // to test accesibility
   notAllowed: boolean = true;
+
+  sets: Record<string, OAISet> = {};
+
+  defaultSet:OAISet = null;
+  deafultSetQuery = "";
+
+
 
   constructor(
     private dialog: MatDialog,
     private ui: UIService,
     private adminApi: AdminApiService,
+    private oaiApi: OAIApiService,
     private auth: AuthService,
     private local: LocalStorageService,
     private router: Router,
     public settings: AppSettings
   ) { }
 
+
   ngOnInit() {
-    //this.view = this.local.getStringProperty('repository.view', 'repositoryManagement');
     this.view = this.router.url.replace('/repository/', '');
+    this.reloadOAI();
   }
+
+  reloadOAI() {
+    this.adminApi.getConfigKeys('oai.set.').subscribe(k=> {
+
+      k.forEach(oneKey=>  {
+        const restkey =  oneKey.replace('oai.set.', ''); 
+        const[id, property] = restkey.split('.');
+        
+        if (id === 'DEFAULT') {
+          if (this.defaultSet == null) {
+            this.defaultSet = new OAISet('DEFAULT', '', '','');
+
+            this.oaiApi.info('DEFAULT').subscribe(json=>{
+              this.defaultSet.numberDocs = json['numberDocs']
+            });
+
+          }
+
+          let nameProp =  `oai.set.${id}.name`;
+          let descProp =  `oai.set.${id}.description`;
+          let filterProp =  `oai.set.${id}.filter`;
+      
+          const object = {
+            [nameProp]: "",
+            [descProp]: "",
+            [filterProp]: "",
+          };
+
+          this.adminApi.getConfigProperties(object).subscribe(props=> {
+            if (props[nameProp]) {
+              this.defaultSet.setName = props[nameProp]
+            }
+
+            if (props[descProp]) {
+              this.defaultSet.setDescription = props[descProp];
+              
+            }
+            if (props[filterProp]) {
+              this.defaultSet.filterQuery = props[filterProp];
+              this.deafultSetQuery = props[filterProp];
+            }
+
+          });
+          /*
+          this.adminApi.getConfigValue(oneKey).subscribe(oneVal=> {
+            if (property === 'name') {
+              this.defaultSet.setName = oneVal[oneKey]
+            } else if (property === 'description') {
+              this.defaultSet.setDescription = oneVal[oneKey];
+            } else if (property === 'desc') {
+              this.sets[id].setDescription = oneVal[oneKey];
+            } else if (property === 'filter') {
+              this.defaultSet.filterQuery = oneVal[oneKey];
+              this.deafultSetQuery = oneVal[oneKey];
+            }
+        });*/
+
+        } else {
+
+          if (!this.sets[id]) {
+            this.sets[id] = new OAISet(id, '', '','');
+            this.oaiApi.info(id).subscribe(json=>{
+              this.sets[id].numberDocs = json['numberDocs']
+            });
+          }
+
+          
+          let nameProp =  `oai.set.${id}.name`;
+          let descProp =  `oai.set.${id}.description`;
+          let filterProp =  `oai.set.${id}.filter`;
+      
+          const object = {
+            [nameProp]: "",
+            [descProp]: "",
+            [filterProp]: "",
+          };
+
+          this.adminApi.getConfigProperties(object).subscribe(props=> {
+            if (props[nameProp]) {
+              this.sets[id].setName = props[nameProp]
+            }
+
+            if (props[descProp]) {
+              this.sets[id].setDescription = props[descProp];
+              
+            }
+            if (props[filterProp]) {
+              this.sets[id].filterQuery = props[filterProp];
+            }
+          });
+
+          /*
+          this.adminApi.getConfigValue(oneKey).subscribe(oneVal=> {
+              if (property === 'name') {
+                this.sets[id].setName = oneVal[oneKey]
+              } else if (property === 'description') {
+                this.sets[id].setDescription = oneVal[oneKey];
+              } else if (property === 'desc') {
+                this.sets[id].setDescription = oneVal[oneKey];
+              } else if (property === 'filter') {
+                this.sets[id].filterQuery = oneVal[oneKey];
+              }
+          });*/
+  
+  
+        }
+
+      });
+    });
+  }
+
+  getOAISets() {
+
+    let sets = [];
+    Object.keys(this.sets).sort((a, b) => {
+      return a.localeCompare(b);
+    }).forEach(key=> {
+      sets.push(this.sets[key]);
+    });
+    
+    return sets;
+  }
+
+
+
 
   openscheduleProcessingIndexRebuildDialog() {
     const dialogRef = this.dialog.open(ScheduleProcessingIndexRebuildDialogComponent, {
@@ -245,6 +381,8 @@ export class RepositoryComponent implements OnInit {
   }
 
 
+
+
   openScheduleSyncWithSdnntDialog() {
     const dialogRef = this.dialog.open(ScheduleSyncWithSdnntComponent, {
       width: '1200px',
@@ -331,14 +469,43 @@ export class RepositoryComponent implements OnInit {
         });
       }
     });
+  }
 
+  isDefaultSetQueryChanged() {
+    return this.defaultSet?.filterQuery !== this.deafultSetQuery;    
   }
 
   saveImplicitSet() {
-    // to do
+
+    // check if default is null
+    if (this.defaultSet == null) {
+      this.defaultSet = new OAISet('DEFAULT', '', '','');
+    }
+
+
+    function replaceSpacesWithPlus(inputString: string): string {
+      return inputString.replace(/\s+/g, '+');
+    }
+  
+    this.defaultSet.filterQuery = this.deafultSetQuery;
+
+    let nameProp =  `oai.set.DEFAULT.name`;
+    let descProp =  `oai.set.DEFAULT.description`;
+    let filterProp =  `oai.set.DEFAULT.filter`;
+
+    let object ={ [nameProp]:this.defaultSet.setName, [descProp]:this.defaultSet.setDescription, 
+      [filterProp]: replaceSpacesWithPlus( this.defaultSet.filterQuery)};
+
+
+    this.adminApi.setConfigProperties(object).subscribe(res=> {
+      this.ui.showInfoSnackBar('snackbar.success.savingAnItem');
+      this.defaultSet = null;
+      this.reloadOAI();
+  });
+
+
 
     // ready for success
-    this.ui.showInfoSnackBar('snackbar.success.savingAnItem');
     // ready for error
     //this.ui.showErrorSnackBar('snackbar.error.savingAnItem')
   }
@@ -348,22 +515,69 @@ export class RepositoryComponent implements OnInit {
       width: '600px',
       panelClass: 'app-add-new-set-dialog'
     });
+
+
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.scheduleRemovePolicyByPid')
+      } else if (result === 'cancel' || result === undefined) {
+        //cancel
+      } else {
+        this.adminApi.setConfigProperties(result.props).subscribe(res=> {
+            this.ui.showInfoSnackBar('snackbar.success.savingAnRecord');
+            this.reloadOAI();
+        });
+
+      }});
   }
 
-  openEditSetDialog() {
+
+  openEditSetDialog(oaiSet: OAISet) {
     const dialogRef = this.dialog.open(EditSetDialogComponent, {
+      data:{
+        id: oaiSet.setSpec,
+        name: oaiSet.setName,
+        description: oaiSet.setDescription,
+        filter: oaiSet.filterQuery
+      },
       width: '600px',
       panelClass: 'app-edit-set-dialog'
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.scheduleRemovePolicyByPid');
+      } else if (result === 'cancel' || result === undefined) {
+        //cancel
+      } else {
+      
+        this.adminApi.setConfigProperties(result.props).subscribe(res=> {
+            this.ui.showInfoSnackBar('snackbar.success.savingAnRecord');
+            this.sets = {}; 
+            this.reloadOAI();
+        });
+
+      }});
+
   }
 
-  deleteSet() {
-    // to do
+  deleteSet(oaiSet:OAISet) {
 
-    // ready for success
-    this.ui.showInfoSnackBar('snackbar.success.deletingItem');
-    // ready for error
-    //this.ui.showErrorSnackBar('snackbar.error.deletingItem')
+    let nameProp =  `oai.set.${oaiSet.setSpec}.name`;
+    let descProp =  `oai.set.${oaiSet.setSpec}.description`;
+    let filterProp =  `oai.set.${oaiSet.setSpec}.filter`;
+
+    let object ={ [nameProp]:'', [descProp]:'', [filterProp]:''};
+
+
+    this.adminApi.deleteConfigProperites(object).subscribe(res=> {
+      this.ui.showInfoSnackBar('snackbar.success.deletingItem');
+      this.sets = {}; 
+      this.reloadOAI();
+    });
+
   }
 
 }

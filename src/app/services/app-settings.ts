@@ -6,7 +6,7 @@ declare var APP_GLOBAL: any;
 
 @Injectable()
 export class AppSettings {
-  static adminClientVersion = "1.4.5" + (!!APP_GLOBAL.devMode ? "-dev" : "");
+  static adminClientVersion = "1.4.6" + (!!APP_GLOBAL.devMode ? "-dev" : "");
 
 
   // external properties from /assets/shared/globals.js
@@ -19,6 +19,8 @@ export class AppSettings {
 
   clientApiBaseUrl = this.coreBaseUrl + '/api/client/v7.0';
   adminApiBaseUrl = this.coreBaseUrl + '/api/admin/v7.0';
+  harvestAapiBaseURL = this.coreBaseUrl+'/api/harvest/v7.0';
+
 
   //cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl || 'http://localhost:8080/search'; 
   cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl ||  this.coreBaseUrl; 

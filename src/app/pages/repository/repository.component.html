@@ -117,11 +117,15 @@
 						<ng-container *ngIf="view == 'oai'">
 							<div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start baseline">
 								<mat-form-field fxFlex>
-									<mat-label>{{ 'desc.implicitSet' | translate }}</mat-label>
-									<input matInput [placeholder]="'desc.implicitSet' | translate" [(ngModel)]="implicitSetHasChanged">
+									<mat-label>{{ 'desc.implicitSet' | translate }}
+										<ng-container *ngIf="defaultSet">
+											 {{ "  ("+ defaultSet.numberDocs +" dokumentů)"}}
+										</ng-container>
+									</mat-label>
+									<input matInput [placeholder]="'desc.implicitSet' | translate" [(ngModel)]="deafultSetQuery">
 								</mat-form-field>
 								<div>
-									<button mat-flat-button color="primary" [disabled]="!implicitSetHasChanged" (click)="saveImplicitSet()" class="app-mr-2">{{ 'button.save' | translate }}</button>
+									<button mat-flat-button color="primary" [disabled]="!isDefaultSetQueryChanged()" (click)="saveImplicitSet()" class="app-mr-2">{{ 'button.save' | translate }}</button>
 									<button mat-flat-button color="primary" (click)="openAddNewSetDialog()">{{ 'button.addNewSet' | translate }}</button>
 								</div>
 							</div>
@@ -129,27 +133,25 @@
 							<table class="app-table">
 								<thead>
 									<tr>
+										<th>{{ 'desc.id' | translate }}</th>
 										<th>{{ 'desc.name' | translate }}</th>
 										<th>{{ 'desc.description' | translate }}</th>
 										<th>{{ 'desc.filter' | translate }}</th>
+										<th>{{ 'desc.docs' | translate }}</th>
 										<th></th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>value</td>
-										<td>value</td>
-										<td>value</td>
-										<td class="app-col-action"><a (click)="openEditSetDialog()" [matTooltip]="'button.edit' | translate"><mat-icon>edit</mat-icon></a></td>
-										<td class="app-col-action"><a (click)="deleteSet()" [matTooltip]="'button.delete' | translate"><mat-icon>delete</mat-icon></a></td>
-									</tr>
-									<tr>
-										<td>value</td>
-										<td>value</td>
-										<td>value</td>
-										<td class="app-col-action"><a (click)="openEditSetDialog()" [matTooltip]="'button.edit' | translate"><mat-icon>edit</mat-icon></a></td>
-										<td class="app-col-action"><a (click)="deleteSet()" [matTooltip]="'button.delete' | translate"><mat-icon>delete</mat-icon></a></td>
+									<tr *ngFor="let oaiSet of getOAISets()" >
+										<td> <i> {{oaiSet.setSpec}} </i></td>
+										<td>{{oaiSet.setName}}</td>
+										<td>{{oaiSet.setDescription}}</td>
+										<td>{{oaiSet.filterQuery}}</td>
+										<td>{{oaiSet.numberDocs}}</td>
+
+										<td class="app-col-action"><a (click)="openEditSetDialog(oaiSet)" [matTooltip]="'button.edit' | translate"><mat-icon>edit</mat-icon></a></td>
+										<td class="app-col-action"><a (click)="deleteSet(oaiSet)" [matTooltip]="'button.delete' | translate"><mat-icon>delete</mat-icon></a></td>
 									</tr>
 								</tbody>
 							</table>

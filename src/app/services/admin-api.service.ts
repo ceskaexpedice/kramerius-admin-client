@@ -283,6 +283,32 @@ export class AdminApiService {
     )
   }
 
+  deleteConfigProperty(key: string): Observable<any> {
+    return this.delete(`/config/${key}`,{}).pipe(
+      delay(300),
+    )
+  }
+  
+  deleteConfigProperites(obj:any): Observable<any> {
+    return this.post(`/config/deleteProperties`, obj).pipe(
+      delay(300),
+    )
+  }
+  
+  getConfigProperties(obj:any): Observable<any> {
+    return this.post(`/config/getProperties`, obj).pipe(
+      delay(300),
+    )
+  }
+
+
+  setConfigProperties(obj:any): Observable<any> {
+    return this.put(`/config`, obj).pipe(
+      delay(300),
+    )
+  }
+
+
   setChildrenOrder(parentPid: string, childernPids: string[]): Observable<any> {
     return this.put(`/items/${parentPid}/children_order`, { parentPid: parentPid, childrenPids: childernPids }).pipe(
       delay(300),
@@ -427,6 +453,24 @@ export class AdminApiService {
   getActions(pid: String): Observable<any> {
     return this.get(`/rights/actions?pid=${pid}`).pipe(map(response =>
       RightAction.fromJsonArray(response)));
+  }
+
+  //admin/v7.0/config/{key}
+  getConfigValue(key: string): Observable<string> {
+    return this.get(`/config/${key}`).pipe(map(response => response as string));
+  }
+
+  getConfigKeys(prefix: string): Observable<string[]> {
+    return this.get(`/config/keys/${prefix}`).pipe(
+      map(response => response as string[])
+    );
+  }
+
+  setConfigValue(key:string, value:string):Observable<string> {
+//    return this.get(`admin/v7.0/config/${key}`).pipe(map(response => response as string));
+    return this.put(`/config/${key}`, value).pipe(
+      map(response => response as string)
+    );
   }
 
 

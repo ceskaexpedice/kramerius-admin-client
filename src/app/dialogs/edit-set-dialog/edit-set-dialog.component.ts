@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -8,22 +9,44 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class EditSetDialogComponent implements OnInit {
 
+  id: string=''
   name: string = '';
   description: string = '';
   filter: string = '';
 
-  constructor(private ui: UIService) { }
+
+  constructor(
+    public dialogRef: MatDialogRef<EditSetDialogComponent>,
+    @Inject( MAT_DIALOG_DATA) public data: any,
+    private ui: UIService) {
+      this.id = data.id;
+      this.name = data.name;
+      this.description = data.description;
+      this.filter = data.filter;
+
+  }
 
   ngOnInit(): void {
   }
 
-  onSave() {
-    // to do
+  replaceSpacesWithPlus(inputString: string): string {
+    return inputString.replace(/\s+/g, '+');
+  }
 
-    // ready for success
-    this.ui.showInfoSnackBar('snackbar.success.savingAnRecord');
-    // ready for error
-    //this.ui.showErrorSnackBar('snackbar.error.savingAnRecord')
+  onSave() {
+
+    let nameProp =  `oai.set.${this.id}.name`;
+    let descProp =  `oai.set.${this.id}.description`;
+    let filterProp =  `oai.set.${this.id}.filter`;
+
+    let props = {};
+    props[nameProp]=this.name;
+    props[descProp]=this.description;
+
+    props[filterProp]=this.replaceSpacesWithPlus(this.filter);
+
+    this.dialogRef.close({ props });
+
   }
 
 }

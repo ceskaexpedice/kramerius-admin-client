@@ -1,6 +1,11 @@
 <h2 mat-dialog-title>{{ 'modal.addNewtSet.title' | translate }}</h2>
 <mat-dialog-content>
-  
+
+  <mat-form-field class="app-w-100">
+    <mat-label>{{ 'desc.id' | translate }}</mat-label>
+    <input type="text" matInput [(ngModel)]="id" [placeholder]="'desc.id' | translate">
+  </mat-form-field>
+
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.name' | translate }}</mat-label>
     <input type="text" matInput [(ngModel)]="name" [placeholder]="'desc.name' | translate">
@@ -18,6 +23,6 @@
   
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button [disabled]="!name || !description || !filter" color="primary" type="submit" (click)="onSave()">{{ 'button.save' | translate }}</button>
+  <button mat-flat-button [disabled]="!id || !name || !description || !filter" color="primary" type="submit" (click)="onSave()">{{ 'button.save' | translate }}</button>
   <button mat-flat-button  mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>
