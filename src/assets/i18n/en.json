@@ -658,6 +658,12 @@
       "title": {
         "new": "New license",
         "edit": "Edit license"
+      },
+      "errors": {
+        "nameRequired": "Name required",
+        "theNameMustStartWith": "The name must start with",
+        "theNameIsAlreadyUsed": "The name is already used",
+        "labelIsRequired": "A label is required"
       }
     },
     "onRemoveLicese": {
@@ -1141,6 +1147,11 @@
     "cuttingUrl": "Cutting url",
     "filter": "Filter",
     "listOfSets": "List of sets",
-    "implicitSet": "Implicit set"
+    "implicitSet": "Implicit set",
+    "turnOnTheLock": "Turn on the lock",
+    "maximumReadingTime": "Maximum reading time",
+    "refreshInterval": "Refresh interval",
+    "numberOfReadersReadingConcurrently": "Number of readers reading concurrently",
+    "localLicense": "Local license"
   }
 }

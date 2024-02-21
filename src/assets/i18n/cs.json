@@ -658,6 +658,12 @@
       "title": {
         "new": "Nová licence",
         "edit": "Úprava licence"
+      },
+      "errors": {
+        "nameRequired": "Jméno ja požadováno",
+        "theNameMustStartWith": "Jméno musí začínat na",
+        "theNameIsAlreadyUsed": "Jméno je již použité",
+        "labelIsRequired": "Popisek je vyžadován"
       }
     },
     "onRemoveLicese": {
@@ -1141,6 +1147,11 @@
     "cuttingUrl": "Url výstřižku",
     "filter": "Filtr",
     "listOfSets": "Seznam setů",
-    "implicitSet": "Implicitní set"
+    "implicitSet": "Implicitní set",
+    "turnOnTheLock": "Zapnout zámek",
+    "maximumReadingTime": "Maximální doba čtení",
+    "refreshInterval": "Refresh interval",
+    "numberOfReadersReadingConcurrently": "Počet souběžně čtoucích čtenářů",
+    "localLicense": "Lokální licence"
   }
 }

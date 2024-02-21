@@ -19,9 +19,13 @@
                 <mat-icon *ngIf="licence.group == 'local'">location_city</mat-icon>
                 <mat-icon *ngIf="licence.group != 'local'">public_outlined</mat-icon>
                 {{ licence.priority+ '.  ' +licence.name }}
+                <ng-container *ngIf="licence.group == 'local'">
+                  <span class="app-pipe"></span>
+                  <mat-icon class="app-cursor-pointer" [matTooltip]="'item 1, item2, item 3'">lock</mat-icon>
+                </ng-container>
               </mat-card-title>
-              <mat-card-subtitle *ngIf="licence.group == 'local'"><strong> {{ 'Lokalni licence ' }} </strong> </mat-card-subtitle>
-              <mat-card-subtitle *ngIf="licence.group != 'local'"><strong> {{ 'Globalni licence' }} </strong> </mat-card-subtitle>
+              <mat-card-subtitle *ngIf="licence.group == 'local'"><strong>{{ 'desc.localLicense' | translate }}</strong></mat-card-subtitle>
+              <mat-card-subtitle *ngIf="licence.group != 'local'"><strong>{{ 'desc.globalLicense' | translate }}</strong></mat-card-subtitle>
               <div class="app-mt-2"><i>{{ licence.description}}</i></div>
             </div>
             <div  class="app-right app-actions">

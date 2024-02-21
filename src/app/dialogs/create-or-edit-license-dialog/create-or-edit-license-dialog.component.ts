@@ -23,6 +23,8 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   mode: string;
   errorMessage: string;
 
+  turnOnLock: boolean;
+
   constructor(public dialogRef: MatDialogRef<CreateOrEditLicenseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private api: AdminApiService,
