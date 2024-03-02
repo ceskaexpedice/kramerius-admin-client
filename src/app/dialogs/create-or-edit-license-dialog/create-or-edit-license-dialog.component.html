@@ -19,19 +19,20 @@
     </mat-form-field>
   </form>
 
-  <mat-checkbox [(ngModel)]="turnOnLock" class="app-mb-4 app-mt-4">{{ 'desc.turnOnTheLock' | translate }}</mat-checkbox>
-  <ng-container *ngIf="turnOnLock">
+
+  <mat-checkbox [(ngModel)]="license.exclusiveLock" class="app-mb-4 app-mt-4">{{ 'desc.turnOnTheLock' | translate }}</mat-checkbox>
+  <ng-container *ngIf="license.exclusiveLock">
     <mat-form-field class="app-w-100">
-      <mat-label>{{ 'desc.maximumReadingTime' | translate }}</mat-label>
-      <input matInput [placeholder]="'desc.maximumReadingTime' | translate">
+      <mat-label>{{ formatedMaxTime()  }}</mat-label>
+      <input matInput [placeholder]="'desc.maximumReadingTime' | translate" [(ngModel)]="license.max">
     </mat-form-field>
     <mat-form-field class="app-w-100">
       <mat-label>{{ 'desc.refreshInterval' | translate }}</mat-label>
-      <input matInput [placeholder]="'desc.refreshInterval' | translate">
+      <input matInput [placeholder]="'desc.refreshInterval' | translate" [(ngModel)]="license.refresh">
     </mat-form-field>
     <mat-form-field class="app-w-100">
       <mat-label>{{ 'desc.numberOfReadersReadingConcurrently' | translate }}</mat-label>
-      <input matInput [placeholder]="'desc.numberOfReadersReadingConcurrently' | translate">
+      <input matInput [placeholder]="'desc.numberOfReadersReadingConcurrently' | translate"  [(ngModel)]="license.readers">
     </mat-form-field>
   </ng-container>
 </mat-dialog-content>

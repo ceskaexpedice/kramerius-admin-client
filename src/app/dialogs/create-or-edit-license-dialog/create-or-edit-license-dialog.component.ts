@@ -16,7 +16,6 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   licenseForm: FormGroup;
 
   licenseNames: string[];
-
   libraryName:string;
   
   license: License;
@@ -60,14 +59,21 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
                       ]],
         licenseDesc: ['', Validators.required]
       });
-  
+
+      // default value for exclusive lock
+      this.license.exclusiveLock = false;
+      this.license.refresh = 20;
+      this.license.max = 10000;
+      this.license.readers = 1;
+
     }
 
- 
     this.licenseName.markAsTouched();
     this.licenseDesc.markAsTouched();
 
   }
+
+  
 
   get licenseName() {
     return this.licenseForm.get('licenseName');
@@ -77,6 +83,33 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
     return this.licenseForm.get('licenseDesc');
   }
 
+  
+  formatedMaxTime() {
+    if (this.license.max > 0) {
+      return "Zadáno v sekundách - "+this.formatTime(this.license.max);
+    }
+  }
+  
+  formatTime(seconds: number): string {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    
+    const hoursStr = hours === 1 ? '1 hodina' : `${hours} hodiny`;
+    const minutesStr = minutes === 1 ? '1 minuta' : `${minutes} minuty`;
+    const secondsStr = remainingSeconds === 1 ? '1 sekunda' : `${remainingSeconds} sekundy`;
+    
+    const timeComponents = [];
+    if (hours > 0) {
+        timeComponents.push(hoursStr);
+    }
+    if (minutes > 0) {
+        timeComponents.push(minutesStr);
+    }
+    timeComponents.push(secondsStr);
+
+    return timeComponents.join(' a ');
+  }
   
   onKeyUp() {
     this.licenseName.markAsTouched();

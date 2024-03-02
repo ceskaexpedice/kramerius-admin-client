@@ -177,6 +177,8 @@
     },
     "cdk": {
       "title": "ČDK",
+      "icon":"settings_ethernet",
+      "desc": "Connected libraries settings",
       "proxy": {
         "title": "Proxy - connected libraries",
         "icon": "hub"
@@ -1149,8 +1151,8 @@
     "listOfSets": "List of sets",
     "implicitSet": "Implicit set",
     "turnOnTheLock": "Turn on the lock",
-    "maximumReadingTime": "Maximum reading time",
-    "refreshInterval": "Refresh interval",
+    "maximumReadingTime": "Maximum reading time (in seconds)",
+    "refreshInterval": "Refresh interval (in seconds)",
     "numberOfReadersReadingConcurrently": "Number of readers reading concurrently",
     "localLicense": "Local license"
   }

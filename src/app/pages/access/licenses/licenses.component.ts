@@ -172,6 +172,7 @@ export class LicensesComponent implements OnInit {
     });
   }
 
+
   private sortLicenses() {
     this.licenses.sort((a: License, b: License) => {
       return a.priority - b.priority;
@@ -205,5 +206,27 @@ export class LicensesComponent implements OnInit {
       this.isItemChildDraged = true;
     }
   }
+
+  formatTime(seconds: number): string {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    
+    const hoursStr = hours === 1 ? '1 hodina' : `${hours} hodiny`;
+    const minutesStr = minutes === 1 ? '1 minuta' : `${minutes} minuty`;
+    const secondsStr = remainingSeconds === 1 ? '1 sekunda' : `${remainingSeconds} sekundy`;
+    
+    const timeComponents = [];
+    if (hours > 0) {
+        timeComponents.push(hoursStr);
+    }
+    if (minutes > 0) {
+        timeComponents.push(minutesStr);
+    }
+    timeComponents.push(secondsStr);
+
+    return timeComponents.join(' a ');
+  }
+
 
 }

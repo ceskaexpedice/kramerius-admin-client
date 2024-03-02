@@ -177,6 +177,8 @@
     },
     "cdk": {
       "title": "ČDK",
+      "icon":"settings_ethernet",
+      "desc": "Nastavení zapojených knihoven",
       "proxy": {
         "title": "Proxy - Zapojené knihovny",
         "icon": "hub"
@@ -1149,8 +1151,8 @@
     "listOfSets": "Seznam setů",
     "implicitSet": "Implicitní set",
     "turnOnTheLock": "Zapnout zámek",
-    "maximumReadingTime": "Maximální doba čtení",
-    "refreshInterval": "Refresh interval",
+    "maximumReadingTime": "Maximální doba čtení (v sekundách)",
+    "refreshInterval": "Refresh interval (v sekundách)",
     "numberOfReadersReadingConcurrently": "Počet souběžně čtoucích čtenářů",
     "localLicense": "Lokální licence"
   }

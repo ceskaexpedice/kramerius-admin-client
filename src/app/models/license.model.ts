@@ -8,6 +8,11 @@ export class License {
   priority: number;
   group:string;
 
+  exclusiveLock: boolean = false;
+  refresh:number = -1;
+  max:number = -1;
+  readers: number = -1;
+
 
 
 
@@ -23,6 +28,19 @@ export class License {
     license.description = json['description'] || '';
     license.priority = json['priority'];
     license.group = json['group'];
+
+    /*
+    private static final String MAXREADERS_KEY = "maxreaders";
+    private static final String REFRESHINTERVAL_KEY = "refreshinterval";
+    private static final String MAXINTERVAL_KEY = "maxinterval";
+    private static final String EXCLUSIVE_KEY = "exclusive";
+    */
+
+    license.exclusiveLock=json["exclusive"];
+    license.refresh=json["refreshinterval"];
+    license.max=json["maxinterval"];
+    license.readers=json["maxreaders"];
+
 
     return license;
 
@@ -41,15 +59,30 @@ export class License {
     this.priority = license.priority;
     this.name = license.name;
     this.description = license.description || '';
+    
+    this.exclusiveLock = license.exclusiveLock;
+    this.refresh = license.refresh;
+    this.max = license.max;
+    this.readers = license.readers;
+
   }
 
   toJson() {
-    return {
+    let retval =  {
       id: this.id,
       priority: this.priority,
       name: this.name,
       description: this.description || ''
+    };
+
+    if (this.exclusiveLock) {
+      retval['exclusive']= true;
+      retval['refreshinterval']= this.refresh;
+      retval['maxinterval']= this.max;
+      retval['maxreaders']= this.readers;
     }
+
+    return retval;
   }
 
 
