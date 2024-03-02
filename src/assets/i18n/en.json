@@ -177,8 +177,6 @@
     },
     "cdk": {
       "title": "ČDK",
-      "icon":"settings_ethernet",
-      "desc": "Connected libraries settings",
       "proxy": {
         "title": "Proxy - connected libraries",
         "icon": "hub"
@@ -1107,7 +1105,7 @@
     "noLicenseSelected": "No license selected",
     "licenseSynchronization": "License synchronization",
     "licenseSynchronizationFetch": "Start license synchronization process",
-    "editingAnObjectInTheProarcApplication": "Editing an object in the ProArc application",
+    "editingAnObjectInTheApplication": "Editing an object in the {{ app }} application",
     "selectServer": "Select a server",
     "selectAllObjects": "Select all objects",
     "selectThisObject": "Select this object",
@@ -1151,8 +1149,8 @@
     "listOfSets": "List of sets",
     "implicitSet": "Implicit set",
     "turnOnTheLock": "Turn on the lock",
-    "maximumReadingTime": "Maximum reading time (in seconds)",
-    "refreshInterval": "Refresh interval (in seconds)",
+    "maximumReadingTime": "Maximum reading time",
+    "refreshInterval": "Refresh interval",
     "numberOfReadersReadingConcurrently": "Number of readers reading concurrently",
     "localLicense": "Local license"
   }

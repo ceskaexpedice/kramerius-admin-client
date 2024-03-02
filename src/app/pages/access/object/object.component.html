@@ -168,8 +168,8 @@
 
         <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'editing' && proarcServers?.length > 0">
           <mat-card-content>
-            <div>
-              <h3 class="app-mt-0">{{ 'desc.editingAnObjectInTheProarcApplication' | translate }}</h3>
+            <div class="app-pb-4">
+              <h3 class="app-mt-0">{{ 'desc.editingAnObjectInTheApplication' | translate : {app: 'ProArc'} }}</h3>
               <mat-form-field class="app-w-100">
                 <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
                 <mat-select [(ngModel)]="selectedProarcServer">
@@ -180,6 +180,21 @@
               </mat-form-field>
               <div>
                 <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer.domain, selectedProarcServer.krameriusInstance)" [disabled]="!selectedProarcServer.domain">{{ 'button.editObject' | translate }}</button>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div>
+              <h3>{{ 'desc.editingAnObjectInTheApplication' | translate : {app: 'AltoEditor'} }}</h3>
+              <mat-form-field class="app-w-100">
+                <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
+                <mat-select [(ngModel)]="selectedAltoeditorServer">
+                  <mat-option *ngFor="let server of altoeditorServers" [value]="server">
+                    <strong>{{ server.name }}</strong> - {{ server.domain }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div>
+                <button mat-flat-button color="primary" (click)="openObjectInAltoeditor(selectedAltoeditorServer.domain)" [disabled]="!selectedAltoeditorServer.domain">{{ 'button.editObject' | translate }}</button>
               </div>
             </div>
           </mat-card-content>
