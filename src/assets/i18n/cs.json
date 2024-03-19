@@ -1107,7 +1107,7 @@
     "noLicenseSelected": "Není vybrána licence",
     "licenseSynchronization": "Synchronizace licencí",
     "licenseSynchronizationFetch": "Spuštění synchronizace licencí",
-    "editingAnObjectInTheProarcApplication": "Editace objektu v aplikaci ProArc",
+    "editingAnObjectInTheApplication": "Editace objektu v aplikaci {{ app }}",
     "selectServer": "Vyberte server",
     "selectAllObjects": "Vybrat všechny objekty",
     "selectThisObject": "Vybrat tento objekt",

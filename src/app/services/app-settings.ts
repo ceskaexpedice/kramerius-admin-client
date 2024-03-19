@@ -33,6 +33,7 @@ export class AppSettings {
   cdkMode = !!APP_GLOBAL.cdkMode;
 
   proarc = APP_GLOBAL.proarc || [];
+  altoeditor = APP_GLOBAL.altoeditor || [];
   krameriusInstance = APP_GLOBAL.krameriusInstance || '';
 
 

@@ -54,6 +54,9 @@ export class ObjectComponent implements OnInit {
 
   proarcServers = this.settings.proarc;
   selectedProarcServer: any = [];
+  
+  altoeditorServers = this.settings.altoeditor;
+  selectedAltoeditorServer: any = [];
 
   //TODO:  language from component
   language:string  = 'cze';
@@ -515,6 +518,10 @@ export class ObjectComponent implements OnInit {
 
   openObjectInProarc(domain: string, krameriusInstance: string) {
     window.open(domain + '/kramerius/' + this.inputPid + '?instance=' + krameriusInstance, "_blank");
+  }
+
+  openObjectInAltoeditor(domain: string) {
+    window.open(domain + '/' + this.inputPid + '/editing', "_blank");
   }
 }
 
