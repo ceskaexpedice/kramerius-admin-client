@@ -13,6 +13,8 @@ import { licensesValidator } from "./licensesValidator";
 })
 export class CreateOrEditLicenseDialogComponent implements OnInit {
 
+  //selectedOption: string = 'instance';
+
   licenseForm: FormGroup;
 
   licenseNames: string[];

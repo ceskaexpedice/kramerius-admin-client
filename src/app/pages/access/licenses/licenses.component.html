@@ -26,6 +26,7 @@
               </mat-card-title>
               <mat-card-subtitle *ngIf="licence.group == 'local'"><strong>{{ 'desc.localLicense' | translate }}</strong></mat-card-subtitle>
               <mat-card-subtitle *ngIf="licence.group != 'local'"><strong>{{ 'desc.globalLicense' | translate }}</strong></mat-card-subtitle>
+
               <div class="app-mt-2"><i>{{ licence.description}}</i></div>
             </div>
             <div  class="app-right app-actions">

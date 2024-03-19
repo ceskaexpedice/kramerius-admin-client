@@ -12,7 +12,7 @@ export class License {
   refresh:number = -1;
   max:number = -1;
   readers: number = -1;
-
+  type ="instance";
 
 
 
@@ -40,6 +40,7 @@ export class License {
     license.refresh=json["refreshinterval"];
     license.max=json["maxinterval"];
     license.readers=json["maxreaders"];
+    license.type = json["type"];
 
 
     return license;
@@ -64,6 +65,7 @@ export class License {
     this.refresh = license.refresh;
     this.max = license.max;
     this.readers = license.readers;
+    this.type = license.type;
 
   }
 
@@ -80,8 +82,8 @@ export class License {
       retval['refreshinterval']= this.refresh;
       retval['maxinterval']= this.max;
       retval['maxreaders']= this.readers;
+      retval['type'] = this.type;
     }
-
     return retval;
   }
 

@@ -30,10 +30,16 @@
       <mat-label>{{ 'desc.refreshInterval' | translate }}</mat-label>
       <input matInput [placeholder]="'desc.refreshInterval' | translate" [(ngModel)]="license.refresh">
     </mat-form-field>
+
     <mat-form-field class="app-w-100">
       <mat-label>{{ 'desc.numberOfReadersReadingConcurrently' | translate }}</mat-label>
       <input matInput [placeholder]="'desc.numberOfReadersReadingConcurrently' | translate"  [(ngModel)]="license.readers">
     </mat-form-field>
+
+    <mat-radio-group [(ngModel)]="license.type">
+      <mat-radio-button  value="INSTANCE">instance</mat-radio-button>
+      <mat-radio-button  value="RULE">rule</mat-radio-button>
+    </mat-radio-group>
   </ng-container>
 </mat-dialog-content>
 
