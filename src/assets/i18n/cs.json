@@ -488,7 +488,9 @@
     "addCutting": "Přidat výstřižek",
     "changeRepresentativeView": "Změnit reprezentativní náhled",
     "save": "Uložit",
-    "addNewSet": "Přidat nový set"
+    "addNewSet": "Přidat nový set",
+    "viewConsumedLicenses": "Zobrazit konzumované licence",
+    "hideConsumedLicenses": "Skrýt konzumované licence"
   },
   "field": {
     "public": "Veřejné",
@@ -1154,6 +1156,9 @@
     "maximumReadingTime": "Maximální doba čtení (v sekundách)",
     "refreshInterval": "Refresh interval (v sekundách)",
     "numberOfReadersReadingConcurrently": "Počet souběžně čtoucích čtenářů",
-    "localLicense": "Lokální licence"
+    "localLicense": "Lokální licence",
+    "readingTime": "Čas čtení",
+    "startReading": "Začátek čtení",
+    "user": "Uživatel"
   }
 }

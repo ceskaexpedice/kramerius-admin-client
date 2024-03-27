@@ -177,6 +177,8 @@
     },
     "cdk": {
       "title": "ČDK",
+      "icon":"settings_ethernet",
+      "desc": "Setting up the involved libraries",
       "proxy": {
         "title": "Proxy - connected libraries",
         "icon": "hub"
@@ -486,7 +488,9 @@
     "addCutting": "Add cutting",
     "changeRepresentativeView": "Change representative view",
     "save": "Save",
-    "addNewSet": "Add new set"
+    "addNewSet": "Add new set",
+    "viewConsumedLicenses": "View consumed licenses",
+    "hideConsumedLicenses": "Hide consumed licenses"
   },
   "field": {
     "public": "Public",
@@ -1152,6 +1156,9 @@
     "maximumReadingTime": "Maximum reading time",
     "refreshInterval": "Refresh interval",
     "numberOfReadersReadingConcurrently": "Number of readers reading concurrently",
-    "localLicense": "Local license"
+    "localLicense": "Local license",
+    "readingTime": "Reading time",
+    "startReading": "Start reading",
+    "user": "User"
   }
 }

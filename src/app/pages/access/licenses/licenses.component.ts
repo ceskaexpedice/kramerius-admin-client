@@ -154,7 +154,7 @@ export class LicensesComponent implements OnInit {
         libraryName: this.libraryName,
         licenseNames: this.licenses.map((lic) => lic.name).concat(this.licenses.map((lic) => lic.name))
       },
-      width: '600px',
+      width: '800px',
       panelClass: 'app-create-or-edit-license-dialog'
     } );
     dialogRef.afterClosed().subscribe(result => {
