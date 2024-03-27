@@ -40,6 +40,37 @@
       <mat-radio-button  value="INSTANCE">instance</mat-radio-button>
       <mat-radio-button  value="RULE">rule</mat-radio-button>
     </mat-radio-group>
+
+    <div *ngIf="license.type === 'RULE'" class="app-mt-4">
+      <a (click)="displayEbornList()" [ngClass]="isEbornListDisplayed ? 'app-rotate-up' : 'app-rotate-down'" fxLayout="row" fxLayoutAlign="start center" class="app-tdn">
+        <mat-icon>expand_more</mat-icon>
+        {{ isEbornListDisplayed ? ('Skrýt seznam eborn licencí' | translate) : ('Zobrazit seznam eborn licencí' | translate) }}
+      </a>
+      <div *ngIf="isEbornListDisplayed" class="app-mt-4">
+        <table class="app-table" [cellPadding]="0" [cellSpacing]="0">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Licence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>eborn_users</td>
+              <td>Knihovna_NKP</td>
+            </tr>
+            <tr>
+              <td>eborn_users</td>
+              <td>Knihovna_MZK</td>
+            </tr>
+            <tr>
+              <td>eborn_users</td>
+              <td>Knihovna_MKP</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </ng-container>
 </mat-dialog-content>
 

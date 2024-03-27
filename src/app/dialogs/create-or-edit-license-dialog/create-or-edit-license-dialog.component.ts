@@ -26,6 +26,8 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
 
   turnOnLock: boolean;
 
+  isEbornListDisplayed: boolean = false;
+
   constructor(public dialogRef: MatDialogRef<CreateOrEditLicenseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private api: AdminApiService,
@@ -167,5 +169,8 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  displayEbornList() {
+    this.isEbornListDisplayed =! this.isEbornListDisplayed;
+  }
 
 }
