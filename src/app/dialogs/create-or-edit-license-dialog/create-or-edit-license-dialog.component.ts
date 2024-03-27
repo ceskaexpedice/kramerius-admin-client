@@ -27,7 +27,6 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   turnOnLock: boolean;
 
   isConsumedLicensesExpanded: boolean = false;
-  consumedLicensesView: string;
 
   constructor(public dialogRef: MatDialogRef<CreateOrEditLicenseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -170,8 +169,7 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  viewConsumedLicenses(view: string) {
-    this.consumedLicensesView = view;
+  viewConsumedLicenses() {
     this.isConsumedLicensesExpanded =! this.isConsumedLicensesExpanded;
   }
 

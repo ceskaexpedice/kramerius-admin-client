@@ -42,16 +42,16 @@
     </mat-radio-group>
 
     <div class="app-mt-4">
-      <a (click)="viewConsumedLicenses(license.type)" [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'" fxLayout="row" fxLayoutAlign="start center" class="app-tdn">
+      <a (click)="viewConsumedLicenses()" [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'" fxLayout="row" fxLayoutAlign="start center" class="app-tdn">
         <mat-icon>expand_more</mat-icon>
         {{ isConsumedLicensesExpanded ? ('button.hideConsumedLicenses' | translate) : ('button.viewConsumedLicenses' | translate) }}
       </a>
-      <div *ngIf="isConsumedLicensesExpanded && consumedLicensesView === 'INSTANCE'" class="app-mt-4">
+      <div *ngIf="license.type === 'INSTANCE' && isConsumedLicensesExpanded" class="app-mt-4">
         <table class="app-table app-mb-4" [cellPadding]="0" [cellSpacing]="0">
           <thead>
             <tr>
               <th>{{ 'desc.user' | translate }}</th>
-              <th>{{ 'decs.readingTime' | translate }}</th>
+              <th>{{ 'desc.readingTime' | translate }}</th>
               <th>{{ 'desc.startReading' | translate }}</th>
               <th>{{ 'desc.maximumReadingTime' | translate }}</th>
             </tr>
@@ -72,7 +72,7 @@
           </tbody>
         </table>
       </div>
-      <div *ngIf="isConsumedLicensesExpanded && consumedLicensesView === 'RULE'" class="app-mt-4">
+      <div *ngIf="license.type === 'RULE' && isConsumedLicensesExpanded" class="app-mt-4">
         <table class="app-table app-mb-4" [cellPadding]="0" [cellSpacing]="0">
           <thead>
             <tr>
@@ -80,7 +80,7 @@
             </tr>
             <tr>
               <th>{{ 'desc.user' | translate }}</th>
-              <th>{{ 'decs.readingTime' | translate }}</th>
+              <th>{{ 'desc.readingTime' | translate }}</th>
               <th>{{ 'desc.startReading' | translate }}</th>
               <th>{{ 'desc.maximumReadingTime' | translate }}</th>
             </tr>
@@ -107,7 +107,7 @@
             </tr>
             <tr>
               <th>{{ 'desc.user' | translate }}</th>
-              <th>{{ 'decs.readingTime' | translate }}</th>
+              <th>{{ 'desc.readingTime' | translate }}</th>
               <th>{{ 'desc.startReading' | translate }}</th>
               <th>{{ 'desc.maximumReadingTime' | translate }}</th>
             </tr>
@@ -134,7 +134,7 @@
             </tr>
             <tr>
               <th>{{ 'desc.user' | translate }}</th>
-              <th>{{ 'decs.readingTime' | translate }}</th>
+              <th>{{ 'desc.readingTime' | translate }}</th>
               <th>{{ 'desc.startReading' | translate }}</th>
               <th>{{ 'desc.maximumReadingTime' | translate }}</th>
             </tr>
@@ -153,7 +153,7 @@
               <td>3 hodiny</td>
             </tr>
           </tbody>
-        </table>
+        </table>      
       </div>
     </div>
   </ng-container>
