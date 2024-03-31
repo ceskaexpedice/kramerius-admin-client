@@ -36,124 +36,49 @@
       <input matInput [placeholder]="'desc.numberOfReadersReadingConcurrently' | translate"  [(ngModel)]="license.readers">
     </mat-form-field>
 
-    <mat-radio-group [(ngModel)]="license.type">
+    <mat-radio-group [(ngModel)]="license.type" (change)="lockTypeChange()">
       <mat-radio-button  value="INSTANCE">instance</mat-radio-button>
       <mat-radio-button  value="RULE">rule</mat-radio-button>
     </mat-radio-group>
 
-    <div class="app-mt-4">
+    <div  *ngIf="lockTypeChanged" class="app-mt-4">
+        <p>{{'alert.createOrEditLicense.errorlock1' |  translate}}</p>
+    </div>
+
+    <div  *ngIf="!lockTypeChanged" class="app-mt-4">
       <a (click)="viewConsumedLicenses()" [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'" fxLayout="row" fxLayoutAlign="start center" class="app-tdn">
         <mat-icon>expand_more</mat-icon>
         {{ isConsumedLicensesExpanded ? ('button.hideConsumedLicenses' | translate) : ('button.viewConsumedLicenses' | translate) }}
       </a>
-      <div *ngIf="license.type === 'INSTANCE' && isConsumedLicensesExpanded" class="app-mt-4">
-        <table class="app-table app-mb-4" [cellPadding]="0" [cellSpacing]="0">
-          <thead>
-            <tr>
-              <th>{{ 'desc.user' | translate }}</th>
-              <th>{{ 'desc.readingTime' | translate }}</th>
-              <th>{{ 'desc.startReading' | translate }}</th>
-              <th>{{ 'desc.maximumReadingTime' | translate }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Karel Vomacka</td>
-              <td>1 hodina</td>
-              <td>21.2.2023 16:00</td>
-              <td>3 hodiny</td>
-            </tr>
-            <tr>
-              <td>Karel Vomacka</td>
-              <td>1 hodina</td>
-              <td>21.2.2023 16:00</td>
-              <td>3 hodiny</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div *ngIf="license.type === 'RULE' && isConsumedLicensesExpanded" class="app-mt-4">
-        <table class="app-table app-mb-4" [cellPadding]="0" [cellSpacing]="0">
-          <thead>
-            <tr>
-              <th colspan="4"><strong>eborn_users</strong><span class="app-pipe"></span><strong>Knihovna_NKP</strong></th>
-            </tr>
-            <tr>
-              <th>{{ 'desc.user' | translate }}</th>
-              <th>{{ 'desc.readingTime' | translate }}</th>
-              <th>{{ 'desc.startReading' | translate }}</th>
-              <th>{{ 'desc.maximumReadingTime' | translate }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Karel Vomacka</td>
-              <td>1 hodina</td>
-              <td>21.2.2023 16:00</td>
-              <td>3 hodiny</td>
-            </tr>
-            <tr>
-              <td>Karel Vomacka</td>
-              <td>1 hodina</td>
-              <td>21.2.2023 16:00</td>
-              <td>3 hodiny</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="app-table app-mb-4" [cellPadding]="0" [cellSpacing]="0">
-          <thead>
-            <tr>
-              <th colspan="4"><strong>eborn_users</strong><span class="app-pipe"></span><strong>Knihovna_MZK</strong></th>
-            </tr>
-            <tr>
-              <th>{{ 'desc.user' | translate }}</th>
-              <th>{{ 'desc.readingTime' | translate }}</th>
-              <th>{{ 'desc.startReading' | translate }}</th>
-              <th>{{ 'desc.maximumReadingTime' | translate }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Karel Vomacka</td>
-              <td>1 hodina</td>
-              <td>21.2.2023 16:00</td>
-              <td>3 hodiny</td>
-            </tr>
-            <tr>
-              <td>Karel Vomacka</td>
-              <td>1 hodina</td>
-              <td>21.2.2023 16:00</td>
-              <td>3 hodiny</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="app-table app-mb-4" [cellPadding]="0" [cellSpacing]="0">
-          <thead>
-            <tr>
-              <th colspan="4"><strong>eborn_users</strong><span class="app-pipe"></span><strong>Knihovna_MZK</strong></th>
-            </tr>
-            <tr>
-              <th>{{ 'desc.user' | translate }}</th>
-              <th>{{ 'desc.readingTime' | translate }}</th>
-              <th>{{ 'desc.startReading' | translate }}</th>
-              <th>{{ 'desc.maximumReadingTime' | translate }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Karel Vomacka</td>
-              <td>1 hodina</td>
-              <td>21.2.2023 16:00</td>
-              <td>3 hodiny</td>
-            </tr>
-            <tr>
-              <td>Karel Vomacka</td>
-              <td>1 hodina</td>
-              <td>21.2.2023 16:00</td>
-              <td>3 hodiny</td>
-            </tr>
-          </tbody>
-        </table>      
+
+      <div *ngIf="isConsumedLicensesExpanded" class="app-mt-4">
+
+
+        <ng-container *ngFor="let lockMap of lockMaps">
+          <table *ngIf="lockMap.enabled" class="app-table app-mb-4" [cellPadding]="0" [cellSpacing]="0">
+            <p>{{lockMap.enabled}}</p>
+            <thead>
+              <tr>
+                <th colspan="4"><strong>{{lockMap.formattedName}}</strong></th>
+              </tr>
+              <tr>
+                <th>{{ 'desc.user' | translate }}</th>
+                <th>{{ 'desc.readingTime' | translate }}</th>
+                <th>{{ 'desc.startReading' | translate }}</th>
+                <th>{{ 'desc.maximumReadingTime' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="lockMap.items">
+              <tr  *ngFor="let item of lockMap.items">
+                <td>{{item.username}}</td>
+                <td>{{formatTimeDifference(item.createdTime)}}</td>
+                <td>{{ formatDateTime( item.createdTime) }}</td>
+                <td>{{formatDateTime(item.maxTime)}}</td>
+              </tr>
+            </tbody>
+          </table>
+  
+        </ng-container>
       </div>
     </div>
   </ng-container>

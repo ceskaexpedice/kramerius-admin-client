@@ -62,6 +62,16 @@ export class AdminApiService {
     return this.http.put(this.baseUrl + path, body, options);
   }
 
+  getLocksByLicense(license:string): Observable<any> {
+    return this.get(`/locks/license/${license}`, {}).pipe(
+    );
+  }
+
+  getLocksItems(hash:string): Observable<any> {
+    return this.get(`/locks/${hash}`, {}).pipe(
+    );
+  }
+
   getGeneralQuery(path: string): Observable<any> {
     const options = { headers: new HttpHeaders({ 'Accept': '*' }) };
     return this.http.get(this.baseUrl + path, options);
@@ -128,6 +138,8 @@ export class AdminApiService {
       map(response => [Batch.fromJson(response), Process.fromJson(response['process'])])
     );
   }
+
+
 
   getProcessOwners(): Observable<ProcessOwner[]> {
     return this.get('/processes/owners').pipe(
@@ -626,6 +638,45 @@ export class AdminApiService {
   getConfFlagToLicense() {
     return this.get(`/conf/flagtolicense`)
   }
+
+  /* IIIF Support */
+
+  /**  Parse client url and returns pid of object and bounding box */
+  parseClientUrl(inputUrl: string): { uuid: string, bb: string } | null {
+    const uuidRegex = /uuid:([a-fA-F0-9-]+)\?/;
+    const bbRegex = /bb=([^&]+)/;
+
+    const uuidMatch = inputUrl.match(uuidRegex);
+    const bbMatch = inputUrl.match(bbRegex);
+
+    if (uuidMatch && bbMatch) {
+        const uuid = uuidMatch[1];
+        const bb = bbMatch[1];
+
+        return { "uuid":"uuid:"+uuid, "bb":bb };
+    }
+    return null;
+  }
+
+  /** Returns true if given url is clip url */
+  isClipUrl(url:string): boolean {
+    
+    if (url?.startsWith('http')) {
+      const coreUrlCompoents = new URL(this.appSettings.coreBaseUrl);
+      const urlComponents = new URL(url);
+      if (coreUrlCompoents.host === urlComponents.host ) {
+        let struct = this.parseClientUrl(url);
+        if (struct != null) {
+          let retflag =  struct != null;
+          return retflag;
+        } else if (url.match(/iiif/)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 
 
 }

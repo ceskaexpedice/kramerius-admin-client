@@ -14,8 +14,8 @@
   <mat-form-field class="app-w-100">
     <mat-label>{{ 'desc.cuttingUrl' | translate }}</mat-label>
     <input type="text" matInput  [(ngModel)]="url" [placeholder]="'desc.cuttingUrl' | translate">
-    <!-- <mat-icon matPrefix class="app-mr-2 app-va-text-botttom">link</mat-icon> -->
-    <mat-icon matPrefix class="app-mr-2 app-va-text-botttom material-icons-outlined">cut</mat-icon>
+    <mat-icon *ngIf="!isClipUrl()" matPrefix class="app-mr-2 app-va-text-botttom">link</mat-icon>
+    <mat-icon *ngIf="isClipUrl()" matPrefix class="app-mr-2 app-va-text-botttom material-icons-outlined">cut</mat-icon>
     <div *ngIf="urlFormControl.hasError('pattern') && urlFormControl.dirty">
       Neplatná URL adresa
     </div>

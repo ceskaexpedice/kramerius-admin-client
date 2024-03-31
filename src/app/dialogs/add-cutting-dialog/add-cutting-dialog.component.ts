@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Collection } from 'src/app/models/collection.model';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 
 
@@ -44,7 +45,8 @@ export class AddCuttingDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddCuttingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data, 
-    protected api:CollectionsService
+    protected api:CollectionsService,
+    protected adminApi:AdminApiService,
     ) {
 
       if (data && data.collection) {
@@ -74,6 +76,11 @@ export class AddCuttingDialogComponent implements OnInit {
 
 
 
-  //addCuttingtoColllection
+  isClipUrl(): boolean {
+    const retflag = this.adminApi.isClipUrl(this.url);
+    console.log("Const retflag "+retflag);
+    return retflag;
+  }
+
 
 }

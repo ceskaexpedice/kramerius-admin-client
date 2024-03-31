@@ -311,7 +311,8 @@
     },
     "createOrEditLicense": {
       "error1": "Licence s tímto názvem už exituje, zadejte jiný název.",
-      "error2": "Licenci se nepodařilo vytvořit."
+      "error2": "Licenci se nepodařilo vytvořit.",
+      "errorlock1":"Změna typu zámku, nutno uložit. "
     },
     "collections": {
       "noData": {
@@ -1153,7 +1154,7 @@
     "listOfSets": "Seznam setů",
     "implicitSet": "Implicitní set",
     "turnOnTheLock": "Zapnout zámek",
-    "maximumReadingTime": "Maximální doba čtení (v sekundách)",
+    "maximumReadingTime": "Maximální doba čtení ",
     "refreshInterval": "Refresh interval (v sekundách)",
     "numberOfReadersReadingConcurrently": "Počet souběžně čtoucích čtenářů",
     "localLicense": "Lokální licence",

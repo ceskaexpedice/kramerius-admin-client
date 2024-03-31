@@ -311,7 +311,8 @@
     },
     "createOrEditLicense": {
       "error1": "The license with this name is already expired, please enter another name.",
-      "error2": "The license could not be created."
+      "error2": "The license could not be created.",
+      "errorlock1":"Change of lock type, must be saved. "
     },
     "collections": {
       "noData": {
