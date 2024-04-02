@@ -41,16 +41,17 @@
       <mat-radio-button  value="RULE">rule</mat-radio-button>
     </mat-radio-group>
 
-    <div  *ngIf="lockTypeChanged" class="app-mt-4">
-        <p>{{'alert.createOrEditLicense.errorlock1' |  translate}}</p>
-    </div>
+    <mat-card *ngIf="lockTypeChanged" class="app-view-alert app-info app-mt-4">
+      <mat-card-content>
+        <mat-icon>info</mat-icon>{{'alert.createOrEditLicense.errorlock1' |  translate}}
+      </mat-card-content>
+    </mat-card>
 
     <div  *ngIf="!lockTypeChanged" class="app-mt-4">
       <a (click)="viewConsumedLicenses()" [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'" fxLayout="row" fxLayoutAlign="start center" class="app-tdn">
         <mat-icon>expand_more</mat-icon>
         {{ isConsumedLicensesExpanded ? ('button.hideConsumedLicenses' | translate) : ('button.viewConsumedLicenses' | translate) }}
       </a>
-
       <div *ngIf="isConsumedLicensesExpanded" class="app-mt-4">
         <ng-container *ngFor="let lockMap of lockMaps">
           <table *ngIf="lockMap.enabled" class="app-table app-mb-2" [cellPadding]="0" [cellSpacing]="0">
