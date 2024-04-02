@@ -52,11 +52,8 @@
       </a>
 
       <div *ngIf="isConsumedLicensesExpanded" class="app-mt-4">
-
-
         <ng-container *ngFor="let lockMap of lockMaps">
-          <table *ngIf="lockMap.enabled" class="app-table app-mb-4" [cellPadding]="0" [cellSpacing]="0">
-            <p>{{lockMap.enabled}}</p>
+          <table *ngIf="lockMap.enabled" class="app-table app-mb-2" [cellPadding]="0" [cellSpacing]="0">
             <thead>
               <tr>
                 <th colspan="4"><strong>{{lockMap.formattedName}}</strong></th>
@@ -77,7 +74,11 @@
               </tr>
             </tbody>
           </table>
-  
+          <mat-card *ngIf="lockMaps?.length === 0" class="app-view-alert app-info">
+            <mat-card-content>
+              <mat-icon>info</mat-icon>{{ 'alert.noResults' | translate }}
+            </mat-card-content>
+          </mat-card>
         </ng-container>
       </div>
     </div>

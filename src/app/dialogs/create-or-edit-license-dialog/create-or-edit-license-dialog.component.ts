@@ -33,6 +33,8 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   // lock map to display 
   lockMaps:any[] = [];
 
+  loading: boolean = true;
+
   constructor(public dialogRef: MatDialogRef<CreateOrEditLicenseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private api: AdminApiService,
@@ -196,6 +198,7 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
               });
           });
         });
+        this.loading = false;
       } else {
         this.lockMaps = [];
       }
