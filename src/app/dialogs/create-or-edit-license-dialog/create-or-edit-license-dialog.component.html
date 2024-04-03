@@ -47,7 +47,7 @@
       </mat-card-content>
     </mat-card>
 
-    <div  *ngIf="!lockTypeChanged" class="app-mt-4">
+    <div  *ngIf="!lockTypeChanged && lockMaps?.length > 0" class="app-mt-4">
       <a (click)="viewConsumedLicenses()" [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'" fxLayout="row" fxLayoutAlign="start center" class="app-tdn">
         <mat-icon>expand_more</mat-icon>
         {{ isConsumedLicensesExpanded ? ('button.hideConsumedLicenses' | translate) : ('button.viewConsumedLicenses' | translate) }}
