@@ -1,4 +1,4 @@
-name: Build - main
+name: Build - release
 on:
     release:
         types: [unpublished, created]
@@ -22,6 +22,7 @@ jobs:
       run: |
         npm install
         npm run build
+        node run-script create-zip.js
         
     - uses: actions/upload-artifact@v3
       with:
