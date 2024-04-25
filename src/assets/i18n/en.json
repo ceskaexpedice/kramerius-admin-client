@@ -1160,6 +1160,7 @@
     "localLicense": "Local license",
     "readingTime": "Reading time",
     "startReading": "Start reading",
-    "user": "User"
+    "user": "User",
+    "deleteObject": "Delete object"
   }
 }

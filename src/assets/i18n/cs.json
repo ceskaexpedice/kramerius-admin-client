@@ -1160,6 +1160,7 @@
     "localLicense": "Lokální licence",
     "readingTime": "Čas čtení",
     "startReading": "Začátek čtení",
-    "user": "Uživatel"
+    "user": "Uživatel",
+    "deleteObject": "Smazat objekt"
   }
 }
