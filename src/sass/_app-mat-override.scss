@@ -381,6 +381,12 @@
           @extend .app-pr-4;
         }
 
+        &.mat-column-state {      
+          .app-badge {
+            min-width: 110px;
+          }
+        }
+
         .app-text-cutter-wrapper {
           position: relative;
           display: flex;

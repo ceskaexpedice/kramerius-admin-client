@@ -1165,6 +1165,9 @@
     "readingTime": "Čas čtení",
     "startReading": "Začátek čtení",
     "user": "Uživatel",
-    "deleteObject": "Smazat objekt"
+    "deleteObject": "Smazat objekt",
+    "pid": "Pid",
+    "true": "Ano",
+    "false": "Ne"
   }
 }

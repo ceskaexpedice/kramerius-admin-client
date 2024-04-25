@@ -1165,6 +1165,9 @@
     "readingTime": "Reading time",
     "startReading": "Start reading",
     "user": "User",
-    "deleteObject": "Delete object"
+    "deleteObject": "Delete object",
+    "pid": "Pid",
+    "true": "Yes",
+    "false": "No"
   }
 }
