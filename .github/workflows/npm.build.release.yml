@@ -22,7 +22,7 @@ jobs:
       run: |
         npm install
         npm run build
-        node run-script create-zip.js
+        npm run-script create-zip.js
         
     - uses: actions/upload-artifact@v3
       with:
