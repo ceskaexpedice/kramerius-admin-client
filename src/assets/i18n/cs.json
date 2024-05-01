@@ -190,6 +190,11 @@
       "objectReharvest": {
         "title": "Reharvest objektu",
         "icon": "repeat"
+      },
+      "reharvestjob":{
+        "running":"Reharvest spuštěn",
+        "open":"Reharvest naplánován",
+        "closed":"Reharvest ukončen"
       }
     }
   },

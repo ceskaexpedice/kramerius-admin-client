@@ -13,7 +13,7 @@ import { Role } from '../models/roles.model';
 import { ConditionParam } from '../models/condition-param.model';
 import { Right } from '../models/right.model';
 import { RightAction } from '../models/right-action.model';
-import { Library, StatusTimtamp } from '../models/cdk.library.model';
+import { Library, Reharvest, StatusTimtamp } from '../models/cdk.library.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,7 @@ export class CdkApiService {
         return this.http.get(url, options);
     }
     
-    private doPut(path: string, params, type = 'json'): Observable<Object> {
+    private doPut(path: string, body:any, params, type = 'json'): Observable<Object> {
         const options = {
           params: params
         };
@@ -48,12 +48,16 @@ export class CdkApiService {
           options['observe'] = 'response';
         }
         let url = this.cdkUrl + path;
-        return this.http.put(url, options);
+        if (body) {
+          return this.http.put(url, body, options);
+        } else {
+          return this.http.put(url,  options);
+        }
     }
 
 
     setStatus(code:string, status:boolean) : Observable<any>{
-      return this.doPut(`/api/admin/v7.0/connected/${code}/status?status=${status}`,{}).pipe(map(response => Library.oneLibFromJson(code, response)));
+      return this.doPut(`/api/admin/v7.0/connected/${code}/status?status=${status}`,null,{}).pipe(map(response => Library.oneLibFromJson(code, response)));
     }
 
     connected(): Observable<any[]> {
@@ -68,6 +72,21 @@ export class CdkApiService {
       //http://localhost:8080/search/api/admin/v7.0/connected/knav/timestamps
       return this.doGet(`/api/admin/v7.0/connected/${code}/timestamps`,{}).pipe(map(response => StatusTimtamp.statusesFromJson(response)));
     }
+
+
+    reharvests(): Observable<any[]> {
+      //search/api/admin/v7.0/reharvest
+      return this.doGet('/api/admin/v7.0/reharvest',{}).pipe(map(response => Reharvest.reharvestsFromJson(response)));
+    }
+
+    planReharvest(obj:any) {
+      //https://api.val.ceskadigitalniknihovna.cz/search/api/admin/v7.0/reharvest
+      return this.doPut('/api/admin/v7.0/reharvest',obj,{}).pipe(map(response => Reharvest.reharvestFromJson(response)));
+    }
+
+    // timestamps(code): Observable<any[]> {
+    //   return this.doGet(`/api/admin/v7.0/connected/${code}/timestamps`,{}).pipe(map(response => StatusTimtamp.statusesFromJson(response)));
+    // }
 
 
 

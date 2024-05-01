@@ -190,7 +190,13 @@
       "objectReharvest": {
         "title": "Oject reharvest",
         "icon": "repeat"
+      },
+      "reharvestjob":{
+        "running":"Reharvest started",
+        "open":"Reharvest planned",
+        "closed":"Reharvest finished"
       }
+
     }
   },
   "navbar": {
