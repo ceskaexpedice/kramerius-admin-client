@@ -105,7 +105,9 @@ $states: (
   warning: #ab493f,
   session: $app-color-lightnes,
   keyword: $app-color-darknes,
-  default: $app-gray-6
+  default: $app-gray-6,
+  is-reharvest-from-core: #faf7e3,
+  is-reharvest-from-admin: #f0ffee,
 );
 
 // dashboard

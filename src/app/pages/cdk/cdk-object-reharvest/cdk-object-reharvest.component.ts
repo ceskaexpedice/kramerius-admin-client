@@ -36,6 +36,7 @@ export class CdkObjectReharvestComponent implements OnInit {
   //dataSource = ELEMENT_DATA;
 
   dataSource:Reharvest[];
+  isReharvestFromCore: boolean = true;
 
   constructor(
     private dialog: MatDialog,
