@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 import { Reharvest } from 'src/app/models/cdk.library.model';
+import { AppSettings } from 'src/app/services/app-settings';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
@@ -39,7 +40,8 @@ export class CdkObjectReharvestComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private ui: UIService,
-    private cdkApi: CdkApiService
+    private cdkApi: CdkApiService,
+    private appSettings:AppSettings
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +50,57 @@ export class CdkObjectReharvestComponent implements OnInit {
       this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
     });
  }
+
+  clientLink(uuid) {
+    
+    /*
+    let kramInstance =  this.appSettings.coreBaseUrl+'/../uuid/';
+    this.appSettings.getCoreInfo().subscribe(response => {
+       let  coreInfo = response;
+      if ( coreInfo?.instance?.client) {
+          kramInstance = coreInfo.instance.client+"/uuid/";
+      } 
+    });
+    return kramInstance+uuid;
+    */
+
+    return this.appSettings.userClientBaseUrl + "/uuid/" + uuid;
+  }
+
+ 
+ /*
+
+     this.kramInstance =  this.appSettings.coreBaseUrl+'/../uuid/';
+
+    this.api.getSdntSyncInfo().subscribe((data:any)=> {
+      this.info = data;
+
+      this.appSettings.getCoreInfo().subscribe(response => {
+        this.coreInfo = response;
+
+        let sindex = this.info.endpoint.indexOf('/api/v1.0/lists/changes');
+        if (sindex > -1) {
+          this.sdnntInstance = this.info.endpoint.substring(0, sindex)+"/search";
+        }
+
+        if ( this.coreInfo?.instance?.client) {
+          this.kramInstance = this.coreInfo.instance.client+"/uuid/";
+        } else {
+          if (this.info.version === 'v7') {
+            let kindex = this.info.kramerius.indexOf('/search/api/client/v7.0');
+            if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
+              this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
+            }
+          } else {
+            let kindex = this.info.kramerius.indexOf('/search/api/v5.0');
+            if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
+              this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
+            }
+          }
+      }
+    });
+
+ */
 
  openScheduledReHarvestSpecificPidsDialog() {
   const dialogRef = this.dialog.open(ScheduleReHarvestSpecificPidsDialogComponent, {

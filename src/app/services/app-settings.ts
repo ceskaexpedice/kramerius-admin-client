@@ -9,11 +9,14 @@ export class AppSettings {
   static adminClientVersion = "1.4.6" + (!!APP_GLOBAL.devMode ? "-dev" : "");
 
 
+
   // external properties from /assets/shared/globals.js
   userClientBaseUrl = APP_GLOBAL.userClientBaseUrl;
   deployPath = APP_GLOBAL.deployPath || '';
   coreBaseUrl = APP_GLOBAL.coreBaseUrl;
   keycloak = APP_GLOBAL.keycloak;
+
+  //webClient = APP_GLOBAL.webClient || 'https://ceskadigitalniknihovna.cz'
 
   devMode = !!APP_GLOBAL.devMode; //pokud true, tak se zobrazuje zalozka DEV a dalsi testovaci veci (napr. spousteni testovaciho procesu)
 

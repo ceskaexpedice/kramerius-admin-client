@@ -1013,6 +1013,7 @@
     }
   },
   "desc": {
+    "pod": "Pod",
     "modelDisplayStatistics": "Statistiky zobrazení modelů",
     "statisticsOfUsedLanguages": "Statistiky použitých jazyků",
     "authorStatistics": "Statistiky autorů",

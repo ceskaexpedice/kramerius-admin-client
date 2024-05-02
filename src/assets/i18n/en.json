@@ -1014,6 +1014,7 @@
     }
   },
   "desc": {
+    "pod": "Pod",
     "modelDisplayStatistics": "Model display statistics",
     "statisticsOfUsedLanguages": "Statistics of used languages",
     "authorStatistics": "Author statistics",
