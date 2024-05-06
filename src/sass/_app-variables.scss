@@ -103,11 +103,18 @@ $states: (
   killed: #ca7023,
   not-running: #ca7023,
   warning: #ab493f,
+  too-big: #ab443f,
+  waiting_for_approve: #a44c04,
+  canceled: #a2a2a0,
+
   session: $app-color-lightnes,
   keyword: $app-color-darknes,
   default: $app-gray-6,
+  // for reharvest jobs
   is-reharvest-from-core: #faf7e3,
   is-reharvest-from-admin: #f0ffee,
+
+
 );
 
 // dashboard

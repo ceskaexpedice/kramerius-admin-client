@@ -194,7 +194,11 @@
       "reharvestjob":{
         "running":"Reharvest started",
         "open":"Reharvest planned",
-        "closed":"Reharvest finished"
+        "closed":"Reharvest finished",
+        "too_big":"Reharvest is too big -> Manual reharvest needed",
+        "waiting_for_approve":"Approve needed",
+        "cancelled":"Reharvest cancelled"
+
       }
 
     }
@@ -901,6 +905,8 @@
         "2-4": "{{value}} processes Remove Visibility flag have been scheduled",
         "more": "{{value}} processes have been scheduled to remove visibility flag"
       },
+
+      "scheduleCDKHarvest":"CDK harvest has been planned",
 
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",

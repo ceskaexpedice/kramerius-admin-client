@@ -194,7 +194,11 @@
       "reharvestjob":{
         "running":"Reharvest spuštěn",
         "open":"Reharvest naplánován",
-        "closed":"Reharvest ukončen"
+        "closed":"Reharvest ukončen",
+        "too_big":"Příliš velké dílo na reharvest -> Nutný ruční zásah",
+        "waiting_for_approve":"Nutnný souhlas pro reharvest",
+        "cancelled":"Reharvest zrušený"
+        
       }
     }
   },
@@ -900,6 +904,8 @@
         "2-4": "Byly naplánovány {{value}} procesy Odebrání příznaku viditelnosti",
         "more": "Bylo naplánováno {{value}} procesů Odebrání příznaku viditelnosti"
       },
+
+      "scheduleCDKHarvest":"Harvest pidu byl naplánovován",
 
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",

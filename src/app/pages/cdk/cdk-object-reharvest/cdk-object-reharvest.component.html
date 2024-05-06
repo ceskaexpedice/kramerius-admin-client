@@ -35,6 +35,9 @@
             <div *ngSwitchCase="'harvested'" class="app-badge app-finished">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
             <div *ngSwitchCase="'closed'" class="app-badge app-finished">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
             <div *ngSwitchCase="'open'" class="app-badge app-planned">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
+            <div *ngSwitchCase="'too_big'" class="app-badge app-warning">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
+            <div *ngSwitchCase="'waiting_for_approve'" class="app-badge app-waiting_for_approve">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
+            <div *ngSwitchCase="'cancelled'" class="app-badge app-canceled">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
           </ng-container>
       </ng-container>
 
@@ -58,8 +61,23 @@
           {{ element.pod }}
         </td>
       </ng-container>
+
+      <ng-container matColumnDef="approve">
+        <th mat-header-cell *matHeaderCellDef>{{ 'desc.approve' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+          
+          <button *ngIf="element.state == 'waiting_for_approve'" mat-icon-button (click)="approveState(element)">
+            <mat-icon>done</mat-icon>
+          </button>
+          <button *ngIf="element.state == 'waiting_for_approve'" mat-icon-button (click)="closedState(element)">
+            <mat-icon>close</mat-icon>
+          </button>
+
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns; let last = last; let first = first" [class.app-last]="last" [class.app-first]="first" [ngClass]="isReharvestFromCore ? 'app-is-reharvest-from-core' : 'app-is-reharvest-from-admin'"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let last = last; let first = first" [class.app-last]="last" [class.app-first]="first" [ngClass]="isReharvestFromCore(row) ? 'app-is-reharvest-from-core' : 'app-is-reharvest-from-admin'"></tr>
     </table>
   </div>
 </div>

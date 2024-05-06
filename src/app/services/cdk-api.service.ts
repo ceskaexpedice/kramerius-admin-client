@@ -84,10 +84,15 @@ export class CdkApiService {
       return this.doPut('/api/admin/v7.0/reharvest',obj,{}).pipe(map(response => Reharvest.reharvestFromJson(response)));
     }
 
-    // timestamps(code): Observable<any[]> {
-    //   return this.doGet(`/api/admin/v7.0/connected/${code}/timestamps`,{}).pipe(map(response => StatusTimtamp.statusesFromJson(response)));
-    // }
+    changeReharvestState(id:string, state:string) {
+      return this.doPut(`/api/admin/v7.0/reharvest/${id}/state?state=${state}`,{},{}).pipe(map(response => Reharvest.reharvestFromJson(response)));
+    }
 
+    // @PUT
+    // @Path("{id}/state")
+    // @Produces(MediaType.APPLICATION_JSON)
+    // public Response changeState(@PathParam("id") String id, @QueryParam("state") String state) {
+  
 
 
 

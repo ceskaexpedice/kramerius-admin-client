@@ -32,11 +32,11 @@ const ELEMENT_DATA: objectReharvest[] = [
 })
 export class CdkObjectReharvestComponent implements OnInit {
 
-  displayedColumns: string[] = ['date', 'pid', 'state', 'description', 'pod'];
+  displayedColumns: string[] = ['date', 'pid', 'state', 'description', 'pod','approve'];
   //dataSource = ELEMENT_DATA;
 
   dataSource:Reharvest[];
-  isReharvestFromCore: boolean = true;
+  //isReharvestFromCore: boolean = true;
 
   constructor(
     private dialog: MatDialog,
@@ -51,6 +51,11 @@ export class CdkObjectReharvestComponent implements OnInit {
       this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
     });
  }
+
+
+  isReharvestFromCore(reharvest:Reharvest) {
+    return reharvest.name?.startsWith("Delete");
+  }
 
   clientLink(uuid) {
     
@@ -114,12 +119,8 @@ export class CdkObjectReharvestComponent implements OnInit {
       this.ui.showErrorSnackBar('snackbar.error.scheduleRemovePolicyByPid')
     } else if (result === 'cancel' || result === undefined) {
       //nothing, dialog was closed
-    } else if (result == 1) {
-      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.1');
-    } else if (result == 2 || result == 3 || result == 4) {
-      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.2-4', {value: result});
     } else {
-      this.ui.showInfoSnackBar('snackbar.success.scheduleRemovePolicyByPid.more', {value: result});
+      this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest');
     }
     this.cdkApi.reharvests().subscribe(resp=> {
       this.dataSource = resp;
@@ -128,8 +129,25 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   })
 
-}
+  }
 
+  approveState( reharvest: any) {
+      this.cdkApi.changeReharvestState(reharvest.id, 'open').subscribe(x=> {
+        this.cdkApi.reharvests().subscribe(resp=> {
+          this.dataSource = resp;
+          this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
+        });
+      });
+  }
+
+  closedState( reharvest: any) {
+      this.cdkApi.changeReharvestState(reharvest.id, 'cancelled').subscribe(x=> {
+        this.cdkApi.reharvests().subscribe(resp=> {
+          this.dataSource = resp;
+          this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
+        });
+      });
+  }
 
 
 }
