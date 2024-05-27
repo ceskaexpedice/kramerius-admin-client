@@ -40,6 +40,7 @@ export class ScheduleImportNdkDialogComponent implements OnInit {
         policy: formData.policy,
         inputDataDir: formData.import_dir,
         startIndexer: formData.schedule_indexations,
+        
       }
     }).subscribe(response => {
       this.dialogRef.close("scheduled");

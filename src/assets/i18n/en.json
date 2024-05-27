@@ -661,7 +661,8 @@
     },
     "startImport": {
       "title": "Starting the import",
-      "message": "Are you sure you want to start the import?"
+      "message": "Are you sure you want to start the import?",
+      "licensemessage":"Are you sure you want to applz license and start the import processes?"
     },
     "createOrEditRole": {
       "title": {
@@ -918,6 +919,7 @@
       "scheduleProcessingIndexRebuild": "The Build Processing index process has been scheduled",
       "scheduleProcessingIndexRebuildForObject": "The Process Rebuild Processing index for the object has been scheduled",
       "scheduleImportProcess": "The import has been scheduled",
+      "scheduleApplyLicenseAndImportProcess": "The applying license and import process has been scheduled",
       "scheduleSdnntSyncProcess": "The sync process has been scheduled",
       "createOrEditRole": "The role has been added",
       "onRemoveRole": "The role has been removed",

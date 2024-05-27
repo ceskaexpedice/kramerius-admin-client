@@ -660,7 +660,8 @@
     },
     "startImport": {
       "title": "Spuštění importu",
-      "message": "Opravdu chcete spustit import?"
+      "message": "Opravdu chcete spustit import?",
+      "licensemessage":"Opravdu chcete spustit přiřadit licenci a spustit import?"
     },
     "createOrEditRole": {
       "title": {
@@ -917,6 +918,7 @@
       "scheduleProcessingIndexRebuild": "Proces Vybudování Processing indexu byl naplánován",
       "scheduleProcessingIndexRebuildForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
       "scheduleImportProcess": "Import byl naplánován",
+      "scheduleApplyLicenseAndImportProcess": "Přiřazení licence a Import naplánován",
       "scheduleSdnntSyncProcess": "Synchronizace se SDNNT naplánována",
       "createOrEditRole": "Role byla přidána",
       "onRemoveRole": "Role byla odstraněna",

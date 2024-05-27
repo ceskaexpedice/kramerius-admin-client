@@ -37,6 +37,7 @@ export class ScheduleImportFoxmlDialogComponent implements OnInit {
       params: {
         inputDataDir: formData.import_dir,
         startIndexer: formData.schedule_indexations,
+        license: formData.license
       }
     }).subscribe(response => {
       //console.log(response);
