@@ -110,6 +110,7 @@ import { EditSetDialogComponent } from './dialogs/edit-set-dialog/edit-set-dialo
 import { AddNewSetDialogComponent } from './dialogs/add-new-set-dialog/add-new-set-dialog.component';
 import { OAIApiService } from './services/oai-api.services';
 import { CdkObjectReharvestComponent } from './pages/cdk/cdk-object-reharvest/cdk-object-reharvest.component';
+import { RunImportComponent } from './dialogs/run-import/run-import.component';
 //import { FileSaverModule } from 'ngx-filesaver';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -203,7 +204,8 @@ export function createCustomMatPaginatorIntl(
     AddCuttingDialogComponent,
     EditSetDialogComponent,
     AddNewSetDialogComponent,
-    CdkObjectReharvestComponent
+    CdkObjectReharvestComponent,
+    RunImportComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
 import { Router } from '@angular/router';
 import { License } from 'src/app/models/license.model';
+import { RunImportComponent } from 'src/app/dialogs/run-import/run-import.component';
 
 @Component({
   selector: 'app-import',
@@ -109,10 +110,15 @@ export class ImportComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+    /* const dialogRef = this.dialog.open(SimpleDialogComponent, { 
       data: data,
       width: '600px',
       panelClass: 'app-simple'
+    }); */
+    const dialogRef = this.dialog.open(RunImportComponent, { 
+      data: data,
+      width: '600px',
+      panelClass: 'app-run-import-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'approve') {
