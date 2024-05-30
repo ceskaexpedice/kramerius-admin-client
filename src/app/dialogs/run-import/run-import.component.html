@@ -1,6 +1,21 @@
 <h2 mat-dialog-title>{{ 'modal.startImport.title' | translate }}</h2>
 <mat-dialog-content>
-  Sem to dej na hulvata pod sebe, jak to pak upravim, happy!
+
+  <div>Dal jsem to tam na prasaka ! </div>
+
+  <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
+
+  <div>
+    kombo
+  </div>
+  <mat-select [(ngModel)]="selectedLicense">
+    <mat-option *ngFor="let license of licenses" [value]="license">
+      <mat-icon *ngIf="license.group == 'local'">location_city</mat-icon>
+      <mat-icon *ngIf="license.group != 'local'">public_outlined</mat-icon>
+      {{ license.priority + '. ' + license.name }}
+    </mat-option>
+</mat-select>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button color="primary">{{ 'button.schedule' | translate }}</button>

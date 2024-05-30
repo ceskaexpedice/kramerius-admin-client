@@ -95,6 +95,7 @@ export class ImportComponent implements OnInit {
   }
 
   submit() {
+    /*
     const data: SimpleDialogData = {
 
       title:   this.ui.getTranslation('modal.startImport.title'),
@@ -109,14 +110,16 @@ export class ImportComponent implements OnInit {
         value: 'cancel',
         color: 'light'
       }
-    };
+    };*/
     /* const dialogRef = this.dialog.open(SimpleDialogComponent, { 
       data: data,
       width: '600px',
       panelClass: 'app-simple'
     }); */
+
+
     const dialogRef = this.dialog.open(RunImportComponent, { 
-      data: data,
+      data: {licenses: this.licenses},
       width: '600px',
       panelClass: 'app-run-import-dialog'
     });
