@@ -142,14 +142,19 @@ export class ImportComponent implements OnInit {
   }
 
   importNdk() {
+    let p = {
+      policy:  'PRIVATE',
+      inputDataDir: this.imports.selectedTree.getFullPath(),
+      startIndexer: this.scheduleIndexations,
+      useIIPServer: this.ndkIIPServer
+    };
+
+    if (this.selectedLicense) {
+      p['license'] = this.selectedLicense.name;
+    }
     this.api.scheduleProcess({
       defid: 'convert_and_import',
-      params: {
-        policy: this.ndkPublic ? 'PUBLIC' : 'PRIVATE',
-        inputDataDir: this.imports.selectedTree.getFullPath(),
-        startIndexer: this.scheduleIndexations,
-        useIIPServer: this.ndkIIPServer        
-      }
+      params: p
     }).subscribe(response => {
       this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
     }, error => {

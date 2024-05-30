@@ -12,7 +12,7 @@ export class RunImportComponent implements OnInit {
   selectedLicense:License;
   licenses:License[];
 
-  scheduleIndexation: boolean = false;
+  scheduleIndexation: boolean = true;
   ndkIIPServer:boolean = true;
   type="foxml";
 

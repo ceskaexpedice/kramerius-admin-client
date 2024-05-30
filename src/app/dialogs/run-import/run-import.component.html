@@ -3,12 +3,16 @@
   <mat-form-field appearance="fill" class="app-w-100">
     <mat-label>{{ 'desc.selectLicenseToImport' | translate }}</mat-label>
     <mat-select [(ngModel)]="selectedLicense" [panelClass]="'app-licenses'">
-      <mat-option>-- {{ 'desc.noLicense' | translate }} --</mat-option>
+      <mat-select-trigger>
+        {{ selectedLicense?.name || '-- ' + ('desc.noLicense' | translate) + ' --' }}
+      </mat-select-trigger>
+      
+      <mat-option  [value]="null">-- {{ 'desc.noLicense' | translate }} --</mat-option>
       <mat-option *ngFor="let license of licenses" [value]="license">
         <div class="app-mb-1">
           <mat-icon *ngIf="license.group == 'local'">location_city</mat-icon>
           <mat-icon *ngIf="license.group != 'local'">public_outlined</mat-icon>
-          <strong>{{ license.priority + '. ' + license.name }}</strong>
+          <strong>{{ license.name }}</strong>
         </div>
         <div class="app-mb-1">
           <strong class="app-desc">{{ license.group == 'local' ? ('desc.localLicense' | translate) : ('desc.globalLicense' | translate) }}</strong>
