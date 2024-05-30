@@ -49,9 +49,11 @@
 							<div class="app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.basedOnEmbeddedPids' | translate }}</h3>
 								<!-- tj. změna viditelnosti -->
-								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
+								<!-- <span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2">{{ 'button.setPublicPrivate' | translate }}</button>
-								</span>
+								</span> -->
+
+								<button mat-flat-button  color="primary" class="app-mr-2" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.setPublicPrivate' | translate }}</button>
 
 								<!-- odebrani viditelnosti -->
 								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">

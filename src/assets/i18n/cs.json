@@ -504,7 +504,8 @@
     "save": "Uložit",
     "addNewSet": "Přidat nový set",
     "viewConsumedLicenses": "Zobrazit konzumované licence",
-    "hideConsumedLicenses": "Skrýt konzumované licence"
+    "hideConsumedLicenses": "Skrýt konzumované licence",
+    "thisFlagUnsupported": "Tento příznak již není podporován"
   },
   "field": {
     "public": "Veřejné",

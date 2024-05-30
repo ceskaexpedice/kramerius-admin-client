@@ -200,7 +200,6 @@
         "cancelled":"Reharvest cancelled"
 
       }
-
     }
   },
   "navbar": {
@@ -505,7 +504,8 @@
     "save": "Save",
     "addNewSet": "Add new set",
     "viewConsumedLicenses": "View consumed licenses",
-    "hideConsumedLicenses": "Hide consumed licenses"
+    "hideConsumedLicenses": "Hide consumed licenses",
+    "thisFlagUnsupported": "This flag is no longer supported"
   },
   "field": {
     "public": "Public",

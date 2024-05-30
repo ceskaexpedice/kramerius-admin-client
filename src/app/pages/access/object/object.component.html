@@ -82,7 +82,7 @@
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <mat-icon class="app-20 app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon>
                   <strong>{{ 'field.' + policy | translate }}</strong>
-                  <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4">{{ 'button.changeAvailability' | translate }}</button>
+                  <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.changeAvailability' | translate }}</button>
                 </div>
               </div>
               <mat-divider [inset]="true"></mat-divider>

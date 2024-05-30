@@ -1,20 +1,35 @@
 <h2 mat-dialog-title>{{ 'modal.startImport.title' | translate }}</h2>
 <mat-dialog-content>
 
-  <div>Dal jsem to tam na prasaka ! </div>
 
-  <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
-
-  <div>
-    kombo
-  </div>
+<mat-form-field appearance="fill" class="app-w-100">
+  <mat-label>Vyberte licenci pro import</mat-label>
   <mat-select [(ngModel)]="selectedLicense">
+    <mat-option>-- zadna licence --</mat-option>
     <mat-option *ngFor="let license of licenses" [value]="license">
-      <mat-icon *ngIf="license.group == 'local'">location_city</mat-icon>
-      <mat-icon *ngIf="license.group != 'local'">public_outlined</mat-icon>
-      {{ license.priority + '. ' + license.name }}
+      <div>
+        <mat-icon *ngIf="license.group == 'local'">location_city</mat-icon>
+        <mat-icon *ngIf="license.group != 'local'">public_outlined</mat-icon>
+        {{ license.priority + '. ' + license.name }}
+        <mat-divider></mat-divider>
+        test
+      </div>
     </mat-option>
-</mat-select>
+  </mat-select>
+</mat-form-field>
+
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    test <br />
+    <mat-divider></mat-divider>
+    test
+  </button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu>
+
+<mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
+  
 
 
 <ng-container *ngIf="type == 'ndk'">
