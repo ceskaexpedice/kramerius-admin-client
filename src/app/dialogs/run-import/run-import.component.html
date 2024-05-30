@@ -3,7 +3,7 @@
 
   <div>Dal jsem to tam na prasaka ! </div>
 
-  <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
+  <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
 
   <div>
     kombo
@@ -16,8 +16,19 @@
     </mat-option>
 </mat-select>
 
+
+<ng-container *ngIf="type == 'ndk'">
+  <span class="pipe-separator">|</span>
+  <mat-checkbox [disableRipple]="true"  *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
+</ng-container>
+
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary">{{ 'button.schedule' | translate }}</button>
+  <button mat-flat-button color="primary" (click)="scheduleProcess()">{{ 'button.schedule' | translate }}</button>
   <button mat-flat-button mat-dialog-close>{{ 'button.cancel' | translate }}</button>
+
+  <!--
+  <button mat-flat-button (click)="onClose(data.btn1.value)" [color]="data.btn1.color">{{ data.btn1.label }}</button>
+-->
 </mat-dialog-actions>

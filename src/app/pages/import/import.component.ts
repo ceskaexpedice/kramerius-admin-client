@@ -20,7 +20,7 @@ export class ImportComponent implements OnInit {
 
   type: string;
   tree: Tree;
-  ndkPublic: boolean;
+  ndkPublic: boolean = false;
   ndkIIPServer: boolean;
 
   scheduleIndexations: boolean;
@@ -119,12 +119,19 @@ export class ImportComponent implements OnInit {
 
 
     const dialogRef = this.dialog.open(RunImportComponent, { 
-      data: {licenses: this.licenses},
+      data: {
+        type: this.type,
+        licenses: this.licenses},
       width: '600px',
       panelClass: 'app-run-import-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'approve') {
+
+
+      if (result) {
+        this.selectedLicense = result.selectedLicense;
+        this.scheduleIndexations = result.scheduleIndexation;
+        this.ndkIIPServer = result.ndkIIPServer;
         if (this.type == 'foxml') {
           this.importFoxml();
         } else if (this.type == 'ndk') {

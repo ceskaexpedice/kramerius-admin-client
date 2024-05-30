@@ -11,17 +11,35 @@ export class RunImportComponent implements OnInit {
 
   selectedLicense:License;
   licenses:License[];
-  scheduleIndexations: boolean;
 
+  scheduleIndexation: boolean = false;
+  ndkIIPServer:boolean = true;
+  type="foxml";
 
   constructor(    
     public dialogRef: MatDialogRef<RunImportComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.licenses = data.licenses;
+    this.type= data.type;
    }
 
   ngOnInit(): void {
   }
+
+  scheduleProcess() {
+    const data = {
+      selectedLicense:  this.selectedLicense,
+      scheduleIndexation: this.scheduleIndexation,
+      ndkIIPServer: this.ndkIIPServer
+    };
+    this.dialogRef.close(data);
+  }
+
+  
+
+  // onClose(data) {
+  //   this.dialogRef.close(data);
+  // }
 
 }
