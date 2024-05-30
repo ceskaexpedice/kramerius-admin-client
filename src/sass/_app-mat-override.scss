@@ -315,6 +315,12 @@
       &:not(:last-child) {
         border-bottom: 1px solid $app-card-border-color;
       }
+
+      &.mat-selected {
+        .app-desc {
+          color: inherit;
+        }
+      }
     }
   }
 }
