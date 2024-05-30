@@ -1,49 +1,33 @@
 <h2 mat-dialog-title>{{ 'modal.startImport.title' | translate }}</h2>
-<mat-dialog-content>
+<mat-dialog-content class="app-scrollbar-fix">
+  <mat-form-field appearance="fill" class="app-w-100">
+    <mat-label>{{ 'desc.selectLicenseToImport' | translate }}</mat-label>
+    <mat-select [(ngModel)]="selectedLicense" [panelClass]="'app-licenses'">
+      <mat-option>-- {{ 'desc.noLicense' | translate }} --</mat-option>
+      <mat-option *ngFor="let license of licenses" [value]="license">
+        <div class="app-mb-1">
+          <mat-icon *ngIf="license.group == 'local'">location_city</mat-icon>
+          <mat-icon *ngIf="license.group != 'local'">public_outlined</mat-icon>
+          <strong>{{ license.priority + '. ' + license.name }}</strong>
+        </div>
+        <div class="app-mb-1">
+          <strong class="app-desc">{{ license.group == 'local' ? ('desc.localLicense' | translate) : ('desc.globalLicense' | translate) }}</strong>
+        </div>
+        <div class="app-mb-1">
+          <i>{{ license.description }}</i>
+        </div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-
-<mat-form-field appearance="fill" class="app-w-100">
-  <mat-label>Vyberte licenci pro import</mat-label>
-  <mat-select [(ngModel)]="selectedLicense">
-    <mat-option>-- zadna licence --</mat-option>
-    <mat-option *ngFor="let license of licenses" [value]="license">
-      <div>
-        <mat-icon *ngIf="license.group == 'local'">location_city</mat-icon>
-        <mat-icon *ngIf="license.group != 'local'">public_outlined</mat-icon>
-        {{ license.priority + '. ' + license.name }}
-        <mat-divider></mat-divider>
-        test
-      </div>
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>
-    test <br />
-    <mat-divider></mat-divider>
-    test
-  </button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
-
-<mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
+  <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
   
-
-
-<ng-container *ngIf="type == 'ndk'">
-  <span class="pipe-separator">|</span>
-  <mat-checkbox [disableRipple]="true"  *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
-</ng-container>
-
-
+  <ng-container *ngIf="type == 'ndk'">
+    <mat-checkbox [disableRipple]="true"  *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
+  </ng-container>
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
   <button mat-flat-button color="primary" (click)="scheduleProcess()">{{ 'button.schedule' | translate }}</button>
   <button mat-flat-button mat-dialog-close>{{ 'button.cancel' | translate }}</button>
-
-  <!--
-  <button mat-flat-button (click)="onClose(data.btn1.value)" [color]="data.btn1.color">{{ data.btn1.label }}</button>
--->
 </mat-dialog-actions>

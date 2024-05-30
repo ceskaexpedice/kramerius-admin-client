@@ -1183,6 +1183,8 @@
     "deleteObject": "Smazat objekt",
     "pid": "Pid",
     "true": "Ano",
-    "false": "Ne"
+    "false": "Ne",
+    "selectLicenseToImport": "Vyberte licenci pro import",
+    "noLicense": "Žádná licence"
   }
 }

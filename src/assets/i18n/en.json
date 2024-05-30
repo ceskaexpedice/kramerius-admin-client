@@ -1183,6 +1183,8 @@
     "deleteObject": "Delete object",
     "pid": "Pid",
     "true": "Yes",
-    "false": "No"
+    "false": "No",
+    "selectLicenseToImport": "Select a license to import",
+    "noLicense": "No license"
   }
 }
