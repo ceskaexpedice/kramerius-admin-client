@@ -186,6 +186,19 @@
       "europeanou": {
         "title": "Europeanou",
         "icon": "public"
+      },
+      "objectReharvest": {
+        "title": "Oject reharvest",
+        "icon": "repeat"
+      },
+      "reharvestjob":{
+        "running":"Reharvest started",
+        "open":"Reharvest planned",
+        "closed":"Reharvest finished",
+        "too_big":"Reharvest is too big -> Manual reharvest needed",
+        "waiting_for_approve":"Approve needed",
+        "cancelled":"Reharvest cancelled"
+
       }
     }
   },
@@ -491,7 +504,8 @@
     "save": "Save",
     "addNewSet": "Add new set",
     "viewConsumedLicenses": "View consumed licenses",
-    "hideConsumedLicenses": "Hide consumed licenses"
+    "hideConsumedLicenses": "Hide consumed licenses",
+    "thisFlagUnsupported": "This flag is no longer supported"
   },
   "field": {
     "public": "Public",
@@ -647,7 +661,8 @@
     },
     "startImport": {
       "title": "Starting the import",
-      "message": "Are you sure you want to start the import?"
+      "message": "Are you sure you want to start the import?",
+      "licensemessage":"Are you sure you want to applz license and start the import processes?"
     },
     "createOrEditRole": {
       "title": {
@@ -892,6 +907,8 @@
         "more": "{{value}} processes have been scheduled to remove visibility flag"
       },
 
+      "scheduleCDKHarvest":"CDK harvest has been planned",
+
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",
@@ -902,6 +919,7 @@
       "scheduleProcessingIndexRebuild": "The Build Processing index process has been scheduled",
       "scheduleProcessingIndexRebuildForObject": "The Process Rebuild Processing index for the object has been scheduled",
       "scheduleImportProcess": "The import has been scheduled",
+      "scheduleApplyLicenseAndImportProcess": "The applying license and import process has been scheduled",
       "scheduleSdnntSyncProcess": "The sync process has been scheduled",
       "createOrEditRole": "The role has been added",
       "onRemoveRole": "The role has been removed",
@@ -1004,6 +1022,7 @@
     }
   },
   "desc": {
+    "pod": "Pod",
     "modelDisplayStatistics": "Model display statistics",
     "statisticsOfUsedLanguages": "Statistics of used languages",
     "authorStatistics": "Author statistics",
@@ -1160,6 +1179,12 @@
     "localLicense": "Local license",
     "readingTime": "Reading time",
     "startReading": "Start reading",
-    "user": "User"
+    "user": "User",
+    "deleteObject": "Delete object",
+    "pid": "Pid",
+    "true": "Yes",
+    "false": "No",
+    "selectLicenseToImport": "Select a license to import",
+    "noLicense": "No license"
   }
 }

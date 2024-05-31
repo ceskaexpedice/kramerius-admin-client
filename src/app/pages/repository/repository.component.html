@@ -13,7 +13,9 @@
           <a *ngIf="!notAllowed" mat-tab-link (click)="changeView('exports')" [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'sites.repository.exports.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('bulk-data-editing')"  [active]="view == 'bulk-data-editing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'sites.repository.bulk-data-editing.title' | translate }}</a>
 					<a mat-tab-link (click)="changeView('oai')"  [active]="view == 'oai'"><mat-icon class="material-icons-outlined">api</mat-icon>{{ 'sites.repository.oai.title' | translate }}</a>
+					<!--
 					<a mat-tab-link (click)="changeView('cdk')" [active]="view == 'cdk'" *ngIf="settings.cdkMode"><mat-icon class="material-icons-outlined">local_library</mat-icon>{{ 'sites.repository.cdk.title' | translate }}</a>
+				-->
         </nav>
       </div>
     </div>
@@ -49,9 +51,11 @@
 							<div class="app-mb-4">
 								<h3 class="app-mt-0">{{ 'desc.basedOnEmbeddedPids' | translate }}</h3>
 								<!-- tj. změna viditelnosti -->
-								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
+								<!-- <span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2">{{ 'button.setPublicPrivate' | translate }}</button>
-								</span>
+								</span> -->
+
+								<button mat-flat-button  color="primary" class="app-mr-2" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.setPublicPrivate' | translate }}</button>
 
 								<!-- odebrani viditelnosti -->
 								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
@@ -156,12 +160,13 @@
 								</tbody>
 							</table>
 						</ng-container>
-
+						<!--	
 						<ng-container *ngIf="view == 'cdk'">
 							<span>
 								<button mat-flat-button (click)="openScheduledReHarvestSpecificPidsDialog()" color="primary" class="app-mr-2" >{{ 'button.reHarvestSpecificPids' | translate }}</button>
 							</span>				
 						</ng-container>
+						-->
 					</mat-card-content>
         </mat-card>
       </div>

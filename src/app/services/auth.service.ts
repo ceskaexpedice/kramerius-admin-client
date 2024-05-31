@@ -81,6 +81,9 @@ export class AuthService {
   login() {
     const redircetUri = `${this.baseUrl()}/keycloak`;
     let url = `${this.settings.clientApiBaseUrl}/user/auth/login?&redirect_uri=${redircetUri}`;
+    if (this.settings.keycloak && this.settings.keycloak['loginType']) {
+      url = url + "&type="+this.settings.keycloak['loginType'];
+    }
     window.open(url, '_top');
   }
 

@@ -67,6 +67,7 @@ const routes: Routes = [
   { path: 'statistics/generating-logs-for-nk', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'cdk', redirectTo: 'cdk/proxy'},
   { path: 'cdk/proxy', component: CdkComponent, canActivate: [AuthGuard] },
+  { path: 'cdk/object-reharvest', component: CdkComponent, canActivate: [AuthGuard] },
   { path: 'cdk/proxy/detail/:id', component: CdkProxyDetailComponent, canActivate: [AuthGuard] },
   { path: 'cdk/europeanou', component: CdkComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }

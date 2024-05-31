@@ -8,6 +8,8 @@ import { ImportService } from 'src/app/services/import.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
 import { Router } from '@angular/router';
+import { License } from 'src/app/models/license.model';
+import { RunImportComponent } from 'src/app/dialogs/run-import/run-import.component';
 
 @Component({
   selector: 'app-import',
@@ -18,11 +20,14 @@ export class ImportComponent implements OnInit {
 
   type: string;
   tree: Tree;
-  ndkPublic: boolean;
+  ndkPublic: boolean = false;
   ndkIIPServer: boolean;
 
   scheduleIndexations: boolean;
   inputDirError = {};
+
+  selectedLicense:License;
+  licenses:License[];
 
   errorState: boolean = false;
 
@@ -40,6 +45,11 @@ export class ImportComponent implements OnInit {
     //this.type = this.local.getStringProperty('import.type', 'foxml');
     this.type = this.router.url.replace('/import/', '');
     this.initTree();
+
+    this.api.getAllLicenses().subscribe((licenses: License[]) => {
+      this.licenses = licenses;
+    });
+
   }
 
   changeType(type: string) {
@@ -85,9 +95,11 @@ export class ImportComponent implements OnInit {
   }
 
   submit() {
+    /*
     const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.startImport.title'),
-      message: this.ui.getTranslation('modal.startImport.message'),
+
+      title:   this.ui.getTranslation('modal.startImport.title'),
+      message: this.selectedLicense ? this.ui.getTranslation('modal.startImport.licensemessage') : this.ui.getTranslation('modal.startImport.message'),
       btn1: {
         label: this.ui.getTranslation('button.schedule'),
         value: 'approve',
@@ -98,14 +110,28 @@ export class ImportComponent implements OnInit {
         value: 'cancel',
         color: 'light'
       }
-    };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+    };*/
+    /* const dialogRef = this.dialog.open(SimpleDialogComponent, { 
       data: data,
       width: '600px',
       panelClass: 'app-simple'
+    }); */
+
+
+    const dialogRef = this.dialog.open(RunImportComponent, { 
+      data: {
+        type: this.type,
+        licenses: this.licenses},
+      width: '600px',
+      panelClass: 'app-run-import-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 'approve') {
+
+
+      if (result) {
+        this.selectedLicense = result.selectedLicense;
+        this.scheduleIndexations = result.scheduleIndexation;
+        this.ndkIIPServer = result.ndkIIPServer;
         if (this.type == 'foxml') {
           this.importFoxml();
         } else if (this.type == 'ndk') {
@@ -116,14 +142,19 @@ export class ImportComponent implements OnInit {
   }
 
   importNdk() {
+    let p = {
+      policy:  'PRIVATE',
+      inputDataDir: this.imports.selectedTree.getFullPath(),
+      startIndexer: this.scheduleIndexations,
+      useIIPServer: this.ndkIIPServer
+    };
+
+    if (this.selectedLicense) {
+      p['license'] = this.selectedLicense.name;
+    }
     this.api.scheduleProcess({
       defid: 'convert_and_import',
-      params: {
-        policy: this.ndkPublic ? 'PUBLIC' : 'PRIVATE',
-        inputDataDir: this.imports.selectedTree.getFullPath(),
-        startIndexer: this.scheduleIndexations,
-        useIIPServer: this.ndkIIPServer        
-      }
+      params: p
     }).subscribe(response => {
       this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
     }, error => {
@@ -139,9 +170,14 @@ export class ImportComponent implements OnInit {
       params: {
         inputDataDir: this.imports.selectedTree.getFullPath(),
         startIndexer: this.scheduleIndexations,
+        license: this.selectedLicense?.name
       }
     }).subscribe(response => {
-      this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
+      if (this.selectedLicense) {
+        this.ui.showInfoSnackBar("scheduleApplyLicenseAndImportProcess");
+      } else {
+        this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
+      }
     }, error => {
       this.ui.showInfoSnackBar('snackbar.error.scheduleImportProcess');
       console.log(error);

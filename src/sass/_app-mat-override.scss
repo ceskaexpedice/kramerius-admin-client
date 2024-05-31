@@ -291,7 +291,8 @@
 }
 
 // mat select
-.mat-select-panel-wrap {
+// puvodne - .mat-select-panel-wrap
+.mat-select-panel {
   .mat-option {
     .mat-icon {
       @extend .app-mr-2;
@@ -301,6 +302,25 @@
     &.app-add {
       font-weight: 800;
       color: $app-color-primary;
+    }
+  }
+
+  &.app-licenses {
+    .mat-option {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      height: auto;
+      line-height: normal;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $app-card-border-color;
+      }
+
+      &.mat-selected {
+        .app-desc {
+          color: inherit;
+        }
+      }
     }
   }
 }
@@ -379,6 +399,12 @@
 
         &:last-of-type {
           @extend .app-pr-4;
+        }
+
+        &.mat-column-state {      
+          .app-badge {
+            min-width: 110px;
+          }
         }
 
         .app-text-cutter-wrapper {

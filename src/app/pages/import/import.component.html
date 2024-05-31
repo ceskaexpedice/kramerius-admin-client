@@ -16,12 +16,7 @@
     </div>
     <div fxFlex fxLayout="column" fxFlexFill class="app-container">
       <ng-container *ngIf="!this.inputDirError[this.type]">
-        <div fxLayout="row" fxLayoutAlign="start end" class="app-mb-4">
-          <div fxFlex>
-            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" [(ngModel)]="scheduleIndexations" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
-            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkPublic" color="primary" class="app-mr-4">{{ 'desc.post' | translate }}</mat-checkbox>
-            <mat-checkbox [disableRipple]="true" [disabled]="!imports.selectedTree" *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
-          </div>
+        <div fxLayout="row" fxLayoutAlign="end end" class="app-mb-4">
           <div>
             <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">{{ 'button.startImport' | translate }}</button>
           </div>

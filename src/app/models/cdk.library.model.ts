@@ -1,3 +1,54 @@
+
+
+export class Reharvest{
+  name:string;
+  id:string;
+  type:string;
+  state:string;
+  pids:string[];
+  timestamp:string;
+  pod:string;
+
+  getDateTime(): Date {
+    return new Date(this.timestamp);
+  }
+
+  static reharvestsFromJson(jsonArray):Reharvest[] {
+    let retval: Reharvest[] = [];
+    jsonArray.forEach(jsonObject=> {
+      retval.push(Reharvest.reharvestFromJson(jsonObject) );
+    }); 
+    return retval;
+  }
+
+  static reharvestFromJson(json):Reharvest {
+    let reh = new Reharvest();
+    if (json['id']) {
+      reh.id = json['id'];
+    }
+    if (json['name']) {
+      reh.name = json['name'];
+    }
+    if (json['type']) {
+      reh.type = json['type'];
+    }
+    if (json['state']) {
+      reh.state = json['state'];
+    }
+    if (json['pids']) {
+      reh.pids = json['pids'];
+    }
+    if (json['timestamp']) {
+      reh.timestamp = json['timestamp'];
+    }
+    if (json['pod']) {
+      reh.pod = json['pod'];
+    }
+    return reh;
+  }
+}
+
+
 export class Library {
     status:boolean = true;
     code:string;
@@ -12,9 +63,11 @@ export class Library {
         for (const key of Object.keys(json)) {
           retval.push(new Library(json[key].status, key));
         }
+        /*
         retval.forEach(l=> {
           console.log(l.status);
         });
+        */
         return retval;
     }
     

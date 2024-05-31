@@ -6,14 +6,19 @@ declare var APP_GLOBAL: any;
 
 @Injectable()
 export class AppSettings {
-  static adminClientVersion = "1.4.6" + (!!APP_GLOBAL.devMode ? "-dev" : "");
+  static adminClientVersion = "1.4.7" + (!!APP_GLOBAL.devMode ? "-dev" : "");
+
 
 
   // external properties from /assets/shared/globals.js
   userClientBaseUrl = APP_GLOBAL.userClientBaseUrl;
   deployPath = APP_GLOBAL.deployPath || '';
   coreBaseUrl = APP_GLOBAL.coreBaseUrl;
+
   keycloak = APP_GLOBAL.keycloak;
+  keycloakLoginType = APP_GLOBAL.keycloakLoginType || '';
+
+  //webClient = APP_GLOBAL.webClient || 'https://ceskadigitalniknihovna.cz'
 
   devMode = !!APP_GLOBAL.devMode; //pokud true, tak se zobrazuje zalozka DEV a dalsi testovaci veci (napr. spousteni testovaciho procesu)
 
@@ -22,7 +27,6 @@ export class AppSettings {
   harvestAapiBaseURL = this.coreBaseUrl+'/api/harvest/v7.0';
 
 
-  //cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl || 'http://localhost:8080/search'; 
   cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl ||  this.coreBaseUrl; 
 
   defaultLang = APP_GLOBAL.lang || 'cs';
@@ -35,6 +39,8 @@ export class AppSettings {
   proarc = APP_GLOBAL.proarc || [];
   altoeditor = APP_GLOBAL.altoeditor || [];
   krameriusInstance = APP_GLOBAL.krameriusInstance || '';
+
+
 
 
   interceptresponse: EventEmitter<any> = new EventEmitter<any>();

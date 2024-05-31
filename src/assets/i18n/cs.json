@@ -186,6 +186,19 @@
       "europeanou": {
         "title": "Europeanou",
         "icon": "public"
+      },
+      "objectReharvest": {
+        "title": "Reharvest objektu",
+        "icon": "repeat"
+      },
+      "reharvestjob":{
+        "running":"Reharvest spuštěn",
+        "open":"Reharvest naplánován",
+        "closed":"Reharvest ukončen",
+        "too_big":"Příliš velké dílo na reharvest -> Nutný ruční zásah",
+        "waiting_for_approve":"Nutnný souhlas pro reharvest",
+        "cancelled":"Reharvest zrušený"
+        
       }
     }
   },
@@ -491,7 +504,8 @@
     "save": "Uložit",
     "addNewSet": "Přidat nový set",
     "viewConsumedLicenses": "Zobrazit konzumované licence",
-    "hideConsumedLicenses": "Skrýt konzumované licence"
+    "hideConsumedLicenses": "Skrýt konzumované licence",
+    "thisFlagUnsupported": "Tento příznak již není podporován"
   },
   "field": {
     "public": "Veřejné",
@@ -647,7 +661,8 @@
     },
     "startImport": {
       "title": "Spuštění importu",
-      "message": "Opravdu chcete spustit import?"
+      "message": "Opravdu chcete spustit import?",
+      "licensemessage":"Opravdu chcete spustit přiřadit licenci a spustit import?"
     },
     "createOrEditRole": {
       "title": {
@@ -892,6 +907,8 @@
         "more": "Bylo naplánováno {{value}} procesů Odebrání příznaku viditelnosti"
       },
 
+      "scheduleCDKHarvest":"Harvest pidu byl naplánovován",
+
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
@@ -902,6 +919,7 @@
       "scheduleProcessingIndexRebuild": "Proces Vybudování Processing indexu byl naplánován",
       "scheduleProcessingIndexRebuildForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
       "scheduleImportProcess": "Import byl naplánován",
+      "scheduleApplyLicenseAndImportProcess": "Přiřazení licence a Import naplánován",
       "scheduleSdnntSyncProcess": "Synchronizace se SDNNT naplánována",
       "createOrEditRole": "Role byla přidána",
       "onRemoveRole": "Role byla odstraněna",
@@ -1004,6 +1022,7 @@
     }
   },
   "desc": {
+    "pod": "Pod",
     "modelDisplayStatistics": "Statistiky zobrazení modelů",
     "statisticsOfUsedLanguages": "Statistiky použitých jazyků",
     "authorStatistics": "Statistiky autorů",
@@ -1160,6 +1179,12 @@
     "localLicense": "Lokální licence",
     "readingTime": "Čas čtení",
     "startReading": "Začátek čtení",
-    "user": "Uživatel"
+    "user": "Uživatel",
+    "deleteObject": "Smazat objekt",
+    "pid": "Pid",
+    "true": "Ano",
+    "false": "Ne",
+    "selectLicenseToImport": "Vyberte licenci pro import",
+    "noLicense": "Žádná licence"
   }
 }
