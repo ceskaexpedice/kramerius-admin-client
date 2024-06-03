@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node git-info-detect.js && ng serve",
-    "build": "node git-info-detect.js && ng build --prod",
+    "build": "node git-info-detect.js && ng build --prod && node create-zip.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -29,16 +29,20 @@
     "@ckeditor/ckeditor5-build-classic": "^17.0.0",
     "@ckeditor/ckeditor5-build-decoupled-document": "^17.0.0",
     "@ckeditor/ckeditor5-upload": "^17.0.0",
-    "moment": "^2.29.1",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "@types/file-saver": "^2.0.5",
+    "archiver": "^7.0.1",
+    "echarts": "^5.3.0",
+    "file-saver": "^2.0.5",
+    "moment": "^2.29.1",
+    "ngx-echarts": "^7.1.0",
+    "ngx-filesaver": "^16.0.0",
     "rxjs": "~6.6.7",
     "timers": "^0.1.1",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2",
-    "echarts": "^5.3.0",
-    "ngx-echarts": "^7.1.0",
-    "xml-parser": "1.2.1"
+    "xml-parser": "1.2.1",
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.15",
@@ -57,6 +61,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "npm-build-zip": "^1.0.4",
     "protractor": "~7.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~6.1.0",
