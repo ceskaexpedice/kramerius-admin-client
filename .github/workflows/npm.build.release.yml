@@ -120,5 +120,5 @@ jobs:
       with:
         context: .
         push: true
-        tags: pavelstastny/kramerius-admin-client:${{inputs.release_name}}_from-github
+        tags: ceskaexpedice/kramerius-admin-client:${{inputs.release_name}}
         build-args: ADMIN_ADDR=${{ runner.temp }}/dist/kramerius-admin
