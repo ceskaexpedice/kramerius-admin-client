@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs: 
       tag_name:
-        description: 'Tag name for the release - 1.4.7'
+        description: 'Tag name for the release - v1.4.7'
         required: true
       release_name:
         description: 'Release name - Verze 1.4.7'
@@ -67,7 +67,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v${{ inputs.tag_name }}
+        tag_name: ${{ inputs.tag_name }}
         release_name: ${{ inputs.release_name }}
         body: |
           Description of the release
@@ -111,6 +111,7 @@ jobs:
       with:
         username: ${{secrets.DOCKERHUB_USERNAME}}
         password: ${{secrets.DOCKERHUB_TOKEN}}  
+
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
