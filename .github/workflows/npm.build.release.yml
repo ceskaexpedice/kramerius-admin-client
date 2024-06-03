@@ -3,19 +3,11 @@ on:
   workflow_dispatch:
     inputs: 
       tag_name:
-        description: 'Tag name for the release'
+        description: 'Tag name for the release - v1.4.7'
         required: true
       release_name:
-        description: 'Release name'
+        description: 'Release name - Verze 1.4.7'
         required: true
-      dev_mode:
-        description: "Developer mode"
-        type: choice
-        required: true
-        default: 'false'
-        options:
-            - true
-            - false
 jobs:
 # Create distribution and docker image
   build_zip_docker_image:
