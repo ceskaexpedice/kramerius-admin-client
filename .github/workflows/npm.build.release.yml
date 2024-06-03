@@ -61,6 +61,9 @@ jobs:
         # Create a copy of 'dist' directory in 'runner.temp'
         cp -r ./dist ${{ runner.temp }}
 
+        # Create a copy of 'dist' directory in 'runner.temp'
+        cp -r ./dist-zip ${{ runner.temp }}
+
     - name: List files in runner.temp directory
       run: |
         ls -la ${{ runner.temp }}
