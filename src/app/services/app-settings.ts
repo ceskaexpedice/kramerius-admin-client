@@ -16,7 +16,6 @@ export class AppSettings {
   coreBaseUrl = APP_GLOBAL.coreBaseUrl;
 
   keycloak = APP_GLOBAL.keycloak;
-  keycloakLoginType = APP_GLOBAL.keycloakLoginType || '';
 
   //webClient = APP_GLOBAL.webClient || 'https://ceskadigitalniknihovna.cz'
 
