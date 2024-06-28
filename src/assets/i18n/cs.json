@@ -1023,6 +1023,9 @@
   },
   "desc": {
     "pod": "Pod",
+    "root":"Celý titul",
+    "children":"Pouze podčásti",
+    "typeOfHarvest": "Typ reharvestu",
     "modelDisplayStatistics": "Statistiky zobrazení modelů",
     "statisticsOfUsedLanguages": "Statistiky použitých jazyků",
     "authorStatistics": "Statistiky autorů",

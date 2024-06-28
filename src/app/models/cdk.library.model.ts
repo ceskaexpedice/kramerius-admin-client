@@ -5,12 +5,12 @@ export class Reharvest{
   id:string;
   type:string;
   state:string;
-  pids:string[];
-  timestamp:string;
+  pid:string;
+  indexed:string;
   pod:string;
 
   getDateTime(): Date {
-    return new Date(this.timestamp);
+    return new Date(this.indexed);
   }
 
   static reharvestsFromJson(jsonArray):Reharvest[] {
@@ -35,11 +35,11 @@ export class Reharvest{
     if (json['state']) {
       reh.state = json['state'];
     }
-    if (json['pids']) {
-      reh.pids = json['pids'];
+    if (json['pid']) {
+      reh.pid = json['pid'];
     }
-    if (json['timestamp']) {
-      reh.timestamp = json['timestamp'];
+    if (json['indexed']) {
+      reh.indexed = json['indexed'];
     }
     if (json['pod']) {
       reh.pod = json['pod'];

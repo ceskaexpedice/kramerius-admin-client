@@ -32,7 +32,7 @@ const ELEMENT_DATA: objectReharvest[] = [
 })
 export class CdkObjectReharvestComponent implements OnInit {
 
-  displayedColumns: string[] = ['date', 'pid', 'state', 'description', 'pod','approve'];
+  displayedColumns: string[] = ['date', 'pid', 'type', 'state', 'description', 'pod','approve'];
   //dataSource = ELEMENT_DATA;
 
   dataSource:Reharvest[];
@@ -116,7 +116,7 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result === 'error') {
-      this.ui.showErrorSnackBar('snackbar.error.scheduleRemovePolicyByPid')
+      this.ui.showErrorSnackBar('snackbar.error.scheduleCDKHarvest')
     } else if (result === 'cancel' || result === undefined) {
       //nothing, dialog was closed
     } else {

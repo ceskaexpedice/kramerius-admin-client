@@ -9,7 +9,7 @@
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.date' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.timestamp }}
+          {{ element.indexed }}
         </td>
       </ng-container>
 
@@ -17,15 +17,23 @@
       <ng-container matColumnDef="pid">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.pid' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-
-          
-          <ng-container  *ngFor="let p of element.pids">
-            <a [href]="clientLink(p)" target="_blank">{{ p }}</a>
+          <ng-container>
+            <a [href]="clientLink(element.pid)" target="_blank">{{element.pid }}</a>
           </ng-container>
-
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>{{ 'desc.type' | translate }}</th>
+        <td mat-cell *matCellDef="let element">
+
+          <ng-container  [ngSwitch]="element.type">
+            <div *ngSwitchCase="'root'" class="app-badge">{{  'desc.root'  | translate }}</div>
+            <div *ngSwitchCase="'children'" class="app-badge">{{ 'desc.children'   | translate }}</div>
+          </ng-container>
+        </td>
+        </ng-container>
+        
       <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.state' | translate }}</th>
         <td mat-cell *matCellDef="let element">

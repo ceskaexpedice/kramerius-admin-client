@@ -11,9 +11,16 @@
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" accept=".txt" />
 		</div>
+		<div>
+            <mat-label>{{ 'desc.typeOfHarvest' | translate }}</mat-label>
+            <mat-radio-group [(ngModel)]="typeOfHarvest" name="typeOfHarvest" required>
+                <mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button>
+                <mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button>
+            </mat-radio-group>
+        </div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="false" color="primary" type="submit"  mat-dialog-close="submitted">{{ 'button.schedule' | translate }}</button>
+		<button mat-flat-button [disabled]="false" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
 		<button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>

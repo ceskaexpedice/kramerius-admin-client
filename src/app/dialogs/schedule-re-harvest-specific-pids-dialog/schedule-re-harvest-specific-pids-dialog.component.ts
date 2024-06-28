@@ -11,9 +11,8 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
-  //    private adminApi: AdminApiService,
   pids;
-
+  typeOfHarvest:string = 'children';
 
   constructor(
     public adminApi: AdminApiService,
@@ -26,21 +25,18 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
   
   schedule(formData) {
     const pidlist = this.splitPids(this.pids);
-    this.cdkApi.planReharvest({name:'User trigger - reharvest from admin client',pids:pidlist}).subscribe(res=> {
+    pidlist.forEach(pid=> {
+        this.cdkApi.planReharvest({name:'User trigger - reharvest from admin client',pid:pid,type: this.typeOfHarvest}).subscribe(
+          res=> {
+            this.dialogRef.close(res);
+          },
+          error => {
+            this.dialogRef.close('error');
+          }
+        );
     });
   }
   
-  /*
-  onSchedule() {
-    const pidlist = this.splitPids(this.pids);
-    this.cdkApi.planReharvest({name:'Scheduled from admin client',pids:pidlist});
-    this.dialogRef.close({ result: "scheduled" });
-  }
-
-  onCancel() {
-    this.dialogRef.close({ result: "canceled" });
-  }*/
-
 
   splitPids(pids: string) {
     //uuid:123 uuid:456,uuid:789;uuid:012, uuid:345; uuid:678    uuid:901

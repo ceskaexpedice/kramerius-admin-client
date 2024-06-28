@@ -1015,7 +1015,9 @@
       "addingAnItem": "Error adding item",
       "deletingItem": "Error deleting item",
       "savingAnItem": "Error saving item",
-      "savingAnRecord": "Error saving record"
+      "savingAnRecord": "Error saving record",
+      "scheduleCDKHarvest":"CDK harvest has NOT been planned"
+
     },
     "alert": {
       "tokenTimeExpireInfo": "You will be automatically logged out of the application in 2 minutes"
@@ -1023,6 +1025,9 @@
   },
   "desc": {
     "pod": "Pod",
+    "root":"Whole title",
+    "children":"Only subparts",
+    "typeOfHarvest": "Type of reharvest",
     "modelDisplayStatistics": "Model display statistics",
     "statisticsOfUsedLanguages": "Statistics of used languages",
     "authorStatistics": "Author statistics",

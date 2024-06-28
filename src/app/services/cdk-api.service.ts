@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
-import { delay, map, tap } from 'rxjs/operators';
+import { catchError, delay, map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
@@ -39,6 +39,7 @@ export class CdkApiService {
         return this.http.get(url, options);
     }
     
+    
     private doPut(path: string, body:any, params, type = 'json'): Observable<Object> {
         const options = {
           params: params
@@ -54,6 +55,7 @@ export class CdkApiService {
           return this.http.put(url,  options);
         }
     }
+
 
 
     setStatus(code:string, status:boolean) : Observable<any>{
@@ -81,8 +83,18 @@ export class CdkApiService {
 
     planReharvest(obj:any) {
       //https://api.val.ceskadigitalniknihovna.cz/search/api/admin/v7.0/reharvest
-      return this.doPut('/api/admin/v7.0/reharvest',obj,{}).pipe(map(response => Reharvest.reharvestFromJson(response)));
+      //return this.doPut('/api/admin/v7.0/reharvest',obj,{}).pipe(map(response => Reharvest.reharvestFromJson(response)));
+
+      return this.doPut('/api/admin/v7.0/reharvest', obj, {}).pipe(
+        tap((response: HttpResponse<Object>) => {}),
+        map(response => Reharvest.reharvestFromJson(response))
+        // catchError((error: any) => {
+        //   return throwError(() => new Error('An error occurred while reharvesting.'));
+        // })
+      );
+
     }
+
 
     changeReharvestState(id:string, state:string) {
       return this.doPut(`/api/admin/v7.0/reharvest/${id}/state?state=${state}`,{},{}).pipe(map(response => Reharvest.reharvestFromJson(response)));
