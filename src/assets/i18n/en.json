@@ -197,8 +197,8 @@
         "closed":"Reharvest finished",
         "too_big":"Reharvest is too big -> Manual reharvest needed",
         "waiting_for_approve":"Approve needed",
-        "cancelled":"Reharvest cancelled"
-
+        "cancelled":"Reharvest cancelled",
+        "failed":"Reharvest failed"
       }
     }
   },

@@ -197,8 +197,8 @@
         "closed":"Reharvest ukončen",
         "too_big":"Příliš velké dílo na reharvest -> Nutný ruční zásah",
         "waiting_for_approve":"Nutnný souhlas pro reharvest",
-        "cancelled":"Reharvest zrušený"
-        
+        "cancelled":"Reharvest zrušený",
+        "failed":"Reharvest zhavaroval"
       }
     }
   },
@@ -1015,7 +1015,8 @@
       "addingAnItem": "Chyba při přidání položky",
       "deletingItem": "Chyba při smazání položky",
       "savingAnItem": "Chyba při ukládání položky",
-      "savingAnRecord": "Chyba při ukládání záznamu"
+      "savingAnRecord": "Chyba při ukládání záznamu",
+      "scheduleCDKHarvest":"Reharvest objektu se nepodařilo naplánovat"
     },
     "alert": {
       "tokenTimeExpireInfo": "Za 2 minuty dojde k automatickému odhlášení z aplikace"

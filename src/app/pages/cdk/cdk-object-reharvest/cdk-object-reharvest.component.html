@@ -46,6 +46,7 @@
             <div *ngSwitchCase="'too_big'" class="app-badge app-warning">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
             <div *ngSwitchCase="'waiting_for_approve'" class="app-badge app-waiting_for_approve">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
             <div *ngSwitchCase="'cancelled'" class="app-badge app-canceled">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
+            <div *ngSwitchCase="'failed'" class="app-badge app-failed">{{ 'sites.cdk.reharvestjob.' + element.state | translate }}</div>
           </ng-container>
       </ng-container>
 
