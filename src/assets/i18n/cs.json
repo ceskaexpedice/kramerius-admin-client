@@ -1024,8 +1024,9 @@
   },
   "desc": {
     "pod": "Pod",
-    "root":"Celý titul",
-    "children":"Pouze podčásti",
+    "root":"Reharvest celého titulu",
+    "children":"Reharvest podčástí (ročník, výtisk,..)",
+    "new_root":"Nový harvest celého titulu",
     "typeOfHarvest": "Typ reharvestu",
     "modelDisplayStatistics": "Statistiky zobrazení modelů",
     "statisticsOfUsedLanguages": "Statistiky použitých jazyků",
@@ -1189,6 +1190,11 @@
     "true": "Ano",
     "false": "Ne",
     "selectLicenseToImport": "Vyberte licenci pro import",
-    "noLicense": "Žádná licence"
+    "noLicense": "Žádná licence",
+    "reharvestLibsOption":"Volba knihoven při reharvestu",
+    "fromindex": "Všechny knihovny přítomné u titulu v indexu",
+    "selection": "Výběr knihoven",
+    "disabledLibrary": "Vypnuta knihovna",
+    "selectLibraries":"Výběr knihoven"
   }
 }

@@ -7,6 +7,7 @@ export class Reharvest{
   state:string;
   pid:string;
   indexed:string;
+  libraries:string[];
   pod:string;
 
   getDateTime(): Date {
@@ -43,6 +44,9 @@ export class Reharvest{
     }
     if (json['pod']) {
       reh.pod = json['pod'];
+    }
+    if (json['libraries']) {
+      reh.libraries = json['libraries'];
     }
     return reh;
   }

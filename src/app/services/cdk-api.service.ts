@@ -14,6 +14,7 @@ import { ConditionParam } from '../models/condition-param.model';
 import { Right } from '../models/right.model';
 import { RightAction } from '../models/right-action.model';
 import { Library, Reharvest, StatusTimtamp } from '../models/cdk.library.model';
+import { AdminApiService } from './admin-api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,11 @@ export class CdkApiService {
         }
     }
 
+    private delete(path: string, options = {}): Observable<Object> {
+      let url = this.cdkUrl + path;
+      return this.http.delete(url, options);
+    }
+  
 
 
     setStatus(code:string, status:boolean) : Observable<any>{
@@ -95,17 +101,13 @@ export class CdkApiService {
 
     }
 
+    deleteReharvest(id:string):Observable<any> {
+      return this.delete(`/api/admin/v7.0/reharvest/${id}`).pipe();
+    }
 
     changeReharvestState(id:string, state:string) {
       return this.doPut(`/api/admin/v7.0/reharvest/${id}/state?state=${state}`,{},{}).pipe(map(response => Reharvest.reharvestFromJson(response)));
     }
-
-    // @PUT
-    // @Path("{id}/state")
-    // @Produces(MediaType.APPLICATION_JSON)
-    // public Response changeState(@PathParam("id") String id, @QueryParam("state") String state) {
-  
-
 
 
     // MOVE to server

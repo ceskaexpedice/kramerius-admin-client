@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
+import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
+import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { Reharvest } from 'src/app/models/cdk.library.model';
 import { AppSettings } from 'src/app/services/app-settings';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
@@ -32,7 +34,7 @@ const ELEMENT_DATA: objectReharvest[] = [
 })
 export class CdkObjectReharvestComponent implements OnInit {
 
-  displayedColumns: string[] = ['date', 'pid', 'type', 'state', 'description', 'pod','approve'];
+  displayedColumns: string[] = ['date', 'pid','libs', 'type', 'state', 'description', 'pod','approve','delete'];
   //dataSource = ELEMENT_DATA;
 
   dataSource:Reharvest[];
@@ -46,12 +48,16 @@ export class CdkObjectReharvestComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cdkApi.reharvests().subscribe(resp=> {
-      this.dataSource = resp;
-      this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
-    });
- }
+    this.reloadReharvests();
+  }
 
+
+ reloadReharvests() {
+  this.cdkApi.reharvests().subscribe(resp=> {
+    this.dataSource = resp;
+    this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
+  });
+ }
 
   isReharvestFromCore(reharvest:Reharvest) {
     return reharvest.name?.startsWith("Delete");
@@ -74,6 +80,38 @@ export class CdkObjectReharvestComponent implements OnInit {
   }
 
  
+  deleteRow(element) {
+    const data: SimpleDialogData = {
+      title: this.ui.getTranslation('modal.onRemoveProcess.title'),
+      message: this.ui.getTranslation('modal.onRemoveProcess.message'),
+      btn1: {
+        label: this.ui.getTranslation('button.yes'),
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: this.ui.getTranslation('button.no'),
+        value: 'no',
+        color: 'default'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+
+        this.cdkApi.deleteReharvest(element.id).subscribe(result => {
+          this.reloadReharvests();
+        });
+
+      }
+    });
+
+  }
+
  /*
 
      this.kramInstance =  this.appSettings.coreBaseUrl+'/../uuid/';

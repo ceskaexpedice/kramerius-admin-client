@@ -11,16 +11,49 @@
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" accept=".txt" />
 		</div>
+
+		<div class="app-desc app-mb-4" [innerHtml]="('desc.typeOfHarvest' | translate) + ':'"></div>
+
 		<div>
-            <mat-label>{{ 'desc.typeOfHarvest' | translate }}</mat-label>
-            <mat-radio-group [(ngModel)]="typeOfHarvest" name="typeOfHarvest" required>
+			<!--
+            <mat-label>{{ 'desc.typeOfHarvest' | translate }}: &nbsp;</mat-label>
+			-->
+            <mat-radio-group [disabled]="!pids" [(ngModel)]="typeOfHarvest" name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)">
                 <mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button>
                 <mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button>
+                <mat-radio-button value="new_root">{{ 'desc.new_root' | translate }}</mat-radio-button>
             </mat-radio-group>
         </div>
+
+		<hr/>
+
+		<div class="app-desc app-mb-4" [innerHtml]="('desc.reharvestLibsOption' | translate) + ':'"></div>
+
+		<div>
+			<mat-radio-group [disabled]="!pids" [(ngModel)]="reharvestLibsOption" name="reharvestLibsOption" (change)="onReharvestLibsOptionChange($event)">
+			  <mat-radio-button value="fromindex" [disabled]="typeOfHarvest==='new_root'">{{ 'desc.fromindex' | translate }}</mat-radio-button>
+			  <mat-radio-button value="selection">{{ 'desc.selection' | translate }}</mat-radio-button>
+			</mat-radio-group>
+		  </div>
+
+		  <div *ngIf="reharvestLibsOption === 'selection'">
+			<h2 mat-dialog-title>{{ 'desc.selectLibraries' | translate }}</h2>			
+			<div *ngFor="let option of options">
+			  <mat-checkbox [disabled]="!option.enabled" [(ngModel)]="option.selected" name="option_{{option.library.code}}">
+				{{ option.library.code | translate }} 
+				
+				<ng-container *ngIf="!option.enabled">
+					<i>&nbsp;({{ "desc.disabledLibrary" | translate }})</i>
+				</ng-container>
+
+			  </mat-checkbox>
+
+			</div>
+		  </div>
+		  
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="false" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+		<button mat-flat-button [disabled]="!pids" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
 		<button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>

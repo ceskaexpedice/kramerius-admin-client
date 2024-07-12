@@ -1027,6 +1027,7 @@
     "pod": "Pod",
     "root":"Whole title",
     "children":"Only subparts",
+    "new_root":"New harvest of whole title",
     "typeOfHarvest": "Type of reharvest",
     "modelDisplayStatistics": "Model display statistics",
     "statisticsOfUsedLanguages": "Statistics of used languages",
@@ -1190,6 +1191,10 @@
     "true": "Yes",
     "false": "No",
     "selectLicenseToImport": "Select a license to import",
-    "noLicense": "No license"
+    "noLicense": "No license",
+    "reharvestLibsOption":"Libraries for reharvest",
+    "selection": "Selection",
+    "disabledLibrary": "Disabled library",
+    "selectLibraries":"Library selection"
   }
 }
