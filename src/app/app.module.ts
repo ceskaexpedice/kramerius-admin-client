@@ -111,6 +111,7 @@ import { AddNewSetDialogComponent } from './dialogs/add-new-set-dialog/add-new-s
 import { OAIApiService } from './services/oai-api.services';
 import { CdkObjectReharvestComponent } from './pages/cdk/cdk-object-reharvest/cdk-object-reharvest.component';
 import { RunImportComponent } from './dialogs/run-import/run-import.component';
+import {ShowSeChannelDialogComponent} from './dialogs/show-sechannel-dialog/show-sechannel-dialog.component'
 //import { FileSaverModule } from 'ngx-filesaver';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -197,6 +198,7 @@ export function createCustomMatPaginatorIntl(
     AddNewParameterDialogComponent,
     UserInfoDialogComponent,
     ShowMappingDialogComponent,
+    ShowSeChannelDialogComponent,
     ScheduleReHarvestSpecificPidsDialogComponent,
     ScheduleMigrateCollectionsDialogComponent,
     CreateCollectionBackupDialogComponent,

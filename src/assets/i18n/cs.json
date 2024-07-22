@@ -1195,6 +1195,20 @@
     "fromindex": "Všechny knihovny přítomné u titulu v indexu",
     "selection": "Výběr knihoven",
     "disabledLibrary": "Vypnuta knihovna",
-    "selectLibraries":"Výběr knihoven"
+    "selectLibraries":"Výběr knihoven",
+    "securedChannel":"Chráněný kanál",
+    "register":"Registr kramériů",
+    "api": "Verze API",
+    "securedChannelHealth":"Healthcheck chráněného kanálu pro",
+    "securedChannelEnabled":"Chráněný kanál je povolen",
+    "securedChannelSolr":"Chráněný kanál vidí na vzdálený solr",
+    "securedChannelUser":"Chráněný kanál může získat inforamce o uživateli",
+    "usersInfo":"Inforamce o uživatelích",
+    "users":"Uživatelé",
+    "notLogged":"Nepřihlášený uživatel",
+    "dnnt":"DNNT uživatel",
+    "roles":"Role",
+    "licenses":"Licence"
+
   }
 }

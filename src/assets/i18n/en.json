@@ -1195,6 +1195,18 @@
     "reharvestLibsOption":"Libraries for reharvest",
     "selection": "Selection",
     "disabledLibrary": "Disabled library",
-    "selectLibraries":"Library selection"
+    "selectLibraries":"Library selection",
+    "securedChannel":"Secured channel",
+    "register":"Kramerius registry",
+    "api": "API version",
+    "securedChannelHealth":"Healthcheck for",
+    "securedChannelEnabled":"The channel is enabled",
+    "securedChannelSolr":"The channel is able to connect to Solr.",
+    "securedChannelUser":"The channel is able to get info about users",
+    "usersInfo":"Users info",
+    "notLogged":"Not logged user",
+    "dnnt":"DNNT user",
+    "roles":"Roles",
+    "licenses":"Licenses"
   }
 }

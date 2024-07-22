@@ -77,20 +77,22 @@ export class CdkApiService {
     }
 
     timestamps(code): Observable<any[]> {
-      //http://localhost:8080/search/api/admin/v7.0/connected/knav/timestamps
       return this.doGet(`/api/admin/v7.0/connected/${code}/timestamps`,{}).pipe(map(response => StatusTimtamp.statusesFromJson(response)));
     }
 
+    config(code): Observable<any> {
+      return this.doGet(`/api/admin/v7.0/connected/${code}/config`,{}).pipe();
+    }
+
+    channel(code): Observable<any> {
+      return this.doGet(`/api/admin/v7.0/connected/${code}/config/channel/health`,{}).pipe();
+    }
 
     reharvests(): Observable<any[]> {
-      //search/api/admin/v7.0/reharvest
       return this.doGet('/api/admin/v7.0/reharvest',{}).pipe(map(response => Reharvest.reharvestsFromJson(response)));
     }
 
     planReharvest(obj:any) {
-      //https://api.val.ceskadigitalniknihovna.cz/search/api/admin/v7.0/reharvest
-      //return this.doPut('/api/admin/v7.0/reharvest',obj,{}).pipe(map(response => Reharvest.reharvestFromJson(response)));
-
       return this.doPut('/api/admin/v7.0/reharvest', obj, {}).pipe(
         tap((response: HttpResponse<Object>) => {}),
         map(response => Reharvest.reharvestFromJson(response))
@@ -102,7 +104,7 @@ export class CdkApiService {
     }
 
     deleteReharvest(id:string):Observable<any> {
-      return this.delete(`/api/admin/v7.0/reharvest/${id}`).pipe();
+      return this.  delete(`/api/admin/v7.0/reharvest/${id}`).pipe();
     }
 
     changeReharvestState(id:string, state:string) {

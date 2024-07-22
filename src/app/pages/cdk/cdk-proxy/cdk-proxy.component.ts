@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ShowMappingDialogComponent } from 'src/app/dialogs/show-mapping-dialog/show-mapping-dialog.component';
+import { ShowSeChannelDialogComponent } from 'src/app/dialogs/show-sechannel-dialog/show-sechannel-dialog.component';
 import { Library } from 'src/app/models/cdk.library.model';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 
@@ -257,11 +258,12 @@ export class CdkProxyComponent implements OnInit {
   cdkMock:any ={"svkhk":{"status":true},"kkp":{"status":true},"svkul":{"status":true},"knav":{"status":true},"uzei":{"status":true},"inovatika":{"status":true},"mzk":{"status":true}};
 
 
-  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'showMapping', 'switch'];
+  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'showMapping','showSEChannel', 'switch'];
 
   dataSource:Library[];
-
   register:Map<String, any> = new Map();
+  problems:Map<String, boolean> = new Map();
+
   constructor(
     private cdkApi: CdkApiService,
     public dialog: MatDialog
@@ -286,6 +288,7 @@ export class CdkProxyComponent implements OnInit {
     this.cdkApi.connected().subscribe(resp=> {
       this.dataSource = resp;
       this.cdkApi.registrinfo().subscribe(resp=> {
+
         let codes = this.dataSource.map(l=> l.code);
         let registerResponse = resp;
         registerResponse.forEach(one=> {
@@ -294,6 +297,25 @@ export class CdkProxyComponent implements OnInit {
             this.register.set(code, one);
           }
         });
+
+        for (let code of this.register.keys()) {
+
+          this.cdkApi.channel(code).subscribe(resp=> {
+            if(resp.channel.solr && resp.channel.user) {
+              let resp = this.register.get(code);
+              if (resp) {
+                this.problems.set(code,false);
+              }
+            } else {
+              let resp = this.register.get(code);
+              if (resp) {
+                this.problems.set(code,true);
+              }
+
+            }
+          });
+ 
+        }
       });
     });
   }
@@ -358,6 +380,18 @@ export class CdkProxyComponent implements OnInit {
       panelClass: 'app-show-mapping-dialog',
       width: '800px'
     });
+  }
+
+  showSEChannelDialog(lib:any) {
+    const dialogRef = this.dialog.open(ShowSeChannelDialogComponent, {
+      data: {
+        "code": lib.code,
+        "register":this.register
+      },
+      panelClass: 'app-show-mapping-dialog',
+      width: '800px'
+    });
+
   }
 
 }
