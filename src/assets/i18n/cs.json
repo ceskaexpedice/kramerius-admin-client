@@ -729,6 +729,11 @@
       "title": "Smazání procesu/dávky",
       "message": "Určitě chcete proces/dávku trvale smazat?"
     },
+    "onRemoveCDKReharvest":{
+      "title": "Smazání reharvestu",
+      "message": "Určitě chcete reharvest  smazat?"
+
+    },
     "onKillProcess": {
       "title": "Zrušení procesu/dávky",
       "message": "Určitě chcete zrušit proces/dávku?"
@@ -1023,6 +1028,9 @@
     }
   },
   "desc": {
+    "addToCollections":"Přidat do sbírky",
+    "noCollection":"Žádná sbírka",
+    "selectCollection":"Vyber sbírku",
     "pod": "Pod",
     "root":"Reharvest celého titulu",
     "children":"Reharvest podčástí (ročník, výtisk,..)",
@@ -1208,7 +1216,12 @@
     "notLogged":"Nepřihlášený uživatel",
     "dnnt":"DNNT uživatel",
     "roles":"Role",
-    "licenses":"Licence"
+    "licenses":"Licence",
+    "delete":"Smazat",
+    "approve":"Potvrdit",
+    "only_pid":"Reharvest pouze daného pidu",
+    "delete_pid": "Smazání objektu",
+    "delete_tree": "Smazání podstromu"    
 
   }
 }

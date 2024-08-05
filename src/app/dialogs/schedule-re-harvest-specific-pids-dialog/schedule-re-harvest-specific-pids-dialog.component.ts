@@ -78,7 +78,7 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
 
           let object = {
-            name:'User trigger - reharvest from admin client',
+            name:'User trigger | Reharvest from admin client ',
             pid:pid,
             type: this.typeOfHarvest,
             libraries:libs

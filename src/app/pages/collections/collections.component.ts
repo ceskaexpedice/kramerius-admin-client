@@ -64,7 +64,7 @@ export class CollectionsComponent implements OnInit {
 
   // all configured languages
   public languages = this.appSettings.languages;
-  public lang: string = 'cs';
+  public lang: string =  this.appSettings.defaultLang;//'cs';
 
 
   columnMapping = {

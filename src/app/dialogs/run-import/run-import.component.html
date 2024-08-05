@@ -1,6 +1,7 @@
 <h2 mat-dialog-title>{{ 'modal.startImport.title' | translate }}</h2>
 <mat-dialog-content class="app-scrollbar-fix">
   <mat-form-field appearance="fill" class="app-w-100">
+
     <mat-label>{{ 'desc.selectLicenseToImport' | translate }}</mat-label>
     <mat-select [(ngModel)]="selectedLicense" [panelClass]="'app-licenses'">
       <mat-select-trigger>
@@ -29,6 +30,36 @@
   <ng-container *ngIf="type == 'ndk'">
     <mat-checkbox [disableRipple]="true"  *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
   </ng-container>
+
+  <mat-checkbox [disableRipple]="true" [(ngModel)]="addCollection" color="primary" class="app-mr-4">{{ 'desc.addToCollections' | translate }}</mat-checkbox>
+  <ng-container *ngIf="addCollection">
+
+    <mat-form-field appearance="fill" class="app-w-100">
+
+    <!-- Label pro tabulku -->
+    <label>{{ 'desc.selectCollection' | translate }}</label>
+    <mat-select [(ngModel)]="selectedCollection" [panelClass]="'app-licenses'">
+      <mat-select-trigger>
+
+        <ng-container *ngIf="selectedCollection; else noCollection">
+          <strong>{{ name(selectedCollection) }}</strong>
+        </ng-container>
+        <ng-template #noCollection>
+          -- {{ 'desc.noCollection' | translate }} --
+        </ng-template>
+
+      </mat-select-trigger>
+      
+      <mat-option  [value]="null">-- {{ 'desc.noCollection' | translate }} --</mat-option>
+      <mat-option *ngFor="let collection of allCollections" [value]="collection">
+        <strong>{{ name(collection) }}</strong>
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
+
+  </ng-container>
+
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

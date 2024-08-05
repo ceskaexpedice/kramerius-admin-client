@@ -19,10 +19,13 @@
             <mat-label>{{ 'desc.typeOfHarvest' | translate }}: &nbsp;</mat-label>
 			-->
             <mat-radio-group [disabled]="!pids" [(ngModel)]="typeOfHarvest" name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)">
-                <mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button>
-                <mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button>
-                <mat-radio-button value="new_root">{{ 'desc.new_root' | translate }}</mat-radio-button>
-            </mat-radio-group>
+				<div><mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button></div> 
+                <div><mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button></div> 
+                <div><mat-radio-button value="new_root">{{ 'desc.new_root' | translate }}</mat-radio-button></div> 
+                <div><mat-radio-button value="only_pid">{{ 'desc.only_pid' | translate }}</mat-radio-button></div>
+				<mat-radio-button value="delete_pid">{{ 'desc.delete_pid' | translate }}</mat-radio-button> <br/>
+				<mat-radio-button value="delete_tree">{{ 'desc.delete_tree' | translate }}</mat-radio-button> 
+			</mat-radio-group>
         </div>
 
 		<hr/>

@@ -82,8 +82,8 @@ export class CdkObjectReharvestComponent implements OnInit {
  
   deleteRow(element) {
     const data: SimpleDialogData = {
-      title: this.ui.getTranslation('modal.onRemoveProcess.title'),
-      message: this.ui.getTranslation('modal.onRemoveProcess.message'),
+      title: this.ui.getTranslation('modal.onRemoveCDKReharvest.title'),
+      message: this.ui.getTranslation('modal.onRemoveCDKReharvest.message'),
       btn1: {
         label: this.ui.getTranslation('button.yes'),
         value: 'yes',

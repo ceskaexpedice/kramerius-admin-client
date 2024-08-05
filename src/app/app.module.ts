@@ -113,6 +113,7 @@ import { CdkObjectReharvestComponent } from './pages/cdk/cdk-object-reharvest/cd
 import { RunImportComponent } from './dialogs/run-import/run-import.component';
 import {ShowSeChannelDialogComponent} from './dialogs/show-sechannel-dialog/show-sechannel-dialog.component'
 //import { FileSaverModule } from 'ngx-filesaver';
+import { MatChipsModule } from '@angular/material/chips';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -221,6 +222,7 @@ export function createCustomMatPaginatorIntl(
     CKEditorModule,
     FlexLayoutModule,
     MatBadgeModule,
+    MatChipsModule,
     //FileSaverModule,
     NgxEchartsModule.forRoot({
       echarts

@@ -1024,6 +1024,9 @@
     }
   },
   "desc": {
+    "addToCollections":"Add to collection",
+    "noCollection":"No collection",
+    "selectCollection":"Select collection",
     "pod": "Pod",
     "root":"Whole title",
     "children":"Only subparts",
@@ -1207,6 +1210,12 @@
     "notLogged":"Not logged user",
     "dnnt":"DNNT user",
     "roles":"Roles",
-    "licenses":"Licenses"
+    "licenses":"Licenses",
+    "delete":"Delete",
+    "approve":"Approve",
+    "only_pid":"Reharvest pouze daného pidu",
+    "delete_pid": "Delete object",
+    "delete_tree": "Delete tree"    
+
   }
 }
