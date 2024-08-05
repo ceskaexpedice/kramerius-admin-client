@@ -505,7 +505,8 @@
     "addNewSet": "Přidat nový set",
     "viewConsumedLicenses": "Zobrazit konzumované licence",
     "hideConsumedLicenses": "Skrýt konzumované licence",
-    "thisFlagUnsupported": "Tento příznak již není podporován"
+    "thisFlagUnsupported": "Tento příznak již není podporován",
+    "approve": "Schválit"
   },
   "field": {
     "public": "Veřejné",
@@ -732,7 +733,6 @@
     "onRemoveCDKReharvest":{
       "title": "Smazání reharvestu",
       "message": "Určitě chcete reharvest  smazat?"
-
     },
     "onKillProcess": {
       "title": "Zrušení procesu/dávky",
@@ -911,9 +911,7 @@
         "2-4": "Byly naplánovány {{value}} procesy Odebrání příznaku viditelnosti",
         "more": "Bylo naplánováno {{value}} procesů Odebrání příznaku viditelnosti"
       },
-
       "scheduleCDKHarvest":"Harvest pidu byl naplánovován",
-
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
@@ -1221,7 +1219,7 @@
     "approve":"Potvrdit",
     "only_pid":"Reharvest pouze daného pidu",
     "delete_pid": "Smazání objektu",
-    "delete_tree": "Smazání podstromu"    
-
+    "delete_tree": "Smazání podstromu",
+    "library": "Knihovna"
   }
 }

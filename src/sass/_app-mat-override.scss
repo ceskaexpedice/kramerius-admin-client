@@ -401,6 +401,15 @@
           @extend .app-pr-4;
         }
 
+        &.app-col-icon {
+          width: 40px;
+          text-align: center;
+
+          &:last-child {
+            @extend .app-p-0;
+          }
+        }
+
         &.mat-column-state {      
           .app-badge {
             min-width: 110px;
