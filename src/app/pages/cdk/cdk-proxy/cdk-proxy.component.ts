@@ -389,7 +389,7 @@ export class CdkProxyComponent implements OnInit {
         "register":this.register
       },
       panelClass: 'app-show-mapping-dialog',
-      width: '800px'
+      width: '1280px'
     });
 
   }

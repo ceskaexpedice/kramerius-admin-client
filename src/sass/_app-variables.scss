@@ -110,11 +110,10 @@ $states: (
   session: $app-color-lightnes,
   keyword: $app-color-darknes,
   default: $app-gray-6,
+
   // for reharvest jobs
   is-reharvest-from-core: #faf7e3,
-  is-reharvest-from-admin: #f0ffee,
-
-
+  is-reharvest-from-admin: #f0ffee
 );
 
 // dashboard
