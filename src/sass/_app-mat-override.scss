@@ -585,3 +585,15 @@
     font-size: 14px;
   }
 }
+
+// checkbox
+.mat-checkbox {
+  .mat-checkbox-inner-container {
+    width: $app-mat-checbox-size;
+    height: $app-mat-checbox-size;
+  }
+
+  .mat-checkbox-label {
+    font-size: $app-mat-checbox-size;
+  }
+}

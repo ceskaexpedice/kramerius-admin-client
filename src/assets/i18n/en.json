@@ -1198,7 +1198,7 @@
     "selectLicenseToImport": "Select a license to import",
     "noLicense": "No license",
     "reharvestLibsOption":"Libraries for reharvest",
-    "fromindex": "Všechny knihovny přítomné u titulu v indexu",
+    "allLibrariesPresentForTheTitleInTheIndex": "All libraries present for the title in the index",
     "selection": "Selection",
     "disabledLibrary": "Disabled library",
     "selectLibraries":"Library selection",
