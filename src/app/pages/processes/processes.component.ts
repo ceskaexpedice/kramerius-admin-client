@@ -75,6 +75,9 @@ export class ProcessesComponent implements OnInit {
   errorMessage: string;
   errorState: boolean = false;
 
+  autoReload: boolean = false;
+  reloadSubscription: Subscription;
+
   constructor(
     private adminApi: AdminApiService,
     private auth: AuthService,
@@ -94,11 +97,21 @@ export class ProcessesComponent implements OnInit {
   }
 
   reloadProcesses() {
+
+    const expandedBatchIds = this.batches
+    .filter(batch => batch.expanded)
+    .map(batch => batch.id);
+
     this.fetchingProcesses = true;
     this.batches = [];
     this.batches_planned = [];
     this.adminApi.getProcesses(this.buildProcessesParams()).subscribe(([batches, total]: [Batch[], number]) => {
       this.batches = batches;
+      this.batches.forEach(b=> {
+        if (expandedBatchIds.indexOf(b.id)>=0) {
+          b.expanded = true;
+        }
+      });
       this.batches_planned = batches.filter(batch => batch.state == 'PLANNED');
       this.resultCount = total;
       this.fetchingProcesses = false;
@@ -299,5 +312,27 @@ export class ProcessesComponent implements OnInit {
   getRouterLink(path: string = null, id: string,  viewProperty: string = null, viewValue: string = null) {
     this.local.setStringProperty(viewProperty + '.view', viewValue);
     return path + id;
+  }
+
+  /** auto reload */
+  
+  onAutoReloadChange(event: any): void {
+    if (event.checked) {
+      this.startAutoReload();
+    } else {
+      this.stopAutoReload();
+    }
+  }
+  
+  startAutoReload(): void {
+    this.reloadSubscription = interval(20000).subscribe(() => {
+      this.reloadProcesses();
+    });
+  }
+
+  stopAutoReload(): void {
+    if (this.reloadSubscription) {
+      this.reloadSubscription.unsubscribe();
+    }
   }
 }

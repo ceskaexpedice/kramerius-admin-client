@@ -30,24 +30,8 @@ export class RunImportComponent implements OnInit {
    
 
 
-  // /** collection prefix search */
-  // collectionPrefixSearch:string='';
-
-  // /** collection table - rows */
-  // collecitonRows:number = 5;
-  // /** collection table - page */
-  // collectionPage:number = 0;
-  // // searching
-  // subject: Subject<string> = new Subject();
-
-  // displayedColumns: string[] = ['select', 'title'];
-
-  // numFound:number = 0;
-
   selectedCollection:Collection;
   allCollections:Collection[];
-
-  //selection = new SelectionModel<any>(true, []);
 
   /** Selected licences */
   selectedLicense:License;
@@ -109,6 +93,20 @@ export class RunImportComponent implements OnInit {
     return retval;
   }
 
+  onScheduleIndexationChange(isChecked: boolean) {
+    this.scheduleIndexation = isChecked;
+    if (!isChecked) {
+      this.addCollection = false;
+    }
+  }
+
+  onSelectCollectionChange(isChecked: boolean) {
+    this.addCollection = isChecked;
+    if (!isChecked) {
+      this.selectedCollection = null;
+    }
+  }
+
   collectionsReload() {
     this.clientApi.getCollections(1000, 0, false, '', 'created', 'asc').subscribe((res)  => {
       this.allCollections = res["docs"].map((d)=> {
@@ -156,13 +154,12 @@ export class RunImportComponent implements OnInit {
 
   scheduleProcess() {
     const data = {
-      selectedLicense:  this.selectedLicense ? this.selectedLicense : "-none-",
+      selectedLicense:  this.selectedLicense,
       scheduleIndexation: this.scheduleIndexation,
       ndkIIPServer: this.ndkIIPServer,
-      collections: this.selectedCollection ?  [this.selectedCollection?.id] : []
+      selectedCollection: this.selectedCollection?.id 
     };
     this.dialogRef.close(data);
   }
-
 
 }

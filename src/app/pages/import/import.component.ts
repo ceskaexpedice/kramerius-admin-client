@@ -27,6 +27,7 @@ export class ImportComponent implements OnInit {
   inputDirError = {};
 
   selectedLicense:License;
+  selectedCollection:string;
   licenses:License[];
 
   errorState: boolean = false;
@@ -130,6 +131,7 @@ export class ImportComponent implements OnInit {
 
       if (result) {
         this.selectedLicense = result.selectedLicense;
+        this.selectedCollection = result.selectedCollection;
         this.scheduleIndexations = result.scheduleIndexation;
         this.ndkIIPServer = result.ndkIIPServer;
         if (this.type == 'foxml') {
@@ -146,11 +148,14 @@ export class ImportComponent implements OnInit {
       policy:  'PRIVATE',
       inputDataDir: this.imports.selectedTree.getFullPath(),
       startIndexer: this.scheduleIndexations,
-      useIIPServer: this.ndkIIPServer
+      useIIPServer: this.ndkIIPServer,
     };
 
     if (this.selectedLicense) {
       p['license'] = this.selectedLicense.name;
+    }
+    if(this.selectedCollection) {
+      p['collections'] = this.selectedLicense.name;
     }
     this.api.scheduleProcess({
       defid: 'convert_and_import',
@@ -170,14 +175,15 @@ export class ImportComponent implements OnInit {
       params: {
         inputDataDir: this.imports.selectedTree.getFullPath(),
         startIndexer: this.scheduleIndexations,
-        license: this.selectedLicense?.name
+        license: this.selectedLicense?.name,
+        collections: this.selectedCollection
       }
     }).subscribe(response => {
-      if (this.selectedLicense) {
-        this.ui.showInfoSnackBar("scheduleApplyLicenseAndImportProcess");
-      } else {
-        this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
-      }
+      this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
+      // if (this.selectedLicense) {
+      //   this.ui.showInfoSnackBar("scheduleApplyLicenseAndImportProcess");
+      // } else {
+      // }
     }, error => {
       this.ui.showInfoSnackBar('snackbar.error.scheduleImportProcess');
       console.log(error);

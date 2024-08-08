@@ -25,15 +25,16 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
+  <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" (ngModelChange)="onScheduleIndexationChange($event)" color="primary" class="app-mr-4">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
+
   <ng-container *ngIf="type == 'ndk'">
     <mat-checkbox [disableRipple]="true"  *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
   </ng-container>
-  <mat-checkbox [disableRipple]="true" [(ngModel)]="addCollection" color="primary" class="app-mr-4">{{ 'desc.addToCollections' | translate }}</mat-checkbox>
+  <mat-checkbox [disableRipple]="true" [(ngModel)]="addCollection"  [disabled]="!scheduleIndexation"  (ngModelChange)="onSelectCollectionChange($event)" color="primary" class="app-mr-4">{{ 'desc.addToCollections' | translate }}</mat-checkbox>
 
-  <mat-form-field *ngIf="addCollection" appearance="fill" class="app-w-100 app-mt-4">
+  <mat-form-field *ngIf="addCollection && scheduleIndexation" appearance="fill" class="app-w-100 app-mt-4">
     <mat-label>{{ 'desc.selectCollection' | translate }}</mat-label>
-    <mat-select>
+    <mat-select  [(ngModel)]="selectedCollection" >
       <mat-option *ngFor="let collection of allCollections" [value]="collection">
         {{ name(collection) }}
       </mat-option>
