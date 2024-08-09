@@ -67,25 +67,20 @@ export class IndexingComponent implements OnInit {
 
   ngOnInit() {
 
-     this.clientApi.getAllModelsFromIndex().subscribe(any=> {
-      if (any['model']) {
-        let pmodels = [];
-        let names = [];
-        let resultModel = any['model'];
-        for(let i=0;i<resultModel.length;i++) {
-          if (i % 2==0) {
-              let model = resultModel[i];
-              if (!this.REMOVED_FROM_INDEXATION.includes(model)) {
-                pmodels.push(model);
-                let translation = this.ui.getTranslation('field.'+model);
-                names.push(translation);
-              }
-            }
+    this.adminApi.getAllModelsFromProcessingIndex().subscribe(res=> {
+      let pmodels = [];
+      let names = [];
+      const models = Object.keys(res).map(key => key.replace(/^model:/, ''));
+      models.forEach(model=> {
+        if (!this.REMOVED_FROM_INDEXATION.includes(model)) {
+          pmodels.push(model);
+          let translation = this.ui.getTranslation('field.'+model);
+          names.push(translation);
         }
-        this.models = pmodels;
-        this.modelNames = names;
-      }
-     });
+      });
+      this.models = pmodels;
+      this.modelNames = names;
+    });
 
     //this.view = this.local.getStringProperty('indexing.view', 'object');
     this.view = this.router.url.replace('/indexing/', '');

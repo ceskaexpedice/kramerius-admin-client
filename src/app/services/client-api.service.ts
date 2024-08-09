@@ -133,7 +133,10 @@ export class ClientApiService {
 
   // getAllModelsFromProcessingIndex
 
+
+
   getAllModelsFromIndex(): Observable<any[]> {
+    //http://localhost:8080/search/api/admin/v7.0/processing/models
     return this.facets({
       q: '*',
       fl: 'pid', //'pid,title.search',

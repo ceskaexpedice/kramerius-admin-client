@@ -383,6 +383,7 @@
     }
   },
   "button": {
+    "autoRefresProcesses":"Automatic reload {{refreshinterval}} s",
     "showDetail": "Show detail",
     "hideDetail": "Hide detail",
     "startImport": "Start import",
@@ -1104,9 +1105,15 @@
     "monographunit":"Monograph unit",
     "multivolumemonograph":"Multivolume monograph",
     "periodical": "Periodical",
+    "periodicalvolume": "Periodical Volume",
+    "periodicalitem": "Periodical Issue",    
     "manuscript": "Manuscript",
     "collection": "Collection",
     "soundrecording": "Soundrecording",
+    "supplement": "Supplement",
+    "track": "Track",
+    "soundunit": "Part",
+    "internalpart": "Chapter",    
     "version": "Version",
     "availability": "Availability",
     "synchronization": "Synchronization",

@@ -155,6 +155,7 @@ export class AdminApiService {
     )
   }
 
+    
   killBatch(firstProcessId: number): Observable<any> {
     return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}/execution`).pipe(
       //delay(3000)
@@ -166,6 +167,7 @@ export class AdminApiService {
       //delay(3000),
     )
   }
+
 
 
   uploadCollectionThumbnail(collectionPid:string, file:File):Observable<any> {
@@ -205,6 +207,8 @@ export class AdminApiService {
   getCollection(id: string): Observable<any> {
     return this.get(`/collections/${id}`);
   }
+
+
 
   getSdntSyncInfo(): Observable<any> {
     return this.get(`/sdnnt/info`);
@@ -282,6 +286,12 @@ export class AdminApiService {
   deleteObject(pid: string): Observable<any> {
     return this.delete(`/items/${pid}`);
   }
+
+    /** Processing index  */
+    getAllModelsFromProcessingIndex(): Observable<any> {
+      return this.get(`/items/models`).pipe();
+    }
+  
 
   getConfigProperty(key: string): Observable<any> {
     return this.get(`/config/${key}`).pipe(

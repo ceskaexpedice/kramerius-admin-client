@@ -39,7 +39,7 @@ export class AppSettings {
   altoeditor = APP_GLOBAL.altoeditor || [];
   krameriusInstance = APP_GLOBAL.krameriusInstance || '';
 
-
+  processRefreshInterval = APP_GLOBAL.processRefreshInterval || 5;
 
 
   interceptresponse: EventEmitter<any> = new EventEmitter<any>();

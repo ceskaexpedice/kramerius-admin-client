@@ -78,6 +78,7 @@ export class ProcessesComponent implements OnInit {
   autoReload: boolean = false;
   reloadSubscription: Subscription;
 
+
   constructor(
     private adminApi: AdminApiService,
     private auth: AuthService,
@@ -323,9 +324,9 @@ export class ProcessesComponent implements OnInit {
       this.stopAutoReload();
     }
   }
-  
+
   startAutoReload(): void {
-    this.reloadSubscription = interval(20000).subscribe(() => {
+    this.reloadSubscription = interval(this.appSettings.processRefreshInterval*1000).subscribe(() => {
       this.reloadProcesses();
     });
   }

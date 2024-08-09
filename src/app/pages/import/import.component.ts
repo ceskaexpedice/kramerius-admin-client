@@ -155,7 +155,7 @@ export class ImportComponent implements OnInit {
       p['license'] = this.selectedLicense.name;
     }
     if(this.selectedCollection) {
-      p['collections'] = this.selectedLicense.name;
+      p['collections'] = this.selectedCollection;
     }
     this.api.scheduleProcess({
       defid: 'convert_and_import',

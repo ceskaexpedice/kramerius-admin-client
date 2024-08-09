@@ -79,7 +79,8 @@
             <mat-icon>refresh</mat-icon>
           </button>
 
-          <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)" [disabled]="isLoading()">{{ 'button.autoRefresProcesses' | translate }}</mat-checkbox>
+          <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)" [disabled]="isLoading()">{{ 'button.autoRefresProcesses' | translate : {refreshinterval: appSettings.processRefreshInterval} }}</mat-checkbox>
+
         </div>
         <div>
           <button mat-flat-button (click)="onCancelScheduledProcesses()" color="primary" [disabled]="isLoading() || batches_planned.length == 0">
