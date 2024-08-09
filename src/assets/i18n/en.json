@@ -301,7 +301,16 @@
     "a_able_tobe_part_of_collections": {
       "title": "Possibility to be included in the collection",
       "subtitle": "This right gives the objects the possibility to be included in the collection"
+    },
+    "a_sdnnt_sync":{
+      "title": "Synchronization of licenses with the SDNNT application",
+      "subtitle": "Synchronization of licenses with the SDNNT application"
+    },
+    "a_object_edit":{
+      "title": "Object editation",
+      "subtitle": "Right for object editation"
     }
+
   },
   "alert": {
     "statistics": {
@@ -1111,6 +1120,7 @@
     "collection": "Collection",
     "soundrecording": "Soundrecording",
     "supplement": "Supplement",
+    "picture":"Picture",
     "track": "Track",
     "soundunit": "Part",
     "internalpart": "Chapter",    

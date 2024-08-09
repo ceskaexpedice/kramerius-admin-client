@@ -301,7 +301,16 @@
     "a_able_tobe_part_of_collections": {
       "title": "Možnost být zařazen do sbírky",
       "subtitle": "Toto právo dává objektům možnost být zařazen do sbírky"
+    },
+    "a_sdnnt_sync":{
+      "title": "Synchronizace licencí se Seznamem děl nedosutpných na trhu",
+      "subtitle": "Synchronizace licencí se Seznamem děl nedosutpných na trhu"
+    },
+    "a_object_edit":{
+      "title": "Editace objektu",
+      "subtitle": "Právo editovat objekt"
     }
+
   },
   "alert": {
     "statistics": {
