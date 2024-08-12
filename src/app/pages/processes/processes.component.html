@@ -87,12 +87,38 @@
             <mat-icon>clear</mat-icon>{{ 'button.cancelScheduledProcesses' | translate }}
           </button>
         </div>
+
       </div>
     </div>
     <div fxFlex class="app-container-fluid app-oh">
       <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y" *ngIf="!errorState">
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
         <table mat-table [dataSource]="batches" class="app-w-100">
+
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"  [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="batches.length !== 0"></mat-checkbox>
+            </th>
+            <!-- disabled when expand -->
+            <td mat-cell *matCellDef="let row">
+              
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"  [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
+
+              <ng-container *ngIf="row.expanded">
+                <div *ngFor="let p of row.processes" class="app-col-expanded">&#160;</div>
+              </ng-container>
+
+              <!--
+              <ng-container *ngIf="row.expanded">
+                <div *ngFor="let p of row.processes" class="app-col-expanded ">
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(p) : null" [checked]="selection.isSelected(p)"  [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
+                </div>
+              </ng-container>
+              -->
+            </td>
+          </ng-container>
+
+
           <ng-container matColumnDef="expand">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
@@ -103,6 +129,7 @@
                 <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
               </ng-container>
           </ng-container>
+
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>Id</th>
             <td mat-cell *matCellDef="let element">

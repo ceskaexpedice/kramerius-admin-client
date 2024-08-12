@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Router } from '@angular/router';
+import { SelectionModel } from '@angular/cdk/collections';
 
 
 @Component({
@@ -41,6 +42,9 @@ export class ProcessesComponent implements OnInit {
   selectedTestProcessDuration = this.testProcessDuration[0];
 
   displayedColumns = ['expand', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner', 'action'];
+
+  selection = new SelectionModel<any>(true, []);
+
 
   // to test accesibility
   //notAllowed: boolean = true;
@@ -234,6 +238,19 @@ export class ProcessesComponent implements OnInit {
   onSelectedOwnerChanged(event) {
     this.reloadProcesses();
   }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.batches.length;
+    return numSelected === numRows;
+  }
+    // Selects all rows if they are not all selected; otherwise clear selection.
+    masterToggle() {
+      this.isAllSelected() ?
+          this.selection.clear() :
+          this.batches.forEach(row => this.selection.select(row));
+    }
+  
 
   private buildProcessesParams(): any {
     const params = {
