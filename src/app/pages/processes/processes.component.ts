@@ -41,7 +41,7 @@ export class ProcessesComponent implements OnInit {
   testProcessDuration = [1, 5, 10, 30, 60, 120]
   selectedTestProcessDuration = this.testProcessDuration[0];
 
-  displayedColumns = ['todelete', 'expand', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner', 'action'];
+  displayedColumns = ['selection', 'expand', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner', 'action'];
 
   selection = new SelectionModel<any>(true, []);
 
