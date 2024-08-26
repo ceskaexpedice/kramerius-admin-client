@@ -5,7 +5,8 @@
 
 .mat-cell {
   &.mat-column-expand,
-  &.mat-column-action {
+  &.mat-column-action,
+  &.mat-column-todelete {
     width: 50px;
   }
 

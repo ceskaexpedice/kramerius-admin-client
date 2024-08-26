@@ -80,14 +80,15 @@
           </button>
 
           <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)" [disabled]="isLoading()">{{ 'button.autoRefresProcesses' | translate : {refreshinterval: appSettings.processRefreshInterval} }}</mat-checkbox>
-
         </div>
         <div>
+          <button mat-flat-button (click)="bulkDeleteProcesses()" color="warn" [disabled]="!this.isAllItemsSelected" class="app-mr-2">
+            {{ 'button.deleteSelectedItems' | translate }}
+          </button>
           <button mat-flat-button (click)="onCancelScheduledProcesses()" color="primary" [disabled]="isLoading() || batches_planned.length == 0">
-            <mat-icon>clear</mat-icon>{{ 'button.cancelScheduledProcesses' | translate }}
+            {{ 'button.cancelScheduledProcesses' | translate }}
           </button>
         </div>
-
       </div>
     </div>
     <div fxFlex class="app-container-fluid app-oh">
@@ -100,14 +101,11 @@
               <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"  [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="batches.length !== 0"></mat-checkbox>
             </th>
             <!-- disabled when expand -->
-            <td mat-cell *matCellDef="let row">
-              
+            <td mat-cell *matCellDef="let row">  
               <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"  [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
-
               <ng-container *ngIf="row.expanded">
                 <div *ngFor="let p of row.processes" class="app-col-expanded">&#160;</div>
               </ng-container>
-
               <!--
               <ng-container *ngIf="row.expanded">
                 <div *ngFor="let p of row.processes" class="app-col-expanded ">
@@ -118,6 +116,19 @@
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="todelete">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (click)="selectAllItems()"></mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded app-tdn">
+                <mat-checkbox class="app-fix-expanded app-tdn" [checked]="this.isAllItemsSelected"></mat-checkbox>
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
+              </ng-container>
+            </td>
+          </ng-container>
 
           <ng-container matColumnDef="expand">
             <th mat-header-cell *matHeaderCellDef></th>
@@ -126,8 +137,9 @@
                 <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
               </a>
               <ng-container *ngIf="element.expanded">
-                <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
+                <div *ngFor="let p of element.processes" class="app-col-expanded">&#160;</div>
               </ng-container>
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="id">
