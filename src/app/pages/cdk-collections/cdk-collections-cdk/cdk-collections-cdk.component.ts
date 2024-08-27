@@ -57,7 +57,7 @@ export class CdkCollectionsCdkComponent implements OnInit {
   page: number = 0;
   numFound: number = 1000;
 
-  displayedColumns = ['select', 'name_cze', 'logo', 'code', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
+  displayedColumns = ['select', 'name_cze', 'logo', 'code', 'description_cze', 'createdAt', 'modifiedAt'];
 
   selection = new SelectionModel<any>(true, []);
 
