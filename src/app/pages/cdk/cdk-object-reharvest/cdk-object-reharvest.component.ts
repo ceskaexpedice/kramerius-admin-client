@@ -34,7 +34,7 @@ const ELEMENT_DATA: objectReharvest[] = [
 })
 export class CdkObjectReharvestComponent implements OnInit {
 
-  displayedColumns: string[] = ['date', 'pid', 'libs', 'type', 'state', 'pod', 'description', 'approve', 'cancel', 'delete'];
+  displayedColumns: string[] = ['date', 'pid', 'code', 'type', 'state', 'pod', 'description', 'approve', 'cancel', 'delete'];
   //dataSource = ELEMENT_DATA;
 
   dataSource:Reharvest[];

@@ -21,14 +21,14 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="libs">
-        <th mat-header-cell *matHeaderCellDef>{{ 'desc.library' | translate }}</th>
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef>{{ 'desc.code' | translate }}</th>
         <td  mat-cell *matCellDef="let element">
           <ng-container *ngIf="element.libraries">
 
             <div  matTooltip="{{ element.libraries.join(', ') }}" class="app-text-cutter-wrapper">
               <div class="app-text-cutter">
-                {{(element.libraries.join(", ") )}}
+                <strong>{{(element.libraries.join(", ") )}}</strong>
               </div>
             </div>
              

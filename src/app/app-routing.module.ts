@@ -20,6 +20,13 @@ import { ObjectComponent } from './pages/access/object/object.component';
 import { CollectionNewComponent } from './pages/collections/collection-new/collection-new.component';
 import { CdkComponent } from './pages/cdk/cdk.component';
 import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
+import { CdkCollectionsComponent } from './pages/cdk-collections/cdk-collections.component';
+import { CdkCollectionNewComponent } from './pages/cdk-collections/cdk-collection-new/cdk-collection-new.component';
+import { CdkCollectionDetailComponent } from './pages/cdk-collections/cdk-collection-detail/cdk-collection-detail.component';
+import { CdkCollectionEditComponent } from './pages/cdk-collections/cdk-collection-edit/cdk-collection-edit.component';
+import { CdkCollectionContentComponent } from './pages/cdk-collections/cdk-collection-content/cdk-collection-content.component';
+import { CdkCollectionContextComponent } from './pages/cdk-collections/cdk-collection-context/cdk-collection-context.component';
+import { CdkCollectionComponent } from './pages/cdk-collections/cdk-collection/cdk-collection.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -70,6 +77,16 @@ const routes: Routes = [
   { path: 'cdk/object-reharvest', component: CdkComponent, canActivate: [AuthGuard] },
   { path: 'cdk/proxy/detail/:id', component: CdkProxyDetailComponent, canActivate: [AuthGuard] },
   { path: 'cdk/europeanou', component: CdkComponent, canActivate: [AuthGuard] },
+  
+  { path: 'cdk-collections', redirectTo: 'cdk-collections/cdk'},
+  { path: 'cdk-collections/new', component: CdkCollectionNewComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/detail/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/edit/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/content/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/context/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/cdk', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/diglib', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
+
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
 

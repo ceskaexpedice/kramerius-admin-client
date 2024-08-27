@@ -3,7 +3,7 @@
     <ng-container matColumnDef="logo">
       <th mat-header-cell *matHeaderCellDef>{{ 'Logo'}}</th>
       <td mat-cell *matCellDef="let lib">
-        <img style="width:24px; height:24px;" src="{{logo(lib.code)}}"/>
+        <img class="app-logo-lib" src="{{logo(lib.code)}}"/>
       </td>
     </ng-container>
 

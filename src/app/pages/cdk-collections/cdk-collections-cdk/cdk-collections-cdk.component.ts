@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
@@ -22,15 +22,19 @@ import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/rest
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  selector: 'app-collections',
-  templateUrl: './collections.component.html',
-  styleUrls: ['./collections.component.scss']
+  selector: 'app-cdk-collections-cdk',
+  templateUrl: './cdk-collections-cdk.component.html',
+  styleUrls: ['./cdk-collections-cdk.component.scss']
 })
+export class CdkCollectionsCdkComponent implements OnInit {
 
-export class CollectionsComponent implements OnInit {
+  @Input() standaloneOnly: boolean;
 
   // Debouncing 
   private subject: Subject<string> = new Subject();
+
+  cdkMode: boolean = this.appSettings.cdkMode;
+  view: string;
 
   collections: Collection[] = [];
   allCollections: Collection[] = [];
@@ -39,7 +43,7 @@ export class CollectionsComponent implements OnInit {
 
   state = 'none';
   query: string;
-  standaloneOnly: boolean;
+  //standaloneOnly: boolean;
 
   sortField: string;
   sortAsc: boolean;
@@ -53,7 +57,7 @@ export class CollectionsComponent implements OnInit {
   page: number = 0;
   numFound: number = 1000;
 
-  displayedColumns = ['select', 'name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
+  displayedColumns = ['select', 'name_cze', 'logo', 'code', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
 
   selection = new SelectionModel<any>(true, []);
 
@@ -103,6 +107,7 @@ export class CollectionsComponent implements OnInit {
     });
 
     this.reload();
+    this.view = this.locals.getStringProperty('cdk-collections.view');
   }
 
   ngAfterViewInit() {
@@ -175,7 +180,7 @@ export class CollectionsComponent implements OnInit {
           });
         });
 
- 
+
         col.createdAt = d["created"]
         col.modifiedAt = d["modified"]
         return col;
@@ -435,7 +440,7 @@ export class CollectionsComponent implements OnInit {
           console.log(error);
         });
       }
-   });
+    });
   }
 
   openRestoreFromCollectionBackupDialog() {
@@ -471,4 +476,5 @@ export class CollectionsComponent implements OnInit {
     // this.ui.showInfoSnackBar('snackbar.success.startTheProcess');
 
   }
+
 }

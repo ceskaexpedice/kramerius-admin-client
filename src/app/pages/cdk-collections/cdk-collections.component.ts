@@ -22,15 +22,17 @@ import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/rest
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  selector: 'app-collections',
-  templateUrl: './collections.component.html',
-  styleUrls: ['./collections.component.scss']
+  selector: 'app-cdk-collections',
+  templateUrl: './cdk-collections.component.html',
+  styleUrls: ['./cdk-collections.component.scss']
 })
-
-export class CollectionsComponent implements OnInit {
+export class CdkCollectionsComponent implements OnInit {
 
   // Debouncing 
   private subject: Subject<string> = new Subject();
+
+  cdkMode: boolean = this.appSettings.cdkMode;
+  view: string;
 
   collections: Collection[] = [];
   allCollections: Collection[] = [];
@@ -103,6 +105,7 @@ export class CollectionsComponent implements OnInit {
     });
 
     this.reload();
+    this.view = this.locals.getStringProperty('cdk-collections.view');
   }
 
   ngAfterViewInit() {
@@ -266,7 +269,7 @@ export class CollectionsComponent implements OnInit {
   }
 
   onNewCollections() {
-    this.router.navigate(['/', 'collections', 'new']);
+    this.router.navigate(['/', 'cdk-collections', 'new']);
   }
 
   getSortIcon(field: string) {
@@ -470,5 +473,11 @@ export class CollectionsComponent implements OnInit {
 
     // this.ui.showInfoSnackBar('snackbar.success.startTheProcess');
 
+  }
+
+  changeView(view: string) {
+    this.view = view;
+    this.locals.setStringProperty('cdk-collections.view', view);
+    this.router.navigate(['/cdk-collections/', view]);
   }
 }

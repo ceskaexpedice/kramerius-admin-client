@@ -24,7 +24,7 @@
       <!-- pravo pro objekt -->
       <a *ngIf="allowedGlobalAction('a_rights_edit')" routerLink="/access" routerLinkActive="active" mat-button (click)="setDefaultRoute('access.view','actions')">{{ 'sites.access.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_process_edit') || allowedGlobalAction('a_process_read')" routerLink="/processes" routerLinkActive="active" mat-button>{{ 'sites.processes.title' | translate }}</a>
-      <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" routerLink="/collections" routerLinkActive="active" mat-button>{{ 'sites.collections.title' | translate }}</a>
+      <a *ngIf="allowedGlobalAction('a_collections_read') || allowedGlobalAction('a_collections_edit')" [routerLink]="cdkMode ? '/cdk-collections' : '/collections'" routerLinkActive="active" mat-button (click)="cdkMode ? setDefaultRoute('cdk-collections.view','cdk') : null">{{ 'sites.collections.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_index')" routerLink="/indexing" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'sites.indexing.title' | translate }}</a>
       <a routerLink="/repository" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'sites.repository.title' | translate }}</a>
       <a *ngIf="allowedGlobalAction('a_statistics')" routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'sites.statistics.title' | translate }}</a>
