@@ -221,7 +221,13 @@
     }
 
     .mat-icon {
-      @extend .app-mr-1, .app-ml-n2;
+      &:not(.app-menu) {
+        @extend .app-mr-1, .app-ml-n2;
+      }
+
+      &.app-menu {
+        @extend .app-mr-n2, .app-ml-1;
+      }
 
       @include setIcon(20);
     }

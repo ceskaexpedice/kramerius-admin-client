@@ -526,7 +526,8 @@
     "viewConsumedLicenses": "View consumed licenses",
     "hideConsumedLicenses": "Hide consumed licenses",
     "thisFlagUnsupported": "This flag is no longer supported",
-    "approve": "Approve"
+    "approve": "Approve",
+    "annualReport": "Annual report"
   },
   "field": {
     "public": "Public",

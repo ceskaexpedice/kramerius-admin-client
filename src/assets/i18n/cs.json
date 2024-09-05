@@ -526,7 +526,8 @@
     "viewConsumedLicenses": "Zobrazit konzumované licence",
     "hideConsumedLicenses": "Skrýt konzumované licence",
     "thisFlagUnsupported": "Tento příznak již není podporován",
-    "approve": "Schválit"
+    "approve": "Schválit",
+    "annualReport": "Roční výkaz"
   },
   "field": {
     "public": "Veřejné",
