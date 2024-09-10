@@ -219,9 +219,15 @@ a {
   font-size: 12px;
 }
 
+.app-logo-lib {
+  width:24px; 
+  height:24px;
+}
+
 .app-desc {
   color: $app-gray-6;
   font-size: 14px;
+  vertical-align: middle;
 }
 
 .app-explanation {

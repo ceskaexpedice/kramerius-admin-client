@@ -114,6 +114,16 @@
         "title": "Context",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "source"
+      },
+      "cdk": {
+        "title": "Collections created at ČDK",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "library_books"
+      },
+      "dgLib": {
+        "title": "Collections from digital libraries",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "local_library"
       }
     },
     "indexing": {
@@ -516,7 +526,8 @@
     "viewConsumedLicenses": "View consumed licenses",
     "hideConsumedLicenses": "Hide consumed licenses",
     "thisFlagUnsupported": "This flag is no longer supported",
-    "approve": "Approve"
+    "approve": "Approve",
+    "annualReport": "Annual report"
   },
   "field": {
     "public": "Public",

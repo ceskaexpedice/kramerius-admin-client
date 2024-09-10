@@ -114,6 +114,15 @@ import { RunImportComponent } from './dialogs/run-import/run-import.component';
 import {ShowSeChannelDialogComponent} from './dialogs/show-sechannel-dialog/show-sechannel-dialog.component'
 //import { FileSaverModule } from 'ngx-filesaver';
 import { MatChipsModule } from '@angular/material/chips';
+import { CdkCollectionsComponent } from './pages/cdk-collections/cdk-collections.component';
+import { CdkCollectionComponent } from './pages/cdk-collections/cdk-collection/cdk-collection.component';
+import { CdkCollectionContentComponent } from './pages/cdk-collections/cdk-collection-content/cdk-collection-content.component';
+import { CdkCollectionContextComponent } from './pages/cdk-collections/cdk-collection-context/cdk-collection-context.component';
+import { CdkCollectionDetailComponent } from './pages/cdk-collections/cdk-collection-detail/cdk-collection-detail.component';
+import { CdkCollectionNewComponent } from './pages/cdk-collections/cdk-collection-new/cdk-collection-new.component';
+import { CdkCollectionEditComponent } from './pages/cdk-collections/cdk-collection-edit/cdk-collection-edit.component';
+import { CdkCollectionsCdkComponent } from './pages/cdk-collections/cdk-collections-cdk/cdk-collections-cdk.component';
+import { CdkCollectionsDiglibComponent } from './pages/cdk-collections/cdk-collections-diglib/cdk-collections-diglib.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -208,7 +217,16 @@ export function createCustomMatPaginatorIntl(
     EditSetDialogComponent,
     AddNewSetDialogComponent,
     CdkObjectReharvestComponent,
-    RunImportComponent
+    RunImportComponent,
+    CdkCollectionsComponent,
+    CdkCollectionComponent,
+    CdkCollectionContentComponent,
+    CdkCollectionContextComponent,
+    CdkCollectionDetailComponent,
+    CdkCollectionNewComponent,
+    CdkCollectionEditComponent,
+    CdkCollectionsCdkComponent,
+    CdkCollectionsDiglibComponent
   ],
   imports: [
     BrowserModule,

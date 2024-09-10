@@ -6,5 +6,9 @@
 .mat-table {
   .mat-row {
     @include setStateColor();
+
+    .mat-column-code {
+      width: 100px;
+    }
   }
 }

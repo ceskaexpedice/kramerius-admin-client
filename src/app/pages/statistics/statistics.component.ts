@@ -202,8 +202,6 @@ export class StatisticsComponent implements OnInit {
     // });
   }
 
-
-
   private reinitTopHitsTable(response: Object) {
     this.table = new Map<string, any>();
     for (let i = 0; i < this.models.length; i++) {

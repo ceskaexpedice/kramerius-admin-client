@@ -114,6 +114,16 @@
         "title": "Kontext",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "source"
+      },
+      "cdk": {
+        "title": "Sbírky vytvořené na ČDK",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "library_books"
+      },
+      "dgLib": {
+        "title": "Sbírky z digitálních knihoven",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "local_library"
       }
     },
     "indexing": {
@@ -516,7 +526,8 @@
     "viewConsumedLicenses": "Zobrazit konzumované licence",
     "hideConsumedLicenses": "Skrýt konzumované licence",
     "thisFlagUnsupported": "Tento příznak již není podporován",
-    "approve": "Schválit"
+    "approve": "Schválit",
+    "annualReport": "Roční výkaz"
   },
   "field": {
     "public": "Veřejné",

@@ -17,7 +17,7 @@
       </div>
       <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="app-mb-4">
         <div fxFlex>
-          <input class="app-input-autocomplete app-mr-4" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
+          <input class="app-input-autocomplete app-mr-2" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
           <button [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()" class="app-mr-2">{{ 'button.createNewCollection' | translate }}</button>
           <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="warn" (click)="deleteSelectedCollections()" class="app-mr-2">{{ 'button.deleteSelectedCollections' | translate }}</button>
           <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="primary" (click)="openCreateCollectionBackupDialog()" class="app-mr-2">{{ 'button.createBackup' | translate }}</button>
@@ -41,13 +41,16 @@
               <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
             </td>
           </ng-container>
-
           <ng-container matColumnDef="name_cze">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-              <a [routerLink]="getRouterLink('/collections/detail/', element.id, 'collection', 'detail')" (click)="linkToDetail(element.id)" [class.app-avoid-click]="!allowEdit(element.id)">
-                {{ element.names[displayLanguage()] }}
-              </a>
+              <div  [matTooltip]="element.names[displayLanguage()]" class="app-text-cutter-wrapper">
+                <div class="app-text-cutter">
+                  <a [routerLink]="getRouterLink('/collections/detail/', element.id, 'collection', 'detail')" (click)="linkToDetail(element.id)" [class.app-avoid-click]="!allowEdit(element.id)">
+                    {{ element.names[displayLanguage()] }}
+                  </a>
+                </div>
+              </div>
             </td>
           </ng-container>
           <ng-container matColumnDef="description_cze">

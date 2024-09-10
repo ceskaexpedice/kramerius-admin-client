@@ -23,42 +23,52 @@
     <div fxFlex class="app-oa-y">
 			<div class="app-container">
 				<ng-container *ngIf="!errorState && view !== 'generating-logs-for-nk'">
-					<div>
-						<mat-form-field class="app-mr-2">
-							<mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
-							<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
-							<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
-							<mat-datepicker #from></mat-datepicker>
-						</mat-form-field>
-						<mat-form-field class="app-mr-2">
-							<mat-label>{{ 'desc.dateTo' | translate }}</mat-label>
-							<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
-							<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
-							<mat-datepicker #to></mat-datepicker>
-						</mat-form-field>
-						<!-- redady to implement for each filter same as is in processes-->
-						<!-- <a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2">
-							<mat-icon>cancel</mat-icon>
-						</a> -->
-						<!--
-						<mat-form-field class="app-mr-2">
-							<mat-label>{{ 'desc.license' | translate }}</mat-label>
-							<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
-								<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
-							</mat-select>
-						</mat-form-field>
-						-->
-						<!-- redady to implement for each filter same as is in processes-->
-						<!-- <a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2">
-							<mat-icon>cancel</mat-icon>
-						</a> -->
-						<mat-form-field>
-							<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
-							<input matInput placeholder="Pid / Čnb / Issn / Issbn" [(ngModel)]="identifier"  (keyup)="onIdentKeyUp($event.target)">
-						</mat-form-field>
-						<a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2" *ngIf="identifier" (click)="clearIdentifier($event.target)">
-							<mat-icon>cancel</mat-icon>
-						</a>
+					<div fxLayout="row" fxLayoutAlign="start baseline">
+						<div fxFlex>
+							<mat-form-field class="app-mr-2">
+								<mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
+								<input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" (dateChange)="changeEvent('change', $event)">
+								<mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
+								<mat-datepicker #from></mat-datepicker>
+							</mat-form-field>
+							<mat-form-field class="app-mr-2">
+								<mat-label>{{ 'desc.dateTo' | translate }}</mat-label>
+								<input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="changeEvent('change', $event)">
+								<mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
+								<mat-datepicker #to></mat-datepicker>
+							</mat-form-field>
+							<!-- redady to implement for each filter same as is in processes-->
+							<!-- <a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2">
+								<mat-icon>cancel</mat-icon>
+							</a> -->
+							<!--
+							<mat-form-field class="app-mr-2">
+								<mat-label>{{ 'desc.license' | translate }}</mat-label>
+								<mat-select  [(ngModel)]="license" (selectionChange)="changeEvent('change', $event)">
+									<mat-option *ngFor="let l of allLicenses" [value]="l"  >{{ l }}</mat-option>
+								</mat-select>
+							</mat-form-field>
+							-->
+							<!-- redady to implement for each filter same as is in processes-->
+							<!-- <a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2">
+								<mat-icon>cancel</mat-icon>
+							</a> -->
+							<mat-form-field>
+								<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
+								<input matInput placeholder="Pid / Čnb / Issn / Issbn" [(ngModel)]="identifier"  (keyup)="onIdentKeyUp($event.target)">
+							</mat-form-field>
+							<a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2" *ngIf="identifier" (click)="clearIdentifier($event.target)">
+								<mat-icon>cancel</mat-icon>
+							</a>
+						</div>
+						<div>
+							<button mat-flat-button [matMenuTriggerFor]="menuAnnualReport" color="primary">{{ 'button.annualReport' | translate }}<mat-icon class="app-menu">keyboard_arrow_down</mat-icon></button>
+							<mat-menu #menuAnnualReport="matMenu">
+								<button mat-menu-item>2023</button>
+								<button mat-menu-item>2022</button>
+								<button mat-menu-item>2021</button>
+							</mat-menu>
+						</div>
 					</div>
 
 					<div class="app-mt-2" *ngIf="filters && filters.length > 0">
