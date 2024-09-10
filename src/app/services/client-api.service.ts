@@ -156,6 +156,19 @@ export class ClientApiService {
     );
   }
 
+
+
+  getPids(pids: string[], fieldlist:string[] ): Observable<any> {
+    const pidQuery = pids.map(pid => `pid:"${pid}"`).join(' OR ');
+    const fl = fieldlist ? fieldlist.map(fl => `${fl}`).join(','):"*";
+    return this.search({
+      q: pidQuery,
+      fl: fl,
+      rows: pids.length
+    });
+  }
+
+
   getIndexationInfoForPids(pids: string[]) {
     let query = "";
     pids.forEach(pid => {

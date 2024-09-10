@@ -26,6 +26,7 @@ import { DeleteStatisticsDialogComponent } from 'src/app/dialogs/delete-statisti
 import { MatDialog } from '@angular/material/dialog';
 import { FileDownloadService } from 'src/app/services/file-download';
 import * as moment from 'moment';
+import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 @Component({
   selector: 'app-statistics',
@@ -35,27 +36,32 @@ import * as moment from 'moment';
 export class StatisticsComponent implements OnInit {
 
   // vybrane modely
-  models = ["monograph","periodical","soundrecording"];
+  models = ["monograph", "periodical", "soundrecording","map","collection","manuscript","graphic","archive","convolute","museumExhibit"];
+
 
   // konfigurace grafu 
   modelsOpts: EChartsOption = {};
   langOpts: EChartsOption = {};
   authorOpts: EChartsOption = {};
+  providedByLicensesOpts: EChartsOption = {};
+  collectionsOpts: EChartsOption = {};
 
-  dateTo: Date = new Date(new Date().getFullYear(), new Date().getMonth(),new Date().getDate()+1);
-  dateFrom: Date = new Date(new Date().getFullYear(), new Date().getMonth()-1,new Date().getDate());
-  license:string = null;
+  filters: any[] = [];
 
-  allLicenses:string[];
 
-  identifier:string;
+  dateTo: Date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1);
+  dateFrom: Date = new Date(new Date().getFullYear(), new Date().getMonth() - 1, new Date().getDate());
+  license: string = null;
+
+  allLicenses: string[];
+
+  identifier: string;
 
   isPageStatistics: boolean = true;
 
   errorMessage: string;
   errorState: boolean = false;
 
-  
   // Debouncing 
   private subject: Subject<string> = new Subject();
 
@@ -66,143 +72,194 @@ export class StatisticsComponent implements OnInit {
   view: string;
   path: string;
 
+  lang: string;
+
   public selection: any = [];
 
   public isResultModel: boolean = false;
   public isResultLang: boolean = false;
   public isResultAuthor: boolean = false;
+  public isProvidedByLicense: boolean = false;
+  public isCollections: boolean = false;
 
-  // nkplog files
 
-  logfiles:any [] = [];
+
+  logfiles: any[] = [];
 
   // pripojena instance
   constructor(
-    public appSettings: AppSettings, 
-    private adminApi: AdminApiService, 
-    private clientApi: ClientApiService, 
+    public appSettings: AppSettings,
+    private adminApi: AdminApiService,
+    private clientApi: ClientApiService,
+    private isoConvert: IsoConvertService,
     private downloadService: FileDownloadService,
-    @Inject(DOCUMENT) private document: Document, 
+    @Inject(DOCUMENT) private document: Document,
     private local: LocalStorageService,
     private router: Router,
     private ui: UIService,
     private auth: AuthService,
     private dialog: MatDialog) { }
 
+
+
+  extractNames(values: (string | number)[]): string[] {
+    const names: string[] = [];
+    for (let i = 0; i < values.length; i += 2) {
+      const name = values[i] as string;
+      names.push(name);
+    }
+    return names;
+  }
+
+  extractCounts(values: (string | number)[]): number[] {
+    const counts: number[] = [];
+
+    for (let i = 1; i < values.length; i += 2) {
+      const count = values[i] as number;
+      counts.push(count);
+    }
+
+    return counts;
+  }
+
+
   reinitGraphs() {
+
+    let facets = [];
+    facets.push('provided_by_license');
+    facets.push('authors');
+    facets.push('langs');
+    facets.push('all_models');
+
+
+      this.adminApi.statisticsFacets(
+        this.dateFrom != null ? this.format(this.dateFrom) : null,
+        this.dateTo != null ? this.format(this.dateTo) : null,
+        this.identifier, this.filters, [ 'provided_by_license', 'authors', 'langs', 'all_models']).subscribe(response => {
+          if (response['facet_counts']) {
   
-    let requestedLicense = this.license != null && this.license !== 'All' ? this.license : null;
+            // authors 
+            let authors = response['facet_counts']['facet_fields']['authors'];
+            let authorCounts = this.extractCounts(authors);
+            let authorNames = this.extractNames(authors);
+            this.reinitAuthorGraph(authorNames, authorCounts, authors);
+  
+            // langs
+            let langs = response['facet_counts']['facet_fields']['langs'];
+            let langsCount = this.extractCounts(langs);
+            let langsNames = this.extractNames(langs);
+            this.reinitLangGraph(langsNames, langsCount, langs);
+  
+            // models
+            let models = response['facet_counts']['facet_fields']['all_models'];
+            let modelCounts = this.extractCounts(models);
+            let modelNames = this.extractNames(models);
+            this.reinitModelGraph(modelNames, modelCounts);
+  
+            // providedByLicenses
+            let providedByLicenses = response['facet_counts']['facet_fields']['provided_by_license'];
+            let providedLicensesCounts = this.extractCounts(providedByLicenses);
+            let providedLicensesNames = this.extractNames(providedByLicenses);
+            this.reinitProvidedLicensesGraph(providedLicensesNames, providedLicensesCounts);
+  
+            // check if pids_collection exists
+            this.adminApi.statisticsFacets(
+              null,
+              null,
+              null, [{
+                data:{
+                  filterField: "pids_collection",
+                  filterValue: "*"
+                }
+              }],[]).subscribe(response => {
 
-    this.adminApi.statisticsLicenseFilter(
-      this.dateFrom != null ? this.format(this.dateFrom) : null, 
-      this.dateTo != null ? this.format(this.dateTo) : null,
-      requestedLicense, this.identifier
-    ).subscribe(response => {
-      this.allLicenses = response["license"];
-      this.allLicenses.unshift('All');
-    }, (error: HttpErrorResponse) => {
-      this.errorMessage = error.error.message;
-      this.errorState = true;
-    });
+                let pidModels = modelNames.slice().filter(item => this.models.includes(item)).map(item => `pids_${item}`);
+                if (response['response']['numFound'] && response['response']['numFound'] > 0) {
+                  pidModels.push("pids_collection");
+                }
 
+                this.adminApi.statisticsFacets(
+                  this.dateFrom != null ? this.format(this.dateFrom) : null,
+                  this.dateTo != null ? this.format(this.dateTo) : null,
+                  this.identifier, this.filters, pidModels).subscribe(response => {
 
-    // authors graph configuration
-    this.adminApi.statisticsAuthors(
-      this.dateFrom != null ? this.format(this.dateFrom) : null, 
-      this.dateTo != null ? this.format(this.dateTo) : null,
-      requestedLicense, this.identifier
-    ).subscribe(response=> {
-      this.isResultAuthor = response && response.length > 0;
-      this.authorOpts = {
-        xAxis: {
-          type: 'category',
-          data: response.map(item=> {
-            return item.author_name;
-          })
-        },
-        yAxis: {
-        },
-        tooltip: {
-          trigger: 'item'
-        },
+                    // collections
+                    let collections = response['facet_counts']['facet_fields']['pids_collection'];
+                    let collectionCounts = this.extractCounts(collections);
+                    let collectionPids = this.extractNames(collections);
+                    this.reinitCollectionsGraph(collectionPids, collectionCounts);
 
-        series: [
-          {
-            data: response.map(item=> {
-              return item.count;
-            }),
-            type: 'bar'
+                    //table top hits
+                    this.reinitTopHitsTable(response);
+                  });          
+
+              });
           }
-        ]
-      };
-    });
+        }, (error: HttpErrorResponse) => {
+          this.errorMessage = error.error.message;
+          this.errorState = true;
+        });
+    // });
+  }
 
-    // lang graph configuration
-    this.adminApi.statisticsLang(
-      this.dateFrom != null ? this.format(this.dateFrom) : null, 
-      this.dateTo != null ? this.format(this.dateTo) : null,
-      requestedLicense, this.identifier
-   ).subscribe(response=> {
-      this.isResultLang = response && response.length > 0;
-      if (response) {
-        this.langOpts = {
-          xAxis: {
-            type: 'category',
-            data: response.map(item=> {
-              return item.lang;
-            })
-          },
-          yAxis: {
-          },
-          tooltip: {
-            trigger: 'item'
-          },
-  
-          series: [
-            {
-              data: response.map(item=> {
-                return item.count;
-              }),
-              type: 'bar'
+
+
+  private reinitTopHitsTable(response: Object) {
+    this.table = new Map<string, any>();
+    for (let i = 0; i < this.models.length; i++) {
+      let tableFacets = response['facet_counts']['facet_fields'][`pids_${this.models[i]}`];
+      if (tableFacets) {
+        let values = [];
+        let tablePids = this.extractNames(tableFacets);
+        let tableCounts = this.extractCounts(tableFacets);
+        let map: Map<string, number> = new Map();
+        for (let j = 0; j < tablePids.length; j++) { map.set(tablePids[j], tableCounts[j]); }
+        this.clientApi.getPids(tablePids, ['pid', 'title.search']).subscribe(resp => {
+          console.log(resp);
+          for (let k = 0; k < resp.length; k++) {
+            let count = map.get(resp[k].pid);
+            if (count > 0) {
+              let val = {
+                count: map.get(resp[k].pid),
+                pid: resp[k].pid,
+                title: resp[k]['title.search']
+              };
+              values.push(val);
             }
-          ]
-        };
-  
-      } else {
-        this.langOpts = {
-          xAxis: {
-            type: 'category',
-            data: []
-          },
-          yAxis: {
-          },
-          tooltip: {
-            trigger: 'item'
-          },
-  
-          series: [
-            {
-              data: [],
-              type: 'bar'
-            }
-          ]
-        }
+          }
+          if (values.length > 0) {
+            this.table.set(this.models[i], values);
+          }
+        });
+
       }
-    });
+    }
+  }
 
-    // models pie graph configuration
-    this.adminApi.statisticsModels(
-      this.dateFrom != null ? this.format(this.dateFrom) : null, 
-      this.dateTo != null ? this.format(this.dateTo) : null,
-      requestedLicense, this.identifier
-    ).subscribe(response => {
-      this.isResultModel = Object.keys(response.sums).length > 0;
+  private reinitCollectionsGraph(collectionPids: string[], collectionCounts: number[]) {
+    let collectionItems = [];
+    this.clientApi.getPids(collectionPids, ['pid', 'title.search*']).subscribe(docs => {
+      let collections = docs;
+      for (let i = 0; i < collections.length; i++) {
+        let col = collections[i];
+        let collectionTitle = col['title.search'];
+        if (col[`search_${this.displayLanguage()}`]) {
+          let titles = col[`search_${this.displayLanguage()}`];
+          if (titles.length > 0) { collectionTitle = titles[0]; }
+        }
+        collectionItems.push({
+          value: collectionCounts[i],
+          name: collectionTitle,
+          filterField: "pids_collection",
+          filterValue: col['pid']
+        });
+      }
 
-      this.table = response;
+      this.isCollections = collectionItems.length > 0;
 
-      this.modelsOpts = {
+      this.collectionsOpts = {
         legend: {
-          type:"scroll"
+          type: "scroll"
         },
         tooltip: {
           trigger: 'item'
@@ -220,32 +277,182 @@ export class StatisticsComponent implements OnInit {
               shadowColor: 'rgba(0, 0, 0, 0.5)'
             },
             label: {
-                show: false
+              show: false
             }
           },
-          data: Object.keys(response.sums).map(key => {
-            return {
-              value: response.sums[key],
-              name: key
-            }
-          })
+          data: collectionItems
         }
       };
-  
     });
+  }
 
+  private reinitProvidedLicensesGraph(providedLicensesNames: string[], providedLicensesCounts: number[]) {
+    let providedLicensesItems = [];
+    for (let i = 0; i < providedLicensesNames.length; i++) {
+      let obj = {
+        value: providedLicensesCounts[i],
+        name: providedLicensesNames[i],
+        filterField: "provided_by_license",
+        filterValue: providedLicensesNames[i]
+      };
+      providedLicensesItems.push(obj);
+
+    }
+
+    this.isProvidedByLicense = providedLicensesItems.length > 0;
+    this.providedByLicensesOpts = {
+      legend: {
+        type: "scroll"
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+
+      series: {
+        type: 'pie',
+        label: {
+          show: false,
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          },
+          label: {
+            show: false
+          }
+        },
+        data: providedLicensesItems
+      }
+    };
+  }
+
+  private reinitModelGraph(modelNames: string[], modelCounts: number[]) {
+    let modelItems = [];
+    for (let i = 0; i < modelNames.length; i++) {
+      if (this.models.indexOf(modelNames[i]) >= 0) {
+
+        modelItems.push({
+          value: modelCounts[i],
+          name: modelNames[i],
+          filterField: "all_models",
+          filterValue: modelNames[i]
+        });
+      }
+    }
+    this.isResultModel = modelItems.length > 0;
+    this.modelsOpts = {
+      legend: {
+        type: "scroll"
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+
+      series: {
+        type: 'pie',
+        label: {
+          show: false,
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          },
+          label: {
+            show: false
+          }
+        },
+        data: modelItems
+      }
+    };
+  }
+
+  private reinitLangGraph(langsNames: string[], langsCount: number[], langs: any) {
+    let langsItems = [];
+    for (let i = 0; i < langsNames.length; i++) {
+      langsItems.push({
+        value: langsCount[i],
+        name: langsNames[i],
+        filterField: "langs",
+        filterValue: langsNames[i]
+      });
+    }
+    this.isResultLang = langsItems.length > 0;
+    this.langOpts = {
+      xAxis: {
+        type: 'category',
+        data: this.extractNames(langs)
+      },
+      yAxis: {
+        type: 'log',
+        name: 'Počet',
+        logBase: 10
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+
+      series: [
+        {
+          data: langsItems,
+          type: 'bar'
+        }
+      ]
+    };
+  }
+
+  /** Author graph */
+  private reinitAuthorGraph(authorNames: string[], authorCounts: number[], authors: any) {
+    let authorItems = [];
+    for (let i = 0; i < authorNames.length; i++) {
+      authorItems.push({
+        value: authorCounts[i],
+        name: authorNames[i],
+        filterField: "authors",
+        filterValue: authorNames[i]
+      });
+    }
+    this.isResultAuthor = authorItems.length > 0;
+    this.authorOpts = {
+      xAxis: {
+        type: 'category',
+        data: this.extractNames(authors)
+      },
+      yAxis: {
+        type: 'log',
+        name: 'Počet',
+        logBase: 10
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      series: [
+        {
+          data: authorItems,
+          type: 'bar'
+        }
+      ]
+    };
+  }
+
+  displayLanguage() {
+    if (this.isoConvert.isTranslatable(this.lang)) {
+      return this.isoConvert.convert(this.lang)[0];
+    }
+    return this.lang;
   }
 
   ngOnInit() {
     //this.view = this.local.getStringProperty('statistics.view', 'graphs');
     this.view = this.router.url.replace('/statistics/', '');
-
+    this.lang = this.appSettings.defaultLang;
     this.reinitGraphs();
-
     this.subject.pipe(
       debounceTime(400)
     ).subscribe(searchTextValue => {
-      console.log("Changing event");
       this.reinitGraphs();
     });
 
@@ -253,12 +460,10 @@ export class StatisticsComponent implements OnInit {
       return this.isPageStatistics = true;
     }
 
-    //this.adminApi.getOutputNKPLogsDirFiles().
-
     this.adminApi.getOutputNKPLogsDirFiles().subscribe(response => {
       this.logfiles = [];
       response.files.forEach(file => {
-          this.logfiles.push(file);
+        this.logfiles.push(file);
       });
     }, error => {
       console.log(error);
@@ -266,23 +471,21 @@ export class StatisticsComponent implements OnInit {
   }
 
   modifiedLogFile(logfile) {
-    
+
     if (logfile.lastModifiedTime) {
 
       const date = moment(logfile.lastModifiedTime);
       const formattedDateTime = date.format('DD/MM/YYYY HH:mm:ss');
       return formattedDateTime;
-      
+
     } else return 'none';
   }
 
   download(logfile) {
 
-    this.adminApi.getOutputNKPLogsFile( logfile.name ).subscribe(response => {
+    this.adminApi.getOutputNKPLogsFile(logfile.name).subscribe(response => {
       let downloadlink = this.adminApi.getOutputDownloadLinks(response.downloadlink);
-     
       this.downloadService.downloadFile(downloadlink, logfile.name);
-      //const newWindow = window.open( this.adminApi.getOutputDownloadLinks(response.downloadlink), '_blank');
     }, error => {
       console.log(error);
     })
@@ -307,10 +510,8 @@ export class StatisticsComponent implements OnInit {
 
   getLastCommitHash() {
     const info = gitInfo;
-    //console.log(info)
     const hash = info.hash ? info.hash
-      : info['default'].hash.substring(1); //pokud je to jeste v objektu "default", je hash prefixovan 'g', viz git-info.json (generovan pred buildem)
-    //console.log(hash)
+      : info['default'].hash.substring(1);
     return hash;
   }
 
@@ -321,38 +522,38 @@ export class StatisticsComponent implements OnInit {
 
 
   csvModels() {
-    let url = this.appSettings.adminApiBaseUrl+'/statistics/summary';
+    let url = this.appSettings.adminApiBaseUrl + '/statistics/summary';
     this.goto(url);
 
   }
   csvAuthor() {
-    let url = this.appSettings.adminApiBaseUrl+'/statistics/author';
+    let url = this.appSettings.adminApiBaseUrl + '/statistics/author';
     this.goto(url);
 
   }
   csvLang() {
-    let url = this.appSettings.adminApiBaseUrl+'/statistics/lang';
+    let url = this.appSettings.adminApiBaseUrl + '/statistics/lang';
     this.goto(url);
   }
 
-  goto(url:string) {
+  goto(url: string) {
     let u = url + "/export/csv";
     if (this.dateFrom || this.dateTo || this.license) {
-      u = u +"?";
+      u = u + "?";
     }
     if (this.dateFrom) {
       let fdat = this.format(this.dateFrom);
 
-      u = u + "dateFrom="+(u.endsWith("?") ? fdat : fdat) ;
+      u = u + "dateFrom=" + (u.endsWith("?") ? fdat : fdat);
     }
     if (this.dateTo) {
       let fdat = this.format(this.dateTo);
-      u = u + (u.endsWith("?")  ?  "" : "&") + "dateTo="+fdat;
-    } 
-    if (this.license && this.license !== 'All') {
-      u = u + (u.endsWith("?")  ?  "" : "&") + "license="+this.license;
+      u = u + (u.endsWith("?") ? "" : "&") + "dateTo=" + fdat;
     }
-    console.log("url is "+url);
+    if (this.license && this.license !== 'All') {
+      u = u + (u.endsWith("?") ? "" : "&") + "license=" + this.license;
+    }
+    console.log("url is " + url);
     this.document.location.href = u;
   }
 
@@ -365,27 +566,26 @@ export class StatisticsComponent implements OnInit {
 
   showMore(id: string) {
     if (this.selection[id]) {
-      this.selection[id] =! this.selection[id];
+      this.selection[id] = !this.selection[id];
     } else {
       this.selection[id] = true;
     }
 
     if (this.selection[id]) {
-      // TODO: Do it better
-      this.clientApi.getModsNewApi(id).subscribe(mr=> {
+      this.clientApi.getModsNewApi(id).subscribe(mr => {
         let modsFields = {};
         let ast = parse(mr);
         let mods = ast.root.children[0];
 
-          // author
-        let personal = this.elms(mods,'name','type',null);
+        // author
+        let personal = this.elms(mods, 'name', 'type', null);
         if (personal) {
           let author = personal.map(element => {
             let nameParts = this.elms(element, 'namePart', null, null);
-            nameParts = nameParts.filter((p)=> {
-              return (!p.attributes['type']) ||  (p.attributes['type'] && p.attributes['type'] !=='date')
+            nameParts = nameParts.filter((p) => {
+              return (!p.attributes['type']) || (p.attributes['type'] && p.attributes['type'] !== 'date')
             });
-            let f = this.texts(nameParts);  
+            let f = this.texts(nameParts);
             return f ? f : '';
           }).join(', ');
 
@@ -393,11 +593,11 @@ export class StatisticsComponent implements OnInit {
         }
 
         //   nakladatelske udaje
-        let originInfo = this.elms(mods,'originInfo',null, null);
+        let originInfo = this.elms(mods, 'originInfo', null, null);
         if (originInfo) {
           let oinfo = originInfo.map(element => {
             let nameParts = this.elms(element, 'publisher', null, null);
-            let f = this.texts(nameParts);  
+            let f = this.texts(nameParts);
             return f ? f : '';
           }).join(', ');
 
@@ -405,67 +605,67 @@ export class StatisticsComponent implements OnInit {
         }
 
         //abstract
-        let abstract = this.elms(mods,'abstract',null,null);
+        let abstract = this.elms(mods, 'abstract', null, null);
         if (abstract) {
-          let f = this.texts(abstract);  
+          let f = this.texts(abstract);
           modsFields['abstract'] = f ? f : '';
-        }        
+        }
         // poznamka
         let note = this.elms(mods, 'note', null, null);
         if (note) {
-          let f = this.texts(note);  
+          let f = this.texts(note);
           modsFields['note'] = f ? f : '';
-        }  
+        }
 
         //issn
         let issn = this.elms(mods, 'identifier', 'type', 'issn');
         if (issn) {
-          let f = this.texts(issn);  
+          let f = this.texts(issn);
           modsFields['issn'] = f ? f : '';
         }
 
         //isbn
         let isbn = this.elms(mods, 'identifier', 'type', 'isbn');
         if (isbn) {
-          let f = this.texts(isbn);  
+          let f = this.texts(isbn);
           modsFields['isbn'] = f ? f : '';
         }
 
         //barcode
         let barcode = this.elms(mods, 'identifier', 'type', 'barcode');
         if (barcode) {
-          let f = this.texts(barcode);  
+          let f = this.texts(barcode);
           modsFields['barcode'] = f ? f : '';
         }
 
         //uuid
         let uuid = this.elms(mods, 'identifier', 'type', 'uuid');
         if (uuid) {
-          let f = this.texts(uuid);  
+          let f = this.texts(uuid);
           modsFields['uuid'] = f ? f : '';
         }
 
         // langs
-        let langs = this.elms(mods, 'language',null, null);
+        let langs = this.elms(mods, 'language', null, null);
         if (langs) {
           let tl = langs.map(element => {
             let term = this.elms(element, 'languageTerm', 'authority', 'iso639-2b');
-            let f = this.texts(term);  
+            let f = this.texts(term);
             return f ? f : '';
           });
           modsFields['langs'] = tl;
         }
 
         // subject - klicova slova
-        let keywords = this.elms(mods, 'subject',null, null);
+        let keywords = this.elms(mods, 'subject', null, null);
         if (keywords) {
           let tl = keywords.map(element => {
             let term = this.elms(element, 'topic', null, null);
-            let f = this.texts(term);  
+            let f = this.texts(term);
             return f ? f : '';
           });
           let filtered = [];
-          tl.forEach(k=> {
+          tl.forEach(k => {
             if (k !== '' && !filtered.includes(k)) {
               filtered.push(k);
             }
@@ -474,25 +674,25 @@ export class StatisticsComponent implements OnInit {
         }
 
         // location 
-        let location = this.elms(mods, 'location',null, null);
+        let location = this.elms(mods, 'location', null, null);
         if (location) {
           let tl = location.map(element => {
             let term = this.elms(element, 'physicalLocation', null, null);
-            let f = this.texts(term);  
+            let f = this.texts(term);
             return f ? f : '';
           });
           modsFields['location'] = tl;
         }
 
         //physicalDescription
-        let physicalDescription = this.elms(mods, 'physicalDescription',null, null);
-          if (physicalDescription) {
+        let physicalDescription = this.elms(mods, 'physicalDescription', null, null);
+        if (physicalDescription) {
           let desc = '';
           let tl = physicalDescription.forEach(element => {
             let ext = this.elms(element, 'extent', null, null);
             if (ext) {
-                let tt = this.texts(ext);
-                desc ='Rozsah:' +  this.texts(ext);
+              let tt = this.texts(ext);
+              desc = 'Rozsah:' + this.texts(ext);
             }
           });
           modsFields['physicalDescription'] = desc;
@@ -500,9 +700,9 @@ export class StatisticsComponent implements OnInit {
 
         this.descriptions[id] = modsFields;
       });
-   }
+    }
   }
-    
+
   /** Utilitni metody ??  Presunout ?? */
 
   // date formatting 
@@ -521,36 +721,36 @@ export class StatisticsComponent implements OnInit {
   }
 
   private texts(elms) {
-    let texts = elms.map(elm=> {
+    let texts = elms.map(elm => {
       return elm.content;
     });
-    return texts.join(' ');      
+    return texts.join(' ');
   }
 
   private first(parent, name) {
-    let first = parent.children.find((obj)=> {
-      return obj.name === name || obj.name.includes(':'+name);
-    });     
-    return first;     
+    let first = parent.children.find((obj) => {
+      return obj.name === name || obj.name.includes(':' + name);
+    });
+    return first;
   }
 
-  private elms(parent, name,  attrName, attrValue) {
-    let elms = parent.children.filter((obj)=> {
-      return obj.name === name || obj.name.includes(':'+name);
-    });     
+  private elms(parent, name, attrName, attrValue) {
+    let elms = parent.children.filter((obj) => {
+      return obj.name === name || obj.name.includes(':' + name);
+    });
     if (attrName != null) {
-      let tt =  elms.filter((obj)=> {
+      let tt = elms.filter((obj) => {
         if (attrValue != null) {
           return obj.attributes[attrName] === attrValue;
         } else {
           return attrName in obj.attributes;
         }
       });
-      return tt;  
+      return tt;
     } else return elms;
   }
 
-  allowedGlobalAction(name:string) {
+  allowedGlobalAction(name: string) {
     if (this.auth.authorizedGlobalActions) {
       let retval = this.auth.authorizedGlobalActions.indexOf(name) >= 0;
       return retval;
@@ -569,5 +769,15 @@ export class StatisticsComponent implements OnInit {
       width: '600px',
       panelClass: 'app-delete-statistics-dialog'
     });
+  }
+
+  toggleFilter(filter: any): void {
+    const index = this.filters.findIndex(f => f.name === filter.name && f.value === filter.value);
+    if (index >= 0) {
+      this.filters.splice(index, 1);
+    } else {
+      this.filters.push(filter);
+    }
+    this.reinitGraphs();
   }
 }

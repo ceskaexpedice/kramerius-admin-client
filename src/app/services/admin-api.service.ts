@@ -173,9 +173,7 @@ export class AdminApiService {
   uploadCollectionThumbnail(collectionPid:string, file:File):Observable<any> {
     let formData: FormData = new FormData();
     formData.append('file', file, file.name);
-    console.log("Form data "+formData);
     let tf = formData.get('file');
-    console.log("TF "+tf);
 
     return this.post(`/collections/${collectionPid}/image/thumb`, formData);
   }  
@@ -610,22 +608,85 @@ export class AdminApiService {
     return this.get(`/statistics/lang`, params);
   }
 
+
+  formatDateForSolr(dateFrom: string, dateTo: string): string {
+    const toISO8601 = (date: string): string => {
+        const [year, month, day] = date.split('.').map(Number);
+        const isoDate = new Date(Date.UTC(year, month - 1, day)).toISOString();
+        return isoDate;
+    };
+
+    const formattedFrom = dateFrom ? toISO8601(dateFrom) : '*';
+    const formattedTo = dateTo ? toISO8601(dateTo) : '*';
+    return `[${formattedFrom} TO ${formattedTo}]`;
+}
+
+
   statisticsAuthors(dateFrom: string, dateTo: string, license: string, identifier: string): Observable<any> {
     let params: HttpParams = new HttpParams();
     if (dateFrom) {
       params = params.set('dateFrom', dateFrom);
     }
+    
     if (dateTo) {
       params = params.set('dateTo', dateTo);
     }
-    if (license) {
-      params = params.set('license', license);
-    }
+
     if (identifier) {
       params = params.set('identifier', identifier);
     }
-    return this.get(`/statistics/author`, params);
+
+    return this.get(`/statistics/authors`, params);
   }
+
+
+  // findPids(pids: string[], fieldlist:string[] ): Observable<any> {
+  //   let params: HttpParams = new HttpParams();
+  //   const pidQuery = pids.map(pid => `pid:"${pid}"`).join(' OR ');
+  //   params = params.set('q', pidQuery);
+  //   params = params.set('rows', '100');  
+  //   params = params.set('facet', 'false');
+
+  //   if (fieldlist) {
+  //     const flparam = fieldlist.map(fl => `${fl}`).join(' ');
+  //     params = params.set('fl', flparam);
+  //   }
+
+  //   params = params.set('rows', '100');  
+
+  //   return this.get(`/statistics/search`, params);
+  // }
+
+  
+  statitisticFields() {
+    return this.get(`/indexreflection/logs/schema/fields`);
+  }
+
+  statisticsFacets(dateFrom: string, dateTo: string,  identifier: string, filter:any[], facets:string[] ) {
+    let params: HttpParams = new HttpParams();
+    params = params.set('q', '*');
+    params = params.set('rows', '0');
+    if (facets && facets.length > 0) {
+      params = params.set('facet', 'true');
+      params = params.append('facet.mincount', '1');
+      
+      for(let i=0;i<facets.length;i++) {
+        params = params.append('facet.field', facets[i]);
+      }      
+    }
+
+    if (filter) {
+      for(let i=0;i<filter.length;i++) {
+        let lf = filter[i];
+        let field = lf.data.filterField;
+        let value = lf.data.filterValue === '*' ? '*' : `"${lf.data.filterValue}"` 
+        params = params.append('fq', `${field}:${value}`);
+      }
+    }
+    return this.get(`/statistics/search`, params);
+  }
+
+
 
   deleteStatistics(dateFrom: string, dateTo: string) {
     let params: HttpParams = new HttpParams();
@@ -641,6 +702,8 @@ export class AdminApiService {
     };
     return this.delete(`/statistics/`, options);
   }
+
+
 
 
   /** Specific for processes */
