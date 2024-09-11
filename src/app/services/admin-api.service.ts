@@ -662,10 +662,12 @@ export class AdminApiService {
     return this.get(`/indexreflection/logs/schema/fields`);
   }
 
-  statisticsFacets(dateFrom: string, dateTo: string,  identifier: string, filter:any[], facets:string[] ) {
+  statisticsSearch(dateFrom: string, dateTo: string,  identifier: string, filter:any[], facets:string[] ) {
     let params: HttpParams = new HttpParams();
     params = params.set('q', '*');
     params = params.set('rows', '0');
+
+
     if (facets && facets.length > 0) {
       params = params.set('facet', 'true');
       params = params.append('facet.mincount', '1');
@@ -673,6 +675,14 @@ export class AdminApiService {
       for(let i=0;i<facets.length;i++) {
         params = params.append('facet.field', facets[i]);
       }      
+    }
+
+    if (dateFrom && dateTo) {
+      params = params.append('fq', `date:[${dateFrom} TO ${dateTo}]`);
+    } else if (dateFrom && !dateTo) {
+      params = params.append('fq', `date:[${dateFrom} TO *]`);
+    } else if (!dateFrom && dateTo) {
+      params = params.append('fq', `date:[* TO ${dateTo}]`);
     }
 
     if (filter) {

@@ -36,7 +36,7 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 export class StatisticsComponent implements OnInit {
 
   // vybrane modely
-  models = ["monograph", "periodical", "soundrecording","map","collection","manuscript","graphic","archive","convolute","museumExhibit"];
+  models = ["monograph", "periodical", "soundrecording", "map", "collection", "manuscript", "graphic", "archive", "convolute", "museumExhibit", "article"];
 
 
   // konfigurace grafu 
@@ -47,7 +47,6 @@ export class StatisticsComponent implements OnInit {
   collectionsOpts: EChartsOption = {};
 
   filters: any[] = [];
-
 
   dateTo: Date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1);
   dateFrom: Date = new Date(new Date().getFullYear(), new Date().getMonth() - 1, new Date().getDate());
@@ -82,6 +81,8 @@ export class StatisticsComponent implements OnInit {
   public isProvidedByLicense: boolean = false;
   public isCollections: boolean = false;
 
+
+  private rememberColor: Map<string, string> = new Map();
 
 
   logfiles: any[] = [];
@@ -132,73 +133,73 @@ export class StatisticsComponent implements OnInit {
     facets.push('all_models');
 
 
-      this.adminApi.statisticsFacets(
-        this.dateFrom != null ? this.format(this.dateFrom) : null,
-        this.dateTo != null ? this.format(this.dateTo) : null,
-        this.identifier, this.filters, [ 'provided_by_license', 'authors', 'langs', 'all_models']).subscribe(response => {
-          if (response['facet_counts']) {
-  
-            // authors 
-            let authors = response['facet_counts']['facet_fields']['authors'];
-            let authorCounts = this.extractCounts(authors);
-            let authorNames = this.extractNames(authors);
-            this.reinitAuthorGraph(authorNames, authorCounts, authors);
-  
-            // langs
-            let langs = response['facet_counts']['facet_fields']['langs'];
-            let langsCount = this.extractCounts(langs);
-            let langsNames = this.extractNames(langs);
-            this.reinitLangGraph(langsNames, langsCount, langs);
-  
-            // models
-            let models = response['facet_counts']['facet_fields']['all_models'];
-            let modelCounts = this.extractCounts(models);
-            let modelNames = this.extractNames(models);
-            this.reinitModelGraph(modelNames, modelCounts);
-  
-            // providedByLicenses
-            let providedByLicenses = response['facet_counts']['facet_fields']['provided_by_license'];
-            let providedLicensesCounts = this.extractCounts(providedByLicenses);
-            let providedLicensesNames = this.extractNames(providedByLicenses);
-            this.reinitProvidedLicensesGraph(providedLicensesNames, providedLicensesCounts);
-  
-            // check if pids_collection exists
-            this.adminApi.statisticsFacets(
-              null,
-              null,
-              null, [{
-                data:{
-                  filterField: "pids_collection",
-                  filterValue: "*"
-                }
-              }],[]).subscribe(response => {
+    this.adminApi.statisticsSearch(
+      this.dateFrom != null ? this.dateFrom.toISOString() : null,
+      this.dateTo != null ? this.dateTo.toISOString() : null,
+      this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models']).subscribe(response => {
+        if (response['facet_counts']) {
 
-                let pidModels = modelNames.slice().filter(item => this.models.includes(item)).map(item => `pids_${item}`);
-                if (response['response']['numFound'] && response['response']['numFound'] > 0) {
-                  pidModels.push("pids_collection");
-                }
+          // authors 
+          let authors = response['facet_counts']['facet_fields']['authors'];
+          let authorCounts = this.extractCounts(authors);
+          let authorNames = this.extractNames(authors);
+          this.reinitAuthorGraph(authorNames, authorCounts, authors);
 
-                this.adminApi.statisticsFacets(
-                  this.dateFrom != null ? this.format(this.dateFrom) : null,
-                  this.dateTo != null ? this.format(this.dateTo) : null,
-                  this.identifier, this.filters, pidModels).subscribe(response => {
+          // langs
+          let langs = response['facet_counts']['facet_fields']['langs'];
+          let langsCount = this.extractCounts(langs);
+          let langsNames = this.extractNames(langs);
+          this.reinitLangGraph(langsNames, langsCount, langs);
 
-                    // collections
-                    let collections = response['facet_counts']['facet_fields']['pids_collection'];
-                    let collectionCounts = this.extractCounts(collections);
-                    let collectionPids = this.extractNames(collections);
-                    this.reinitCollectionsGraph(collectionPids, collectionCounts);
+          // top level models
+          let models = response['facet_counts']['facet_fields']['all_models'];
+          let modelCounts = this.extractCounts(models);
+          let modelNames = this.extractNames(models);
+          this.reinitModelGraph(modelNames, modelCounts);
 
-                    //table top hits
-                    this.reinitTopHitsTable(response);
-                  });          
+          // providedByLicenses
+          let providedByLicenses = response['facet_counts']['facet_fields']['provided_by_license'];
+          let providedLicensesCounts = this.extractCounts(providedByLicenses);
+          let providedLicensesNames = this.extractNames(providedByLicenses);
+          this.reinitProvidedLicensesGraph(providedLicensesNames, providedLicensesCounts);
 
-              });
-          }
-        }, (error: HttpErrorResponse) => {
-          this.errorMessage = error.error.message;
-          this.errorState = true;
-        });
+          // check if pids_collection exists
+          this.adminApi.statisticsSearch(
+            null,
+            null,
+            null, [{
+              data: {
+                filterField: "pids_collection",
+                filterValue: "*"
+              }
+            }], []).subscribe(response => {
+
+              let pidModels = modelNames.slice().filter(item => this.models.includes(item)).map(item => `pids_${item}`);
+              if (response['response']['numFound'] && response['response']['numFound'] > 0) {
+                pidModels.push("pids_collection");
+              }
+
+              this.adminApi.statisticsSearch(
+                this.dateFrom != null ? this.dateFrom.toISOString() : null,
+                this.dateTo != null ? this.dateTo.toISOString() : null,
+                this.identifier, this.filters, pidModels).subscribe(response => {
+
+                  // collections
+                  let collections = response['facet_counts']['facet_fields']['pids_collection'];
+                  let collectionCounts = this.extractCounts(collections);
+                  let collectionPids = this.extractNames(collections);
+                  this.reinitCollectionsGraph(collectionPids, collectionCounts);
+
+                  //table top hits
+                  this.reinitTopHitsTable(response);
+                });
+
+            });
+        }
+      }, (error: HttpErrorResponse) => {
+        this.errorMessage = error.error.message;
+        this.errorState = true;
+      });
     // });
   }
 
@@ -213,7 +214,6 @@ export class StatisticsComponent implements OnInit {
         let map: Map<string, number> = new Map();
         for (let j = 0; j < tablePids.length; j++) { map.set(tablePids[j], tableCounts[j]); }
         this.clientApi.getPids(tablePids, ['pid', 'title.search']).subscribe(resp => {
-          console.log(resp);
           for (let k = 0; k < resp.length; k++) {
             let count = map.get(resp[k].pid);
             if (count > 0) {
@@ -226,6 +226,9 @@ export class StatisticsComponent implements OnInit {
             }
           }
           if (values.length > 0) {
+            values.sort((a, b) => {
+              return b.count - a.count;
+            });
             this.table.set(this.models[i], values);
           }
         });
@@ -245,20 +248,33 @@ export class StatisticsComponent implements OnInit {
           let titles = col[`search_${this.displayLanguage()}`];
           if (titles.length > 0) { collectionTitle = titles[0]; }
         }
-        collectionItems.push({
+        let colitem = {
           value: collectionCounts[i],
           name: collectionTitle,
           filterField: "pids_collection",
           filterValue: col['pid']
-        });
+        };
+        if (this.rememberColor.has(`${colitem.filterField}_${colitem.filterValue}`)) {
+          let c = this.rememberColor.get(`${colitem.filterField}_${colitem.filterValue}`);
+          colitem["itemStyle"] = {
+            color: c
+          }
+        }
+        collectionItems.push(colitem);
       }
 
       this.isCollections = collectionItems.length > 0;
 
       this.collectionsOpts = {
+
         legend: {
-          type: "scroll"
+          type: 'scroll',
+          orient: 'vertical',
+          left: 10,
+          top: 10,
+          bottom: 'auto'
         },
+
         tooltip: {
           trigger: 'item'
         },
@@ -293,6 +309,13 @@ export class StatisticsComponent implements OnInit {
         filterField: "provided_by_license",
         filterValue: providedLicensesNames[i]
       };
+
+      if (this.rememberColor.has(`${obj.filterField}_${obj.filterValue}`)) {
+        let c = this.rememberColor.get(`${obj.filterField}_${obj.filterValue}`);
+        obj["itemStyle"] = {
+          color: c
+        }
+      }
       providedLicensesItems.push(obj);
 
     }
@@ -300,8 +323,13 @@ export class StatisticsComponent implements OnInit {
     this.isProvidedByLicense = providedLicensesItems.length > 0;
     this.providedByLicensesOpts = {
       legend: {
-        type: "scroll"
+        type: 'scroll',
+        orient: 'vertical',
+        left: 10,
+        top: 10,
+        bottom: 'auto'
       },
+
       tooltip: {
         trigger: 'item'
       },
@@ -330,19 +358,32 @@ export class StatisticsComponent implements OnInit {
     let modelItems = [];
     for (let i = 0; i < modelNames.length; i++) {
       if (this.models.indexOf(modelNames[i]) >= 0) {
-
-        modelItems.push({
+        let model = {
           value: modelCounts[i],
           name: modelNames[i],
           filterField: "all_models",
           filterValue: modelNames[i]
-        });
+        };
+
+        if (this.rememberColor.has(`${model.filterField}_${model.filterValue}`)) {
+          let c = this.rememberColor.get(`${model.filterField}_${model.filterValue}`);
+          model["itemStyle"] = {
+            color: c
+          }
+        }
+
+
+        modelItems.push(model);
       }
     }
     this.isResultModel = modelItems.length > 0;
     this.modelsOpts = {
       legend: {
-        type: "scroll"
+        type: 'scroll',
+        orient: 'vertical',
+        left: 10,
+        top: 10,
+        bottom: 'auto'
       },
       tooltip: {
         trigger: 'item'
@@ -353,6 +394,7 @@ export class StatisticsComponent implements OnInit {
         label: {
           show: false,
         },
+
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
@@ -371,12 +413,20 @@ export class StatisticsComponent implements OnInit {
   private reinitLangGraph(langsNames: string[], langsCount: number[], langs: any) {
     let langsItems = [];
     for (let i = 0; i < langsNames.length; i++) {
-      langsItems.push({
+      let lang = {
         value: langsCount[i],
         name: langsNames[i],
         filterField: "langs",
         filterValue: langsNames[i]
-      });
+      };
+
+      if (this.rememberColor.has(`${lang.filterField}_${lang.filterValue}`)) {
+        let c = this.rememberColor.get(`${lang.filterField}_${lang.filterValue}`);
+        lang["itemStyle"] = {
+          color: c
+        }
+      }
+      langsItems.push(lang);
     }
     this.isResultLang = langsItems.length > 0;
     this.langOpts = {
@@ -396,7 +446,8 @@ export class StatisticsComponent implements OnInit {
       series: [
         {
           data: langsItems,
-          type: 'bar'
+          type: 'bar',
+          showBackground: true
         }
       ]
     };
@@ -406,19 +457,35 @@ export class StatisticsComponent implements OnInit {
   private reinitAuthorGraph(authorNames: string[], authorCounts: number[], authors: any) {
     let authorItems = [];
     for (let i = 0; i < authorNames.length; i++) {
-      authorItems.push({
+      let auth = {
         value: authorCounts[i],
         name: authorNames[i],
         filterField: "authors",
         filterValue: authorNames[i]
-      });
+      };
+      if (this.rememberColor.has(`${auth.filterField}_${auth.filterValue}`)) {
+        let c = this.rememberColor.get(`${auth.filterField}_${auth.filterValue}`);
+        auth["itemStyle"] = {
+          color: c
+        }
+      }
+      authorItems.push(auth);
     }
     this.isResultAuthor = authorItems.length > 0;
     this.authorOpts = {
       xAxis: {
         type: 'category',
-        data: this.extractNames(authors)
+
+        data: this.extractNames(authors),
+        axisTick: {
+          show: false
+        },
+        axisLine: {
+          show: false
+        },
+        z: 10
       },
+
       yAxis: {
         type: 'log',
         name: 'Počet',
@@ -429,6 +496,7 @@ export class StatisticsComponent implements OnInit {
       },
       series: [
         {
+          showBackground: true,
           data: authorItems,
           type: 'bar'
         }
@@ -551,7 +619,6 @@ export class StatisticsComponent implements OnInit {
     if (this.license && this.license !== 'All') {
       u = u + (u.endsWith("?") ? "" : "&") + "license=" + this.license;
     }
-    console.log("url is " + url);
     this.document.location.href = u;
   }
 
@@ -703,7 +770,7 @@ export class StatisticsComponent implements OnInit {
 
   /** Utilitni metody ??  Presunout ?? */
 
-  // date formatting 
+  // // date formatting 
   private format(date) {
     let d = new Date(date);
     let month = (d.getMonth() + 1).toString();
@@ -771,9 +838,14 @@ export class StatisticsComponent implements OnInit {
 
   toggleFilter(filter: any): void {
     const index = this.filters.findIndex(f => f.name === filter.name && f.value === filter.value);
+    let hashVal = `${filter.data.filterField}_${filter.data.filterValue}`;
     if (index >= 0) {
+      this.rememberColor.delete(hashVal);
       this.filters.splice(index, 1);
     } else {
+      if (filter.color) {
+        this.rememberColor.set(hashVal, filter.color);
+      }
       this.filters.push(filter);
     }
     this.reinitGraphs();
