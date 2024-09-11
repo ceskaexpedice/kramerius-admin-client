@@ -554,7 +554,8 @@
     "internalpart": "Internal Parts",
     "convolute": "Convolute",
     "picture": "Pictures",
-    "multivolumemonograph":"Multivolume monograph"
+    "multivolumemonograph":"Multivolume monograph",
+    "collection": "Collections"
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
@@ -1059,6 +1060,8 @@
     "topLevelmodelStatistics":"Top level statistics",
     "statisticsOfUsedLanguages": "Statistics of used languages",
     "authorStatistics": "Author statistics",
+    "providedByLicense": "Provided by license",
+    "viewedCollections": "Viewed collections",
     "dateFrom": "Date form",
     "dateTo": "Date to",
     "license": "License",

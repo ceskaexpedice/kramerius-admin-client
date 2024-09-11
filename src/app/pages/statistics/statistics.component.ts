@@ -851,3 +851,8 @@ export class StatisticsComponent implements OnInit {
     this.reinitGraphs();
   }
 }
+
+/* 
+periodikum: #167a1b
+monograph: #c73565
+*/
