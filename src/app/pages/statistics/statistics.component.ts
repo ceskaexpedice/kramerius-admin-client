@@ -19,7 +19,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { GenerateNkpLogsDialogComponent } from 'src/app/dialogs/generate-nkp-logs-dialog/generate-nkp-logs-dialog.component';
 import { DeleteStatisticsDialogComponent } from 'src/app/dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
@@ -28,6 +28,11 @@ import { FileDownloadService } from 'src/app/services/file-download';
 import * as moment from 'moment';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
+/** Levely zobrazeni - master, detail, subdteial */
+enum ViewLevel {
+  master, detail // subdetail
+}
+
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -35,12 +40,24 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 })
 export class StatisticsComponent implements OnInit {
 
-  // vybrane modely
-  models = ["monograph", "periodical", "soundrecording", "map", "collection", "manuscript", "graphic", "archive", "convolute", "museumExhibit", "article"];
+  level = ViewLevel.master;
+  detailDoc  = {}
+  detailMods = null;
+
+  isMaster() { return this.level == ViewLevel.master; }
+  isDetail() { return this.level == ViewLevel.detail; }
+
+  
+  // Top level modely
+  topLevelModels = ["monograph", "periodical", "soundrecording", "map", "collection", "manuscript", "graphic", "archive", "convolute", "museumExhibit", "article"];
+  // modely prvni urovne 
+  detailModels = ["monographunit","periodicalvolume","periodicalissue","periodicalitem"]
 
 
   // konfigurace grafu 
   modelsOpts: EChartsOption = {};
+  detailOpts: EChartsOption = {};
+
   langOpts: EChartsOption = {};
   authorOpts: EChartsOption = {};
   providedByLicensesOpts: EChartsOption = {};
@@ -66,6 +83,7 @@ export class StatisticsComponent implements OnInit {
 
   // tabulka 
   table: any;
+  tablekeys:string[] = [];
   descriptions: any = {};
 
   view: string;
@@ -73,9 +91,16 @@ export class StatisticsComponent implements OnInit {
 
   lang: string;
 
+  
   public selection: any = [];
 
-  public isResultModel: boolean = false;
+  public isResultTopLevelModel: boolean = false;
+
+  public isDetailsData: boolean = false;
+  //public isMonographUnits: boolean = false;
+
+  //public isResultSecondtLevelItems: boolean = false;
+
   public isResultLang: boolean = false;
   public isResultAuthor: boolean = false;
   public isProvidedByLicense: boolean = false;
@@ -155,7 +180,13 @@ export class StatisticsComponent implements OnInit {
           let models = response['facet_counts']['facet_fields']['all_models'];
           let modelCounts = this.extractCounts(models);
           let modelNames = this.extractNames(models);
-          this.reinitModelGraph(modelNames, modelCounts);
+          this.reinitTopLevelModelGraph(modelNames, modelCounts);
+
+          // detail models
+          // let detailModels = response['facet_counts']['facet_fields']['all_models'];
+          // let detailModelCounts = this.extractCounts(detailModels);
+          // let detailModelNames = this.extractNames(detailModels);
+          // this.reinitDetailModels(detailModelNames, detailModelCounts);
 
           // providedByLicenses
           let providedByLicenses = response['facet_counts']['facet_fields']['provided_by_license'];
@@ -174,9 +205,13 @@ export class StatisticsComponent implements OnInit {
               }
             }], []).subscribe(response => {
 
-              let pidModels = modelNames.slice().filter(item => this.models.includes(item)).map(item => `pids_${item}`);
+              let pidModels = modelNames.slice().filter(item => this.topLevelModels.includes(item)).map(item => `pids_${item}`);
               if (response['response']['numFound'] && response['response']['numFound'] > 0) {
                 pidModels.push("pids_collection");
+              }
+
+              if (this.level == ViewLevel.detail) {
+                pidModels.push(...this.detailModels.map(m=> `pids_${m}`));
               }
 
               this.adminApi.statisticsSearch(
@@ -189,6 +224,30 @@ export class StatisticsComponent implements OnInit {
                   let collectionCounts = this.extractCounts(collections);
                   let collectionPids = this.extractNames(collections);
                   this.reinitCollectionsGraph(collectionPids, collectionCounts);
+
+                  if (this.level != ViewLevel.master) {
+
+                    let periodicalvolumes = response['facet_counts']['facet_fields']['pids_periodicalvolume'];
+                    let monographunits = response['facet_counts']['facet_fields']['pids_monographunit'];
+                    let periodicalissues = response['facet_counts']['facet_fields']['pids_periodicalissue'];
+                    let periodicalitems = response['facet_counts']['facet_fields']['pids_periodicalitem'];
+
+                    if (periodicalvolumes && periodicalvolumes.length > 0) {
+                      let periodicalvolumeCounts = this.extractCounts(periodicalvolumes);
+                      let periodicalvolumePids = this.extractNames(periodicalvolumes);
+                      this.reinitDetailsGraph(periodicalvolumePids, periodicalvolumeCounts);
+                    } else if (monographunits && monographunits.length > 0) {
+                      let monographUnitCounts = this.extractCounts(monographunits);
+                      let monographUnitPids = this.extractNames(monographunits);
+                      this.reinitDetailsGraph(monographUnitPids, monographUnitCounts);
+                    } else if (periodicalissues && periodicalissues.length > 0) {
+                      let periodicalissueCounts = this.extractCounts(periodicalissues);
+                      let periodicalissuePids = this.extractNames(periodicalissues);
+                      this.reinitDetailsGraph(periodicalissuePids, periodicalissueCounts);
+                    } else {
+                      this.reinitDetailsGraph([], []);
+                    }
+                  }    
 
                   //table top hits
                   this.reinitTopHitsTable(response);
@@ -204,16 +263,25 @@ export class StatisticsComponent implements OnInit {
   }
 
   private reinitTopHitsTable(response: Object) {
+    let models = [];
+    models.push(...this.topLevelModels);
+    if (this.level == ViewLevel.detail) {
+      models.push(...this.detailModels);
+    }  
+    
     this.table = new Map<string, any>();
-    for (let i = 0; i < this.models.length; i++) {
-      let tableFacets = response['facet_counts']['facet_fields'][`pids_${this.models[i]}`];
+    
+    for (let i = 0; i < models.length; i++) {
+      let tableFacets = response['facet_counts']['facet_fields'][`pids_${models[i]}`];
       if (tableFacets) {
         let values = [];
         let tablePids = this.extractNames(tableFacets);
         let tableCounts = this.extractCounts(tableFacets);
         let map: Map<string, number> = new Map();
         for (let j = 0; j < tablePids.length; j++) { map.set(tablePids[j], tableCounts[j]); }
+
         this.clientApi.getPids(tablePids, ['pid', 'title.search']).subscribe(resp => {
+
           for (let k = 0; k < resp.length; k++) {
             let count = map.get(resp[k].pid);
             if (count > 0) {
@@ -229,13 +297,69 @@ export class StatisticsComponent implements OnInit {
             values.sort((a, b) => {
               return b.count - a.count;
             });
-            this.table.set(this.models[i], values);
+            this.table.set(models[i], values);
+            this.tablekeys = models.filter(key => this.table.has(key));
           }
         });
-
       }
     }
   }
+
+
+
+
+  private reinitDetailsGraph(detailpids:string[], detailcount:number[]) {
+
+    let detailItems = [];
+    this.clientApi.getPids(detailpids, ['pid', 'title.search*', 'root.title', 'date.str','part.number.str']).subscribe(docs => {
+      let details = docs;
+      for (let i = 0; i < details.length; i++) {
+        let vol = details[i];
+
+
+        let volumeTitle = `Ročník ${vol['date.str']} / ${vol['part.number.str']}`;
+ 
+        let detailItem = {
+          value: detailcount[i],
+          name:  volumeTitle,
+          filterField: "pids_periodicalvolume",
+          filterValue: vol['pid']
+        };
+        if (this.rememberColor.has(`${detailItem.filterField}_${detailItem.filterValue}`)) {
+          let c = this.rememberColor.get(`${detailItem.filterField}_${detailItem.filterValue}`);
+          detailItem["itemStyle"] = {
+            color: c
+          }
+        }
+        detailItems.push(detailItem);
+      }
+      this.isDetailsData = detailItems.length > 0;
+
+      this.detailOpts = {
+        xAxis: {
+          type: 'category',
+          data: detailItems.map(m=> m.name)
+        },
+        yAxis: {
+          type: 'log',
+          name: 'Počet',
+          logBase: 10
+        },
+        tooltip: {
+          trigger: 'item'
+        },
+  
+        series: [
+          {
+            data: detailItems,
+            type: 'bar',
+            showBackground: true
+          }
+        ]
+      };
+    });
+  }
+
 
   private reinitCollectionsGraph(collectionPids: string[], collectionCounts: number[]) {
     let collectionItems = [];
@@ -262,9 +386,7 @@ export class StatisticsComponent implements OnInit {
         }
         collectionItems.push(colitem);
       }
-
       this.isCollections = collectionItems.length > 0;
-
       this.collectionsOpts = {
 
         legend: {
@@ -299,6 +421,8 @@ export class StatisticsComponent implements OnInit {
       };
     });
   }
+
+
 
   private reinitProvidedLicensesGraph(providedLicensesNames: string[], providedLicensesCounts: number[]) {
     let providedLicensesItems = [];
@@ -354,10 +478,10 @@ export class StatisticsComponent implements OnInit {
     };
   }
 
-  private reinitModelGraph(modelNames: string[], modelCounts: number[]) {
-    let modelItems = [];
+  private reinitTopLevelModelGraph(modelNames: string[], modelCounts: number[]) {
+    let topLevelModelItems = [];
     for (let i = 0; i < modelNames.length; i++) {
-      if (this.models.indexOf(modelNames[i]) >= 0) {
+      if (this.topLevelModels.indexOf(modelNames[i]) >= 0) {
         let model = {
           value: modelCounts[i],
           name: modelNames[i],
@@ -373,10 +497,10 @@ export class StatisticsComponent implements OnInit {
         }
 
 
-        modelItems.push(model);
+        topLevelModelItems.push(model);
       }
     }
-    this.isResultModel = modelItems.length > 0;
+    this.isResultTopLevelModel = topLevelModelItems.length > 0;
     this.modelsOpts = {
       legend: {
         type: 'scroll',
@@ -405,7 +529,7 @@ export class StatisticsComponent implements OnInit {
             show: false
           }
         },
-        data: modelItems
+        data: topLevelModelItems
       }
     };
   }
@@ -512,14 +636,31 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.view = this.local.getStringProperty('statistics.view', 'graphs');
     this.view = this.router.url.replace('/statistics/', '');
     this.lang = this.appSettings.defaultLang;
     this.reinitGraphs();
     this.subject.pipe(
       debounceTime(400)
     ).subscribe(searchTextValue => {
-      this.reinitGraphs();
+      if (searchTextValue) {
+        
+        let params: HttpParams = new HttpParams();
+        params = params.set('q', `pid:"${this.identifier}" OR id_ccnb:"${this.identifier}" OR id_isbn:"${this.identifier}" OR id_issn:"${this.identifier}"`);
+        params = params.set('rows', '100');
+        params = params.set('fl', 'pid title.search model');
+        
+        this.clientApi.search(params).subscribe(docs=> {
+          if (docs.length == 1) {
+            this.detailDoc = docs[0];
+            this.loadMods(docs[0]['pid']);
+            this.level = ViewLevel.detail;
+          }
+          this.reinitGraphs();
+        });
+      } else {
+        this.level = ViewLevel.master;
+        this.reinitGraphs();
+      }
     });
 
     if (this.router.url.replace('/', '') === 'statistics') {
@@ -629,6 +770,34 @@ export class StatisticsComponent implements OnInit {
     this.router.navigate(['/statistics/', view]);
   }
 
+  getDetailTitle():string {
+    let model = this.detailDoc['model'];
+    if (this.topLevelModels.indexOf(model) >= 0) {
+      return this.detailDoc['root.title']
+    } else {
+      return this.detailDoc['root.title'] +' / '+this.detailDoc['title.search']
+    }
+  }
+
+  searchItem(id:string) {
+    this.identifier = id;
+    
+    let params: HttpParams = new HttpParams();
+    params = params.set('q', `pid:"${this.identifier}" OR id_ccnb:"${this.identifier}" OR id_isbn:"${this.identifier}" OR id_issn:"${this.identifier}"`);
+    params = params.set('rows', '100');
+    params = params.set('fl', 'pid title.search model root.title');
+    
+    this.clientApi.search(params).subscribe(docs=> {
+      if (docs.length == 1) {
+        this.detailDoc = docs[0];
+        this.loadMods(docs[0]['pid']);
+        this.level = ViewLevel.detail;
+      }
+      this.reinitGraphs();
+    });
+
+  }
+
   showMore(id: string) {
     if (this.selection[id]) {
       this.selection[id] = !this.selection[id];
@@ -637,6 +806,143 @@ export class StatisticsComponent implements OnInit {
     }
 
     if (this.selection[id]) {
+      this.loadMods(id);
+    }
+
+    // if (pid) {
+    //   this.clientApi.getModsNewApi(id).subscribe(mr => {
+    //     let modsFields = {};
+    //     let ast = parse(mr);
+    //     let mods = ast.root.children[0];
+
+    //     // author
+    //     let personal = this.elms(mods, 'name', 'type', null);
+    //     if (personal) {
+    //       let author = personal.map(element => {
+    //         let nameParts = this.elms(element, 'namePart', null, null);
+    //         nameParts = nameParts.filter((p) => {
+    //           return (!p.attributes['type']) || (p.attributes['type'] && p.attributes['type'] !== 'date')
+    //         });
+    //         let f = this.texts(nameParts);
+    //         return f ? f : '';
+    //       }).join(', ');
+
+    //       modsFields['author'] = author;
+    //     }
+
+    //     //   nakladatelske udaje
+    //     let originInfo = this.elms(mods, 'originInfo', null, null);
+    //     if (originInfo) {
+    //       let oinfo = originInfo.map(element => {
+    //         let nameParts = this.elms(element, 'publisher', null, null);
+    //         let f = this.texts(nameParts);
+    //         return f ? f : '';
+    //       }).join(', ');
+
+    //       modsFields['origininfo'] = oinfo;
+    //     }
+
+    //     //abstract
+    //     let abstract = this.elms(mods, 'abstract', null, null);
+    //     if (abstract) {
+    //       let f = this.texts(abstract);
+    //       modsFields['abstract'] = f ? f : '';
+    //     }
+    //     // poznamka
+    //     let note = this.elms(mods, 'note', null, null);
+    //     if (note) {
+    //       let f = this.texts(note);
+    //       modsFields['note'] = f ? f : '';
+    //     }
+
+    //     //issn
+    //     let issn = this.elms(mods, 'identifier', 'type', 'issn');
+    //     if (issn) {
+    //       let f = this.texts(issn);
+    //       modsFields['issn'] = f ? f : '';
+    //     }
+
+    //     //isbn
+    //     let isbn = this.elms(mods, 'identifier', 'type', 'isbn');
+    //     if (isbn) {
+    //       let f = this.texts(isbn);
+    //       modsFields['isbn'] = f ? f : '';
+    //     }
+
+    //     //barcode
+    //     let barcode = this.elms(mods, 'identifier', 'type', 'barcode');
+    //     if (barcode) {
+    //       let f = this.texts(barcode);
+    //       modsFields['barcode'] = f ? f : '';
+    //     }
+
+    //     //uuid
+    //     let uuid = this.elms(mods, 'identifier', 'type', 'uuid');
+    //     if (uuid) {
+    //       let f = this.texts(uuid);
+    //       modsFields['uuid'] = f ? f : '';
+    //     }
+
+    //     // langs
+    //     let langs = this.elms(mods, 'language', null, null);
+    //     if (langs) {
+    //       let tl = langs.map(element => {
+    //         let term = this.elms(element, 'languageTerm', 'authority', 'iso639-2b');
+    //         let f = this.texts(term);
+    //         return f ? f : '';
+    //       });
+    //       modsFields['langs'] = tl;
+    //     }
+
+    //     // subject - klicova slova
+    //     let keywords = this.elms(mods, 'subject', null, null);
+    //     if (keywords) {
+    //       let tl = keywords.map(element => {
+    //         let term = this.elms(element, 'topic', null, null);
+    //         let f = this.texts(term);
+    //         return f ? f : '';
+    //       });
+    //       let filtered = [];
+    //       tl.forEach(k => {
+    //         if (k !== '' && !filtered.includes(k)) {
+    //           filtered.push(k);
+    //         }
+    //       });
+    //       modsFields['keywords'] = filtered;
+    //     }
+
+    //     // location 
+    //     let location = this.elms(mods, 'location', null, null);
+    //     if (location) {
+    //       let tl = location.map(element => {
+    //         let term = this.elms(element, 'physicalLocation', null, null);
+    //         let f = this.texts(term);
+    //         return f ? f : '';
+    //       });
+    //       modsFields['location'] = tl;
+    //     }
+
+    //     //physicalDescription
+    //     let physicalDescription = this.elms(mods, 'physicalDescription', null, null);
+    //     if (physicalDescription) {
+    //       let desc = '';
+    //       let tl = physicalDescription.forEach(element => {
+    //         let ext = this.elms(element, 'extent', null, null);
+    //         if (ext) {
+    //           let tt = this.texts(ext);
+    //           desc = 'Rozsah:' + this.texts(ext);
+    //         }
+    //       });
+    //       modsFields['physicalDescription'] = desc;
+    //     }
+
+    //     this.descriptions[id] = modsFields;
+    //   });
+    // }
+  }
+
+  loadMods(id: string) {
+    if (id) {
       this.clientApi.getModsNewApi(id).subscribe(mr => {
         let modsFields = {};
         let ast = parse(mr);
@@ -766,6 +1072,7 @@ export class StatisticsComponent implements OnInit {
         this.descriptions[id] = modsFields;
       });
     }
+
   }
 
   /** Utilitni metody ??  Presunout ?? */
@@ -839,6 +1146,9 @@ export class StatisticsComponent implements OnInit {
   toggleFilter(filter: any): void {
     const index = this.filters.findIndex(f => f.name === filter.name && f.value === filter.value);
     let hashVal = `${filter.data.filterField}_${filter.data.filterValue}`;
+    if (filter.modifier) {
+      hashVal = hashVal+"-"+filter.modifier;
+    }
     if (index >= 0) {
       this.rememberColor.delete(hashVal);
       this.filters.splice(index, 1);

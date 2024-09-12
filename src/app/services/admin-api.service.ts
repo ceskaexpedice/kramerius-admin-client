@@ -668,6 +668,11 @@ export class AdminApiService {
     params = params.set('rows', '0');
 
 
+    if (identifier) {
+      let query = `(all_pids:"${identifier}" OR id_isbn:"${identifier}" OR id_issn:"${identifier}" OR id_ccnb:"${identifier}")`;
+      params = params.append("fq",query);
+    }
+
     if (facets && facets.length > 0) {
       params = params.set('facet', 'true');
       params = params.append('facet.mincount', '1');
