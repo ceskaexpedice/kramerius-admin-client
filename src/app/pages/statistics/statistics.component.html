@@ -15,7 +15,7 @@
       <div>
         <nav mat-tab-nav-bar>
           <a mat-tab-link (click)="changeView('graphs')" [active]="view == 'graphs'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'sites.statistics.graphs.title' | translate }}</a>
-          <a mat-tab-link (click)="changeView('most-viewed-documents')"  [active]="view == 'most-viewed-documents'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'sites.statistics.most-viewed-documents.title' | translate }}</a>
+          <!-- <a mat-tab-link (click)="changeView('most-viewed-documents')"  [active]="view == 'most-viewed-documents'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'sites.statistics.most-viewed-documents.title' | translate }}</a> -->
 					<a mat-tab-link (click)="changeView('generating-logs-for-nk')"  [active]="view == 'generating-logs-for-nk'"><mat-icon class="material-icons-outlined">fitbit</mat-icon>{{ 'sites.statistics.generating-logs-for-nk.title' | translate }}</a>
         </nav>
       </div>
@@ -71,154 +71,115 @@
 						</div>
 					</div>
 
-					<div class="app-mt-2" *ngIf="filters && filters.length > 0">
+					<div class="app-mb-4" *ngIf="filters && filters.length > 0">
 						<mat-chip-list>
-						  <mat-chip *ngFor="let filter of filters"
-						  	(removed)="toggleFilter(filter)"
-							[ngStyle]="{'background-color': filter.color}">
-							{{ filter.name }}
-							<mat-icon matChipRemove>cancel</mat-icon>
+						  <mat-chip *ngFor="let filter of filters" (removed)="toggleFilter(filter)" [ngStyle]="{'background-color': filter.color}" class="app-color-lightnes">
+								{{ filter.name }}<mat-icon matChipRemove>cancel</mat-icon>
 						  </mat-chip>
 						</mat-chip-list>
 					</div>
 
-
-					<ng-container  *ngIf="view == 'graphs'">
-
+					<ng-container *ngIf="view == 'graphs'">
 						<ng-container *ngIf="!isMaster()">
-	
 							<h1> 
 								{{ 'desc.'+detailDoc['model'] |  translate}} /  {{getDetailTitle() }}
 							</h1>
-							
-							<!--
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['author']"><label class="app-label">{{ 'desc.author' | translate }}:</label> {{descriptions[detailDoc['pid']]['author']}}</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['origininfo']"><label class="app-label">{{ 'desc.publishingData' | translate }}:</label> {{descriptions[detailDoc['pid']]['origininfo']}}</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['keywords'] && descriptions[detailDoc['pid']]['keywords'].length > 0"><label class="app-label">{{ 'desc.keywords' | translate }}:</label> 
-								<span *ngFor="let k of descriptions[detailDoc['pid']]['keywords']; let isLast=last">
-									{{k}}{{isLast ? '' : ', '}}
-								</span>
-							</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['langs'] && descriptions[detailDoc['pid']]['langs'].length > 0"><label class="app-label">{{ 'desc.language' | translate }}:</label> 
-								<ng-container *ngFor="let l of descriptions[detailDoc['pid']]['langs']; let isLast=last">
-									<span *ngIf="l && l!==''">
-										{{ 'lang.'+ l | translate }}{{isLast ? '' : ', '}}
-									</span>
-								</ng-container>
-							</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['location'] && descriptions[detailDoc['pid']]['location'].length>0"><label class="app-label">{{ 'desc.storageLocation' | translate }}:</label> 
-								<ng-container *ngFor="let l of descriptions[detailDoc['pid']]['location']; ; let isLast=last">
-									<span *ngIf="l && l!==''">
-										{{  'sigla.'+ l | translate }}{{isLast ? '' : ', '}}
-									</span>
-								</ng-container>
-							</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['physicalDescription']"><label class="app-label">{{ 'desc.physicalDescription' | translate }}:</label> {{descriptions[detailDoc['pid']]['physicalDescription']}}</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['abstract']"><label class="app-label">{{ 'desc.abstract' | translate }}:</label> {{descriptions[detailDoc['pid']]['abstract']}}</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['note']"><label class="app-label">{{ 'desc.comment' | translate }}:</label> {{descriptions[detailDoc['pid']]['note']}}</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['isbn']"><label class="app-label">{{ 'Isbn' | translate }}:</label> {{descriptions[detailDoc['pid']]['isbn']}}</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['issn']"><label class="app-label">{{ 'Isbn' | translate }}:</label> {{descriptions[detailDoc['pid']]['issn']}}</div>
-							<div *ngIf="descriptions[detailDoc['pid']] && descriptions[detailDoc['pid']]['barcode']"><label class="app-label">{{ 'desc.barcode' | translate }}:</label> {{descriptions[detailDoc['pid']]['barcode']}}</div>
-							-->
-	
-
 						</ng-container>
-
-
-						<div fxLayout="row" fxLayoutGap="16px">
+						<div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
 							<!-- top level models -->
-							<mat-card fxFlex class="app-card app-view-border" *ngIf="isMaster()">
+							<mat-card fxFlex class="app-card app-view-border" fxLayout="column"  *ngIf="isMaster()">
 								<mat-card-header>
 									<mat-card-title>{{ 'desc.topLevelmodelStatistics' | translate }}</mat-card-title>
 								</mat-card-header>
-								<mat-card-content *ngIf="isResultTopLevelModel">
+								<mat-card-content fxFlex *ngIf="isResultTopLevelModel">
 									<div echarts [options]="modelsOpts" style="height: 350px;"  (chartClick)="toggleFilter($event)"></div>
-									<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
 								</mat-card-content>
+								<mat-card-actions>
+									<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
+								</mat-card-actions>
 								<mat-card *ngIf="!isResultTopLevelModel" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
 								</mat-card>
 							</mat-card>
-
-							<!-- detail level models -->
+							<!-- detail -->	
 							<mat-card fxFlex class="app-card app-view-border" *ngIf="!isMaster()">
 								<mat-card-header>
 									<mat-card-title>Periodical volumes, Monographunits</mat-card-title>
 								</mat-card-header>
 								<mat-card-content *ngIf="isDetailsData">
 									<div echarts [options]="detailOpts" style="height: 350px;"  (chartClick)="toggleFilter($event)"></div>
-									<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
 								</mat-card-content>
+								<mat-card-actions>
+									<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
+								</mat-card-actions>
 								<mat-card *ngIf="!isDetailsData" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
 								</mat-card>
 							</mat-card>
-							
-							<!-- languages -->
-							<mat-card fxFlex class="app-card app-view-border" *ngIf="isMaster()">
+
+							<mat-card fxFlex class="app-card app-view-border" fxLayout="column"  *ngIf="isMaster()">
 								<mat-card-header>
 									<mat-card-title>{{ 'desc.statisticsOfUsedLanguages' | translate }}</mat-card-title>
 								</mat-card-header>
-								<mat-card-content *ngIf="isResultLang">
+								<mat-card-content fxFlex *ngIf="isResultLang">
 									<div echarts [options]="langOpts" style="height: 350px;" (chartClick)="toggleFilter($event)"></div>
-									<button mat-flat-button  (click)="csvLang()" color="primary"  class="app-mr-2">CSV</button>
 								</mat-card-content>
+								<mat-card-actions>
+									<button mat-flat-button  (click)="csvLang()" color="primary"  class="app-mr-2">CSV</button>
+								</mat-card-actions>
 								<mat-card *ngIf="!isResultLang" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
 								</mat-card>
 							</mat-card>
-							
-							<!-- authors graph -->
-							<mat-card fxFlex class="app-card app-view-border" *ngIf="isMaster()">
+
+							<mat-card fxFlex class="app-card app-view-border" fxLayout="column" *ngIf="isMaster()">
 								<mat-card-header>
 									<mat-card-title>{{ 'desc.authorStatistics' | translate }}</mat-card-title>
 								</mat-card-header>
-								<mat-card-content *ngIf="isResultAuthor">
+								<mat-card-content fxFlex *ngIf="isResultAuthor">
 									<div echarts [options]="authorOpts" style="height: 350px;" (chartClick)="toggleFilter($event)"></div>
-									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
 								</mat-card-content>
+								<mat-card-actions>
+									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
+								</mat-card-actions>
 								<mat-card *ngIf="!isResultAuthor" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
 								</mat-card>
 							</mat-card>
 
-							<mat-card fxFlex class="app-card app-view-border" *ngIf="isMaster() || isDetail() ">
+							<mat-card fxFlex class="app-card app-view-border" fxLayout="column" *ngIf="isMaster() || isDetail()">
 								<mat-card-header>
 									<mat-card-title>{{ 'desc.providedByLicense' | translate }}</mat-card-title>
 								</mat-card-header>
-								<mat-card-content *ngIf="isProvidedByLicense">
+								<mat-card-content fxFlex *ngIf="isProvidedByLicense">
 									<div echarts [options]="providedByLicensesOpts"  (chartClick)="toggleFilter($event)" style="height: 350px;"></div>
-									<!--
-									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
-									-->
 								</mat-card-content>
+								<mat-card-actions>
+									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
+								</mat-card-actions>
 								<mat-card *ngIf="!isProvidedByLicense" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
 								</mat-card>
 							</mat-card>
 
-							<mat-card fxFlex class="app-card app-view-border" *ngIf="isMaster() || isDetail()">
+							<mat-card fxFlex class="app-card app-view-border" fxLayout="column"  *ngIf="isMaster() || isDetail()">
 								<mat-card-header>
 									<mat-card-title>{{ 'desc.viewedCollections' | translate }}</mat-card-title>
 								</mat-card-header>
-								<mat-card-content *ngIf="isCollections">
+								<mat-card-content fxFlex *ngIf="isCollections">
 									<div echarts [options]="collectionsOpts" (chartClick)="toggleFilter($event)" style="height: 350px;"></div>
-									<!--
-									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
-									-->
 								</mat-card-content>
+								<mat-card-actions>
+									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
+								</mat-card-actions>
 								<mat-card *ngIf="!isCollections" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
 								</mat-card>
 							</mat-card>
 						</div>
 
-						<!--
-						<ng-container *ngFor="let key of sortedKeys; let last = last"></ng-container>
-						-->
-
 						<ng-container *ngFor="let key of tablekeys ; let last = last">
-							<div class="app-mb-4" [class.app-mb-n4]="last">
+							<div class="app-mb-4">
 								<ng-container *ngIf="table.get(key).length > 0">
 									<h3 class="app-mt-0 app-mb-2">{{ 'field.' + key | translate }}</h3>
 									<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
@@ -275,23 +236,29 @@
 													</a>
 
 													<a (click)="searchItem(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
-														<mat-icon>like</mat-icon>
+														<mat-icon>search</mat-icon>
 														{{ selection[v.pid] ? ('button.hideDetail' | translate) : ('button.showDetail' | translate) }}
 													</a>
+
 												</td>
 											</tr>
 										</tbody>
 									</table>
+									<div class="app-text-right app-mt-4">
+										<button mat-flat-button  (click)="csvAuthor()" color="primary">CSV</button>
+									</div>
 								</ng-container>
 							</div>
 						</ng-container>
 					</ng-container>
+					
 					<ng-container  *ngIf="view == 'most-viewed-documents'">
 						<mat-card  *ngIf="isResultTopLevelModel" class="app-card app-view-border">
 							<mat-card-content>
-								<ng-container *ngFor="let key of tablekeys | keyvalue; let last = last">
+								<ng-container *ngFor="let item of table | keyvalue; let last = last">
+
 									<div class="app-mb-4" [class.app-mb-n4]="last">
-										<ng-container *ngIf="table.get(key).length > 0">
+										<ng-container *ngIf="item.value.length > 0">
 											<h3 class="app-mt-0 app-mb-2">{{ 'field.' + item.key | translate }}</h3>
 											<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
 												<thead>

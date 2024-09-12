@@ -603,3 +603,16 @@
     font-size: $app-mat-checbox-size;
   }
 }
+
+// chiplist
+.mat-chip-list {
+  .mat-chip {
+    &.mat-standard-chip {
+      color: $app-color-lightnes;
+
+      .mat-chip-remove {
+        color: $app-color-lightnes;
+      }
+    }
+  }   
+}

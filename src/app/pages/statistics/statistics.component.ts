@@ -41,17 +41,17 @@ enum ViewLevel {
 export class StatisticsComponent implements OnInit {
 
   level = ViewLevel.master;
-  detailDoc  = {}
+  detailDoc = {}
   detailMods = null;
 
   isMaster() { return this.level == ViewLevel.master; }
   isDetail() { return this.level == ViewLevel.detail; }
 
-  
+
   // Top level modely
-  topLevelModels = ["monograph", "periodical", "soundrecording", "map", "collection", "manuscript", "graphic", "archive", "convolute", "museumExhibit", "article"];
+  topLevelModels = ["collection", "monograph", "periodical", "soundrecording", "map", "manuscript", "graphic", "archive", "convolute", "museumExhibit", "article"];
   // modely prvni urovne 
-  detailModels = ["monographunit","periodicalvolume","periodicalissue","periodicalitem"]
+  detailModels = ["monographunit", "periodicalvolume", "periodicalissue", "periodicalitem"]
 
 
   // konfigurace grafu 
@@ -83,7 +83,7 @@ export class StatisticsComponent implements OnInit {
 
   // tabulka 
   table: any;
-  tablekeys:string[] = [];
+  tablekeys: string[] = [];
   descriptions: any = {};
 
   view: string;
@@ -91,7 +91,7 @@ export class StatisticsComponent implements OnInit {
 
   lang: string;
 
-  
+
   public selection: any = [];
 
   public isResultTopLevelModel: boolean = false;
@@ -211,7 +211,7 @@ export class StatisticsComponent implements OnInit {
               }
 
               if (this.level == ViewLevel.detail) {
-                pidModels.push(...this.detailModels.map(m=> `pids_${m}`));
+                pidModels.push(...this.detailModels.map(m => `pids_${m}`));
               }
 
               this.adminApi.statisticsSearch(
@@ -247,7 +247,7 @@ export class StatisticsComponent implements OnInit {
                     } else {
                       this.reinitDetailsGraph([], []);
                     }
-                  }    
+                  }
 
                   //table top hits
                   this.reinitTopHitsTable(response);
@@ -267,10 +267,10 @@ export class StatisticsComponent implements OnInit {
     models.push(...this.topLevelModels);
     if (this.level == ViewLevel.detail) {
       models.push(...this.detailModels);
-    }  
-    
+    }
+
     this.table = new Map<string, any>();
-    
+
     for (let i = 0; i < models.length; i++) {
       let tableFacets = response['facet_counts']['facet_fields'][`pids_${models[i]}`];
       if (tableFacets) {
@@ -308,20 +308,20 @@ export class StatisticsComponent implements OnInit {
 
 
 
-  private reinitDetailsGraph(detailpids:string[], detailcount:number[]) {
+  private reinitDetailsGraph(detailpids: string[], detailcount: number[]) {
 
     let detailItems = [];
-    this.clientApi.getPids(detailpids, ['pid', 'title.search*', 'root.title', 'date.str','part.number.str']).subscribe(docs => {
+    this.clientApi.getPids(detailpids, ['pid', 'title.search*', 'root.title', 'date.str', 'part.number.str']).subscribe(docs => {
       let details = docs;
       for (let i = 0; i < details.length; i++) {
         let vol = details[i];
 
 
         let volumeTitle = `Ročník ${vol['date.str']} / ${vol['part.number.str']}`;
- 
+
         let detailItem = {
           value: detailcount[i],
-          name:  volumeTitle,
+          name: volumeTitle,
           filterField: "pids_periodicalvolume",
           filterValue: vol['pid']
         };
@@ -338,7 +338,7 @@ export class StatisticsComponent implements OnInit {
       this.detailOpts = {
         xAxis: {
           type: 'category',
-          data: detailItems.map(m=> m.name)
+          data: detailItems.map(m => m.name)
         },
         yAxis: {
           type: 'log',
@@ -348,7 +348,7 @@ export class StatisticsComponent implements OnInit {
         tooltip: {
           trigger: 'item'
         },
-  
+
         series: [
           {
             data: detailItems,
@@ -642,21 +642,9 @@ export class StatisticsComponent implements OnInit {
     this.subject.pipe(
       debounceTime(400)
     ).subscribe(searchTextValue => {
+
       if (searchTextValue) {
-        
-        let params: HttpParams = new HttpParams();
-        params = params.set('q', `pid:"${this.identifier}" OR id_ccnb:"${this.identifier}" OR id_isbn:"${this.identifier}" OR id_issn:"${this.identifier}"`);
-        params = params.set('rows', '100');
-        params = params.set('fl', 'pid title.search model');
-        
-        this.clientApi.search(params).subscribe(docs=> {
-          if (docs.length == 1) {
-            this.detailDoc = docs[0];
-            this.loadMods(docs[0]['pid']);
-            this.level = ViewLevel.detail;
-          }
-          this.reinitGraphs();
-        });
+        this.searchItem(searchTextValue);
       } else {
         this.level = ViewLevel.master;
         this.reinitGraphs();
@@ -770,32 +758,42 @@ export class StatisticsComponent implements OnInit {
     this.router.navigate(['/statistics/', view]);
   }
 
-  getDetailTitle():string {
+  getDetailTitle(): string {
     let model = this.detailDoc['model'];
     if (this.topLevelModels.indexOf(model) >= 0) {
       return this.detailDoc['root.title']
     } else {
-      return this.detailDoc['root.title'] +' / '+this.detailDoc['title.search']
+      return this.detailDoc['root.title'] + ' / ' + this.detailDoc['title.search']
     }
   }
 
-  searchItem(id:string) {
+  searchItem(id: string) {
     this.identifier = id;
-    
+
     let params: HttpParams = new HttpParams();
     params = params.set('q', `pid:"${this.identifier}" OR id_ccnb:"${this.identifier}" OR id_isbn:"${this.identifier}" OR id_issn:"${this.identifier}"`);
     params = params.set('rows', '100');
-    params = params.set('fl', 'pid title.search model root.title');
-    
-    this.clientApi.search(params).subscribe(docs=> {
+    params = params.set('fl', 'pid title.search model root.pid');
+
+    this.clientApi.search(params).subscribe(docs => {
       if (docs.length == 1) {
+        let model = docs[0]['model']
+        // pouze pro modely monograph a periodical jdeme niz
+        if (model.startsWith("monograph") || model.startsWith("periodical")) {
+          this.level = ViewLevel.detail;
+        } else {
+          this.level = ViewLevel.master;
+        }
         this.detailDoc = docs[0];
-        this.loadMods(docs[0]['pid']);
-        this.level = ViewLevel.detail;
+        //this.loadMods(docs[0]['pid']);
       }
       this.reinitGraphs();
+   
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth' // Smooth scrolling effect
+        });
     });
-
   }
 
   showMore(id: string) {
@@ -1147,7 +1145,7 @@ export class StatisticsComponent implements OnInit {
     const index = this.filters.findIndex(f => f.name === filter.name && f.value === filter.value);
     let hashVal = `${filter.data.filterField}_${filter.data.filterValue}`;
     if (filter.modifier) {
-      hashVal = hashVal+"-"+filter.modifier;
+      hashVal = hashVal + "-" + filter.modifier;
     }
     if (index >= 0) {
       this.rememberColor.delete(hashVal);
@@ -1161,3 +1159,8 @@ export class StatisticsComponent implements OnInit {
     this.reinitGraphs();
   }
 }
+
+/* 
+periodikum: #167a1b
+monograph: #c73565
+*/
