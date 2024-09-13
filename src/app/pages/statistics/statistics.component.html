@@ -20,8 +20,8 @@
         </nav>
       </div>
     </div>
-    <div fxFlex class="app-oa-y">
-			<div class="app-container">
+    <div  fxFlex class="app-oa-y">
+			<div class="app-container" #scrollelm >
 				<ng-container *ngIf="!errorState && view !== 'generating-logs-for-nk'">
 					<div fxLayout="row" fxLayoutAlign="start baseline">
 						<div fxFlex>
@@ -82,7 +82,7 @@
 					<ng-container *ngIf="view == 'graphs'">
 						<ng-container *ngIf="!isMaster()">
 							<h1> 
-								{{ 'desc.'+detailDoc['model'] |  translate}} /  {{getDetailTitle() }}
+								{{ 'desc.'+detailDoc['model'] |  translate}} / ( {{getDetailTitle() }} )
 							</h1>
 						</ng-container>
 						<div fxLayout="row" fxLayoutGap="16px" class="app-mb-4">
@@ -94,7 +94,7 @@
 								<mat-card-content fxFlex *ngIf="isResultTopLevelModel">
 									<div echarts [options]="modelsOpts" style="height: 350px;"  (chartClick)="toggleFilter($event)"></div>
 								</mat-card-content>
-								<mat-card-actions>
+								<mat-card-actions *ngIf="isResultTopLevelModel">
 									<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isResultTopLevelModel" class="app-view-alert app-info">
@@ -104,12 +104,12 @@
 							<!-- detail -->	
 							<mat-card fxFlex class="app-card app-view-border" *ngIf="!isMaster()">
 								<mat-card-header>
-									<mat-card-title>Periodical volumes, Monographunits</mat-card-title>
+									<mat-card-title> Podčásti  - {{ 'desc.'+deatilTypes | translate}}</mat-card-title>
 								</mat-card-header>
 								<mat-card-content *ngIf="isDetailsData">
 									<div echarts [options]="detailOpts" style="height: 350px;"  (chartClick)="toggleFilter($event)"></div>
 								</mat-card-content>
-								<mat-card-actions>
+								<mat-card-actions *ngIf="isDetailsData">
 									<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isDetailsData" class="app-view-alert app-info">
@@ -124,7 +124,7 @@
 								<mat-card-content fxFlex *ngIf="isResultLang">
 									<div echarts [options]="langOpts" style="height: 350px;" (chartClick)="toggleFilter($event)"></div>
 								</mat-card-content>
-								<mat-card-actions>
+								<mat-card-actions *ngIf="isResultLang">
 									<button mat-flat-button  (click)="csvLang()" color="primary"  class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isResultLang" class="app-view-alert app-info">
@@ -139,7 +139,7 @@
 								<mat-card-content fxFlex *ngIf="isResultAuthor">
 									<div echarts [options]="authorOpts" style="height: 350px;" (chartClick)="toggleFilter($event)"></div>
 								</mat-card-content>
-								<mat-card-actions>
+								<mat-card-actions  *ngIf="isResultAuthor">
 									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isResultAuthor" class="app-view-alert app-info">
@@ -154,7 +154,7 @@
 								<mat-card-content fxFlex *ngIf="isProvidedByLicense">
 									<div echarts [options]="providedByLicensesOpts"  (chartClick)="toggleFilter($event)" style="height: 350px;"></div>
 								</mat-card-content>
-								<mat-card-actions>
+								<mat-card-actions *ngIf="isProvidedByLicense">
 									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isProvidedByLicense" class="app-view-alert app-info">
@@ -169,7 +169,7 @@
 								<mat-card-content fxFlex *ngIf="isCollections">
 									<div echarts [options]="collectionsOpts" (chartClick)="toggleFilter($event)" style="height: 350px;"></div>
 								</mat-card-content>
-								<mat-card-actions>
+								<mat-card-actions *ngIf="isCollections">
 									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isCollections" class="app-view-alert app-info">
@@ -180,7 +180,7 @@
 
 						<ng-container *ngFor="let key of tablekeys ; let last = last">
 							<div class="app-mb-4">
-								<ng-container *ngIf="table.get(key).length > 0">
+								<ng-container *ngIf="table.get(key) && table.get(key).length > 0">
 									<h3 class="app-mt-0 app-mb-2">{{ 'field.' + key | translate }}</h3>
 									<table class="app-table" [cellPadding]="0" [cellSpacing]="0">
 										<thead>

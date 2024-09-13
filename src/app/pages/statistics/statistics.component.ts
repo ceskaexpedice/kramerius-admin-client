@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { AppSettings } from 'src/app/services/app-settings';
 import * as gitInfo from 'git-info.json'
 import { ECharts, EChartsOption } from 'echarts';
@@ -30,7 +30,7 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 /** Levely zobrazeni - master, detail, subdteial */
 enum ViewLevel {
-  master, detail // subdetail
+  master, detail 
 }
 
 @Component({
@@ -40,9 +40,12 @@ enum ViewLevel {
 })
 export class StatisticsComponent implements OnInit {
 
+  @ViewChild('scrollelm') scrollelm!: ElementRef;
+
   level = ViewLevel.master;
   detailDoc = {}
   detailMods = null;
+  deatilTypes = null;
 
   isMaster() { return this.level == ViewLevel.master; }
   isDetail() { return this.level == ViewLevel.detail; }
@@ -219,6 +222,8 @@ export class StatisticsComponent implements OnInit {
                 this.dateTo != null ? this.dateTo.toISOString() : null,
                 this.identifier, this.filters, pidModels).subscribe(response => {
 
+                  this.deatilTypes='';
+
                   // collections
                   let collections = response['facet_counts']['facet_fields']['pids_collection'];
                   let collectionCounts = this.extractCounts(collections);
@@ -226,29 +231,73 @@ export class StatisticsComponent implements OnInit {
                   this.reinitCollectionsGraph(collectionPids, collectionCounts);
 
                   if (this.level != ViewLevel.master) {
+                    let periodicalvolumes =  response['facet_counts']['facet_fields']['pids_periodicalvolume'];
+                    let monographunits =  response['facet_counts']['facet_fields']['pids_monographunit'];
+                    let periodicalissues =  response['facet_counts']['facet_fields']['pids_periodicalissue'];
+                    let periodicalitems =  response['facet_counts']['facet_fields']['pids_periodicalitem'];
 
-                    let periodicalvolumes = response['facet_counts']['facet_fields']['pids_periodicalvolume'];
-                    let monographunits = response['facet_counts']['facet_fields']['pids_monographunit'];
-                    let periodicalissues = response['facet_counts']['facet_fields']['pids_periodicalissue'];
-                    let periodicalitems = response['facet_counts']['facet_fields']['pids_periodicalitem'];
+                    switch(this.detailDoc['model']) {
+                        case 'periodical':
+                          if (periodicalvolumes && periodicalvolumes.length > 0) {
+                            let periodicalvolumeCounts = this.extractCounts(periodicalvolumes);
+                            let periodicalvolumePids = this.extractNames(periodicalvolumes);
+                            this.reinitDetailsGraph(periodicalvolumePids, periodicalvolumeCounts);
+                            this.deatilTypes = "periodicalvolume";
+                          } else if (periodicalissues && periodicalissues.length > 0) {
+                            let periodicalissueCounts = this.extractCounts(periodicalissues);
+                            let periodicalissuePids = this.extractNames(periodicalissues);
+                            this.reinitDetailsGraph(periodicalissuePids, periodicalissueCounts);
+                            this.deatilTypes = "periodicalissue";
+                          } else if (periodicalitems && periodicalitems.length > 0) {
+                            let periodicalitemCount = this.extractCounts(periodicalitems);
+                            let periodicalitemPids = this.extractNames(periodicalitems);
+                            this.reinitDetailsGraph(periodicalitemPids, periodicalitemCount);
+                            this.deatilTypes = "periodicalitem";
+                          } else {  
+                            this.reinitDetailsGraph([], []);
+                          }
+                          break;
+                        case 'periodicalvolume':
+                          if (periodicalissues && periodicalissues.length > 0) {
+                            let periodicalissueCounts = this.extractCounts(periodicalissues);
+                            let periodicalissuePids = this.extractNames(periodicalissues);
+                            this.reinitDetailsGraph(periodicalissuePids, periodicalissueCounts);
+                            this.deatilTypes = "periodicalissue";
+                          } else if (periodicalitems && periodicalitems.length > 0) {
+                            let periodicalitemCount = this.extractCounts(periodicalitems);
+                            let periodicalitemPids = this.extractNames(periodicalitems);
+                            this.reinitDetailsGraph(periodicalitemPids, periodicalitemCount);
+                            this.deatilTypes = "periodicalitem";
+                          } else {  
+                            this.reinitDetailsGraph([], []);
+                          }
+                          break;
+                        case 'periodicalissue':
+                          if (periodicalitems && periodicalitems.length > 0) {
+                            let periodicalitemCount = this.extractCounts(periodicalitems);
+                            let periodicalitemPids = this.extractNames(periodicalitems);
+                            this.reinitDetailsGraph(periodicalitemPids, periodicalitemCount);
+                            this.deatilTypes = "periodicalitem";
+                          } else {  
+                            this.reinitDetailsGraph([], []);
+                          }
+                          break;
+                        case 'monograph':
+                          if (monographunits && monographunits.length > 0) {
+                            let monographUnitCounts = this.extractCounts(monographunits);
+                            let monographUnitPids = this.extractNames(monographunits);
+                            this.reinitDetailsGraph(monographUnitPids, monographUnitCounts);
+                            this.deatilTypes = "monographunit";
+                          } else {  
+                            this.reinitDetailsGraph([], []);
+                          }
+                          break;
+                        default:
+                          this.reinitDetailsGraph([], []);
 
-                    if (periodicalvolumes && periodicalvolumes.length > 0) {
-                      let periodicalvolumeCounts = this.extractCounts(periodicalvolumes);
-                      let periodicalvolumePids = this.extractNames(periodicalvolumes);
-                      this.reinitDetailsGraph(periodicalvolumePids, periodicalvolumeCounts);
-                    } else if (monographunits && monographunits.length > 0) {
-                      let monographUnitCounts = this.extractCounts(monographunits);
-                      let monographUnitPids = this.extractNames(monographunits);
-                      this.reinitDetailsGraph(monographUnitPids, monographUnitCounts);
-                    } else if (periodicalissues && periodicalissues.length > 0) {
-                      let periodicalissueCounts = this.extractCounts(periodicalissues);
-                      let periodicalissuePids = this.extractNames(periodicalissues);
-                      this.reinitDetailsGraph(periodicalissuePids, periodicalissueCounts);
-                    } else {
-                      this.reinitDetailsGraph([], []);
+
                     }
                   }
-
                   //table top hits
                   this.reinitTopHitsTable(response);
                 });
@@ -280,7 +329,8 @@ export class StatisticsComponent implements OnInit {
         let map: Map<string, number> = new Map();
         for (let j = 0; j < tablePids.length; j++) { map.set(tablePids[j], tableCounts[j]); }
 
-        this.clientApi.getPids(tablePids, ['pid', 'title.search']).subscribe(resp => {
+
+        this.clientApi.getPids(tablePids, ['pid','model', 'title.search','date.str','model','root.pid','root.title','part.number.str']).subscribe(resp => {
 
           for (let k = 0; k < resp.length; k++) {
             let count = map.get(resp[k].pid);
@@ -288,7 +338,7 @@ export class StatisticsComponent implements OnInit {
               let val = {
                 count: map.get(resp[k].pid),
                 pid: resp[k].pid,
-                title: resp[k]['title.search']
+                title:  this.getIndexTitle(resp[k])  //resp[k]['title.search']
               };
               values.push(val);
             }
@@ -311,18 +361,19 @@ export class StatisticsComponent implements OnInit {
   private reinitDetailsGraph(detailpids: string[], detailcount: number[]) {
 
     let detailItems = [];
-    this.clientApi.getPids(detailpids, ['pid', 'title.search*', 'root.title', 'date.str', 'part.number.str']).subscribe(docs => {
+    this.clientApi.getPids(detailpids, ['pid','model', 'title.search*', 'root.title', 'date.str', 'title.search']).subscribe(docs => {
       let details = docs;
       for (let i = 0; i < details.length; i++) {
         let vol = details[i];
+        let model =vol['model'];        
 
-
-        let volumeTitle = `Ročník ${vol['date.str']} / ${vol['part.number.str']}`;
+        let translated =  this.ui.getTranslation('desc.'+vol['model']);
+        let volumeTitle = `${translated} -  ${vol['date.str']} / ${vol['title.search']}`;
 
         let detailItem = {
           value: detailcount[i],
           name: volumeTitle,
-          filterField: "pids_periodicalvolume",
+          filterField: `pids_${model}`,
           filterValue: vol['pid']
         };
         if (this.rememberColor.has(`${detailItem.filterField}_${detailItem.filterValue}`)) {
@@ -758,22 +809,64 @@ export class StatisticsComponent implements OnInit {
     this.router.navigate(['/statistics/', view]);
   }
 
+
+  getIndexTitle(doc:any) {
+    let model = doc['model'];
+    if (this.topLevelModels.indexOf(model) >= 0) {
+      return doc['root.title']
+    } else {
+      if (doc['date.str'] && doc['title.search']) {
+        let title = `${doc['root.title']} / ${doc['date.str']} - ${doc['title.search']}`
+        return title;
+      } else if (doc['date.str']){
+
+        let title = `${doc['root.title']} / ${doc['date.str']}`
+        return title;
+
+      } else if (doc['part.number.str']){
+        let title = `${doc['root.title']} / ${doc['part.number.str']}`
+        return title;
+      } else if (doc['title.search']){
+        let title = `${doc['root.title']} / ${doc['title.search']}`
+        return title;
+      } else {
+        return JSON.stringify(doc);
+      }
+    }
+
+  }
+
   getDetailTitle(): string {
+    return this.getIndexTitle(this.detailDoc);
+    /*
     let model = this.detailDoc['model'];
     if (this.topLevelModels.indexOf(model) >= 0) {
       return this.detailDoc['root.title']
     } else {
-      return this.detailDoc['root.title'] + ' / ' + this.detailDoc['title.search']
-    }
+      if (this.detailDoc['date.str'] && this.detailDoc['title.search']) {
+        let title = `${this.detailDoc['root.title']}/${this.detailDoc['date.str']} - ${this.detailDoc['title.search']}`
+        return title;
+      } else if (this.detailDoc['part.number.str']){
+        let title = `${this.detailDoc['root.title']}/${this.detailDoc['part.number.str']}`
+        return title;
+      } else if (this.detailDoc['title.search']){
+        let title = `${this.detailDoc['root.title']}/${this.detailDoc['title.search']}`
+        return title;
+      } else {
+        return JSON.stringify(this.detailDoc);
+      }
+    }*/
   }
 
+
+ 
   searchItem(id: string) {
     this.identifier = id;
 
     let params: HttpParams = new HttpParams();
     params = params.set('q', `pid:"${this.identifier}" OR id_ccnb:"${this.identifier}" OR id_isbn:"${this.identifier}" OR id_issn:"${this.identifier}"`);
     params = params.set('rows', '100');
-    params = params.set('fl', 'pid title.search model root.pid');
+    params = params.set('fl', 'pid title.search date.str model root.pid root.title part.number.str');
 
     this.clientApi.search(params).subscribe(docs => {
       if (docs.length == 1) {
@@ -789,10 +882,13 @@ export class StatisticsComponent implements OnInit {
       }
       this.reinitGraphs();
    
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth' // Smooth scrolling effect
-        });
+        if (this.scrollelm) {
+          let native = this.scrollelm.nativeElement;
+          this.scrollelm.nativeElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start' // 'start' posune na začátek elementu, 'center' nebo 'end' jsou také možnosti
+          });
+        }
     });
   }
 
