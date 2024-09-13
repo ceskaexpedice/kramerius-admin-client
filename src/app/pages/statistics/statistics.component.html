@@ -187,6 +187,7 @@
 											<tr>
 												<th class="app-first">{{ 'desc.numberOfImpressions' | translate }}</th>
 												<th>{{ 'desc.work' | translate }}</th>
+												<th class="app-last app-filter"></th>
 												<th class="app-last"></th>
 											</tr>
 										</thead>
@@ -229,17 +230,17 @@
 														<div *ngIf="descriptions[v.pid] && descriptions[v.pid]['barcode']"><label class="app-label">{{ 'desc.barcode' | translate }}:</label> {{descriptions[v.pid]['barcode']}}</div>
 													</div>
 												</td>
+												<td>
+													<a (click)="searchItem(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn">
+														<mat-icon>filter_list</mat-icon>
+														{{ 'Zobrazit podčásti' | translate }}
+													</a>
+												</td>
 												<td class="app-col-detail">
 													<a (click)="showMore(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
 														<mat-icon>expand_more</mat-icon>
 														{{ selection[v.pid] ? ('button.hideDetail' | translate) : ('button.showDetail' | translate) }}
 													</a>
-
-													<a (click)="searchItem(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
-														<mat-icon>search</mat-icon>
-														{{ selection[v.pid] ? ('button.hideDetail' | translate) : ('button.showDetail' | translate) }}
-													</a>
-
 												</td>
 											</tr>
 										</tbody>
