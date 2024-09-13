@@ -56,10 +56,8 @@
 							<mat-form-field>
 								<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
 								<input matInput placeholder="Pid / Čnb / Issn / Issbn" [(ngModel)]="identifier"  (keyup)="onIdentKeyUp($event.target)">
+								<mat-icon matSuffix class="app-clear app-cursor-pointer app-ml-2" [matTooltip]="'button.deselect' | translate" *ngIf="identifier" (click)="clearIdentifier($event.target)">close</mat-icon>
 							</mat-form-field>
-							<a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2" *ngIf="identifier" (click)="clearIdentifier($event.target)">
-								<mat-icon>cancel</mat-icon>
-							</a>
 						</div>
 						<div>
 							<button mat-flat-button [matMenuTriggerFor]="menuAnnualReport" color="primary">{{ 'button.annualReport' | translate }}<mat-icon class="app-menu">keyboard_arrow_down</mat-icon></button>

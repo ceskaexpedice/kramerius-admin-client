@@ -292,6 +292,10 @@
       &.app-action {
         @include setIcon(20, $app-color-primary, sub);
       }
+
+      &.app-clear {
+        @include setIcon(20, $app-color-warn, sub);
+      }
     }
   }
 }
