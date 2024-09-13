@@ -54,7 +54,7 @@ export class StatisticsComponent implements OnInit {
   // Top level modely
   topLevelModels = ["collection", "monograph", "periodical", "soundrecording", "map", "manuscript", "graphic", "archive", "convolute", "museumExhibit", "article"];
   // modely prvni urovne 
-  detailModels = ["monographunit", "periodicalvolume", "periodicalissue", "periodicalitem"]
+  detailModels = ["monographunit", "periodicalvolume",  "periodicalitem"]
 
 
   // konfigurace grafu 
@@ -233,7 +233,6 @@ export class StatisticsComponent implements OnInit {
                   if (this.level != ViewLevel.master) {
                     let periodicalvolumes =  response['facet_counts']['facet_fields']['pids_periodicalvolume'];
                     let monographunits =  response['facet_counts']['facet_fields']['pids_monographunit'];
-                    let periodicalissues =  response['facet_counts']['facet_fields']['pids_periodicalissue'];
                     let periodicalitems =  response['facet_counts']['facet_fields']['pids_periodicalitem'];
 
                     switch(this.detailDoc['model']) {
@@ -243,11 +242,6 @@ export class StatisticsComponent implements OnInit {
                             let periodicalvolumePids = this.extractNames(periodicalvolumes);
                             this.reinitDetailsGraph(periodicalvolumePids, periodicalvolumeCounts);
                             this.deatilTypes = "periodicalvolume";
-                          } else if (periodicalissues && periodicalissues.length > 0) {
-                            let periodicalissueCounts = this.extractCounts(periodicalissues);
-                            let periodicalissuePids = this.extractNames(periodicalissues);
-                            this.reinitDetailsGraph(periodicalissuePids, periodicalissueCounts);
-                            this.deatilTypes = "periodicalissue";
                           } else if (periodicalitems && periodicalitems.length > 0) {
                             let periodicalitemCount = this.extractCounts(periodicalitems);
                             let periodicalitemPids = this.extractNames(periodicalitems);
@@ -258,21 +252,6 @@ export class StatisticsComponent implements OnInit {
                           }
                           break;
                         case 'periodicalvolume':
-                          if (periodicalissues && periodicalissues.length > 0) {
-                            let periodicalissueCounts = this.extractCounts(periodicalissues);
-                            let periodicalissuePids = this.extractNames(periodicalissues);
-                            this.reinitDetailsGraph(periodicalissuePids, periodicalissueCounts);
-                            this.deatilTypes = "periodicalissue";
-                          } else if (periodicalitems && periodicalitems.length > 0) {
-                            let periodicalitemCount = this.extractCounts(periodicalitems);
-                            let periodicalitemPids = this.extractNames(periodicalitems);
-                            this.reinitDetailsGraph(periodicalitemPids, periodicalitemCount);
-                            this.deatilTypes = "periodicalitem";
-                          } else {  
-                            this.reinitDetailsGraph([], []);
-                          }
-                          break;
-                        case 'periodicalissue':
                           if (periodicalitems && periodicalitems.length > 0) {
                             let periodicalitemCount = this.extractCounts(periodicalitems);
                             let periodicalitemPids = this.extractNames(periodicalitems);
@@ -903,137 +882,145 @@ export class StatisticsComponent implements OnInit {
       this.loadMods(id);
     }
 
-    // if (pid) {
-    //   this.clientApi.getModsNewApi(id).subscribe(mr => {
-    //     let modsFields = {};
-    //     let ast = parse(mr);
-    //     let mods = ast.root.children[0];
-
-    //     // author
-    //     let personal = this.elms(mods, 'name', 'type', null);
-    //     if (personal) {
-    //       let author = personal.map(element => {
-    //         let nameParts = this.elms(element, 'namePart', null, null);
-    //         nameParts = nameParts.filter((p) => {
-    //           return (!p.attributes['type']) || (p.attributes['type'] && p.attributes['type'] !== 'date')
-    //         });
-    //         let f = this.texts(nameParts);
-    //         return f ? f : '';
-    //       }).join(', ');
-
-    //       modsFields['author'] = author;
-    //     }
-
-    //     //   nakladatelske udaje
-    //     let originInfo = this.elms(mods, 'originInfo', null, null);
-    //     if (originInfo) {
-    //       let oinfo = originInfo.map(element => {
-    //         let nameParts = this.elms(element, 'publisher', null, null);
-    //         let f = this.texts(nameParts);
-    //         return f ? f : '';
-    //       }).join(', ');
-
-    //       modsFields['origininfo'] = oinfo;
-    //     }
-
-    //     //abstract
-    //     let abstract = this.elms(mods, 'abstract', null, null);
-    //     if (abstract) {
-    //       let f = this.texts(abstract);
-    //       modsFields['abstract'] = f ? f : '';
-    //     }
-    //     // poznamka
-    //     let note = this.elms(mods, 'note', null, null);
-    //     if (note) {
-    //       let f = this.texts(note);
-    //       modsFields['note'] = f ? f : '';
-    //     }
-
-    //     //issn
-    //     let issn = this.elms(mods, 'identifier', 'type', 'issn');
-    //     if (issn) {
-    //       let f = this.texts(issn);
-    //       modsFields['issn'] = f ? f : '';
-    //     }
-
-    //     //isbn
-    //     let isbn = this.elms(mods, 'identifier', 'type', 'isbn');
-    //     if (isbn) {
-    //       let f = this.texts(isbn);
-    //       modsFields['isbn'] = f ? f : '';
-    //     }
-
-    //     //barcode
-    //     let barcode = this.elms(mods, 'identifier', 'type', 'barcode');
-    //     if (barcode) {
-    //       let f = this.texts(barcode);
-    //       modsFields['barcode'] = f ? f : '';
-    //     }
-
-    //     //uuid
-    //     let uuid = this.elms(mods, 'identifier', 'type', 'uuid');
-    //     if (uuid) {
-    //       let f = this.texts(uuid);
-    //       modsFields['uuid'] = f ? f : '';
-    //     }
-
-    //     // langs
-    //     let langs = this.elms(mods, 'language', null, null);
-    //     if (langs) {
-    //       let tl = langs.map(element => {
-    //         let term = this.elms(element, 'languageTerm', 'authority', 'iso639-2b');
-    //         let f = this.texts(term);
-    //         return f ? f : '';
-    //       });
-    //       modsFields['langs'] = tl;
-    //     }
-
-    //     // subject - klicova slova
-    //     let keywords = this.elms(mods, 'subject', null, null);
-    //     if (keywords) {
-    //       let tl = keywords.map(element => {
-    //         let term = this.elms(element, 'topic', null, null);
-    //         let f = this.texts(term);
-    //         return f ? f : '';
-    //       });
-    //       let filtered = [];
-    //       tl.forEach(k => {
-    //         if (k !== '' && !filtered.includes(k)) {
-    //           filtered.push(k);
-    //         }
-    //       });
-    //       modsFields['keywords'] = filtered;
-    //     }
-
-    //     // location 
-    //     let location = this.elms(mods, 'location', null, null);
-    //     if (location) {
-    //       let tl = location.map(element => {
-    //         let term = this.elms(element, 'physicalLocation', null, null);
-    //         let f = this.texts(term);
-    //         return f ? f : '';
-    //       });
-    //       modsFields['location'] = tl;
-    //     }
-
-    //     //physicalDescription
-    //     let physicalDescription = this.elms(mods, 'physicalDescription', null, null);
-    //     if (physicalDescription) {
-    //       let desc = '';
-    //       let tl = physicalDescription.forEach(element => {
-    //         let ext = this.elms(element, 'extent', null, null);
-    //         if (ext) {
-    //           let tt = this.texts(ext);
-    //           desc = 'Rozsah:' + this.texts(ext);
-    //         }
-    //       });
-    //       modsFields['physicalDescription'] = desc;
-    //     }
-
-    //     this.descriptions[id] = modsFields;
-    //   });
-    // }
   }
+
+
+  /** Mods author  */
+  getModsAuthor(pid:string) {
+    return this.descriptions[pid]['author'];
+  }
+
+  isModsAuthor(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['author'];
+  }
+
+  /** Publisher */
+  getModsPublisher(pid:string) {
+    return this.descriptions[pid]['origininfo_publisher'];
+  }
+
+  isModsPublisher(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['origininfo_publisher'];
+  }
+
+  /** Mods keywords */
+  getModsKeywords(pid:string) {
+    return this.descriptions[pid]['keywords'];
+  }
+
+  isModsKeywords(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['keywords'] && this.descriptions[pid]['keywords'].length > 0
+  }
+
+  /** Mods langs */
+  getModsLangs(pid:string) {
+    return this.descriptions[pid]['langs'];
+  }
+
+  isModsLangs(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['langs'] && this.descriptions[pid]['langs'].length > 0;
+  }
+
+
+  /** Mods location  */
+  getModsLocation(pid:string) {
+    let location =  this.descriptions[pid]['location'];
+    return location;
+  }
+
+  isModsLocation(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['location'] && this.descriptions[pid]['location'].length>0
+  }
+
+  /** Mods physical location */
+  getModsPhysicalLocation(pid:string) {
+    let desc = this.descriptions[pid]['physicalDescription']
+    return desc;
+  }
+
+  isModsPhysicalLocation(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['physicalDescription']
+  }
+
+  getModsAbstract(pid:string) {
+    return this.descriptions[pid]['abstract'];
+  }
+
+  isModsAbstract(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['abstract']
+  }
+
+  getModsNote(pid:string) {
+    return this.descriptions[pid]['note']    
+  }
+
+  isModsNote(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['note']    
+  }
+
+  getModsISBN(pid:string) {
+    return this.descriptions[pid]['isbn']
+  }
+
+  isModsISBN(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['isbn']
+  }
+
+  getModsISSN(pid:string) {
+    return this.descriptions[pid]['issn']
+  }
+
+  isModsISSN(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['issn']
+  }
+
+  getModsBarCode(pid:string) {
+    return this.descriptions[pid]['barcode']
+  }
+
+  isModsBarCode(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['barcode'];
+  }
+
+
+
+  /** Mods - volume date */
+  getModsvolumeDate(pid:string) {
+    return this.descriptions[pid]['origininfo_dateissued'];
+  }
+
+  isModsVolumeDate(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['origininfo_dateissued'];
+  }
+
+
+  /** Mods - volume number */
+  getModsVolumeNumber(pid:string) {
+   return this.descriptions[pid]['title_partNumber'];
+  }
+
+  isModsVolumeNumber(pid:string) {
+   return this.descriptions[pid] && this.descriptions[pid]['title_partNumber'];
+  }
+
+  getModsTitle(pid:string) {
+    return this.descriptions[pid]['title'];
+  }
+
+  isModsTitle(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['title'];
+  }
+
+  getModsSubTitle(pid:string) {
+    return this.descriptions[pid]['subTitle'];
+  }
+
+  isModsSubTitle(pid:string) {
+    return this.descriptions[pid] && this.descriptions[pid]['subTitle'];
+  }
+
+
+  //descriptions[v.pid] && descriptions[v.pid]['isbn']
 
   loadMods(id: string) {
     if (id) {
@@ -1041,6 +1028,32 @@ export class StatisticsComponent implements OnInit {
         let modsFields = {};
         let ast = parse(mr);
         let mods = ast.root.children[0];
+
+        //   title info 
+        let titleInfo = this.elms(mods, 'titleInfo', null, null);
+        if (titleInfo) {
+
+            let titlePartNumber = titleInfo.map(element => {
+            let partNumber = this.elms(element, 'partNumber', null, null);
+            let f = this.texts(partNumber);
+            return f ? f : '';
+          }).join(', ');
+          modsFields['title_partNumber'] = titlePartNumber;
+
+          let title = titleInfo.map(element => {
+            let partNumber = this.elms(element, 'title', null, null);
+            let f = this.texts(partNumber);
+            return f ? f : '';
+          }).join(', ');
+          modsFields['title'] = title;
+
+          let subTitle = titleInfo.map(element => {
+            let partNumber = this.elms(element, 'subTitle', null, null);
+            let f = this.texts(partNumber);
+            return f ? f : '';
+          }).join(', ');
+          modsFields['subTitle'] = subTitle;
+        }
 
         // author
         let personal = this.elms(mods, 'name', 'type', null);
@@ -1060,13 +1073,28 @@ export class StatisticsComponent implements OnInit {
         //   nakladatelske udaje
         let originInfo = this.elms(mods, 'originInfo', null, null);
         if (originInfo) {
+
           let oinfo = originInfo.map(element => {
             let nameParts = this.elms(element, 'publisher', null, null);
             let f = this.texts(nameParts);
             return f ? f : '';
           }).join(', ');
 
-          modsFields['origininfo'] = oinfo;
+          modsFields['origininfo_publisher'] = oinfo;
+
+          let dateIssued = originInfo.map(element => {
+            let dateIssuedElms = this.elms(element, 'dateIssued', null, null);
+            // dateIssuedElms = dateIssuedElms.filter((p) => { 
+            //   let retval = Object.keys(p.attributes).length == 0;
+            //   return retval;
+            // });
+
+            let f = this.texts(dateIssuedElms);
+            return f ? f : '';
+          }).join(', ');
+
+          modsFields['origininfo_dateissued'] = dateIssued;
+
         }
 
         //abstract
@@ -1162,7 +1190,6 @@ export class StatisticsComponent implements OnInit {
           });
           modsFields['physicalDescription'] = desc;
         }
-
         this.descriptions[id] = modsFields;
       });
     }

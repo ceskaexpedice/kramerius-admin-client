@@ -1252,6 +1252,8 @@
     "only_pid":"Reharvest pouze daného pidu",
     "delete_pid": "Delete object",
     "delete_tree": "Delete tree",
-    "library": "Library"
+    "library": "Library",   
+    "title":"Title",
+    "subtitle":"Subtitle"
   }
 }
