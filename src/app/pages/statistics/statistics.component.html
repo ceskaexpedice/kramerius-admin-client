@@ -56,10 +56,8 @@
 							<mat-form-field>
 								<mat-label>Pid / Čnb / Issn / Issbn</mat-label>
 								<input matInput placeholder="Pid / Čnb / Issn / Issbn" [(ngModel)]="identifier"  (keyup)="onIdentKeyUp($event.target)">
+								<mat-icon matSuffix class="app-clear app-cursor-pointer app-ml-2" [matTooltip]="'button.deselect' | translate" *ngIf="identifier" (click)="clearIdentifier($event.target)">close</mat-icon>
 							</mat-form-field>
-							<a mat-icon-button [matTooltip]="'button.deselect' | translate" class="app-clear-filter app-mr-2" *ngIf="identifier" (click)="clearIdentifier($event.target)">
-								<mat-icon>cancel</mat-icon>
-							</a>
 						</div>
 						<div>
 							<button mat-flat-button [matMenuTriggerFor]="menuAnnualReport" color="primary">{{ 'button.annualReport' | translate }}<mat-icon class="app-menu">keyboard_arrow_down</mat-icon></button>
@@ -187,6 +185,7 @@
 											<tr>
 												<th class="app-first">{{ 'desc.numberOfImpressions' | translate }}</th>
 												<th>{{ 'desc.work' | translate }}</th>
+												<th class="app-last app-filter"></th>
 												<th class="app-last"></th>
 											</tr>
 										</thead>
@@ -252,17 +251,17 @@
 														<div *ngIf="isModsBarCode(v.pid)"><label class="app-label">{{ 'desc.barcode' | translate }}:</label> {{ getModsBarCode(v.pid)}}</div>
 													</div>
 												</td>
+												<td>
+													<a (click)="searchItem(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn">
+														<mat-icon>filter_list</mat-icon>
+														{{ 'Zobrazit podčásti' | translate }}
+													</a>
+												</td>
 												<td class="app-col-detail">
 													<a (click)="showMore(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
 														<mat-icon>expand_more</mat-icon>
 														{{ selection[v.pid] ? ('button.hideDetail' | translate) : ('button.showDetail' | translate) }}
 													</a>
-
-													<a (click)="searchItem(v.pid)" fxLayout="row" fxLayoutAlign="start center" class="app-tdn" [ngClass]="selection[v.pid] ? 'app-rotate-up' : 'app-rotate-down'">
-														<mat-icon>search</mat-icon>
-														{{ selection[v.pid] ? ('button.hideDetail' | translate) : ('button.showDetail' | translate) }}
-													</a>
-
 												</td>
 											</tr>
 										</tbody>
