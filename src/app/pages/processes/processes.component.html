@@ -82,7 +82,7 @@
           <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)" [disabled]="isLoading()">{{ 'button.autoRefresProcesses' | translate : {refreshinterval: appSettings.processRefreshInterval} }}</mat-checkbox>
         </div>
         <div>
-          <button mat-flat-button (click)="bulkDeleteProcesses()" color="warn" [disabled]="!this.isAllItemsSelected" class="app-mr-2">
+          <button mat-flat-button (click)="bulkDeleteProcesses()" color="warn" [disabled]="!selection.hasValue()" class="app-mr-2">
             {{ 'button.deleteSelectedItems' | translate }}
           </button>
           <button mat-flat-button (click)="onCancelScheduledProcesses()" color="primary" [disabled]="isLoading() || batches_planned.length == 0">
@@ -97,6 +97,11 @@
         <table mat-table [dataSource]="batches" class="app-w-100">
 
           <ng-container matColumnDef="select">
+            <!--
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()" [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="collections?.length !== 0"></mat-checkbox>
+            </th>
+            -->
             <th mat-header-cell *matHeaderCellDef>
               <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"  [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="batches.length !== 0"></mat-checkbox>
             </th>
@@ -106,23 +111,17 @@
               <ng-container *ngIf="row.expanded">
                 <div *ngFor="let p of row.processes" class="app-col-expanded">&#160;</div>
               </ng-container>
-              <!--
-              <ng-container *ngIf="row.expanded">
-                <div *ngFor="let p of row.processes" class="app-col-expanded ">
-                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(p) : null" [checked]="selection.isSelected(p)"  [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
-                </div>
-              </ng-container>
-              -->
+
             </td>
           </ng-container>
 
           <ng-container matColumnDef="selection">
             <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (click)="selectAllItems()"></mat-checkbox>
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" ></mat-checkbox>
             </th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded app-tdn">
-                <mat-checkbox class="app-fix-expanded app-tdn" [checked]="this.isAllItemsSelected"></mat-checkbox>
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"  class="app-fix-expanded app-tdn" [checked]="selection.isSelected(element)"></mat-checkbox>
               </span>
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>

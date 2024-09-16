@@ -268,6 +268,10 @@
       "title": "Editing statistics",
       "subtitle": "Editing statistics"
     },
+    "a_export_statistics": {
+      "title": "Export statistics",
+      "subtitle": "Export statistics"
+    },
     "a_export_replications": {
       "title": "Export replication",
       "subtitle": "Document replication rights"
@@ -571,6 +575,11 @@
     "indexationScheduledByIndexing": "Scheduled by <strong>{{value}}</strong> indexing"
   },
   "modal": {
+    "removeProcesses":{
+      "title": "Deleting a process",
+      "message": "Do you really want to permanently delete the process"
+    },
+
     "removeCuttersFromCollection": {
       "title": "Removal clips from the collection",
       "message": "Do you really want to remove  objects from the collection?"

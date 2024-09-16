@@ -52,7 +52,19 @@ export class StatisticsComponent implements OnInit {
 
 
   // Top level modely
-  topLevelModels = ["collection", "monograph", "periodical", "soundrecording", "map", "manuscript", "graphic", "archive", "convolute", "museumExhibit", "article"];
+  topLevelModels = ["collection", "monograph", "periodical", "soundrecording", "map", "manuscript", "graphic", "archive", "convolute", "museumExhibit", "article","sheetmusic"];
+  topLevelModelsColor = {
+    "monograph":"#c73565",
+    "periodical":"#167a1b",
+    "collection":"#000",
+    "graphic":"#dc2522",
+    "map":"#735f32",
+    "sheetmusic":"#7e4ad8",
+    "soundrecording":"#af580b",
+    "archive":"#144272",
+    "convolute":"#7b4713"
+  };
+
   // modely prvni urovne 
   detailModels = ["monographunit", "periodicalvolume",  "periodicalitem"]
 
@@ -273,8 +285,6 @@ export class StatisticsComponent implements OnInit {
                           break;
                         default:
                           this.reinitDetailsGraph([], []);
-
-
                     }
                   }
                   //table top hits
@@ -524,9 +534,13 @@ export class StatisticsComponent implements OnInit {
           model["itemStyle"] = {
             color: c
           }
+        // } else {
+        //   if (this.topLevelModelsColor[modelNames[i]]) {
+        //     model["itemStyle"] = {
+        //       color: this.topLevelModelsColor[modelNames[i]]
+        //     }
+        //   }
         }
-
-
         topLevelModelItems.push(model);
       }
     }
@@ -745,41 +759,91 @@ export class StatisticsComponent implements OnInit {
     this.reinitGraphs();
   }
 
+  csvDetail() { 
+    let url = this.adminApi.statisticsPidsCSVURL( `pids_${this.deatilTypes}`,
+      this.dateFrom != null ? this.dateFrom.toISOString() : null,
+      this.dateTo != null ? this.dateTo.toISOString() : null,
+      this.identifier, this.filters, [`pids_${this.deatilTypes}`],
+      // fmt parameters 
+      ['Count',`${this.deatilTypes}`,'Title','Url'],null, `${this.deatilTypes}`,`${this.deatilTypes}.csv`
+    );
+    this.document.location.href = this.appSettings.adminApiBaseUrl +'/'+ url;
+  }
+
+  csvCollections() {
+    let url = this.adminApi.statisticsPidsCSVURL( "pids_collection",
+      this.dateFrom != null ? this.dateFrom.toISOString() : null,
+      this.dateTo != null ? this.dateTo.toISOString() : null,
+      this.identifier, this.filters, ['pids_collection'],
+      // fmt parameters 
+      ['Count','Collection','Title','Url'],null, "Collections","collection.csv"
+    );
+    this.document.location.href = this.appSettings.adminApiBaseUrl +'/'+ url;
+  }
 
   csvModels() {
-    let url = this.appSettings.adminApiBaseUrl + '/statistics/summary';
-    this.goto(url);
-
+    let url = this.adminApi.statisticsFacetsCSVURL( "all_models",
+    this.dateFrom != null ? this.dateFrom.toISOString() : null,
+    this.dateTo != null ? this.dateTo.toISOString() : null,
+    this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models'],
+    // fmt parameters 
+    /* header */
+    ['Count','Model'], this.topLevelModels, "Models csv","models.csv"
+  );
+    this.document.location.href = this.appSettings.adminApiBaseUrl +'/'+ url;
   }
+
   csvAuthor() {
-    let url = this.appSettings.adminApiBaseUrl + '/statistics/author';
-    this.goto(url);
-
+    let url = this.adminApi.statisticsFacetsCSVURL( "authors",
+    this.dateFrom != null ? this.dateFrom.toISOString() : null,
+    this.dateTo != null ? this.dateTo.toISOString() : null,
+    this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models'],
+    // fmt parameters - allowed values
+    ['Count','Authors'],  null, "Authors csv","authors.csv"
+  );
+    this.document.location.href = this.appSettings.adminApiBaseUrl +'/'+ url;
+      //this.goto(this.appSettings.adminApiBaseUrl +'/'+ url);
   }
+
   csvLang() {
-    let url = this.appSettings.adminApiBaseUrl + '/statistics/lang';
-    this.goto(url);
+      let url = this.adminApi.statisticsFacetsCSVURL( "langs",
+      this.dateFrom != null ? this.dateFrom.toISOString() : null,
+      this.dateTo != null ? this.dateTo.toISOString() : null,
+      this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models'],
+      ['Count','Lang'],null, "Lang csv","langs.csv"
+    );
+    this.document.location.href = this.appSettings.adminApiBaseUrl +'/'+ url;
   }
 
-  goto(url: string) {
-    let u = url + "/export/csv";
-    if (this.dateFrom || this.dateTo || this.license) {
-      u = u + "?";
-    }
-    if (this.dateFrom) {
-      let fdat = this.format(this.dateFrom);
 
-      u = u + "dateFrom=" + (u.endsWith("?") ? fdat : fdat);
-    }
-    if (this.dateTo) {
-      let fdat = this.format(this.dateTo);
-      u = u + (u.endsWith("?") ? "" : "&") + "dateTo=" + fdat;
-    }
-    if (this.license && this.license !== 'All') {
-      u = u + (u.endsWith("?") ? "" : "&") + "license=" + this.license;
-    }
-    this.document.location.href = u;
+  csvLicenses() {
+    let url = this.adminApi.statisticsFacetsCSVURL( "provided_by_license",
+      this.dateFrom != null ? this.dateFrom.toISOString() : null,
+      this.dateTo != null ? this.dateTo.toISOString() : null,
+      this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models'],
+      // fmt parameters
+      ['Count','License'], null,"Licenses csv","licenses.csv"
+    );
+      this.document.location.href = this.appSettings.adminApiBaseUrl +'/'+ url;
   }
+  
+
+
+  anualYearOptions(): number[] {
+    const currentYear = new Date().getFullYear();
+    const lastThreeYears = [];
+    for (let i = 0; i < 3; i++) {
+      lastThreeYears.push(currentYear - i);
+    }
+    return lastThreeYears;
+  }
+
+  csvAnual(year:string) {
+    //# Roční výkaz, 2019, akce: ALL, viditelnosti: ALL, unikátní IP adresy: false.
+    let url = this.adminApi.statisticsAnulalCSVURL( year, [], `Roční výkaz, ${year}`,`anual-${year}.csv`);
+    this.document.location.href = this.appSettings.adminApiBaseUrl +'/'+ url;
+  }
+
 
 
   changeView(view: string) {
@@ -787,7 +851,6 @@ export class StatisticsComponent implements OnInit {
     this.local.setStringProperty('statistics.view', view);
     this.router.navigate(['/statistics/', view]);
   }
-
 
   getIndexTitle(doc:any) {
     let model = doc['model'];

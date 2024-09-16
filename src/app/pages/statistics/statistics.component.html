@@ -62,9 +62,7 @@
 						<div>
 							<button mat-flat-button [matMenuTriggerFor]="menuAnnualReport" color="primary">{{ 'button.annualReport' | translate }}<mat-icon class="app-menu">keyboard_arrow_down</mat-icon></button>
 							<mat-menu #menuAnnualReport="matMenu">
-								<button mat-menu-item>2023</button>
-								<button mat-menu-item>2022</button>
-								<button mat-menu-item>2021</button>
+								<button mat-menu-item *ngFor="let year of anualYearOptions()" (click)="csvAnual(year)">{{ year }}</button>
 							</mat-menu>
 						</div>
 					</div>
@@ -108,7 +106,7 @@
 									<div echarts [options]="detailOpts" style="height: 350px;"  (chartClick)="toggleFilter($event)"></div>
 								</mat-card-content>
 								<mat-card-actions *ngIf="isDetailsData">
-									<button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
+									<button mat-flat-button  (click)="csvDetail()" color="primary" class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isDetailsData" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
@@ -153,7 +151,7 @@
 									<div echarts [options]="providedByLicensesOpts"  (chartClick)="toggleFilter($event)" style="height: 350px;"></div>
 								</mat-card-content>
 								<mat-card-actions *ngIf="isProvidedByLicense">
-									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
+									<button mat-flat-button  (click)="csvLicenses()" color="primary"  class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isProvidedByLicense" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
@@ -168,7 +166,7 @@
 									<div echarts [options]="collectionsOpts" (chartClick)="toggleFilter($event)" style="height: 350px;"></div>
 								</mat-card-content>
 								<mat-card-actions *ngIf="isCollections">
-									<button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
+									<button mat-flat-button  (click)="csvCollections()" color="primary"  class="app-mr-2">CSV</button>
 								</mat-card-actions>
 								<mat-card *ngIf="!isCollections" class="app-view-alert app-info">
 									<mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
@@ -266,9 +264,11 @@
 											</tr>
 										</tbody>
 									</table>
+									<!--
 									<div class="app-text-right app-mt-4">
 										<button mat-flat-button  (click)="csvAuthor()" color="primary">CSV</button>
 									</div>
+									-->
 								</ng-container>
 							</div>
 						</ng-container>

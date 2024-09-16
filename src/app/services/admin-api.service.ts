@@ -662,7 +662,98 @@ export class AdminApiService {
     return this.get(`/indexreflection/logs/schema/fields`);
   }
 
+  /** annual year csv generator */
+  statisticsAnulalCSVURL(year:string, fmt_headers:string[], fmt_firstlinecomment,fmt_filename) {
+    let params: HttpParams = new HttpParams();
+    params = params.set("year", year);
+
+    if (fmt_headers) {
+      for(let i=0;i<fmt_headers.length;i++) {
+        params = params.append('fmt_headers',fmt_headers[i]);
+      }
+    }
+    if (fmt_firstlinecomment) {
+      params = params.append('fmt_firstlinecomment',fmt_firstlinecomment);
+    }
+    if (fmt_filename) {
+      params = params.append('fmt_filename',fmt_filename);
+    }
+
+    let url = `statistics/anual/csv?${params.toString()}`;
+    return url;    
+  }
+
+  /** pids - facets & search in search index  */
+  statisticsPidsCSVURL(
+        // faceting & search params
+        facetname:string, dateFrom: string, dateTo: string,  identifier: string, filter:any[], facets:string[], 
+        // fmt values
+        fmt_headers:string[],
+        // print only allowed values
+        fmt_allowedvalues:string[],
+        fmt_firstlinecomment,
+        fmt_filename)  {
+      let params: HttpParams = this.searchParams(identifier, facets, dateFrom, dateTo, filter);
+      if (fmt_headers) {
+        for(let i=0;i<fmt_headers.length;i++) {
+          params = params.append('fmt_headers',fmt_headers[i]);
+        }
+      }
+      if (fmt_allowedvalues) {
+        for(let i=0;i<fmt_allowedvalues.length;i++) {
+          params = params.append('fmt_allowedvalues',fmt_allowedvalues[i]);
+        }
+      }
+      if (fmt_firstlinecomment) {
+        params = params.append('fmt_firstlinecomment',fmt_firstlinecomment);
+      }
+      if (fmt_filename) {
+        params = params.append('fmt_filename',fmt_filename);
+      }
+
+      let url = `statistics/pids/csv/${facetname}?${params.toString()}`;
+      return url;  
+  }
+
+  /** facets csv generator  */
+  statisticsFacetsCSVURL( 
+    // faceting & search params
+    facetname:string, dateFrom: string, dateTo: string,  identifier: string, filter:any[], facets:string[], 
+    // fmt values
+    fmt_headers:string[],
+    // print only allowed values
+    fmt_allowedvalues:string[],
+    fmt_firstlinecomment,
+    fmt_filename
+  ) {
+    let params: HttpParams = this.searchParams(identifier, facets, dateFrom, dateTo, filter);
+    if (fmt_headers) {
+      for(let i=0;i<fmt_headers.length;i++) {
+        params = params.append('fmt_headers',fmt_headers[i]);
+      }
+    }
+    if (fmt_allowedvalues) {
+      for(let i=0;i<fmt_allowedvalues.length;i++) {
+        params = params.append('fmt_allowedvalues',fmt_allowedvalues[i]);
+      }
+    }
+    if (fmt_firstlinecomment) {
+      params = params.append('fmt_firstlinecomment',fmt_firstlinecomment);
+    }
+    if (fmt_filename) {
+      params = params.append('fmt_filename',fmt_filename);
+    }
+    let url = `statistics/facets/csv/${facetname}?${params.toString()}`;
+    return url;    
+  }
+
+  /** generic statistic search */
   statisticsSearch(dateFrom: string, dateTo: string,  identifier: string, filter:any[], facets:string[] ) {
+    let params: HttpParams = this.searchParams(identifier, facets, dateFrom, dateTo, filter);
+    return this.get(`/statistics/search`, params);
+  }
+
+  private searchParams(identifier: string, facets: string[], dateFrom: string, dateTo: string, filter: any[]) {
     let params: HttpParams = new HttpParams();
     params = params.set('q', '*');
     params = params.set('rows', '0');
@@ -670,16 +761,16 @@ export class AdminApiService {
 
     if (identifier) {
       let query = `(all_pids:"${identifier}" OR id_isbn:"${identifier}" OR id_issn:"${identifier}" OR id_ccnb:"${identifier}")`;
-      params = params.append("fq",query);
+      params = params.append("fq", query);
     }
 
     if (facets && facets.length > 0) {
       params = params.set('facet', 'true');
       params = params.append('facet.mincount', '1');
-      
-      for(let i=0;i<facets.length;i++) {
+
+      for (let i = 0; i < facets.length; i++) {
         params = params.append('facet.field', facets[i]);
-      }      
+      }
     }
 
     if (dateFrom && dateTo) {
@@ -691,15 +782,16 @@ export class AdminApiService {
     }
 
     if (filter) {
-      for(let i=0;i<filter.length;i++) {
+      for (let i = 0; i < filter.length; i++) {
         let lf = filter[i];
         let field = lf.data.filterField;
-        let value = lf.data.filterValue === '*' ? '*' : `"${lf.data.filterValue}"` 
+        let value = lf.data.filterValue === '*' ? '*' : `"${lf.data.filterValue}"`;
         params = params.append('fq', `${field}:${value}`);
       }
     }
-    return this.get(`/statistics/search`, params);
+    return params;
   }
+
 
 
 

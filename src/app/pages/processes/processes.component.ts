@@ -246,12 +246,18 @@ export class ProcessesComponent implements OnInit {
     const numRows = this.batches.length;
     return numSelected === numRows;
   }
-    // Selects all rows if they are not all selected; otherwise clear selection.
-    masterToggle() {
-      this.isAllSelected() ?
-          this.selection.clear() :
-          this.batches.forEach(row => this.selection.select(row));
-    }
+
+
+
+  masterToggle() {
+    let b = this.isAllSelected();
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.batches.forEach(row => {
+          console.log("row >" +row);
+          this.selection.select(row)
+        });
+  }
   
 
   private buildProcessesParams(): any {
@@ -291,6 +297,8 @@ export class ProcessesComponent implements OnInit {
     return this.fetchingOwners || this.fetchingProcesses || this.schedulingProcesses || this.deletingProcesses || this.cancelingProcesses;
   }
 
+
+  
   onCancelScheduledProcesses() {
     const dialogRef = this.dialog.open(CancelScheduledProcessesDialogComponent, {
       data: this.buildProcessesParams(),
@@ -358,7 +366,49 @@ export class ProcessesComponent implements OnInit {
 
   // ready for happy - todo
   bulkDeleteProcesses() {
-    // to do
+    const data: SimpleDialogData = {
+      title: this.ui.getTranslation('modal.removeProcesses.title'),
+      message: this.ui.getTranslation('modal.removeProcesses.message') + '?',
+      btn1: {
+        label: this.ui.getTranslation('button.yes'),
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: this.ui.getTranslation('button.no'),
+        value: 'no',
+        color: 'light'
+      }
+    };
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
+      data: data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'yes') {
+        let toDelete:any[] = [];
+        this.batches.forEach(b=> {
+          if (this.selection.isSelected(b)) {
+            toDelete.push(b);
+          }
+        });
+
+        let requests = [];
+        toDelete.forEach(batch => {
+          requests.push(this.adminApi.deleteProcessBatch(batch.id));
+        });
+    
+        forkJoin(requests).subscribe(result => {
+          this.selection.clear();
+          this.reloadProcesses();          
+          dialogRef.close({ state: 'deleted', kills: requests.length });
+        }, error => {
+          dialogRef.close();
+        });
+      }
+    });
+
   }
 
   selectAllItems() {

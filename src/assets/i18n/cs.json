@@ -268,6 +268,10 @@
       "title": "Editace statistik",
       "subtitle": "Editace statistik"
     },
+    "a_export_statistics": {
+      "title": "Export statistik",
+      "subtitle": "Export statistik"
+    },
     "a_export_replications": {
       "title": "Export replikace",
       "subtitle": "Práva pro replikaci dokumentu"
@@ -571,6 +575,10 @@
     "indexationScheduledByIndexing": "Naplánováno <strong>{{value}}</strong> indexací"
   },
   "modal": {
+    "removeProcesses":{
+      "title": "Smazání procesů",
+      "message": "Opravdu chcete smazat procesy"
+    },
     "removeCuttersFromCollection": {
       "title": "Odebrání výstřižků ze sbírky",
       "message": "Opravdu chcete odebrat výstrižky ze sbírky"
