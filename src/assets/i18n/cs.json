@@ -323,6 +323,11 @@
     "a_object_edit":{
       "title": "Editace objektu",
       "subtitle": "Právo editovat objekt"
+    },
+    "a_admin_api_specification_read":{
+      "title": "Čtení  specifikace administračního API",
+      "subtitle": "Možnost získat specifikaci administračního API "
+
     }
 
   },

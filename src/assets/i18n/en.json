@@ -323,7 +323,12 @@
     "a_object_edit":{
       "title": "Object editation",
       "subtitle": "Right for object editation"
+    },
+    "a_admin_api_specification_read":{
+      "title": "Read admin api specification",
+      "subtitle": "Read admin api specification "
     }
+
 
   },
   "alert": {
