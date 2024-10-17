@@ -91,7 +91,7 @@ export class Process {
     return 'app-default';
   } */
 
-  static fromJson(json): Process {
+  static fromJson(json: any): Process {
     const process = new Process();
     process.id = json['id'];
     process.uuid = json['uuid'];
@@ -109,7 +109,7 @@ export class Process {
     return process;
   }
 
-  static fromJsonArray(json): Process[] {
+  static fromJsonArray(json: any): Process[] {
     const items = [];
     for (const obj of json) {
       items.push(Process.fromJson(obj));

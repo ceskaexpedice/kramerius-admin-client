@@ -29,8 +29,8 @@ export class OAIApiService {
   
  
 
-    private doGet(path: string, params, type = 'json'): Observable<Object> {
-        const options = {
+    private doGet(path: string, params: any, type = 'json'): Observable<Object> {
+        const options: any = {
           params: params
         };
         if (type === 'text') {
@@ -43,7 +43,7 @@ export class OAIApiService {
 
 
 
-    info(set): Observable<any> {
+    info(set: any): Observable<any> {
       return this.doGet(`/info?set=${set}`,{}).pipe();
     }
 

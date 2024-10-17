@@ -28,8 +28,8 @@ export class CdkApiService {
     }
  
 
-    private doGet(path: string, params, type = 'json'): Observable<Object> {
-        const options = {
+    private doGet(path: string, params: any, type = 'json'): Observable<Object> {
+        const options: any = {
           params: params
         };
         if (type === 'text') {
@@ -41,8 +41,8 @@ export class CdkApiService {
     }
     
     
-    private doPut(path: string, body:any, params, type = 'json'): Observable<Object> {
-        const options = {
+    private doPut(path: string, body:any, params: any, type = 'json'): Observable<Object> {
+        const options: any = {
           params: params
         };
         if (type === 'text') {
@@ -72,19 +72,19 @@ export class CdkApiService {
         return this.doGet('/api/admin/v7.0/connected',{}).pipe(map(response => Library.libsFromJson(response)));
     }
 
-    mapping(code): Observable<any> {
+    mapping(code: string): Observable<any> {
       return this.doGet(`/api/admin/v7.0/connected/${code}/associations`,{}).pipe();
     }
 
-    timestamps(code): Observable<any[]> {
+    timestamps(code: string): Observable<any[]> {
       return this.doGet(`/api/admin/v7.0/connected/${code}/timestamps`,{}).pipe(map(response => StatusTimtamp.statusesFromJson(response)));
     }
 
-    config(code): Observable<any> {
+    config(code: string): Observable<any> {
       return this.doGet(`/api/admin/v7.0/connected/${code}/config`,{}).pipe();
     }
 
-    channel(code): Observable<any> {
+    channel(code: string): Observable<any> {
       return this.doGet(`/api/admin/v7.0/connected/${code}/config/channel/health`,{}).pipe();
     }
 
@@ -94,7 +94,7 @@ export class CdkApiService {
 
     planReharvest(obj:any) {
       return this.doPut('/api/admin/v7.0/reharvest', obj, {}).pipe(
-        tap((response: HttpResponse<Object>) => {}),
+        //tap((response: HttpResponse<Object>) => {}),
         map(response => Reharvest.reharvestFromJson(response))
         // catchError((error: any) => {
         //   return throwError(() => new Error('An error occurred while reharvesting.'));

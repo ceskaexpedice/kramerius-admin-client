@@ -15,8 +15,8 @@ export class ClientApiService {
     this.baseUrl = this.appSettings.clientApiBaseUrl;
   }
 
-  private doGet(path: string, params, type = 'json'): Observable<Object> {
-    const options = {
+  private doGet(path: string, params: any, type = 'json'): Observable<Object> {
+    const options: any = {
       params: params
     };
     if (type === 'text') {
@@ -32,7 +32,7 @@ export class ClientApiService {
   }
 
   private getText(path: string, params = {}): Observable<string> {
-    return this.doGet(path, params, 'text').pipe(map(response => response['body']));
+    return this.doGet(path, params, 'text').pipe(map((response: any) => response['body']));
   }
 
   getGeneralQuery(query: string): Observable<string> {
@@ -52,17 +52,17 @@ export class ClientApiService {
     return this.baseUrl + `/items/${uuid}/image/thumb`;
   }
 
-  search(params): Observable<any[]> {
-    return this.get('/search', params).pipe(map(response => response['response']['docs']));
+  search(params: any): Observable<any[]> {
+    return this.get('/search', params).pipe(map((response: any) => response['response']['docs']));
   }
 
   /** facets from search index */
-  facets(params): Observable<any[]> {
-    return this.get('/search', params).pipe(map(response => response['facet_counts']['facet_fields']));
+  facets(params: any): Observable<any[]> {
+    return this.get('/search', params).pipe(map((response: any) => response['facet_counts']['facet_fields']));
   }
 
-  fullSearch(params): Observable<any[]> {
-    return this.get('/search', params).pipe(map(response => response['response']));
+  fullSearch(params: any): Observable<any[]> {
+    return this.get('/search', params).pipe(map((response: any) => response['response']));
   }
 
 

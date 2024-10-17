@@ -36,7 +36,7 @@ export class CollectionsService {
 
   getCollectionsContainingItem(lang:string, itemPid: String): Observable<[Collection[], number]> {
     return this.adminApi.getCollectionsContainingItem(itemPid).pipe(
-      map(response => {
+      map((response: any) => {
         //console.log(response);
         return [Collection.fromAdminApiJsonArray(lang, response['collections']), parseInt(response['total_size'], 10)]
       }));
@@ -66,7 +66,7 @@ export class CollectionsService {
     return this.adminApi.addItemsToCollection(collectionPid, itemsPids);
   }
 
-  addCuttingtoColllection(collectionPid, cutting): Observable<Object> {
+  addCuttingtoColllection(collectionPid: string, cutting: any): Observable<Object> {
     return this.adminApi.addCuttingItemToCollection(collectionPid, cutting);
   }
 

@@ -1,54 +1,54 @@
-@import './src/sass/app-variables.scss';
-@import './src/sass/app-mixins.scss';
-@import './src/sass/app-global.scss';
+// @import '../../../sass/app-variables.scss';
+// @import '../../../sass/app-mixins.scss';
+// @import '../../../sass/app-global.scss';
 
 
-.mat-toolbar {
-  position: fixed;
-  z-index: 10;
+// .mat-toolbar {
+//   position: fixed;
+//   z-index: 10;
 
-  .app-logo {
-    color: $app-color-lightnes;
-    text-decoration: none;
+//   .app-logo {
+//     color: $app-color-lightnes;
+//     text-decoration: none;
 
-    svg {
-      .app-colored {
-        fill: $app-color-primary;
-      }
+//     svg {
+//       .app-colored {
+//         fill: $app-color-primary;
+//       }
 
-      .app-bg {
-        fill-opacity: .8;
-      }
+//       .app-bg {
+//         fill-opacity: .8;
+//       }
 
-      #admin-letter {
-        fill-opacity: .8;
-      }
-    }
-  }
+//       #admin-letter {
+//         fill-opacity: .8;
+//       }
+//     }
+//   }
 
-  .mat-button-base {
-    color: $app-color-lightnes;
+//   .mat-button-base {
+//     color: $app-color-lightnes;
 
-    &:hover {
-      &:not(.app-avatar) {
-        background-color: rgba($app-color-lightnes, .2);
-      }
-    }
+//     &:hover {
+//       &:not(.app-avatar) {
+//         background-color: rgba($app-color-lightnes, .2);
+//       }
+//     }
 
-    &.active {
-      background-color: rgba($app-color-lightnes, .2);
-    }
-  }
+//     &.active {
+//       background-color: rgba($app-color-lightnes, .2);
+//     }
+//   }
 
-  .app-avatar {
-    div {
-      width: $app-avatar-size;
-      height: $app-avatar-size;
-      border-radius: 50%;
-      font-size: 16px;
-      font-weight: 900;
-      text-transform: uppercase;
-      background-color: $app-avatar-color;
-    }
-  }
-}
+//   .app-avatar {
+//     div {
+//       width: $app-avatar-size;
+//       height: $app-avatar-size;
+//       border-radius: 50%;
+//       font-size: 16px;
+//       font-weight: 900;
+//       text-transform: uppercase;
+//       background-color: $app-avatar-color;
+//     }
+//   }
+// }

@@ -1,9 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettings } from 'src/app/services/app-settings';
 import * as gitInfo from 'git-info.json'
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-about-dialog',
+  standalone: true,
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
+    RouterModule, TranslateModule, MatMenuModule],
   templateUrl: './about-dialog.component.html',
   styleUrls: ['./about-dialog.component.scss']
 })
@@ -55,7 +66,7 @@ export class AboutDialogComponent implements OnInit {
   }
 
   getLastCommitHash() {
-    const info = gitInfo;
+    const info: any = gitInfo;
     //console.log(info)
     const hash = info.hash ? info.hash
       : info['default'].hash.substring(1); //pokud je to jeste v objektu "default", je hash prefixovan 'g', viz git-info.json (generovan pred buildem)

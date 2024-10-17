@@ -32,7 +32,7 @@ export class Right {
     }
   }
 
-  static fromJson(json): Right {
+  static fromJson(json: any): Right {
     const right = new Right();
     right.id = json['id'];
     right.pid = json['pid'];
@@ -46,7 +46,7 @@ export class Right {
     return right;
   }
 
-  static fromJsonArray(json): Right[] {
+  static fromJsonArray(json: any): Right[] {
     const result = [];
     for (const obj of json) {
       result.push(Right.fromJson(obj));
@@ -55,7 +55,7 @@ export class Right {
   }
 
   toJson() {
-    const json = {
+    const json: any = {
       action: this.action,
       role: this.role ? { name: this.role.name, id: this.role.id } : null,
       pid: this.pid
@@ -85,7 +85,7 @@ export class Condition {
   isLabelAssignable: boolean;
   rootLevelCriterum: boolean;
 
-  static fromJson(json): Condition {
+  static fromJson(json: any): Condition {
     const condition = new Condition();
     condition.setCode(json['qname']);
     condition.license = json['label'];
@@ -114,7 +114,7 @@ export class Condition {
   }
 
   toJson() {
-    const json = {
+    const json: any = {
       qname: this.code,
     }
     if (this.params) {

@@ -1,11 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import * as gitInfo from 'git-info.json'
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatCardModule,
+    RouterModule, TranslateModule, MatTooltipModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -46,7 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   getLastCommitHash() {
-    const info = gitInfo;
+    const info: any = gitInfo;
     //console.log(info)
     const hash = info.hash ? info.hash
       : info['default'].hash.substring(1); //pokud je to jeste v objektu "default", je hash prefixovan 'g', viz git-info.json (generovan pred buildem)

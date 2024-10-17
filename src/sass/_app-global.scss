@@ -8,7 +8,7 @@ a {
   text-decoration: none;
 
   &:hover {
-    color: rgba($app-color-primary, .7);
+    color: $app-color-primary-700;
 
     &:not(.mat-toolbar &, .mat-tab-nav-bar &, .mat-flat-button) {
       text-decoration: underline;

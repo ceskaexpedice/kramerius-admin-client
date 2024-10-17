@@ -52,7 +52,8 @@
     }
 
     &.app-selected {
-      background-color: rgba($app-color-accent, .03);
+      //background-color: rgba($app-color-accent, .03);
+      background-color: $app-color-accent-300;
     }
 
     .mat-card-header {
@@ -112,7 +113,8 @@
 
   &.app-view-alert {
     @extend .app-clean-shadow;
-    @include setAlertCard();
+    // TODO KUDELA
+    // @include setAlertCard();
     border: 1px solid;
 
     .mat-card-content {
@@ -128,8 +130,8 @@
 
   &.app-view-dev {
     position: relative;
-    background-color: rgba($app-color-dev, .1) !important;
-    border: 1px solid rgba($app-color-dev, .4);
+    background-color: rgba($app-dev, .1) !important;
+    border: 1px solid rgba($app-dev, .4);
 
     .app-marker {
       position: absolute;

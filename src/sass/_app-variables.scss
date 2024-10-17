@@ -1,4 +1,17 @@
-@import 'app-theme.scss';
+@import './app-theme.scss';
+
+//M3 Upgrades
+
+$mat-blue-gray: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette);
+$mat-red: mat.m2-get-color-from-palette(mat.$m2-red-palette);
+$mat-teal: mat.m2-get-color-from-palette(mat.$m2-teal-palette);
+$mat-brown: mat.m2-get-color-from-palette(mat.$m2-brown-palette);
+$mat-green: mat.m2-get-color-from-palette(mat.$m2-green-palette);
+$mat-orange: mat.m2-get-color-from-palette(mat.$m2-orange-palette);
+$mat-purple: mat.m2-get-color-from-palette(mat.$m2-purple-palette);
+$mat-cyan: mat.m2-get-color-from-palette(mat.$m2-cyan-palette);
+$mat-lime: mat.m2-get-color-from-palette(mat.$m2-lime-palette);
+$mat-amber: mat.m2-get-color-from-palette(mat.$m2-amber-palette);
 
 // system colors
 $app-color-primary: mat-color($app-primary) !default;
@@ -6,9 +19,14 @@ $app-color-accent: mat-color($app-accent) !default;
 $app-color-warn: mat-color($app-warn) !default;
 $app-color-lightnes: #ffffff !default;
 $app-color-darknes: #000000 !default;
-$app-color-dev: mat-color($mat-teal, 700) !default;
+$app-color-dev: mat-color($app-dev, 700) !default;
+
+$app-color-primary-700: mat-color($app-primary, 700) !default;
+$app-color-accent-300: mat-color($app-accent, 300) !default;
 
 // gray contrast colors
+$app-pgray: mat.m2-define-palette(mat.$m2-gray-palette);
+$mat-gray: mat.m2-get-color-from-palette($app-pgray);
 $app-gray-0: mat-color($mat-gray, 50) !default;
 $app-gray-1: mat-color($mat-gray, 100) !default;
 $app-gray-2: mat-color($mat-gray, 200) !default;

@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSettings } from 'src/app/services/app-settings';
-import * as gitInfo from 'git-info.json'
-import { AuthService } from 'src/app/services/auth.service';
-import { AdminApiService } from 'src/app/services/admin-api.service';
+// import * as gitInfo from 'git-info.json'
+import { AuthService } from '../../services/auth.service';
+import { AdminApiService } from '../../services/admin-api.service';
 import { interval, Subscription } from 'rxjs';
+import { AppSettings } from '../../services/app-settings';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer',
+  standalone: true,
+  imports: [TranslateModule],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })

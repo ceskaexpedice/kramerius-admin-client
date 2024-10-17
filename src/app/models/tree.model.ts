@@ -21,7 +21,7 @@ export class Tree {
     }
 
 
-    getFullPath() {
+    getFullPath(): string {
         if (!this.parent) {
             return '/';
         }
@@ -31,7 +31,7 @@ export class Tree {
         return this.parent.getFullPath() + '/' + this.file.name;
     }
 
-    expand(api: AdminApiService, all: boolean = false, onError?) {
+    expand(api: AdminApiService, all: boolean = false, onError?: any) {
         if (!this.expandable()) {
             return;
         }

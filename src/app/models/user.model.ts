@@ -8,7 +8,7 @@ export class User {
   licenses: string[];
   session: any;
 
-  static fromJson(json): User {
+  static fromJson(json: any): User {
     if (json) {
       const user = new User();
       user.authenticated = !!json['authenticated'];
