@@ -1,24 +1,27 @@
-// @import './src/sass/app-variables.scss';
-// @import './src/sass/app-mixins.scss';
-// @import './src/sass/app-global.scss';
+@use '@angular/material' as mat;
+@include mat.core();
 
-// .app-footer {
-//   @extend .app-p-4;
-//   background-color: $app-footer-bg-color;
-//   color: $app-footer-color;
-//   font-size: 14px;
+@import '../../../sass/app-variables.scss';
+@import '../../../sass/app-mixins.scss';
+@import '../../../sass/app-global.scss';
 
-//   .app-left {
-//     .app-pipe {
-//       opacity: .5;
-//     }
-//   }
+.app-footer {
+  @extend .app-p-4;
+  background-color: $app-footer-bg-color;
+  color: $app-footer-color;
+  font-size: 14px;
 
-//   .app-right {
-//     img {
-//       @extend .app-ml-1;
-//       height: 15px;
-//       vertical-align: middle;
-//     }
-//   }
-// }
+  .app-left {
+    .app-pipe {
+      opacity: .5;
+    }
+  }
+
+  .app-right {
+    img {
+      @extend .app-ml-1;
+      height: 15px;
+      vertical-align: middle;
+    }
+  }
+}

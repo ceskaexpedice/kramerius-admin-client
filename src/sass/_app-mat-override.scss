@@ -1,17 +1,17 @@
 // --- MATERIAL OVERRIDE ---
 
 // card
-.mat-card {
+.mat-mdc-card {
   &.app-card {
     @extend .app-clean-shadow, .app-clean-radius;
     color: $app-body-color;
 
-    .mat-card-header {
-      .mat-card-header-text {
+    .mat-mdc-card-header {
+      .mat-mdc-card-header-text {
         @extend .app-m-0;
       }
 
-      .mat-card-title {
+      .mat-mdc-card-title {
         .mat-icon {
           @extend .app-mr-1;
           @include setIcon(20, $position: bottom);
@@ -19,7 +19,7 @@
       }
     }
 
-    .mat-card-actions {
+    .mat-mdc-card-actions {
       @extend .app-m-0, .app-p-0;
     }
   }
@@ -56,8 +56,8 @@
       background-color: $app-color-accent-300;
     }
 
-    .mat-card-header {
-      .mat-card-title {
+    .mat-mdc-card-header {
+      .mat-mdc-card-title {
         font-size: 16px;
 
         .mat-icon {
@@ -78,13 +78,13 @@
       //background-color: rgba($app-color-accent, .03);
     }
 
-    .mat-card-header {
+    .mat-mdc-card-header {
       .app-left {
-        .mat-card-title {
+        .mat-mdc-card-title {
           font-size: 16px;
         }
     
-        .mat-card-subtitle {
+        .mat-mdc-card-subtitle {
           @extend .app-mb-0;
         }
       }
@@ -117,7 +117,7 @@
     // @include setAlertCard();
     border: 1px solid;
 
-    .mat-card-content {
+    .mat-mdc-card-content {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -151,9 +151,9 @@
   &.app-not-allowed {
     color: $app-color-disabled !important; 
 
-    .mat-card-header {
-      .mat-card-title,
-      .mat-card-subtitle {
+    .mat-mdc-card-header {
+      .mat-mdc-card-title,
+      .mat-mdc-card-subtitle {
         color: $app-color-disabled !important;
       }
 
@@ -200,21 +200,21 @@
 }
 
 // button toogle
-.mat-button-toggle-appearance-standard {
+.mat-mdc-button-toggle-appearance-standard {
   color: $app-color-primary !important;
   
-  &.mat-button-toggle-checked {
+  &.mat-mdc-button-toggle-checked {
     background-color: $app-color-primary !important;
     color: $app-color-lightnes !important;
   }
   
-  .mat-button-toggle-label-content {
+  .mat-mdc-button-toggle-label-content {
     line-height: $app-button-height;
   }
 }
 
 // button
-.mat-button-base {
+.mat-mdc-button-base {
   line-height: $app-button-height !important;
 
   &.mat-flat-button {

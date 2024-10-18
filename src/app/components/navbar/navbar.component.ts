@@ -19,12 +19,13 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FlexLayoutModule } from 'ngx-flexible-layout';
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
+  imports: [CommonModule, FlexLayoutModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
     RouterModule, TranslateModule, MatMenuModule, MatTooltipModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']

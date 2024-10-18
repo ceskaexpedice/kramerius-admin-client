@@ -1,59 +1,62 @@
-// @import './src/sass/app-variables.scss';
-// @import './src/sass/app-mixins.scss';
-// @import './src/sass/app-global.scss';
+@use '@angular/material' as mat;
+@include mat.core();
 
-// .app-cards-wrapper {
-//   margin-left: -#{$app-home-card-gap};
-// }
+@import '../../../sass/app-variables.scss';
+@import '../../../sass/app-mixins.scss';
+@import '../../../sass/app-global.scss';
 
-// .mat-card {
-//   margin-right: $app-home-card-gap;
-//   margin-bottom: $app-home-card-gap;
-//   flex: 0 0 calc(#{$app-home-card-width} - #{$app-home-card-gap});
-//   max-width: calc(#{$app-home-card-width} - #{$app-home-card-gap});
-//   padding-top: 40px;
-//   position: relative;
-//   height: 260px;
+.app-cards-wrapper {
+  margin-left: -#{$app-home-card-gap};
+}
 
-//   .mat-card-header {
-//     @extend .app-text-center;
+.mat-mdc-card {
+  margin-right: $app-home-card-gap;
+  margin-bottom: $app-home-card-gap;
+  flex: 0 0 calc(#{$app-home-card-width} - #{$app-home-card-gap});
+  max-width: calc(#{$app-home-card-width} - #{$app-home-card-gap});
+  padding-top: 40px;
+  position: relative;
+  height: 260px;
 
-//     .mat-card-subtitle {
-//       @extend .app-mb-2;
-//       font-size: 15px;
-//     }
-//   }
+  .mat-mdc-card-header {
+    @extend .app-text-center;
 
-//   .mat-card-content {
-//     @extend .app-text-center, .app-h-100;
-//     line-height: 22px;
-//   }
+    .mat-mdc-card-subtitle {
+      @extend .app-mb-2;
+      font-size: 15px;
+    }
+  }
 
-//   .mat-card-actions {
-//     .mat-flat-button {
-//       .mat-icon {
-//         @extend .app-ml-1, .app-mr-0;
-//       }
-//     }
-//   }
+  .mat-mdc-card-content {
+    @extend .app-text-center, .app-h-100;
+    line-height: 22px;
+  }
 
-//   .app-mark-rounded {
-//     $app-size: 50px;
-//     @include setDashboardColor();
+  .mat-mdc-card-actions {
+    .mat-mdc-flat-button {
+      .mat-icon {
+        @extend .app-ml-1, .app-mr-0;
+      }
+    }
+  }
 
-//     position: absolute;
-//     top: calc(-#{$app-size} / 2);
-//     left: 0;
-//     right: 0;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     height: $app-size;
-//     width: $app-size;
-//     border-radius: 50%;
-//     background-color: $app-gray-6;
-//     color: $app-color-lightnes;
-//     margin-left: auto;
-//     margin-right: auto;
-//   }
-// }
+  .app-mark-rounded {
+    $app-size: 50px;
+    @include setDashboardColor();
+
+    position: absolute;
+    top: calc(-#{$app-size} / 2);
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $app-size;
+    width: $app-size;
+    border-radius: 50%;
+    background-color: $app-gray-6;
+    color: $app-color-lightnes;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
