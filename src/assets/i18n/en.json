@@ -886,7 +886,11 @@
     },
     "scheduleReHarvestSpecificPids": {
       "title": "Object reharvest",
-      "message": "Reharvest object"
+      "message": "Reharvest object",
+      "loadingDataFromLibraries":{
+        "title":"Reading data from connected library",
+        "pleaseWait":"Plase wait"
+      }
     },
     "scheduleMigrateCollections": {
       "title": "Migrate collections"

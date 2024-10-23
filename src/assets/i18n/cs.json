@@ -885,7 +885,11 @@
     },
     "scheduleReHarvestSpecificPids": {
       "title": "Reharvest objektu",
-      "message": "Znovu sklidit konkrétní objekty"
+      "message": "Znovu sklidit konkrétní objekt",
+      "loadingDataFromLibraries":{
+        "title":"Načítání dat z připojených knihoven",
+        "pleaseWait":"Prosím vyčkejte"
+      }
     },
     "scheduleMigrateCollections": {
       "title": "Migrovat sbírky"
