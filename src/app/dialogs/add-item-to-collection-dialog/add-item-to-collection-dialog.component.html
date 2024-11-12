@@ -1,0 +1,40 @@
+<form class="form-signin" #f="ngForm" (ngSubmit)="onAdd()">
+	<h2 mat-dialog-title *ngIf="isCollection">{{ 'modal.addItemToCollection.titleCollection' | translate }}</h2>
+	<h2 mat-dialog-title *ngIf="!isCollection">{{ 'modal.addItemToCollection.titleObject' | translate }}</h2>
+	<mat-dialog-content class="mat-typography">
+		<div class="app-desc app-mb-4" *ngIf="isCollection">
+			{{ 'modal.addItemToCollection.messageCollection' | translate }}.
+		</div>
+		<div class="app-desc app-mb-4" *ngIf="!isCollection">
+			{{ 'modal.addItemToCollection.messageObject' | translate }}.
+		</div>
+		<div class="app-mb-2">
+			<mat-form-field class="app-w-100" *ngIf="title">
+				<input [disabled]="inProgress || title" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" [placeholder]="'desc.name' | translate">
+			</mat-form-field>
+			<mat-form-field class="app-w-100" *ngIf="pid">
+				<input [disabled]="inProgress || pid" matInput type="text" id="inputPid" name="pid" [(ngModel)]="pid" placeholder="PID">
+			</mat-form-field>
+		</div>
+		<div class="app-mb-4">
+			<strong>{{ 'desc.theCollectionItIsBeingAddedTo' | translate }}:</strong>
+		</div>
+		<div class="app-mb-4">
+			<input class="app-input-autocomplete app-w-100" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off" name="collection_filter">
+		</div>
+		<mat-card *ngFor="let superCollection of potentialSuperCollections" class="app-card app-view-item app-view-hover app-cursor-pointer" (click)="allowEditCollection(superCollection.id) ? selectSuperCollection(superCollection) : false" [class.app-selected]="superCollection == selectedSuperCollection" [class.app-not-allowed]="!allowEditCollection(superCollection.id)" [matTooltip]="!allowEditCollection(superCollection.id) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEditCollection(superCollection.id) ? 'app-alert-not-allowed' : null">
+			<mat-card-header>
+				<mat-card-title class="app-mb-1" fxLayout="row" fxLayoutAlign="start center">
+					<mat-icon [class.app-color-accent]="superCollection == selectedSuperCollection">{{ superCollection == selectedSuperCollection ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
+					{{getName(superCollection) }}
+				</mat-card-title>
+				<mat-card-subtitle class="app-m-0">{{ getDescription(superCollection) }}</mat-card-subtitle>
+			</mat-card-header>
+		</mat-card>
+		<mat-progress-bar *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-flat-button [disabled]="inProgress || !selectedSuperCollection" color="primary" type="submit">{{ 'button.add' | translate }}</button>
+		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+	</mat-dialog-actions>
+</form>

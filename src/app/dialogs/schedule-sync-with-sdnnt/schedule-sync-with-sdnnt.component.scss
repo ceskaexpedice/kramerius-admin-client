@@ -1,0 +1,27 @@
+@import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
+
+.mat-table {
+  .mat-row {
+    &.app-detail-row {
+      height: 0;
+    }
+
+    &.app-element-row {
+      td {
+        border-bottom-width: 0;
+      }
+    }
+
+    &.app-expanded-row {
+      background-color: $app-gray-1;
+    }
+
+    .mat-cell {
+      &.mat-column-pid {
+        width: 380px;
+      }
+    }
+  }
+}

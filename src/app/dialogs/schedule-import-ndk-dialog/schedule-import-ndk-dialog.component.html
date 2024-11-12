@@ -1,0 +1,31 @@
+<form #f="ngForm" (ngSubmit)="schedule(f.value)">
+	<mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
+	<h2 mat-dialog-title>Import NDK MET</h2>
+	<mat-dialog-content>
+		<div class="app-desc app-mb-4">
+			Naplánujte proces, který konvertuje soubory ve formátu NDK METS ze zvoleného importního adresáře na serveru a výsledek importuje.
+		</div>
+		<div class="app-desc app-mb-4">
+			Kořenový adresář pro import NDK METS je typicky <i>$HOME/.kramerius/convert</i>.
+		</div>
+		<div>
+			<mat-form-field class="app-w-100">
+        <mat-select placeholder="Importní adresář" ngModel name="import_dir" required>
+					<mat-option *ngFor="let importDir of importDirs; let i = index" [value]="importDir">{{importDir}}</mat-option>
+        </mat-select>
+   		 </mat-form-field>
+			<mat-form-field class="app-w-100">
+				<mat-select placeholder="Viditelnost" ngModel name="policy" required>
+					<mat-option *ngFor="let policy of policies; let i = index" [value]="policy">{{policyLabels[i]}}</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div>
+			<mat-checkbox [ngModel]="true" name="schedule_indexations" color="primary">Naplánovat následnou indexaci</mat-checkbox>
+		</div>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">Naplánovat</button>
+    <button mat-flat-button  [disabled]="inProgress" mat-dialog-close="cancel">Zrušit</button>
+	</mat-dialog-actions>
+</form>

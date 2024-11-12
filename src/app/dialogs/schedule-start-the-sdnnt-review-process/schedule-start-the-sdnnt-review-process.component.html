@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{ 'modal.scheduleStartTheSdnntReviewProcess.title' | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  <ul>
+    <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.krameriusInstance' | translate }}: <strong> {{ info.kramerius}} </strong></li>
+    <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>{{ info.acronym }} </strong></li>
+    <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.sdnntInstance' | translate }}: <strong>{{ info.endpoint }}</strong></li>
+  </ul>
+  <mat-card class="app-view-alert app-warn" *ngIf="!info.kramerius || !info.acronym || !info.endpoint">
+    <mat-card-content>
+      <mat-icon>error</mat-icon>
+      <div>
+        {{ 'modal.scheduleStartTheSdnntReviewProcess.alert' | translate }}:<br />
+        <ul>
+          <li *ngIf="!info.kramerius">{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.krameriusInstance' | translate }}: <strong>sdnnt.check.local.api</strong></li>
+          <li *ngIf="!info.acronym">{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>sdnnt.check.acronym</strong></li>
+          <li *ngIf="!info.endpoint">{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.sdnntInstance' | translate }}: <strong>sdnnt.check.endpoint</strong></li>
+        </ul>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" (click)="startsyncProcess()" mat-dialog-close [disabled]="!info.kramerius || !info.acronym || !info.endpoint">{{ 'button.schedule' | translate }}</button>
+  <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+</mat-dialog-actions>

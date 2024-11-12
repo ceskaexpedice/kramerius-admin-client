@@ -1,0 +1,113 @@
+<h2 mat-dialog-title>{{ 'modal.scheduleSyncWithSdnnt.title' | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>{{ 'modal.scheduleSyncWithSdnnt.timeInfo' | translate }}: <strong>{{ lasttimestamp | date : 'dd.MM.yyyy H:mm' }}</strong></h3>
+  <div class="app-oh">
+    <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="app-w-100">
+        <ng-container [matColumnDef]="column" *ngFor="let column of columnsToDisplay">
+          <th mat-header-cell *matHeaderCellDef [ngSwitch]="column">
+            <ng-container *ngSwitchCase="'sync_actions'">{{ 'modal.scheduleSyncWithSdnnt.field.' + column + '.title' | translate }}</ng-container>
+            <ng-container *ngSwitchCase="'process_id'">{{ 'modal.scheduleSyncWithSdnnt.field.process' | translate }}</ng-container>
+            <ng-container *ngSwitchDefault>{{ 'modal.scheduleSyncWithSdnnt.field.' + column | translate }}</ng-container>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            
+            <ng-container [ngSwitch]="column">
+              <ng-container *ngSwitchCase="'pid'">
+                <div class="app-text-cutter-wrapper">
+                  <div class="app-text-cutter">
+                    <a *ngIf="element.pid && element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" [matTooltip]="element['real_kram_titles_search']">{{ element['real_kram_titles_search'] }}</a>
+                    <a *ngIf="element.pid && !element.real_kram_titles_search" [href]="kramInstance+element[column]" target="_blank" [matTooltip]="element['pid']">{{ element['pid'] }}</a>
+                    <strong *ngIf="!element.pid " [matTooltip]="'modal.scheduleSyncWithSdnnt.field.linkMissing' | translate">{{ element['title'] }}</strong>
+                  </div>
+                </div>   
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'real_kram_model'"> <strong>{{ element[column] }} </strong></ng-container>
+              <ng-container *ngSwitchCase="'real_kram_date'"> <strong>{{ element[column] }} </strong></ng-container>
+              <ng-container *ngSwitchCase="'type_of_rec'"> <strong>{{ element[column] }} </strong></ng-container>
+
+              <ng-container *ngSwitchCase="'sdnntModel'"> 
+                <strong>{{ 'desc.'+element[column] | translate }} </strong>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'sdnntDate'"><strong>{{ element[column] }}</strong></ng-container>
+
+              <ng-container *ngSwitchCase="'sdnntCatalog'">
+                <a [href]=" sdnntInstance +'?q=' + element['catalog']" target="_blank">{{ element['sdnntCatalog'] }}</a>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'title'">
+                <div class="app-text-cutter-wrapper" [matTooltip]="element[column]">
+                  <div class="app-text-cutter">{{ element[column] }}</div>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="'sync_actions'">
+                <span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.' + column + '.' + element[column] | translate" fxLayout="row" fxLayoutAlign="start center"></span>
+              </ng-container>
+              <ng-container *ngSwitchCase="'process_id'">
+                <ng-container *ngFor="let p_ids of element[column]; let i = index">
+                  <a [href]="'processes/standard-output/' + p_ids" target="_blank">{{ p_ids }}</a>
+                  <span *ngIf="i !== element[column].length - 1"> | </span>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngSwitchDefault>{{ element[column] }}</ng-container>
+            </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expand">
+          <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+          <td mat-cell *matCellDef="let element" class="app-text-right">
+            <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation(); getChildren(element.id)" *ngIf="element.sync_actions.includes('partial_change')" [matTooltip]="'Zobrazit ostatni zaznamy'">
+              <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+              <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length" class="app-pt-0 app-pb-0">
+            <div class="app-element-detail app-oh" fxLayout="row" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <table class="app-table app-mb-4">
+                <thead>
+                  <tr>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.pid' | translate }}</th>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.real_kram_date' | translate }}</th>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.real_kram_model' | translate }}</th>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.sync_actions.title' | translate }}</th>
+                    <th>{{ 'modal.scheduleSyncWithSdnnt.field.process' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let child of element.children">
+                    <td>
+                      <div class="app-text-cutter-wrapper">
+                        <div class="app-text-cutter">
+                          <a [href]="kramInstance+child.pid" target="_blank" [matTooltip]="child.real_kram_titles_search">{{ child.real_kram_titles_search }}</a>
+                        </div>
+                      </div>  
+                    </td>             
+                    <td>{{ child.real_kram_date }}</td>             
+                    <td>{{ 'field.' + child.real_kram_model | translate }}</td>             
+                    <td><span [innerHTML]="'modal.scheduleSyncWithSdnnt.field.sync_actions.' + child.sync_actions | translate" fxLayout="row" fxLayoutAlign="start center"></span></td>
+                    <td><a [href]="'processes/standard-output/' + child.process_id" target="_blank" > {{child.process_id}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="app-element-row" [class.app-expanded-row]="expandedElement === element"></tr><!--(click)=" element.children?.length > 0 ? (expandedElement = expandedElement === element ? null : element) : null"-->
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; let element;" class="app-detail-row" [class.app-expanded-row]="expandedElement === element"></tr>
+      </table>
+      <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [pageIndex]="pageIndex" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary"  (click)="applyChanges();"   mat-dialog-close>{{ 'button.acceptChanges' | translate }}</button>
+  <button mat-flat-button mat-dialog-close=" cancel">{{ 'button.cancel' | translate }}</button>
+</mat-dialog-actions>
