@@ -1,0 +1,31 @@
+.app-table {
+  thead {
+    tr {
+      th {
+        &.app-first {
+          width: 180px;
+        }
+
+        &.app-last {
+          &.app-filter {
+            width: 160px;
+          }
+
+          width: 140px;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        &:not(.app-col-detail) {
+          div {
+            line-height: 20px;
+          }
+        }       
+      }
+    }
+  }
+}

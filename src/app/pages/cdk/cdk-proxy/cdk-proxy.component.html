@@ -1,0 +1,85 @@
+<div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
+  <table mat-table [dataSource]="dataSource" class="app-w-100">
+    <ng-container matColumnDef="logo">
+      <th mat-header-cell *matHeaderCellDef>{{ 'Logo'}}</th>
+      <td mat-cell *matCellDef="let lib">
+        <img class="app-logo-lib" src="{{logo(lib.code)}}"/>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef>{{ 'desc.code' | translate }}</th>
+      <td mat-cell *matCellDef="let lib"><strong>{{ lib.code }}</strong></td>
+    </ng-container>
+    
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>{{ 'desc.name' | translate }}</th>
+      <td mat-cell *matCellDef="let lib">
+        <a [routerLink]="'detail/'+lib.code">{{ register.get(lib.code) != null ? register.get(lib.code).name : '' }}</a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef>{{ 'desc.register' | translate }}</th>
+      <td mat-cell *matCellDef="let lib">
+        <div class="app-badge" [ngClass]="register.get(lib.code) && register.get(lib.code)['alive'] ? 'app-finished' : 'app-failed'">
+          {{ register.get(lib.code) && register.get(lib.code)['alive'] ? 'online' : 'offline' }}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="stateDuration">
+      <th mat-header-cell *matHeaderCellDef>{{ 'desc.stateDuration' | translate }}</th>
+      <td mat-cell *matCellDef="let lib">{{ formatDuration(lib.code) }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="showMapping">
+      <th mat-header-cell *matHeaderCellDef>{{ 'desc.showMapping' | translate }}</th>
+      <td mat-cell *matCellDef="let lib">
+        <a (click)="showMappingDialog(lib)" [matTooltip]="'desc.showMapping' | translate">
+          <mat-icon>open_in_browser</mat-icon>
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="showSEChannel">
+      <th mat-header-cell *matHeaderCellDef>{{ 'desc.securedChannel' | translate }}</th>
+      <td mat-cell *matCellDef="let lib">
+        <a (click)="showSEChannelDialog(lib)" [matTooltip]="'desc.showMapping' | translate">
+
+          <ng-container *ngIf="problems.has(lib.code)">
+            <mat-icon *ngIf="problems.get(lib.code)" color="warn">error</mat-icon>          
+            <mat-icon *ngIf="!problems.get(lib.code)">check</mat-icon>          
+          </ng-container>
+
+          <ng-container *ngIf="!problems.has(lib.code)">
+            <mat-icon>help_outline</mat-icon>          
+          </ng-container>
+
+        </a>
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="switch">
+      <th mat-header-cell *matHeaderCellDef class="app-text-right" >{{ 'desc.switch' | translate }}</th>
+      <td mat-cell *matCellDef="let lib" class="app-text-right">
+        <mat-slide-toggle [checked]="lib.status" (change)="toggle(lib.code, $event)" [matTooltip]="lib.status ? ('desc.state' | translate) + ': ' + 'Zapnuto' : ('desc.state' | translate) + ': ' + 'Vypnuto'"></mat-slide-toggle>
+      </td>
+    </ng-container>
+
+    <!--
+    <ng-container matColumnDef="priority">
+      <th mat-header-cell *matHeaderCellDef class="app-text-right" >{{ 'desc.priority' | translate }}</th>
+      <td mat-cell *matCellDef="let lib" class="app-text-right">
+        <a class="app-arrow-up" disabled="true" (click)="up(lib)"   [matTooltip]="'button.increasePriority' | translate"><mat-icon>straight</mat-icon></a>
+        <a class="app-arrow-down" (click)="down(lib)"  [matTooltip]="'button.decreasePriority' | translate"><mat-icon class="app-rotate-180">straight</mat-icon></a>
+      </td>
+    </ng-container>
+  -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; let last = last; let first = first" [class.app-last]="last" [class.app-first]="first"></tr>
+  </table>
+</div>
+

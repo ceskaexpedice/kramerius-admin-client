@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>{{ 'desc.mappingTable' | translate }}: <span class="app-text-uppercase">{{ table.code }}</span></h2>
+<mat-dialog-content class="mat-typography">
+  <table class="app-table">
+    <thead>
+      <tr>
+        <th>{{ 'Sigla' | translate }}</th>
+        <th>{{ 'desc.desc' | translate }}</th>
+        <th>{{ 'desc.providingDk' | translate }}</th>
+        <!--
+        <th>{{ 'desc.nameAndLinkToTheRegistry' | translate }}</th>
+        -->      
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="table.items && table.items.length >0">
+        <tr *ngFor="let item of table.items">
+          <td>{{ item.sigla }}</td>
+          <td>{{ item.description }}</td>
+          <td> <a [href]="'https://registr.digitalniknihovna.cz/library/' + table.code" target="_blank" [title]="table.code">{{ table.name }}</a> </td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="!table.items || table.items.length  == 0">
+        <td colspan="3" class="app-color-info">{{ 'alert.noResults' | translate }}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button matDialogClose>{{ 'button.close' | translate }}</button>
+</mat-dialog-actions>

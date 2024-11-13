@@ -32,6 +32,7 @@
     "rxjs": "~7.8.0",
     "timers": "^0.1.1",
     "tslib": "^2.3.0",
+    "xml-parser": "^1.2.1",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "@angular/cli": "^18.2.8",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "@types/xml-parser": "^1.2.33",
     "git-describe": "^4.1.1",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",

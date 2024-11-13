@@ -60,6 +60,7 @@ export class ScheduleProcessingIndexRebuildForObjectDialogComponent implements O
     if (!!pid) {
       return pid.startsWith('uuid:') && pid.length > 'uuid:'.length;
     }
+    return false;
   }
 
 }

@@ -1,0 +1,52 @@
+<div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y app-mb-4">
+  <table mat-table [dataSource]="dataSource" class="app-w-100">
+    <ng-container matColumnDef="license">
+      <th mat-header-cell *matHeaderCellDef>{{ 'desc.license' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field appearance="fill" class="app-w-100">
+          <mat-select [placeholder]="'--- ' + ('desc.chooseLicense' | translate) + ' ---'">
+            <mat-option value="dnntt">dnntt</mat-option>
+            <mat-option value="dnnto">dnnto</mat-option>
+            <mat-option value="knav_lokalni">knav_lokalni</mat-option>
+          </mat-select>
+          </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="icon">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"><mat-icon>east</mat-icon></td>
+    </ng-container>
+
+    <ng-container matColumnDef="licenseLink">
+      <th mat-header-cell *matHeaderCellDef>{{ 'desc.linkToLicenseDetail' | translate }}</th>
+      <td mat-cell *matCellDef="let element">
+        <a [href]="'https://rightsstatements.org/page/' + element.selected['id'] + '/1.0/?language=en'" *ngIf="element.selected" target="_blank"><img [src]="'https://rightsstatements.org/files/buttons/' + element.selected['id'] + '.white.svg'" /></a>
+        <span class="app-desc" *ngIf="!element.selected">{{ '--- ' + ('desc.noLicenseSelected' | translate) + ' ---' }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="licenseEuro">
+      <th mat-header-cell *matHeaderCellDef class="app-text-right">{{ 'desc.license' | translate }} Europeanou</th>
+      <td mat-cell *matCellDef="let element" class="app-text-right">
+        <mat-form-field appearance="fill" class="app-w-100">
+          <mat-select [(value)]="element.selected" [placeholder]="'--- ' + ('desc.chooseLicense' | translate) + ' ---'">
+            <mat-option *ngFor="let license of licensesEuro" [value]="license">{{ license.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" class="app-text-right">
+        <a [matTooltip]="'button.deleteRow' | translate"><mat-icon>delete</mat-icon></a>    
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<button mat-flat-button color="primary">{{ 'button.addRow' | translate }}</button>
+

@@ -88,7 +88,7 @@ export class ParamsComponent implements OnInit {
           });
         }
         this.ui.showInfoSnackBar('snackbar.success.onNewParam');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onNewParam');
           }
@@ -131,7 +131,7 @@ export class ParamsComponent implements OnInit {
           });
         }
         this.ui.showInfoSnackBar('snackbar.success.onNewValue');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onNewValue');
           }
@@ -167,7 +167,7 @@ export class ParamsComponent implements OnInit {
           console.log('cp', cp);
         });
         this.ui.showInfoSnackBar('snackbar.success.onRemoveValue');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onRemoveValue');
           }
@@ -207,7 +207,7 @@ export class ParamsComponent implements OnInit {
           console.log('cp', cp);
         });
         this.ui.showInfoSnackBar('snackbar.success.onEditValue');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onEditValue');
           }
@@ -284,11 +284,11 @@ export class ParamsComponent implements OnInit {
           console.log('cp', cp);
         });
         this.ui.showInfoSnackBar('snackbar.success.onEditParam');
-        (error) => {
-          if (error) {
-            this.ui.showErrorSnackBar('snackbar.error.onEditParam');
-          }
-        }
+        // (error: any) => {
+        //   if (error) {
+        //     this.ui.showErrorSnackBar('snackbar.error.onEditParam');
+        //   }
+        // }
       }
     });
   }

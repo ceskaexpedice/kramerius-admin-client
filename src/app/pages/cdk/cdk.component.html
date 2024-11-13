@@ -1,0 +1,26 @@
+<div class="app-access app-h-100">
+  <div fxLayout="column" fxFlexFill>
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'sites.cdk.title' | translate }}</span>
+      </div>
+      <div>
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link (click)="changeView('proxy')" [active]="view == 'proxy'"><mat-icon class="material-icons-outlined">{{ 'sites.cdk.proxy.icon' | translate  }}</mat-icon>{{ 'sites.cdk.proxy.title' | translate }}</a>
+          <!--
+          <a mat-tab-link (click)="changeView('europeanou')" [active]="view == 'europeanou'"><mat-icon class="material-icons-outlined">{{ 'sites.cdk.europeanou.icon' | translate  }}</mat-icon>{{ 'sites.cdk.europeanou.title' | translate }}</a>
+           -->
+           <a mat-tab-link (click)="changeView('object-reharvest')" [active]="view == 'object-reharvest'"><mat-icon class="material-icons-outlined">{{ 'sites.cdk.objectReharvest.icon' | translate  }}</mat-icon>{{ 'sites.cdk.objectReharvest.title' | translate }}</a>
+       </nav>
+      </div>
+    </div>
+    <div fxFlex class="app-container-fluid app-oh">
+      <app-cdk-proxy *ngIf="view == 'proxy'"></app-cdk-proxy>
+      <app-cdk-europeanou *ngIf="view == 'europeanou'"></app-cdk-europeanou>
+      <app-cdk-object-reharvest *ngIf="view == 'object-reharvest'"></app-cdk-object-reharvest>
+    </div>
+  </div>
+</div>

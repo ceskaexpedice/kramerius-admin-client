@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+@import '../../../../sass/app-variables.scss';
+@import '../../../../sass/app-mixins.scss';
+@import '../../../../sass/app-global.scss';
+
+
+.app-row {
+  @extend .app-cursor-pointer;
+  user-select: none;
+  font-size: 14px;
+  height: 34px;
+
+  &.app-file {
+    color: $app-gray-5;
+  }
+
+  &.app-selected {
+    font-weight: 900;
+    background-color: $app-gray-0;
+  }
+
+  .app-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+}

@@ -1,0 +1,83 @@
+<h2 mat-dialog-title>{{ 'desc.securedChannelHealth' | translate }}: <span class="app-text-uppercase">{{ data.code }}</span></h2>
+<mat-dialog-content class="mat-typography">
+  <h3 class="app-mb-1">{{ 'desc.securedChannel' | translate }}:</h3>
+  <table class="app-table app-mb-4">
+    <thead>
+      <tr>
+        <th>{{ 'desc.api' | translate}}</th>
+        <th>{{ 'desc.securedChannelEnabled' | translate}}</th>
+        <th>{{ 'desc.securedChannelSolr' | translate}}</th>
+        <th>{{ 'desc.securedChannelUser' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+		<tr>
+			<td><strong>{{config?.api}}</strong></td>
+			<td class="app-col-icon">
+        <mat-icon *ngIf="channel?.channel.enabled; else notEnabled" color="primary">check_circle</mat-icon>
+        <ng-template #notEnabled>
+          <mat-icon color="warn">error</mat-icon>
+        </ng-template>
+      </td>
+      <td class="app-col-icon">
+        <mat-icon *ngIf="channel?.channel.solr; else notHealthySolr" color="primary">check_circle</mat-icon>
+        <ng-template #notHealthySolr>
+          <mat-icon color="warn">error</mat-icon>
+        </ng-template>
+      </td>
+      <td class="app-col-icon">
+        <mat-icon *ngIf="channel?.channel.user; else notHealthyUser" color="primary">check_circle</mat-icon>
+        <ng-template #notHealthyUser>
+          <mat-icon color="warn">error</mat-icon>
+        </ng-template>
+      </td>
+		</tr>
+    </tbody>
+  </table>
+
+  <h3 class="app-mb-1">{{ 'desc.usersInfo' | translate }}:</h3>
+  <table class="app-table">
+    <thead>
+      <tr>
+        <th>{{ 'desc.users'| translate }}</th>
+        <th>{{ 'desc.roles' | translate }}</th>
+        <th>{{ 'desc.licenses' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userKey of getUserKeys()">
+        <th [ngSwitch]="userKey">
+          <ng-container *ngSwitchCase="'notLogged'">
+            {{ 'desc.notLogged' | translate }}
+          </ng-container>
+          <ng-container *ngSwitchCase="'dnnt'">
+            {{ 'desc.dnnt' | translate }}
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            {{ userKey }}
+          </ng-container>
+        </th>
+        <td>
+          <ng-container *ngFor="let role of getRoles(userKey); let i = index; let last = last">
+            <span>{{ role }}</span>
+            <ng-container *ngIf="!last">, </ng-container>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container  *ngFor="let lic of getLicenses(userKey); let i = index; let last = last">
+            <ng-container *ngIf="lic.startsWith(acronym); else notAcronym">
+              <span>{{ lic }}</span>
+            </ng-container>
+            <ng-template #notAcronym>
+              <a [href]="getLinkForLicense()" target="_blank">{{ lic }}</a>
+            </ng-template>
+            <ng-container *ngIf="!last">, </ng-container>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button matDialogClose>{{ 'button.close' | translate }}</button>
+</mat-dialog-actions>

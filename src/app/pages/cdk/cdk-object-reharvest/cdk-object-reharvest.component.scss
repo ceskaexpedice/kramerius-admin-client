@@ -1,0 +1,14 @@
+@import './src/sass/app-variables.scss';
+@import './src/sass/app-mixins.scss';
+@import './src/sass/app-global.scss';
+
+
+.mat-table {
+  .mat-row {
+    @include setStateColor();
+
+    .mat-column-code {
+      width: 100px;
+    }
+  }
+}
