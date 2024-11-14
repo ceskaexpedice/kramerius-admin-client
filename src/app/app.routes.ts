@@ -18,6 +18,9 @@ import { CollectionComponent } from './pages/collections/collection/collection.c
 import { IndexingComponent } from './pages/indexing/indexing.component';
 import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './pages/repository/repository.component';
+import { CdkCollectionNewComponent } from './pages/cdk-collections/cdk-collection-new/cdk-collection-new.component';
+import { CdkCollectionComponent } from './pages/cdk-collections/cdk-collection/cdk-collection.component';
+import { CdkCollectionsComponent } from './pages/cdk-collections/cdk-collections.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -69,14 +72,14 @@ export const routes: Routes = [
   { path: 'cdk/proxy/detail/:id', component: CdkProxyDetailComponent, canActivate: [AuthGuard] },
   { path: 'cdk/europeanou', component: CdkComponent, canActivate: [AuthGuard] },
   
-  // { path: 'cdk-collections', redirectTo: 'cdk-collections/cdk'},
-  // { path: 'cdk-collections/new', component: CdkCollectionNewComponent, canActivate: [AuthGuard] },
-  // { path: 'cdk-collections/detail/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
-  // { path: 'cdk-collections/edit/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
-  // { path: 'cdk-collections/content/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
-  // { path: 'cdk-collections/context/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
-  // { path: 'cdk-collections/cdk', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
-  // { path: 'cdk-collections/diglib', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections', redirectTo: 'cdk-collections/cdk'},
+  { path: 'cdk-collections/new', component: CdkCollectionNewComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/detail/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/edit/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/content/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/context/:id', component: CdkCollectionComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/cdk', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
+  { path: 'cdk-collections/diglib', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
 
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
