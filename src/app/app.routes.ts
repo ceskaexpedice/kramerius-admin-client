@@ -9,21 +9,27 @@ import { ImportComponent } from './pages/import/import.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { CdkComponent } from './pages/cdk/cdk.component';
 import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
+import { DevComponent } from './pages/dev/dev.component';
+import { ProcessesComponent } from './pages/processes/processes.component';
+import { ProcessComponent } from './pages/processes/process/process.component';
+import { CollectionsComponent } from './pages/collections/collections.component';
+import { CollectionNewComponent } from './pages/collections/collection-new/collection-new.component';
+import { CollectionComponent } from './pages/collections/collection/collection.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'keycloak', component: AuthComponent },
-  // { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
-  // { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
-  // { path: 'processes/standard-output/:id', component: ProcessComponent, canActivate: [AuthGuard] },
-  // { path: 'processes/error-output/:id', component: ProcessComponent, canActivate: [AuthGuard] },
-  // { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
-  // { path: 'collections/new', component: CollectionNewComponent, canActivate: [AuthGuard] },
-  // { path: 'collections/detail/:id', component: CollectionComponent, canActivate: [AuthGuard] },
-  // { path: 'collections/edit/:id', component: CollectionComponent, canActivate: [AuthGuard] },
-  // { path: 'collections/content/:id', component: CollectionComponent, canActivate: [AuthGuard] },
-  // { path: 'collections/context/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'dev', component: DevComponent, canActivate: [AuthGuard] },
+  { path: 'processes', component: ProcessesComponent, canActivate: [AuthGuard] },
+  { path: 'processes/standard-output/:id', component: ProcessComponent, canActivate: [AuthGuard] },
+  { path: 'processes/error-output/:id', component: ProcessComponent, canActivate: [AuthGuard] },
+  { path: 'collections', component: CollectionsComponent, canActivate: [AuthGuard] },
+  { path: 'collections/new', component: CollectionNewComponent, canActivate: [AuthGuard] },
+  { path: 'collections/detail/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/edit/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/content/:id', component: CollectionComponent, canActivate: [AuthGuard] },
+  { path: 'collections/context/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   // { path: 'indexing', redirectTo: 'indexing/object' },
   // { path: 'indexing/object', component: IndexingComponent, canActivate: [AuthGuard] },
   // { path: 'indexing/model', component: IndexingComponent, canActivate: [AuthGuard] },

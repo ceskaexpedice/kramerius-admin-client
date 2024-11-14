@@ -1,0 +1,48 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+@import '../../../sass/app-variables.scss';
+@import '../../../sass/app-mixins.scss';
+@import '../../../sass/app-global.scss';
+
+
+.mat-cell {
+  &.mat-column-expand,
+  &.mat-column-action,
+  &.mat-column-todelete {
+    width: 50px;
+  }
+
+  &.mat-column-name {
+    width: 40%
+  }
+
+  &.mat-column-owner {
+    width: 150px;
+  }
+
+  &.mat-column-state {
+    width: 110px;
+
+    .app-badge {
+      @extend .app-w-100, .app-mr-4;
+    }
+  }
+
+  .app-text-cutter-wrapper,
+  .app-col-expanded,
+  .app-fix-expanded {
+    min-height: $app-table-row-height;
+  }
+
+  .app-fix-expanded {
+    display: flex;
+    align-items: center;
+  }
+
+  .app-col-expanded {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+}

@@ -135,5 +135,6 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
         .split(/[\s,;]+/) //split by white spaces, ',', ';'
         .filter(n => n); //remove empty strings
     }
+    return [];
   }
 }

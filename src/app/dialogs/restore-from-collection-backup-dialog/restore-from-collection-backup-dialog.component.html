@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>{{ 'modal.restoreFromCollectionBackup.title' | translate }}</h2>
+<mat-dialog-content>
+
+  <mat-radio-group [(ngModel)]="selectedFile">
+
+
+  <table class="app-table" [cellPadding]="0" [cellSpacing]="0">
+    <thead>
+      <tr>
+        <th></th>
+        <th>{{ 'desc.fileName' | translate }}</th>
+        <th>{{ 'desc.creationDate' | translate }}</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of backups">
+          <td class="app-radio-button"><mat-radio-button [value]="row.name"></mat-radio-button></td>
+          <td><a (click)="download(row.name)">{{ row.name }}</a></td>
+          <td>{{ modifiedLogFile(row)}}</td>
+          <td class="app-col-action"><a (click)="download(row.name)" [matTooltip]="'desc.download' | translate"><mat-icon>file_download</mat-icon></a></td>
+        </tr>
+    </tbody>
+  </table>
+</mat-radio-group>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button [disabled]="!selectedFile" color="primary" type="submit" (click)="restoreFromCollectionBackup('processes')">{{ 'button.restoreAndGoToProcessList' | translate }}</button>
+  <!-- <button mat-flat-button [disabled]="!selectedFile" color="primary" type="submit" (click)="restoreFromCollectionBackup('collections')">{{ 'button.restoreAndStayInCollections' | translate }}</button> -->
+  <button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+</mat-dialog-actions>
