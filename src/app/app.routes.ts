@@ -15,6 +15,9 @@ import { ProcessComponent } from './pages/processes/process/process.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { CollectionNewComponent } from './pages/collections/collection-new/collection-new.component';
 import { CollectionComponent } from './pages/collections/collection/collection.component';
+import { IndexingComponent } from './pages/indexing/indexing.component';
+import { ConfigComponent } from './components/config/config.component';
+import { RepositoryComponent } from './pages/repository/repository.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -30,16 +33,16 @@ export const routes: Routes = [
   { path: 'collections/edit/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections/content/:id', component: CollectionComponent, canActivate: [AuthGuard] },
   { path: 'collections/context/:id', component: CollectionComponent, canActivate: [AuthGuard] },
-  // { path: 'indexing', redirectTo: 'indexing/object' },
-  // { path: 'indexing/object', component: IndexingComponent, canActivate: [AuthGuard] },
-  // { path: 'indexing/model', component: IndexingComponent, canActivate: [AuthGuard] },
-  // { path: 'config', component: ConfigComponent, canActivate: [AuthGuard] },
-  // { path: 'repository', redirectTo: 'repository/repository-management' },
-  // { path: 'repository/repository-management', component: RepositoryComponent, canActivate: [AuthGuard] },
-  // { path: 'repository/exports', component: RepositoryComponent, canActivate: [AuthGuard] },
-  // { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
-  // { path: 'repository/oai', component: RepositoryComponent, canActivate: [AuthGuard] },
-  // { path: 'repository/cdk', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'indexing', redirectTo: 'indexing/object' },
+  { path: 'indexing/object', component: IndexingComponent, canActivate: [AuthGuard] },
+  { path: 'indexing/model', component: IndexingComponent, canActivate: [AuthGuard] },
+  { path: 'config', component: ConfigComponent, canActivate: [AuthGuard] },
+  { path: 'repository', redirectTo: 'repository/repository-management' },
+  { path: 'repository/repository-management', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/exports', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/oai', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/cdk', component: RepositoryComponent, canActivate: [AuthGuard] },
   /* to delete after testing { path: 'repository/statistics', component: RepositoryComponent, canActivate: [AuthGuard] }, */
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },

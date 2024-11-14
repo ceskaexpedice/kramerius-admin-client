@@ -1,0 +1,28 @@
+<form #f="ngForm" (ngSubmit)="schedule()">
+	<mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
+	<h2 mat-dialog-title>{{ 'modal.deleteObjectsLowLevel.title' | translate }}</h2>
+	<mat-dialog-content>
+		<ng-container *ngIf="!fixed">
+			<div class="app-desc app-mb-4">{{ 'modal.deleteObjectsLowLevel.message1' | translate }}</div>
+			<div class="app-desc app-mb-4">{{ 'modal.deleteObjectsLowLevel.message2' | translate }}</div>
+			<div class="app-desc app-color-warn app-mb-4">{{ 'modal.deleteObjectsLowLevel.message3' | translate }}</div>
+		</ng-container>
+		<div>
+			<mat-form-field appearance="fill" class="app-w-100 app-download">
+				<mat-label>{{fixed ? 'PID' : ('desc.pids' | translate) }}</mat-label>
+				<textarea matInput type="text" id="inputPids" name="pids" autofocus [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate ) + '...'" [disabled]="inProgress || fixed" required rows="{{fixed ? 1 : 4}}"></textarea>
+				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed" class="app-cursor-pointer">file_download</mat-icon>
+			</mat-form-field>
+			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)"	accept=".txt" />
+		</div>
+		<div>
+			<mat-form-field *ngIf="title" class="app-w-100">
+				<input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" [placeholder]="'desc.name' | translate">
+			</mat-form-field>
+		</div>
+	</mat-dialog-content>
+	<mat-dialog-actions align="end">
+		<button mat-flat-button [disabled]="inProgress || !isValid()" color="warn" type="submit">{{ 'button.delete' | translate }}</button>
+		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+	</mat-dialog-actions>
+</form>

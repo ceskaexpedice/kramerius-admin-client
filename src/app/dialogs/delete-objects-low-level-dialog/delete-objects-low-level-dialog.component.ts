@@ -3,11 +3,9 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
-import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
@@ -17,13 +15,13 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule,
-  MatProgressBarModule, MatTooltipModule],
-  selector: 'app-schedule-delete-objects-smart',
-  templateUrl: './schedule-delete-objects-smart.component.html',
-  styleUrls: ['./schedule-delete-objects-smart.component.scss']
+    MatButtonModule, MatIconModule, MatTooltipModule, MatProgressBarModule, 
+    MatFormFieldModule],
+  selector: 'app-delete-objects-low-level-dialog',
+  templateUrl: './delete-objects-low-level-dialog.component.html',
+  styleUrls: ['./delete-objects-low-level-dialog.component.scss']
 })
-export class ScheduleDeleteObjectsSmartComponent implements OnInit {
+export class DeleteObjectsLowLevelDialogComponent implements OnInit {
 
   @ViewChild('fileWithPids', { static: true }) fileWithPids: ElementRef;
 
@@ -32,13 +30,12 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
   pids;
   title;
   fixed = false;
-  ignoreIncosistencies:boolean = false;
 
   pidsCounter = 0;
   scheduledCounter = 0;
   progressBarMode: ProgressBarMode = 'indeterminate';
 
-  constructor(public dialogRef: MatDialogRef<ScheduleDeleteObjectsSmartComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
+  constructor(public dialogRef: MatDialogRef<DeleteObjectsLowLevelDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
       this.fixed = true;
       this.pids = data.pid;
@@ -49,25 +46,14 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  modelChange() {
-    console.log("Model change");
-  }
-
-  schedule(formData: any) {
+  schedule() {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
+
     let requests: any[] = [];
     pidlist.forEach(pid => {
       requests.push(
-        this.adminApi.scheduleProcess({
-          defid: 'delete_tree',
-          params: {
-            pid: pid,
-            title: this.title,
-            ignoreIncosistencies:  formData['ignoreIncosistencies']
-          }
-        })
+        this.adminApi.deleteObject(pid)
       );
     })
     //TODO: namisto forkJoin pocitat uspesne a neuspesne, ted je to bud "proslo vse", nebo "chyba"
