@@ -15,13 +15,15 @@ import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
 import { FlexLayoutModule } from "ngx-flexible-layout";
 import { MatRadioModule } from "@angular/material/radio";
-import { MatFormFieldModule } from "@angular/material/form-field";
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
     FormsModule, ReactiveFormsModule, 
-    MatDialogModule, MatRadioModule, MatFormFieldModule, 
+    MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, 
     MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule
      ],
   selector: 'app-create-or-edit-license-dialog',

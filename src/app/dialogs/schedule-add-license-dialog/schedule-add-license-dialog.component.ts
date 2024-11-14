@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
@@ -17,7 +19,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatProgressBarModule, 
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, 
     MatTooltipModule, MatSelectModule],
   selector: 'app-schedule-add-license-dialog',
   templateUrl: './schedule-add-license-dialog.component.html',

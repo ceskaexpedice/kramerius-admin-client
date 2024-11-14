@@ -26,7 +26,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
@@ -42,7 +44,7 @@ import { CollectionContextComponent } from "../../collections/collection-context
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatRadioModule, MatCheckboxModule,
-    MatTooltipModule, MatFormFieldModule, MatTabsModule, MatMenuModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
+    MatTooltipModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatMenuModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
   selector: 'app-cdk-collection',
   templateUrl: './cdk-collection.component.html',
   styleUrls: ['./cdk-collection.component.scss']

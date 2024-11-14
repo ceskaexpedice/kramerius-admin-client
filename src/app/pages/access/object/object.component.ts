@@ -26,7 +26,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import { RightsComponent } from '../rights/rights.component';
@@ -37,7 +39,7 @@ import { MatSelectModule } from '@angular/material/select';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatProgressBarModule,
-    MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, 
+    MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, MatInputModule, 
     RightsComponent],
   templateUrl: './object.component.html',
   styleUrls: ['./object.component.scss']

@@ -16,7 +16,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Router, RouterModule } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,7 +40,7 @@ import { DurationPipe } from 'src/app/pipes/duration.pipe';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule,  MatProgressBarModule, 
-    MatTooltipModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatTableModule,
+    MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
     MatCheckboxModule, MatPaginatorModule, DurationPipe
   ],
   selector: 'app-processes',

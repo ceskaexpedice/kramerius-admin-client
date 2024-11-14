@@ -3,7 +3,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,7 +18,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatTooltipModule, MatFormFieldModule],
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
   selector: 'app-add-cutting-dialog',
   templateUrl: './add-cutting-dialog.component.html',
   styleUrls: ['./add-cutting-dialog.component.scss']

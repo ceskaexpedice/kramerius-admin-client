@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -16,7 +18,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule,
-    MatTooltipModule, MatFormFieldModule
+    MatTooltipModule, MatFormFieldModule, MatInputModule
   ],
   selector: 'app-config',
   templateUrl: './config.component.html',

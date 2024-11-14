@@ -17,7 +17,7 @@ import { ParamsComponent } from './params/params.component';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
     MatIconModule, MatTabsModule, 
-    // MatCardModule, MatButtonModule, MatFormFieldModule, MatProgressBarModule,
+    // MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
     // MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, 
     RightsComponent, RolesComponent, LicensesComponent, ParamsComponent ],
   selector: 'app-access',

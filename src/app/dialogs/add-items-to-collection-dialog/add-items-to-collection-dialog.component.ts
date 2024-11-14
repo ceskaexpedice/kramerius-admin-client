@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -19,7 +21,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatTooltipModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule,
   MatProgressBarModule, MatCardModule],
   selector: 'app-add-items-to-collection-dialog',
   templateUrl: './add-items-to-collection-dialog.component.html',

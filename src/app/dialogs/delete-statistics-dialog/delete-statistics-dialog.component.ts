@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,7 +18,7 @@ import { UIService } from 'src/app/services/ui.service';
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatDatepickerModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
    MatTooltipModule],
   selector: 'app-delete-statistics-dialog',
   templateUrl: './delete-statistics-dialog.component.html',

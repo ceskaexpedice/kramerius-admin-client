@@ -3,7 +3,9 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
@@ -16,7 +18,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatSelectModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule,
   MatProgressBarModule, MatTooltipModule],
   selector: 'app-schedule-remove-license-dialog',
   templateUrl: './schedule-remove-license-dialog.component.html',

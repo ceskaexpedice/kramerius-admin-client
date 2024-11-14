@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -15,7 +17,7 @@ import { UIService } from 'src/app/services/ui.service';
 @Component({
   standalone: true,
   imports: [CommonModule, FormsModule, TranslateModule, MatIconModule,
-    MatToolbarModule, MatButtonModule,  MatDialogModule, MatFormFieldModule, MatTooltipModule],
+    MatToolbarModule, MatButtonModule,  MatDialogModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
   selector: 'app-add-new-parameter-dialog',
   templateUrl: './add-new-parameter-dialog.component.html',
   styleUrls: ['./add-new-parameter-dialog.component.scss']

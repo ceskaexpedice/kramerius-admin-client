@@ -3,7 +3,9 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -16,7 +18,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatTooltipModule, MatProgressBarModule, 
-    MatFormFieldModule],
+    MatFormFieldModule, MatInputModule],
   selector: 'app-delete-objects-low-level-dialog',
   templateUrl: './delete-objects-low-level-dialog.component.html',
   styleUrls: ['./delete-objects-low-level-dialog.component.scss']

@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -17,7 +19,7 @@ import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.ser
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatCardModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
     MatProgressBarModule, MatTooltipModule],
   selector: 'app-cancel-scheduled-processes-dialog',
   templateUrl: './cancel-scheduled-processes-dialog.component.html',

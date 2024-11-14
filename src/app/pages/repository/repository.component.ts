@@ -37,12 +37,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatTabsModule } from '@angular/material/tabs';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule,
     MatTooltipModule, MatDividerModule
   ],
   selector: 'app-repository',

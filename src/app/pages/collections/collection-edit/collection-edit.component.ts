@@ -9,7 +9,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateNewCollectionDialogComponent } from 'src/app/dialogs/create-new-collection-dialog/create-new-collection-dialog.component';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +27,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
     MatTooltipModule, MatProgressBarModule, MatCheckboxModule,
     CKEditorModule
   ],

@@ -5,7 +5,9 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UIService } from 'src/app/services/ui.service';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +21,7 @@ import { FlexLayoutModule } from 'ngx-flexible-layout';
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
     MatTooltipModule
   ],
   selector: 'app-dev',

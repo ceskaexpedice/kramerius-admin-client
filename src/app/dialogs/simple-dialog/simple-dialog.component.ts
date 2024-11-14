@@ -9,11 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   standalone: true,
   imports: [CommonModule, FormsModule, TranslateModule, 
-    MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule, MatFormFieldModule],
+    MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule, MatFormFieldModule, MatInputModule],
   templateUrl: './simple-dialog.component.html',
   styleUrls: ['./simple-dialog.component.scss']
 })

@@ -13,7 +13,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
@@ -27,7 +29,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
-    FormsModule,  MatFormFieldModule, 
+    FormsModule,  MatFormFieldModule, MatInputModule, 
     MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule,
     MatIconModule, MatCardModule, MatTooltipModule
      ],
