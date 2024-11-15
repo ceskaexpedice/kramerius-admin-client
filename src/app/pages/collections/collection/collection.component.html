@@ -18,7 +18,7 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
-        <nav mat-tab-nav-bar fxFlex>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" fxFlex>
           <a mat-tab-link (click)="changeView('detail')" [active]="view == 'detail'">
             <mat-icon class="material-icons-outlined">visibility</mat-icon>{{ 'sites.collections.detail.title' | translate }}
           </a>
@@ -34,6 +34,7 @@
             <span class="app-badge app-count">{{ superCollections?.length }}</span>
           </a>
         </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
         <div *ngIf="view == 'content'">
           <mat-radio-group [(ngModel)]="contentView">
             <mat-radio-button value="object" checked="true">{{ 'desc.displayObjects' | translate }}</mat-radio-button>

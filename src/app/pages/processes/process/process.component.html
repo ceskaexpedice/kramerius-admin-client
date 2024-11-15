@@ -12,10 +12,11 @@
         </span>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a mat-tab-link (click)="changeView('standard-output')" [active]="view == 'standard-output'"><mat-icon class="material-icons-outlined">output</mat-icon>{{ 'sites.processes.standard-output.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('error-output')"  [active]="view == 'error-output'"><mat-icon class="material-icons-outlined">error_outline</mat-icon>{{ 'sites.processes.error-output.title' | translate }}</a>
         </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
     <div fxFlex class="app-oa-y">

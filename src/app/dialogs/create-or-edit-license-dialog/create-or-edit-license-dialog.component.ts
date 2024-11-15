@@ -18,12 +18,14 @@ import { MatRadioModule } from "@angular/material/radio";
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
-    FormsModule, ReactiveFormsModule, 
-    MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, 
+    FormsModule, ReactiveFormsModule, MatButtonModule,
+    MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
     MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule
      ],
   selector: 'app-create-or-edit-license-dialog',
@@ -72,8 +74,8 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
       this.license.copyFrom(this.data.license);
 
       this.licenseForm = this.formBuilder.group({
-        licenseName: ['', []],
-        licenseDesc: ['', Validators.required]
+        licenseName: [this.license.name, []],
+        licenseDesc: [this.license.description, Validators.required]
       });
 
     } else {
@@ -82,11 +84,11 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
  
       this.licenseForm = this.formBuilder.group({
       
-        licenseName: ['', [Validators.required, 
+        licenseName: [this.license.name, [Validators.required, 
                           Validators.pattern('^'+this.libraryName+'_.*$')
                           ,licensesValidator(this.licenseNames)
                       ]],
-        licenseDesc: ['', Validators.required]
+        licenseDesc: [this.license.description, Validators.required]
       });
 
       // default value for exclusive lock
@@ -146,6 +148,8 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   }
 
   onSave() {
+    this.license.name = this.licenseForm.value.licenseName;
+    this.license.description = this.licenseForm.value.licenseDesc;
     if (!this.license.name) {
       return;
     }

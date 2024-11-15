@@ -1,6 +1,9 @@
-@import './src/sass/app-variables.scss';
-@import './src/sass/app-mixins.scss';
-@import './src/sass/app-global.scss';
+@use '@angular/material' as mat;
+@include mat.core();
+
+@import '../../../sass/app-variables.scss';
+@import '../../../sass/app-mixins.scss';
+@import '../../../sass/app-global.scss';
 
 .mat-table {
   .mat-row {

@@ -8,13 +8,14 @@
         <span class="app-last">{{ 'sites.cdk.title' | translate }}</span>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a mat-tab-link (click)="changeView('proxy')" [active]="view == 'proxy'"><mat-icon class="material-icons-outlined">{{ 'sites.cdk.proxy.icon' | translate  }}</mat-icon>{{ 'sites.cdk.proxy.title' | translate }}</a>
           <!--
           <a mat-tab-link (click)="changeView('europeanou')" [active]="view == 'europeanou'"><mat-icon class="material-icons-outlined">{{ 'sites.cdk.europeanou.icon' | translate  }}</mat-icon>{{ 'sites.cdk.europeanou.title' | translate }}</a>
            -->
            <a mat-tab-link (click)="changeView('object-reharvest')" [active]="view == 'object-reharvest'"><mat-icon class="material-icons-outlined">{{ 'sites.cdk.objectReharvest.icon' | translate  }}</mat-icon>{{ 'sites.cdk.objectReharvest.title' | translate }}</a>
        </nav>
+       <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
     <div fxFlex class="app-container-fluid app-oh">

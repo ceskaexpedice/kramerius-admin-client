@@ -16,11 +16,12 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
-    MatIconModule, MatCardModule,  MatProgressBarModule, MatIconModule, MatTooltipModule
+    MatIconModule, MatCardModule, MatButtonModule,  MatProgressBarModule, MatIconModule, MatTooltipModule
      ],
   selector: 'app-roles',
   templateUrl: './roles.component.html',

@@ -8,10 +8,11 @@
         <span class="app-last">{{ 'sites.indexing.title' | translate }}</span>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a mat-tab-link (click)="changeView('object')" [active]="view == 'object'"><mat-icon class="material-icons-outlined">data_object</mat-icon>{{ 'sites.indexing.object.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('model')"  [active]="view == 'model'"><mat-icon class="material-icons-outlined">category</mat-icon>{{ 'sites.indexing.model.title' | translate }}</a>
         </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>	
 		<div fxFlex fxLayout="column" fxFlexFill class="app-container-fluid app-oh">

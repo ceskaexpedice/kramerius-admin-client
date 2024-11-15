@@ -3,7 +3,8 @@
   <form  [formGroup]="licenseForm">
     <mat-form-field class="app-w-100">
       <mat-label>{{ 'desc.name' | translate }} / Prefix {{libraryName }}</mat-label>
-      <input matInput [placeholder]="'desc.name' | translate" [readonly]="mode=='edit'" type="text" name="note" [(ngModel)]="license.name" (keyup)="onKeyUp()" autocomplete="off" id="licenseName" formControlName="licenseName" required>
+      <input matInput [placeholder]="'desc.name' | translate" [readonly]="mode=='edit'" type="text" name="note" 
+      (keyup)="onKeyUp()" autocomplete="off" id="licenseName" formControlName="licenseName" required>
       <mat-error *ngIf="licenseName.invalid && (licenseName.dirty || licenseName.touched)">
         <ng-container *ngIf="licenseName.errors['required']">{{ 'modal.createOrEditLicense.errors.nameRequired' | translate }}</ng-container>
         <ng-container *ngIf="licenseName.errors['pattern']">{{ 'modal.createOrEditLicense.errors.theNameMustStartWith' | translate }} '{{ libraryName }}'<ng-container *ngIf="licenseName.hasError('alreadyUsed')"> | </ng-container></ng-container>
@@ -12,7 +13,8 @@
     </mat-form-field>
     <mat-form-field class="app-w-100">
       <mat-label>{{ 'desc.description' | translate }}</mat-label>
-      <input matInput [placeholder]="'desc.description' | translate" type="text" name="description" [(ngModel)]="license.description" autocomplete="off" id="licenseDesc" formControlName="licenseDesc" required>
+      <input matInput [placeholder]="'desc.description' | translate" type="text" name="description" 
+      autocomplete="off" id="licenseDesc" formControlName="licenseDesc" required>
       <mat-error *ngIf="licenseDesc.invalid && (licenseDesc.dirty || licenseDesc.touched)">
         <ng-container *ngIf="licenseDesc.errors['required']">{{ 'modal.createOrEditLicense.errors.labelIsRequired' | translate }}</ng-container>
       </mat-error>
@@ -20,7 +22,7 @@
   </form>
 
 
-  <mat-checkbox [(ngModel)]="license.exclusiveLock" class="app-mb-4 app-mt-4">{{ 'desc.turnOnTheLock' | translate }}</mat-checkbox>
+  <mat-checkbox [(ngModel)]="license.exclusiveLock"  class="app-mb-4 app-mt-4">{{ 'desc.turnOnTheLock' | translate }}</mat-checkbox>
   <ng-container *ngIf="license.exclusiveLock">
     <mat-form-field class="app-w-100">
       <mat-label>{{ formatedMaxTime()  }}</mat-label>

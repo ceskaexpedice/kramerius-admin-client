@@ -29,10 +29,11 @@
         </div>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a mat-tab-link (click)="changeView('cdk')" [active]="view == 'cdk'"><mat-icon class="material-icons-outlined">{{ 'sites.collections.cdk.icon' | translate  }}</mat-icon>{{ 'sites.collections.cdk.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('diglib')" [active]="view == 'diglib'"><mat-icon class="material-icons-outlined">{{ 'sites.collections.dgLib.icon' | translate  }}</mat-icon>{{ 'sites.collections.dgLib.title' | translate }}</a>
        </nav>
+       <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
     <div fxFlex class="app-container-fluid app-oh">

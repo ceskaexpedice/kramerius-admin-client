@@ -13,11 +13,12 @@
         </ng-container>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a mat-tab-link (click)="changeView('graphs')" [active]="view == 'graphs'"><mat-icon class="material-icons-outlined">bar_chart</mat-icon>{{ 'sites.statistics.graphs.title' | translate }}</a>
           <!-- <a mat-tab-link (click)="changeView('most-viewed-documents')"  [active]="view == 'most-viewed-documents'"><mat-icon class="material-icons-outlined">preview</mat-icon>{{ 'sites.statistics.most-viewed-documents.title' | translate }}</a> -->
 					<a mat-tab-link (click)="changeView('generating-logs-for-nk')"  [active]="view == 'generating-logs-for-nk'"><mat-icon class="material-icons-outlined">fitbit</mat-icon>{{ 'sites.statistics.generating-logs-for-nk.title' | translate }}</a>
         </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
     <div  fxFlex class="app-oa-y">

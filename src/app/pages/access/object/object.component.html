@@ -29,7 +29,7 @@
         </span>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a *ngIf="specificAuthorizedActions.indexOf('a_rights_edit')>=0"  mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'">
             <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.object.actions.title' | translate }}
           </a>
@@ -48,6 +48,7 @@
             <mat-icon class="material-icons-outlined">edit</mat-icon>{{ 'sites.object.editing.title' | translate }}
           </a>
         </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
 

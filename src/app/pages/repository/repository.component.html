@@ -8,7 +8,7 @@
         <span class="app-last">{{ 'sites.repository.title' | translate }}</span>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
           <a mat-tab-link (click)="changeView('repository-management')" [active]="view == 'repository-management'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.repository.repository-management.title' | translate }}</a>
           <a *ngIf="!notAllowed" mat-tab-link (click)="changeView('exports')" [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'sites.repository.exports.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('bulk-data-editing')"  [active]="view == 'bulk-data-editing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'sites.repository.bulk-data-editing.title' | translate }}</a>
@@ -17,6 +17,7 @@
 					<a mat-tab-link (click)="changeView('cdk')" [active]="view == 'cdk'" *ngIf="settings.cdkMode"><mat-icon class="material-icons-outlined">local_library</mat-icon>{{ 'sites.repository.cdk.title' | translate }}</a>
 				-->
         </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
     <div fxFlex class="app-oa-y">

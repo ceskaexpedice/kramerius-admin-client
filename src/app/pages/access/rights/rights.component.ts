@@ -56,7 +56,7 @@ export class RightsComponent implements OnInit {
 
       rAct.forEach(a=> {
         this.actionMap[a.code] = a;
-        console.log(this.actionMap[a.code]);
+        // console.log(this.actionMap[a.code]);
       });
       this.actions = rAct;
 
@@ -69,7 +69,7 @@ export class RightsComponent implements OnInit {
         }
         // this.roles = roles;
         this.state = 'success';
-        console.log('rights', rights);
+        // console.log('rights', rights);
       });
     }, (error:HttpErrorResponse) => {
       this.errorState = true;

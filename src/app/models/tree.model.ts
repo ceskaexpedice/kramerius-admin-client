@@ -49,7 +49,7 @@ export class Tree {
         this.children = [];
 
         api.getImportFiles(this.type, this.getFullPath()).subscribe((files: File[]) => {
-            console.log('files', files);
+            // console.log('files', files);
             for (const file of files) {
                 const tree = new Tree(this.ui, this.type, file, this, this.level + 1);
                 this.children.push(tree);
