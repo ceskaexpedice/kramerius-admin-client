@@ -41,7 +41,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatChipsModule} from '@angular/material/chips';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxEchartsDirective, NgxEchartsModule, provideEcharts  } from 'ngx-echarts';
 
 /** Levely zobrazeni - master, detail, subdteial */
 enum ViewLevel {
@@ -53,11 +53,14 @@ enum ViewLevel {
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule,
     MatTooltipModule, MatTabsModule, MatDatepickerModule, MatChipsModule,
-    NgxEchartsModule
+    NgxEchartsModule, NgxEchartsDirective
   ],
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+  styleUrls: ['./statistics.component.scss'],
+  providers: [
+    provideEcharts(),
+  ]
 })
 export class StatisticsComponent implements OnInit {
 

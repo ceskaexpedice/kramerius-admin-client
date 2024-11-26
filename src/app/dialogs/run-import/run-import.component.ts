@@ -24,6 +24,7 @@ import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRippleModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -31,7 +32,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
     FormsModule,  MatFormFieldModule, MatInputModule, 
     MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule,
-    MatIconModule, MatCardModule, MatTooltipModule
+    MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule
      ],
   selector: 'app-run-import',
   templateUrl: './run-import.component.html',

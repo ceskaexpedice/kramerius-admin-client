@@ -13,12 +13,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, 
-  MatProgressBarModule, MatTooltipModule],
+  MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
   selector: 'app-schedule-indexations-by-multiple-pids-dialog',
   templateUrl: './schedule-indexations-by-multiple-pids-dialog.component.html',
   styleUrls: ['./schedule-indexations-by-multiple-pids-dialog.component.scss']

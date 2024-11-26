@@ -15,12 +15,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-  MatProgressBarModule, MatTooltipModule],
+  MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
   selector: 'app-schedule-delete-objects-smart',
   templateUrl: './schedule-delete-objects-smart.component.html',
   styleUrls: ['./schedule-delete-objects-smart.component.scss']
