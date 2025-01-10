@@ -197,6 +197,10 @@
     @extend .app-p-4;
     background-color: $app-card-bg-hover;
   }
+
+  .app-mark-rounded {
+    @include setDashboardColor();
+  }
 }
 
 // button toogle
