@@ -1,0 +1,51 @@
+// --- FLEX LAYOUT ---
+
+.app-fxLayout {
+  display: flex !important;
+  box-sizing: border-box;
+
+  &.app-row {
+    flex-direction: row;
+  }
+
+  &.app-column {
+    flex-direction: column; 
+  }
+
+  &.app-wrap {
+    flex-flow: wrap;
+  }
+
+  &.app-center-v {
+    align-items: center;
+  }
+
+  &.app-center-h {
+    place-content: center;
+  }
+
+  &.app-fill {
+    height: 100%; 
+    min-height: 100%; 
+    min-width: 100%; 
+    width: 100%; 
+  }
+}
+
+
+.app-fxFlex {
+  flex: 1 1 1e-09px; 
+  box-sizing: border-box;
+
+  &.app-center-v {
+    align-self: center;
+  }
+}
+
+.app-jc-start {
+  justify-content: start !important;
+}
+
+.app-jc-end {
+  justify-content: end !important;
+}
