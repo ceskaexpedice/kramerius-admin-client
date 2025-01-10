@@ -38,7 +38,7 @@
 
     <ng-container *ngIf="auth.isLoggedIn()">
       <a [matMenuTriggerFor]="profile_menu" mat-button class="app-avatar">
-        <div fxLayout="row" fxLayoutAlign="center center">
+        <div class="app-fxLayout app-row app-center-v app-center-h">
           {{ auth.getTextProfileImage() }}
         </div>
       </a>
