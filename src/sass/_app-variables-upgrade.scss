@@ -28,4 +28,7 @@
 
   --app-body-bg: var(--app-color-lightnes);
   --app-body-color: var(--app-color-darknes);
+
+  --app-navbar-avatar-size: 40px;
+  --app-navbar-avatar-bg-color: #{mat.m2-get-color-from-palette(mat.$m2-amber-palette, 900)};
 }
