@@ -1,14 +1,7 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-@import '../../../sass/app-variables.scss';
-@import '../../../sass/app-mixins.scss';
-@import '../../../sass/app-global.scss';
-
 .app-footer {
-  @extend .app-p-4;
-  background-color: $app-footer-bg-color;
-  color: $app-footer-color;
+  padding: 16px;
+  background-color: var(--app-footer-bg-color);
+  color: var(--app-footer-color);
   font-size: 14px;
 
   .app-left {
@@ -19,7 +12,7 @@
 
   .app-right {
     img {
-      @extend .app-ml-1;
+      margin-left: 4px;
       height: 15px;
       vertical-align: middle;
     }

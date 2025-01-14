@@ -1,5 +1,5 @@
-<footer class="app-footer" fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="center center">
-  <div fxFlex class="app-left">
+<footer class="app-footer app-fxLayout app-row app-center-h app-center-v app-gap-8">
+  <div class="app-left app-fxFlex">
     <strong>K7 Admin © {{ currentYear }}</strong>
     <span class="app-pipe"></span>
     {{ 'desc.tokenExpiresAt' | translate }}: <strong>{{ getTokenDeadline() }}</strong> <!-- {{getTokenDeadline() +" ("+ tokenHours+":"+tokenMinutes+":"+tokenSeconds+")"}}-->

@@ -32,6 +32,9 @@
   --app-navbar-avatar-size: 40px;
   --app-navbar-avatar-bg-color: #{mat.m2-get-color-from-palette(mat.$m2-amber-palette, 900)};
 
+  --app-footer-bg-color: var(--app-color-darknes);
+  --app-footer-color: var(--app-gray-5);
+
   // home
   --app-home-card-gap: 32px;
   --app-home-card-width: 25%;

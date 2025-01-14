@@ -153,3 +153,17 @@
     }
   }
 }
+
+
+// set gap
+@mixin setFlexGap() {
+  @each $gap, $val in $gaps {
+    &.app-gap-#{$gap} {
+      > * {
+        &:not(:last-child) {
+          margin-right: #{$val}px;
+        }
+      }
+    }
+  }
+}
