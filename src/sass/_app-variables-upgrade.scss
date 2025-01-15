@@ -39,4 +39,10 @@
   --app-home-card-gap: 32px;
   --app-home-card-width: 25%;
   --app-home-card-height: 260px;
+
+  // material vars
+  --mdc-filled-button-container-height: 32px;
+
+  --mat-expansion-header-collapsed-state-height: 48px;
+  --mat-expansion-header-expanded-state-height: var(--mat-expansion-header-collapsed-state-height);
 }

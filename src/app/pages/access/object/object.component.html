@@ -1,22 +1,26 @@
-<div class="app-object app-h-100">
-  <div fxLayout="row" fxFlexFill fxLayoutAlign="center center" *ngIf="!correctPid() && !checkingPid">
-    <mat-card class="app-card app-view-border app-p-8" fxFlex="600px">
-      <mat-card-content>
-        <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
-          <mat-label>{{ 'desc.enterTheUuidOfTheObject' | translate }}</mat-label>
-          <input matInput [(ngModel)]="inputPid" placeholder="{{pid}}" (keyup.enter)="assignUuid()" type="text">
-          <mat-icon (click)="assignUuid()" matSuffix color="primary" class="app-cursor-pointer" [matTooltip]="'button.send' | translate">send</mat-icon>
-        </mat-form-field>
-        <mat-error *ngIf="!!errorMessage">
-          {{ errorMessage }}
-        </mat-error>
-      </mat-card-content>
-    </mat-card>
+<div class="app-object app-fxLayout app-column app-fill">
+  <div class="app-fxFlex app-fxLayout app-column app-oa-y">
+		<div class="app-container app-fxFlex">
+			<div class="app-fxLayout app-column app-fill app-center-v app-center-h" *ngIf="!correctPid() && !checkingPid">
+        <mat-card class="app-card app-uuid app-view-border app-p-4">
+          <mat-card-content>
+            <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
+              <mat-label>{{ 'desc.enterTheUuidOfTheObject' | translate }}</mat-label>
+              <input matInput [(ngModel)]="inputPid" placeholder="{{pid}}" (keyup.enter)="assignUuid()" type="text">
+              <mat-icon (click)="assignUuid()" matSuffix color="primary" class="app-cursor-pointer" [matTooltip]="'button.send' | translate">send</mat-icon>
+            </mat-form-field>
+            <mat-error *ngIf="!!errorMessage">
+              {{ errorMessage }}
+            </mat-error>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
 
   <mat-progress-bar mode="indeterminate" *ngIf="checkingPid"></mat-progress-bar>
 
-  <div fxLayout="column" fxFlexFill *ngIf="correctPid()">
+  <div *ngIf="correctPid()" class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
@@ -52,9 +56,9 @@
       </div>
     </div>
 
-    <div fxFlex class="app-oh app-oa-y">
+    <div class="app-fxFlex app-oa-y">
       <div class="app-container">
-        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="32px">
+        <mat-card class="app-card app-view-border app-view-header app-p-4 app-fxLayout app-row app-center-h app-center-v app-gap-8">
           <div fxFlex class="app-text-cutter">
             <a (click)="copyTextToClipboard(inputPid)" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
@@ -70,17 +74,17 @@
           </div>
         </mat-card>
 
-        <mat-card *ngIf="view == 'actions'" fxLayout="column" class="app-card app-view-border app-p-0">
+        <ng-container *ngIf="view == 'actions'">
           <app-rights [pid]="pid"></app-rights>
-        </mat-card>
+        </ng-container>
 
         <ng-container *ngIf="view == 'accessibility'">
           <mat-progress-bar mode="indeterminate" *ngIf="loadingLicenses"></mat-progress-bar>
-          <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="!loadingLicenses">
+          <mat-card class="app-card app-view-border" *ngIf="!loadingLicenses">
             <mat-card-content>
               <div class="app-mb-4">
                 <h3 class="app-mt-0">{{ 'desc.availability' | translate }}</h3>
-                <div fxLayout="row" fxLayoutAlign="start center">
+                <div class="app-fxLayout app-center-v">
                   <mat-icon class="app-20 app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon>
                   <strong>{{ 'field.' + policy | translate }}</strong>
                   <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.changeAvailability' | translate }}</button>
@@ -103,8 +107,7 @@
                   </tbody>
                 </table>
               </div>
-              <button mat-flat-button color="primary" (click)="onAddLicense()">{{ 'button.addLicense' | translate
-                }}</button>
+              <button mat-flat-button color="primary" (click)="onAddLicense()">{{ 'button.addLicense' | translate }}</button>
             </mat-card-content>
           </mat-card>
         </ng-container>

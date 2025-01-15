@@ -1,0 +1,49 @@
+// --- MATERIAL OVERRIDE UPGRADE ---
+
+.mat-mdc-card {
+  &.app-view-alert {
+    @extend .app-clean-shadow;
+    // TODO KUDELA
+    @include setAlertCard();
+    border: 1px solid;
+
+    .mat-mdc-card-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .mat-icon {
+        @extend .app-mr-2;
+      }
+    }
+  }
+}
+
+.mat-accordion {
+  &.app-view-access {
+    .mat-expansion-panel {
+      @extend .app-clean-shadow, .app-clean-radius, .app-m-0;
+      border: 1px solid $app-card-border-color;
+      border-top: 0;
+
+      &.mat-expanded {
+        background-color: var(--app-gray-1)
+      }
+
+      .mat-expansion-panel-header {
+        @extend .app-pl-4, .app-pr-4;
+      }
+
+      .mat-expansion-panel-content {
+        .mat-expansion-panel-body {
+          @extend .app-pl-4, .app-pr-4;
+        }
+
+        .mat-action-row {
+          @extend .app-clean-border, .app-p-4;
+          padding-top: 0 !important;
+        }
+      }
+    }
+  }
+}
