@@ -48,9 +48,9 @@ $app-color-disabled: $app-gray-4;
 $app-body-bg: $app-color-lightnes; //x
 $app-body-color: $app-color-darknes; //x
 $app-border-radius: 4px !default;
-$app-card-border-color: $app-gray-3;
-$app-card-bg-hover: $app-gray-1;
-$app-card-bg-expanded: $app-card-bg-hover;
+$app-card-border-color: $app-gray-3; // x
+$app-card-bg-hover: $app-gray-1; // x
+$app-card-bg-expanded: $app-card-bg-hover; // x
 $app-toolbar-height: 64px !default;
 $app-container: 1280px !default;
 $app-button-height: 32px !default;

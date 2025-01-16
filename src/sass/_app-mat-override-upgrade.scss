@@ -2,10 +2,7 @@
 
 .mat-mdc-card {
   &.app-view-alert {
-    @extend .app-clean-shadow;
-    // TODO KUDELA
     @include setAlertCard();
-    border: 1px solid;
 
     .mat-mdc-card-content {
       display: flex;
@@ -17,21 +14,47 @@
       }
     }
   }
+
+  &.app-view-header {
+    @extend .app-p-4;
+    max-height: var(--app-card-view-header-height);
+  }
+
+  &.app-view-item {
+    @extend .app-p-4, .app-cursor-pointer;
+    border-top: 0 !important;
+
+    &:hover {
+      background-color: var(--app-card-bg-hover);
+    }
+
+    .mat-mdc-card-header {
+      @extend .app-p-0;
+    }
+  }
+
+  .app-mark-rounded {
+    @include setDashboardColor();
+  }
 }
 
 .mat-accordion {
-  &.app-view-access {
+  &.app-view-default {
     .mat-expansion-panel {
       @extend .app-clean-shadow, .app-clean-radius, .app-m-0;
-      border: 1px solid $app-card-border-color;
+      border: 1px solid var(--app-card-border-color);
       border-top: 0;
 
       &.mat-expanded {
-        background-color: var(--app-gray-1)
+        background-color: var(--app-gray-0)
       }
 
       .mat-expansion-panel-header {
         @extend .app-pl-4, .app-pr-4;
+
+        .mat-expansion-panel-header-description {
+          font-weight: var(--app-expansion-header-description-text-weight);
+        }
       }
 
       .mat-expansion-panel-content {
@@ -45,5 +68,11 @@
         }
       }
     }
+  }
+}
+
+.mat-mdc-form-field {
+  .mat-mdc-form-field-subscript-wrapper {
+    height: 0;
   }
 }

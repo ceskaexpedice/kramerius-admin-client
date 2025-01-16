@@ -10,7 +10,7 @@
 		<div class="app-container">
 			<div class="app-cards-wrapper app-fxLayout app-row app-wrap app-center-h">
 				<ng-container *ngFor="let item of dashBoard">
-					<mat-card *ngIf="!item.hidden" class="app-card app-view-border app-fxLayout app-column app-center-v">
+					<mat-card *ngIf="!item.hidden" appearance="outlined" class="app-fxLayout app-column app-center-v">
 						<mat-card-header>
 							<mat-card-title>{{ 'sites.' + item.type + '.title' | translate }}</mat-card-title>
 							<mat-card-subtitle *ngIf="item.subtype">{{ 'sites.' + item.type + '.' + item.subtype + '.title' | translate }}</mat-card-subtitle>

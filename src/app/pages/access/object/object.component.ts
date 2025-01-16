@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AddItemToCollectionDialogComponent } from 'src/app/dialogs/add-item-to-collection-dialog/add-item-to-collection-dialog.component';
@@ -34,18 +34,20 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { RightsComponent } from '../rights/rights.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatProgressBarModule,
     MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, MatInputModule, 
-    RightsComponent],
+    RightsComponent, MatExpansionModule],
   templateUrl: './object.component.html',
   styleUrls: ['./object.component.scss']
 })
 export class ObjectComponent implements OnInit {
 
+  readonly panelOpenState = signal(false);
 
   view: string;
   routeView: string;

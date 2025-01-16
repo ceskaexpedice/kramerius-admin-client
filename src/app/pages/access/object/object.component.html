@@ -2,14 +2,14 @@
   <div class="app-fxFlex app-fxLayout app-column app-oa-y">
 		<div class="app-container app-fxFlex">
 			<div class="app-fxLayout app-column app-fill app-center-v app-center-h" *ngIf="!correctPid() && !checkingPid">
-        <mat-card class="app-card app-uuid app-view-border app-p-4">
+        <mat-card appearance="outlined" class="app-uuid app-p-4">
           <mat-card-content>
-            <mat-form-field appearance="fill" class="app-mb-n4 app-w-100">
+            <mat-form-field appearance="outline" class="app-w-100">
               <mat-label>{{ 'desc.enterTheUuidOfTheObject' | translate }}</mat-label>
               <input matInput [(ngModel)]="inputPid" placeholder="{{pid}}" (keyup.enter)="assignUuid()" type="text">
               <mat-icon (click)="assignUuid()" matSuffix color="primary" class="app-cursor-pointer" [matTooltip]="'button.send' | translate">send</mat-icon>
             </mat-form-field>
-            <mat-error *ngIf="!!errorMessage">
+            <mat-error *ngIf="!!errorMessage" class="app-mt-2">
               {{ errorMessage }}
             </mat-error>
           </mat-card-content>
@@ -58,7 +58,7 @@
 
     <div class="app-fxFlex app-oa-y">
       <div class="app-container">
-        <mat-card class="app-card app-view-border app-view-header app-p-4 app-fxLayout app-row app-center-h app-center-v app-gap-8">
+        <mat-card appearance="outlined" class="app-p-4 app-fxLayout app-row app-center-h app-center-v app-gap-8">
           <div fxFlex class="app-text-cutter">
             <a (click)="copyTextToClipboard(inputPid)" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
@@ -80,52 +80,55 @@
 
         <ng-container *ngIf="view == 'accessibility'">
           <mat-progress-bar mode="indeterminate" *ngIf="loadingLicenses"></mat-progress-bar>
-          <mat-card class="app-card app-view-border" *ngIf="!loadingLicenses">
-            <mat-card-content>
-              <div class="app-mb-4">
-                <h3 class="app-mt-0">{{ 'desc.availability' | translate }}</h3>
-                <div class="app-fxLayout app-center-v">
-                  <mat-icon class="app-20 app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon>
-                  <strong>{{ 'field.' + policy | translate }}</strong>
-                  <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.changeAvailability' | translate }}</button>
-                </div>
+          <mat-accordion class="app-view-default" multi>
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{ 'desc.availability' | translate }}</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="app-fxLayout app-center-v">
+                <mat-icon class="app-20 app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon>
+                <strong>{{ 'field.' + policy | translate }}</strong>
+                <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.changeAvailability' | translate }}</button>
               </div>
-              <mat-divider [inset]="true"></mat-divider>
-              <div class="app-mt-4 app-mb-4">
-                <h3 class="app-mt-0">{{ 'desc.license' | translate }}</h3>
-                <table class="app-table" *ngIf="licenses?.length > 0">
-                  <tbody>
-                    <tr *ngFor="let license of licenses" class="app-mb-1">
-                      <th>{{ license }}</th>
-                      <td class="app-col-action">
-                        <a class="app-btn-warn" (click)="onRemoveLicense(license)"
-                          [matTooltip]="'button.removeLicense' | translate">
-                          <mat-icon>cancel</mat-icon>
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <button mat-flat-button color="primary" (click)="onAddLicense()">{{ 'button.addLicense' | translate }}</button>
-            </mat-card-content>
-          </mat-card>
+            </mat-expansion-panel>
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{ 'desc.license' | translate }}</mat-panel-title>
+              </mat-expansion-panel-header>
+              <table class="app-table" *ngIf="licenses?.length > 0">
+                <tbody>
+                  <tr *ngFor="let license of licenses" class="app-mb-1">
+                    <th>{{ license }}</th>
+                    <td class="app-col-action">
+                      <a class="app-btn-warn" (click)="onRemoveLicense(license)"
+                        [matTooltip]="'button.removeLicense' | translate">
+                        <mat-icon>cancel</mat-icon>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <mat-action-row>
+                <button mat-flat-button color="primary" (click)="onAddLicense()">{{ 'button.addLicense' | translate }}</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          </mat-accordion>
         </ng-container>
 
         <ng-container *ngIf="view === 'in-collections'">
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
-          <mat-card fxLayout="column" *ngIf="!loadingCollections" class="app-card app-view-border app-p-0">
-            <mat-card class="app-card app-view-border-bottom">
+          <ng-container *ngIf="!loadingCollections">
+            <mat-card appearance="outlined" class="app-p-4 app-clean-border-t">
               <strong>{{ 'desc.collectionsContainingThisCollection' | translate }}:</strong>
             </mat-card>
-            <mat-card class="app-view-rights app-view-hover app-cursor-pointer" *ngFor="let superCollection of superCollections" (click)="allowCollectionEdit(superCollection['id']) ? setRouterLink('/collections/context', collection['id'], 'collection', 'context') : null" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowCollectionEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowCollectionEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
-              <mat-card-header fxLayout="row" fxLayoutGap="16px">
-                <div *ngIf="getThumb(superCollection['id'])">
+            <mat-card appearance="outlined" class="app-view-item" *ngFor="let superCollection of superCollections" (click)="allowCollectionEdit(superCollection['id']) ? setRouterLink('/collections/context', collection['id'], 'collection', 'context') : null" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowCollectionEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowCollectionEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
+              <mat-card-header class="app-fxLayout app-row">
+                <div *ngIf="getThumb(superCollection['id'])" class="app-mr-4">
                   <img [src]="getThumb(superCollection['id'])" />
                 </div>
-                <div fxFlex class="app-left">
-                  <mat-card-title>
-                    <mat-icon *ngIf="allowCollectionEdit(superCollection['id'])">link</mat-icon>{{ getCollectionDefaultName( superCollection) }}
+                <div class="app-left app-fxFlex">
+                  <mat-card-title class="app-fxLayout app-row app-center-v app-gap-2">
+                    <mat-icon *ngIf="allowCollectionEdit(superCollection['id'])">link</mat-icon><span>{{ getCollectionDefaultName( superCollection) }}</span>
                   </mat-card-title>
                   <mat-card-subtitle>{{ superCollection.getDescription() }}</mat-card-subtitle>
                 </div>
@@ -137,19 +140,20 @@
               </mat-card-header>
             </mat-card>
             <!-- TODO: sbírky, co ho obsahují nepřímo od rodiče (z indexu)? Jen pro informaci, nebo proklik na sbírku-->
-
-            <mat-card *ngIf="superCollections?.length === 0" class="app-card app-color-info app-text-center">
-              <mat-card-content fxLayout="row" fxLayoutAlign="center center">
-                <mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.context' | translate }}
+            <mat-card appearance="outlined" *ngIf="superCollections?.length === 0" class="app-view-alert app-color-info app-clean-border-t">
+              <mat-card-content>
+                <mat-icon>info</mat-icon>{{ 'alert.collections.noData.context' | translate }}
               </mat-card-content>
             </mat-card>
-          </mat-card>
+          </ng-container>
         </ng-container>
 
-        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'others'">
-          <mat-card-content>
-            <div class="app-mb-4">
-              <h3 class="app-mt-0">{{ 'desc.synchronization' | translate }}</h3>
+        <mat-accordion class="app-view-default" *ngIf="view == 'others'" multi>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ 'desc.synchronization' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
               <span [matTooltip]="specificAuthorizedActions.indexOf('a_index') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_index') < 0 ? 'app-alert-not-allowed' : null">
                 <button [disabled]="specificAuthorizedActions.indexOf('a_index') < 0" mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2" >{{ 'button.reindexSearchIndex' | translate }}</button>
               </span>
@@ -157,9 +161,12 @@
                 <button [disabled]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0" mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
               </span>
             </div>
-            <mat-divider [inset]="true"></mat-divider>
-            <div class="app-mt-4 app-mb-4">
-              <h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
+          </mat-expansion-panel>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ 'desc.deleting' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
               <span [matTooltip]="specificAuthorizedActions.indexOf('a_delete') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_delete') < 0 ? 'app-alert-not-allowed' : null">
                 <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectSmart()" color="warn" class="app-mr-2">{{'button.deleteObjectSmart' | translate }}</button>
               </span>
@@ -167,42 +174,43 @@
                 <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' | translate }}</button>
               </span>
             </div>
-          </mat-card-content>
-        </mat-card>
+          </mat-expansion-panel>
+        </mat-accordion>
 
-        <mat-card fxLayout="column" class="app-card app-view-border" *ngIf="view == 'editing' && proarcServers?.length > 0">
-          <mat-card-content>
-            <div class="app-pb-4">
-              <h3 class="app-mt-0">{{ 'desc.editingAnObjectInTheApplication' | translate : {app: 'ProArc'} }}</h3>
-              <mat-form-field class="app-w-100">
-                <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
-                <mat-select [(ngModel)]="selectedProarcServer">
-                  <mat-option *ngFor="let server of proarcServers" [value]="server">
-                    <strong>{{ server.name }}</strong> - {{ server.domain }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <div>
-                <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer.domain, selectedProarcServer.krameriusInstance)" [disabled]="!selectedProarcServer.domain">{{ 'button.editObject' | translate }}</button>
-              </div>
-            </div>
-            <mat-divider></mat-divider>
-            <div>
-              <h3>{{ 'desc.editingAnObjectInTheApplication' | translate : {app: 'AltoEditor'} }}</h3>
-              <mat-form-field class="app-w-100">
-                <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
-                <mat-select [(ngModel)]="selectedAltoeditorServer">
-                  <mat-option *ngFor="let server of altoeditorServers" [value]="server">
-                    <strong>{{ server.name }}</strong> - {{ server.domain }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <div>
-                <button mat-flat-button color="primary" (click)="openObjectInAltoeditor(selectedAltoeditorServer.domain)" [disabled]="!selectedAltoeditorServer.domain">{{ 'button.editObject' | translate }}</button>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
+        <mat-accordion class="app-view-default" *ngIf="view == 'editing' && proarcServers?.length > 0" multi>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ 'desc.editingAnObjectInTheApplication' | translate : {app: 'ProArc'} }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field appearance="outline" class="app-w-100">
+              <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
+              <mat-select [(ngModel)]="selectedProarcServer">
+                <mat-option *ngFor="let server of proarcServers" [value]="server">
+                  <strong>{{ server.name }}</strong> - {{ server.domain }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-action-row>
+              <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer.domain, selectedProarcServer.krameriusInstance)" [disabled]="!selectedProarcServer.domain">{{ 'button.editObject' | translate }}</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ 'desc.editingAnObjectInTheApplication' | translate : {app: 'AltoEditor'} }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field appearance="outline" class="app-w-100">
+              <mat-label>{{ 'desc.selectServer' | translate }}</mat-label>
+              <mat-select [(ngModel)]="selectedAltoeditorServer">
+                <mat-option *ngFor="let server of altoeditorServers" [value]="server">
+                  <strong>{{ server.name }}</strong> - {{ server.domain }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-action-row>
+              <button mat-flat-button color="primary" (click)="openObjectInAltoeditor(selectedAltoeditorServer.domain)" [disabled]="!selectedAltoeditorServer.domain">{{ 'button.editObject' | translate }}</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
     </div>
   </div>

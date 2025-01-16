@@ -19,7 +19,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UIService } from 'src/app/services/ui.service';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   standalone: true,
@@ -37,7 +37,7 @@ export class RightsComponent implements OnInit {
   state: string;
   // roles: any[];
   actionMap: {[key: string]: RightAction};
-  selectedAction: RightAction;
+  //selectedAction: RightAction;
 
   actions: RightAction[];
   errorMessage: string;
@@ -80,10 +80,10 @@ export class RightsComponent implements OnInit {
 
   }
 
-  onEditRight(right: Right) {
+  onEditRight(action: RightAction, right: Right) {
     const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
       data : { 
-        action: this.selectedAction.code,
+        action: action.code,
         right: right.clone()
       },
       width: '600px',
@@ -129,7 +129,7 @@ export class RightsComponent implements OnInit {
 
   onNewRight(action: RightAction) {
     const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
-      data : { action: this.selectedAction.code, pid: this.pid || 'uuid:1' },
+      data : { action: action.code, pid: this.pid || 'uuid:1' },
       width: '600px',
       panelClass: 'app-create-or-edit-right-dialog'
     });

@@ -1,7 +1,7 @@
 // --- MATERIAL OVERRIDE ---
 
 // card
-.mat-mdc-card {
+/* .mat-mdc-card {
   &.app-card {
     @extend .app-clean-shadow, .app-clean-radius;
     color: $app-body-color;
@@ -185,7 +185,7 @@
     @include setDashboardColor();
   }
 }
-
+ */
 // button toogle
 .mat-mdc-button-toggle-appearance-standard {
   color: $app-color-primary !important;
