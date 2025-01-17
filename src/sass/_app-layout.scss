@@ -23,7 +23,6 @@ body {
   color: var(--app-body-color);
 
   .app-container {
-    //@extend .app-p-4;
     padding: 16px !important;
     margin: 0 auto;
     max-width: $app-container;

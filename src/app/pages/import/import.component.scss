@@ -1,26 +1,2 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-@import '../../../sass/app-variables.scss';
-@import '../../../sass/app-mixins.scss';
-@import '../../../sass/app-global.scss';
-
-
-.app-import {
-	.app-path-bar {
-		@extend .app-pt-2, .app-pb-2, .app-pr-4, .app-pl-4;
-		border-bottom: 1px solid $app-card-border-color;
-	
-		.app-left {
-			a {
-				font-weight: bold;
-			}
-	
-			.app-path {
-				font-size: 14px;
-			}
-		}
-	}
-}
 
 		
