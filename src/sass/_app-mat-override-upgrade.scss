@@ -28,7 +28,10 @@
 
   &.app-view-item {
     @extend .app-p-4, .app-cursor-pointer;
-    border-top: 0 !important;
+    
+    &:not(:first-child) {
+      border-top: 0;
+    }
 
     &:hover {
       background-color: var(--app-card-bg-hover);
@@ -36,6 +39,19 @@
 
     .mat-mdc-card-header {
       @extend .app-p-0;
+    }
+
+    .app-right {
+      &.app-actions {
+        a {
+          @extend .app-ml-4;
+          color: $app-color-primary;
+
+          .mat-icon {
+            @include setIcon(20);
+          }
+        }
+      }
     }
   }
 
@@ -49,7 +65,10 @@
     .mat-expansion-panel {
       @extend .app-clean-shadow, .app-clean-radius, .app-m-0;
       border: 1px solid var(--app-card-border-color);
-      border-top: 0;
+      
+      &:not(:first-child) {
+        border-top: 0;
+      }
 
       &.mat-expanded {
         background-color: var(--app-gray-0)

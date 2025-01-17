@@ -1,5 +1,5 @@
-<div class="app-access app-h-100">
-  <div fxLayout="column" fxFlexFill>
+<div class="app-access app-fxLayout app-column app-fill">
+  <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
@@ -8,7 +8,7 @@
         <span class="app-last">{{ 'sites.access.title' | translate }}</span>
       </div>
       <div>
-        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
           <a mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.access.actions.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('roles')" [active]="view == 'roles'"><mat-icon class="material-icons-outlined">manage_accounts</mat-icon>{{ 'sites.access.roles.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('licenses')" [active]="view == 'licenses'"><mat-icon class="material-icons-outlined">policy</mat-icon>{{ 'sites.access.licenses.title' | translate }}</a>
@@ -17,14 +17,8 @@
         <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
-    <div fxFlex class="app-oa-y">
+    <div class="app-fxFlex app-oa-y">
       <div class="app-container">
-        <!-- <mat-card fxLayout="column" class="app-card app-view-border app-p-0">
-          <app-rights *ngIf="view == 'actions'"></app-rights>
-          <app-roles *ngIf="view == 'roles'"></app-roles>
-          <app-licenses *ngIf="view == 'licenses'"></app-licenses>
-          <app-params *ngIf="view == 'params'"></app-params>
-        </mat-card> -->
         <app-rights *ngIf="view == 'actions'"></app-rights>
         <app-roles *ngIf="view == 'roles'"></app-roles>
         <app-licenses *ngIf="view == 'licenses'"></app-licenses>

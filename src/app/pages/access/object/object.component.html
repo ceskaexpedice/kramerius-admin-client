@@ -118,7 +118,7 @@
         <ng-container *ngIf="view === 'in-collections'">
           <mat-progress-bar mode="indeterminate" *ngIf="loadingCollections"></mat-progress-bar>
           <ng-container *ngIf="!loadingCollections">
-            <mat-card appearance="outlined" class="app-p-4 app-clean-border-t">
+            <mat-card appearance="outlined" class="app-p-4">
               <strong>{{ 'desc.collectionsContainingThisCollection' | translate }}:</strong>
             </mat-card>
             <mat-card appearance="outlined" class="app-view-item" *ngFor="let superCollection of superCollections" (click)="allowCollectionEdit(superCollection['id']) ? setRouterLink('/collections/context', collection['id'], 'collection', 'context') : null" [ngClass]="!allowCollectionEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowCollectionEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowCollectionEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
