@@ -1,6 +1,12 @@
 // --- MATERIAL OVERRIDE UPGRADE ---
 
 .mat-mdc-card {
+  &.app-hover{
+    &:hover {
+      background-color: var(--app-card-bg-hover);
+    }
+  }
+  
   &.app-view-alert {
     @include setAlertCard();
 
@@ -72,6 +78,8 @@
 }
 
 .mat-mdc-form-field {
+  background-color: var(--app-color-lightnes);
+
   .mat-mdc-form-field-subscript-wrapper {
     height: 0;
   }
