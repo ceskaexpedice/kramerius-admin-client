@@ -33,7 +33,7 @@
         </span>
       </div>
       <div>
-        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
           <a *ngIf="specificAuthorizedActions.indexOf('a_rights_edit')>=0"  mat-tab-link (click)="changeView('actions')" [active]="view == 'actions'">
             <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.object.actions.title' | translate }}
           </a>
