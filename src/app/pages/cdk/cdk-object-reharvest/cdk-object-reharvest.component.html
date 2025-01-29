@@ -1,10 +1,12 @@
-<div fxLayout="column" fxFlexFill>
-  <div class="app-text-right app-mb-4">
-    <button mat-flat-button (click)="openScheduledReHarvestSpecificPidsDialog()" color="primary" class="app-mr-2" >{{ 'button.reHarvestSpecificPids' | translate }}</button>
-  </div>
+<div class="app-fxLayout app-column app-fill">
+  <mat-card appearance="outlined" class="app-view-header app-fxLayout app-row app-center-v app-clean-border-b">
+    <div class="app-fxFlex app-text-right">
+      <button mat-flat-button (click)="openScheduledReHarvestSpecificPidsDialog()" color="primary">{{ 'button.reHarvestSpecificPids' | translate }}</button>
+    </div>
+  </mat-card>
 
-  <div fxFlex class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
-    <table mat-table [dataSource]="dataSource" class="app-w-100">
+  <div class="app-fxFlex app-table-wrapper app-view-border app-maxh-100 app-oa-y">
+    <table mat-table [dataSource]="dataSource" class="app-w-100 app-view-cdk-reharvest">
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.date' | translate }}</th>
         <td mat-cell *matCellDef="let element">

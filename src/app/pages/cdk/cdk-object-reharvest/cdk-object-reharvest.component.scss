@@ -1,15 +1,5 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-@import '../../../../sass/app-variables.scss';
-@import '../../../../sass/app-mixins.scss';
-@import '../../../../sass/app-global.scss';
-
-
-.mat-table {
-  .mat-row {
-    @include setStateColor();
-
+.mat-mdc-table {
+  .mat-mdc-row {
     .mat-column-code {
       width: 100px;
     }

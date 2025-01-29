@@ -1,5 +1,6 @@
 // --- MATERIAL OVERRIDE UPGRADE ---
 
+// CARD
 .mat-mdc-card {
   &.app-hover{
     &:hover {
@@ -97,6 +98,7 @@
   }
 }
 
+// ACCORDION
 .mat-accordion {
   &.app-view-default {
     .mat-expansion-panel {
@@ -121,7 +123,7 @@
    
         .app-actions {
           @extend .app-mr-4;
-          
+
           a {
             @extend .app-ml-4;
             color: $app-color-primary;
@@ -147,10 +149,150 @@
   }
 }
 
+// FORM FIELD
 .mat-mdc-form-field {
   background-color: var(--app-color-lightnes);
 
   .mat-mdc-form-field-subscript-wrapper {
     height: 0;
+  }
+}
+
+// TABLE
+.mat-mdc-table {
+  &.app-view-border {
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: $app-table-color-border;
+  }
+
+  &.app-view-cdk-reharvest {
+    .mat-mdc-row {
+      @include setStateColor();
+    }
+  }
+
+  .mat-column-select {
+    @extend .app-pr-2;
+  }
+
+  thead {
+    .mat-mdc-header-row {
+      .mat-mdc-header-cell {
+        padding: 0;
+
+        &:first-of-type {
+          @extend .app-pl-4;
+        }
+
+        &:last-of-type {
+          @extend .app-pr-4;
+        }
+      }
+    }
+  }
+
+  tbody {
+    .mat-mdc-row {
+      &:hover {
+        background: $app-table-color-bg-hover;
+      }
+  
+      &.active {    
+        &:hover {
+          background: $app-table-color-bg-hover;
+        }
+      }
+
+      &:last-child {
+        .mat-cell {
+          border-bottom: none;
+        }
+      }
+
+      &.app-not-allowed {
+        color: $app-color-disabled !important; 
+  
+        .mat-cell, a, .mat-icon {
+          color: $app-color-disabled !important; 
+        }
+
+        .app-badge {
+          background-color: $app-color-disabled !important;
+        }
+      }
+
+      .mat-mdc-cell {
+        padding: 0;
+        
+        &:first-of-type {
+          @extend .app-pl-4;
+        }
+
+        &:last-of-type {
+          @extend .app-pr-4;
+        }
+
+        &.app-col-icon {
+          width: 40px;
+          text-align: center;
+
+          &:last-child {
+            @extend .app-p-0;
+          }
+        }
+
+        &.mat-column-state {      
+          .app-badge {
+            min-width: 110px;
+          }
+        }
+
+        .app-text-cutter-wrapper {
+          position: relative;
+          display: flex;
+        }
+  
+        .app-text-cutter {
+          @extend .app-pr-4;
+          position: absolute;
+          max-width: 100%;
+          align-self: center;
+        }
+
+        .mat-form-field {
+          &.mat-form-field-appearance-fill {
+            &.mat-form-field-type-mat-select {
+              .mat-form-field-wrapper {
+                @extend .app-pb-0;
+  
+                .mat-form-field-flex,
+                .mat-form-field-infix {
+                  @extend .app-pt-0;
+                }
+
+                .mat-select-arrow-wrapper {
+                  display: flex;
+                  vertical-align: bottom;
+                }
+
+                .mat-form-field-underline {
+                  bottom: 0;
+                }
+              }
+            }
+          }
+        }
+
+        .mat-mdc-icon-button {
+          --mdc-icon-button-state-layer-size: var(--mat-table-row-item-container-height);
+          padding: 0;
+
+          .mat-icon {
+            @include setIcon($position: text-top);
+          }
+        }
+      } 
+    }
   }
 }

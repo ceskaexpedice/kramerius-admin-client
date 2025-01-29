@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -37,7 +39,7 @@ const ELEMENT_DATA: objectReharvest[] = [
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
-    MatIconModule, MatTooltipModule, MatTableModule
+    MatIconModule, MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule
   ],
   selector: 'app-cdk-object-reharvest',
   templateUrl: './cdk-object-reharvest.component.html',
