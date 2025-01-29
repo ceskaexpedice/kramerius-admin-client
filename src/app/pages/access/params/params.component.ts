@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -15,17 +15,19 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   standalone: true,
   imports: [CommonModule, TranslateModule, FlexLayoutModule,
     MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
-    MatTooltipModule],
+    MatTooltipModule, MatExpansionModule],
   selector: 'app-params',
   templateUrl: './params.component.html',
   styleUrls: ['./params.component.scss']
 })
 export class ParamsComponent implements OnInit {
+  readonly panelOpenState = signal(false);
 
   state: string;
   params: ConditionParam[];

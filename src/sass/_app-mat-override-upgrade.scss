@@ -117,6 +117,20 @@
         .mat-expansion-panel-header-description {
           font-weight: var(--app-expansion-header-description-text-weight);
         }
+
+   
+        .app-actions {
+          @extend .app-mr-4;
+          
+          a {
+            @extend .app-ml-4;
+            color: $app-color-primary;
+  
+            .mat-icon {
+              @include setIcon(20);
+            }
+          }
+        } 
       }
 
       .mat-expansion-panel-content {
