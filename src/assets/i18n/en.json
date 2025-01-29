@@ -210,6 +210,14 @@
         "cancelled":"Reharvest cancelled",
         "failed":"Reharvest failed"
       }
+    },
+    "monitoring": {
+      "title": "Monitoring",
+      "api": {
+        "title": "API monitoring",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "monitoring"
+      }    
     }
   },
   "navbar": {
@@ -579,7 +587,6 @@
       "title": "Deleting a process",
       "message": "Do you really want to permanently delete the process"
     },
-
     "removeCuttersFromCollection": {
       "title": "Removal clips from the collection",
       "message": "Do you really want to remove  objects from the collection?"

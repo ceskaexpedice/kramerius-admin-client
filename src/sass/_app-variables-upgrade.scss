@@ -14,6 +14,10 @@
   --app-color-accent: #{mat.m2-get-color-from-palette($app-paccent)};
   --app-color-dev: #{mat.m2-get-color-from-palette($app-pdev)};
 
+  --app-color-info: #{mat.m2-get-color-from-palette(mat.$m2-amber-palette, 900)};
+  --app-color-success: #{mat.m2-get-color-from-palette(mat.$m2-green-palette, 800)};
+  --app-color-disabled: var(--app-gray-4);
+
   // gray colors
   --app-gray-0: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 50))};
   --app-gray-1: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 100))};

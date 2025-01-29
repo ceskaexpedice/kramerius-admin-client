@@ -1,1 +1,23 @@
-<p>monitoring works!</p>
+<div class="app-access app-fxLayout app-column app-fill">
+  <div class="app-fxLayout app-column app-fill">
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'sites.monitoring.title' | translate }}</span>
+      </div>
+      <div>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
+          <a mat-tab-link (click)="changeView('api')" [active]="view == 'api'"><mat-icon class="material-icons-outlined">monitoring</mat-icon>{{ 'sites.monitoring.api.title' | translate }}</a>
+        </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+      </div>
+    </div>
+    <div class="app-fxFlex">
+      <div class="app-container-fluid app-fxLayout app-column app-fill">
+        <app-monitoring-api *ngIf="view == 'api'" class="app-fxFlex app-oh"></app-monitoring-api>
+      </div>
+    </div>
+  </div>
+</div>

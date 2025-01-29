@@ -21,7 +21,7 @@ import { RepositoryComponent } from './pages/repository/repository.component';
 import { CdkCollectionNewComponent } from './pages/cdk-collections/cdk-collection-new/cdk-collection-new.component';
 import { CdkCollectionComponent } from './pages/cdk-collections/cdk-collection/cdk-collection.component';
 import { CdkCollectionsComponent } from './pages/cdk-collections/cdk-collections.component';
-import { MonitoringApiComponent } from './pages/monitoring/monitoring-api/monitoring-api.component';
+import { MonitoringComponent } from './pages/monitoring/monitoring.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -67,6 +67,7 @@ export const routes: Routes = [
   { path: 'statistics/graphs', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'statistics/most-viewed-documents', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'statistics/generating-logs-for-nk', component: StatisticsComponent, canActivate: [AuthGuard] },
+  
   { path: 'cdk', redirectTo: 'cdk/proxy'},
   { path: 'cdk/proxy', component: CdkComponent, canActivate: [AuthGuard] },
   { path: 'cdk/object-reharvest', component: CdkComponent, canActivate: [AuthGuard] },
@@ -83,7 +84,7 @@ export const routes: Routes = [
   { path: 'cdk-collections/diglib', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
 
   { path: 'monitoring', redirectTo: 'monitoring/api' },
-  { path: 'monitoring/api', component: MonitoringApiComponent, canActivate: [AuthGuard] },
+  { path: 'monitoring/api', component: MonitoringComponent, canActivate: [AuthGuard] },
 
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];

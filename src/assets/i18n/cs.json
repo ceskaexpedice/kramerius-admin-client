@@ -210,6 +210,14 @@
         "cancelled":"Reharvest zrušený",
         "failed":"Reharvest zhavaroval"
       }
+    },
+    "monitoring": {
+      "title": "Sledování",
+      "api": {
+        "title": "Sledování API",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "monitoring"
+      }    
     }
   },
   "navbar": {

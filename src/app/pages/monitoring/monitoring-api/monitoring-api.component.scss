@@ -1,0 +1,16 @@
+.mat-mdc-icon-button {
+  &.mat-mdc-button-base {
+    --mdc-icon-button-state-layer-size: 32px;
+    padding: 4px;
+
+    .mat-icon {
+      &.app-inlude {
+        --mat-icon-color: var(--app-color-success);
+      }
+
+      &.app-exclude {
+        --mat-icon-color: var(--app-color-warn);
+      }
+    }
+  }
+}
