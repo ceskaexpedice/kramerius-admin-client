@@ -121,5 +121,58 @@ export class CdkApiService {
       return this.http.get(`https://api.registr.digitalniknihovna.cz/api/libraries/${code}`, {}).pipe();
     } 
 
+    /** generic api monitor search */
+  apiMonitorSearch(dateFrom: string, dateTo: string,   filter:any[] ) {
+    let params: HttpParams = this.searchParams( dateFrom, dateTo, filter);
+
+    /*
+    search/api/admin/v7.0/monitor/search?q=*:*&sort=duration+desc&facet=true&facet.field=labels
+    */
+
+    return this.get(`/api/admin/v7.0/monitor/search`, params);
+  }
+
+  private get(path: string, params = {}): Observable<Object> {
+    return this.doGet(path, params);
+  }
+
+
+  private searchParams(  dateFrom: string, dateTo: string, filter: any[]) {
+    //q=*:*&sort=duration+desc&facet=true&facet.field=labels
+    let params: HttpParams = new HttpParams();
+    params = params.set('q', '*');
+    params = params.set('rows', '100');
+    params = params.set('sort', 'duration desc');
+
+    params = params.append('facet', 'true');
+    params = params.append('facet.field', 'labels');
+    params = params.append('facet.field', 'resource');
+
+
+    // if (dateFrom && dateTo) {
+    //   params = params.append('fq', `date:[${dateFrom} TO ${dateTo}]`);
+    // } else if (dateFrom && !dateTo) {
+    //   params = params.append('fq', `date:[${dateFrom} TO *]`);
+    // } else if (!dateFrom && dateTo) {
+    //   params = params.append('fq', `date:[* TO ${dateTo}]`);
+    // }
+    /*
+      filterKey: string;
+  // node_1
+  filterVal:string;
+*/
+
+     if (filter) {
+      for (let i = 0; i < filter.length; i++) {
+        let lf = filter[i];
+        let field = lf.filterKey;
+        let value = lf.filterVal === '*' ? '*' : `"${lf.filterVal}"`;
+        params = params.append('fq', `${field}:${value}`);
+      }
+    }
+    return params;
+  }
+
+
     
 }
