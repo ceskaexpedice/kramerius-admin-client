@@ -16,14 +16,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { DatetimePipe } from 'src/app/pipes/datetime.pipe';
 import { LogsComponent } from './logs/logs.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, 
     MatTooltipModule, MatTabsModule, 
     DurationPipe, DatetimePipe, LogsComponent
