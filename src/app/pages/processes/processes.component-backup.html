@@ -70,14 +70,23 @@
           <a *ngIf="!!dateTo" mat-icon-button [matTooltip]="'button.deselect' | translate" (click)="dateTo=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter">
             <mat-icon>cancel</mat-icon>
           </a>
-      
+
+          <!--          
+          <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)">Auto Reload</mat-checkbox>
+          -->
+
           <button mat-icon-button [matTooltip]="'button.reloadProcesses' | translate" (click)="reloadProcesses()" [disabled]="isLoading()">
             <mat-icon>refresh</mat-icon>
           </button>
+
+          <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)" [disabled]="isLoading()">{{ 'button.autoRefresProcesses' | translate : {refreshinterval: appSettings.processRefreshInterval} }}</mat-checkbox>
         </div>
         <div>
+          <button mat-flat-button (click)="bulkDeleteProcesses()" color="warn" [disabled]="!selection.hasValue()" class="app-mr-2">
+            {{ 'button.deleteSelectedItems' | translate }}
+          </button>
           <button mat-flat-button (click)="onCancelScheduledProcesses()" color="primary" [disabled]="isLoading() || batches_planned.length == 0">
-            <mat-icon>clear</mat-icon>{{ 'button.cancelScheduledProcesses' | translate }}
+            {{ 'button.cancelScheduledProcesses' | translate }}
           </button>
         </div>
       </div>
@@ -86,6 +95,40 @@
       <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y" *ngIf="!errorState">
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
         <table mat-table [dataSource]="batches" class="app-w-100">
+
+          <ng-container matColumnDef="select">
+            <!--
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()" [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="collections?.length !== 0"></mat-checkbox>
+            </th>
+            -->
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"  [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="batches.length !== 0"></mat-checkbox>
+            </th>
+            <!-- disabled when expand -->
+            <td mat-cell *matCellDef="let row">  
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"  [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
+              <ng-container *ngIf="row.expanded">
+                <div *ngFor="let p of row.processes" class="app-col-expanded">&#160;</div>
+              </ng-container>
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="selection">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" ></mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <span class="app-fix-expanded app-tdn">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"  class="app-fix-expanded app-tdn" [checked]="selection.isSelected(element)"></mat-checkbox>
+              </span>
+              <ng-container *ngIf="element.expanded">
+                <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
+              </ng-container>
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="expand">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
@@ -93,9 +136,11 @@
                 <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
               </a>
               <ng-container *ngIf="element.expanded">
-                <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
+                <div *ngFor="let p of element.processes" class="app-col-expanded">&#160;</div>
               </ng-container>
+            </td>
           </ng-container>
+
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>Id</th>
             <td mat-cell *matCellDef="let element">
@@ -125,14 +170,21 @@
             </td>
           </ng-container>
 
-          <!-- stav / batch stav -->
           <ng-container matColumnDef="state">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.state' | translate }}</th>
             <td mat-cell *matCellDef="let element">
               <span class="app-fix-expanded">
-                <div class="app-badge" [ngClass]="'app-' + element.state.toLowerCase()">
-                  {{ 'batch.' + element.state | translate }}
-                </div>
+
+                <ng-container *ngIf="element.processes.length > 1">
+                  <div class="app-badge" [ngClass]="'app-' + element.state.toLowerCase()">
+                    {{ 'batch.' + element.state+'_BATCH' | translate }}
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="element.processes.length <= 1">
+                  <div class="app-badge" [ngClass]="'app-' + element.state.toLowerCase()">
+                    {{ 'batch.' + element.state | translate }}
+                  </div>
+                </ng-container>
               </span>
 
               <ng-container *ngIf="element.expanded">
@@ -188,9 +240,19 @@
           <ng-container matColumnDef="duration">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.duration' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-              <span class="app-fix-expanded">
-                {{ element.getDuration(loadedTimestamp) | appDuration }}
-              </span>
+
+              <ng-container *ngIf="element.processes.length > 1">
+                <span class="app-fix-expanded">
+                  {{   element.getDuration(loadedTimestamp) | appDuration }} / {{element.getAllProcessDuration() | appDuration }}
+                </span>
+              </ng-container>
+
+              <ng-container *ngIf="element.processes.length <= 1">
+                <span class="app-fix-expanded">
+                  {{   element.getDuration(loadedTimestamp) | appDuration }}
+                </span>
+              </ng-container>
+
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded">
                   {{ p.getDuration(loadedTimestamp) | appDuration }}

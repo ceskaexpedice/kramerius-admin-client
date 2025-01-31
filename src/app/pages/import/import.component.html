@@ -7,7 +7,7 @@
       <span class="app-last">{{ 'sites.import.title' | translate }}</span>
     </div>
     <div>
-      <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
         <a mat-tab-link (click)="changeType('foxml')" [active]="type == 'foxml'"><mat-icon class="material-icons-outlined">code</mat-icon>FOXML</a>
         <a mat-tab-link (click)="changeType('ndk')" [active]="type == 'ndk'"><mat-icon class="material-icons-outlined">code</mat-icon>NDK METS</a>
       </nav>  

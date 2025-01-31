@@ -96,6 +96,26 @@
   .app-mark-rounded {
     @include setDashboardColor();
   }
+
+  &.app-view-dev {
+    position: relative;
+    background-color: rgba($app-dev, .1) !important;
+    border: 1px solid rgba($app-dev, .4);
+
+    .app-marker {
+      position: absolute;
+      top: -17px;
+      right: -1px;
+      background-color: var(--app-color-dev);
+      color: $app-color-lightnes;
+      font-size: 12px;
+      padding: 1px 4px;
+    }
+
+    .mat-mdc-unelevated-button {
+      background-color: var(--app-color-dev) !important;
+    }
+  }
 }
 
 // ACCORDION
@@ -296,3 +316,58 @@
     }
   }
 }
+
+// PAGINATOR
+.mat-mdc-paginator {
+  .app-table-wrapper & {
+    bottom: 0px;
+    position: sticky;
+    z-index: 10;
+    border-top: 1px solid $app-table-color-border;
+  }
+}
+
+// CHECKBOX
+.mdc-checkbox {
+  padding: calc((var(--mdc-checkbox-state-layer-size, 40px) - calc(var(--app-checkbox-default-size) + var(--app-checkbox-reduction))) / 2) !important;
+
+  .mdc-checkbox__background {
+    width: calc(var(--app-checkbox-default-size) - var(--app-checkbox-reduction));
+    height: calc(var(--app-checkbox-default-size) - var(--app-checkbox-reduction));
+  }
+}
+
+// DENSITY - FORMS
+.app-view-processes {
+
+  .mat-mdc-form-field {
+    max-width: 180px;
+  }
+
+  @include mat.form-field-density(-6);
+  @include mat.icon-button-density(-6);
+
+  .mat-mdc-form-field-infix {
+    display: flex;
+  }
+
+  .mat-mdc-form-field-icon-suffix {
+    margin-right: 4px;
+    display: flex;
+
+    .mdc-icon-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .mat-icon {
+        @include setIcon(18);
+      }
+
+      svg {
+        --mdc-icon-button-icon-size: 18px;
+      }
+    }
+  }
+}
+
