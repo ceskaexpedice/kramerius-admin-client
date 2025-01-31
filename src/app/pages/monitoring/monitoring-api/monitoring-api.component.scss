@@ -15,59 +15,10 @@
   }
 }
 
-/* Omezení velikosti sloupců v tabulce */
-.mat-table {
-  width: 100%; /* Zajistí, že tabulka využije celý dostupný prostor */
+
+.mat-mdc-cell {
+  &.mat-column-endpoint,
+  &.mat-column-pid {
+    width: 120px;
+  }
 }
-
-th, td {
-  max-width: 200px; /* Maximální šířka sloupce */
-  overflow: hidden;
-  text-overflow: ellipsis; /* Přidá "..." pokud je text moc dlouhý */
-  white-space: nowrap; /* Zabrání zalomení */
-}
-
-
-/* Specifická šířka pro konkrétní sloupce */
-
-.mat-column-startTime,
-.mat-column-endTime {
-  width: 320px;
-  max-width: 320px;
-}
-
-.mat-column-duration {
-  width: 220px;
-  max-width: 220px;
-}
-
-.mat-column-resource {
-  width: 40px;
-  max-width: 40px;
-}
-
-.mat-column-endpoint {
-  width: 150px;
-  max-width: 150px;
-}
-
-.mat-column-querypart {
-  width: 50px;
-  max-width: 50px;
-}
-
-
-.mat-column-labels {
-  width: 200px;
-  max-width: 200px;
-
-  font-weight: bold;
-  //font-size: 10px;
-  padding: 4px;
-  border-radius: 4px;
-  text-align: center; 
-}
-
-
-
-
