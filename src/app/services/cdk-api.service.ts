@@ -122,7 +122,7 @@ export class CdkApiService {
     } 
 
     /** generic api monitor search */
-  apiMonitorSearch(dateFrom: string, dateTo: string,   filter:any[] ) {
+  apiMonitorSearch(dateFrom: Date, dateTo: Date,   filter:any[] ) {
     let params: HttpParams = this.searchParams( dateFrom, dateTo, filter);
 
     /*
@@ -137,8 +137,11 @@ export class CdkApiService {
   }
 
 
-  private searchParams(  dateFrom: string, dateTo: string, filter: any[]) {
+  private searchParams( dateFrom: Date, dateTo: Date, filter: any[]) {
     //q=*:*&sort=duration+desc&facet=true&facet.field=labels
+    
+
+
     let params: HttpParams = new HttpParams();
     params = params.set('q', '*');
     params = params.set('rows', '100');
@@ -149,25 +152,26 @@ export class CdkApiService {
     params = params.append('facet.field', 'resource');
 
 
-    // if (dateFrom && dateTo) {
-    //   params = params.append('fq', `date:[${dateFrom} TO ${dateTo}]`);
-    // } else if (dateFrom && !dateTo) {
-    //   params = params.append('fq', `date:[${dateFrom} TO *]`);
-    // } else if (!dateFrom && dateTo) {
-    //   params = params.append('fq', `date:[* TO ${dateTo}]`);
-    // }
+
+    if (dateFrom && dateTo) {
+
+      params = params.append('fq', `startTime:[${dateFrom.toISOString()} TO ${dateTo.toISOString()}]`);
+    } else if (dateFrom && !dateTo) {
+      params = params.append('fq', `startTime:[${dateFrom.toISOString()} TO *]`);
+    } else if (!dateFrom && dateTo) {
+      params = params.append('fq', `startTime:[* TO ${dateTo.toISOString()}]`);
+    }
     /*
       filterKey: string;
   // node_1
   filterVal:string;
 */
 
+
      if (filter) {
       for (let i = 0; i < filter.length; i++) {
         let lf = filter[i];
-        let field = lf.filterKey;
-        let value = lf.filterVal === '*' ? '*' : `"${lf.filterVal}"`;
-        params = params.append('fq', `${field}:${value}`);
+        params = params.append('fq', `${lf}`);
       }
     }
     return params;

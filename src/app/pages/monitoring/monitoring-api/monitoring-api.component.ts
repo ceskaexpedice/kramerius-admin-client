@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import {MatListModule} from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { NgClass } from '@angular/common';
+import { DatePipe, NgClass } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
@@ -15,17 +15,38 @@ import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import {FilterType, Filter,FacetFilters,  FacetValue, FacetsGroup} from './filters';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from 'ngx-flexible-layout';
+import { MatInputModule } from '@angular/material/input';
+
+/*
+  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
+   MatTooltipModule],
+*/
 
 
 @Component({
   selector: 'app-monitoring-api',
   standalone: true,
-  imports: [MatRadioModule, MatExpansionModule, TranslateModule, MatListModule, MatIconModule, MatButtonModule, NgClass, 
+  imports: [MatRadioModule, 
+    MatExpansionModule, 
+    TranslateModule, MatListModule, 
+    MatIconModule, MatButtonModule, NgClass, 
     MatTableModule,
     CommonModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    FormsModule, 
+    FlexLayoutModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
+  providers: [DatePipe],
   templateUrl: './monitoring-api.component.html',
   styleUrl: './monitoring-api.component.scss'
 })
@@ -38,12 +59,16 @@ export class MonitoringApiComponent implements OnInit {
   labels:any;
   resources:any;
 
+  dateFrom: Date; 
+  dateTo: Date;   
+  
   groups:FacetsGroup = {};
   facetFilters:FacetFilters = {};
 
   constructor(    
     private adminApi: AdminApiService,
-    private cdkApi : CdkApiService
+    private cdkApi : CdkApiService,
+    datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -52,18 +77,28 @@ export class MonitoringApiComponent implements OnInit {
 
 
   reloadAPIItems() {
-    
-    let filters= Object.values( this.facetFilters).map(f=> f.facetval);
+    let fqs = Object.values( this.facetFilters).map(f=> {
+      let key = f.facetval.filterKey
+      let val = f.facetval.filterVal === '*' ? '*' : `"${f.facetval.filterVal}"`;
 
-    this.cdkApi.apiMonitorSearch(null, null, filters).subscribe(
+      switch(f.type) {
+        case '+': 
+          return `${key}:${val}`
+        break;
+        case '-':
+          return `NOT ${key}:${val}`
+        break;
+      }
+    });
+
+    this.cdkApi.apiMonitorSearch(this.dateFrom, this.dateTo, fqs).subscribe(
       {
         next: (resp:any)=>{
-
           this.dataSource =  resp?.response?.docs || [];;
           this.groups = {};
 
           if (resp?.facet_counts && resp.facet_counts.facet_fields) {
-            console.log(resp.facet_counts.facet_fields);
+            //console.log(resp.facet_counts.facet_fields);
             Object.keys(resp.facet_counts.facet_fields).forEach((groupKey:any)=>{
               // groupKey
 
@@ -106,8 +141,8 @@ export class MonitoringApiComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
         }
       });
-
   }
+
 
   isFilterSelected(facet:FacetValue, type:FilterType) {
     let selectedFromGroup = this.facetFilters[facet.groupid];
@@ -126,7 +161,8 @@ export class MonitoringApiComponent implements OnInit {
       };
       this.facetFilters[facet.groupid] = filterVal;
     } else {
-      this.facetFilters[facet.groupid]= null;
+      delete this.facetFilters[facet.groupid];
+
     }
     this.reloadAPIItems();
   }
@@ -139,7 +175,7 @@ export class MonitoringApiComponent implements OnInit {
       };
       this.facetFilters[facet.groupid] = filterVal;
     } else {
-      this.facetFilters[facet.groupid]= null;
+      delete this.facetFilters[facet.groupid];
     }
     this.reloadAPIItems();
   }
