@@ -27,7 +27,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -38,7 +37,7 @@ import { DurationPipe } from 'src/app/pipes/duration.pipe';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule,  MatProgressBarModule, 
     MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
     MatCheckboxModule, MatPaginatorModule, DurationPipe

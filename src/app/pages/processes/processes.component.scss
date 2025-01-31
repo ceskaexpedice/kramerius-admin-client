@@ -1,12 +1,4 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-@import '../../../sass/app-variables.scss';
-@import '../../../sass/app-mixins.scss';
-@import '../../../sass/app-global.scss';
-
-
-.mat-cell {
+.mat-mdc-cell {
   &.mat-column-expand,
   &.mat-column-action,
   &.mat-column-todelete {
@@ -25,14 +17,15 @@
     width: 110px;
 
     .app-badge {
-      @extend .app-w-100, .app-mr-4;
+      width: 100%;
+      margin-right: 16px;
     }
   }
 
   .app-text-cutter-wrapper,
   .app-col-expanded,
   .app-fix-expanded {
-    min-height: $app-table-row-height;
+    min-height: var(--mat-table-row-item-container-height);
   }
 
   .app-fix-expanded {

@@ -51,8 +51,8 @@
 
   --app-expansion-header-description-text-weight: 400;
 
-  // material vars
-  --mdc-filled-button-container-height: 32px;
+  // MATERIAL
+  --mdc-filled-button-container-height: 34px;
 
   --mdc-outlined-card-container-shape: 0;
   --mat-card-title-text-weight: 500;;
@@ -62,4 +62,10 @@
   --mat-expansion-header-text-weight: 500;
 
   --mat-table-row-item-container-height: 48px;
+
+  // checkbox
+  --mdc-checkbox-state-layer-size: calc(40px - var(--app-checkbox-reduction));
+  --mat-checkbox-label-text-size: 14px;
+  --app-checkbox-default-size: 18px;
+  --app-checkbox-reduction: 4px;
 }

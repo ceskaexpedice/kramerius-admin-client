@@ -32,8 +32,8 @@ $app-theme: mat.m2-define-light-theme((
    primary: $app-pprimary,
    accent: $app-paccent,
    warn: $app-pwarn,
- )
- //density: 0,
+  ),
+  density: 0,
 ));
 
 
