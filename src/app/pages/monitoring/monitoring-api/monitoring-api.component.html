@@ -1,121 +1,89 @@
 <div class="app-fxLayout app-row app-fill">
-  <div class="app-left app-oa-y app-pr-4" style="width: 300px;">
+  <div class="app-left app-oa-y app-pr-4" style="width: 350px;">
     <mat-accordion class="app-view-default" multi>
-
-      
-      <mat-expansion-panel expanded  *ngFor="let group of groups | keyvalue"><!-- projdi cyklem -->
+      <mat-expansion-panel expanded  *ngFor="let group of groups | keyvalue">
         <mat-expansion-panel-header>
           <mat-panel-title>{{  group.key | translate }}</mat-panel-title>
         </mat-expansion-panel-header>
         <div>
-          <div class="app-fxLayout app-row app-center-v" *ngFor="let facet of group.value"><!-- projdi cyklem -->
+          <div class="app-fxLayout app-row app-center-v" *ngFor="let facet of group.value">
             <button mat-icon-button (click)="setButtonEnabledSelection( facet)" [disabled]=" false">
               <mat-icon [ngClass]="isFilterSelected(facet,'+') ? 'app-inlude' : 'material-icons-outlined'">check_box</mat-icon>
             </button>
             <button mat-icon-button (click)="setButtonDisabledSelection(facet)" [disabled]="false ">
               <mat-icon [ngClass]="isFilterSelected(facet,'-') ? 'app-exclude' : 'material-icons-outlined'">disabled_by_default</mat-icon> 
             </button>
-
             <span class="app-ml-2">{{facet.name +" - "}}</span>
             <span class="app-ml-2">{{facet.value}}</span>
           </div>
         </div>
       </mat-expansion-panel>
-
-
-      <mat-expansion-panel expanded ><!-- projdi cyklem -->
+      <mat-expansion-panel expanded >
         <mat-expansion-panel-header>
           <mat-panel-title>{{ "Date" | translate }}</mat-panel-title>
         </mat-expansion-panel-header>
-        <div>
-
-          <div class="app-fxLayout app-row app-gap-16">
-
-            <mat-form-field fxFlex>
+        <div class="app-view-processes">
+          <div class="app-fxLayout app-row app-gap-4">
+            <mat-form-field fxFlex appearance="outline">
               <mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
               <input matInput [matDatepicker]="from"  [(ngModel)]="dateFrom" (dateChange)="reloadAPIItems()">
               <mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
               <mat-datepicker #from></mat-datepicker>
             </mat-form-field>
-            <mat-form-field fxFlex>
+            <mat-form-field fxFlex appearance="outline">
               <mat-label>{{ 'desc.dateTo' | translate }}</mat-label>
               <input matInput [matDatepicker]="to" [(ngModel)]="dateTo" (dateChange)="reloadAPIItems()">
               <mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
               <mat-datepicker #to></mat-datepicker>
             </mat-form-field>
-        
-            <!--
-            <mat-form-field appearance="fill">
-            <mat-label>Datum od</mat-label>
-            <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom" (dateChange)="applyDateFilter()">
-            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-            <mat-datepicker #pickerFrom></mat-datepicker>
-          </mat-form-field>
-          
-          <mat-form-field appearance="fill">
-            <mat-label>Datum do</mat-label>
-            <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo" (dateChange)="applyDateFilter()">
-            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-            <mat-datepicker #pickerTo></mat-datepicker>
-          </mat-form-field>
-          -->
-        </div>
-    
+          </div>
         </div>
       </mat-expansion-panel>
-
     </mat-accordion>
   </div>
+
   <div class="app-fxFlex app-right">
     <div class="app-oa-y app-table-wrapper app-view-border app-maxh-100">
-
-
       <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="startTime">
           <th mat-header-cell *matHeaderCellDef>{{ 'Datum a čas' | translate }}</th>
-          <td mat-cell *matCellDef="let element"> <strong>{{ element.startTime  | date:'HH:mm:ss dd.mm.yy'  }} </strong> | </td>
+          <td mat-cell *matCellDef="let element">{{ element.startTime  | date:'HH:mm:ss dd.mm.yy'  }}</td>
         </ng-container>
         
         <ng-container matColumnDef="duration">
-          <th mat-header-cell *matHeaderCellDef>{{ 'Doba trvání v ms' | translate }}</th>
-          <td mat-cell *matCellDef="let element"> <strong>{{ element.duration }} ms</strong>  </td>
+          <th mat-header-cell *matHeaderCellDef>{{ 'Doba trvání' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.duration }} ms</td>
         </ng-container>
 
         <ng-container matColumnDef="resource">
           <th mat-header-cell *matHeaderCellDef>{{ 'Parent resource ' | translate }}</th>
-          <td mat-cell *matCellDef="let element"><strong>{{  getLastSegment(element.resource) }}</strong></td>
+          <td mat-cell *matCellDef="let element">{{  getLastSegment(element.resource) }}</td>
         </ng-container>
 
         <ng-container matColumnDef="endpoint">
           <th mat-header-cell *matHeaderCellDef>{{ 'URL endpointu' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.endpoint }}</td>
+          <td mat-cell *matCellDef="let element">
+            <div class="app-text-cutter-wrapper" [matTooltip]="element.endpoint">
+              <div class="app-text-cutter">
+                {{ element.endpoint }}
+              </div>
+            </div>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="querypart">
-          <th mat-header-cell *matHeaderCellDef>{{ 'Query parametry' | translate }}</th>
+          <th mat-header-cell *matHeaderCellDef>{{ 'Query' | translate }}</th>
           <td mat-cell *matCellDef="let element">  
-            <!--  
-            <mat-icon *ngIf="hasQueryParams(element)" 
-            [matTooltip]="formatQueryParams(element.querypart)" 
-            class="query-icon">list </mat-icon>
-          -->
-          <button mat-icon-button 
-          *ngIf="hasQueryParams(element)"
-          [matTooltip]="formatQueryParams(element.querypart)"
-          class="query-icon">
-            <mat-icon>list</mat-icon>
-        </button>
+            <button mat-icon-button *ngIf="hasQueryParams(element)" [matTooltip]="formatQueryParams(element.querypart)" class="query-icon">
+              <mat-icon>list</mat-icon>
+            </button>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="labels">
           <th mat-header-cell *matHeaderCellDef>{{ 'Labels' | translate }}</th>
           <td mat-cell *matCellDef="let element">
-
-            <div *ngFor="let label of element.labels" class="label-item">
-              {{ label }}
-            </div>
-
+            <div *ngFor="let label of element.labels" class="label-item">{{ label }}</div>
           </td>
         </ng-container>
 
@@ -126,12 +94,18 @@
 
         <ng-container matColumnDef="pid">
           <th mat-header-cell *matHeaderCellDef>{{ 'PID' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.pid }}</td>
+          <td mat-cell *matCellDef="let element">
+            <div class="app-text-cutter-wrapper" [matTooltip]="element.pid">
+              <div class="app-text-cutter">
+                {{ element.pid }}
+              </div>
+            </div>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="httpMethod">
           <th mat-header-cell *matHeaderCellDef>{{ 'HTTP metoda' | translate }}</th>
-          <td mat-cell *matCellDef="let element"><strong> {{ element.httpMethod }}</strong></td>
+          <td mat-cell *matCellDef="let element">{{ element.httpMethod }}</td>
         </ng-container>
 
         <ng-container matColumnDef="ipaddress">
