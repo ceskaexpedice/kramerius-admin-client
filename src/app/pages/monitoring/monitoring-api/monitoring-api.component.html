@@ -7,7 +7,7 @@
         </mat-expansion-panel-header>
         <div>
           <div class="app-fxLayout app-row app-center-v" *ngFor="let facet of group.value">
-            <button mat-icon-button (click)="setButtonEnabledSelection( facet)" [disabled]=" false">
+            <button mat-icon-button (click)="setButtonEnabledSelection( facet)" [disabled]=" false"><!-- app-color-disabled -->
               <mat-icon [ngClass]="isFilterSelected(facet,'+') ? 'app-inlude' : 'material-icons-outlined'">check_box</mat-icon>
             </button>
             <button mat-icon-button (click)="setButtonDisabledSelection(facet)" [disabled]="false ">
