@@ -1270,6 +1270,16 @@
     "delete_tree": "Smazání podstromu",
     "library": "Knihovna",
     "title":"Titul",
-    "subtitle":"Podtitul"
+    "subtitle":"Podtitul",
+    "dateAndTime": "Datum a čas",
+    "parentResource": "Nadřazený zdroj",
+    "endpointUrl":  "URL endpointu",
+    "labels": "Štítky",
+    "ipAddress": "IP adresa",
+    "query": "Dotaz",
+    "httpMethod": "HTTP metoda",
+    "resource": "Zdroj",
+    "workers": "Workers",
+    "recordDetail": "Detail záznamu"
   }
 }

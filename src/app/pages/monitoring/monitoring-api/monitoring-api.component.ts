@@ -20,6 +20,8 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatInputModule } from '@angular/material/input';
+import { MonitoringApiDetailComponent } from 'src/app/dialogs/monitoring-api-detail/monitoring-api-detail.component';
+import { MatDialog } from '@angular/material/dialog';
 
 /*
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
@@ -52,7 +54,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class MonitoringApiComponent implements OnInit {
 
-  displayedColumns: string[] = ['startTime',  'duration', 'resource', 'endpoint', 'querypart', 'labels', 'userId', 'pid', 'httpMethod', 'ipaddress'];
+  displayedColumns: string[] = ['startTime',  'duration', 'resource', 'endpoint', 'labels', 'userId', 'pid', 'ipaddress', 'action'];
   dataSource:any;
 
   workers:any;
@@ -68,7 +70,8 @@ export class MonitoringApiComponent implements OnInit {
   constructor(    
     private adminApi: AdminApiService,
     private cdkApi : CdkApiService,
-    datePipe: DatePipe
+    datePipe: DatePipe,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -209,6 +212,13 @@ export class MonitoringApiComponent implements OnInit {
         }
       })
       .join('\n\n'); 
+  }
+
+  showMonitoringDetail() {
+    const dialogRef = this.dialog.open(MonitoringApiDetailComponent, {
+      width: '600px',
+      panelClass: 'app-monitoring-api-detail-dialog'
+    });
   }
 
 }

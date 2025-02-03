@@ -18,7 +18,8 @@
 
 .mat-mdc-cell {
   &.mat-column-endpoint,
-  &.mat-column-pid {
-    width: 120px;
+  &.mat-column-pid,
+  &.mat-column-labels {
+    width: 14%;
   }
 }

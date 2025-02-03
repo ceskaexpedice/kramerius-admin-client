@@ -1270,6 +1270,16 @@
     "delete_tree": "Delete tree",
     "library": "Library",   
     "title":"Title",
-    "subtitle":"Subtitle"
+    "subtitle":"Subtitle",
+    "dateAndTime": "Date and time",
+    "parentResource": "Parent resource",
+    "endpointUrl":  "Endpoint URL",
+    "labels": "Labels",
+    "ipAddress": "IP address",
+     "query": "Query",
+     "httpMethod": "HTTP method",
+     "resource": "Resource",
+     "workers": "Workers",
+     "recordDetail": "Record detail"
   }
 }
