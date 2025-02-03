@@ -2,9 +2,18 @@
 <mat-dialog-content>
   <table class="app-table">
     <tbody>
-      <tr>
-        <th>Nazev sloupce</th>
-        <td>Hodnota Hodnota Hodnota Hodnota</td>
+
+        <tr *ngFor="let key of KEYS">
+        <th>{{ key }}</th>
+        <td [ngSwitch]="key">
+        
+          <span *ngSwitchCase="'startTime'">{{ item[key] | date:'dd.MM.yyy HH:mm' }}</span>
+          <span *ngSwitchCase="'endTime'">{{ item[key] | date:'dd.MM.yyy HH:mm' }}</span>
+          <span *ngSwitchCase="'duration'">{{ item[key] + ' ms' }}</span>
+          <span *ngSwitchDefault>{{ item[key] }}</span>
+
+        </td>
+
       </tr>
     </tbody>
   </table>

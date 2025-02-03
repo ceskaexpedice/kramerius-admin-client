@@ -101,9 +101,7 @@ export class MonitoringApiComponent implements OnInit {
           this.groups = {};
 
           if (resp?.facet_counts && resp.facet_counts.facet_fields) {
-            //console.log(resp.facet_counts.facet_fields);
             Object.keys(resp.facet_counts.facet_fields).forEach((groupKey:any)=>{
-              // groupKey
 
               let arr = resp.facet_counts.facet_fields[groupKey];
               for (let i = 0; i < arr.length; i += 2) {
@@ -153,6 +151,17 @@ export class MonitoringApiComponent implements OnInit {
       selectedFromGroup.facetval.filterKey == facet.filterKey &&
        selectedFromGroup.facetval.filterVal == facet.filterVal &&
        selectedFromGroup.type == type;
+  }
+
+
+  shouldBeEnabled(facet:FacetValue, type:FilterType) {
+    let selectedFromGroup = this.facetFilters[facet.groupid];
+    if (selectedFromGroup) {
+      let sel =  selectedFromGroup.facetval.filterKey == facet.filterKey && selectedFromGroup.facetval.filterVal == facet.filterVal && selectedFromGroup.type == type;
+      return sel;
+    } else {
+      return true;
+    }
   }
 
 
@@ -214,8 +223,11 @@ export class MonitoringApiComponent implements OnInit {
       .join('\n\n'); 
   }
 
-  showMonitoringDetail() {
+  showMonitoringDetail(item:any) {
     const dialogRef = this.dialog.open(MonitoringApiDetailComponent, {
+      data:{
+        item:item
+      },
       width: '600px',
       panelClass: 'app-monitoring-api-detail-dialog'
     });

@@ -150,6 +150,7 @@ export class CdkApiService {
     params = params.append('facet', 'true');
     params = params.append('facet.field', 'labels');
     params = params.append('facet.field', 'resource');
+    params = params.append('facet.sort', 'index');
 
 
 
