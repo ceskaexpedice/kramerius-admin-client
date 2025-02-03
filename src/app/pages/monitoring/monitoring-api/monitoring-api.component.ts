@@ -52,7 +52,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class MonitoringApiComponent implements OnInit {
 
-  displayedColumns: string[] = ['startTime',  'duration', 'resource', 'endpoint', 'querypart', 'labels', 'userId', 'pid', 'httpMethod'];
+  displayedColumns: string[] = ['startTime',  'duration', 'resource', 'endpoint', 'querypart', 'labels', 'userId', 'pid', 'httpMethod', 'ipaddress'];
   dataSource:any;
 
   workers:any;
