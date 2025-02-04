@@ -22,6 +22,7 @@ import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatInputModule } from '@angular/material/input';
 import { MonitoringApiDetailComponent } from 'src/app/dialogs/monitoring-api-detail/monitoring-api-detail.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 /*
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
@@ -46,7 +47,8 @@ import { MatDialog } from '@angular/material/dialog';
     FormsModule, 
     FlexLayoutModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatPaginatorModule
   ],
   providers: [DatePipe],
   templateUrl: './monitoring-api.component.html',
