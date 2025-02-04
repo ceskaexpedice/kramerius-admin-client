@@ -130,7 +130,7 @@
 
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr><!-- app-duration-low, app-duration-high app-duration-critical -->
       </table>
       <mat-paginator  (page)="handlePageEvent($event)"  [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page"></mat-paginator>
 

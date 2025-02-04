@@ -132,7 +132,12 @@ $states: (
 
   // for reharvest jobs
   is-reharvest-from-core: #faf7e3,
-  is-reharvest-from-admin: #f0ffee
+  is-reharvest-from-admin: #f0ffee,
+
+  // monitoring
+  duration-low: #faf7e4,
+  duration-high: #faeee3,
+  duration-critical: #fae3e3,
 );
 
 // dashboard

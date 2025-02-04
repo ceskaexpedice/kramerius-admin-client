@@ -186,10 +186,8 @@
     border-color: $app-table-color-border;
   }
 
-  &.app-view-cdk-reharvest {
-    .mat-mdc-row {
-      @include setStateColor();
-    }
+  .mat-mdc-row {
+    @include setStateColor();
   }
 
   .mat-column-select {
