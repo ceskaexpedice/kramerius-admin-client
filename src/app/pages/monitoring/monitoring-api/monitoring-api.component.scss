@@ -19,7 +19,8 @@
 .mat-mdc-cell {
   &.mat-column-endpoint,
   &.mat-column-pid,
-  &.mat-column-labels {
+  &.mat-column-labels,
+  &.app-column-userId {
     width: 14%;
   }
 }

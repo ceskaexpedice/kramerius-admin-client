@@ -95,7 +95,13 @@
 
         <ng-container matColumnDef="userId">
           <th mat-header-cell *matHeaderCellDef>{{ 'desc.user' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
+          <td mat-cell *matCellDef="let element">
+            <div class="app-text-cutter-wrapper" [matTooltip]="element.userId">
+              <div class="app-text-cutter">
+                {{ element.userId }}
+              </div>
+            </div>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="pid">
