@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MonitoringApiDetailComponent } from 'src/app/dialogs/monitoring-api-detail/monitoring-api-detail.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { AppSettings } from 'src/app/services/app-settings';
 
 /*
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
@@ -60,9 +61,9 @@ export class MonitoringApiComponent implements OnInit {
   dataSource:any;
 
  length = 50;
-  pageSize = 10;
+  pageSize = 100;
   pageIndex = 0;
-  pageSizeOptions = [5, 10, 25];
+  pageSizeOptions = [100, 200, 300];
 
   workers:any;
   labels:any;
@@ -75,15 +76,20 @@ export class MonitoringApiComponent implements OnInit {
   facetFilters:FacetFilters = {};
 
   constructor(    
+    private appSettings: AppSettings,
     private adminApi: AdminApiService,
     private cdkApi : CdkApiService,
     datePipe: DatePipe,
     private dialog: MatDialog
-  ) {}
+  ) {
+
+
+  }
 
   ngOnInit() {
     this.reloadAPIItems();
   }
+
 
 
   handlePageEvent(e: PageEvent) {
@@ -110,9 +116,6 @@ export class MonitoringApiComponent implements OnInit {
       }
     });
 
-    // this.length = e.length;
-    // this.pageSize = e.pageSize;
-    // this.pageIndex = e.pageIndex;
 
     this.cdkApi.apiMonitorSearch(this.pageIndex,this.pageSize, this.dateFrom, this.dateTo, fqs).subscribe(
       {
@@ -242,6 +245,17 @@ export class MonitoringApiComponent implements OnInit {
         }
       })
       .join('\n\n'); 
+  }
+
+  getSeverityClass(item:any) {
+    if (item.duration <= this.appSettings.apiMonitorLow) {
+      return 'app-duration-low';
+    } else if (item.duration > this.appSettings.apiMonitorLow && item.duration <= this.appSettings.apiMonitorHigh) {
+      return 'app-duration-high';
+    } else {
+      return 'app-duration-critical';
+    }
+
   }
 
   showMonitoringDetail(item:any) {
