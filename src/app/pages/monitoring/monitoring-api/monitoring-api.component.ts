@@ -22,7 +22,7 @@ import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatInputModule } from '@angular/material/input';
 import { MonitoringApiDetailComponent } from 'src/app/dialogs/monitoring-api-detail/monitoring-api-detail.component';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 /*
   imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
@@ -59,6 +59,11 @@ export class MonitoringApiComponent implements OnInit {
   displayedColumns: string[] = ['startTime',  'duration', 'resource', 'endpoint', 'labels', 'userId', 'pid', 'ipaddress', 'action'];
   dataSource:any;
 
+ length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
   workers:any;
   labels:any;
   resources:any;
@@ -81,6 +86,15 @@ export class MonitoringApiComponent implements OnInit {
   }
 
 
+  handlePageEvent(e: PageEvent) {
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.reloadAPIItems();
+  }
+  
+  
+
   reloadAPIItems() {
     let fqs = Object.values( this.facetFilters).map(f=> {
       let key = f.facetval.filterKey
@@ -96,10 +110,15 @@ export class MonitoringApiComponent implements OnInit {
       }
     });
 
-    this.cdkApi.apiMonitorSearch(this.dateFrom, this.dateTo, fqs).subscribe(
+    // this.length = e.length;
+    // this.pageSize = e.pageSize;
+    // this.pageIndex = e.pageIndex;
+
+    this.cdkApi.apiMonitorSearch(this.pageIndex,this.pageSize, this.dateFrom, this.dateTo, fqs).subscribe(
       {
         next: (resp:any)=>{
           this.dataSource =  resp?.response?.docs || [];;
+          this.length = resp?.response?.numFound;
           this.groups = {};
 
           if (resp?.facet_counts && resp.facet_counts.facet_fields) {

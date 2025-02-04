@@ -122,29 +122,35 @@ export class CdkApiService {
     } 
 
     /** generic api monitor search */
-  apiMonitorSearch(dateFrom: Date, dateTo: Date,   filter:any[] ) {
-    let params: HttpParams = this.searchParams( dateFrom, dateTo, filter);
+  
+        // this.length = e.length;
+    // this.pageSize = e.pageSize;
+    // this.pageIndex = e.pageIndex;
 
-    /*
-    search/api/admin/v7.0/monitor/search?q=*:*&sort=duration+desc&facet=true&facet.field=labels
-    */
+    apiMonitorSearch(pageIndex:number,  pageSize:number,   dateFrom: Date, dateTo: Date,   filter:any[] ) {
+      let params: HttpParams = this.searchParams(pageIndex, pageSize, dateFrom, dateTo, filter);
 
-    return this.get(`/api/admin/v7.0/monitor/search`, params);
-  }
+      /*
+      search/api/admin/v7.0/monitor/search?q=*:*&sort=duration+desc&facet=true&facet.field=labels
+      */
+
+      return this.get(`/api/admin/v7.0/monitor/search`, params);
+    }
 
   private get(path: string, params = {}): Observable<Object> {
     return this.doGet(path, params);
   }
 
 
-  private searchParams( dateFrom: Date, dateTo: Date, filter: any[]) {
+  private searchParams( pageIndex:number, pageSize: number, dateFrom: Date, dateTo: Date, filter: any[]) {
     //q=*:*&sort=duration+desc&facet=true&facet.field=labels
     
 
 
     let params: HttpParams = new HttpParams();
     params = params.set('q', '*');
-    params = params.set('rows', '100');
+    params = params.set('rows', pageSize);
+    params = params.set('start', pageIndex*pageSize);
     params = params.set('sort', 'duration desc');
 
     params = params.append('facet', 'true');
