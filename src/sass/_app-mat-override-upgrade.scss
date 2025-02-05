@@ -183,15 +183,15 @@
   &.app-view-border {
     border-width: 1px 1px 0 1px;
     border-style: solid;
-    border-color: $app-table-color-border;
+    border-color: var(--app-card-border-color);
   }
 
   .mat-mdc-row {
     @include setStateColor();
   }
 
-  .mat-column-select {
-    @extend .app-pr-2;
+  .app-col-checkbox {
+    width: 40px;
   }
 
   thead {
@@ -200,11 +200,15 @@
         padding: 0;
 
         &:first-of-type {
-          @extend .app-pl-4;
+          &:not(.app-col-icon, .app-col-checkbox) {
+            @extend .app-pl-4;
+          }
         }
 
         &:last-of-type {
-          @extend .app-pr-4;
+          &:not(.app-col-icon, .app-col-checkbox) {
+            @extend .app-pr-4;
+          }
         }
       }
     }
@@ -244,11 +248,15 @@
         padding: 0;
         
         &:first-of-type {
-          @extend .app-pl-4;
+          &:not(.app-col-icon, .app-col-checkbox) {
+            @extend .app-pl-4;
+          }
         }
 
         &:last-of-type {
-          @extend .app-pr-4;
+          &:not(.app-col-icon, .app-col-checkbox) {
+            @extend .app-pr-4;
+          }
         }
 
         &.app-col-icon {
@@ -265,10 +273,6 @@
             .mat-icon {
               @include setIcon(20);
             }
-          }
-
-          &:last-child {
-            @extend .app-p-0;
           }
         }
 
@@ -348,11 +352,7 @@
 }
 
 // DENSITY - FORMS
-.app-view-processes {
-
-  .mat-mdc-form-field {
-    max-width: 180px;
-  }
+.app-form-customize {
 
   @include mat.form-field-density(-6);
   @include mat.icon-button-density(-6);

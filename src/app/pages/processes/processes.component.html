@@ -1,4 +1,4 @@
-<div class="app-processes app-fxLayout app-column app-fill app-view-processes">
+<div class="app-processes app-fxLayout app-column app-fill app-form-customize ">
   <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
@@ -109,13 +109,11 @@
           </ng-container>
 
           <ng-container matColumnDef="selection">
-            <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" ></mat-checkbox>
+            <th mat-header-cell *matHeaderCellDef class="app-col-checkbox">
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" class="app-fxLayout app-center-h"></mat-checkbox>
             </th>
-            <td mat-cell *matCellDef="let element">
-              <span class="app-fix-expanded app-tdn">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"  class="app-fix-expanded app-tdn" [checked]="selection.isSelected(element)"></mat-checkbox>
-              </span>
+            <td mat-cell *matCellDef="let element" class="app-col-checkbox">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null" class="app-fix-expanded app-tdn" [checked]="selection.isSelected(element)"></mat-checkbox>
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
               </ng-container>
@@ -279,7 +277,7 @@
 
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="app-col-icon">
               <span class="app-fix-expanded">
                 <button *ngIf="element.isDeletable()" (click)="onRemoveProcess(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button [matTooltip]="'button.deleteProcess' | translate" matTooltipPosition="below" color="primary" [class.app-avoid-click]="notAllowed(element.id)">
                   <mat-icon>delete</mat-icon>
