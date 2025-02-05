@@ -27,18 +27,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatSlideToggleModule,
     MatTooltipModule, MatMenuModule, MatPaginatorModule,
-    MatProgressBarModule, MatCheckboxModule, MatTableModule, MatSortModule
+    MatProgressBarModule, MatCheckboxModule, MatTableModule, MatSortModule, MatInputModule
   ],
   selector: 'app-collections',
   templateUrl: './collections.component.html',

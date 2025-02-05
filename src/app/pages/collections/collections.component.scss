@@ -1,29 +1,28 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-@import '../../../sass/app-variables.scss';
-@import '../../../sass/app-mixins.scss';
-@import '../../../sass/app-global.scss';
-
-.mat-cell {
-  &.mat-column-name_cze {
-    width: 13%;
+.app-topbar {
+  .mat-mdc-form-field {
+    &.app-search {
+      width: 350px;
+    }
   }
+}
 
-  &.mat-column-logo {
-    width: 50px;
-  }
 
-  &.mat-column-code {
-    width: 50px;
-  }
-
-  &.mat-column-description_cze {
-    width: 70%;
-  }
+.mat-mdc-table {
+  .mat-mdc-cell {
+    &.mat-column-name_cze {
+      width: 13%;
+    }
   
-  &.mat-column-action {
-    @extend .app-pl-2;
-    width: 50px;
+    &.mat-column-logo {
+      width: 50px;
+    }
+  
+    &.mat-column-code {
+      width: 50px;
+    }
+  
+    &.mat-column-description_cze {
+      width: 70%;
+    }
   }
 }

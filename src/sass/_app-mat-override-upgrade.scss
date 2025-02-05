@@ -192,6 +192,7 @@
 
   .app-col-checkbox {
     width: 40px;
+    text-align: center;
   }
 
   thead {
@@ -265,11 +266,7 @@
 
           @include mat.icon-button-density(-4);
 
-          .mdc-icon-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-      
+          .mdc-icon-button {     
             .mat-icon {
               @include setIcon(20);
             }

@@ -1,4 +1,4 @@
-<div class="app-processes app-fxLayout app-column app-fill app-form-customize ">
+<div class="app-processes app-fxLayout app-column app-fill app-form-customize">
   <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
@@ -93,7 +93,7 @@
     <div class="app-fxFlex app-container-fluid app-oh">
       <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y" *ngIf="!errorState">
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
-        <table mat-table [dataSource]="batches" class="app-w-100">
+        <table mat-table [dataSource]="batches">
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
               <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"  [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="batches.length !== 0"></mat-checkbox>
