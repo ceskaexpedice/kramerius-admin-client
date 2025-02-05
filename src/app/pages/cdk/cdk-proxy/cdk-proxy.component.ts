@@ -303,8 +303,25 @@ export class CdkProxyComponent implements OnInit {
 
     this.cdkApi.connected().subscribe(resp=> {
       this.dataSource = resp;
-      this.cdkApi.registrinfo().subscribe(resp=> {
+      this.dataSource.forEach(lb=> {
+        if (lb.status) {
+          this.cdkApi.channel(lb.code).subscribe(resp=> {
+            if(resp.channel.solr && resp.channel.user) {
+              let resp = this.register.get(lb.code);
+              if (resp) {
+                this.problems.set(lb.code,false);
+              }
+            } else {
+              let resp = this.register.get(lb.code);
+              if (resp) {
+                this.problems.set(lb.code,true);
+              }
+            }
+          });
+        }
+    });
 
+      this.cdkApi.registrinfo().subscribe(resp=> {
         let codes = this.dataSource.map(l=> l.code);
         let registerResponse = resp;
         registerResponse.forEach((one: any)=> {
@@ -314,9 +331,9 @@ export class CdkProxyComponent implements OnInit {
           }
         });
 
+        /*
         const keys: string[] = Object.keys(this.register);
         keys.forEach((code: string) => {
-
           this.cdkApi.channel(code).subscribe(resp=> {
             if(resp.channel.solr && resp.channel.user) {
               let resp = this.register.get(code);
@@ -328,11 +345,10 @@ export class CdkProxyComponent implements OnInit {
               if (resp) {
                 this.problems.set(code,true);
               }
-
             }
           });
         });
- 
+        */
         
       });
     });
