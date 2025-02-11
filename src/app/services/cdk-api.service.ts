@@ -92,6 +92,11 @@ export class CdkApiService {
       return this.doGet('/api/admin/v7.0/reharvest',{}).pipe(map(response => Reharvest.reharvestsFromJson(response)));
     }
 
+    introspectPid(pid:string): Observable<any> {
+      return this.doGet(`/api/admin/v7.0/items/${pid}/solr/instintrospect`,{}).pipe();
+    }
+
+
     planReharvest(obj:any) {
       return this.doPut('/api/admin/v7.0/reharvest', obj, {}).pipe(
         //tap((response: HttpResponse<Object>) => {}),

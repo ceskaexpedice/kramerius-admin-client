@@ -161,7 +161,7 @@ export class CdkObjectReharvestComponent implements OnInit {
 
  openScheduledReHarvestSpecificPidsDialog() {
   const dialogRef = this.dialog.open(ScheduleReHarvestSpecificPidsDialogComponent, {
-    width: '600px',
+    width: '1400px',
     panelClass: 'app-schedule-re-harvest-specific-pids-dialog'
   });
 

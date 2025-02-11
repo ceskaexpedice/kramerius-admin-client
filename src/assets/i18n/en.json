@@ -1249,7 +1249,7 @@
     "allLibrariesPresentForTheTitleInTheIndex": "All libraries present for the title in the index",
     "selection": "Selection",
     "disabledLibrary": "Disabled library",
-    "selectLibraries":"Library selection",
+    "selectLibraries":"Libraries  for reharvest",
     "securedChannel":"Secured channel",
     "register":"Kramerius registry",
     "api": "API version",

@@ -1249,7 +1249,7 @@
     "allLibrariesPresentForTheTitleInTheIndex": "Všechny knihovny přítomné u titulu v indexu",
     "selection": "Výběr knihoven",
     "disabledLibrary": "Vypnutá knihovna",
-    "selectLibraries":"Výběr knihoven",
+    "selectLibraries":"Výběr knihoven pro reharvest",
     "securedChannel":"Chráněný kanál",
     "register":"Registr kramériů",
     "api": "Verze API",

@@ -1,20 +1,46 @@
-<form #f="ngForm" (ngSubmit)="schedule()">
-	<mat-progress-bar></mat-progress-bar>
+<!--<form [formGroup]="form" (ngSubmit)="schedule()">-->
+<div>
+
+
+	<mat-progress-bar *ngIf="isLibsLoading" mode="indeterminate"></mat-progress-bar>
+
 	<h2 mat-dialog-title>{{ 'modal.scheduleReHarvestSpecificPids.title' | translate }}</h2>
 	<mat-dialog-content class="app-scrollbar-fix">
 		<div class="app-desc app-mb-4" [innerHtml]="('modal.scheduleReHarvestSpecificPids.message' | translate) + '.'"></div>
 		<div>
+			<div *ngIf="isLibsLoading" class="loading-overlay">
+				<div class="loading-text">
+				  <h5>{{ 'modal.scheduleReHarvestSpecificPids.loadingDataFromLibraries.title' | translate }}</h5>
+				  <p> {{ 'modal.scheduleReHarvestSpecificPids.loadingDataFromLibraries.pleaseWait' | translate }}</p>
+				</div>
+			  </div>			  
+			  
 			<mat-form-field appearance="fill" class="app-w-100 app-download">
 				<mat-label>{{ 'desc.pids' | translate }}</mat-label>
-				<textarea [disabled]="false" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus></textarea>
+				<textarea [disabled]="false" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids"
+				(ngModelChange)="onPidsChange($event)"
+				[placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus>
+
+				</textarea>
+				<!--
 				<mat-icon matSuffix [matTooltip]="'button.loadPidsFromFile' | translate" class="app-cursor-pointer">file_download</mat-icon>
+				-->
 			</mat-form-field>
-			<input style="display: none;" #fileWithPids name="pf" type="file" accept=".txt" />
+			<div class="app-desc app-mb-4" >
+				<p>
+					<mat-icon *ngIf="conflict || selectedCount == 0" color="warn">warning</mat-icon>
+				    <mat-icon *ngIf="!conflict && selectedCount > 0" color="primary">info</mat-icon>
+					{{ summary() }}
+				</p> 
+			</div>
 		</div>
+
+		<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
 
 		<div class="app-desc app-mb-1">{{ 'desc.typeOfHarvest' | translate }}:</div>
 		<div>
-      <mat-radio-group [disabled]="!pids" [(ngModel)]="typeOfHarvest" name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)">
+      <mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDsiabled" [(ngModel)]="typeOfHarvest"  name="typeOfHarvest" 
+	  required (change)="onTypeOfReharvestChanged($event)">
 				<div><mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button></div> 
 				<div><mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button></div> 
 				<div><mat-radio-button value="new_root">{{ 'desc.new_root' | translate }}</mat-radio-button></div> 
@@ -22,34 +48,57 @@
 				<mat-radio-button value="delete_pid">{{ 'desc.delete_pid' | translate }}</mat-radio-button> <br/>
 				<mat-radio-button value="delete_tree">{{ 'desc.delete_tree' | translate }}</mat-radio-button> 
 			</mat-radio-group>
-  	</div>
+	  	</div>
 
 		<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
 
+
 		<div class="app-desc app-mb-1">{{ 'desc.reharvestLibsOption' | translate }}:</div>
 		<div>
-			<mat-radio-group [disabled]="!pids" [(ngModel)]="reharvestLibsOption" name="reharvestLibsOption" (change)="onReharvestLibsOptionChange($event)">
+			<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDsiabled" [(ngModel)]="reharvestLibsOption" name="reharvestLibsOption"
+			(change)="onReharvestLibsOptionChange($event)">
 			  <mat-radio-button value="fromindex" [disabled]="typeOfHarvest==='new_root'">{{ 'desc.allLibrariesPresentForTheTitleInTheIndex' | translate }}</mat-radio-button>
 			  <mat-radio-button value="selection">{{ 'desc.selection' | translate }}</mat-radio-button>
 			</mat-radio-group>
 		</div>
 
 		<ng-container *ngIf="reharvestLibsOption === 'selection'">
+
 			<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
+			<div class="app-desc app-mb-1">Nahled do cdk indexu:</div>			
+			<div>
+				<mat-checkbox  [disabled]="true" checked="{{cdkIndex}}" name="_cdk_">
+					<strong>{{" ČDK" }}</strong> 
+					<ng-container *ngIf="cdkIndex">
+					  <strong><i class="app-desc">&nbsp;{{detailDoc("_cdk_",cdkIndex)}}</i></strong>
+				   </ng-container>
+				   <ng-container *ngIf="!cdkIndex">
+					<strong><i class="app-desc"> Nenalezeno </i></strong>
+				 </ng-container>
+			</mat-checkbox>
+		  </div>
+
+			<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
+
 			<div class="app-desc app-mb-1">{{ 'desc.selectLibraries' | translate }}:</div>			
+
+
 			<div *ngFor="let option of options">
-			  <mat-checkbox [disabled]="!option.enabled" [(ngModel)]="option.selected" name="option_{{option.library.code}}">
-					{{ option.library.code | translate }} 
-					
-					<ng-container *ngIf="!option.enabled">
-						<i class="app-desc">&nbsp;({{ "desc.disabledLibrary" | translate }})</i>
-					</ng-container>
-			  </mat-checkbox>
-			</div>
+					<mat-checkbox *ngIf="option.selected" [disabled]="!option.enabled && !isLibsLoading" [(ngModel)]="option.selected" name="option_{{option.library.code}}">
+						  <strong>{{ option.library.code | translate }}</strong> 
+						  <ng-container *ngIf="!option.enabled">
+							  <i class="app-desc">&nbsp;({{ "desc.disabledLibrary" | translate }})</i>
+						  </ng-container>
+
+						  <ng-container *ngIf="option.enabled">
+							<strong><i class="app-desc">&nbsp;{{detail(option.library.code)}}</i></strong>
+						 </ng-container>
+					</mat-checkbox>
+				  </div>
 		</ng-container>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="!pids" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+		<button mat-flat-button [disabled]="!pids" color="primary" (click)="schedule()" >{{ 'button.schedule' | translate }}</button>
 		<button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
-</form>
+</div>	
