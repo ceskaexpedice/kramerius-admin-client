@@ -1,8 +1,8 @@
-<div class="app-collection app-h-100">
-  <div fxLayout="column" fxFlexFill>
+<div class="app-collection app-fxLayout app-column app-fill app-form-customize">
+  <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
-      <div fxLayout="row" class="app-mb-2">
-        <div fxFlex class="app-breadcrumbs">
+      <div class="app-fxLayout app-row app-mb-2">
+        <div class="app-fxFlex app-breadcrumbs">
           <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
           <a routerLink="/">home</a>
           <span class="app-separator">/</span>
@@ -17,8 +17,8 @@
           </mat-menu>
         </div>
       </div>
-      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
-        <nav mat-tab-nav-bar [tabPanel]="tabPanel" fxFlex>
+      <div class="app-fxLayout app-row app-center-v app-gap-4">
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false" class="app-fxFlex">
           <a mat-tab-link (click)="changeView('detail')" [active]="view == 'detail'">
             <mat-icon class="material-icons-outlined">visibility</mat-icon>{{ 'sites.collections.detail.title' | translate }}
           </a>
@@ -43,17 +43,17 @@
         </div>
       </div>
     </div>
-    <div fxFlex class="app-oa-y">
+    <div class="app-fxFlex app-oa-y">
       <div class="app-container">
-        <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-          <div *ngIf="view === 'content'  && contentView === 'object' ">
+        <mat-card appearance="outlined" class="app-view-header app-fxLayout app-row app-center-v">
+          <div *ngIf="view === 'content'  && contentView === 'object'" class="app-ml-n2 app-mr-2">
             <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="itemSelection.hasValue() && isAllItemsSelected()" [indeterminate]="itemSelection.hasValue() && !isAllItemsSelected()"  [matTooltip]="'desc.selectAllCollections' | translate"></mat-checkbox>
           </div>
-          <div *ngIf="view === 'content'  && contentView === 'cuttings' ">
+          <div *ngIf="view === 'content'  && contentView === 'cuttings'" class="app-ml-n2 app-mr-2">
             <mat-checkbox (change)="$event ? masterCuttingToggle() : null" [checked]="cuttingsSelection.hasValue() && isAllCuttingsSelected()" [indeterminate]="cuttingsSelection.hasValue() && !isAllCuttingsSelected()"  [matTooltip]="'desc.selectAllCollections' | translate"></mat-checkbox>
           </div>
 
-          <div fxFlex class="app-text-cutter">
+          <div class="app-fxFlex app-text-cutter">
             <a (click)="copyTextToClipboard(getCurrentRoute('string', '/collections/' + view + '/'))" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
             </a>
@@ -67,10 +67,8 @@
             <button [disabled]="orderings.length == 0" mat-flat-button color="primary" (click)="saveReorderingOfItems()" class="app-mr-2">{{ 'button.saveOrderChange' | translate }}</button>
             <!-- remove item from collection -->
             <button [disabled]="!itemSelection.hasValue()" mat-flat-button color="warn" (click)="deleteSelectedItemsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
-
           </div>
 
-      
           <div *ngIf="view === 'context'">
             <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
           </div>
@@ -81,21 +79,21 @@
         </mat-card>
 
         <div *ngIf="collection">
-          <mat-card fxLayout="column" *ngIf="view == 'detail'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+          <mat-card *ngIf="view == 'detail'" appearance="outlined" class="app-oa-y app-clean-border-t">
             <app-collection-detail  [collection]="collection" [state]="state" [lang]="lang"></app-collection-detail>
           </mat-card>
 
-          <mat-card fxLayout="column" *ngIf="view == 'edit'" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+          <mat-card *ngIf="view == 'edit'" appearance="outlined" class="app-oa-y app-clean-border-t">
             <app-collection-edit (delete)="onDelete()" (updated)="onUpdated()" [colId]="collection.id" [lang]="lang"></app-collection-edit>
           </mat-card>
 
-          <mat-card fxLayout="column" *ngIf="view == 'content' && items" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+          <div *ngIf="view == 'content' && items" appearance="outlined" class="app-oa-y">
             <app-collection-content  [itemSelection]="itemSelection"  [cuttingsSelection]="cuttingsSelection" [collection]="collection" [state]="state" [items]="items" (dragEvent)="changeOrderings($event)" [collectionActions]="collectionActions" (updated)="onUpdated()" [lang]="lang" [contentView]="contentView"></app-collection-content>
-          </mat-card>
+          </div>
 
-          <mat-card fxLayout="column" *ngIf="view === 'context' && superCollections" class="app-card app-view-border app-maxh-100 app-p-0 app-oa-y">
+          <div *ngIf="view === 'context' && superCollections" appearance="outlined" class="app-oa-y">
             <app-collection-context [collection]="collection" [state]="state" [superCollections]="superCollections" [collectionActions]="collectionActions" (updated)="onUpdated()" [lang]="lang"></app-collection-context>
-          </mat-card>
+          </div>
         </div>
       </div>
     </div>

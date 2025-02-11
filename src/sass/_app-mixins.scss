@@ -156,12 +156,18 @@
 
 
 // set gap
-@mixin setFlexGap() {
+@mixin setFlexGap($direction: null) {
   @each $gap, $val in $gaps {
     &.app-gap-#{$gap} {
       > * {
         &:not(:last-child) {
-          margin-right: #{$val}px;
+          @if ($direction == 'row') {
+            margin-right: #{$val}px;
+          } @else if ($direction == 'column') {
+            margin-bottom: #{$val}px;
+          } @else {
+            margin-right: #{$val}px;
+          }
         }
       }
     }

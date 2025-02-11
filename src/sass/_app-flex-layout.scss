@@ -6,10 +6,12 @@
 
   &.app-row {
     flex-direction: row;
+    @include setFlexGap(row);
   }
 
   &.app-column {
-    flex-direction: column; 
+    flex-direction: column;
+    @include setFlexGap(column);
   }
 
   &.app-wrap {
@@ -30,8 +32,6 @@
     min-width: 100%; 
     width: 100%; 
   }
-
-  @include setFlexGap();
 }
 
 

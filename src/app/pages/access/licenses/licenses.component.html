@@ -8,8 +8,8 @@
 </mat-card>
 <div *ngIf="!errorState" cdkDropList (cdkDropListDropped)="drop($event)">
   <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-  <mat-card appearance="outlined" class="app-view-item app-view-rights" *ngFor="let licence of licenses; let first = first; let last = last" cdkDrag>
-    <mat-card-header fxLayout="row" fxLayoutAlign="start center">
+  <mat-card appearance="outlined" class="app-view-item app-with-header" *ngFor="let licence of licenses; let first = first; let last = last" cdkDrag>
+    <mat-card-header>
       <div fxFlex class="app-left">
         <mat-card-title class="app-mb-2">
           <mat-icon>{{ licence.group == 'local' ? 'location_city' : 'public_outlined' }}</mat-icon>

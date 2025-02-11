@@ -28,14 +28,20 @@
   }
 
   &.app-view-item {
-    @extend .app-p-4, .app-cursor-pointer;
+    @extend .app-p-4;
     
-    &:not(:first-child) {
+
+    &:not(:first-child),
+    &.app-with-header {
       border-top: 0;
     }
 
     &:hover {
       background-color: var(--app-card-bg-hover);
+    }
+
+    img {
+      max-width: 60px;
     }
 
     .mat-mdc-card-header {
