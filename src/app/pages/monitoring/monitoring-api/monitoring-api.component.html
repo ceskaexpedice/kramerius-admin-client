@@ -1,4 +1,4 @@
-<div class="app-fxLayout app-row app-fill">
+<div class="app-fxLayout app-row app-fill app-form-customize">
   <div class="app-left app-oa-y app-pr-4" style="width: 350px;">
     <mat-accordion class="app-view-default" multi>
       <mat-expansion-panel expanded  *ngFor="let group of groups | keyvalue">
@@ -18,7 +18,7 @@
           </div>
         </div>
       </mat-expansion-panel>
-      <mat-expansion-panel expanded >
+      <mat-expansion-panel expanded>
         <mat-expansion-panel-header>
           <mat-panel-title>{{ "desc.date" | translate }}</mat-panel-title>
         </mat-expansion-panel-header>
