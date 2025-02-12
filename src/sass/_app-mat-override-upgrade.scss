@@ -372,6 +372,21 @@
   }
 }
 
+// CHIPLIST
+.mat-mdc-chip-listbox {
+  .mat-mdc-chip {
+    &.mat-mdc-standard-chip {
+      .mat-mdc-chip-action-label {
+        color: var(--app-color-lightnes);
+      }
+
+      .mat-mdc-chip-remove {
+        color: var(--app-color-lightnes);
+      }
+    }
+  }   
+}
+
 // DENSITY - FORMS
 .app-form-customize {
 
