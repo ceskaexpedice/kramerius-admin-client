@@ -52,8 +52,16 @@
   --app-expansion-header-description-text-weight: 400;
 
   // MATERIAL
-  --mdc-filled-button-container-height: 34px;
 
+  // button
+  --mdc-filled-button-container-height: 36px;
+
+  // toogle botton
+  --mat-standard-button-toggle-height: var(--mdc-filled-button-container-height);
+  --mat-standard-button-toggle-selected-state-text-color: var(--app-color-lightnes);
+  --mat-standard-button-toggle-selected-state-background-color: var(--app-color-primary);
+
+  // card
   --mdc-outlined-card-container-shape: 0;
   --mat-card-title-text-weight: 500;;
 

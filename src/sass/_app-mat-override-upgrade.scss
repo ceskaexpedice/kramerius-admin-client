@@ -377,6 +377,7 @@
 
   @include mat.form-field-density(-6);
   @include mat.icon-button-density(-6);
+  //@include mat.button-density(0);
 
   .mat-mdc-form-field-infix {
     display: flex;
