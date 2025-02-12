@@ -12,14 +12,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { Collection } from 'src/app/models/collection.model';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, 
     MatTooltipModule, MatProgressBarModule, MatCheckboxModule
   ],

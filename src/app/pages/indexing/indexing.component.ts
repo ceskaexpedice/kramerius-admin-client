@@ -22,7 +22,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
@@ -30,7 +29,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatTableModule,
     MatTooltipModule, MatTabsModule, MatCheckboxModule, MatProgressBarModule, MatButtonToggleModule,
     MatPaginatorModule
