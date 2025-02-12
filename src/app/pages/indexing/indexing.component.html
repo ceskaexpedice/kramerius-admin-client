@@ -1,4 +1,42 @@
-<div class="app-indexing app-h-100">
+<div class="app-indexing app-fxLayout app-column app-fill">
+  <div class="app-fxLayout app-column app-fill">
+		<div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'sites.indexing.title' | translate }}</span>
+      </div>
+      <div>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
+          <a mat-tab-link (click)="changeView('object')" [active]="view == 'object'"><mat-icon class="material-icons-outlined">data_object</mat-icon>{{ 'sites.indexing.object.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('model')"  [active]="view == 'model'"><mat-icon class="material-icons-outlined">category</mat-icon>{{ 'sites.indexing.model.title' | translate }}</a>
+        </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+      </div>
+    </div>
+		<div class="app-fxFlex app-container-fluid app-oa-y">
+			<ng-container *ngIf="view == 'object'">
+				<mat-card appearance="outlined" class="app-view-title-flex">
+					<mat-card-header>
+						<mat-card-title class="app-fxLayout app-row app-gap-4 app-mb-2">
+							<div class="app-fxFlex">{{ 'desc.object' | translate }}</div>
+							<span class="app-badge app-version">{{ 'batch.currentVersionOfTheIndexer' | translate }}:&#160;<strong>{{ currentIndexerVersion }}</strong></span>
+						</mat-card-title>
+					</mat-card-header>
+					<mat-card-content>
+						{{ 'comment.indexationObject' | translate }}.
+					</mat-card-content>
+					<mat-card-actions>
+						<button mat-flat-button color="primary" (click)="openIndexationByPidDialog()">{{ 'button.indexTheObject' | translate }}</button>
+					</mat-card-actions>
+				</mat-card>
+			</ng-container>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="app-indexing app-h-100">
   <div fxLayout="column" fxFlexFill>
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
@@ -70,11 +108,6 @@
 							<mat-button-toggle value="indexed_old" (change)="onChangeStateFilter($event.value)" [matTooltip]="'comment.indexationIndexedObsolete' | translate" matTooltipPosition="above">{{ 'button.indexedObsolete' | translate }}</mat-button-toggle>
 						</mat-button-toggle-group>
 					</div>
-					<!-- to delete after test <div>
-						<button mat-flat-button color="primary" (click)="openIndexationsByMultiplePidsDialog()" matTooltip="Indexovat všechny aktuálně zobrazené objekty - každý ve vlastním procesu" [disabled]="loading || !selectedModel || noCurrentItems()">
-							<mat-icon>play_arrow</mat-icon>{{ 'button.indexInBulk' | translate }}
-						</button>
-					</div> -->
 				</div>
 				<div class="app-mb-4 app-oh">
 					<div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
@@ -111,14 +144,6 @@
 									{{ 'desc.noRecordFound' | translate }}
 								</td>
 							</ng-container>
-							<!-- to delete after testing <ng-container matColumnDef="action">
-								<th mat-header-cell *matHeaderCellDef ></th>
-								<td mat-cell *matCellDef="let element">
-									<button (click)="openIndexationByPidDialog(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button [matTooltip]="'button.index' | translate" matTooltipPosition="below" color="primary">
-										<mat-icon>play_arrow</mat-icon>
-									</button>
-								</td>
-							</ng-container> -->
 							<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 							<tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[buildUserClientUrl(row.pid)]" (click)="selection.toggle(row)"></tr>
 							<tr mat-footer-row *matFooterRowDef="['disclaimer']" [hidden]="!noCurrentItems()"></tr>
@@ -132,9 +157,6 @@
 						<div *ngIf="scheduledIndexationsCounter" class="app-desc" [innerHtml]="'comment.indexationScheduledByIndexing' | translate : {value: scheduledIndexationsCounter}"></div>
 					</div>
 					<div>
-						<!-- <button mat-flat-button (click)="loadNextBatchOfItems()" [disabled]="loading || !selectedModel || !stateFilter"	[matTooltip]="'comment.indexationLoadMore' | translate" class="app-mr-2">
-							{{ 'button.loadMore' | translate }}
-						</button> -->
 						<button mat-flat-button color="primary" (click)="openIndexationsByMultiplePidsDialog()" [disabled]="loading || !selectedModel || !stateFilter || noCurrentItems() || !selection.hasValue()" [matTooltip]="'comment.indexationIndexInBulk' | translate">
 							{{ 'button.indexSelectedObjects' | translate }}
 						</button>
@@ -143,4 +165,4 @@
 			</ng-container>
 		</div>
 	</div>
-</div>
+</div> -->

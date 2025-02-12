@@ -2,6 +2,33 @@
 
 // CARD
 .mat-mdc-card {
+  // header
+  .mat-mdc-card-header {
+    .mat-mdc-card-title {
+      .mat-icon {
+        @include setIcon(20, $position: bottom);
+      }
+    }
+  }
+
+  // content
+  .mat-mdc-card-content {
+    // ----
+  }
+
+  // actions
+  .mat-mdc-card-actions {
+    padding: 16px;
+  }
+
+  &.app-view-title-flex {
+    .mat-mdc-card-header {
+      .mat-mdc-card-header-text {
+        width: 100%;
+      }
+    }
+  }
+
   &.app-hover{
     &:hover {
       background-color: var(--app-card-bg-hover);
@@ -29,8 +56,11 @@
 
   &.app-view-item {
     @extend .app-p-4;
-    
 
+    .mat-mdc-card-header {
+      @extend .app-p-0;
+    }
+    
     &:not(:first-child),
     &.app-with-header {
       border-top: 0;
@@ -42,18 +72,6 @@
 
     img {
       max-width: 60px;
-    }
-
-    .mat-mdc-card-header {
-      @extend .app-p-0;
-
-      .mat-mdc-card-title {
-        //@extend .app-mb-2;
-
-        .mat-icon {
-          @include setIcon(20, $position: bottom);
-        }
-      }
     }
 
     // drag and drop view
