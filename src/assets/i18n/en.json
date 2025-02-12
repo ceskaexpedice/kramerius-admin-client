@@ -1276,10 +1276,12 @@
     "endpointUrl":  "Endpoint URL",
     "labels": "Labels",
     "ipAddress": "IP address",
-     "query": "Query",
-     "httpMethod": "HTTP method",
-     "resource": "Resource",
-     "workers": "Workers",
-     "recordDetail": "Record detail"
+    "query": "Query",
+    "httpMethod": "HTTP method",
+    "resource": "Resource",
+    "workers": "Workers",
+    "recordDetail": "Record detail",
+    "id": "Id",
+    "count": "Count"
   }
 }

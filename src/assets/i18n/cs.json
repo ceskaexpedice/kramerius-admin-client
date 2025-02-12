@@ -1280,6 +1280,8 @@
     "httpMethod": "HTTP metoda",
     "resource": "Zdroj",
     "workers": "Workers",
-    "recordDetail": "Detail záznamu"
+    "recordDetail": "Detail záznamu",
+    "id": "Id",
+    "count": "Počet"
   }
 }
