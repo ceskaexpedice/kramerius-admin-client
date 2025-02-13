@@ -1,8 +1,8 @@
-<div class="app-collections app-h-100">
-  <div fxLayout="column" fxFlexFill>
+<div class="app-cdk-collections app-fxLayout app-column app-fill app-form-customize">
+  <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
-      <div fxLayout="row" class="app-mb-2">
-        <div fxFlex class="app-breadcrumbs">
+      <div class="app-fxLayout app-row app-mb-2">
+        <div class="app-fxFlex app-breadcrumbs">
           <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
           <a routerLink="/">home</a>
           <span class="app-separator">/</span>
@@ -15,13 +15,15 @@
           </mat-menu>
         </div>
       </div>
-      <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center" class="app-mb-4">
-        <div fxFlex>
-          <input class="app-input-autocomplete app-mr-2" type="text" [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
-          <button [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()" class="app-mr-2">{{ 'button.createNewCollection' | translate }}</button>
-          <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="warn" (click)="deleteSelectedCollections()" class="app-mr-2">{{ 'button.deleteSelectedCollections' | translate }}</button>
-          <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="primary" (click)="openCreateCollectionBackupDialog()" class="app-mr-2">{{ 'button.createBackup' | translate }}</button>
-          <button mat-flat-button color="primary" (click)="openRestoreFromCollectionBackupDialog()" class="app-mr-1">{{ 'button.restoreFromBackup' | translate }}</button>
+      <div class="app-fxLayout app-row app-center-v app-pt-2 app-pb-4">
+        <div class="app-fxFlex app-fxLayout app-row app-center-v app-gap-2">
+          <mat-form-field appearance="outline" class="app-search">
+            <input matInput [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
+          </mat-form-field>
+          <button [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
+          <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="warn" (click)="deleteSelectedCollections()">{{ 'button.deleteSelectedCollections' | translate }}</button>
+          <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="primary" (click)="openCreateCollectionBackupDialog()">{{ 'button.createBackup' | translate }}</button>
+          <button mat-flat-button color="primary" (click)="openRestoreFromCollectionBackupDialog()">{{ 'button.restoreFromBackup' | translate }}</button>
           <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage('cdk-collections')" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
         </div>
         <div>
@@ -29,19 +31,20 @@
         </div>
       </div>
       <div>
-        <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
           <a mat-tab-link (click)="changeView('cdk')" [active]="view == 'cdk'"><mat-icon class="material-icons-outlined">{{ 'sites.collections.cdk.icon' | translate  }}</mat-icon>{{ 'sites.collections.cdk.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('diglib')" [active]="view == 'diglib'"><mat-icon class="material-icons-outlined">{{ 'sites.collections.dgLib.icon' | translate  }}</mat-icon>{{ 'sites.collections.dgLib.title' | translate }}</a>
        </nav>
        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
-    <div fxFlex class="app-container-fluid app-oh">
+
+    <div class="app-fxFlex app-container-fluid app-oh">
       <div class="app-table-wrapper app-maxh-100 app-view-border app-oa-y" *ngIf="!errorState">
         <app-cdk-collections-cdk *ngIf="view == 'cdk'" [standaloneOnly]="standaloneOnly"></app-cdk-collections-cdk>
         <app-cdk-collections-diglib *ngIf="view == 'diglib'" [standaloneOnly]="standaloneOnly"></app-cdk-collections-diglib>
       </div>
-      <mat-card *ngIf="errorState" class="app-view-alert app-warn">
+      <mat-card *ngIf="errorState" appearance="outlined" class="app-view-alert app-warn">
         <mat-card-content>
           <mat-icon>error</mat-icon>{{ errorMessage }}
         </mat-card-content>

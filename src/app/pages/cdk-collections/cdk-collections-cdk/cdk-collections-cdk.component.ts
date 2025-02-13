@@ -32,11 +32,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
     MatTooltipModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatPaginatorModule,
     MatTableModule, MatSortModule

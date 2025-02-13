@@ -28,15 +28,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CdkCollectionsCdkComponent } from "./cdk-collections-cdk/cdk-collections-cdk.component";
 import { CdkCollectionsDiglibComponent } from "./cdk-collections-diglib/cdk-collections-diglib.component";
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule, MatInputModule,
     MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
     MatTooltipModule, MatSlideToggleModule, CdkCollectionsCdkComponent, CdkCollectionsDiglibComponent],
   selector: 'app-cdk-collections',

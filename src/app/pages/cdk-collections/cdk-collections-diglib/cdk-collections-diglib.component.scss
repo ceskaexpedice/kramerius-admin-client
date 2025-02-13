@@ -1,11 +1,4 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-@import '../../../../sass/app-variables.scss';
-@import '../../../../sass/app-mixins.scss';
-@import '../../../../sass/app-global.scss';
-
-.mat-cell {
+.mat-mdc-cell {
   &.mat-column-name_cze {
     width: 13%;
   }
@@ -19,11 +12,6 @@
   }
 
   &.mat-column-description_cze {
-    width: 70%;
-  }
-  
-  &.mat-column-action {
-    @extend .app-pl-2;
-    width: 50px;
+    width: 65%;
   }
 }
