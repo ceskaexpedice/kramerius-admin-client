@@ -288,12 +288,20 @@
           width: 40px;
           text-align: center;
 
-          @include mat.icon-button-density(-4);
+          /* @include mat.icon-button-density(-4);
 
           .mdc-icon-button {     
             .mat-icon {
               @include setIcon(20);
             }
+          } */
+        }
+
+        @include mat.icon-button-density(-4);
+
+        .mdc-icon-button {     
+          .mat-icon {
+            @include setIcon(20);
           }
         }
 

@@ -10,17 +10,17 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { ShowMappingDialogComponent } from 'src/app/dialogs/show-mapping-dialog/show-mapping-dialog.component';
 import { ShowSeChannelDialogComponent } from 'src/app/dialogs/show-sechannel-dialog/show-sechannel-dialog.component';
 import { Library } from 'src/app/models/cdk.library.model';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
-    MatIconModule, MatSlideToggleModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatIconModule, MatSlideToggleModule, MatButtonModule,
     MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule
   ],
   selector: 'app-cdk-proxy',
