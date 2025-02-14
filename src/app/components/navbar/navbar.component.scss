@@ -2,6 +2,7 @@
   z-index: 10;
 
   .mat-mdc-button{
+    --mat-text-button-horizontal-padding: 12px;
     color: var(--app-color-lightnes);
 
     &:hover {
