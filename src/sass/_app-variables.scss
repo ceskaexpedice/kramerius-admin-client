@@ -1,0 +1,219 @@
+// --- VARIABLES ---
+
+@import './app-theme.scss';
+
+// css variables
+:root {
+  @include mat.all-component-themes($app-theme);
+
+  /* $mat-blue-gray: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette);
+  $mat-red: mat.m2-get-color-from-palette(mat.$m2-red-palette);
+  $mat-teal: mat.m2-get-color-from-palette(mat.$m2-teal-palette);
+  $mat-brown: mat.m2-get-color-from-palette(mat.$m2-brown-palette);
+  $mat-green: mat.m2-get-color-from-palette(mat.$m2-green-palette);
+  $mat-orange: mat.m2-get-color-from-palette(mat.$m2-orange-palette);
+  $mat-purple: mat.m2-get-color-from-palette(mat.$m2-purple-palette);
+  $mat-cyan: mat.m2-get-color-from-palette(mat.$m2-cyan-palette);
+  $mat-lime: mat.m2-get-color-from-palette(mat.$m2-lime-palette);
+  $mat-amber: mat.m2-get-color-from-palette(mat.$m2-amber-palette);
+ */
+
+  // colors
+  --app-color-lightnes: #ffffff;
+  --app-color-lightnes-rgb: 255, 255, 255;
+  --app-color-darknes: #000000;
+  --app-color-darknes-rgb: 0, 0, 0;
+  --app-color-primary: #{mat.m2-get-color-from-palette($app-pprimary)};
+  --app-color-warn: #{mat.m2-get-color-from-palette($app-pwarn)};
+  --app-color-accent: #{mat.m2-get-color-from-palette($app-paccent)};
+  --app-color-dev: #{mat.m2-get-color-from-palette($app-pdev)};
+
+  --app-color-info: #{mat.m2-get-color-from-palette(mat.$m2-amber-palette, 900)};
+  --app-color-success: #{mat.m2-get-color-from-palette(mat.$m2-green-palette, 800)};
+  --app-color-disabled: var(--app-gray-4);
+
+  --app-color-primary-700: #{mat.m2-get-color-from-palette($app-pprimary, 700)};
+  --app-color-accent-300: #{mat.m2-get-color-from-palette($app-paccent, 300)};
+
+  // gray colors
+  --app-gray-0: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 50))};
+  --app-gray-1: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 100))};
+  --app-gray-2: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 200))};
+  --app-gray-3: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 300))};
+  --app-gray-4: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 400))};
+  --app-gray-5: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 500))};
+  --app-gray-6: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 600))};
+  --app-gray-7: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 700))};
+  --app-gray-8: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 800))};
+  --app-gray-9: #{mat.m2-get-color-from-palette(mat.m2-define-palette(mat.$m2-gray-palette, 900))};
+
+  --app-body-bg: var(--app-color-lightnes);
+  --app-body-color: var(--app-color-darknes);
+
+  --app-container: 1280px;
+
+  --app-navbar-avatar-size: 40px;
+  --app-navbar-avatar-bg-color: #{mat.m2-get-color-from-palette(mat.$m2-amber-palette, 900)};
+
+  --app-table-color-bg: var(--app-color-lightnes);
+  --app-table-color: var(--app-gray-7);
+  --app-table-color-border: var(--app-card-border-color);
+  --app-table-color-bg-hover: var(--app-gray-2);
+
+  --app-footer-bg-color: var(--app-color-darknes);
+  --app-footer-color: var(--app-gray-5);
+
+  // home
+  --app-home-card-gap: 32px;
+  --app-home-card-width: 25%;
+  --app-home-card-height: 260px;
+
+  // global
+  --app-card-view-header-height: 53px;
+  --app-card-border-color: var(--mdc-outlined-card-outline-color);
+  --app-card-bg-hover: var(--app-gray-1);
+
+  --app-expansion-header-description-text-weight: 400;
+
+  --app-badge-size: 40px;
+  --app-badge-border-radius: calc(#{var(--app-badge-size)} / 2);
+  --app-badge-version-color: var(--app-color-accent);
+
+  --app-border-radius: 4px;
+
+
+  // MATERIAL
+
+  // toolbar
+  --mat-toolbar-standard-height: 64px;
+
+  // button
+  --mdc-filled-button-container-height: 36px;
+
+  // toogle botton
+  --mat-standard-button-toggle-height: var(--mdc-filled-button-container-height);
+  --mat-standard-button-toggle-selected-state-text-color: var(--app-color-lightnes);
+  --mat-standard-button-toggle-selected-state-background-color: var(--app-color-primary);
+
+  // card
+  --mdc-outlined-card-container-shape: 0;
+  --mdc-outlined-card-outline-color: rgba(0, 0, 0, 0.12);
+  --mat-card-title-text-weight: 500;
+ 
+  // acordion
+  --mat-expansion-header-collapsed-state-height: 48px;
+  --mat-expansion-header-expanded-state-height: var(--mat-expansion-header-collapsed-state-height);
+  --mat-expansion-header-text-weight: 500;
+
+  // table
+  --mat-table-row-item-container-height: 48px;
+
+  // checkbox
+  --mdc-checkbox-state-layer-size: calc(40px - var(--app-checkbox-reduction));
+  --mat-checkbox-label-text-size: 14px;
+  --app-checkbox-default-size: 18px;
+  --app-checkbox-reduction: 4px;
+}
+
+// todp
+// radio button size
+// toogle button size
+
+
+// GAPS
+$gaps: (
+  "0": 0,
+  "1": 4,
+  "2": 8,
+  "3": 12,
+  "4": 16,
+  "5": 20,
+  "6": 24,
+  "7": 28,
+  "8": 32,
+);
+
+// icon size
+$iconSize: (
+  "14": 14,
+  "15": 15,
+  "16": 16,
+  "17": 17,
+  "18": 18,
+  "19": 19,
+  "20": 20,
+  "21": 21,
+  "22": 22,
+  "23": 23,
+);
+
+// ALERTS
+$alerts: (
+  warn: var(--app-color-warn),
+  info: var(--app-color-info),
+  success:  var(app-color-success)
+);
+
+// STATES
+$states: (
+  planned: #7b7b7b,
+  running: #456aa5,
+  finished: #45a55a,
+  failed: var(--app-color-warn),
+  killed: #ca7023,
+  not-running: #ca7023,
+  warning: #ab493f,
+  too-big: #ab443f,
+  waiting_for_approve: #a44c04,
+  canceled: #a2a2a0,
+
+  session: var(--app-color-lightnes),
+  keyword: var(--app-color-darknes),
+  default: var(--app-gray-6),
+
+  // for reharvest jobs
+  is-reharvest-from-core: #faf7e3,
+  is-reharvest-from-admin: #f0ffee,
+
+  // monitoring
+  duration-low: #faf7e4,
+  duration-high: #faeee3,
+  duration-critical: #fae3e3,
+);
+
+// DASHBOARD
+$dashboard: (
+  object: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette, 400),
+  object-actions: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette, 400),
+  object-accessibility: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette, 400),
+  object-in-collections: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette, 400),
+  object-others: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette, 400),
+
+  import-foxml: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette, 400),
+  import-ndk: mat.m2-get-color-from-palette(mat.$m2-blue-gray-palette, 400),
+
+  access-actions: mat.m2-get-color-from-palette(mat.$m2-red-palette, 400),
+  access-roles: mat.m2-get-color-from-palette(mat.$m2-red-palette, 400),
+  access-licenses: mat.m2-get-color-from-palette(mat.$m2-red-palette, 400),
+  access-params: mat.m2-get-color-from-palette(mat.$m2-red-palette, 400),
+
+  processes: mat.m2-get-color-from-palette(mat.$m2-teal-palette, 400),
+  processes-standard-output: mat.m2-get-color-from-palette(mat.$m2-teal-palette, 400),
+  processes-error-output: mat.m2-get-color-from-palette(mat.$m2-teal-palette, 400),
+
+  collections: mat.m2-get-color-from-palette(mat.$m2-brown-palette, 400),
+  collections-detail: mat.m2-get-color-from-palette(mat.$m2-brown-palette, A400),
+  collections-edit: mat.m2-get-color-from-palette(mat.$m2-brown-palette, A400),
+  collections-content: mat.m2-get-color-from-palette(mat.$m2-brown-palette, A400),
+  collections-context: mat.m2-get-color-from-palette(mat.$m2-brown-palette, A400),
+
+  indexing-object: mat.m2-get-color-from-palette(mat.$m2-green-palette, 400),
+  indexing-model: mat.m2-get-color-from-palette(mat.$m2-orange-palette, A700),
+
+  repository-repository-management: mat.m2-get-color-from-palette(mat.$m2-purple-palette, A700),
+  repository-bulk-data-editing: mat.m2-get-color-from-palette(mat.$m2-cyan-palette, A700),
+  repository-statistics: mat.m2-get-color-from-palette(mat.$m2-lime-palette, 700),
+
+  statistics-graphs: mat.m2-get-color-from-palette(mat.$m2-orange-palette, A700),
+  statistics-most-viewed-documents: mat.m2-get-color-from-palette(mat.$m2-orange-palette, A700)
+);
