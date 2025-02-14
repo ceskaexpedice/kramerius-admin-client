@@ -1,13 +1,5 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-@import '../../../../sass/app-variables.scss';
-@import '../../../../sass/app-mixins.scss';
-@import '../../../../sass/app-global.scss';
-
-
 .app-row {
-  @extend .app-cursor-pointer;
+  cursor: pointer;
   user-select: none;
   font-size: 14px;
   height: 34px;

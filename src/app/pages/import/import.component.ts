@@ -18,12 +18,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { TreeComponent } from './tree/tree.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule,
     MatTooltipModule, MatTabsModule, TreeComponent
   ],

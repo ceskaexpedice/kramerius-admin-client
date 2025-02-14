@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { Tree } from 'src/app/models/tree.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ImportService } from 'src/app/services/import.service';
@@ -14,7 +13,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatIconModule, MatTooltipModule, MatProgressSpinnerModule
   ],
   selector: 'app-tree',
