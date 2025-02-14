@@ -4,11 +4,11 @@
 @include mat.core();
 
 //@import 'sass/app-theme.scss';
-@import 'sass/app-variables.scss';
+//@import 'sass/app-variables.scss';
 @import 'sass/app-variables-upgrade.scss';
 @import "sass/app-mixins";
 @import 'sass/app-flex-layout.scss';
 @import 'sass/app-global.scss';
-@import 'sass/app-mat-override.scss';
+//@import 'sass/app-mat-override.scss';
 @import 'sass/app-mat-override-upgrade.scss';
 @import 'sass/app-layout.scss';

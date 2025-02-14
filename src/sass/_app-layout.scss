@@ -25,7 +25,7 @@ body {
   .app-container {
     padding: 16px !important;
     margin: 0 auto;
-    max-width: $app-container;
+    max-width: var(--app-container);
     width: 100%;
   }
 

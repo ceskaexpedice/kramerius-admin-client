@@ -107,7 +107,7 @@
       &.app-actions {
         a {
           @extend .app-ml-4;
-          color: $app-color-primary;
+          color: var(--app-color-primary);
 
           .mat-icon {
             @include setIcon(20);
@@ -131,7 +131,7 @@
       top: -17px;
       right: -1px;
       background-color: var(--app-color-dev);
-      color: $app-color-lightnes;
+      color: var(--app-color-lightnes);
       font-size: 12px;
       padding: 1px 4px;
     }
@@ -170,7 +170,7 @@
 
           a {
             @extend .app-ml-4;
-            color: $app-color-primary;
+            color: var(--app-color-primary);
   
             .mat-icon {
               @include setIcon(20);
@@ -242,12 +242,12 @@
   tbody {
     .mat-mdc-row {
       &:hover {
-        background: $app-table-color-bg-hover;
+        background: var(--app-table-color-bg-hover);
       }
   
       &.active {    
         &:hover {
-          background: $app-table-color-bg-hover;
+          background: var(--app-table-color-bg-hover);
         }
       }
 
@@ -258,14 +258,14 @@
       }
 
       &.app-not-allowed {
-        color: $app-color-disabled !important; 
+        color: var(--app-color-disabled) !important; 
   
         .mat-cell, a, .mat-icon {
-          color: $app-color-disabled !important; 
+          color: var(--app-color-disabled) !important; 
         }
 
         .app-badge {
-          background-color: $app-color-disabled !important;
+          background-color: var(--app-color-disabled) !important;
         }
       }
 
@@ -366,7 +366,7 @@
     bottom: 0px;
     position: sticky;
     z-index: 10;
-    border-top: 1px solid $app-table-color-border;
+    border-top: 1px solid var(--app-table-color-border);
   }
 }
 
@@ -394,6 +394,66 @@
     }
   }   
 }
+
+// TABS
+.mat-mdc-tab-nav-bar {
+  &.mat-mdc-tab-header {
+    @extend .app-clean-border;
+  }
+
+  .mat-mdc-tab-links {
+    .mat-mdc-tab-link {
+      opacity: unset;
+    
+      &:hover {
+        text-decoration: none;
+      }
+
+      &.mdc-tab--active {
+        font-weight: 900;
+
+        .mdc-tab__text-label {
+          color: black;
+        }
+      }
+
+      &:not(.mdc-tab--active) {
+        color: var(--app-gray-6);
+        font-weight: normal;
+
+        .mat-badge-content,
+        .app-badge {
+          background-color: var(--app-gray-5);
+        }
+      }
+
+      .mat-icon {
+        @extend .app-mr-2;
+        @include setIcon(20);
+      }
+
+      .mat-badge {
+        .mat-icon {
+          @include setIcon($position: sub);
+        }
+
+        .mat-badge-content {
+          right: -6px;
+        }
+
+        .app-push-right {
+          margin-right: 24px;
+        }
+      }
+    }
+  }
+}
+
+// ICON
+.mat-icon {
+  @include setIconSize();
+}
+
 
 // DENSITY - FORMS
 .app-form-customize {

@@ -18,7 +18,7 @@
     }
 
     &.app-expanded-row {
-      background-color: $app-gray-1;
+      background-color: var(--app-gray-1);
     }
 
     .mat-cell {
