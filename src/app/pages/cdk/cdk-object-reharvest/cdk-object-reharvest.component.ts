@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
@@ -39,7 +41,7 @@ const ELEMENT_DATA: objectReharvest[] = [
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
-    MatIconModule, MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule
+    MatIconModule, MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule, MatPaginatorModule, MatProgressBarModule
   ],
   selector: 'app-cdk-object-reharvest',
   templateUrl: './cdk-object-reharvest.component.html',
@@ -62,6 +64,11 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadReharvests();
+  }
+
+  isLoading() {
+    // todo
+    return true;
   }
 
 

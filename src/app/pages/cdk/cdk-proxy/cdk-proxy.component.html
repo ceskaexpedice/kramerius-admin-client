@@ -1,8 +1,5 @@
 <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y">
-  <div>
-    <p><mat-slide-toggle>Slide me!</mat-slide-toggle></p>
-
-  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
   <table mat-table [dataSource]="dataSource" class="app-w-100">
     <ng-container matColumnDef="logo">
       <th mat-header-cell *matHeaderCellDef>{{ 'Logo'}}</th>

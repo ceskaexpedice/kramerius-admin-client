@@ -6,6 +6,7 @@
   </mat-card>
 
   <div class="app-fxFlex app-table-wrapper app-view-border app-maxh-100 app-oa-y">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
     <table mat-table [dataSource]="dataSource" class="app-w-100">
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.date' | translate }}</th>
@@ -115,6 +116,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns; let last = last; let first = first" [class.app-last]="last" [class.app-first]="first" [ngClass]="isReharvestFromCore(row) ? 'app-is-reharvest-from-core' : 'app-is-reharvest-from-admin'"></tr>
     </table>
+    <mat-paginator *ngIf="!isLoading()"  hidePageSize="false" [pageSizeOptions]="[50, 100, 1000]"></mat-paginator>
   </div>
 </div>
 

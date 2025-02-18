@@ -16,12 +16,13 @@ import { Library } from 'src/app/models/cdk.library.model';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatIconModule, MatSlideToggleModule, MatButtonModule,
-    MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule
+    MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule, MatProgressBarModule
   ],
   selector: 'app-cdk-proxy',
   templateUrl: './cdk-proxy.component.html',
@@ -353,6 +354,11 @@ export class CdkProxyComponent implements OnInit {
       });
     });
   }
+  }
+
+  isLoading() {
+    // todo
+    return true;
   }
 
   public toggle(code:string, event: MatSlideToggleChange) {
