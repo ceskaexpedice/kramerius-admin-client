@@ -137,7 +137,7 @@ export class ImportComponent implements OnInit {
       data: {
         type: this.type,
         licenses: this.licenses},
-      width: '600px',
+      width: '630px',
       panelClass: 'app-run-import-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {

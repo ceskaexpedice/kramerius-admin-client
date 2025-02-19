@@ -485,9 +485,35 @@
 .mat-mdc-select-panel {
   .mat-mdc-option {
     min-height: var(--app-select-option-min-height);
+
+    .mat-icon {
+      margin-right: 8px;
+    }
+  }
+
+  &.app-licenses {
+    .mat-mdc-option {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      height: auto;
+      line-height: normal;
+
+      .app-license-desc {
+        font-weight: 500;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--app-card-border-color);
+      }
+
+      &:not(.mat-mdc-option-active) {
+        .app-license-desc {
+          color: var(--app-gray-7);
+        }
+      }
+    }
   }
 }
-
 
 // DENSITY - FORMS
 .app-form-customize {
