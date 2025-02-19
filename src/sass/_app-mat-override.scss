@@ -489,6 +489,11 @@
     .mat-icon {
       margin-right: 8px;
     }
+
+    &.app-add {
+      font-weight: 800;
+      color: var(--app-color-primary);
+    }
   }
 
   &.app-licenses {

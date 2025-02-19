@@ -1282,6 +1282,8 @@
     "workers": "Workers",
     "recordDetail": "Detail záznamu",
     "id": "Id",
-    "count": "Počet"
+    "count": "Počet",
+    "instance": "Instance",
+    "rule": "Pravidlo"
   }
 }

@@ -13,7 +13,6 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { FlexLayoutModule } from "ngx-flexible-layout";
 import { MatRadioModule } from "@angular/material/radio";
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -23,7 +22,7 @@ import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
+  imports: [CommonModule, RouterModule, TranslateModule,
     FormsModule, ReactiveFormsModule, MatButtonModule,
     MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
     MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule
