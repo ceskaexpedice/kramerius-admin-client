@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ mode == 'new' ? ('modal.newRight.titleNew' | translate) : ('modal.newRight.titleEdit' | translate) }}</h2>
-<mat-dialog-content class="mat-typography">
-  <mat-form-field appearance="fill" class="app-w-100">
+<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+  <mat-form-field appearance="outline" class="app-w-100">
     <mat-label>{{ 'desc.role' | translate }}</mat-label>
     <mat-select [(value)]="right.role">
       <mat-option (click)="openAddNewRoleDialog()" class="app-add">
@@ -13,7 +13,7 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="app-w-100">
+  <mat-form-field appearance="outline" class="app-w-100">
     <mat-label>{{ 'desc.condition' | translate }}</mat-label>
     <mat-select [(value)]="right.condition">
       <mat-option value="-" (click)="selectCondition(null)">-</mat-option>
@@ -23,7 +23,7 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.paramsNecessary">
+  <mat-form-field appearance="outline" class="app-w-100" *ngIf="right.condition && right.condition.paramsNecessary">
     <mat-label>{{ 'desc.parameter' | translate }}</mat-label>
     <mat-select [(value)]="right.condition.params">
       <mat-option (click)="openAddNewParamDialog()" class="app-add">
@@ -41,7 +41,7 @@
     </div> -->
   </mat-form-field>
 
-  <mat-form-field appearance="fill" class="app-w-100" *ngIf="right.condition && right.condition.isLabelAssignable">
+  <mat-form-field appearance="outline" class="app-w-100" *ngIf="right.condition && right.condition.isLabelAssignable">
     <mat-label>{{ 'desc.license' | translate }}</mat-label>
     <mat-select [(value)]="right.condition.license">
       <mat-option value="-" >-</mat-option>

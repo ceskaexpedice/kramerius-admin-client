@@ -25,11 +25,14 @@
   --app-color-darknes-rgb: 0, 0, 0;
   --app-color-primary: #{mat.m2-get-color-from-palette($app-pprimary)};
   --app-color-warn: #{mat.m2-get-color-from-palette($app-pwarn)};
+  --app-color-warn-rgb: 229, 57,53;
   --app-color-accent: #{mat.m2-get-color-from-palette($app-paccent)};
   --app-color-dev: #{mat.m2-get-color-from-palette($app-pdev)};
 
   --app-color-info: #{mat.m2-get-color-from-palette(mat.$m2-amber-palette, 900)};
+  --app-color-info-rgb: 255, 111, 0;
   --app-color-success: #{mat.m2-get-color-from-palette(mat.$m2-green-palette, 800)};
+  --app-color-success-rgb: 46, 125, 50;
   --app-color-disabled: var(--app-gray-4);
 
   --app-color-primary-700: #{mat.m2-get-color-from-palette($app-pprimary, 700)};
@@ -81,6 +84,7 @@
 
   --app-border-radius: 4px;
 
+  --app-select-option-min-height: 36px;
 
   // MATERIAL
 
@@ -113,6 +117,9 @@
   --mat-checkbox-label-text-size: 14px;
   --app-checkbox-default-size: 18px;
   --app-checkbox-reduction: 4px;
+
+  // dialog
+  --mat-dialog-actions-padding: 16px;
 }
 
 // todp
@@ -149,9 +156,9 @@ $iconSize: (
 
 // ALERTS
 $alerts: (
-  warn: var(--app-color-warn),
-  info: var(--app-color-info),
-  success:  var(app-color-success)
+  warn: var(--app-color-warn-rgb),
+  info: var(--app-color-info-rgb),
+  success: var(--app-color-success-rgb),
 );
 
 // STATES

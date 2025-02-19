@@ -1,15 +1,15 @@
 <h2 mat-dialog-title>{{ mode == 'new' ? ('modal.createOrEditRole.title.new' | translate) : ('modal.createOrEditRole.title.edit' | translate) }}</h2>
-<mat-dialog-content class="mat-typography">
-  <mat-form-field class="app-w-100">
+<mat-dialog-content class="mat-typography app-form-customize app-fxLayout app-column app-gap-4">
+  <mat-form-field class="app-w-100" appearance="outline">
     <mat-label>{{ 'desc.name' | translate }}</mat-label>
     <input matInput [placeholder]="'desc.name' | translate"  name="note" [(ngModel)]="role.name" autocomplete="off">
   </mat-form-field>
+  <mat-card appearance="outlined" class="app-view-alert app-warn" *ngIf="errorMessage">
+    <mat-card-content>
+      <mat-icon>error</mat-icon>{{ errorMessage }}
+    </mat-card-content>
+  </mat-card>
 </mat-dialog-content>
-<mat-card class="app-view-alert app-warn" *ngIf="errorMessage">
-  <mat-card-content>
-    {{ errorMessage }}
-  </mat-card-content>
-</mat-card>
 <mat-dialog-actions align="end">
   <button mat-flat-button *ngIf="mode == 'new'" (click)="onSave()" color="primary">{{ 'button.create' | translate }}</button>
   <button mat-flat-button *ngIf="mode == 'edit'" (click)="onSave()" color="primary">{{ 'button.edit' | translate }}</button>

@@ -12,13 +12,12 @@ import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progres
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, 
     MatTooltipModule, MatSelectModule],
   selector: 'app-schedule-add-license-dialog',

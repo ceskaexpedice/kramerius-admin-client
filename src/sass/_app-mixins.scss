@@ -40,12 +40,12 @@
 @mixin setAlertCard() {
   @each $alert, $color in $alerts {
     &.app-#{$alert} {
-      color: $color;
+      color: rgb($color);
       border-color: rgba($color, .2);
       background-color: rgba($color, .1) !important;
 
       .mat-icon {
-        color: $color;
+        color: rgb($color);
       }
     }
   }

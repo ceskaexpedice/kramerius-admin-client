@@ -6,6 +6,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from "@angular/material/icon";
 import {MatInputModule} from '@angular/material/input';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { TranslateModule } from "@ngx-translate/core";
@@ -16,7 +17,7 @@ import { UIService } from 'src/app/services/ui.service';
 @Component({
   standalone: true,
   imports: [CommonModule, FormsModule, TranslateModule, MatCardModule,
-    MatToolbarModule, MatButtonModule,  MatDialogModule, MatFormFieldModule, MatInputModule],
+    MatToolbarModule, MatButtonModule,  MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule],
   selector: 'app-create-or-edit-role-dialog',
   templateUrl: './create-or-edit-role-dialog.component.html',
   styleUrls: ['./create-or-edit-role-dialog.component.scss']

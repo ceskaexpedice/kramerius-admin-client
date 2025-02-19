@@ -2,11 +2,11 @@
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()">
 	</mat-progress-bar>
 	<h2 mat-dialog-title>{{ 'modal.scheduleAddLicense.title' | translate }}</h2>
-	<mat-dialog-content>
-		<div class="app-desc app-mb-4" *ngIf="!fixed" [innerHtml]="'modal.scheduleAddLicense.messageNotFixed' | translate"></div>
-		<div class="app-desc app-mb-4" *ngIf="fixed" [innerHtml]="'modal.scheduleAddLicense.messageFixed' | translate"></div>
+	<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+		<div class="app-desc" *ngIf="!fixed" [innerHtml]="'modal.scheduleAddLicense.messageNotFixed' | translate"></div>
+		<div class="app-desc" *ngIf="fixed" [innerHtml]="'modal.scheduleAddLicense.messageFixed' | translate"></div>
 		<div>
-			<mat-form-field appearance="fill" class="app-w-100 app-download">
+			<mat-form-field appearance="outline" class="app-w-100 app-download">
 				<mat-label>{{ fixed ? 'PID' : ('desc.pids' | translate) }}</mat-label>
 				<textarea [disabled]="inProgress || fixed" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + '...'" required  rows="{{fixed ? 1 : 4}}"></textarea>
 				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed" class="app-cursor-pointer">file_download</mat-icon>
@@ -14,15 +14,13 @@
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 		</div>
 		<div>
-			<mat-form-field *ngIf="title" class="app-w-100">
+			<mat-form-field appearance="outline" *ngIf="title" class="app-w-100">
 				<input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" [placeholder]="'desc.name' | translate">
 			</mat-form-field>
 		</div>
 		<div>
-			<mat-form-field class="app-w-100">
-
+			<mat-form-field appearance="outline" class="app-w-100">
 				<mat-select [placeholder]="'desc.license' | translate" [(value)]="license" name="license" required>
-		
 					<mat-option *ngFor="let lic of licenses" [value]="lic.name">
 							{{lic.name }}
 							<i *ngIf="lic.description">  - {{lic.description}} </i>
