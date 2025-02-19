@@ -1,4 +1,4 @@
-<div class="app-object app-fxLayout app-column app-fill">
+<div class="app-object app-fxLayout app-column app-fill app-form-customize">
   <div class="app-fxFlex app-fxLayout app-column app-oa-y">
 		<div class="app-container app-fxFlex">
 			<div class="app-fxLayout app-column app-fill app-center-v app-center-h" *ngIf="!correctPid() && !checkingPid">
@@ -58,7 +58,7 @@
 
     <div class="app-fxFlex app-oa-y">
       <div class="app-container">
-        <mat-card appearance="outlined" class="app-p-4 app-fxLayout app-row app-center-h app-center-v app-gap-8">
+        <mat-card appearance="outlined" class="app-fxLayout app-row app-center-h app-center-v app-gap-8 app-view-header app-clean-border-b">
           <div fxFlex class="app-text-cutter">
             <a (click)="copyTextToClipboard(inputPid)" [matTooltip]="'button.copyTheTextToTheClipboard' | translate">
               <mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon>
