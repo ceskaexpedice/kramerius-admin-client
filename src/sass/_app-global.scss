@@ -402,7 +402,8 @@ table {
       tr {
         td {
           &.app-col-action {
-            width: 30px;
+            width: 20px;
+            text-align: center;
             color: var(--app-color-primary);
 
             .mat-icon {

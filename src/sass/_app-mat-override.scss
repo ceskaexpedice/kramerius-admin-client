@@ -160,10 +160,11 @@
       .mat-expansion-panel-header {
         @extend .app-pl-4, .app-pr-4;
 
-        .mat-expansion-panel-header-description {
-          font-weight: var(--app-expansion-header-description-text-weight);
+        .mat-content {
+          .mat-expansion-panel-header-description {
+            font-weight: var(--app-expansion-header-description-text-weight);
+          }
         }
-
    
         .app-actions {
           @extend .app-mr-4;
@@ -187,6 +188,19 @@
         .mat-action-row {
           @extend .app-clean-border, .app-p-4;
           padding-top: 0 !important;
+        }
+      }
+    }
+  }
+
+  &.app-view-actions {
+    --mat-expansion-header-collapsed-state-height: 54px;
+    --mat-expansion-header-expanded-state-height: var(--mat-expansion-header-collapsed-state-height);
+    
+    .mat-expansion-panel {
+      .mat-expansion-panel-header {
+        .mat-content {
+          flex-direction: column;
         }
       }
     }
