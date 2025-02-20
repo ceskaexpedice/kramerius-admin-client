@@ -520,6 +520,14 @@
   }
 }
 
+// MENU
+.mat-mdc-menu-panel {
+  .mat-mdc-menu-item {
+    min-height: var(--app-menu-item-min-height);
+  }
+}
+
+
 // DENSITY - FORMS
 .app-form-customize {
 
