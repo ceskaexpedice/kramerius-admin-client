@@ -1,12 +1,12 @@
 <form #f="ngForm" (ngSubmit)="schedule()">
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
 	<h2 mat-dialog-title>{{ 'modal.scheduleProcessingIndexRebuild.title' | translate }}</h2>
-	<mat-dialog-content>
-		<div class="app-desc app-mb-4" [innerHtml]="'modal.scheduleProcessingIndexRebuild.message1' | translate"></div>
-		<div class="app-desc app-mb-4">
+	<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+		<div class="app-desc" [innerHtml]="'modal.scheduleProcessingIndexRebuild.message1' | translate"></div>
+		<div class="app-desc">
 			{{ 'modal.scheduleProcessingIndexRebuild.message2' | translate }}
 		</div>
-		<div class="app-mb-4">
+		<div>
 			<strong>{{ 'modal.scheduleProcessingIndexRebuild.instruction.backup.title' | translate }}</strong>
 			<ol>
 				<li [innerHtml]="'modal.scheduleProcessingIndexRebuild.instruction.backup.1' | translate"></li>
@@ -14,7 +14,7 @@
 				<li [innerHtml]="'modal.scheduleProcessingIndexRebuild.instruction.backup.3' | translate"></li>
 			</ol>
 		</div>
-		<div class="app-mb-4">
+		<div>
 			<strong>{{ 'modal.scheduleProcessingIndexRebuild.instruction.recovery.title' | translate }}</strong>
 			<ol>
 				<li>{{ 'modal.scheduleProcessingIndexRebuild.instruction.recovery.1' | translate }}</li>
