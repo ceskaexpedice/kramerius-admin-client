@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
 import { Collection } from 'src/app/models/collection.model';
 import { RightAction } from 'src/app/models/right-action.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -20,7 +19,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule,
   MatProgressBarModule, MatCardModule],
   selector: 'app-add-items-to-collection-dialog',
