@@ -1,23 +1,21 @@
 <form #f="ngForm" (ngSubmit)="schedule(f.value)">
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
 	<h2 mat-dialog-title>{{ 'modal.deleteObjectsSmart.title' | translate }}</h2>
-	<mat-dialog-content>
+	<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
 		<ng-container *ngIf="!fixed">
-			<div class="app-desc app-mb-4" [innerHtml]="'modal.deleteObjectsSmart.message1' | translate"></div>
-			<div class="app-desc app-mb-4" [innerHtml]="'modal.deleteObjectsSmart.message2' | translate"></div>
-			<div class="app-desc app-mb-4">{{ 'modal.deleteObjectsSmart.message3' | translate }}</div>
-			<div class="app-explanation app-mb-4" [innerHtml]="'modal.deleteObjectsSmart.explanation' | translate"></div>
+			<div class="app-desc" [innerHtml]="'modal.deleteObjectsSmart.message1' | translate"></div>
+			<div class="app-desc" [innerHtml]="'modal.deleteObjectsSmart.message2' | translate"></div>
+			<div class="app-desc">{{ 'modal.deleteObjectsSmart.message3' | translate }}</div>
+			<div class="app-explanation" [innerHtml]="'modal.deleteObjectsSmart.explanation' | translate"></div>
 		</ng-container>
 		<div>
-			<mat-checkbox class="app-desc app-mb-4" [(ngModel)]="ignoreIncosistencies"
-					name="ignoreIncosistencies">Pokračuj pokud není dokument v akubra repositáři
-				
-				</mat-checkbox>  
-			<mat-form-field appearance="fill" class="app-w-100 app-download">
+			<mat-checkbox class="app-desc" [(ngModel)]="ignoreIncosistencies" name="ignoreIncosistencies">Pokračuj pokud není dokument v akubra repositáři</mat-checkbox>  
+		</div>
+		<div>
+			<mat-form-field appearance="outline" class="app-w-100 app-download">
 				<mat-label>{{fixed ? 'PID' : ('desc.pids' | translate) }}</mat-label>
 				<textarea matInput type="text" id="inputPids" name="pids" autofocus [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate ) + '...'" [disabled]="inProgress || fixed" required rows="{{fixed ? 1 : 4}}"></textarea>
 				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed" class="app-cursor-pointer">file_download</mat-icon>
-
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 		</div>
