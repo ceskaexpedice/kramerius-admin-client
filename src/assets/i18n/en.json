@@ -200,15 +200,6 @@
       "objectReharvest": {
         "title": "Oject reharvest",
         "icon": "repeat"
-      },
-      "reharvestjob":{
-        "running":"Reharvest started",
-        "open":"Reharvest planned",
-        "closed":"Reharvest finished",
-        "too_big":"Reharvest is too big -> Manual reharvest needed",
-        "waiting_for_approve":"Approve needed",
-        "cancelled":"Reharvest cancelled",
-        "failed":"Reharvest failed"
       }
     },
     "monitoring": {
@@ -567,7 +558,22 @@
     "convolute": "Convolute",
     "picture": "Pictures",
     "multivolumemonograph":"Multivolume monograph",
-    "collection": "Collections"
+    "collection": "Collections",
+
+    "running":"Reharvest started",
+    "open":"Reharvest planned",
+    "closed":"Reharvest finished",
+    "too_big":"Reharvest is too big -> Manual reharvest needed",
+    "waiting_for_approve":"Approve needed",
+    "cancelled":"Reharvest cancelled",
+    "failed":"Reharvest failed",
+    
+    "root":"Whole title",
+    "children":"Only subparts",
+    "new_root":"New harvest of whole title",
+    "only_pid":"Reharvest pouze daného pidu",
+    "delete_pid": "Delete object",
+    "delete_tree": "Delete tree"
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",

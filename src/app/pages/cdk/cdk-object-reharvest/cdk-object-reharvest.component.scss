@@ -5,16 +5,3 @@
     }
   }
 }
-
-.clickable {
-  cursor: pointer; /* Změna kurzoru při najetí */
-  transition: background-color 0.2s ease-in-out;
-}
-
-.clickable:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Jemný hover efekt */
-}
-
-.clickable:active {
-  transform: scale(0.95); /* Jemný efekt při kliknutí */
-}
