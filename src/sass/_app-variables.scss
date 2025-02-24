@@ -167,6 +167,7 @@ $states: (
   planned: #7b7b7b,
   running: #456aa5,
   finished: #45a55a,
+  closed: #45a55a,
   failed: var(--app-color-warn),
   killed: #ca7023,
   not-running: #ca7023,

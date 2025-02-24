@@ -64,29 +64,29 @@
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.type' | translate }}</th>
         <td mat-cell *matCellDef="let element">
           <ng-container  [ngSwitch]="element.type">
-            <div *ngSwitchCase="'root'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{  'desc.root'  | translate }}</div>
-            <div *ngSwitchCase="'children'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'desc.children'   | translate }}</div>
-            <div *ngSwitchCase="'new_root'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'desc.new_root'   | translate }}</div>
-            <div *ngSwitchCase="'only_pid'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'desc.only_pid'   | translate }}</div>
-            <div *ngSwitchCase="'delete_pid'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'desc.delete_pid'   | translate }}</div>
-            <div *ngSwitchCase="'delete_tree'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'desc.delete_tree'   | translate }}</div>
+            <div *ngSwitchCase="'root'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{  'field.root'  | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'children'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'field.children'   | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'new_root'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'field.new_root'   | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'only_pid'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'field.only_pid'   | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'delete_pid'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'field.delete_pid'   | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'delete_tree'" class="app-badge app-cursor-pointer" (click)="onTypeClick(element.type)">{{ 'field.delete_tree'   | translate }}<mat-icon>clear</mat-icon></div>
           </ng-container>
         </td>
-        </ng-container>
+      </ng-container>
         
       <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.state' | translate }}</th>
         <td mat-cell *matCellDef="let element">
           <ng-container  [ngSwitch]="element.state">
-            <div *ngSwitchCase="'harvesting'" class="app-badge app-running app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
-            <div *ngSwitchCase="'running'" class="app-badge app-running app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
-            <div *ngSwitchCase="'harvested'" class="app-badge app-finished app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
-            <div *ngSwitchCase="'closed'" class="app-badge app-closed app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
-            <div *ngSwitchCase="'open'" class="app-badge app-planned app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
-            <div *ngSwitchCase="'too_big'" class="app-badge app-warning app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
-            <div *ngSwitchCase="'waiting_for_approve'" class="app-badge app-waiting_for_approve app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
-            <div *ngSwitchCase="'cancelled'" class="app-badge app-canceled app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
-            <div *ngSwitchCase="'failed'" class="app-badge app-failed app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}</div>
+            <div *ngSwitchCase="'harvesting'" class="app-badge app-running app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'running'" class="app-badge app-running app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'harvested'" class="app-badge app-finished app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'closed'" class="app-badge app-closed app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'open'" class="app-badge app-planned app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'too_big'" class="app-badge app-warning app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'waiting_for_approve'" class="app-badge app-waiting_for_approve app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'cancelled'" class="app-badge app-canceled app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
+            <div *ngSwitchCase="'failed'" class="app-badge app-failed app-cursor-pointer"  (click)="onStateClick(element.state)">{{ 'field.' + element.state | translate }}<mat-icon>clear</mat-icon></div>
           </ng-container>
       </ng-container>
 
