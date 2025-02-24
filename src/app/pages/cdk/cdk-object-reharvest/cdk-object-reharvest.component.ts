@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -19,28 +19,13 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
-// --- data mock to delete ---
-/*
-export interface objectReharvest {
-  date: string;
-  pid: string;
-  deleteObject: boolean;
-  description: string;
-  state: string;
-}
 
-const ELEMENT_DATA: objectReharvest[] = [
-  {date: '20.4.2024', pid: 'uuid:3a99c250-bc5d-4318-a5a8-db00547fd5c4', deleteObject: true, description: 'Manualni reharvest objektu z MZK, KNAV', state: 'PLANNED'},
-  {date: '24.4.2024', pid: 'uuid:c9b6c867-6d60-4a64-9519-95f5e66ea910', deleteObject: false, description: 'Neplanovany reharvest objektu z duvodu dila/stranky', state: 'FINISHED'},
-  {date: '20.4.2024', pid: 'uuid:3a99c250-bc5d-4318-a5a8-db00547fd5c4', deleteObject: true, description: 'Manualni reharvest objektu z MZK, KNAV', state: 'PLANNED'},
-  {date: '24.4.2024', pid: 'uuid:c9b6c867-6d60-4a64-9519-95f5e66ea910', deleteObject: false, description: 'Neplanovany reharvest objektu z duvodu dila/stranky', state: 'FINISHED'}
-];
-*/
-// -- data mock to delete ---
-
+/**
+ * Reharvests component, displaying and manage reharvets 
+ */
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
+  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule,
     MatIconModule, MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule, MatPaginatorModule, MatProgressBarModule
   ],
   selector: 'app-cdk-object-reharvest',
@@ -49,57 +34,63 @@ const ELEMENT_DATA: objectReharvest[] = [
 })
 export class CdkObjectReharvestComponent implements OnInit {
 
-  displayedColumns: string[] = ['date', 'pid', 'code', 'type', 'state', 'pod', 'description', 'approve', 'cancel', 'delete'];
-  //dataSource = ELEMENT_DATA;
+  /** Table columns */
+  displayedColumns: string[] = [
+    'date', 'pid', 'code', 'type', 'state', 'pod', 'description', 'approve', 'cancel', 'delete'
+  ];
+  /** Datasource for table */
+  dataSource: Reharvest[];
 
-  dataSource:Reharvest[];
-  //isReharvestFromCore: boolean = true;
+  /** Paging properties */
+  length = 50;
+  pageSize = 5;
+  pageIndex = 0;
+  pageSizeOptions = [5, 100, 200];
+
+  /** loading flag */
+  loading = false;
 
   constructor(
     private dialog: MatDialog,
     private ui: UIService,
     private cdkApi: CdkApiService,
-    private appSettings:AppSettings
+    private appSettings: AppSettings
   ) { }
 
   ngOnInit(): void {
     this.reloadReharvests();
   }
 
-  isLoading() {
-    // todo
-    return true;
+
+
+  handlePageEvent(e: PageEvent) {
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.reloadReharvests();
   }
 
 
- reloadReharvests() {
-  this.cdkApi.reharvests().subscribe(resp=> {
-    this.dataSource = resp;
-    this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
-  });
- }
+  reloadReharvests() {
+    this.loading = true;
+    this.cdkApi.reharvests(this.pageIndex, this.pageSize).subscribe(resp => {
+      this.dataSource = resp['response']['docs'];
+      this.length = resp['response']['numFound'];
+      this.loading = false;
 
-  isReharvestFromCore(reharvest:Reharvest) {
+      this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
+    });
+  }
+
+  isReharvestFromCore(reharvest: Reharvest) {
     return reharvest.name?.startsWith("Delete");
   }
 
   clientLink(uuid: string) {
-    
-    /*
-    let kramInstance =  this.appSettings.coreBaseUrl+'/../uuid/';
-    this.appSettings.getCoreInfo().subscribe(response => {
-       let  coreInfo = response;
-      if ( coreInfo?.instance?.client) {
-          kramInstance = coreInfo.instance.client+"/uuid/";
-      } 
-    });
-    return kramInstance+uuid;
-    */
-
     return this.appSettings.userClientBaseUrl + "/uuid/" + uuid;
   }
 
- 
+
   deleteRow(element: any) {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.onRemoveCDKReharvest.title'),
@@ -129,82 +120,47 @@ export class CdkObjectReharvestComponent implements OnInit {
 
       }
     });
-
   }
 
- /*
+  openScheduledReHarvestSpecificPidsDialog() {
+    const dialogRef = this.dialog.open(ScheduleReHarvestSpecificPidsDialogComponent, {
+      width: '1400px',
+      panelClass: 'app-schedule-re-harvest-specific-pids-dialog'
+    });
 
-     this.kramInstance =  this.appSettings.coreBaseUrl+'/../uuid/';
-
-    this.api.getSdntSyncInfo().subscribe((data:any)=> {
-      this.info = data;
-
-      this.appSettings.getCoreInfo().subscribe(response => {
-        this.coreInfo = response;
-
-        let sindex = this.info.endpoint.indexOf('/api/v1.0/lists/changes');
-        if (sindex > -1) {
-          this.sdnntInstance = this.info.endpoint.substring(0, sindex)+"/search";
-        }
-
-        if ( this.coreInfo?.instance?.client) {
-          this.kramInstance = this.coreInfo.instance.client+"/uuid/";
-        } else {
-          if (this.info.version === 'v7') {
-            let kindex = this.info.kramerius.indexOf('/search/api/client/v7.0');
-            if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
-              this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
-            }
-          } else {
-            let kindex = this.info.kramerius.indexOf('/search/api/v5.0');
-            if (kindex > -1 && !this.info.kramerius.startsWith('http://localhost')) {
-              this.kramInstance = this.info.kramerius.substring(0, kindex)+"/uuid/";
-            }
-          }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.scheduleCDKHarvest')
+      } else if (result === 'cancel' || result === undefined) {
+        //nothing, dialog was closed
+      } else {
+        this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest');
       }
-    });
+      this.cdkApi.reharvests(this.pageSize, this.pageIndex).subscribe(resp => {
+        this.dataSource = resp;
+        this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
+      });
 
- */
-
- openScheduledReHarvestSpecificPidsDialog() {
-  const dialogRef = this.dialog.open(ScheduleReHarvestSpecificPidsDialogComponent, {
-    width: '1400px',
-    panelClass: 'app-schedule-re-harvest-specific-pids-dialog'
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result === 'error') {
-      this.ui.showErrorSnackBar('snackbar.error.scheduleCDKHarvest')
-    } else if (result === 'cancel' || result === undefined) {
-      //nothing, dialog was closed
-    } else {
-      this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest');
-    }
-    this.cdkApi.reharvests().subscribe(resp=> {
-      this.dataSource = resp;
-      this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
-    });
-
-  })
+    })
 
   }
 
-  approveState( reharvest: any) {
-      this.cdkApi.changeReharvestState(reharvest.id, 'open').subscribe(x=> {
-        this.cdkApi.reharvests().subscribe(resp=> {
-          this.dataSource = resp;
-          this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
-        });
+  approveState(reharvest: any) {
+    this.cdkApi.changeReharvestState(reharvest.id, 'open').subscribe(x => {
+      this.cdkApi.reharvests(this.pageSize, this.pageIndex).subscribe(resp => {
+        this.dataSource = resp;
+        this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
       });
+    });
   }
 
-  closedState( reharvest: any) {
-      this.cdkApi.changeReharvestState(reharvest.id, 'cancelled').subscribe(x=> {
-        this.cdkApi.reharvests().subscribe(resp=> {
-          this.dataSource = resp;
-          this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
-        });
+  closedState(reharvest: any) {
+    this.cdkApi.changeReharvestState(reharvest.id, 'cancelled').subscribe(x => {
+      this.cdkApi.reharvests(this.pageIndex, this.pageSize).subscribe(resp => {
+        this.dataSource = resp;
+        this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
       });
+    });
   }
 
 
