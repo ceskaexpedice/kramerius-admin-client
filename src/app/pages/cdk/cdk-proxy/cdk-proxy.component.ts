@@ -307,34 +307,39 @@ export class CdkProxyComponent implements OnInit {
     this.cdkApi.connected().subscribe(resp=> {
       this.dataSource = resp;
 
-      let full_array = [];
-      this.dataSource.forEach(lb=> { full_array.push(lb); });
-      let processing_array=[];
+      let full_array:string[] = [];
+      this.dataSource.forEach(lb=> { full_array.push(lb.code); });
+      let processing_array:string[]=[];
 
-
+      //this.loading = false;
       this.dataSource.forEach(lb=> {
         if (lb.status) {
           this.cdkApi.channel(lb.code).subscribe(resp=> {
 
             processing_array.push(lb.code);
-
-
-            if(resp.channel.solr && resp.channel.user) {
-
-              let resp = this.register.get(lb.code);
-              if (resp) {
-                this.problems.set(lb.code,false);
-              }
-            } else {
-              let resp = this.register.get(lb.code);
-              if (resp) {
-                this.problems.set(lb.code,true);
-              }
+            const areEqual = JSON.stringify([...full_array].sort()) === JSON.stringify([...processing_array].sort());
+            if (areEqual) {
+              console.log(this.problems);
+              this.loading = false;
             }
 
-            // if (full_array === processing_array) {
+            console.log("\t channel for "+lb.code)
 
-            // }
+            if(resp.channel.solr && resp.channel.user) {
+              this.problems.set(lb.code,false);
+              /*
+              let resp = this.register.get(lb.code);
+              if (resp) {
+              } else {
+              }*/
+
+            } else {
+              this.problems.set(lb.code,true);
+              /*  
+              let resp = this.register.get(lb.code);
+              if (resp) {
+              }*/
+            }
           });
         }
     });
@@ -374,8 +379,7 @@ export class CdkProxyComponent implements OnInit {
   }
 
   isLoading() {
-    // todo
-    return true;
+    return this.loading;
   }
 
   public toggle(code:string, event: MatSlideToggleChange) {
