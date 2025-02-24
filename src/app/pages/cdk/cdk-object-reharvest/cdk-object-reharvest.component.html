@@ -43,20 +43,16 @@
       <ng-container matColumnDef="code">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.code' | translate }}</th>
         <td  mat-cell *matCellDef="let element">
-          <div class="app-fxLayout app-row app-center-v app-gap-1">
-            <div>
-              <ng-container *ngIf="element.libraries">
-                <div  matTooltip="{{ element.libraries.join(', ') }}" class="app-text-cutter-wrapper">
-                  <div class="app-text-cutter">
-                    <strong>{{(element.libraries.join(", ") )}}</strong>
-                  </div>
-                </div> 
-              </ng-container>
-              <ng-container *ngIf="!element.libraries">
-                {{ 'desc.none' | translate }}
-              </ng-container>
-            </div>
-          </div>
+          <ng-container *ngIf="element.libraries">
+            <div  matTooltip="{{ element.libraries.join(', ') }}" class="app-text-cutter-wrapper">
+              <div class="app-text-cutter">
+                <strong>{{(element.libraries.join(", ") )}}</strong>
+              </div>
+            </div> 
+          </ng-container>
+          <ng-container *ngIf="!element.libraries">
+            {{ 'desc.none' | translate }}
+          </ng-container>
         </td>
       </ng-container>
 
