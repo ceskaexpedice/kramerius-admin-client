@@ -200,15 +200,6 @@
       "objectReharvest": {
         "title": "Reharvest objektu",
         "icon": "repeat"
-      },
-      "reharvestjob":{
-        "running":"Reharvest spuštěn",
-        "open":"Reharvest naplánován",
-        "closed":"Reharvest ukončen",
-        "too_big":"Příliš velké dílo na reharvest -> Nutný ruční zásah",
-        "waiting_for_approve":"Nutnný souhlas pro reharvest",
-        "cancelled":"Reharvest zrušený",
-        "failed":"Reharvest zhavaroval"
       }
     },
     "monitoring": {
@@ -567,7 +558,22 @@
     "convolute": "Konvoluty",
     "picture": "Obrázky",
     "multivolumemonograph":"Vícesvazková monografie",
-    "collection": "Sbírky"
+    "collection": "Sbírky",
+
+    "running":"Reharvest spuštěn",
+    "open":"Reharvest naplánován",
+    "closed":"Reharvest ukončen",
+    "too_big":"Příliš velké dílo na reharvest -> Nutný ruční zásah",
+    "waiting_for_approve":"Nutnný souhlas pro reharvest",
+    "cancelled":"Reharvest zrušený",
+    "failed":"Reharvest zhavaroval",
+
+    "root":"Reharvest celého titulu",
+    "children":"Reharvest podčástí (ročník, výtisk,..)",
+    "new_root":"Nový harvest celého titulu",
+    "only_pid":"Reharvest pouze daného pidu",
+    "delete_pid": "Smazání objektu",
+    "delete_tree": "Smazání podstromu"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
