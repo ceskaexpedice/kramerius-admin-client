@@ -60,7 +60,7 @@ export class MonitoringApiComponent implements OnInit {
   displayedColumns: string[] = ['startTime',  'duration', 'resource', 'endpoint', 'labels', 'userId', 'pid', 'ipaddress', 'action'];
   dataSource:any;
 
- length = 50;
+  length = 50;
   pageSize = 100;
   pageIndex = 0;
   pageSizeOptions = [100, 200, 300];

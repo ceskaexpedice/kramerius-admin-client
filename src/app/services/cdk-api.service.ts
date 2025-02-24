@@ -88,8 +88,8 @@ export class CdkApiService {
       return this.doGet(`/api/admin/v7.0/connected/${code}/config/channel/health`,{}).pipe();
     }
 
-    reharvests(): Observable<any[]> {
-      return this.doGet('/api/admin/v7.0/reharvest',{}).pipe(map(response => Reharvest.reharvestsFromJson(response)));
+    reharvests(page:number, rows:number): Observable<any> {
+      return this.doGet(`/api/admin/v7.0/reharvest?page=${page}&rows=${rows}`,{}).pipe();
     }
 
     introspectPid(pid:string): Observable<any> {
