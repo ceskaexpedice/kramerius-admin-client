@@ -1,6 +1,22 @@
 <div class="app-fxLayout app-column app-fill">
-  <mat-card appearance="outlined" class="app-view-header app-fxLayout app-row app-center-v app-clean-border-b">
-    <div class="app-fxFlex app-text-right">
+  <mat-card appearance="outlined" class="app-view-header app-fxLayout app-row app-center-v app-clean-border-b app-form-customize">
+    <div class="app-fxFlex app-fxLayout app-row app-center-v app-gap-4">
+      <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>test</mat-label>
+        <input type="email" matInput placeholder="Test">
+        <button matSuffix mat-icon-button aria-label="Clear" color="warn">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <div>
+        <mat-chip-listbox>
+          <mat-chip class="app-color-lightnes" style="background-color: black;">
+            test<mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-listbox>
+      </div>
+    </div>
+    <div>
       <button mat-flat-button (click)="openScheduledReHarvestSpecificPidsDialog()" color="primary">{{ 'button.reHarvestSpecificPids' | translate }}</button>
     </div>
   </mat-card>
@@ -27,16 +43,21 @@
       <ng-container matColumnDef="code">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.code' | translate }}</th>
         <td  mat-cell *matCellDef="let element">
-          <ng-container *ngIf="element.libraries">
-            <div  matTooltip="{{ element.libraries.join(', ') }}" class="app-text-cutter-wrapper">
-              <div class="app-text-cutter">
-                <strong>{{(element.libraries.join(", ") )}}</strong>
-              </div>
-            </div> 
-          </ng-container>
-          <ng-container *ngIf="!element.libraries">
-            {{ 'desc.none' | translate }}
-          </ng-container>
+          <div class="app-fxLayout app-row app-center-v app-gap-1">
+            <div>
+              <ng-container *ngIf="element.libraries">
+                <div  matTooltip="{{ element.libraries.join(', ') }}" class="app-text-cutter-wrapper">
+                  <div class="app-text-cutter">
+                    <strong>{{(element.libraries.join(", ") )}}</strong>
+                  </div>
+                </div> 
+              </ng-container>
+              <ng-container *ngIf="!element.libraries">
+                {{ 'desc.none' | translate }}
+              </ng-container>
+            </div>
+            <mat-icon>filter_list</mat-icon>
+          </div>
         </td>
       </ng-container>
 

@@ -2,8 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
@@ -25,7 +28,7 @@ import { UIService } from 'src/app/services/ui.service';
  */
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, MatChipsModule, MatFormFieldModule, MatFormFieldModule, MatInputModule,
     MatIconModule, MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule, MatPaginatorModule, MatProgressBarModule
   ],
   selector: 'app-cdk-object-reharvest',
