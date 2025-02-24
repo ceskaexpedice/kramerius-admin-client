@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
-import { catchError, delay, map, tap } from 'rxjs/operators';
+import { catchError, delay, filter, map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
@@ -88,8 +88,14 @@ export class CdkApiService {
       return this.doGet(`/api/admin/v7.0/connected/${code}/config/channel/health`,{}).pipe();
     }
 
-    reharvests(page:number, rows:number): Observable<any> {
-      return this.doGet(`/api/admin/v7.0/reharvest?page=${page}&rows=${rows}`,{}).pipe();
+    reharvests(page:number, rows:number, pid:string, filters:string[]): Observable<any> {
+      let sfitlers = filters.join(';');
+      if(pid) sfitlers = sfitlers+";pid:\""+pid+"\"";
+      if (sfitlers === '') {
+        return this.doGet(`/api/admin/v7.0/reharvest?page=${page}&rows=${rows}`,{}).pipe();
+      } else {
+        return this.doGet(`/api/admin/v7.0/reharvest?page=${page}&rows=${rows}&filters=${sfitlers}`,{}).pipe();
+      }
     }
 
     introspectPid(pid:string): Observable<any> {

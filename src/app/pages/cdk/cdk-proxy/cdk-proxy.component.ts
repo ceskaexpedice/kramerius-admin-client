@@ -280,6 +280,8 @@ export class CdkProxyComponent implements OnInit {
   dataSource:Library[];
   register:Map<String, any> = new Map();
   problems:Map<String, boolean> = new Map();
+  loading = false;
+
 
   constructor(
     private cdkApi: CdkApiService,
@@ -301,13 +303,24 @@ export class CdkProxyComponent implements OnInit {
       });
 
     } else {
-
+    this.loading = true;
     this.cdkApi.connected().subscribe(resp=> {
       this.dataSource = resp;
+
+      let full_array = [];
+      this.dataSource.forEach(lb=> { full_array.push(lb); });
+      let processing_array=[];
+
+
       this.dataSource.forEach(lb=> {
         if (lb.status) {
           this.cdkApi.channel(lb.code).subscribe(resp=> {
+
+            processing_array.push(lb.code);
+
+
             if(resp.channel.solr && resp.channel.user) {
+
               let resp = this.register.get(lb.code);
               if (resp) {
                 this.problems.set(lb.code,false);
@@ -318,6 +331,10 @@ export class CdkProxyComponent implements OnInit {
                 this.problems.set(lb.code,true);
               }
             }
+
+            // if (full_array === processing_array) {
+
+            // }
           });
         }
     });

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -14,6 +15,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from 'ngx-flexible-layout';
+import { debounceTime, Subject } from 'rxjs';
 import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -28,8 +30,12 @@ import { UIService } from 'src/app/services/ui.service';
  */
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, MatChipsModule, MatFormFieldModule, MatFormFieldModule, MatInputModule,
-    MatIconModule, MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule, MatPaginatorModule, MatProgressBarModule
+  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, MatChipsModule, 
+    MatFormFieldModule,  MatInputModule,
+    MatIconModule, 
+    MatInputModule,
+    FormsModule,
+    MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule, MatPaginatorModule, MatProgressBarModule
   ],
   selector: 'app-cdk-object-reharvest',
   templateUrl: './cdk-object-reharvest.component.html',
@@ -46,12 +52,20 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   /** Paging properties */
   length = 50;
-  pageSize = 5;
+  pageSize = 50;
   pageIndex = 0;
-  pageSizeOptions = [5, 100, 200];
+  pageSizeOptions = [50, 100, 200];
 
   /** loading flag */
   loading = false;
+
+  // filters
+  filters:string[] = [];
+  pid:string;
+
+  // Debouncing 
+  private subject: Subject<string> = new Subject();
+  
 
   constructor(
     private dialog: MatDialog,
@@ -61,6 +75,13 @@ export class CdkObjectReharvestComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.subject.pipe(
+      debounceTime(400)
+    ).subscribe(searchTextValue => {
+      this.pid = searchTextValue;
+      this.reloadReharvests();
+    });
+
     this.reloadReharvests();
   }
 
@@ -76,7 +97,9 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   reloadReharvests() {
     this.loading = true;
-    this.cdkApi.reharvests(this.pageIndex, this.pageSize).subscribe(resp => {
+    this.pageIndex = 0;
+
+    this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
       this.dataSource = resp['response']['docs'];
       this.length = resp['response']['numFound'];
       this.loading = false;
@@ -139,7 +162,7 @@ export class CdkObjectReharvestComponent implements OnInit {
       } else {
         this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest');
       }
-      this.cdkApi.reharvests(this.pageSize, this.pageIndex).subscribe(resp => {
+      this.cdkApi.reharvests(this.pageSize, this.pageIndex,this.pid, this.filters).subscribe(resp => {
         this.dataSource = resp;
         this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
       });
@@ -150,7 +173,7 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   approveState(reharvest: any) {
     this.cdkApi.changeReharvestState(reharvest.id, 'open').subscribe(x => {
-      this.cdkApi.reharvests(this.pageSize, this.pageIndex).subscribe(resp => {
+      this.cdkApi.reharvests(this.pageSize, this.pageIndex, this.pid, this.filters).subscribe(resp => {
         this.dataSource = resp;
         this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
       });
@@ -159,12 +182,40 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   closedState(reharvest: any) {
     this.cdkApi.changeReharvestState(reharvest.id, 'cancelled').subscribe(x => {
-      this.cdkApi.reharvests(this.pageIndex, this.pageSize).subscribe(resp => {
+      this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
         this.dataSource = resp;
         this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
       });
     });
   }
 
+  onStateClick(state:string) {
+    this.filters.push(`state:${state}`);
+    this.reloadReharvests();
+  }
 
+  onTypeClick(type:string) {
+    this.filters.push(`type:${type}`);
+    this.reloadReharvests();
+  }
+
+  onFilterRemoveClick(filter:string) {
+    this.filters =  this.filters.filter(f => f !== filter);
+    this.reloadReharvests();    
+  }
+
+  onIdentKeyUp(target: any) {
+    this.subject.next(target.value);
+  }
+  
+  onPidClick(pid: string) {
+    this.subject.next(pid);
+  }
+
+  onDeletePidClick() {
+    this.pid = null; 
+    this.reloadReharvests();
+  }
+    
+    
 }
