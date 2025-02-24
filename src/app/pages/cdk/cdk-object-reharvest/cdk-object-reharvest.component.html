@@ -16,8 +16,14 @@
           </mat-chip>
         </mat-chip-listbox>
 
+
+        <button mat-raised-button color="primary" (click)="reloadReharvests()">
+          <mat-icon>refresh</mat-icon> Obnovit
+        </button>
+  
       </div>
     </div>
+
     <div>
       <button mat-flat-button (click)="openScheduledReHarvestSpecificPidsDialog()" color="primary">{{ 'button.reHarvestSpecificPids' | translate }}</button>
     </div>

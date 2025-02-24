@@ -164,7 +164,9 @@ export class CdkObjectReharvestComponent implements OnInit {
       }
       this.cdkApi.reharvests(this.pageSize, this.pageIndex,this.pid, this.filters).subscribe(resp => {
         this.dataSource = resp;
-        this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
+        //this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
+        this.reloadReharvests();
+
       });
 
     })
@@ -190,12 +192,22 @@ export class CdkObjectReharvestComponent implements OnInit {
   }
 
   onStateClick(state:string) {
-    this.filters.push(`state:${state}`);
+    let filter = `state:${state}`;
+    if (this.filters.indexOf(filter) < 0) {
+      this.filters.push(`state:${state}`);
+    } else {
+      this.filters =  this.filters.filter(f => f !== filter);
+    }
     this.reloadReharvests();
   }
 
   onTypeClick(type:string) {
-    this.filters.push(`type:${type}`);
+    let filter = `type:${type}`;
+    if (this.filters.indexOf(filter) < 0) {
+      this.filters.push(`type:${type}`);
+    } else {
+      this.filters =  this.filters.filter(f => f !== filter);
+    }
     this.reloadReharvests();
   }
 
