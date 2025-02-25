@@ -9,8 +9,8 @@
         </button>
       </mat-form-field> -->
       <mat-chip-listbox>
-        <mat-chip-row *ngIf="pid" [matTooltip]="pid">
-          <div class="app-text-cutter app-pid-filter">{{ pid }}</div>
+        <mat-chip-row *ngIf="pid" [matTooltip]="pid" class="app-pid">
+          <div class="app-text-cutter">{{ pid }}</div>
           <button matChipRemove (click)="onDeletePidClick()"><mat-icon>cancel</mat-icon></button>
         </mat-chip-row>
         <mat-chip-row *ngFor="let filter of filters" [ngClass]="'app-' + filter.split(':')[1]">

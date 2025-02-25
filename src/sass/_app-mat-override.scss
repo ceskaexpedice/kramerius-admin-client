@@ -419,6 +419,14 @@
         color: var(--app-color-lightnes);
       }
     }
+
+    &.app-pid {
+      background-color: var(--app-color-primary);
+
+      .app-text-cutter {
+        max-width: 200px;
+      }
+    }
   }   
 }
 
