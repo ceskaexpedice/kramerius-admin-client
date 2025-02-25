@@ -1,7 +1,11 @@
+.app-pid-filter {
+  max-width: 200px;
+}
+
 .mat-mdc-table {
   .mat-mdc-row {
     .mat-column-code {
-      width: 100px;
+      min-width: 200px;
     }
   }
 }

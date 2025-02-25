@@ -270,7 +270,7 @@ a {
   color: var(--app-color-lightnes);
   font-size: 12px;
   font-weight: 500;
-  background-color: var(--app-color-primary);
+  background-color: var(--app-badge-default-color);
 
   &.app-version {
     background-color: var(--app-badge-version-color);

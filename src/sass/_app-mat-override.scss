@@ -405,7 +405,12 @@
 // CHIPLIST
 .mat-mdc-chip-listbox {
   .mat-mdc-chip {
+    @include setStateColor();
+
     &.mat-mdc-standard-chip {
+      background-color: var(--app-badge-default-color);
+      
+
       .mat-mdc-chip-action-label {
         color: var(--app-color-lightnes);
       }
