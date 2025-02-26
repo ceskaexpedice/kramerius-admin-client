@@ -19,16 +19,7 @@
         <a [routerLink]="'detail/'+lib.code">{{ register.get(lib.code) != null ? register.get(lib.code).name : '' }}</a>
       </td>
     </ng-container>
-
-    <ng-container matColumnDef="state">
-      <th mat-header-cell *matHeaderCellDef>{{ 'desc.register' | translate }}</th>
-      <td mat-cell *matCellDef="let lib">
-        <div class="app-badge" [ngClass]="register.get(lib.code) && register.get(lib.code)['alive'] ? 'app-finished' : 'app-failed'">
-          {{ register.get(lib.code) && register.get(lib.code)['alive'] ? 'online' : 'offline' }}
-        </div>
-      </td>
-    </ng-container>
-
+    
     <ng-container matColumnDef="stateDuration">
       <th mat-header-cell *matHeaderCellDef>{{ 'desc.stateDuration' | translate }}</th>
       <td mat-cell *matCellDef="let lib">{{ formatDuration(lib.code) }}</td>

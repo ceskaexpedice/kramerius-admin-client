@@ -22,12 +22,19 @@
 				{{ summary() }}
 			</mat-card-content>
 		</mat-card>
+
+		<mat-card *ngIf="conflict" appearance="outlined" class="app-view-alert">
+			<mat-card-content>
+				<p>{{conflictMessage}}</p>
+			</mat-card-content>
+		</mat-card>
+
 	</div>
 
 	<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
 
 	<div class="app-desc app-mb-1">{{ 'desc.typeOfHarvest' | translate }}:</div>
-	<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDsiabled" [(ngModel)]="typeOfHarvest"  name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)">
+	<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDisabled" [(ngModel)]="typeOfHarvest"  name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)">
 		<div><mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button></div> 
 		<div><mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button></div> 
 		<div><mat-radio-button value="new_root">{{ 'desc.new_root' | translate }}</mat-radio-button></div> 
@@ -39,7 +46,7 @@
 	<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
 
 	<div class="app-desc app-mb-1">{{ 'desc.reharvestLibsOption' | translate }}:</div>
-	<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDsiabled" [(ngModel)]="reharvestLibsOption" name="reharvestLibsOption" (change)="onReharvestLibsOptionChange($event)">
+	<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDisabled" [(ngModel)]="reharvestLibsOption" name="reharvestLibsOption" (change)="onReharvestLibsOptionChange($event)">
 		<mat-radio-button value="fromindex" [disabled]="typeOfHarvest==='new_root'">{{ 'desc.allLibrariesPresentForTheTitleInTheIndex' | translate }}</mat-radio-button>
 		<mat-radio-button value="selection">{{ 'desc.selection' | translate }}</mat-radio-button>
 	</mat-radio-group>

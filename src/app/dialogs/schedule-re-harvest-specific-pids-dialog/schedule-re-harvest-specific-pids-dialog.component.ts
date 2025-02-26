@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, model, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -37,9 +37,10 @@ import { MatCardModule } from '@angular/material/card';
 export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
   isLibsLoading: boolean = false;  // nahrava seznam ve kterych knihovnach se titul nachazi
-  reharvestingDsiabled = false;
+  reharvestingDisabled = false;
   selectedCount = 0; // v kolika knihovnach byl titul nalezen
   conflict = false; // zda se jedna o konflikt - rozdil modelu 
+  conflictMessage = "";
 
   // stored in cdk index 
   cdkIndex:any;
@@ -55,6 +56,8 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
   typeOfHarvest: string = 'children';
   // rehaversting libs options 'all from index' | 'selected from checkbox'
   reharvestLibsOption: string = "fromindex";
+  root_pids:string[] = [];
+  pid_paths:string[] = [];
 
   // Debouncing 
   private subject: Subject<string> = new Subject();
@@ -86,8 +89,11 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
       });
       const pidlist = this.splitPids(pids);
       let rootpids: string[] = [];
+      let pidpaths:string[] = [];
       let enabled: string[] = [];
-      let fdocs:any = {}
+      //let fdocs:any = {}
+      let fdocs: Record<string, any[]> = {};
+
 
       for (let i = 0; i < pidlist.length; i++) {
         this.cdkApi.introspectPid(pidlist[i]).subscribe(resp => {
@@ -100,9 +106,17 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
             if (numFound > 0) {
               let docs = resp[key]['response']['docs'];
               if (docs && docs.length > 0) {
-                rootpids.push(docs[0]['root.pid']);
-                
-                fdocs[key]= docs[0];
+
+                let rp = docs[0]['root.pid'];
+                let pp = docs[0]['pid_paths'];
+                rootpids.push(rp);
+
+                if (pp && pp.length > 0) {
+                  pidpaths.push(pp[0])
+                } else {
+                  pidpaths.push(rp)
+                }
+                fdocs[key]= docs;
               }
               enabled.push(key);
             }
@@ -110,6 +124,8 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
           // store cdk instance
           this.cdkIndex = fdocs['_cdk_'];
+          this.root_pids = rootpids;
+          this.pid_paths = pidpaths;
 
           let uniqueCardinality: number = new Set(rootpids).size;
           if (uniqueCardinality) {
@@ -123,20 +139,29 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
             this.options.forEach(opt => {
               let selected = enabled.indexOf(opt.library.code) >= 0;
               opt.selected = selected;
-              opt.doc = fdocs[opt.library.code];
+              if (fdocs[opt.library.code]) {
+                opt.doc = fdocs[opt.library.code][0];
+              }
             });
           } else {
             // conflict
             // reharvest korenoveho titulu
-
           }
 
-          
-          let selected = this.options.filter(o=> o.selected);
-          let models = selected.map(o=> o.doc['model']);
-          this.selectedCount = selected.length;
-          this.conflict = new Set(models).size != 1;
-          this.reharvestingDsiabled = this.selectedCount <1 || this.conflict;
+          let modelConflict = this.modelConflict();
+          if (modelConflict[0]) {
+            this.conflict = modelConflict[0];
+            this.conflictMessage = modelConflict[1];
+          }
+
+          let cdkConflict = this.cdkConflict(fdocs['_cdk_']);          
+          if (cdkConflict[0]) {
+            this.conflict = cdkConflict[0];
+            this.conflictMessage = cdkConflict[1];
+          }
+
+
+          this.reharvestingDisabled = this.selectedCount <1 || this.conflict;
 
           let libs: string[] = [];
           this.options.forEach(option => {
@@ -151,6 +176,29 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
     });
  }
+
+ cdkConflict(docs: any[]): [boolean, string] {
+  let conflict = docs.length > 1;
+  let message = conflict ? `Conflict detected: ${docs.length} documents` : "No conflict";
+
+  return [conflict, message];
+}
+
+
+
+
+  
+  private modelConflict(): [boolean, string] {
+    let selected = this.options.filter(o => o.selected);
+    let models = selected.map(o => o.doc['model']);
+    this.selectedCount = selected.length;
+    let modelConflict = new Set(models).size !== 1;
+    
+    // Určení modelu, pokud existuje, jinak prázdný řetězec
+    let modelName = models.length > 0 ? models[0] : "";
+
+    return [modelConflict, modelName];
+}
 
  summary() {
   if (this.selectedCount > 0) {
@@ -173,8 +221,6 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
       strings.push(`model ${obj['model']}`);
     }
 
-    console.log(obj);
-
     return "Nalezeno ->  "+ strings.join(', ');
   } else return ""; 
 
@@ -193,7 +239,6 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
   }
 
   onPidsChange(newPidsValue: string): void {
-    //this.details = {};
     this.pids = newPidsValue;
     if (newPidsValue) {
       this.isLibsLoading = true;
@@ -251,9 +296,16 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
           libraries: libs
         };
 
+
+        // new root
         if (this.typeOfHarvest == 'new_root') {
           object['root.pid'] = pid
         }
+
+        if (!this.cdkIndex && this.pid_paths.length > 0) {
+          object['own_pid_path']=this.pid_paths[0];
+        }
+
 
         if (libs.length > 0) {
           this.cdkApi.planReharvest(object).subscribe(
