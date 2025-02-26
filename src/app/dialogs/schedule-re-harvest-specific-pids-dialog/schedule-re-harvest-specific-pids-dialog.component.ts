@@ -154,9 +154,9 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
  summary() {
   if (this.selectedCount > 0) {
-    return `Nalezeno v ${this.selectedCount} knihovnách; ${this.conflict  ? 'Konflikt' : 'Žádný konflikt'}`
+    return  this.ui.getTranslation('alert.cdkReharvestSpecificPids.result', { value: this.selectedCount}) + '. ' + this.ui.getTranslation(this.conflict ? 'desc.conflict' : 'desc.noConflict') + '.';
   } else {
-    return `Nalezeno v ${this.selectedCount} knihovnách`
+    return this.ui.getTranslation('alert.cdkReharvestSpecificPids.result', { value: this.selectedCount}) + '.';
   }
  }
 

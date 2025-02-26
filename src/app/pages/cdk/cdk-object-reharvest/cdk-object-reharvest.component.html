@@ -9,8 +9,9 @@
         </button>
       </mat-form-field> -->
       <mat-chip-listbox>
-        <mat-chip-row *ngIf="pid" [matTooltip]="pid" class="app-pid">
-          <div class="app-text-cutter">{{ pid }}</div>
+        <mat-chip-row *ngIf="pid" class="app-pid">
+          <div class="app-text-cutter" [matTooltip]="pid">{{ pid }}</div>
+          <button matChipRemove class="app-pr-0" [matTooltip]="'button.copyTheTextToTheClipboard' | translate" (click)="copyTextToClipboard(pid)"><mat-icon>content_copy</mat-icon></button>
           <button matChipRemove (click)="onDeletePidClick()"><mat-icon>cancel</mat-icon></button>
         </mat-chip-row>
         <mat-chip-row *ngFor="let filter of filters" [ngClass]="'app-' + filter.split(':')[1]">
@@ -20,7 +21,7 @@
     </div>
 
     <div>
-      <button mat-flat-button color="primary" (click)="reloadReharvests()" class="app-mr-2">Obnovit</button>
+      <button mat-flat-button color="primary" (click)="reloadReharvests()" class="app-mr-2">{{ 'button.reload' | translate }}</button>
       <button mat-flat-button (click)="openScheduledReHarvestSpecificPidsDialog()" color="primary">{{ 'button.reHarvestSpecificPids' | translate }}</button>
     </div>
   </mat-card>
@@ -38,8 +39,11 @@
       <ng-container matColumnDef="pid">
         <th mat-header-cell *matHeaderCellDef>{{ 'desc.pid' | translate }}</th>
         <td mat-cell *matCellDef="let element">
-          <div class="app-fxLayout app-row app-center-v">
-            <a [href]="clientLink(element.pid)" target="_blank">{{element.pid }}</a>
+          <div class="app-fxLayout app-row app-center-v app-gap-1">
+            <button mat-icon-button color="primary" [matTooltip]="'button.copyTheTextToTheClipboard' | translate" (click)="copyTextToClipboard(element.pid)">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+            <a [href]="clientLink(element.pid)" target="_blank">{{ element.pid }}</a>
             <button mat-icon-button color="primary" (click)="onPidClick(element.pid)">
               <mat-icon>filter_list</mat-icon>
             </button>

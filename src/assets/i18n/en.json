@@ -340,6 +340,9 @@
       "uuidValidation403": "Insufficient access rights",
       "uuidValidationElse": "Error reading from repository: {{ value1 }}: {{ value2 }}"
     },
+    "cdkReharvestSpecificPids": {
+      "result": "Found in {{ value }} libraries"
+    },
     "createOrEditRole": {
       "error1": "The role with this name is already exited, please enter another name.",
       "error2": "The role could not be created."
@@ -530,7 +533,8 @@
     "hideConsumedLicenses": "Hide consumed licenses",
     "thisFlagUnsupported": "This flag is no longer supported",
     "approve": "Approve",
-    "annualReport": "Annual report"
+    "annualReport": "Annual report",
+    "reload": "Reload"
   },
   "field": {
     "public": "Public",
@@ -571,7 +575,7 @@
     "root":"Whole title",
     "children":"Only subparts",
     "new_root":"New harvest of whole title",
-    "only_pid":"Reharvest pouze daného pidu",
+    "only_pid":"Reharvest only the given pid",
     "delete_pid": "Delete object",
     "delete_tree": "Delete tree"
   },
@@ -1271,7 +1275,7 @@
     "licenses":"Licenses",
     "delete":"Delete",
     "approve":"Approve",
-    "only_pid":"Reharvest pouze daného pidu",
+    "only_pid":"Reharvest only the given pid",
     "delete_pid": "Delete object",
     "delete_tree": "Delete tree",
     "library": "Library",   
@@ -1290,6 +1294,10 @@
     "id": "Id",
     "count": "Count",
     "instance": "Instance",
-    "rule": "Rule"
+    "rule": "Rule",
+    "previewToCdkIndex": "Preview to cdk index",
+    "notFound": "Not found",
+    "conflict": "Conflict",
+    "noConflict": "No conflict"
   }
 }

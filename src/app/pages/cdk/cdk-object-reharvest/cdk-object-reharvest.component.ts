@@ -23,6 +23,7 @@ import { Reharvest } from 'src/app/models/cdk.library.model';
 import { AppSettings } from 'src/app/services/app-settings';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { UIService } from 'src/app/services/ui.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 
 /**
@@ -71,7 +72,8 @@ export class CdkObjectReharvestComponent implements OnInit {
     private dialog: MatDialog,
     private ui: UIService,
     private cdkApi: CdkApiService,
-    private appSettings: AppSettings
+    private appSettings: AppSettings,
+    private clipboard: Clipboard
   ) { }
 
   ngOnInit(): void {
@@ -229,5 +231,9 @@ export class CdkObjectReharvestComponent implements OnInit {
     this.reloadReharvests();
   }
     
+  copyTextToClipboard(val: string) {
+    this.clipboard.copy(val);
+    this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
+  }
     
 }

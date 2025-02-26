@@ -340,6 +340,9 @@
       "uuidValidation403": "Nedostatečná přístupová práva",
       "uuidValidationElse": "Chyba čtení z repozitáře: {{ value1 }}: {{ value2 }}"
     },
+    "cdkReharvestSpecificPids": {
+      "result": "Nalezeno v {{ value }} knihovnách"
+    },
     "createOrEditRole": {
       "error1": "Role s tímto názvem už exituje, zadejte jiný název.",
       "error2": "Roli se nepodařilo vytvořit."
@@ -530,7 +533,8 @@
     "hideConsumedLicenses": "Skrýt konzumované licence",
     "thisFlagUnsupported": "Tento příznak již není podporován",
     "approve": "Schválit",
-    "annualReport": "Roční výkaz"
+    "annualReport": "Roční výkaz",
+    "reload": "Obnovit"
   },
   "field": {
     "public": "Veřejné",
@@ -1290,6 +1294,10 @@
     "id": "Id",
     "count": "Počet",
     "instance": "Instance",
-    "rule": "Pravidlo"
+    "rule": "Pravidlo",
+    "previewToCdkIndex": "Náhled do cdk indexu",
+    "notFound": "Nenalezeno",
+    "conflict": "Konflikt",
+    "noConflict": "Žádný konflikt"
   }
 }

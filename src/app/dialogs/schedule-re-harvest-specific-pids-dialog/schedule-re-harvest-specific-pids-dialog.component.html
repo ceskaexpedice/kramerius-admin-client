@@ -2,14 +2,7 @@
 
 <h2 mat-dialog-title>{{ 'modal.scheduleReHarvestSpecificPids.title' | translate }}</h2>
 <mat-dialog-content class="app-scrollbar-fix app-form-customize">
-	<div class="app-fxLayout app-column app-gap-4">
-		<div class="app-desc" [innerHtml]="('modal.scheduleReHarvestSpecificPids.message' | translate) + '.'"></div>
-
-		<div *ngIf="isLibsLoading" class="app-desc">
-			<div><strong>{{ 'modal.scheduleReHarvestSpecificPids.loadingDataFromLibraries.title' | translate }}</strong></div>
-			<div>{{ 'modal.scheduleReHarvestSpecificPids.loadingDataFromLibraries.pleaseWait' | translate }}</div>
-		</div>			  
-			
+	<div class="app-fxLayout app-column app-gap-4">			
 		<mat-form-field appearance="outline" class="app-w-100">
 			<mat-label>{{ 'desc.pids' | translate }}</mat-label>
 			<textarea [disabled]="false" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" (ngModelChange)="onPidsChange($event)" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="2"></textarea>
@@ -27,12 +20,12 @@
 	<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
 
 	<div class="app-desc app-mb-1">{{ 'desc.typeOfHarvest' | translate }}:</div>
-	<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDsiabled" [(ngModel)]="typeOfHarvest"  name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)">
-		<div><mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button></div> 
-		<div><mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button></div> 
-		<div><mat-radio-button value="new_root">{{ 'desc.new_root' | translate }}</mat-radio-button></div> 
-		<div><mat-radio-button value="only_pid">{{ 'desc.only_pid' | translate }}</mat-radio-button></div>
-		<mat-radio-button value="delete_pid">{{ 'desc.delete_pid' | translate }}</mat-radio-button> <br/>
+	<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDsiabled" [(ngModel)]="typeOfHarvest"  name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)" class="app-fxLayout app-column">
+		<mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button>
+		<mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button>
+		<mat-radio-button value="new_root">{{ 'desc.new_root' | translate }}</mat-radio-button> 
+		<mat-radio-button value="only_pid">{{ 'desc.only_pid' | translate }}</mat-radio-button>
+		<mat-radio-button value="delete_pid">{{ 'desc.delete_pid' | translate }}</mat-radio-button> 
 		<mat-radio-button value="delete_tree">{{ 'desc.delete_tree' | translate }}</mat-radio-button> 
 	</mat-radio-group>
 	
@@ -48,14 +41,14 @@
 
 		<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
 		
-		<div class="app-desc app-mb-1">Nahled do cdk indexu:</div>			
+		<div class="app-desc app-mb-1">{{ 'desc.previewToCdkIndex' | translate }}:</div>			
 		<mat-checkbox  [disabled]="true" checked="{{cdkIndex}}" name="_cdk_">
 			<strong>{{" ČDK" }}</strong> 
 			<ng-container *ngIf="cdkIndex">
 				<strong><i class="app-desc">&nbsp;{{detailDoc("_cdk_",cdkIndex)}}</i></strong>
 			</ng-container>
 			<ng-container *ngIf="!cdkIndex">
-				<strong><i class="app-desc"> Nenalezeno </i></strong>
+				<strong><i class="app-desc"> {{ 'desc.notFound' | translate }} </i></strong>
 			</ng-container>
 		</mat-checkbox>
 
