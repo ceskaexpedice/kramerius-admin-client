@@ -29,7 +29,6 @@
     "echarts": "^5.5.1",
     "moment": "^2.30.1",
     "ngx-echarts": "^18.0.0",
-    "ngx-flexible-layout": "^18.0.2",
     "rxjs": "~7.8.0",
     "timers": "^0.1.1",
     "tslib": "^2.3.0",
