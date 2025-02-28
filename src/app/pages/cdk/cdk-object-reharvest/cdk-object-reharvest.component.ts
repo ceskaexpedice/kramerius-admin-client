@@ -106,7 +106,6 @@ export class CdkObjectReharvestComponent implements OnInit {
       this.length = resp['response']['numFound'];
       this.loading = false;
 
-      this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
     });
   }
 
@@ -166,20 +165,15 @@ export class CdkObjectReharvestComponent implements OnInit {
       }
       this.cdkApi.reharvests(this.pageSize, this.pageIndex,this.pid, this.filters).subscribe(resp => {
         this.dataSource = resp;
-        //this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
         this.reloadReharvests();
-
       });
-
     })
-
   }
 
   approveState(reharvest: any) {
     this.cdkApi.changeReharvestState(reharvest.id, 'open').subscribe(x => {
       this.cdkApi.reharvests(this.pageSize, this.pageIndex, this.pid, this.filters).subscribe(resp => {
         this.dataSource = resp;
-        this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
       });
     });
   }
@@ -188,7 +182,6 @@ export class CdkObjectReharvestComponent implements OnInit {
     this.cdkApi.changeReharvestState(reharvest.id, 'cancelled').subscribe(x => {
       this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
         this.dataSource = resp;
-        this.dataSource.sort((a, b) => b.getDateTime().getTime() - a.getDateTime().getTime());
       });
     });
   }

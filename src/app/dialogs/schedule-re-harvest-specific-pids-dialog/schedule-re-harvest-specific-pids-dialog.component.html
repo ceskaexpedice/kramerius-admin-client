@@ -3,11 +3,12 @@
 <h2 mat-dialog-title>{{ 'modal.scheduleReHarvestSpecificPids.title' | translate }}</h2>
 <mat-dialog-content class="app-scrollbar-fix app-form-customize">
 	<div class="app-fxLayout app-column app-gap-4">			
+		<!-- pidy pro hreahrvest-->
 		<mat-form-field appearance="outline" class="app-w-100">
 			<mat-label>{{ 'desc.pids' | translate }}</mat-label>
 			<textarea [disabled]="false" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" (ngModelChange)="onPidsChange($event)" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="2"></textarea>
 		</mat-form-field>
-	
+		<!-- alert message -->
 		<mat-card *ngIf="(conflict || selectedCount == 0) || (!conflict && selectedCount > 0)" appearance="outlined" class="app-view-alert" [ngClass]="{ 'app-warn': conflict || selectedCount == 0, 'app-success': !conflict && selectedCount > 0 }">
 			<mat-card-content>
 				<mat-icon *ngIf="conflict || selectedCount == 0" color="warn">warning</mat-icon>
@@ -15,19 +16,31 @@
 				{{ summary() }}
 			</mat-card-content>
 		</mat-card>
-
-		<mat-card *ngIf="conflict" appearance="outlined" class="app-view-alert">
+		<!-- conflict alternative-->
+		<mat-card *ngIf="conflict" appearance="outlined">
 			<mat-card-content>
-				<p>{{conflictMessage}}</p>
+				<div style="width: 100%;">
+					<strong>{{conflictMessage}}</strong>
+				</div>
+				<mat-divider></mat-divider>
+				<div>
+					<mat-checkbox *ngFor="let cfo of conflictAlternatives" [disabled]="true" checked="true" style="display: block;">
+						<strong>{{cfo.pid}}</strong> 
+						<ng-container>
+							<strong><i *ngIf="cfo.type == 'delete_tree'" class="app-desc">&nbsp; Smazat podstrom </i></strong>
+							<strong><i *ngIf="cfo.type == 'root'" class="app-desc">&nbsp; Reharvest celku </i></strong>
+						</ng-container>
+					</mat-checkbox>
+				</div>
 			</mat-card-content>
 		</mat-card>
-
 	</div>
 
-	<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
+	<!-- standard reharvest part/type of reharvest-->
+	<mat-divider *ngIf="!conflict" class="app-mt-4 app-mb-4"></mat-divider>
 
-	<div class="app-desc app-mb-1">{{ 'desc.typeOfHarvest' | translate }}:</div>
-	<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDisabled" [(ngModel)]="typeOfHarvest"  name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)">
+	<div *ngIf="!conflict" class="app-desc app-mb-1">{{ 'desc.typeOfHarvest' | translate }}:</div>
+	<mat-radio-group *ngIf="!conflict" [disabled]="!pids || isLibsLoading || reharvestingDisabled" [(ngModel)]="typeOfHarvest"  name="typeOfHarvest" required (change)="onTypeOfReharvestChanged($event)">
 		<div><mat-radio-button value="root">{{ 'desc.root' | translate }}</mat-radio-button></div> 
 		<div><mat-radio-button value="children">{{ 'desc.children' | translate }}</mat-radio-button></div> 
 		<div><mat-radio-button value="new_root">{{ 'desc.new_root' | translate }}</mat-radio-button></div> 
@@ -36,15 +49,17 @@
 		<mat-radio-button value="delete_tree">{{ 'desc.delete_tree' | translate }}</mat-radio-button> 
 	</mat-radio-group>
 	
-	<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
+	<!-- standard reharvest part/selection-->
+	<mat-divider *ngIf="!conflict" class="app-mt-4 app-mb-4"></mat-divider>
 
-	<div class="app-desc app-mb-1">{{ 'desc.reharvestLibsOption' | translate }}:</div>
-	<mat-radio-group [disabled]="!pids || isLibsLoading || reharvestingDisabled" [(ngModel)]="reharvestLibsOption" name="reharvestLibsOption" (change)="onReharvestLibsOptionChange($event)">
+	<div *ngIf="!conflict" class="app-desc app-mb-1">{{ 'desc.reharvestLibsOption' | translate }}:</div>
+	<mat-radio-group  *ngIf="!conflict" [disabled]="!pids || isLibsLoading || reharvestingDisabled" [(ngModel)]="reharvestLibsOption" name="reharvestLibsOption" (change)="onReharvestLibsOptionChange($event)">
 		<mat-radio-button value="fromindex" [disabled]="typeOfHarvest==='new_root'">{{ 'desc.allLibrariesPresentForTheTitleInTheIndex' | translate }}</mat-radio-button>
 		<mat-radio-button value="selection">{{ 'desc.selection' | translate }}</mat-radio-button>
 	</mat-radio-group>
 
-	<ng-container *ngIf="reharvestLibsOption === 'selection'">
+	<!-- standard reharvest part/ checkbox with selections-->
+	<ng-container *ngIf="!conflict && reharvestLibsOption === 'selection'">
 
 		<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
 		
@@ -60,9 +75,12 @@
 		</mat-checkbox>
 
 
-		<mat-divider class="app-mt-4 app-mb-4"></mat-divider>
+		<!-- standard reharvest part/ checkbox with libs selections-->
+		<mat-divider *ngIf="!conflict" class="app-mt-4 app-mb-4"></mat-divider>
 
-		<div class="app-desc app-mb-1">{{ 'desc.selectLibraries' | translate }}:</div>			
+
+		<div *ngIf="!conflict" class="app-desc app-mb-1">{{ 'desc.selectLibraries' | translate }}:</div>			
+		<ng-container *ngIf="!conflict">
 		<div *ngFor="let option of options">
 			<mat-checkbox *ngIf="option.selected" [disabled]="!option.enabled && !isLibsLoading" [(ngModel)]="option.selected" name="option_{{option.library.code}}">
 					<strong>{{ option.library.code | translate }}</strong> 
@@ -74,6 +92,7 @@
 					</ng-container>
 			</mat-checkbox>
 		</div>
+	</ng-container>
 	</ng-container>
 </mat-dialog-content>
 

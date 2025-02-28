@@ -1297,7 +1297,7 @@
     "rule": "Pravidlo",
     "previewToCdkIndex": "Náhled do cdk indexu",
     "notFound": "Nenalezeno",
-    "conflict": "Konflikt",
-    "noConflict": "Žádný konflikt"
+    "conflict": "Nalezen konflikt",
+    "noConflict": "Nenalezen žádný konflikt"
   }
 }

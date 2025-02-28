@@ -23,6 +23,7 @@ import { debounceTime, Subject } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { forkJoin, from, concatMap, toArray  } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -37,11 +38,12 @@ import { MatCardModule } from '@angular/material/card';
 export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
   isLibsLoading: boolean = false;  // nahrava seznam ve kterych knihovnach se titul nachazi
-  reharvestingDisabled = false;
+  reharvestingDisabled = false; // znemozneny standardni reharvest
   selectedCount = 0; // v kolika knihovnach byl titul nalezen
+
   conflict = false; // zda se jedna o konflikt - rozdil modelu 
   conflictMessage = "";
-
+  conflictAlternatives:any[] = [];
   // stored in cdk index 
   cdkIndex:any;
 
@@ -148,18 +150,21 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
             // reharvest korenoveho titulu
           }
 
+          // check model conflict
           let modelConflict = this.modelConflict();
           if (modelConflict[0]) {
             this.conflict = modelConflict[0];
             this.conflictMessage = modelConflict[1];
+            this.conflictAlternatives = modelConflict[2];
           }
 
+          // check cdk conflict
           let cdkConflict = this.cdkConflict(fdocs['_cdk_']);          
           if (cdkConflict[0]) {
             this.conflict = cdkConflict[0];
             this.conflictMessage = cdkConflict[1];
+            this.conflictAlternatives = cdkConflict[2];
           }
-
 
           this.reharvestingDisabled = this.selectedCount <1 || this.conflict;
 
@@ -177,18 +182,45 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
     });
  }
 
- cdkConflict(docs: any[]): [boolean, string] {
+ cdkConflict(docs: any[]): [boolean, string,any[]] {
   let conflict = docs.length > 1;
-  let message = conflict ? `Conflict detected: ${docs.length} documents` : "No conflict";
+  let message = this.ui.getTranslation('desc.cdkconflict')
 
-  return [conflict, message];
+  let _to_delete :any[]= [];
+  let _to_reharvets:any[]=[];
+  
+  docs.forEach(doc=> {
+    let deleteObject: any = {
+      name: 'User trigger | Reharvest from admin client ',
+      pid: doc['root.pid'],
+      type: 'delete_tree'
+    };
+    if (!this.cdkIndex && this.pid_paths.length > 0) {
+      deleteObject['own_pid_path']=this.pid_paths[0];
+    }
+    _to_delete.push(deleteObject);
+
+
+    let reharvestObject: any = {
+      name: 'User trigger | Reharvest from admin client ',
+      pid: doc['root.pid'],
+      type: 'root'
+    };
+    if (!this.cdkIndex && this.pid_paths.length > 0) {
+      reharvestObject['own_pid_path']=this.pid_paths[0];
+    }
+    _to_reharvets.push(reharvestObject);
+  });
+  
+  
+  return [conflict, message, [..._to_delete]];
 }
 
 
 
 
   
-  private modelConflict(): [boolean, string] {
+  private modelConflict(): [boolean, string, any[]] {
     let selected = this.options.filter(o => o.selected);
     let models = selected.map(o => o.doc['model']);
     this.selectedCount = selected.length;
@@ -197,7 +229,7 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
     // Určení modelu, pokud existuje, jinak prázdný řetězec
     let modelName = models.length > 0 ? models[0] : "";
 
-    return [modelConflict, modelName];
+    return [modelConflict, modelName,[]];
 }
 
  summary() {
@@ -274,9 +306,37 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
     });
   }
 
-
-
   schedule() {
+    if (!this.conflict) {
+      this.scheduleRegular();
+    } else {
+      this.scheduleAlternatives();
+    }
+  }
+
+  scheduleAlternatives() {
+    if (this.conflictAlternatives) {
+
+      from(this.conflictAlternatives).pipe(
+        concatMap(doc => this.cdkApi.planReharvest(doc)), 
+        toArray() 
+      ).subscribe(
+        res => {
+          this.dialogRef.close(res); 
+        },
+        error => {
+          this.dialogRef.close('error'); 
+        }
+      );
+
+    } else {
+      this.dialogRef.close('error'); 
+    }
+
+  }
+
+
+  scheduleRegular() {
     const pidlist = this.splitPids(this.pids);
     pidlist.forEach(pid => {
       if (this.reharvestLibsOption == 'selection') {
