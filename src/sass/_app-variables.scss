@@ -165,6 +165,7 @@ $alerts: (
 
 // STATES
 $states: (
+  count: var(--app-color-primary),
   planned: #7b7b7b,
   running: #456aa5,
   finished: #45a55a,
