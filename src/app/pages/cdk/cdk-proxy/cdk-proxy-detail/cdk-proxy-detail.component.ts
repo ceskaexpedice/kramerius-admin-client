@@ -5,7 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { StatusTimtamp } from 'src/app/models/cdk.library.model';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 
@@ -18,7 +18,7 @@ export interface PeriodicElement { // TO DO: SMAZAT
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
+  imports: [CommonModule, RouterModule, TranslateModule, 
     MatIconModule, MatTooltipModule, MatTableModule
   ],
   selector: 'app-cdk-proxy-detail',

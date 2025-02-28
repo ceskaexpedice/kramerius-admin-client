@@ -14,7 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { Library } from 'src/app/models/cdk.library.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
@@ -28,7 +28,7 @@ import { forkJoin, from, concatMap, toArray  } from 'rxjs';
 @Component({
   standalone: true,
   imports: [
-    CommonModule, TranslateModule, FlexLayoutModule,  MatDialogModule, MatCheckboxModule,
+    CommonModule, TranslateModule,  MatDialogModule, MatCheckboxModule,
     MatButtonModule, MatIconModule,  MatInputModule, MatSelectModule, MatDividerModule,
     MatProgressBarModule, MatTooltipModule, MatRadioModule, FormsModule, MatProgressBarModule, MatAccordion, MatExpansionModule, MatCardModule],
   selector: 'app-schedule-re-harvest-specific-pids-dialog',

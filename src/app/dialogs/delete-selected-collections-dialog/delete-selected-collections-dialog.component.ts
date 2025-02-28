@@ -12,13 +12,12 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { TranslateModule } from "@ngx-translate/core";
-import { FlexLayoutModule } from "ngx-flexible-layout";
 import { Collection } from "src/app/models/collection.model";
 
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
   selector: 'app-delete-selected-collections-dialog',
   templateUrl: './delete-selected-collections-dialog.component.html',

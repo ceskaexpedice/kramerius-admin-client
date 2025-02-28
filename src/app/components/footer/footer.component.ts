@@ -5,12 +5,12 @@ import { AdminApiService } from '../../services/admin-api.service';
 import { interval, Subscription } from 'rxjs';
 import { AppSettings } from '../../services/app-settings';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [TranslateModule, FlexLayoutModule],
+  imports: [TranslateModule],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })

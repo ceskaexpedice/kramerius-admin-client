@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RightsComponent } from './rights/rights.component';
@@ -15,7 +15,7 @@ import { ParamsComponent } from './params/params.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatIconModule, MatTabsModule, 
     // MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
     // MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, 

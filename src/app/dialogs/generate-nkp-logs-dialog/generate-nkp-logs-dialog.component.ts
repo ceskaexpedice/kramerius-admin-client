@@ -12,13 +12,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import moment from 'moment';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
    MatTooltipModule, MatCheckboxModule],
   selector: 'app-generate-nkp-logs-dialog',

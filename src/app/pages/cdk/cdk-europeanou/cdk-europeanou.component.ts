@@ -9,7 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 
 const ELEMENT_DATA: any[] = [
   {license: null, icon: null, licenseLink: null, licenseEuro: null, action: null},
@@ -23,7 +23,7 @@ const ELEMENT_DATA: any[] = [
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, 
+  imports: [CommonModule, RouterModule, TranslateModule, 
     MatIconModule, MatTooltipModule, MatTableModule,
     MatFormFieldModule, MatInputModule, MatSelectModule
   ],

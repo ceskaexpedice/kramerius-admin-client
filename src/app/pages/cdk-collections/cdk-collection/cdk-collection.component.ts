@@ -32,7 +32,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { CollectionDetailComponent } from "../../collections/collection-detail/collection-detail.component";
@@ -42,7 +42,7 @@ import { CollectionContextComponent } from "../../collections/collection-context
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatRadioModule, MatCheckboxModule,
     MatTooltipModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatMenuModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
   selector: 'app-cdk-collection',

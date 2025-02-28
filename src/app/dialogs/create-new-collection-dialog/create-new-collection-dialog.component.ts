@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { UIService } from 'src/app/services/ui.service';
@@ -16,7 +16,7 @@ import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
   selector: 'app-create-new-collection-dialog',
   templateUrl: './create-new-collection-dialog.component.html',

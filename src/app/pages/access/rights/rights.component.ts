@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { CreateOrEditRightDialogComponent } from 'src/app/dialogs/create-or-edit-right-dialog/create-or-edit-right-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -23,7 +23,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, MatProgressBarModule,
+  imports: [CommonModule, TranslateModule, MatProgressBarModule,
     MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatExpansionModule],
   selector: 'app-rights',
   templateUrl: './rights.component.html',

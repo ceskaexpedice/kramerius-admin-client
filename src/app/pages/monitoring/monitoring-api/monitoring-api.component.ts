@@ -18,7 +18,7 @@ import {FilterType, Filter,FacetFilters,  FacetValue, FacetsGroup} from './filte
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { MatInputModule } from '@angular/material/input';
 import { MonitoringApiDetailComponent } from 'src/app/dialogs/monitoring-api-detail/monitoring-api-detail.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,7 +26,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { AppSettings } from 'src/app/services/app-settings';
 
 /*
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
    MatTooltipModule],
 */
@@ -46,7 +46,7 @@ import { AppSettings } from 'src/app/services/app-settings';
     MatDatepickerModule,
     MatFormFieldModule,
     FormsModule, 
-    FlexLayoutModule,
+   
     MatInputModule,
     MatDatepickerModule,
     MatPaginatorModule

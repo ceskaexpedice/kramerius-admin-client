@@ -14,7 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { debounceTime, Subject } from 'rxjs';
 import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
@@ -31,7 +31,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
  */
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, MatChipsModule, 
+  imports: [CommonModule, RouterModule, TranslateModule, MatChipsModule, 
     MatFormFieldModule,  MatInputModule,
     MatIconModule, 
     MatInputModule,

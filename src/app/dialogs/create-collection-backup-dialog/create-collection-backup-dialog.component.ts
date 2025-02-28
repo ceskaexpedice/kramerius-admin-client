@@ -10,13 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
   selector: 'app-create-collection-backup-dialog',
   templateUrl: './create-collection-backup-dialog.component.html',

@@ -8,12 +8,12 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, MatDialogModule,
     MatButtonModule, MatDividerModule, MatIconModule],
   selector: 'app-schedule-change-flag-on-license-dialog',
   templateUrl: './schedule-change-flag-on-license-dialog.component.html',

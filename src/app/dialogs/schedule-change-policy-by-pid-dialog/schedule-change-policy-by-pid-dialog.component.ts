@@ -12,13 +12,13 @@ import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progres
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule,
   MatProgressBarModule, MatTooltipModule, MatSelectModule],
   selector: 'app-schedule-change-policy-by-pid-dialog',

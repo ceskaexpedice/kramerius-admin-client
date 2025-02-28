@@ -9,7 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { Collection } from 'src/app/models/collection.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
@@ -17,7 +17,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
   selector: 'app-add-cutting-dialog',
   templateUrl: './add-cutting-dialog.component.html',

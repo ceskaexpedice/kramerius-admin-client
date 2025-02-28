@@ -6,7 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { CdkProxyComponent } from './cdk-proxy/cdk-proxy.component';
 import { CdkObjectReharvestComponent } from './cdk-object-reharvest/cdk-object-reharvest.component';
@@ -14,7 +14,7 @@ import { CdkEuropeanouComponent } from './cdk-europeanou/cdk-europeanou.componen
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatIconModule, MatTooltipModule, MatTabsModule,
     CdkProxyComponent, CdkObjectReharvestComponent, CdkEuropeanouComponent
   ],

@@ -11,14 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { forkJoin } from 'rxjs';
 import { Batch } from 'src/app/models/batch.model';
 import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule, FormsModule, MatDialogModule,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
     MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
     MatProgressBarModule, MatTooltipModule],
   selector: 'app-cancel-scheduled-processes-dialog',

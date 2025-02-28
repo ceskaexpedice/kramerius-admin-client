@@ -11,12 +11,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule, FormsModule,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
     MatCardModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule,
     MatTooltipModule, MatFormFieldModule, MatInputModule
   ],

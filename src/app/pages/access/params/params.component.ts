@@ -13,13 +13,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, TranslateModule, FlexLayoutModule,
+  imports: [CommonModule, TranslateModule,
     MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
     MatTooltipModule, MatExpansionModule],
   selector: 'app-params',

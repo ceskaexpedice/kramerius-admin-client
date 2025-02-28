@@ -9,12 +9,12 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppSettings } from 'src/app/services/app-settings';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { FlexLayoutModule } from 'ngx-flexible-layout';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FlexLayoutModule,  
+  imports: [CommonModule, RouterModule, TranslateModule,  
     MatCardModule, MatButtonModule, MatIconModule,
     MatTooltipModule],
   templateUrl: './home.component.html',
