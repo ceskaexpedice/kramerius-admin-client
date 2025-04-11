@@ -1,0 +1,140 @@
+
+var APP_GLOBAL = {
+    deployPath: '',
+
+    //coreBaseUrl: 'https://k7.inovatika.dev/search',
+    //coreBaseUrl: 'http://localhost:8080/search',
+
+	//userClientBaseUrl: 'https://kramerius.knihovna-pardubice.cz/',
+    //coreBaseUrl: 'https://kramerius.knihovna-pardubice.cz/search',
+
+    coreBaseUrl: 'https://k7.inovatika.dev/search',
+	userClientBaseUrl: 'https://k7.inovatika.dev/',
+
+    //coreBaseUrl: 'http://localhost:8080/search',
+
+    //coreBaseUrl: 'https://k7.inovatika.dev/search',
+    //coreBaseUrl: 'http://localhost:8080/search',
+
+    //userClientBaseUrl: 'https://val.ceskadigitalniknihovna.cz',
+	//coreBaseUrl: 'https://api.val.ceskadigitalniknihovna.cz/search',
+
+    //userClientBaseUrl: 'https://ceskadigitalniknihovna.cz',
+	//coreBaseUrl: 'https://api.ceskadigitalniknihovna.cz/search',
+
+	/*
+    userClientBaseUrl: 'https://k7.inovatika.dev',
+    deployPath: '',
+    coreBaseUrl: 'https://k7.inovatika.dev/search',
+	*/
+	
+	cdkMode:false,
+	devMode:true,
+	
+    keycloak: {
+		loginType:'form',
+		logoutUrl: 'https://k7.inovatika.dev/auth/realms/kramerius/protocol/openid-connect/logout' 
+    },
+
+
+
+    homeDashboard: [
+		{
+			type: "object",
+			hidden: true,
+		},
+		{
+			type: "import",
+			subtype: "foxml",
+			hidden: true
+		},
+		{
+			type: "import",
+			subtype: "ndk",
+			hidden: true
+		},
+		{
+			type: "access",
+			subtype: "rights",
+			hidden: true
+		},
+		{
+			type: "access",
+			subtype: "roles",
+			hidden: true
+		},
+		{
+			type: "access",
+			subtype: "licenses",
+			hidden: true
+		},
+		{
+			type: "access",
+			subtype: "parameters",
+			hidden: true
+		},
+		{
+			type: "processes",
+			hidden: true		
+		},
+		{
+			type: "collections",	
+			hidden: true,
+		},
+		{
+			type: "collections",
+			subtype: 'detail',
+			hidden: true,
+		},
+		{
+			type: "collections",
+			subtype: 'edit',
+			hidden: true,
+		},
+		{
+			type: "collections",
+			subtype: 'content',
+			hidden: true,
+		},
+		{
+			type: "collections",
+			subtype: 'context',
+			hidden: true,
+		},
+		{
+			type: "indexing",
+			subtype: "object",
+			hidden: false		
+		},
+		{
+			type: "indexing",
+			subtype: "model",
+			hidden: false
+		},
+		{
+			type: "repository",
+			subtype: "repository-management",
+			hidden: false
+		},
+		{
+			type: "repository",
+			subtype: "bulk-data-editing",
+			hidden: false
+		},
+		{
+			type: "repository",
+			subtype: "statistics",
+			hidden: false
+		},
+		{
+			type: "statistics",
+			subtype: "graphs",
+			hidden: true
+		},
+		{
+			type: "statistics",
+			subtype: "most-viewed-documents",
+			hidden: true
+		}
+	]
+}
