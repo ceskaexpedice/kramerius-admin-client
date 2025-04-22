@@ -1,6 +1,6 @@
-<mat-toolbar color="primary" fxLayout="row">
-  <div fxFlex>
-    <a routerLink="/" class="app-logo" fxLayout="row">
+<mat-toolbar color="primary" class="app-fxLayout app-row">
+  <div class="app-fxFlex">
+    <a routerLink="/" class="app-logo app-fxLayout">
       <svg width="125px" height="25px" viewBox="0 0 406 81" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>logo</title>
         <g id="logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -30,6 +30,7 @@
       <a *ngIf="allowedGlobalAction('a_statistics')" routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'sites.statistics.title' | translate }}</a>
       <a routerLink="/cdk" routerLinkActive="active" mat-button (click)="setDefaultRoute('cdk.view','proxy')" *ngIf="settings.cdkMode">{{ 'sites.cdk.title' | translate }}</a>  
       <a routerLink="/dev" routerLinkActive="active" mat-button *ngIf="settings.devMode">DEV</a>
+      <a routerLink="/monitoring" routerLinkActive="active" mat-button (click)="setDefaultRoute('monitoring.view','api')">{{ 'sites.monitoring.title' | translate }}</a>
       <a (click)="openAboutDialog()" mat-button>{{ 'modal.about.title' | translate }}</a> 
     </ng-container>
     
@@ -38,7 +39,7 @@
 
     <ng-container *ngIf="auth.isLoggedIn()">
       <a [matMenuTriggerFor]="profile_menu" mat-button class="app-avatar">
-        <div fxLayout="row" fxLayoutAlign="center center">
+        <div class="app-fxLayout app-row app-center-v app-center-h">
           {{ auth.getTextProfileImage() }}
         </div>
       </a>

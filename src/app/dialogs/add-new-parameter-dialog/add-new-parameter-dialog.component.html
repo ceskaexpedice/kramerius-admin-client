@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ 'modal.onNewParam.title' | translate }}</h2>
-<mat-dialog-content class="mat-typography">
-  <mat-form-field class="app-w-100">
+<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+  <mat-form-field appearance="outline" class="app-w-100">
     <mat-label>{{ 'desc.name' | translate }}</mat-label>
     <input matInput [placeholder]="'desc.name' | translate" type="text" [(ngModel)]="param" [disabled]="isParamCreated">
   </mat-form-field>

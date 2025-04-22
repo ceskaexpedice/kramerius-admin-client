@@ -1,12 +1,29 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { ShowMappingDialogComponent } from 'src/app/dialogs/show-mapping-dialog/show-mapping-dialog.component';
 import { ShowSeChannelDialogComponent } from 'src/app/dialogs/show-sechannel-dialog/show-sechannel-dialog.component';
 import { Library } from 'src/app/models/cdk.library.model';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatIconModule, MatSlideToggleModule, MatButtonModule,
+    MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule, MatProgressBarModule
+  ],
   selector: 'app-cdk-proxy',
   templateUrl: './cdk-proxy.component.html',
   styleUrls: ['./cdk-proxy.component.scss']
@@ -258,11 +275,13 @@ export class CdkProxyComponent implements OnInit {
   cdkMock:any ={"svkhk":{"status":true},"kkp":{"status":true},"svkul":{"status":true},"knav":{"status":true},"uzei":{"status":true},"inovatika":{"status":true},"mzk":{"status":true}};
 
 
-  displayedColumns: string[] = ['logo','code', 'name', 'state',  'stateDuration', 'showMapping','showSEChannel', 'switch'];
+  displayedColumns: string[] = ['logo','code', 'name'/*, 'state'*/,  'stateDuration', 'showMapping','showSEChannel', 'switch'];
 
   dataSource:Library[];
   register:Map<String, any> = new Map();
   problems:Map<String, boolean> = new Map();
+  loading = false;
+
 
   constructor(
     private cdkApi: CdkApiService,
@@ -276,7 +295,7 @@ export class CdkProxyComponent implements OnInit {
 
       this.dataSource = Library.libsFromJson( this.cdkMock );
       let codes = this.dataSource.map(l=> l.code);
-      this.registrMock.forEach(one=> {
+      this.registrMock.forEach((one: any)=> {
         let code = one.code;
         if (codes.indexOf(code)> -1) {
           this.register.set(code, one);
@@ -284,22 +303,60 @@ export class CdkProxyComponent implements OnInit {
       });
 
     } else {
-
+    this.loading = true;
     this.cdkApi.connected().subscribe(resp=> {
       this.dataSource = resp;
-      this.cdkApi.registrinfo().subscribe(resp=> {
 
+      let full_array:string[] = [];
+      this.dataSource.forEach(lb=> { full_array.push(lb.code); });
+      let processing_array:string[]=[];
+
+      //this.loading = false;
+      this.dataSource.forEach(lb=> {
+        if (lb.status) {
+          this.cdkApi.channel(lb.code).subscribe(resp=> {
+
+            processing_array.push(lb.code);
+            const areEqual = JSON.stringify([...full_array].sort()) === JSON.stringify([...processing_array].sort());
+            if (areEqual) {
+              console.log(this.problems);
+              this.loading = false;
+            }
+
+            console.log("\t channel for "+lb.code)
+
+            if(resp.channel.solr && resp.channel.user) {
+              this.problems.set(lb.code,false);
+              /*
+              let resp = this.register.get(lb.code);
+              if (resp) {
+              } else {
+              }*/
+
+            } else {
+              this.problems.set(lb.code,true);
+              /*  
+              let resp = this.register.get(lb.code);
+              if (resp) {
+              }*/
+            }
+          });
+        }
+    });
+
+      this.cdkApi.registrinfo().subscribe(resp=> {
         let codes = this.dataSource.map(l=> l.code);
         let registerResponse = resp;
-        registerResponse.forEach(one=> {
+        registerResponse.forEach((one: any)=> {
           let code = one.code;
           if (codes.indexOf(code)> -1) {
             this.register.set(code, one);
           }
         });
 
-        for (let code of this.register.keys()) {
-
+        /*
+        const keys: string[] = Object.keys(this.register);
+        keys.forEach((code: string) => {
           this.cdkApi.channel(code).subscribe(resp=> {
             if(resp.channel.solr && resp.channel.user) {
               let resp = this.register.get(code);
@@ -311,14 +368,18 @@ export class CdkProxyComponent implements OnInit {
               if (resp) {
                 this.problems.set(code,true);
               }
-
             }
           });
- 
-        }
+        });
+        */
+        
       });
     });
   }
+  }
+
+  isLoading() {
+    return this.loading;
   }
 
   public toggle(code:string, event: MatSlideToggleChange) {
@@ -331,13 +392,13 @@ export class CdkProxyComponent implements OnInit {
     });
   }
 
-  logo(code) {
+  logo(code: string) {
     if (this.register.get(code) != null && this.register.get(code)['logo']) {
       return this.register.get(code)['logo'];
     } else return null;
   }
 
-  formatDuration(code) {
+  formatDuration(code: string) {
     if (this.register.get(code) != null && this.register.get(code)['state_duration']) {
       let duration = this.register.get(code)['state_duration'];
       let days = Math.floor(duration/(3600 * 24));
@@ -353,23 +414,24 @@ export class CdkProxyComponent implements OnInit {
         return `${minutes}min`      
       }
     } 
+    return '';
   }
 
-  up(lib) {
-    let index = this.dataSource.indexOf(lib);
-    if (index > 0) {
-      this.arraymove(this.dataSource, index, index-1);
-      console.log(this.dataSource);
-    }
-  }
+  // up(lib) {
+  //   let index = this.dataSource.indexOf(lib);
+  //   if (index > 0) {
+  //     this.arraymove(this.dataSource, index, index-1);
+  //     console.log(this.dataSource);
+  //   }
+  // }
 
-  down(lib) {}
+  // down(lib) {}
 
-  arraymove(arr, fromIndex, toIndex) {
-    var element = arr[fromIndex];
-    arr.splice(fromIndex, 1);
-    arr.splice(toIndex, 0, element);
-  }
+  // arraymove(arr, fromIndex, toIndex) {
+  //   var element = arr[fromIndex];
+  //   arr.splice(fromIndex, 1);
+  //   arr.splice(toIndex, 0, element);
+  // }
 
   showMappingDialog(lib: any) {
     const dialogRef = this.dialog.open(ShowMappingDialogComponent, {

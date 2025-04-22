@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { forkJoin } from 'rxjs';
 import { ScheduleIndexationByModelDialogComponent } from 'src/app/dialogs/schedule-indexation-by-model-dialog/schedule-indexation-by-model-dialog.component';
 import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
@@ -12,10 +12,28 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatTableModule,
+    MatTooltipModule, MatTabsModule, MatCheckboxModule, MatProgressBarModule, MatButtonToggleModule,
+    MatPaginatorModule
+  ],
   selector: 'app-indexing',
   templateUrl: './indexing.component.html',
   styleUrls: ['./indexing.component.scss']
@@ -30,12 +48,12 @@ export class IndexingComponent implements OnInit {
   models = ['archive', 'graphic', 'sheetmusic', 'convolute', 'map', 'monograph', 'periodical', 'manuscript', 'collection', 'soundrecording'];
   modelNames = ['Archiválie', 'Grafiky', 'Hudebniny', 'Konvoluty', 'Mapy', 'Monografie', 'Periodika', 'Rukopisy', 'Sbírky', 'Zvukové nahrávky'];
 
-  selectedModel = undefined;
-  stateFilter = undefined;
+  selectedModel: string = undefined;
+  stateFilter: string = undefined;
 
   loading = false;
 
-  currentIndexerVersion;
+  currentIndexerVersion: string;
 
   itemsLoaded: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgress: boolean }[] = [];
   itemsToShowBatchSize = 100;
@@ -68,8 +86,8 @@ export class IndexingComponent implements OnInit {
   ngOnInit() {
 
     this.adminApi.getAllModelsFromProcessingIndex().subscribe(res=> {
-      let pmodels = [];
-      let names = [];
+      let pmodels: string[] = [];
+      let names: string[] = [];
       const models = Object.keys(res).map(key => key.replace(/^model:/, ''));
       models.forEach(model=> {
         if (!this.REMOVED_FROM_INDEXATION.includes(model)) {
@@ -104,7 +122,7 @@ export class IndexingComponent implements OnInit {
     }
   }
 
-  onChangeStateFilter(event) {
+  onChangeStateFilter(event: string) {
     this.stateFilter = event;
     this.loadFirstBatchOfItems();
   }
@@ -169,7 +187,7 @@ export class IndexingComponent implements OnInit {
       if (result === 'ignore_inconsistent_objects:true' || result === 'ignore_inconsistent_objects:false') {
         const ignoreInconsistentObjects = result === 'ignore_inconsistent_objects:true';
         this.loading = true;
-        let requests = [];
+        let requests: any[] = [];
         items.forEach(object => {
           
           requests.push(
@@ -226,8 +244,8 @@ export class IndexingComponent implements OnInit {
       this.adminApi.getObjectsByModel(this.selectedModel, order, this.repoNextOffset, this.repoLimit);
     query.subscribe(response => {
       const itemsFromRepo = response.items;
-      let pidsFromRepo = [];
-      itemsFromRepo.forEach(item => {
+      let pidsFromRepo: string[] = [];
+      itemsFromRepo.forEach((item: any) => {
         pidsFromRepo.push(item.pid);
       });
 
@@ -240,13 +258,13 @@ export class IndexingComponent implements OnInit {
         this.reponNextCursor = response.nextCursor;
         //check which of pids are in index
         this.clientApi.getIndexationInfoForPids(pidsFromRepo).subscribe(objectsInIndex => {
-          const objectsInIndexByPid = {};
+          const objectsInIndexByPid: any = {};
           objectsInIndex.forEach(object => {
             objectsInIndexByPid[object.pid] = object;
           })
           //merge to get final results
           let itemsMerged: { pid: string, title: string, indexed: boolean, indexerVersion: number, indexationInProgress: boolean }[] = [];
-          itemsFromRepo.forEach(item => {
+          itemsFromRepo.forEach((item: any) => {
             const objectInIndex = objectsInIndexByPid[item.pid];
             itemsMerged.push({
               pid: item['pid'],
@@ -258,7 +276,7 @@ export class IndexingComponent implements OnInit {
           });
 
           //filter by states
-          const filtered = itemsMerged.filter(o => {
+          const filtered = itemsMerged.filter((o: any) => {
             switch (this.stateFilter) {
               case 'all': return true;
               case 'in_progress': return o.indexationInProgress;
@@ -290,7 +308,7 @@ export class IndexingComponent implements OnInit {
   }
 
   getSelectedItems() {
-    let retvals = [];
+    let retvals: any[] = [];
     let itms = this.getCurrentItems();
     itms.forEach(row=> {
       if (this.selection.isSelected(row)) {

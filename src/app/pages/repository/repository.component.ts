@@ -15,7 +15,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { DeleteObjectsLowLevelDialogComponent } from 'src/app/dialogs/delete-objects-low-level-dialog/delete-objects-low-level-dialog.component';
 import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-delete-objects-smart/schedule-delete-objects-smart.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ScheduleSyncWithSdnntComponent } from 'src/app/dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
 import { ScheduleStartTheSdnntReviewProcessComponent } from 'src/app/dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
 import { ScheduleChangeFlagOnLicenseDialogComponent } from 'src/app/dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
@@ -27,8 +27,25 @@ import { EditSetDialogComponent } from 'src/app/dialogs/edit-set-dialog/edit-set
 import { AddNewSetDialogComponent } from 'src/app/dialogs/add-new-set-dialog/add-new-set-dialog.component';
 import { OAISet } from 'src/app/models/oaiset';
 import { OAIApiService } from 'src/app/services/oai-api.services';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule,
+    MatTooltipModule, MatDividerModule, MatExpansionModule
+  ],
   selector: 'app-repository',
   templateUrl: './repository.component.html',
   styleUrls: ['./repository.component.scss']
@@ -176,7 +193,7 @@ export class RepositoryComponent implements OnInit {
 
   getOAISets() {
 
-    let sets = [];
+    let sets: OAISet[] = [];
     Object.keys(this.sets).sort((a, b) => {
       return a.localeCompare(b);
     }).forEach(key=> {

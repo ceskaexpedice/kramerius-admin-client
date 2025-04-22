@@ -30,7 +30,7 @@ export class Collection {
   }
 
 
-  static fromAdminApiJson(json): Collection {
+  static fromAdminApiJson(json: any): Collection {
     const collection = new Collection();
     collection.id = json['pid'];
     collection.names = json['names'] || {};
@@ -58,7 +58,7 @@ export class Collection {
     return collection;
   }
 
-  static fromAdminApiJsonArray(lang:string, json): Collection[] {
+  static fromAdminApiJsonArray(lang:string, json: any): Collection[] {
     const items = [];
     for (const obj of json) {
       items.push(Collection.fromAdminApiJson(obj));

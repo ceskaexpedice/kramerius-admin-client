@@ -1,9 +1,20 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Data } from '@angular/router';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule,
+    MatTooltipModule],
   selector: 'app-show-sechannel-dialog',
   templateUrl: './show-sechannel-dialog.component.html',
   styleUrls: ['./show-sechannel-dialog.component.scss']
@@ -22,7 +33,7 @@ export class ShowSeChannelDialogComponent implements OnInit {
     this.acronym = data.code;
   }
 
-  getRoles(userKey) {
+  getRoles(userKey: string) {
     let retval = this.channel.users[userKey]?.roles;
     if (retval) {
       return retval;
@@ -31,7 +42,7 @@ export class ShowSeChannelDialogComponent implements OnInit {
     }
   }
 
-  getLicenses(userKey) {
+  getLicenses(userKey: string) {
     let retval = this.channel.users[userKey]?.licenses;
     if (retval) {
       return retval;
@@ -48,7 +59,7 @@ export class ShowSeChannelDialogComponent implements OnInit {
     }
   }
 
-  getLinkForLicense(lic) {
+  getLinkForLicense() {
     return "https://github.com/ceskaexpedice/kramerius/wiki/Licence"
   }
 

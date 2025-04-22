@@ -1,6 +1,6 @@
-<div class="app-access app-h-100">
-  <div fxLayout="column" fxFlexFill>
-    <div class="app-topbar">
+<div class="app-repository app-fxLayout app-column app-fill app-form-customize">
+  <div class="app-fxLayout app-column app-fill">
+		<div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
@@ -8,169 +8,137 @@
         <span class="app-last">{{ 'sites.repository.title' | translate }}</span>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
           <a mat-tab-link (click)="changeView('repository-management')" [active]="view == 'repository-management'"><mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>{{ 'sites.repository.repository-management.title' | translate }}</a>
           <a *ngIf="!notAllowed" mat-tab-link (click)="changeView('exports')" [active]="view == 'exports'"><mat-icon class="material-icons-outlined">import_export</mat-icon>{{ 'sites.repository.exports.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('bulk-data-editing')"  [active]="view == 'bulk-data-editing'"><mat-icon class="material-icons-outlined">edit_note</mat-icon>{{ 'sites.repository.bulk-data-editing.title' | translate }}</a>
 					<a mat-tab-link (click)="changeView('oai')"  [active]="view == 'oai'"><mat-icon class="material-icons-outlined">api</mat-icon>{{ 'sites.repository.oai.title' | translate }}</a>
-					<!--
-					<a mat-tab-link (click)="changeView('cdk')" [active]="view == 'cdk'" *ngIf="settings.cdkMode"><mat-icon class="material-icons-outlined">local_library</mat-icon>{{ 'sites.repository.cdk.title' | translate }}</a>
-				-->
         </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
-    <div fxFlex class="app-oa-y">
-      <div class="app-container">
-        <mat-card fxLayout="column" class="app-card app-view-border">
+		<div class="app-fxFlex app-oa-y">
+			<div class="app-container">
+				<mat-card appearance="outlined" *ngIf="view == 'repository-management'">
 					<mat-card-content>
-						<ng-container *ngIf="view == 'repository-management'">
-							<span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
-								<button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2" >{{ 'button.buildProcessingIndex' | translate }}</button>
-							</span>
-							<span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
-								<button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
-							</span>								
-						</ng-container>
-								
-						<ng-container *ngIf="view == 'exports'">
-							<div class="app-mb-4">
-								<h3 class="app-mt-0">{{ 'desc.global' | translate }}</h3>
-								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportStatistics' | translate }}</button>
-								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportPidsOfDnntLicensedObjects' | translate }}</button> 
-								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.generateAccessLogs' | translate }}</button>
-							</div>
-							<mat-divider [inset]="true"></mat-divider>
-							<div class="app-mt-4">
-								<h3 class="app-mt-0">{{ 'desc.forDocument' | translate }}</h3>
-								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportDocument' | translate }} (PDF)</button>
-								<button mat-flat-button (click)="todo()" color="primary" disabled class="app-mr-2">{{ 'button.exportDocument' | translate }} (FOXML)</button>
-							</div>
-						</ng-container>
+						<span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
+							<button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2" >{{ 'button.buildProcessingIndex' | translate }}</button>
+						</span>
+						<span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
+							<button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+						</span>										
+					</mat-card-content>
+				</mat-card>
 
-						<ng-container *ngIf="view == 'bulk-data-editing'">
-							<div class="app-mb-4">
-								<h3 class="app-mt-0">{{ 'desc.basedOnEmbeddedPids' | translate }}</h3>
-								<!-- tj. změna viditelnosti -->
-								<!-- <span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openChangePolicyDialog()" color="primary" class="app-mr-2">{{ 'button.setPublicPrivate' | translate }}</button>
-								</span> -->
-
-								<button mat-flat-button  color="primary" class="app-mr-2" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.setPublicPrivate' | translate }}</button>
-
-								<!-- odebrani viditelnosti -->
-								 <!--
+				<ng-container *ngIf="view == 'bulk-data-editing'">
+					<mat-accordion class="app-view-default" multi>
+						<mat-expansion-panel expanded="true">
+							<mat-expansion-panel-header>
+								<mat-panel-title>{{ 'desc.basedOnEmbeddedPids' | translate }}</mat-panel-title>
+							</mat-expansion-panel-header>
+							<div class="app-fxLayout app-row app-gap-2">
+								<button mat-flat-button  color="primary" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.setPublicPrivate' | translate }}</button>
 								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openRemoveTheVisibilityFlagDialog()" color="primary" class="app-mr-2">{{ 'button.removeTheVisibilityFlag' | translate }}</button>
+									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openAddLicenceDialog()" color="primary">{{ 'button.addLicense' | translate }}</button>
 								</span>
-								-->
-								<!-- DNNT, DNNT2 apod. -->
 								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openAddLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.addLicense' | translate }}</button>
-								</span>
-
-								<!-- DNNT, DNNT2 apod. -->
-								<span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openRemoveLicenceDialog()" color="primary" class="app-mr-2">{{ 'button.removeLicense' | translate }}</button>
+									<button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openRemoveLicenceDialog()" color="primary">{{ 'button.removeLicense' | translate }}</button>
 								</span>
 							</div>
-							<mat-divider [inset]="true"></mat-divider>
-							<!-- Pohybyliva zed - vypnuta
-							<div class="app-mt-4 app-mb-4">
-								<h3 class="app-mt-0">{{ 'desc.basedOnData' | translate }}</h3>
-								<button mat-flat-button (click)="todo()" color="primary" disabled  class="app-mr-2">{{ 'button.setPublicByDates' | translate }}</button>
-							</div>
-							-->		
-							<mat-divider [inset]="true"></mat-divider>
-							<div class="app-mt-4 app-mb-4">
-								<h3 class="app-mt-0">{{ 'desc.deleting' | translate }}</h3>
+						</mat-expansion-panel>
+						<mat-expansion-panel expanded="true">
+							<mat-expansion-panel-header>
+								<mat-panel-title>{{ 'desc.deleting' | translate }}</mat-panel-title>
+							</mat-expansion-panel-header>
+							<div class="app-fxLayout app-row app-gap-2">
 								<span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openScheduleDeleteObjectsSmartDialog()" color="warn" class="app-mr-2">{{ 'button.deleteObjectsSmart' | translate }}</button>
+									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openScheduleDeleteObjectsSmartDialog()" color="warn">{{ 'button.deleteObjectsSmart' | translate }}</button>
 								</span>
 								<span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openDeleteObjectsLowLevelDialog()" color="warn">{{ 'button.deleteObjectsLowLevel' | translate }}</button>
 								</span>
 							</div>
-
-							<mat-divider [inset]="true"></mat-divider>
-							<div class="app-mt-4 app-mb-4">
-								<h3 class="app-mt-0">{{ 'desc.licenseSynchronizationFetch' | translate }}</h3>
+						</mat-expansion-panel>
+						<mat-expansion-panel expanded="true">
+							<mat-expansion-panel-header>
+								<mat-panel-title>{{ 'desc.licenseSynchronizationFetch' | translate }}</mat-panel-title>
+							</mat-expansion-panel-header>
+							<div class="app-fxLayout app-row app-gap-2">
 								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleStartTheSdnntReviewProcessDialog()" color="primary" class="app-mr-2">{{ 'button.startSynchronizationWithSDNNT' | translate }}</button>
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleStartTheSdnntReviewProcessDialog()" color="primary">{{ 'button.startSynchronizationWithSDNNT' | translate }}</button>
 								</span>
 								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleSyncWithSdnntDialog()" color="primary" class="app-mr-2">{{ 'button.showSynchronzationResults' | translate }}</button>
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleSyncWithSdnntDialog()" color="primary">{{ 'button.showSynchronzationResults' | translate }}</button>
 								</span>
 							</div>
-
-							<mat-divider [inset]="true"></mat-divider>
-							<div class="app-mt-4 app-mb-4">
-								<h3 class="app-mt-0">{{ 'desc.changeFlagOnLicense' | translate }}</h3>
+						</mat-expansion-panel>
+						<mat-expansion-panel expanded="true">
+							<mat-expansion-panel-header>
+								<mat-panel-title>{{ 'desc.changeFlagOnLicense' | translate }}</mat-panel-title>
+							</mat-expansion-panel-header>
+							<div class="app-fxLayout app-row app-gap-2">
 								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleChangeFlagOnLicenseDialog()" color="primary" class="app-mr-2">{{ 'button.changeFlagOnLicense' | translate }}</button>
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleChangeFlagOnLicenseDialog()" color="primary">{{ 'button.changeFlagOnLicense' | translate }}</button>
 								</span>
 							</div>
-
-							<mat-divider [inset]="true"></mat-divider>
-							<div class="app-mt-4">
-								<h3 class="app-mt-0">{{ 'desc.migrationOfCollectionsFromK5' | translate }}</h3>
+						</mat-expansion-panel>
+						<mat-expansion-panel expanded="true">
+							<mat-expansion-panel-header>
+								<mat-panel-title>{{ 'desc.migrationOfCollectionsFromK5' | translate }}</mat-panel-title>
+							</mat-expansion-panel-header>
+							<div class="app-fxLayout app-row app-gap-2">
 								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
-									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleMigrateCollectionsDialog()" color="primary" class="app-mr-2">{{ 'button.migrateCollections' | translate }}</button>
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleMigrateCollectionsDialog()" color="primary">{{ 'button.migrateCollections' | translate }}</button>
 								</span>
 							</div>
-						</ng-container>
+						</mat-expansion-panel>
+					</mat-accordion>
+				</ng-container>
 
-						<ng-container *ngIf="view == 'oai'">
-							<div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start baseline">
-								<mat-form-field fxFlex>
-									<mat-label>{{ 'desc.implicitSet' | translate }}
-										<ng-container *ngIf="defaultSet">
-											 {{ "  ("+ defaultSet.numberDocs +" dokumentů)"}}
-										</ng-container>
-									</mat-label>
-									<input matInput [placeholder]="'desc.implicitSet' | translate" [(ngModel)]="deafultSetQuery">
-								</mat-form-field>
-								<div>
-									<button mat-flat-button color="primary" [disabled]="!isDefaultSetQueryChanged()" (click)="saveImplicitSet()" class="app-mr-2">{{ 'button.save' | translate }}</button>
-									<button mat-flat-button color="primary" (click)="openAddNewSetDialog()">{{ 'button.addNewSet' | translate }}</button>
-								</div>
+				<mat-card appearance="outlined" *ngIf="view == 'oai'">
+					<mat-card-content>
+						<div class="app-fxLayout app-row app-gap-2 app-mb-4">
+							<mat-form-field appearance="outline" class="app-fxFlex">
+								<mat-label>{{ 'desc.implicitSet' | translate }}
+									<ng-container *ngIf="defaultSet">
+										 {{ "  ("+ defaultSet.numberDocs +" dokumentů)"}}
+									</ng-container>
+								</mat-label>
+								<input matInput [placeholder]="'desc.implicitSet' | translate" [(ngModel)]="deafultSetQuery">
+							</mat-form-field>
+							<div>
+								<button mat-flat-button color="primary" [disabled]="!isDefaultSetQueryChanged()" (click)="saveImplicitSet()" class="app-mr-2">{{ 'button.save' | translate }}</button>
+								<button mat-flat-button color="primary" (click)="openAddNewSetDialog()">{{ 'button.addNewSet' | translate }}</button>
 							</div>
-							<h3 class="app-mt-0 app-mb-2">{{ 'desc.listOfSets' | translate }}</h3>
-							<table class="app-table">
-								<thead>
-									<tr>
-										<th>{{ 'desc.id' | translate }}</th>
-										<th>{{ 'desc.name' | translate }}</th>
-										<th>{{ 'desc.description' | translate }}</th>
-										<th>{{ 'desc.filter' | translate }}</th>
-										<th>{{ 'desc.docs' | translate }}</th>
-										<th></th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr *ngFor="let oaiSet of getOAISets()" >
-										<td> <i> {{oaiSet.setSpec}} </i></td>
-										<td>{{oaiSet.setName}}</td>
-										<td>{{oaiSet.setDescription}}</td>
-										<td>{{oaiSet.filterQuery}}</td>
-										<td>{{oaiSet.numberDocs}}</td>
-
-										<td class="app-col-action"><a (click)="openEditSetDialog(oaiSet)" [matTooltip]="'button.edit' | translate"><mat-icon>edit</mat-icon></a></td>
-										<td class="app-col-action"><a (click)="deleteSet(oaiSet)" [matTooltip]="'button.delete' | translate"><mat-icon>delete</mat-icon></a></td>
-									</tr>
-								</tbody>
-							</table>
-						</ng-container>
-						<!--	
-						<ng-container *ngIf="view == 'cdk'">
-							<span>
-								<button mat-flat-button (click)="openScheduledReHarvestSpecificPidsDialog()" color="primary" class="app-mr-2" >{{ 'button.reHarvestSpecificPids' | translate }}</button>
-							</span>				
-						</ng-container>
-						-->
+						</div>
+						<h3 class="app-mt-0 app-mb-2">{{ 'desc.listOfSets' | translate }}</h3>
+						<table class="app-table">
+							<thead>
+								<tr>
+									<th>{{ 'desc.id' | translate }}</th>
+									<th>{{ 'desc.name' | translate }}</th>
+									<th>{{ 'desc.description' | translate }}</th>
+									<th>{{ 'desc.filter' | translate }}</th>
+									<th>{{ 'desc.count' | translate }}</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let oaiSet of getOAISets()" >
+									<td> <i> {{oaiSet.setSpec}} </i></td>
+									<td>{{oaiSet.setName}}</td>
+									<td>{{oaiSet.setDescription}}</td>
+									<td>{{oaiSet.filterQuery}}</td>
+									<td>{{oaiSet.numberDocs}}</td>
+									<td class="app-col-action"><a (click)="openEditSetDialog(oaiSet)" [matTooltip]="'button.edit' | translate"><mat-icon>edit</mat-icon></a></td>
+									<td class="app-col-action"><a (click)="deleteSet(oaiSet)" [matTooltip]="'button.delete' | translate"><mat-icon>delete</mat-icon></a></td>
+								</tr>
+							</tbody>
+						</table>
 					</mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
+				</mat-card>
+			</div>
+		</div>
+	</div>
 </div>

@@ -19,24 +19,20 @@ html, body {
 body {
   @extend .app-m-0;
   font-family: Roboto, "Helvetica Neue", sans-serif; 
-  background: $app-body-bg;
-  color: $app-body-color;
+  background: var(--app-body-bg);
+  color: var(--app-body-color);
 
-  .app-content-wrapper {
-    height: 100%;
-    padding-top: $app-toolbar-height;
-
-    .app-container {
-      @extend .app-p-4;
-      margin: 0 auto;
-      max-width: $app-container;
-      width: 100%;
-    }
-
-    .app-container-fluid {
-      @extend .app-p-4;
-      max-width: 100%;
-    }
+  .app-container {
+    padding: 16px !important;
+    margin: 0 auto;
+    max-width: var(--app-container);
+    width: 100%;
   }
+
+  .app-container-fluid {
+    @extend .app-p-4;
+    max-width: 100%;
+  }
+
 }
 

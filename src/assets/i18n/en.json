@@ -200,16 +200,15 @@
       "objectReharvest": {
         "title": "Oject reharvest",
         "icon": "repeat"
-      },
-      "reharvestjob":{
-        "running":"Reharvest started",
-        "open":"Reharvest planned",
-        "closed":"Reharvest finished",
-        "too_big":"Reharvest is too big -> Manual reharvest needed",
-        "waiting_for_approve":"Approve needed",
-        "cancelled":"Reharvest cancelled",
-        "failed":"Reharvest failed"
       }
+    },
+    "monitoring": {
+      "title": "Monitoring",
+      "api": {
+        "title": "API monitoring",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "monitoring"
+      }    
     }
   },
   "navbar": {
@@ -345,6 +344,9 @@
       "uuidValidation404": "Object not found",
       "uuidValidation403": "Insufficient access rights",
       "uuidValidationElse": "Error reading from repository: {{ value1 }}: {{ value2 }}"
+    },
+    "cdkReharvestSpecificPids": {
+      "result": "Found in {{ value }} libraries"
     },
     "createOrEditRole": {
       "error1": "The role with this name is already exited, please enter another name.",
@@ -536,7 +538,8 @@
     "hideConsumedLicenses": "Hide consumed licenses",
     "thisFlagUnsupported": "This flag is no longer supported",
     "approve": "Approve",
-    "annualReport": "Annual report"
+    "annualReport": "Annual report",
+    "reload": "Reload"
   },
   "field": {
     "public": "Public",
@@ -564,7 +567,24 @@
     "convolute": "Convolute",
     "picture": "Pictures",
     "multivolumemonograph":"Multivolume monograph",
-    "collection": "Collections"
+    "collection": "Collections",
+
+    "running":"Reharvest started",
+    "open":"Reharvest planned",
+    "closed":"Reharvest finished",
+    "too_big":"Reharvest is too big -> Manual reharvest needed",
+    "waiting_for_approve":"Approve needed",
+    "cancelled":"Reharvest cancelled",
+    "failed":"Reharvest failed",
+    
+    "root":"Whole title",
+    "children":"Only subparts",
+    "new_root":"New harvest of whole title",
+    "only_pid":"Reharvest only the given pid",
+    "delete_pid": "Delete object",
+    "delete_tree": "Delete tree",
+    "delete_root": "Delete title"
+
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
@@ -584,7 +604,6 @@
       "title": "Deleting a process",
       "message": "Do you really want to permanently delete the process"
     },
-
     "removeCuttersFromCollection": {
       "title": "Removal clips from the collection",
       "message": "Do you really want to remove  objects from the collection?"
@@ -1251,7 +1270,7 @@
     "allLibrariesPresentForTheTitleInTheIndex": "All libraries present for the title in the index",
     "selection": "Selection",
     "disabledLibrary": "Disabled library",
-    "selectLibraries":"Library selection",
+    "selectLibraries":"Libraries  for reharvest",
     "securedChannel":"Secured channel",
     "register":"Kramerius registry",
     "api": "API version",
@@ -1267,11 +1286,30 @@
     "licenses":"Licenses",
     "delete":"Delete",
     "approve":"Approve",
-    "only_pid":"Reharvest pouze daného pidu",
+    "only_pid":"Reharvest only the given pid",
     "delete_pid": "Delete object",
     "delete_tree": "Delete tree",
     "library": "Library",   
     "title":"Title",
-    "subtitle":"Subtitle"
+    "subtitle":"Subtitle",
+    "dateAndTime": "Date and time",
+    "parentResource": "Parent resource",
+    "endpointUrl":  "Endpoint URL",
+    "labels": "Labels",
+    "ipAddress": "IP address",
+    "query": "Query",
+    "httpMethod": "HTTP method",
+    "resource": "Resource",
+    "workers": "Workers",
+    "recordDetail": "Record detail",
+    "id": "Id",
+    "count": "Count",
+    "instance": "Instance",
+    "rule": "Rule",
+    "previewToCdkIndex": "Preview to cdk index",
+    "notFound": "Not found",
+    "conflict": "Conflict",
+    "noConflict": "No conflict",
+    "none":""
   }
 }

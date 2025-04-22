@@ -4,11 +4,11 @@
 
 a {
   @extend .app-cursor-pointer;
-  color: $app-color-primary;
+  color: var(--app-color-primary);
   text-decoration: none;
 
   &:hover {
-    color: rgba($app-color-primary, .7);
+    color: var(--app-color-primary-700);
 
     &:not(.mat-toolbar &, .mat-tab-nav-bar &, .mat-flat-button) {
       text-decoration: underline;
@@ -22,35 +22,35 @@ a {
 
 // theme colors
 .app-color-primary {
-  color: $app-color-primary;
+  color: var(--app-color-primary);
 }
 
 .app-color-accent {
-  color: $app-color-accent;
+  color: var(--app-color-accent);
 }
 
 .app-color-warn {
-  color: $app-color-warn !important;
+  color: var(--app-color-warn) !important;
 }
 
 .app-color-info {
-  color: $app-color-info !important;
+  color: var(--app-color-info) !important;
 }
 
 .app-color-lightnes {
-  color: $app-color-lightnes;
+  color: var(--app-color-lightnes);
 }
 
 .app-color-success {
-  color: $app-color-success !important;
+  color: var(--app-color-success) !important;
 }
 
 .app-color-disabled {
-  color: $app-color-disabled !important;
+  color: var(--app-color-disabled) !important;
 }
 
 .app-bg-white {
-  background-color: $app-color-lightnes !important;
+  background-color: var(--app-color-lightnes) !important;
 }
 
 // cleaners
@@ -68,6 +68,14 @@ a {
 
 .app-clean-border {
   border: 0 !important;
+}
+
+.app-clean-border-b {
+  border-bottom: 0 !important;
+}
+
+.app-clean-border-t {
+  border-top: 0 !important;
 }
 
 .app-clean-shadow {
@@ -211,7 +219,7 @@ a {
 
 .app-pipe {
   @extend .app-ml-2, .app-mr-2;
-  border-left: 1px solid $app-gray-4;
+  border-left: 1px solid var(--app-gray-4);
 
   /* &:last-child {
     @extend .app-dn;
@@ -219,7 +227,7 @@ a {
 }
 
 .app-label {
-  color: $app-gray-6;
+  color: var(--app-gray-6);
   font-size: 12px;
 }
 
@@ -229,13 +237,13 @@ a {
 }
 
 .app-desc {
-  color: $app-gray-6;
+  color: var(--app-gray-6);
   font-size: 14px;
   vertical-align: middle;
 }
 
 .app-explanation {
-  color: $app-gray-6;
+  color: var(--app-gray-6);
   font-size: 12px;
 }
 
@@ -246,7 +254,7 @@ a {
 .app-clear-filter,
 .app-btn-warn {
   .mat-icon {
-    @include setIcon(18, $app-color-warn, middle);
+    @include setIcon(18, var(--app-color-warn), middle);
   }
 }
 
@@ -258,18 +266,18 @@ a {
   justify-content: center;
   min-width: 20px;
   height: 20px;
-  border-radius: $app-badge-border-radius;
-  color: $app-color-lightnes;
+  border-radius: var(--app-badge-border-radius);
+  color: var(--app-color-lightnes);
   font-size: 12px;
   font-weight: 500;
-  background-color: $app-color-primary;
+  background-color: var(--app-badge-default-color);
 
   &.app-version {
-    background-color: $app-badge-version-color;
+    background-color: var(--app-badge-version-color);
   }
 
   &.app-session {
-    color: $app-color-primary;
+    color: var(--app-color-primary);
   }
 
   &.app-count {
@@ -283,9 +291,9 @@ a {
 
 .app-input-autocomplete {
   @extend .app-clean-shadow, .app-pl-4, .app-pr-4;
-  height: $app-button-height;
-  border-radius: $app-border-radius;
-  border: 1px solid $app-table-color-border;
+  height: var(--mdc-filled-button-container-height);
+  border-radius: var(--app-border-radius);
+  border: 1px solid var(--app-table-color-border);
   min-width: 400px;
 }
 
@@ -294,11 +302,11 @@ a {
 }
 
 .app-not-allowed {
-  color: $app-color-disabled !important;
+  color: var(--app-color-disabled) !important;
   cursor: not-allowed;
 
   .mat-icon {
-    @include setIcon($color: $app-color-disabled);
+    @include setIcon($color: var(--app-color-disabled));
   }
 }
 
@@ -320,14 +328,14 @@ a {
 } */
 
 .app-view-border-bottom {
-  border-bottom: 1px solid $app-card-border-color;
+  border-bottom: 1px solid var(--app-card-border-color);
 }
 
 // top bar
 .app-topbar {
   @extend .app-pt-8, .app-pl-4, .app-pr-4;
-  background-color: $app-gray-1;
-  border-bottom: 1px solid $app-gray-3;
+  background-color: var(--app-gray-1);
+  border-bottom: 1px solid var(--app-gray-3);
 
   .app-breadcrumbs {
     font-size: 20px;
@@ -336,7 +344,7 @@ a {
     span {
       &.app-separator {
         @extend .app-ml-2, .app-mr-2;
-        color: $app-gray-4;
+        color: var(--app-gray-4);
       }
 
       &.app-last {
@@ -345,7 +353,7 @@ a {
     }
 
     .mat-icon {
-      @include setIcon($color: $app-gray-4, $position: bottom);
+      @include setIcon($color: var(--app-gray-4), $position: bottom);
     }
   }
 }
@@ -353,7 +361,7 @@ a {
 // table wrapper
 .app-table-wrapper {
   &.app-view-border {
-    border: 1px solid $app-table-color-border;
+    border: 1px solid var(--app-table-color-border);
   }
 }
 
@@ -365,14 +373,14 @@ table {
     @extend .app-w-100;
     border-width: 1px 0 0 1px;
     border-style: solid;
-    border-color: $app-table-color-border;
-    background-color: $app-table-color-bg;
+    border-color: var(--app-table-color-border);
+    background-color: var(--app-table-color-bg);
 
     tr {
       td, th {
         border-width: 0 1px 1px 0;
         border-style: solid;
-        border-color: $app-table-color-border;
+        border-color: var(--app-table-color-border);
         padding: 4px 8px;
         vertical-align: top;
         text-align: left;
@@ -385,7 +393,7 @@ table {
         th {
           /* font-size: 12px;
           font-weight: 500;
-          color: $app-gray-6; */
+          color: var(--app-gray-6); */
         }
       }
     }
@@ -394,8 +402,9 @@ table {
       tr {
         td {
           &.app-col-action {
-            width: 30px;
-            color: $app-color-primary;
+            width: 20px;
+            text-align: center;
+            color: var(--app-color-primary);
 
             .mat-icon {
               @include setIcon(18, $position: sub)
@@ -434,12 +443,12 @@ table {
 
         &:hover {
           td {
-            background-color: $app-gray-0;
+            background-color: var(--app-gray-0);
           }
         }
 
        /*  &:nth-child(odd) {
-          background-color: rgba($app-gray-0, .5);
+          background-color: rgba(var(--app-gray-0), .5);
         } */
 
         .app-input {

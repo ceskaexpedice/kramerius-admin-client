@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AddItemToCollectionDialogComponent } from 'src/app/dialogs/add-item-to-collection-dialog/add-item-to-collection-dialog.component';
 import { ScheduleAddLicenseDialogComponent } from 'src/app/dialogs/schedule-add-license-dialog/schedule-add-license-dialog.component';
 import { ScheduleChangePolicyByPidDialogComponent } from 'src/app/dialogs/schedule-change-policy-by-pid-dialog/schedule-change-policy-by-pid-dialog.component';
@@ -18,14 +18,36 @@ import { UIService } from 'src/app/services/ui.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { AuthService } from 'src/app/services/auth.service';
 import { AppSettings } from 'src/app/services/app-settings';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+import { RightsComponent } from '../rights/rights.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatProgressBarModule,
+    MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, MatInputModule, 
+    RightsComponent, MatExpansionModule],
   templateUrl: './object.component.html',
   styleUrls: ['./object.component.scss']
 })
 export class ObjectComponent implements OnInit {
 
+  readonly panelOpenState = signal(false);
 
   view: string;
   routeView: string;
@@ -33,29 +55,29 @@ export class ObjectComponent implements OnInit {
   inputPid: string;
   pidIsCorrect = false;
   errorMessage: string;
-  title;
+  title: string;
   collection: Collection;
 
   checkingPid = false;
 
   //tab collections
   loadingCollections = false;
-  superCollections;
+  superCollections: any[];
 
   //tab accessibility
   loadingLicenses = false;
-  licenses;
-  policy;
+  licenses: any;
+  policy: string;
 
   // specificke akce spojene s objektem
-  specificAuthorizedActions = [];
+  specificAuthorizedActions: string | string[] = [];
   // specificke akce pro kolekce
   collectionActions:Map<string,string[]> = new Map();
 
-  proarcServers = this.settings.proarc;
+  proarcServers: any[];
   selectedProarcServer: any = [];
   
-  altoeditorServers = this.settings.altoeditor;
+  altoeditorServers: any[];
   selectedAltoeditorServer: any = [];
 
   //TODO:  language from component
@@ -76,6 +98,8 @@ export class ObjectComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.proarcServers = this.settings.proarc;
+    this.altoeditorServers = this.settings.altoeditor;
     this.route.params.subscribe(params => {
       this.pid = params['pid'];
       //this.title = this.pid;
@@ -137,7 +161,7 @@ export class ObjectComponent implements OnInit {
   }
 
 
-  allowCollectionEdit(pid) {
+  allowCollectionEdit(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_collections_edit')) {
         return true;
@@ -165,7 +189,7 @@ export class ObjectComponent implements OnInit {
 
         this.authApi.getPidsAuthorizedActions(this.superCollections.map(c=> c['id']), null).subscribe((d:any) => {
           Object.keys(d).forEach((k)=> {
-            let actions = d[k].map((v)=> v.code);
+            let actions = d[k].map((v: any)=> v.code);
             this.collectionActions.set(k, actions);
           });
         });
@@ -193,7 +217,7 @@ export class ObjectComponent implements OnInit {
     this.loadingLicenses = true;
     this.licenses = undefined;
     this.policy = undefined;
-    this.adminApi.getLicensesOfObject(this.pid).subscribe(data => {
+    this.adminApi.getLicensesOfObject(this.pid).subscribe((data: any) => {
       this.licenses = data['licenses']
       this.policy = data['policy'];
       this.loadingLicenses = false;
@@ -208,7 +232,7 @@ export class ObjectComponent implements OnInit {
     return this.pid && this.pidIsCorrect;
   }
 
-  getCollectionDefaultName(col) {
+  getCollectionDefaultName(col: any) {
     return col.names['cze']
   }
 
@@ -341,7 +365,7 @@ export class ObjectComponent implements OnInit {
     return this.clientApi.getThumb(uuid);
   }
 
-  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string, itemName) {
+  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPid: string) {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
       //message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
@@ -504,8 +528,8 @@ export class ObjectComponent implements OnInit {
     this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
   }
 
-  removeItemFromAnotherCollection(superCollection, collection, event) {
-    this.onRemoveItemFromCollection(superCollection.id,  this.getCollectionDefaultName( superCollection) , collection['id'], collection.getName());
+  removeItemFromAnotherCollection(superCollection: any, collection: any, event: Event) {
+    this.onRemoveItemFromCollection(superCollection.id,  this.getCollectionDefaultName( superCollection) , collection['id']);
     event.preventDefault(); 
     event.stopPropagation();
   }

@@ -1,6 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { CreateOrEditRightDialogComponent } from 'src/app/dialogs/create-or-edit-right-dialog/create-or-edit-right-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -9,19 +18,26 @@ import { Right } from 'src/app/models/right.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UIService } from 'src/app/services/ui.service';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, MatProgressBarModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatExpansionModule],
   selector: 'app-rights',
   templateUrl: './rights.component.html',
   styleUrls: ['./rights.component.scss']
 })
 export class RightsComponent implements OnInit {
   //TODO: prejmenovat na ActionsComponent. Je to hlavně seznam (relevantních) akcí. Až sekundárně administrace práv nad konkrétními akcemi
-
+  
+  readonly panelOpenState = signal(false);
+  
   state: string;
   // roles: any[];
   actionMap: {[key: string]: RightAction};
-  selectedAction: RightAction;
+  //selectedAction: RightAction;
 
   actions: RightAction[];
   errorMessage: string;
@@ -42,7 +58,7 @@ export class RightsComponent implements OnInit {
 
       rAct.forEach(a=> {
         this.actionMap[a.code] = a;
-        console.log(this.actionMap[a.code]);
+        // console.log(this.actionMap[a.code]);
       });
       this.actions = rAct;
 
@@ -55,7 +71,7 @@ export class RightsComponent implements OnInit {
         }
         // this.roles = roles;
         this.state = 'success';
-        console.log('rights', rights);
+        // console.log('rights', rights);
       });
     }, (error:HttpErrorResponse) => {
       this.errorState = true;
@@ -64,10 +80,10 @@ export class RightsComponent implements OnInit {
 
   }
 
-  onEditRight(right: Right) {
+  onEditRight(action: RightAction, right: Right) {
     const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
       data : { 
-        action: this.selectedAction.code,
+        action: action.code,
         right: right.clone()
       },
       width: '600px',
@@ -113,7 +129,7 @@ export class RightsComponent implements OnInit {
 
   onNewRight(action: RightAction) {
     const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
-      data : { action: this.selectedAction.code, pid: this.pid || 'uuid:1' },
+      data : { action: action.code, pid: this.pid || 'uuid:1' },
       width: '600px',
       panelClass: 'app-create-or-edit-right-dialog'
     });

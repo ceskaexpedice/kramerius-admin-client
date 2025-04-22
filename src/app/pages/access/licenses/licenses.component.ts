@@ -8,9 +8,24 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ClientApiService } from 'src/app/services/client-api.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule, DragDropModule, MatButtonModule
+     ],
   selector: 'app-licenses',
   templateUrl: './licenses.component.html',
   styleUrls: ['./licenses.component.scss']
@@ -78,7 +93,7 @@ export class LicensesComponent implements OnInit {
           libraryName: this.libraryName,
           licenseNames: this.licenses.map((lic) => lic.name).concat(this.licenses.map((lic) => lic.name))
       },
-      width: '600px',
+      width: '800px',
       panelClass: 'app-create-or-edit-license-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -87,7 +102,7 @@ export class LicensesComponent implements OnInit {
         this.licenses.push(license);
         this.sortLicenses();
         this.ui.showInfoSnackBar('snackbar.success.createOrEditLicense');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.errorcreateOrEditLicense');
           }
@@ -163,7 +178,7 @@ export class LicensesComponent implements OnInit {
         license.copyFrom(result.license);
         this.sortLicenses();
         // this.reload();
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onEditLicese');
           }

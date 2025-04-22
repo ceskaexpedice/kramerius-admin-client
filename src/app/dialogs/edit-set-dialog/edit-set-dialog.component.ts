@@ -1,8 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatTooltipModule, 
+    MatFormFieldModule, MatInputModule],
   selector: 'app-edit-set-dialog',
   templateUrl: './edit-set-dialog.component.html',
   styleUrls: ['./edit-set-dialog.component.scss']
@@ -39,7 +53,7 @@ export class EditSetDialogComponent implements OnInit {
     let descProp =  `oai.set.${this.id}.description`;
     let filterProp =  `oai.set.${this.id}.filter`;
 
-    let props = {};
+    let props: any = {};
     props[nameProp]=this.name;
     props[descProp]=this.description;
 

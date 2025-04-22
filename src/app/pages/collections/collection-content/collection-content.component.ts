@@ -1,4 +1,3 @@
-import { HtmlAstPath } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
@@ -7,7 +6,7 @@ import { Collection } from 'src/app/models/collection.model';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { UIService } from 'src/app/services/ui.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { forkJoin } from 'rxjs';
 import { delay, map, tap } from 'rxjs/operators';
@@ -16,19 +15,37 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { AppSettings } from 'src/app/services/app-settings';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, 
+    MatTooltipModule, MatProgressBarModule, MatCheckboxModule, DragDropModule
+  ],
   selector: 'app-collection-content',
   templateUrl: './collection-content.component.html',
   styleUrls: ['./collection-content.component.scss']
 })
 export class CollectionContentComponent implements OnInit, OnChanges {
 
-  @Input() collection;
-  @Input() state;
-  @Input() items;
-  @Input() lang;
-  @Input() contentView;
+  @Input() collection: Collection;
+  @Input() state: string;
+  @Input() items: SelectionModel<any>[];
+  @Input() lang: string;
+  @Input() contentView: string;
 
   @Input() collectionActions:Map<string,string[]>;
 
@@ -45,9 +62,9 @@ export class CollectionContentComponent implements OnInit, OnChanges {
 
   @Output() deleteitems = new EventEmitter<any>();
 
-  collectionItems;
-  noncollectionItems;
-  clippingItems;
+  collectionItems: any[];
+  noncollectionItems: any[];
+  clippingItems: any[];
 
   public isRepresentativePageSelected: any = [];
 
@@ -72,14 +89,14 @@ export class CollectionContentComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.items) {
+    if (changes['items']) {
       this.collectionItems = [];
-      this.noncollectionItems =  changes.items.currentValue;
+      this.noncollectionItems =  changes['items'].currentValue;
       this.clippingItems = this.collection.clipitems;
     }
   }
 
-  getName(item): string {
+  getName(item: any): string {
     let langs = this.isoService.isTranslatable(this.lang) ? this.isoService.convert(this.lang) : [this.lang];
 
     let name = item['title.search'];
@@ -120,7 +137,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   
 
   // TODO: move to utils ts
-  allowEdit(pid) {
+  allowEdit(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_collections_edit')) {
         return true;
@@ -131,7 +148,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
 
 
   // TODO: Move to utils ts
-  allowEditRemove(pid) {
+  allowEditRemove(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_able_tobe_part_of_collections')) {
         return true;
@@ -141,7 +158,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   }
 
 
-  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPids: string[], itemName) {
+  onRemoveItemFromCollection(collectionPid: string, collectionName: string, itemPids: string[], itemName: string) {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
       message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
@@ -165,7 +182,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
  
-       const observables = [];
+       const observables: any = [];
        itemPids.forEach(ipid=> {
           observables.push(this.collectionsService.removeItemFromCollection(collectionPid, ipid));
         });
@@ -185,7 +202,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
     });
   }
 
-  removeItemFromCollection(item, collection, event) {
+  removeItemFromCollection(item: any, collection: any, event: Event) {
     let itempids:string[] = [item['pid']];
     this.onRemoveItemFromCollection(collection.id, collection.getName(), itempids, this.getName(item)); 
     event.preventDefault(); 

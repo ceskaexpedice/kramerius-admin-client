@@ -5,10 +5,25 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UIService } from 'src/app/services/ui.service';
-import { HttpHeaders } from '@angular/common/http';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+    MatTooltipModule
+  ],
   selector: 'app-dev',
   templateUrl: './dev.component.html',
   styleUrls: ['./dev.component.scss']
@@ -50,26 +65,26 @@ export class DevComponent implements OnInit {
     this.item5Title,
   ]
 
-  collections;
-  collections_by_id;
-  pids_of_collections_having_item;
-  pids_of_collections_missing_item;
+  collections: any[];
+  collections_by_id: { [x: string]: Collection; };
+  pids_of_collections_having_item: any;
+  pids_of_collections_missing_item: any;
 
-  changeThumbnailSrcPid;
-  changeThumbnailTrgPid;
+  changeThumbnailSrcPid: string;
+  changeThumbnailTrgPid: string;
 
   //deletion
-  pidForDeletion;
+  pidForDeletion: string;
 
-  pidForPrintFoxml;
-  pidForPrintSolr;
+  pidForPrintFoxml: any;
+  pidForPrintSolr: string;
 
   //set MODS
-  setModsPid;
-  setModsMods;
+  setModsPid: string;
+  setModsMods: string;
 
   //export PDF
-  pidForPdfExport;
+  pidForPdfExport: any;
 
   constructor(
     private collectionsService: CollectionsService,
@@ -104,7 +119,7 @@ export class DevComponent implements OnInit {
             this.pids_of_collections_having_item[item].push(collection.id);
           });
           this.pids_of_collections_missing_item[item] = [];
-          this.collections.forEach(collection => {
+          this.collections.forEach((collection: { id: any; }) => {
             if (this.pids_of_collections_having_item[item].indexOf(collection.id) == -1) {
               this.pids_of_collections_missing_item[item].push(collection.id);
             }

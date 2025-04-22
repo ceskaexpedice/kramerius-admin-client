@@ -21,7 +21,7 @@ export class Tree {
     }
 
 
-    getFullPath() {
+    getFullPath(): string {
         if (!this.parent) {
             return '/';
         }
@@ -31,7 +31,7 @@ export class Tree {
         return this.parent.getFullPath() + '/' + this.file.name;
     }
 
-    expand(api: AdminApiService, all: boolean = false, onError?) {
+    expand(api: AdminApiService, all: boolean = false, onError?: any) {
         if (!this.expandable()) {
             return;
         }
@@ -49,7 +49,7 @@ export class Tree {
         this.children = [];
 
         api.getImportFiles(this.type, this.getFullPath()).subscribe((files: File[]) => {
-            console.log('files', files);
+            // console.log('files', files);
             for (const file of files) {
                 const tree = new Tree(this.ui, this.type, file, this, this.level + 1);
                 this.children.push(tree);

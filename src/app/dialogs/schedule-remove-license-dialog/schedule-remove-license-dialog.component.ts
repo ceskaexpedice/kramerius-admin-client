@@ -1,9 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule,
+  MatProgressBarModule, MatTooltipModule],
   selector: 'app-schedule-remove-license-dialog',
   templateUrl: './schedule-remove-license-dialog.component.html',
   styleUrls: ['./schedule-remove-license-dialog.component.scss']
@@ -23,7 +38,7 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
 
   pidsCounter = 0;
   scheduledCounter = 0;
-  progressBarMode = 'indeterminate';
+  progressBarMode: ProgressBarMode = 'indeterminate';
 
   constructor(public dialogRef: MatDialogRef<ScheduleRemoveLicenseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
@@ -56,7 +71,7 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  schedule(formData) {
+  schedule() {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
     const license = this.license; //formData.license;
@@ -82,6 +97,8 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
       return pids
         .split(/[\s,;]+/) //split by white spaces, ',', ';'
         .filter(n => n); //remove empty strings
+    } else {
+      return [];
     }
   }
 
@@ -103,7 +120,7 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
     el.click();
   }
 
-  isValid(form) {
+  isValid() {
     //return form.valid //nefunguje, kdyz je textarea disabled (protoze fixed)
     return this.pids && this.license;
   }

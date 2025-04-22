@@ -1,8 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { CdkProxyComponent } from './cdk-proxy/cdk-proxy.component';
+import { CdkObjectReharvestComponent } from './cdk-object-reharvest/cdk-object-reharvest.component';
+import { CdkEuropeanouComponent } from './cdk-europeanou/cdk-europeanou.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatIconModule, MatTooltipModule, MatTabsModule,
+    CdkProxyComponent, CdkObjectReharvestComponent, CdkEuropeanouComponent
+  ],
   selector: 'app-cdk',
   templateUrl: './cdk.component.html',
   styleUrls: ['./cdk.component.scss']

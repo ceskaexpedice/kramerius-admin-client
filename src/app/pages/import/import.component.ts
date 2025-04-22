@@ -7,11 +7,25 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ImportService } from 'src/app/services/import.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { License } from 'src/app/models/license.model';
 import { RunImportComponent } from 'src/app/dialogs/run-import/run-import.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { TreeComponent } from './tree/tree.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule,
+    MatTooltipModule, MatTabsModule, TreeComponent
+  ],
   selector: 'app-import',
   templateUrl: './import.component.html',
   styleUrls: ['./import.component.scss']
@@ -24,7 +38,7 @@ export class ImportComponent implements OnInit {
   ndkIIPServer: boolean;
 
   scheduleIndexations: boolean;
-  inputDirError = {};
+  inputDirError: any = {};
 
   selectedLicense:License;
   selectedCollection:string;
@@ -64,7 +78,7 @@ export class ImportComponent implements OnInit {
     this.tree = new Tree(this.ui, this.type, { name: '/', isDir: true });
     this.imports.selectedTree = null;
     delete this.inputDirError[this.type];
-    this.tree.expand(this.api, false, error => {
+    this.tree.expand(this.api, false, (error: any) => {
       this.inputDirError[this.type] = error;
       this.errorState = true;
       console.log(error);
@@ -123,7 +137,7 @@ export class ImportComponent implements OnInit {
       data: {
         type: this.type,
         licenses: this.licenses},
-      width: '600px',
+      width: '630px',
       panelClass: 'app-run-import-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -144,7 +158,7 @@ export class ImportComponent implements OnInit {
   }
 
   importNdk() {
-    let p = {
+    let p: any = {
       policy:  'PRIVATE',
       inputDataDir: this.imports.selectedTree.getFullPath(),
       startIndexer: this.scheduleIndexations,

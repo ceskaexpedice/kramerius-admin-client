@@ -6,8 +6,26 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SdnntItem, SdnntSync } from 'src/app/models/sdnnt.model';
 import { PageEvent } from '@angular/material/paginator';
 import { AppSettings } from 'src/app/services/app-settings';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
+  MatProgressBarModule, MatTooltipModule, MatPaginatorModule],
   selector: 'app-schedule-sync-with-sdnnt',
   templateUrl: './schedule-sync-with-sdnnt.component.html',
   styleUrls: ['./schedule-sync-with-sdnnt.component.scss'],
@@ -31,7 +49,7 @@ export class ScheduleSyncWithSdnntComponent implements OnInit {
 
   expandedElement: SdnntItem | null;
 
-  dataSource = [];
+  dataSource: SdnntItem[] = [];
 
   length = 50;
   pageSize = 10;

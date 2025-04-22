@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { AppSettings } from '../services/app-settings';
-import { UIService } from '../services/ui.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { AppSettings } from './services/app-settings';
+import { AuthService } from './services/auth.service';
+import { UIService } from './services/ui.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, CommonModule, NavbarComponent, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
 
@@ -17,8 +23,8 @@ export class AppComponent {
     private router: Router,
     private settings: AppSettings,
     public auth: AuthService
-  ) {}
-  
+  ) { }
+
   ngOnInit() {
 
     /** Handle language */

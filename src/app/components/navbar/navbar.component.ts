@@ -9,23 +9,36 @@ import { interval, Subscription } from 'rxjs';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AboutDialogComponent } from 'src/app/dialogs/about-dialog/about-dialog.component';
 import { UserInfoDialogComponent } from 'src/app/dialogs/user-info-dialog/user-info-dialog.component';
+import { CommonModule } from '@angular/common';
+
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
+    RouterModule, TranslateModule, MatMenuModule, MatTooltipModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   // to test accesibility
   notAllowed: boolean = false;
-  cdkMode = this.settings.cdkMode;
+  cdkMode: boolean;
 
   tokenHours: string;
   tokenMinutes: string;
   tokenSeconds: string;
 
-  public languages = this.appSettings.languages;
+  public languages: string[];
   
   constructor(
     public auth: AuthService, 
@@ -35,13 +48,16 @@ export class NavbarComponent implements OnInit {
     public appSettings: AppSettings,
     private local: LocalStorageService,
     public dialog: MatDialog
-    ) { }
+    ) { 
+      this.cdkMode = settings.cdkMode;
+      this.languages = appSettings.languages;
+    }
 
   ngOnInit():void  {
     interval(1000).subscribe(x => {
       if (AuthService.tokenDeadline) {
 
-        function getDifference(date1, date2) {
+        function getDifference(date1: any, date2: any) {
           const diffInMs = Math.abs(date2 - date1);
           return diffInMs;
         }

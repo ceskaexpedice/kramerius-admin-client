@@ -1,9 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Process } from 'src/app/models/process.model';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatButtonModule, MatIconModule, MatPaginatorModule,
+    MatTooltipModule
+  ],
   selector: 'app-process-logs',
   templateUrl: './logs.component.html',
   styleUrls: ['./logs.component.scss']
@@ -36,13 +49,13 @@ export class LogsComponent implements OnInit {
     this.reload();
   }
 
-  isSevereOrWarning(line) {
-    return line.indexOf('WARNING') || line.indexOf('SEVERE')
-  }
+  // isSevereOrWarning(line) {
+  //   return line.indexOf('WARNING') || line.indexOf('SEVERE')
+  // }
 
-  isInfoLine(line) {
-    return line.indexOf('INFO')
-  }
+  // isInfoLine(line) {
+  //   return line.indexOf('INFO')
+  // }
 
   reload() {
     const offset = this.pageIndex * this.pageSize;

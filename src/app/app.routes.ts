@@ -1,34 +1,29 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { ProcessesComponent } from './pages/processes/processes.component';
-import { AuthGuard } from './guards/auth.guard';
+import { Routes } from '@angular/router';
+import { AuthComponent } from './components/auth/auth.component';
 import { LoginComponent } from './pages/account/login/login.component';
-import { ProcessComponent } from './pages/processes/process/process.component';
-import { CollectionsComponent } from './pages/collections/collections.component';
-import { CollectionEditComponent } from './pages/collections/collection-edit/collection-edit.component';
-import { CollectionComponent } from './pages/collections/collection/collection.component';
-import { DevComponent } from './pages/dev/dev.component';
-import { IndexingComponent } from './pages/indexing/indexing.component';
-import { ConfigComponent } from './components/config/config.component';
-import { RepositoryComponent } from './pages/repository/repository.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ObjectComponent } from './pages/access/object/object.component';
 import { AccessComponent } from './pages/access/access.component';
 import { ImportComponent } from './pages/import/import.component';
 import { StatisticsComponent } from './pages/statistics/statistics.component';
-import { AuthComponent } from './components/auth/auth.component';
-import { ObjectComponent } from './pages/access/object/object.component';
-import { CollectionNewComponent } from './pages/collections/collection-new/collection-new.component';
 import { CdkComponent } from './pages/cdk/cdk.component';
 import { CdkProxyDetailComponent } from './pages/cdk/cdk-proxy/cdk-proxy-detail/cdk-proxy-detail.component';
-import { CdkCollectionsComponent } from './pages/cdk-collections/cdk-collections.component';
+import { DevComponent } from './pages/dev/dev.component';
+import { ProcessesComponent } from './pages/processes/processes.component';
+import { ProcessComponent } from './pages/processes/process/process.component';
+import { CollectionsComponent } from './pages/collections/collections.component';
+import { CollectionNewComponent } from './pages/collections/collection-new/collection-new.component';
+import { CollectionComponent } from './pages/collections/collection/collection.component';
+import { IndexingComponent } from './pages/indexing/indexing.component';
+import { ConfigComponent } from './components/config/config.component';
+import { RepositoryComponent } from './pages/repository/repository.component';
 import { CdkCollectionNewComponent } from './pages/cdk-collections/cdk-collection-new/cdk-collection-new.component';
-import { CdkCollectionDetailComponent } from './pages/cdk-collections/cdk-collection-detail/cdk-collection-detail.component';
-import { CdkCollectionEditComponent } from './pages/cdk-collections/cdk-collection-edit/cdk-collection-edit.component';
-import { CdkCollectionContentComponent } from './pages/cdk-collections/cdk-collection-content/cdk-collection-content.component';
-import { CdkCollectionContextComponent } from './pages/cdk-collections/cdk-collection-context/cdk-collection-context.component';
 import { CdkCollectionComponent } from './pages/cdk-collections/cdk-collection/cdk-collection.component';
+import { CdkCollectionsComponent } from './pages/cdk-collections/cdk-collections.component';
+import { MonitoringComponent } from './pages/monitoring/monitoring.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'keycloak', component: AuthComponent },
@@ -72,6 +67,7 @@ const routes: Routes = [
   { path: 'statistics/graphs', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'statistics/most-viewed-documents', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'statistics/generating-logs-for-nk', component: StatisticsComponent, canActivate: [AuthGuard] },
+  
   { path: 'cdk', redirectTo: 'cdk/proxy'},
   { path: 'cdk/proxy', component: CdkComponent, canActivate: [AuthGuard] },
   { path: 'cdk/object-reharvest', component: CdkComponent, canActivate: [AuthGuard] },
@@ -87,12 +83,8 @@ const routes: Routes = [
   { path: 'cdk-collections/cdk', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
   { path: 'cdk-collections/diglib', component: CdkCollectionsComponent, canActivate: [AuthGuard] },
 
+  { path: 'monitoring', redirectTo: 'monitoring/api' },
+  { path: 'monitoring/api', component: MonitoringComponent, canActivate: [AuthGuard] },
+
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
-  exports: [RouterModule],
-  providers: [AuthGuard]
-})
-export class AppRoutingModule { }

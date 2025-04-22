@@ -1,9 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { RightsComponent } from './rights/rights.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { RolesComponent } from './roles/roles.component';
+import { LicensesComponent } from './licenses/licenses.component';
+import { ParamsComponent } from './params/params.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatIconModule, MatTabsModule, 
+    // MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
+    // MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, 
+    RightsComponent, RolesComponent, LicensesComponent, ParamsComponent ],
   selector: 'app-access',
   templateUrl: './access.component.html',
   styleUrls: ['./access.component.scss']

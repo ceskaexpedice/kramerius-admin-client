@@ -1,61 +1,45 @@
-<mat-card class="app-card app-view-border app-p-0">
-  <ng-container *ngIf="!errorState" >
-    <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-    <ng-container *ngIf="state=='success'">
-      <mat-card class="app-view-rights app-view-hover" *ngFor="let action of actions" [class.app-card-expanded]="selectedAction == action">
-        <mat-card-header fxLayout="row" fxLayoutAlign="start center">
-          <div fxFlex class="app-left">
-            <mat-card-title>
-              {{ 'rights.' + action.code + '.title' | translate }}<span class="app-badge app-count">{{ action.rights.length }}</span>
-            </mat-card-title>
-            <mat-card-subtitle>{{ 'rights.' + action.description + '.subtitle' | translate }}</mat-card-subtitle>
-          </div>
-          <div class="app-right app-actions">
-            <a (click)="selectedAction = action" *ngIf="selectedAction != action" class="app-ico-expand"><mat-icon>expand_more</mat-icon></a>
-            <a (click)="selectedAction = null" *ngIf="selectedAction == action" class="app-ico-expand"><mat-icon>expand_less</mat-icon></a>
-          </div>
-        </mat-card-header>
-        <ng-container *ngIf="selectedAction == action">
-          <mat-card-content>
-            <table [cellPadding]="0" [cellSpacing]="0" class="app-table app-mt-4">
-              <thead>
-                <tr>
-                  <th>{{ 'desc.role' | translate }}</th>
-                  <th>{{ 'desc.condition' | translate }}</th>
-                  <th>{{ 'desc.parameter' | translate }}</th>
-                  <th>{{ 'desc.license' | translate }}</th>
-                  <th colspan="2"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let right of action.rights">
-                  <td> {{ right.role.name }}</td>
-                  <td>{{ right.condition ? right.condition.name : "-"}}</td>
-                  <td>{{ right.condition && right.condition.params && right.condition.params.description ? right.condition.params.description : "-"}}</td>
-                  <td>{{ right.hasLicense() ? right.condition.license : "-"}}</td>
-                  <td class="app-col-action">
-                    <a (click)="onEditRight(right)" [matTooltip]="'button.editRight' | translate"><mat-icon>edit</mat-icon></a>
-                  </td>
-                  <td class="app-col-action">
-                    <a (click)="onRemoveRight(action, right)" [matTooltip]="'button.deleteRight' | translate"><mat-icon>delete</mat-icon></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-flat-button (click)="onNewRight(action)" color="primary">
-              {{ 'button.addRight' | translate }}
-            </button>
-          </mat-card-actions> 
-        </ng-container>
-      </mat-card>
-    </ng-container>
-  </ng-container>
-  
-  <mat-card *ngIf="errorState" class="app-view-alert app-warn">
-    <mat-card-content>
-      <mat-icon>error</mat-icon>{{ errorMessage }}
-    </mat-card-content>
-  </mat-card>
+<ng-container *ngIf="!errorState">
+  <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
+  <mat-accordion class="app-view-default app-view-actions" *ngIf="state=='success'"><!--multi-->
+    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)" *ngFor="let action of actions">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ 'rights.' + action.code + '.title' | translate }}<span class="app-badge app-count">{{ action.rights.length }}</span></mat-panel-title>
+        <mat-panel-description>{{ 'rights.' + action.description + '.subtitle' | translate }}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <table [cellPadding]="0" [cellSpacing]="0" class="app-table">
+        <thead>
+          <tr>
+            <th>{{ 'desc.role' | translate }}</th>
+            <th>{{ 'desc.condition' | translate }}</th>
+            <th>{{ 'desc.parameter' | translate }}</th>
+            <th>{{ 'desc.license' | translate }}</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let right of action.rights">
+            <td> {{ right.role.name }}</td>
+            <td>{{ right.condition ? right.condition.name : "-"}}</td>
+            <td>{{ right.condition && right.condition.params && right.condition.params.description ? right.condition.params.description : "-"}}</td>
+            <td>{{ right.hasLicense() ? right.condition.license : "-"}}</td>
+            <td class="app-col-action">
+              <a (click)="onEditRight(action, right)" [matTooltip]="'button.editRight' | translate"><mat-icon>edit</mat-icon></a>
+            </td>
+            <td class="app-col-action">
+              <a (click)="onRemoveRight(action, right)" [matTooltip]="'button.deleteRight' | translate"><mat-icon>delete</mat-icon></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <mat-action-row>
+        <button mat-flat-button (click)="onNewRight(action)" color="primary">{{ 'button.addRight' | translate }}</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>
+
+<mat-card appearance="outlined" *ngIf="errorState" class="app-view-alert app-color-warn app-clean-border-t">
+  <mat-card-content>
+    <mat-icon>error</mat-icon>{{ errorMessage }}
+  </mat-card-content>
 </mat-card>

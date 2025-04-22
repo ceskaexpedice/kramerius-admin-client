@@ -1,9 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule,
+  MatProgressBarModule, MatTooltipModule, MatSelectModule],
   selector: 'app-schedule-change-policy-by-pid-dialog',
   templateUrl: './schedule-change-policy-by-pid-dialog.component.html',
   styleUrls: ['./schedule-change-policy-by-pid-dialog.component.scss']
@@ -28,7 +45,7 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
 
   pidsCounter = 0;
   scheduledCounter = 0;
-  progressBarMode = 'indeterminate';
+  progressBarMode: ProgressBarMode = 'indeterminate';
 
   constructor(public dialogRef: MatDialogRef<ScheduleChangePolicyByPidDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
@@ -39,7 +56,7 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
     }
   }
 
-  translatePolicy(policy) {
+  translatePolicy(policy: string) {
     //TODO: i18n
     switch (policy) {
       case 'PUBLIC': return 'Veřejné';
@@ -51,7 +68,7 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  schedule(formData) {
+  schedule(formData: any) {
     this.inProgress = true;
 
     const pids = this.splitPids(this.pids);
@@ -61,7 +78,7 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
     const scope = formData.scope;
     const policy = this.policy;//formData.policy;
 
-    let requests = [];
+    let requests: any[] = [];
     pids.forEach(pid => {
       requests.push(
         this.adminApi.scheduleProcess({
@@ -92,6 +109,7 @@ export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
         .split(/[\s,;]+/) //split by white spaces, ',', ';'
         .filter(n => n); //remove empty strings
     }
+    return [];
   }
 
   getProgress() {

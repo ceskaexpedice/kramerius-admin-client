@@ -1,8 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatTooltipModule, 
+    MatFormFieldModule, MatInputModule],
   selector: 'app-add-new-set-dialog',
   templateUrl: './add-new-set-dialog.component.html',
   styleUrls: ['./add-new-set-dialog.component.scss']
@@ -34,7 +47,7 @@ oai.set.monograph2.filter=model:monograph
     let descProp =  `oai.set.${this.id}.description`;
     let filterProp =  `oai.set.${this.id}.filter`;
 
-    let props = {};
+    let props: any = {};
     props[nameProp]=this.name;
     props[descProp]=this.description;
     props[filterProp]=this.replaceSpacesWithPlus(this.filter);

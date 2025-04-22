@@ -11,13 +11,13 @@ import 'echarts/lib/component/legend'
 import 'echarts/theme/macarons.js';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { License } from 'src/app/models/license.model';
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import parse from 'xml-parser';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,8 +25,21 @@ import { GenerateNkpLogsDialogComponent } from 'src/app/dialogs/generate-nkp-log
 import { DeleteStatisticsDialogComponent } from 'src/app/dialogs/delete-statistics-dialog/delete-statistics-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FileDownloadService } from 'src/app/services/file-download';
-import * as moment from 'moment';
+import moment from 'moment';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatChipsModule} from '@angular/material/chips';
+import { NgxEchartsDirective, NgxEchartsModule, provideEcharts  } from 'ngx-echarts';
 
 /** Levely zobrazeni - master, detail, subdteial */
 enum ViewLevel {
@@ -34,18 +47,27 @@ enum ViewLevel {
 }
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule,
+    MatTooltipModule, MatTabsModule, MatDatepickerModule, MatChipsModule,
+    NgxEchartsModule, NgxEchartsDirective
+  ],
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+  styleUrls: ['./statistics.component.scss'],
+  providers: [
+    provideEcharts(),
+  ]
 })
 export class StatisticsComponent implements OnInit {
 
   @ViewChild('scrollelm') scrollelm!: ElementRef;
 
   level = ViewLevel.master;
-  detailDoc = {}
-  detailMods = null;
-  deatilTypes = null;
+  detailDoc: any = {}
+  // detailMods = null;
+  deatilTypes: string = null;
 
   isMaster() { return this.level == ViewLevel.master; }
   isDetail() { return this.level == ViewLevel.detail; }
@@ -176,7 +198,7 @@ export class StatisticsComponent implements OnInit {
     this.adminApi.statisticsSearch(
       this.dateFrom != null ? this.dateFrom.toISOString() : null,
       this.dateTo != null ? this.dateTo.toISOString() : null,
-      this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models']).subscribe(response => {
+      this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models']).subscribe((response: any) => {
         if (response['facet_counts']) {
 
           // authors 
@@ -218,7 +240,7 @@ export class StatisticsComponent implements OnInit {
                 filterField: "pids_collection",
                 filterValue: "*"
               }
-            }], []).subscribe(response => {
+            }], []).subscribe((response: any) => {
 
               let pidModels = modelNames.slice().filter(item => this.topLevelModels.includes(item)).map(item => `pids_${item}`);
               if (response['response']['numFound'] && response['response']['numFound'] > 0) {
@@ -232,7 +254,7 @@ export class StatisticsComponent implements OnInit {
               this.adminApi.statisticsSearch(
                 this.dateFrom != null ? this.dateFrom.toISOString() : null,
                 this.dateTo != null ? this.dateTo.toISOString() : null,
-                this.identifier, this.filters, pidModels).subscribe(response => {
+                this.identifier, this.filters, pidModels).subscribe((response: any) => {
 
                   this.deatilTypes='';
 
@@ -300,7 +322,7 @@ export class StatisticsComponent implements OnInit {
     // });
   }
 
-  private reinitTopHitsTable(response: Object) {
+  private reinitTopHitsTable(response: any) {
     let models = [];
     models.push(...this.topLevelModels);
     if (this.level == ViewLevel.detail) {
@@ -359,7 +381,7 @@ export class StatisticsComponent implements OnInit {
         let translated =  this.ui.getTranslation('desc.'+vol['model']);
         let volumeTitle = `${translated} -  ${vol['date.str']} / ${vol['title.search']}`;
 
-        let detailItem = {
+        let detailItem: any = {
           value: detailcount[i],
           name: volumeTitle,
           filterField: `pids_${model}`,
@@ -412,7 +434,7 @@ export class StatisticsComponent implements OnInit {
           let titles = col[`search_${this.displayLanguage()}`];
           if (titles.length > 0) { collectionTitle = titles[0]; }
         }
-        let colitem = {
+        let colitem: any = {
           value: collectionCounts[i],
           name: collectionTitle,
           filterField: "pids_collection",
@@ -467,7 +489,7 @@ export class StatisticsComponent implements OnInit {
   private reinitProvidedLicensesGraph(providedLicensesNames: string[], providedLicensesCounts: number[]) {
     let providedLicensesItems = [];
     for (let i = 0; i < providedLicensesNames.length; i++) {
-      let obj = {
+      let obj: any = {
         value: providedLicensesCounts[i],
         name: providedLicensesNames[i],
         filterField: "provided_by_license",
@@ -522,7 +544,7 @@ export class StatisticsComponent implements OnInit {
     let topLevelModelItems = [];
     for (let i = 0; i < modelNames.length; i++) {
       if (this.topLevelModels.indexOf(modelNames[i]) >= 0) {
-        let model = {
+        let model: any = {
           value: modelCounts[i],
           name: modelNames[i],
           filterField: "all_models",
@@ -581,7 +603,7 @@ export class StatisticsComponent implements OnInit {
   private reinitLangGraph(langsNames: string[], langsCount: number[], langs: any) {
     let langsItems = [];
     for (let i = 0; i < langsNames.length; i++) {
-      let lang = {
+      let lang: any = {
         value: langsCount[i],
         name: langsNames[i],
         filterField: "langs",
@@ -625,7 +647,7 @@ export class StatisticsComponent implements OnInit {
   private reinitAuthorGraph(authorNames: string[], authorCounts: number[], authors: any) {
     let authorItems = [];
     for (let i = 0; i < authorNames.length; i++) {
-      let auth = {
+      let auth: any = {
         value: authorCounts[i],
         name: authorNames[i],
         filterField: "authors",
@@ -696,12 +718,12 @@ export class StatisticsComponent implements OnInit {
     });
 
     if (this.router.url.replace('/', '') === 'statistics') {
-      return this.isPageStatistics = true;
+      this.isPageStatistics = true;
     }
 
     this.adminApi.getOutputNKPLogsDirFiles().subscribe(response => {
       this.logfiles = [];
-      response.files.forEach(file => {
+      response.files.forEach((file: any) => {
         this.logfiles.push(file);
       });
     }, error => {
@@ -709,7 +731,7 @@ export class StatisticsComponent implements OnInit {
     })
   }
 
-  modifiedLogFile(logfile) {
+  modifiedLogFile(logfile: any) {
 
     if (logfile.lastModifiedTime) {
 
@@ -720,7 +742,7 @@ export class StatisticsComponent implements OnInit {
     } else return 'none';
   }
 
-  download(logfile) {
+  download(logfile: any) {
 
     this.adminApi.getOutputNKPLogsFile(logfile.name).subscribe(response => {
       let downloadlink = this.adminApi.getOutputDownloadLinks(response.downloadlink);
@@ -730,11 +752,11 @@ export class StatisticsComponent implements OnInit {
     })
   }
 
-  onIdentKeyUp(target) {
+  onIdentKeyUp(target: any) {
     this.subject.next(target.value);
   }
 
-  clearIdentifier(target) {
+  clearIdentifier(target: any) {
     this.identifier = null;
     this.subject.next(target.value);
   }
@@ -748,7 +770,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   getLastCommitHash() {
-    const info = gitInfo;
+    const info: any = gitInfo;
     const hash = info.hash ? info.hash
       : info['default'].hash.substring(1);
     return hash;
@@ -1088,7 +1110,7 @@ export class StatisticsComponent implements OnInit {
   loadMods(id: string) {
     if (id) {
       this.clientApi.getModsNewApi(id).subscribe(mr => {
-        let modsFields = {};
+        let modsFields: any = {};
         let ast = parse(mr);
         let mods = ast.root.children[0];
 
@@ -1096,21 +1118,21 @@ export class StatisticsComponent implements OnInit {
         let titleInfo = this.elms(mods, 'titleInfo', null, null);
         if (titleInfo) {
 
-            let titlePartNumber = titleInfo.map(element => {
+            let titlePartNumber = titleInfo.map((element: any) => {
             let partNumber = this.elms(element, 'partNumber', null, null);
             let f = this.texts(partNumber);
             return f ? f : '';
           }).join(', ');
           modsFields['title_partNumber'] = titlePartNumber;
 
-          let title = titleInfo.map(element => {
+          let title = titleInfo.map((element: any) => {
             let partNumber = this.elms(element, 'title', null, null);
             let f = this.texts(partNumber);
             return f ? f : '';
           }).join(', ');
           modsFields['title'] = title;
 
-          let subTitle = titleInfo.map(element => {
+          let subTitle = titleInfo.map((element: any) => {
             let partNumber = this.elms(element, 'subTitle', null, null);
             let f = this.texts(partNumber);
             return f ? f : '';
@@ -1121,9 +1143,9 @@ export class StatisticsComponent implements OnInit {
         // author
         let personal = this.elms(mods, 'name', 'type', null);
         if (personal) {
-          let author = personal.map(element => {
+          let author = personal.map((element: any) => {
             let nameParts = this.elms(element, 'namePart', null, null);
-            nameParts = nameParts.filter((p) => {
+            nameParts = nameParts.filter((p: any) => {
               return (!p.attributes['type']) || (p.attributes['type'] && p.attributes['type'] !== 'date')
             });
             let f = this.texts(nameParts);
@@ -1137,7 +1159,7 @@ export class StatisticsComponent implements OnInit {
         let originInfo = this.elms(mods, 'originInfo', null, null);
         if (originInfo) {
 
-          let oinfo = originInfo.map(element => {
+          let oinfo = originInfo.map((element: any) => {
             let nameParts = this.elms(element, 'publisher', null, null);
             let f = this.texts(nameParts);
             return f ? f : '';
@@ -1145,7 +1167,7 @@ export class StatisticsComponent implements OnInit {
 
           modsFields['origininfo_publisher'] = oinfo;
 
-          let dateIssued = originInfo.map(element => {
+          let dateIssued = originInfo.map((element: any) => {
             let dateIssuedElms = this.elms(element, 'dateIssued', null, null);
             // dateIssuedElms = dateIssuedElms.filter((p) => { 
             //   let retval = Object.keys(p.attributes).length == 0;
@@ -1204,7 +1226,7 @@ export class StatisticsComponent implements OnInit {
         // langs
         let langs = this.elms(mods, 'language', null, null);
         if (langs) {
-          let tl = langs.map(element => {
+          let tl = langs.map((element: any) => {
             let term = this.elms(element, 'languageTerm', 'authority', 'iso639-2b');
             let f = this.texts(term);
             return f ? f : '';
@@ -1215,13 +1237,13 @@ export class StatisticsComponent implements OnInit {
         // subject - klicova slova
         let keywords = this.elms(mods, 'subject', null, null);
         if (keywords) {
-          let tl = keywords.map(element => {
+          let tl = keywords.map((element: any) => {
             let term = this.elms(element, 'topic', null, null);
             let f = this.texts(term);
             return f ? f : '';
           });
-          let filtered = [];
-          tl.forEach(k => {
+          let filtered: string[] = [];
+          tl.forEach((k: string) => {
             if (k !== '' && !filtered.includes(k)) {
               filtered.push(k);
             }
@@ -1232,7 +1254,7 @@ export class StatisticsComponent implements OnInit {
         // location 
         let location = this.elms(mods, 'location', null, null);
         if (location) {
-          let tl = location.map(element => {
+          let tl = location.map((element: any) => {
             let term = this.elms(element, 'physicalLocation', null, null);
             let f = this.texts(term);
             return f ? f : '';
@@ -1244,7 +1266,7 @@ export class StatisticsComponent implements OnInit {
         let physicalDescription = this.elms(mods, 'physicalDescription', null, null);
         if (physicalDescription) {
           let desc = '';
-          let tl = physicalDescription.forEach(element => {
+          let tl = physicalDescription.forEach((element: any) => {
             let ext = this.elms(element, 'extent', null, null);
             if (ext) {
               let tt = this.texts(ext);
@@ -1262,7 +1284,7 @@ export class StatisticsComponent implements OnInit {
   /** Utilitni metody ??  Presunout ?? */
 
   // // date formatting 
-  private format(date) {
+  private format(date: string) {
     let d = new Date(date);
     let month = (d.getMonth() + 1).toString();
     let day = d.getDate().toString();
@@ -1276,26 +1298,26 @@ export class StatisticsComponent implements OnInit {
     return [year, month, day].join('.');
   }
 
-  private texts(elms) {
+  private texts(elms: any[]) {
     let texts = elms.map(elm => {
       return elm.content;
     });
     return texts.join(' ');
   }
 
-  private first(parent, name) {
-    let first = parent.children.find((obj) => {
+  private first(parent: any, name: string) {
+    let first = parent.children.find((obj: any) => {
       return obj.name === name || obj.name.includes(':' + name);
     });
     return first;
   }
 
-  private elms(parent, name, attrName, attrValue) {
-    let elms = parent.children.filter((obj) => {
+  private elms(parent: any, name: string, attrName: string, attrValue: any) {
+    let elms = parent.children.filter((obj: any) => {
       return obj.name === name || obj.name.includes(':' + name);
     });
     if (attrName != null) {
-      let tt = elms.filter((obj) => {
+      let tt = elms.filter((obj: any) => {
         if (attrValue != null) {
           return obj.attributes[attrName] === attrValue;
         } else {

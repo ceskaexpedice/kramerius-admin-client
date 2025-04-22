@@ -1,14 +1,7 @@
-@import './src/sass/app-variables.scss';
-@import './src/sass/app-mixins.scss';
-@import './src/sass/app-global.scss';
-
-
-.mat-table {
-  .mat-row {
-    @include setStateColor();
-
+.mat-mdc-table {
+  .mat-mdc-row {
     .mat-column-code {
-      width: 100px;
+      min-width: 200px;
     }
   }
 }

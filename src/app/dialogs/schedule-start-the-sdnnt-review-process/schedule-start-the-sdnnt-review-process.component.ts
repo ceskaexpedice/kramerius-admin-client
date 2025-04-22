@@ -1,9 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
+  MatProgressBarModule, MatTooltipModule],
   selector: 'app-schedule-start-the-sdnnt-review-process',
   templateUrl: './schedule-start-the-sdnnt-review-process.component.html',
   styleUrls: ['./schedule-start-the-sdnnt-review-process.component.scss']

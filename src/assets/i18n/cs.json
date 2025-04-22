@@ -200,16 +200,15 @@
       "objectReharvest": {
         "title": "Reharvest objektu",
         "icon": "repeat"
-      },
-      "reharvestjob":{
-        "running":"Reharvest spuštěn",
-        "open":"Reharvest naplánován",
-        "closed":"Reharvest ukončen",
-        "too_big":"Příliš velké dílo na reharvest -> Nutný ruční zásah",
-        "waiting_for_approve":"Nutnný souhlas pro reharvest",
-        "cancelled":"Reharvest zrušený",
-        "failed":"Reharvest zhavaroval"
       }
+    },
+    "monitoring": {
+      "title": "Sledování",
+      "api": {
+        "title": "Sledování API",
+        "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
+        "icon": "monitoring"
+      }    
     }
   },
   "navbar": {
@@ -345,6 +344,9 @@
       "uuidValidation404": "Objekt nenalezen",
       "uuidValidation403": "Nedostatečná přístupová práva",
       "uuidValidationElse": "Chyba čtení z repozitáře: {{ value1 }}: {{ value2 }}"
+    },
+    "cdkReharvestSpecificPids": {
+      "result": "Nalezeno v {{ value }} knihovnách"
     },
     "createOrEditRole": {
       "error1": "Role s tímto názvem už exituje, zadejte jiný název.",
@@ -536,7 +538,8 @@
     "hideConsumedLicenses": "Skrýt konzumované licence",
     "thisFlagUnsupported": "Tento příznak již není podporován",
     "approve": "Schválit",
-    "annualReport": "Roční výkaz"
+    "annualReport": "Roční výkaz",
+    "reload": "Obnovit"
   },
   "field": {
     "public": "Veřejné",
@@ -564,7 +567,23 @@
     "convolute": "Konvoluty",
     "picture": "Obrázky",
     "multivolumemonograph":"Vícesvazková monografie",
-    "collection": "Sbírky"
+    "collection": "Sbírky",
+
+    "running":"Reharvest spuštěn",
+    "open":"Reharvest naplánován",
+    "closed":"Reharvest ukončen",
+    "too_big":"Příliš velké dílo na reharvest -> Nutný ruční zásah",
+    "waiting_for_approve":"Nutnný souhlas pro reharvest",
+    "cancelled":"Reharvest zrušený",
+    "failed":"Reharvest zhavaroval",
+
+    "root":"Reharvest celého titulu",
+    "children":"Reharvest podčástí (ročník, výtisk,..)",
+    "new_root":"Nový harvest celého titulu",
+    "only_pid":"Reharvest pouze daného pidu",
+    "delete_pid": "Smazání objektu",
+    "delete_tree": "Smazání podstromu",
+    "delete_root": "Smazání titulu"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
@@ -1250,7 +1269,7 @@
     "allLibrariesPresentForTheTitleInTheIndex": "Všechny knihovny přítomné u titulu v indexu",
     "selection": "Výběr knihoven",
     "disabledLibrary": "Vypnutá knihovna",
-    "selectLibraries":"Výběr knihoven",
+    "selectLibraries":"Výběr knihoven pro reharvest",
     "securedChannel":"Chráněný kanál",
     "register":"Registr kramériů",
     "api": "Verze API",
@@ -1271,6 +1290,25 @@
     "delete_tree": "Smazání podstromu",
     "library": "Knihovna",
     "title":"Titul",
-    "subtitle":"Podtitul"
+    "subtitle":"Podtitul",
+    "dateAndTime": "Datum a čas",
+    "parentResource": "Nadřazený zdroj",
+    "endpointUrl":  "URL endpointu",
+    "labels": "Štítky",
+    "ipAddress": "IP adresa",
+    "query": "Dotaz",
+    "httpMethod": "HTTP metoda",
+    "resource": "Zdroj",
+    "workers": "Workers",
+    "recordDetail": "Detail záznamu",
+    "id": "Id",
+    "count": "Počet",
+    "instance": "Instance",
+    "rule": "Pravidlo",
+    "previewToCdkIndex": "Náhled do cdk indexu",
+    "notFound": "Nenalezeno",
+    "conflict": "Nalezen konflikt",
+    "noConflict": "Nenalezen žádný konflikt",
+    "none":""
   }
 }

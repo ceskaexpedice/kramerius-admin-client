@@ -1,6 +1,6 @@
 import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,8 +20,31 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { AddCuttingDialogComponent } from 'src/app/dialogs/add-cutting-dialog/add-cutting-dialog.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { CollectionDetailComponent } from "../../collections/collection-detail/collection-detail.component";
+import { CollectionEditComponent } from "../../collections/collection-edit/collection-edit.component";
+import { CollectionContentComponent } from "../../collections/collection-content/collection-content.component";
+import { CollectionContextComponent } from "../../collections/collection-context/collection-context.component";
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatRadioModule, MatCheckboxModule,
+    MatTooltipModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatMenuModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
   selector: 'app-cdk-collection',
   templateUrl: './cdk-collection.component.html',
   styleUrls: ['./cdk-collection.component.scss']
@@ -61,7 +84,7 @@ export class CdkCollectionComponent implements OnInit {
   public cuttingsSelection = new SelectionModel<any>(true, []);
 
   // all configured languages
-  public languages = this.appSettings.languages;
+  public languages: string[];
 
   public lang: string = 'cs';
   // seznam vsech jazyku
@@ -85,6 +108,7 @@ export class CdkCollectionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.languages = this.appSettings.languages;
     this.state = 'loading';
     this.route.params.subscribe(params => {
       this.loadData(params['id']);
@@ -103,7 +127,7 @@ export class CdkCollectionComponent implements OnInit {
       this.clientApi.getStructure(collectionId).subscribe((response)=> {
         let children = response['children'];
 
-        let fosterChildren = children['foster'].map(obj=> obj['pid']);
+        let fosterChildren = children['foster'].map((obj: any)=> obj['pid']);
         
         this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
           // items
@@ -126,7 +150,7 @@ export class CdkCollectionComponent implements OnInit {
           // deti 
           this.auth.getPidsAuthorizedActions(this.items.map(c=> c['pid']), null).subscribe((d:any) => {
             Object.keys(d).forEach((k)=> {
-              let actions = d[k].map((v)=> v.code);
+              let actions = d[k].map((v: any)=> v.code);
               this.collectionActions.set(k, actions);
             });
           });
@@ -146,7 +170,7 @@ export class CdkCollectionComponent implements OnInit {
 
       this.auth.getPidsAuthorizedActions(this.superCollections.map(c=> c['id']),null).subscribe((d:any) => {
         Object.keys(d).forEach((k)=> {
-          let actions = d[k].map((v)=> v.code);
+          let actions = d[k].map((v: any)=> v.code);
           this.collectionActions.set(k, actions);
         });
       });
@@ -326,7 +350,7 @@ export class CdkCollectionComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
-        this.collectionsService.removeBatchCuttingsFromCollection(this.collection.id, toDelete).subscribe((collections: any[]) => {
+        this.collectionsService.removeBatchCuttingsFromCollection(this.collection.id, toDelete).subscribe(() => {
         //this.ui.showInfoSnackBar(`snackbar.success.removeFromThisCollection`); 
         this.ui.showInfoSnackBar(`snackbar.success.deletingItem`);
         this.loadData(this.collection.id);
@@ -410,7 +434,7 @@ export class CdkCollectionComponent implements OnInit {
   }
 
 
-  onRemoveItemsFromCollection(collectionPid: string, collectionName: string, itemPids: string[], itemName) {
+  onRemoveItemsFromCollection(collectionPid: string, collectionName: string, itemPids: string[], itemName: string) {
     const data: SimpleDialogData = {
       title: this.ui.getTranslation('modal.removeFromThisCollection.title'),
       message: this.ui.getTranslation('modal.removeFromThisCollection.message', { value1: itemName, value2: collectionName }) + '?',
@@ -434,7 +458,7 @@ export class CdkCollectionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'yes') {
 
-        const observables = [];
+        const observables: any[] = [];
 
         itemPids.forEach(ipid=> {
           observables.push(this.collectionsService.removeItemFromCollection(collectionPid, ipid));
@@ -452,7 +476,7 @@ export class CdkCollectionComponent implements OnInit {
     });
   }
 
-  setLang(lang) {
+  setLang(lang: string) {
     this.lang = lang;
 
 //    this.langTranslated = this.isoConvert.isTranslatable(this.langSelected) ? this.isoConvert.convert(this.langSelected) : [this.langSelected];

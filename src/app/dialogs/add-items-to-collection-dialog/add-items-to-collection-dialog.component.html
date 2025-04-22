@@ -1,25 +1,27 @@
-<form #f="ngForm" (ngSubmit)="onAdd(f.value)">
+<form #f="ngForm" (ngSubmit)="onAdd()">
 	<h2 mat-dialog-title>{{ 'modal.addItemsToCollection.title' | translate }}</h2>
-	<mat-dialog-content class="mat-typography">
-		<div class="app-desc app-mb-4">
+	<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+		<div class="app-desc">
 			{{ 'modal.addItemsToCollection.message' | translate }}.
 		</div>
-		<div class="app-mb-2">
+		<div>
       <strong>{{ 'desc.collection' | translate }}</strong>
     </div>
-		<div class="app-mb-2">
-			<mat-form-field class="app-w-100" *ngIf="collection_title">
+		<div>
+			<mat-form-field appearance="outline" class="app-w-100" *ngIf="collection_title">
 				<input [disabled]="inProgress || collection_title" matInput type="text" id="inputCollectionTitle" name="collection_title" [(ngModel)]="collection_title" [placeholder]="'desc.name' | translate">
 			</mat-form-field>
-			<mat-form-field class="app-w-100" *ngIf="collection_pid">
+		</div>
+		<div>
+			<mat-form-field appearance="outline" class="app-w-100" *ngIf="collection_pid">
 				<input [disabled]="inProgress || collection_pid" matInput type="text" id="inputCollectionPid" name="collection_pid" [(ngModel)]="collection_pid" placeholder="PID">
 			</mat-form-field>
 		</div>
-		<div class="app-mb-2">
+		<div>
       <strong>{{ 'desc.itemsBeingAdded' | translate }}</strong>
     </div>
 		<div>
-			<mat-form-field appearance="fill" class="app-w-100 app-download">
+			<mat-form-field appearance="outline" class="app-w-100 app-download">
 				<mat-label>{{ 'desc.pids' | translate }}</mat-label>
 				<textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="{{pidsTextareaRows}}"></textarea>
 				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" class="app-cursor-pointer">file_download</mat-icon>
@@ -27,27 +29,26 @@
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 		</div>
 		<mat-progress-bar mode="indeterminate" *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
-		<!-- <span *ngIf="rightsErrors.length > 0">Rights error : {{rightsErrors.join(',')}} </span>
-		<span *ngIf="containsGe()">Genric errors : {{genericErrorToText()}} </span> -->
-		
-		<mat-card *ngIf="!!items_counter_total" class="app-view-alert" [ngClass]="!!items_counter_failed ? 'app-warn' : 'app-success'">
-			<mat-card-content>
-				<div [innerHtml]="('alert.addItemsToCollection.success' | translate : {value1: items_counter_added, value2: items_counter_total}) + '!'"></div>
-				&nbsp;
-				<div *ngIf="!!items_counter_failed" [innerHtml]="('alert.addItemsToCollection.error' | translate : {value: items_counter_failed}) + '!'"></div>
-			</mat-card-content>
-		</mat-card>
-
-		<mat-card *ngIf="rightsErrors.length > 0 || containsGe()" class="app-view-alert app-warn app-mt-4">
-			<div *ngIf="rightsErrors.length > 0">
-				<strong>{{ 'alert.addItemsToCollection.notAllowed' | translate }}:</strong>
-				<ul class="app-m-0">
-					<li *ngFor="let uuid of rightsErrors">{{ uuid }}</li>
-				</ul>
-			</div>
-			<div *ngIf="containsGe()" [innerHtml]="genericErrorToText()"></div>
-		</mat-card>
-
+		<div>
+			<mat-card appearance="outlined" *ngIf="!!items_counter_total" class="app-view-alert" [ngClass]="!!items_counter_failed ? 'app-warn' : 'app-success'">
+				<mat-card-content>
+					<div [innerHtml]="('alert.addItemsToCollection.success' | translate : {value1: items_counter_added, value2: items_counter_total}) + '!'"></div>
+					&nbsp;
+					<div *ngIf="!!items_counter_failed" [innerHtml]="('alert.addItemsToCollection.error' | translate : {value: items_counter_failed}) + '!'"></div>
+				</mat-card-content>
+			</mat-card>
+			<mat-card appearance="outlined" *ngIf="rightsErrors.length > 0 || containsGe()" class="app-view-alert app-warn app-mt-2">
+				<mat-card-content>
+					<div *ngIf="rightsErrors.length > 0">
+						<strong>{{ 'alert.addItemsToCollection.notAllowed' | translate }}:</strong>
+						<ul class="app-m-0">
+							<li *ngFor="let uuid of rightsErrors">{{ uuid }}</li>
+						</ul>
+					</div>
+					<div *ngIf="containsGe()" [innerHtml]="genericErrorToText()"></div>
+				</mat-card-content>
+			</mat-card>
+		</div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
 		<button mat-flat-button [disabled]="inProgress || !f.valid || isFinished()" color="primary" type="submit">{{ 'button.add' | translate }}</button>

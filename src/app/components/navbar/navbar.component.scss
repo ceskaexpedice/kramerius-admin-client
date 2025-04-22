@@ -1,54 +1,30 @@
-@import './src/sass/app-variables.scss';
-@import './src/sass/app-mixins.scss';
-@import './src/sass/app-global.scss';
-
-
 .mat-toolbar {
-  position: fixed;
   z-index: 10;
 
-  .app-logo {
-    color: $app-color-lightnes;
-    text-decoration: none;
-
-    svg {
-      .app-colored {
-        fill: $app-color-primary;
-      }
-
-      .app-bg {
-        fill-opacity: .8;
-      }
-
-      #admin-letter {
-        fill-opacity: .8;
-      }
-    }
-  }
-
-  .mat-button-base {
-    color: $app-color-lightnes;
+  .mat-mdc-button{
+    --mat-text-button-horizontal-padding: 12px;
+    color: var(--app-color-lightnes);
 
     &:hover {
       &:not(.app-avatar) {
-        background-color: rgba($app-color-lightnes, .2);
+        background-color: rgba(var(--app-color-lightnes-rgb), .2);
       }
     }
 
     &.active {
-      background-color: rgba($app-color-lightnes, .2);
+      background-color: rgba(var(--app-color-lightnes-rgb), .2);
     }
   }
 
   .app-avatar {
     div {
-      width: $app-avatar-size;
-      height: $app-avatar-size;
+      width: var(--app-navbar-avatar-size);
+      height: var(--app-navbar-avatar-size);
       border-radius: 50%;
       font-size: 16px;
       font-weight: 900;
       text-transform: uppercase;
-      background-color: $app-avatar-color;
+      background-color: var(--app-navbar-avatar-bg-color);
     }
   }
 }

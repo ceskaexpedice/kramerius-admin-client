@@ -1,13 +1,24 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { UIService } from 'src/app/services/ui.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { forkJoin } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
   selector: 'app-delete-selected-items-from-collection',
   templateUrl: './delete-selected-items-from-collection.component.html',
   styleUrls: ['./delete-selected-items-from-collection.component.scss']
@@ -43,7 +54,7 @@ export class DeleteSelectedItemsFromCollectionComponent implements OnInit {
     });
   }
 
-  scheduleDeleteSelectedItemsAndChangeRoute(routerLink) {
+  scheduleDeleteSelectedItemsAndChangeRoute(routerLink: string) {
     
     let todelete = this.data['todelete'];
     let colid = this.data['pid'];  

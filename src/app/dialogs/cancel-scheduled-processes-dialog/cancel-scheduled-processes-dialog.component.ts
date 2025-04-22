@@ -1,10 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { forkJoin } from 'rxjs';
 import { Batch } from 'src/app/models/batch.model';
 import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
+    MatProgressBarModule, MatTooltipModule],
   selector: 'app-cancel-scheduled-processes-dialog',
   templateUrl: './cancel-scheduled-processes-dialog.component.html',
   styleUrls: ['./cancel-scheduled-processes-dialog.component.scss']
@@ -54,7 +70,7 @@ export class CancelScheduledProcessesDialogComponent implements OnInit {
   }
 
   cancelAllAndClose(batches: Batch[]) {
-    let requests = [];
+    let requests: any[] = [];
     batches.forEach(batch => {
       requests.push(this.adminApi.killBatch(batch.id));
     });

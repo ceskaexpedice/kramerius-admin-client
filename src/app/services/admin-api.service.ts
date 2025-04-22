@@ -27,8 +27,8 @@ export class AdminApiService {
     this.baseUrl = this.appSettings.adminApiBaseUrl;
   }
 
-  private doGet(path: string, params, type = 'json'): Observable<Object> {
-    const options = {
+  private doGet(path: string, params: any, type = 'json'): Observable<Object> {
+    const options: any = {
       params: params
     };
     if (type === 'text') {
@@ -43,14 +43,14 @@ export class AdminApiService {
   }
 
   private getText(path: string, params = {}): Observable<string> {
-    return this.doGet(path, params, 'text').pipe(map(response => response['body']));
+    return this.doGet(path, params, 'text').pipe(map((response: any) => response['body']));
   }
 
   private head(path: string, options = {}): Observable<Object> {
     return this.http.head(this.baseUrl + path, options);
   }
 
-  private post(path: string, body, options = {}): Observable<Object> {
+  private post(path: string, body: any, options = {}): Observable<Object> {
     return this.http.post(this.baseUrl + path, body, options);
   }
 
@@ -114,7 +114,7 @@ export class AdminApiService {
     return this.get('/processes/batches', params).pipe(
       //delay(2000),
       //tap(response => console.log(response)),
-      map(response => [Batch.fromJsonArray(response['batches']), response['total_size']])
+      map((response: any) => [Batch.fromJsonArray(response['batches']), response['total_size']])
     );
   }
 
@@ -135,7 +135,7 @@ export class AdminApiService {
   getProcess(processId: number): Observable<[Batch, Process]> {
     return this.get(`/processes/by_process_id/${processId}`).pipe(
       //tap(response => console.log(response)),
-      map(response => [Batch.fromJson(response), Process.fromJson(response['process'])])
+      map((response: any) => [Batch.fromJson(response), Process.fromJson(response['process'])])
     );
   }
 
@@ -144,11 +144,11 @@ export class AdminApiService {
   getProcessOwners(): Observable<ProcessOwner[]> {
     return this.get('/processes/owners').pipe(
       //delay(3000),
-      map(response => ProcessOwner.fromJsonArray(response['owners']))
+      map((response: any) => ProcessOwner.fromJsonArray(response['owners']))
     );
   }
 
-  scheduleProcess(definition, onScheduled = undefined): Observable<any> {
+  scheduleProcess(definition: any, onScheduled: any = undefined): Observable<any> {
     return this.post('/processes', definition).pipe(
       //delay(Math.floor(Math.random() * 5000)),
       tap(response => { if (onScheduled) onScheduled(response); }),
@@ -225,7 +225,7 @@ export class AdminApiService {
   }
 
   getSdntSyncDataGranularity(id:string): Observable<SdnntItem[]> {
-    return this.get(`/sdnnt/sync/granularity/${id}`).pipe(map((response) => {
+    return this.get(`/sdnnt/sync/granularity/${id}`).pipe(map((response: any) => {
       let val = response[id];
       return SdnntItem.fromJsonArray(val);
     }));
@@ -255,15 +255,15 @@ export class AdminApiService {
     return this.post(`/collections/${collectionPid}/items`, itemsPids);
   }
 
-  addCuttingItemToCollection(collectionPid, cutting:any) : Observable<Object> {
+  addCuttingItemToCollection(collectionPid: string, cutting:any) : Observable<Object> {
     return this.post(`/collections/${collectionPid}/add_clip_item`, cutting);
   }
 
-  removeCuttingItemToCollection(collectionPid, cutting:any) : Observable<Object> {
+  removeCuttingItemToCollection(collectionPid: string, cutting:any) : Observable<Object> {
     return this.put(`/collections/${collectionPid}/delete_clip_item`, cutting);
   }
 
-  removeBatchCuttingItemsToCollection(collectionPid, cutting:any[]) : Observable<Object> {
+  removeBatchCuttingItemsToCollection(collectionPid: string, cutting:any[]) : Observable<Object> {
     return this.put(`/collections/${collectionPid}/delete_batch_clipitems`, {"clipitems":cutting});
   }
 
@@ -363,7 +363,7 @@ export class AdminApiService {
     // fullPath = '/files/input-data-dir-for_import-foxml/045b1250-7e47-11e0-add1-000d606f5dc6/';
     return this.get(fullPath).pipe(
       //delay(3000),
-      map(response => response['files']));
+      map((response: any) => response['files']));
   }
 
   //deprecated (use getImportFiles instead)
@@ -384,17 +384,17 @@ export class AdminApiService {
     )
   }
 
-  getOutputCollectionsBackupsFile(file): Observable<any> {
+  getOutputCollectionsBackupsFile(file: string): Observable<any> {
       return this.get(`/files/output-data-dir-for_collectionsbackup/`+file+"?generatedownloads=true").pipe(
     )
   }
 
-  getOutputNKPLogsFile(file): Observable<any> {
+  getOutputNKPLogsFile(file: string): Observable<any> {
     return this.get(`/files/output-data-dir-for_nkplogs/`+file+"?generatedownloads=true").pipe(
     )
   }
 
-  getOutputDownloadLinks(link): string {
+  getOutputDownloadLinks(link: string): string {
     //http://localhost:8080/search/api/admin/v7.0/files/download-path/b8dbeb7a5617a33e168a6d5a1cb26c2b
     return this.baseUrl +"/files/download-path/"+ link;
   }
@@ -663,7 +663,7 @@ export class AdminApiService {
   }
 
   /** annual year csv generator */
-  statisticsAnulalCSVURL(year:string, fmt_headers:string[], fmt_firstlinecomment,fmt_filename) {
+  statisticsAnulalCSVURL(year:string, fmt_headers:string[], fmt_firstlinecomment: any,fmt_filename: string) {
     let params: HttpParams = new HttpParams();
     params = params.set("year", year);
 
@@ -691,8 +691,8 @@ export class AdminApiService {
         fmt_headers:string[],
         // print only allowed values
         fmt_allowedvalues:string[],
-        fmt_firstlinecomment,
-        fmt_filename)  {
+        fmt_firstlinecomment: any,
+        fmt_filename: string)  {
       let params: HttpParams = this.searchParams(identifier, facets, dateFrom, dateTo, filter);
       if (fmt_headers) {
         for(let i=0;i<fmt_headers.length;i++) {
@@ -723,8 +723,8 @@ export class AdminApiService {
     fmt_headers:string[],
     // print only allowed values
     fmt_allowedvalues:string[],
-    fmt_firstlinecomment,
-    fmt_filename
+    fmt_firstlinecomment: any,
+    fmt_filename: any
   ) {
     let params: HttpParams = this.searchParams(identifier, facets, dateFrom, dateTo, filter);
     if (fmt_headers) {
