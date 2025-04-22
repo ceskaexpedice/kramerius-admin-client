@@ -54,16 +54,13 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
   // harvesting pids
   pids: string;
-  // type of reharvest 'root' | 'children' | 'new_root'
   typeOfHarvest: string = 'children';
-  // rehaversting libs options 'all from index' | 'selected from checkbox'
   reharvestLibsOption: string = "fromindex";
   root_pids:string[] = [];
   pid_paths:string[] = [];
 
   // Debouncing 
   private subject: Subject<string> = new Subject();
-
 
 
   constructor(
@@ -93,13 +90,10 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
       let rootpids: string[] = [];
       let pidpaths:string[] = [];
       let enabled: string[] = [];
-      //let fdocs:any = {}
       let fdocs: Record<string, any[]> = {};
-
 
       for (let i = 0; i < pidlist.length; i++) {
         this.cdkApi.introspectPid(pidlist[i]).subscribe(resp => {
-
 
           let keys = Object.keys(resp);
           for (let j = 0; j < keys.length; j++) {
@@ -183,13 +177,13 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
  }
 
  cdkConflict(docs: any[]): [boolean, string,any[]] {
-  let conflict = docs.length > 1;
+  let conflict =  docs?.length > 1;
   let message = this.ui.getTranslation('desc.cdkconflict')
 
   let _to_delete :any[]= [];
   let _to_reharvets:any[]=[];
   
-  docs.forEach(doc=> {
+  docs?.forEach(doc=> {
     let deleteObject: any = {
       name: 'User trigger | Reharvest from admin client ',
       pid: doc['root.pid'],
@@ -199,7 +193,6 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
       deleteObject['own_pid_path']=this.pid_paths[0];
     }
     _to_delete.push(deleteObject);
-
 
     let reharvestObject: any = {
       name: 'User trigger | Reharvest from admin client ',
@@ -216,9 +209,6 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
   return [conflict, message, [..._to_delete]];
 }
 
-
-
-
   
   private modelConflict(): [boolean, string, any[]] {
     let selected = this.options.filter(o => o.selected);
@@ -226,7 +216,6 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
     this.selectedCount = selected.length;
     let modelConflict = new Set(models).size !== 1;
     
-    // Určení modelu, pokud existuje, jinak prázdný řetězec
     let modelName = models.length > 0 ? models[0] : "";
 
     return [modelConflict, modelName,[]];
@@ -362,6 +351,8 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
           object['root.pid'] = pid
         }
 
+        
+
         if (!this.cdkIndex && this.pid_paths.length > 0) {
           object['own_pid_path']=this.pid_paths[0];
         }
@@ -378,7 +369,14 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
           );
         }
       } else {
-        this.cdkApi.planReharvest({ name: 'User trigger - reharvest from admin client', pid: pid, type: this.typeOfHarvest }).subscribe(
+
+        let object:any ={ name: 'User trigger - reharvest from admin client', pid: pid, type: this.typeOfHarvest }
+        
+        if (this.typeOfHarvest == 'delete_root' && !object['root.pid']) {
+          object['root.pid'] = pid
+        }
+
+        this.cdkApi.planReharvest(object).subscribe(
           res => {
             this.dialogRef.close(res);
           },

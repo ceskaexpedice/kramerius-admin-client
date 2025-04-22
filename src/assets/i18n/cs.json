@@ -577,7 +577,8 @@
     "new_root":"Nový harvest celého titulu",
     "only_pid":"Reharvest pouze daného pidu",
     "delete_pid": "Smazání objektu",
-    "delete_tree": "Smazání podstromu"
+    "delete_tree": "Smazání podstromu",
+    "delete_root": "Smazání titulu"
   },
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
@@ -1298,6 +1299,7 @@
     "previewToCdkIndex": "Náhled do cdk indexu",
     "notFound": "Nenalezeno",
     "conflict": "Nalezen konflikt",
-    "noConflict": "Nenalezen žádný konflikt"
+    "noConflict": "Nenalezen žádný konflikt",
+    "none":""
   }
 }

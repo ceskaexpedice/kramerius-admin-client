@@ -577,7 +577,9 @@
     "new_root":"New harvest of whole title",
     "only_pid":"Reharvest only the given pid",
     "delete_pid": "Delete object",
-    "delete_tree": "Delete tree"
+    "delete_tree": "Delete tree",
+    "delete_root": "Delete title"
+
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
@@ -1298,6 +1300,7 @@
     "previewToCdkIndex": "Preview to cdk index",
     "notFound": "Not found",
     "conflict": "Conflict",
-    "noConflict": "No conflict"
+    "noConflict": "No conflict",
+    "none":""
   }
 }

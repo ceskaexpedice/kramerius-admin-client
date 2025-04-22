@@ -103,6 +103,7 @@ export class CdkObjectReharvestComponent implements OnInit {
 
     this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
       this.dataSource = resp['response']['docs'];
+      //console.log(this.dataSource);
       this.length = resp['response']['numFound'];
       this.loading = false;
 
@@ -163,7 +164,7 @@ export class CdkObjectReharvestComponent implements OnInit {
       } else {
         this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest');
       }
-      this.cdkApi.reharvests(this.pageSize, this.pageIndex,this.pid, this.filters).subscribe(resp => {
+      this.cdkApi.reharvests(this.pageIndex, this.pageSize,this.pid, this.filters).subscribe(resp => {
         this.dataSource = resp;
         this.reloadReharvests();
       });
@@ -172,8 +173,14 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   approveState(reharvest: any) {
     this.cdkApi.changeReharvestState(reharvest.id, 'open').subscribe(x => {
-      this.cdkApi.reharvests(this.pageSize, this.pageIndex, this.pid, this.filters).subscribe(resp => {
-        this.dataSource = resp;
+
+      //this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
+
+      this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
+        this.dataSource = resp['response']['docs'];
+        this.length = resp['response']['numFound'];
+        this.loading = false;
+
       });
     });
   }
@@ -181,7 +188,10 @@ export class CdkObjectReharvestComponent implements OnInit {
   closedState(reharvest: any) {
     this.cdkApi.changeReharvestState(reharvest.id, 'cancelled').subscribe(x => {
       this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
-        this.dataSource = resp;
+        this.dataSource = resp['response']['docs'];
+        //console.log(this.dataSource);
+        this.length = resp['response']['numFound'];
+        this.loading = false;
       });
     });
   }

@@ -107,9 +107,6 @@ export class CdkApiService {
       return this.doPut('/api/admin/v7.0/reharvest', obj, {}).pipe(
         //tap((response: HttpResponse<Object>) => {}),
         map(response => Reharvest.reharvestFromJson(response))
-        // catchError((error: any) => {
-        //   return throwError(() => new Error('An error occurred while reharvesting.'));
-        // })
       );
 
     }
