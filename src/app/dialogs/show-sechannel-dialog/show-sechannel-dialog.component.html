@@ -69,7 +69,7 @@
               <span>{{ lic }}</span>
             </ng-container>
             <ng-template #notAcronym>
-              <a [href]="getLinkForLicense(lic)" target="_blank">{{ lic }}</a>
+              <a [href]="getLinkForLicense()" target="_blank">{{ lic }}</a>
             </ng-template>
             <ng-container *ngIf="!last">, </ng-container>
           </ng-container>

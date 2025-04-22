@@ -1,4 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 const ELEMENT_DATA: any[] = [
   {license: null, icon: null, licenseLink: null, licenseEuro: null, action: null},
@@ -11,6 +22,11 @@ const ELEMENT_DATA: any[] = [
 ]; 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, 
+    MatIconModule, MatTooltipModule, MatTableModule,
+    MatFormFieldModule, MatInputModule, MatSelectModule
+  ],
   selector: 'app-cdk-europeanou',
   templateUrl: './cdk-europeanou.component.html',
   styleUrls: ['./cdk-europeanou.component.scss']

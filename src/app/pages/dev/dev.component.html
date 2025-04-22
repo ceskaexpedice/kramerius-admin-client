@@ -1,103 +1,105 @@
-<div class="app-root">
+<div class="app-dev app-fxLayout app-column app-fill">
+	<div class="app-fxFlex app-oa-y app-view-processes">
+		<div class="app-container-fluid">
+			<h1>Test</h1>
+			<p>Tato komponenta slouží pro testování, typicky nové funkcionality na backendu. Protože tady máme funkční autentizaci, což se složitěji simuluje.</p>
 
-    <h1>Test</h1>
-    <p>Tato komponenta slouží pro testování, typicky nové funkcionality na backendu. Protože tady máme funkční
-        autentizaci, což se složitěji simuluje.</p>
+			<mat-card appearance="outlined" class="app-mb-4">
+				<mat-card-header>
+					<mat-card-title class="app-mb-2">Úklid</mat-card-title>
+				</mat-card-header>
+				<mat-card-content class="app-fxLayout app-row app-center-v app-gap-4">
+					<!-- mazani objektu z repozitare -->
+					<mat-form-field appearance="outline">
+						<input matInput [(ngModel)]="pidForDeletion" placeholder="PID">
+					</mat-form-field>
+					<!-- tohle pouzivat fakt opatrne, neresi se uklid vyhledavaciho indexu, taky to kvuli cachovani neznamena, ze bude objekt skutecne smazan, muze byt potreba restratovat Tomcat -->
+					<button mat-flat-button (click)="deleteObjectLowLevel()" [disabled]="!pidForDeletion" color="primary">Smazat objekt z repozitáře</button>
+				</mat-card-content>
+			</mat-card>
 
-    <h3>Úklid</h3>
-    <div>
-        <!-- mazani objektu z repozitare -->
-        <mat-form-field class="app-schedule-indexation-process-pid">
-            <input matInput [(ngModel)]="pidForDeletion" placeholder="PID">
-        </mat-form-field>
-        <!-- tohle pouzivat fakt opatrne, neresi se uklid vyhledavaciho indexu, taky to kvuli cachovani neznamena, ze bude objekt skutecne smazan, muze byt potreba restratovat Tomcat -->
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="deleteObjectLowLevel()"
-            [disabled]="!pidForDeletion" color="primary">Smazat objekt z repozitáře</button>
-    </div>
 
-    <!-- <button (click)="logData()">log data</button> -->
+			<mat-card appearance="outlined" class="app-mb-4">
+				<mat-card-header>
+					<mat-card-title class="app-mb-2">Výpis foxml (do konzole)</mat-card-title>
+				</mat-card-header>
+				<mat-card-content class="app-fxLayout app-row app-center-v app-gap-4">
+					<mat-form-field appearance="outline">
+          	<input matInput [(ngModel)]="pidForPrintFoxml" placeholder="PID">
+        	</mat-form-field>
+        	<button mat-flat-button (click)="printFoxmlOfObjectFromRepo()" [disabled]="!pidForPrintFoxml" color="primary">Zalogovat foxml</button>
+				</mat-card-content>
+			</mat-card>
 
-    <!-- <h2>Ukázkové objekty ve sbírkách</h2>
-    <ng-container *ngFor="let item of items;let i = index">
-        <h4>{{titles[i]}} ({{item}})</h4>
-        <ng-container *ngFor="let collection_id of pids_of_collections_having_item[item]">
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <button (click)="removeFromCollection(item,collection_id)">odebrat</button>
-            {{collections_by_id[collection_id].name}} ({{collection_id}})
-            <br>
-        </ng-container>
-        <br>
-        <ng-container *ngFor="let collection_id of pids_of_collections_missing_item[item]">
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <button (click)="addToCollection(item,collection_id)">přidat</button>
-            {{collections_by_id[collection_id].name}} ({{collection_id}})
-            <br>
-        </ng-container>
-
-    </ng-container> -->
-
-    <h3>Výpis foxml (do konzole)</h3>
-    <div>
-        <mat-form-field class="app-schedule-indexation-process-pid">
-            <input matInput [(ngModel)]="pidForPrintFoxml" placeholder="PID">
-        </mat-form-field>
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="printFoxmlOfObjectFromRepo()"
-            [disabled]="!pidForPrintFoxml" color="primary">Zalogovat foxml</button>
-    </div>
-
-    <h3>Výpis z vyhledávacího indexu (do konzole)</h3>
-    <div>
-        <mat-form-field class="app-schedule-indexation-process-pid">
+			<mat-card appearance="outlined" class="app-mb-4">
+				<mat-card-header>
+					<mat-card-title class="app-mb-2">Výpis z vyhledávacího indexu (do konzole)</mat-card-title>
+				</mat-card-header>
+				<mat-card-content class="app-fxLayout app-row app-center-v app-gap-4">
+					<mat-form-field appearance="outline">
             <input matInput [(ngModel)]="pidForPrintSolr" placeholder="PID">
-        </mat-form-field>
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="printSolrRecord()"
-            [disabled]="!pidForPrintSolr" color="primary">Zalogovat solr záznam</button>
-    </div>
+        	</mat-form-field>
+        	<button mat-flat-button (click)="printSolrRecord()" [disabled]="!pidForPrintSolr" color="primary">Zalogovat solr záznam</button>
+				</mat-card-content>
+			</mat-card>
 
-    <h3>Nastavení Thumbnailu ze stránky</h3>
-    <div>
-        <mat-form-field class="app-schedule-indexation-process-pid">
-            <input matInput [(ngModel)]="changeThumbnailTrgPid" placeholder="PID (cíle)">
-        </mat-form-field>
-        <mat-form-field class="app-schedule-indexation-process-pid">
+			<mat-card appearance="outlined" class="app-mb-4">
+				<mat-card-header>
+					<mat-card-title class="app-mb-2">Nastavení Thumbnailu ze stránky</mat-card-title>
+				</mat-card-header>
+				<mat-card-content class="app-fxLayout app-row app-center-v app-gap-4">
+					<mat-form-field appearance="outline">
+						<input matInput [(ngModel)]="changeThumbnailTrgPid" placeholder="PID (cíle)">
+        	</mat-form-field>
+					<mat-form-field appearance="outline">
             <input matInput [(ngModel)]="changeThumbnailSrcPid" placeholder="PID (zdrojové stránky)">
-        </mat-form-field>
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="changeThubnail()"
-            [disabled]="!changeThumbnailSrcPid || !changeThumbnailTrgPid" color="primary">Nastavit thumbnail</button>
-    </div>
+        	</mat-form-field>
+        	<button mat-flat-button (click)="changeThubnail()" [disabled]="!changeThumbnailSrcPid || !changeThumbnailTrgPid" color="primary">Nastavit thumbnail</button>
+				</mat-card-content>
+			</mat-card>
 
-    <h3>Nastavení MODS</h3>
-    <div>
-        <mat-form-field class="app-schedule-indexation-process-pid">
-            <input matInput [(ngModel)]="setModsPid" placeholder="PID">
-        </mat-form-field>
-        <mat-form-field class="app-schedule-indexation-process-pid">
+			<mat-card appearance="outlined" class="app-mb-4">
+				<mat-card-header>
+					<mat-card-title class="app-mb-2">Nastavení MODS</mat-card-title>
+				</mat-card-header>
+				<mat-card-content class="app-fxLayout app-row app-gap-4">
+					<mat-form-field appearance="outline">
+						<input matInput [(ngModel)]="setModsPid" placeholder="PID">
+        	</mat-form-field>
+        	<mat-form-field appearance="outline">
             <mat-label>MODS záznam objektu</mat-label>
-            <textarea matInput [(ngModel)]="setModsMods" type="text" rows='10'></textarea>
-        </mat-form-field>
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="setMods()"
-            [disabled]="!setModsPid || !setModsMods" color="primary">Nastavit MODS</button>
-    </div>
+            <textarea matInput [(ngModel)]="setModsMods" type="text" rows='4'></textarea>
+        	</mat-form-field>
+        	<button mat-flat-button (click)="setMods()" [disabled]="!setModsPid || !setModsMods" color="primary">Nastavit MODS</button>
+				</mat-card-content>
+			</mat-card>
 
-    <h3>Export do PDF</h3>
-    <div>
-        <mat-form-field class="app-schedule-indexation-process-pid">
+			<mat-card appearance="outlined" class="app-mb-4">
+				<mat-card-header>
+					<mat-card-title class="app-mb-2">Export do PDF</mat-card-title>
+				</mat-card-header>
+				<mat-card-content class="app-fxLayout app-row app-gap-4">
+					<mat-form-field appearance="outline">
             <input matInput [(ngModel)]="pidForPdfExport" placeholder="PID">
-        </mat-form-field>
-        <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="exportPDF()"
-            [disabled]="!pidForPdfExport" color="primary">Exportovat PDF</button>
-    </div>
-
-    <br>
-
-    <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="logDataFromAdminApi()"
-        color="primary">Log data from admin api</button>
-    <br>
-    <button class="app-schedule-indexation-process-btn" mat-raised-button (click)="logDataFromClientApi()"
-        color="primary">Log data from client api</button>
-    <br>
-    <button class="app-schedule-indexation-process-btn" mat-raised-button color="warn"
-        (click)="testAction()">Test</button>
-    <br>
-
+        	</mat-form-field>
+        	<button mat-flat-button (click)="exportPDF()" [disabled]="!pidForPdfExport" color="primary">Exportovat PDF</button>
+				</mat-card-content>
+			</mat-card>
+			
+			<mat-card appearance="outlined" class="app-mb-4">
+				<mat-card-header>
+					<mat-card-title class="app-mb-2">Testy</mat-card-title>
+				</mat-card-header>
+				<mat-card-content class="app-fxLayout app-row app-gap-4">
+					<button mat-flat-button (click)="logDataFromAdminApi()" color="primary">Log data from admin api</button>
+    			<button mat-flat-button (click)="logDataFromClientApi()" color="primary">Log data from client api</button>
+					<button mat-flat-button color="warn" (click)="testAction()">Test</button>
+				</mat-card-content>
+			</mat-card>
+			
+		</div>
+	</div>
 </div>
+
+
+

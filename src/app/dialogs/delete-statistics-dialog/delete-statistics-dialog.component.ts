@@ -1,20 +1,35 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import * as moment from 'moment';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import moment from 'moment';
+
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
+   MatTooltipModule],
   selector: 'app-delete-statistics-dialog',
   templateUrl: './delete-statistics-dialog.component.html',
   styleUrls: ['./delete-statistics-dialog.component.scss']
 })
 export class DeleteStatisticsDialogComponent implements OnInit {
 
-  dateFrom:moment.Moment = moment().add(-2,"years");
-  dateTo:moment.Moment = moment().add(-1,"years");
+  dateFrom:moment.Moment;
+  dateTo:moment.Moment
 
-  maxDate:moment.Moment = moment().add(-1,"years");
+  maxDate:moment.Moment;
 
   constructor(
     public dialogRef: MatDialogRef<DeleteStatisticsDialogComponent>,
@@ -25,6 +40,10 @@ export class DeleteStatisticsDialogComponent implements OnInit {
 
  
   ngOnInit(): void {
+    this.dateFrom = moment().add(-2,"years");
+    this.dateTo = moment().add(-1,"years");
+  
+    this.maxDate = moment().add(-1,"years");
   }
   
   deleteStatistics() {

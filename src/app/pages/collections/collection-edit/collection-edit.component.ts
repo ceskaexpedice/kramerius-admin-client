@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Collection } from 'src/app/models/collection.model';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic/';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic/';
 import '@ckeditor/ckeditor5-build-classic/build/translations/cs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,7 +10,26 @@ import { CreateNewCollectionDialogComponent } from 'src/app/dialogs/create-new-c
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+    MatTooltipModule, MatProgressBarModule, MatCheckboxModule,
+    CKEditorModule
+  ],
   selector: 'app-collection-edit',
   templateUrl: './collection-edit.component.html',
   styleUrls: ['./collection-edit.component.scss']
@@ -28,7 +47,7 @@ export class CollectionEditComponent implements OnInit {
 
   keywordToDelete: string = '';
 
-  collection: Collection;
+  collection: any;
   collectionName: string;
   mode = 'none';
   state = 'none';
@@ -44,7 +63,7 @@ export class CollectionEditComponent implements OnInit {
   standalone:boolean = false;
   langs:string[];
 
-  @Input() colId;
+  @Input() colId: string;
   @Input() lang:any;
 
   @Output() updated = new EventEmitter<any>();
@@ -118,8 +137,8 @@ export class CollectionEditComponent implements OnInit {
 
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.lang) {
-      const newLang = changes.lang.currentValue;
+    if (changes['lang']) {
+      const newLang = changes['lang'].currentValue;
       this.initCollectionLangValues();
     }
   }
@@ -146,7 +165,7 @@ export class CollectionEditComponent implements OnInit {
 
   reloadtimestamp:number;
 
-  getThumb(col) {
+  getThumb(col: any) {
     if (col) {
       if (this.reloadtimestamp) {
         return this.clientService.getThumb(col.id)+"?reloadtimestap="+this.reloadtimestamp;
@@ -180,13 +199,13 @@ export class CollectionEditComponent implements OnInit {
   }
 
   getKeywords() {
-    let retvals = [];
+    let retvals: any[] = [];
     if (this.collection) {
       let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
       langs.forEach(l=> {
         if (this.collection.keywords[l]) {
 
-          this.collection.keywords[l].forEach(k=>{
+          this.collection.keywords[l].forEach((k: any)=>{
             retvals.push(k);
           });
         }
@@ -257,7 +276,7 @@ export class CollectionEditComponent implements OnInit {
   deleteKeyword(keyword: string) {
     let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
     langs.forEach(l=> {
-      this.collection.keywords[l] = this.collection.keywords[l].filter(item => item !== keyword);
+      this.collection.keywords[l] = this.collection.keywords[l].filter((item: string) => item !== keyword);
     });
   }
 }

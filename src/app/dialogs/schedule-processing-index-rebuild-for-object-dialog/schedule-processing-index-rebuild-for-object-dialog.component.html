@@ -1,19 +1,19 @@
 <form #f="ngForm" (ngSubmit)="schedule()">
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
 	<h2 mat-dialog-title>{{ 'modal.scheduleProcessingIndexRebuildForObject.title' | translate }}</h2>
-	<mat-dialog-content>
-		<div class="app-desc app-mb-4" [innerHtml]="('modal.scheduleProcessingIndexRebuildForObject.message1' | translate) + '.'"></div>
-		<div class="app-desc app-mb-4">{{ 'modal.scheduleProcessingIndexRebuildForObject.message2' | translate }}</div>
-		<div class="app-desc app-mb-4">{{ 'modal.scheduleProcessingIndexRebuildForObject.message3' | translate }}</div>
-		<div class="app-desc app-mb-4 app-color-warn" [innerHtml]="'modal.scheduleProcessingIndexRebuildForObject.message4' | translate"></div>
+	<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+		<div class="app-desc" [innerHtml]="('modal.scheduleProcessingIndexRebuildForObject.message1' | translate) + '.'"></div>
+		<div class="app-desc">{{ 'modal.scheduleProcessingIndexRebuildForObject.message2' | translate }}</div>
+		<div class="app-desc">{{ 'modal.scheduleProcessingIndexRebuildForObject.message3' | translate }}</div>
+		<div class="app-desc app-color-warn" [innerHtml]="'modal.scheduleProcessingIndexRebuildForObject.message4' | translate"></div>
 		<div>
-			<mat-form-field class="app-w-100">
+			<mat-form-field appearance="outline" class="app-w-100">
 				<mat-label>PID</mat-label>
 				<input [disabled]="inProgress || fixed" matInput type="text" id="pid" name="pid" [(ngModel)]="pid" placeholder="PID" required autofocus>
 			</mat-form-field>
 		</div>
 		<div>
-			<mat-form-field *ngIf="title" class="app-w-100">
+			<mat-form-field appearance="outline" *ngIf="title" class="app-w-100">
 				<input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" [placeholder]="'desc.name' | translate">
 			</mat-form-field>
 		</div>

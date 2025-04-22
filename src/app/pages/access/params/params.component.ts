@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
@@ -6,13 +6,28 @@ import { ConditionParam } from 'src/app/models/condition-param.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
+    MatTooltipModule, MatExpansionModule],
   selector: 'app-params',
   templateUrl: './params.component.html',
   styleUrls: ['./params.component.scss']
 })
 export class ParamsComponent implements OnInit {
+  readonly panelOpenState = signal(false);
 
   state: string;
   params: ConditionParam[];
@@ -75,7 +90,7 @@ export class ParamsComponent implements OnInit {
           });
         }
         this.ui.showInfoSnackBar('snackbar.success.onNewParam');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onNewParam');
           }
@@ -118,7 +133,7 @@ export class ParamsComponent implements OnInit {
           });
         }
         this.ui.showInfoSnackBar('snackbar.success.onNewValue');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onNewValue');
           }
@@ -154,7 +169,7 @@ export class ParamsComponent implements OnInit {
           console.log('cp', cp);
         });
         this.ui.showInfoSnackBar('snackbar.success.onRemoveValue');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onRemoveValue');
           }
@@ -194,7 +209,7 @@ export class ParamsComponent implements OnInit {
           console.log('cp', cp);
         });
         this.ui.showInfoSnackBar('snackbar.success.onEditValue');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.onEditValue');
           }
@@ -271,11 +286,11 @@ export class ParamsComponent implements OnInit {
           console.log('cp', cp);
         });
         this.ui.showInfoSnackBar('snackbar.success.onEditParam');
-        (error) => {
-          if (error) {
-            this.ui.showErrorSnackBar('snackbar.error.onEditParam');
-          }
-        }
+        // (error: any) => {
+        //   if (error) {
+        //     this.ui.showErrorSnackBar('snackbar.error.onEditParam');
+        //   }
+        // }
       }
     });
   }

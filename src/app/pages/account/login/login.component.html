@@ -1,19 +1,23 @@
-<div class="app-container app-h-100">
-	<div fxLayout="column" fxFlexFill fxLayoutAlign="center center">
-		<mat-card class="app-view-alert app-warn" *ngIf="errorMessage">
-			<mat-card-content>{{ 'alert.login.' + errorMessage | translate }}</mat-card-content>
-		</mat-card>
-		<mat-card class="app-card app-view-border app-mb-4 app-mt-4">
-			<mat-card-content>	
-				<strong class="app-mr-2">k7Admin</strong>
-				<span class="app-badge app-version app-mr-2">{{ 'desc.version' | translate }} {{getVersion()}}</span>
-				<span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
-				<span class="app-pipe"></span>
-				<strong class="app-mr-2">{{ 'desc.connectedInstance' | translate }}: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
-			</mat-card-content>
-		</mat-card>
-		<button mat-flat-button (click)="login()" color="primary">
-			{{ errorMessage ? ('button.signInAgain' | translate) : ('button.logIn' | translate) }}
-		</button>
+<div class="app-fxLayout app-column app-fill">
+	<div class="app-fxFlex app-fxLayout app-column app-oa-y">
+		<div class="app-container app-fxFlex">
+			<div class="app-fxLayout app-column app-fill app-center-v app-center-h">
+				<mat-card class="app-view-alert app-warn" *ngIf="errorMessage">
+					<mat-card-content>{{ 'alert.login.' + errorMessage | translate }}</mat-card-content>
+				</mat-card>
+				<mat-card appearance="outlined" class="app-mb-4 app-mt-4">
+					<mat-card-content>	
+						<strong class="app-mr-2">k7Admin</strong>
+						<span class="app-badge app-version app-mr-2">{{ 'desc.version' | translate }} {{getVersion()}}</span>
+						<span>commit <a href="https://github.com/ceskaexpedice/kramerius-admin-client/commit/{{getLastCommitHash()}}" target="_blank">{{getLastCommitHash()}}</a></span>
+						<span class="app-pipe"></span>
+						<strong class="app-mr-2">{{ 'desc.connectedInstance' | translate }}: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
+					</mat-card-content>
+				</mat-card>
+				<button mat-flat-button (click)="login()" color="primary">
+					{{ errorMessage ? ('button.signInAgain' | translate) : ('button.logIn' | translate) }}
+				</button>
+			</div>
+		</div>	
 	</div>
 </div>

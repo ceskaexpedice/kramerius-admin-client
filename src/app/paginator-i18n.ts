@@ -5,7 +5,7 @@ export class PaginatorI18n extends MatPaginatorIntl {
 
   private rangeLabelIntl: string;
 
-  getRangeLabel = (page, pageSize, length) => {
+  override getRangeLabel = (page: number, pageSize: number, length: number) => {
       if (length === 0 || pageSize === 0) {
         return this.translate.instant('paginator.desc.rangeLabel1', { length });
       }

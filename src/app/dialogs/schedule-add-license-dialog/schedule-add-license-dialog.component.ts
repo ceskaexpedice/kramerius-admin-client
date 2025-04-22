@@ -1,9 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, 
+    MatTooltipModule, MatSelectModule],
   selector: 'app-schedule-add-license-dialog',
   templateUrl: './schedule-add-license-dialog.component.html',
   styleUrls: ['./schedule-add-license-dialog.component.scss']
@@ -18,12 +34,12 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
   title;
   fixed = false;
 
-  licenses;
-  license;
+  licenses: any[];
+  license: string;
 
   pidsCounter = 0;
   scheduledCounter = 0;
-  progressBarMode = 'indeterminate';
+  progressBarMode: ProgressBarMode = 'indeterminate';
 
   constructor(public dialogRef: MatDialogRef<ScheduleAddLicenseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
@@ -36,7 +52,7 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
     }
   }
 
-  fetchAvailableLicenses(licensesToExclude = []) {
+  fetchAvailableLicenses(licensesToExclude: any[] = []) {
     this.inProgress = true;
     this.adminApi.getAllLicenses().subscribe((licenses: License[]) => {
 
@@ -55,7 +71,7 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  schedule(formData) {
+  schedule() {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
     const license = this.license; 
@@ -66,12 +82,24 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
         pidlist: pidlist.length == 1 ? undefined : pidlist,
         pid: pidlist.length == 1 ? pidlist[0] : undefined,
       }
-    }).subscribe(response => {
-      this.dialogRef.close("scheduled");
-    }, error => {
-      console.log(error);
-      this.dialogRef.close('error');
-    });
+    }).subscribe(
+      {
+        next: (response: any) => {
+          this.dialogRef.close("scheduled");
+        },
+        error: (error: any) => {
+            console.log(error);
+            this.dialogRef.close('error');
+          }
+      }
+      
+    //   (response: any) => {
+    //   this.dialogRef.close("scheduled");
+    // }, error => {
+    //   console.log(error);
+    //   this.dialogRef.close('error');
+    // }
+  );
   }
 
   splitPids(pids: string) {
@@ -82,6 +110,7 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
         .split(/[\s,;]+/) //split by white spaces, ',', ';'
         .filter(n => n); //remove empty strings
     }
+    return [];
   }
 
   getProgress() {
@@ -102,7 +131,7 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
     el.click();
   }
 
-  isValid(form) {
+  isValid() {
     //return form.valid //nefunguje, kdyz je textarea disabled (protoze fixed)
     return this.pids && this.license;
   }

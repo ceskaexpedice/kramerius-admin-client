@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -20,8 +20,25 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { CreateCollectionBackupDialogComponent } from 'src/app/dialogs/create-collection-backup-dialog/create-collection-backup-dialog.component';
 import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CdkCollectionsCdkComponent } from "./cdk-collections-cdk/cdk-collections-cdk.component";
+import { CdkCollectionsDiglibComponent } from "./cdk-collections-diglib/cdk-collections-diglib.component";
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule, MatInputModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
+    MatTooltipModule, MatSlideToggleModule, CdkCollectionsCdkComponent, CdkCollectionsDiglibComponent],
   selector: 'app-cdk-collections',
   templateUrl: './cdk-collections.component.html',
   styleUrls: ['./cdk-collections.component.scss']
@@ -31,7 +48,7 @@ export class CdkCollectionsComponent implements OnInit {
   // Debouncing 
   private subject: Subject<string> = new Subject();
 
-  cdkMode: boolean = this.appSettings.cdkMode;
+  cdkMode: boolean;
   view: string;
 
   collections: Collection[] = [];
@@ -64,11 +81,12 @@ export class CdkCollectionsComponent implements OnInit {
   public langTranslated:string[] = ['cze', 'ces'];
 
   // all configured languages
-  public languages = this.appSettings.languages;
-  public lang: string =  this.appSettings.defaultLang;//'cs';
+  public languages: string[];
+  public lang: string;
 
 
-  columnMapping = {
+
+  columnMapping: any = {
     'name_cze':'title.sort',
     'createdAt':'created',
     'modifiedAt':"modified"
@@ -93,6 +111,9 @@ export class CdkCollectionsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.cdkMode = this.appSettings.cdkMode;
+    this.languages = this.appSettings.languages;
+    this.lang =  this.appSettings.defaultLang;//'cs';
     this.query = "";
     this.standaloneOnly = false;
     this.sortField = this.locals.getStringProperty('collectoins.sort_field', 'createdAt');
@@ -124,9 +145,7 @@ export class CdkCollectionsComponent implements OnInit {
         if (cIndex >=0 ) this.collections[cIndex] = collection;
 
       });
-    } else {
-      return null;
-    }
+    } 
   }
 
   displayLanguage() {
@@ -140,8 +159,9 @@ export class CdkCollectionsComponent implements OnInit {
   reload() {
     this.state = 'loading';
 
-    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc').subscribe((res)  => {
-      this.allCollections = res["docs"].map((d)=> {
+    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc')
+    .subscribe((res: any)  => {
+      this.allCollections = res["docs"].map((d: any)=> {
         let col:Collection = new Collection();
         // zjistit jazyk a pokud neni, search.title, collection.desc atd..         
         col.id= d.pid;
@@ -166,7 +186,7 @@ export class CdkCollectionsComponent implements OnInit {
           }
         }
         let languages = this.appSettings.languages;
-        languages.forEach(lang => {
+        languages.forEach((lang: string) => {
           let converted:string[] = this.isoConvert.convert(lang);
           converted.forEach(conv => {
             if (!col.names[conv]) {
@@ -199,7 +219,7 @@ export class CdkCollectionsComponent implements OnInit {
 
       this.auth.getPidsAuthorizedActions(this.allCollections.map((c)=> c.id), ['a_collections_edit', 'a_rights_edit']).subscribe((d:any) => {
         Object.keys(d).forEach((k)=> {
-          let actions = d[k].map((v)=> v.code);
+          let actions = d[k].map((v: any)=> v.code);
           this.collectionActions.set(k, actions);
         });
         this.state = 'success';
@@ -240,7 +260,7 @@ export class CdkCollectionsComponent implements OnInit {
   }
 
 
-  allowBePartOfCollection(pid) {
+  allowBePartOfCollection(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_able_tobe_part_of_collections')) {
         return true;
@@ -250,7 +270,7 @@ export class CdkCollectionsComponent implements OnInit {
   }
 
 
-  allowEdit(pid) {
+  allowEdit(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_collections_edit')) {
         return true;
@@ -259,7 +279,7 @@ export class CdkCollectionsComponent implements OnInit {
     return false;
   }
 
-  allowRights(pid) {
+  allowRights(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_rights_edit')) {
         return true;
@@ -272,15 +292,15 @@ export class CdkCollectionsComponent implements OnInit {
     this.router.navigate(['/', 'cdk-collections', 'new']);
   }
 
-  getSortIcon(field: string) {
-    if (this.sortField === field) {
-      if (this.sortAsc) {
-        return 'arrow_drop_up';
-      } else {
-        return 'arrow_drop_down';
-      }
-    }
-  }
+  // getSortIcon(field: string) {
+  //   if (this.sortField === field) {
+  //     if (this.sortAsc) {
+  //       return 'arrow_drop_up';
+  //     } else {
+  //       return 'arrow_drop_down';
+  //     }
+  //   }
+  // }
 
   // TODO: Not used
   sortBy(field: string) {
@@ -354,7 +374,7 @@ export class CdkCollectionsComponent implements OnInit {
     this.reload();
   }
 
-  reloadPage(routerLink) {
+  reloadPage(routerLink: string) {
     //location.reload();
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
     this.router.navigate([routerLink]))
@@ -383,7 +403,7 @@ export class CdkCollectionsComponent implements OnInit {
   }
 
   deleteSelectedCollections() {
-    let toDelete = [];
+    let toDelete: any[] = [];
     this.collections.forEach(c=> {
       if (this.selection.isSelected(c)) {
         toDelete.push(c);
@@ -397,7 +417,7 @@ export class CdkCollectionsComponent implements OnInit {
     });
   }
 
-  setLang(lang) {
+  setLang(lang: string) {
     this.lang = lang;
     this.reload();
   }

@@ -1,12 +1,32 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from "@angular/forms";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { License } from "src/app/models/license.model";
 import { AdminApiService } from "src/app/services/admin-api.service";
 import { UIService } from 'src/app/services/ui.service';
 import { licensesValidator } from "./licensesValidator";
+import { MatIconModule } from "@angular/material/icon";
+import { CommonModule } from "@angular/common";
+import { MatCardModule } from "@angular/material/card";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { RouterModule } from "@angular/router";
+import { TranslateModule } from "@ngx-translate/core";
+import { MatRadioModule } from "@angular/material/radio";
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule,
+    FormsModule, ReactiveFormsModule, MatButtonModule,
+    MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
+    MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule
+     ],
   selector: 'app-create-or-edit-license-dialog',
   templateUrl: './create-or-edit-license-dialog.component.html',
   styleUrls: ['./create-or-edit-license-dialog.component.scss']
@@ -53,8 +73,8 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
       this.license.copyFrom(this.data.license);
 
       this.licenseForm = this.formBuilder.group({
-        licenseName: ['', []],
-        licenseDesc: ['', Validators.required]
+        licenseName: [this.license.name, []],
+        licenseDesc: [this.license.description, Validators.required]
       });
 
     } else {
@@ -63,11 +83,11 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
  
       this.licenseForm = this.formBuilder.group({
       
-        licenseName: ['', [Validators.required, 
+        licenseName: [this.license.name, [Validators.required, 
                           Validators.pattern('^'+this.libraryName+'_.*$')
                           ,licensesValidator(this.licenseNames)
                       ]],
-        licenseDesc: ['', Validators.required]
+        licenseDesc: [this.license.description, Validators.required]
       });
 
       // default value for exclusive lock
@@ -97,6 +117,7 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
     if (this.license.max > 0) {
       return "Zadáno v sekundách - "+this.formatTime(this.license.max);
     }
+    return null;
   }
   
   formatTime(seconds: number): string {
@@ -126,6 +147,8 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   }
 
   onSave() {
+    this.license.name = this.licenseForm.value.licenseName;
+    this.license.description = this.licenseForm.value.licenseDesc;
     if (!this.license.name) {
       return;
     }
@@ -183,7 +206,7 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
               this.api.getLocksItems(lm["hash"]).subscribe(res=>{
 
                 const now = new Date();
-                const filteredItems = res['items'].filter(item => {
+                const filteredItems = res['items'].filter((item: any) => {
                   const maxTime = new Date(item.maxTime); 
                   return maxTime > now; 
                 });

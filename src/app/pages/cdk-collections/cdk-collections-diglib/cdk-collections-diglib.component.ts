@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { debounceTime } from "rxjs/operators";
 import { ClientApiService } from 'src/app/services/client-api.service';
@@ -20,8 +20,26 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { CreateCollectionBackupDialogComponent } from 'src/app/dialogs/create-collection-backup-dialog/create-collection-backup-dialog.component';
 import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';;
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
+    MatTooltipModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatPaginatorModule,
+    MatTableModule, MatSortModule
+  ],
   selector: 'app-cdk-collections-diglib',
   templateUrl: './cdk-collections-diglib.component.html',
   styleUrls: ['./cdk-collections-diglib.component.scss']
@@ -33,7 +51,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   // Debouncing 
   private subject: Subject<string> = new Subject();
 
-  cdkMode: boolean = this.appSettings.cdkMode;
+  cdkMode: boolean;
   view: string;
 
   collections: Collection[] = [];
@@ -66,11 +84,11 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   public langTranslated:string[] = ['cze', 'ces'];
 
   // all configured languages
-  public languages = this.appSettings.languages;
-  public lang: string =  this.appSettings.defaultLang;//'cs';
+  public languages: string[];
+  public lang: string;//'cs';
 
 
-  columnMapping = {
+  columnMapping: any = {
     'name_cze':'title.sort',
     'createdAt':'created',
     'modifiedAt':"modified"
@@ -95,6 +113,10 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.cdkMode = this.appSettings.cdkMode;
+    this.languages = this.appSettings.languages;
+    this.lang =  this.appSettings.defaultLang;//'cs';
+    this.query = "";
     this.query = "";
     this.standaloneOnly = false;
     this.sortField = this.locals.getStringProperty('collectoins.sort_field', 'createdAt');
@@ -126,9 +148,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
         if (cIndex >=0 ) this.collections[cIndex] = collection;
 
       });
-    } else {
-      return null;
-    }
+    } 
   }
 
   displayLanguage() {
@@ -142,8 +162,9 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   reload() {
     this.state = 'loading';
 
-    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc').subscribe((res)  => {
-      this.allCollections = res["docs"].map((d)=> {
+    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc')
+    .subscribe((res: any)  => {
+      this.allCollections = res["docs"].map((d: any)=> {
         let col:Collection = new Collection();
         // zjistit jazyk a pokud neni, search.title, collection.desc atd..         
         col.id= d.pid;
@@ -168,7 +189,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
           }
         }
         let languages = this.appSettings.languages;
-        languages.forEach(lang => {
+        languages.forEach((lang: string) => {
           let converted:string[] = this.isoConvert.convert(lang);
           converted.forEach(conv => {
             if (!col.names[conv]) {
@@ -201,7 +222,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
 
       this.auth.getPidsAuthorizedActions(this.allCollections.map((c)=> c.id), ['a_collections_edit', 'a_rights_edit']).subscribe((d:any) => {
         Object.keys(d).forEach((k)=> {
-          let actions = d[k].map((v)=> v.code);
+          let actions = d[k].map((v: any)=> v.code);
           this.collectionActions.set(k, actions);
         });
         this.state = 'success';
@@ -242,7 +263,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   }
 
 
-  allowBePartOfCollection(pid) {
+  allowBePartOfCollection(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_able_tobe_part_of_collections')) {
         return true;
@@ -252,7 +273,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   }
 
 
-  allowEdit(pid) {
+  allowEdit(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_collections_edit')) {
         return true;
@@ -261,7 +282,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     return false;
   }
 
-  allowRights(pid) {
+  allowRights(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_rights_edit')) {
         return true;
@@ -274,15 +295,15 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     this.router.navigate(['/', 'collections', 'new']);
   }
 
-  getSortIcon(field: string) {
-    if (this.sortField === field) {
-      if (this.sortAsc) {
-        return 'arrow_drop_up';
-      } else {
-        return 'arrow_drop_down';
-      }
-    }
-  }
+  // getSortIcon(field: string) {
+  //   if (this.sortField === field) {
+  //     if (this.sortAsc) {
+  //       return 'arrow_drop_up';
+  //     } else {
+  //       return 'arrow_drop_down';
+  //     }
+  //   }
+  // }
 
   // TODO: Not used
   sortBy(field: string) {
@@ -356,7 +377,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     this.reload();
   }
 
-  reloadPage(routerLink) {
+  reloadPage(routerLink: string) {
     //location.reload();
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
     this.router.navigate([routerLink]))
@@ -385,7 +406,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   }
 
   deleteSelectedCollections() {
-    let toDelete = [];
+    let toDelete: any[] = [];
     this.collections.forEach(c=> {
       if (this.selection.isSelected(c)) {
         toDelete.push(c);
@@ -399,7 +420,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     });
   }
 
-  setLang(lang) {
+  setLang(lang: string) {
     this.lang = lang;
     this.reload();
   }

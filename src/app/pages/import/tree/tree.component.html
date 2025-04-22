@@ -1,6 +1,6 @@
 <ng-container *ngIf="tree">
-  <div fxLayout="row" fxLayoutAlign="start center" (click)="select()" (dblclick)="open()" class="app-row" [class.app-file]="!tree.file.isDir" [class.app-selected]="tree == imports.selectedTree">
-    <div class="app-left" [fxFlex]="(tree.level * 20 + 40) + 'px'">
+  <div class="app-fxLayout app-row app-center-v" (click)="select()" (dblclick)="open()" [class.app-file]="!tree.file.isDir" [class.app-selected]="tree == imports.selectedTree">
+    <div class="app-left" [style]="'flex: 1 1' + (tree.level * 20 + 40) + 'px; max-width:' + (tree.level * 20 + 40) + 'px; min-width:' + (tree.level * 20 + 40) + 'px;'"><!--[fxFlex]="(tree.level * 20 + 40) + 'px'"-->
       <mat-spinner *ngIf="tree.loading" [strokeWidth]="3" [diameter]="20" class="app-mr-2"></mat-spinner>
       <mat-icon class="app-tree-expand" *ngIf="tree.expandable() && !tree.loading" (click)="toggle($event)" class="app-mr-2">{{ tree.expanded ? "expand_more" : "chevron_right" }}</mat-icon>
     </div>

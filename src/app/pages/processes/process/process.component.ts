@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Process } from 'src/app/models/process.model';
 import { Batch } from 'src/app/models/batch.model';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
@@ -8,15 +8,32 @@ import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dial
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UIService } from 'src/app/services/ui.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { DurationPipe } from 'src/app/pipes/duration.pipe';
+import { DatetimePipe } from 'src/app/pipes/datetime.pipe';
+import { LogsComponent } from './logs/logs.component';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, 
+    MatTooltipModule, MatTabsModule, 
+    DurationPipe, DatetimePipe, LogsComponent
+  ],
   selector: 'app-process',
   templateUrl: './process.component.html',
   styleUrls: ['./process.component.scss']
 })
 export class ProcessComponent implements OnInit {
 
-  processId;
+  processId: number;
 
   batch: Batch;
   process: Process;
@@ -25,7 +42,7 @@ export class ProcessComponent implements OnInit {
   view: string;
 
   // when current data was loaded
-  loadedTimestamp;
+  loadedTimestamp: Date;
 
   constructor(
     private route: ActivatedRoute,

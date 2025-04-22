@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { AppSettings } from './app-settings';
 import { Batch } from '../models/batch.model';
-import { catchError, delay, map, tap } from 'rxjs/operators';
+import { catchError, delay, filter, map, tap } from 'rxjs/operators';
 import { ProcessOwner } from '../models/process-owner.model';
 import { Process } from '../models/process.model';
 import { Collection } from '../models/collection.model';
@@ -28,8 +28,8 @@ export class CdkApiService {
     }
  
 
-    private doGet(path: string, params, type = 'json'): Observable<Object> {
-        const options = {
+    private doGet(path: string, params: any, type = 'json'): Observable<Object> {
+        const options: any = {
           params: params
         };
         if (type === 'text') {
@@ -41,8 +41,8 @@ export class CdkApiService {
     }
     
     
-    private doPut(path: string, body:any, params, type = 'json'): Observable<Object> {
-        const options = {
+    private doPut(path: string, body:any, params: any, type = 'json'): Observable<Object> {
+        const options: any = {
           params: params
         };
         if (type === 'text') {
@@ -72,39 +72,41 @@ export class CdkApiService {
         return this.doGet('/api/admin/v7.0/connected',{}).pipe(map(response => Library.libsFromJson(response)));
     }
 
-    mapping(code): Observable<any> {
+    mapping(code: string): Observable<any> {
       return this.doGet(`/api/admin/v7.0/connected/${code}/associations`,{}).pipe();
     }
 
-    timestamps(code): Observable<any[]> {
+    timestamps(code: string): Observable<any[]> {
       return this.doGet(`/api/admin/v7.0/connected/${code}/timestamps`,{}).pipe(map(response => StatusTimtamp.statusesFromJson(response)));
     }
 
-    config(code): Observable<any> {
+    config(code: string): Observable<any> {
       return this.doGet(`/api/admin/v7.0/connected/${code}/config`,{}).pipe();
     }
 
-    channel(code): Observable<any> {
+    channel(code: string): Observable<any> {
       return this.doGet(`/api/admin/v7.0/connected/${code}/config/channel/health`,{}).pipe();
     }
 
-    reharvests(): Observable<any[]> {
-      return this.doGet('/api/admin/v7.0/reharvest',{}).pipe(map(response => Reharvest.reharvestsFromJson(response)));
+    reharvests(page:number, rows:number, pid:string, filters:string[]): Observable<any> {
+      let sfitlers = filters.join(';');
+      if(pid) sfitlers = sfitlers+";pid:\""+pid+"\"";
+      if (sfitlers === '') {
+        return this.doGet(`/api/admin/v7.0/reharvest?page=${page}&rows=${rows}`,{}).pipe();
+      } else {
+        return this.doGet(`/api/admin/v7.0/reharvest?page=${page}&rows=${rows}&filters=${sfitlers}`,{}).pipe();
+      }
     }
 
-    introspectPid(pid): Observable<any> {
+    introspectPid(pid:string): Observable<any> {
       return this.doGet(`/api/admin/v7.0/items/${pid}/solr/instintrospect`,{}).pipe();
     }
 
 
-
     planReharvest(obj:any) {
       return this.doPut('/api/admin/v7.0/reharvest', obj, {}).pipe(
-        tap((response: HttpResponse<Object>) => {}),
+        //tap((response: HttpResponse<Object>) => {}),
         map(response => Reharvest.reharvestFromJson(response))
-        // catchError((error: any) => {
-        //   return throwError(() => new Error('An error occurred while reharvesting.'));
-        // })
       );
 
     }
@@ -127,51 +129,58 @@ export class CdkApiService {
       return this.http.get(`https://api.registr.digitalniknihovna.cz/api/libraries/${code}`, {}).pipe();
     } 
 
-  /** generic api monitor search */
-  apiMonitorSearch(dateFrom: string, dateTo: string,  identifier: string, filter:any[], facets:string[] ) {
-    let params: HttpParams = this.searchParams(identifier, facets, dateFrom, dateTo, filter);
-    return this.get(`/monitor/search`, params);
-  }
+    
 
+
+
+  /** generic api monitor search */
+  apiMonitorSearch(pageIndex:number,  pageSize:number,   dateFrom: Date, dateTo: Date,   filter:any[] ) {
+    let params: HttpParams = this.searchParams(pageIndex, pageSize, dateFrom, dateTo, filter);
+
+    return this.get(`/api/admin/v7.0/monitor/search`, params);
+  }
   private get(path: string, params = {}): Observable<Object> {
     return this.doGet(path, params);
   }
 
 
-  private searchParams(identifier: string, facets: string[], dateFrom: string, dateTo: string, filter: any[]) {
+  private searchParams( pageIndex:number, pageSize: number, dateFrom: Date, dateTo: Date, filter: any[]) {
+    //q=*:*&sort=duration+desc&facet=true&facet.field=labels
+    
+
+
     let params: HttpParams = new HttpParams();
     params = params.set('q', '*');
-    params = params.set('rows', '100');
+    params = params.set('rows', pageSize);
+    params = params.set('start', pageIndex*pageSize);
+    params = params.set('sort', 'duration desc');
+
+    params = params.append('facet', 'true');
+    params = params.append('facet.field', 'labels');
+    params = params.append('facet.field', 'resource');
+    params = params.append('facet.sort', 'index');
 
 
-    if (identifier) {
-      let query = `pid:"${identifier}"`;
-      params = params.append("fq", query);
-    }
-
-    if (facets && facets.length > 0) {
-      params = params.set('facet', 'true');
-      params = params.append('facet.mincount', '1');
-
-      for (let i = 0; i < facets.length; i++) {
-        params = params.append('facet.field', facets[i]);
-      }
-    }
 
     if (dateFrom && dateTo) {
-      params = params.append('fq', `date:[${dateFrom} TO ${dateTo}]`);
-    } else if (dateFrom && !dateTo) {
-      params = params.append('fq', `date:[${dateFrom} TO *]`);
-    } else if (!dateFrom && dateTo) {
-      params = params.append('fq', `date:[* TO ${dateTo}]`);
-    }
 
-    if (filter) {
+      params = params.append('fq', `startTime:[${dateFrom.toISOString()} TO ${dateTo.toISOString()}]`);
+    } else if (dateFrom && !dateTo) {
+      params = params.append('fq', `startTime:[${dateFrom.toISOString()} TO *]`);
+    } else if (!dateFrom && dateTo) {
+      params = params.append('fq', `startTime:[* TO ${dateTo.toISOString()}]`);
+    }
+    /*
+      filterKey: string;
+  // node_1
+  filterVal:string;
+*/
+
+
+     if (filter) {
       for (let i = 0; i < filter.length; i++) {
         let lf = filter[i];
-        let field = lf.data.filterField;
-        let value = lf.data.filterValue === '*' ? '*' : `"${lf.data.filterValue}"`;
-        params = params.append('fq', `${field}:${value}`);
+        params = params.append('fq', `${lf}`);
       }
     }
     return params;

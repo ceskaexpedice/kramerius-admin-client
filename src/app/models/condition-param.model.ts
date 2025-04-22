@@ -10,7 +10,7 @@ export class ConditionParam {
     this.values = [];
   }
 
-  static fromJson(json): ConditionParam {
+  static fromJson(json: any): ConditionParam {
     const param = new ConditionParam();
     param.id = json['id'];
     param.description = json['description'] || '';
@@ -18,7 +18,7 @@ export class ConditionParam {
     return param;
   }
 
-  static fromJsonArray(json): ConditionParam[] {
+  static fromJsonArray(json: any): ConditionParam[] {
     const result = [];
     for (const obj of json) {
       result.push(ConditionParam.fromJson(obj));
@@ -36,7 +36,7 @@ export class ConditionParam {
   }
 
   toJson() {
-    const json = {
+    const json: any = {
       description: this.description || '',
       objects: this.values     
     }

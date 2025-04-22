@@ -41,6 +41,12 @@ export class AppSettings {
 
   processRefreshInterval = APP_GLOBAL.processRefreshInterval || 5;
 
+ // <!-- app-duration-low, app-duration-high app-duration-critical -->
+
+
+  apiMonitorLow = APP_GLOBAL.apiMonitorLow || 1500;
+  apiMonitorHigh = APP_GLOBAL.apiMonitorHigh || 5000;
+
 
   interceptresponse: EventEmitter<any> = new EventEmitter<any>();
 

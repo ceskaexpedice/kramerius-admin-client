@@ -2,7 +2,7 @@ export class SdnntSync {
     numberOfRec:number;
     docs:SdnntItem[];    
 
-    static fromJson(json): SdnntSync {
+    static fromJson(json: any): SdnntSync {
       const result = new SdnntSync();
       result.numberOfRec = json['numFound'];
       result.docs = SdnntItem.fromJsonArray(json['docs'])
@@ -79,7 +79,7 @@ export class SdnntItem {
       }
     }
 
-    static fromJsonArray(jsonArray): SdnntItem[] {
+    static fromJsonArray(jsonArray: any): SdnntItem[] {
         const result = [];
         for (const obj of jsonArray) {
           result.push(SdnntItem.fromJson(obj));
@@ -87,7 +87,7 @@ export class SdnntItem {
         return result;
     }
 
-    static fromJson(json): SdnntItem {
+    static fromJson(json: any): SdnntItem {
         const item = new SdnntItem();
         item.id = json['id'];
         item.pid = json['pid'];

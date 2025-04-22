@@ -1,8 +1,8 @@
-<div class="app-collection-new app-h-100">
-  <div fxLayout="column" fxFlexFill>
+<div class="app-collection-new app-fxLayout app-column app-fill app-form-customize">
+  <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
-      <div fxLayout="row" class="app-mb-4">
-        <div fxFlex class="app-breadcrumbs">
+      <div class="app-fxLayout app-row app-mb-4">
+        <div class="app-fxFlex app-breadcrumbs">
           <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
           <a routerLink="/">home</a>
           <span class="app-separator">/</span>
@@ -18,12 +18,10 @@
         </div>
       </div>   
     </div>
-    <div fxFlex class="app-oa-y">
+    <div class="app-fxFlex app-oa-y">
       <div class="app-container">
-        <mat-card class="app-card app-view-border app-p-0">
-          <mat-card-content>
-            <app-collection-edit [lang]="lang"></app-collection-edit>
-          </mat-card-content>
+        <mat-card appearance="outlined"> 
+          <app-collection-edit [lang]="lang"></app-collection-edit>
         </mat-card>
       </div>
     </div>

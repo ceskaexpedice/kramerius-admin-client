@@ -1,5 +1,5 @@
-<div class="app-processes app-h-100">
-  <div fxLayout="column" fxFlexFill>
+<div class="app-processes app-fxLayout app-column app-fill app-form-customize">
+  <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
@@ -7,23 +7,24 @@
         <span class="app-separator">/</span>
         <span class="app-last">{{ 'sites.processes.title' | translate }}</span>
       </div>
-      <mat-card fxLayout="row" fxLayoutAlign="start center" *ngIf="appSettings.devMode" class="app-card app-view-dev app-pb-0 app-mb-4 app-mt-4">
+
+      <mat-card appearance="outlined" *ngIf="appSettings.devMode" class="app-fxLayout app-row app-center-v app-p-4 app-mb-2 app-view-dev">
         <div class="app-marker">Development mode</div>
-        <div fxFlex>
-          <mat-form-field class="app-mr-2">
+        <div class="app-fxFlex">
+          <mat-form-field appearance="outline" class="app-mr-2">
             <mat-select [placeholder]="'desc.finalState' | translate" [(value)]="selectedtestProcessFinalState">
               <mat-option *ngFor="let state of testProcessFinalStates" [value]="state">{{ state }}</mat-option>
             </mat-select>
           </mat-form-field>
     
-          <mat-form-field class="app-mr-2">
+          <mat-form-field appearance="outline" class="app-mr-2">
             <mat-select [placeholder]="'desc.processInTheBatch' | translate" [(value)]="selectedTestProcessProcessesInBatch">
               <mat-option *ngFor="let processes of testProcessProcessesInBatch" [value]="processes">{{ processes }}
               </mat-option>
             </mat-select>
           </mat-form-field>
     
-          <mat-form-field class="app-mr-2">
+          <mat-form-field appearance="outline" class="app-mr-2">
             <mat-select [placeholder]="'desc.durationOfTheProcess' | translate" [(value)]="selectedTestProcessDuration">
               <mat-option *ngFor="let duration of testProcessDuration" [value]="duration">{{ duration }} s</mat-option>
             </mat-select>
@@ -33,55 +34,52 @@
           <button mat-flat-button (click)="scheduleTestProcess()" [disabled]="isLoading()" color="primary"><mat-icon>play_arrow</mat-icon>{{ 'button.startTheTestProcess' | translate }}</button>
         </div>
       </mat-card>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxFlex>
-          <mat-form-field class="app-mr-2">
+
+      <div class="app-fxLayout app-row app-center-v app-pt-2 app-pb-4">
+        <div class="app-fxFlex app-fxLayout app-row app-center-v">
+          <mat-form-field class="app-mr-2" appearance="outline">
             <mat-select [placeholder]="'desc.state' | translate" [(value)]="selectedState" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
               <mat-option *ngFor="let state of batch_states" [value]="state.key">{{ state.label }}</mat-option>
             </mat-select>
+            <button matSuffix mat-icon-button *ngIf="!!selectedState" color="warn" [matTooltip]="'button.deselect' | translate" [disabled]="isLoading()" (click)="selectedState=undefined;onFiltersChanged(); $event.stopPropagation();">
+              <mat-icon>close</mat-icon>
+            </button>
           </mat-form-field>
-          <a *ngIf="!!selectedState" mat-icon-button [matTooltip]="'button.deselect' | translate" [disabled]="isLoading()" (click)="selectedState=undefined;onFiltersChanged()" class="app-clear-filter app-mr-2">
-            <mat-icon>cancel</mat-icon>
-          </a>
-      
-          <mat-form-field class="app-mr-2">
+          
+          <mat-form-field class="app-mr-2" appearance="outline">
             <mat-select [placeholder]="'desc.owner' | translate" [(value)]="selectedOwner" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
               <mat-option *ngFor="let owner of owners" [value]="owner.id">{{ owner.name }}</mat-option>
             </mat-select>
+            <button matSuffix mat-icon-button *ngIf="!!selectedOwner" color="warn" [matTooltip]="'button.deselect' | translate" [disabled]="isLoading()" (click)="selectedOwner=undefined;onFiltersChanged(); $event.stopPropagation();">
+              <mat-icon>close</mat-icon>
+            </button>
           </mat-form-field>
-          <a *ngIf="!!selectedOwner"mat-icon-button [matTooltip]="'button.deselect' | translate" (click)="selectedOwner=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
-            <mat-icon>cancel</mat-icon>
-          </a>
-      
-          <mat-form-field class="app-mr-2">
+
+          <mat-form-field class="app-mr-2" appearance="outline">
             <input matInput [matDatepicker]="myDatepickerFrom" [placeholder]="'desc.from' | translate" [(ngModel)]='dateFrom' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
             <mat-datepicker-toggle matSuffix [for]="myDatepickerFrom"></mat-datepicker-toggle>
             <mat-datepicker #myDatepickerFrom [disabled]="isLoading()"></mat-datepicker>
+            <button matSuffix mat-icon-button *ngIf="!!dateFrom" color="warn" [matTooltip]="'button.deselect' | translate" [disabled]="isLoading()" (click)="dateFrom=undefined;onFiltersChanged();">
+              <mat-icon>close</mat-icon>
+            </button>
           </mat-form-field>
-          <a *ngIf="!!dateFrom" mat-icon-button [matTooltip]="'button.deselect' | translate" (click)="dateFrom=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter app-mr-2">
-            <mat-icon>cancel</mat-icon>
-          </a>
-      
-          <mat-form-field class="app-mr-2">
+          
+          <mat-form-field class="app-mr-2" appearance="outline">
             <input matInput [matDatepicker]="myDatepickerTo" [placeholder]="'desc.to' | translate" [(ngModel)]='dateTo' [disabled]="isLoading()" (dateChange)="onFiltersChanged()">
             <mat-datepicker-toggle matSuffix [for]="myDatepickerTo"></mat-datepicker-toggle>
             <mat-datepicker #myDatepickerTo [disabled]="isLoading()"></mat-datepicker>
+            <button matSuffix mat-icon-button *ngIf="!!dateTo" color="warn" [matTooltip]="'button.deselect' | translate" [disabled]="isLoading()" (click)="dateTo=undefined;onFiltersChanged();">
+              <mat-icon>close</mat-icon>
+            </button>
           </mat-form-field>
-          <a *ngIf="!!dateTo" mat-icon-button [matTooltip]="'button.deselect' | translate" (click)="dateTo=undefined;onFiltersChanged()" [disabled]="isLoading()" class="app-clear-filter">
-            <mat-icon>cancel</mat-icon>
-          </a>
-
-          <!--          
-          <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)">Auto Reload</mat-checkbox>
-          -->
-
+          
           <button mat-icon-button [matTooltip]="'button.reloadProcesses' | translate" (click)="reloadProcesses()" [disabled]="isLoading()">
             <mat-icon>refresh</mat-icon>
           </button>
 
           <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)" [disabled]="isLoading()">{{ 'button.autoRefresProcesses' | translate : {refreshinterval: appSettings.processRefreshInterval} }}</mat-checkbox>
         </div>
-        <div>
+        <div class="app-fxLayout app-row app-center-v">
           <button mat-flat-button (click)="bulkDeleteProcesses()" color="warn" [disabled]="!selection.hasValue()" class="app-mr-2">
             {{ 'button.deleteSelectedItems' | translate }}
           </button>
@@ -91,38 +89,31 @@
         </div>
       </div>
     </div>
-    <div fxFlex class="app-container-fluid app-oh">
+    
+    <div class="app-fxFlex app-container-fluid app-oh">
       <div class="app-table-wrapper app-view-border app-maxh-100 app-oa-y" *ngIf="!errorState">
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading()"></mat-progress-bar>
-        <table mat-table [dataSource]="batches" class="app-w-100">
-
+        <table mat-table [dataSource]="batches">
           <ng-container matColumnDef="select">
-            <!--
-            <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()" [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="collections?.length !== 0"></mat-checkbox>
-            </th>
-            -->
             <th mat-header-cell *matHeaderCellDef>
               <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"  [matTooltip]="'desc.selectAllCollections' | translate" *ngIf="batches.length !== 0"></mat-checkbox>
             </th>
+
             <!-- disabled when expand -->
             <td mat-cell *matCellDef="let row">  
               <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"  [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
               <ng-container *ngIf="row.expanded">
                 <div *ngFor="let p of row.processes" class="app-col-expanded">&#160;</div>
               </ng-container>
-
             </td>
           </ng-container>
 
           <ng-container matColumnDef="selection">
-            <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" ></mat-checkbox>
+            <th mat-header-cell *matHeaderCellDef class="app-col-checkbox">
+              <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" class="app-fxLayout app-center-h"></mat-checkbox>
             </th>
-            <td mat-cell *matCellDef="let element">
-              <span class="app-fix-expanded app-tdn">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"  class="app-fix-expanded app-tdn" [checked]="selection.isSelected(element)"></mat-checkbox>
-              </span>
+            <td mat-cell *matCellDef="let element" class="app-col-checkbox">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null" class="app-fix-expanded app-tdn" [checked]="selection.isSelected(element)"></mat-checkbox>
               <ng-container *ngIf="element.expanded">
                 <div *ngFor="let p of element.processes" class="app-col-expanded app-ml-n4">&#160;</div>
               </ng-container>
@@ -152,6 +143,7 @@
               </ng-container>
             </td>
           </ng-container>
+
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.name' | translate }}</th>
             <td mat-cell *matCellDef="let element" [matTooltip]="notAllowed(element.id) ? null : element.getName()">
@@ -196,6 +188,7 @@
               </ng-container>
             </td>
           </ng-container>
+
           <ng-container matColumnDef="planned">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.scheduled' | translate }}</th>
             <td mat-cell *matCellDef="let element">
@@ -209,6 +202,7 @@
               </ng-container>
             </td>
           </ng-container> 
+
           <ng-container matColumnDef="started">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.running' | translate }}</th>
             <td mat-cell *matCellDef="let element">
@@ -221,7 +215,8 @@
                 </div>
               </ng-container>
             </td>
-          </ng-container>  
+          </ng-container>
+
           <ng-container matColumnDef="finished">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.finished' | translate }}</th>
             <td mat-cell *matCellDef="let element">
@@ -236,7 +231,8 @@
                 </div>
               </ng-container>
             </td>
-          </ng-container>  
+          </ng-container>
+
           <ng-container matColumnDef="duration">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.duration' | translate }}</th>
             <td mat-cell *matCellDef="let element">
@@ -259,7 +255,8 @@
                 </div>
               </ng-container>
             </td>
-          </ng-container>  
+          </ng-container>
+
           <ng-container matColumnDef="owner">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.owner' | translate }}</th>
             <td mat-cell *matCellDef="let element" [matTooltip]="element.ownerName">
@@ -277,9 +274,10 @@
               </ng-container>
             </td>
           </ng-container>
+
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="app-col-icon">
               <span class="app-fix-expanded">
                 <button *ngIf="element.isDeletable()" (click)="onRemoveProcess(element); $event.preventDefault(); $event.stopPropagation()" mat-icon-button [matTooltip]="'button.deleteProcess' | translate" matTooltipPosition="below" color="primary" [class.app-avoid-click]="notAllowed(element.id)">
                   <mat-icon>delete</mat-icon>
@@ -292,14 +290,15 @@
                 <div *ngFor="let p of element.processes" class="app-col-expanded app-mr-n4">&#160;</div>
               </ng-container>
             </td>
-          </ng-container>     
+          </ng-container> 
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.app-not-allowed]="notAllowed(row.id)" [matTooltip]="notAllowed(row.id) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="notAllowed(row.id)  ? 'app-alert-not-allowed' : null"></tr>
         </table>
         <mat-paginator *ngIf="!isLoading()" [length]="resultCount" hidePageSize="false" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 1000]" (page)="onPageChanged($event)"></mat-paginator>
       </div>
 
-      <mat-card *ngIf="errorState" class="app-view-alert app-warn">
+      <mat-card *ngIf="errorState" appearance="outlined" class="app-view-alert app-warn">
         <mat-card-content>
           <mat-icon>error</mat-icon>{{ errorMessage }}
         </mat-card-content>

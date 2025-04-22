@@ -70,7 +70,6 @@ export class Process {
       case Process.FINISHED: return '#45a55a';
       case Process.FAILED: return '#ab493f';
       case Process.KILLED: return '#ca7023';
-      case Process.KILLED: return '#ca7023';
       case Process.NOT_RUNNING: return '#ca7023';
       case Process.WARNING: return '#ab493f';
     }
@@ -91,7 +90,7 @@ export class Process {
     return 'app-default';
   } */
 
-  static fromJson(json): Process {
+  static fromJson(json: any): Process {
     const process = new Process();
     process.id = json['id'];
     process.uuid = json['uuid'];
@@ -109,7 +108,7 @@ export class Process {
     return process;
   }
 
-  static fromJsonArray(json): Process[] {
+  static fromJsonArray(json: any): Process[] {
     const items = [];
     for (const obj of json) {
       items.push(Process.fromJson(obj));

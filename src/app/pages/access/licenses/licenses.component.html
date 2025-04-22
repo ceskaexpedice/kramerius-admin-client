@@ -1,51 +1,40 @@
-
-<div fxLayout="row" fxLayoutGap="16px">
-  <div fxFlex>
-    <mat-card class="app-card app-view-border app-view-header" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-      <div fxFlex class="app-text-cutter">
-        {{ 'desc.localLibraryLicense' | translate }}: <strong>{{ libraryName }}</strong>
+<mat-card appearance="outlined" class="app-view-header app-fxLayout app-row app-center-v">
+  <div class="app-fxFlex app-left">
+    {{ 'desc.localLibraryLicense' | translate }}: <strong>{{ libraryName }}</strong>
+  </div>
+  <div class="app-right">
+    <button [disabled]="!isItemChildDraged" mat-flat-button color="primary" (click)="changeOrder()">{{ 'button.saveOrderChange' | translate }}</button>
+  </div>
+</mat-card>
+<div *ngIf="!errorState" cdkDropList (cdkDropListDropped)="drop($event)">
+  <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
+  <mat-card appearance="outlined" class="app-view-item app-with-header" *ngFor="let licence of licenses; let first = first; let last = last" cdkDrag>
+    <mat-card-header>
+      <div fxFlex class="app-left">
+        <mat-card-title class="app-mb-2">
+          <mat-icon>{{ licence.group == 'local' ? 'location_city' : 'public_outlined' }}</mat-icon>
+          {{ licence.priority+ '.  ' +licence.name }}
+          <ng-container *ngIf="licence.group == 'local' && licence.exclusiveLock">
+            <span class="app-pipe"></span>
+            <mat-icon class="app-cursor-pointer" [matTooltip]="'Počet čtenářů: ' +licence.readers + '| Maximální doba čtení: '+this.formatTime(licence.max)+' | Refresh interval:  '+licence.refresh +' s'">lock</mat-icon>
+          </ng-container>
+        </mat-card-title>
+        <mat-card-subtitle><strong>{{ licence.group == 'local' ? ('desc.localLicense' | translate) : ('desc.globalLicense' | translate) }}</strong></mat-card-subtitle>
+        <div class="app-mt-2"><i>{{ licence.description}}</i></div>
       </div>
-      <div>
-        <button [disabled]="!isItemChildDraged" mat-flat-button color="primary" (click)="changeOrder()">{{ 'button.saveOrderChange' | translate }}</button>
+      <div  class="app-right app-actions">
+        <a *ngIf="licence.group == 'local' && acronymSet()" (click)="onEditLicese(licence)" [matTooltip]="'button.editLicense' | translate"><mat-icon>edit</mat-icon></a>
+        <a *ngIf="licence.group == 'local'  && acronymSet()" (click)="onRemoveLicese(licence)" [matTooltip]="'button.deleteLicense' | translate"><mat-icon>delete</mat-icon></a>
       </div>
-    </mat-card>
-    <mat-card *ngIf="!errorState" class="app-card app-view-border app-p-0" cdkDropList (cdkDropListDropped)="drop($event)">
-      <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-      <ng-container *ngIf="state=='success'">
-        <mat-card class="app-view-rights app-view-hover" *ngFor="let licence of licenses; let first = first; let last = last" cdkDrag>
-          <mat-card-header fxLayout="row" fxLayoutAlign="start center">
-            <div fxFlex class="app-left">
-              <mat-card-title class="app-mb-4">
-                <mat-icon *ngIf="licence.group == 'local'">location_city</mat-icon>
-                <mat-icon *ngIf="licence.group != 'local'">public_outlined</mat-icon>
-                {{ licence.priority+ '.  ' +licence.name }}
-                <ng-container *ngIf="licence.group == 'local' && licence.exclusiveLock">
-                  <span class="app-pipe"></span>
-                  <mat-icon class="app-cursor-pointer" [matTooltip]="'Počet čtenářů: ' +licence.readers + '| Maximální doba čtení: '+this.formatTime(licence.max)+' | Refresh interval:  '+licence.refresh +' s'">lock</mat-icon>
-                </ng-container>
-              </mat-card-title>
-              <mat-card-subtitle *ngIf="licence.group == 'local'"><strong>{{ 'desc.localLicense' | translate }}</strong></mat-card-subtitle>
-              <mat-card-subtitle *ngIf="licence.group != 'local'"><strong>{{ 'desc.globalLicense' | translate }}</strong></mat-card-subtitle>
-
-              <div class="app-mt-2"><i>{{ licence.description}}</i></div>
-            </div>
-            <div  class="app-right app-actions">
-              <!-- <a *ngIf="!last" (click)="onMoveLiceseDown(licence)" [matTooltip]="'button.moveDown' | translate"><mat-icon>south</mat-icon></a>
-              <a *ngIf="!first" (click)="onMoveLiceseUp(licence)" [matTooltip]="'button.moveUp' | translate"><mat-icon>north</mat-icon></a> -->
-              <a *ngIf="licence.group == 'local' && acronymSet()" (click)="onEditLicese(licence)" [matTooltip]="'button.editLicense' | translate"><mat-icon>edit</mat-icon></a>
-              <a *ngIf="licence.group == 'local'  && acronymSet()" (click)="onRemoveLicese(licence)" [matTooltip]="'button.deleteLicense' | translate"><mat-icon>delete</mat-icon></a>
-            </div>
-          </mat-card-header>
-        </mat-card>
-        <button  *ngIf="libraryName && libraryName != ''" mat-flat-button (click)="onNewLicence()" color="primary" class="app-m-4">
-          {{ 'button.addLicense' | translate }}
-        </button>
-      </ng-container>
-    </mat-card>
-    <mat-card *ngIf="errorState" class="app-view-alert app-warn">
-      <mat-card-content>
-        <mat-icon>error</mat-icon>{{ errorMessage }}
-      </mat-card-content>
-    </mat-card>
+    </mat-card-header>
+  </mat-card>
+  <div class="app-text-right app-pt-4">
+    <button  *ngIf="libraryName && libraryName != ''" mat-flat-button (click)="onNewLicence()" color="primary">{{ 'button.addLicense' | translate }}</button>
   </div>
 </div>
+
+<mat-card *ngIf="errorState" appearance="outlined" class="app-view-alert app-color-warn">
+  <mat-card-content>
+    <mat-icon>error</mat-icon>{{ errorMessage }} 
+  </mat-card-content>
+</mat-card>

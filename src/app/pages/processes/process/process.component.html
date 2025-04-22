@@ -1,5 +1,5 @@
-<div class="app-home app-h-100">
-	<div fxLayout="column" fxFlexFill>
+<div class="app-process app-fxLayout app-column app-fill">
+  <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
       <div class="app-breadcrumbs app-mb-4">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
@@ -12,19 +12,20 @@
         </span>
       </div>
       <div>
-        <nav mat-tab-nav-bar>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
           <a mat-tab-link (click)="changeView('standard-output')" [active]="view == 'standard-output'"><mat-icon class="material-icons-outlined">output</mat-icon>{{ 'sites.processes.standard-output.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('error-output')"  [active]="view == 'error-output'"><mat-icon class="material-icons-outlined">error_outline</mat-icon>{{ 'sites.processes.error-output.title' | translate }}</a>
         </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
-    <div fxFlex class="app-oa-y">
-			<div class="app-container-fluid">
-        <div fxLayout="row" fxLayoutGap="16px" fxFlexFill>
+    <div class="app-fxFlex app-oa-y">
+      <div class="app-container-fluid">
+        <div class="app-fxLayout app-row app-gap-4">
           <div class="app-left">
-            <mat-card class="app-card app-view-border app-mb-4">
+            <mat-card appearance="outlined" class="app-mb-4">
               <mat-card-header>
-                <mat-card-title>{{ 'desc.process' | translate }}</mat-card-title>
+                <mat-card-title class="app-mb-2">{{ 'desc.process' | translate }}</mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <div class="app-badge app-mb-4" [ngClass]="'app-' + process.state.toLowerCase()">{{ 'batch.' + process.state | translate }}</div>
@@ -46,9 +47,9 @@
                 </div>
               </mat-card-content>
             </mat-card>
-            <mat-card class="app-card app-view-border">
+            <mat-card appearance="outlined">
               <mat-card-header>
-                <mat-card-title>{{ 'desc.batch' | translate }}</mat-card-title>
+                <mat-card-title class="app-mb-2">{{ 'desc.batch' | translate }}</mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <div class="app-badge app-mb-4" [ngClass]="'app-' + process.state.toLowerCase()">{{ 'batch.' + process.state | translate }}</div>
@@ -75,10 +76,12 @@
               </mat-card-actions>
             </mat-card>
           </div>
-          <mat-card fxFlex class="app-right" class="app-card app-view-border">
-            <app-process-logs *ngIf="view === 'standard-output'" [process]="process" [logType]="'out'" [urlOutUrl]="logOutUrl()"></app-process-logs>
-            <app-process-logs *ngIf="view === 'error-output'" [process]="process" [logType]="'err'" [urlOutUrl]="logErrUrl()"></app-process-logs>
-          </mat-card>
+          <div class="app-right app-fxFlex">
+            <mat-card appearance="outlined" class="app-pl-4 app-pt-2 app-pr-4 app-pb-4">
+              <app-process-logs *ngIf="view === 'standard-output'" [process]="process" [logType]="'out'" [urlOutUrl]="logOutUrl()"></app-process-logs>
+              <app-process-logs *ngIf="view === 'error-output'" [process]="process" [logType]="'err'" [urlOutUrl]="logErrUrl()"></app-process-logs>
+            </mat-card>
+          </div>
         </div>
       </div>
     </div>

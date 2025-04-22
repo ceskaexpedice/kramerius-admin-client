@@ -27,7 +27,7 @@ export class AuthService {
   authorizedGlobalActions: string[];
 
   // specific actions
-  authorizedSpecificActions =  {};
+  authorizedSpecificActions: any =  {};
 
   constructor(
     private http: HttpClient, 
@@ -51,7 +51,7 @@ export class AuthService {
     });
   }
 
-  loadGlobalAuthorizedActions(callback: (number) => void) {
+  loadGlobalAuthorizedActions(callback: (arg0: number) => void) {
     this.getAuthorizedActions('uuid:1').subscribe((rAct: RightAction[]) => {
       this.authorizedGlobalActions = [];
       rAct.forEach(rA => {
@@ -61,9 +61,9 @@ export class AuthService {
     });
   }
 
-  loadAuthorizedSpecificActions(pid: string, callback: (number) => void) {
+  loadAuthorizedSpecificActions(pid: string, callback: (arg0: number) => void) {
     this.getAuthorizedActions(pid).subscribe((rAct: RightAction[]) => {
-      let specActions = [];
+      let specActions: any = [];
       rAct.forEach(rA => {
         specActions.push(rA.code);
       });
@@ -128,7 +128,7 @@ export class AuthService {
 
   getPidsAuthorizedActions(pids: string[], actions:string[]) {
 
-    const payload = {
+    const payload: any = {
         pids: pids
     };
 
@@ -155,7 +155,7 @@ export class AuthService {
     return (this.user.name || this.user.uid || '?')[0];
   }
 
-  checkToken(callback: (number) => void) {
+  checkToken(callback: (arg0: number) => void) {
     if (!AuthService.token) {
       callback(AuthService.AUTH_NOT_LOGGED_IN);
       return;
@@ -186,7 +186,7 @@ export class AuthService {
     });
   }
 
-  keycloakAuth(code: string, callback: (number) => void = null) {
+  keycloakAuth(code: string, callback: (arg0: number) => void = null) {
     this.getToken(code).subscribe(
         (token: string) => {
             if (!token) {
@@ -219,7 +219,7 @@ export class AuthService {
     const redircetUri = `${this.baseUrl()}/keycloak`;
     // let url = `${this.settings.clientApiBaseUrl}/user/auth/login?&redirect_uri=${redircetUri}`;
     let url = `${this.settings.clientApiBaseUrl}/user/auth/token?code=${code}&redirect_uri=${redircetUri}`;
-    return this.http.get(url).pipe(map(response => 
+    return this.http.get(url).pipe(map((response: any) => 
       response['access_token'])
     );
 

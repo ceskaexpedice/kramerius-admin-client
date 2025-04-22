@@ -35,7 +35,7 @@ export class UIService {
     this.translate.use(lang).subscribe(val => {
       this.currentLang = lang;
       localStorage.setItem("lang", this.currentLang);
-      this.langSubject.next();
+      this.langSubject.next(true);
     });
   }
 

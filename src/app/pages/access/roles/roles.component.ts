@@ -7,8 +7,22 @@ import { Role } from 'src/app/models/roles.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatIconModule, MatCardModule, MatButtonModule,  MatProgressBarModule, MatIconModule, MatTooltipModule
+     ],
   selector: 'app-roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss']
@@ -48,7 +62,7 @@ export class RolesComponent implements OnInit {
         const role = result.role;
         this.roles.push(role);
         this.ui.showInfoSnackBar('snackbar.success.createOrEditRole');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.createOrEditRole');
           }
@@ -104,7 +118,7 @@ export class RolesComponent implements OnInit {
         if (result && result.role) {
           this.ui.showInfoSnackBar('snackbar.success.onEditRole');
           role.copyFrom(result.role);
-          (error) => {
+          (error: any) => {
             if (error) {
               this.ui.showErrorSnackBar('snackbar.error.onEditRole');
             }

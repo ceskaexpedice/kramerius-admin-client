@@ -1,11 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Tree } from 'src/app/models/tree.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { ImportService } from 'src/app/services/import.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatIconModule, MatTooltipModule, MatProgressSpinnerModule
+  ],
   selector: 'app-tree',
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss']
@@ -31,7 +41,7 @@ export class TreeComponent implements OnInit {
     }
   }
 
-  toggle(event) {
+  toggle(event: Event) {
     event.stopPropagation();
     event.preventDefault();
     if (!this.tree.expanded) {

@@ -1,9 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatTooltipModule, MatProgressBarModule, 
+    MatFormFieldModule, MatInputModule],
   selector: 'app-delete-objects-low-level-dialog',
   templateUrl: './delete-objects-low-level-dialog.component.html',
   styleUrls: ['./delete-objects-low-level-dialog.component.scss']
@@ -20,7 +34,7 @@ export class DeleteObjectsLowLevelDialogComponent implements OnInit {
 
   pidsCounter = 0;
   scheduledCounter = 0;
-  progressBarMode = 'indeterminate';
+  progressBarMode: ProgressBarMode = 'indeterminate';
 
   constructor(public dialogRef: MatDialogRef<DeleteObjectsLowLevelDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
@@ -33,11 +47,11 @@ export class DeleteObjectsLowLevelDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  schedule(formData) {
+  schedule() {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
 
-    let requests = [];
+    let requests: any[] = [];
     pidlist.forEach(pid => {
       requests.push(
         this.adminApi.deleteObject(pid)
@@ -60,6 +74,7 @@ export class DeleteObjectsLowLevelDialogComponent implements OnInit {
         .split(/[\s,;]+/) //split by white spaces, ',', ';'
         .filter(n => n); //remove empty strings
     }
+    return [];
   }
 
   getProgress() {
@@ -80,7 +95,7 @@ export class DeleteObjectsLowLevelDialogComponent implements OnInit {
     el.click();
   }
 
-  isValid(form) {
+  isValid() {
     //return form.valid //nefunguje, kdyz je textarea disabled (protoze fixed)
     return this.pids;
   }

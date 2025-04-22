@@ -40,12 +40,12 @@
 @mixin setAlertCard() {
   @each $alert, $color in $alerts {
     &.app-#{$alert} {
-      color: $color;
+      color: rgb($color);
       border-color: rgba($color, .2);
       background-color: rgba($color, .1) !important;
 
       .mat-icon {
-        color: $color;
+        color: rgb($color);
       }
     }
   }
@@ -150,6 +150,26 @@
     }
     .app-pb-n#{$gap} {
       padding-bottom: -#{$val}px !important;
+    }
+  }
+}
+
+
+// set gap
+@mixin setFlexGap($direction: null) {
+  @each $gap, $val in $gaps {
+    &.app-gap-#{$gap} {
+      > * {
+        &:not(:last-child) {
+          @if ($direction == 'row') {
+            margin-right: #{$val}px;
+          } @else if ($direction == 'column') {
+            margin-bottom: #{$val}px;
+          } @else {
+            margin-right: #{$val}px;
+          }
+        }
+      }
     }
   }
 }

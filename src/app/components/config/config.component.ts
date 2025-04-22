@@ -1,7 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule,
+    MatTooltipModule, MatFormFieldModule, MatInputModule
+  ],
   selector: 'app-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss']
@@ -10,9 +28,9 @@ export class ConfigComponent implements OnInit {
 
   constructor(private adminApi: AdminApiService) { }
 
-  propertiesLoadingNow = [];
-  propertiesSavingNow = [];
-  properties = {} //key:value
+  propertiesLoadingNow: string[] = [];
+  propertiesSavingNow: string[] = [];
+  properties: any = {} //key:value
 
   ngOnInit() {
     this.loadData();
@@ -25,7 +43,7 @@ export class ConfigComponent implements OnInit {
     this.loadValue('processQueue.activeProcess');
   }
 
-  loadValue(key) {
+  loadValue(key: string) {
     this.setLoadingNow(key, true);
     this.adminApi.getConfigProperty(key).subscribe(result => {
       console.log('loaded ' + key + ": " + result[key])
@@ -34,19 +52,19 @@ export class ConfigComponent implements OnInit {
     })
   }
 
-  saveValue(key) {
+  saveValue(key: string) {
     this.setSavingNow(key, true);
     this.adminApi.setConfigProperty(key, String(this.properties[key])).subscribe(result => {
       this.setSavingNow(key, false);
     })
   }
 
-  updateValue(key, value: string) {
+  updateValue(key: string, value: string) {
     this.adminApi.setConfigProperty(key, value).subscribe(result => {
     })
   }
 
-  setLoadingNow(key, loading: boolean) {
+  setLoadingNow(key: string, loading: boolean) {
     if (loading) {
       this.propertiesLoadingNow.push(key);
     } else {
@@ -57,11 +75,11 @@ export class ConfigComponent implements OnInit {
     }
   }
 
-  isLoadingNow(key) {
+  isLoadingNow(key: string) {
     return this.propertiesLoadingNow.includes(key);
   }
 
-  setSavingNow(key, loading: boolean) {
+  setSavingNow(key: string, loading: boolean) {
     if (loading) {
       this.propertiesSavingNow.push(key);
     } else {
@@ -72,7 +90,7 @@ export class ConfigComponent implements OnInit {
     }
   }
 
-  isSavingNow(key) {
+  isSavingNow(key: string) {
     return this.propertiesSavingNow.includes(key);
   }
 

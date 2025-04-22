@@ -16,7 +16,7 @@ export class Batch {
   constructor() {
   }
 
-  static fromJson(json): Batch {
+  static fromJson(json: any): Batch {
     const batch = new Batch();
     const jBatch = json['batch'];
     const jProcesses = json['processes'];
@@ -45,7 +45,7 @@ export class Batch {
     return batch;
   }
 
-  static fromJsonArray(json): Batch[] {
+  static fromJsonArray(json: any): Batch[] {
     const items = [];
     for (const obj of json) {
       items.push(Batch.fromJson(obj));
@@ -78,6 +78,7 @@ export class Batch {
     if (this.processes.length > 0) {
       return this.processes[0].name;
     }
+    return null;
   }
 
   hasSubprocesses(): boolean {

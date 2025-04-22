@@ -5,11 +5,12 @@
     <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>{{ info.acronym }} </strong></li>
     <li>{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.sdnntInstance' | translate }}: <strong>{{ info.endpoint }}</strong></li>
   </ul>
-  <mat-card class="app-view-alert app-warn" *ngIf="!info.kramerius || !info.acronym || !info.endpoint">
+  <mat-card appearance="outlined" class="app-view-alert app-warn" *ngIf="!info.kramerius || !info.acronym || !info.endpoint">
     <mat-card-content>
-      <mat-icon>error</mat-icon>
       <div>
-        {{ 'modal.scheduleStartTheSdnntReviewProcess.alert' | translate }}:<br />
+        <div class="app-fxLayout app-row app-center-v">
+          <mat-icon>error</mat-icon>{{ 'modal.scheduleStartTheSdnntReviewProcess.alert' | translate }}:
+        </div>
         <ul>
           <li *ngIf="!info.kramerius">{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.krameriusInstance' | translate }}: <strong>sdnnt.check.local.api</strong></li>
           <li *ngIf="!info.acronym">{{ 'modal.scheduleStartTheSdnntReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>sdnnt.check.acronym</strong></li>

@@ -14,15 +14,15 @@ export class Reharvest{
     return new Date(this.indexed);
   }
 
-  static reharvestsFromJson(jsonArray):Reharvest[] {
+  static reharvestsFromJson(jsonArray: any):Reharvest[] {
     let retval: Reharvest[] = [];
-    jsonArray.forEach(jsonObject=> {
+    jsonArray.forEach((jsonObject: any)=> {
       retval.push(Reharvest.reharvestFromJson(jsonObject) );
     }); 
     return retval;
   }
 
-  static reharvestFromJson(json):Reharvest {
+  static reharvestFromJson(json: any):Reharvest {
     let reh = new Reharvest();
     if (json['id']) {
       reh.id = json['id'];
@@ -62,7 +62,7 @@ export class Library {
         this.status = status;
     }
 
-    static libsFromJson(json):Library[]  {
+    static libsFromJson(json: any):Library[]  {
         let retval = [];
         for (const key of Object.keys(json)) {
           retval.push(new Library(json[key].status, key));
@@ -75,8 +75,8 @@ export class Library {
         return retval;
     }
     
-    static oneLibFromJson(code, json):Library  {
-      return new Library(code, json.status);
+    static oneLibFromJson(code: string, json: any):Library  {
+      return new Library(json.status, code);
     }
 
 }
@@ -96,7 +96,7 @@ export class StatusTimtamp {
     this.errors = errors;
   } 
 
-  static statusesFromJson(json): StatusTimtamp[] {
+  static statusesFromJson(json: any): StatusTimtamp[] {
     let retval = [];
     for (const key of Object.keys(json)) {
       retval.push(this.oneStatus(json[key]));
@@ -105,7 +105,7 @@ export class StatusTimtamp {
   }
 
   
-  static oneStatus(json) {
+  static oneStatus(json: any) {
     let stm =  new StatusTimtamp(json.date, json.indexed, json.updated, json.errors || 0);    
     if (json.type) {
       stm.type = json.type;

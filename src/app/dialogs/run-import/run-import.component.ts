@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -10,9 +10,29 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { MatChipsModule } from '@angular/material/chips';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRippleModule } from '@angular/material/core';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, 
+    FormsModule,  MatFormFieldModule, MatInputModule, 
+    MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule,
+    MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule
+     ],
   selector: 'app-run-import',
   templateUrl: './run-import.component.html',
   styleUrls: ['./run-import.component.scss']
@@ -22,10 +42,10 @@ export class RunImportComponent implements OnInit {
   /** Collections */
   addCollection: boolean = false; // import & add collection
 
-   languages = this.appSettings.languages;
+   languages: any[];
   // //langSelected: string = 'cs';
    langTranslated:string[] = ['cze', 'ces'];
-   lang: string = this.appSettings.defaultLang;
+   lang: string;
 
    
 
@@ -57,6 +77,8 @@ export class RunImportComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.languages = this.appSettings.languages;
+    this.lang = this.appSettings.defaultLang;
     this.collectionsReload();
     // this.subject.pipe(
     //   debounceTime(400)
@@ -108,8 +130,8 @@ export class RunImportComponent implements OnInit {
   }
 
   collectionsReload() {
-    this.clientApi.getCollections(1000, 0, false, '', 'created', 'asc').subscribe((res)  => {
-      this.allCollections = res["docs"].map((d)=> {
+    this.clientApi.getCollections(1000, 0, false, '', 'created', 'asc').subscribe((res: any)  => {
+      this.allCollections = res["docs"].map((d: any)=> {
         let col:Collection = new Collection();
         // zjistit jazyk a pokud neni, search.title, collection.desc atd..         
         col.id= d.pid;
@@ -134,7 +156,7 @@ export class RunImportComponent implements OnInit {
           }
         }
         let languages = this.appSettings.languages;
-        languages.forEach(lang => {
+        languages.forEach((lang: string) => {
           let converted:string[] = this.isoConvert.convert(lang);
           converted.forEach(conv => {
             if (!col.names[conv]) {

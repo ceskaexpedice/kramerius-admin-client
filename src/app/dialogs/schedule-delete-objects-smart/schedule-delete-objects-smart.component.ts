@@ -1,9 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule, ProgressBarMode } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+  MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
   selector: 'app-schedule-delete-objects-smart',
   templateUrl: './schedule-delete-objects-smart.component.html',
   styleUrls: ['./schedule-delete-objects-smart.component.scss']
@@ -21,7 +38,7 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
 
   pidsCounter = 0;
   scheduledCounter = 0;
-  progressBarMode = 'indeterminate';
+  progressBarMode: ProgressBarMode = 'indeterminate';
 
   constructor(public dialogRef: MatDialogRef<ScheduleDeleteObjectsSmartComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
     if (data) {
@@ -39,10 +56,10 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
     console.log("Model change");
   }
 
-  schedule(formData) {
+  schedule(formData: any) {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
-    let requests = [];
+    let requests: any[] = [];
     pidlist.forEach(pid => {
       requests.push(
         this.adminApi.scheduleProcess({
@@ -72,6 +89,7 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
         .split(/[\s,;]+/) //split by white spaces, ',', ';'
         .filter(n => n); //remove empty strings
     }
+    return [];
   }
 
   getProgress() {
@@ -92,7 +110,7 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
     el.click();
   }
 
-  isValid(form) {
+  isValid() {
     //return form.valid //nefunguje, kdyz je textarea disabled (protoze fixed)
     return this.pids;
   }

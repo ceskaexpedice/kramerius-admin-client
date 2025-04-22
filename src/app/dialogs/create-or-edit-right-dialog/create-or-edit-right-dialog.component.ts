@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from "@angular/material/dialog";
 import { ConditionParam } from "src/app/models/condition-param.model";
 import { License } from "src/app/models/license.model";
 import { Condition, Right } from "src/app/models/right.model";
@@ -11,8 +11,23 @@ import { MatDialog } from '@angular/material/dialog';
 import { UIService } from "src/app/services/ui.service";
 import { AddNewParameterDialogComponent } from "../add-new-parameter-dialog/add-new-parameter-dialog.component";
 import { CreateOrEditRoleDialogComponent } from "../create-or-edit-role-dialog/create-or-edit-role-dialog.component";
+import {MatSelectModule} from '@angular/material/select';
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { TranslateModule } from "@ngx-translate/core";
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, FormsModule, TranslateModule, 
+    MatToolbarModule, MatButtonModule, MatIconModule,  
+    MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDividerModule],
   selector: 'app-create-or-edit-right-dialog',
   templateUrl: './create-or-edit-right-dialog.component.html',
   styleUrls: ['./create-or-edit-right-dialog.component.scss']
@@ -207,7 +222,7 @@ export class CreateOrEditRightDialogComponent implements OnInit {
         const role = result.role;
         this.roles.push(role);
         this.ui.showInfoSnackBar('snackbar.success.createOrEditRole');
-        (error) => {
+        (error: any) => {
           if (error) {
             this.ui.showErrorSnackBar('snackbar.error.createOrEditRole');
           }

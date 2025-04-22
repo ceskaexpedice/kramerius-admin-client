@@ -1,7 +1,3 @@
-@import './src/sass/app-variables.scss';
-@import './src/sass/app-mixins.scss';
-@import './src/sass/app-global.scss';
-
 .mat-table {
   .mat-row {
     &.app-detail-row {
@@ -15,7 +11,7 @@
     }
 
     &.app-expanded-row {
-      background-color: $app-gray-1;
+      background-color: var(--app-gray-1);
     }
 
     .mat-cell {

@@ -1,8 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule,
+  MatProgressBarModule, MatTooltipModule],
   selector: 'app-schedule-import-ndk-dialog',
   templateUrl: './schedule-import-ndk-dialog.component.html',
   styleUrls: ['./schedule-import-ndk-dialog.component.scss']
@@ -10,7 +26,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 export class ScheduleImportNdkDialogComponent implements OnInit {
 
   inProgress = false;
-  importDirs = [];
+  importDirs: string[] = [];
   policies = ['PUBLIC', 'PRIVATE'];
   policyLabels = ['veřejné', 'neveřejné'];
 
@@ -21,7 +37,7 @@ export class ScheduleImportNdkDialogComponent implements OnInit {
     this.adminApi.getConvertAndImportNdkInputDirFiles().subscribe(response => {
       this.importDirs = [];
       //TODO: neresi se prochazeni do hloubky, ale berou se jen adresare prvni urovne
-      response.files.forEach(file => {
+      response.files.forEach((file: any) => {
         if (file.isDir) {
           this.importDirs.push(file.name);
         }
@@ -33,7 +49,7 @@ export class ScheduleImportNdkDialogComponent implements OnInit {
     })
   }
 
-  schedule(formData) {
+  schedule(formData: any) {
     this.adminApi.scheduleProcess({
       defid: 'convert_and_import',
       params: {

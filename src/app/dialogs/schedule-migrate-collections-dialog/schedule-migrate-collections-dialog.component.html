@@ -1,6 +1,6 @@
 	<h2 mat-dialog-title>{{ 'modal.scheduleMigrateCollections.title' | translate }}</h2>
-	<mat-dialog-content>
-    <mat-form-field class="app-w-100" >
+	<mat-dialog-content class="mat-typography app-form-customize">
+    <mat-form-field appearance="outline" class="app-w-100" >
       <mat-label>{{ 'desc.completeTheInstance' | translate }}</mat-label>
       <input type="text" [(ngModel)]="k5instance"  matInput [placeholder]="'desc.completeTheInstance' | translate">
     </mat-form-field>

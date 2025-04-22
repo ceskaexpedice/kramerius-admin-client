@@ -21,7 +21,7 @@ export class License {
     this.priority = 0;
   }
 
-  static fromJson(json): License {
+  static fromJson(json: any): License {
     const license = new License();
     license.id = json['id'];
     license.name = json['name'];
@@ -47,7 +47,7 @@ export class License {
 
   }
 
-  static fromJsonArray(json): License[] {
+  static fromJsonArray(json: any): License[] {
     const result = [];
     for (const obj of json) {
       result.push(License.fromJson(obj));
@@ -70,7 +70,7 @@ export class License {
   }
 
   toJson() {
-    let retval =  {
+    let retval: any =  {
       id: this.id,
       priority: this.priority,
       name: this.name,

@@ -1,21 +1,16 @@
-@import './src/sass/app-variables.scss';
-@import './src/sass/app-mixins.scss';
-@import './src/sass/app-global.scss';
-
-
 .app-row {
-  @extend .app-cursor-pointer;
+  cursor: pointer;
   user-select: none;
   font-size: 14px;
   height: 34px;
 
   &.app-file {
-    color: $app-gray-5;
+    color: var(--app-gray-5);
   }
 
   &.app-selected {
     font-weight: 900;
-    background-color: $app-gray-0;
+    background-color: var(--app-gray-0);
   }
 
   .app-left {

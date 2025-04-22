@@ -1,45 +1,33 @@
-@import './src/sass/app-variables.scss';
-@import './src/sass/app-mixins.scss';
-@import './src/sass/app-global.scss';
-
 .app-cards-wrapper {
-  margin-left: -#{$app-home-card-gap};
+  margin-left: calc(var(--app-home-card-gap) * -1);
 }
 
-.mat-card {
-  margin-right: $app-home-card-gap;
-  margin-bottom: $app-home-card-gap;
-  flex: 0 0 calc(#{$app-home-card-width} - #{$app-home-card-gap});
-  max-width: calc(#{$app-home-card-width} - #{$app-home-card-gap});
+.mat-mdc-card {
+  margin-left: var(--app-home-card-gap);
+  margin-bottom: var(--app-home-card-gap);
+  flex: 0 0 calc(#{var(--app-home-card-width)} - #{var(--app-home-card-gap)});
+  max-width: calc(#{var(--app-home-card-width)} - #{var(--app-home-card-gap)});
   padding-top: 40px;
   position: relative;
-  height: 260px;
+  height: var(--app-home-card-height);
 
-  .mat-card-header {
-    @extend .app-text-center;
+  .mat-mdc-card-header {
+    text-align: center;
 
-    .mat-card-subtitle {
-      @extend .app-mb-2;
+    .mat-mdc-card-subtitle {
+      margin-bottom: 8px;
       font-size: 15px;
     }
   }
 
-  .mat-card-content {
-    @extend .app-text-center, .app-h-100;
+  .mat-mdc-card-content {
+    text-align: center;
+    height: 100%;
     line-height: 22px;
-  }
-
-  .mat-card-actions {
-    .mat-flat-button {
-      .mat-icon {
-        @extend .app-ml-1, .app-mr-0;
-      }
-    }
   }
 
   .app-mark-rounded {
     $app-size: 50px;
-    @include setDashboardColor();
 
     position: absolute;
     top: calc(-#{$app-size} / 2);
@@ -51,8 +39,8 @@
     height: $app-size;
     width: $app-size;
     border-radius: 50%;
-    background-color: $app-gray-6;
-    color: $app-color-lightnes;
+    background-color: var(--app-gray-6);
+    color: var(--app-color-lightnes);
     margin-left: auto;
     margin-right: auto;
   }

@@ -1,10 +1,25 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { forkJoin } from 'rxjs';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+  MatProgressBarModule, MatTooltipModule],
   selector: 'app-schedule-remove-the-visibility-flag-dialog',
   templateUrl: './schedule-remove-the-visibility-flag-dialog.component.html',
   styleUrls: ['./schedule-remove-the-visibility-flag-dialog.component.scss']
@@ -28,8 +43,8 @@ export class ScheduleRemoveTheVisibilityFlagDialogComponent implements OnInit {
   policies = ['PUBLIC', 'PRIVATE'];
 
   
-  title;
-  policy;
+  title: string;
+  policy: string;
 
   pidsCounter = 0;
   scheduledCounter = 0;
@@ -43,7 +58,7 @@ export class ScheduleRemoveTheVisibilityFlagDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  schedule(formData) {
+  schedule(formData: any) {
     this.inProgress = true;
 
     const pids = this.splitPids(this.pids);
@@ -53,7 +68,7 @@ export class ScheduleRemoveTheVisibilityFlagDialogComponent implements OnInit {
     const scope = formData.scope;
     const policy = this.policy;//formData.policy;
 
-    let requests = [];
+    let requests: any[] = [];
     pids.forEach(pid => {
       requests.push(
         this.adminApi.scheduleProcess({
@@ -75,13 +90,15 @@ export class ScheduleRemoveTheVisibilityFlagDialogComponent implements OnInit {
     });
   }
 
-  splitPids(pids: string) {
+  splitPids(pids: string): string[] {
     //uuid:123 uuid:456,uuid:789;uuid:012, uuid:345; uuid:678    uuid:901
     //uuid:123 uuid:456,uuid:789;uuid:012, uuid:345; uuid:678    uuid:901 xxx
     if (pids) {
       return pids
         .split(/[\s,;]+/) //split by white spaces, ',', ';'
         .filter(n => n); //remove empty strings
+    } else {
+      return []
     }
   }
 

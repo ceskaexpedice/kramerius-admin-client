@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { Batch } from 'src/app/models/batch.model';
@@ -14,11 +14,34 @@ import { CancelScheduledProcessesDialogComponent } from 'src/app/dialogs/cancel-
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DurationPipe } from 'src/app/pipes/duration.pipe';
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule,  MatProgressBarModule, 
+    MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
+    MatCheckboxModule, MatPaginatorModule, DurationPipe
+  ],
   selector: 'app-processes',
   templateUrl: './processes.component.html',
   styleUrls: ['./processes.component.scss']
@@ -59,12 +82,12 @@ export class ProcessesComponent implements OnInit {
   pageSize = 50;
 
   // Filters
-  dateFrom;
-  dateTo;
-  selectedOwner;
-  selectedState;
+  dateFrom: string;
+  dateTo: string;
+  selectedOwner: string;
+  selectedState: string;
 
-  batch_states = [];
+  batch_states: { key: string; label: string; }[] = [];
   owners: ProcessOwner[] = []
   batches: Batch[] = []
   batches_planned: Batch[] = [];
@@ -237,7 +260,7 @@ export class ProcessesComponent implements OnInit {
     });
   }
 
-  onSelectedOwnerChanged(event) {
+  onSelectedOwnerChanged() {
     this.reloadProcesses();
   }
 
@@ -286,7 +309,7 @@ export class ProcessesComponent implements OnInit {
     return params;
   }
 
-  convertDate(date) { // 01/02/2021 -> 2021-02-01
+  convertDate(date: string) { // 01/02/2021 -> 2021-02-01
     const year = date.slice(6, 10);
     const month = date.slice(3, 5);
     const day = date.slice(0, 2);
@@ -394,7 +417,7 @@ export class ProcessesComponent implements OnInit {
           }
         });
 
-        let requests = [];
+        let requests: any[] = [];
         toDelete.forEach(batch => {
           requests.push(this.adminApi.deleteProcessBatch(batch.id));
         });

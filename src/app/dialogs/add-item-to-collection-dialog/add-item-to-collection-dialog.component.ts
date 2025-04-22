@@ -1,5 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import { Collection } from 'src/app/models/collection.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CollectionsService } from 'src/app/services/collections.service';
@@ -7,6 +18,10 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, 
+    MatTooltipModule],
   selector: 'app-add-item-to-collection-dialog',
   templateUrl: './add-item-to-collection-dialog.component.html',
   styleUrls: ['./add-item-to-collection-dialog.component.scss']
@@ -18,10 +33,10 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   title;
   isCollection = false;
 
-  potentialSuperCollections = [];
-  potentialSuperCollectionsAll = [];
-  selectedSuperCollection;
-  specificAuthorizedActions = [];
+  potentialSuperCollections: any[] = [];
+  potentialSuperCollectionsAll: any[] = [];
+  selectedSuperCollection: any;
+  specificAuthorizedActions: any[] = [];
 
   inProgress = false;
 
@@ -31,7 +46,7 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   language:string = 'cze';
 
   constructor(public dialogRef: MatDialogRef<AddItemToCollectionDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data,
+    @Inject(MAT_DIALOG_DATA) public data: any,
      private collectionApi: CollectionsService,
      private authService: AuthService,
      private isoConvert: IsoConvertService
@@ -56,7 +71,7 @@ export class AddItemToCollectionDialogComponent implements OnInit {
             this.potentialSuperCollectionsAll.forEach((cp)=> {
               let actions = d[cp.id];
               if (actions) {
-                actions.forEach((r)=> {
+                actions.forEach((r: any)=> {
                   if (r.code == 'a_collections_edit') {
                     this.allowedCollections.push(cp.id);
                   }
@@ -83,12 +98,12 @@ export class AddItemToCollectionDialogComponent implements OnInit {
 
   }
 
-  allowEditCollection(pid) {
+  allowEditCollection(pid: string) {
     let flag =  (this.allowedCollections && this.allowedCollections.includes(pid));
     return flag;
   }
 
-  onAdd(formData) {
+  onAdd() {
     this.inProgress = true;
     this.collectionApi.addItemToCollection(this.selectedSuperCollection.id, this.pid)
       .subscribe(() => {
@@ -118,13 +133,13 @@ export class AddItemToCollectionDialogComponent implements OnInit {
   }
   
 
-  getName(item): string {
+  getName(item: any): string {
     let langs = this.isoConvert.isTranslatable(this.language) ? this.isoConvert.convert(this.language) : [this.language];
     return item.names[langs[0]];
   }
 
 
-  getDescription(item):string {
+  getDescription(item: any):string {
     let langs = this.isoConvert.isTranslatable(this.language) ? this.isoConvert.convert(this.language) : [this.language];
     return item.descriptions[langs[0]];
 

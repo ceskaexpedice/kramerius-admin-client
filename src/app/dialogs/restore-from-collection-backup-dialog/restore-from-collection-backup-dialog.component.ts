@@ -1,13 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { CreateCollectionBackupDialogComponent } from '../create-collection-backup-dialog/create-collection-backup-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
-import * as moment from 'moment';
+import moment from 'moment';
 import { FileDownloadService } from 'src/app/services/file-download';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatRadioModule, MatTooltipModule],
   selector: 'app-restore-from-collection-backup-dialog',
   templateUrl: './restore-from-collection-backup-dialog.component.html',
   styleUrls: ['./restore-from-collection-backup-dialog.component.scss']
@@ -31,7 +42,7 @@ export class RestoreFromCollectionBackupDialogComponent implements OnInit {
 
     this.adminApi.getOutputCollectionsBackupsDirFiles().subscribe(response => {
       this.backups = [];
-      response.files.forEach(file => {
+      response.files.forEach((file: any) => {
           this.backups.push(file);
       });
     }, error => {
@@ -40,12 +51,12 @@ export class RestoreFromCollectionBackupDialogComponent implements OnInit {
 
   }
 
-  getDateTime(file) {
+  getDateTime(file: any) {
     const date = new Date(file.lastModifiedTime);    
   }
 
 
-  modifiedLogFile(logfile) {
+  modifiedLogFile(logfile: any) {
     
     if (logfile.lastModifiedTime) {
 
@@ -56,7 +67,7 @@ export class RestoreFromCollectionBackupDialogComponent implements OnInit {
     } else return 'none';
   }
 
-  restoreFromCollectionBackup(routerLink) {
+  restoreFromCollectionBackup(routerLink: string) {
     this.dialogRef.close({
       "routerLink": routerLink,
       "backupname": this.selectedFile
@@ -73,7 +84,7 @@ export class RestoreFromCollectionBackupDialogComponent implements OnInit {
     */
   }
 
-  download(backup) {
+  download(backup: string) {
     this.adminApi.getOutputCollectionsBackupsFile( backup ).subscribe(response => {
       let downloadlink = this.adminApi.getOutputDownloadLinks(response.downloadlink);
       this.downloadService.downloadFile(downloadlink, backup);

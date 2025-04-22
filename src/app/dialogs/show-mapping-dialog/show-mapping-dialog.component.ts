@@ -1,9 +1,20 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Data } from '@angular/router';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule,
+    MatTooltipModule],
   selector: 'app-show-mapping-dialog',
   templateUrl: './show-mapping-dialog.component.html',
   styleUrls: ['./show-mapping-dialog.component.scss']

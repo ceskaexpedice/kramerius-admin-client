@@ -1,12 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormControl, FormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { Collection } from 'src/app/models/collection.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
   selector: 'app-add-cutting-dialog',
   templateUrl: './add-cutting-dialog.component.html',
   styleUrls: ['./add-cutting-dialog.component.scss']
@@ -44,7 +56,7 @@ export class AddCuttingDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddCuttingDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data, 
+    @Inject(MAT_DIALOG_DATA) public data: any, 
     protected api:CollectionsService,
     protected adminApi:AdminApiService,
     ) {
