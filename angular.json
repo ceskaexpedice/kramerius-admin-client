@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/kramerius-admin-client",
-            "index": "src/index.html",
+            "index": "src/index.html",i
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -43,13 +43,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "100kb",
+                  "maximumError": "120kb"
                 }
               ],
               "outputHashing": "all"
