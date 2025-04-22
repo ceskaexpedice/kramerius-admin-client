@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node git-info-detect.js && ng serve",
-    "build": "node git-info-detect.js && ng build --prod && node create-zip.js",
+    "build": "node git-info-detect.js && ng build && node create-zip.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
