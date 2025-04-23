@@ -1,5 +1,4 @@
 
-console.log("!!!! ARCHIVING ....");
 const fs = require('fs');
 const archiver = require('archiver');
 const path = require('path');
@@ -9,7 +8,6 @@ const zipDir = path.join(__dirname, 'dist-zip');
 const outputPath = path.join(zipDir, 'kramerius-admin.zip');
 const inputDir = path.join(__dirname, 'dist/kramerius-admin-client/browser');
 
-console.log("Checking if zipDirExists " +zipDir);
 if (!fs.existsSync(zipDir)) {
     fs.mkdirSync(zipDir, { recursive: true }); 
 }
@@ -45,7 +43,7 @@ archive.on('error', function(err) {
     throw err;
 });
 
-console.log(`📂 Packing ${inputDir}:`);
+console.log(`📂 Archiving ${inputDir}:`);
 listFilesRecursive(inputDir);
 
 archive.pipe(output);
