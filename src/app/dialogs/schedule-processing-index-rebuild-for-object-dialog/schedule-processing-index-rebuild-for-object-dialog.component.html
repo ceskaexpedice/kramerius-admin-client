@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="schedule()">
+<form #f="ngForm" (ngSubmit)="schedule(f.value)">
 	<mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
 	<h2 mat-dialog-title>{{ 'modal.scheduleProcessingIndexRebuildForObject.title' | translate }}</h2>
 	<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
@@ -8,9 +8,11 @@
 		<div class="app-desc app-color-warn" [innerHtml]="'modal.scheduleProcessingIndexRebuildForObject.message4' | translate"></div>
 		<div>
 			<mat-form-field appearance="outline" class="app-w-100">
-				<mat-label>PID</mat-label>
-				<input [disabled]="inProgress || fixed" matInput type="text" id="pid" name="pid" [(ngModel)]="pid" placeholder="PID" required autofocus>
+				<mat-label>PIDy</mat-label>
+				<textarea [disabled]="inProgress || fixed" matInput type="text" id="pid" name="pid" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="{{pidsTextareaRows}}"></textarea>
+				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed" class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
+			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
 		</div>
 		<div>
 			<mat-form-field appearance="outline" *ngIf="title" class="app-w-100">
@@ -19,7 +21,7 @@
 		</div>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !pidValid(f.value.pid)" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
 		<button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>
 </form>
