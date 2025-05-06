@@ -68,6 +68,48 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
     });
   }
 
+  Onblur(pidsString: string) {
+    if (!pidsString || pidsString.trim() === '') {
+      return;
+    }
+    
+    this.licenses = []; // reset licenses
+
+    const pids = pidsString
+      .split(/\s+/)  // split podle mezery, entru, tabulátorů
+      .map(pid => pid.trim())
+      .filter(pid => pid !== '');
+
+    pids.forEach(pid => {
+      this.adminApi.getLicensesOfObject(pid).subscribe({
+        next: (data: any) => {
+          const parsed = data as { licenses: string[]; pid: string; policy: string };
+  
+          const mappedLicenses = parsed.licenses.map(name => ({
+            name,
+            description
+          }));
+
+          this.licenses = [...this.licenses, ...mappedLicenses];
+          this.licenses = this.removeDuplicateLicenses(this.licenses);
+        }
+      });
+    });
+    
+    
+  }
+
+  removeDuplicateLicenses(licenses: { name: string, description: string }[]): { name: string, description: string }[] {
+    const seen = new Set<string>();
+    return licenses.filter(lic => {
+      if (seen.has(lic.name)) {
+        return false; // už jsme viděli → přeskočíme
+      }
+      seen.add(lic.name);
+      return true; // první výskyt → necháme
+    });
+  }
+
   ngOnInit() {
   }
 
