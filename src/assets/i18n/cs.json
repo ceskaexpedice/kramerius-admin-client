@@ -539,7 +539,8 @@
     "thisFlagUnsupported": "Tento příznak již není podporován",
     "approve": "Schválit",
     "annualReport": "Roční výkaz",
-    "reload": "Obnovit"
+    "reload": "Obnovit",
+    "addRuntimeLicense": "Přidat runtime licenci"
   },
   "field": {
     "public": "Veřejné",
