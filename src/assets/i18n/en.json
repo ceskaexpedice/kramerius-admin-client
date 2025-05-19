@@ -1310,6 +1310,12 @@
     "notFound": "Not found",
     "conflict": "Conflict",
     "noConflict": "No conflict",
-    "none":""
+    "none":"",
+    "runtimeLicense":"Runtime license",
+    "runtimeType":{
+      "ALL_DOCUMENTS":"All documents",
+      "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Only cover and content pages"
+    },
+    "selectTypeOfRuntimeLicenseFilter":"Select how to apply runtime license"
   }
 }

@@ -499,18 +499,19 @@ export class AdminApiService {
       License.fromJson(response)));
   }
 
-  getAllLicenses(): Observable<License[]> {
-    return this.get('/licenses').pipe(map(response =>
+  getAllLicenses(acceptRuntime:boolean): Observable<License[]> {
+    return this.get(`/licenses?runtime=${acceptRuntime}`).pipe(map(response =>
       License.fromJsonArray(response)));
   }
 
-  getGlobalLicenses(): Observable<License[]> {
-    return this.get('/licenses/global').pipe(map(response =>
+
+  getGlobalLicenses(acceptRuntime:boolean): Observable<License[]> {
+    return this.get(`/licenses/global?runtime=${acceptRuntime}`).pipe(map(response =>
       License.fromJsonArray(response)));
   }
 
-  getLocalLicenses(): Observable<License[]> {
-    return this.get('/licenses/local').pipe(map(response =>
+  getLocalLicenses(acceptRuntime:boolean): Observable<License[]> {
+    return this.get(`/licenses/local?runtime=${acceptRuntime}`).pipe(map(response =>
       License.fromJsonArray(response)));
   }
 

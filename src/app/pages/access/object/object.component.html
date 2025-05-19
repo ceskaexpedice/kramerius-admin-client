@@ -177,7 +177,7 @@
           </mat-expansion-panel>
         </mat-accordion>
 
-        <mat-accordion class="app-view-default" *ngIf="view == 'editing' && proarcServers?.length > 0" multi>
+        <mat-accordion class="app-view-default" *ngIf="view == 'editing' && (proarcServers?.length > 0) ||  (altoeditorServers?.length > 0 )" multi>
           <mat-expansion-panel expanded>
             <mat-expansion-panel-header>
               <mat-panel-title>{{ 'desc.editingAnObjectInTheApplication' | translate : {app: 'ProArc'} }}</mat-panel-title>

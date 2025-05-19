@@ -1309,6 +1309,12 @@
     "notFound": "Nenalezeno",
     "conflict": "Nalezen konflikt",
     "noConflict": "Nenalezen žádný konflikt",
-    "none":""
+    "none":"",
+    "runtimeLicense":"Runtime licence",
+    "runtimeType":{
+      "ALL_DOCUMENTS":"Všechny dokumenty",
+      "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Pouze obálky a obsahy"
+    },
+    "selectTypeOfRuntimeLicenseFilter":"Vyberte na které dokumenty bude licence aplikována"
   }
 }

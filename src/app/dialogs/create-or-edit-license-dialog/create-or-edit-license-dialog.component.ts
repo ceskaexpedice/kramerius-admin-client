@@ -19,13 +19,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDivider } from "@angular/material/divider";
+import { MatOption } from "@angular/material/core";
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule,
     FormsModule, ReactiveFormsModule, MatButtonModule,
     MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
-    MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule
+    MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule, MatDivider, MatOption, MatSelectModule
      ],
   selector: 'app-create-or-edit-license-dialog',
   templateUrl: './create-or-edit-license-dialog.component.html',
@@ -43,9 +46,9 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   mode: string;
   errorMessage: string;
 
+
   // lock turn on
   turnOnLock: boolean;
-
   lockTypeChanged:boolean = false;
   
   // expansion flag - consumed licenses
@@ -54,6 +57,10 @@ export class CreateOrEditLicenseDialogComponent implements OnInit {
   lockMaps:any[] = [];
 
   loading: boolean = true;
+
+
+  // runtime
+  turnOnRuntime: boolean;
 
   constructor(public dialogRef: MatDialogRef<CreateOrEditLicenseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

@@ -128,9 +128,9 @@ export class CreateOrEditRightDialogComponent implements OnInit {
         }
       });
 
-      this.api.getAllLicenses().subscribe((licenses: License[]) => {
+      this.api.getAllLicenses(true).subscribe((licenses: License[]) => {
         this.licenses = licenses.map((lic) => lic.name );
-        if (this.data.right?.condition.license) {
+        if (this.data.right?.condition?.license) {
           let license =  this.licenses.find((license) => {
             let eq =  license == this.data.right.condition.license; 
             return eq;

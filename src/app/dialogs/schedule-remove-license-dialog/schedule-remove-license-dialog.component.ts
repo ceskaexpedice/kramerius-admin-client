@@ -54,7 +54,7 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
 
   fetchAvailableLicenses() {
     this.inProgress = true;
-    this.adminApi.getAllLicenses().subscribe((licenses: License[]) => {
+    this.adminApi.getAllLicenses(false).subscribe((licenses: License[]) => {
       //this.licenses = licenses.map((lic) => lic.name);
       this.license = licenses[0];
 

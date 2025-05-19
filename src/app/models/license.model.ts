@@ -8,12 +8,19 @@ export class License {
   priority: number;
   group:string;
 
+  // exclusive lock
   exclusiveLock: boolean = false;
   refresh:number = -1;
   max:number = -1;
   readers: number = -1;
   type ="instance";
 
+  // runtime
+  runtime: boolean = false;
+  runtimeType: string;
+
+  // Type of runtime licenses 
+  ALL_RUNTIME_TYPES:string[] = ['ALL_DOCUMENTS','COVER_AND_CONTENT_MONOGRAPH_PAGE'];
 
 
   constructor() {
@@ -42,6 +49,9 @@ export class License {
     license.readers=json["maxreaders"];
     license.type = json["type"];
 
+    license.runtime = json["runtime"];
+    license.runtimeType = json["runtime_type"]
+
 
     return license;
 
@@ -67,6 +77,9 @@ export class License {
     this.readers = license.readers;
     this.type = license.type;
 
+    this.runtime = license.runtime;
+    this.runtimeType = license.runtimeType;
+
   }
 
   toJson() {
@@ -84,6 +97,13 @@ export class License {
       retval['maxreaders']= this.readers;
       retval['type'] = this.type;
     }
+
+    if (this.runtime) {
+      retval["runtime"] = true;
+      retval["runtime_type"] = this.runtimeType;
+
+    }
+
     return retval;
   }
 

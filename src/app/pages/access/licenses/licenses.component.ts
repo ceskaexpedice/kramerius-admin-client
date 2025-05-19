@@ -67,7 +67,7 @@ export class LicensesComponent implements OnInit {
 
 
 
-    this.api.getAllLicenses().subscribe((licenses: License[]) => {
+    this.api.getAllLicenses(true).subscribe((licenses: License[]) => {
       this.licenses = licenses;
       this.state = 'success';
     }, (error: HttpErrorResponse) => {

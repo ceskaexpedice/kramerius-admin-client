@@ -21,68 +21,119 @@
 
   <mat-checkbox [(ngModel)]="license.exclusiveLock"  class="app-mb-4 app-mt-4">{{ 'desc.turnOnTheLock' | translate }}</mat-checkbox>
 
-  <ng-container *ngIf="license.exclusiveLock">
-    <div class="app-fxLayout app-column app-gap-4">
-      <mat-form-field appearance="outline" class="app-w-100">
-        <mat-label>{{ formatedMaxTime()  }}</mat-label>
-        <input matInput [placeholder]="'desc.maximumReadingTime' | translate" [(ngModel)]="license.max">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="app-w-100">
-        <mat-label>{{ 'desc.refreshInterval' | translate }}</mat-label>
-        <input matInput [placeholder]="'desc.refreshInterval' | translate" [(ngModel)]="license.refresh">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="app-w-100">
-        <mat-label>{{ 'desc.numberOfReadersReadingConcurrently' | translate }}</mat-label>
-        <input matInput [placeholder]="'desc.numberOfReadersReadingConcurrently' | translate"  [(ngModel)]="license.readers">
-      </mat-form-field>
-      <mat-radio-group [(ngModel)]="license.type" (change)="lockTypeChange()">
-        <mat-radio-button value="INSTANCE">{{ 'desc.instance' | translate }}</mat-radio-button>
-        <mat-radio-button value="RULE">{{ 'desc.rule' | translate }}</mat-radio-button>
-      </mat-radio-group>
-      <mat-card appearance="outlined" *ngIf="lockTypeChanged" class="app-view-alert app-info">
-        <mat-card-content>
-          <mat-icon>info</mat-icon>{{'alert.createOrEditLicense.errorlock1' |  translate}}
-        </mat-card-content>
-      </mat-card>
-    </div>
+  <mat-checkbox [(ngModel)]="license.runtime"  class="app-mb-4">
+  {{ 'desc.runtimeLicense' | translate }}
+ </mat-checkbox>
 
-    <div *ngIf="!lockTypeChanged && lockMaps?.length > 0" class="app-mt-4">
-      <a (click)="viewConsumedLicenses()" [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'" class="app-fxLayout app-row app-center-v app-tdn">
-        <mat-icon>expand_more</mat-icon>
-        {{ isConsumedLicensesExpanded ? ('button.hideConsumedLicenses' | translate) : ('button.viewConsumedLicenses' | translate) }}
-      </a>
-      <div *ngIf="isConsumedLicensesExpanded" class="app-mt-4">
-        <ng-container *ngFor="let lockMap of lockMaps">
-          <table *ngIf="lockMap.enabled" class="app-table app-mb-2" [cellPadding]="0" [cellSpacing]="0">
-            <thead>
-              <tr>
-                <th colspan="4"><strong>{{lockMap.formattedName}}</strong></th>
-              </tr>
-              <tr>
-                <th>{{ 'desc.user' | translate }}</th>
-                <th>{{ 'desc.readingTime' | translate }}</th>
-                <th>{{ 'desc.startReading' | translate }}</th>
-                <th>{{ 'desc.maximumReadingTime' | translate }}</th>
-              </tr>
-            </thead>
-            <tbody *ngIf="lockMap.items">
-              <tr  *ngFor="let item of lockMap.items">
-                <td>{{item.username}}</td>
-                <td>{{formatTimeDifference(item.createdTime)}}</td>
-                <td>{{ formatDateTime( item.createdTime) }}</td>
-                <td>{{formatDateTime(item.maxTime)}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <mat-card *ngIf="lockMaps?.length === 0" class="app-view-alert app-info">
-            <mat-card-content>
-              <mat-icon>info</mat-icon>{{ 'alert.noResults' | translate }}
-            </mat-card-content>
-          </mat-card>
-        </ng-container>
-      </div>
-    </div>
+
+   <ng-container *ngIf="license.runtime">
+
+<mat-card appearance="outlined" class="app-mt-6 app-mb-4" *ngIf="license.runtime">
+  <!--
+  <mat-card-header>
+    <mat-card-title>{{ 'desc.runtimeLicense' | translate }}</mat-card-title>
+  </mat-card-header>
+  -->
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="app-w-100">
+      <mat-label>{{ 'desc.selectTypeOfRuntimeLicenseFilter' | translate }}</mat-label>
+      <mat-select [(ngModel)]="license.runtimeType" name="runtimeType">
+        <mat-option *ngFor="let type of license.ALL_RUNTIME_TYPES" [value]="type">
+          {{ ('desc.runtimeType.' + type) | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
   </ng-container>
+
+
+<ng-container *ngIf="license.exclusiveLock">
+  <mat-card appearance="outlined" class="app-mb-4 app-mt-6">
+    <!--
+    <mat-card-header>
+      <mat-card-title>{{ 'desc.lockSettings' | translate }}</mat-card-title>
+    </mat-card-header>
+    -->
+    <mat-card-content>
+      <div class="app-fxLayout app-column app-gap-4">
+        <mat-form-field appearance="outline" class="app-w-100">
+          <mat-label>{{ formatedMaxTime() }}</mat-label>
+          <input matInput [placeholder]="'desc.maximumReadingTime' | translate" [(ngModel)]="license.max">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="app-w-100">
+          <mat-label>{{ 'desc.refreshInterval' | translate }}</mat-label>
+          <input matInput [placeholder]="'desc.refreshInterval' | translate" [(ngModel)]="license.refresh">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="app-w-100">
+          <mat-label>{{ 'desc.numberOfReadersReadingConcurrently' | translate }}</mat-label>
+          <input matInput [placeholder]="'desc.numberOfReadersReadingConcurrently' | translate" [(ngModel)]="license.readers">
+        </mat-form-field>
+
+        <mat-radio-group [(ngModel)]="license.type" (change)="lockTypeChange()">
+          <mat-radio-button value="INSTANCE">{{ 'desc.instance' | translate }}</mat-radio-button>
+          <mat-radio-button value="RULE">{{ 'desc.rule' | translate }}</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-card appearance="outlined" *ngIf="lockTypeChanged" class="app-view-alert app-info">
+          <mat-card-content>
+            <mat-icon>info</mat-icon>
+            {{ 'alert.createOrEditLicense.errorlock1' | translate }}
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div *ngIf="!lockTypeChanged && lockMaps?.length > 0" class="app-mt-4">
+        <a (click)="viewConsumedLicenses()"
+           [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'"
+           class="app-fxLayout app-row app-center-v app-tdn">
+          <mat-icon>expand_more</mat-icon>
+          {{ isConsumedLicensesExpanded
+              ? ('button.hideConsumedLicenses' | translate)
+              : ('button.viewConsumedLicenses' | translate) }}
+        </a>
+
+        <div *ngIf="isConsumedLicensesExpanded" class="app-mt-4">
+          <ng-container *ngFor="let lockMap of lockMaps">
+            <table *ngIf="lockMap.enabled" class="app-table app-mb-2" [cellPadding]="0" [cellSpacing]="0">
+              <thead>
+                <tr>
+                  <th colspan="4"><strong>{{ lockMap.formattedName }}</strong></th>
+                </tr>
+                <tr>
+                  <th>{{ 'desc.user' | translate }}</th>
+                  <th>{{ 'desc.readingTime' | translate }}</th>
+                  <th>{{ 'desc.startReading' | translate }}</th>
+                  <th>{{ 'desc.maximumReadingTime' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="lockMap.items">
+                <tr *ngFor="let item of lockMap.items">
+                  <td>{{ item.username }}</td>
+                  <td>{{ formatTimeDifference(item.createdTime) }}</td>
+                  <td>{{ formatDateTime(item.createdTime) }}</td>
+                  <td>{{ formatDateTime(item.maxTime) }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <mat-card *ngIf="lockMaps?.length === 0" class="app-view-alert app-info">
+              <mat-card-content>
+                <mat-icon>info</mat-icon>
+                {{ 'alert.noResults' | translate }}
+              </mat-card-content>
+            </mat-card>
+          </ng-container>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+  
+
   <mat-card appearance="outlined" class="app-view-alert app-warn" *ngIf="errorMessage">
     <mat-card-content>
       {{ errorMessage }}

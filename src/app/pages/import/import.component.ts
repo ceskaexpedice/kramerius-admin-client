@@ -61,7 +61,7 @@ export class ImportComponent implements OnInit {
     this.type = this.router.url.replace('/import/', '');
     this.initTree();
 
-    this.api.getAllLicenses().subscribe((licenses: License[]) => {
+    this.api.getAllLicenses(false).subscribe((licenses: License[]) => {
       this.licenses = licenses;
     });
 

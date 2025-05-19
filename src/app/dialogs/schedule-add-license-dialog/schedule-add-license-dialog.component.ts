@@ -54,7 +54,7 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
 
   fetchAvailableLicenses(licensesToExclude: any[] = []) {
     this.inProgress = true;
-    this.adminApi.getAllLicenses().subscribe((licenses: License[]) => {
+    this.adminApi.getAllLicenses(false).subscribe((licenses: License[]) => {
 
       let tmpLicenses =  licenses.filter(lic => licensesToExclude.indexOf(lic.name) == -1);
       let globalLicenses = tmpLicenses.filter(lic=> lic.group !='local'); 
