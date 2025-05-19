@@ -539,7 +539,8 @@
     "thisFlagUnsupported": "This flag is no longer supported",
     "approve": "Approve",
     "annualReport": "Annual report",
-    "reload": "Reload"
+    "reload": "Reload",
+    "addRuntimeLicense": "Add runtime license"
   },
   "field": {
     "public": "Public",
@@ -584,7 +585,6 @@
     "delete_pid": "Delete object",
     "delete_tree": "Delete tree",
     "delete_root": "Delete title"
-
   },
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
