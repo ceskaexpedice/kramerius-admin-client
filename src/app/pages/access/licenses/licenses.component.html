@@ -10,7 +10,7 @@
   <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
   <mat-card appearance="outlined" class="app-view-item app-with-header"  [ngClass]="{'app-runtime-card': licence.runtime}" *ngFor="let licence of licenses; let first = first; let last = last" cdkDrag>
     <mat-card-header>
-      <div fxFlex class="app-left">
+      <div class="app-fxFlex app-left">
         <mat-card-title class="app-mb-2">
 
           <mat-icon>{{ licence.group == 'local' ? 'location_city' : 'public_outlined' }}</mat-icon>
