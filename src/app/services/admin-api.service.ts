@@ -517,7 +517,7 @@ export class AdminApiService {
 
 
   getLicensesOfObject(pid: string) {
-    return this.get(`/items/${pid}/licenses`)
+    return this.get(`/items/${pid}/licenses`)   
     //.pipe(delay(3000));
   }
 

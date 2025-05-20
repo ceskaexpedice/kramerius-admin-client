@@ -7,7 +7,7 @@
 		<div>
 			<mat-form-field appearance="outline" class="app-w-100 app-download">
 				<mat-label>{{fixed ? 'PID' : ('desc.pids' | translate) }}</mat-label>
-				<textarea matInput type="text" id="inputPids" name="pids" autofocus [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate ) + '...'" [disabled]="inProgress || fixed" required rows="{{fixed ? 1 : 4}}"></textarea>
+				<textarea matInput type="text" id="inputPids" name="pids" autofocus [(ngModel)]="pids" (blur)="Onblur(pids)" [placeholder]="('desc.insertPidsHere' | translate ) + '...'" [disabled]="inProgress || fixed" required rows="{{fixed ? 1 : 4}}"></textarea>
 				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed" class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
