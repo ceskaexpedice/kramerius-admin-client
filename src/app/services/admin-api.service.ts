@@ -858,9 +858,12 @@ export class AdminApiService {
     return false;
   }
 
-
-
+  // return workmode endpoint
+  getWorkMode(): Observable<any> {
+    return this.get(`/workmode`, {}).pipe();
+  }
 }
+
 export interface ProcessesParams {
   limit: number;
   offset: number;

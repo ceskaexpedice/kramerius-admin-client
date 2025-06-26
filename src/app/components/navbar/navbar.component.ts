@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AdminApiService } from 'src/app/services/admin-api.service'; // pedro
 
 
 @Component({
@@ -38,6 +39,10 @@ export class NavbarComponent implements OnInit {
   tokenMinutes: string;
   tokenSeconds: string;
 
+  workModeRead: boolean;
+  workModeReadClass: string = 'app-workmode-readOnly';
+  workModeReason: string;
+
   public languages: string[];
   
   constructor(
@@ -47,7 +52,8 @@ export class NavbarComponent implements OnInit {
     public ui: UIService,
     public appSettings: AppSettings,
     private local: LocalStorageService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private adminApi: AdminApiService, // pedro
     ) { 
       this.cdkMode = settings.cdkMode;
       this.languages = appSettings.languages;
@@ -85,6 +91,15 @@ export class NavbarComponent implements OnInit {
         this.tokenSeconds = null;
       }
     });
+
+    // call api to return workmode endpoint
+    this.adminApi.getWorkMode().subscribe(res => {
+      this.workModeRead = res.readOnly;
+      this.workModeReason = res.reason;
+      console.log(this.workModeRead);
+    });
+
+    
   }
 
   private padTo2Digits(num: number) {

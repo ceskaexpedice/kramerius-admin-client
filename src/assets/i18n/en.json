@@ -1317,5 +1317,10 @@
       "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Only cover and content pages"
     },
     "selectTypeOfRuntimeLicenseFilter":"Select how to apply runtime license"
+  },
+  "workmode": {
+    "maintenance": "Maintance mode",
+    "distributedLocksException": "Locks mode",
+    "noReason": "No reason mode"
   }
 }

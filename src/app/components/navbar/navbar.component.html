@@ -1,5 +1,5 @@
-<mat-toolbar color="primary" class="app-fxLayout app-row">
-  <div class="app-fxFlex">
+<mat-toolbar color="primary" class="app-fxLayout app-row" [ngClass]="this.workModeRead ? 'app-workmode-readOnly' : null">
+  <div class="app-fxFlex app-fxLayout app-row app-center-v app-gap-4">
     <a routerLink="/" class="app-logo app-fxLayout">
       <svg width="125px" height="25px" viewBox="0 0 406 81" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>logo</title>
@@ -16,6 +16,9 @@
         </g>
       </svg>  
     </a>
+    <div *ngIf="this.workModeRead" class="app-badge app-workmode" [ngClass]="this.workModeRead ? 'app-' + this.workModeReason : null" [matTooltip]="'workmode.' + this.workModeReason | translate">
+      {{ 'workmode.' + this.workModeReason | translate }} <mat-icon class="app-ml-2">info</mat-icon>
+    </div>
   </div>
   <div>
     <ng-container *ngIf="auth.isLoggedIn()">

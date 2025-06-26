@@ -1317,5 +1317,10 @@
       "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Pouze obálky a obsahy"
     },
     "selectTypeOfRuntimeLicenseFilter":"Vyberte na které dokumenty bude licence aplikována"
+  },
+  "workmode": {
+    "maintenance": "Režim údržby",
+    "distributedLocksException": "Režim zamknuto",
+    "noReason": "Režim neznámý"
   }
 }

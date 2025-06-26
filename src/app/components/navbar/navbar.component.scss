@@ -1,6 +1,17 @@
 .mat-toolbar {
   z-index: 10;
 
+  &.app-workmode-readOnly {
+    background-color: var(--app-color-info);
+
+    .app-badge {
+      &.app-workmode {
+        border: 1px solid var(--app-color-lightnes);
+        height: 30px;
+      } 
+    }
+  }
+
   .mat-mdc-button{
     --mat-text-button-horizontal-padding: 12px;
     color: var(--app-color-lightnes);
