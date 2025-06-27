@@ -16,8 +16,8 @@
         </g>
       </svg>  
     </a>
-    <div *ngIf="this.workModeRead" class="app-badge app-workmode" [ngClass]="this.workModeRead ? 'app-' + this.workModeReason : null" [matTooltip]="'workmode.' + this.workModeReason | translate">
-      {{ 'workmode.' + this.workModeReason | translate }} <mat-icon class="app-ml-2">info</mat-icon>
+    <div *ngIf="this.workModeRead" class="app-badge app-workmode" [ngClass]="this.workModeRead ? 'app-' + this.workModeReason : null" [matTooltip]="'workmode.' + this.workModeReason + '.desc' | translate">
+      {{ 'workmode.' + this.workModeReason + '.label' | translate }} <mat-icon class="app-ml-2">info</mat-icon>
     </div>
   </div>
   <div>

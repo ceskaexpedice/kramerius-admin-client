@@ -1319,8 +1319,17 @@
     "selectTypeOfRuntimeLicenseFilter":"Vyberte na které dokumenty bude licence aplikována"
   },
   "workmode": {
-    "maintenance": "Režim údržby",
-    "distributedLocksException": "Režim zamknuto",
-    "noReason": "Režim neznámý"
+    "maintenance": {
+      "label": "Režim údržby",
+      "desc": "Režim údržby znamena rezim udrzby, dude ..."
+    },
+    "distributedLocksException": {
+      "label": "Režim zamknuto",
+      "desc":  "Režim zamknuto znamena rezim zamknuto, dude ..."
+    },
+    "noReason": {
+      "label": "Režim neznámý",
+      "desc": "Režim neznámý znamena rezim neznamy, dude ..."
+    }
   }
 }
