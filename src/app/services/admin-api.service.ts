@@ -863,7 +863,7 @@ export class AdminApiService {
     return this.get(`/workmode`, {}).pipe();
   }
 
-
+  // put maintenance mod
   putWorkMode(state: boolean): Observable<any> {
     const json =  {
       readOnly: state,
