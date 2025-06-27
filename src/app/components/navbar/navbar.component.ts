@@ -96,7 +96,7 @@ export class NavbarComponent implements OnInit {
     this.adminApi.getWorkMode().subscribe(res => {
       this.workModeRead = res.readOnly;
       this.workModeReason = res.reason;
-      console.log(this.workModeRead);
+      //console.log(this.workModeRead);
     });
 
     
