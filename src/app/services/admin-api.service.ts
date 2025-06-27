@@ -862,6 +862,15 @@ export class AdminApiService {
   getWorkMode(): Observable<any> {
     return this.get(`/workmode`, {}).pipe();
   }
+
+
+  putWorkMode(state: boolean): Observable<any> {
+    const json =  {
+      readOnly: state,
+      reason: 'maintenance'
+    };
+    return this.put(`/workmode`, json);
+  }
 }
 
 export interface ProcessesParams {

@@ -16,6 +16,9 @@
         </g>
       </svg>  
     </a>
+    <mat-slide-toggle color="primary" [(ngModel)]="workModeRead" (change)="setWorkModeToMaintence()" >
+      <!-- {{ 'workmode.maintenance.label' | translate }} -->
+    </mat-slide-toggle>
     <div *ngIf="this.workModeRead" class="app-badge app-workmode" [ngClass]="this.workModeRead ? 'app-' + this.workModeReason : null" [matTooltip]="'workmode.' + this.workModeReason + '.desc' | translate">
       {{ 'workmode.' + this.workModeReason + '.label' | translate }} <mat-icon class="app-ml-2">info</mat-icon>
     </div>

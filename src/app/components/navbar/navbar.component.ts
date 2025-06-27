@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/services/app-settings';
@@ -20,13 +20,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AdminApiService } from 'src/app/services/admin-api.service'; // pedro
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
-    RouterModule, TranslateModule, MatMenuModule, MatTooltipModule],
+    RouterModule, TranslateModule, MatMenuModule, MatTooltipModule, MatSlideToggle, FormsModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
@@ -39,7 +41,7 @@ export class NavbarComponent implements OnInit {
   tokenMinutes: string;
   tokenSeconds: string;
 
-  workModeRead: boolean;
+  workModeRead: boolean = true;
   workModeReadClass: string = 'app-workmode-readOnly';
   workModeReason: string;
 
@@ -97,9 +99,7 @@ export class NavbarComponent implements OnInit {
       this.workModeRead = res.readOnly;
       this.workModeReason = res.reason;
       //console.log(this.workModeRead);
-    });
-
-    
+    });    
   }
 
   private padTo2Digits(num: number) {
@@ -146,6 +146,17 @@ export class NavbarComponent implements OnInit {
     const dialogRef = this.dialog.open(UserInfoDialogComponent, {
       panelClass: 'app-user-info-dialog',
       width: '600px'
+    });
+  }
+
+  setWorkModeToMaintence() {
+    this.adminApi.putWorkMode(this.workModeRead).subscribe(res => {
+      this.workModeRead = res.readOnly;
+      this.workModeReason = res.reason;
+      //console.log(res);
+      this.auth.loadGlobalAuthorizedActions((status: number) => {
+        console.log("Authorized actions loaded")
+      });
     });
   }
 }
