@@ -858,12 +858,12 @@ export class AdminApiService {
     return false;
   }
 
-  // return workmode endpoint
+  // return workmode endpoint / by pedro
   getWorkMode(): Observable<any> {
     return this.get(`/workmode`, {}).pipe();
   }
 
-  // put maintenance mod
+  // put maintenance mod / by pedro
   putWorkMode(state: boolean): Observable<any> {
     const json =  {
       readOnly: state,

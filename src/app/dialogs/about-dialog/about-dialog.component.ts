@@ -9,11 +9,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
+import { AdminApiService } from 'src/app/services/admin-api.service'; // pedro,
+import { AuthService } from 'src/app/services/auth.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-about-dialog',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule, FormsModule, MatSlideToggleModule,
     RouterModule, TranslateModule, MatMenuModule],
   templateUrl: './about-dialog.component.html',
   styleUrls: ['./about-dialog.component.scss']
@@ -23,7 +27,9 @@ export class AboutDialogComponent implements OnInit {
   coreInfo: any;
 
   constructor(
-    public appSettings: AppSettings
+    public appSettings: AppSettings,
+    private adminApi: AdminApiService, // pedro
+    public auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -72,5 +78,16 @@ export class AboutDialogComponent implements OnInit {
       : info['default'].hash.substring(1); //pokud je to jeste v objektu "default", je hash prefixovan 'g', viz git-info.json (generovan pred buildem)
     //console.log(hash)
     return hash;
+  }
+
+   setWorkModeToMaintence() {
+    this.adminApi.putWorkMode(this.appSettings.workModeRead).subscribe(res => {
+      this.appSettings.workModeRead = res.readOnly;
+      this.appSettings.workModeReason = res.reason;
+      //console.log(res);
+      this.auth.loadGlobalAuthorizedActions((status: number) => {
+        console.log("Authorized actions loaded")
+      });
+    });
   }
 }

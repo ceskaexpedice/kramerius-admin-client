@@ -41,10 +41,6 @@ export class NavbarComponent implements OnInit {
   tokenMinutes: string;
   tokenSeconds: string;
 
-  workModeRead: boolean = true;
-  workModeReadClass: string = 'app-workmode-readOnly';
-  workModeReason: string;
-
   public languages: string[];
   
   constructor(
@@ -96,9 +92,9 @@ export class NavbarComponent implements OnInit {
 
     // call api to return workmode endpoint
     this.adminApi.getWorkMode().subscribe(res => {
-      this.workModeRead = res.readOnly;
-      this.workModeReason = res.reason;
-      //console.log(this.workModeRead);
+      this.settings.workModeRead = res.readOnly;
+      this.settings.workModeReason = res.reason;
+      //console.log(this.settings.workModeRead);
     });    
   }
 
@@ -146,17 +142,6 @@ export class NavbarComponent implements OnInit {
     const dialogRef = this.dialog.open(UserInfoDialogComponent, {
       panelClass: 'app-user-info-dialog',
       width: '600px'
-    });
-  }
-
-  setWorkModeToMaintence() {
-    this.adminApi.putWorkMode(this.workModeRead).subscribe(res => {
-      this.workModeRead = res.readOnly;
-      this.workModeReason = res.reason;
-      //console.log(res);
-      this.auth.loadGlobalAuthorizedActions((status: number) => {
-        console.log("Authorized actions loaded")
-      });
     });
   }
 }

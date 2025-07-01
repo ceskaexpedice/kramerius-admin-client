@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="app-fxLayout app-row" [ngClass]="this.workModeRead ? 'app-workmode-readOnly' : null">
+<mat-toolbar color="primary" class="app-fxLayout app-row" [ngClass]="settings.workModeRead ? 'app-workmode-readOnly' : null">
   <div class="app-fxFlex app-fxLayout app-row app-center-v app-gap-4">
     <a routerLink="/" class="app-logo app-fxLayout">
       <svg width="125px" height="25px" viewBox="0 0 406 81" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -16,11 +16,8 @@
         </g>
       </svg>  
     </a>
-    <mat-slide-toggle color="primary" [(ngModel)]="workModeRead" (change)="setWorkModeToMaintence()" >
-      <!-- {{ 'workmode.maintenance.label' | translate }} -->
-    </mat-slide-toggle>
-    <div *ngIf="this.workModeRead" class="app-badge app-workmode" [ngClass]="this.workModeRead ? 'app-' + this.workModeReason : null" [matTooltip]="'workmode.' + this.workModeReason + '.desc' | translate">
-      {{ 'workmode.' + this.workModeReason + '.label' | translate }} <mat-icon class="app-ml-2">info</mat-icon>
+    <div *ngIf="settings.workModeRead" class="app-badge app-workmode" [ngClass]="settings.workModeRead ? 'app-' + settings.workModeReason : null" [matTooltip]="'workmode.' + settings.workModeReason + '.desc' | translate">
+      {{ 'workmode.' + settings.workModeReason + '.label' | translate }} <mat-icon class="app-ml-2">info</mat-icon>
     </div>
   </div>
   <div>

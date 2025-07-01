@@ -20,7 +20,9 @@
     <span class="app-label">Commit: </span>
     <strong><a href="https://github.com/ceskaexpedice/kramerius/commit/{{getCoreHashFull()}}" target="_blank">{{getCoreHashShort()}}</a></strong><br />
     <span class="app-label">{{ 'desc.connectedInstance' | translate }}: </span>
-    <strong><a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a></strong>
+    <strong><a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a></strong><br />
+    <span class="app-label">{{ 'workmode.maintenance.label' | translate }}: </span>
+    <mat-slide-toggle color="primary" [disabled]="appSettings.workModeRead && (appSettings.workModeReason === 'distributedLocksException' || appSettings.workModeReason === 'noReason')" [(ngModel)]="appSettings.workModeRead" (change)="setWorkModeToMaintence()"></mat-slide-toggle>
   </div>
   
 </mat-dialog-content>

@@ -47,6 +47,10 @@ export class AppSettings {
   apiMonitorLow = APP_GLOBAL.apiMonitorLow || 1500;
   apiMonitorHigh = APP_GLOBAL.apiMonitorHigh || 5000;
 
+  // work mode / by pedro
+  workModeRead: boolean = true;
+  workModeReadClass: string = 'app-workmode-readOnly';
+  workModeReason: string;
 
   interceptresponse: EventEmitter<any> = new EventEmitter<any>();
 
