@@ -1317,5 +1317,19 @@
       "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Only cover and content pages"
     },
     "selectTypeOfRuntimeLicenseFilter":"Select how to apply runtime license"
+  },
+  "workmode": {
+    "maintenance": {
+      "label": "Maintance mode",
+      "desc": "Maintance mode means maintance mode, dude ..."
+    },
+    "distributedLocksException": {
+      "label": "Locks mode",
+      "desc":  "Locks mode means locks mode, dude ..."
+    },
+    "noReason": {
+      "label": "No reason mode",
+      "desc": "No reason mode means no reason mode, dude ..."
+    }
   }
 }

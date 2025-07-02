@@ -580,3 +580,11 @@
   }
 }
 
+// angular override
+:root {
+  @include mat.slide-toggle-overrides((
+    /* selected-handle-color: white,
+    unselected-handle-color: var(--app-gray-6) */
+  ));
+}
+

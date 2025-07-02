@@ -190,6 +190,11 @@ $states: (
   duration-low: #faf7e4,
   duration-high: #faeee3,
   duration-critical: #fae3e3,
+
+  // workmode
+  maintenance: var(--app-color-success),
+  distributedLocksException: var(--app-color-warn),
+  noReason: var(--app-color-darknes)
 );
 
 // DASHBOARD

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { AppSettings } from 'src/app/services/app-settings';
@@ -19,13 +19,16 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { AdminApiService } from 'src/app/services/admin-api.service'; // pedro
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
-    RouterModule, TranslateModule, MatMenuModule, MatTooltipModule],
+    RouterModule, TranslateModule, MatMenuModule, MatTooltipModule, MatSlideToggle, FormsModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
@@ -47,7 +50,8 @@ export class NavbarComponent implements OnInit {
     public ui: UIService,
     public appSettings: AppSettings,
     private local: LocalStorageService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private adminApi: AdminApiService, // pedro
     ) { 
       this.cdkMode = settings.cdkMode;
       this.languages = appSettings.languages;
@@ -85,6 +89,13 @@ export class NavbarComponent implements OnInit {
         this.tokenSeconds = null;
       }
     });
+
+    // call api to return workmode endpoint
+    this.adminApi.getWorkMode().subscribe(res => {
+      this.settings.workModeRead = res.readOnly;
+      this.settings.workModeReason = res.reason;
+      //console.log(this.settings.workModeRead);
+    });    
   }
 
   private padTo2Digits(num: number) {

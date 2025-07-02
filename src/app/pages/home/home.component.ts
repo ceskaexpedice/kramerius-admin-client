@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppSettings } from 'src/app/services/app-settings';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class HomeComponent implements OnInit {
     public dashBoard: any;
   constructor(
     private settings: AppSettings,
-    private local: LocalStorageService
+    private local: LocalStorageService,
+    public auth: AuthService
   ) {  }
 
 
@@ -35,5 +37,12 @@ export class HomeComponent implements OnInit {
 
   setDefaultRoute(type: string, value: string) {
     this.local.setStringProperty(type, value);
+  }
+
+  allowedGlobalAction(name:string) {
+    if (this.auth.authorizedGlobalActions) {
+      let retval = this.auth.authorizedGlobalActions.indexOf(name) >= 0;
+      return retval;
+    } else return false;
   }
 }

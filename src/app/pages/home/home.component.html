@@ -10,7 +10,7 @@
 		<div class="app-container">
 			<div class="app-cards-wrapper app-fxLayout app-row app-wrap app-center-h">
 				<ng-container *ngFor="let item of dashBoard">
-					<mat-card *ngIf="!item.hidden" appearance="outlined" class="app-fxLayout app-column app-center-v">
+					<mat-card *ngIf="!item.hidden" appearance="outlined" class="app-fxLayout app-column app-center-v" [ngClass]="(item.type === 'indexing' && !allowedGlobalAction('a_index')) || (item.type === 'import' && !allowedGlobalAction('a_import')) ? 'app-disabled' : null">
 						<mat-card-header>
 							<mat-card-title>{{ 'sites.' + item.type + '.title' | translate }}</mat-card-title>
 							<mat-card-subtitle *ngIf="item.subtype">{{ 'sites.' + item.type + '.' + item.subtype + '.title' | translate }}</mat-card-subtitle>
@@ -24,7 +24,7 @@
 							</div>
 						</mat-card-content>
 						<mat-card-actions>
-							<button mat-flat-button color="accent" [routerLink]="item.subtype ? ('/' + item.type + '/' + item.subtype) : ('/' + item.type)" (click)="item.subtype ? setDefaultRoute(item.type + '.view', item.subtype) : null">
+							<button [disabled]="(item.type === 'indexing' && !allowedGlobalAction('a_index'))  || (item.type === 'import' && !allowedGlobalAction('a_import'))" mat-flat-button color="accent" [routerLink]="item.subtype ? ('/' + item.type + '/' + item.subtype) : ('/' + item.type)" (click)="item.subtype ? setDefaultRoute(item.type + '.view', item.subtype) : null">
 								<span>{{ 'button.goTo' | translate }}</span>
 								<mat-icon>arrow_forward</mat-icon>
 							</button>
