@@ -7,7 +7,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { AdminApiService } from 'src/app/services/admin-api.service'; // pedro,
@@ -29,7 +29,8 @@ export class AboutDialogComponent implements OnInit {
   constructor(
     public appSettings: AppSettings,
     private adminApi: AdminApiService, // pedro
-    public auth: AuthService
+    public auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -84,6 +85,8 @@ export class AboutDialogComponent implements OnInit {
     this.adminApi.putWorkMode(this.appSettings.workModeRead).subscribe(res => {
       this.appSettings.workModeRead = res.readOnly;
       this.appSettings.workModeReason = res.reason;
+
+
       //console.log(res);
       this.auth.loadGlobalAuthorizedActions((status: number) => {
         console.log("Authorized actions loaded")

@@ -24,6 +24,10 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 
 
+export enum WorkerModeState {
+    init, interval
+}
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -33,6 +37,8 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  
+
   // to test accesibility
   notAllowed: boolean = false;
   cdkMode: boolean;
@@ -40,6 +46,9 @@ export class NavbarComponent implements OnInit {
   tokenHours: string;
   tokenMinutes: string;
   tokenSeconds: string;
+
+  modeState: WorkerModeState = WorkerModeState.init;
+  
 
   public languages: string[];
   
@@ -58,6 +67,14 @@ export class NavbarComponent implements OnInit {
     }
 
   ngOnInit():void  {
+
+     this.adminApi.getWorkMode().subscribe(initialRes => {
+      this.settings.workModeRead = initialRes.readOnly;
+      this.settings.workModeReason = initialRes.reason;
+      this.modeState = WorkerModeState.init;
+     });
+
+
     interval(1000).subscribe(x => {
       if (AuthService.tokenDeadline) {
 
@@ -88,14 +105,31 @@ export class NavbarComponent implements OnInit {
         this.tokenMinutes = null;
         this.tokenSeconds = null;
       }
+
+
+      // call api to return workmode endpoint
+      this.adminApi.getWorkMode().subscribe(res => {
+        if (this.settings.workModeRead != res.readOnly) {
+          console.log("\t-->Settings worker mode and reason  ");
+
+          this.settings.workModeRead = res.readOnly;
+          this.settings.workModeReason = res.reason;
+
+          window.location.reload();
+
+          // if (this.modeState == WorkerModeState.interval) {
+
+          //   this.auth.loadGlobalAuthorizedActions((status: number) => {
+          //     console.log("Authorized actions loaded")
+          //   });
+  
+          // }
+          // this.modeState = WorkerModeState.interval;
+      }
+      });    
+
     });
 
-    // call api to return workmode endpoint
-    this.adminApi.getWorkMode().subscribe(res => {
-      this.settings.workModeRead = res.readOnly;
-      this.settings.workModeReason = res.reason;
-      //console.log(this.settings.workModeRead);
-    });    
   }
 
   private padTo2Digits(num: number) {
