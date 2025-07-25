@@ -58,24 +58,16 @@ export class ScheduleProcessingIndexRebuildForObjectDialogComponent implements O
     this.pidsCounter = pids.length;
     this.scheduledCounter = 0;
 
-    let requests: any[] = [];
-    pids.forEach(pid => {
-      requests.push(
-        this.adminApi.scheduleProcess({
-          defid: 'processing_rebuild_for_object',
-          params: { pid: pid }
-        }, () => this.scheduledCounter++)
-      );
-    });
-
-    this.progressBarMode = 'determinate';
-
-    forkJoin(requests).subscribe(result => {
-      this.dialogRef.close(this.scheduledCounter);
+    this.adminApi.scheduleProcess({
+      defid: 'processing_rebuild_for_object',
+      params: { pidlist: pids }
+    }).subscribe(response => {
+      this.dialogRef.close("scheduled");
     }, error => {
       console.log(error);
       this.dialogRef.close('error');
     });
+
   }
 
   splitPids(pids: string): string[] {

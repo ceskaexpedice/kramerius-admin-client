@@ -423,7 +423,6 @@ export class CdkCollectionsComponent implements OnInit {
   }
 
   openCreateCollectionBackupDialog() {
-    /*    
     const dialogRef = this.dialog.open(CreateCollectionBackupDialogComponent, {
       width: '600px',
       panelClass: 'app-create-collection-backup-dialog'
@@ -459,7 +458,6 @@ export class CdkCollectionsComponent implements OnInit {
         });
       }
    });
-   */
   }
 
   openRestoreFromCollectionBackupDialog() {

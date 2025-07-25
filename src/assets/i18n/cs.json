@@ -1321,15 +1321,15 @@
   "workmode": {
     "maintenance": {
       "label": "Režim údržby",
-      "desc": "Režim údržby znamena rezim udrzby, dude ..."
+      "desc": "Data lze pouze číst, nikoliv opravovat."
     },
     "distributedLocksException": {
-      "label": "Režim zamknuto",
-      "desc":  "Režim zamknuto znamena rezim zamknuto, dude ..."
+      "label": "Chyba zámkového serveru",
+      "desc":  "Data lze pouze číst, nikoliv opravovat."
     },
     "noReason": {
       "label": "Režim neznámý",
-      "desc": "Režim neznámý znamena rezim neznamy, dude ..."
+      "desc": "Data lze pouze číst, nikoliv opravovat."
     }
   }
 }
