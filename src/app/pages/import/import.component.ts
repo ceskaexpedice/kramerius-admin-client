@@ -36,6 +36,7 @@ export class ImportComponent implements OnInit {
   tree: Tree;
   ndkPublic: boolean = false;
   ndkIIPServer: boolean;
+  indexationType:string='indexRoots'; 
 
   scheduleIndexations: boolean;
   inputDirError: any = {};
@@ -137,7 +138,8 @@ export class ImportComponent implements OnInit {
       data: {
         type: this.type,
         licenses: this.licenses},
-      width: '630px',
+      width: '800px',
+      height: '600px', 
       panelClass: 'app-run-import-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -148,6 +150,9 @@ export class ImportComponent implements OnInit {
         this.selectedCollection = result.selectedCollection;
         this.scheduleIndexations = result.scheduleIndexation;
         this.ndkIIPServer = result.ndkIIPServer;
+        this.indexationType = result.indexationType;
+
+  
         if (this.type == 'foxml') {
           this.importFoxml();
         } else if (this.type == 'ndk') {
@@ -163,6 +168,8 @@ export class ImportComponent implements OnInit {
       inputDataDir: this.imports.selectedTree.getFullPath(),
       startIndexer: this.scheduleIndexations,
       useIIPServer: this.ndkIIPServer,
+      indexationType: this.indexationType
+
     };
 
     if (this.selectedLicense) {
@@ -190,7 +197,8 @@ export class ImportComponent implements OnInit {
         inputDataDir: this.imports.selectedTree.getFullPath(),
         startIndexer: this.scheduleIndexations,
         license: this.selectedLicense?.name,
-        collections: this.selectedCollection
+        collections: this.selectedCollection,
+        indexationType: this.indexationType
       }
     }).subscribe(response => {
       this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');

@@ -1312,6 +1312,10 @@
     "noConflict": "No conflict",
     "none":"",
     "runtimeLicense":"Runtime license",
+    "indexingSettings":"Indexing settings",
+    "indexRoots":"Complete indexation of all root titles in the package",
+    "indexNewImported": "Complete indexation of newly imported titles only, partial indexation of ancestors",   
+
     "runtimeType":{
       "ALL_DOCUMENTS":"All documents",
       "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Only cover and content pages"

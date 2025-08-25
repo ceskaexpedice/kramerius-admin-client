@@ -24,21 +24,54 @@
   </mat-form-field>
 
   <div class="app-fxLayout app-row app-gap-4">
+    
     <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" (ngModelChange)="onScheduleIndexationChange($event)" color="primary">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
+
     <ng-container *ngIf="type == 'ndk'">
       <mat-checkbox [disableRipple]="true"  *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
     </ng-container>
     <mat-checkbox [disableRipple]="true" [(ngModel)]="addCollection"  [disabled]="!scheduleIndexation"  (ngModelChange)="onSelectCollectionChange($event)" color="primary">{{ 'desc.addToCollections' | translate }}</mat-checkbox>
   </div>
  
-  <mat-form-field *ngIf="addCollection && scheduleIndexation" appearance="outline" class="app-w-100">
-    <mat-label>{{ 'desc.selectCollection' | translate }}</mat-label>
-    <mat-select  [(ngModel)]="selectedCollection" >
+  <div *ngIf="scheduleIndexation" class="border p-4 rounded-md shadow-sm bg-gray-50 mt-4">
+
+</div>
+
+<mat-card *ngIf="scheduleIndexation" class="mt-4">
+  <mat-card-content>
+    <div class="mat-body-1 font-semibold mb-3">
+      {{ 'desc.indexingSettings' | translate }}
+    </div>
+
+    <mat-radio-group [(ngModel)]="indexationType" name="indexingType" color="primary" class="flex flex-col app-gap-2">
+      <mat-radio-button [disableRipple]="true" value="indexRoots">
+        {{ 'desc.indexRoots' | translate }}
+      </mat-radio-button>
+      <mat-radio-button [disableRipple]="true" value="indexNewImported">
+        {{ 'desc.indexNewImported' | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+
+
+</mat-card>
+
+
+<mat-card *ngIf="addCollection && scheduleIndexation" class="mt-4">
+  <mat-card-content>
+    <div class="mat-body-1 font-semibold mb-3">
+      {{ 'desc.selectCollection' | translate }}
+    </div>
+
+    <mat-select [(ngModel)]="selectedCollection" class="app-w-100">
       <mat-option *ngFor="let collection of allCollections" [value]="collection">
         {{ name(collection) }}
       </mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
