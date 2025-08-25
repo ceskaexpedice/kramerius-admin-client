@@ -1312,6 +1312,9 @@
     "noConflict": "Nenalezen žádný konflikt",
     "none":"",
     "runtimeLicense":"Runtime licence",
+    "indexingSettings":"Nastavení indexeru",
+    "indexRoots":"Kompletní indexace všech kořenových titulů v balíčku",
+    "indexNewImported": "Kompletní indexace pouze nově importovaných, částečná indexace předků",   
     "runtimeType":{
       "ALL_DOCUMENTS":"Všechny dokumenty",
       "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Pouze obálky a obsahy"

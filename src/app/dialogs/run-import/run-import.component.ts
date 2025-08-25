@@ -12,6 +12,7 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRippleModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRadioButton } from '@angular/material/radio';
 
 
 @Component({
@@ -31,7 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [CommonModule, RouterModule, TranslateModule, 
     FormsModule,  MatFormFieldModule, MatInputModule, 
     MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule,
-    MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule
+    MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule 
      ],
   selector: 'app-run-import',
   templateUrl: './run-import.component.html',
@@ -48,7 +50,7 @@ export class RunImportComponent implements OnInit {
    lang: string;
 
    
-
+  indexationType:string='indexNewImported';
 
   selectedCollection:Collection;
   allCollections:Collection[];
@@ -179,7 +181,9 @@ export class RunImportComponent implements OnInit {
       selectedLicense:  this.selectedLicense,
       scheduleIndexation: this.scheduleIndexation,
       ndkIIPServer: this.ndkIIPServer,
-      selectedCollection: this.selectedCollection?.id 
+      selectedCollection: this.selectedCollection?.id,
+      indexationType: this.indexationType
+
     };
     this.dialogRef.close(data);
   }
