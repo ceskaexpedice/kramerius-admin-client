@@ -13,6 +13,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { debounceTime, Subject, switchMap, takeUntil } from 'rxjs';
+import { ClientApiService } from 'src/app/services/client-api.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   standalone: true,
@@ -33,6 +36,9 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
   title;
   fixed = false;
 
+  /** all licenses used for pids  */
+  allUSedLicenses:string[] = [];
+
   licenses;
   license;
 
@@ -40,8 +46,16 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
   scheduledCounter = 0;
   progressBarMode: ProgressBarMode = 'indeterminate';
 
-  constructor(public dialogRef: MatDialogRef<ScheduleRemoveLicenseDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private adminApi: AdminApiService) {
+
+  private pidsChanged$ = new Subject<string>();
+
+
+  constructor(public dialogRef: MatDialogRef<ScheduleRemoveLicenseDialogComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: any,
+     private adminApi: AdminApiService,
+    private clientApi: ClientApiService) {
     if (data) {
+    
       this.fixed = true;
       this.pids = data.pid;
       this.title = data.title;
@@ -50,6 +64,32 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
     } else {
       this.fetchAvailableLicenses();
     }
+
+    //     this.subject.pipe(
+    //   debounceTime(400)
+    // ).subscribe(pids => {
+    //   this.isLibsLoading = true;
+    //   this.options.forEach(opt=> {
+    //     opt.selected = false;
+    //     opt.doc = null;
+    //   });
+    //   const pidlist = this.splitPids(pids);
+    //   let rootpids: string[] = [];
+    //   let pidpaths:string[] = [];
+    //   let enabled: string[] = [];
+    //   let fdocs: Record<string, any[]> = {};
+
+
+
+    this.pidsChanged$
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe((pidsString) => {
+        this.getLicensesForPids(pidsString);
+        //console.log("Licenses ... ");
+      });
+
   }
 
   fetchAvailableLicenses() {
@@ -120,9 +160,40 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
     el.click();
   }
 
+  onPidsChanged(pids: string) {
+    this.pidsChanged$.next(pids);
+  }
+
   isValid() {
     //return form.valid //nefunguje, kdyz je textarea disabled (protoze fixed)
     return this.pids && this.license;
   }
 
+  getLicensesForPids(pidsString:string): any {
+
+    this.allUSedLicenses = [];
+
+    let pids = this.splitPids(pidsString);
+    const query = pids.map(pid => `pid:"${pid}"`).join(' OR ');
+
+    let params:HttpParams = new HttpParams()
+    .set('q', query)
+    .set('rows', pids.length.toString())
+    .set('fl', 'pid, licenses');
+    
+    this.clientApi.search(params).subscribe(docs => {
+      console.log(docs);
+      docs.forEach(doc=> {
+        let doclicenses = doc['licenses'];
+        this.allUSedLicenses = Array.from(new Set([...this.allUSedLicenses, ...doclicenses]));  
+        console.log(this.allUSedLicenses);
+      });
+    });
+    
+    //this.clientApi.search
+  }
+
+
 }
+
+
