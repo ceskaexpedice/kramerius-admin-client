@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChange
 import { Collection } from 'src/app/models/collection.model';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic/';
 import '@ckeditor/ckeditor5-build-classic/build/translations/cs';
+import coreTranslations from 'ckeditor5/translations/cs.js';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UIService } from 'src/app/services/ui.service';
 import { CollectionsService } from 'src/app/services/collections.service';
@@ -22,6 +23,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { List } from 'echarts';
 
 @Component({
   standalone: true,
@@ -39,11 +41,21 @@ export class CollectionEditComponent implements OnInit {
   editorCze = ClassicEditor; //BalloonEditor;
   editorEng = ClassicEditor; //BalloonEditor;
 
-  editorConfig = {
-    // placeholder: 'Popis sbírky',
-    language: 'cs',
-    toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'],
-  };
+  // editorConfig = {
+  //   // placeholder: 'Popis sbírky',
+  //   language: 'cs',
+  //   toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'],
+  // };
+
+  public editorConfig = {
+    translations: [
+            coreTranslations
+        ],
+      licenseKey: 'GPL',
+      language: 'cs',
+      toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote' ],
+      placeholder: 'Popis sbírky...'
+  }
 
   keywordToDelete: string = '';
 
