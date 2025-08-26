@@ -58,10 +58,12 @@
           </ng-container>
           <ng-container matColumnDef="description_cze">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.description' | translate }}</th>
-            <td mat-cell *matCellDef="let element" [matTooltip]="allowEdit(element.id) ? element.descriptions[displayLanguage()] : null">
-              <div class="app-text-cutter-wrapper">
-                <div class="app-text-cutter">
-                  {{ element.descriptions[displayLanguage()] }}
+            <td mat-cell *matCellDef="let element" 
+            
+            [matTooltip]="allowEdit(element.id) ? element.descriptions[displayLanguage()] : null">
+            
+            <div class="app-text-cutter-wrapper">
+                <div class="app-text-cutter" [innerHTML]="element.descriptions[displayLanguage()]">
                 </div>
               </div>
             </td>
