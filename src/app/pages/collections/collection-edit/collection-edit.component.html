@@ -47,7 +47,11 @@
 
   <div>
     <div class="app-label app-mb-2">{{ 'desc.fullDescriptionOfTheCollection'  | translate }} ({{ 'lang.' + lang | translate }})</div>
-    <ckeditor [config]="editorConfig" [editor]="editorCze" required [ngModel]="content" (ngModelChange)="onModelLangChange('contents', $event)" data="" name="text"></ckeditor>
+    <ckeditor [config]="editorConfig" 
+   
+    [editor]="Editor"
+
+    required [ngModel]="content" (ngModelChange)="onModelLangChange('contents', $event)" data="" name="text"></ckeditor>
   </div>
 
   <div class="app-fxLayout app-row app-gap-2">

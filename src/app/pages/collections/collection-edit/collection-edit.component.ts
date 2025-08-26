@@ -41,6 +41,8 @@ export class CollectionEditComponent implements OnInit {
   editorCze = ClassicEditor; //BalloonEditor;
   editorEng = ClassicEditor; //BalloonEditor;
 
+  public Editor = ClassicEditor as any;
+
   // editorConfig = {
   //   // placeholder: 'Popis sbírky',
   //   language: 'cs',
