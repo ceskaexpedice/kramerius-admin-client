@@ -7,7 +7,11 @@
 		<div>
 			<mat-form-field appearance="outline" class="app-w-100 app-download">
 				<mat-label>{{fixed ? 'PID' : ('desc.pids' | translate) }}</mat-label>
-				<textarea matInput type="text" id="inputPids" name="pids" autofocus [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate ) + '...'" [disabled]="inProgress || fixed" required rows="{{fixed ? 1 : 4}}"></textarea>
+				<textarea matInput type="text" id="inputPids" name="pids" autofocus 
+				[(ngModel)]="pids" 
+				 (ngModelChange)="onPidsChanged($event)"
+
+				[placeholder]="('desc.insertPidsHere' | translate ) + '...'" [disabled]="inProgress || fixed" required rows="{{fixed ? 1 : 4}}"></textarea>
 				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed" class="app-cursor-pointer">file_download</mat-icon>
 			</mat-form-field>
 			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
@@ -20,13 +24,21 @@
 		<div>
 			<mat-form-field appearance="outline" class="app-w-100">
 				<mat-select [placeholder]="'desc.license' | translate" [(value)]="license" name="license" required [disabled]="inProgress || fixed">
-					<mat-option *ngFor="let lic of licenses" [value]="lic.name">
+					<mat-option *ngFor="let lic of licenses" 
+					[value]="lic.name"
+					 [ngClass]="{'app-used-license': allUSedLicenses.includes(lic.name)}"
+					>
 						{{lic.name }}
 						<i *ngIf="lic.description">  - {{lic.description}} </i>
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
+		
+		<p class="app-licenses">
+			  {{ allUSedLicenses }}
+		</p>
+		
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
 		<button mat-flat-button [disabled]="inProgress || !isValid()" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>

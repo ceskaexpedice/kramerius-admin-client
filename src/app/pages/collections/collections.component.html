@@ -63,7 +63,7 @@
             [matTooltip]="allowEdit(element.id) ? element.descriptions[displayLanguage()] : null">
             
             <div class="app-text-cutter-wrapper">
-                <div class="app-text-cutter" [innerHTML]="element.descriptions[displayLanguage()]">
+                <div class="app-text-cutter" [innerHTML]="sanitizeText(element.descriptions[displayLanguage()])">
                 </div>
               </div>
             </td>

@@ -470,14 +470,18 @@ export class CollectionsComponent implements OnInit {
         });
       }
     });
-    // this.routerLink = routerLink;
+  }
 
-    // this.dialogRef.close(
-    //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-    //   this.router.navigate([routerLink]))
-    // );
 
-    // this.ui.showInfoSnackBar('snackbar.success.startTheProcess');
-
+  sanitizeText(textOrArray: string | string[]): string {
+    let text = '';
+    if (Array.isArray(textOrArray)) {
+      text = textOrArray.join(' ');
+    } else {
+      text = textOrArray || '';
+    }
+    text = text.replace(/<[^>]+>/g, '');
+    text = text.replace(/(\r\n|\n|\r)/gm, ' ');
+    return text.trim();
   }
 }
