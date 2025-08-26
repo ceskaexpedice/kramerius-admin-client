@@ -186,7 +186,12 @@ export class ScheduleRemoveLicenseDialogComponent implements OnInit {
       docs.forEach(doc=> {
         let doclicenses = doc['licenses'];
         this.allUSedLicenses = Array.from(new Set([...this.allUSedLicenses, ...doclicenses]));  
-        console.log(this.allUSedLicenses);
+
+        this.licenses.sort((a:any, b:any) => {
+          const aUsed = this.allUSedLicenses.includes(a.name) ? 0 : 1;
+          const bUsed = this.allUSedLicenses.includes(b.name) ? 0 : 1;
+          return aUsed - bUsed;
+        });
       });
     });
     
