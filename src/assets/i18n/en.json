@@ -1085,6 +1085,11 @@
     }
   },
   "desc": {
+    "typeOfImport" :"Type of import",
+    "typeOfImport_import": "Full import",
+    "typeOfImport_import_desc": "Performs a full import, including relationships.",
+    "typeOfImport_update": "Metadata update",
+    "typeOfImport_update_desc": "Performs only an update of bibliographic data (BiblioMods and DC). Note: a full re-indexing will be triggered.",
     "addToCollections":"Add to collection",
     "noCollection":"No collection",
     "selectCollection":"Select collection",

@@ -38,6 +38,8 @@ export class ImportComponent implements OnInit {
   ndkIIPServer: boolean;
   indexationType:string='indexRoots'; 
 
+  importType:string = 'import'; // update vs import - only in foxml
+
   scheduleIndexations: boolean;
   inputDirError: any = {};
 
@@ -142,6 +144,16 @@ export class ImportComponent implements OnInit {
       height: '600px', 
       panelClass: 'app-run-import-dialog'
     });
+
+    /*
+          selectedLicense:  this.selectedLicense,
+      scheduleIndexation: this.scheduleIndexation,
+      ndkIIPServer: this.ndkIIPServer,
+      selectedCollection: this.selectedCollection?.id,
+      indexationType: this.indexationType,
+      importType: this.importType
+    */
+
     dialogRef.afterClosed().subscribe(result => {
 
 
@@ -151,10 +163,14 @@ export class ImportComponent implements OnInit {
         this.scheduleIndexations = result.scheduleIndexation;
         this.ndkIIPServer = result.ndkIIPServer;
         this.indexationType = result.indexationType;
-
+        this.importType = result.importType;  
   
         if (this.type == 'foxml') {
-          this.importFoxml();
+          if (this.importType == 'import') {
+            this.importFoxml();
+          } else {
+            this.updateFoxml();            
+          }  
         } else if (this.type == 'ndk') {
           this.importNdk();
         }
@@ -189,6 +205,25 @@ export class ImportComponent implements OnInit {
     });
   }
 
+
+  updateFoxml() {
+    this.api.scheduleProcess({
+      defid: 'update',
+      params: {
+        inputDataDir: this.imports.selectedTree.getFullPath(),
+        startIndexer: this.scheduleIndexations
+        //license: this.selectedLicense?.name,
+        //collections: this.selectedCollection,
+        //indexationType: this.indexationType
+      }
+    }).subscribe(response => {
+      this.ui.showInfoSnackBar('snackbar.success.scheduleImportProcess');
+    }, error => {
+      this.ui.showInfoSnackBar('snackbar.error.scheduleImportProcess');
+      console.log(error);
+    });
+
+  }
 
   importFoxml() {
     this.api.scheduleProcess({

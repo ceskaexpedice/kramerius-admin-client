@@ -12,7 +12,7 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatRadioChange, MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,15 +26,15 @@ import { MatRippleModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioButton } from '@angular/material/radio';
+import { MatDivider } from "@angular/material/divider";
 
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, 
-    FormsModule,  MatFormFieldModule, MatInputModule, 
+  imports: [CommonModule, RouterModule, TranslateModule,
+    FormsModule, MatFormFieldModule, MatInputModule,
     MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule,
-    MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule 
-     ],
+    MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule, MatDivider],
   selector: 'app-run-import',
   templateUrl: './run-import.component.html',
   styleUrls: ['./run-import.component.scss']
@@ -51,6 +51,7 @@ export class RunImportComponent implements OnInit {
 
    
   indexationType:string='indexNewImported';
+  importType:string = 'import';
 
   selectedCollection:Collection;
   allCollections:Collection[];
@@ -82,11 +83,6 @@ export class RunImportComponent implements OnInit {
     this.languages = this.appSettings.languages;
     this.lang = this.appSettings.defaultLang;
     this.collectionsReload();
-    // this.subject.pipe(
-    //   debounceTime(400)
-    // ).subscribe(searchTextValue => {
-    //   this.collectionsReload();
-    // });
   }
 
   displayLanguage() {
@@ -182,10 +178,20 @@ export class RunImportComponent implements OnInit {
       scheduleIndexation: this.scheduleIndexation,
       ndkIIPServer: this.ndkIIPServer,
       selectedCollection: this.selectedCollection?.id,
-      indexationType: this.indexationType
+      indexationType: this.indexationType,
+      importType: this.importType
 
     };
     this.dialogRef.close(data);
+  }
+
+  onImportTypeChange(event: MatRadioChange): void {
+    if (event.value === 'update') {
+      this.indexationType = 'indexRoots';
+      this.addCollection = false;
+    } else if (event.value === 'import') {
+      this.indexationType = 'indexNewImported';
+    }
   }
 
 }

@@ -1085,6 +1085,11 @@
     }
   },
   "desc": {
+    "typeOfImport" :"Typ importu",
+    "typeOfImport_import": "Plný import",
+    "typeOfImport_import_desc": "Provede plný import včetně vazeb.",
+    "typeOfImport_update": "Pouze update metadat",
+    "typeOfImport_update_desc": "Provede pouze update bibliografických dat (BiblioMods a DC). Poznámka: spouští se plná indexace.",
     "addToCollections":"Přidat do sbírky",
     "noCollection":"Žádná sbírka",
     "selectCollection":"Vyber sbírku",
@@ -1144,7 +1149,7 @@
     "managed": "Upraveno",
     "collectionName": "Název sbírky",
     "english": "Anglický",
-    "separateCollection": "Samostatná sbírka",
+    "separateCollection": "Samostatná sbírka/samostatně viditelná v digitální knihovně",
     "shortDescriptionOfTheCollection": "Krátky popis sbírky",
     "fullDescriptionOfTheCollection": "Úplný popis sbírky",
     "yes": "Ano",
