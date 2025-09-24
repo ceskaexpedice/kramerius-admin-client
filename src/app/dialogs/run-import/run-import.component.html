@@ -30,8 +30,6 @@
     </ng-container>
     <mat-checkbox [disableRipple]="true" [(ngModel)]="addCollection" [disabled]="!scheduleIndexation || importType=='update'"  (ngModelChange)="onSelectCollectionChange($event)" color="primary">{{ 'desc.addToCollections' | translate }}</mat-checkbox>
   </div>
- 
-  <!-- <div *ngIf="scheduleIndexation" class="border p-4 rounded-md shadow-sm bg-gray-50 mt-4"></div> -->
 
   <mat-form-field appearance="outline" *ngIf="addCollection && scheduleIndexation">
      <mat-label>{{ 'desc.selectCollection' | translate }}</mat-label>
@@ -83,30 +81,6 @@
       </mat-radio-group>
     </mat-card-content>
   </mat-card>
-
-  <!-- <mat-card *ngIf="scheduleIndexation" class="mt-4">
-    <mat-card-content>
-      <div class="mat-body-1 font-semibold mb-3">
-        {{ 'desc.indexingSettings' | translate }}
-      </div>
-
-      <mat-radio-group [(ngModel)]="indexationType" 
-        name="indexingType" 
-        color="primary" 
-        class="flex flex-col app-gap-2">
-        <mat-radio-button [disableRipple]="true"
-          value="indexRoots"
-          [disabled]="importType == 'update'">
-          {{ 'desc.indexRoots' | translate }}
-        </mat-radio-button>
-        <mat-radio-button [disableRipple]="true" 
-          value="indexNewImported"
-          [disabled]="importType == 'update'">
-          {{ 'desc.indexNewImported' | translate }}
-        </mat-radio-button>
-      </mat-radio-group>
-    </mat-card-content>
-  </mat-card> -->
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

@@ -34,7 +34,7 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
   pids;
   title;
   fixed = false;
-  ignoreIncosistencies:boolean = false;
+  ignoreIncosistencies:boolean = true;
 
   pidsCounter = 0;
   scheduledCounter = 0;
