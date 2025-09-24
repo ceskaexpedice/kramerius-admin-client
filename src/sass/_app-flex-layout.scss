@@ -26,6 +26,10 @@
     place-content: center;
   }
 
+  &.app-start-v {
+    align-items: start;
+  }
+
   &.app-fill {
     height: 100%; 
     min-height: 100%; 
@@ -42,6 +46,14 @@
   &.app-center-v {
     align-self: center;
   }
+}
+
+.app-as-start {
+  align-self: start;
+}
+
+.app-as-end {
+  align-self: end;
 }
 
 .app-jc-start {

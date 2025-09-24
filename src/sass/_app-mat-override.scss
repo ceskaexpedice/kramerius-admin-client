@@ -616,6 +616,16 @@
         }
       }
     }
+
+    &.app-label-more-lines  {
+      align-self: start !important;
+
+      .mat-mdc-radio-button {
+        .mdc-radio { 
+          align-self: start;
+        }
+      }
+    }
   }
 }
 
