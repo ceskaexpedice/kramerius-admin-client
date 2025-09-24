@@ -586,5 +586,46 @@
     /* selected-handle-color: white,
     unselected-handle-color: var(--app-gray-6) */
   ));
+  
+
+  @include mat.radio-overrides((
+    state-layer-size: calc(var(--app-radio-button-size) * 2)
+  ));
+  .mat-mdc-radio-group {
+    .mat-mdc-radio-button {
+      --mat-radio-state-layer-size: calc(var(--app-radio-button-size) * 2);
+      margin-right: 8px;
+
+      .mdc-radio__background::before {
+        top: calc(-1 * (var(--mat-radio-state-layer-size, 40px) - var(--app-radio-button-size)) / 2) !important;
+        left: calc(-1 * (var(--mat-radio-state-layer-size, 40px) - var(--app-radio-button-size)) / 2) !important;
+      }
+    
+      .mdc-radio {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    
+        .mdc-radio__background {
+          height: var(--app-radio-button-size);
+          width: var(--app-radio-button-size);
+    
+          .mdc-radio__inner-circle {
+            border-width: calc(var(--app-radio-button-size) / 2);
+          }
+        }
+      }
+    }
+
+    &.app-label-more-lines  {
+      align-self: start !important;
+
+      .mat-mdc-radio-button {
+        .mdc-radio { 
+          align-self: start;
+        }
+      }
+    }
+  }
 }
 

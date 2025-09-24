@@ -9,9 +9,6 @@
 			<div class="app-explanation" [innerHtml]="'modal.deleteObjectsSmart.explanation' | translate"></div>
 		</ng-container>
 		<div>
-			<mat-checkbox class="app-desc" [(ngModel)]="ignoreIncosistencies" name="ignoreIncosistencies">Pokračuj pokud není dokument v akubra repositáři</mat-checkbox>  
-		</div>
-		<div>
 			<mat-form-field appearance="outline" class="app-w-100 app-download">
 				<mat-label>{{fixed ? 'PID' : ('desc.pids' | translate) }}</mat-label>
 				<textarea matInput type="text" id="inputPids" name="pids" autofocus [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate ) + '...'" [disabled]="inProgress || fixed" required rows="{{fixed ? 1 : 4}}"></textarea>
