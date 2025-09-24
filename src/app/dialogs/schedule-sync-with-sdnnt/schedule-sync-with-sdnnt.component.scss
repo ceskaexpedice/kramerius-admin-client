@@ -1,5 +1,5 @@
-.mat-table {
-  .mat-row {
+.mat-mdc-table {
+  .mat-mdc-row {
     &.app-detail-row {
       height: 0;
     }
@@ -14,7 +14,7 @@
       background-color: var(--app-gray-1);
     }
 
-    .mat-cell {
+    .mat-mdc-cell {
       &.mat-column-pid {
         width: 380px;
       }
