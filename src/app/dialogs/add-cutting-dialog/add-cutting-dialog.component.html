@@ -1,17 +1,16 @@
 <h2 mat-dialog-title>{{ 'modal.addCutting.title' | translate }}</h2>
-<mat-dialog-content>
-  
-  <mat-form-field class="app-w-100">
+<mat-dialog-content class="app-fxLayout app-column app-gap-4 app-form-customize">
+  <mat-form-field appearance="outline">
     <mat-label>{{ 'desc.cuttingName' | translate }}</mat-label>
     <input type="text" matInput [(ngModel)]="name" [placeholder]="'desc.cuttingName' | translate">
   </mat-form-field>
   
-  <mat-form-field class="app-w-100">
+  <mat-form-field appearance="outline">
     <mat-label>{{ 'desc.cuttingDesc' | translate }}</mat-label>
-    <input type="text" matInput [(ngModel)]="description" [placeholder]="'desc.cuttingDesc' | translate">
+    <textarea matInput [(ngModel)]="description" [placeholder]="'desc.cuttingDesc' | translate"></textarea>
   </mat-form-field>
   
-  <mat-form-field class="app-w-100">
+  <mat-form-field appearance="outline">
     <mat-label>{{ 'desc.cuttingUrl' | translate }}</mat-label>
     <input type="text" matInput  [(ngModel)]="url" [placeholder]="'desc.cuttingUrl' | translate">
     <mat-icon *ngIf="!isClipUrl()" matPrefix class="app-mr-2 app-va-text-botttom">link</mat-icon>
@@ -20,7 +19,6 @@
       Neplatná URL adresa
     </div>
   </mat-form-field>
-  
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-flat-button [disabled]="disableAddButton()" color="primary" type="submit" (click)="onSave()">{{ 'button.add' | translate }}</button>
