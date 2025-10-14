@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+
+import { DateAdapter } from '@angular/material/core'; 
+
 import { Subject, Observable } from 'rxjs';
 
 @Injectable()
@@ -11,7 +14,8 @@ export class UIService {
 
   constructor(
     private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dateAdapter: DateAdapter<any> 
     ) {
   }
 
@@ -32,6 +36,10 @@ export class UIService {
   }
 
   changeLang(lang: string) {
+    const localeCode = lang === 'cs' ? 'cs-CZ' : 'en-US';
+
+    this.dateAdapter.setLocale(localeCode);
+
     this.translate.use(lang).subscribe(val => {
       this.currentLang = lang;
       localStorage.setItem("lang", this.currentLang);
