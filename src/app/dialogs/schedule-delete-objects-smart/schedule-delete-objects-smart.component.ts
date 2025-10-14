@@ -67,7 +67,7 @@ export class ScheduleDeleteObjectsSmartComponent implements OnInit {
           params: {
             pid: pid,
             title: this.title,
-            ignoreIncosistencies:  formData['ignoreIncosistencies']
+            ignoreIncosistencies:  true
           }
         })
       );
