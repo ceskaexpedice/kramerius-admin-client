@@ -316,6 +316,8 @@ export class ObjectComponent implements OnInit {
           params: {
             pid: this.pid,
             title: this.title,
+            ignoreIncosistencies:  true
+
           }
         }).subscribe(result => {
           this.ui.showInfoSnackBar("snackbar.success.deleteObjectSmart");
