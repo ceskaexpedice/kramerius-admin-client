@@ -207,7 +207,7 @@
               </mat-select>
             </mat-form-field>
             <mat-action-row>
-              <button mat-flat-button color="primary" (click)="openObjectInAltoeditor(selectedAltoeditorServer.domain)" [disabled]="!selectedAltoeditorServer.domain">{{ 'button.editObject' | translate }}</button>
+              <button mat-flat-button color="primary" (click)="openObjectInAltoeditor(selectedAltoeditorServer.domain, selectedAltoeditorServer.krameriusInstance)" [disabled]="!selectedAltoeditorServer.domain">{{ 'button.editObject' | translate }}</button>
             </mat-action-row>
           </mat-expansion-panel>
         </mat-accordion>

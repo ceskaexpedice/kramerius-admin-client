@@ -546,8 +546,8 @@ export class ObjectComponent implements OnInit {
     window.open(domain + '/kramerius/' + this.inputPid + '?instance=' + krameriusInstance, "_blank");
   }
 
-  openObjectInAltoeditor(domain: string) {
-    window.open(domain + '/' + this.inputPid + '/editing', "_blank");
+  openObjectInAltoeditor(domain: string, krameriusInstance: string) {
+    window.open(domain + '/' + this.inputPid + '/editing'+'?instance=' + krameriusInstance, "_blank");
   }
 }
 
