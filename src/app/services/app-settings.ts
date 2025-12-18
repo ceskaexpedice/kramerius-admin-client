@@ -6,7 +6,7 @@ declare var APP_GLOBAL: any;
 
 @Injectable()
 export class AppSettings {
-  static adminClientVersion = "1.5.7" + (!!APP_GLOBAL.devMode ? "-dev" : "");
+  static adminClientVersion = "1.5.8" + (!!APP_GLOBAL.devMode ? "-dev" : "");
 
 
 
