@@ -47,3 +47,15 @@
     }
   }
 }
+
+.app-uuid-style {
+  display: inline-block;
+  max-width: 50px;         
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  white-space: nowrap;
+  font-family: monospace;   
+  font-size: 12px;
+  color: #777;              
+  vertical-align: middle;
+}
