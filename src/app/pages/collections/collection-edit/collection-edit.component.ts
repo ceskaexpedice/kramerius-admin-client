@@ -12,7 +12,7 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +24,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { List } from 'echarts';
+import { catchError, map, of, switchMap, take } from 'rxjs';
+import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
   standalone: true,
@@ -43,20 +45,15 @@ export class CollectionEditComponent implements OnInit {
 
   public Editor = ClassicEditor as any;
 
-  // editorConfig = {
-  //   // placeholder: 'Popis sbírky',
-  //   language: 'cs',
-  //   toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'],
-  // };
 
   public editorConfig = {
     translations: [
-            coreTranslations
-        ],
-      licenseKey: 'GPL',
-      language: 'cs',
-      toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote' ],
-      placeholder: 'Popis sbírky...'
+      coreTranslations
+    ],
+    licenseKey: 'GPL',
+    language: 'cs',
+    toolbar: ['undo', 'redo', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'blockQuote'],
+    placeholder: 'Popis sbírky...'
   }
 
   keywordToDelete: string = '';
@@ -65,20 +62,19 @@ export class CollectionEditComponent implements OnInit {
   collectionName: string;
   mode = 'none';
   state = 'none';
-  author='';
+  author = '';
 
-  //test ='testovacimodel'
 
-  keyword:string;
+  keyword: string;
 
-  name:string;
-  description:string;
+  name: string;
+  description: string;
   content: string;
-  standalone:boolean = false;
-  langs:string[];
+  standalone: boolean = false;
+  langs: string[];
 
   @Input() colId: string;
-  @Input() lang:any;
+  @Input() lang: any;
 
   @Output() updated = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
@@ -90,6 +86,7 @@ export class CollectionEditComponent implements OnInit {
     private router: Router,
     private collectionsService: CollectionsService,
     private clientService: ClientApiService,
+    private adminService: AdminApiService,
     private isoConvert: IsoConvertService,
     private dialog: MatDialog) {
   }
@@ -123,7 +120,7 @@ export class CollectionEditComponent implements OnInit {
 
   private initCollectionLangValues() {
     this.langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
-    
+
     this.name = '';// + this.langs;
     this.description = '';
     this.content = '';
@@ -134,15 +131,15 @@ export class CollectionEditComponent implements OnInit {
       this.langs.forEach(l => {
         if (this.collection.names[l]) {
           this.name = this.collection.names[l];
-        }      
+        }
         if (this.collection.descriptions[l]) {
           this.description = this.collection.descriptions[l];
-        }      
+        }
         if (this.collection.contents[l]) {
           this.content = this.collection.contents[l];
         }
       });
-      
+
       this.author = this.collection.author;
 
       this.standalone = this.collection.standalone;
@@ -163,31 +160,31 @@ export class CollectionEditComponent implements OnInit {
     this.initCollectionLangValues();
   }
 
-  onModelLangChange(key:string, newValue: string) {
+  onModelLangChange(key: string, newValue: string) {
     this.langs.forEach(l => {
       this.collection[key][l] = newValue;
     });
   }
 
-  onStandaloChange(std:boolean) {
+  onStandaloChange(std: boolean) {
     this.collection.standalone = std;
   }
 
-  onAuthorChange(auth:string) {
+  onAuthorChange(auth: string) {
     this.collection.author = auth;
   }
 
-  reloadtimestamp:number;
+  reloadtimestamp: number;
 
   getThumb(col: any) {
     if (col) {
       if (this.reloadtimestamp) {
-        return this.clientService.getThumb(col.id)+"?reloadtimestap="+this.reloadtimestamp;
+        return this.clientService.getThumb(col.id) + "?reloadtimestap=" + this.reloadtimestamp;
 
       } else {
         return this.clientService.getThumb(col.id);
       }
-    }     
+    }
     else return 'assets/img/no-image.png';
   }
 
@@ -195,20 +192,20 @@ export class CollectionEditComponent implements OnInit {
 
     const file: File = event.target.files[0];
     if (file) {
-      this.collectionsService.uploadCollectionThumbnail(this.colId, file).subscribe(s=> {
+      this.collectionsService.uploadCollectionThumbnail(this.colId, file).subscribe(s => {
         this.reloadtimestamp = (new Date()).getTime();
         console.log(s);
       }, error => {
         console.log(error);
-    }); 
-  }
-  // }).subscribe(response => {
-  //   this.dialogRef.close("scheduled");
-  //   this.ui.showInfoSnackBar('snackbar.success.changeFlagOnLicense');
-  // }, error => {
-  //   console.log(error);
-  //   this.dialogRef.close('error');
-  // });
+      });
+    }
+    // }).subscribe(response => {
+    //   this.dialogRef.close("scheduled");
+    //   this.ui.showInfoSnackBar('snackbar.success.changeFlagOnLicense');
+    // }, error => {
+    //   console.log(error);
+    //   this.dialogRef.close('error');
+    // });
 
   }
 
@@ -216,10 +213,10 @@ export class CollectionEditComponent implements OnInit {
     let retvals: any[] = [];
     if (this.collection) {
       let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
-      langs.forEach(l=> {
+      langs.forEach(l => {
         if (this.collection.keywords[l]) {
 
-          this.collection.keywords[l].forEach((k: any)=>{
+          this.collection.keywords[l].forEach((k: any) => {
             retvals.push(k);
           });
         }
@@ -232,12 +229,12 @@ export class CollectionEditComponent implements OnInit {
   newKeyword() {
 
     let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
-    langs.forEach(l=> {
+    langs.forEach(l => {
 
       if (!this.collection.keywords[l]) {
         this.collection.keywords[l] = [];
       }
-  
+
       if (this.keyword) {
         this.collection.keywords[l].push(this.keyword);
         this.keyword = '';
@@ -246,36 +243,63 @@ export class CollectionEditComponent implements OnInit {
 
   }
 
-  
 
 
-  onSave() {
 
-    this.collectionsService.createCollection(this.collection).subscribe(response => {
-      const dialogRef = this.dialog.open(CreateNewCollectionDialogComponent, {
-        data: response,
-        width: '600px',
-        panelClass: 'app-create-new-collection-dialog'
-      });
-    },
-      (error) => {
-        console.log(error);
-        this.ui.showErrorSnackBar("snackbar.error.collectionHasBeenCreated");
-      });
+onSave() {
+  this.collectionsService.createCollection(this.collection)
+    .pipe(
+      take(1), 
+      switchMap((response: any) => {
+        if (response && response.scheduleMainProcess) {
+          const scheduleData = response.scheduleMainProcess;
+          return this.adminService.scheduleProcess({
+            defid: scheduleData.profileId,
+            params: scheduleData.payload
+          }).pipe(
+            map((processRes) => {
+              return { 
+                collection: response, 
+                process: processRes 
+              };
+            }),
+            catchError(err => {
+              this.ui.showErrorSnackBar("Kolekce vytvořena, ale plánování procesu selhalo");
+              return of(response); 
+            })
+          );
+        }
+       return of({ collection: response, process: null });
+      })
+    )
+    .subscribe({
+      next: (combinedData) => {
+        this.dialog.open(CreateNewCollectionDialogComponent, {
+          //data: combinedData.collection,
+          data: combinedData,
+          width: '600px',
+          panelClass: 'app-create-new-collection-dialog'
+        });
+        
+      },
+      error: (error) => {
+        this.ui.showErrorSnackBar("snackbar.error.collectionCreationFailed");
+      }
+    });
   }
 
 
   onUpdate() {
     this.state = 'loading';
     this.collectionsService.updateCollection(this.collection).subscribe(() => {
-        this.ui.showInfoSnackBar("snackbar.success.theCollectionHasBeenModified");
-        if (this.colId) {
-          this.updated.emit();
-          this.state = 'success';
-        } else {
-          this.router.navigate(['/collections', this.collection.id]);
-        }
-      },
+      this.ui.showInfoSnackBar("snackbar.success.theCollectionHasBeenModified");
+      if (this.colId) {
+        this.updated.emit();
+        this.state = 'success';
+      } else {
+        this.router.navigate(['/collections', this.collection.id]);
+      }
+    },
       (error) => {
         this.state = 'error';
         console.log(error);
@@ -289,7 +313,7 @@ export class CollectionEditComponent implements OnInit {
 
   deleteKeyword(keyword: string) {
     let langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
-    langs.forEach(l=> {
+    langs.forEach(l => {
       this.collection.keywords[l] = this.collection.keywords[l].filter((item: string) => item !== keyword);
     });
   }

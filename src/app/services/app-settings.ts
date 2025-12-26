@@ -9,7 +9,6 @@ export class AppSettings {
   static adminClientVersion = "1.5.8" + (!!APP_GLOBAL.devMode ? "-dev" : "");
 
 
-
   // external properties from /assets/shared/globals.js
   userClientBaseUrl = APP_GLOBAL.userClientBaseUrl;
   deployPath = APP_GLOBAL.deployPath || '';

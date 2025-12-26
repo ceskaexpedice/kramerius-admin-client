@@ -139,6 +139,11 @@ export class AdminApiService {
     );
   }
 
+  getProcessByUuid(processUuid: string): Observable<[Batch, Process]> {
+    return this.get(`/processes/by_process_uuid/${processUuid}`).pipe(
+      map((response: any) => [Batch.fromJson(response), Process.fromJson(response['process'])])
+    );
+  }
 
 
   getProcessOwners(): Observable<ProcessOwner[]> {
