@@ -46,6 +46,7 @@ export class Process {
   finished: Date;
   planned: Date;
   name: string;
+  worker:string;
 
   constructor() {
   }
@@ -104,6 +105,9 @@ export class Process {
     }
     if (json['planned']) {
       process.planned = new Date(json['planned']);
+    }
+    if (json['worker']) {
+      process.worker = json['worker']      
     }
     return process;
   }

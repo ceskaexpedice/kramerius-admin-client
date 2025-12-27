@@ -33,15 +33,15 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
+import { MatDivider } from "@angular/material/divider";
 
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule,  MatProgressBarModule, 
+    MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatProgressBarModule,
     MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
-    MatCheckboxModule, MatPaginatorModule, DurationPipe
-  ],
+    MatCheckboxModule, MatPaginatorModule, DurationPipe, MatDivider],
   selector: 'app-processes',
   templateUrl: './processes.component.html',
   styleUrls: ['./processes.component.scss']
@@ -64,16 +64,15 @@ export class ProcessesComponent implements OnInit {
   testProcessDuration = [1, 5, 10, 30, 60, 120]
   selectedTestProcessDuration = this.testProcessDuration[0];
 
-  displayedColumns = ['selection', 'expand', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner', 'action'];
+  displayedColumns = ['selection', 'expand', 'id', 'name', 'state', 'planned', 'started', 'finished', 'duration', 'owner', 'worker', 'action'];
 
   selection = new SelectionModel<any>(true, []);
 
   isAllItemsSelected: boolean = false;
 
+  selectedWorkers: string[] = []; 
+  workers: string[] = []; 
 
-  // to test accesibility
-  //notAllowed: boolean = true;
-  //batchId: string = '94';
 
 
   // Paginator
@@ -128,6 +127,16 @@ export class ProcessesComponent implements OnInit {
 
   reloadProcesses() {
 
+    let workers:string[] = [];  
+    this.adminApi.getWorkers().subscribe(data=> {
+      data.forEach((w:any)=> {
+        if (w.nodeId) {
+          workers.push(w.nodeId);  
+        }
+      })  
+      this.workers = workers;
+    });
+
     const expandedBatchIds = this.batches
     .filter(batch => batch.expanded)
     .map(batch => batch.id);
@@ -157,6 +166,18 @@ export class ProcessesComponent implements OnInit {
       this.owners = owners;
       this.fetchingOwners = false;
     }, error => this.fetchingOwners = false);
+  }
+
+
+
+  getSelectedWorkersNames(): string {
+    if (!this.selectedWorkers || this.selectedWorkers.length === 0) {
+      return '';
+    }
+    return this.workers
+      .filter(w => this.selectedWorkers.includes(w))
+      .map(w => w)
+      .join(', ');
   }
 
   scheduleTestProcess() {
@@ -305,6 +326,9 @@ export class ProcessesComponent implements OnInit {
       const until = this.convertDate(new Date(String(this.dateTo)).toLocaleDateString('en-GB')) + "T23:59:59";
       //console.log(until);
       params.until = until;
+    }
+    if (this.selectedWorkers) {
+      params.workers = this.selectedWorkers.join(',')
     }
     return params;
   }

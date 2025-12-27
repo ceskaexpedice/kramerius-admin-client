@@ -868,6 +868,11 @@ export class AdminApiService {
     return this.get(`/workmode`, {}).pipe();
   }
 
+  getWorkers(): Observable<any> {
+    return this.get(`/processes/workers`, {}).pipe();
+  }
+
+
   // put maintenance mod / by pedro
   putWorkMode(state: boolean): Observable<any> {
     const json =  {
@@ -885,5 +890,6 @@ export interface ProcessesParams {
   until?: string;
   state?: string;
   owner?: string;
+  workers?: string;
 }
 
