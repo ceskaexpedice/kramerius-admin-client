@@ -79,7 +79,7 @@ export class ScheduleAddLicenseDialogComponent implements OnInit {
       defid: 'add_license',
       params: {
         license: license,
-        pidlist: pidlist.length == 1 ? undefined : pidlist,
+        pidlist:   pidlist.length == 1 ? undefined : pidlist.join(';'),
         pid: pidlist.length == 1 ? pidlist[0] : undefined,
       }
     }).subscribe(

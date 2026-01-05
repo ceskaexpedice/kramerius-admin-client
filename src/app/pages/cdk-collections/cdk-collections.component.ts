@@ -443,7 +443,7 @@ export class CdkCollectionsComponent implements OnInit {
         this.adminApi.scheduleProcess({
           defid: 'backup-collections',
           params: {
-            pidlist:toDelete,
+            pidlist:toDelete.join(';'),
             backupname: result.backupname
     
           }

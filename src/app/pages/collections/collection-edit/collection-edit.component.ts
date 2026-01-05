@@ -246,46 +246,22 @@ export class CollectionEditComponent implements OnInit {
 
 
 
-onSave() {
-  this.collectionsService.createCollection(this.collection)
-    .pipe(
-      take(1), 
-      switchMap((response: any) => {
-        if (response && response.scheduleMainProcess) {
-          const scheduleData = response.scheduleMainProcess;
-          return this.adminService.scheduleProcess({
-            defid: scheduleData.profileId,
-            params: scheduleData.payload
-          }).pipe(
-            map((processRes) => {
-              return { 
-                collection: response, 
-                process: processRes 
-              };
-            }),
-            catchError(err => {
-              this.ui.showErrorSnackBar("Kolekce vytvořena, ale plánování procesu selhalo");
-              return of(response); 
-            })
-          );
+  onSave() {
+    this.collectionsService.createCollection(this.collection)
+      .pipe(take(1)) 
+      .subscribe({
+        next: (combinedData) => {
+          this.dialog.open(CreateNewCollectionDialogComponent, {
+            data: combinedData,
+            width: '600px',
+            panelClass: 'app-create-new-collection-dialog'
+          });
+          
+        },
+        error: (error) => {
+          this.ui.showErrorSnackBar("snackbar.error.collectionCreationFailed");
         }
-       return of({ collection: response, process: null });
-      })
-    )
-    .subscribe({
-      next: (combinedData) => {
-        this.dialog.open(CreateNewCollectionDialogComponent, {
-          //data: combinedData.collection,
-          data: combinedData,
-          width: '600px',
-          panelClass: 'app-create-new-collection-dialog'
-        });
-        
-      },
-      error: (error) => {
-        this.ui.showErrorSnackBar("snackbar.error.collectionCreationFailed");
-      }
-    });
+      });
   }
 
 

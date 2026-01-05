@@ -60,7 +60,10 @@ export class ScheduleProcessingIndexRebuildForObjectDialogComponent implements O
 
     this.adminApi.scheduleProcess({
       defid: 'processing_rebuild_for_object',
-      params: { pidlist: pids }
+      params: { 
+        target: pids.join(';') 
+      
+      }
     }).subscribe(response => {
       this.dialogRef.close("scheduled");
     }, error => {

@@ -15,6 +15,8 @@ import { Collection } from 'src/app/models/collection.model';
 import { RightAction } from 'src/app/models/right-action.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CollectionsService } from 'src/app/services/collections.service';
+import { AdminApiService } from 'src/app/services/admin-api.service';
+import { catchError, of } from 'rxjs';
 
 
 @Component({
@@ -52,7 +54,8 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<AddItemsToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public collection: Collection, 
   private collectionApi: CollectionsService,
-  private authService: AuthService
+  private authService: AuthService,
+  private adminApi: AdminApiService 
   ) {
     if (collection) {
       this.collection_title = collection.names['cze'];
@@ -89,20 +92,20 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
         });
   
         if (authActions.includes('a_able_tobe_part_of_collections')) {
-          //TODO: use collectionApi.addItemsToCollection instead
           this.collectionApi.addItemToCollection(this.collection.id, pid)
-          .subscribe(() => {
+          .subscribe((resp:any) => {
+
             this.items_counter_added++;
             if (this.isFinished()) {
               this.inProgress = false;
             }
-          }, response => {
+          }, errorResp => {
             // pid
             this.items_counter_failed++;
-            if (response.error && response.error.message) {
-              this.genericErrors[pid]= response.error.message;
+            if (errorResp.error && errorResp.error.message) {
+              this.genericErrors[pid]= errorResp.error.message;
             } else {
-              this.genericErrors[pid]= response;
+              this.genericErrors[pid]= errorResp;
             }
 
             if (this.isFinished()) {

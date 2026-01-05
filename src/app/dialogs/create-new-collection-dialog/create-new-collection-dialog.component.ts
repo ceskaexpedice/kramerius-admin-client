@@ -26,13 +26,6 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class CreateNewCollectionDialogComponent implements OnInit {
 
-  /*
-               return { 
-                collection: response, 
-                process: processRes 
-              };
- */
-
   collection: Collection;
   processUuid: string;
   isProcessFinished: boolean = false;
@@ -55,8 +48,8 @@ export class CreateNewCollectionDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.collectionPid = this.data.collection.collection.pid;
-    this.processUuid = this.data.process?.processId;
+    this.collectionPid = this.data.collection.pid;
+    this.processUuid = this.data.scheduleMainProcessPlanned?.processId;
 
     if (this.processUuid) {
       this.checkProcessStatus();
