@@ -6,7 +6,7 @@ declare var APP_GLOBAL: any;
 
 @Injectable()
 export class AppSettings {
-  static adminClientVersion = "1.5.8" + (!!APP_GLOBAL.devMode ? "-dev" : "");
+  static adminClientVersion = "1.5.8-rc1" + (!!APP_GLOBAL.devMode ? "-dev" : "");
 
 
   // external properties from /assets/shared/globals.js
@@ -27,8 +27,10 @@ export class AppSettings {
 
   cdkApiBaseUrl = APP_GLOBAL.cdkApiBaseUrl ||  this.coreBaseUrl; 
 
+  // default lang 
   defaultLang = APP_GLOBAL.lang || 'cs';
 
+  // languages
   languages = APP_GLOBAL.languages || ['cs','en','de'];
 
   homeDashboard = APP_GLOBAL.homeDashboard || [];
