@@ -10,6 +10,7 @@ export class Batch {
   planned: Date;
   ownerId: string;
   ownerName: string;
+  workers: string[];
   processes: Process[];
   expanded = false;
 
@@ -36,6 +37,10 @@ export class Batch {
     if (jBatch['batchState']) {
       batch.batchState = jBatch['batchState'];
     }
+    if (jBatch['workers']) {
+      batch.workers = jBatch['workers'];
+    }
+
     batch.processes = [];
     if (jProcesses) {
       for (const process of jProcesses) {

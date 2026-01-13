@@ -417,10 +417,10 @@ export class CollectionsComponent implements OnInit {
     // this.routerLink = routerLink;
 
 
-    let toDelete:string[] = [];
+    let backupPids:string[] = [];
     this.dataSource.data.forEach(itm => {
       if (this.selection.isSelected(itm)) {
-        toDelete.push(itm.id);
+        backupPids.push(itm.id);
       }
     });
     
@@ -430,8 +430,8 @@ export class CollectionsComponent implements OnInit {
         this.adminApi.scheduleProcess({
           defid: 'backup-collections',
           params: {
-            pidlist:toDelete,
-            backupname: result.backupname
+            target:"pidlist:"+backupPids.join(";"),
+            nameOfBackup: result.backupname
     
           }
         }).subscribe(response => {

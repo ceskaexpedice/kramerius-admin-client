@@ -47,3 +47,30 @@
     }
   }
 }
+
+.app-uuid-style {
+  display: inline-block;
+  max-width: 35px;         
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  white-space: nowrap;
+  font-family: monospace;   
+  font-size: 14px;
+  color: #777;              
+  vertical-align: middle;
+}
+
+
+.app-filter-width {
+  width: 150px;
+}
+.app-date-width {
+  width: 140px;
+}
+.app-row-wrap {
+  flex-wrap: wrap !important;
+  gap: 8px 0; /* mezera mezi řádky při zalomení */
+}
+.app-j-end {
+  justify-content: flex-end;
+}

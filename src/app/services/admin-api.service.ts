@@ -139,6 +139,11 @@ export class AdminApiService {
     );
   }
 
+  getProcessByUuid(processUuid: string): Observable<[Batch, Process]> {
+    return this.get(`/processes/by_process_uuid/${processUuid}`).pipe(
+      map((response: any) => [Batch.fromJson(response), Process.fromJson(response['process'])])
+    );
+  }
 
 
   getProcessOwners(): Observable<ProcessOwner[]> {
@@ -863,6 +868,11 @@ export class AdminApiService {
     return this.get(`/workmode`, {}).pipe();
   }
 
+  getWorkers(): Observable<any> {
+    return this.get(`/processes/workers`, {}).pipe();
+  }
+
+
   // put maintenance mod / by pedro
   putWorkMode(state: boolean): Observable<any> {
     const json =  {
@@ -880,5 +890,6 @@ export interface ProcessesParams {
   until?: string;
   state?: string;
   owner?: string;
+  workers?: string;
 }
 

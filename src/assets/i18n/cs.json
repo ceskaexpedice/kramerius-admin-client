@@ -817,7 +817,7 @@
     "createNewCollection": {
       "title": "Vytvoření nové sbírky",
       "alert": "Sbírka <strong><em>{{pid}}</em></strong> byla úspěšně vytvořena a zařazena do procesu k indexaci. Zobrazení sbírky v seznamu sbírek může chvíli trvat v závislosti na pořadí procesu indexace.",
-      "message": "Níže můžete editovat tuto nově vytvořenou sbírku, zkontrolovat proces indexace této sbírky nebo zavřít tento dialog a tím přejít na seznam sbírek."
+      "message": "Níže můžete editovat tuto nově vytvořenou sbírku (po skončení indexace) případně zkontrolovat proces indexace této sbírky nebo zavřít tento dialog a tím přejít na seznam sbírek."
     },
     "deleteSelectedCollections": {
       "title": "Smazání vybraných sbírek",

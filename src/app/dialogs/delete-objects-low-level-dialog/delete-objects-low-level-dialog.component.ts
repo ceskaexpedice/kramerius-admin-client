@@ -50,6 +50,7 @@ export class DeleteObjectsLowLevelDialogComponent implements OnInit {
   schedule() {
     this.inProgress = true;
     const pidlist = this.splitPids(this.pids);
+    // target:"pidlist:"+backupPids.join(";"),
 
     let requests: any[] = [];
     pidlist.forEach(pid => {

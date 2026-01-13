@@ -447,7 +447,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
         this.adminApi.scheduleProcess({
           defid: 'backup-collections',
           params: {
-            pidlist:toDelete,
+            pidlist:toDelete.join(';'),
             backupname: result.backupname
     
           }
