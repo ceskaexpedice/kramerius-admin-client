@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{ 'modal.fixlogprocess.title' | translate }}</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-card appearance="outlined"  class="app-view-alert app-info">
+    <mat-card-content>
+    <div style="display: flex; align-items: center; gap: 12px; padding: 8px 0;">
+        <mat-icon color="primary">settings_backup_restore</mat-icon>
+        <p style="margin: 0;">
+          {{ 'modal.fixlogprocess.message' | translate }}
+          <a href="https://github.com/ceskaexpedice/kramerius/issues/1251" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             style="font-weight: bold; text-decoration: underline;">#1251</a>
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" (click)="startFixProcess()" mat-dialog-close >{{ 'button.startfixprocess' | translate }}</button>
+  <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+</mat-dialog-actions>

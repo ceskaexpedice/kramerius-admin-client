@@ -39,6 +39,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FixLogsDialogComponent } from 'src/app/dialogs/fix-logs-dialog/fix-logs-dialog.component';
 
 @Component({
   standalone: true,
@@ -398,6 +399,13 @@ export class RepositoryComponent implements OnInit {
   }
 
 
+
+  openFixLogsIssue() {
+    const dialogRef = this.dialog.open(FixLogsDialogComponent, {
+      width: '600px',
+      panelClass: 'app-fix-logs-dialog'
+    });
+  }
 
 
   openScheduleSyncWithSdnntDialog() {

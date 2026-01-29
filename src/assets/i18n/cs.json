@@ -542,7 +542,9 @@
     "approve": "Schválit",
     "annualReport": "Roční výkaz",
     "reload": "Obnovit",
-    "addRuntimeLicense": "Přidat runtime licenci"
+    "addRuntimeLicense": "Přidat runtime licenci",
+    "startfixprocess": "Spustit opravný proces",
+    "fixlogprocess":"Opravný proces pro logy"  
   },
   "field": {
     "public": "Veřejné",
@@ -914,7 +916,7 @@
       }
     },
     "scheduleMigrateCollections": {
-      "title": "Migrovat sbírky"
+      "title": "Migrovat sbírky z K5 instance"
     },
     "createCollectionBackup": {
       "title": "Vytvoření zálohy vybraných sbírek"
@@ -930,7 +932,12 @@
     },
     "addNewtSet": {
       "title": "Přidání nového setu"
+    },
+    "fixlogprocess":{
+      "title": "Opravný proces pro logy",
+      "message": "Proces pro opravu logu. Viz issue:"
     }
+
   },
   "snackbar": {
     "success": {
@@ -1015,7 +1022,8 @@
       "addingAnItem": "Položka byla úspěšně přidána",
       "deletingItem": "Položka byla úspěšně smazána",
       "savingAnItem": "Položka byla úspěšně uložena",
-      "savingAnRecord": "Záznam byl úspěšně uložen"
+      "savingAnRecord": "Záznam byl úspěšně uložen",
+      "scheduleFixLogProcess": "Proces pro opravy logů naplánován"
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
@@ -1080,7 +1088,8 @@
       "deletingItem": "Chyba při smazání položky",
       "savingAnItem": "Chyba při ukládání položky",
       "savingAnRecord": "Chyba při ukládání záznamu",
-      "scheduleCDKHarvest":"Reharvest objektu se nepodařilo naplánovat"
+      "scheduleCDKHarvest":"Reharvest objektu se nepodařilo naplánovat",
+      "scheduleFixLogProcess": "Proces pro opravu logů se nepodařilo napánovat"
     },
     "alert": {
       "tokenTimeExpireInfo": "Za 2 minuty dojde k automatickému odhlášení z aplikace"
@@ -1225,6 +1234,8 @@
     "selectThisCollection": "Vybrat tuto sbírku",
     "selectAllItems": "Vybrat všechny položky",
     "selectThisItem": "Vybrat tuto položku",
+    "datak5migration": "Procesy pro migraci dat z K5",
+    "fixprocesses":"Opravné procesy",
     "changeFlagOnLicense": "Změna príznaku na licenci",
     "symptom": "Příznak",
     "localLibraryLicense": "Lokální licence knihovny",
