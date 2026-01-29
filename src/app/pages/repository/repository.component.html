@@ -72,16 +72,21 @@
 								</span>
 							</div>
 						</mat-expansion-panel>
+
 						<mat-expansion-panel expanded="true">
 							<mat-expansion-panel-header>
-								<mat-panel-title>{{ 'desc.changeFlagOnLicense' | translate }}</mat-panel-title>
+								<mat-panel-title>{{ 'desc.datak5migration' | translate }}</mat-panel-title>
 							</mat-expansion-panel-header>
 							<div class="app-fxLayout app-row app-gap-2">
 								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
 									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleChangeFlagOnLicenseDialog()" color="primary">{{ 'button.changeFlagOnLicense' | translate }}</button>
 								</span>
+								<span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleMigrateCollectionsDialog()" color="primary">{{ 'button.migrateCollections' | translate }}</button>
+								</span>
 							</div>
 						</mat-expansion-panel>
+						<!--
 						<mat-expansion-panel expanded="true">
 							<mat-expansion-panel-header>
 								<mat-panel-title>{{ 'desc.migrationOfCollectionsFromK5' | translate }}</mat-panel-title>
@@ -92,6 +97,19 @@
 								</span>
 							</div>
 						</mat-expansion-panel>
+						-->
+
+						<mat-expansion-panel expanded="true">
+							<mat-expansion-panel-header>
+								<mat-panel-title>{{ 'desc.fixprocesses' | translate }}</mat-panel-title>
+							</mat-expansion-panel-header>
+							<div class="app-fxLayout app-row app-gap-2">
+								<span [matTooltip]="!allowedGlobalAction('a_statistics_edit') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
+									<button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button (click)="openFixLogsIssue()" color="primary">{{ 'button.fixlogprocess' | translate }}</button>
+								</span>
+							</div>
+						</mat-expansion-panel>
+
 					</mat-accordion>
 				</ng-container>
 

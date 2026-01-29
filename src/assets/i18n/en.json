@@ -542,7 +542,10 @@
     "approve": "Approve",
     "annualReport": "Annual report",
     "reload": "Reload",
-    "addRuntimeLicense": "Add runtime license"
+    "addRuntimeLicense": "Add runtime license",
+    "startfixprocess": "Start fix process",
+    "fixlogprocess":"Fix logs process"  
+
   },
   "field": {
     "public": "Public",
@@ -914,7 +917,7 @@
       }
     },
     "scheduleMigrateCollections": {
-      "title": "Migrate collections"
+      "title": "Migrate collections from K5 instance"
     },
     "createCollectionBackup": {
       "title": "Creating a backup of selected collections"
@@ -930,7 +933,12 @@
     },
     "addNewtSet": {
       "title": "Adding a new set"
+    },
+    "fixlogprocess":{
+      "title": "Fix log process",
+      "message": "The fix process. See issue:"
     }
+
   },
   "snackbar": {
     "success": {
@@ -1015,7 +1023,9 @@
       "addingAnItem": "Item added successfully",
       "deletingItem": "The item have been successfully deleted",
       "savingAnItem": "The item was successfully saved",
-      "savingAnRecord": "The record was saved successfully"
+      "savingAnRecord": "The record was saved successfully",
+      "scheduleFixLogProcess": "The fix logs process has been planned"
+
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -1080,7 +1090,8 @@
       "deletingItem": "Error deleting item",
       "savingAnItem": "Error saving item",
       "savingAnRecord": "Error saving record",
-      "scheduleCDKHarvest":"CDK harvest has NOT been planned"
+      "scheduleCDKHarvest":"CDK harvest has NOT been planned",
+      "scheduleFixLogProcess": "The fix log process has NOT been planned"
     },
     "alert": {
       "tokenTimeExpireInfo": "You will be automatically logged out of the application in 2 minutes"
@@ -1225,6 +1236,8 @@
     "selectThisCollection": "Select this collection",
     "selectAllItems": "Select all items",
     "selectThisItem": "Select this item",
+    "datak5migration": "Migration processes (From K5 instance)",
+    "fixprocesses":"Fix processess",
     "changeFlagOnLicense": "Change flag on license",
     "symptom": "Symptom",
     "localLibraryLicense": "Local Library License",
