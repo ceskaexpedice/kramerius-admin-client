@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,9 +17,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
-        MatTooltipModule, MatCheckboxModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatTooltipModule, MatCheckboxModule],
     selector: 'app-generate-nkp-logs-dialog',
     templateUrl: './generate-nkp-logs-dialog.component.html',
     styleUrls: ['./generate-nkp-logs-dialog.component.scss']

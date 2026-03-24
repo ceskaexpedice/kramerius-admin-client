@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,9 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-        MatTooltipModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
     selector: 'app-schedule-migrate-collections-dialog',
     templateUrl: './schedule-migrate-collections-dialog.component.html',
     styleUrls: ['./schedule-migrate-collections-dialog.component.scss']

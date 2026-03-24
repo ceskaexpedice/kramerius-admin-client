@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,8 +15,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-    imports: [CommonModule, FormsModule, TranslateModule, MatIconModule,
-        MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
+    imports: [FormsModule, TranslateModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
     selector: 'app-add-new-parameter-dialog',
     templateUrl: './add-new-parameter-dialog.component.html',
     styleUrls: ['./add-new-parameter-dialog.component.scss']

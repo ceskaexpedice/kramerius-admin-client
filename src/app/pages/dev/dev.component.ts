@@ -8,7 +8,7 @@ import { UIService } from 'src/app/services/ui.service';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -19,10 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-        MatTooltipModule
-    ],
+    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
     selector: 'app-dev',
     templateUrl: './dev.component.html',
     styleUrls: ['./dev.component.scss']

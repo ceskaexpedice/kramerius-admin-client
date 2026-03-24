@@ -1,15 +1,17 @@
 <form #f="ngForm" (ngSubmit)="schedule(f.value)">
-	<mat-progress-bar class="progress-bar" *ngIf="inProgress" mode="indeterminate"></mat-progress-bar>
-	<h2 mat-dialog-title>{{ 'modal.scheduleIndexationsByMultiplePids.title' | translate: {value: itemsCount} }}</h2>
-	<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
-		<div class="app-desc" [innerHtml]="'modal.scheduleIndexationsByMultiplePids.message' | translate: {value: itemsCount}"></div>
-		<div>
-			<mat-checkbox [ngModel]="false" name="ignore_inconsistent_objects" color="primary">{{ 'modal.scheduleIndexationsByMultiplePids.checkbox' | translate }}</mat-checkbox>
-		</div>
-		<div class="app-explanation" [innerHtml]="'modal.scheduleIndexationsByMultiplePids.explanation' | translate"></div>
-	</mat-dialog-content>
-	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+  @if (inProgress) {
+    <mat-progress-bar class="progress-bar" mode="indeterminate"></mat-progress-bar>
+  }
+  <h2 mat-dialog-title>{{ 'modal.scheduleIndexationsByMultiplePids.title' | translate: {value: itemsCount} }}</h2>
+  <mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+    <div class="app-desc" [innerHtml]="'modal.scheduleIndexationsByMultiplePids.message' | translate: {value: itemsCount}"></div>
+    <div>
+      <mat-checkbox [ngModel]="false" name="ignore_inconsistent_objects" color="primary">{{ 'modal.scheduleIndexationsByMultiplePids.checkbox' | translate }}</mat-checkbox>
+    </div>
+    <div class="app-explanation" [innerHtml]="'modal.scheduleIndexationsByMultiplePids.explanation' | translate"></div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
     <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
-	</mat-dialog-actions>
+  </mat-dialog-actions>
 </form>

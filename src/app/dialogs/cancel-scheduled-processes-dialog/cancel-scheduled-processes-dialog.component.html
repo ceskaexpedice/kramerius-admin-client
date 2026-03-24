@@ -1,26 +1,48 @@
 <h2 mat-dialog-title>{{ 'modal.cancelScheduledProcesses.title' | translate }}</h2>
-<mat-progress-bar mode="indeterminate" *ngIf="fetchingBatches"></mat-progress-bar>
+@if (fetchingBatches) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
 <mat-dialog-content class="mat-typography">
-	<ng-container *ngIf="!fetchingBatches && !fetchingErrorMsg && isSomethingToCancel()">
-		<div class="app-desc app-mb-4" [ngSwitch]="true">
-			<span *ngSwitchCase="batches.length === 1" [innerHtml]="'modal.cancelScheduledProcesses.message1.1' | translate: {value: batches.length}"></span>
-			<span *ngSwitchCase="batches.length > 1 && batches.length <= 4" [innerHtml]="'modal.cancelScheduledProcesses.message1.2-4' | translate: {value: batches.length}"></span>
-			<span *ngSwitchDefault [innerHtml]="'modal.cancelScheduledProcesses.message1.more' | translate: {value: batches.length}"></span>
-		</div>
-	</ng-container>
-	<ng-container *ngIf="!fetchingBatches && !fetchingErrorMsg && !isSomethingToCancel()">
-		<div class="app-desc app-mb-4">{{ 'modal.cancelScheduledProcesses.message2' | translate }}</div>
-		<div class="app-desc app-mb-4">{{ 'modal.cancelScheduledProcesses.message3' | translate }}</div>
-	</ng-container>
+  @if (!fetchingBatches && !fetchingErrorMsg && isSomethingToCancel()) {
+    <div class="app-desc app-mb-4">
+      @switch (true) {
+        @case (batches.length === 1) {
+          <span [innerHtml]="'modal.cancelScheduledProcesses.message1.1' | translate: {value: batches.length}"></span>
+        }
+        @case (batches.length > 1 && batches.length <= 4) {
+          <span [innerHtml]="'modal.cancelScheduledProcesses.message1.2-4' | translate: {value: batches.length}"></span>
+        }
+        @default {
+          <span [innerHtml]="'modal.cancelScheduledProcesses.message1.more' | translate: {value: batches.length}"></span>
+        }
+      }
+    </div>
+  }
+  @if (!fetchingBatches && !fetchingErrorMsg && !isSomethingToCancel()) {
+    <div class="app-desc app-mb-4">{{ 'modal.cancelScheduledProcesses.message2' | translate }}</div>
+    <div class="app-desc app-mb-4">{{ 'modal.cancelScheduledProcesses.message3' | translate }}</div>
+  }
 </mat-dialog-content>
-<mat-card class="app-view-alert app-warn" *ngIf="fetchingErrorMsg">
-	<mat-card-content>{{ 'desc.error' | translate }}: {{ fetchingErrorMsg }}</mat-card-content>
-</mat-card>
+@if (fetchingErrorMsg) {
+  <mat-card class="app-view-alert app-warn">
+    <mat-card-content>{{ 'desc.error' | translate }}: {{ fetchingErrorMsg }}</mat-card-content>
+  </mat-card>
+}
 <mat-dialog-actions align="end">
-	<button mat-flat-button *ngIf="isSomethingToCancel()" [disabled]="fetchingBatches || fetchingErrorMsg || cancelingBatches" (click)="onCancelAll()" color="warn" [ngSwitch]="true">
-		<span *ngSwitchCase="batches.length === 1">{{ 'modal.cancelScheduledProcesses.button.1' | translate: {value: batches.length} }}</span>
-		<span *ngSwitchCase="batches.length > 1 && batches.length <= 4">{{ 'modal.cancelScheduledProcesses.button.2-4' | translate: {value: batches.length} }}</span>
-		<span *ngSwitchDefault>{{ 'modal.cancelScheduledProcesses.button.more' | translate: {value: batches.length} }}</span>
-	</button>
-	<button mat-flat-button (click)="onClose()" [disabled]="fetchingBatches || cancelingBatches">{{ 'button.close' | translate }}</button>
+  @if (isSomethingToCancel()) {
+    <button mat-flat-button [disabled]="fetchingBatches || fetchingErrorMsg || cancelingBatches" (click)="onCancelAll()" color="warn">
+      @switch (true) {
+        @case (batches.length === 1) {
+          <span>{{ 'modal.cancelScheduledProcesses.button.1' | translate: {value: batches.length} }}</span>
+        }
+        @case (batches.length > 1 && batches.length <= 4) {
+          <span>{{ 'modal.cancelScheduledProcesses.button.2-4' | translate: {value: batches.length} }}</span>
+        }
+        @default {
+          <span>{{ 'modal.cancelScheduledProcesses.button.more' | translate: {value: batches.length} }}</span>
+        }
+      }
+    </button>
+  }
+  <button mat-flat-button (click)="onClose()" [disabled]="fetchingBatches || cancelingBatches">{{ 'button.close' | translate }}</button>
 </mat-dialog-actions>

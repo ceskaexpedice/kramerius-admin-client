@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -12,16 +12,15 @@ import { UIService } from 'src/app/services/ui.service';
 
 @Component({
     imports: [
-        CommonModule,
-        TranslateModule,
-        FormsModule,
-        MatDialogModule,
-        MatButtonModule,
-        MatIconModule,
-        MatTooltipModule,
-        MatCard,
-        MatCardContent
-    ],
+    TranslateModule,
+    FormsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatCard,
+    MatCardContent
+],
     selector: 'app-fix-logs-dialog',
     templateUrl: './fix-logs-dialog.component.html',
     styleUrls: ['./fix-logs-dialog.component.scss']

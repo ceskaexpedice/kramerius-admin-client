@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,9 +15,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-        MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
     selector: 'app-schedule-indexations-by-multiple-pids-dialog',
     templateUrl: './schedule-indexations-by-multiple-pids-dialog.component.html',
     styleUrls: ['./schedule-indexations-by-multiple-pids-dialog.component.scss']

@@ -73,7 +73,7 @@
 
   // global
   --app-card-view-header-height: 53px;
-  --app-card-border-color: var(--mdc-outlined-card-outline-color);
+  --app-card-border-color: var(--mat-card-outlined-outline-color);
   --app-card-bg-hover: var(--app-color-gray-1);
 
   --app-expansion-header-description-text-weight: 400;
@@ -94,16 +94,16 @@
   --mat-toolbar-standard-height: 64px;
 
   // button
-  --mdc-filled-button-container-height: 36px;
+  --mat-button-filled-container-height: 36px;
 
   // toogle botton
-  --mat-standard-button-toggle-height: var(--mdc-filled-button-container-height);
-  --mat-standard-button-toggle-selected-state-text-color: var(--app-color-lightnes);
-  --mat-standard-button-toggle-selected-state-background-color: var(--app-color-primary);
+  --mat-button-toggle-height: var(--mat-button-filled-container-height);
+  --mat-button-toggle-selected-state-text-color: var(--app-color-lightnes);
+  --mat-button-toggle-selected-state-background-color: var(--app-color-primary);
 
   // card
-  --mdc-outlined-card-container-shape: 0;
-  --mdc-outlined-card-outline-color: rgba(0, 0, 0, 0.12);
+  --mat-card-outlined-container-shape: 0;
+  --mat-card-outlined-outline-color: rgba(0, 0, 0, 0.12);
   --mat-card-title-text-weight: 500;
  
   // acordion
@@ -115,7 +115,7 @@
   --mat-table-row-item-container-height: 48px;
 
   // checkbox
-  --mdc-checkbox-state-layer-size: calc(40px - var(--app-checkbox-reduction));
+  --mat-checkbox-state-layer-size: calc(40px - var(--app-checkbox-reduction));
   --mat-checkbox-label-text-size: 14px;
   --app-checkbox-default-size: 18px;
   --app-checkbox-reduction: 4px;

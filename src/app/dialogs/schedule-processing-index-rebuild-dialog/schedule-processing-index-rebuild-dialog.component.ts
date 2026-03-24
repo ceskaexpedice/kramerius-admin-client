@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,9 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';;
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-        MatProgressBarModule, MatTooltipModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatTooltipModule],
     selector: 'app-schedule-processing-index-rebuild-dialog',
     templateUrl: './schedule-processing-index-rebuild-dialog.component.html',
     styleUrls: ['./schedule-processing-index-rebuild-dialog.component.scss']

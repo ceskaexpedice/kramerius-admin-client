@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,10 +22,7 @@ const ELEMENT_DATA: any[] = [
 ]; 
 
 @Component({
-    imports: [CommonModule, RouterModule, TranslateModule,
-        MatIconModule, MatTooltipModule, MatTableModule,
-        MatFormFieldModule, MatInputModule, MatSelectModule
-    ],
+    imports: [RouterModule, TranslateModule, MatIconModule, MatTooltipModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule],
     selector: 'app-cdk-europeanou',
     templateUrl: './cdk-europeanou.component.html',
     styleUrls: ['./cdk-europeanou.component.scss']

@@ -12,7 +12,7 @@ import { UIService } from "src/app/services/ui.service";
 import { AddNewParameterDialogComponent } from "../add-new-parameter-dialog/add-new-parameter-dialog.component";
 import { CreateOrEditRoleDialogComponent } from "../create-or-edit-role-dialog/create-or-edit-role-dialog.component";
 import {MatSelectModule} from '@angular/material/select';
-import { CommonModule } from "@angular/common";
+
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 
@@ -24,9 +24,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
-    imports: [CommonModule, FormsModule, TranslateModule,
-        MatToolbarModule, MatButtonModule, MatIconModule,
-        MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDividerModule],
+    imports: [FormsModule, TranslateModule, MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDividerModule],
     selector: 'app-create-or-edit-right-dialog',
     templateUrl: './create-or-edit-right-dialog.component.html',
     styleUrls: ['./create-or-edit-right-dialog.component.scss']

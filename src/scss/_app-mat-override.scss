@@ -370,7 +370,7 @@
         }
 
         .mat-mdc-icon-button {
-          --mdc-icon-button-state-layer-size: var(--mat-table-row-item-container-height);
+          --mat-icon-button-state-layer-size: var(--mat-table-row-item-container-height);
           padding: 0;
 
           .mat-icon {
@@ -394,7 +394,7 @@
 
 // CHECKBOX
 .mdc-checkbox {
-  padding: calc((var(--mdc-checkbox-state-layer-size, 40px) - calc(var(--app-checkbox-default-size) + var(--app-checkbox-reduction))) / 2) !important;
+  padding: calc((var(--mat-checkbox-state-layer-size, 40px) - calc(var(--app-checkbox-default-size) + var(--app-checkbox-reduction))) / 2) !important;
 
   .mdc-checkbox__background {
     width: calc(var(--app-checkbox-default-size) - var(--app-checkbox-reduction));
@@ -574,7 +574,7 @@
       }
 
       svg {
-        --mdc-icon-button-icon-size: 18px;
+        --mat-icon-button-icon-size: 18px;
       }
     }
   }

@@ -8,20 +8,24 @@
         <th>{{ 'desc.providingDk' | translate }}</th>
         <!--
         <th>{{ 'desc.nameAndLinkToTheRegistry' | translate }}</th>
-        -->      
+        -->
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="table.items && table.items.length >0">
-        <tr *ngFor="let item of table.items">
-          <td>{{ item.sigla }}</td>
-          <td>{{ item.description }}</td>
-          <td> <a [href]="'https://registr.digitalniknihovna.cz/library/' + table.code" target="_blank" [title]="table.code">{{ table.name }}</a> </td>
+      @if (table.items && table.items.length >0) {
+        @for (item of table.items; track item) {
+          <tr>
+            <td>{{ item.sigla }}</td>
+            <td>{{ item.description }}</td>
+            <td> <a [href]="'https://registr.digitalniknihovna.cz/library/' + table.code" target="_blank" [title]="table.code">{{ table.name }}</a> </td>
+          </tr>
+        }
+      }
+      @if (!table.items || table.items.length  == 0) {
+        <tr>
+          <td colspan="3" class="app-color-info">{{ 'alert.noResults' | translate }}</td>
         </tr>
-      </ng-container>
-      <tr *ngIf="!table.items || table.items.length  == 0">
-        <td colspan="3" class="app-color-info">{{ 'alert.noResults' | translate }}</td>
-      </tr>
+      }
     </tbody>
   </table>
 </mat-dialog-content>

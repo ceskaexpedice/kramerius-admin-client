@@ -7,9 +7,11 @@
         <mat-icon>add_circle</mat-icon>{{ 'desc.addNewRole' | translate }}
       </mat-option>
       <mat-divider></mat-divider>
-      <mat-option *ngFor="let role of roles" (click)="right.role = role" [value]="role" >
-        {{ role ? role.name : '-'  }}
-      </mat-option>
+      @for (role of roles; track role) {
+        <mat-option (click)="right.role = role" [value]="role" >
+          {{ role ? role.name : '-'  }}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 
@@ -17,42 +19,56 @@
     <mat-label>{{ 'desc.condition' | translate }}</mat-label>
     <mat-select [(value)]="right.condition">
       <mat-option value="-" (click)="selectCondition(null)">-</mat-option>
-      <mat-option *ngFor="let condition of conditions" (click)="selectCondition(condition)" [value]="condition">
-        {{ condition ? condition.name : '-' }}
-      </mat-option>
+      @for (condition of conditions; track condition) {
+        <mat-option (click)="selectCondition(condition)" [value]="condition">
+          {{ condition ? condition.name : '-' }}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" class="app-w-100" *ngIf="right.condition && right.condition.paramsNecessary">
-    <mat-label>{{ 'desc.parameter' | translate }}</mat-label>
-    <mat-select [(value)]="right.condition.params">
-      <mat-option (click)="openAddNewParamDialog()" class="app-add">
-        <mat-icon>add_circle</mat-icon>{{ 'desc.addNewParameter' | translate }}
-      </mat-option>
-      <mat-divider></mat-divider>
-      <mat-option value="-" (click)="selectParam(null)">-</mat-option>
-      <mat-option *ngFor="let param of params" (click)="selectParam(param)" [value]="param">
-        {{ param.description }}
-      </mat-option>
-    </mat-select>
-    <!-- alternativ to add new parameter
-    <div matSuffix class="app-ml-2">
-      <mat-icon (click)="openNewParamDialog()" color="primary">add_circle</mat-icon>
-    </div> -->
-  </mat-form-field>
+  @if (right.condition && right.condition.paramsNecessary) {
+    <mat-form-field appearance="outline" class="app-w-100">
+      <mat-label>{{ 'desc.parameter' | translate }}</mat-label>
+      <mat-select [(value)]="right.condition.params">
+        <mat-option (click)="openAddNewParamDialog()" class="app-add">
+          <mat-icon>add_circle</mat-icon>{{ 'desc.addNewParameter' | translate }}
+        </mat-option>
+        <mat-divider></mat-divider>
+        <mat-option value="-" (click)="selectParam(null)">-</mat-option>
+        @for (param of params; track param) {
+          <mat-option (click)="selectParam(param)" [value]="param">
+            {{ param.description }}
+          </mat-option>
+        }
+      </mat-select>
+      <!-- alternativ to add new parameter
+      <div matSuffix class="app-ml-2">
+        <mat-icon (click)="openNewParamDialog()" color="primary">add_circle</mat-icon>
+      </div> -->
+    </mat-form-field>
+  }
 
-  <mat-form-field appearance="outline" class="app-w-100" *ngIf="right.condition && right.condition.isLabelAssignable">
-    <mat-label>{{ 'desc.license' | translate }}</mat-label>
-    <mat-select [(value)]="right.condition.license">
-      <mat-option value="-" >-</mat-option>
-      <mat-option *ngFor="let license of licenses" [value]="license">
-        {{ license }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  @if (right.condition && right.condition.isLabelAssignable) {
+    <mat-form-field appearance="outline" class="app-w-100">
+      <mat-label>{{ 'desc.license' | translate }}</mat-label>
+      <mat-select [(value)]="right.condition.license">
+        <mat-option value="-" >-</mat-option>
+        @for (license of licenses; track license) {
+          <mat-option [value]="license">
+            {{ license }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" *ngIf="mode == 'new'" (click)="onSave()">{{ 'button.create' | translate }}</button>
-  <button mat-flat-button color="primary" *ngIf="mode == 'edit'" (click)="onSave()">{{ 'button.edit' | translate }}</button>
+  @if (mode == 'new') {
+    <button mat-flat-button color="primary" (click)="onSave()">{{ 'button.create' | translate }}</button>
+  }
+  @if (mode == 'edit') {
+    <button mat-flat-button color="primary" (click)="onSave()">{{ 'button.edit' | translate }}</button>
+  }
   <button mat-flat-button (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

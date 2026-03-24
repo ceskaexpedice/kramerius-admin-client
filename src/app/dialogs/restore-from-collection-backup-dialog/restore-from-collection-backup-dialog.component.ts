@@ -6,7 +6,7 @@ import { CreateCollectionBackupDialogComponent } from '../create-collection-back
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import moment from 'moment';
 import { FileDownloadService } from 'src/app/services/file-download';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,8 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatButtonModule, MatIconModule, MatRadioModule, MatTooltipModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatRadioModule, MatTooltipModule],
     selector: 'app-restore-from-collection-backup-dialog',
     templateUrl: './restore-from-collection-backup-dialog.component.html',
     styleUrls: ['./restore-from-collection-backup-dialog.component.scss']

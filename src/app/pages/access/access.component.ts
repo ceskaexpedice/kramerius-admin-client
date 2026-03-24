@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -14,11 +14,7 @@ import { LicensesComponent } from './licenses/licenses.component';
 import { ParamsComponent } from './params/params.component';
 
 @Component({
-    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-        MatIconModule, MatTabsModule,
-        // MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
-        // MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, 
-        RightsComponent, RolesComponent, LicensesComponent, ParamsComponent],
+    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatTabsModule, RightsComponent, RolesComponent, LicensesComponent, ParamsComponent],
     selector: 'app-access',
     templateUrl: './access.component.html',
     styleUrls: ['./access.component.scss']

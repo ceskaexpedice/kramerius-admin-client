@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Data } from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,9 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatButtonModule, MatIconModule,
-        MatTooltipModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatTooltipModule],
     selector: 'app-show-sechannel-dialog',
     templateUrl: './show-sechannel-dialog.component.html',
     styleUrls: ['./show-sechannel-dialog.component.scss']

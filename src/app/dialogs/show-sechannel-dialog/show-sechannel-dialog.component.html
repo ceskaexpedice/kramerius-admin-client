@@ -11,27 +11,30 @@
       </tr>
     </thead>
     <tbody>
-		<tr>
-			<td><strong>{{config?.api}}</strong></td>
-			<td class="app-col-icon">
-        <mat-icon *ngIf="channel?.channel.enabled; else notEnabled" color="primary">check_circle</mat-icon>
-        <ng-template #notEnabled>
-          <mat-icon color="warn">error</mat-icon>
-        </ng-template>
-      </td>
-      <td class="app-col-icon">
-        <mat-icon *ngIf="channel?.channel.solr; else notHealthySolr" color="primary">check_circle</mat-icon>
-        <ng-template #notHealthySolr>
-          <mat-icon color="warn">error</mat-icon>
-        </ng-template>
-      </td>
-      <td class="app-col-icon">
-        <mat-icon *ngIf="channel?.channel.user; else notHealthyUser" color="primary">check_circle</mat-icon>
-        <ng-template #notHealthyUser>
-          <mat-icon color="warn">error</mat-icon>
-        </ng-template>
-      </td>
-		</tr>
+      <tr>
+        <td><strong>{{config?.api}}</strong></td>
+        <td class="app-col-icon">
+          @if (channel?.channel.enabled) {
+            <mat-icon color="primary">check_circle</mat-icon>
+          } @else {
+            <mat-icon color="warn">error</mat-icon>
+          }
+        </td>
+        <td class="app-col-icon">
+          @if (channel?.channel.solr) {
+            <mat-icon color="primary">check_circle</mat-icon>
+          } @else {
+            <mat-icon color="warn">error</mat-icon>
+          }
+        </td>
+        <td class="app-col-icon">
+          @if (channel?.channel.user) {
+            <mat-icon color="primary">check_circle</mat-icon>
+          } @else {
+            <mat-icon color="warn">error</mat-icon>
+          }
+        </td>
+      </tr>
     </tbody>
   </table>
 
@@ -45,36 +48,43 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let userKey of getUserKeys()">
-        <th [ngSwitch]="userKey">
-          <ng-container *ngSwitchCase="'notLogged'">
-            {{ 'desc.notLogged' | translate }}
-          </ng-container>
-          <ng-container *ngSwitchCase="'dnnt'">
-            {{ 'desc.dnnt' | translate }}
-          </ng-container>
-          <ng-container *ngSwitchDefault>
-            {{ userKey }}
-          </ng-container>
-        </th>
-        <td>
-          <ng-container *ngFor="let role of getRoles(userKey); let i = index; let last = last">
-            <span>{{ role }}</span>
-            <ng-container *ngIf="!last">, </ng-container>
-          </ng-container>
-        </td>
-        <td>
-          <ng-container  *ngFor="let lic of getLicenses(userKey); let i = index; let last = last">
-            <ng-container *ngIf="lic.startsWith(acronym); else notAcronym">
-              <span>{{ lic }}</span>
-            </ng-container>
-            <ng-template #notAcronym>
-              <a [href]="getLinkForLicense()" target="_blank">{{ lic }}</a>
-            </ng-template>
-            <ng-container *ngIf="!last">, </ng-container>
-          </ng-container>
-        </td>
-      </tr>
+      @for (userKey of getUserKeys(); track userKey) {
+        <tr>
+          <th>
+            @switch (userKey) {
+              @case ('notLogged') {
+                {{ 'desc.notLogged' | translate }}
+              }
+              @case ('dnnt') {
+                {{ 'desc.dnnt' | translate }}
+              }
+              @default {
+                {{ userKey }}
+              }
+            }
+          </th>
+          <td>
+            @for (role of getRoles(userKey); track role; let i = $index; let last = $last) {
+              <span>{{ role }}</span>
+              @if (!last) {
+                ,
+              }
+            }
+          </td>
+          <td>
+            @for (lic of getLicenses(userKey); track lic; let i = $index; let last = $last) {
+              @if (lic.startsWith(acronym)) {
+                <span>{{ lic }}</span>
+              } @else {
+                <a [href]="getLinkForLicense()" target="_blank">{{ lic }}</a>
+              }
+              @if (!last) {
+                ,
+              }
+            }
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
 </mat-dialog-content>

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,9 +16,7 @@ import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
-        MatTooltipModule, MatSelectModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatTooltipModule, MatSelectModule],
     selector: 'app-schedule-add-license-dialog',
     templateUrl: './schedule-add-license-dialog.component.html',
     styleUrls: ['./schedule-add-license-dialog.component.scss']

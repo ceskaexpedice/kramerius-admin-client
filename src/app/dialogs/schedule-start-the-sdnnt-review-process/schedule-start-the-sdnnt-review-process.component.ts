@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,9 +16,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
-        MatProgressBarModule, MatTooltipModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressBarModule, MatTooltipModule],
     selector: 'app-schedule-start-the-sdnnt-review-process',
     templateUrl: './schedule-start-the-sdnnt-review-process.component.html',
     styleUrls: ['./schedule-start-the-sdnnt-review-process.component.scss']

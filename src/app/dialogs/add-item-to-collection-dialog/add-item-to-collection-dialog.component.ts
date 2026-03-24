@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,9 +18,7 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
-        MatTooltipModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatTooltipModule],
     selector: 'app-add-item-to-collection-dialog',
     templateUrl: './add-item-to-collection-dialog.component.html',
     styleUrls: ['./add-item-to-collection-dialog.component.scss']

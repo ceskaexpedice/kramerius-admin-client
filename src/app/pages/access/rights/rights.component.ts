@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,8 +22,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
-    imports: [CommonModule, TranslateModule, MatProgressBarModule,
-        MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatExpansionModule],
+    imports: [TranslateModule, MatProgressBarModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatExpansionModule],
     selector: 'app-rights',
     templateUrl: './rights.component.html',
     styleUrls: ['./rights.component.scss']

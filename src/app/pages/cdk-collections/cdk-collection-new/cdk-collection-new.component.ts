@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,9 +14,7 @@ import { UIService } from 'src/app/services/ui.service';
 import { CollectionEditComponent } from "../../collections/collection-edit/collection-edit.component";
 
 @Component({
-    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-        MatCardModule, MatButtonModule, MatIconModule,
-        MatTooltipModule, MatMenuModule, CollectionEditComponent],
+    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatMenuModule, CollectionEditComponent],
     selector: 'app-cdk-collection-new',
     templateUrl: './cdk-collection-new.component.html',
     styleUrls: ['./cdk-collection-new.component.scss']

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,8 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-user-info-dialog',
-    imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule,
-        RouterModule, TranslateModule, MatDividerModule],
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule, RouterModule, TranslateModule, MatDividerModule],
     templateUrl: './user-info-dialog.component.html',
     styleUrls: ['./user-info-dialog.component.scss']
 })

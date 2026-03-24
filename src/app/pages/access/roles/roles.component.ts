@@ -8,7 +8,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -19,9 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-        MatIconModule, MatCardModule, MatButtonModule, MatProgressBarModule, MatIconModule, MatTooltipModule
-    ],
+    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatCardModule, MatButtonModule, MatProgressBarModule, MatIconModule, MatTooltipModule],
     selector: 'app-roles',
     templateUrl: './roles.component.html',
     styleUrls: ['./roles.component.scss']

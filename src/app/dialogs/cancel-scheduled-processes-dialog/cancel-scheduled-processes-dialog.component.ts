@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,9 +17,7 @@ import { Batch } from 'src/app/models/batch.model';
 import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
 
 @Component({
-    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
-        MatProgressBarModule, MatTooltipModule],
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressBarModule, MatTooltipModule],
     selector: 'app-cancel-scheduled-processes-dialog',
     templateUrl: './cancel-scheduled-processes-dialog.component.html',
     styleUrls: ['./cancel-scheduled-processes-dialog.component.scss']

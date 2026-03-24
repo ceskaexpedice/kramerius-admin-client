@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,10 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
-    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-        MatIconModule, MatSlideToggleModule, MatButtonModule,
-        MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule, MatProgressBarModule
-    ],
+    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatSlideToggleModule, MatButtonModule, MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule, MatProgressBarModule],
     selector: 'app-cdk-proxy',
     templateUrl: './cdk-proxy.component.html',
     styleUrls: ['./cdk-proxy.component.scss']

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, DOCUMENT } from '@angular/core';
 import { AppSettings } from 'src/app/services/app-settings';
 import * as gitInfo from 'git-info.json'
 import { ECharts, EChartsOption } from 'echarts';
@@ -11,7 +11,7 @@ import 'echarts/lib/component/legend'
 import 'echarts/theme/macarons.js';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { License } from 'src/app/models/license.model';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import parse from 'xml-parser';

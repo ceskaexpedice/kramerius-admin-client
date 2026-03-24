@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -15,8 +15,7 @@ import { AdminApiService } from "src/app/services/admin-api.service";
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-    imports: [CommonModule, FormsModule, TranslateModule, MatCardModule,
-        MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule],
+    imports: [FormsModule, TranslateModule, MatCardModule, MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule],
     selector: 'app-create-or-edit-role-dialog',
     templateUrl: './create-or-edit-role-dialog.component.html',
     styleUrls: ['./create-or-edit-role-dialog.component.scss']

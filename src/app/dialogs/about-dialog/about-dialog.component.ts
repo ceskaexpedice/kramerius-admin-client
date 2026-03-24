@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettings } from 'src/app/services/app-settings';
 import * as gitInfo from 'git-info.json'
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,8 +16,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
     selector: 'app-about-dialog',
-    imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule, FormsModule, MatSlideToggleModule,
-        RouterModule, TranslateModule, MatMenuModule],
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule, FormsModule, MatSlideToggleModule, RouterModule, TranslateModule, MatMenuModule],
     templateUrl: './about-dialog.component.html',
     styleUrls: ['./about-dialog.component.scss']
 })

@@ -291,7 +291,7 @@ a {
 
 .app-input-autocomplete {
   @extend .app-clean-shadow, .app-pl-4, .app-pr-4;
-  height: var(--mdc-filled-button-container-height);
+  height: var(--mat-button-filled-container-height);
   border-radius: var(--app-border-radius);
   border: 1px solid var(--app-table-color-border);
   min-width: 400px;

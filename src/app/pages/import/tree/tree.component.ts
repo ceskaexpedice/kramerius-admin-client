@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,9 +12,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
-    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-        MatIconModule, MatTooltipModule, MatProgressSpinnerModule
-    ],
+    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatTooltipModule, MatProgressSpinnerModule],
     selector: 'app-tree',
     templateUrl: './tree.component.html',
     styleUrls: ['./tree.component.scss']

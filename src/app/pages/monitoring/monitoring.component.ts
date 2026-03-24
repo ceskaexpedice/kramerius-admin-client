@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MonitoringApiComponent } from "./monitoring-api/monitoring-api.component";
@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-monitoring',
-    imports: [CommonModule, MonitoringApiComponent, TranslateModule, MatIconModule, MatTabsModule],
+    imports: [MonitoringApiComponent, TranslateModule, MatIconModule, MatTabsModule],
     templateUrl: './monitoring.component.html',
     styleUrl: './monitoring.component.scss'
 })
