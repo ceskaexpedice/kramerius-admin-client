@@ -219,7 +219,7 @@ a {
 
 .app-pipe {
   @extend .app-ml-2, .app-mr-2;
-  border-left: 1px solid var(--app-gray-4);
+  border-left: 1px solid var(--app-color-gray-4);
 
   /* &:last-child {
     @extend .app-dn;
@@ -227,7 +227,7 @@ a {
 }
 
 .app-label {
-  color: var(--app-gray-6);
+  color: var(--app-color-gray-6);
   font-size: 12px;
 }
 
@@ -237,13 +237,13 @@ a {
 }
 
 .app-desc {
-  color: var(--app-gray-6);
+  color: var(--app-color-gray-6);
   font-size: 14px;
   vertical-align: middle;
 }
 
 .app-explanation {
-  color: var(--app-gray-6);
+  color: var(--app-color-gray-6);
   font-size: 12px;
 }
 
@@ -334,8 +334,8 @@ a {
 // top bar
 .app-topbar {
   @extend .app-pt-8, .app-pl-4, .app-pr-4;
-  background-color: var(--app-gray-1);
-  border-bottom: 1px solid var(--app-gray-3);
+  background-color: var(--app-color-gray-1);
+  border-bottom: 1px solid var(--app-color-gray-3);
 
   .app-breadcrumbs {
     font-size: 20px;
@@ -344,7 +344,7 @@ a {
     span {
       &.app-separator {
         @extend .app-ml-2, .app-mr-2;
-        color: var(--app-gray-4);
+        color: var(--app-color-gray-4);
       }
 
       &.app-last {
@@ -353,7 +353,7 @@ a {
     }
 
     .mat-icon {
-      @include setIcon($color: var(--app-gray-4), $position: bottom);
+      @include setIcon($color: var(--app-color-gray-4), $position: bottom);
     }
   }
 }
@@ -393,7 +393,7 @@ table {
         th {
           /* font-size: 12px;
           font-weight: 500;
-          color: var(--app-gray-6); */
+          color: var(--app-color-gray-6); */
         }
       }
     }
@@ -443,12 +443,12 @@ table {
 
         &:hover {
           td {
-            background-color: var(--app-gray-0);
+            background-color: var(--app-color-gray-0);
           }
         }
 
        /*  &:nth-child(odd) {
-          background-color: rgba(var(--app-gray-0), .5);
+          background-color: rgba(var(--app-color-gray-0), .5);
         } */
 
         .app-input {

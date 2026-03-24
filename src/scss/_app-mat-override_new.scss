@@ -1,0 +1,16 @@
+// --- MATERIAL OVERRIDE ---
+@use '@angular/material' as mat;
+
+:root {
+  // FORM FIELD
+  @include mat.form-field-overrides((
+    container-height: 36px,
+    container-vertical-padding: 6px,
+    container-text-size: 14px,
+    container-text-weight: 500,
+    
+    outlined-label-text-size: 14px,
+    outlined-label-text-populated-size: 14px
+    outlined-outline-color: var(--app-color-gray-3)
+  ));
+}

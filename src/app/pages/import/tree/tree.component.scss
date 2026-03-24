@@ -5,12 +5,12 @@
   height: 34px;
 
   &.app-file {
-    color: var(--app-gray-5);
+    color: var(--app-color-gray-5);
   }
 
   &.app-selected {
     font-weight: 900;
-    background-color: var(--app-gray-0);
+    background-color: var(--app-color-gray-0);
   }
 
   .app-left {

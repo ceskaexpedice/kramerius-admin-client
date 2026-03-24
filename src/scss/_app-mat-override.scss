@@ -154,7 +154,7 @@
       }
 
       &.mat-expanded {
-        background-color: var(--app-gray-0)
+        background-color: var(--app-color-gray-0)
       }
 
       .mat-expansion-panel-header {
@@ -453,12 +453,12 @@
       }
 
       &:not(.mdc-tab--active) {
-        color: var(--app-gray-6);
+        color: var(--app-color-gray-6);
         font-weight: normal;
 
         .mat-badge-content,
         .app-badge {
-          background-color: var(--app-gray-5);
+          background-color: var(--app-color-gray-5);
         }
       }
 
@@ -534,7 +534,7 @@
 
       &:not(.mat-mdc-option-active) {
         .app-license-desc {
-          color: var(--app-gray-7);
+          color: var(--app-color-gray-7);
         }
       }
     }
@@ -584,7 +584,7 @@
 :root {
   @include mat.slide-toggle-overrides((
     /* selected-handle-color: white,
-    unselected-handle-color: var(--app-gray-6) */
+    unselected-handle-color: var(--app-color-gray-6) */
   ));
   
 
