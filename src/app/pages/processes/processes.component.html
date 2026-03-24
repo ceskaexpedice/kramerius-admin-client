@@ -3,7 +3,7 @@
   <div class="app-fxLayout app-column app-fill">
     <div class="app-topbar">
 
-      <div class="app-breadcrumbs app-mb-4">
+      <div class="app-breadcrumbs app-mb-6">
         <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
         <a routerLink="/">home</a>
         <span class="app-separator">/</span>
@@ -37,14 +37,8 @@
         </div>
       </mat-card>
 
-
-
-  <div class="app-fxLayout app-column app-pt-2 app-pb-4">
-    <div class="app-fxLayout app-row app-row-wrap app-center-v app-mb-2">      
-    <!--
-      <div class="app-fxLayout app-row app-center-v app-pt-2 app-pb-4">
-        <div class="app-fxFlex app-fxLayout app-row app-center-v">
-        -->
+      <div class="app-fxLayout app-row app-gap-2 app-row-wrap app-mb-2">
+        <div class="app-fxLayout app-row app-center-v app-mb-2">      
           <mat-form-field class="app-mr-2" appearance="outline">
             <mat-select [placeholder]="'desc.state' | translate" [(value)]="selectedState" (selectionChange)="onFiltersChanged()" [disabled]="isLoading()">
               <mat-option *ngFor="let state of batch_states" [value]="state.key">{{ state.label }}</mat-option>
@@ -93,7 +87,6 @@
                 {{ worker }}
               </mat-option>
             </mat-select>
-
             <button matSuffix mat-icon-button 
                     *ngIf="selectedWorkers?.length > 0" 
                     color="warn" 
@@ -103,8 +96,7 @@
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
-
-
+        
           <button mat-icon-button [matTooltip]="'button.reloadProcesses' | translate" (click)="reloadProcesses()" [disabled]="isLoading()">
             <mat-icon>refresh</mat-icon>
           </button>
@@ -112,10 +104,7 @@
           <mat-checkbox [(ngModel)]="autoReload" (change)="onAutoReloadChange($event)" [disabled]="isLoading()">{{ 'button.autoRefresProcesses' | translate : {refreshinterval: appSettings.processRefreshInterval} }}</mat-checkbox>
         </div>
 
-        <div class="app-fxLayout app-row app-center-v app-ml-2">
-          <!--  
-          <div class="app-fxLayout app-row app-center-v">
-            -->
+        <div class="app-fxLayout app-row app-center-v app-mb-2">
           <button mat-flat-button (click)="bulkDeleteProcesses()" color="warn" [disabled]="!selection.hasValue()" class="app-mr-2">
             {{ 'button.deleteSelectedItems' | translate }}
           </button>
