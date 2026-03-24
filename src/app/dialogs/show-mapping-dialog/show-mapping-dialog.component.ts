@@ -11,13 +11,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule,
-    MatTooltipModule],
-  selector: 'app-show-mapping-dialog',
-  templateUrl: './show-mapping-dialog.component.html',
-  styleUrls: ['./show-mapping-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule,
+        MatTooltipModule],
+    selector: 'app-show-mapping-dialog',
+    templateUrl: './show-mapping-dialog.component.html',
+    styleUrls: ['./show-mapping-dialog.component.scss']
 })
 export class ShowMappingDialogComponent implements OnInit {
 

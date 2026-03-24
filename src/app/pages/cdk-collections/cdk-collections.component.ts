@@ -35,13 +35,12 @@ import { CdkCollectionsDiglibComponent } from "./cdk-collections-diglib/cdk-coll
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule, MatInputModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
-    MatTooltipModule, MatSlideToggleModule, CdkCollectionsCdkComponent, CdkCollectionsDiglibComponent],
-  selector: 'app-cdk-collections',
-  templateUrl: './cdk-collections.component.html',
-  styleUrls: ['./cdk-collections.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule, MatInputModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
+        MatTooltipModule, MatSlideToggleModule, CdkCollectionsCdkComponent, CdkCollectionsDiglibComponent],
+    selector: 'app-cdk-collections',
+    templateUrl: './cdk-collections.component.html',
+    styleUrls: ['./cdk-collections.component.scss']
 })
 export class CdkCollectionsComponent implements OnInit {
 

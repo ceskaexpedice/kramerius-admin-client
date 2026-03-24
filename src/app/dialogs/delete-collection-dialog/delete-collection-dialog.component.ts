@@ -10,13 +10,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatTooltipModule,
-   MatCardModule],
-  selector: 'app-delete-collection-dialog',
-  templateUrl: './delete-collection-dialog.component.html',
-  styleUrls: ['./delete-collection-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatTooltipModule,
+        MatCardModule],
+    selector: 'app-delete-collection-dialog',
+    templateUrl: './delete-collection-dialog.component.html',
+    styleUrls: ['./delete-collection-dialog.component.scss']
 })
 export class DeleteCollectionDialogComponent implements OnInit {
 

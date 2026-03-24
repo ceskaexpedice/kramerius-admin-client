@@ -14,13 +14,12 @@ import { UIService } from 'src/app/services/ui.service';
 import { CollectionEditComponent } from "../../collections/collection-edit/collection-edit.component";
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule,
-    MatTooltipModule, MatMenuModule, CollectionEditComponent],
-  selector: 'app-cdk-collection-new',
-  templateUrl: './cdk-collection-new.component.html',
-  styleUrls: ['./cdk-collection-new.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule,
+        MatTooltipModule, MatMenuModule, CollectionEditComponent],
+    selector: 'app-cdk-collection-new',
+    templateUrl: './cdk-collection-new.component.html',
+    styleUrls: ['./cdk-collection-new.component.scss']
 })
 export class CdkCollectionNewComponent implements OnInit {
 

@@ -15,13 +15,12 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, 
-  MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
-  selector: 'app-schedule-indexations-by-multiple-pids-dialog',
-  templateUrl: './schedule-indexations-by-multiple-pids-dialog.component.html',
-  styleUrls: ['./schedule-indexations-by-multiple-pids-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
+    selector: 'app-schedule-indexations-by-multiple-pids-dialog',
+    templateUrl: './schedule-indexations-by-multiple-pids-dialog.component.html',
+    styleUrls: ['./schedule-indexations-by-multiple-pids-dialog.component.scss']
 })
 export class ScheduleIndexationsByMultiplePidsDialogComponent implements OnInit {
 

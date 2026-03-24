@@ -20,13 +20,12 @@ import { catchError, of } from 'rxjs';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule,
-  MatProgressBarModule, MatCardModule],
-  selector: 'app-add-items-to-collection-dialog',
-  templateUrl: './add-items-to-collection-dialog.component.html',
-  styleUrls: ['./add-items-to-collection-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule,
+        MatProgressBarModule, MatCardModule],
+    selector: 'app-add-items-to-collection-dialog',
+    templateUrl: './add-items-to-collection-dialog.component.html',
+    styleUrls: ['./add-items-to-collection-dialog.component.scss']
 })
 export class AddItemsToCollectionDialogComponent implements OnInit {
 

@@ -11,13 +11,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule,
-    MatTooltipModule],
-  selector: 'app-show-sechannel-dialog',
-  templateUrl: './show-sechannel-dialog.component.html',
-  styleUrls: ['./show-sechannel-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule,
+        MatTooltipModule],
+    selector: 'app-show-sechannel-dialog',
+    templateUrl: './show-sechannel-dialog.component.html',
+    styleUrls: ['./show-sechannel-dialog.component.scss']
 })
 export class ShowSeChannelDialogComponent implements OnInit {
 

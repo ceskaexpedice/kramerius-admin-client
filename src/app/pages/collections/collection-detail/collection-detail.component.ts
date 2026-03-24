@@ -17,14 +17,13 @@ import { ClientApiService } from 'src/app/services/client-api.service';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, 
-    MatTooltipModule, MatProgressBarModule, MatCheckboxModule
-  ],
-  selector: 'app-collection-detail',
-  templateUrl: './collection-detail.component.html',
-  styleUrls: ['./collection-detail.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatTooltipModule, MatProgressBarModule, MatCheckboxModule
+    ],
+    selector: 'app-collection-detail',
+    templateUrl: './collection-detail.component.html',
+    styleUrls: ['./collection-detail.component.scss']
 })
 export class CollectionDetailComponent implements OnInit {
 

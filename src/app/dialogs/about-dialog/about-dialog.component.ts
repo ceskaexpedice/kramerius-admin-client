@@ -15,12 +15,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
-  selector: 'app-about-dialog',
-  standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule, FormsModule, MatSlideToggleModule,
-    RouterModule, TranslateModule, MatMenuModule],
-  templateUrl: './about-dialog.component.html',
-  styleUrls: ['./about-dialog.component.scss']
+    selector: 'app-about-dialog',
+    imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule, FormsModule, MatSlideToggleModule,
+        RouterModule, TranslateModule, MatMenuModule],
+    templateUrl: './about-dialog.component.html',
+    styleUrls: ['./about-dialog.component.scss']
 })
 export class AboutDialogComponent implements OnInit {
 

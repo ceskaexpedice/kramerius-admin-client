@@ -12,11 +12,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, 
-    MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule, MatFormFieldModule, MatInputModule],
-  templateUrl: './simple-dialog.component.html',
-  styleUrls: ['./simple-dialog.component.scss']
+    imports: [CommonModule, FormsModule, TranslateModule,
+        MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule, MatFormFieldModule, MatInputModule],
+    templateUrl: './simple-dialog.component.html',
+    styleUrls: ['./simple-dialog.component.scss']
 })
 export class SimpleDialogComponent implements OnInit {
 

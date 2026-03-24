@@ -16,13 +16,12 @@ import { License } from 'src/app/models/license.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, 
-    MatTooltipModule, MatSelectModule],
-  selector: 'app-schedule-add-license-dialog',
-  templateUrl: './schedule-add-license-dialog.component.html',
-  styleUrls: ['./schedule-add-license-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
+        MatTooltipModule, MatSelectModule],
+    selector: 'app-schedule-add-license-dialog',
+    templateUrl: './schedule-add-license-dialog.component.html',
+    styleUrls: ['./schedule-add-license-dialog.component.scss']
 })
 export class ScheduleAddLicenseDialogComponent implements OnInit {
 

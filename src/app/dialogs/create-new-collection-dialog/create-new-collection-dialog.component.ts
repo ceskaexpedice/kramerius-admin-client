@@ -17,12 +17,11 @@ import { UIService } from 'src/app/services/ui.service';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
-  selector: 'app-create-new-collection-dialog',
-  templateUrl: './create-new-collection-dialog.component.html',
-  styleUrls: ['./create-new-collection-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
+    selector: 'app-create-new-collection-dialog',
+    templateUrl: './create-new-collection-dialog.component.html',
+    styleUrls: ['./create-new-collection-dialog.component.scss']
 })
 export class CreateNewCollectionDialogComponent implements OnInit {
 

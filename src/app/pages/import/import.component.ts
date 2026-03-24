@@ -21,14 +21,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TreeComponent } from './tree/tree.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule,
-    MatTooltipModule, MatTabsModule, TreeComponent
-  ],
-  selector: 'app-import',
-  templateUrl: './import.component.html',
-  styleUrls: ['./import.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule,
+        MatTooltipModule, MatTabsModule, TreeComponent
+    ],
+    selector: 'app-import',
+    templateUrl: './import.component.html',
+    styleUrls: ['./import.component.scss']
 })
 export class ImportComponent implements OnInit {
 

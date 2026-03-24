@@ -19,14 +19,13 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-    MatTooltipModule
-  ],
-  selector: 'app-dev',
-  templateUrl: './dev.component.html',
-  styleUrls: ['./dev.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatTooltipModule
+    ],
+    selector: 'app-dev',
+    templateUrl: './dev.component.html',
+    styleUrls: ['./dev.component.scss']
 })
 export class DevComponent implements OnInit {
 

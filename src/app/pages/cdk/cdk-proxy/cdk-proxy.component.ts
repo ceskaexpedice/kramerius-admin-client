@@ -19,14 +19,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatIconModule, MatSlideToggleModule, MatButtonModule,
-    MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule, MatProgressBarModule
-  ],
-  selector: 'app-cdk-proxy',
-  templateUrl: './cdk-proxy.component.html',
-  styleUrls: ['./cdk-proxy.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatIconModule, MatSlideToggleModule, MatButtonModule,
+        MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule, MatProgressBarModule
+    ],
+    selector: 'app-cdk-proxy',
+    templateUrl: './cdk-proxy.component.html',
+    styleUrls: ['./cdk-proxy.component.scss']
 })
 export class CdkProxyComponent implements OnInit {
 

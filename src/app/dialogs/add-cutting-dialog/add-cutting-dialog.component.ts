@@ -16,12 +16,11 @@ import { CollectionsService } from 'src/app/services/collections.service';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
-  selector: 'app-add-cutting-dialog',
-  templateUrl: './add-cutting-dialog.component.html',
-  styleUrls: ['./add-cutting-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
+    selector: 'app-add-cutting-dialog',
+    templateUrl: './add-cutting-dialog.component.html',
+    styleUrls: ['./add-cutting-dialog.component.scss']
 })
 export class AddCuttingDialogComponent implements OnInit {
 

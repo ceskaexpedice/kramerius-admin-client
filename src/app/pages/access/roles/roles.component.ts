@@ -19,13 +19,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatIconModule, MatCardModule, MatButtonModule,  MatProgressBarModule, MatIconModule, MatTooltipModule
-     ],
-  selector: 'app-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatIconModule, MatCardModule, MatButtonModule, MatProgressBarModule, MatIconModule, MatTooltipModule
+    ],
+    selector: 'app-roles',
+    templateUrl: './roles.component.html',
+    styleUrls: ['./roles.component.scss']
 })
 export class RolesComponent implements OnInit {
 

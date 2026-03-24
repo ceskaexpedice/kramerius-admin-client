@@ -13,13 +13,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatTooltipModule, 
-    MatFormFieldModule, MatInputModule],
-  selector: 'app-edit-set-dialog',
-  templateUrl: './edit-set-dialog.component.html',
-  styleUrls: ['./edit-set-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatTooltipModule,
+        MatFormFieldModule, MatInputModule],
+    selector: 'app-edit-set-dialog',
+    templateUrl: './edit-set-dialog.component.html',
+    styleUrls: ['./edit-set-dialog.component.scss']
 })
 export class EditSetDialogComponent implements OnInit {
 

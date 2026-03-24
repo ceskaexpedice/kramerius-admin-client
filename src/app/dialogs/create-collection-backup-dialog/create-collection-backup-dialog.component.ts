@@ -15,12 +15,11 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
-  selector: 'app-create-collection-backup-dialog',
-  templateUrl: './create-collection-backup-dialog.component.html',
-  styleUrls: ['./create-collection-backup-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
+    selector: 'app-create-collection-backup-dialog',
+    templateUrl: './create-collection-backup-dialog.component.html',
+    styleUrls: ['./create-collection-backup-dialog.component.scss']
 })
 export class CreateCollectionBackupDialogComponent implements OnInit {
   

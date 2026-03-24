@@ -29,12 +29,11 @@ export enum WorkerModeState {
 }
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
-    RouterModule, TranslateModule, MatMenuModule, MatTooltipModule, MatSlideToggle, FormsModule],
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule,
+        RouterModule, TranslateModule, MatMenuModule, MatTooltipModule, MatSlideToggle, FormsModule],
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   

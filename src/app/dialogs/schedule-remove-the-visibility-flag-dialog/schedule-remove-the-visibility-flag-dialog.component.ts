@@ -16,13 +16,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-  MatProgressBarModule, MatTooltipModule],
-  selector: 'app-schedule-remove-the-visibility-flag-dialog',
-  templateUrl: './schedule-remove-the-visibility-flag-dialog.component.html',
-  styleUrls: ['./schedule-remove-the-visibility-flag-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatProgressBarModule, MatTooltipModule],
+    selector: 'app-schedule-remove-the-visibility-flag-dialog',
+    templateUrl: './schedule-remove-the-visibility-flag-dialog.component.html',
+    styleUrls: ['./schedule-remove-the-visibility-flag-dialog.component.scss']
 })
 export class ScheduleRemoveTheVisibilityFlagDialogComponent implements OnInit {
 

@@ -15,14 +15,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule,
-    MatTooltipModule, MatFormFieldModule, MatInputModule
-  ],
-  selector: 'app-config',
-  templateUrl: './config.component.html',
-  styleUrls: ['./config.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule,
+        MatTooltipModule, MatFormFieldModule, MatInputModule
+    ],
+    selector: 'app-config',
+    templateUrl: './config.component.html',
+    styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent implements OnInit {
 

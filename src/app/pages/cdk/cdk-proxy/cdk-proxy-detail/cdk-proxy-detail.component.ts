@@ -17,13 +17,12 @@ export interface PeriodicElement { // TO DO: SMAZAT
 }
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, 
-    MatIconModule, MatTooltipModule, MatTableModule
-  ],
-  selector: 'app-cdk-proxy-detail',
-  templateUrl: './cdk-proxy-detail.component.html',
-  styleUrls: ['./cdk-proxy-detail.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule,
+        MatIconModule, MatTooltipModule, MatTableModule
+    ],
+    selector: 'app-cdk-proxy-detail',
+    templateUrl: './cdk-proxy-detail.component.html',
+    styleUrls: ['./cdk-proxy-detail.component.scss']
 })
 export class CdkProxyDetailComponent implements OnInit {
 

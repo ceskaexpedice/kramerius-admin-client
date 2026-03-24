@@ -33,27 +33,25 @@ import { AppSettings } from 'src/app/services/app-settings';
 
 
 @Component({
-  selector: 'app-monitoring-api',
-  standalone: true,
-  imports: [MatRadioModule, 
-    MatExpansionModule, 
-    TranslateModule, MatListModule, 
-    MatIconModule, MatButtonModule, NgClass, 
-    MatTableModule,
-    CommonModule,
-    MatTooltipModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    FormsModule, 
-   
-    MatInputModule,
-    MatDatepickerModule,
-    MatPaginatorModule
-  ],
-  providers: [DatePipe],
-  templateUrl: './monitoring-api.component.html',
-  styleUrl: './monitoring-api.component.scss'
+    selector: 'app-monitoring-api',
+    imports: [MatRadioModule,
+        MatExpansionModule,
+        TranslateModule, MatListModule,
+        MatIconModule, MatButtonModule, NgClass,
+        MatTableModule,
+        CommonModule,
+        MatTooltipModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatPaginatorModule
+    ],
+    providers: [DatePipe],
+    templateUrl: './monitoring-api.component.html',
+    styleUrl: './monitoring-api.component.scss'
 })
 export class MonitoringApiComponent implements OnInit {
 

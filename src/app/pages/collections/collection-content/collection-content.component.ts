@@ -30,14 +30,13 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, 
-    MatTooltipModule, MatProgressBarModule, MatCheckboxModule, DragDropModule
-  ],
-  selector: 'app-collection-content',
-  templateUrl: './collection-content.component.html',
-  styleUrls: ['./collection-content.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatTooltipModule, MatProgressBarModule, MatCheckboxModule, DragDropModule
+    ],
+    selector: 'app-collection-content',
+    templateUrl: './collection-content.component.html',
+    styleUrls: ['./collection-content.component.scss']
 })
 export class CollectionContentComponent implements OnInit, OnChanges {
 

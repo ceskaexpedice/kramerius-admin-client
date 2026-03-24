@@ -38,14 +38,13 @@ import { CollectionContentComponent } from "../collection-content/collection-con
 import { CollectionContextComponent } from "../collection-context/collection-context.component";
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatTabsModule,
-    MatTooltipModule, MatMenuModule, MatRadioModule, MatCheckboxModule, 
-    CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
-  selector: 'app-collection',
-  templateUrl: './collection.component.html',
-  styleUrls: ['./collection.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatTabsModule,
+        MatTooltipModule, MatMenuModule, MatRadioModule, MatCheckboxModule,
+        CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
+    selector: 'app-collection',
+    templateUrl: './collection.component.html',
+    styleUrls: ['./collection.component.scss']
 })
 export class CollectionComponent implements OnInit {
 

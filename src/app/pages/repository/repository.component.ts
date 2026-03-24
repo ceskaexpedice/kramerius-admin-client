@@ -42,14 +42,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { FixLogsDialogComponent } from 'src/app/dialogs/fix-logs-dialog/fix-logs-dialog.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule,
-    MatTooltipModule, MatDividerModule, MatExpansionModule
-  ],
-  selector: 'app-repository',
-  templateUrl: './repository.component.html',
-  styleUrls: ['./repository.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule,
+        MatTooltipModule, MatDividerModule, MatExpansionModule
+    ],
+    selector: 'app-repository',
+    templateUrl: './repository.component.html',
+    styleUrls: ['./repository.component.scss']
 })
 export class RepositoryComponent implements OnInit {
   view: string;

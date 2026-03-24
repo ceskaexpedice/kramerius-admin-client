@@ -24,15 +24,14 @@ import { MatOption } from "@angular/material/core";
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule,
-    FormsModule, ReactiveFormsModule, MatButtonModule,
-    MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
-    MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule, MatDivider, MatOption, MatSelectModule
-     ],
-  selector: 'app-create-or-edit-license-dialog',
-  templateUrl: './create-or-edit-license-dialog.component.html',
-  styleUrls: ['./create-or-edit-license-dialog.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule,
+        FormsModule, ReactiveFormsModule, MatButtonModule,
+        MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
+        MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule, MatDivider, MatOption, MatSelectModule
+    ],
+    selector: 'app-create-or-edit-license-dialog',
+    templateUrl: './create-or-edit-license-dialog.component.html',
+    styleUrls: ['./create-or-edit-license-dialog.component.scss']
 })
 export class CreateOrEditLicenseDialogComponent implements OnInit {
 

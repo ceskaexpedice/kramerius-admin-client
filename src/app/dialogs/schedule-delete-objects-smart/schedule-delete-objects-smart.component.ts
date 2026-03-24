@@ -17,13 +17,12 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-  MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
-  selector: 'app-schedule-delete-objects-smart',
-  templateUrl: './schedule-delete-objects-smart.component.html',
-  styleUrls: ['./schedule-delete-objects-smart.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
+    selector: 'app-schedule-delete-objects-smart',
+    templateUrl: './schedule-delete-objects-smart.component.html',
+    styleUrls: ['./schedule-delete-objects-smart.component.scss']
 })
 export class ScheduleDeleteObjectsSmartComponent implements OnInit {
 

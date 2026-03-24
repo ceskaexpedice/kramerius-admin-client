@@ -24,13 +24,12 @@ import { TranslateModule } from "@ngx-translate/core";
 import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, 
-    MatToolbarModule, MatButtonModule, MatIconModule,  
-    MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDividerModule],
-  selector: 'app-create-or-edit-right-dialog',
-  templateUrl: './create-or-edit-right-dialog.component.html',
-  styleUrls: ['./create-or-edit-right-dialog.component.scss']
+    imports: [CommonModule, FormsModule, TranslateModule,
+        MatToolbarModule, MatButtonModule, MatIconModule,
+        MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDividerModule],
+    selector: 'app-create-or-edit-right-dialog',
+    templateUrl: './create-or-edit-right-dialog.component.html',
+    styleUrls: ['./create-or-edit-right-dialog.component.scss']
 })
 export class CreateOrEditRightDialogComponent implements OnInit {
 

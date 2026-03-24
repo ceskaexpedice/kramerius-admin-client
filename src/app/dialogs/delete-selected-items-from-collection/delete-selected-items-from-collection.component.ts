@@ -16,12 +16,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
-  selector: 'app-delete-selected-items-from-collection',
-  templateUrl: './delete-selected-items-from-collection.component.html',
-  styleUrls: ['./delete-selected-items-from-collection.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
+    selector: 'app-delete-selected-items-from-collection',
+    templateUrl: './delete-selected-items-from-collection.component.html',
+    styleUrls: ['./delete-selected-items-from-collection.component.scss']
 })
 export class DeleteSelectedItemsFromCollectionComponent implements OnInit {
 

@@ -41,13 +41,12 @@ import { CollectionContentComponent } from "../../collections/collection-content
 import { CollectionContextComponent } from "../../collections/collection-context/collection-context.component";
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatRadioModule, MatCheckboxModule,
-    MatTooltipModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatMenuModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
-  selector: 'app-cdk-collection',
-  templateUrl: './cdk-collection.component.html',
-  styleUrls: ['./cdk-collection.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatRadioModule, MatCheckboxModule,
+        MatTooltipModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatMenuModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
+    selector: 'app-cdk-collection',
+    templateUrl: './cdk-collection.component.html',
+    styleUrls: ['./cdk-collection.component.scss']
 })
 export class CdkCollectionComponent implements OnInit {
 

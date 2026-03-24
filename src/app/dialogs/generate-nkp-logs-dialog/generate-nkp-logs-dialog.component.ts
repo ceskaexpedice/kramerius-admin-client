@@ -17,13 +17,12 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
-   MatTooltipModule, MatCheckboxModule],
-  selector: 'app-generate-nkp-logs-dialog',
-  templateUrl: './generate-nkp-logs-dialog.component.html',
-  styleUrls: ['./generate-nkp-logs-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
+        MatTooltipModule, MatCheckboxModule],
+    selector: 'app-generate-nkp-logs-dialog',
+    templateUrl: './generate-nkp-logs-dialog.component.html',
+    styleUrls: ['./generate-nkp-logs-dialog.component.scss']
 })
 export class GenerateNkpLogsDialogComponent implements OnInit {
 

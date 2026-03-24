@@ -28,15 +28,14 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatTableModule,
-    MatTooltipModule, MatTabsModule, MatCheckboxModule, MatProgressBarModule, MatButtonToggleModule,
-    MatPaginatorModule
-  ],
-  selector: 'app-indexing',
-  templateUrl: './indexing.component.html',
-  styleUrls: ['./indexing.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatTableModule,
+        MatTooltipModule, MatTabsModule, MatCheckboxModule, MatProgressBarModule, MatButtonToggleModule,
+        MatPaginatorModule
+    ],
+    selector: 'app-indexing',
+    templateUrl: './indexing.component.html',
+    styleUrls: ['./indexing.component.scss']
 })
 export class IndexingComponent implements OnInit {
 

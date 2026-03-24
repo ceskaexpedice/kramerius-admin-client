@@ -15,12 +15,11 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, MatIconModule,
-    MatToolbarModule, MatButtonModule,  MatDialogModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
-  selector: 'app-add-new-parameter-dialog',
-  templateUrl: './add-new-parameter-dialog.component.html',
-  styleUrls: ['./add-new-parameter-dialog.component.scss']
+    imports: [CommonModule, FormsModule, TranslateModule, MatIconModule,
+        MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatTooltipModule],
+    selector: 'app-add-new-parameter-dialog',
+    templateUrl: './add-new-parameter-dialog.component.html',
+    styleUrls: ['./add-new-parameter-dialog.component.scss']
 })
 export class AddNewParameterDialogComponent implements OnInit {
 

@@ -18,13 +18,12 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, 
-    MatTooltipModule],
-  selector: 'app-add-item-to-collection-dialog',
-  templateUrl: './add-item-to-collection-dialog.component.html',
-  styleUrls: ['./add-item-to-collection-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
+        MatTooltipModule],
+    selector: 'app-add-item-to-collection-dialog',
+    templateUrl: './add-item-to-collection-dialog.component.html',
+    styleUrls: ['./add-item-to-collection-dialog.component.scss']
 })
 export class AddItemToCollectionDialogComponent implements OnInit {
 

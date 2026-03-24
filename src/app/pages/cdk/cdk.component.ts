@@ -13,14 +13,13 @@ import { CdkObjectReharvestComponent } from './cdk-object-reharvest/cdk-object-r
 import { CdkEuropeanouComponent } from './cdk-europeanou/cdk-europeanou.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatIconModule, MatTooltipModule, MatTabsModule,
-    CdkProxyComponent, CdkObjectReharvestComponent, CdkEuropeanouComponent
-  ],
-  selector: 'app-cdk',
-  templateUrl: './cdk.component.html',
-  styleUrls: ['./cdk.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatIconModule, MatTooltipModule, MatTabsModule,
+        CdkProxyComponent, CdkObjectReharvestComponent, CdkEuropeanouComponent
+    ],
+    selector: 'app-cdk',
+    templateUrl: './cdk.component.html',
+    styleUrls: ['./cdk.component.scss']
 })
 export class CdkComponent implements OnInit {
   view: string;

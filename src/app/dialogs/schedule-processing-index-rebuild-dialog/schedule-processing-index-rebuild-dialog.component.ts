@@ -14,13 +14,12 @@ import { TranslateModule } from '@ngx-translate/core';;
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-  MatProgressBarModule, MatTooltipModule],
-  selector: 'app-schedule-processing-index-rebuild-dialog',
-  templateUrl: './schedule-processing-index-rebuild-dialog.component.html',
-  styleUrls: ['./schedule-processing-index-rebuild-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatProgressBarModule, MatTooltipModule],
+    selector: 'app-schedule-processing-index-rebuild-dialog',
+    templateUrl: './schedule-processing-index-rebuild-dialog.component.html',
+    styleUrls: ['./schedule-processing-index-rebuild-dialog.component.scss']
 })
 export class ScheduleProcessingIndexRebuildDialogComponent implements OnInit {
 

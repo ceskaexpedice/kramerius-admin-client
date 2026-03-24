@@ -37,13 +37,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatProgressBarModule,
-    MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, MatInputModule, 
-    RightsComponent, MatExpansionModule],
-  templateUrl: './object.component.html',
-  styleUrls: ['./object.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatProgressBarModule,
+        MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, MatInputModule,
+        RightsComponent, MatExpansionModule],
+    templateUrl: './object.component.html',
+    styleUrls: ['./object.component.scss']
 })
 export class ObjectComponent implements OnInit {
 

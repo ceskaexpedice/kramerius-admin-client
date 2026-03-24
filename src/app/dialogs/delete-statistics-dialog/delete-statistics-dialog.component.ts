@@ -16,13 +16,12 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
-   MatTooltipModule],
-  selector: 'app-delete-statistics-dialog',
-  templateUrl: './delete-statistics-dialog.component.html',
-  styleUrls: ['./delete-statistics-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatDatepickerModule,
+        MatTooltipModule],
+    selector: 'app-delete-statistics-dialog',
+    templateUrl: './delete-statistics-dialog.component.html',
+    styleUrls: ['./delete-statistics-dialog.component.scss']
 })
 export class DeleteStatisticsDialogComponent implements OnInit {
 

@@ -22,12 +22,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, MatProgressBarModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatExpansionModule],
-  selector: 'app-rights',
-  templateUrl: './rights.component.html',
-  styleUrls: ['./rights.component.scss']
+    imports: [CommonModule, TranslateModule, MatProgressBarModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatExpansionModule],
+    selector: 'app-rights',
+    templateUrl: './rights.component.html',
+    styleUrls: ['./rights.component.scss']
 })
 export class RightsComponent implements OnInit {
   //TODO: prejmenovat na ActionsComponent. Je to hlavně seznam (relevantních) akcí. Až sekundárně administrace práv nad konkrétními akcemi

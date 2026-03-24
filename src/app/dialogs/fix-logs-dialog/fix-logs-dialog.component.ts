@@ -11,21 +11,20 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [
-    CommonModule,
-    TranslateModule,
-    FormsModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatCard,
-    MatCardContent
-],
-  selector: 'app-fix-logs-dialog',
-  templateUrl: './fix-logs-dialog.component.html',
-  styleUrls: ['./fix-logs-dialog.component.scss']
+    imports: [
+        CommonModule,
+        TranslateModule,
+        FormsModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatCard,
+        MatCardContent
+    ],
+    selector: 'app-fix-logs-dialog',
+    templateUrl: './fix-logs-dialog.component.html',
+    styleUrls: ['./fix-logs-dialog.component.scss']
 })
 export class FixLogsDialogComponent implements OnInit {
 

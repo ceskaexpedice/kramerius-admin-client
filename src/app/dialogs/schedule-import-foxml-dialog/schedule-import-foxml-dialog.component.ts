@@ -15,13 +15,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule,
-  MatProgressBarModule, MatTooltipModule],
-  selector: 'app-schedule-import-foxml-dialog',
-  templateUrl: './schedule-import-foxml-dialog.component.html',
-  styleUrls: ['./schedule-import-foxml-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule,
+        MatProgressBarModule, MatTooltipModule],
+    selector: 'app-schedule-import-foxml-dialog',
+    templateUrl: './schedule-import-foxml-dialog.component.html',
+    styleUrls: ['./schedule-import-foxml-dialog.component.scss']
 })
 export class ScheduleImportFoxmlDialogComponent implements OnInit {
 

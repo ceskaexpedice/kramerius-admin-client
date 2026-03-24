@@ -22,14 +22,13 @@ const ELEMENT_DATA: any[] = [
 ]; 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, 
-    MatIconModule, MatTooltipModule, MatTableModule,
-    MatFormFieldModule, MatInputModule, MatSelectModule
-  ],
-  selector: 'app-cdk-europeanou',
-  templateUrl: './cdk-europeanou.component.html',
-  styleUrls: ['./cdk-europeanou.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule,
+        MatIconModule, MatTooltipModule, MatTableModule,
+        MatFormFieldModule, MatInputModule, MatSelectModule
+    ],
+    selector: 'app-cdk-europeanou',
+    templateUrl: './cdk-europeanou.component.html',
+    styleUrls: ['./cdk-europeanou.component.scss']
 })
 export class CdkEuropeanouComponent implements OnInit {
 

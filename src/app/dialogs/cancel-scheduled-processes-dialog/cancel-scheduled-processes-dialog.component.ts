@@ -17,13 +17,12 @@ import { Batch } from 'src/app/models/batch.model';
 import { AdminApiService, ProcessesParams } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
-    MatProgressBarModule, MatTooltipModule],
-  selector: 'app-cancel-scheduled-processes-dialog',
-  templateUrl: './cancel-scheduled-processes-dialog.component.html',
-  styleUrls: ['./cancel-scheduled-processes-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
+        MatProgressBarModule, MatTooltipModule],
+    selector: 'app-cancel-scheduled-processes-dialog',
+    templateUrl: './cancel-scheduled-processes-dialog.component.html',
+    styleUrls: ['./cancel-scheduled-processes-dialog.component.scss']
 })
 export class CancelScheduledProcessesDialogComponent implements OnInit {
 

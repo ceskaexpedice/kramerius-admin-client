@@ -18,13 +18,12 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
-    MatTooltipModule, MatExpansionModule],
-  selector: 'app-params',
-  templateUrl: './params.component.html',
-  styleUrls: ['./params.component.scss']
+    imports: [CommonModule, TranslateModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
+        MatTooltipModule, MatExpansionModule],
+    selector: 'app-params',
+    templateUrl: './params.component.html',
+    styleUrls: ['./params.component.scss']
 })
 export class ParamsComponent implements OnInit {
   readonly panelOpenState = signal(false);

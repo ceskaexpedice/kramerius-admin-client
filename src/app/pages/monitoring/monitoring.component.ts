@@ -8,11 +8,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-monitoring',
-  standalone: true,
-  imports: [CommonModule, MonitoringApiComponent, TranslateModule, MatIconModule, MatTabsModule],
-  templateUrl: './monitoring.component.html',
-  styleUrl: './monitoring.component.scss'
+    selector: 'app-monitoring',
+    imports: [CommonModule, MonitoringApiComponent, TranslateModule, MatIconModule, MatTabsModule],
+    templateUrl: './monitoring.component.html',
+    styleUrl: './monitoring.component.scss'
 })
 export class MonitoringComponent {
   view: string;

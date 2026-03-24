@@ -16,13 +16,12 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
-  MatProgressBarModule, MatTooltipModule],
-  selector: 'app-schedule-start-the-sdnnt-review-process',
-  templateUrl: './schedule-start-the-sdnnt-review-process.component.html',
-  styleUrls: ['./schedule-start-the-sdnnt-review-process.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatCardModule,
+        MatProgressBarModule, MatTooltipModule],
+    selector: 'app-schedule-start-the-sdnnt-review-process',
+    templateUrl: './schedule-start-the-sdnnt-review-process.component.html',
+    styleUrls: ['./schedule-start-the-sdnnt-review-process.component.scss']
 })
 export class ScheduleStartTheSdnntReviewProcessComponent implements OnInit {
 

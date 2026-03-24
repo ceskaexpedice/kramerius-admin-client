@@ -16,13 +16,12 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDividerModule,
-  MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
-  selector: 'app-schedule-indexation-by-model-dialog',
-  templateUrl: './schedule-indexation-by-model-dialog.component.html',
-  styleUrls: ['./schedule-indexation-by-model-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDividerModule,
+        MatProgressBarModule, MatTooltipModule, MatCheckboxModule],
+    selector: 'app-schedule-indexation-by-model-dialog',
+    templateUrl: './schedule-indexation-by-model-dialog.component.html',
+    styleUrls: ['./schedule-indexation-by-model-dialog.component.scss']
 })
 export class ScheduleIndexationByModelDialogComponent implements OnInit {
 

@@ -12,13 +12,12 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatIconModule, MatTooltipModule, MatProgressSpinnerModule
-  ],
-  selector: 'app-tree',
-  templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatIconModule, MatTooltipModule, MatProgressSpinnerModule
+    ],
+    selector: 'app-tree',
+    templateUrl: './tree.component.html',
+    styleUrls: ['./tree.component.scss']
 })
 export class TreeComponent implements OnInit {
 

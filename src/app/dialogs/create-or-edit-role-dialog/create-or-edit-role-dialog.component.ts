@@ -15,12 +15,11 @@ import { AdminApiService } from "src/app/services/admin-api.service";
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, MatCardModule,
-    MatToolbarModule, MatButtonModule,  MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule],
-  selector: 'app-create-or-edit-role-dialog',
-  templateUrl: './create-or-edit-role-dialog.component.html',
-  styleUrls: ['./create-or-edit-role-dialog.component.scss']
+    imports: [CommonModule, FormsModule, TranslateModule, MatCardModule,
+        MatToolbarModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatIconModule],
+    selector: 'app-create-or-edit-role-dialog',
+    templateUrl: './create-or-edit-role-dialog.component.html',
+    styleUrls: ['./create-or-edit-role-dialog.component.scss']
 })
 export class CreateOrEditRoleDialogComponent implements OnInit {
 

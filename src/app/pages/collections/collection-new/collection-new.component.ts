@@ -13,14 +13,13 @@ import { UIService } from 'src/app/services/ui.service';
 import { CollectionEditComponent } from '../collection-edit/collection-edit.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatMenuModule,
-    MatTooltipModule, CollectionEditComponent
-  ],
-  selector: 'app-collection-new',
-  templateUrl: './collection-new.component.html',
-  styleUrls: ['./collection-new.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatMenuModule,
+        MatTooltipModule, CollectionEditComponent
+    ],
+    selector: 'app-collection-new',
+    templateUrl: './collection-new.component.html',
+    styleUrls: ['./collection-new.component.scss']
 })
 export class CollectionNewComponent implements OnInit {
 

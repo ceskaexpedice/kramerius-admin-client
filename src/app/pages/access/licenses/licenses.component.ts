@@ -22,13 +22,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule, DragDropModule, MatButtonModule
-     ],
-  selector: 'app-licenses',
-  templateUrl: './licenses.component.html',
-  styleUrls: ['./licenses.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule, DragDropModule, MatButtonModule
+    ],
+    selector: 'app-licenses',
+    templateUrl: './licenses.component.html',
+    styleUrls: ['./licenses.component.scss']
 })
 export class LicensesComponent implements OnInit {
 

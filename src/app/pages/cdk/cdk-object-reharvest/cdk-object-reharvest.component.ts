@@ -30,17 +30,16 @@ import { Clipboard } from '@angular/cdk/clipboard';
  * Reharvests component, displaying and manage reharvets 
  */
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, MatChipsModule, 
-    MatFormFieldModule,  MatInputModule,
-    MatIconModule, 
-    MatInputModule,
-    FormsModule,
-    MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule, MatPaginatorModule, MatProgressBarModule
-  ],
-  selector: 'app-cdk-object-reharvest',
-  templateUrl: './cdk-object-reharvest.component.html',
-  styleUrls: ['./cdk-object-reharvest.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, MatChipsModule,
+        MatFormFieldModule, MatInputModule,
+        MatIconModule,
+        MatInputModule,
+        FormsModule,
+        MatTooltipModule, MatTableModule, MatButtonModule, MatCardModule, MatPaginatorModule, MatProgressBarModule
+    ],
+    selector: 'app-cdk-object-reharvest',
+    templateUrl: './cdk-object-reharvest.component.html',
+    styleUrls: ['./cdk-object-reharvest.component.scss']
 })
 export class CdkObjectReharvestComponent implements OnInit {
 

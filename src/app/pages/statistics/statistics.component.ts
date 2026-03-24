@@ -47,18 +47,17 @@ enum ViewLevel {
 }
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule,
-    MatTooltipModule, MatTabsModule, MatDatepickerModule, MatChipsModule,
-    NgxEchartsModule, NgxEchartsDirective
-  ],
-  selector: 'app-statistics',
-  templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss'],
-  providers: [
-    provideEcharts(),
-  ]
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatMenuModule,
+        MatTooltipModule, MatTabsModule, MatDatepickerModule, MatChipsModule,
+        NgxEchartsModule, NgxEchartsDirective
+    ],
+    selector: 'app-statistics',
+    templateUrl: './statistics.component.html',
+    styleUrls: ['./statistics.component.scss'],
+    providers: [
+        provideEcharts(),
+    ]
 })
 export class StatisticsComponent implements OnInit {
 

@@ -37,14 +37,13 @@ import { MatDivider } from "@angular/material/divider";
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatProgressBarModule,
-    MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
-    MatCheckboxModule, MatPaginatorModule, DurationPipe, MatDivider],
-  selector: 'app-processes',
-  templateUrl: './processes.component.html',
-  styleUrls: ['./processes.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatProgressBarModule,
+        MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
+        MatCheckboxModule, MatPaginatorModule, DurationPipe, MatDivider],
+    selector: 'app-processes',
+    templateUrl: './processes.component.html',
+    styleUrls: ['./processes.component.scss']
 })
 export class ProcessesComponent implements OnInit {
 

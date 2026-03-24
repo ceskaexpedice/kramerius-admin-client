@@ -17,12 +17,11 @@ import { AdminApiService } from "src/app/services/admin-api.service";
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
-  selector: 'app-delete-selected-collections-dialog',
-  templateUrl: './delete-selected-collections-dialog.component.html',
-  styleUrls: ['./delete-selected-collections-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
+    selector: 'app-delete-selected-collections-dialog',
+    templateUrl: './delete-selected-collections-dialog.component.html',
+    styleUrls: ['./delete-selected-collections-dialog.component.scss']
 })
 export class DeleteSelectedCollectionsDialogComponent implements OnInit {
 

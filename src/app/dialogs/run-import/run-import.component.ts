@@ -30,14 +30,13 @@ import { MatDivider } from "@angular/material/divider";
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule,
-    FormsModule, MatFormFieldModule, MatInputModule,
-    MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule,
-    MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule, MatDivider],
-  selector: 'app-run-import',
-  templateUrl: './run-import.component.html',
-  styleUrls: ['./run-import.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule,
+        FormsModule, MatFormFieldModule, MatInputModule,
+        MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule,
+        MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule, MatDivider],
+    selector: 'app-run-import',
+    templateUrl: './run-import.component.html',
+    styleUrls: ['./run-import.component.scss']
 })
 export class RunImportComponent implements OnInit {
 

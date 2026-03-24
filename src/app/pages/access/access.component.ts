@@ -14,15 +14,14 @@ import { LicensesComponent } from './licenses/licenses.component';
 import { ParamsComponent } from './params/params.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatIconModule, MatTabsModule, 
-    // MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
-    // MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, 
-    RightsComponent, RolesComponent, LicensesComponent, ParamsComponent ],
-  selector: 'app-access',
-  templateUrl: './access.component.html',
-  styleUrls: ['./access.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatIconModule, MatTabsModule,
+        // MatCardModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatProgressBarModule,
+        // MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, 
+        RightsComponent, RolesComponent, LicensesComponent, ParamsComponent],
+    selector: 'app-access',
+    templateUrl: './access.component.html',
+    styleUrls: ['./access.component.scss']
 })
 export class AccessComponent implements OnInit {
 

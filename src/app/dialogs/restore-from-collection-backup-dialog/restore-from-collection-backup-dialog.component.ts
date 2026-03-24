@@ -16,12 +16,11 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatRadioModule, MatTooltipModule],
-  selector: 'app-restore-from-collection-backup-dialog',
-  templateUrl: './restore-from-collection-backup-dialog.component.html',
-  styleUrls: ['./restore-from-collection-backup-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatRadioModule, MatTooltipModule],
+    selector: 'app-restore-from-collection-backup-dialog',
+    templateUrl: './restore-from-collection-backup-dialog.component.html',
+    styleUrls: ['./restore-from-collection-backup-dialog.component.scss']
 })
 export class RestoreFromCollectionBackupDialogComponent implements OnInit {
   

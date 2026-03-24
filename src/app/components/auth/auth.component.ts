@@ -5,10 +5,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-auth',
-  standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule],
-  templateUrl: './auth.component.html'
+    selector: 'app-auth',
+    imports: [CommonModule, MatProgressSpinnerModule],
+    templateUrl: './auth.component.html'
 })
 export class AuthComponent implements OnInit {
 

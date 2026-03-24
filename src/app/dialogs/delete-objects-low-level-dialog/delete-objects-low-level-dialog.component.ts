@@ -14,13 +14,12 @@ import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatTooltipModule, MatProgressBarModule, 
-    MatFormFieldModule, MatInputModule],
-  selector: 'app-delete-objects-low-level-dialog',
-  templateUrl: './delete-objects-low-level-dialog.component.html',
-  styleUrls: ['./delete-objects-low-level-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatTooltipModule, MatProgressBarModule,
+        MatFormFieldModule, MatInputModule],
+    selector: 'app-delete-objects-low-level-dialog',
+    templateUrl: './delete-objects-low-level-dialog.component.html',
+    styleUrls: ['./delete-objects-low-level-dialog.component.scss']
 })
 export class DeleteObjectsLowLevelDialogComponent implements OnInit {
 

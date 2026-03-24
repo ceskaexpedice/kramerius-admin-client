@@ -8,11 +8,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  selector: 'app-footer',
-  standalone: true,
-  imports: [TranslateModule],
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+    selector: 'app-footer',
+    imports: [TranslateModule],
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
 

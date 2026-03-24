@@ -12,12 +12,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, MatDialogModule,
-    MatButtonModule, MatDividerModule, MatIconModule],
-  selector: 'app-schedule-change-flag-on-license-dialog',
-  templateUrl: './schedule-change-flag-on-license-dialog.component.html',
-  styleUrls: ['./schedule-change-flag-on-license-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, MatDialogModule,
+        MatButtonModule, MatDividerModule, MatIconModule],
+    selector: 'app-schedule-change-flag-on-license-dialog',
+    templateUrl: './schedule-change-flag-on-license-dialog.component.html',
+    styleUrls: ['./schedule-change-flag-on-license-dialog.component.scss']
 })
 export class ScheduleChangeFlagOnLicenseDialogComponent implements OnInit {
 
