@@ -1,5 +1,36 @@
 // --- FLEX LAYOUT ---
 
+$gaps: (
+  "0": 0,
+  "1": 4,
+  "2": 8,
+  "3": 12,
+  "4": 16,
+  "5": 20,
+  "6": 24,
+  "7": 28,
+  "8": 32,
+);
+
+// set gap
+@mixin setFlexGap($direction: null) {
+  @each $gap, $val in $gaps {
+    &.app-gap-#{$gap} {
+      > * {
+        &:not(:last-child) {
+          @if ($direction == 'row') {
+            margin-right: #{$val}px;
+          } @else if ($direction == 'column') {
+            margin-bottom: #{$val}px;
+          } @else {
+            margin-right: #{$val}px;
+          }
+        }
+      }
+    }
+  }
+}
+
 .app-fxLayout {
   display: flex !important;
   box-sizing: border-box;
