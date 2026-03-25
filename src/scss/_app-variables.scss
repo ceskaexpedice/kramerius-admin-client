@@ -42,10 +42,10 @@
   --app-navbar-avatar-size: 40px;
   --app-navbar-avatar-bg-color: --app-color-tertiary;
 
-  --app-table-color-bg: var(--app-color-lightnes);
-  --app-table-color: var(--app-color-gray-7);
-  --app-table-color-border: var(--app-card-border-color);
-  --app-table-color-bg-hover: var(--app-color-gray-2);
+  // --app-table-color-bg: var(--app-color-lightnes);
+  // --app-table-color: var(--app-color-gray-7);
+  // --app-table-color-border: var(--app-card-border-color);
+  // --app-table-color-bg-hover: var(--app-color-gray-2);
 
   --app-footer-bg-color: var(--app-color-darknes);
   --app-footer-color: var(--app-color-gray-5);
@@ -67,155 +67,17 @@
   --app-badge-version-color: var(--app-color-accent);
   --app-badge-default-color: var(--app-color-gray-8);
 
-  --app-border-radius: 4px;
-
   --app-select-option-min-height: 36px;
   --app-menu-item-min-height: var(--app-select-option-min-height);
 
-  // MATERIAL
 
-  // toolbar
-  --mat-toolbar-standard-height: 64px;
 
-  // button
-  --mdc-filled-button-container-height: 36px;
 
-  // toogle botton
-  --mat-standard-button-toggle-height: var(--mdc-filled-button-container-height);
-  --mat-standard-button-toggle-selected-state-text-color: var(--app-color-lightnes);
-  --mat-standard-button-toggle-selected-state-background-color: var(--app-color-primary);
+  // new
+  --app-default-border-radius: 4px;
+  --app-default-height: 36px;
+  --app-default-font-size: 14px;
+  --app-default-border-color: var(--app-color-gray-3);
 
-  // card
-  --mdc-outlined-card-container-shape: 0;
-  --mdc-outlined-card-outline-color: rgba(0, 0, 0, 0.12);
-  --mat-card-title-text-weight: 500;
- 
-  // acordion
-  --mat-expansion-header-collapsed-state-height: 48px;
-  --mat-expansion-header-expanded-state-height: var(--mat-expansion-header-collapsed-state-height);
-  --mat-expansion-header-text-weight: 500;
-
-  // table
-  --mat-table-row-item-container-height: 48px;
-
-  // checkbox
-  --mdc-checkbox-state-layer-size: calc(40px - var(--app-checkbox-reduction));
-  --mat-checkbox-label-text-size: 14px;
-  --app-checkbox-default-size: 18px;
-  --app-checkbox-reduction: 4px;
-
-  // dialog
-  --mat-dialog-actions-padding: 24px;
-
-  // radio button
-  --app-radio-button-size: 14px;  
+  --app-table-row-item-container-height: 48px;
 }
-
-// todp
-// toogle button size
-
-
-// GAPS
-$gaps: (
-  "0": 0,
-  "1": 4,
-  "2": 8,
-  "3": 12,
-  "4": 16,
-  "5": 20,
-  "6": 24,
-  "7": 28,
-  "8": 32,
-);
-
-// icon size
-$iconSize: (
-  "14": 14,
-  "15": 15,
-  "16": 16,
-  "17": 17,
-  "18": 18,
-  "19": 19,
-  "20": 20,
-  "21": 21,
-  "22": 22,
-  "23": 23,
-);
-
-// ALERTS
-$alerts: (
-  warn: var(--app-color-warn-rgb),
-  info: var(--app-color-info-rgb),
-  success: var(--app-color-success-rgb),
-);
-
-// STATES
-$states: (
-  count: var(--app-color-primary),
-  planned: #7b7b7b,
-  running: #456aa5,
-  finished: #45a55a,
-  closed: #45a55a,
-  failed: var(--app-color-warn),
-  killed: #ca7023,
-  not-running: #ca7023,
-  warning: #ab493f,
-  too-big: #ab443f,
-  waiting_for_approve: #a44c04,
-  canceled: #a2a2a0,
-
-  session: var(--app-color-lightnes),
-  keyword: var(--app-color-darknes),
-  default: var(--app-color-gray-6),
-
-  // for reharvest jobs
-  is-reharvest-from-core: #faf7e3,
-  is-reharvest-from-admin: #f0ffee,
-
-  // monitoring
-  duration-low: #faf7e4,
-  duration-high: #faeee3,
-  duration-critical: #fae3e3,
-
-  // workmode
-  maintenance: var(--app-color-success),
-  distributedLocksException: var(--app-color-warn),
-  noReason: var(--app-color-darknes)
-);
-
-// DASHBOARD
-$dashboard: (
-  object: var(--app-color-primary),
-  object-actions: var(--app-color-primary),
-  object-accessibility: var(--app-color-primary),
-  object-in-collections: var(--app-color-primary),
-  object-others: var(--app-color-primary),
-
-  import-foxml: var(--app-color-primary),
-  import-ndk: var(--app-color-primary),
-
-  access-actions: var(--app-color-primary),
-  access-roles: var(--app-color-primary),
-  access-licenses: var(--app-color-primary),
-  access-params: var(--app-color-primary),
-
-  processes: var(--app-color-primary),
-  processes-standard-output: var(--app-color-primary),
-  processes-error-output: var(--app-color-primary),
-
-  collections: var(--app-color-primary),
-  collections-detail: var(--app-color-primary),
-  collections-edit: var(--app-color-primary),
-  collections-content: var(--app-color-primary),
-  collections-context: var(--app-color-primary),
-
-  indexing-object: var(--app-color-primary),
-  indexing-model: var(--app-color-primary),
-
-  repository-repository-management: var(--app-color-primary),
-  repository-bulk-data-editing: var(--app-color-primary),
-  repository-statistics: var(--app-color-primary),
-
-  statistics-graphs: var(--app-color-primary),
-  statistics-most-viewed-documents: var(--app-color-primary)
-);

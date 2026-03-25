@@ -88,6 +88,20 @@ $iconSize: (
   "23": 23,
 );
 
+// set checkbox density
+@mixin setCheckBoxDensity($val: null) {
+  @if ($val != null) {
+    .mat-mdc-checkbox {    
+      .mdc-checkbox__background {
+        width: calc(18px - #{$val}px);
+        height: calc(18px - #{$val}px);
+        top: calc((var(--mat-checkbox-state-layer-size, 40px) - calc(18px - #{$val}px)) / 2);
+        left: calc((var(--mat-checkbox-state-layer-size, 40px) - calc(18px - #{$val}px)) / 2);
+      }
+    }
+  }  
+}
+
 // set icon size
 @mixin setIcon($size: null, $color: null, $position: null) {
   @if ($size != null) {
@@ -381,183 +395,6 @@ $iconSize: (
   }
 }
 
-// TABLE
-.mat-mdc-table {
-  &.app-view-border {
-    border-width: 1px 1px 0 1px;
-    border-style: solid;
-    border-color: var(--app-card-border-color);
-  }
-
-  .mat-mdc-row {
-    @include setStateColor();
-  }
-
-  .app-col-checkbox {
-    width: 40px;
-    text-align: center;
-  }
-
-  thead {
-    .mat-mdc-header-row {
-      .mat-mdc-header-cell {
-        padding: 0;
-
-        &:first-of-type {
-          &:not(.app-col-icon, .app-col-checkbox) {
-            padding-left: 16px;
-          }
-        }
-
-        &:last-of-type {
-          &:not(.app-col-icon, .app-col-checkbox) {
-            padding-right: 16px;
-          }
-        }
-      }
-    }
-  }
-
-  tbody {
-    .mat-mdc-row {
-      &:hover {
-        background: var(--app-table-color-bg-hover);
-      }
-  
-      &.active {    
-        &:hover {
-          background: var(--app-table-color-bg-hover);
-        }
-      }
-
-      &:last-child {
-        .mat-cell {
-          border-bottom: none;
-        }
-      }
-
-      &.app-not-allowed {
-        color: var(--app-color-disabled) !important; 
-  
-        .mat-cell, a, .mat-icon {
-          color: var(--app-color-disabled) !important; 
-        }
-
-        .app-badge {
-          background-color: var(--app-color-disabled) !important;
-        }
-      }
-
-      .mat-mdc-cell {
-        padding: 0;
-        
-        &:first-of-type {
-          &:not(.app-col-icon, .app-col-checkbox) {
-            padding-left: 16px;
-          }
-        }
-
-        &:last-of-type {
-          &:not(.app-col-icon, .app-col-checkbox) {
-            padding-right: 16px;
-          }
-        }
-
-        &.app-col-icon {
-          width: 40px;
-          text-align: center;
-
-          /* @include mat.icon-button-density(-4);
-
-          .mdc-icon-button {     
-            .mat-icon {
-              @include setIcon(20);
-            }
-          } */
-        }
-
-        //--todo @include mat.icon-button-density(-4);
-
-        .mdc-icon-button {     
-          .mat-icon {
-            @include setIcon(20);
-          }
-        }
-
-        &.mat-column-state {      
-          .app-badge {
-            min-width: 110px;
-          }
-        }
-
-        .app-text-cutter-wrapper {
-          position: relative;
-          display: flex;
-        }
-  
-        .app-text-cutter {
-          padding-right: 16px;
-          position: absolute;
-          max-width: 100%;
-          align-self: center;
-        }
-
-        .mat-form-field {
-          &.mat-form-field-appearance-fill {
-            &.mat-form-field-type-mat-select {
-              .mat-form-field-wrapper {
-                padding-bottom: 0 !important;
-  
-                .mat-form-field-flex,
-                .mat-form-field-infix {
-                  padding-top: 0 !important;
-                }
-
-                .mat-select-arrow-wrapper {
-                  display: flex;
-                  vertical-align: bottom;
-                }
-
-                .mat-form-field-underline {
-                  bottom: 0;
-                }
-              }
-            }
-          }
-        }
-
-        .mat-mdc-icon-button {
-          --mdc-icon-button-state-layer-size: var(--mat-table-row-item-container-height);
-          padding: 0;
-
-          .mat-icon {
-            @include setIcon($position: text-top);
-          }
-        }
-      } 
-    }
-  }
-}
-
-// PAGINATOR
-.mat-mdc-paginator {
-  .app-table-wrapper & {
-    bottom: 0px;
-    position: sticky;
-    z-index: 10;
-    border-top: 1px solid var(--app-table-color-border);
-  }
-}
-
-// CHECKBOX
-.mdc-checkbox {
-  padding: calc((var(--mdc-checkbox-state-layer-size, 40px) - calc(var(--app-checkbox-default-size) + var(--app-checkbox-reduction))) / 2) !important;
-
-  .mdc-checkbox__background {
-    width: calc(var(--app-checkbox-default-size) - var(--app-checkbox-reduction));
-    height: calc(var(--app-checkbox-default-size) - var(--app-checkbox-reduction));
-  }
-}
 
 // CHIPLIST
 .mat-mdc-chip-listbox {
@@ -699,43 +536,13 @@ $iconSize: (
 }
 
 // MENU
-.mat-mdc-menu-panel {
-  .mat-mdc-menu-item {
-    min-height: var(--app-menu-item-min-height);
-  }
-}
+// .mat-mdc-menu-panel {
+//   .mat-mdc-menu-item {
+//     min-height: var(--app-menu-item-min-height);
+//   }
+// }
 
 
-// DENSITY - FORMS
-.app-form-customize {
-
-  //--todo @include mat.form-field-density(-6);
-  //--todo @include mat.icon-button-density(-6);
-  //@include mat.button-density(0);
-
-  .mat-mdc-form-field-infix {
-    display: flex;
-  }
-
-  .mat-mdc-form-field-icon-suffix {
-    margin-right: 4px;
-    display: flex;
-
-    .mdc-icon-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .mat-icon {
-        @include setIcon(18);
-      }
-
-      svg {
-        --mdc-icon-button-icon-size: 18px;
-      }
-    }
-  }
-}
 
 
 
@@ -743,21 +550,21 @@ $iconSize: (
 
 
 :root {
-  // FORM FIELD
+  // form field
   @include mat.form-field-overrides((
-    container-height: 36px,
+    container-height: var(--app-default-height),
     container-vertical-padding: 6px,
-    container-text-size: 14px,
+    container-text-size: var(--app-default-font-size),
     container-text-weight: 500,
+    container-text-tracking: 0,
 
-    outlined-outline-color: var(--app-color-gray-3),
-    outlined-label-text-size: 14px,
-    outlined-label-text-populated-size: 14px,
+    outlined-outline-color: var(--app-default-border-color),
+    outlined-label-text-size: var(--app-default-font-size),
+    outlined-label-text-populated-size: var(--app-default-font-size),
 
     hover-state-layer-opacity: 0,
     focus-state-layer-opacity: 0
   ));
-
   .mat-mdc-form-field {
     .mat-mdc-form-field-icon-suffix {
       display: flex;
@@ -775,15 +582,13 @@ $iconSize: (
         }
       }
     }
-
     .mat-mdc-form-field-bottom-align {
       &::before {
         height: 0;
       }
     }
-
     &.app-datepicker {
-      $app-width: 160px;
+      $app-width: 155px;
       flex: 1 1 $app-width;
       max-width: $app-width;
       min-width: $app-width;
@@ -791,9 +596,241 @@ $iconSize: (
   }
 
 
+  // select
+  @include mat.select-overrides((
+    panel-background-color: var(--app-color-lightnes),
+    trigger-text-size: var(--app-default-font-size),
+    trigger-text-weight: 400,
+    trigger-text-tracking: 0
+  ));
+  --mat-option-label-text-tracking: 0;
+  --mat-option-label-text-size: 14px;
+  .mat-mdc-option {
+    min-height: var(--app-default-height) !important;
+    line-height: var(--app-default-height) !important;
+
+    .mdc-list-item__primary-text {
+      white-space: nowrap !important;
+      display: inline-block;
+      flex-grow: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+
+  // checkbox
+  @include setCheckBoxDensity(2);
+  @include mat.checkbox-overrides((
+    state-layer-size: var(--app-default-height)
+  ));
+
+
+  // button
+  @include mat.button-overrides((
+    filled-container-height: var(--app-default-height),
+    filled-container-shape: var(--app-default-border-radius)
+  ));
+
+
+   // button icon
+  @include mat.icon-button-overrides((
+    state-layer-size: var(--app-default-height)
+  ));
+
+
+  // toolbar
   @include mat.toolbar-overrides((
-    container-background-color: var(--app-color-primary),
-    container-text-color: red,
+    container-background-color: var(--app-color-primary)
+  ));
+
+
+  // card
+  @include mat.card-overrides((
+    outlined-container-color: var(--app-color-lightnes),
+    outlined-container-shape: 0px,
+    outlined-outline-color: var(--app-default-border-color)
+  ));
+
+
+  // paginator
+  @include mat.paginator-overrides((
+    container-background-color: var(--app-color-lightnes)
+  ));
+
+
+  // menu
+  @include mat.menu-overrides((
+    container-color: var(--app-color-lightnes),
+    container-shape: var(--app-default-border-radius),
+    item-label-text-tracking: 0,
+    item-label-text-weight: 400
+  ));
+  .mat-mdc-menu-item {
+    min-height: var(--app-default-height) !important;
+  }
+
+
+  // table
+  @include mat.table-overrides((
+    background-color: var(--app-color-lightnes),
+    header-headline-color: var(--app-color-gray-7),
+    row-item-outline-color: var(--app-default-border-color),
+    row-item-container-height: var(--app-table-row-item-container-height)
   ));
 }
 
+
+
+
+// table
+.mat-mdc-table {
+  .mat-mdc-row {
+    @include setStateColor();
+  }
+
+  .app-col-checkbox {
+    width: 40px;
+    text-align: center;
+  }
+
+  thead {
+    .mat-mdc-header-row {
+      .mat-mdc-header-cell {
+        padding: 0;
+
+        &:first-of-type {
+          &:not(.app-col-icon, .app-col-checkbox) {
+            padding-left: 16px;
+          }
+        }
+
+        &:last-of-type {
+          &:not(.app-col-icon, .app-col-checkbox) {
+            padding-right: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  tbody {
+    .mat-mdc-row {
+      &:hover {
+        background: var(--app-color-gray-2);
+      }
+  
+      &.active {    
+        &:hover {
+          background: var(--app-color-gray-2);
+        }
+      }
+
+      &:last-child {
+        .mat-mdc-cell {
+          border-bottom: none;
+        }
+      }
+
+      &.app-not-allowed {
+        color: var(--app-color-disabled) !important; 
+  
+        .mat-mdc-cell, a, .mat-icon {
+          color: var(--app-color-disabled) !important; 
+        }
+
+        .app-badge {
+          background-color: var(--app-color-disabled) !important;
+        }
+      }
+
+      .mat-mdc-cell {
+        padding: 0;
+        
+        &:first-of-type {
+          &:not(.app-col-icon, .app-col-checkbox) {
+            padding-left: 16px;
+          }
+        }
+
+        &:last-of-type {
+          &:not(.app-col-icon, .app-col-checkbox) {
+            padding-right: 16px;
+          }
+        }
+
+        &.app-col-icon {
+          width: 40px;
+          text-align: center;
+
+          /* @include mat.icon-button-density(-4);
+
+          .mdc-icon-button {     
+            .mat-icon {
+              @include setIcon(20);
+            }
+          } */
+        }
+
+        //--todo @include mat.icon-button-density(-4);
+
+        .mdc-icon-button {     
+          .mat-icon {
+            @include setIcon(20);
+          }
+        }
+
+        &.mat-column-state {      
+          .app-badge {
+            min-width: 110px;
+          }
+        }
+
+        .app-text-cutter-wrapper {
+          position: relative;
+          display: flex;
+        }
+  
+        .app-text-cutter {
+          padding-right: 16px;
+          position: absolute;
+          max-width: 100%;
+          align-self: center;
+        }
+
+        .mat-form-field {
+          &.mat-form-field-appearance-fill {
+            &.mat-form-field-type-mat-select {
+              .mat-form-field-wrapper {
+                padding-bottom: 0 !important;
+  
+                .mat-form-field-flex,
+                .mat-form-field-infix {
+                  padding-top: 0 !important;
+                }
+
+                .mat-select-arrow-wrapper {
+                  display: flex;
+                  vertical-align: bottom;
+                }
+
+                .mat-form-field-underline {
+                  bottom: 0;
+                }
+              }
+            }
+          }
+        }
+
+        .mat-mdc-icon-button {
+          --mdc-icon-button-state-layer-size: var(--mat-table-row-item-container-height);
+          padding: 0;
+
+          .mat-icon {
+            @include setIcon($position: text-top);
+          }
+        }
+      } 
+    }
+  }
+}
