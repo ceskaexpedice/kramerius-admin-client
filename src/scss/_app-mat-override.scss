@@ -396,59 +396,6 @@ $iconSize: (
   @include setIconSize();
 }
 
-// DIALOG
-.mat-mdc-dialog-panel {
-  .mat-mdc-dialog-container {
-    .mat-mdc-dialog-content {
-      padding-top: 4px !important;
-    }
-
-    .mat-mdc-dialog-actions {
-      padding-top: 8px;
-     }
-  }
-}
-
-// SELECT PANEL
-.mat-mdc-select-panel {
-  .mat-mdc-option {
-    min-height: var(--app-select-option-min-height);
-
-    .mat-icon {
-      margin-right: 8px;
-    }
-
-    &.app-add {
-      font-weight: 800;
-      color: var(--app-color-primary);
-    }
-  }
-
-  &.app-licenses {
-    .mat-mdc-option {
-      padding-top: 8px;
-      padding-bottom: 8px;
-      height: auto;
-      line-height: normal;
-
-      .app-license-desc {
-        font-weight: 500;
-      }
-
-      &:not(:last-child) {
-        border-bottom: 1px solid var(--app-card-border-color);
-      }
-
-      &:not(.mat-mdc-option-active) {
-        .app-license-desc {
-          color: var(--app-color-gray-7);
-        }
-      }
-    }
-  }
-}
-
-
 
 :root {
   // form field
@@ -517,19 +464,52 @@ $iconSize: (
   ));
   --mat-option-label-text-tracking: 0;
   --mat-option-label-text-size: 14px;
-  .mat-mdc-option {
-    min-height: var(--app-default-height) !important;
-    line-height: var(--app-default-height) !important;
+  .mat-mdc-select-panel {
+    .mat-mdc-option {
+      min-height: var(--app-default-height) !important;
+      line-height: var(--app-default-height) !important;
 
-    .mdc-list-item__primary-text {
-      white-space: nowrap !important;
-      display: inline-block;
-      flex-grow: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      &.app-add {
+        font-weight: 800;
+        color: var(--app-color-primary);
+      }
+
+      .mat-icon {
+        margin-right: 8px;
+      }
+
+      .mdc-list-item__primary-text {
+        white-space: nowrap !important;
+        display: inline-block;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      } 
+    }
+    &.app-licenses {
+      .mat-mdc-option {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        height: auto;
+        line-height: normal;
+
+        .app-license-desc {
+          font-weight: 500;
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--app-default-border-color);
+        }
+
+        &:not(.mat-mdc-option-active) {
+          .app-license-desc {
+            color: var(--app-color-gray-7);
+          }
+        }
+      }
     }
   }
-
+  
 
   // datepicker
   @include mat.datepicker-overrides((
@@ -666,6 +646,13 @@ $iconSize: (
   }
 
 
+  // dialog
+  @include mat.dialog-overrides((
+    container-color: var(--app-color-lightnes),
+    container-shape: var(--app-default-border-radius)
+  ));
+
+
   // table
   @include mat.table-overrides((
     background-color: var(--app-color-lightnes),
@@ -792,7 +779,6 @@ $iconSize: (
           max-width: 100%;
           align-self: center;
         }
-
         .mat-form-field {
           &.mat-form-field-appearance-fill {
             &.mat-form-field-type-mat-select {
@@ -816,7 +802,6 @@ $iconSize: (
             }
           }
         }
-
         .mat-mdc-icon-button {
           --mdc-icon-button-state-layer-size: var(--mat-table-row-item-container-height);
           padding: 0;
