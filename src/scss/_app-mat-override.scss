@@ -257,7 +257,7 @@ $iconSize: (
         padding-top: 8px;
         padding-bottom: 8px;
         height: auto;
-        line-height: normal;
+        line-height: normal !important;
 
         .app-license-desc {
           font-weight: 500;
@@ -285,10 +285,56 @@ $iconSize: (
 
 
   // checkbox
-  @include setCheckBoxDensity(2);
+  @include setCheckBoxDensity(4);
   @include mat.checkbox-overrides((
     state-layer-size: var(--app-default-height)
   ));
+
+
+  // radio button
+  @include mat.radio-overrides((
+    // no properties works in angular v21
+  ));
+  .mat-mdc-radio-group {
+    .mat-mdc-radio-button {
+      --mat-radio-state-layer-size: calc(var(--app-radio-button-size) * 2);
+      margin-right: 8px;
+
+      .mdc-radio__background::before {
+        top: calc(-1 * (var(--mat-radio-state-layer-size, 40px) - var(--app-radio-button-size)) / 2) !important;
+        left: calc(-1 * (var(--mat-radio-state-layer-size, 40px) - var(--app-radio-button-size)) / 2) !important;
+      }
+    
+      .mdc-radio {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    
+        .mat-mdc-radio-touch-target {
+          height: 34px;
+          width: 34px;
+        }
+    
+        .mdc-radio__background {
+          height: var(--app-radio-button-size);
+          width: var(--app-radio-button-size);
+    
+          .mdc-radio__inner-circle {
+            border-width: calc(var(--app-radio-button-size) / 2);
+          }
+        }
+      }
+    }
+    &.app-label-more-lines  {
+      align-self: start !important;
+      .mat-mdc-radio-button {
+        .mdc-radio { 
+          align-items: start;
+          align-self: start;
+        }
+      }
+    }
+  }
 
 
   // button
@@ -619,7 +665,8 @@ $iconSize: (
   // dialog
   @include mat.dialog-overrides((
     container-color: var(--app-color-lightnes),
-    container-shape: var(--app-default-border-radius)
+    container-shape: var(--app-default-border-radius),
+    container-max-width: 800px
   ));
 
 
