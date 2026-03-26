@@ -497,7 +497,7 @@ a {
   &.app-view-border {
     border: 1px solid var(--app-default-border-color);
   }
-  
+
   .mat-mdc-paginator {
     bottom: 0px;
     position: sticky;
@@ -515,27 +515,17 @@ table {
     border-width: 1px 0 0 1px;
     border-style: solid;
     border-color: var(--app-default-border-color);
-    background-color: var(--app-table-color-bg);
+    background-color: var(--app-color-lightnes);
 
     tr {
       td, th {
         border-width: 0 1px 1px 0;
         border-style: solid;
         border-color: var(--app-default-border-color);
-        padding: 4px 8px;
+        padding: 1px 8px;
         vertical-align: top;
         text-align: left;
         font-size: 14px;
-      }
-    }
-
-    thead {
-      tr {
-        th {
-          /* font-size: 12px;
-          font-weight: 500;
-          color: var(--app-color-gray-6); */
-        }
       }
     }
 
@@ -587,10 +577,6 @@ table {
             background-color: var(--app-color-gray-0);
           }
         }
-
-       /*  &:nth-child(odd) {
-          background-color: rgba(var(--app-color-gray-0), .5);
-        } */
 
         .app-input {
           width: calc(100% - 4px);

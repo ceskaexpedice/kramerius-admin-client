@@ -308,93 +308,6 @@ $iconSize: (
   }
 }
 
-// ACCORDION
-.mat-accordion {
-  &.app-view-default {
-    .mat-expansion-panel {
-      box-shadow: none !important;
-      border-radius: 0 !important;
-      margin: 0 !important;
-      border: 1px solid var(--app-card-border-color);
-      
-      &:not(:first-child) {
-        border-top: 0;
-      }
-
-      &.mat-expanded {
-        background-color: var(--app-color-gray-0)
-      }
-
-      .mat-expansion-panel-header {
-        padding-left: 16px;
-        padding-right: 16px;
-
-        .mat-content {
-          .mat-expansion-panel-header-description {
-            font-weight: var(--app-expansion-header-description-text-weight);
-          }
-        }
-   
-        .app-actions {
-          margin-right: 16px;
-
-          a {
-            margin-left: 16px;
-            color: var(--app-color-primary);
-  
-            .mat-icon {
-              @include setIcon(20);
-            }
-          }
-        } 
-      }
-
-      .mat-expansion-panel-content {
-        .mat-expansion-panel-body {
-          padding-left: 16px;
-          padding-right: 16px;
-        }
-
-        .mat-action-row {
-          border: 0 !important;
-          padding: 16px;
-          padding-top: 0 !important;
-        }
-      }
-    }
-  }
-
-  &.app-view-actions {
-    --mat-expansion-header-collapsed-state-height: 58px;
-    --mat-expansion-header-expanded-state-height: var(--mat-expansion-header-collapsed-state-height);
-
-    .mat-expansion-panel {
-      .mat-expansion-panel-header {
-        .mat-content {
-          flex-direction: column;
-        }
-      }
-    }
-  }
-}
-
-// FORM FIELD
-.mat-mdc-form-field {
-  background-color: var(--app-color-lightnes);
-
-  .mat-mdc-form-field-subscript-wrapper {
-    height: 0;
-  }
-
-  &.app-download {
-    .mat-mdc-form-field-icon-suffix {
-      position: absolute;
-      top: 10px;
-      right: 0;
-    }
-  }
-}
-
 
 // CHIPLIST
 .mat-mdc-chip-listbox {
@@ -535,18 +448,6 @@ $iconSize: (
   }
 }
 
-// MENU
-// .mat-mdc-menu-panel {
-//   .mat-mdc-menu-item {
-//     min-height: var(--app-menu-item-min-height);
-//   }
-// }
-
-
-
-
-
-
 
 
 :root {
@@ -566,6 +467,10 @@ $iconSize: (
     focus-state-layer-opacity: 0
   ));
   .mat-mdc-form-field {
+    background-color: var(--app-color-lightnes);
+    .mat-mdc-form-field-subscript-wrapper {
+      height: 0;
+    }
     .mat-mdc-form-field-icon-suffix {
       display: flex;
       padding-right: 4px;
@@ -593,6 +498,13 @@ $iconSize: (
       max-width: $app-width;
       min-width: $app-width;
     }
+    &.app-download {
+      .mat-mdc-form-field-icon-suffix {
+        position: absolute;
+        top: 10px;
+        right: 0;
+      }
+    }
   }
 
 
@@ -619,6 +531,13 @@ $iconSize: (
   }
 
 
+  // datepicker
+  @include mat.datepicker-overrides((
+    calendar-body-label-text-color: var(--app-color-primary),
+    calendar-container-background-color: var(--app-color-lightnes),
+  ));
+
+
   // checkbox
   @include setCheckBoxDensity(2);
   @include mat.checkbox-overrides((
@@ -629,7 +548,8 @@ $iconSize: (
   // button
   @include mat.button-overrides((
     filled-container-height: var(--app-default-height),
-    filled-container-shape: var(--app-default-border-radius)
+    filled-container-shape: var(--app-default-border-radius),
+    filled-horizontal-padding: 16px
   ));
 
 
@@ -668,6 +588,81 @@ $iconSize: (
   ));
   .mat-mdc-menu-item {
     min-height: var(--app-default-height) !important;
+  }
+
+
+  // expansion panel
+  @include mat.expansion-overrides((
+    container-background-color: var(--app-color-lightnes),
+    container-elevation-shadow: none,
+    container-shape: 0,
+    container-text-tracking: 0,
+    header-text-tracking: 0
+  ));
+  .mat-accordion {
+    &.app-view-default {
+      .mat-expansion-panel {
+        margin: 0 !important;
+        border: 1px solid var(--app-default-border-color);
+        
+        &:not(:first-child) {
+          border-top: 0;
+        }
+
+        &.mat-expanded {
+          background-color: var(--app-color-gray-0)
+        }
+        .mat-expansion-panel-header {
+          padding-left: 16px;
+          padding-right: 16px;
+
+          .mat-content {
+            .mat-expansion-panel-header-description {
+              font-weight: 400;
+              font-size: 15px;
+              color: var(--app-color-gray-6);
+            }
+          }
+          .app-actions {
+            margin-right: 16px;
+
+            a {
+              margin-left: 16px;
+              color: var(--app-color-primary);
+    
+              .mat-icon {
+                @include setIcon(20);
+              }
+            }
+          } 
+        }
+        .mat-expansion-panel-content {
+          .mat-expansion-panel-body {
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+
+          .mat-action-row {
+            border: 0 !important;
+            padding: 16px;
+            padding-top: 0 !important;
+          }
+        }
+      }
+    }
+    &.app-view-actions {
+      @include mat.expansion-overrides((
+        header-collapsed-state-height: 58px, 
+        header-expanded-state-height: 58px
+      ));
+      .mat-expansion-panel {
+        .mat-expansion-panel-header {
+          .mat-content {
+            flex-direction: column;
+          }
+        }
+      }
+    }
   }
 
 
