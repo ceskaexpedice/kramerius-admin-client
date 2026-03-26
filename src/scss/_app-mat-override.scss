@@ -164,41 +164,6 @@ $iconSize: (
 }
 
 
-
-
-
-
-
-// CHIPLIST
-.mat-mdc-chip-listbox {
-  .mat-mdc-chip {
-    @include setStateColor();
-
-    &.mat-mdc-standard-chip {
-      background-color: var(--app-badge-default-color);
-      
-
-      .mat-mdc-chip-action-label {
-        color: var(--app-color-lightnes);
-      }
-
-      .mat-mdc-chip-remove {
-        color: var(--app-color-lightnes);
-      }
-    }
-
-    &.app-pid {
-      background-color: var(--app-color-primary);
-
-      .app-text-cutter {
-        max-width: 200px;
-      }
-    }
-  }   
-}
-
-
-
 // icon
 .mat-icon {
   @include setIconSize();
@@ -614,10 +579,57 @@ $iconSize: (
   }
 
 
+  // chips
+  @include mat.chips-overrides((
+ 
+  ));
+  .mat-mdc-chip-listbox {
+    .mat-mdc-chip {
+      @include setStateColor();
+      &.mat-mdc-standard-chip {
+        background-color: var(--app-badge-default-color);
+        .mat-mdc-chip-action-label {
+          color: var(--app-color-lightnes);
+        }
+        .mat-mdc-chip-remove {
+          color: var(--app-color-lightnes);
+        }
+      }
+      &.app-pid {
+        background-color: var(--app-color-primary);
+        .app-text-cutter {
+          max-width: 200px;
+        }
+      }
+    }   
+  }
+
+
   // dialog
   @include mat.dialog-overrides((
     container-color: var(--app-color-lightnes),
     container-shape: var(--app-default-border-radius)
+  ));
+
+
+  // slide toggle
+  @include mat.slide-toggle-overrides((
+    track-height: 10px,
+    with-icon-handle-size: 18px,
+    pressed-handle-size: 18px,
+    track-outline-width: 0,
+    track-width: 44px,
+    handle-width: 44px,
+    state-layer-size: 32px,
+    label-text-tracking: 0,
+    selected-handle-color: var(--app-color-primary),
+    selected-icon-color: var(--app-color-lightnes),
+    selected-focus-handle-color: var(--app-color-primary),
+    selected-hover-handle-color: var(--app-color-primary),
+    selected-pressed-handle-color: var(--app-color-primary),
+    selected-track-color: #99cbff,
+    selected-focus-track-color: #99cbff,
+    selected-hover-track-color: #99cbff
   ));
 
 
