@@ -39,9 +39,6 @@
 
   --app-container: 1280px;
 
-  --app-navbar-avatar-size: 40px;
-  --app-navbar-avatar-bg-color: --app-color-tertiary;
-
   --app-footer-bg-color: var(--app-color-darknes);
   --app-footer-color: var(--app-color-gray-5);
 
@@ -58,15 +55,12 @@
   --app-select-option-min-height: 36px;
   --app-menu-item-min-height: var(--app-select-option-min-height);
 
-
-
-
   // new
   --app-default-border-radius: 4px;
   --app-default-height: 36px;
   --app-default-font-size: 14px;
   --app-default-border-color: var(--app-color-gray-3);
-  
+
   --app-slide-toggle-handle-size: 16px;
   --app-slide-toggle-selected-track-color: #99cbff;
 
