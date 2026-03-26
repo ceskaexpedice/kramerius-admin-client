@@ -315,6 +315,15 @@ $iconSize: (
   ));
 
 
+  // button toggle
+  @include mat.button-toggle-overrides((
+    shape: var(--app-default-border-radius),
+    height: var(--app-default-height),
+    divider-color: var(--app-default-border-color),
+    selected-state-background-color: var(--app-color-gray-2)
+  ));
+
+
   // toolbar
   @include mat.toolbar-overrides((
     container-background-color: var(--app-color-primary)
