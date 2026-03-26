@@ -166,147 +166,7 @@ $iconSize: (
 
 
 
-// CARD
-.mat-mdc-card {
-  // header
-  .mat-mdc-card-header {
-    .mat-mdc-card-title {
-      .mat-icon {
-        @include setIcon(20, $position: bottom);
-      }
-    }
-  }
 
-  // content
-  .mat-mdc-card-content {
-    // ----
-  }
-
-  // actions
-  .mat-mdc-card-actions {
-    padding: 16px;
-  }
-
-  &.app-view-title-flex {
-    .mat-mdc-card-header {
-      .mat-mdc-card-header-text {
-        width: 100%;
-      }
-    }
-  }
-
-  &.app-hover{
-    &:hover {
-      background-color: var(--app-card-bg-hover);
-    }
-  }
-  
-  &.app-view-alert {
-    @include setAlertCard();
-
-    .mat-mdc-card-content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .mat-icon {
-        nav-right: 8px;
-      }
-    }
-  }
-
-  &.app-view-header {
-    padding: 16px;
-    max-height: var(--app-card-view-header-height);
-  }
-
-  &.app-view-item {
-    padding: 16px;
-
-    .mat-mdc-card-header {
-       padding: 0;
-    }
-    
-    &:not(:first-child),
-    &.app-with-header {
-      border-top: 0;
-    }
-
-    &:hover {
-      background-color: var(--app-card-bg-hover);
-    }
-
-    img {
-      max-width: 60px;
-    }
-
-    // drag and drop view
-    &.cdk-drag {
-      &:not(.cdk-drag-disabled) {
-        cursor: move;
-      }
-      
-      &.cdk-drag-preview {
-        box-sizing: border-box;
-        border-radius: 4px;
-        box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                    0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                    0 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
-      }
-
-      &.cdk-drag-placeholder {
-        opacity: 0;
-      }
-
-      &.cdk-drag-animating {
-        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-      }
-
-      .cdk-drop-list-dragging & {
-        &:not(.cdk-drag-placeholder) {
-          transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-        }
-      }
-    }
-
-    .app-right {
-      &.app-actions {
-        a {
-          margin-left: 16px;
-          color: var(--app-color-primary);
-
-          .mat-icon {
-            @include setIcon(20);
-          }
-        }
-      }
-    }
-  }
-
-  .app-mark-rounded {
-    @include setDashboardColor();
-  }
-
-  &.app-view-dev {
-    position: relative;
-    background-color: rgba(#707882, .1) !important;
-    border: 1px solid rgba(#707882, .4);
-
-    .app-marker {
-      position: absolute;
-      top: -17px;
-      right: -1px;
-      background-color: var(--app-color-dev);
-      color: var(--app-color-lightnes);
-      font-size: 12px;
-      padding: 1px 4px;
-    }
-
-    .mat-mdc-unelevated-button {
-      background-color: var(--app-color-dev) !important;
-    }
-  }
-}
 
 
 // CHIPLIST
@@ -337,61 +197,9 @@ $iconSize: (
   }   
 }
 
-// TABS
-.mat-mdc-tab-nav-bar {
-  &.mat-mdc-tab-header {
-    border: 0 !important;
-  }
 
-  .mat-mdc-tab-links {
-    .mat-mdc-tab-link {
-      opacity: unset;
-    
-      &:hover {
-        text-decoration: none;
-      }
 
-      &.mdc-tab--active {
-        font-weight: 900;
-
-        .mdc-tab__text-label {
-          color: black;
-        }
-      }
-
-      &:not(.mdc-tab--active) {
-        color: var(--app-color-gray-6);
-        font-weight: normal;
-
-        .mat-badge-content,
-        .app-badge {
-          background-color: var(--app-color-gray-5);
-        }
-      }
-
-      .mat-icon {
-        margin-right: 8px;
-        @include setIcon(20);
-      }
-
-      .mat-badge {
-        .mat-icon {
-          @include setIcon($position: sub);
-        }
-
-        .mat-badge-content {
-          right: -6px;
-        }
-
-        .app-push-right {
-          margin-right: 24px;
-        }
-      }
-    }
-  }
-}
-
-// ICON
+// icon
 .mat-icon {
   @include setIconSize();
 }
@@ -549,8 +357,127 @@ $iconSize: (
   @include mat.card-overrides((
     outlined-container-color: var(--app-color-lightnes),
     outlined-container-shape: 0px,
-    outlined-outline-color: var(--app-default-border-color)
+    outlined-outline-color: var(--app-default-border-color),
+    title-text-size: 16px,
+    title-text-tracking: 0,
+    title-text-weight: 500,
+    subtitle-text-size: 14px,
+    subtitle-text-tracking: 0,
+    subtitle-text-weight: normal,
+    subtitle-text-color: var(--app-color-gray-6),
+    subtitle-text-line-height: 14px
   ));
+  // CARD
+  .mat-mdc-card {
+    .mat-mdc-card-header {
+      .mat-mdc-card-title {
+        .mat-icon {
+          @include setIcon(20, $position: text-bottom);
+        }
+      }
+    }
+    .mat-mdc-card-actions {
+      padding: 16px;
+    }
+    &.app-hover{
+      &:hover {
+        background-color: var(--app-color-gray-1);
+      }
+    }
+    &.app-view-title-flex {
+      .mat-mdc-card-header {
+        .mat-mdc-card-header-text {
+          width: 100%;
+        }
+      }
+    }
+    &.app-view-alert {
+      @include setAlertCard();
+      .mat-mdc-card-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .mat-icon {
+          nav-right: 8px;
+        }
+      }
+    }
+    &.app-view-header {
+      padding: 16px;
+      max-height: 53px;
+    }
+    &.app-view-item {
+      padding: 16px;
+      .mat-mdc-card-header {
+        padding: 0;
+      }
+      &:not(:first-child),
+      &.app-with-header {
+        border-top: 0;
+      }
+      &:hover {
+        background-color: var(--app-color-gray-1);
+      }
+     img {
+        max-width: 60px;
+      }
+      &.cdk-drag {
+        &:not(.cdk-drag-disabled) {
+          cursor: move;
+        }
+        &.cdk-drag-preview {
+          box-sizing: border-box;
+          border-radius: 4px;
+          box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                      0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                      0 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
+        }
+        &.cdk-drag-placeholder {
+          opacity: 0;
+        }
+        &.cdk-drag-animating {
+          transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+        }
+        .cdk-drop-list-dragging & {
+          &:not(.cdk-drag-placeholder) {
+            transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+          }
+        }
+      }
+      .app-right {
+        &.app-actions {
+          a {
+            margin-left: 16px;
+            color: var(--app-color-primary);
+
+            .mat-icon {
+              @include setIcon(20);
+            }
+          }
+        }
+      }
+    }
+    &.app-view-dev {
+      position: relative;
+      background-color: rgba(#707882, .1) !important;
+      border: 1px solid rgba(#707882, .4);
+      .app-marker {
+        position: absolute;
+        top: -17px;
+        right: -1px;
+        background-color: var(--app-color-dev);
+        color: var(--app-color-lightnes);
+        font-size: 12px;
+        padding: 1px 4px;
+      }
+      .mat-mdc-unelevated-button {
+        background-color: var(--app-color-dev) !important;
+      }
+    }
+    .app-mark-rounded {
+      @include setDashboardColor();
+    }
+  }
 
 
   // paginator
@@ -639,6 +566,47 @@ $iconSize: (
         .mat-expansion-panel-header {
           .mat-content {
             flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+
+  
+  // tabs
+  @include mat.tabs-overrides((
+    label-text-size: 16px,
+    label-text-tracking: 0,
+    label-text-weight: normal
+  ));
+  .mat-mdc-tab-nav-bar {
+    .mat-mdc-tab-links {
+      .mat-mdc-tab-link {
+        &:hover {
+          text-decoration: none;
+        }
+        &.mdc-tab--active {
+          font-weight: 900;
+        }
+        &:not(.mdc-tab--active) {
+          .mat-badge-content,
+          .app-badge {
+            background-color: var(--app-color-gray-5);
+          }
+        }
+        .mat-icon {
+          margin-right: 8px;
+          @include setIcon(20);
+        }
+        .mat-badge {
+          .mat-icon {
+            @include setIcon($position: sub);
+          }
+          .mat-badge-content {
+            right: -6px;
+          }
+          .app-push-right {
+            margin-right: 24px;
           }
         }
       }
