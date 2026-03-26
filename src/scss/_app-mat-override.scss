@@ -615,8 +615,8 @@ $iconSize: (
   // slide toggle
   @include mat.slide-toggle-overrides((
     track-height: 10px,
-    with-icon-handle-size: 18px,
-    pressed-handle-size: 18px,
+    with-icon-handle-size: var( --app-slide-toggle-handle-size),
+    pressed-handle-size: var( --app-slide-toggle-handle-size),
     track-outline-width: 0,
     track-width: 44px,
     handle-width: 44px,
@@ -627,10 +627,15 @@ $iconSize: (
     selected-focus-handle-color: var(--app-color-primary),
     selected-hover-handle-color: var(--app-color-primary),
     selected-pressed-handle-color: var(--app-color-primary),
-    selected-track-color: #99cbff,
-    selected-focus-track-color: #99cbff,
-    selected-hover-track-color: #99cbff
+    selected-track-color: var(--app-slide-toggle-selected-track-color),
+    selected-focus-track-color: var(--app-slide-toggle-selected-track-color),
+    selected-hover-track-color: var(--app-slide-toggle-selected-track-color)
   ));
+  .mat-mdc-slide-toggle {
+    .mdc-switch {
+      margin-right: 4px;
+    }
+  }
 
 
   // table
