@@ -3,51 +3,44 @@
 
 @use '@angular/material' as mat;
 
-// ALERTS
+// alerts
 $alerts: (
   warn: var(--app-color-warn-rgb),
   info: var(--app-color-info-rgb),
   success: var(--app-color-success-rgb),
 );
 
-// DASHBOARD
+// dashboard
 $dashboard: (
-  object: var(--app-color-primary),
-  object-actions: var(--app-color-primary),
-  object-accessibility: var(--app-color-primary),
-  object-in-collections: var(--app-color-primary),
-  object-others: var(--app-color-primary),
-
-  import-foxml: var(--app-color-primary),
-  import-ndk: var(--app-color-primary),
-
-  access-actions: var(--app-color-primary),
-  access-roles: var(--app-color-primary),
-  access-licenses: var(--app-color-primary),
-  access-params: var(--app-color-primary),
-
-  processes: var(--app-color-primary),
-  processes-standard-output: var(--app-color-primary),
-  processes-error-output: var(--app-color-primary),
-
-  collections: var(--app-color-primary),
-  collections-detail: var(--app-color-primary),
-  collections-edit: var(--app-color-primary),
-  collections-content: var(--app-color-primary),
-  collections-context: var(--app-color-primary),
-
-  indexing-object: var(--app-color-primary),
-  indexing-model: var(--app-color-primary),
-
-  repository-repository-management: var(--app-color-primary),
-  repository-bulk-data-editing: var(--app-color-primary),
-  repository-statistics: var(--app-color-primary),
-
-  statistics-graphs: var(--app-color-primary),
-  statistics-most-viewed-documents: var(--app-color-primary)
+  object: #78909C,
+  object-actions: #78909C,
+  object-accessibility: #78909C,
+  object-in-collections: #78909C,
+  object-others: #78909C,
+  import-foxml: #78909C,
+  import-ndk: #78909C,
+  access-actions: #EF5350,
+  access-roles: #EF5350,
+  access-licenses: #EF5350,
+  access-params: #EF5350,
+  processes: #26A69A,
+  processes-standard-output: #26A69A,
+  processes-error-output: #26A69A,
+  collections: #8D6E63,
+  collections-detail: #8D6E63,
+  collections-edit: #8D6E63,
+  collections-content: #8D6E63,
+  collections-context: #8D6E63,
+  indexing-object: #66BB6A,
+  indexing-model: #FF6D00,
+  repository-repository-management: #AA00FF,
+  repository-bulk-data-editing: #00B8D4,
+  repository-statistics: #AFB42B,
+  statistics-graphs: #FF6D00,
+  statistics-most-viewed-documents: #FF6D00
 );
 
-// STATES
+// states
 $states: (
   count: var(--app-color-primary),
   planned: #7b7b7b,
@@ -307,6 +300,12 @@ $iconSize: (
     outlined-container-shape: var(--app-default-border-radius),
     outlined-outline-color: var(--app-default-border-color)
   ));
+  .mdc-button--unelevated {
+
+    &.mat-accent {
+      background-color: var(--app-color-accent)
+    }
+  }
 
 
    // button icon

@@ -27,7 +27,7 @@
                 </div>
               </mat-card-content>
               <mat-card-actions>
-                <button [disabled]="(item.type === 'indexing' && !allowedGlobalAction('a_index'))  || (item.type === 'import' && !allowedGlobalAction('a_import'))" mat-flat-button color="accent" [routerLink]="item.subtype ? ('/' + item.type + '/' + item.subtype) : ('/' + item.type)" (click)="item.subtype ? setDefaultRoute(item.type + '.view', item.subtype) : null">
+                <button [disabled]="(item.type === 'indexing' && !allowedGlobalAction('a_index'))  || (item.type === 'import' && !allowedGlobalAction('a_import'))" matButton="filled" color="accent" [routerLink]="item.subtype ? ('/' + item.type + '/' + item.subtype) : ('/' + item.type)" (click)="item.subtype ? setDefaultRoute(item.type + '.view', item.subtype) : null">
                   <span>{{ 'button.goTo' | translate }}</span>
                   <mat-icon>arrow_forward</mat-icon>
                 </button>
