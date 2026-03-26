@@ -302,7 +302,10 @@ $iconSize: (
   @include mat.button-overrides((
     filled-container-height: var(--app-default-height),
     filled-container-shape: var(--app-default-border-radius),
-    filled-horizontal-padding: 16px
+    filled-horizontal-padding: 16px,
+    outlined-container-height: var(--app-default-height),
+    outlined-container-shape: var(--app-default-border-radius),
+    outlined-outline-color: var(--app-default-border-color)
   ));
 
 

@@ -9,7 +9,7 @@
           <span class="app-last">{{ 'sites.collections.title' | translate }}</span>
         </div>
         <div>
-          <button mat-stroked-button [matMenuTriggerFor]="menuLang" class="app-bg-white app-pr-1" [matTooltip]="'button.languageForEditing' | translate"><span class="app-mr-2">{{ 'lang.' + lang | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
+          <button matButton="outlined" [matMenuTriggerFor]="menuLang" class="app-bg-white app-pr-1" [matTooltip]="'button.languageForEditing' | translate"><span class="app-mr-2">{{ 'lang.' + lang | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
           <mat-menu #menuLang="matMenu">
             @for (language of languages; track language) {
               <button mat-menu-item (click)="setLang(language)">{{ 'lang.' + language | translate  }}</button>
