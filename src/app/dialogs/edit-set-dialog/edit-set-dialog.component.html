@@ -18,6 +18,6 @@
   
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button [disabled]="!name || !description || !filter" color="primary" type="submit" (click)="onSave()">{{ 'button.save' | translate }}</button>
-  <button mat-flat-button  mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+  <button matButton="filled" [disabled]="!name || !description || !filter" color="primary" type="submit" (click)="onSave()">{{ 'button.save' | translate }}</button>
+  <button matButton  mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

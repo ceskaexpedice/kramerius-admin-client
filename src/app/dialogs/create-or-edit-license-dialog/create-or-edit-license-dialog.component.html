@@ -167,10 +167,10 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   @if (mode == 'new') {
-    <button mat-flat-button (click)="onSave()" color="primary" [disabled]="(licenseDesc.invalid && (licenseDesc.dirty || licenseDesc.touched)) || (licenseName.invalid && (licenseName.dirty || licenseName.touched))">{{ 'button.create' | translate }}</button>
+    <button matButton="filled" (click)="onSave()" color="primary" [disabled]="(licenseDesc.invalid && (licenseDesc.dirty || licenseDesc.touched)) || (licenseName.invalid && (licenseName.dirty || licenseName.touched))">{{ 'button.create' | translate }}</button>
   }
   @if (mode == 'edit') {
-    <button mat-flat-button (click)="onSave()" color="primary">{{ 'button.edit' | translate }}</button>
+    <button matButton="filled" (click)="onSave()" color="primary">{{ 'button.edit' | translate }}</button>
   }
-  <button mat-flat-button (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
+  <button matButton (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

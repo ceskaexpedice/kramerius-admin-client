@@ -18,6 +18,6 @@
       <mat-icon class="fa-spin">hourglass_empty</mat-icon>
     }
   {{ 'button.editThisCollection' | translate }}</button>
-  <button mat-flat-button (click)="goToRoute('/processes')" mat-dialog-close color="primary">{{ 'button.goToProcesses' | translate }}</button>
-  <button mat-flat-button (click)="goToRoute('/collections')" mat-dialog-close>{{ 'button.close' | translate }}</button>
+  <button matButton="filled" (click)="goToRoute('/processes')" mat-dialog-close color="primary">{{ 'button.goToProcesses' | translate }}</button>
+  <button matButton (click)="goToRoute('/collections')" mat-dialog-close>{{ 'button.close' | translate }}</button>
 </mat-dialog-actions>

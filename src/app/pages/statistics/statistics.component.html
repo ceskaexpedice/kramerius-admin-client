@@ -48,7 +48,7 @@
               </mat-form-field>
             </div>
             <div>
-              <button mat-flat-button [matMenuTriggerFor]="menuAnnualReport" color="primary">{{ 'button.annualReport' | translate }}<mat-icon class="app-menu">keyboard_arrow_down</mat-icon></button>
+              <button matButton="filled" [matMenuTriggerFor]="menuAnnualReport" color="primary">{{ 'button.annualReport' | translate }}<mat-icon class="app-menu">keyboard_arrow_down</mat-icon></button>
               <mat-menu #menuAnnualReport="matMenu">
                 @for (year of anualYearOptions(); track year) {
                   <button mat-menu-item (click)="csvAnual(year+'')">{{ year }}</button>
@@ -83,7 +83,7 @@
                 }
                 @if (isResultTopLevelModel) {
                   <mat-card-actions>
-                    <button mat-flat-button  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
+                    <button matButton="filled"  (click)="csvModels()" color="primary" class="app-mr-2">CSV</button>
                   </mat-card-actions>
                 }
                 @if (!isResultTopLevelModel) {
@@ -105,7 +105,7 @@
                 }
                 @if (isDetailsData) {
                   <mat-card-actions>
-                    <button mat-flat-button  (click)="csvDetail()" color="primary" class="app-mr-2">CSV</button>
+                    <button matButton="filled"  (click)="csvDetail()" color="primary" class="app-mr-2">CSV</button>
                   </mat-card-actions>
                 }
                 @if (!isDetailsData) {
@@ -127,7 +127,7 @@
                 }
                 @if (isResultLang) {
                   <mat-card-actions>
-                    <button mat-flat-button  (click)="csvLang()" color="primary"  class="app-mr-2">CSV</button>
+                    <button matButton="filled"  (click)="csvLang()" color="primary"  class="app-mr-2">CSV</button>
                   </mat-card-actions>
                 }
                 @if (!isResultLang) {
@@ -149,7 +149,7 @@
                 }
                 @if (isResultAuthor) {
                   <mat-card-actions >
-                    <button mat-flat-button  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
+                    <button matButton="filled"  (click)="csvAuthor()" color="primary"  class="app-mr-2">CSV</button>
                   </mat-card-actions>
                 }
                 @if (!isResultAuthor) {
@@ -171,7 +171,7 @@
                 }
                 @if (isProvidedByLicense) {
                   <mat-card-actions>
-                    <button mat-flat-button  (click)="csvLicenses()" color="primary"  class="app-mr-2">CSV</button>
+                    <button matButton="filled"  (click)="csvLicenses()" color="primary"  class="app-mr-2">CSV</button>
                   </mat-card-actions>
                 }
                 @if (!isProvidedByLicense) {
@@ -193,7 +193,7 @@
                 }
                 @if (isCollections) {
                   <mat-card-actions>
-                    <button mat-flat-button  (click)="csvCollections()" color="primary"  class="app-mr-2">CSV</button>
+                    <button matButton="filled"  (click)="csvCollections()" color="primary"  class="app-mr-2">CSV</button>
                   </mat-card-actions>
                 }
                 @if (!isCollections) {
@@ -340,10 +340,10 @@
     <mat-card appearance="outlined">
       <mat-card-content>
         <span [matTooltip]="!allowedGlobalAction('a_generate_nkplogs') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_generate_nkplogs')  ? 'app-alert-not-allowed' : null">
-          <button [disabled]="!allowedGlobalAction('a_generate_nkplogs')" mat-flat-button color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">{{ 'button.generateNkpLogs' | translate }}</button>
+          <button [disabled]="!allowedGlobalAction('a_generate_nkplogs')" matButton="filled" color="primary" class="app-mr-2" (click)="openNkpLogyDialog()">{{ 'button.generateNkpLogs' | translate }}</button>
         </span>
         <span [matTooltip]="!allowedGlobalAction('a_statistics_edit') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_statistics_edit')  ? 'app-alert-not-allowed' : null">
-          <button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button><!--od do-->
+          <button [disabled]="!allowedGlobalAction('a_statistics_edit')" matButton="filled" color="primary" class="app-mr-2" (click)="openDeleteStatisticsDialog()">{{ 'button.deleteStatistics' | translate }}</button><!--od do-->
         </span>
         <h3>{{ 'desc.listOfGeneratedLogsInDirectories' | translate }}</h3>
         <table class="app-table" [cellPadding]="0" [cellSpacing]="0">

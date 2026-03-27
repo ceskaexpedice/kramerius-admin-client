@@ -29,7 +29,7 @@
               {{ 'comment.indexationObject' | translate }}.
             </mat-card-content>
             <mat-card-actions>
-              <button mat-flat-button color="primary" (click)="openIndexationByPidDialog()">{{ 'button.indexTheObject' | translate }}</button>
+              <button matButton="filled" color="primary" (click)="openIndexationByPidDialog()">{{ 'button.indexTheObject' | translate }}</button>
             </mat-card-actions>
           </mat-card>
         </div>
@@ -55,7 +55,7 @@
                   }
                 </mat-select>
               </mat-form-field>
-              <button mat-flat-button color="primary" (click)="openIndexationByModelDialog()" [disabled]="loading || !selectedModel">
+              <button matButton="filled" color="primary" (click)="openIndexationByModelDialog()" [disabled]="loading || !selectedModel">
                 {{ 'button.indexTheModel' | translate }}
               </button>
             </mat-card-actions>
@@ -125,7 +125,7 @@
               }
             </div>
             <div>
-              <button mat-flat-button color="primary" (click)="openIndexationsByMultiplePidsDialog()" [disabled]="loading || !selectedModel || !stateFilter || noCurrentItems() || !selection.hasValue()" [matTooltip]="'comment.indexationIndexInBulk' | translate">
+              <button matButton="filled" color="primary" (click)="openIndexationsByMultiplePidsDialog()" [disabled]="loading || !selectedModel || !stateFilter || noCurrentItems() || !selection.hasValue()" [matTooltip]="'comment.indexationIndexInBulk' | translate">
                 {{ 'button.indexSelectedObjects' | translate }}
               </button>
             </div>

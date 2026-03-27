@@ -25,8 +25,8 @@
   }
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button (click)="onClose(data.btn1.value)" [color]="data.btn1.color">{{ data.btn1.label }}</button>
+  <button matButton="filled" (click)="onClose(data.btn1.value)" [color]="data.btn1.color">{{ data.btn1.label }}</button>
   @if (data.btn2) {
-    <button mat-flat-button (click)="onClose(data.btn2.value)" [color]="data.btn2.color">{{ data.btn2.label }}</button>
+    <button matButton (click)="onClose(data.btn2.value)" [color]="data.btn2.color">{{ data.btn2.label }}</button>
   }
 </mat-dialog-actions>

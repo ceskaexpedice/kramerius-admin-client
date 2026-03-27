@@ -29,7 +29,7 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-flat-button [disabled]="inProgress || !isValid()" color="warn" type="submit">{{ 'button.schedule' | translate }}</button>
-    <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+    <button matButton="filled" [disabled]="inProgress || !isValid()" color="warn" type="submit">{{ 'button.schedule' | translate }}</button>
+    <button matButton [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
   </mat-dialog-actions>
 </form>

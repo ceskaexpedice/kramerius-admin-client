@@ -17,7 +17,7 @@
   <div class="app-fxFlex app-fxLayout app-column app-container">
     @if (!this.inputDirError[this.type]) {
       <div class="app-mb-4 app-text-right">
-        <button mat-flat-button color="primary" (click)="submit()" [disabled]="!imports.selectedTree">{{ 'button.startImport' | translate }}</button>
+        <button matButton="filled" color="primary" (click)="submit()" [disabled]="!imports.selectedTree">{{ 'button.startImport' | translate }}</button>
       </div>
       <div class="app-fxFlex app-oh">
         <div class="app-fxLayout app-column app-fill">

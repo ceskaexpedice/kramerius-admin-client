@@ -3,7 +3,7 @@
     {{ 'desc.localLibraryLicense' | translate }}: <strong>{{ libraryName }}</strong>
   </div>
   <div class="app-right">
-    <button [disabled]="!isItemChildDraged" mat-flat-button color="primary" (click)="changeOrder()">{{ 'button.saveOrderChange' | translate }}</button>
+    <button [disabled]="!isItemChildDraged" matButton="filled" color="primary" (click)="changeOrder()">{{ 'button.saveOrderChange' | translate }}</button>
   </div>
 </mat-card>
 @if (!errorState) {
@@ -44,7 +44,7 @@
     }
     <div class="app-text-right app-pt-4">
       @if (libraryName && libraryName != '') {
-        <button  mat-flat-button (click)="onNewLicence()" color="primary">{{ 'button.addLicense' | translate }}</button>
+        <button  matButton="filled" (click)="onNewLicence()" color="primary">{{ 'button.addLicense' | translate }}</button>
       }
     </div>
   </div>

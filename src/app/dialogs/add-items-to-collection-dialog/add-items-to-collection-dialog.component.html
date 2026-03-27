@@ -69,12 +69,12 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-flat-button [disabled]="inProgress || !f.valid || isFinished()" color="primary" type="submit">{{ 'button.add' | translate }}</button>
+    <button matButton="filled" [disabled]="inProgress || !f.valid || isFinished()" color="primary" type="submit">{{ 'button.add' | translate }}</button>
     @if (!isFinished()) {
-      <button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+      <button matButton [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
     }
     @if (isFinished()) {
-      <button mat-flat-button type="button" (click)="onCloseAfterFinished()">{{ 'button.close' | translate }}</button>
+      <button matButton type="button" (click)="onCloseAfterFinished()">{{ 'button.close' | translate }}</button>
     }
   </mat-dialog-actions>
 </form>

@@ -38,7 +38,7 @@
             </mat-form-field>
           </div>
           <div>
-            <button mat-flat-button (click)="scheduleTestProcess()" [disabled]="isLoading()" color="primary"><mat-icon>play_arrow</mat-icon>{{ 'button.startTheTestProcess' | translate }}</button>
+            <button matButton="filled" (click)="scheduleTestProcess()" [disabled]="isLoading()" color="primary"><mat-icon>play_arrow</mat-icon>{{ 'button.startTheTestProcess' | translate }}</button>
           </div>
         </mat-card>
       }
@@ -126,10 +126,10 @@
         </div>
 
         <div class="app-fxLayout app-row app-center-v app-mb-2">
-          <button mat-flat-button (click)="bulkDeleteProcesses()" color="warn" [disabled]="!selection.hasValue()" class="app-mr-2">
+          <button matButton="filled" (click)="bulkDeleteProcesses()" color="warn" [disabled]="!selection.hasValue()" class="app-mr-2">
             {{ 'button.deleteSelectedItems' | translate }}
           </button>
-          <button mat-flat-button (click)="onCancelScheduledProcesses()" color="primary" [disabled]="isLoading() || batches_planned.length == 0">
+          <button matButton="filled" (click)="onCancelScheduledProcesses()" color="primary" [disabled]="isLoading() || batches_planned.length == 0">
             {{ 'button.cancelScheduledProcesses' | translate }}
           </button>
         </div>

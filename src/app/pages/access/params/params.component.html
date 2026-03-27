@@ -35,14 +35,14 @@
             </tbody>
           </table>
           <mat-action-row>
-            <button mat-flat-button (click)="onNewValue(param)" color="primary">{{ 'button.addValue' | translate }}</button>
+            <button matButton="filled" (click)="onNewValue(param)" color="primary">{{ 'button.addValue' | translate }}</button>
           </mat-action-row>
         </mat-expansion-panel>
       }
     </mat-accordion>
   }
   <div class="app-text-right app-pt-4">
-    <button mat-flat-button (click)="onNewParam()" color="primary">{{ 'button.addParameter' | translate }}</button>
+    <button matButton="filled" (click)="onNewParam()" color="primary">{{ 'button.addParameter' | translate }}</button>
   </div>
 }
 

@@ -88,10 +88,10 @@
               </mat-card-content>
               <mat-card-actions>
                 @if (batch.isKillable()) {
-                  <button mat-flat-button (click)="onKillProcess(batch)" color="primary">{{ 'button.stop' | translate }}</button>
+                  <button matButton="filled" (click)="onKillProcess(batch)" color="primary">{{ 'button.stop' | translate }}</button>
                 }
                 @if (batch.isDeletable()) {
-                  <button mat-flat-button (click)="onRemoveProcess(batch)" color="primary">{{ 'button.delete' | translate }}</button>
+                  <button matButton="filled" (click)="onRemoveProcess(batch)" color="primary">{{ 'button.delete' | translate }}</button>
                 }
               </mat-card-actions>
             </mat-card>

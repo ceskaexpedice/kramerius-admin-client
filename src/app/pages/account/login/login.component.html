@@ -16,7 +16,7 @@
             <strong class="app-mr-2">{{ 'desc.connectedInstance' | translate }}: </strong>  <a href="{{appSettings.coreBaseUrl}}">{{appSettings.coreBaseUrl}}</a>
           </mat-card-content>
         </mat-card>
-        <button mat-flat-button (click)="login()" color="primary">
+        <button matButton="filled" (click)="login()" color="primary">
           {{ errorMessage ? ('button.signInAgain' | translate) : ('button.logIn' | translate) }}
         </button>
       </div>

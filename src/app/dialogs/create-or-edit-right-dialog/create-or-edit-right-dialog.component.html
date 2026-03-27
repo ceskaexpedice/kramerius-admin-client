@@ -65,10 +65,10 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   @if (mode == 'new') {
-    <button mat-flat-button color="primary" (click)="onSave()">{{ 'button.create' | translate }}</button>
+    <button matButton="filled" color="primary" (click)="onSave()">{{ 'button.create' | translate }}</button>
   }
   @if (mode == 'edit') {
-    <button mat-flat-button color="primary" (click)="onSave()">{{ 'button.edit' | translate }}</button>
+    <button matButton="filled" color="primary" (click)="onSave()">{{ 'button.edit' | translate }}</button>
   }
-  <button mat-flat-button (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
+  <button matButton (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

@@ -31,7 +31,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   @if (!isParamCreated) {
-    <button mat-flat-button color="primary" (click)="createNewParam()">{{ 'button.create' | translate }}</button>
+    <button matButton="filled" color="primary" (click)="createNewParam()">{{ 'button.create' | translate }}</button>
   }
-  <button mat-flat-button matDialogClose>{{ 'button.close' | translate }}</button>
+  <button matButton matDialogClose>{{ 'button.close' | translate }}</button>
 </mat-dialog-actions>

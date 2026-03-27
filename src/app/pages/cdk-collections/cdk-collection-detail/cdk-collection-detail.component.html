@@ -14,7 +14,7 @@
   <div fxLayout="row" fxLayoutGap="24px" class="app-mb-4">
     <img onerror="this.src='assets/img/no-image.png'" [src]="getThumb(collection)" class="app-representative-page" [matTooltip]="'button.representativePage' | translate">
     <div>
-      <button mat-flat-button color="primary" disabled>
+      <button matButton="filled" color="primary" disabled>
         {{ 'button.changeRepresentativeView' | translate }}
       </button>
     </div>

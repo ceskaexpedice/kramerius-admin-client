@@ -14,7 +14,7 @@
 						<input matInput [(ngModel)]="pidForDeletion" placeholder="PID">
 					</mat-form-field>
 					<!-- tohle pouzivat fakt opatrne, neresi se uklid vyhledavaciho indexu, taky to kvuli cachovani neznamena, ze bude objekt skutecne smazan, muze byt potreba restratovat Tomcat -->
-					<button mat-flat-button (click)="deleteObjectLowLevel()" [disabled]="!pidForDeletion" color="primary">Smazat objekt z repozitáře</button>
+					<button matButton="filled" (click)="deleteObjectLowLevel()" [disabled]="!pidForDeletion" color="primary">Smazat objekt z repozitáře</button>
 				</mat-card-content>
 			</mat-card>
 
@@ -27,7 +27,7 @@
 					<mat-form-field appearance="outline">
           	<input matInput [(ngModel)]="pidForPrintFoxml" placeholder="PID">
         	</mat-form-field>
-        	<button mat-flat-button (click)="printFoxmlOfObjectFromRepo()" [disabled]="!pidForPrintFoxml" color="primary">Zalogovat foxml</button>
+        	<button matButton="filled" (click)="printFoxmlOfObjectFromRepo()" [disabled]="!pidForPrintFoxml" color="primary">Zalogovat foxml</button>
 				</mat-card-content>
 			</mat-card>
 
@@ -39,7 +39,7 @@
 					<mat-form-field appearance="outline">
             <input matInput [(ngModel)]="pidForPrintSolr" placeholder="PID">
         	</mat-form-field>
-        	<button mat-flat-button (click)="printSolrRecord()" [disabled]="!pidForPrintSolr" color="primary">Zalogovat solr záznam</button>
+        	<button matButton="filled" (click)="printSolrRecord()" [disabled]="!pidForPrintSolr" color="primary">Zalogovat solr záznam</button>
 				</mat-card-content>
 			</mat-card>
 
@@ -54,7 +54,7 @@
 					<mat-form-field appearance="outline">
             <input matInput [(ngModel)]="changeThumbnailSrcPid" placeholder="PID (zdrojové stránky)">
         	</mat-form-field>
-        	<button mat-flat-button (click)="changeThubnail()" [disabled]="!changeThumbnailSrcPid || !changeThumbnailTrgPid" color="primary">Nastavit thumbnail</button>
+        	<button matButton="filled" (click)="changeThubnail()" [disabled]="!changeThumbnailSrcPid || !changeThumbnailTrgPid" color="primary">Nastavit thumbnail</button>
 				</mat-card-content>
 			</mat-card>
 
@@ -70,7 +70,7 @@
             <mat-label>MODS záznam objektu</mat-label>
             <textarea matInput [(ngModel)]="setModsMods" type="text" rows='4'></textarea>
         	</mat-form-field>
-        	<button mat-flat-button (click)="setMods()" [disabled]="!setModsPid || !setModsMods" color="primary">Nastavit MODS</button>
+        	<button matButton="filled" (click)="setMods()" [disabled]="!setModsPid || !setModsMods" color="primary">Nastavit MODS</button>
 				</mat-card-content>
 			</mat-card>
 
@@ -82,7 +82,7 @@
 					<mat-form-field appearance="outline">
             <input matInput [(ngModel)]="pidForPdfExport" placeholder="PID">
         	</mat-form-field>
-        	<button mat-flat-button (click)="exportPDF()" [disabled]="!pidForPdfExport" color="primary">Exportovat PDF</button>
+        	<button matButton="filled" (click)="exportPDF()" [disabled]="!pidForPdfExport" color="primary">Exportovat PDF</button>
 				</mat-card-content>
 			</mat-card>
 			
@@ -91,9 +91,9 @@
 					<mat-card-title class="app-mb-2">Testy</mat-card-title>
 				</mat-card-header>
 				<mat-card-content class="app-fxLayout app-row app-gap-4">
-					<button mat-flat-button (click)="logDataFromAdminApi()" color="primary">Log data from admin api</button>
-    			<button mat-flat-button (click)="logDataFromClientApi()" color="primary">Log data from client api</button>
-					<button mat-flat-button color="warn" (click)="testAction()">Test</button>
+					<button matButton="filled" (click)="logDataFromAdminApi()" color="primary">Log data from admin api</button>
+    			<button matButton="filled" (click)="logDataFromClientApi()" color="primary">Log data from client api</button>
+					<button matButton="filled" color="warn" (click)="testAction()">Test</button>
 				</mat-card-content>
 			</mat-card>
 			

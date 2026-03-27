@@ -22,10 +22,10 @@
           <mat-form-field appearance="outline" class="app-search">
             <input matInput [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" name="query" (ngModelChange)="onSearch()" autocomplete="off">
           </mat-form-field>
-          <button [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
-          <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="warn" (click)="deleteSelectedCollections()">{{ 'button.deleteSelectedCollections' | translate }}</button>
-          <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="primary" (click)="openCreateCollectionBackupDialog()">{{ 'button.createBackup' | translate }}</button>
-          <button mat-flat-button color="primary" (click)="openRestoreFromCollectionBackupDialog()" [disabled]="!allowedGlobalAction('a_collections_edit')">{{ 'button.restoreFromBackup' | translate }}</button>
+          <button [disabled]="!allowedGlobalAction('a_collections_edit')" matButton="filled" color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
+          <button [disabled]="!selection.hasValue() || collections?.length === 0" matButton="filled" color="warn" (click)="deleteSelectedCollections()">{{ 'button.deleteSelectedCollections' | translate }}</button>
+          <button [disabled]="!selection.hasValue() || collections?.length === 0" matButton="filled" color="primary" (click)="openCreateCollectionBackupDialog()">{{ 'button.createBackup' | translate }}</button>
+          <button matButton="filled" color="primary" (click)="openRestoreFromCollectionBackupDialog()" [disabled]="!allowedGlobalAction('a_collections_edit')">{{ 'button.restoreFromBackup' | translate }}</button>
           <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage('collections')" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
         </div>
         <div>

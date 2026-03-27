@@ -16,7 +16,7 @@
     <img onerror="this.src='assets/img/no-image.png'" [src]="getThumb(collection)" class="app-representative-page" [matTooltip]="'button.representativePage' | translate">
     <div>
       <input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput class="app-dn">
-      <button mat-flat-button color="primary" (click)="fileInput.click()">
+      <button matButton="filled" color="primary" (click)="fileInput.click()">
         {{ 'button.changeRepresentativeView' | translate }}
       </button>
     </div>
@@ -62,13 +62,13 @@
 
   <div class="app-fxLayout app-row app-gap-2">
     @if (mode === 'new') {
-      <button mat-flat-button color="primary" (click)="onSave()">{{ 'button.create'  | translate }}</button>
+      <button matButton="filled" color="primary" (click)="onSave()">{{ 'button.create'  | translate }}</button>
     }
     @if (mode === 'edit') {
-      <button mat-flat-button color="primary" (click)="onUpdate()">{{ 'button.edit'  | translate }}</button>
+      <button matButton="filled" color="primary" (click)="onUpdate()">{{ 'button.edit'  | translate }}</button>
     }
     @if (mode === 'edit') {
-      <button mat-flat-button color="warn" (click)="onDelete()">{{ 'button.remove'  | translate }}</button>
+      <button matButton="filled" color="warn" (click)="onDelete()">{{ 'button.remove'  | translate }}</button>
     }
   </div>
 </mat-card-content>

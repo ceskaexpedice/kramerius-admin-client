@@ -25,10 +25,10 @@
           <mat-card appearance="outlined">
             <mat-card-content>
               <span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
-                <button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2" >{{ 'button.buildProcessingIndex' | translate }}</button>
+                <button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" matButton="filled" (click)="openscheduleProcessingIndexRebuildDialog()" color="primary" class="app-mr-2" >{{ 'button.buildProcessingIndex' | translate }}</button>
               </span>
               <span [matTooltip]="!allowedGlobalAction('a_rebuild_processing_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_rebuild_processing_index')  ? 'app-alert-not-allowed' : null">
-                <button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" mat-flat-button (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+                <button [disabled]="!allowedGlobalAction('a_rebuild_processing_index')" matButton="filled" (click)="openscheduleProcessingIndexRebuildForPidDialog()" color="primary" class="app-mr-2">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
               </span>
             </mat-card-content>
           </mat-card>
@@ -41,12 +41,12 @@
                 <mat-panel-title>{{ 'desc.basedOnEmbeddedPids' | translate }}</mat-panel-title>
               </mat-expansion-panel-header>
               <div class="app-fxLayout app-row app-gap-2">
-                <button mat-flat-button  color="primary" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.setPublicPrivate' | translate }}</button>
+                <button matButton="filled"  color="primary" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.setPublicPrivate' | translate }}</button>
                 <span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openAddLicenceDialog()" color="primary">{{ 'button.addLicense' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_set_accessibility')" matButton="filled" (click)="openAddLicenceDialog()" color="primary">{{ 'button.addLicense' | translate }}</button>
                 </span>
                 <span [matTooltip]="!allowedGlobalAction('a_set_accessibility') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_set_accessibility')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_set_accessibility')" mat-flat-button (click)="openRemoveLicenceDialog()" color="primary">{{ 'button.removeLicense' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_set_accessibility')" matButton="filled" (click)="openRemoveLicenceDialog()" color="primary">{{ 'button.removeLicense' | translate }}</button>
                 </span>
               </div>
             </mat-expansion-panel>
@@ -56,10 +56,10 @@
               </mat-expansion-panel-header>
               <div class="app-fxLayout app-row app-gap-2">
                 <span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openScheduleDeleteObjectsSmartDialog()" color="warn">{{ 'button.deleteObjectsSmart' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_delete')" matButton="filled" (click)="openScheduleDeleteObjectsSmartDialog()" color="warn">{{ 'button.deleteObjectsSmart' | translate }}</button>
                 </span>
                 <span [matTooltip]="!allowedGlobalAction('a_delete') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_delete')" mat-flat-button (click)="openDeleteObjectsLowLevelDialog()" color="warn">{{ 'button.deleteObjectsLowLevel' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_delete')" matButton="filled" (click)="openDeleteObjectsLowLevelDialog()" color="warn">{{ 'button.deleteObjectsLowLevel' | translate }}</button>
                 </span>
               </div>
             </mat-expansion-panel>
@@ -69,10 +69,10 @@
               </mat-expansion-panel-header>
               <div class="app-fxLayout app-row app-gap-2">
                 <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleStartTheSdnntReviewProcessDialog()" color="primary">{{ 'button.startSynchronizationWithSDNNT' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_index')" matButton="filled" (click)="openScheduleStartTheSdnntReviewProcessDialog()" color="primary">{{ 'button.startSynchronizationWithSDNNT' | translate }}</button>
                 </span>
                 <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleSyncWithSdnntDialog()" color="primary">{{ 'button.showSynchronzationResults' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_index')" matButton="filled" (click)="openScheduleSyncWithSdnntDialog()" color="primary">{{ 'button.showSynchronzationResults' | translate }}</button>
                 </span>
               </div>
             </mat-expansion-panel>
@@ -82,10 +82,10 @@
               </mat-expansion-panel-header>
               <div class="app-fxLayout app-row app-gap-2">
                 <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleChangeFlagOnLicenseDialog()" color="primary">{{ 'button.changeFlagOnLicense' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_index')" matButton="filled" (click)="openScheduleChangeFlagOnLicenseDialog()" color="primary">{{ 'button.changeFlagOnLicense' | translate }}</button>
                 </span>
                 <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleMigrateCollectionsDialog()" color="primary">{{ 'button.migrateCollections' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_index')" matButton="filled" (click)="openScheduleMigrateCollectionsDialog()" color="primary">{{ 'button.migrateCollections' | translate }}</button>
                 </span>
               </div>
             </mat-expansion-panel>
@@ -96,7 +96,7 @@
               </mat-expansion-panel-header>
               <div class="app-fxLayout app-row app-gap-2">
                 <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_index')" mat-flat-button (click)="openScheduleMigrateCollectionsDialog()" color="primary">{{ 'button.migrateCollections' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_index')" matButton="filled" (click)="openScheduleMigrateCollectionsDialog()" color="primary">{{ 'button.migrateCollections' | translate }}</button>
                 </span>
               </div>
             </mat-expansion-panel>
@@ -107,7 +107,7 @@
               </mat-expansion-panel-header>
               <div class="app-fxLayout app-row app-gap-2">
                 <span [matTooltip]="!allowedGlobalAction('a_statistics_edit') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
-                  <button [disabled]="!allowedGlobalAction('a_statistics_edit')" mat-flat-button (click)="openFixLogsIssue()" color="primary">{{ 'button.fixlogprocess' | translate }}</button>
+                  <button [disabled]="!allowedGlobalAction('a_statistics_edit')" matButton="filled" (click)="openFixLogsIssue()" color="primary">{{ 'button.fixlogprocess' | translate }}</button>
                 </span>
               </div>
             </mat-expansion-panel>
@@ -127,8 +127,8 @@
                   <input matInput [placeholder]="'desc.implicitSet' | translate" [(ngModel)]="deafultSetQuery">
                 </mat-form-field>
                 <div>
-                  <button mat-flat-button color="primary" [disabled]="!isDefaultSetQueryChanged()" (click)="saveImplicitSet()" class="app-mr-2">{{ 'button.save' | translate }}</button>
-                  <button mat-flat-button color="primary" (click)="openAddNewSetDialog()">{{ 'button.addNewSet' | translate }}</button>
+                  <button matButton="filled" color="primary" [disabled]="!isDefaultSetQueryChanged()" (click)="saveImplicitSet()" class="app-mr-2">{{ 'button.save' | translate }}</button>
+                  <button matButton="filled" color="primary" (click)="openAddNewSetDialog()">{{ 'button.addNewSet' | translate }}</button>
                 </div>
               </div>
               <h3 class="app-mt-0 app-mb-2">{{ 'desc.listOfSets' | translate }}</h3>

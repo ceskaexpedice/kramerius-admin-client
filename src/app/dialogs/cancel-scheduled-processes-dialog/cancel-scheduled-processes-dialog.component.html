@@ -30,7 +30,7 @@
 }
 <mat-dialog-actions align="end">
   @if (isSomethingToCancel()) {
-    <button mat-flat-button [disabled]="fetchingBatches || fetchingErrorMsg || cancelingBatches" (click)="onCancelAll()" color="warn">
+    <button matButton="filled" [disabled]="fetchingBatches || fetchingErrorMsg || cancelingBatches" (click)="onCancelAll()" color="warn">
       @switch (true) {
         @case (batches.length === 1) {
           <span>{{ 'modal.cancelScheduledProcesses.button.1' | translate: {value: batches.length} }}</span>
@@ -44,5 +44,5 @@
       }
     </button>
   }
-  <button mat-flat-button (click)="onClose()" [disabled]="fetchingBatches || cancelingBatches">{{ 'button.close' | translate }}</button>
+  <button matButton (click)="onClose()" [disabled]="fetchingBatches || cancelingBatches">{{ 'button.close' | translate }}</button>
 </mat-dialog-actions>

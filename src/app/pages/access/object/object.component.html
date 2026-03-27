@@ -85,7 +85,7 @@
             </div>
             @if (view === 'collections') {
               <div>
-                <a mat-flat-button color="primary" (click)="onAddThisToACollection()">
+                <a matButton="filled" color="primary" (click)="onAddThisToACollection()">
                   <mat-icon>add_circle</mat-icon>{{ 'button.addToACollection' | translate }}
                 </a>
               </div>
@@ -106,7 +106,7 @@
                 <div class="app-fxLayout app-center-v">
                   <mat-icon class="app-20 app-mr-2">{{ policy === 'public' ? 'lock_open' : 'lock' }}</mat-icon>
                   <strong>{{ 'field.' + policy | translate }}</strong>
-                  <button mat-flat-button color="primary" (click)="onChangePolicy()" class="app-ml-4" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.changeAvailability' | translate }}</button>
+                  <button matButton="filled" color="primary" (click)="onChangePolicy()" class="app-ml-4" disabled="true" [matTooltip]="'button.thisFlagUnsupported' | translate">{{ 'button.changeAvailability' | translate }}</button>
                 </div>
               </mat-expansion-panel>
               <mat-expansion-panel expanded>
@@ -131,7 +131,7 @@
                   </table>
                 }
                 <mat-action-row>
-                  <button mat-flat-button color="primary" (click)="onAddLicense()">{{ 'button.addLicense' | translate }}</button>
+                  <button matButton="filled" color="primary" (click)="onAddLicense()">{{ 'button.addLicense' | translate }}</button>
                 </mat-action-row>
               </mat-expansion-panel>
             </mat-accordion>
@@ -186,10 +186,10 @@
                   </mat-expansion-panel-header>
                   <div>
                     <span [matTooltip]="specificAuthorizedActions.indexOf('a_index') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_index') < 0 ? 'app-alert-not-allowed' : null">
-                      <button [disabled]="specificAuthorizedActions.indexOf('a_index') < 0" mat-flat-button (click)="indexObjectWithProcess()" color="primary" class="app-mr-2" >{{ 'button.reindexSearchIndex' | translate }}</button>
+                      <button [disabled]="specificAuthorizedActions.indexOf('a_index') < 0" matButton="filled" (click)="indexObjectWithProcess()" color="primary" class="app-mr-2" >{{ 'button.reindexSearchIndex' | translate }}</button>
                     </span>
                     <span [matTooltip]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0 ? 'app-alert-not-allowed' : null">
-                      <button [disabled]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0" mat-flat-button (click)="rebuildProcessingIndexForObject()" color="primary">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
+                      <button [disabled]="specificAuthorizedActions.indexOf('a_rebuild_processing_index') < 0" matButton="filled" (click)="rebuildProcessingIndexForObject()" color="primary">{{ 'button.rebuildTheProcessingIndexForTheObject' | translate }}</button>
                     </span>
                   </div>
                 </mat-expansion-panel>
@@ -199,10 +199,10 @@
                   </mat-expansion-panel-header>
                   <div>
                     <span [matTooltip]="specificAuthorizedActions.indexOf('a_delete') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_delete') < 0 ? 'app-alert-not-allowed' : null">
-                      <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectSmart()" color="warn" class="app-mr-2">{{'button.deleteObjectSmart' | translate }}</button>
+                      <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" matButton="filled" (click)="deleteObjectSmart()" color="warn" class="app-mr-2">{{'button.deleteObjectSmart' | translate }}</button>
                     </span>
                     <span [matTooltip]="specificAuthorizedActions.indexOf('a_delete') < 0 ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="specificAuthorizedActions.indexOf('a_delete') < 0 ? 'app-alert-not-allowed' : null">
-                      <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" mat-flat-button (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' | translate }}</button>
+                      <button [disabled]="specificAuthorizedActions.indexOf('a_delete') < 0" matButton="filled" (click)="deleteObjectLowLevel()" color="warn">{{ 'button.deleteObjectLowLevel' | translate }}</button>
                     </span>
                   </div>
                 </mat-expansion-panel>
@@ -225,7 +225,7 @@
                     </mat-select>
                   </mat-form-field>
                   <mat-action-row>
-                    <button mat-flat-button color="primary" (click)="openObjectInProarc(selectedProarcServer.domain, selectedProarcServer.krameriusInstance)" [disabled]="!selectedProarcServer.domain">{{ 'button.editObject' | translate }}</button>
+                    <button matButton="filled" color="primary" (click)="openObjectInProarc(selectedProarcServer.domain, selectedProarcServer.krameriusInstance)" [disabled]="!selectedProarcServer.domain">{{ 'button.editObject' | translate }}</button>
                   </mat-action-row>
                 </mat-expansion-panel>
                 <mat-expansion-panel expanded>
@@ -243,7 +243,7 @@
                     </mat-select>
                   </mat-form-field>
                   <mat-action-row>
-                    <button mat-flat-button color="primary" (click)="openObjectInAltoeditor(selectedAltoeditorServer.domain, selectedAltoeditorServer.krameriusInstance)" [disabled]="!selectedAltoeditorServer.domain">{{ 'button.editObject' | translate }}</button>
+                    <button matButton="filled" color="primary" (click)="openObjectInAltoeditor(selectedAltoeditorServer.domain, selectedAltoeditorServer.krameriusInstance)" [disabled]="!selectedAltoeditorServer.domain">{{ 'button.editObject' | translate }}</button>
                   </mat-action-row>
                 </mat-expansion-panel>
               </mat-accordion>

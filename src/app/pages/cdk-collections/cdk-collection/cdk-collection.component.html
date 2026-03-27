@@ -77,24 +77,24 @@
           </div>
           @if (view === 'content' && contentView === 'object') {
             <div>
-              <button mat-flat-button color="primary" (click)="onAddItemsToThisCollection()" class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
+              <button matButton="filled" color="primary" (click)="onAddItemsToThisCollection()" class="app-mr-2">{{ 'button.addToThisCollection' | translate }}</button>
               <!-- drag&drop ordering -->
-              <button [disabled]="orderings.length == 0" mat-flat-button color="primary" (click)="saveReorderingOfItems()" class="app-mr-2">{{ 'button.saveOrderChange' | translate }}</button>
+              <button [disabled]="orderings.length == 0" matButton="filled" color="primary" (click)="saveReorderingOfItems()" class="app-mr-2">{{ 'button.saveOrderChange' | translate }}</button>
               <!-- remove item from collection -->
-              <button [disabled]="!itemSelection.hasValue()" mat-flat-button color="warn" (click)="deleteSelectedItemsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
+              <button [disabled]="!itemSelection.hasValue()" matButton="filled" color="warn" (click)="deleteSelectedItemsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
             </div>
           }
 
 
           @if (view === 'context') {
             <div>
-              <button mat-flat-button color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
+              <button matButton="filled" color="primary" (click)="onAddThisToSuperCollection()">{{ 'button.addThisCollectionToAnotherCollection' | translate }}</button>
             </div>
           }
           @if (view === 'content' && contentView === 'cuttings') {
             <div>
-              <button mat-flat-button color="primary" (click)="openAddCuttingDialog()" class="app-mr-2">{{ 'button.addCutting' | translate }}</button>
-              <button [disabled]="!cuttingsSelection.hasValue()" mat-flat-button color="warn" (click)="deleteSelectedCuttingsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
+              <button matButton="filled" color="primary" (click)="openAddCuttingDialog()" class="app-mr-2">{{ 'button.addCutting' | translate }}</button>
+              <button [disabled]="!cuttingsSelection.hasValue()" matButton="filled" color="warn" (click)="deleteSelectedCuttingsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
             </div>
           }
         </mat-card>

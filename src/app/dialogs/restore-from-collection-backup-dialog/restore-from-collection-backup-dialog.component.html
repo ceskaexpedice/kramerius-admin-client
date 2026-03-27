@@ -28,7 +28,7 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button [disabled]="!selectedFile" color="primary" type="submit" (click)="restoreFromCollectionBackup('processes')">{{ 'button.restoreAndGoToProcessList' | translate }}</button>
-  <!-- <button mat-flat-button [disabled]="!selectedFile" color="primary" type="submit" (click)="restoreFromCollectionBackup('collections')">{{ 'button.restoreAndStayInCollections' | translate }}</button> -->
-  <button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+  <button matButton="filled" [disabled]="!selectedFile" color="primary" type="submit" (click)="restoreFromCollectionBackup('processes')">{{ 'button.restoreAndGoToProcessList' | translate }}</button>
+  <!-- <button matButton="filled" [disabled]="!selectedFile" color="primary" type="submit" (click)="restoreFromCollectionBackup('collections')">{{ 'button.restoreAndStayInCollections' | translate }}</button> -->
+  <button matButton [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>
