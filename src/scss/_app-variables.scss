@@ -1,11 +1,9 @@
 // --- VARIABLES ---
 
 :root {
-  // colors
   --app-color-primary: var(--mat-sys-primary);
   --app-color-secondary: var(--mat-sys-secondary);
   --app-color-tertiary: var(--mat-sys-tertiary);
-  --app-color-accent: var(--mat-sys-secondary);
 
   --app-color-lightnes: #ffffff;
   --app-color-lightnes-rgb: 255, 255, 255;
@@ -14,13 +12,12 @@
 
   --app-color-warn: var(--mat-sys-error);
   --app-color-warn-rgb: 229, 57,53;
-  --app-color-dev: var(--mat-sys-outline);
-
-  --app-color-info: 1, 67, 97;
-  --app-color-info-rgb: 1, 67, 97;
-  --app-color-success: 30, 70, 32;
-  --app-color-success-rgb: 30, 70, 32;
+  --app-color-info: #ff6f00;
+  --app-color-info-rgb: 255, 111, 0;
+  --app-color-success: #2e7d32;
+  --app-color-success-rgb: 46, 125, 50;
   --app-color-disabled: var(--app-color-gray-4);
+  --app-color-dev: var(--mat-sys-outline);
 
   // gray pallete
   --app-color-gray-0: #FAFAFA;
@@ -34,37 +31,27 @@
   --app-color-gray-8: #424242;
   --app-color-gray-9: #212121;
 
-  --app-body-bg: var(--app-color-lightnes);
-  --app-body-color: var(--app-color-darknes);
+  --app-default-border-radius: 4px;
+  --app-default-height: 36px;
+  --app-default-font-size: 14px;
+  --app-default-border-color: var(--app-color-gray-3);
 
   --app-container: 1280px;
 
-  --app-footer-bg-color: var(--app-color-darknes);
-  --app-footer-color: var(--app-color-gray-5);
-
-  // home
   --app-home-card-gap: 32px;
   --app-home-card-width: 25%;
   --app-home-card-height: 260px;
 
   --app-badge-size: 40px;
   --app-badge-border-radius: calc(#{var(--app-badge-size)} / 2);
-  --app-badge-version-color: var(--app-color-accent);
+  --app-badge-version-color: var(--app-color-secondary);
   --app-badge-default-color: var(--app-color-gray-8);
-
-  --app-select-option-min-height: 36px;
-  --app-menu-item-min-height: var(--app-select-option-min-height);
-
-  // new
-  --app-default-border-radius: 4px;
-  --app-default-height: 36px;
-  --app-default-font-size: 14px;
-  --app-default-border-color: var(--app-color-gray-3);
 
   --app-slide-toggle-handle-size: 16px;
   --app-slide-toggle-selected-track-color: #99cbff;
-
   --app-radio-button-size: 14px;
-
   --app-table-row-item-container-height: 48px;
+
+  --app-footer-bg-color: var(--app-color-darknes);
+  --app-footer-color: var(--app-color-gray-5);
 }

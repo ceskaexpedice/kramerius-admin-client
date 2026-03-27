@@ -347,9 +347,20 @@ $iconSize: (
     outlined-outline-color: var(--app-default-border-color)
   ));
   .mdc-button--unelevated {
-
+    &.mat-primary {
+      &:not(.mat-mdc-button-disabled) {
+        background-color: var(--app-color-primary)
+      }
+    }
     &.mat-accent {
-      background-color: var(--app-color-accent)
+      &:not(.mat-mdc-button-disabled) {
+        background-color: var(--app-color-secondary)
+      } 
+    }
+    &.mat-warn {
+      &:not(.mat-mdc-button-disabled) {
+        background-color: var(--app-color-warn)
+      }
     }
   }
 
@@ -420,7 +431,7 @@ $iconSize: (
         align-items: center;
         justify-content: center;
         .mat-icon {
-          nav-right: 8px;
+          margin-right: 8px;
         }
       }
     }
@@ -599,7 +610,8 @@ $iconSize: (
   @include mat.tabs-overrides((
     label-text-size: 16px,
     label-text-tracking: 0,
-    label-text-weight: normal
+    label-text-weight: normal,
+    divider-height: 0
   ));
   .mat-mdc-tab-nav-bar {
     .mat-mdc-tab-links {

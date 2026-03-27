@@ -43,7 +43,7 @@
         <mat-card appearance="outlined" class="app-view-item app-cursor-pointer" (click)="allowEditCollection(superCollection.id) ? selectSuperCollection(superCollection) : false" [class.app-selected]="superCollection == selectedSuperCollection" [class.app-not-allowed]="!allowEditCollection(superCollection.id)" [matTooltip]="!allowEditCollection(superCollection.id) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEditCollection(superCollection.id) ? 'app-alert-not-allowed' : null">
           <mat-card-header class="app-pb-4">
             <mat-card-title class="app-fxLayout app-row app-center-v app-gap-2 app-mb-1">
-              <mat-icon [class.app-color-accent]="superCollection == selectedSuperCollection">{{ superCollection == selectedSuperCollection ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
+              <mat-icon [class.app-color-secondary]="superCollection == selectedSuperCollection">{{ superCollection == selectedSuperCollection ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
               <span>{{ getName(superCollection) }}</span>
             </mat-card-title>
             <mat-card-subtitle class="app-m-0">{{ getDescription(superCollection) }}</mat-card-subtitle>

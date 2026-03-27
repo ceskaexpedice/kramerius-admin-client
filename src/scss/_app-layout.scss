@@ -19,8 +19,8 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif; 
-  background: var(--app-body-bg);
-  color: var(--app-body-color);
+  background: var(--app-color-lightnes);
+  color: var(--app-color-darknes);
 
   .app-container {
     padding: 16px !important;
