@@ -722,13 +722,13 @@ $iconSize: (
 
   // slide toggle
   @include mat.slide-toggle-overrides((
-    track-height: 10px,
+    track-height: 12px,
     with-icon-handle-size: var( --app-slide-toggle-handle-size),
     pressed-handle-size: var( --app-slide-toggle-handle-size),
     track-outline-width: 0,
     track-width: 44px,
     handle-width: 44px,
-    state-layer-size: 32px,
+    state-layer-size: 36px,
     label-text-tracking: 0,
     selected-handle-color: var(--app-color-primary),
     selected-icon-color: var(--app-color-lightnes),
