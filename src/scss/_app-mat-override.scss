@@ -375,6 +375,29 @@ $iconSize: (
   @include mat.icon-button-overrides((
     state-layer-size: var(--app-default-height)
   ));
+  .mdc-icon-button {
+    &.mat-primary {
+      &:not(.mat-mdc-button-disabled) {
+       @include mat.icon-button-overrides((
+        icon-color: var(--app-color-primary)
+      ));
+      }
+    }
+    &.mat-accent {
+      &:not(.mat-mdc-button-disabled) {
+        @include mat.icon-button-overrides((
+          icon-color: var(--app-color-secondary)
+        ));
+      } 
+    }
+    &.mat-warn {
+      &:not(.mat-mdc-button-disabled) {
+        @include mat.icon-button-overrides((
+          icon-color: var(--app-color-warn)
+        ));
+      }
+    }
+  }
 
 
   // button toggle
@@ -406,7 +429,6 @@ $iconSize: (
     subtitle-text-color: var(--app-color-gray-6),
     subtitle-text-line-height: 14px
   ));
-  // CARD
   .mat-mdc-card {
     .mat-mdc-card-header {
       .mat-mdc-card-title {
@@ -434,10 +456,13 @@ $iconSize: (
       @include setAlertCard();
       .mat-mdc-card-content {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: row;
         .mat-icon {
           margin-right: 8px;
+        }
+        .app-text {
+          flex: 1 1 1e-09px; 
+          box-sizing: border-box;
         }
       }
     }
@@ -446,6 +471,9 @@ $iconSize: (
       max-height: 53px;
     }
     &.app-view-item {
+      @include mat.card-overrides((
+        title-text-line-height: 0
+      ));
       padding: 16px;
       .mat-mdc-card-header {
         padding: 0;
@@ -686,6 +714,9 @@ $iconSize: (
     container-shape: var(--app-default-border-radius),
     container-max-width: 800px
   ));
+  .mat-mdc-dialog-content {
+    padding-top: 4px !important;
+  }
 
 
   // slide toggle
@@ -805,7 +836,6 @@ $iconSize: (
         &.app-col-icon {
           width: 40px;
           text-align: center;
-
           /* @include mat.icon-button-density(-4);
 
           .mdc-icon-button {     
@@ -815,7 +845,7 @@ $iconSize: (
           } */
         }
 
-        //--todo @include mat.icon-button-density(-4);
+        @include mat.icon-button-density(-4);
 
         .mdc-icon-button {     
           .mat-icon {
@@ -864,7 +894,7 @@ $iconSize: (
           }
         }
         .mat-mdc-icon-button {
-          --mdc-icon-button-state-layer-size: var(--mat-table-row-item-container-height);
+          --mdc-icon-button-state-layer-size: 32px;
           padding: 0;
 
           .mat-icon {
