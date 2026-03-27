@@ -712,7 +712,8 @@ $iconSize: (
   @include mat.dialog-overrides((
     container-color: var(--app-color-lightnes),
     container-shape: var(--app-default-border-radius),
-    container-max-width: 800px
+    container-min-width: 800px,
+    container-max-width: 100%
   ));
   .mat-mdc-dialog-content {
     padding-top: 4px !important;

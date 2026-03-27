@@ -88,7 +88,10 @@
                 }
                 @if (!isResultTopLevelModel) {
                   <mat-card appearance="outlined" class="app-view-alert app-info app-m-4">
-                    <mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+                     <mat-card-content>
+                      <mat-icon class="material-icons-outlined">info</mat-icon>
+                      <div class="app-text">{{ 'alert.statistics.noData' | translate }}.</div>
+                    </mat-card-content>
                   </mat-card>
                 }
               </mat-card>
@@ -110,7 +113,10 @@
                 }
                 @if (!isDetailsData) {
                   <mat-card appearance="outlined" class="app-view-alert app-info app-m-4">
-                    <mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+                     <mat-card-content>
+                      <mat-icon class="material-icons-outlined">info</mat-icon>
+                      <div class="app-text">{{ 'alert.statistics.noData' | translate }}.</div>
+                    </mat-card-content>
                   </mat-card>
                 }
               </mat-card>
@@ -132,7 +138,10 @@
                 }
                 @if (!isResultLang) {
                   <mat-card appearance="outlined" class="app-view-alert app-info app-m-4">
-                    <mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+                     <mat-card-content>
+                      <mat-icon class="material-icons-outlined">info</mat-icon>
+                      <div class="app-text">{{ 'alert.statistics.noData' | translate }}.</div>
+                    </mat-card-content>
                   </mat-card>
                 }
               </mat-card>
@@ -154,7 +163,10 @@
                 }
                 @if (!isResultAuthor) {
                   <mat-card appearance="outlined" class="app-view-alert app-info app-m-4">
-                    <mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+                    <mat-card-content>
+                      <mat-icon class="material-icons-outlined">info</mat-icon>
+                      <div class="app-text">{{ 'alert.statistics.noData' | translate }}.</div>
+                    </mat-card-content>
                   </mat-card>
                 }
               </mat-card>
@@ -176,7 +188,10 @@
                 }
                 @if (!isProvidedByLicense) {
                   <mat-card appearance="outlined" class="app-view-alert app-info app-m-4">
-                    <mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+                    <mat-card-content>
+                      <mat-icon class="material-icons-outlined">info</mat-icon>
+                      <div class="app-text">{{ 'alert.statistics.noData' | translate }}.</div>
+                    </mat-card-content>
                   </mat-card>
                 }
               </mat-card>
@@ -198,7 +213,10 @@
                 }
                 @if (!isCollections) {
                   <mat-card appearance="outlined" class="app-view-alert app-info app-m-4">
-                    <mat-card-content><mat-icon class="material-icons-outlined">info</mat-icon>{{ 'alert.statistics.noData' | translate }}.</mat-card-content>
+                    <mat-card-content>
+                      <mat-icon class="material-icons-outlined">info</mat-icon>
+                      <div class="app-text">{{ 'alert.statistics.noData' | translate }}.</div>
+                    </mat-card-content>
                   </mat-card>
                 }
               </mat-card>
@@ -208,7 +226,7 @@
             <div class="app-mb-4">
               @if (table.get(key) && table.get(key).length > 0) {
                 <h3 class="app-mt-0 app-mb-2">{{ 'field.' + key | translate }}</h3>
-                <table class="app-table" [cellPadding]="0" [cellSpacing]="0">
+                <table class="app-table app-view-vt" [cellPadding]="0" [cellSpacing]="0">
                   <thead>
                     <tr>
                       <th class="app-first">{{ 'desc.numberOfImpressions' | translate }}</th>
@@ -315,9 +333,9 @@
                       </div>
                     }
                   </td>
-                  <td>
+                  <td class="app-col-icon">
                     <a (click)="searchItem(v.pid)" class="app-fxLayout app-row app-center-v app-tdn">
-                      <mat-icon>filter_list</mat-icon>
+                      <mat-icon class="app-mr-1">filter_list</mat-icon>
                       {{ 'Zobrazit podčásti' | translate }}
                     </a>
                   </td>
