@@ -344,8 +344,14 @@ $iconSize: (
     filled-horizontal-padding: 16px,
     outlined-container-height: var(--app-default-height),
     outlined-container-shape: var(--app-default-border-radius),
-    outlined-outline-color: var(--app-default-border-color)
+    outlined-outline-color: var(--app-default-border-color),
+    text-container-shape: var(--app-default-border-radius)
   ));
+  .mat-toolbar {
+    @include mat.button-overrides((
+      text-container-shape: initial
+    ));
+  }
   .mdc-button--unelevated {
     &.mat-primary {
       &:not(.mat-mdc-button-disabled) {
