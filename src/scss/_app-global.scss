@@ -316,19 +316,6 @@ a {
   pointer-events: none;
 }
 
-/* .app-avoid-click {
-  pointer-events: none;
-  color: #bdbdbd !important; 
-  
-  .mat-cell, a, .mat-icon {
-    color: #bdbdbd !important; 
-  }
-
-  .app-badge {
-    background-color: #bdbdbd !important;
-  }
-} */
-
 .app-view-border-bottom {
   border-bottom: 1px solid var(--app-default-border-color);
 }
@@ -380,7 +367,6 @@ a {
 
 // table
 table {
-  // standart table
   &.app-table {
     width: 100%;
     border-width: 1px 0 0 1px;
