@@ -1,29 +1,15 @@
-// --- FLEX LAYOUT ---
-
-$gaps: (
-  "0": 0,
-  "1": 4,
-  "2": 8,
-  "3": 12,
-  "4": 16,
-  "5": 20,
-  "6": 24,
-  "7": 28,
-  "8": 32,
-);
-
-// set gap
+// flex layout
 @mixin setFlexGap($direction: null) {
-  @each $gap, $val in $gaps {
-    &.app-gap-#{$gap} {
+  @for $i from 0 through 8 {
+    &.app-gap-#{$i} {
       > * {
         &:not(:last-child) {
           @if ($direction == 'row') {
-            margin-right: #{$val}px;
+            margin-right: #{$i * 4}px;
           } @else if ($direction == 'column') {
-            margin-bottom: #{$val}px;
+            margin-bottom: #{$i * 4}px;
           } @else {
-            margin-right: #{$val}px;
+            margin-right: #{$i * 4}px;
           }
         }
       }

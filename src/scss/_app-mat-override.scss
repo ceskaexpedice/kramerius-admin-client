@@ -1,167 +1,9 @@
-// --- MATERIAL OVERRIDE UPGRADE ---
-
-
+// material override
+@use 'app-mixins' as *;
+@use 'app-mixins-dashboard' as *;
+@use 'app-mixins-states' as *;
+@use 'app-mixins-alerts' as *;
 @use '@angular/material' as mat;
-
-// alerts
-$alerts: (
-  warn: var(--app-color-warn-rgb),
-  info: var(--app-color-info-rgb),
-  success: var(--app-color-success-rgb),
-);
-
-// dashboard
-$dashboard: (
-  object: #78909C,
-  object-actions: #78909C,
-  object-accessibility: #78909C,
-  object-in-collections: #78909C,
-  object-others: #78909C,
-  import-foxml: #78909C,
-  import-ndk: #78909C,
-  access-actions: #EF5350,
-  access-roles: #EF5350,
-  access-licenses: #EF5350,
-  access-params: #EF5350,
-  processes: #26A69A,
-  processes-standard-output: #26A69A,
-  processes-error-output: #26A69A,
-  collections: #8D6E63,
-  collections-detail: #8D6E63,
-  collections-edit: #8D6E63,
-  collections-content: #8D6E63,
-  collections-context: #8D6E63,
-  indexing-object: #66BB6A,
-  indexing-model: #FF6D00,
-  repository-repository-management: #AA00FF,
-  repository-bulk-data-editing: #00B8D4,
-  repository-statistics: #AFB42B,
-  statistics-graphs: #FF6D00,
-  statistics-most-viewed-documents: #FF6D00
-);
-
-// states
-$states: (
-  count: var(--app-color-primary),
-  planned: #7b7b7b,
-  running: #456aa5,
-  finished: #45a55a,
-  closed: #45a55a,
-  failed: var(--app-color-warn),
-  killed: #ca7023,
-  not-running: #ca7023,
-  warning: #ab493f,
-  too-big: #ab443f,
-  waiting_for_approve: #a44c04,
-  canceled: #a2a2a0,
-  session: var(--app-color-lightnes),
-  keyword: var(--app-color-darknes),
-  default: var(--app-color-gray-6),
-  is-reharvest-from-core: #faf7e3,
-  is-reharvest-from-admin: #f0ffee,
-  duration-low: #faf7e4,
-  duration-high: #faeee3,
-  duration-critical: #fae3e3,
-  maintenance: var(--app-color-success),
-  distributedLocksException: var(--app-color-warn),
-  noReason: var(--app-color-darknes)
-);
-
-// icon size
-$iconSize: (
-  "14": 14,
-  "15": 15,
-  "16": 16,
-  "17": 17,
-  "18": 18,
-  "19": 19,
-  "20": 20,
-  "21": 21,
-  "22": 22,
-  "23": 23,
-);
-
-// set checkbox density
-@mixin setCheckBoxDensity($val: null) {
-  @if ($val != null) {
-    .mat-mdc-checkbox {    
-      .mdc-checkbox__background {
-        width: calc(18px - #{$val}px);
-        height: calc(18px - #{$val}px);
-        top: calc((var(--mat-checkbox-state-layer-size, 40px) - calc(18px - #{$val}px)) / 2);
-        left: calc((var(--mat-checkbox-state-layer-size, 40px) - calc(18px - #{$val}px)) / 2);
-      }
-    }
-  }  
-}
-
-// set icon size
-@mixin setIcon($size: null, $color: null, $position: null) {
-  @if ($size != null) {
-    font-size: #{$size}px;
-    height: #{$size}px;
-    width: #{$size}px;  
-  }
-  @if ($color != null) {
-    color: $color !important;
-  }
-  @if ($position != null) {
-    vertical-align: $position !important;  
-  }  
-}
-
-// set alert card
-@mixin setAlertCard() {
-  @each $alert, $color in $alerts {
-    &.app-#{$alert} {
-      color: rgb($color);
-      border-color: rgba($color, .2);
-      background-color: rgba($color, .1) !important;
-
-      .mat-icon {
-        color: rgb($color);
-      }
-    }
-  }
-}
-
-// set dashboard color
-@mixin setDashboardColor() {
-  @each $type, $color in $dashboard {
-    &.app-#{$type} {
-      background-color: $color !important;
-    }
-  }
-}
-
-
-// set badge color
-@mixin setStateColor() {
-  @each $state, $color in $states {
-    &.app-#{$state} {
-      background-color: $color !important;
-    }
-  }
-}
-
-
-// set icon size
-@mixin setIconSize() {
-  @each $size, $val in $iconSize {
-    &.app-#{$size} {
-      font-size: #{$val}px;
-      width: #{$val}px;
-      height: #{$val}px;
-    }
-  }
-}
-
-
-// icon
-.mat-icon {
-  @include setIconSize();
-}
-
 
 :root {
   // form field
@@ -753,156 +595,156 @@ $iconSize: (
     row-item-outline-color: var(--app-default-border-color),
     row-item-container-height: var(--app-table-row-item-container-height)
   ));
-}
+  .mat-mdc-table {
+    .mat-mdc-row {
+      @include setStateColor();
+    }
 
+    .app-col-checkbox {
+      width: 40px;
+      text-align: center;
+    }
 
+    thead {
+      .mat-mdc-header-row {
+        .mat-mdc-header-cell {
+          padding: 0;
 
-
-// table
-.mat-mdc-table {
-  .mat-mdc-row {
-    @include setStateColor();
-  }
-
-  .app-col-checkbox {
-    width: 40px;
-    text-align: center;
-  }
-
-  thead {
-    .mat-mdc-header-row {
-      .mat-mdc-header-cell {
-        padding: 0;
-
-        &:first-of-type {
-          &:not(.app-col-icon, .app-col-checkbox) {
-            padding-left: 16px;
+          &:first-of-type {
+            &:not(.app-col-icon, .app-col-checkbox) {
+              padding-left: 16px;
+            }
           }
-        }
 
-        &:last-of-type {
-          &:not(.app-col-icon, .app-col-checkbox) {
-            padding-right: 16px;
+          &:last-of-type {
+            &:not(.app-col-icon, .app-col-checkbox) {
+              padding-right: 16px;
+            }
           }
         }
       }
     }
-  }
 
-  tbody {
-    .mat-mdc-row {
-      &:hover {
-        background: var(--app-color-gray-2);
-      }
-  
-      &.active {    
+    tbody {
+      .mat-mdc-row {
         &:hover {
           background: var(--app-color-gray-2);
         }
-      }
-
-      &:last-child {
-        .mat-mdc-cell {
-          border-bottom: none;
+    
+        &.active {    
+          &:hover {
+            background: var(--app-color-gray-2);
+          }
         }
-      }
 
-      &.app-not-allowed {
-        color: var(--app-color-disabled) !important; 
-  
-        .mat-mdc-cell, a, .mat-icon {
+        &:last-child {
+          .mat-mdc-cell {
+            border-bottom: none;
+          }
+        }
+
+        &.app-not-allowed {
           color: var(--app-color-disabled) !important; 
-        }
+    
+          .mat-mdc-cell, a, .mat-icon {
+            color: var(--app-color-disabled) !important; 
+          }
 
-        .app-badge {
-          background-color: var(--app-color-disabled) !important;
-        }
-      }
-
-      .mat-mdc-cell {
-        padding: 0;
-        
-        &:first-of-type {
-          &:not(.app-col-icon, .app-col-checkbox) {
-            padding-left: 16px;
+          .app-badge {
+            background-color: var(--app-color-disabled) !important;
           }
         }
 
-        &:last-of-type {
-          &:not(.app-col-icon, .app-col-checkbox) {
-            padding-right: 16px;
+        .mat-mdc-cell {
+          padding: 0;
+          
+          &:first-of-type {
+            &:not(.app-col-icon, .app-col-checkbox) {
+              padding-left: 16px;
+            }
           }
-        }
 
-        &.app-col-icon {
-          width: 40px;
-          text-align: center;
-          /* @include mat.icon-button-density(-4);
+          &:last-of-type {
+            &:not(.app-col-icon, .app-col-checkbox) {
+              padding-right: 16px;
+            }
+          }
+
+          &.app-col-icon {
+            width: 40px;
+            text-align: center;
+            /* @include mat.icon-button-density(-4);
+
+            .mdc-icon-button {     
+              .mat-icon {
+                @include setIcon(20);
+              }
+            } */
+          }
+
+          @include mat.icon-button-density(-4);
 
           .mdc-icon-button {     
             .mat-icon {
               @include setIcon(20);
             }
-          } */
-        }
-
-        @include mat.icon-button-density(-4);
-
-        .mdc-icon-button {     
-          .mat-icon {
-            @include setIcon(20);
           }
-        }
 
-        &.mat-column-state {      
-          .app-badge {
-            min-width: 110px;
+          &.mat-column-state {      
+            .app-badge {
+              min-width: 110px;
+            }
           }
-        }
 
-        .app-text-cutter-wrapper {
-          position: relative;
-          display: flex;
-        }
-  
-        .app-text-cutter {
-          padding-right: 16px;
-          position: absolute;
-          max-width: 100%;
-          align-self: center;
-        }
-        .mat-form-field {
-          &.mat-form-field-appearance-fill {
-            &.mat-form-field-type-mat-select {
-              .mat-form-field-wrapper {
-                padding-bottom: 0 !important;
-  
-                .mat-form-field-flex,
-                .mat-form-field-infix {
-                  padding-top: 0 !important;
-                }
+          .app-text-cutter-wrapper {
+            position: relative;
+            display: flex;
+          }
+    
+          .app-text-cutter {
+            padding-right: 16px;
+            position: absolute;
+            max-width: 100%;
+            align-self: center;
+          }
+          .mat-form-field {
+            &.mat-form-field-appearance-fill {
+              &.mat-form-field-type-mat-select {
+                .mat-form-field-wrapper {
+                  padding-bottom: 0 !important;
+    
+                  .mat-form-field-flex,
+                  .mat-form-field-infix {
+                    padding-top: 0 !important;
+                  }
 
-                .mat-select-arrow-wrapper {
-                  display: flex;
-                  vertical-align: bottom;
-                }
+                  .mat-select-arrow-wrapper {
+                    display: flex;
+                    vertical-align: bottom;
+                  }
 
-                .mat-form-field-underline {
-                  bottom: 0;
+                  .mat-form-field-underline {
+                    bottom: 0;
+                  }
                 }
               }
             }
           }
-        }
-        .mat-mdc-icon-button {
-          --mdc-icon-button-state-layer-size: 32px;
-          padding: 0;
+          .mat-mdc-icon-button {
+            --mdc-icon-button-state-layer-size: 32px;
+            padding: 0;
 
-          .mat-icon {
-            @include setIcon($position: text-top);
+            .mat-icon {
+              @include setIcon($position: text-top);
+            }
           }
-        }
-      } 
+        } 
+      }
     }
   }
 }
+
+
+
+
+

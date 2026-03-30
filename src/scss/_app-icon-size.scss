@@ -1,0 +1,14 @@
+// icon class size settings
+@mixin setIconSize() {
+  @for $i from 14 through 24 {
+    &.app-#{$i} {
+      font-size: #{$i}px;
+      width: #{$i}px;
+      height: #{$i}px;
+    }
+  }
+}
+
+.mat-icon {
+  @include setIconSize();
+}

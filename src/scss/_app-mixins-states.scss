@@ -1,0 +1,34 @@
+// states
+$states: (
+  count: var(--app-color-primary),
+  planned: #7b7b7b,
+  running: #456aa5,
+  finished: #45a55a,
+  closed: #45a55a,
+  failed: var(--app-color-warn),
+  killed: #ca7023,
+  not-running: #ca7023,
+  warning: #ab493f,
+  too-big: #ab443f,
+  waiting_for_approve: #a44c04,
+  canceled: #a2a2a0,
+  session: var(--app-color-lightnes),
+  keyword: var(--app-color-darknes),
+  default: var(--app-color-gray-6),
+  is-reharvest-from-core: #faf7e3,
+  is-reharvest-from-admin: #f0ffee,
+  duration-low: #faf7e4,
+  duration-high: #faeee3,
+  duration-critical: #fae3e3,
+  maintenance: var(--app-color-success),
+  distributedLocksException: var(--app-color-warn),
+  noReason: var(--app-color-darknes)
+);
+
+@mixin setStateColor() {
+  @each $state, $color in $states {
+    &.app-#{$state} {
+      background-color: $color !important;
+    }
+  }
+}
