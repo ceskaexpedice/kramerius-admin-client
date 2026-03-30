@@ -33,14 +33,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
-import { MatDivider } from "@angular/material/divider";
+import { MatDividerModule } from "@angular/material/divider";
 
 
 @Component({
     imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
         MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatProgressBarModule,
         MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
-        MatCheckboxModule, MatPaginatorModule, DurationPipe, MatDivider],
+        MatCheckboxModule, MatPaginatorModule, DurationPipe, MatDividerModule],
     selector: 'app-processes',
     templateUrl: './processes.component.html',
     styleUrls: ['./processes.component.scss']

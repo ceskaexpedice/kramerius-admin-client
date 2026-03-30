@@ -19,7 +19,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatButtonModule } from "@angular/material/button";
-import { MatDivider } from "@angular/material/divider";
 import { MatOption } from "@angular/material/core";
 import { MatSelectModule } from '@angular/material/select';
 
@@ -27,7 +26,7 @@ import { MatSelectModule } from '@angular/material/select';
     imports: [CommonModule, RouterModule, TranslateModule,
         FormsModule, ReactiveFormsModule, MatButtonModule,
         MatDialogModule, MatRadioModule, MatFormFieldModule, MatInputModule, MatCheckboxModule,
-        MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule, MatDivider, MatOption, MatSelectModule
+        MatIconModule, MatTabsModule, MatCardModule, MatTooltipModule, MatProgressBarModule, MatOption, MatSelectModule
     ],
     selector: 'app-create-or-edit-license-dialog',
     templateUrl: './create-or-edit-license-dialog.component.html',

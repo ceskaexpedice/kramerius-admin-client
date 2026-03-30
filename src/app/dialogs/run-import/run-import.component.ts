@@ -26,11 +26,10 @@ import { MatRippleModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioButton } from '@angular/material/radio';
-import { MatDivider } from "@angular/material/divider";
 
 
 @Component({
-    imports: [RouterModule, TranslateModule, FormsModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule, MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule, MatDivider],
+    imports: [RouterModule, TranslateModule, FormsModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule, MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule],
     selector: 'app-run-import',
     templateUrl: './run-import.component.html',
     styleUrls: ['./run-import.component.scss']
