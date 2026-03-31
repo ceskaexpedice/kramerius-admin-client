@@ -9,7 +9,7 @@
             <mat-option value="dnnto">dnnto</mat-option>
             <mat-option value="knav_lokalni">knav_lokalni</mat-option>
           </mat-select>
-          </mat-form-field>
+        </mat-form-field>
       </td>
     </ng-container>
 
@@ -21,8 +21,12 @@
     <ng-container matColumnDef="licenseLink">
       <th mat-header-cell *matHeaderCellDef>{{ 'desc.linkToLicenseDetail' | translate }}</th>
       <td mat-cell *matCellDef="let element">
-        <a [href]="'https://rightsstatements.org/page/' + element.selected['id'] + '/1.0/?language=en'" *ngIf="element.selected" target="_blank"><img [src]="'https://rightsstatements.org/files/buttons/' + element.selected['id'] + '.white.svg'" /></a>
-        <span class="app-desc" *ngIf="!element.selected">{{ '--- ' + ('desc.noLicenseSelected' | translate) + ' ---' }}</span>
+        @if (element.selected) {
+          <a [href]="'https://rightsstatements.org/page/' + element.selected['id'] + '/1.0/?language=en'" target="_blank"><img [src]="'https://rightsstatements.org/files/buttons/' + element.selected['id'] + '.white.svg'" /></a>
+        }
+        @if (!element.selected) {
+          <span class="app-desc">{{ '--- ' + ('desc.noLicenseSelected' | translate) + ' ---' }}</span>
+        }
       </td>
     </ng-container>
 
@@ -31,7 +35,9 @@
       <td mat-cell *matCellDef="let element" class="app-text-right">
         <mat-form-field appearance="fill" class="app-w-100">
           <mat-select [(value)]="element.selected" [placeholder]="'--- ' + ('desc.chooseLicense' | translate) + ' ---'">
-            <mat-option *ngFor="let license of licensesEuro" [value]="license">{{ license.name }}</mat-option>
+            @for (license of licensesEuro; track license) {
+              <mat-option [value]="license">{{ license.name }}</mat-option>
+            }
           </mat-select>
         </mat-form-field>
       </td>
@@ -40,7 +46,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element" class="app-text-right">
-        <a [matTooltip]="'button.deleteRow' | translate"><mat-icon>delete</mat-icon></a>    
+        <a [matTooltip]="'button.deleteRow' | translate"><mat-icon>delete</mat-icon></a>
       </td>
     </ng-container>
 
@@ -48,5 +54,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
-<button mat-flat-button color="primary">{{ 'button.addRow' | translate }}</button>
+<button matButton="filled" color="primary">{{ 'button.addRow' | translate }}</button>
 

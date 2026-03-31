@@ -1,0 +1,20 @@
+// alerts
+$alerts: (
+  warn: var(--app-color-warn-rgb),
+  info: var(--app-color-info-rgb),
+  success: var(--app-color-success-rgb),
+);
+
+@mixin setAlertCard() {
+  @each $alert, $color in $alerts {
+    &.app-#{$alert} {
+      color: rgb($color);
+      border-color: rgba($color, .2);
+      background-color: rgba($color, .1) !important;
+
+      .mat-icon {
+        color: rgb($color);
+      }
+    }
+  }
+}

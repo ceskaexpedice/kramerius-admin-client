@@ -1,35 +1,43 @@
 <form #f="ngForm" (ngSubmit)="schedule(f.value)">
-	<mat-progress-bar *ngIf="inProgress" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
-	<h2 mat-dialog-title>{{ 'modal.scheduleIndexationByPid.title' | translate }}</h2>
-	<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
-		<div class="app-desc" [innerHtml]="('modal.scheduleIndexationByPid.message' | translate) + '.'"></div>
-		<div>
-			<mat-form-field appearance="outline" class="app-w-100 app-download">
-				<mat-label>{{ 'desc.pids' | translate }}</mat-label>
-				<textarea [disabled]="inProgress || fixed" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="{{pidsTextareaRows}}"></textarea>
-				<mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" *ngIf="!fixed" class="app-cursor-pointer">file_download</mat-icon>
-			</mat-form-field>
-			<input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
-		</div>
-		<div>
-			<mat-form-field appearance="outline" *ngIf="title" class="app-w-100">
-				<input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" [placeholder]="'desc.name' | translate">
-			</mat-form-field>
-		</div>
-		<div>
-			<mat-form-field appearance="outline" class="app-w-100">
-				<mat-select [placeholder]="'desc.indexingType' | translate" ngModel name="type" required>
-					<mat-option *ngFor="let type of indexationProcessTypes; let i = index" [value]="type">{{ 'field.' + type | translate }}</mat-option>
-				</mat-select>
-			</mat-form-field>
-		</div>
-		<div>
-			<mat-checkbox [ngModel]="true" name="ignore_inconsistent_objects" color="primary">{{ 'desc.skipInconsistentObjects' | translate }} *</mat-checkbox>
-		</div>
-		<div class="app-explanation" [innerHtml]="'* ' + ('modal.scheduleIndexationByPid.explanation' | translate) + '.'"></div>
-	</mat-dialog-content>
-	<mat-dialog-actions align="end">
-		<button mat-flat-button [disabled]="inProgress || !f.valid" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
-		<button mat-flat-button [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
-	</mat-dialog-actions>
+  @if (inProgress) {
+    <mat-progress-bar [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>
+  }
+  <h2 mat-dialog-title>{{ 'modal.scheduleIndexationByPid.title' | translate }}</h2>
+  <mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+    <div class="app-desc" [innerHtml]="('modal.scheduleIndexationByPid.message' | translate) + '.'"></div>
+    <div>
+      <mat-form-field appearance="outline" class="app-w-100 app-download">
+        <mat-label>{{ 'desc.pids' | translate }}</mat-label>
+        <textarea [disabled]="inProgress || fixed" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="{{pidsTextareaRows}}"></textarea>
+        @if (!fixed) {
+          <mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" class="app-cursor-pointer">file_download</mat-icon>
+        }
+      </mat-form-field>
+      <input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
+    </div>
+    <div>
+      @if (title) {
+        <mat-form-field appearance="outline" class="app-w-100">
+          <input [disabled]="inProgress || fixed" matInput type="text" id="inputTitle" name="title" [(ngModel)]="title" [placeholder]="'desc.name' | translate">
+        </mat-form-field>
+      }
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="app-w-100">
+        <mat-select [placeholder]="'desc.indexingType' | translate" ngModel name="type" required>
+          @for (type of indexationProcessTypes; track type; let i = $index) {
+            <mat-option [value]="type">{{ 'field.' + type | translate }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-checkbox [ngModel]="true" name="ignore_inconsistent_objects" color="primary">{{ 'desc.skipInconsistentObjects' | translate }} *</mat-checkbox>
+    </div>
+    <div class="app-explanation" [innerHtml]="'* ' + ('modal.scheduleIndexationByPid.explanation' | translate) + '.'"></div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton="filled" [disabled]="inProgress || !f.valid" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+    <button matButton [disabled]="inProgress" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+  </mat-dialog-actions>
 </form>

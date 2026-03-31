@@ -4,52 +4,68 @@
     <mat-form-field appearance="outline" class="app-w-100">
       <mat-label>{{ 'desc.name' | translate }} / Prefix {{libraryName }}</mat-label>
       <input matInput [placeholder]="'desc.name' | translate" [readonly]="mode=='edit'" type="text" name="note" (keyup)="onKeyUp()" autocomplete="off" id="licenseName" formControlName="licenseName" required>
-      <mat-error *ngIf="licenseName.invalid && (licenseName.dirty || licenseName.touched)">
-        <ng-container *ngIf="licenseName.errors['required']">{{ 'modal.createOrEditLicense.errors.nameRequired' | translate }}</ng-container>
-        <ng-container *ngIf="licenseName.errors['pattern']">{{ 'modal.createOrEditLicense.errors.theNameMustStartWith' | translate }} '{{ libraryName }}'<ng-container *ngIf="licenseName.hasError('alreadyUsed')"> | </ng-container></ng-container>
-        <ng-container *ngIf="licenseName.hasError('alreadyUsed')">{{ 'modal.createOrEditLicense.errors.theNameIsAlreadyUsed' | translate }}</ng-container>
+      @if (licenseName.invalid && (licenseName.dirty || licenseName.touched)) {
+        <mat-error>
+          @if (licenseName.errors['required']) {
+            {{ 'modal.createOrEditLicense.errors.nameRequired' | translate }}
+          }
+          @if (licenseName.errors['pattern']) {
+            {{ 'modal.createOrEditLicense.errors.theNameMustStartWith' | translate }} '{{ libraryName }}'@if (licenseName.hasError('alreadyUsed')) {
+            |
+          }
+        }
+        @if (licenseName.hasError('alreadyUsed')) {
+          {{ 'modal.createOrEditLicense.errors.theNameIsAlreadyUsed' | translate }}
+        }
       </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="app-w-100">
-      <mat-label>{{ 'desc.description' | translate }}</mat-label>
-      <input matInput [placeholder]="'desc.description' | translate" type="text" name="description" autocomplete="off" id="licenseDesc" formControlName="licenseDesc" required>
-      <mat-error *ngIf="licenseDesc.invalid && (licenseDesc.dirty || licenseDesc.touched)">
-        <ng-container *ngIf="licenseDesc.errors['required']">{{ 'modal.createOrEditLicense.errors.labelIsRequired' | translate }}</ng-container>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="app-w-100">
+    <mat-label>{{ 'desc.description' | translate }}</mat-label>
+    <input matInput [placeholder]="'desc.description' | translate" type="text" name="description" autocomplete="off" id="licenseDesc" formControlName="licenseDesc" required>
+    @if (licenseDesc.invalid && (licenseDesc.dirty || licenseDesc.touched)) {
+      <mat-error>
+        @if (licenseDesc.errors['required']) {
+          {{ 'modal.createOrEditLicense.errors.labelIsRequired' | translate }}
+        }
       </mat-error>
-    </mat-form-field>
-  </form>
+    }
+  </mat-form-field>
+</form>
 
-  <mat-checkbox [(ngModel)]="license.exclusiveLock"  class="app-mb-4 app-mt-4">{{ 'desc.turnOnTheLock' | translate }}</mat-checkbox>
+<mat-checkbox [(ngModel)]="license.exclusiveLock"  class="app-mb-4 app-mt-4">{{ 'desc.turnOnTheLock' | translate }}</mat-checkbox>
 
-  <mat-checkbox [(ngModel)]="license.runtime"  class="app-mb-4">
+<mat-checkbox [(ngModel)]="license.runtime"  class="app-mb-4">
   {{ 'desc.runtimeLicense' | translate }}
- </mat-checkbox>
+</mat-checkbox>
 
 
-   <ng-container *ngIf="license.runtime">
+@if (license.runtime) {
+  @if (license.runtime) {
+    <mat-card appearance="outlined" class="app-mt-6 app-mb-4">
+      <!--
+      <mat-card-header>
+        <mat-card-title>{{ 'desc.runtimeLicense' | translate }}</mat-card-title>
+      </mat-card-header>
+      -->
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="app-w-100">
+          <mat-label>{{ 'desc.selectTypeOfRuntimeLicenseFilter' | translate }}</mat-label>
+          <mat-select [(ngModel)]="license.runtimeType" name="runtimeType">
+            @for (type of license.ALL_RUNTIME_TYPES; track type) {
+              <mat-option [value]="type">
+                {{ ('desc.runtimeType.' + type) | translate }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+  }
+}
 
-<mat-card appearance="outlined" class="app-mt-6 app-mb-4" *ngIf="license.runtime">
-  <!--
-  <mat-card-header>
-    <mat-card-title>{{ 'desc.runtimeLicense' | translate }}</mat-card-title>
-  </mat-card-header>
-  -->
-  <mat-card-content>
-    <mat-form-field appearance="outline" class="app-w-100">
-      <mat-label>{{ 'desc.selectTypeOfRuntimeLicenseFilter' | translate }}</mat-label>
-      <mat-select [(ngModel)]="license.runtimeType" name="runtimeType">
-        <mat-option *ngFor="let type of license.ALL_RUNTIME_TYPES" [value]="type">
-          {{ ('desc.runtimeType.' + type) | translate }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-card-content>
-</mat-card>
 
-  </ng-container>
-
-
-<ng-container *ngIf="license.exclusiveLock">
+@if (license.exclusiveLock) {
   <mat-card appearance="outlined" class="app-mb-4 app-mt-6">
     <!--
     <mat-card-header>
@@ -62,86 +78,99 @@
           <mat-label>{{ formatedMaxTime() }}</mat-label>
           <input matInput [placeholder]="'desc.maximumReadingTime' | translate" [(ngModel)]="license.max">
         </mat-form-field>
-
         <mat-form-field appearance="outline" class="app-w-100">
           <mat-label>{{ 'desc.refreshInterval' | translate }}</mat-label>
           <input matInput [placeholder]="'desc.refreshInterval' | translate" [(ngModel)]="license.refresh">
         </mat-form-field>
-
         <mat-form-field appearance="outline" class="app-w-100">
           <mat-label>{{ 'desc.numberOfReadersReadingConcurrently' | translate }}</mat-label>
           <input matInput [placeholder]="'desc.numberOfReadersReadingConcurrently' | translate" [(ngModel)]="license.readers">
         </mat-form-field>
-
         <mat-radio-group [(ngModel)]="license.type" (change)="lockTypeChange()">
           <mat-radio-button value="INSTANCE">{{ 'desc.instance' | translate }}</mat-radio-button>
           <mat-radio-button value="RULE">{{ 'desc.rule' | translate }}</mat-radio-button>
         </mat-radio-group>
-
-        <mat-card appearance="outlined" *ngIf="lockTypeChanged" class="app-view-alert app-info">
-          <mat-card-content>
-            <mat-icon>info</mat-icon>
-            {{ 'alert.createOrEditLicense.errorlock1' | translate }}
-          </mat-card-content>
-        </mat-card>
+        @if (lockTypeChanged) {
+          <mat-card appearance="outlined" class="app-view-alert app-info">
+            <mat-card-content>
+              <mat-icon>info</mat-icon>
+              {{ 'alert.createOrEditLicense.errorlock1' | translate }}
+            </mat-card-content>
+          </mat-card>
+        }
       </div>
-
-      <div *ngIf="!lockTypeChanged && lockMaps?.length > 0" class="app-mt-4">
-        <a (click)="viewConsumedLicenses()"
-           [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'"
-           class="app-fxLayout app-row app-center-v app-tdn">
-          <mat-icon>expand_more</mat-icon>
-          {{ isConsumedLicensesExpanded
-              ? ('button.hideConsumedLicenses' | translate)
-              : ('button.viewConsumedLicenses' | translate) }}
-        </a>
-
-        <div *ngIf="isConsumedLicensesExpanded" class="app-mt-4">
-          <ng-container *ngFor="let lockMap of lockMaps">
-            <table *ngIf="lockMap.enabled" class="app-table app-mb-2" [cellPadding]="0" [cellSpacing]="0">
-              <thead>
-                <tr>
-                  <th colspan="4"><strong>{{ lockMap.formattedName }}</strong></th>
-                </tr>
-                <tr>
-                  <th>{{ 'desc.user' | translate }}</th>
-                  <th>{{ 'desc.readingTime' | translate }}</th>
-                  <th>{{ 'desc.startReading' | translate }}</th>
-                  <th>{{ 'desc.maximumReadingTime' | translate }}</th>
-                </tr>
-              </thead>
-              <tbody *ngIf="lockMap.items">
-                <tr *ngFor="let item of lockMap.items">
-                  <td>{{ item.username }}</td>
-                  <td>{{ formatTimeDifference(item.createdTime) }}</td>
-                  <td>{{ formatDateTime(item.createdTime) }}</td>
-                  <td>{{ formatDateTime(item.maxTime) }}</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <mat-card *ngIf="lockMaps?.length === 0" class="app-view-alert app-info">
-              <mat-card-content>
-                <mat-icon>info</mat-icon>
-                {{ 'alert.noResults' | translate }}
-              </mat-card-content>
-            </mat-card>
-          </ng-container>
+      @if (!lockTypeChanged && lockMaps?.length > 0) {
+        <div class="app-mt-4">
+          <a (click)="viewConsumedLicenses()"
+            [ngClass]="isConsumedLicensesExpanded ? 'app-rotate-up' : 'app-rotate-down'"
+            class="app-fxLayout app-row app-center-v app-tdn">
+            <mat-icon>expand_more</mat-icon>
+            {{ isConsumedLicensesExpanded
+            ? ('button.hideConsumedLicenses' | translate)
+            : ('button.viewConsumedLicenses' | translate) }}
+          </a>
+          @if (isConsumedLicensesExpanded) {
+            <div class="app-mt-4">
+              @for (lockMap of lockMaps; track lockMap) {
+                @if (lockMap.enabled) {
+                  <table class="app-table app-mb-2" [cellPadding]="0" [cellSpacing]="0">
+                    <thead>
+                      <tr>
+                        <th colspan="4"><strong>{{ lockMap.formattedName }}</strong></th>
+                      </tr>
+                      <tr>
+                        <th>{{ 'desc.user' | translate }}</th>
+                        <th>{{ 'desc.readingTime' | translate }}</th>
+                        <th>{{ 'desc.startReading' | translate }}</th>
+                        <th>{{ 'desc.maximumReadingTime' | translate }}</th>
+                      </tr>
+                    </thead>
+                    @if (lockMap.items) {
+                      <tbody>
+                        @for (item of lockMap.items; track item) {
+                          <tr>
+                            <td>{{ item.username }}</td>
+                            <td>{{ formatTimeDifference(item.createdTime) }}</td>
+                            <td>{{ formatDateTime(item.createdTime) }}</td>
+                            <td>{{ formatDateTime(item.maxTime) }}</td>
+                          </tr>
+                        }
+                      </tbody>
+                    }
+                  </table>
+                }
+                @if (lockMaps?.length === 0) {
+                  <mat-card class="app-view-alert app-info">
+                    <mat-card-content>
+                      <mat-icon>info</mat-icon>
+                      {{ 'alert.noResults' | translate }}
+                    </mat-card-content>
+                  </mat-card>
+                }
+              }
+            </div>
+          }
         </div>
-      </div>
+      }
     </mat-card-content>
   </mat-card>
-</ng-container>
-  
+}
 
-  <mat-card appearance="outlined" class="app-view-alert app-warn" *ngIf="errorMessage">
+
+@if (errorMessage) {
+  <mat-card appearance="outlined" class="app-view-alert app-warn">
     <mat-card-content>
       {{ errorMessage }}
     </mat-card-content>
   </mat-card>
+}
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button *ngIf="mode == 'new'" (click)="onSave()" color="primary" [disabled]="(licenseDesc.invalid && (licenseDesc.dirty || licenseDesc.touched)) || (licenseName.invalid && (licenseName.dirty || licenseName.touched))">{{ 'button.create' | translate }}</button>
-  <button mat-flat-button *ngIf="mode == 'edit'" (click)="onSave()" color="primary">{{ 'button.edit' | translate }}</button>
-  <button mat-flat-button (click)="onCancel()">{{ 'button.cancel' | translate }}</button>  
+  @if (mode == 'new') {
+    <button matButton="filled" (click)="onSave()" color="primary" [disabled]="(licenseDesc.invalid && (licenseDesc.dirty || licenseDesc.touched)) || (licenseName.invalid && (licenseName.dirty || licenseName.touched))">{{ 'button.create' | translate }}</button>
+  }
+  @if (mode == 'edit') {
+    <button matButton="filled" (click)="onSave()" color="primary">{{ 'button.edit' | translate }}</button>
+  }
+  <button matButton (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

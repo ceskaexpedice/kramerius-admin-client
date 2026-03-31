@@ -34,15 +34,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatSlideToggleModule,
-    MatTooltipModule, MatMenuModule, MatPaginatorModule,
-    MatProgressBarModule, MatCheckboxModule, MatTableModule, MatSortModule, MatInputModule
-  ],
-  selector: 'app-collections',
-  templateUrl: './collections.component.html',
-  styleUrls: ['./collections.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatSlideToggleModule,
+        MatTooltipModule, MatMenuModule, MatPaginatorModule,
+        MatProgressBarModule, MatCheckboxModule, MatTableModule, MatSortModule, MatInputModule
+    ],
+    selector: 'app-collections',
+    templateUrl: './collections.component.html',
+    styleUrls: ['./collections.component.scss']
 })
 
 export class CollectionsComponent implements OnInit {

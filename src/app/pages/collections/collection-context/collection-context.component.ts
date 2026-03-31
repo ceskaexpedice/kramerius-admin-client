@@ -18,14 +18,13 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, 
-    MatTooltipModule, MatProgressBarModule
-  ],
-  selector: 'app-collection-context',
-  templateUrl: './collection-context.component.html',
-  styleUrls: ['./collection-context.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule,
+        MatTooltipModule, MatProgressBarModule
+    ],
+    selector: 'app-collection-context',
+    templateUrl: './collection-context.component.html',
+    styleUrls: ['./collection-context.component.scss']
 })
 export class CollectionContextComponent implements OnInit {
 

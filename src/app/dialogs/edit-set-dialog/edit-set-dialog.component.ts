@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,13 +13,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatTooltipModule, 
-    MatFormFieldModule, MatInputModule],
-  selector: 'app-edit-set-dialog',
-  templateUrl: './edit-set-dialog.component.html',
-  styleUrls: ['./edit-set-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
+    selector: 'app-edit-set-dialog',
+    templateUrl: './edit-set-dialog.component.html',
+    styleUrls: ['./edit-set-dialog.component.scss']
 })
 export class EditSetDialogComponent implements OnInit {
 

@@ -7,11 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  selector: 'app-monitoring-api-detail',
-  standalone: true,
-  imports: [MatDialogModule, TranslateModule, MatButtonModule, CommonModule, MatDivider],
-  templateUrl: './monitoring-api-detail.component.html',
-  styleUrl: './monitoring-api-detail.component.scss'
+    selector: 'app-monitoring-api-detail',
+    imports: [MatDialogModule, TranslateModule, MatButtonModule, CommonModule, MatDivider],
+    templateUrl: './monitoring-api-detail.component.html',
+    styleUrl: './monitoring-api-detail.component.scss'
 })
 export class MonitoringApiDetailComponent implements OnInit{
     KEYS:string[] = ['endpoint', 'resource', 'querypart', 'httpMethod', 'startTime','endTime', 'duration', 'userId', 'labels'];

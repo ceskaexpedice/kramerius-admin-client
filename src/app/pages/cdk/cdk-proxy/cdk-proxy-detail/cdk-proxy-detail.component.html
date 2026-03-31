@@ -29,28 +29,36 @@
           <ng-container matColumnDef="indexed">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.indexed' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-                <ng-container *ngIf="element.indexed > 0"> <strong> {{ element.indexed }}</strong></ng-container>
-                <ng-container *ngIf="element.indexed <= 0">  {{ element.indexed }} </ng-container>
+              @if (element.indexed > 0) {
+                <strong> {{ element.indexed }}</strong>
+              }
+              @if (element.indexed <= 0) {
+                {{ element.indexed }}
+              }
             </td>
           </ng-container>
-        
+
           <ng-container matColumnDef="updated">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.updated' | translate }}</th>
             <td mat-cell *matCellDef="let element">
-              <ng-container *ngIf="element.updated > 0"> <strong> {{ element.updated }}</strong></ng-container>
-              <ng-container *ngIf="element.updated <= 0">  {{ element.updated }} </ng-container>
-             </td>
+              @if (element.updated > 0) {
+                <strong> {{ element.updated }}</strong>
+              }
+              @if (element.updated <= 0) {
+                {{ element.updated }}
+              }
+            </td>
 
           </ng-container>
-        
+
           <ng-container matColumnDef="error">
             <th mat-header-cell *matHeaderCellDef>{{ 'desc.error' | translate }}</th>
             <td mat-cell *matCellDef="let element">{{ element.errors }}</td>
           </ng-container>
-        
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>  
+        </table>
       </div>
     </div>
   </div>

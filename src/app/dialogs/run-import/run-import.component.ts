@@ -10,7 +10,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { ClientApiService } from 'src/app/services/client-api.service';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { MatChipsModule } from '@angular/material/chips';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatRadioChange, MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
@@ -26,18 +26,13 @@ import { MatRippleModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioButton } from '@angular/material/radio';
-import { MatDivider } from "@angular/material/divider";
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule,
-    FormsModule, MatFormFieldModule, MatInputModule,
-    MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule,
-    MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule, MatDivider],
-  selector: 'app-run-import',
-  templateUrl: './run-import.component.html',
-  styleUrls: ['./run-import.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatFormFieldModule, MatInputModule, MatDialogModule, MatSelectModule, MatCheckboxModule, MatRippleModule, MatIconModule, MatCardModule, MatTooltipModule, MatButtonModule, MatRadioButton, MatRadioModule],
+    selector: 'app-run-import',
+    templateUrl: './run-import.component.html',
+    styleUrls: ['./run-import.component.scss']
 })
 export class RunImportComponent implements OnInit {
 

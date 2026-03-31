@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { forkJoin } from 'rxjs';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -16,13 +16,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-  MatProgressBarModule, MatTooltipModule],
-  selector: 'app-schedule-remove-the-visibility-flag-dialog',
-  templateUrl: './schedule-remove-the-visibility-flag-dialog.component.html',
-  styleUrls: ['./schedule-remove-the-visibility-flag-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatTooltipModule],
+    selector: 'app-schedule-remove-the-visibility-flag-dialog',
+    templateUrl: './schedule-remove-the-visibility-flag-dialog.component.html',
+    styleUrls: ['./schedule-remove-the-visibility-flag-dialog.component.scss']
 })
 export class ScheduleRemoveTheVisibilityFlagDialogComponent implements OnInit {
 

@@ -1,13 +1,13 @@
 <h2 mat-dialog-title>{{ 'modal.generateNkpLogs.title' | translate }}</h2>
 <mat-dialog-content class="mat-typography app-scrollbar-fix">
-  <div fxLayout="row" fxLayoutGap="16px">
-    <mat-form-field fxFlex>
+  <div class="app-fxLayout app-row app-gap-2 app-mb-4">
+    <mat-form-field appearance="outline" class="app-fxFlex">
       <mat-label>{{ 'desc.dateFrom' | translate }}</mat-label>
       <input matInput [matDatepicker]="from" [(ngModel)]="dateFrom" >
       <mat-datepicker-toggle matSuffix [for]="from" ></mat-datepicker-toggle>
       <mat-datepicker #from></mat-datepicker>
     </mat-form-field>
-    <mat-form-field fxFlex>
+    <mat-form-field appearance="outline" class="app-fxFlex">
       <mat-label>{{ 'desc.dateTo' | translate }}</mat-label>
       <input matInput [matDatepicker]="to" [(ngModel)]="dateTo" >
       <mat-datepicker-toggle matSuffix [for]="to" ></mat-datepicker-toggle>
@@ -18,6 +18,6 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" (click)="scheduleNkpLogsProcess()">{{ 'button.schedule' | translate }}</button>
-  <button mat-flat-button mat-dialog-close>{{ 'button.close' | translate }}</button>
+  <button matButton="filled" color="primary" (click)="scheduleNkpLogsProcess()">{{ 'button.schedule' | translate }}</button>
+  <button matButton mat-dialog-close>{{ 'button.close' | translate }}</button>
 </mat-dialog-actions>

@@ -34,15 +34,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';;
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
-    MatTooltipModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatPaginatorModule,
-    MatTableModule, MatSortModule
-  ],
-  selector: 'app-cdk-collections-diglib',
-  templateUrl: './cdk-collections-diglib.component.html',
-  styleUrls: ['./cdk-collections-diglib.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
+        MatTooltipModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatPaginatorModule,
+        MatTableModule, MatSortModule
+    ],
+    selector: 'app-cdk-collections-diglib',
+    templateUrl: './cdk-collections-diglib.component.html',
+    styleUrls: ['./cdk-collections-diglib.component.scss']
 })
 export class CdkCollectionsDiglibComponent implements OnInit {
 

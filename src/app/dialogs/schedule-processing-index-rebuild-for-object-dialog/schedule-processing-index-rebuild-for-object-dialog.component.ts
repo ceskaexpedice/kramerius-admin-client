@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,13 +15,10 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-  MatProgressBarModule, MatTooltipModule],
-  selector: 'app-schedule-processing-index-rebuild-for-object-dialog',
-  templateUrl: './schedule-processing-index-rebuild-for-object-dialog.component.html',
-  styleUrls: ['./schedule-processing-index-rebuild-for-object-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatProgressBarModule, MatTooltipModule],
+    selector: 'app-schedule-processing-index-rebuild-for-object-dialog',
+    templateUrl: './schedule-processing-index-rebuild-for-object-dialog.component.html',
+    styleUrls: ['./schedule-processing-index-rebuild-for-object-dialog.component.scss']
 })
 export class ScheduleProcessingIndexRebuildForObjectDialogComponent implements OnInit {
 

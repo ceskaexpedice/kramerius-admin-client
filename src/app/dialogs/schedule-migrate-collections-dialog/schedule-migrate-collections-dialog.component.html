@@ -6,6 +6,6 @@
     </mat-form-field>
 	</mat-dialog-content>
 	<mat-dialog-actions align="end">
-		<button mat-flat-button (click)="migrate()" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
-		<button mat-flat-button [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+		<button matButton="filled" (click)="migrate()" color="primary" type="submit">{{ 'button.schedule' | translate }}</button>
+		<button matButton [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 	</mat-dialog-actions>

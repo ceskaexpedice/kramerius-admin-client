@@ -2,46 +2,66 @@
 <mat-dialog-content>
   <table class="app-table mat-elevation-z2">
     <tbody>
-        <tr *ngFor="let key of KEYS">
-        <th>{{ key }}</th>
-        <td [ngSwitch]="key">
-          <span *ngSwitchCase="'startTime'">{{ item[key] | date:'dd.MM.yyy HH:mm' }}</span>
-          <span *ngSwitchCase="'endTime'">{{ item[key] | date:'dd.MM.yyy HH:mm' }}</span>
-          <span *ngSwitchCase="'duration'">{{ item[key] + ' ms' }}</span>
-          <span *ngSwitchDefault>{{ item[key] }}</span>
-        </td>
-      </tr>
+      @for (key of KEYS; track key) {
+        <tr>
+          <th>{{ key }}</th>
+          <td>
+            @switch (key) {
+              @case ('startTime') {
+                <span>{{ item[key] | date:'dd.MM.yyy HH:mm' }}</span>
+              }
+              @case ('endTime') {
+                <span>{{ item[key] | date:'dd.MM.yyy HH:mm' }}</span>
+              }
+              @case ('duration') {
+                <span>{{ item[key] + ' ms' }}</span>
+              }
+              @default {
+                <span>{{ item[key] }}</span>
+              }
+            }
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
 
-  <mat-divider *ngIf="item['granularSnapshot']" class="divider"></mat-divider>
+  @if (item['granularSnapshot']) {
+    <mat-divider class="divider"></mat-divider>
+  }
 
   <!-- Granularita - jednotlivé části události -->
-  <h2 *ngIf="item['granularSnapshot']" mat-dialog-title>
-    {{ 'desc.granularDetails' | translate }}
-  </h2>
+  @if (item['granularSnapshot']) {
+    <h2 mat-dialog-title>
+      {{ 'desc.granularDetails' | translate }}
+    </h2>
+  }
 
-  <table class="app-table" *ngIf="item['granularSnapshot']">
-    <tbody>
-      <tr *ngFor="let snp of snapshotArray">
-        <td>
-          <span>{{ snp.name }}</span>
-        </td>
-        <td>
-          <span>{{ snp.start | date:'dd.MM.yyy HH:mm'  }}</span>
-        </td>
-        <td>
-          <span>{{ snp.stop | date:'dd.MM.yyy HH:mm' }}</span>
-        </td>
-        <td>
-          <span>{{ (snp.stop - snp.start) +  ' ms' }}</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  @if (item['granularSnapshot']) {
+    <table class="app-table">
+      <tbody>
+        @for (snp of snapshotArray; track snp) {
+          <tr>
+            <td>
+              <span>{{ snp.name }}</span>
+            </td>
+            <td>
+              <span>{{ snp.start | date:'dd.MM.yyy HH:mm'  }}</span>
+            </td>
+            <td>
+              <span>{{ snp.stop | date:'dd.MM.yyy HH:mm' }}</span>
+            </td>
+            <td>
+              <span>{{ (snp.stop - snp.start) +  ' ms' }}</span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-flat-button  mat-dialog-close=" cancel">{{ 'button.close' | translate }}</button>
+  <button matButton mat-dialog-close=" cancel">{{ 'button.close' | translate }}</button>
 </mat-dialog-actions>

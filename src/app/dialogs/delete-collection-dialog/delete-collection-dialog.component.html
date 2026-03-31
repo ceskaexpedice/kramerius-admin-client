@@ -11,6 +11,6 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button (click)="onClose('yes')" mat-dialog-close color="warn">{{ 'button.yes' | translate }}</button>
-  <button mat-flat-button mat-dialog-close>{{ 'button.no' | translate }}</button>
+  <button matButton="filled" (click)="onClose('yes')" mat-dialog-close color="warn">{{ 'button.yes' | translate }}</button>
+  <button matButton mat-dialog-close>{{ 'button.no' | translate }}</button>
 </mat-dialog-actions>

@@ -3,5 +3,7 @@
   <div class="app-fxFlex">
     <router-outlet></router-outlet>
   </div>
-  <app-footer *ngIf="auth.isLoggedIn()"></app-footer>
+  @if (auth.isLoggedIn()) {
+    <app-footer></app-footer>
+  }
 </div>

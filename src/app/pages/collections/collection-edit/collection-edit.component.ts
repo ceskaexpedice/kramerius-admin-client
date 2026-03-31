@@ -28,15 +28,14 @@ import { catchError, map, of, switchMap, take } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
-    MatTooltipModule, MatProgressBarModule, MatCheckboxModule,
-    CKEditorModule
-  ],
-  selector: 'app-collection-edit',
-  templateUrl: './collection-edit.component.html',
-  styleUrls: ['./collection-edit.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatTooltipModule, MatProgressBarModule, MatCheckboxModule,
+        CKEditorModule
+    ],
+    selector: 'app-collection-edit',
+    templateUrl: './collection-edit.component.html',
+    styleUrls: ['./collection-edit.component.scss']
 })
 export class CollectionEditComponent implements OnInit {
 

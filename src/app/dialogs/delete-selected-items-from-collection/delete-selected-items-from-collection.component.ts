@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { forkJoin } from 'rxjs';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -16,12 +16,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
-  selector: 'app-delete-selected-items-from-collection',
-  templateUrl: './delete-selected-items-from-collection.component.html',
-  styleUrls: ['./delete-selected-items-from-collection.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
+    selector: 'app-delete-selected-items-from-collection',
+    templateUrl: './delete-selected-items-from-collection.component.html',
+    styleUrls: ['./delete-selected-items-from-collection.component.scss']
 })
 export class DeleteSelectedItemsFromCollectionComponent implements OnInit {
 

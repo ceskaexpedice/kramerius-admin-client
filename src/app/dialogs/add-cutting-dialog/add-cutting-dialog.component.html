@@ -4,23 +4,29 @@
     <mat-label>{{ 'desc.cuttingName' | translate }}</mat-label>
     <input type="text" matInput [(ngModel)]="name" [placeholder]="'desc.cuttingName' | translate">
   </mat-form-field>
-  
+
   <mat-form-field appearance="outline">
     <mat-label>{{ 'desc.cuttingDesc' | translate }}</mat-label>
     <textarea matInput [(ngModel)]="description" [placeholder]="'desc.cuttingDesc' | translate"></textarea>
   </mat-form-field>
-  
+
   <mat-form-field appearance="outline">
     <mat-label>{{ 'desc.cuttingUrl' | translate }}</mat-label>
     <input type="text" matInput  [(ngModel)]="url" [placeholder]="'desc.cuttingUrl' | translate">
-    <mat-icon *ngIf="!isClipUrl()" matPrefix class="app-mr-2 app-va-text-botttom">link</mat-icon>
-    <mat-icon *ngIf="isClipUrl()" matPrefix class="app-mr-2 app-va-text-botttom material-icons-outlined">cut</mat-icon>
-    <div *ngIf="urlFormControl.hasError('pattern') && urlFormControl.dirty">
-      Neplatná URL adresa
-    </div>
+    @if (!isClipUrl()) {
+      <mat-icon matPrefix class="app-mr-2 app-va-text-botttom">link</mat-icon>
+    }
+    @if (isClipUrl()) {
+      <mat-icon matPrefix class="app-mr-2 app-va-text-botttom material-icons-outlined">cut</mat-icon>
+    }
+    @if (urlFormControl.hasError('pattern') && urlFormControl.dirty) {
+      <div>
+        Neplatná URL adresa
+      </div>
+    }
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button [disabled]="disableAddButton()" color="primary" type="submit" (click)="onSave()">{{ 'button.add' | translate }}</button>
-  <button mat-flat-button  mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+  <button matButton="filled" [disabled]="disableAddButton()" color="primary" type="submit" (click)="onSave()">{{ 'button.add' | translate }}</button>
+  <button matButton mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

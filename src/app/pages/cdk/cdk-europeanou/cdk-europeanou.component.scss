@@ -1,17 +1,10 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-@import '../../../../scss/app-variables.scss';
-@import '../../../../scss/app-mixins.scss';
-@import '../../../../scss/app-global.scss';
-
 .mat-table {
   .mat-column-action {
     width: 60px;
   }
 
   .mat-column-icon {
-    @extend .app-text-center;
+    text-align: center;
     width: 400px;
   }
   
@@ -21,7 +14,6 @@
   }
   
   .mat-column-licenseLink {
-    //@extend .app-pr-4;
     min-width: 110px;
 
     a {

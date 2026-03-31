@@ -4,14 +4,20 @@
     <mat-label>{{ 'desc.name' | translate }}</mat-label>
     <input matInput [placeholder]="'desc.name' | translate"  name="note" [(ngModel)]="role.name" autocomplete="off">
   </mat-form-field>
-  <mat-card appearance="outlined" class="app-view-alert app-warn" *ngIf="errorMessage">
-    <mat-card-content>
-      <mat-icon>error</mat-icon>{{ errorMessage }}
-    </mat-card-content>
-  </mat-card>
+  @if (errorMessage) {
+    <mat-card appearance="outlined" class="app-view-alert app-warn">
+      <mat-card-content>
+        <mat-icon>error</mat-icon>{{ errorMessage }}
+      </mat-card-content>
+    </mat-card>
+  }
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button *ngIf="mode == 'new'" (click)="onSave()" color="primary">{{ 'button.create' | translate }}</button>
-  <button mat-flat-button *ngIf="mode == 'edit'" (click)="onSave()" color="primary">{{ 'button.edit' | translate }}</button>
-  <button mat-flat-button (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
+  @if (mode == 'new') {
+    <button matButton="filled" (click)="onSave()" color="primary">{{ 'button.create' | translate }}</button>
+  }
+  @if (mode == 'edit') {
+    <button matButton="filled" (click)="onSave()" color="primary">{{ 'button.edit' | translate }}</button>
+  }
+  <button matButton (click)="onCancel()">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

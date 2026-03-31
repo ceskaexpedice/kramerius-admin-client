@@ -2,7 +2,9 @@
 <mat-dialog-content class="mat-typography">
   <h4 class="app-mt-0">{{ 'modal.scheduleChangeFlagOnLicense.section1' | translate }}:</h4>
   <ul>
-    <li *ngFor="let model of models"><strong> {{ 'field.'+ model | translate }}</strong></li>
+    @for (model of models; track model) {
+      <li><strong> {{ 'field.'+ model | translate }}</strong></li>
+    }
   </ul>
   <mat-divider class="app-mb-4"></mat-divider>
   <h4>{{ 'modal.scheduleChangeFlagOnLicense.section2' | translate }}:</h4>
@@ -12,6 +14,6 @@
   </ul>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" (click)="changeFlagOnLicense()" mat-dialog-close>{{ 'button.change' | translate }}</button>
-  <button mat-flat-button mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
+  <button matButton="filled" color="primary" (click)="changeFlagOnLicense()" mat-dialog-close>{{ 'button.change' | translate }}</button>
+  <button matButton mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

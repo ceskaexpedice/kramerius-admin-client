@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>{{ 'modal.startImport.title' | translate }}</h2>
-<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+<mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize app-pt-1">
   <mat-form-field appearance="outline">
     <mat-label>{{ 'desc.selectLicenseToImport' | translate }}</mat-label>
     <mat-select [(ngModel)]="selectedLicense" [panelClass]="'app-licenses'">
@@ -7,83 +7,99 @@
         {{ selectedLicense?.name || '-- ' + ('desc.noLicense' | translate) + ' --' }}
       </mat-select-trigger>
       <mat-option  [value]="null">-- {{ 'desc.noLicense' | translate }} --</mat-option>
-      <mat-option *ngFor="let license of licenses" [value]="license">
-        <div class="app-fxLayout app-row app-center-v app-mb-1">
-          <mat-icon *ngIf="license.group == 'local'">location_city</mat-icon>
-          <mat-icon *ngIf="license.group != 'local'">public_outlined</mat-icon>
-          <strong>{{ license.name }}</strong>
-        </div>
-        <div class="app-license-desc app-mb-1">
-          {{ license.group == 'local' ? ('desc.localLicense' | translate) : ('desc.globalLicense' | translate) }}
-        </div>
-        <div class="app-mb-1">
-          <i>{{ license.description }}</i>
-        </div>
-      </mat-option>
+      @for (license of licenses; track license) {
+        <mat-option [value]="license">
+          <div class="app-fxLayout app-row app-center-v app-mb-1">
+            @if (license.group == 'local') {
+              <mat-icon>location_city</mat-icon>
+            }
+            @if (license.group != 'local') {
+              <mat-icon>public_outlined</mat-icon>
+            }
+            <strong>{{ license.name }}</strong>
+          </div>
+          <div class="app-license-desc app-mb-1">
+            {{ license.group == 'local' ? ('desc.localLicense' | translate) : ('desc.globalLicense' | translate) }}
+          </div>
+          <div class="app-mb-1">
+            <i>{{ license.description }}</i>
+          </div>
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 
   <div class="app-fxLayout app-row app-gap-4">
     <mat-checkbox [disableRipple]="true" [(ngModel)]="scheduleIndexation" (ngModelChange)="onScheduleIndexationChange($event)" color="primary">{{ 'desc.scheduleSubsequentIndexing' | translate }}</mat-checkbox>
-    <ng-container *ngIf="type == 'ndk'">
-      <mat-checkbox [disableRipple]="true"  *ngIf="type == 'ndk'" [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
-    </ng-container>
+    @if (type == 'ndk') {
+      @if (type == 'ndk') {
+        <mat-checkbox [disableRipple]="true"  [(ngModel)]="ndkIIPServer" color="primary">{{ 'desc.useIipServer' | translate }}</mat-checkbox>
+      }
+    }
     <mat-checkbox [disableRipple]="true" [(ngModel)]="addCollection" [disabled]="!scheduleIndexation || importType=='update'"  (ngModelChange)="onSelectCollectionChange($event)" color="primary">{{ 'desc.addToCollections' | translate }}</mat-checkbox>
   </div>
 
-  <mat-form-field appearance="outline" *ngIf="addCollection && scheduleIndexation">
-     <mat-label>{{ 'desc.selectCollection' | translate }}</mat-label>
-    <mat-select [(ngModel)]="selectedCollection" class="app-w-100">
-      <mat-option *ngFor="let collection of allCollections" [value]="collection">
-        {{ name(collection) }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  @if (addCollection && scheduleIndexation) {
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'desc.selectCollection' | translate }}</mat-label>
+      <mat-select [(ngModel)]="selectedCollection" class="app-w-100">
+        @for (collection of allCollections; track collection) {
+          <mat-option [value]="collection">
+            {{ name(collection) }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
 
-  <mat-card *ngIf="type=='foxml'" appearance="outlined">
-    <mat-card-header class="app-mb-2">
-      <mat-card-title>{{ 'desc.typeOfImport' | translate }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-radio-group [(ngModel)]="importType" name="typeOfImport" (change)="onImportTypeChange($event)" color="primary" class="app-label-more-lines">
-        <mat-radio-button [disableRipple]="true" value="import">
-          <div>
-            {{ 'desc.typeOfImport_import' | translate }}
-          </div>
-          <div class="app-desc">
-            {{ 'desc.typeOfImport_import_desc' | translate }}
-          </div>
-        </mat-radio-button>
-        <mat-radio-button [disableRipple]="true" value="update">
-          <div>
-            {{ 'desc.typeOfImport_update' | translate }}
-          </div>
-          <div class="app-desc">
-            {{ 'desc.typeOfImport_update_desc' | translate }}
-          </div>
-        </mat-radio-button>
-      </mat-radio-group>
-    </mat-card-content> 
-  </mat-card>
+  @if (type=='foxml') {
+    <mat-card appearance="outlined">
+      <mat-card-header class="app-mb-2">
+        <mat-card-title>{{ 'desc.typeOfImport' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-radio-group [(ngModel)]="importType" name="typeOfImport" (change)="onImportTypeChange($event)" color="primary" class="app-label-more-lines">
+          <mat-radio-button [disableRipple]="true" value="import">
+            <div>
+              {{ 'desc.typeOfImport_import' | translate }}
+            </div>
+            <div class="app-desc">
+              {{ 'desc.typeOfImport_import_desc' | translate }}
+            </div>
+          </mat-radio-button>
+          <mat-radio-button [disableRipple]="true" value="update">
+            <div>
+              {{ 'desc.typeOfImport_update' | translate }}
+            </div>
+            <div class="app-desc">
+              {{ 'desc.typeOfImport_update_desc' | translate }}
+            </div>
+          </mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+  }
 
-  <mat-card *ngIf="scheduleIndexation" appearance="outlined">
-    <mat-card-header class="app-mb-2">
-      <mat-card-title>{{ 'desc.indexingSettings' | translate }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-radio-group [(ngModel)]="indexationType" name="indexingType" color="primary">
-        <mat-radio-button [disableRipple]="true" value="indexRoots" [disabled]="importType == 'update'">
-          {{ 'desc.indexRoots' | translate }}
-        </mat-radio-button>
-        <mat-radio-button [disableRipple]="true" value="indexNewImported" [disabled]="importType == 'update'">
-          {{ 'desc.indexNewImported' | translate }}
-        </mat-radio-button>
-      </mat-radio-group>
-    </mat-card-content>
-  </mat-card>
+  @if (scheduleIndexation) {
+    <mat-card appearance="outlined">
+      <mat-card-header class="app-mb-2">
+        <mat-card-title>{{ 'desc.indexingSettings' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-radio-group [(ngModel)]="indexationType" name="indexingType" color="primary">
+          <mat-radio-button [disableRipple]="true" value="indexRoots" [disabled]="importType == 'update'">
+            {{ 'desc.indexRoots' | translate }}
+          </mat-radio-button>
+          <mat-radio-button [disableRipple]="true" value="indexNewImported" [disabled]="importType == 'update'">
+            {{ 'desc.indexNewImported' | translate }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+  }
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-flat-button color="primary" (click)="scheduleProcess()">{{ 'button.schedule' | translate }}</button>
-  <button mat-flat-button mat-dialog-close>{{ 'button.cancel' | translate }}</button>
+  <button matButton="filled" color="primary" (click)="scheduleProcess()">{{ 'button.schedule' | translate }}</button>
+  <button matButton mat-dialog-close>{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>

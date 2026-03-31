@@ -5,7 +5,7 @@ import { Observable, Subject, forkJoin, of } from 'rxjs'; // autocomplete
 import { catchError, debounceTime, switchMap, take } from 'rxjs/operators';
 import { Router } from "@angular/router";
 import { UIService } from 'src/app/services/ui.service';
-import { CommonModule } from "@angular/common";
+
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -17,12 +17,10 @@ import { AdminApiService } from "src/app/services/admin-api.service";
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
-  selector: 'app-delete-selected-collections-dialog',
-  templateUrl: './delete-selected-collections-dialog.component.html',
-  styleUrls: ['./delete-selected-collections-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
+    selector: 'app-delete-selected-collections-dialog',
+    templateUrl: './delete-selected-collections-dialog.component.html',
+    styleUrls: ['./delete-selected-collections-dialog.component.scss']
 })
 export class DeleteSelectedCollectionsDialogComponent implements OnInit {
 

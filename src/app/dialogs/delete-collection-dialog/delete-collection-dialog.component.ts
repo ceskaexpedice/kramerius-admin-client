@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,13 +10,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatTooltipModule,
-   MatCardModule],
-  selector: 'app-delete-collection-dialog',
-  templateUrl: './delete-collection-dialog.component.html',
-  styleUrls: ['./delete-collection-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatTooltipModule, MatCardModule],
+    selector: 'app-delete-collection-dialog',
+    templateUrl: './delete-collection-dialog.component.html',
+    styleUrls: ['./delete-collection-dialog.component.scss']
 })
 export class DeleteCollectionDialogComponent implements OnInit {
 

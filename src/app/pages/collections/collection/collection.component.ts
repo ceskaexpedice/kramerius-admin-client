@@ -21,7 +21,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { AddCuttingDialogComponent } from 'src/app/dialogs/add-cutting-dialog/add-cutting-dialog.component';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -38,14 +38,10 @@ import { CollectionContentComponent } from "../collection-content/collection-con
 import { CollectionContextComponent } from "../collection-context/collection-context.component";
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatTabsModule,
-    MatTooltipModule, MatMenuModule, MatRadioModule, MatCheckboxModule, 
-    CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
-  selector: 'app-collection',
-  templateUrl: './collection.component.html',
-  styleUrls: ['./collection.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatTooltipModule, MatMenuModule, MatRadioModule, MatCheckboxModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
+    selector: 'app-collection',
+    templateUrl: './collection.component.html',
+    styleUrls: ['./collection.component.scss']
 })
 export class CollectionComponent implements OnInit {
 

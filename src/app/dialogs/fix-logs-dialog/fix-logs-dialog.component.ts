@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -11,9 +11,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [
-    CommonModule,
+    imports: [
     TranslateModule,
     FormsModule,
     MatDialogModule,
@@ -23,9 +21,9 @@ import { UIService } from 'src/app/services/ui.service';
     MatCard,
     MatCardContent
 ],
-  selector: 'app-fix-logs-dialog',
-  templateUrl: './fix-logs-dialog.component.html',
-  styleUrls: ['./fix-logs-dialog.component.scss']
+    selector: 'app-fix-logs-dialog',
+    templateUrl: './fix-logs-dialog.component.html',
+    styleUrls: ['./fix-logs-dialog.component.scss']
 })
 export class FixLogsDialogComponent implements OnInit {
 

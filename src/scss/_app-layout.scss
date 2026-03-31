@@ -1,5 +1,4 @@
-// --- LAYOUT ---
-
+// layout
 html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -17,10 +16,10 @@ html, body {
 }
 
 body {
-  @extend .app-m-0;
+  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif; 
-  background: var(--app-body-bg);
-  color: var(--app-body-color);
+  background: var(--app-color-lightnes);
+  color: var(--app-color-darknes);
 
   .app-container {
     padding: 16px !important;
@@ -30,7 +29,7 @@ body {
   }
 
   .app-container-fluid {
-    @extend .app-p-4;
+    padding: 16px;
     max-width: 100%;
   }
 

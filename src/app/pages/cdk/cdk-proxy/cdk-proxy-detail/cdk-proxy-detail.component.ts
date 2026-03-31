@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -17,13 +17,10 @@ export interface PeriodicElement { // TO DO: SMAZAT
 }
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, 
-    MatIconModule, MatTooltipModule, MatTableModule
-  ],
-  selector: 'app-cdk-proxy-detail',
-  templateUrl: './cdk-proxy-detail.component.html',
-  styleUrls: ['./cdk-proxy-detail.component.scss']
+    imports: [RouterModule, TranslateModule, MatIconModule, MatTooltipModule, MatTableModule],
+    selector: 'app-cdk-proxy-detail',
+    templateUrl: './cdk-proxy-detail.component.html',
+    styleUrls: ['./cdk-proxy-detail.component.scss']
 })
 export class CdkProxyDetailComponent implements OnInit {
 

@@ -21,15 +21,14 @@ import { DatetimePipe } from 'src/app/pipes/datetime.pipe';
 import { LogsComponent } from './logs/logs.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, 
-    MatTooltipModule, MatTabsModule, 
-    DurationPipe, DatetimePipe, LogsComponent
-  ],
-  selector: 'app-process',
-  templateUrl: './process.component.html',
-  styleUrls: ['./process.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule,
+        MatTooltipModule, MatTabsModule,
+        DurationPipe, DatetimePipe, LogsComponent
+    ],
+    selector: 'app-process',
+    templateUrl: './process.component.html',
+    styleUrls: ['./process.component.scss']
 })
 export class ProcessComponent implements OnInit {
 

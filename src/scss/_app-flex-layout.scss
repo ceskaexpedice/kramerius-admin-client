@@ -1,4 +1,21 @@
-// --- FLEX LAYOUT ---
+// flex layout
+@mixin setFlexGap($direction: null) {
+  @for $i from 0 through 8 {
+    &.app-gap-#{$i} {
+      > * {
+        &:not(:last-child) {
+          @if ($direction == 'row') {
+            margin-right: #{$i * 4}px;
+          } @else if ($direction == 'column') {
+            margin-bottom: #{$i * 4}px;
+          } @else {
+            margin-right: #{$i * 4}px;
+          }
+        }
+      }
+    }
+  }
+}
 
 .app-fxLayout {
   display: flex !important;

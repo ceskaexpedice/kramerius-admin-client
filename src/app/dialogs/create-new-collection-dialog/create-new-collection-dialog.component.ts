@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,12 +17,10 @@ import { UIService } from 'src/app/services/ui.service';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
-  selector: 'app-create-new-collection-dialog',
-  templateUrl: './create-new-collection-dialog.component.html',
-  styleUrls: ['./create-new-collection-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatCardModule, MatTooltipModule],
+    selector: 'app-create-new-collection-dialog',
+    templateUrl: './create-new-collection-dialog.component.html',
+    styleUrls: ['./create-new-collection-dialog.component.scss']
 })
 export class CreateNewCollectionDialogComponent implements OnInit {
 

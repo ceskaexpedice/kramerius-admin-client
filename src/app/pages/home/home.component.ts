@@ -13,13 +13,12 @@ import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule,  
-    MatCardModule, MatButtonModule, MatIconModule,
-    MatTooltipModule],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    imports: [CommonModule, RouterModule, TranslateModule,
+        MatCardModule, MatButtonModule, MatIconModule,
+        MatTooltipModule],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 

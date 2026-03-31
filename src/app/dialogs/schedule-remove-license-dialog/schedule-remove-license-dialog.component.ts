@@ -18,13 +18,12 @@ import { ClientApiService } from 'src/app/services/client-api.service';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule,
-  MatProgressBarModule, MatTooltipModule],
-  selector: 'app-schedule-remove-license-dialog',
-  templateUrl: './schedule-remove-license-dialog.component.html',
-  styleUrls: ['./schedule-remove-license-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule,
+        MatProgressBarModule, MatTooltipModule],
+    selector: 'app-schedule-remove-license-dialog',
+    templateUrl: './schedule-remove-license-dialog.component.html',
+    styleUrls: ['./schedule-remove-license-dialog.component.scss']
 })
 export class ScheduleRemoveLicenseDialogComponent implements OnInit {
 

@@ -33,18 +33,18 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
-import { MatDivider } from "@angular/material/divider";
+import { MatDividerModule } from "@angular/material/divider";
+import { Clipboard } from '@angular/cdk/clipboard';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatProgressBarModule,
-    MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
-    MatCheckboxModule, MatPaginatorModule, DurationPipe, MatDivider],
-  selector: 'app-processes',
-  templateUrl: './processes.component.html',
-  styleUrls: ['./processes.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatCardModule, MatButtonModule, MatIconModule, MatDatepickerModule, MatProgressBarModule,
+        MatTooltipModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
+        MatCheckboxModule, MatPaginatorModule, DurationPipe, MatDividerModule],
+    selector: 'app-processes',
+    templateUrl: './processes.component.html',
+    styleUrls: ['./processes.component.scss']
 })
 export class ProcessesComponent implements OnInit {
 
@@ -114,7 +114,8 @@ export class ProcessesComponent implements OnInit {
     public appSettings: AppSettings,
     private ui: UIService,
     private router: Router, 
-    private local: LocalStorageService
+    private local: LocalStorageService,
+    private clipboard: Clipboard
   ) {
     for (const state of Process.BATCH_STATES) {
       this.batch_states.push({ key: state, label: Process.stateLabel(state) })
@@ -460,5 +461,10 @@ export class ProcessesComponent implements OnInit {
 
   selectAllItems() {
     this.isAllItemsSelected =! this.isAllItemsSelected;
+  }
+
+  copyTextToClipboard(val: string) {
+    this.clipboard.copy(val);
+    this.ui.showInfoSnackBar('snackbar.success.copyToClipboard');
   }
 }

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,14 +13,10 @@ import { UIService } from 'src/app/services/ui.service';
 import { CollectionEditComponent } from '../collection-edit/collection-edit.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatMenuModule,
-    MatTooltipModule, CollectionEditComponent
-  ],
-  selector: 'app-collection-new',
-  templateUrl: './collection-new.component.html',
-  styleUrls: ['./collection-new.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule, CollectionEditComponent],
+    selector: 'app-collection-new',
+    templateUrl: './collection-new.component.html',
+    styleUrls: ['./collection-new.component.scss']
 })
 export class CollectionNewComponent implements OnInit {
 

@@ -16,7 +16,9 @@
     </div>
     <div class="app-fxFlex">
       <div class="app-container-fluid app-fxLayout app-column app-fill">
-        <app-monitoring-api *ngIf="view == 'api'" class="app-fxFlex app-oh"></app-monitoring-api>
+        @if (view == 'api') {
+          <app-monitoring-api class="app-fxFlex app-oh"></app-monitoring-api>
+        }
       </div>
     </div>
   </div>

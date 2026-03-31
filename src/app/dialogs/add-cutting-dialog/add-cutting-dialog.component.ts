@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,12 +16,10 @@ import { CollectionsService } from 'src/app/services/collections.service';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
-  selector: 'app-add-cutting-dialog',
-  templateUrl: './add-cutting-dialog.component.html',
-  styleUrls: ['./add-cutting-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
+    selector: 'app-add-cutting-dialog',
+    templateUrl: './add-cutting-dialog.component.html',
+    styleUrls: ['./add-cutting-dialog.component.scss']
 })
 export class AddCuttingDialogComponent implements OnInit {
 

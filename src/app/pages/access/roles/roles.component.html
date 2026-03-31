@@ -1,26 +1,32 @@
 
-<ng-container *ngIf="!errorState">
-  <mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
-  <ng-container *ngIf="state=='success'">
-    <mat-card appearance="outlined" class="app-view-item" *ngFor="let role of roles">
-      <mat-card-header class="app-fxLayout app-row app-center-v">
-        <div class="app-fxFlex app-left">
-          <mat-card-title>{{ role.name }}</mat-card-title>
-        </div>
-        <div class="app-right app-actions">
-          <a (click)="onEditRole(role)" class="app-btn" [matTooltip]="'button.editRole' | translate"><mat-icon>edit</mat-icon></a>
-          <a (click)="onRemoveRole(role)" class="app-btn" [matTooltip]="'button.deleteRole' | translate"><mat-icon>delete</mat-icon></a>     
-        </div>
-      </mat-card-header>
-    </mat-card>
+@if (!errorState) {
+  @if (state=='loading') {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+  @if (state=='success') {
+    @for (role of roles; track role) {
+      <mat-card appearance="outlined" class="app-view-item">
+        <mat-card-header class="app-fxLayout app-row app-center-v">
+          <div class="app-fxFlex app-left">
+            <mat-card-title>{{ role.name }}</mat-card-title>
+          </div>
+          <div class="app-right app-actions">
+            <a (click)="onEditRole(role)" class="app-btn" [matTooltip]="'button.editRole' | translate"><mat-icon>edit</mat-icon></a>
+            <a (click)="onRemoveRole(role)" class="app-btn" [matTooltip]="'button.deleteRole' | translate"><mat-icon>delete</mat-icon></a>
+          </div>
+        </mat-card-header>
+      </mat-card>
+    }
     <div class="app-text-right app-pt-4">
-      <button mat-flat-button (click)="onNewRole()" color="primary">{{ 'button.addRole' | translate }}</button>
+      <button matButton="filled" (click)="onNewRole()" color="primary">{{ 'button.addRole' | translate }}</button>
     </div>
-  </ng-container>
-</ng-container>
+  }
+}
 
-<mat-card appearance="outlined" *ngIf="errorState" class="app-view-alert app-warn">
-  <mat-card-content>
-    <mat-icon>error</mat-icon>{{ errorMessage }}
-  </mat-card-content>
-</mat-card>
+@if (errorState) {
+  <mat-card appearance="outlined" class="app-view-alert app-warn">
+    <mat-card-content>
+      <mat-icon>error</mat-icon>{{ errorMessage }}
+    </mat-card-content>
+  </mat-card>
+}

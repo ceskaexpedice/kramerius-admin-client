@@ -21,7 +21,7 @@ import { CreateCollectionBackupDialogComponent } from 'src/app/dialogs/create-co
 import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -35,13 +35,10 @@ import { CdkCollectionsDiglibComponent } from "./cdk-collections-diglib/cdk-coll
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule, MatInputModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule,
-    MatTooltipModule, MatSlideToggleModule, CdkCollectionsCdkComponent, CdkCollectionsDiglibComponent],
-  selector: 'app-cdk-collections',
-  templateUrl: './cdk-collections.component.html',
-  styleUrls: ['./cdk-collections.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatInputModule, MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule, MatTooltipModule, MatSlideToggleModule, CdkCollectionsCdkComponent, CdkCollectionsDiglibComponent],
+    selector: 'app-cdk-collections',
+    templateUrl: './cdk-collections.component.html',
+    styleUrls: ['./cdk-collections.component.scss']
 })
 export class CdkCollectionsComponent implements OnInit {
 

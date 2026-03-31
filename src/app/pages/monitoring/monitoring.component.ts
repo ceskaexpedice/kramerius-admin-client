@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MonitoringApiComponent } from "./monitoring-api/monitoring-api.component";
@@ -8,11 +8,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-monitoring',
-  standalone: true,
-  imports: [CommonModule, MonitoringApiComponent, TranslateModule, MatIconModule, MatTabsModule],
-  templateUrl: './monitoring.component.html',
-  styleUrl: './monitoring.component.scss'
+    selector: 'app-monitoring',
+    imports: [MonitoringApiComponent, TranslateModule, MatIconModule, MatTabsModule],
+    templateUrl: './monitoring.component.html',
+    styleUrl: './monitoring.component.scss'
 })
 export class MonitoringComponent {
   view: string;

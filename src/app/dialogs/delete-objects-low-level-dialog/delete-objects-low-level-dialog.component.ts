@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,13 +14,10 @@ import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatTooltipModule, MatProgressBarModule, 
-    MatFormFieldModule, MatInputModule],
-  selector: 'app-delete-objects-low-level-dialog',
-  templateUrl: './delete-objects-low-level-dialog.component.html',
-  styleUrls: ['./delete-objects-low-level-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatTooltipModule, MatProgressBarModule, MatFormFieldModule, MatInputModule],
+    selector: 'app-delete-objects-low-level-dialog',
+    templateUrl: './delete-objects-low-level-dialog.component.html',
+    styleUrls: ['./delete-objects-low-level-dialog.component.scss']
 })
 export class DeleteObjectsLowLevelDialogComponent implements OnInit {
 

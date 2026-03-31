@@ -14,7 +14,7 @@ import { UIService } from 'src/app/services/ui.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Router, RouterModule } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -28,15 +28,10 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatTableModule,
-    MatTooltipModule, MatTabsModule, MatCheckboxModule, MatProgressBarModule, MatButtonToggleModule,
-    MatPaginatorModule
-  ],
-  selector: 'app-indexing',
-  templateUrl: './indexing.component.html',
-  styleUrls: ['./indexing.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatSelectModule, MatTableModule, MatTooltipModule, MatTabsModule, MatCheckboxModule, MatProgressBarModule, MatButtonToggleModule, MatPaginatorModule],
+    selector: 'app-indexing',
+    templateUrl: './indexing.component.html',
+    styleUrls: ['./indexing.component.scss']
 })
 export class IndexingComponent implements OnInit {
 

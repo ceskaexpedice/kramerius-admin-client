@@ -12,14 +12,13 @@ import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatButtonModule, MatIconModule, MatPaginatorModule,
-    MatTooltipModule
-  ],
-  selector: 'app-process-logs',
-  templateUrl: './logs.component.html',
-  styleUrls: ['./logs.component.scss']
+    imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
+        MatButtonModule, MatIconModule, MatPaginatorModule,
+        MatTooltipModule
+    ],
+    selector: 'app-process-logs',
+    templateUrl: './logs.component.html',
+    styleUrls: ['./logs.component.scss']
 })
 export class LogsComponent implements OnInit {
 

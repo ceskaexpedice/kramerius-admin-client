@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,14 +13,10 @@ import { CdkObjectReharvestComponent } from './cdk-object-reharvest/cdk-object-r
 import { CdkEuropeanouComponent } from './cdk-europeanou/cdk-europeanou.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatIconModule, MatTooltipModule, MatTabsModule,
-    CdkProxyComponent, CdkObjectReharvestComponent, CdkEuropeanouComponent
-  ],
-  selector: 'app-cdk',
-  templateUrl: './cdk.component.html',
-  styleUrls: ['./cdk.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatTooltipModule, MatTabsModule, CdkProxyComponent, CdkObjectReharvestComponent, CdkEuropeanouComponent],
+    selector: 'app-cdk',
+    templateUrl: './cdk.component.html',
+    styleUrls: ['./cdk.component.scss']
 })
 export class CdkComponent implements OnInit {
   view: string;

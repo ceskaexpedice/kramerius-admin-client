@@ -1,30 +1,40 @@
-<mat-progress-bar mode="indeterminate" *ngIf="state=='loading'"></mat-progress-bar>
+@if (state=='loading') {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
 
 <mat-card appearance="outlined" class="app-view-header app-clean-border-t">
-	<strong>{{ 'desc.collectionsContainingThisCollection' | translate }}:</strong>
+  <strong>{{ 'desc.collectionsContainingThisCollection' | translate }}:</strong>
 </mat-card>
 
-<mat-card appearance="outlined" class="app-view-item app-with-header app-fxLayout app-row app-gap-4 app-cursor-pointer" *ngFor="let superCollection of superCollections" [routerLink]="allowEdit(superCollection['id'])  ?  ['/collections/context/', superCollection['id']] : null " [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
-	<div *ngIf="getThumb(superCollection['id'])">
-		<img [src]="getThumb(superCollection['id'])" />
-	</div>
-	<mat-card-header class="app-fxLayout app-row app-fxFlex">
-		<div class="app-fxFlex app-left">
-			<mat-card-title>
-				<mat-icon *ngIf="allowEdit(superCollection['id'])" class="app-mr-2">link</mat-icon>{{ getName(superCollection) }}
-			</mat-card-title>
-			<mat-card-subtitle>{{ getDescription(superCollection) }}</mat-card-subtitle>
-		</div>
-		<div class="app-right app-actions">
-			<a (click)="allowEdit(superCollection['id']) ? removeItemFromAnotherCollection(superCollection, collection, $event) : null" [matTooltip]="allowEdit(superCollection['id']) ? ('button.removeFromCollection' | translate) : null" class="app-btn-warn" [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null">	
-				<mat-icon>cancel</mat-icon>
-			</a>
-		</div>
-	</mat-card-header>
-</mat-card>
+@for (superCollection of superCollections; track superCollection) {
+  <mat-card appearance="outlined" class="app-view-item app-with-header app-fxLayout app-row app-gap-4 app-cursor-pointer" [routerLink]="allowEdit(superCollection['id'])  ?  ['/collections/context/', superCollection['id']] : null " [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
+    @if (getThumb(superCollection['id'])) {
+      <div>
+        <img [src]="getThumb(superCollection['id'])" />
+      </div>
+    }
+    <mat-card-header class="app-fxLayout app-row app-fxFlex">
+      <div class="app-fxFlex app-left">
+        <mat-card-title>
+          @if (allowEdit(superCollection['id'])) {
+            <mat-icon class="app-mr-2">link</mat-icon>
+            }{{ getName(superCollection) }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ getDescription(superCollection) }}</mat-card-subtitle>
+        </div>
+        <div class="app-right app-actions">
+          <a (click)="allowEdit(superCollection['id']) ? removeItemFromAnotherCollection(superCollection, collection, $event) : null" [matTooltip]="allowEdit(superCollection['id']) ? ('button.removeFromCollection' | translate) : null" class="app-btn-warn" [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null">
+            <mat-icon>cancel</mat-icon>
+          </a>
+        </div>
+      </mat-card-header>
+    </mat-card>
+  }
 
-<mat-card *ngIf="superCollections?.length === 0" appearance="outlined" class="app-view-alert app-color-info app-clean-border-t">
-	<mat-card-content>
-		<mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.context' | translate }}
-	</mat-card-content>
-</mat-card>
+  @if (superCollections?.length === 0) {
+    <mat-card appearance="outlined" class="app-view-alert app-color-info app-clean-border-t">
+      <mat-card-content>
+        <mat-icon class="app-mr-1">info</mat-icon>{{ 'alert.collections.noData.context' | translate }}
+      </mat-card-content>
+    </mat-card>
+  }

@@ -21,19 +21,19 @@ import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { debounceTime, Subject } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { forkJoin, from, concatMap, toArray  } from 'rxjs';
 
 @Component({
-  standalone: true,
-  imports: [
-    CommonModule, TranslateModule,  MatDialogModule, MatCheckboxModule,
-    MatButtonModule, MatIconModule,  MatInputModule, MatSelectModule, MatDividerModule,
-    MatProgressBarModule, MatTooltipModule, MatRadioModule, FormsModule, MatProgressBarModule, MatAccordion, MatExpansionModule, MatCardModule],
-  selector: 'app-schedule-re-harvest-specific-pids-dialog',
-  templateUrl: './schedule-re-harvest-specific-pids-dialog.component.html',
-  styleUrls: ['./schedule-re-harvest-specific-pids-dialog.component.scss']
+    imports: [
+        CommonModule, TranslateModule, MatDialogModule, MatCheckboxModule,
+        MatButtonModule, MatIconModule, MatInputModule, MatSelectModule, MatDividerModule,
+        MatProgressBarModule, MatTooltipModule, MatRadioModule, FormsModule, MatProgressBarModule, MatExpansionModule, MatCardModule
+    ],
+    selector: 'app-schedule-re-harvest-specific-pids-dialog',
+    templateUrl: './schedule-re-harvest-specific-pids-dialog.component.html',
+    styleUrls: ['./schedule-re-harvest-specific-pids-dialog.component.scss']
 })
 export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 

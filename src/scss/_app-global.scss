@@ -1,9 +1,9 @@
-// --- GLOBAL ---
-
-@include setGap();
+// global
+@use 'app-mixins' as *;
+@use 'app-mixins-states' as *;
 
 a {
-  @extend .app-cursor-pointer;
+  cursor: pointer;
   color: var(--app-color-primary);
   text-decoration: none;
 
@@ -25,8 +25,12 @@ a {
   color: var(--app-color-primary);
 }
 
-.app-color-accent {
-  color: var(--app-color-accent);
+.app-color-secondary {
+  color: var(--app-color-secondary);
+}
+
+.app-color-tertiary {
+  color: var(--app-color-tertiary);
 }
 
 .app-color-warn {
@@ -54,10 +58,6 @@ a {
 }
 
 // cleaners
-.app-cleanfix {
-  @include cleanfix();
-}
-
 .app-clean-bg {
   background-color: transparent !important;
 }
@@ -218,12 +218,9 @@ a {
 
 
 .app-pipe {
-  @extend .app-ml-2, .app-mr-2;
+  margin-left: 8px;
+  margin-right: 8px;
   border-left: 1px solid var(--app-color-gray-4);
-
-  /* &:last-child {
-    @extend .app-dn;
-  } */
 }
 
 .app-label {
@@ -260,7 +257,8 @@ a {
 
 .app-badge {
   @include setStateColor();
-  @extend .app-pr-2, .app-pl-2;
+  padding-left: 8px;
+  padding-right: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -281,7 +279,9 @@ a {
   }
 
   &.app-count {
-    @extend .app-pr-1, .app-pl-1, .app-ml-2;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-left: 8px;
   }
 
   .mat-icon {
@@ -290,10 +290,12 @@ a {
 }
 
 .app-input-autocomplete {
-  @extend .app-clean-shadow, .app-pl-4, .app-pr-4;
+  box-shadow: none !important;
+  padding-left: 16px;
+  padding-right: 16px;
   height: var(--mdc-filled-button-container-height);
-  border-radius: var(--app-border-radius);
-  border: 1px solid var(--app-table-color-border);
+  border-radius: var(--app-default-border-radius);
+  border: 1px solid var(--app-default-border-color);
   min-width: 400px;
 }
 
@@ -314,26 +316,15 @@ a {
   pointer-events: none;
 }
 
-/* .app-avoid-click {
-  pointer-events: none;
-  color: #bdbdbd !important; 
-  
-  .mat-cell, a, .mat-icon {
-    color: #bdbdbd !important; 
-  }
-
-  .app-badge {
-    background-color: #bdbdbd !important;
-  }
-} */
-
 .app-view-border-bottom {
-  border-bottom: 1px solid var(--app-card-border-color);
+  border-bottom: 1px solid var(--app-default-border-color);
 }
 
 // top bar
 .app-topbar {
-  @extend .app-pt-8, .app-pl-4, .app-pr-4;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 32px;
   background-color: var(--app-color-gray-1);
   border-bottom: 1px solid var(--app-color-gray-3);
 
@@ -343,7 +334,8 @@ a {
 
     span {
       &.app-separator {
-        @extend .app-ml-2, .app-mr-2;
+        margin-left: 8px;
+        margin-right: 8px;
         color: var(--app-color-gray-4);
       }
 
@@ -361,40 +353,44 @@ a {
 // table wrapper
 .app-table-wrapper {
   &.app-view-border {
-    border: 1px solid var(--app-table-color-border);
+    border: 1px solid var(--app-default-border-color);
+  }
+
+  .mat-mdc-paginator {
+    bottom: 0px;
+    position: sticky;
+    z-index: 10;
+    border-top: 1px solid var(--app-default-border-color);
   }
 }
 
 
 // table
 table {
-  // standart table
   &.app-table {
-    @extend .app-w-100;
+    width: 100%;
     border-width: 1px 0 0 1px;
     border-style: solid;
-    border-color: var(--app-table-color-border);
-    background-color: var(--app-table-color-bg);
+    border-color: var(--app-default-border-color);
+    background-color: var(--app-color-lightnes);
+
+    &.app-view-vt {
+      tr {
+        td, th {
+          vertical-align: top;
+        }
+      }
+    }
 
     tr {
       td, th {
         border-width: 0 1px 1px 0;
         border-style: solid;
-        border-color: var(--app-table-color-border);
+        border-color: var(--app-default-border-color);
         padding: 4px 8px;
-        vertical-align: top;
         text-align: left;
         font-size: 14px;
-      }
-    }
-
-    thead {
-      tr {
-        th {
-          /* font-size: 12px;
-          font-weight: 500;
-          color: var(--app-color-gray-6); */
-        }
+        line-height: normal;
       }
     }
 
@@ -432,10 +428,10 @@ table {
 
           input {
             &[type=text] {
-              @extend .app-clean-bg;
+              background-color: transparent !important;
 
               &:focus {
-                @extend .app-clean-outline;
+                outline: none !important;
               }
             }
           }
@@ -446,10 +442,6 @@ table {
             background-color: var(--app-color-gray-0);
           }
         }
-
-       /*  &:nth-child(odd) {
-          background-color: rgba(var(--app-color-gray-0), .5);
-        } */
 
         .app-input {
           width: calc(100% - 4px);

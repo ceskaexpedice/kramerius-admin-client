@@ -19,10 +19,18 @@
     </div>
     <div class="app-fxFlex app-oa-y">
       <div class="app-container">
-        <app-rights *ngIf="view == 'actions'"></app-rights>
-        <app-roles *ngIf="view == 'roles'"></app-roles>
-        <app-licenses *ngIf="view == 'licenses'"></app-licenses>
-        <app-params *ngIf="view == 'params'"></app-params>
+        @if (view == 'actions') {
+          <app-rights></app-rights>
+        }
+        @if (view == 'roles') {
+          <app-roles></app-roles>
+        }
+        @if (view == 'licenses') {
+          <app-licenses></app-licenses>
+        }
+        @if (view == 'params') {
+          <app-params></app-params>
+        }
       </div>
     </div>
   </div>

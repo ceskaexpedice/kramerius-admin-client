@@ -20,7 +20,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AdminApiService } from 'src/app/services/admin-api.service'; // pedro
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 
 
@@ -29,12 +28,11 @@ export enum WorkerModeState {
 }
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
-    RouterModule, TranslateModule, MatMenuModule, MatTooltipModule, MatSlideToggle, FormsModule],
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule,
+        RouterModule, TranslateModule, MatMenuModule, MatTooltipModule, FormsModule],
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   

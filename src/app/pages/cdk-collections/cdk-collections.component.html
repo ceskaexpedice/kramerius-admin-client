@@ -11,7 +11,9 @@
         <div>
           <button mat-stroked-button [matMenuTriggerFor]="menuLang" class="app-bg-white app-pr-1" [matTooltip]="'button.languageForEditing' | translate"><span class="app-mr-2">{{ 'lang.' + lang | translate }}</span><mat-icon>arrow_drop_down</mat-icon></button>
           <mat-menu #menuLang="matMenu">
-            <button mat-menu-item *ngFor="let language of languages" (click)="setLang(language)">{{ 'lang.' + language | translate  }}</button>
+            @for (language of languages; track language) {
+              <button mat-menu-item (click)="setLang(language)">{{ 'lang.' + language | translate  }}</button>
+            }
           </mat-menu>
         </div>
       </div>
@@ -20,10 +22,10 @@
           <mat-form-field appearance="outline" class="app-search">
             <input matInput [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
           </mat-form-field>
-          <button [disabled]="!allowedGlobalAction('a_collections_edit')" mat-flat-button color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
-          <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="warn" (click)="deleteSelectedCollections()">{{ 'button.deleteSelectedCollections' | translate }}</button>
-          <button [disabled]="!selection.hasValue() || collections?.length === 0" mat-flat-button color="primary" (click)="openCreateCollectionBackupDialog()">{{ 'button.createBackup' | translate }}</button>
-          <button mat-flat-button color="primary" (click)="openRestoreFromCollectionBackupDialog()">{{ 'button.restoreFromBackup' | translate }}</button>
+          <button [disabled]="!allowedGlobalAction('a_collections_edit')" matButton="filled" color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
+          <button [disabled]="!selection.hasValue() || collections?.length === 0" matButton="filled" color="warn" (click)="deleteSelectedCollections()">{{ 'button.deleteSelectedCollections' | translate }}</button>
+          <button [disabled]="!selection.hasValue() || collections?.length === 0" matButton="filled" color="primary" (click)="openCreateCollectionBackupDialog()">{{ 'button.createBackup' | translate }}</button>
+          <button matButton="filled" color="primary" (click)="openRestoreFromCollectionBackupDialog()">{{ 'button.restoreFromBackup' | translate }}</button>
           <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage('cdk-collections')" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
         </div>
         <div>
@@ -34,21 +36,29 @@
         <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
           <a mat-tab-link (click)="changeView('cdk')" [active]="view == 'cdk'"><mat-icon class="material-icons-outlined">{{ 'sites.collections.cdk.icon' | translate  }}</mat-icon>{{ 'sites.collections.cdk.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('diglib')" [active]="view == 'diglib'"><mat-icon class="material-icons-outlined">{{ 'sites.collections.dgLib.icon' | translate  }}</mat-icon>{{ 'sites.collections.dgLib.title' | translate }}</a>
-       </nav>
-       <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+        </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
     </div>
 
     <div class="app-fxFlex app-container-fluid app-oh">
-      <div class="app-table-wrapper app-maxh-100 app-view-border app-oa-y" *ngIf="!errorState">
-        <app-cdk-collections-cdk *ngIf="view == 'cdk'" [standaloneOnly]="standaloneOnly"></app-cdk-collections-cdk>
-        <app-cdk-collections-diglib *ngIf="view == 'diglib'" [standaloneOnly]="standaloneOnly"></app-cdk-collections-diglib>
-      </div>
-      <mat-card *ngIf="errorState" appearance="outlined" class="app-view-alert app-warn">
-        <mat-card-content>
-          <mat-icon>error</mat-icon>{{ errorMessage }}
-        </mat-card-content>
-      </mat-card>
+      @if (!errorState) {
+        <div class="app-table-wrapper app-maxh-100 app-view-border app-oa-y">
+          @if (view == 'cdk') {
+            <app-cdk-collections-cdk [standaloneOnly]="standaloneOnly"></app-cdk-collections-cdk>
+          }
+          @if (view == 'diglib') {
+            <app-cdk-collections-diglib [standaloneOnly]="standaloneOnly"></app-cdk-collections-diglib>
+          }
+        </div>
+      }
+      @if (errorState) {
+        <mat-card appearance="outlined" class="app-view-alert app-warn">
+          <mat-card-content>
+            <mat-icon>error</mat-icon>{{ errorMessage }}
+          </mat-card-content>
+        </mat-card>
+      }
     </div>
   </div>
 </div>

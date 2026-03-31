@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -11,12 +11,10 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-user-info-dialog',
-  standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule,  MatDialogModule,
-    RouterModule, TranslateModule, MatDividerModule],
-  templateUrl: './user-info-dialog.component.html',
-  styleUrls: ['./user-info-dialog.component.scss']
+    selector: 'app-user-info-dialog',
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatDialogModule, RouterModule, TranslateModule, MatDividerModule],
+    templateUrl: './user-info-dialog.component.html',
+    styleUrls: ['./user-info-dialog.component.scss']
 })
 export class UserInfoDialogComponent implements OnInit {
 

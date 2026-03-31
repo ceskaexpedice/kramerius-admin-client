@@ -17,13 +17,12 @@ import { forkJoin } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule,
-  MatProgressBarModule, MatTooltipModule, MatSelectModule],
-  selector: 'app-schedule-change-policy-by-pid-dialog',
-  templateUrl: './schedule-change-policy-by-pid-dialog.component.html',
-  styleUrls: ['./schedule-change-policy-by-pid-dialog.component.scss']
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule,
+        MatProgressBarModule, MatTooltipModule, MatSelectModule],
+    selector: 'app-schedule-change-policy-by-pid-dialog',
+    templateUrl: './schedule-change-policy-by-pid-dialog.component.html',
+    styleUrls: ['./schedule-change-policy-by-pid-dialog.component.scss']
 })
 export class ScheduleChangePolicyByPidDialogComponent implements OnInit {
 

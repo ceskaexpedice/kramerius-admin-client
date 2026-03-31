@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,13 +12,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatTooltipModule, 
-    MatFormFieldModule, MatInputModule],
-  selector: 'app-add-new-set-dialog',
-  templateUrl: './add-new-set-dialog.component.html',
-  styleUrls: ['./add-new-set-dialog.component.scss']
+    imports: [TranslateModule, FormsModule, MatDialogModule, MatButtonModule, MatIconModule, MatTooltipModule, MatFormFieldModule, MatInputModule],
+    selector: 'app-add-new-set-dialog',
+    templateUrl: './add-new-set-dialog.component.html',
+    styleUrls: ['./add-new-set-dialog.component.scss']
 })
 export class AddNewSetDialogComponent implements OnInit {
 

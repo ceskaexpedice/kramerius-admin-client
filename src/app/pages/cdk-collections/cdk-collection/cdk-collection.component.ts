@@ -22,7 +22,7 @@ import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { AddCuttingDialogComponent } from 'src/app/dialogs/add-cutting-dialog/add-cutting-dialog.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -41,13 +41,10 @@ import { CollectionContentComponent } from "../../collections/collection-content
 import { CollectionContextComponent } from "../../collections/collection-context/collection-context.component";
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatRadioModule, MatCheckboxModule,
-    MatTooltipModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatMenuModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
-  selector: 'app-cdk-collection',
-  templateUrl: './cdk-collection.component.html',
-  styleUrls: ['./cdk-collection.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatRadioModule, MatCheckboxModule, MatTooltipModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatMenuModule, CollectionDetailComponent, CollectionEditComponent, CollectionContentComponent, CollectionContextComponent],
+    selector: 'app-cdk-collection',
+    templateUrl: './cdk-collection.component.html',
+    styleUrls: ['./cdk-collection.component.scss']
 })
 export class CdkCollectionComponent implements OnInit {
 

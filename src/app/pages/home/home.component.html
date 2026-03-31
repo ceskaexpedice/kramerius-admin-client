@@ -1,37 +1,41 @@
 
 <div class="app-fxLayout app-column app-fill">
-	<div class="app-topbar">
-		<div class="app-breadcrumbs app-mb-7">
-			<mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
-			<span class="app-last">home</span>
-		</div>
-	</div>
-	<div class="app-fxFlex app-oa-y app-pt-8">
-		<div class="app-container">
-			<div class="app-cards-wrapper app-fxLayout app-row app-wrap app-center-h">
-				<ng-container *ngFor="let item of dashBoard">
-					<mat-card *ngIf="!item.hidden" appearance="outlined" class="app-fxLayout app-column app-center-v" [ngClass]="(item.type === 'indexing' && !allowedGlobalAction('a_index')) || (item.type === 'import' && !allowedGlobalAction('a_import')) ? 'app-disabled' : null">
-						<mat-card-header>
-							<mat-card-title>{{ 'sites.' + item.type + '.title' | translate }}</mat-card-title>
-							<mat-card-subtitle *ngIf="item.subtype">{{ 'sites.' + item.type + '.' + item.subtype + '.title' | translate }}</mat-card-subtitle>
-						</mat-card-header>
-						<mat-card-content>
-							<div class="app-mark-rounded" [ngClass]="item.subtype ? ('app-' + item.type + '-' + item.subtype) : ('app-' + item.type)">
-								<mat-icon>{{ item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.icon' | translate) : ('sites.' + item.type + '.icon' | translate) }}</mat-icon>
-							</div>
-							<div class="app-desc app-text-cutter-vertical" [matTooltip]="item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.desc' | translate) : ('sites.' + item.type + '.desc' | translate)">
-								{{ item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.desc' | translate) : ('sites.' + item.type + '.desc' | translate) }}
-							</div>
-						</mat-card-content>
-						<mat-card-actions>
-							<button [disabled]="(item.type === 'indexing' && !allowedGlobalAction('a_index'))  || (item.type === 'import' && !allowedGlobalAction('a_import'))" mat-flat-button color="accent" [routerLink]="item.subtype ? ('/' + item.type + '/' + item.subtype) : ('/' + item.type)" (click)="item.subtype ? setDefaultRoute(item.type + '.view', item.subtype) : null">
-								<span>{{ 'button.goTo' | translate }}</span>
-								<mat-icon>arrow_forward</mat-icon>
-							</button>
-						</mat-card-actions>
-					</mat-card>
-				</ng-container>
-			</div>				
-		</div>
-	</div>
+  <div class="app-topbar">
+    <div class="app-breadcrumbs app-mb-7">
+      <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+      <span class="app-last">home</span>
+    </div>
+  </div>
+  <div class="app-fxFlex app-oa-y app-pt-8">
+    <div class="app-container">
+      <div class="app-cards-wrapper app-fxLayout app-row app-wrap app-center-h">
+        @for (item of dashBoard; track item) {
+          @if (!item.hidden) {
+            <mat-card appearance="outlined" class="app-fxLayout app-column app-center-v" [ngClass]="(item.type === 'indexing' && !allowedGlobalAction('a_index')) || (item.type === 'import' && !allowedGlobalAction('a_import')) ? 'app-disabled' : null">
+              <mat-card-header>
+                <mat-card-title>{{ 'sites.' + item.type + '.title' | translate }}</mat-card-title>
+                @if (item.subtype) {
+                  <mat-card-subtitle>{{ 'sites.' + item.type + '.' + item.subtype + '.title' | translate }}</mat-card-subtitle>
+                }
+              </mat-card-header>
+              <mat-card-content>
+                <div class="app-mark-rounded" [ngClass]="item.subtype ? ('app-' + item.type + '-' + item.subtype) : ('app-' + item.type)">
+                  <mat-icon>{{ item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.icon' | translate) : ('sites.' + item.type + '.icon' | translate) }}</mat-icon>
+                </div>
+                <div class="app-desc app-text-cutter-vertical" [matTooltip]="item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.desc' | translate) : ('sites.' + item.type + '.desc' | translate)">
+                  {{ item.subtype ? ('sites.' + item.type + '.' + item.subtype + '.desc' | translate) : ('sites.' + item.type + '.desc' | translate) }}
+                </div>
+              </mat-card-content>
+              <mat-card-actions>
+                <button [disabled]="(item.type === 'indexing' && !allowedGlobalAction('a_index'))  || (item.type === 'import' && !allowedGlobalAction('a_import'))" matButton="filled" color="accent" [routerLink]="item.subtype ? ('/' + item.type + '/' + item.subtype) : ('/' + item.type)" (click)="item.subtype ? setDefaultRoute(item.type + '.view', item.subtype) : null">
+                  <span>{{ 'button.goTo' | translate }}</span>
+                  <mat-icon>arrow_forward</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          }
+        }
+      </div>
+    </div>
+  </div>
 </div>

@@ -27,7 +27,7 @@ import { EditSetDialogComponent } from 'src/app/dialogs/edit-set-dialog/edit-set
 import { AddNewSetDialogComponent } from 'src/app/dialogs/add-new-set-dialog/add-new-set-dialog.component';
 import { OAISet } from 'src/app/models/oaiset';
 import { OAIApiService } from 'src/app/services/oai-api.services';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -42,14 +42,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { FixLogsDialogComponent } from 'src/app/dialogs/fix-logs-dialog/fix-logs-dialog.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule,
-    MatTooltipModule, MatDividerModule, MatExpansionModule
-  ],
-  selector: 'app-repository',
-  templateUrl: './repository.component.html',
-  styleUrls: ['./repository.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatDividerModule, MatExpansionModule],
+    selector: 'app-repository',
+    templateUrl: './repository.component.html',
+    styleUrls: ['./repository.component.scss']
 })
 export class RepositoryComponent implements OnInit {
   view: string;

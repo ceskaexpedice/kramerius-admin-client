@@ -13,7 +13,7 @@
   }
 
   .mat-mdc-button{
-    --mat-text-button-horizontal-padding: 12px;
+    --mat-button-text-horizontal-padding: 12px;
     color: var(--app-color-lightnes);
 
     &:hover {
@@ -29,13 +29,13 @@
 
   .app-avatar {
     div {
-      width: var(--app-navbar-avatar-size);
-      height: var(--app-navbar-avatar-size);
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       font-size: 16px;
       font-weight: 900;
       text-transform: uppercase;
-      background-color: var(--app-navbar-avatar-bg-color);
+      background-color:  var(--app-color-tertiary);
     }
   }
 }

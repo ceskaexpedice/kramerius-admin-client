@@ -22,20 +22,19 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
-    MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
-  MatProgressBarModule, MatTooltipModule, MatPaginatorModule],
-  selector: 'app-schedule-sync-with-sdnnt',
-  templateUrl: './schedule-sync-with-sdnnt.component.html',
-  styleUrls: ['./schedule-sync-with-sdnnt.component.scss'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+    imports: [CommonModule, TranslateModule, FormsModule, MatDialogModule,
+        MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule,
+        MatProgressBarModule, MatTooltipModule, MatPaginatorModule],
+    selector: 'app-schedule-sync-with-sdnnt',
+    templateUrl: './schedule-sync-with-sdnnt.component.html',
+    styleUrls: ['./schedule-sync-with-sdnnt.component.scss'],
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ]
 })
 export class ScheduleSyncWithSdnntComponent implements OnInit {
 

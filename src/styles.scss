@@ -1,12 +1,9 @@
-// --- ROOT ---
-
-@use '@angular/material' as mat;
-@include mat.core();
-
-//@import 'scss/app-theme.scss';
-@import 'scss/app-variables.scss';
-@import "scss/app-mixins";
-@import 'scss/app-flex-layout.scss';
-@import 'scss/app-global.scss';
-@import 'scss/app-mat-override.scss';
-@import 'scss/app-layout.scss';
+// root styles
+@use 'scss/app-theme';
+@use 'scss/app-variables';
+@use 'scss/app-gap';
+@use 'scss/app-icon-size';
+@use 'scss/app-layout';
+@use 'scss/app-flex-layout';
+@use 'scss/app-global';
+@use 'scss/app-mat-override';

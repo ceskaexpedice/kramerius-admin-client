@@ -15,8 +15,14 @@
     </div>
   </div>
   <div class="app-fxFlex app-oh app-container-fluid">
-    <app-cdk-proxy *ngIf="view == 'proxy'"></app-cdk-proxy>
-    <app-cdk-europeanou *ngIf="view == 'europeanou'"></app-cdk-europeanou>
-    <app-cdk-object-reharvest *ngIf="view == 'object-reharvest'"></app-cdk-object-reharvest>
+    @if (view == 'proxy') {
+      <app-cdk-proxy></app-cdk-proxy>
+    }
+    @if (view == 'europeanou') {
+      <app-cdk-europeanou></app-cdk-europeanou>
+    }
+    @if (view == 'object-reharvest') {
+      <app-cdk-object-reharvest></app-cdk-object-reharvest>
+    }
   </div>
 </div>

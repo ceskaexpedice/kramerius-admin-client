@@ -10,7 +10,7 @@ import { UIService } from 'src/app/services/ui.service';
 import { Router, RouterModule } from '@angular/router';
 import { License } from 'src/app/models/license.model';
 import { RunImportComponent } from 'src/app/dialogs/run-import/run-import.component';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -21,14 +21,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TreeComponent } from './tree/tree.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
-    MatCardModule, MatButtonModule, MatIconModule,
-    MatTooltipModule, MatTabsModule, TreeComponent
-  ],
-  selector: 'app-import',
-  templateUrl: './import.component.html',
-  styleUrls: ['./import.component.scss']
+    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatTabsModule, TreeComponent],
+    selector: 'app-import',
+    templateUrl: './import.component.html',
+    styleUrls: ['./import.component.scss']
 })
 export class ImportComponent implements OnInit {
 

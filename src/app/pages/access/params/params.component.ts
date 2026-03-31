@@ -6,7 +6,7 @@ import { ConditionParam } from 'src/app/models/condition-param.model';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,13 +18,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, TranslateModule,
-    MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
-    MatTooltipModule, MatExpansionModule],
-  selector: 'app-params',
-  templateUrl: './params.component.html',
-  styleUrls: ['./params.component.scss']
+    imports: [TranslateModule, MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule, MatTooltipModule, MatExpansionModule],
+    selector: 'app-params',
+    templateUrl: './params.component.html',
+    styleUrls: ['./params.component.scss']
 })
 export class ParamsComponent implements OnInit {
   readonly panelOpenState = signal(false);
