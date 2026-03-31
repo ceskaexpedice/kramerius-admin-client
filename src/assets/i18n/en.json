@@ -544,8 +544,7 @@
     "reload": "Reload",
     "addRuntimeLicense": "Add runtime license",
     "startfixprocess": "Start fix process",
-    "fixlogprocess":"Fix logs process"  
-
+    "fixlogprocess":"Fix logs process"
   },
   "field": {
     "public": "Public",
@@ -553,7 +552,6 @@
     "TREE": "An object with descendants",
     "OBJECT": "Just an object",
     "TREE_AND_FOSTER_TREES": "Complete",
-
     "monograph": "Books",
     "periodical": "Newspapers",
     "soundrecording": "Sound Recordings",
@@ -574,15 +572,13 @@
     "picture": "Pictures",
     "multivolumemonograph":"Multivolume monograph",
     "collection": "Collections",
-
     "running":"Reharvest started",
     "open":"Reharvest planned",
     "closed":"Reharvest finished",
     "too_big":"Reharvest is too big -> Manual reharvest needed",
     "waiting_for_approve":"Approve needed",
     "cancelled":"Reharvest cancelled",
-    "failed":"Reharvest failed",
-    
+    "failed":"Reharvest failed", 
     "root":"Whole title",
     "children":"Only subparts",
     "new_root":"New harvest of whole title",
@@ -938,7 +934,6 @@
       "title": "Fix log process",
       "message": "The fix process. See issue:"
     }
-
   },
   "snackbar": {
     "success": {
@@ -1025,7 +1020,6 @@
       "savingAnItem": "The item was successfully saved",
       "savingAnRecord": "The record was saved successfully",
       "scheduleFixLogProcess": "The fix logs process has been planned"
-
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
@@ -1335,12 +1329,12 @@
     "indexingSettings":"Indexing settings",
     "indexRoots":"Complete indexation of all root titles in the package",
     "indexNewImported": "Complete indexation of newly imported titles only, partial indexation of ancestors",   
-
     "runtimeType":{
       "ALL_DOCUMENTS":"All documents",
       "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Only cover and content pages"
     },
-    "selectTypeOfRuntimeLicenseFilter":"Select how to apply runtime license"
+    "selectTypeOfRuntimeLicenseFilter":"Select how to apply runtime license",
+    "worker": "Worker"
   },
   "workmode": {
     "maintenance": {

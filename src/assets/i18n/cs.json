@@ -552,7 +552,6 @@
     "TREE": "Objekt i s potomky",
     "OBJECT": "Jen objekt",
     "TREE_AND_FOSTER_TREES": "Úplná",
-
     "monograph": "Knihy",
     "periodical": "Periodika",
     "soundrecording": "Zvukové nahrávky",
@@ -573,7 +572,6 @@
     "picture": "Obrázky",
     "multivolumemonograph":"Vícesvazková monografie",
     "collection": "Sbírky",
-
     "running":"Reharvest spuštěn",
     "open":"Reharvest naplánován",
     "closed":"Reharvest ukončen",
@@ -581,7 +579,6 @@
     "waiting_for_approve":"Nutnný souhlas pro reharvest",
     "cancelled":"Reharvest zrušený",
     "failed":"Reharvest zhavaroval",
-
     "root":"Reharvest celého titulu",
     "children":"Reharvest podčástí (ročník, výtisk,..)",
     "new_root":"Nový harvest celého titulu",
@@ -937,7 +934,6 @@
       "title": "Opravný proces pro logy",
       "message": "Proces pro opravu logu. Viz issue:"
     }
-
   },
   "snackbar": {
     "success": {
@@ -1337,7 +1333,8 @@
       "ALL_DOCUMENTS":"Všechny dokumenty",
       "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Pouze obálky a obsahy"
     },
-    "selectTypeOfRuntimeLicenseFilter":"Vyberte na které dokumenty bude licence aplikována"
+    "selectTypeOfRuntimeLicenseFilter":"Vyberte na které dokumenty bude licence aplikována",
+    "worker": "Worker"
   },
   "workmode": {
     "maintenance": {

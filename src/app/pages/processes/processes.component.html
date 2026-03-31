@@ -177,7 +177,7 @@
               <td mat-cell *matCellDef="let element">
                 @if (element.hasSubprocesses()) {
                   <a (click)="element.expanded = !element.expanded; $event.preventDefault(); $event.stopPropagation()" [matTooltip]="'button.showThreads' | translate" class="app-fix-expanded app-tdn" [class.app-avoid-click]="notAllowed(element.id)">
-                    <mat-icon>{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
+                    <mat-icon class="app-20">{{ element.expanded ? 'remove' : 'add' }}</mat-icon>
                   </a>
                 }
                 @if (element.expanded) {
@@ -191,8 +191,9 @@
               <th mat-header-cell *matHeaderCellDef>Id</th>
               <td mat-cell *matCellDef="let element">
                 <span class="app-fix-expanded">
+                  <a (click)="copyTextToClipboard(element.id)"><mat-icon class="app-16 app-va-sub app-mr-2">content_copy</mat-icon></a>
                   <a [routerLink]="getRouterLink('/processes/standard-output/', element.id, 'processes', 'standard-output')"
-                    class="app-mr-4 app-uuid-style"
+                    class="app-mr-2 app-uuid"
                     [matTooltip]="element.id"
                     matTooltipPosition="above"
                     [class.app-avoid-click]="notAllowed(element.id)">
@@ -256,13 +257,13 @@
             <ng-container matColumnDef="planned">
               <th mat-header-cell *matHeaderCellDef>{{ 'desc.scheduled' | translate }}</th>
               <td mat-cell *matCellDef="let element">
-                <span class="app-fix-expanded">
-                  {{ element.planned | date : 'dd.MM.yyyy H:mm' }}
+                <span class="app-fix-expanded" [matTooltip]="element.planned | date : 'dd.MM.yyyy H:mm'">
+                  {{ element.planned | date : 'dd.MM.yyyy' }}
                 </span>
                 @if (element.expanded) {
                   @for (p of element.processes; track p) {
-                    <div class="app-col-expanded">
-                      {{ p.planned | date : 'dd.MM.yyyy H:mm' }}
+                    <div class="app-col-expanded" [matTooltip]="p.planned | date : 'dd.MM.yyyy H:mm'">
+                      {{ p.planned | date : 'dd.MM.yyyy' }}
                     </div>
                   }
                 }
@@ -271,13 +272,13 @@
             <ng-container matColumnDef="started">
               <th mat-header-cell *matHeaderCellDef>{{ 'desc.running' | translate }}</th>
               <td mat-cell *matCellDef="let element">
-                <span class="app-fix-expanded">
-                  {{ element.started | date : 'dd.MM.yyyy H:mm' }}
+                <span class="app-fix-expanded" [matTooltip]="element.started | date : 'dd.MM.yyyy H:mm'">
+                  {{ element.started | date : 'dd.MM.yyyy' }}
                 </span>
                 @if (element.expanded) {
                   @for (p of element.processes; track p) {
-                    <div class="app-col-expanded">
-                      {{ p.started | date : 'dd.MM.yyyy H:mm' }}
+                    <div class="app-col-expanded" [matTooltip]="p.started | date : 'dd.MM.yyyy H:mm'">
+                      {{ p.started | date : 'dd.MM.yyyy' }}
                     </div>
                   }
                 }
@@ -286,15 +287,15 @@
             <ng-container matColumnDef="finished">
               <th mat-header-cell *matHeaderCellDef>{{ 'desc.finished' | translate }}</th>
               <td mat-cell *matCellDef="let element">
-                <span class="app-fix-expanded">
+                <span class="app-fix-expanded" [matTooltip]="element.finished | date : 'dd.MM.yyyy H:mm'">
                   @if (element.state !== 'RUNNING') {
-                    {{ element.finished | date : 'dd.MM.yyyy H:mm' }}
+                    {{ element.finished | date : 'dd.MM.yyyy' }}
                   }
                 </span>
                 @if (element.expanded) {
                   @for (p of element.processes; track p) {
-                    <div class="app-col-expanded">
-                      {{ p.finished | date : 'dd.MM.yyyy H:mm' }}
+                    <div class="app-col-expanded" [matTooltip]="p.finished | date : 'dd.MM.yyyy H:mm'">
+                      {{ p.finished | date : 'dd.MM.yyyy' }}
                     </div>
                   }
                 }

@@ -131,6 +131,23 @@
   @include mat.checkbox-overrides((
     state-layer-size: var(--app-default-height)
   ));
+  .mat-pseudo-checkbox {
+    $app-size: 14px;
+    width: $app-size;
+    height: $app-size;
+  }
+  .mat-pseudo-checkbox {
+    &:after {
+      border-bottom-width: 1.5px;
+    }
+  }
+  .mat-pseudo-checkbox-checked {
+    &:after {
+      border-left-width: 1.5px;
+      width: 8px !important;
+      height: 3px !important;
+    }
+  }
 
 
   // radio button

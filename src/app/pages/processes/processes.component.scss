@@ -7,14 +7,29 @@
 }
 
 .mat-mdc-table {
-  .mat-mdc-cell {
-    &.mat-column-expand,
+  .mat-mdc-cell,
+  .mat-mdc-header-cell {
     &.mat-column-todelete {
       width: 50px;
     }
+
+    &.mat-column-expand {
+      width: 24px;
+      padding-right: 8px;
+    }
+
+    &.mat-column-id {
+      .app-uuid {
+        width: 50px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;  
+        white-space: nowrap;
+      }
+    }
   
     &.mat-column-name {
-      width: 40%
+      width: 600px;
     }
   
     &.mat-column-owner {
@@ -39,7 +54,7 @@
     .app-fix-expanded {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: left;
     }
   
     .app-col-expanded {
@@ -50,29 +65,19 @@
   }
 }
 
-.app-uuid-style {
-  display: inline-block;
-  max-width: 35px;         
-  overflow: hidden;
-  text-overflow: ellipsis;  
-  white-space: nowrap;
-  font-family: monospace;   
-  font-size: 14px;
-  color: #777;              
-  vertical-align: middle;
-}
-
-
 .app-filter-width {
   width: 150px;
 }
+
 .app-date-width {
   width: 140px;
 }
+
 .app-row-wrap {
   flex-wrap: wrap !important;
   gap: 8px 0; /* mezera mezi řádky při zalomení */
 }
+
 .app-j-end {
   justify-content: flex-end;
 }
