@@ -1,5 +1,8 @@
 # KrameriusAdminClient
 
+> Toto je administrační rozhraní pro [systém Kramerius](https://system-kramerius.cz/). Jádro systému a hlavní dokumentaci najdete v [`ceskaexpedice/kramerius`](https://github.com/ceskaexpedice/kramerius).
+----
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
 
 ## Development server
