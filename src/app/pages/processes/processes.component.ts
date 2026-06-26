@@ -371,9 +371,11 @@ export class ProcessesComponent implements OnInit {
           return false;
       } else if (this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.ONWER_ACTION) >= 0 && 
             this.auth.authorizedGlobalActions.indexOf(ProcessesComponent.READ_ACTION) >= 0) {
-            let ub =  this.batches.filter(batch => batch.id == Number(b));
+            let ub =  this.batches.filter(batch => batch.id === b);
             if (ub.length > 0) {
-              return ub[0].ownerId !== this.auth.user.uid;
+              let retval = ub[0].ownerId !== this.auth.user.uid;
+              return retval;
+              //return ub[0].ownerId !== this.auth.user.uid;
             }
       } 
     } 

@@ -2,7 +2,7 @@ import { Process } from './process.model';
 
 export class Batch {
 
-  id: number;
+  id: string;
   state: string;
   batchState:string;
   started: Date;

@@ -132,7 +132,7 @@ export class AdminApiService {
     return `${this.baseUrl}/processes/by_process_uuid/${procesUuid}/logs/${logType}?fileName=${fileName}`;
   }
 
-  getProcess(processId: number): Observable<[Batch, Process]> {
+  getProcess(processId: string): Observable<[Batch, Process]> {
     return this.get(`/processes/by_process_id/${processId}`).pipe(
       //tap(response => console.log(response)),
       map((response: any) => [Batch.fromJson(response), Process.fromJson(response['process'])])
@@ -154,20 +154,20 @@ export class AdminApiService {
   }
 
   scheduleProcess(definition: any, onScheduled: any = undefined): Observable<any> {
-    return this.post('/processes', definition).pipe(
+    return this.    post('/processes', definition).pipe(
       //delay(Math.floor(Math.random() * 5000)),
       tap(response => { if (onScheduled) onScheduled(response); }),
     )
   }
 
     
-  killBatch(firstProcessId: number): Observable<any> {
+  killBatch(firstProcessId: string): Observable<any> {
     return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}/execution`).pipe(
       //delay(3000)
     )
   }
 
-  deleteProcessBatch(firstProcessId: number) {
+  deleteProcessBatch(firstProcessId: string) {
     return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}`).pipe(
       //delay(3000),
     )

@@ -32,7 +32,7 @@ import { LogsComponent } from './logs/logs.component';
 })
 export class ProcessComponent implements OnInit {
 
-  processId: number;
+  processId: string;
 
   batch: Batch;
   process: Process;
