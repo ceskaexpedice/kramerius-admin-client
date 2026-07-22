@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>{{ 'modal.createNewCollection.title' | translate }}</h2>
 <mat-dialog-content>
-  <mat-card class="app-view-alert app-info app-mb-4">
+  <mat-card appearance="outlined" class="app-view-alert app-info app-mb-4">
     <mat-card-content>
       <mat-icon>info</mat-icon>
-      <span [innerHtml]="'modal.createNewCollection.alert' | translate : {pid: collectionPid}"></span>
+      <span class="app-text" [innerHtml]="'modal.createNewCollection.alert' | translate : {pid: collectionPid}"></span>
     </mat-card-content>
   </mat-card>
   <div class="app-desc app-mb-4">
