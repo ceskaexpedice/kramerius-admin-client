@@ -12,7 +12,7 @@
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     }
     @for (licence of licenses; track licence; let first = $first; let last = $last) {
-      <mat-card appearance="outlined" class="app-view-item app-with-header"  [ngClass]="{'app-runtime-card': licence.runtime}" cdkDrag>
+      <mat-card appearance="outlined" class="app-view-item app-clean-lh app-with-header"  [ngClass]="{'app-runtime-card': licence.runtime}" cdkDrag>
         <mat-card-header>
           <div class="app-fxFlex app-left">
             <mat-card-title class="app-mb-2">

@@ -330,9 +330,11 @@
       max-height: 53px;
     }
     &.app-view-item {
-      @include mat.card-overrides((
-        title-text-line-height: 0
-      ));
+      &.app-clean-lh {
+        @include mat.card-overrides((
+          title-text-line-height: 0
+        ));
+      }
       padding: 16px;
       .mat-mdc-card-header {
         padding: 0;
