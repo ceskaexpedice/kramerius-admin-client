@@ -72,6 +72,22 @@
   ));
   --mat-option-label-text-tracking: 0;
   --mat-option-label-text-size: 14px;
+
+  .app-select-button {
+    @include mat.select-overrides((
+      placeholder-text-color: var(--app-color-lightnes),
+      enabled-trigger-text-color: var(--app-color-lightnes),
+      enabled-arrow-color: var(--app-color-lightnes),
+      focused-arrow-color: var(--app-color-lightnes),
+      trigger-text-weight: 700
+    ));
+    @include mat.form-field-overrides((
+      outlined-outline-color: var(--app-color-primary),
+      outlined-hover-outline-color: transparent
+    ));
+    background-color: var(--app-color-primary);
+    border-radius: 4px;
+  }
   .mat-mdc-select-panel {
     .mat-mdc-option {
       min-height: var(--app-default-height) !important;

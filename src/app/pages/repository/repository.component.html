@@ -74,6 +74,16 @@
                 <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
                   <button [disabled]="!allowedGlobalAction('a_index')" matButton="filled" (click)="openScheduleSyncWithSdnntDialog()" color="primary">{{ 'button.showSynchronzationResults' | translate }}</button>
                 </span>
+                <span>
+                  <mat-form-field appearance="outline" class="app-select-button">
+                    <!-- <mat-label>Favorite food</mat-label> -->
+                    <mat-select placeholder="test">
+                      @for (food of foods; track food) {
+                        <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </span>
               </div>
             </mat-expansion-panel>
             <mat-expansion-panel expanded="true">

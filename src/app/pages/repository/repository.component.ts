@@ -40,14 +40,31 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FixLogsDialogComponent } from 'src/app/dialogs/fix-logs-dialog/fix-logs-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+
+interface Food {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
-    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatDividerModule, MatExpansionModule],
+    imports: [
+      RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, 
+      MatFormFieldModule, MatInputModule, MatTooltipModule, MatDividerModule, MatExpansionModule, MatSelectModule
+    ],
     selector: 'app-repository',
     templateUrl: './repository.component.html',
     styleUrls: ['./repository.component.scss']
 })
+
+
 export class RepositoryComponent implements OnInit {
+  foods: Food[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'},
+  ];
+
   view: string;
   //implicitSetHasChanged: boolean = false;
 
