@@ -506,7 +506,9 @@
     "addRow": "Add row",
     "deleteRow": "Delete row",
     "synchronizeWithSDNNT": "Synchronize with SDNNT",
-    "startSynchronizationWithSDNNT":"Start check synchronization process SDNNT/Kramerius",
+    "startSynchronizationLicenses":"Start license synchronization",
+    "startSynchronizationWithSDNNT":"Start license synchronization with SDNNT",
+    "startSynchronizationWithKap":"Start synchronizing licenses with the curator application",
     "showSynchronzationResults":"Show processes results",
     "startTheSynchronizationProcess": "Start the synchronization process",
     "editObject": "Edit object",
@@ -837,7 +839,33 @@
       }
     },
     "scheduleSyncWithSdnnt": {
-      "title": "Synchronization of licenses",
+      "title": "Synchronization of licenses with SDNNT",
+      "timeInfo": "Date and time of last synchronization",
+      "field": {
+        "pid": "Pid/Link to DL",
+        "catalog": "Sdnnt",
+        "title": "Title",
+        "process": "Process",
+        "sdnntModel": "Model",
+        "sdnntCatalog":"Catalog id /Link to SDNNT",
+        "sdnntDate": "Publishing date",
+        "real_kram_model":"Model",
+		    "real_kram_date":"Ročník/Výtisk",
+        "linkMissing": "A reference to a periodical or a multi-volume monograph is missing in SDNNT, therefore it is not represented by a link.",
+        "sync_actions": {
+          "title": "Proposed change",
+          "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
+          "add_dnntt": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnntt</strong>",
+          "remove_dnnto": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnnto</strong>",
+          "remove_dnntt": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnntt</strong>",
+          "change_dnntt_dnnto": "<strong class=\"app-ml-1 \">dnntt</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnnto</strong>",
+          "change_dnnto_dnntt": "<strong class=\"app-ml-1 \">dnnto</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnntt</strong>",
+          "partial_change": "<strong>partial change</strong>"
+        }
+      }
+    },
+    "scheduleSyncWithKap": {
+      "title": "Synchronization of licenses with curator application",
       "timeInfo": "Date and time of last synchronization",
       "field": {
         "pid": "Pid/Link to DL",

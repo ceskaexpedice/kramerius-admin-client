@@ -68,19 +68,27 @@
                 <mat-panel-title>{{ 'desc.licenseSynchronizationFetch' | translate }}</mat-panel-title>
               </mat-expansion-panel-header>
               <div class="app-fxLayout app-row app-gap-2">
+                <!-- to delete
                 <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_index')  ? 'app-alert-not-allowed' : null">
                   <button [disabled]="!allowedGlobalAction('a_index')" matButton="filled" (click)="openScheduleStartTheSdnntReviewProcessDialog()" color="primary">{{ 'button.startSynchronizationWithSDNNT' | translate }}</button>
                 </span>
                 <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
                   <button [disabled]="!allowedGlobalAction('a_index')" matButton="filled" (click)="openScheduleSyncWithSdnntDialog()" color="primary">{{ 'button.showSynchronzationResults' | translate }}</button>
-                </span>
-                <span>
+                </span> 
+                -->
+                <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
                   <mat-form-field appearance="outline" class="app-select-button">
-                    <!-- <mat-label>Favorite food</mat-label> -->
-                    <mat-select placeholder="test">
-                      @for (food of foods; track food) {
-                        <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-                      }
+                    <mat-select [placeholder]="'button.startSynchronizationLicenses' | translate" [disabled]="!allowedGlobalAction('a_index')">
+                      <mat-option (click)="openScheduleStartTheSdnntReviewProcessDialog()">{{ 'button.startSynchronizationWithSDNNT' | translate }}</mat-option>
+                      <mat-option (click)="openScheduleStartTheKapReviewProcessDialog()">{{ 'button.startSynchronizationWithKap' | translate }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+                <span [matTooltip]="!allowedGlobalAction('a_index') ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowedGlobalAction('a_delete')  ? 'app-alert-not-allowed' : null">
+                  <mat-form-field appearance="outline" class="app-select-button">
+                    <mat-select [placeholder]="'button.showSynchronzationResults' | translate" [disabled]="!allowedGlobalAction('a_index')">
+                      <mat-option (click)="openScheduleSyncWithSdnntDialog()">{{ 'modal.scheduleSyncWithSdnnt.title' | translate }}</mat-option>
+                      <mat-option (click)="openScheduleSyncWithKapDialog()">{{ 'modal.scheduleSyncWithKap.title' | translate }}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </span>

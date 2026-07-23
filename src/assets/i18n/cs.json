@@ -506,7 +506,9 @@
     "addRow": "Přidat řádek",
     "deleteRow": "Odstranit řádek",
     "synchronizeWithSDNNT": "Synchronizovat se SDNNT",
-    "startSynchronizationWithSDNNT":"Spustit proces kontroly  SDNNT/Kramerius",
+    "startSynchronizationLicenses":"Spustit synchronizaci licencí",
+    "startSynchronizationWithSDNNT":"Spustit synchronizaci licencí se SDNNT",
+    "startSynchronizationWithKap":"Spustit synchronizaci licencí s kurátorskou aplikací",
     "showSynchronzationResults":"Zobrazit výsledek procesu",
     "startTheSynchronizationProcess": "Spustit proces synchronize",
     "editObject": "Editovat objekt",
@@ -837,7 +839,33 @@
       }
     },
     "scheduleSyncWithSdnnt": {
-      "title": "Synchronizace licencí",
+      "title": "Synchronizace licencí se SDNNT",
+      "timeInfo": "Datum a čas poslední synchronizace",
+      "field": {
+        "pid": "Pid/Odkaz do DK",
+        "catalog": "Sdnt",
+        "title": "Titulek",
+        "process": "Proces",
+        "sdnntModel": "Model",
+        "sdnntCatalog":"Katalog/Odkaz do SDNNT",
+        "sdnntDate": "Datum vydání",
+        "real_kram_model":"Model",
+		    "real_kram_date":"Ročník/Výtisk",
+        "linkMissing": "V SDNNT chybí odkaz na periodikum nebo vícesvazkovou monografii proto není reprezentováno odkazem.",
+        "sync_actions": {
+          "title": "Navrhovaná změna",
+          "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
+          "add_dnntt": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnntt</strong>",
+          "remove_dnnto": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnnto</strong>",
+          "remove_dnntt": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnntt</strong>",
+          "change_dnntt_dnnto": "<strong class=\"app-ml-1 \">dnntt</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnnto</strong>",
+          "change_dnnto_dnntt": "<strong class=\"app-ml-1 \">dnnto</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnntt</strong>",
+          "partial_change": "<strong>částečná změna</strong>"
+        }
+      }
+    },
+    "scheduleSyncWithKap": {
+      "title": "Synchronizace licencí s kurátorskou aplikací",
       "timeInfo": "Datum a čas poslední synchronizace",
       "field": {
         "pid": "Pid/Odkaz do DK",
