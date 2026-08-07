@@ -15,6 +15,7 @@ import { ConditionParam } from '../models/condition-param.model';
 import { Right } from '../models/right.model';
 import { RightAction } from '../models/right-action.model';
 import { SdnntItem, SdnntSync } from '../models/sdnnt.model';
+import { KappItem, KappSync } from '../models/kapp.model';
 
 @Injectable({
   providedIn: 'root'
@@ -217,12 +218,35 @@ export class AdminApiService {
     return this.get(`/sdnnt/info`);
   }
 
+  getKappSyncInfo(): Observable<any> {
+    return this.get(`/kapp/info`);
+  }
+
+  getKappSyncTimestamp(): Observable<any> {
+    return this.get(`/kapp/sync/timestamp`);
+  }
+
+  getKappSyncData(rows: number, page: number): Observable<KappSync> {
+    return this.get(`/kapp/sync/actions?rows=${rows}&page=${page}`).pipe(map(response => KappSync.fromJson(response)));
+  }
+
+  getKappSyncDataGranularity(id:string): Observable<KappItem[]> {
+    return this.get(`/kapp/sync/actions/children/${id}`).pipe(map((response: any) => {
+      let val = response[id];
+      return KappItem.fromJsonArray(val);
+    }));
+  }
+
   getSdntSyncTimestamp(): Observable<any> {
     return this.get(`/sdnnt/sync/timestamp`);
   }
 
   getSdntSyncBatches(): Observable<any> {
     return this.get(`/sdnnt/sync/batches`);
+  }
+
+  getKappSyncBatches(): Observable<any> {
+    return this.get(`/kapp/sync/batches`);
   }
 
   getSdntSyncData(rows: number, page: number): Observable<SdnntSync> {

@@ -72,10 +72,8 @@ export class AboutDialogComponent implements OnInit {
 
   getLastCommitHash() {
     const info: any = gitInfo;
-    //console.log(info)
     const hash = info.hash ? info.hash
       : info['default'].hash.substring(1); //pokud je to jeste v objektu "default", je hash prefixovan 'g', viz git-info.json (generovan pred buildem)
-    //console.log(hash)
     return hash;
   }
 
@@ -84,8 +82,6 @@ export class AboutDialogComponent implements OnInit {
       this.appSettings.workModeRead = res.readOnly;
       this.appSettings.workModeReason = res.reason;
 
-
-      //console.log(res);
       this.auth.loadGlobalAuthorizedActions((status: number) => {
         console.log("Authorized actions loaded")
       });

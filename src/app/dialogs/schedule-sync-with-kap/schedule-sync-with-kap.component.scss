@@ -1,0 +1,53 @@
+.mat-mdc-table {
+  table-layout: fixed;
+
+  .mat-column-pid {
+    width: 280px;
+  }
+
+  .mat-column-model {
+    width: 120px;
+  }
+
+  .mat-column-date_issued_year {
+    width: 100px;
+  }
+
+  .mat-column-title {
+    width: auto;
+  }
+
+  .mat-column-sync_actions {
+    width: 170px;
+  }
+
+  .mat-column-process_id {
+    width: 72px;
+  }
+
+  .mat-column-expand {
+    width: 48px;
+  }
+
+  .mat-mdc-row {
+    &.app-detail-row {
+      height: 0;
+    }
+
+    &.app-element-row {
+      td {
+        border-bottom-width: 0;
+      }
+    }
+
+    &.app-expanded-row {
+      background-color: var(--app-color-gray-1);
+    }
+
+    .mat-mdc-cell {
+      &.mat-column-pid {
+        width: 280px;
+      }
+    }
+  }
+}

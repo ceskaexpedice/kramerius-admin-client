@@ -1,5 +1,10 @@
 <h2 mat-dialog-title>{{ 'button.startSynchronizationWithKap' | translate }}</h2>
 <mat-dialog-content class="mat-typography">
+  <ul>
+    <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.krameriusInstance' | translate }}: <strong>{{ info.kramerius }}</strong></li>
+    <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>{{ info.acronym }}</strong></li>
+    <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.kappInstance' | translate }}: <strong>{{ info.endpoint }}</strong></li>
+  </ul>
   @if (!info.kramerius || !info.acronym || !info.endpoint) {
     <mat-card appearance="outlined" class="app-view-alert app-warn">
       <mat-card-content>
@@ -9,13 +14,13 @@
           </div>
           <ul>
             @if (!info.kramerius) {
-              <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.krameriusInstance' | translate }}: <strong>sdnnt.check.local.api</strong></li>
+              <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.krameriusInstance' | translate }}: <strong>kapp.check.local.api</strong></li>
             }
             @if (!info.acronym) {
-              <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>sdnnt.check.acronym</strong></li>
+              <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.abbreviationOfKramerius' | translate }}: <strong>kapp.check.acronym</strong></li>
             }
             @if (!info.endpoint) {
-              <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.sdnntInstance' | translate }}: <strong>sdnnt.check.endpoint</strong></li>
+              <li>{{ 'modal.scheduleStartTheKapReviewProcess.desc.kappInstance' | translate }}: <strong>kapp.endpoint</strong></li>
             }
           </ul>
         </div>

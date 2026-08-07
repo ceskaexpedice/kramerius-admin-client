@@ -846,12 +846,14 @@
         "catalog": "Sdnnt",
         "title": "Title",
         "process": "Process",
+        "model": "Model",
+        "date_issued_year": "Publishing year",
         "sdnntModel": "Model",
         "sdnntCatalog":"Catalog id /Link to SDNNT",
         "sdnntDate": "Publishing date",
         "real_kram_model":"Model",
 		    "real_kram_date":"Ročník/Výtisk",
-        "linkMissing": "A reference to a periodical or a multi-volume monograph is missing in SDNNT, therefore it is not represented by a link.",
+        "linkMissing": "A reference to the object is missing in KAPP, therefore it is not represented by a link.",
         "sync_actions": {
           "title": "Proposed change",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -869,23 +871,26 @@
       "timeInfo": "Date and time of last synchronization",
       "field": {
         "pid": "Pid/Link to DL",
-        "catalog": "Sdnnt",
         "title": "Title",
+        "model":"Model",
+        "date_issued_year":"Publication year",
+
+        "kappLink": "Open in KAPP",
         "process": "Process",
         "sdnntModel": "Model",
         "sdnntCatalog":"Catalog id /Link to SDNNT",
         "sdnntDate": "Publishing date",
         "real_kram_model":"Model",
-		    "real_kram_date":"Ročník/Výtisk",
+		    "real_kram_date":"Volume/Issue",
         "linkMissing": "A reference to a periodical or a multi-volume monograph is missing in SDNNT, therefore it is not represented by a link.",
         "sync_actions": {
           "title": "Proposed change",
-          "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
-          "add_dnntt": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnntt</strong>",
-          "remove_dnnto": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnnto</strong>",
-          "remove_dnntt": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">dnntt</strong>",
-          "change_dnntt_dnnto": "<strong class=\"app-ml-1 \">dnntt</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnnto</strong>",
-          "change_dnnto_dnntt": "<strong class=\"app-ml-1 \">dnnto</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>dnntt</strong>",
+          "add_public": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">public</strong>",
+          "add_onsite": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">onsite</strong>",
+          "remove_public": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">public</strong>",
+          "remove_onsite": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">onsite</strong>",
+          "change_onsite_public": "<strong class=\"app-ml-1 \">onsite</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>public</strong>",
+          "change_public_onsite": "<strong class=\"app-ml-1 \">public</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>onsite</strong>",
           "partial_change": "<strong>partial change</strong>"
         }
       }
@@ -896,6 +901,15 @@
         "krameriusInstance": "Krameria instance",
         "abbreviationOfKramerius": "Abbreviation of kramerius",
         "sdnntInstance": "Sdnnt instance"
+      },
+      "alert": "The following variables must be configured"
+    },
+    "scheduleStartTheKapReviewProcess": {
+      "title": "Starting the KAPP license synchronization process",
+      "desc": {
+        "krameriusInstance": "Kramerius instance",
+        "kappInstance": "KAPP instance",
+        "abbreviationOfKramerius": "Abbreviation of kramerius"
       },
       "alert": "The following variables must be configured"
     },
@@ -1016,6 +1030,7 @@
       "scheduleImportProcess": "The import has been scheduled",
       "scheduleApplyLicenseAndImportProcess": "The applying license and import process has been scheduled",
       "scheduleSdnntSyncProcess": "The sync process has been scheduled",
+      "scheduleKapSyncProcess": "The KAPP sync process has been scheduled",
       "createOrEditRole": "The role has been added",
       "onRemoveRole": "The role has been removed",
       "onEditRole": "The role has been edited",
@@ -1035,6 +1050,7 @@
       "scheduleIndexationByModel": "{{value}} model indexing has been scheduled",
       "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing",
       "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled",
+      "scheduleStartTheKapReviewProcess": "The launch of the KAPP/Kramerius review process has been scheduled",
       "deleteSelectedCollections": "The process of deleting the selected collections has been successfully started",
       "changeFlagOnLicense": "The license flag change process has been scheduled",
       "changeItemsOrder": "The order of the items has been changed",
@@ -1072,6 +1088,7 @@
       "scheduleProcessingIndexRebuildForObject": "Failed to schedule the Rebuild Processing index process for the object",
       "scheduleImportProcess": "Failed to schedule Import process",
       "scheduleSdnntSyncProcess": "Failed to schedule sync process",
+      "scheduleKapSyncProcess": "Failed to schedule KAPP sync process",
       "createOrEditRole": "Failed to add role",
       "onRemoveRole": {
         "409": "Role is used, cannot be removed",
@@ -1103,6 +1120,7 @@
       "scheduleIndexationsByMultiplePids": "Failed to schedule indexing",
       "loadMoreItemsForBatch": "Failed to load data",
       "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process",
+      "scheduleStartTheKapReviewProcess": "Error starting the KAPP/Kramerius review process",
       "deleteSelectedCollections": "An error occurred while deleting the selected collections",
       "scheduleChangeItemsOrder": "An error occurred while saving the item order change",
       "scheduleDeleteSelectedItemsFromCollection": "An error occurred while deleting the selected items from the collection",

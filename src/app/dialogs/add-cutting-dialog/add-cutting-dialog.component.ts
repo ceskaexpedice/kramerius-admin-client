@@ -88,7 +88,7 @@ export class AddCuttingDialogComponent implements OnInit {
 
   isClipUrl(): boolean {
     const retflag = this.adminApi.isClipUrl(this.url);
-    console.log("Const retflag "+retflag);
+    //console.log("Const retflag "+retflag);
     return retflag;
   }
 
