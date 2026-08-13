@@ -108,21 +108,12 @@ export class NavbarComponent implements OnInit {
       // call api to return workmode endpoint
       this.adminApi.getWorkMode().subscribe(res => {
         if (this.settings.workModeRead != res.readOnly) {
-          console.log("\t-->Settings worker mode and reason  ");
 
           this.settings.workModeRead = res.readOnly;
           this.settings.workModeReason = res.reason;
 
           window.location.reload();
 
-          // if (this.modeState == WorkerModeState.interval) {
-
-          //   this.auth.loadGlobalAuthorizedActions((status: number) => {
-          //     console.log("Authorized actions loaded")
-          //   });
-  
-          // }
-          // this.modeState = WorkerModeState.interval;
       }
       });    
 

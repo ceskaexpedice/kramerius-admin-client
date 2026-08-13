@@ -5,6 +5,21 @@
 @use 'app-mixins-alerts' as *;
 @use '@angular/material' as mat;
 
+:host ::ng-deep .app-select-button {
+  width: fit-content;
+  min-width: 0;
+  max-width: 100%;
+
+  .mat-mdc-select-trigger {
+    gap: 12px;
+  }
+
+  .mat-mdc-select-value {
+    max-width: none;
+    padding-right: 16px;
+  }
+}
+
 :root {
   // form field
   @include mat.form-field-overrides((
@@ -72,6 +87,35 @@
   ));
   --mat-option-label-text-tracking: 0;
   --mat-option-label-text-size: 14px;
+
+  .app-select-button {
+    @include mat.select-overrides((
+      placeholder-text-color: var(--app-color-lightnes),
+      enabled-trigger-text-color: var(--app-color-lightnes),
+      enabled-arrow-color: var(--app-color-lightnes),
+      focused-arrow-color: var(--app-color-lightnes),
+      trigger-text-weight: 700
+    ));
+    @include mat.form-field-overrides((
+      outlined-outline-color: var(--app-color-primary),
+      outlined-hover-outline-color: transparent
+    ));
+    background-color: var(--app-color-primary);
+    border-radius: 4px;
+    width: max-content;
+    max-width: 100%;
+
+    .mat-mdc-form-field-infix {
+      width: auto;
+      min-width: 0;
+    }
+    .mat-mdc-select-value {
+      padding-right: 8px;
+    }
+    .cdk-overlay-pane {
+      width: auto !important;
+    }
+  }
   .mat-mdc-select-panel {
     .mat-mdc-option {
       min-height: var(--app-default-height) !important;
@@ -762,8 +806,3 @@
     }
   }
 }
-
-
-
-
-

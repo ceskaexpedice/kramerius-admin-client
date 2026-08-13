@@ -506,7 +506,9 @@
     "addRow": "Přidat řádek",
     "deleteRow": "Odstranit řádek",
     "synchronizeWithSDNNT": "Synchronizovat se SDNNT",
-    "startSynchronizationWithSDNNT":"Spustit proces kontroly  SDNNT/Kramerius",
+    "startSynchronizationLicenses":"Spustit synchronizaci licencí",
+    "startSynchronizationWithSDNNT":"Spustit synchronizaci licencí se SDNNT",
+    "startSynchronizationWithKap":"Spustit synchronizaci licencí s kurátorskou aplikací",
     "showSynchronzationResults":"Zobrazit výsledek procesu",
     "startTheSynchronizationProcess": "Spustit proces synchronize",
     "editObject": "Editovat objekt",
@@ -837,19 +839,21 @@
       }
     },
     "scheduleSyncWithSdnnt": {
-      "title": "Synchronizace licencí",
+      "title": "Synchronizace licencí se SDNNT",
       "timeInfo": "Datum a čas poslední synchronizace",
       "field": {
         "pid": "Pid/Odkaz do DK",
         "catalog": "Sdnt",
         "title": "Titulek",
         "process": "Proces",
+        "model": "Model",
+        "date_issued_year": "Rok vydání",
         "sdnntModel": "Model",
         "sdnntCatalog":"Katalog/Odkaz do SDNNT",
         "sdnntDate": "Datum vydání",
         "real_kram_model":"Model",
 		    "real_kram_date":"Ročník/Výtisk",
-        "linkMissing": "V SDNNT chybí odkaz na periodikum nebo vícesvazkovou monografii proto není reprezentováno odkazem.",
+        "linkMissing": "V KAPP chybí odkaz na objekt, proto není reprezentován odkazem.",
         "sync_actions": {
           "title": "Navrhovaná změna",
           "add_dnnto": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">dnnto</strong>",
@@ -862,12 +866,47 @@
         }
       }
     },
+    "scheduleSyncWithKap": {
+      "title": "Synchronizace licencí s kurátorskou aplikací",
+      "timeInfo": "Datum a čas poslední synchronizace",
+      "field": {
+        "pid": "Pid/Odkaz do DK",
+        "model":"Model",
+        "date_issued_year":"Datum vydání",
+        "title": "Titulek",
+        "kappLink": "Otevřít v KAPP",
+        "process": "Proces",
+        "sdnntModel": "Model",
+        "real_kram_model":"Model",
+		    "real_kram_date":"Ročník/Výtisk",
+        "linkMissing": "V SDNNT chybí odkaz na periodikum nebo vícesvazkovou monografii proto není reprezentováno odkazem.",
+        "sync_actions": {
+          "title": "Navrhovaná změna",
+          "add_public": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">public</strong>",
+          "add_onsite": "<span class=\"material-icons app-ml-1\">post_add</span><strong class=\"app-ml-1 \">onsite</strong>",
+          "remove_public": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">public</strong>",
+          "remove_onsite": "<span class=\"material-icons app-ml-1\">delete_forever</span><strong class=\"app-ml-1 \">onsite</strong>",
+          "change_onsite_public": "<strong class=\"app-ml-1 \">onsite</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>public</strong>",
+          "change_public_onsite": "<strong class=\"app-ml-1 \">public</strong> <span class=\"material-icons app-ml-1 app-mr-1\">trending_flat</span> <strong>onsite</strong>",
+          "partial_change": "<strong>částečná změna</strong>"
+        }
+      }
+    },
     "scheduleStartTheSdnntReviewProcess": {
       "title": "Spuštění procesu synchronizace licencí",
       "desc": {
         "krameriusInstance": "Instance krameria",
         "abbreviationOfKramerius": "Zkratka krameria",
         "sdnntInstance": "Sdnnt instance"
+      },
+      "alert": "Následující proměnné musí být nakonfigurovány"
+    },
+    "scheduleStartTheKapReviewProcess": {
+      "title": "Spuštění procesu synchronizace licencí s KAPP",
+      "desc": {
+        "krameriusInstance": "Instance krameria",
+        "kappInstance": "KAPP instance",
+        "abbreviationOfKramerius": "Zkratka krameria"
       },
       "alert": "Následující proměnné musí být nakonfigurovány"
     },
@@ -988,6 +1027,7 @@
       "scheduleImportProcess": "Import byl naplánován",
       "scheduleApplyLicenseAndImportProcess": "Přiřazení licence a Import naplánován",
       "scheduleSdnntSyncProcess": "Synchronizace se SDNNT naplánována",
+      "scheduleKapSyncProcess": "Synchronizace s KAPP naplánována",
       "createOrEditRole": "Role byla přidána",
       "onRemoveRole": "Role byla odstraněna",
       "onEditRole": "Role byla upravena",
@@ -1007,6 +1047,7 @@
       "scheduleIndexationByModel": "Indexace modelu {{value}} byla naplánována",
       "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací",
       "scheduleStartTheSdnntReviewProcess": "Spuštění procesu kontroly SDNNT/Kramerius bylo naplánováno",
+      "scheduleStartTheKapReviewProcess": "Spuštění procesu kontroly KAPP/Kramerius bylo naplánováno",
       "deleteSelectedCollections": "Proces smazaní vybraných sbirek byl úspěšně spuštěn",
       "changeFlagOnLicense": "Proces změny příznaku na licenci byl naplánován",
       "changeItemsOrder": "Pořadí položek bylo změněno",
@@ -1044,6 +1085,7 @@
       "scheduleProcessingIndexRebuildForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
       "scheduleImportProcess": "Import se nepodařilo naplánovat",
       "scheduleSdnntSyncProcess": "Synchronizace se SDNNT se nepodařilo naplánovat",
+      "scheduleKapSyncProcess": "Synchronizace s KAPP se nepodařilo naplánovat",
       "createOrEditRole": "Roli se nepodařilo přidat",
       "onRemoveRole": {
         "409": "Role je použita, není možné ji odstranit",
@@ -1075,6 +1117,7 @@
       "scheduleIndexationsByMultiplePids": "Nepodařilo se naplánovat indexace",
       "loadMoreItemsForBatch": "Nepodařilo se načíst data",
       "scheduleStartTheSdnntReviewProcess": "Chyba při spuštění procesu kontroly SDNNT/Kramerius",
+      "scheduleStartTheKapReviewProcess": "Chyba při spuštění procesu kontroly KAPP/Kramerius",
       "deleteSelectedCollections": "Došlo k chybě při smazaní vybraných sbírek",
       "scheduleChangeItemsOrder": "Došlo k chybě při ukládání změny pořadí položek",
       "scheduleDeleteSelectedItemsFromCollection": "Došlo k chybě při smazaní vybraných položek ze sbírky",

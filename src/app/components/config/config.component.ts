@@ -42,7 +42,6 @@ export class ConfigComponent implements OnInit {
   loadValue(key: string) {
     this.setLoadingNow(key, true);
     this.adminApi.getConfigProperty(key).subscribe(result => {
-      console.log('loaded ' + key + ": " + result[key])
       this.properties[key] = result[key];
       this.setLoadingNow(key, false);
     })

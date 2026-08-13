@@ -17,7 +17,9 @@ import { ScheduleDeleteObjectsSmartComponent } from 'src/app/dialogs/schedule-de
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { ScheduleSyncWithSdnntComponent } from 'src/app/dialogs/schedule-sync-with-sdnnt/schedule-sync-with-sdnnt.component';
+import { ScheduleSyncWithKapComponent } from 'src/app/dialogs/schedule-sync-with-kap/schedule-sync-with-kap.component';
 import { ScheduleStartTheSdnntReviewProcessComponent } from 'src/app/dialogs/schedule-start-the-sdnnt-review-process/schedule-start-the-sdnnt-review-process.component';
+import { ScheduleStartTheKapReviewProcessComponent } from 'src/app/dialogs/schedule-start-the-kap-review-process/schedule-start-the-kap-review-process.component';
 import { ScheduleChangeFlagOnLicenseDialogComponent } from 'src/app/dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
 import { ScheduleRemoveTheVisibilityFlagDialogComponent } from 'src/app/dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 import { AppSettings } from 'src/app/services/app-settings';
@@ -40,13 +42,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FixLogsDialogComponent } from 'src/app/dialogs/fix-logs-dialog/fix-logs-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-    imports: [RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatDividerModule, MatExpansionModule],
+    imports: [
+      RouterModule, TranslateModule, FormsModule, MatCardModule, MatButtonModule, 
+      MatIconModule, MatTabsModule, MatFormFieldModule, MatInputModule, MatTooltipModule, 
+      MatDividerModule, MatExpansionModule, MatSelectModule
+    ],
     selector: 'app-repository',
     templateUrl: './repository.component.html',
     styleUrls: ['./repository.component.scss']
 })
+
 export class RepositoryComponent implements OnInit {
   view: string;
   //implicitSetHasChanged: boolean = false;
@@ -411,10 +419,24 @@ export class RepositoryComponent implements OnInit {
     });
   }
 
+  openScheduleSyncWithKapDialog() {
+    const dialogRef = this.dialog.open(ScheduleSyncWithKapComponent, {
+      width: '1200px',
+      panelClass: 'app-schedule-sync-with-kap'
+    });
+  }
+
   openScheduleStartTheSdnntReviewProcessDialog() {
     const dialogRef = this.dialog.open(ScheduleStartTheSdnntReviewProcessComponent, {
       width: '600px',
       panelClass: 'app-schedule-start-the-sdnnt-review-process'
+    });
+  }
+
+  openScheduleStartTheKapReviewProcessDialog() {
+    const dialogRef = this.dialog.open(ScheduleStartTheKapReviewProcessComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-start-the-kap-review-process'
     });
   }
 
