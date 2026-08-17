@@ -188,10 +188,14 @@ export class CollectionEditComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
+    const collectionId = this.colId || this.collection?.id;
+    if (this.mode !== 'edit' || !collectionId) {
+      return;
+    }
 
     const file: File = event.target.files[0];
     if (file) {
-      this.collectionsService.uploadCollectionThumbnail(this.colId, file).subscribe(s => {
+      this.collectionsService.uploadCollectionThumbnail(collectionId, file).subscribe(s => {
         this.reloadtimestamp = (new Date()).getTime();
         console.log(s);
       }, error => {
