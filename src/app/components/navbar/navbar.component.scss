@@ -12,7 +12,7 @@
     }
   }
 
-  .mat-mdc-button{
+  .mat-mdc-button {
     --mat-button-text-horizontal-padding: 12px;
     color: var(--app-color-lightnes);
 
@@ -24,6 +24,16 @@
 
     &.active {
       background-color: rgba(var(--app-color-lightnes-rgb), .2);
+    }
+
+    &.app-btn-icon {
+      min-width: 40px;
+      padding: 0 !important;
+      margin-right: 12px;
+
+      .mat-icon {
+        margin: 0;
+      }
     }
   }
 

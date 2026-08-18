@@ -143,7 +143,7 @@ export class ClientSettingsComponent implements OnInit {
   changeView(view: string) {
     this.view = view;
     this.local.setStringProperty('client-settings.view', view);
-    this.router.navigate(['/client-settings', view]);
+    this.router.navigate(['/settings/client', view]);
 
     this.ensureClientResourcesLoaded();
   }
@@ -300,12 +300,12 @@ export class ClientSettingsComponent implements OnInit {
   }
 
   private getViewFromUrl() {
-    return this.router.url.startsWith('/client-settings/resources') ? 'resources' : 'settings';
+    return this.router.url.startsWith('/settings/client/resources') ? 'resources' : 'configuration';
   }
 
   private getResourceNameFromUrl() {
     const url = this.router.url.split(/[?#]/)[0];
-    const prefix = '/client-settings/resources/';
+    const prefix = '/settings/client/resources/';
     if (!url.startsWith(prefix)) {
       return '';
     }
@@ -316,11 +316,11 @@ export class ClientSettingsComponent implements OnInit {
   private navigateToClientResource(path: string) {
     const resourceName = this.getClientResourceName(path);
     if (!resourceName) {
-      this.router.navigate(['/client-settings', 'resources']);
+      this.router.navigate(['/settings/client', 'resources']);
       return;
     }
 
-    const url = `/client-settings/resources/${encodeURIComponent(resourceName)}`;
+    const url = `/settings/client/resources/${encodeURIComponent(resourceName)}`;
     if (this.router.url.split(/[?#]/)[0] !== url) {
       this.router.navigateByUrl(url);
     }

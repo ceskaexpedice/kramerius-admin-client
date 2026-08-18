@@ -74,7 +74,7 @@
     color: #757575;
   }
 
-  .app-client-settings-resources {
+  /* .app-client-settings-resources {
     box-sizing: border-box;
     display: block;
     margin: 8px 0 10px;
@@ -117,7 +117,7 @@
   .app-client-settings-resources .app-table td:nth-child(3) {
     white-space: nowrap;
     width: 82px;
-  }
+  } */
 
   .app-client-settings-resources .app-sort-header {
     align-items: center;
@@ -153,7 +153,7 @@
   .app-client-settings-resources .app-sort-header.app-active mat-icon {
     color: var(--mat-sys-primary);
   }
-
+/* 
   .app-client-settings-resources .app-col-action {
     align-items: center;
     display: flex;
@@ -188,7 +188,7 @@
     line-height: 16px;
     margin: 0;
     width: 16px;
-  }
+  } */
 
   .app-client-settings-actions {
     clear: both;
@@ -271,7 +271,6 @@
   }
 
   .app-client-resource-editor {
-    border-top: 1px solid var(--mat-sys-outline-variant);
     padding-top: 16px;
   }
 

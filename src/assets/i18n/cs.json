@@ -163,47 +163,10 @@
         "desc": "Nastavení protokolu OAI",
         "icon": "api"
       },
-      "client-settings": {
-        "title": "Client settings",
-        "desc": "JSON konfigurace klienta",
-        "icon": "code"
-      },
-      "client-resources": {
-        "title": "Zdroje klienta",
-        "desc": "HTML a obrázkové zdroje klienta",
-        "icon": "folder",
-        "selectResource": "Vyberte zdroj z tabulky.",
-        "unsupported": "Tento typ zdroje zde nelze upravovat.",
-        "newPath": "Cesta / jméno souboru",
-        "addResource": "Přidat zdroj",
-        "loadResource": "Načíst zdroj",
-        "image": "Obrázek"
-      },
       "cdk": {
         "title": "ČDK",
         "desc": "Česká digitální knihovna",
         "icon": "local_library"
-      }
-    },
-    "client-settings": {
-      "title": "Client settings",
-      "desc": "Konfigurace klienta",
-      "icon": "code",
-      "settings": {
-        "title": "Konfigurace",
-        "desc": "JSON konfigurace klienta",
-        "icon": "code"
-      },
-      "resources": {
-        "title": "Zdroje klienta",
-        "desc": "HTML a obrázkové zdroje klienta",
-        "icon": "folder",
-        "selectResource": "Vyberte zdroj z tabulky.",
-        "unsupported": "Tento typ zdroje zde nelze upravovat.",
-        "newPath": "Cesta / jméno souboru",
-        "addResource": "Přidat zdroj",
-        "loadResource": "Načíst zdroj",
-        "image": "Obrázek"
       }
     },
     "statistics": {
@@ -248,6 +211,27 @@
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "monitoring"
       }    
+    },
+    "settings": {
+      "title": "Nastavení",
+      "client": {
+        "title": "Nastavení klienta",
+        "configuration": {
+          "title": "Konfigurace",
+          "icon": "code"
+        },
+        "resources": {
+          "title": "Zdroje klienta",
+          "icon": "folder",
+          "desc": "HTML a obrázkové zdroje klienta",
+          "selectResource": "Vyberte zdroj z tabulky.",
+          "unsupported": "Tento typ zdroje zde nelze upravovat.",
+          "newPath": "Cesta / jméno souboru",
+          "addResource": "Přidat zdroj",
+          "loadResource": "Načíst zdroj",
+          "image": "Obrázek"
+        }
+      }
     }
   },
   "navbar": {
@@ -367,7 +351,6 @@
       "subtitle": "Možnost získat specifikaci administračního API "
 
     }
-
   },
   "alert": {
     "statistics": {

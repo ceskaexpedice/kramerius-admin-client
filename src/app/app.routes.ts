@@ -55,13 +55,23 @@ export const routes: Routes = [
   { path: 'repository/exports', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/oai', component: RepositoryComponent, canActivate: [AuthGuard] },
-  { path: 'repository/client-settings', redirectTo: 'client-settings/settings' },
-  { path: 'repository/client-resources', redirectTo: 'client-settings/resources' },
   { path: 'repository/cdk', component: RepositoryComponent, canActivate: [AuthGuard] },
-  { path: 'client-settings', redirectTo: 'client-settings/settings' },
-  { path: 'client-settings/settings', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
-  { path: 'client-settings/resources', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
-  { path: 'client-settings/resources/:resourceName', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+    
+  // to delete after testing
+  // { path: 'repository/client-settings', redirectTo: 'client-settings/settings' },
+  // { path: 'repository/client-resources', redirectTo: 'client-settings/resources' },
+
+  // to delete after testing
+  // { path: 'client-settings', redirectTo: 'client-settings/settings' },
+  // { path: 'client-settings/settings', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+  // { path: 'client-settings/resources', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+  // { path: 'client-settings/resources/:resourceName', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+
+  { path: 'settings/client', redirectTo: 'settings/client/configuration', pathMatch: 'full' },
+  { path: 'settings/client/configuration', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+  { path: 'settings/client/resources', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+  { path: 'settings/client/resources/:resourceName', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+
   /* to delete after testing { path: 'repository/statistics', component: RepositoryComponent, canActivate: [AuthGuard] }, */
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },

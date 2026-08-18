@@ -44,9 +44,6 @@
         <a routerLink="/indexing" routerLinkActive="active" mat-button (click)="setDefaultRoute('indexing.view','object')">{{ 'sites.indexing.title' | translate }}</a>
       }
       <a routerLink="/repository" routerLinkActive="active" mat-button (click)="setDefaultRoute('repository.view','repository-management')">{{ 'sites.repository.title' | translate }}</a>
-      @if (settings.clientSettingsEnabled) {
-        <a routerLink="/client-settings" routerLinkActive="active" mat-button (click)="setDefaultRoute('client-settings.view','settings')">{{ 'sites.client-settings.title' | translate }}</a>
-      }
       @if (allowedGlobalAction('a_statistics')) {
         <a routerLink="/statistics" routerLinkActive="active" mat-button (click)="setDefaultRoute('statistics.view','graphs')">{{ 'sites.statistics.title' | translate }}</a>
       }
@@ -73,6 +70,18 @@
           {{ auth.getTextProfileImage() }}
         </div>
       </a>
+
+      @if (settings.clientSettingsEnabled) {
+        <!-- <a routerLink="/settings/client" routerLinkActive="active" mat-button (click)="setDefaultRoute('client-settings.view','configuration')">{{ 'sites.client-settings.title' | translate }}</a> -->
+        <a matButton [matMenuTriggerFor]="settings_menu" class="app-btn-icon">
+          <mat-icon>settings</mat-icon>
+        </a>
+      }
+      <mat-menu #settings_menu="matMenu">
+        <button mat-menu-item routerLink="/settings/client" routerLinkActive="active" (click)="setDefaultRoute('client-settings.view','configuration')">
+          {{ 'sites.settings.client.title' | translate }}
+        </button>
+      </mat-menu>
       <div class="app-badge app-session" [matTooltip]="'batch.sessionExpire' | translate">{{ tokenHours+":"+tokenMinutes+":"+tokenSeconds }}</div>
     }
 

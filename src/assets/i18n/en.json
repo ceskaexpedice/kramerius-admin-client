@@ -163,47 +163,10 @@
         "desc": "OAI PMH protocol",
         "icon": "api"
       },
-      "client-settings": {
-        "title": "Client settings",
-        "desc": "Client JSON configuration",
-        "icon": "code"
-      },
-      "client-resources": {
-        "title": "Client resources",
-        "desc": "Client HTML and image resources",
-        "icon": "folder",
-        "selectResource": "Select a resource from the table.",
-        "unsupported": "This resource type cannot be edited here.",
-        "newPath": "Path / file name",
-        "addResource": "Add resource",
-        "loadResource": "Load resource",
-        "image": "Image"
-      },
       "cdk": {
         "title": "Cdk",
         "desc": "Czech digital library",
         "icon": "local_library"
-      }
-    },
-    "client-settings": {
-      "title": "Client settings",
-      "desc": "Client configuration",
-      "icon": "code",
-      "settings": {
-        "title": "Configuration",
-        "desc": "Client JSON configuration",
-        "icon": "code"
-      },
-      "resources": {
-        "title": "Client resources",
-        "desc": "Client HTML and image resources",
-        "icon": "folder",
-        "selectResource": "Select a resource from the table.",
-        "unsupported": "This resource type cannot be edited here.",
-        "newPath": "Path / file name",
-        "addResource": "Add resource",
-        "loadResource": "Load resource",
-        "image": "Image"
       }
     },
     "statistics": {
@@ -248,6 +211,27 @@
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "monitoring"
       }    
+    },
+    "settings": {
+      "title": "Settings",
+      "client": {
+        "title": "Client settings",
+        "configuration": {
+          "title": "Configuration",
+          "icon": "code"
+        },
+        "resources": {
+          "title": "Client resources",
+          "icon": "folder",
+          "desc": "HTML and image client resources",
+          "selectResource": "Select a resource from the table.",
+          "unsupported": "This resource type cannot be edited here.",
+          "newPath": "Path / file name",
+          "addResource": "Add resource",
+          "loadResource": "Load resource",
+          "image": "Image"
+        }
+      }
     }
   },
   "navbar": {
