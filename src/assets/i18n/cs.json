@@ -163,10 +163,47 @@
         "desc": "Nastavení protokolu OAI",
         "icon": "api"
       },
+      "client-settings": {
+        "title": "Client settings",
+        "desc": "JSON konfigurace klienta",
+        "icon": "code"
+      },
+      "client-resources": {
+        "title": "Zdroje klienta",
+        "desc": "HTML a obrázkové zdroje klienta",
+        "icon": "folder",
+        "selectResource": "Vyberte zdroj z tabulky.",
+        "unsupported": "Tento typ zdroje zde nelze upravovat.",
+        "newPath": "Cesta / jméno souboru",
+        "addResource": "Přidat zdroj",
+        "loadResource": "Načíst zdroj",
+        "image": "Obrázek"
+      },
       "cdk": {
         "title": "ČDK",
         "desc": "Česká digitální knihovna",
         "icon": "local_library"
+      }
+    },
+    "client-settings": {
+      "title": "Client settings",
+      "desc": "Konfigurace klienta",
+      "icon": "code",
+      "settings": {
+        "title": "Konfigurace",
+        "desc": "JSON konfigurace klienta",
+        "icon": "code"
+      },
+      "resources": {
+        "title": "Zdroje klienta",
+        "desc": "HTML a obrázkové zdroje klienta",
+        "icon": "folder",
+        "selectResource": "Vyberte zdroj z tabulky.",
+        "unsupported": "Tento typ zdroje zde nelze upravovat.",
+        "newPath": "Cesta / jméno souboru",
+        "addResource": "Přidat zdroj",
+        "loadResource": "Načíst zdroj",
+        "image": "Obrázek"
       }
     },
     "statistics": {
@@ -546,7 +583,8 @@
     "reload": "Obnovit",
     "addRuntimeLicense": "Přidat runtime licenci",
     "startfixprocess": "Spustit opravný proces",
-    "fixlogprocess":"Opravný proces pro logy"  
+    "fixlogprocess":"Opravný proces pro logy",  
+    "upload": "Nahrát"
   },
   "field": {
     "public": "Veřejné",
@@ -1125,6 +1163,7 @@
       "startTheProcess": "Došlo k chybě při spuštění procesu",
       "addingAnItem": "Chyba při přidání položky",
       "deletingItem": "Chyba při smazání položky",
+      "loadingAnItem": "Chyba při načítání položky",
       "savingAnItem": "Chyba při ukládání položky",
       "savingAnRecord": "Chyba při ukládání záznamu",
       "scheduleCDKHarvest":"Reharvest objektu se nepodařilo naplánovat",
@@ -1290,6 +1329,7 @@
     "prefferedUserName": "Preferované uživatelské jméno",
     "download": "Stáhnout",
     "fileName": "Jméno souboru",
+    "path": "Cesta",
     "creationDate": "Datum vytvoření",
     "listOfGeneratedLogsInDirectories": "Seznam vygenerovaných logů v adresáří",
     "sendByEmail": "Poslat emailem",

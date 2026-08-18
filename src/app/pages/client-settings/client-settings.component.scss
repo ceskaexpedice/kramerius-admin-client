@@ -1,0 +1,301 @@
+.app-client-settings {
+  .app-json-editor-field {
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 420px;
+    min-height: 360px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .app-json-highlight,
+  .app-json-editor {
+    box-sizing: border-box;
+    font-family: Consolas, Monaco, 'Courier New', monospace;
+    font-size: 13px;
+    height: 100%;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 360px;
+    padding: 12px;
+    tab-size: 2;
+    white-space: pre;
+    width: 100%;
+  }
+
+  .app-json-highlight {
+    background: var(--mat-sys-surface-container-lowest);
+    color: var(--mat-sys-on-surface);
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .app-json-editor {
+    background: transparent;
+    border: 0;
+    caret-color: var(--mat-sys-on-surface);
+    color: transparent;
+    outline: none;
+    overflow: auto;
+    position: relative;
+    resize: none;
+  }
+
+  .app-json-editor::selection {
+    background: color-mix(in srgb, var(--mat-sys-primary) 30%, transparent);
+    color: transparent;
+  }
+
+  .app-json-editor-disabled {
+    opacity: .65;
+  }
+
+  .app-json-highlight ::ng-deep .app-json-key {
+    color: #7b1fa2;
+  }
+
+  .app-json-highlight ::ng-deep .app-json-string {
+    color: #2e7d32;
+  }
+
+  .app-json-highlight ::ng-deep .app-json-number {
+    color: #1565c0;
+  }
+
+  .app-json-highlight ::ng-deep .app-json-boolean {
+    color: #ad5f00;
+  }
+
+  .app-json-highlight ::ng-deep .app-json-null {
+    color: #757575;
+  }
+
+  .app-client-settings-resources {
+    box-sizing: border-box;
+    display: block;
+    margin: 8px 0 10px;
+    max-height: 220px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+  }
+
+  .app-client-settings-resources .app-table {
+    font-size: 12px;
+  }
+
+  .app-client-settings-resources .app-table th,
+  .app-client-settings-resources .app-table td {
+    height: 28px;
+    line-height: 20px;
+    padding: 2px 8px;
+  }
+
+  .app-client-settings-resources .app-table td:first-child {
+    font-family: Consolas, Monaco, 'Courier New', monospace;
+    max-width: 420px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .app-client-settings-resources .app-table td:first-child a {
+    color: var(--mat-sys-primary);
+    text-decoration: none;
+  }
+
+  .app-client-settings-resources .app-table td:first-child a:hover {
+    text-decoration: underline;
+  }
+
+  .app-client-settings-resources .app-table td:nth-child(2),
+  .app-client-settings-resources .app-table td:nth-child(3) {
+    white-space: nowrap;
+    width: 82px;
+  }
+
+  .app-client-settings-resources .app-sort-header {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: inherit;
+    gap: 4px;
+    max-width: 100%;
+    min-height: 24px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .app-client-settings-resources .app-sort-header span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .app-client-settings-resources .app-sort-header mat-icon {
+    color: var(--mat-sys-on-surface-variant);
+    flex: 0 0 16px;
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;
+  }
+
+  .app-client-settings-resources .app-sort-header.app-active mat-icon {
+    color: var(--mat-sys-primary);
+  }
+
+  .app-client-settings-resources .app-col-action {
+    align-items: center;
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    padding-right: 4px;
+    text-align: right;
+    width: 32px;
+  }
+
+  .app-client-settings-resources .app-col-action a {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    height: 24px;
+    justify-content: center;
+    text-decoration: none;
+    vertical-align: middle;
+    width: 24px;
+  }
+
+  .app-client-settings-resources .app-col-action a.app-disabled {
+    cursor: default;
+    opacity: .45;
+    pointer-events: none;
+  }
+
+  .app-client-settings-resources .app-col-action a mat-icon {
+    color: var(--mat-sys-primary);
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+    margin: 0;
+    width: 16px;
+  }
+
+  .app-client-settings-actions {
+    clear: both;
+    margin-top: 8px;
+    position: relative;
+    z-index: 0;
+  }
+}
+
+.app-client-resources {
+  .app-client-resource-create {
+    flex-wrap: wrap;
+  }
+
+  .app-client-resource-path {
+    flex: 1 1 280px;
+    min-width: 220px;
+  }
+
+  .app-client-resource-type {
+    flex: 0 0 150px;
+  }
+
+  .app-client-resource-create button {
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .app-client-resources-table {
+    max-height: 320px;
+  }
+
+  .app-sort-header {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: inherit;
+    gap: 4px;
+    max-width: 100%;
+    min-height: 24px;
+    padding: 0;
+    text-align: left;
+  }
+
+  .app-sort-header span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .app-sort-header mat-icon {
+    color: var(--mat-sys-on-surface-variant);
+    flex: 0 0 16px;
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;
+  }
+
+  .app-sort-header.app-active mat-icon {
+    color: var(--mat-sys-primary);
+  }
+
+  .app-client-resource-row {
+    cursor: pointer;
+
+    td:first-child {
+      align-items: center;
+      display: flex;
+    }
+
+    &.app-selected {
+      background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+    }
+  }
+
+  .app-client-resource-editor {
+    border-top: 1px solid var(--mat-sys-outline-variant);
+    padding-top: 16px;
+  }
+
+  .app-client-resource-image-insert {
+    flex-wrap: wrap;
+  }
+
+  .app-client-resource-image-select {
+    flex: 1 1 320px;
+    min-width: 240px;
+  }
+
+  .app-client-resource-image-preview {
+    background: var(--mat-sys-surface-container-lowest);
+    border: 1px solid var(--mat-sys-outline-variant);
+    border-radius: 4px;
+    max-height: 360px;
+    max-width: min(520px, 100%);
+    object-fit: contain;
+    padding: 8px;
+  }
+
+  .app-client-resource-empty {
+    color: var(--mat-sys-on-surface-variant);
+    font-size: 13px;
+  }
+}

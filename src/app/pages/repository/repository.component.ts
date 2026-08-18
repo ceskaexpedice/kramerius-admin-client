@@ -67,8 +67,6 @@ export class RepositoryComponent implements OnInit {
   defaultSet:OAISet = null;
   deafultSetQuery = "";
 
-
-
   constructor(
     private dialog: MatDialog,
     private ui: UIService,
@@ -624,3 +622,4 @@ export class RepositoryComponent implements OnInit {
   }
 
 }
+

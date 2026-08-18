@@ -163,10 +163,47 @@
         "desc": "OAI PMH protocol",
         "icon": "api"
       },
+      "client-settings": {
+        "title": "Client settings",
+        "desc": "Client JSON configuration",
+        "icon": "code"
+      },
+      "client-resources": {
+        "title": "Client resources",
+        "desc": "Client HTML and image resources",
+        "icon": "folder",
+        "selectResource": "Select a resource from the table.",
+        "unsupported": "This resource type cannot be edited here.",
+        "newPath": "Path / file name",
+        "addResource": "Add resource",
+        "loadResource": "Load resource",
+        "image": "Image"
+      },
       "cdk": {
         "title": "Cdk",
         "desc": "Czech digital library",
         "icon": "local_library"
+      }
+    },
+    "client-settings": {
+      "title": "Client settings",
+      "desc": "Client configuration",
+      "icon": "code",
+      "settings": {
+        "title": "Configuration",
+        "desc": "Client JSON configuration",
+        "icon": "code"
+      },
+      "resources": {
+        "title": "Client resources",
+        "desc": "Client HTML and image resources",
+        "icon": "folder",
+        "selectResource": "Select a resource from the table.",
+        "unsupported": "This resource type cannot be edited here.",
+        "newPath": "Path / file name",
+        "addResource": "Add resource",
+        "loadResource": "Load resource",
+        "image": "Image"
       }
     },
     "statistics": {
@@ -546,7 +583,8 @@
     "reload": "Reload",
     "addRuntimeLicense": "Add runtime license",
     "startfixprocess": "Start fix process",
-    "fixlogprocess":"Fix logs process"
+    "fixlogprocess":"Fix logs process",
+    "upload": "Upload"
   },
   "field": {
     "public": "Public",
@@ -1128,6 +1166,7 @@
       "startTheProcess": "An error occurred while starting the process",
       "addingAnItem": "Error adding item",
       "deletingItem": "Error deleting item",
+      "loadingAnItem": "Error loading item",
       "savingAnItem": "Error saving item",
       "savingAnRecord": "Error saving record",
       "scheduleCDKHarvest":"CDK harvest has NOT been planned",
@@ -1293,6 +1332,7 @@
     "prefferedUserName": "Preffered user name",
     "download": "Download",
     "fileName": "File name",
+    "path": "Path",
     "creationDate": "Creation date",
     "listOfGeneratedLogsInDirectories": "List of generated logs in directories",
     "sendByEmail": "Send by e-mail",

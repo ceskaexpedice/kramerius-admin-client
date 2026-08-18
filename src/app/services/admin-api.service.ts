@@ -17,6 +17,25 @@ import { RightAction } from '../models/right-action.model';
 import { SdnntItem, SdnntSync } from '../models/sdnnt.model';
 import { KappItem, KappSync } from '../models/kapp.model';
 
+export interface ClientResource {
+  name: string;
+  path: string;
+  type?: 'html' | 'image' | 'other';
+  mimeType?: string;
+  size?: number;
+  lastModified?: string;
+}
+
+export interface UIConfigMetadata {
+  key: string;
+  endpoint: UIConfigEndpoint;
+  title: string;
+  schema?: any;
+  resourceReferencePatterns?: string[];
+}
+
+export type UIConfigEndpoint = string;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -516,10 +535,108 @@ export class AdminApiService {
   }
 
   setConfigValue(key:string, value:string):Observable<string> {
-//    return this.get(`admin/v7.0/config/${key}`).pipe(map(response => response as string));
     return this.put(`/config/${key}`, value).pipe(
       map(response => response as string)
     );
+  }
+
+  saveUIConfig(endpoint: UIConfigEndpoint, value: any): Observable<any> {
+    return this.post(`/ui-config/${endpoint}`, value);
+  }
+
+  getUIConfig(endpoint: UIConfigEndpoint): Observable<any> {
+    return this.get(`/ui-config/${endpoint}`);
+  }
+
+  getUIConfigMetadata(): Observable<UIConfigMetadata[]> {
+    return this.get('/ui-config/metadata').pipe(
+      map((response: any) => response?.configs || [])
+    );
+  }
+
+  // saveUIConfigGeneral(value:string):Observable<string> {
+  //   return this.saveUIConfig('general', this.parseJsonValue(value)).pipe(
+  //     map(response => response as string)
+  //   );
+  // }
+
+  // getUIlConfigGeneral():Observable<string> {
+  //   return this.getUIConfig('general').pipe(
+  //     map(response => typeof response === 'string' ? response : JSON.stringify(response, null, 2))
+  //   );
+  // }
+
+  private parseJsonValue(value: string) {
+    try {
+      return JSON.parse(value);
+    } catch (error) {
+      return value;
+    }
+  }
+
+  getClientResources(): Observable<ClientResource[]> {
+    return this.get('/ui-config/resources').pipe(
+      map((response: any) => (response?.resources || response || []).map((resource: any) => {
+        const path = resource.resourceKey || resource.path || '';
+        const mimeType = resource.contentType || resource.mimeType || '';
+        return {
+          name: resource.name || this.getResourceName(path),
+          path,
+          type: this.getResourceType(path, mimeType),
+          mimeType,
+          size: resource.size,
+          lastModified: resource.lastModified
+        };
+      }))
+    );
+  }
+
+  getClientResourceText(path: string): Observable<string> {
+    return this.getText(`/ui-config/resources/${this.encodeResourceKey(path)}`);
+  }
+
+  setClientResourceText(path: string, value: string): Observable<any> {
+    return this.put(`/ui-config/resources/${this.encodeResourceKey(path)}`, value, {
+      headers: new HttpHeaders({ 'Content-Type': 'text/html; charset=utf-8' })
+    });
+  }
+
+  uploadClientResource(path: string, file: File): Observable<any> {
+    return this.put(`/ui-config/resources/${this.encodeResourceKey(path)}`, file, {
+      headers: new HttpHeaders({ 'Content-Type': file.type || 'application/octet-stream' })
+    });
+  }
+
+  deleteClientResource(path: string): Observable<any> {
+    return this.delete(`/ui-config/resources/${this.encodeResourceKey(path)}`);
+  }
+
+  getClientResourceUrl(path: string, timestamp?: number): string {
+    const reload = timestamp ? `?t=${timestamp}` : '';
+    return `${this.appSettings.clientApiBaseUrl}/ui-config/resources/${this.encodeResourceKey(path)}${reload}`;
+  }
+
+  private encodeResourceKey(resourceKey: string): string {
+    return (resourceKey || '').split('/').map(segment => encodeURIComponent(segment)).join('/');
+  }
+
+  private getResourceName(resourceKey: string): string {
+    return resourceKey?.split('/').filter(Boolean).pop() || resourceKey || '';
+  }
+
+  private getResourceType(resourceKey: string, contentType: string): 'html' | 'image' | 'other' {
+    const path = (resourceKey || '').toLowerCase();
+    const mimeType = contentType || '';
+
+    if (mimeType.includes('html') || path.endsWith('.html') || path.endsWith('.htm')) {
+      return 'html';
+    }
+
+    if (mimeType.startsWith('image/') || /\.(png|jpe?g|gif|webp|svg)$/i.test(path)) {
+      return 'image';
+    }
+
+    return 'other';
   }
 
 

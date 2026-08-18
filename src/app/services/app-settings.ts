@@ -35,6 +35,7 @@ export class AppSettings {
 
   homeDashboard = APP_GLOBAL.homeDashboard || [];
   cdkMode = !!APP_GLOBAL.cdkMode;
+  clientSettingsEnabled = APP_GLOBAL.clientSettingsEnabled !== false;
 
   proarc = APP_GLOBAL.proarc || [];
   altoeditor = APP_GLOBAL.altoeditor || [];

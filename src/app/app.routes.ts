@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router, Routes } from '@angular/router';
 import { AuthComponent } from './components/auth/auth.component';
 import { LoginComponent } from './pages/account/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -18,10 +19,18 @@ import { CollectionComponent } from './pages/collections/collection/collection.c
 import { IndexingComponent } from './pages/indexing/indexing.component';
 import { ConfigComponent } from './components/config/config.component';
 import { RepositoryComponent } from './pages/repository/repository.component';
+import { ClientSettingsComponent } from './pages/client-settings/client-settings.component';
 import { CdkCollectionNewComponent } from './pages/cdk-collections/cdk-collection-new/cdk-collection-new.component';
 import { CdkCollectionComponent } from './pages/cdk-collections/cdk-collection/cdk-collection.component';
 import { CdkCollectionsComponent } from './pages/cdk-collections/cdk-collections.component';
 import { MonitoringComponent } from './pages/monitoring/monitoring.component';
+import { AppSettings } from './services/app-settings';
+
+const clientSettingsEnabledGuard: CanActivateFn = () => {
+  const settings = inject(AppSettings);
+  const router = inject(Router);
+  return settings.clientSettingsEnabled || router.createUrlTree(['/repository']);
+};
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -46,7 +55,13 @@ export const routes: Routes = [
   { path: 'repository/exports', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/bulk-data-editing', component: RepositoryComponent, canActivate: [AuthGuard] },
   { path: 'repository/oai', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'repository/client-settings', redirectTo: 'client-settings/settings' },
+  { path: 'repository/client-resources', redirectTo: 'client-settings/resources' },
   { path: 'repository/cdk', component: RepositoryComponent, canActivate: [AuthGuard] },
+  { path: 'client-settings', redirectTo: 'client-settings/settings' },
+  { path: 'client-settings/settings', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+  { path: 'client-settings/resources', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
+  { path: 'client-settings/resources/:resourceName', component: ClientSettingsComponent, canActivate: [AuthGuard, clientSettingsEnabledGuard] },
   /* to delete after testing { path: 'repository/statistics', component: RepositoryComponent, canActivate: [AuthGuard] }, */
   { path: 'object', component: ObjectComponent, canActivate: [AuthGuard] },
   { path: 'object/:pid', component: ObjectComponent, canActivate: [AuthGuard] },

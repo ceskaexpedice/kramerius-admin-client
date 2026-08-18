@@ -1,0 +1,318 @@
+<div class="app-client-settings-page app-fxLayout app-column app-fill app-form-customize">
+  <div class="app-fxLayout app-column app-fill">
+    <div class="app-topbar">
+      <div class="app-breadcrumbs app-mb-4">
+        <mat-icon class="material-icons-outlined app-mr-2">home</mat-icon>
+        <a routerLink="/">home</a>
+        <span class="app-separator">/</span>
+        <span class="app-last">{{ 'sites.client-settings.title' | translate }}</span>
+      </div>
+      <div>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false">
+          <a mat-tab-link (click)="changeView('settings')" [active]="view == 'settings'">
+            <mat-icon class="material-icons-outlined">code</mat-icon>
+            {{ 'sites.client-settings.settings.title' | translate }}
+          </a>
+          <a mat-tab-link (click)="changeView('resources')" [active]="view == 'resources'">
+            <mat-icon class="material-icons-outlined">folder</mat-icon>
+            {{ 'sites.client-settings.resources.title' | translate }}
+          </a>
+        </nav>
+        <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+      </div>
+    </div>
+
+    <div class="app-fxFlex app-oa-y">
+      <div class="app-container">
+        @if (view == 'settings') {
+          <mat-card appearance="outlined" class="app-client-settings">
+            <mat-card-content>
+              <mat-accordion multi>
+                @for (editor of clientSettingsEditors; track editor.key) {
+                  <mat-expansion-panel expanded="true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>{{ editor.title }}</mat-panel-title>
+                      <mat-panel-description>{{ editor.key }}</mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div
+                      class="app-json-editor-field"
+                      [class.app-json-editor-disabled]="isClientSettingBusy(editor)">
+                      <pre #highlight class="app-json-highlight" aria-hidden="true" [innerHTML]="editor.highlightedValue"></pre>
+                      <textarea
+                        class="app-json-editor"
+                        rows="18"
+                        wrap="off"
+                        spellcheck="false"
+                        [disabled]="isClientSettingBusy(editor)"
+                        [(ngModel)]="editor.value"
+                        (ngModelChange)="onClientSettingChange(editor)"
+                        (keydown)="onJsonEditorKeydown($event, editor)"
+                        (scroll)="onJsonEditorScroll($event, highlight)">
+                      </textarea>
+                    </div>
+                    @if (editor.resourceReferences.length > 0) {
+                      <div class="app-table-wrapper app-view-border app-client-settings-resources">
+                        <table class="app-table">
+                          <thead>
+                            <tr>
+                              <th>
+                                <button type="button" class="app-sort-header" (click)="sortResourceReferencesBy(editor, 'path')" [class.app-active]="isResourceReferencesSortedBy(editor, 'path')">
+                                  <span>Zdroj</span>
+                                  <mat-icon>{{ getResourceReferencesSortIcon(editor, 'path') }}</mat-icon>
+                                </button>
+                              </th>
+                              <th>
+                                <button type="button" class="app-sort-header" (click)="sortResourceReferencesBy(editor, 'type')" [class.app-active]="isResourceReferencesSortedBy(editor, 'type')">
+                                  <span>Typ</span>
+                                  <mat-icon>{{ getResourceReferencesSortIcon(editor, 'type') }}</mat-icon>
+                                </button>
+                              </th>
+                              <th>
+                                <button type="button" class="app-sort-header" (click)="sortResourceReferencesBy(editor, 'status')" [class.app-active]="isResourceReferencesSortedBy(editor, 'status')">
+                                  <span>Stav</span>
+                                  <mat-icon>{{ getResourceReferencesSortIcon(editor, 'status') }}</mat-icon>
+                                </button>
+                              </th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @for (reference of editor.resourceReferences; track reference.path) {
+                              <tr>
+                                <td>
+                                  <a [href]="getClientResourceReferenceClientUrl(reference)" target="_blank" rel="noopener noreferrer" [matTooltip]="getClientResourceReferenceClientUrl(reference)">
+                                    {{ reference.path }}
+                                  </a>
+                                </td>
+                                <td>{{ reference.type }}</td>
+                                <td>
+                                  @if (reference.exists) {
+                                    Existuje
+                                  } @else {
+                                    Neexistuje
+                                  }
+                                </td>
+                                <td class="app-col-action">
+                                  @if (reference.exists) {
+                                    <a (click)="openClientResourceReference(reference)" matTooltip="Otevrit">
+                                      <mat-icon>open_in_new</mat-icon>
+                                    </a>
+                                  } @else {
+                                    <a [class.app-disabled]="clientResourceCreating" (click)="!clientResourceCreating && createClientResourceFromReference(reference)" [matTooltip]="reference.type == 'image' ? 'Nahrat' : 'Vytvorit'">
+                                      <mat-icon>{{ reference.type == 'image' ? 'upload' : 'add' }}</mat-icon>
+                                    </a>
+                                  }
+                                </td>
+                              </tr>
+                            }
+                          </tbody>
+                        </table>
+                      </div>
+                    }
+
+                    <div class="app-fxLayout app-row app-gap-2 app-client-settings-actions">
+                      <button
+                        matButton="filled"
+                        color="primary"
+                        (click)="saveClientSetting(editor)"
+                        [disabled]="isClientSettingBusy(editor) || !isClientSettingChanged(editor)">
+                        {{ 'button.save' | translate }}
+                      </button>
+                      <button
+                        matButton="filled"
+                        color="primary"
+                        (click)="loadClientSetting(editor)"
+                        [disabled]="isClientSettingBusy(editor)">
+                        {{ 'button.reload' | translate }}
+                      </button>
+                    </div>
+                  </mat-expansion-panel>
+                }
+              </mat-accordion>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        @if (view == 'resources') {
+          <mat-card appearance="outlined" class="app-client-resources">
+            <mat-card-content>
+              <div class="app-fxLayout app-row app-center-v app-mb-4 app-gap-2">
+                <h3 class="app-m-0 app-fxFlex">{{ 'sites.client-settings.resources.title' | translate }}</h3>
+                <button matButton="filled" color="primary" (click)="loadClientResources()" [disabled]="clientResourcesLoading">
+                  {{ 'button.reload' | translate }}
+                </button>
+              </div>
+
+              <div class="app-client-resource-create app-fxLayout app-row app-center-v app-gap-2 app-mb-4">
+                <mat-form-field appearance="outline" class="app-client-resource-path">
+                  <mat-label>{{ 'sites.client-settings.resources.newPath' | translate }}</mat-label>
+                  <input matInput [(ngModel)]="newClientResourcePath" [placeholder]="'sites.client-settings.resources.newPath' | translate">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="app-client-resource-type">
+                  <mat-label>{{ 'desc.type' | translate }}</mat-label>
+                  <mat-select [(ngModel)]="newClientResourceType">
+                    <mat-option value="html">HTML</mat-option>
+                    <mat-option value="image">{{ 'sites.client-settings.resources.image' | translate }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                @if (newClientResourceType == 'image') {
+                  <input type="file" (change)="onNewClientResourceFileSelected($event)" accept="image/*" #newResourceFileInput class="app-dn">
+                  <button matButton color="primary" (click)="newResourceFileInput.click()" [disabled]="clientResourceCreating">
+                    <mat-icon>upload</mat-icon>
+                    {{ newClientResourceFile?.name || ('button.upload' | translate) }}
+                  </button>
+                }
+                <button matButton="filled" color="primary" (click)="createClientResource()" [disabled]="!canCreateClientResource()">
+                  <mat-icon>add</mat-icon>
+                  {{ 'sites.client-settings.resources.addResource' | translate }}
+                </button>
+                <button matButton color="primary" (click)="loadClientResourceByKey()" [disabled]="!newClientResourcePath || clientResourceLoading">
+                  <mat-icon>search</mat-icon>
+                  {{ 'sites.client-settings.resources.loadResource' | translate }}
+                </button>
+              </div>
+
+              <div class="app-table-wrapper app-view-border app-oa-y app-client-resources-table">
+                <table class="app-table">
+                  <thead>
+                    <tr>
+                      <th>
+                        <button type="button" class="app-sort-header" (click)="sortClientResourcesBy('name')" [class.app-active]="isClientResourcesSortedBy('name')">
+                          <span>{{ 'desc.fileName' | translate }}</span>
+                          <mat-icon>{{ getClientResourcesSortIcon('name') }}</mat-icon>
+                        </button>
+                      </th>
+                      <th>
+                        <button type="button" class="app-sort-header" (click)="sortClientResourcesBy('type')" [class.app-active]="isClientResourcesSortedBy('type')">
+                          <span>{{ 'desc.type' | translate }}</span>
+                          <mat-icon>{{ getClientResourcesSortIcon('type') }}</mat-icon>
+                        </button>
+                      </th>
+                      <th>
+                        <button type="button" class="app-sort-header" (click)="sortClientResourcesBy('path')" [class.app-active]="isClientResourcesSortedBy('path')">
+                          <span>{{ 'desc.path' | translate }}</span>
+                          <mat-icon>{{ getClientResourcesSortIcon('path') }}</mat-icon>
+                        </button>
+                      </th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (resource of clientResources; track resource.path) {
+                      <tr
+                        class="app-client-resource-row"
+                        [class.app-selected]="selectedClientResource?.path == resource.path"
+                        (click)="selectClientResource(resource)">
+                        <td>
+                          <mat-icon class="material-icons-outlined app-mr-2">
+                            {{ getClientResourceType(resource) == 'image' ? 'image' : (getClientResourceType(resource) == 'html' ? 'html' : 'draft') }}
+                          </mat-icon>
+                          {{ resource.name }}
+                        </td>
+                        <td>{{ getClientResourceType(resource) }}</td>
+                        <td>{{ resource.path }}</td>
+                        <td class="app-col-action">
+                          <a (click)="$event.stopPropagation(); deleteClientResource(resource)" [matTooltip]="'button.delete' | translate">
+                            <mat-icon>delete</mat-icon>
+                          </a>
+                        </td>
+                      </tr>
+                    }
+                    @if (!clientResourcesLoading && clientResources.length == 0) {
+                      <tr>
+                        <td colspan="4">{{ 'alert.statistics.noData' | translate }}</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="app-client-resource-editor app-mt-4">
+                @if (selectedClientResource) {
+                  <div class="app-fxLayout app-row app-center-v app-gap-2 app-mb-3">
+                    <h3 class="app-m-0 app-fxFlex">{{ selectedClientResource.name }}</h3>
+                    @if (selectedClientResourceType == 'html') {
+                      <button
+                        matButton="filled"
+                        color="primary"
+                        (click)="saveSelectedClientResource()"
+                        [disabled]="isClientResourceBusy() || !isSelectedClientResourceChanged()">
+                        {{ 'button.save' | translate }}
+                      </button>
+                    }
+                    <a
+                      matButton
+                      color="primary"
+                      [href]="getSelectedClientResourceClientUrl()"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      [matTooltip]="getSelectedClientResourceClientUrl()">
+                      <mat-icon>open_in_new</mat-icon>
+                      Klient
+                    </a>
+                    <button
+                      matButton
+                      color="warn"
+                      (click)="deleteClientResource()"
+                      [disabled]="isClientResourceBusy()">
+                      <mat-icon>delete</mat-icon>
+                      {{ 'button.delete' | translate }}
+                    </button>
+                  </div>
+
+                  @if (selectedClientResourceType == 'html') {
+                    <div class="app-client-resource-image-insert app-fxLayout app-row app-center-v app-gap-2 app-mb-3">
+                      <mat-form-field appearance="outline" class="app-client-resource-image-select">
+                        <mat-label>Obrazek</mat-label>
+                        <mat-select [(ngModel)]="selectedHtmlImageResourcePath">
+                          @for (resource of getClientImageResources(); track resource.path) {
+                            <mat-option [value]="resource.path">{{ resource.path }}</mat-option>
+                          }
+                        </mat-select>
+                      </mat-form-field>
+                      <button
+                        matButton="filled"
+                        color="primary"
+                        (click)="insertSelectedHtmlImageResource()"
+                        [disabled]="!canInsertSelectedHtmlImage()">
+                        <mat-icon>image</mat-icon>
+                        Vlozit obrazek
+                      </button>
+                    </div>
+                    <ckeditor
+                      [config]="htmlEditorConfig"
+                      [editor]="HtmlEditor"
+                      [disabled]="isClientResourceBusy()"
+                      [(ngModel)]="selectedClientResourceContent"
+                      (ready)="onHtmlEditorReady($event)"
+                      data=""
+                      name="clientResourceHtml">
+                    </ckeditor>
+                  } @else if (selectedClientResourceType == 'image') {
+                    <div class="app-client-resource-image-editor app-fxLayout app-row app-gap-4">
+                      <img
+                        class="app-client-resource-image-preview"
+                        [src]="getSelectedClientResourcePreviewUrl()"
+                        onerror="this.src='assets/img/no-image.png'" />
+                      <div>
+                        <input type="file" (change)="onClientResourceFileSelected($event)" accept="image/*" #resourceFileInput class="app-dn">
+                        <button matButton="filled" color="primary" (click)="resourceFileInput.click()" [disabled]="isClientResourceBusy()">
+                          {{ 'button.upload' | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  } @else {
+                    <div class="app-client-resource-empty">{{ 'sites.client-settings.resources.unsupported' | translate }}</div>
+                  }
+                } @else {
+                  <div class="app-client-resource-empty">{{ 'sites.client-settings.resources.selectResource' | translate }}</div>
+                }
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    </div>
+  </div>
+</div>
