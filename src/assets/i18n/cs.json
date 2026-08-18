@@ -5,7 +5,6 @@
     "slk": "Slovenština",
     "ger": "Němčina",
     "eng": "Angličtina",
-
     "cs": "Čeština",
     "sk": "Slovenština",
     "en": "Angličtina",
@@ -139,7 +138,7 @@
         "title": "Model",
         "desc": "Indexace objektů (a jejich stromů), které mají vybraný model.",
         "icon": "category"
-      } 
+      }
     },
     "repository": {
       "title": "Repozitář",
@@ -185,11 +184,11 @@
         "title": "Generování logů pro NK",
         "desc": "Generování logů pro NK.",
         "icon": "fitbit"
-      } 
+      }
     },
     "cdk": {
       "title": "ČDK",
-      "icon":"settings_ethernet",
+      "icon": "settings_ethernet",
       "desc": "Nastavení zapojených knihoven",
       "proxy": {
         "title": "Proxy - Zapojené knihovny",
@@ -210,7 +209,7 @@
         "title": "Sledování API",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "monitoring"
-      }    
+      }
     },
     "settings": {
       "title": "Nastavení",
@@ -338,18 +337,17 @@
       "title": "Možnost být zařazen do sbírky",
       "subtitle": "Toto právo dává objektům možnost být zařazen do sbírky"
     },
-    "a_sdnnt_sync":{
+    "a_sdnnt_sync": {
       "title": "Synchronizace licencí se Seznamem děl nedostupných na trhu",
       "subtitle": "Synchronizace licencí se Seznamem děl nedostupných na trhu"
     },
-    "a_object_edit":{
+    "a_object_edit": {
       "title": "Editace objektu",
       "subtitle": "Právo editovat objekt"
     },
-    "a_admin_api_specification_read":{
+    "a_admin_api_specification_read": {
       "title": "Čtení  specifikace administračního API",
       "subtitle": "Možnost získat specifikaci administračního API "
-
     }
   },
   "alert": {
@@ -377,7 +375,7 @@
     "createOrEditLicense": {
       "error1": "Licence s tímto názvem už exituje, zadejte jiný název.",
       "error2": "Licenci se nepodařilo vytvořit.",
-      "errorlock1":"Změna typu zámku, nutno uložit. "
+      "errorlock1": "Změna typu zámku, nutno uložit. "
     },
     "collections": {
       "noData": {
@@ -397,31 +395,22 @@
   "batch": {
     "PLANNED": "Naplánováno",
     "PLANNED_BATCH": "Naplánováno",
-
     "RUNNING": "Běží",
     "RUNNING_BATCH": "Čeká",
-
     "FINISHED": "Dokončeno",
     "FINISHED_BATCH": "Dokončeno",
-
     "FAILED": "Chyba",
     "FAILED_BATCH": "Chyba",
-
     "KILLED": "Zrušeno",
     "KILLED_BATCH": "Zrušeno",
-
     "NOT_RUNNING": "Nespuštěno",
     "WARNING": "Varování",
-
-    "WARNING_BATCH":  "Varování",
-
+    "WARNING_BATCH": "Varování",
     "currentVersionOfTheIndexer": "Aktuální verze indexeru",
     "sessionExpire": "Do odhlášení zbýva"
   },
   "paginator": {
     "desc": {
-      "pageNumber": "Číslo stránky",
-      "sortBy": "Řadit podle",
       "itemsPerPageLabel": "Počet záznamů na stránce",
       "nextPageLabel": "Následující stránka",
       "previousPageLabel": "Předchozí stránka",
@@ -429,13 +418,10 @@
       "lastPageLabel": "Poslední stránka",
       "rangeLabel1": "0 z {{length}}",
       "rangeLabel2": "{{startIndex}} - {{endIndex}} z {{length}}"
-    },
-    "tooltip": {
-      "scrollToThePageNumber": "Přejít na stránku"
     }
   },
   "button": {
-    "autoRefresProcesses":"Automatický reload {{refreshinterval}} s",
+    "autoRefresProcesses": "Automatický reload {{refreshinterval}} s",
     "showDetail": "Zobrazit detail",
     "hideDetail": "Skrýt detail",
     "startImport": "Spustit import",
@@ -448,8 +434,6 @@
     "addLicense": "Přidat licenci",
     "editLicense": "Editovat licenci",
     "deleteLicense": "Smazat licenci",
-    "moveUp": "Posunout nahoru",
-    "moveDown": "Posunout dolu",
     "addParameter": "Přidat parametr",
     "editParameter": "Editovat parametr",
     "deleteParameter": "Smazat parametr",
@@ -471,7 +455,6 @@
     "showStandaloneOnly": "Zobrazit pouze samostatné",
     "addToThisCollection": "Přidat do této sbírky",
     "addToACollection": "Přidat do sbírky",
-    "removeFromThisCollection": "Odebrat z této sbírky",
     "removeFromCollection": "Odebrat ze sbírky",
     "addThisCollectionToAnotherCollection": "Přidat tuto sbírku do jiné sbírky",
     "create": "Vytvořit",
@@ -479,14 +462,8 @@
     "remove": "Odstranit",
     "buildProcessingIndex": "Vybudovat processing index",
     "rebuildTheProcessingIndexForTheObject": "Přebudovat processing index pro objekt",
-    "import": "Importovat",
-    "exportDocument": "Exportovat dokument",
-    "exportStatistics": "Exportovat statistiky",
-    "exportPidsOfDnntLicensedObjects": "Exportovat PIDy objektů s licencí DNNT",
-    "generateAccessLogs": "Generovat přístupové logy",
     "setPublicPrivate": "Nastavit public/private",
     "removeLicense": "Odebrat licenci",
-    "setPublicByDates": "Nastavit public podle datumů",
     "generateNkpLogs": "Generovat NKP logy",
     "deleteStatistics": "Promazat statistiky",
     "index": "Indexovat",
@@ -495,15 +472,12 @@
     "inProgressError": "Probíhá / chyba",
     "indexed": "Indexováno",
     "indexedObsolete": "Indexováno (zastaralé)",
-    "indexInBulk": "Indexovat hromadně",
-    "loadMore": "Načíst další",
     "changeAvailability": "Změnit dostupnost",
     "reindexSearchIndex": "Reindexovat (vyhledávací index)",
     "deleteObjectSmart": "Smazat (chytře)",
     "deleteObjectLowLevel": "Smazat (nízkoúrovňově)",
     "deleteObjectsSmart": "Smazat objekty (chytře)",
     "deleteObjectsLowLevel": "Smazat objekty (nízkoúrovňově)",
-    "export": "Exportovat",
     "copyTheTextToTheClipboard": "Zkopirovat text do schránky",
     "add": "Přidat",
     "cancel": "Zrušit",
@@ -521,16 +495,12 @@
     "editThisCollection": "Editovat tuto sbírku",
     "goToProcesses": "Přejít na procesy",
     "reloadThePage": "Znovunačíst stránku",
-    "increasePriority": "Zvýšit prioritu",
-    "decreasePriority": "Snížit prioritu",
     "addRow": "Přidat řádek",
     "deleteRow": "Odstranit řádek",
-    "synchronizeWithSDNNT": "Synchronizovat se SDNNT",
-    "startSynchronizationLicenses":"Spustit synchronizaci licencí",
-    "startSynchronizationWithSDNNT":"Spustit synchronizaci licencí se SDNNT",
-    "startSynchronizationWithKap":"Spustit synchronizaci licencí s kurátorskou aplikací",
-    "showSynchronzationResults":"Zobrazit výsledek procesu",
-    "startTheSynchronizationProcess": "Spustit proces synchronize",
+    "startSynchronizationLicenses": "Spustit synchronizaci licencí",
+    "startSynchronizationWithSDNNT": "Spustit synchronizaci licencí se SDNNT",
+    "startSynchronizationWithKap": "Spustit synchronizaci licencí s kurátorskou aplikací",
+    "showSynchronzationResults": "Zobrazit výsledek procesu",
     "editObject": "Editovat objekt",
     "indexSelectedObjects": "Indexovat vybrané objekty",
     "indexTheModel": "Indexovat model",
@@ -540,7 +510,6 @@
     "deleteSelectedItems": "Vymazat vybrané položky",
     "changeFlagOnLicense": "Změnit príznak na licenci",
     "change": "Změnit",
-    "removeTheVisibilityFlag": "Odebrat příznak viditelnosti",
     "saveOrderChange": "Uložit změnu pořadí",
     "addNewValue": "Přidat novou hodnotu",
     "languageForEditing": "Jazyk pro editaci",
@@ -564,9 +533,8 @@
     "approve": "Schválit",
     "annualReport": "Roční výkaz",
     "reload": "Obnovit",
-    "addRuntimeLicense": "Přidat runtime licenci",
     "startfixprocess": "Spustit opravný proces",
-    "fixlogprocess":"Opravný proces pro logy",  
+    "fixlogprocess": "Opravný proces pro logy",
     "upload": "Nahrát"
   },
   "field": {
@@ -593,19 +561,19 @@
     "internalpart": "Internalpart",
     "convolute": "Konvoluty",
     "picture": "Obrázky",
-    "multivolumemonograph":"Vícesvazková monografie",
+    "multivolumemonograph": "Vícesvazková monografie",
     "collection": "Sbírky",
-    "running":"Reharvest spuštěn",
-    "open":"Reharvest naplánován",
-    "closed":"Reharvest ukončen",
-    "too_big":"Příliš velké dílo na reharvest -> Nutný ruční zásah",
-    "waiting_for_approve":"Nutnný souhlas pro reharvest",
-    "cancelled":"Reharvest zrušený",
-    "failed":"Reharvest zhavaroval",
-    "root":"Reharvest celého titulu",
-    "children":"Reharvest podčástí (ročník, výtisk,..)",
-    "new_root":"Nový harvest celého titulu",
-    "only_pid":"Reharvest pouze daného pidu",
+    "running": "Reharvest spuštěn",
+    "open": "Reharvest naplánován",
+    "closed": "Reharvest ukončen",
+    "too_big": "Příliš velké dílo na reharvest -> Nutný ruční zásah",
+    "waiting_for_approve": "Nutnný souhlas pro reharvest",
+    "cancelled": "Reharvest zrušený",
+    "failed": "Reharvest zhavaroval",
+    "root": "Reharvest celého titulu",
+    "children": "Reharvest podčástí (ročník, výtisk,..)",
+    "new_root": "Nový harvest celého titulu",
+    "only_pid": "Reharvest pouze daného pidu",
     "delete_pid": "Smazání objektu",
     "delete_tree": "Smazání podstromu",
     "delete_root": "Smazání titulu"
@@ -613,18 +581,16 @@
   "comment": {
     "indexationObject": "Indexace objektu, nebo stromu, jehož je objekt kořenem. Na základě PIDu, nebo seznamu PIDů vloženého do formuláře, nebo načteného ze souboru",
     "indexationModel": "Indexace objektů (a jejich stromů), které mají vybraný model",
-    "indexationAll": "",
     "indexationNotIndexed": "Doposud nebylo indexováno",
     "indexationInProgressError": "Probíhá kompletní indexace, nebo kompletní indexace nebyla řádně dokončena",
     "indexationIndexed": "Indexováno aktuální verzí indexeru",
     "indexationIndexedObsolete": "Indexováno některou starší verzí indexeru",
-    "indexationLoadMore": "Pokračovat v procházení repozitáře a načítaní dalších objektů",
     "indexationIndexInBulk": "Indexovat všechny aktuálně zobrazené objekty - každý ve vlastním procesu",
     "indexationProcessedObjects": "Zpracováno <strong>{{value}}</strong> objektů",
     "indexationScheduledByIndexing": "Naplánováno <strong>{{value}}</strong> indexací"
   },
   "modal": {
-    "removeProcesses":{
+    "removeProcesses": {
       "title": "Smazání procesů",
       "message": "Opravdu chcete smazat procesy"
     },
@@ -716,16 +682,16 @@
       "message2": "Protože se prochází všechny FOXML objekty, jde o náročnou operaci, která může trvat i desítky hodin (podle velikosti repozitáře a dostupného výpočetního výkonu). Proto je doporučeno nejprve Processing index zálohovat.",
       "instruction": {
         "backup": {
-          "title": "Postup zálohy Processing indexu:",
           "1": "vypnout Solr: <i>$SOLR_HOME/bin/solr stop</i>",
           "2": "zálohovat datový adresář Processing indexu: typicky <i>$SOLR_HOME/server/solr/processing/data</i>",
-          "3": "zapnout Solr <i>$SOLR_HOME/bin/solr start</i>"
+          "3": "zapnout Solr <i>$SOLR_HOME/bin/solr start</i>",
+          "title": "Postup zálohy Processing indexu:"
         },
         "recovery": {
-          "title": "Postup obnovy Processing indexu:",
           "1": "vypnout Solr",
           "2": "nahradit datový adresář Processing indexu zálohou",
-          "3": "zapnout Solr"
+          "3": "zapnout Solr",
+          "title": "Postup obnovy Processing indexu:"
         }
       }
     },
@@ -742,7 +708,7 @@
     "startImport": {
       "title": "Spuštění importu",
       "message": "Opravdu chcete spustit import?",
-      "licensemessage":"Opravdu chcete spustit přiřadit licenci a spustit import?"
+      "licensemessage": "Opravdu chcete spustit přiřadit licenci a spustit import?"
     },
     "createOrEditRole": {
       "title": {
@@ -809,7 +775,7 @@
       "title": "Smazání procesu/dávky",
       "message": "Určitě chcete proces/dávku trvale smazat?"
     },
-    "onRemoveCDKReharvest":{
+    "onRemoveCDKReharvest": {
       "title": "Smazání reharvestu",
       "message": "Určitě chcete reharvest  smazat?"
     },
@@ -870,10 +836,10 @@
         "model": "Model",
         "date_issued_year": "Rok vydání",
         "sdnntModel": "Model",
-        "sdnntCatalog":"Katalog/Odkaz do SDNNT",
+        "sdnntCatalog": "Katalog/Odkaz do SDNNT",
         "sdnntDate": "Datum vydání",
-        "real_kram_model":"Model",
-		    "real_kram_date":"Ročník/Výtisk",
+        "real_kram_model": "Model",
+        "real_kram_date": "Ročník/Výtisk",
         "linkMissing": "V KAPP chybí odkaz na objekt, proto není reprezentován odkazem.",
         "sync_actions": {
           "title": "Navrhovaná změna",
@@ -892,14 +858,14 @@
       "timeInfo": "Datum a čas poslední synchronizace",
       "field": {
         "pid": "Pid/Odkaz do DK",
-        "model":"Model",
-        "date_issued_year":"Datum vydání",
+        "model": "Model",
+        "date_issued_year": "Datum vydání",
         "title": "Titulek",
         "kappLink": "Otevřít v KAPP",
         "process": "Proces",
         "sdnntModel": "Model",
-        "real_kram_model":"Model",
-		    "real_kram_date":"Ročník/Výtisk",
+        "real_kram_model": "Model",
+        "real_kram_date": "Ročník/Výtisk",
         "linkMissing": "V SDNNT chybí odkaz na periodikum nebo vícesvazkovou monografii proto není reprezentováno odkazem.",
         "sync_actions": {
           "title": "Navrhovaná změna",
@@ -923,7 +889,6 @@
       "alert": "Následující proměnné musí být nakonfigurovány"
     },
     "scheduleStartTheKapReviewProcess": {
-      "title": "Spuštění procesu synchronizace licencí s KAPP",
       "desc": {
         "krameriusInstance": "Instance krameria",
         "kappInstance": "KAPP instance",
@@ -933,7 +898,6 @@
     },
     "scheduleChangeFlagOnLicense": {
       "title": "Změna príznaku na licenci",
-      "checkbox": "Rovněž odebrat príznak policy",
       "section1": "Licence budou přidělovány pro následující modely",
       "section2": "Příznaky se mapují pro následovně"
     },
@@ -945,32 +909,11 @@
       "title": "O aplikaci",
       "desc": "Administrátorské rozhraní Krameria 7."
     },
-    "scheduleChangeOrderDocumentsInCollection": {
-      "title": "Změna pořadí dokumenů ve sbírce",
-      "alert": "Pokud změníte pořadí dokumentů ve sbírce, vytvoří se proces pro reindexaci a položky se Vám můžou zobrazovat v původním pořadí v seznamu do doby, než tento proces bude ukončen.",
-      "button": {
-        "process": "Uložit a přejít na seznam procesů",
-        "collection": "Uložit a zůstat ve sbírce"
-      }
-    },
-    "scheduleChangeOrderLicenses": {
-      "title": "Změna pořadí licencí",
-      "alert": "Pokud změníte pořadí licencí, vytvoří se proces pro reindexaci a položky se Vám můžou zobrazovat v původním pořadí v seznamu do doby, než tento proces bude ukončen.",
-      "button": {
-        "process": "Uložit a přejít na seznam procesů",
-        "licenses": "Uložit a zůstat v licencích"
-      }
-    },
     "userInfo": {
       "title": "Informace o uživateli"
     },
     "scheduleReHarvestSpecificPids": {
-      "title": "Reharvest objektu",
-      "message": "Znovu sklidit konkrétní objekt",
-      "loadingDataFromLibraries":{
-        "title":"Načítání dat z připojených knihoven",
-        "pleaseWait":"Prosím vyčkejte"
-      }
+      "title": "Reharvest objektu"
     },
     "scheduleMigrateCollections": {
       "title": "Migrovat sbírky z K5 instance"
@@ -990,7 +933,7 @@
     "addNewtSet": {
       "title": "Přidání nového setu"
     },
-    "fixlogprocess":{
+    "fixlogprocess": {
       "title": "Opravný proces pro logy",
       "message": "Proces pro opravu logu. Viz issue:"
     }
@@ -1001,7 +944,6 @@
       "theCollectionHasBeenRemoved": "Sbírka byla odstraněna",
       "removeFromThisCollection": "Položka byla úspěšně odebrána ze sbírky",
       "copyToClipboard": "Text byl úspěšně zkopírován do schánky",
-      "addToTheCollection": "Sbírka byla přidána",
       "theCollectionHasBeenModified": "Sbírka byla upravena",
       "collectionHasBeenCreated": "Sbírka byla úspěšně vytvořena",
       "theRightHasBeenRemoved": "Právo bylo odstraněno",
@@ -1035,7 +977,7 @@
         "2-4": "Byly naplánovány {{value}} procesy Odebrání příznaku viditelnosti",
         "more": "Bylo naplánováno {{value}} procesů Odebrání příznaku viditelnosti"
       },
-      "scheduleCDKHarvest":"Harvest pidu byl naplánovován",
+      "scheduleCDKHarvest": "Harvest pidu byl naplánovován",
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
@@ -1046,9 +988,7 @@
       "scheduleProcessingIndexRebuild": "Proces Vybudování Processing indexu byl naplánován",
       "scheduleProcessingIndexRebuildForObject": "Proces Přebudování Processing indexu pro objekt byl naplánován",
       "scheduleImportProcess": "Import byl naplánován",
-      "scheduleApplyLicenseAndImportProcess": "Přiřazení licence a Import naplánován",
       "scheduleSdnntSyncProcess": "Synchronizace se SDNNT naplánována",
-      "scheduleKapSyncProcess": "Synchronizace s KAPP naplánována",
       "createOrEditRole": "Role byla přidána",
       "onRemoveRole": "Role byla odstraněna",
       "onEditRole": "Role byla upravena",
@@ -1073,7 +1013,6 @@
       "changeFlagOnLicense": "Proces změny příznaku na licenci byl naplánován",
       "changeItemsOrder": "Pořadí položek bylo změněno",
       "changeItemsOrderSaved": "Změna pořadí položek byla uložena",
-      "scheduleChangeItemsOrder": "Proces uložení změny pořadí položek byl úspěšně spuštěn",
       "scheduleDeleteSelectedItemsFromCollection": "Proces smazaní vybraných položek ze sbírky byl úspěšně spuštěn",
       "setRepresentativePage": "Nastavení reprezentativní stránky proběhlo úspěšně",
       "startTheProcess": "Proces byl úspěšně naplánován",
@@ -1089,7 +1028,6 @@
       "failedToLoadListOfCollectionsContainingThisCollection": "Nepodařil se načíst seznam sbírek obsahujích tuto sbírku",
       "collectionCouldNotBeDeleted": "Sbírku se nepodařilo odstranit",
       "removeFromThisCollection": "Položku se nepodařilo odebrat ze sbírky",
-      "addToTheCollection": "Sbírku se nepodařilo přidat",
       "theCollectionHasBeenModified": "Sbírku se nepodařilo upravit",
       "collectionHasBeenCreated": "Sbírku se nepodařilo vytvořit",
       "visibilityChange": "Nepodařilo se naplánovat proces(y) Změna viditelnosti",
@@ -1106,14 +1044,12 @@
       "scheduleProcessingIndexRebuildForObject": "Nepodařilo se naplánovat proces Přebudování Processing indexu pro objekt",
       "scheduleImportProcess": "Import se nepodařilo naplánovat",
       "scheduleSdnntSyncProcess": "Synchronizace se SDNNT se nepodařilo naplánovat",
-      "scheduleKapSyncProcess": "Synchronizace s KAPP se nepodařilo naplánovat",
       "createOrEditRole": "Roli se nepodařilo přidat",
       "onRemoveRole": {
         "409": "Role je použita, není možné ji odstranit",
         "failed": "Roli se nepodřilo odstranit"
       },
       "onEditRole": "Roli se nepodařilo upravit",
-      "createOrEditLicense": "Licenci se nepodařilo přidat",
       "onEditLicese": "Licenci se nepodařilo upravit",
       "onRemoveLicese": {
         "409": "Licence je použita, není možné ji odstranit",
@@ -1128,7 +1064,6 @@
       "onNewValue": "Hodnotu se nepodařilo přidat",
       "onRemoveValue": "Hodnota parametru se nepodřila odstranit",
       "onEditValue": "Hodnotu parametru se nepodařilo upravit",
-      "onKillAllScheduled": "Chyba při rušení naplánovaných procesů",
       "onRemoveProcess": "Nepodařilo se smazat proces/dávku",
       "onKillProcess": "Nepodařilo se zrušit proces/dávku",
       "reloadProcesses": "Nepodařilo se načíst procesy",
@@ -1140,38 +1075,33 @@
       "scheduleStartTheSdnntReviewProcess": "Chyba při spuštění procesu kontroly SDNNT/Kramerius",
       "scheduleStartTheKapReviewProcess": "Chyba při spuštění procesu kontroly KAPP/Kramerius",
       "deleteSelectedCollections": "Došlo k chybě při smazaní vybraných sbírek",
-      "scheduleChangeItemsOrder": "Došlo k chybě při ukládání změny pořadí položek",
-      "scheduleDeleteSelectedItemsFromCollection": "Došlo k chybě při smazaní vybraných položek ze sbírky",
       "anErrorOccurredWhileSaving": "Došlo k chybě při ukládání",
-      "startTheProcess": "Došlo k chybě při spuštění procesu",
       "addingAnItem": "Chyba při přidání položky",
       "deletingItem": "Chyba při smazání položky",
       "loadingAnItem": "Chyba při načítání položky",
       "savingAnItem": "Chyba při ukládání položky",
-      "savingAnRecord": "Chyba při ukládání záznamu",
-      "scheduleCDKHarvest":"Reharvest objektu se nepodařilo naplánovat",
-      "scheduleFixLogProcess": "Proces pro opravu logů se nepodařilo napánovat"
+      "scheduleCDKHarvest": "Reharvest objektu se nepodařilo naplánovat"
     },
     "alert": {
       "tokenTimeExpireInfo": "Za 2 minuty dojde k automatickému odhlášení z aplikace"
     }
   },
   "desc": {
-    "typeOfImport" :"Typ importu",
+    "typeOfImport": "Typ importu",
     "typeOfImport_import": "Plný import",
     "typeOfImport_import_desc": "Provede plný import včetně vazeb.",
     "typeOfImport_update": "Pouze update metadat",
     "typeOfImport_update_desc": "Provede pouze update bibliografických dat (BiblioMods a DC). Poznámka: spouští se plná indexace.",
-    "addToCollections":"Přidat do sbírky",
-    "noCollection":"Žádná sbírka",
-    "selectCollection":"Vyber sbírku",
+    "addToCollections": "Přidat do sbírky",
+    "noCollection": "Žádná sbírka",
+    "selectCollection": "Vyber sbírku",
     "pod": "Pod",
-    "root":"Reharvest celého titulu",
-    "children":"Reharvest podčástí (ročník, výtisk,..)",
-    "new_root":"Nový harvest celého titulu",
+    "root": "Reharvest celého titulu",
+    "children": "Reharvest podčástí (ročník, výtisk,..)",
+    "new_root": "Nový harvest celého titulu",
     "typeOfHarvest": "Typ reharvestu",
     "modelDisplayStatistics": "Statistiky zobrazení modelů",
-    "topLevelmodelStatistics":"Statistiky pro zobrazení top level modelů",
+    "topLevelmodelStatistics": "Statistiky pro zobrazení top level modelů",
     "statisticsOfUsedLanguages": "Statistiky použitých jazyků",
     "authorStatistics": "Statistiky autorů",
     "providedByLicense": "Poskytnuto na základě licence",
@@ -1240,16 +1170,16 @@
     "convolute": "Konvoluty",
     "map": "Mapy",
     "monograph": "Monografie",
-    "monographunit":"Svazek",
-    "multivolumemonograph":"Vícesvazková monografie",
+    "monographunit": "Svazek",
+    "multivolumemonograph": "Vícesvazková monografie",
     "periodical": "Periodika",
     "periodicalvolume": "Ročník periodika",
-    "periodicalitem": "Číslo periodika",    
+    "periodicalitem": "Číslo periodika",
     "manuscript": "Rukopisy",
     "collection": "Sbírka",
     "soundrecording": "Zvukové nahrávky",
     "supplement": "Příloha",
-    "picture":"Obrázek",
+    "picture": "Obrázek",
     "track": "Nahrávka",
     "soundunit": "Část",
     "internalpart": "Kapitola",
@@ -1296,7 +1226,7 @@
     "selectAllItems": "Vybrat všechny položky",
     "selectThisItem": "Vybrat tuto položku",
     "datak5migration": "Procesy pro migraci dat z K5",
-    "fixprocesses":"Opravné procesy",
+    "fixprocesses": "Opravné procesy",
     "changeFlagOnLicense": "Změna príznaku na licenci",
     "symptom": "Příznak",
     "localLibraryLicense": "Lokální licence knihovny",
@@ -1346,35 +1276,35 @@
     "false": "Ne",
     "selectLicenseToImport": "Vyberte licenci pro import",
     "noLicense": "Žádná licence",
-    "reharvestLibsOption":"Volba knihoven při reharvestu",
+    "reharvestLibsOption": "Volba knihoven při reharvestu",
     "allLibrariesPresentForTheTitleInTheIndex": "Všechny knihovny přítomné u titulu v indexu",
     "selection": "Výběr knihoven",
     "disabledLibrary": "Vypnutá knihovna",
-    "selectLibraries":"Výběr knihoven pro reharvest",
-    "securedChannel":"Chráněný kanál",
-    "register":"Registr kramériů",
+    "selectLibraries": "Výběr knihoven pro reharvest",
+    "securedChannel": "Chráněný kanál",
+    "register": "Registr kramériů",
     "api": "Verze API",
-    "securedChannelHealth":"Healthcheck chráněného kanálu pro",
-    "securedChannelEnabled":"Chráněný kanál je povolen",
-    "securedChannelSolr":"Chráněný kanál vidí na vzdálený solr",
-    "securedChannelUser":"Chráněný kanál může získat inforamce o uživateli",
-    "usersInfo":"Inforamce o uživatelích",
-    "users":"Uživatelé",
-    "notLogged":"Nepřihlášený uživatel",
-    "dnnt":"DNNT uživatel",
-    "roles":"Role",
-    "licenses":"Licence",
-    "delete":"Smazat",
-    "approve":"Potvrdit",
-    "only_pid":"Reharvest pouze daného pidu",
+    "securedChannelHealth": "Healthcheck chráněného kanálu pro",
+    "securedChannelEnabled": "Chráněný kanál je povolen",
+    "securedChannelSolr": "Chráněný kanál vidí na vzdálený solr",
+    "securedChannelUser": "Chráněný kanál může získat inforamce o uživateli",
+    "usersInfo": "Inforamce o uživatelích",
+    "users": "Uživatelé",
+    "notLogged": "Nepřihlášený uživatel",
+    "dnnt": "DNNT uživatel",
+    "roles": "Role",
+    "licenses": "Licence",
+    "delete": "Smazat",
+    "approve": "Potvrdit",
+    "only_pid": "Reharvest pouze daného pidu",
     "delete_pid": "Smazání objektu",
     "delete_tree": "Smazání podstromu",
     "library": "Knihovna",
-    "title":"Titul",
-    "subtitle":"Podtitul",
+    "title": "Titul",
+    "subtitle": "Podtitul",
     "dateAndTime": "Datum a čas",
     "parentResource": "Nadřazený zdroj",
-    "endpointUrl":  "URL endpointu",
+    "endpointUrl": "URL endpointu",
     "labels": "Štítky",
     "ipAddress": "IP adresa",
     "query": "Dotaz",
@@ -1390,16 +1320,16 @@
     "notFound": "Nenalezeno",
     "conflict": "Nalezen konflikt",
     "noConflict": "Nenalezen žádný konflikt",
-    "none":"",
-    "runtimeLicense":"Runtime licence",
-    "indexingSettings":"Nastavení indexeru",
-    "indexRoots":"Kompletní indexace všech kořenových titulů v balíčku",
-    "indexNewImported": "Kompletní indexace pouze nově importovaných, částečná indexace předků",   
-    "runtimeType":{
-      "ALL_DOCUMENTS":"Všechny dokumenty",
-      "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Pouze obálky a obsahy"
+    "none": "",
+    "runtimeLicense": "Runtime licence",
+    "indexingSettings": "Nastavení indexeru",
+    "indexRoots": "Kompletní indexace všech kořenových titulů v balíčku",
+    "indexNewImported": "Kompletní indexace pouze nově importovaných, částečná indexace předků",
+    "runtimeType": {
+      "ALL_DOCUMENTS": "Všechny dokumenty",
+      "COVER_AND_CONTENT_MONOGRAPH_PAGE": "Pouze obálky a obsahy"
     },
-    "selectTypeOfRuntimeLicenseFilter":"Vyberte na které dokumenty bude licence aplikována",
+    "selectTypeOfRuntimeLicenseFilter": "Vyberte na které dokumenty bude licence aplikována",
     "worker": "Worker"
   },
   "workmode": {
@@ -1409,7 +1339,7 @@
     },
     "distributedLocksException": {
       "label": "Chyba zámkového serveru",
-      "desc":  "Data lze pouze číst, nikoliv opravovat."
+      "desc": "Data lze pouze číst, nikoliv opravovat."
     },
     "noReason": {
       "label": "Režim neznámý",

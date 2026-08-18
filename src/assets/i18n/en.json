@@ -5,7 +5,6 @@
     "slk": "Slovak",
     "ger": "German",
     "eng": "English",
-
     "cs": "Czech",
     "sk": "Slovak",
     "en": "English",
@@ -139,7 +138,7 @@
         "title": "Model",
         "desc": "Indexing of objects (and their trees) that have the selected model.",
         "icon": "category"
-      } 
+      }
     },
     "repository": {
       "title": "Repository",
@@ -185,11 +184,11 @@
         "title": "Generating logs for NK",
         "desc": "Generating logs for NK.",
         "icon": "fitbit"
-      } 
+      }
     },
     "cdk": {
       "title": "ČDK",
-      "icon":"settings_ethernet",
+      "icon": "settings_ethernet",
       "desc": "Setting up the involved libraries",
       "proxy": {
         "title": "Proxy - connected libraries",
@@ -210,7 +209,7 @@
         "title": "API monitoring",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "monitoring"
-      }    
+      }
     },
     "settings": {
       "title": "Settings",
@@ -338,20 +337,18 @@
       "title": "Possibility to be included in the collection",
       "subtitle": "This right gives the objects the possibility to be included in the collection"
     },
-    "a_sdnnt_sync":{
+    "a_sdnnt_sync": {
       "title": "Synchronization of licenses with the SDNNT application",
       "subtitle": "Synchronization of licenses with the SDNNT application"
     },
-    "a_object_edit":{
+    "a_object_edit": {
       "title": "Object editation",
       "subtitle": "Right for object editation"
     },
-    "a_admin_api_specification_read":{
+    "a_admin_api_specification_read": {
       "title": "Read admin api specification",
       "subtitle": "Read admin api specification "
     }
-
-
   },
   "alert": {
     "statistics": {
@@ -378,7 +375,7 @@
     "createOrEditLicense": {
       "error1": "The license with this name is already expired, please enter another name.",
       "error2": "The license could not be created.",
-      "errorlock1":"Change of lock type, must be saved. "
+      "errorlock1": "Change of lock type, must be saved. "
     },
     "collections": {
       "noData": {
@@ -398,31 +395,22 @@
   "batch": {
     "PLANNED": "Scheduled",
     "PLANNED_BATCH": "Naplánováno",
-
     "RUNNING": "Running",
     "RUNNING_BATCH": "Waiting",
-
     "FINISHED": "Finished",
     "FINISHED_BATCH": "Dokončeno",
-
     "FAILED": "Failed",
     "FAILED_BATCH": "Chyba",
-
     "KILLED": "Killed",
     "KILLED_BATCH": "Killed",
-
     "NOT_RUNNING": "Not running",
     "WARNING": "Warning",
-
-    "WARNING_BATCH":  "Warning",
-
+    "WARNING_BATCH": "Warning",
     "currentVersionOfTheIndexer": "Current version of the indexer",
     "sessionExpire": "It remains until logout"
   },
   "paginator": {
     "desc": {
-      "pageNumbe": "Page number",
-      "sortBy": "Order by",
       "itemsPerPageLabel": "Records per page",
       "nextPageLabel": "Next page",
       "previousPageLabel": "Previous page",
@@ -430,13 +418,10 @@
       "lastPageLabel": "Last page",
       "rangeLabel1": "0 of {{length}}",
       "rangeLabel2": "{{startIndex}} - {{endIndex}} of {{length}}"
-    },
-    "tooltip": {
-      "scrollToThePageNumber": "Go to page"
     }
   },
   "button": {
-    "autoRefresProcesses":"Automatic reload {{refreshinterval}} s",
+    "autoRefresProcesses": "Automatic reload {{refreshinterval}} s",
     "showDetail": "Show detail",
     "hideDetail": "Hide detail",
     "startImport": "Start import",
@@ -449,8 +434,6 @@
     "addLicense": "Add license",
     "editLicense": "Edit license",
     "deleteLicense": "Delete license",
-    "moveUp": "Move up",
-    "moveDown": "Move down",
     "addParameter": "Add parameter",
     "editParameter": "Edit parameter",
     "deleteParameter": "Delete parameter",
@@ -472,7 +455,6 @@
     "showStandaloneOnly": "Show standalone only",
     "addToThisCollection": "Add to this collection",
     "addToACollection": "Add to a collection",
-    "removeFromThisCollection": "Remove from this collection",
     "removeFromCollection": "Remove from collection",
     "addThisCollectionToAnotherCollection": "Add this collection to another collection",
     "create": "Create",
@@ -480,14 +462,8 @@
     "remove": "Remove",
     "buildProcessingIndex": "Build processing index",
     "rebuildTheProcessingIndexForTheObject": "Rebuild processing index for the object",
-    "import": "Import",
-    "exportDocument": "Document export",
-    "exportStatistics": "Export statistics",
-    "exportPidsOfDnntLicensedObjects": "Export PIDs of DNNT licensed objects",
-    "generateAccessLogs": "Generate access logs",
     "setPublicPrivate": "Set public / private",
     "removeLicense": "Remove license",
-    "setPublicByDates": "Set public by dates",
     "generateNkpLogs": "Generate NKP logs",
     "deleteStatistics": "Delete statistics",
     "index": "Index",
@@ -496,15 +472,12 @@
     "inProgressError": "In progress / error",
     "indexed": "Indexed",
     "indexedObsolete": "Indexed (obsolete)",
-    "indexInBulk": "Index in bulk",
-    "loadMore": "Load more",
     "changeAvailability": "Change availability",
     "reindexSearchIndex": "Reindex (search index)",
     "deleteObjectSmart": "Delete (smart)",
     "deleteObjectLowLevel": "Delete (low level)",
     "deleteObjectsSmart": "Delete objects (smart)",
     "deleteObjectsLowLevel": "Delete objects (low level)",
-    "export": "Export",
     "copyTheTextToTheClipboard": "Copy the text to the clipboard",
     "add": "Add",
     "cancel": "Cancel",
@@ -522,16 +495,12 @@
     "editThisCollection": "Edit this collection",
     "goToProcesses": "Go to processes",
     "reloadThePage": "Reload the page",
-    "increasePriority": "Increase priority",
-    "decreasePriority": "Decrease priority",
     "addRow": "Add row",
     "deleteRow": "Delete row",
-    "synchronizeWithSDNNT": "Synchronize with SDNNT",
-    "startSynchronizationLicenses":"Start license synchronization",
-    "startSynchronizationWithSDNNT":"Start license synchronization with SDNNT",
-    "startSynchronizationWithKap":"Start synchronizing licenses with the curator application",
-    "showSynchronzationResults":"Show processes results",
-    "startTheSynchronizationProcess": "Start the synchronization process",
+    "startSynchronizationLicenses": "Start license synchronization",
+    "startSynchronizationWithSDNNT": "Start license synchronization with SDNNT",
+    "startSynchronizationWithKap": "Start synchronizing licenses with the curator application",
+    "showSynchronzationResults": "Show processes results",
     "editObject": "Edit object",
     "indexSelectedObjects": "Index selected objects",
     "indexTheModel": "Index the model",
@@ -541,7 +510,6 @@
     "deleteSelectedItems": "Delete selected items",
     "changeFlagOnLicense": "Change flag on license",
     "change": "Change",
-    "removeTheVisibilityFlag": "Remove the visibility flag",
     "saveOrderChange": "Save order change",
     "addNewValue": "Add new value",
     "languageForEditing": "Language for editing",
@@ -565,9 +533,8 @@
     "approve": "Approve",
     "annualReport": "Annual report",
     "reload": "Reload",
-    "addRuntimeLicense": "Add runtime license",
     "startfixprocess": "Start fix process",
-    "fixlogprocess":"Fix logs process",
+    "fixlogprocess": "Fix logs process",
     "upload": "Upload"
   },
   "field": {
@@ -594,19 +561,19 @@
     "internalpart": "Internal Parts",
     "convolute": "Convolute",
     "picture": "Pictures",
-    "multivolumemonograph":"Multivolume monograph",
+    "multivolumemonograph": "Multivolume monograph",
     "collection": "Collections",
-    "running":"Reharvest started",
-    "open":"Reharvest planned",
-    "closed":"Reharvest finished",
-    "too_big":"Reharvest is too big -> Manual reharvest needed",
-    "waiting_for_approve":"Approve needed",
-    "cancelled":"Reharvest cancelled",
-    "failed":"Reharvest failed", 
-    "root":"Whole title",
-    "children":"Only subparts",
-    "new_root":"New harvest of whole title",
-    "only_pid":"Reharvest only the given pid",
+    "running": "Reharvest started",
+    "open": "Reharvest planned",
+    "closed": "Reharvest finished",
+    "too_big": "Reharvest is too big -> Manual reharvest needed",
+    "waiting_for_approve": "Approve needed",
+    "cancelled": "Reharvest cancelled",
+    "failed": "Reharvest failed",
+    "root": "Whole title",
+    "children": "Only subparts",
+    "new_root": "New harvest of whole title",
+    "only_pid": "Reharvest only the given pid",
     "delete_pid": "Delete object",
     "delete_tree": "Delete tree",
     "delete_root": "Delete title"
@@ -614,18 +581,16 @@
   "comment": {
     "indexationObject": "Indexing an object, or the tree whose object is the root. Based on the PID, or list of PIDs inserted into the form, or read from a file",
     "indexationModel": "Indexing of objects (and their trees) that have the selected model",
-    "indexationAll": "",
     "indexationNotIndexed": "It has not been indexed yet",
     "indexationInProgressError": "Complete indexing is in progress or complete indexing has not been completed properly",
     "indexationIndexed": "Indexed by the current indexer version",
     "indexationIndexedObsolete": "Indexed by an older version of the indexer",
-    "indexationLoadMore": "Continue browsing the repository and loading more objects",
     "indexationIndexInBulk": "Index all currently displayed objects - each in its own process",
     "indexationProcessedObjects": "Processed <strong>{{value}}</strong> objects",
     "indexationScheduledByIndexing": "Scheduled by <strong>{{value}}</strong> indexing"
   },
   "modal": {
-    "removeProcesses":{
+    "removeProcesses": {
       "title": "Deleting a process",
       "message": "Do you really want to permanently delete the process"
     },
@@ -717,16 +682,16 @@
       "message2": "Since all FOXML objects are traversed, this is a demanding operation that can take tens of hours (depending on the size of the repository and the available computing power). Therefore, it is recommended to back up the Processing index first.",
       "instruction": {
         "backup": {
-          "title": "Processing index backup procedure:",
           "1": "shutdown Solr: <i>$SOLR_HOME/bin/solr stop</i>",
           "2": "backup the Processing index data directory: typically <i>$SOLR_HOME/server/solr/processing/data</i>",
-          "3": "start Solr <i>$SOLR_HOME/bin/solr start</i>"
+          "3": "start Solr <i>$SOLR_HOME/bin/solr start</i>",
+          "title": "Processing index backup procedure:"
         },
         "recovery": {
-          "title": "Processing index recovery procedure:",
           "1": "turn off Solr",
           "2": "replace the Processing index data directory with a backup",
-          "3": "turn on Solr"
+          "3": "turn on Solr",
+          "title": "Processing index recovery procedure:"
         }
       }
     },
@@ -743,7 +708,7 @@
     "startImport": {
       "title": "Starting the import",
       "message": "Are you sure you want to start the import?",
-      "licensemessage":"Are you sure you want to applz license and start the import processes?"
+      "licensemessage": "Are you sure you want to applz license and start the import processes?"
     },
     "createOrEditRole": {
       "title": {
@@ -810,7 +775,7 @@
       "title": "Deleting a process/batch",
       "message": "Are you sure you want to permanently delete the process/batch?"
     },
-    "onRemoveCDKReharvest":{
+    "onRemoveCDKReharvest": {
       "title": "Deleting reharvest",
       "message": "Are you sure you want to delete reharvest?"
     },
@@ -871,10 +836,10 @@
         "model": "Model",
         "date_issued_year": "Publishing year",
         "sdnntModel": "Model",
-        "sdnntCatalog":"Catalog id /Link to SDNNT",
+        "sdnntCatalog": "Catalog id /Link to SDNNT",
         "sdnntDate": "Publishing date",
-        "real_kram_model":"Model",
-		    "real_kram_date":"Ročník/Výtisk",
+        "real_kram_model": "Model",
+        "real_kram_date": "Ročník/Výtisk",
         "linkMissing": "A reference to the object is missing in KAPP, therefore it is not represented by a link.",
         "sync_actions": {
           "title": "Proposed change",
@@ -894,16 +859,13 @@
       "field": {
         "pid": "Pid/Link to DL",
         "title": "Title",
-        "model":"Model",
-        "date_issued_year":"Publication year",
-
+        "model": "Model",
+        "date_issued_year": "Publication year",
         "kappLink": "Open in KAPP",
         "process": "Process",
         "sdnntModel": "Model",
-        "sdnntCatalog":"Catalog id /Link to SDNNT",
-        "sdnntDate": "Publishing date",
-        "real_kram_model":"Model",
-		    "real_kram_date":"Volume/Issue",
+        "real_kram_model": "Model",
+        "real_kram_date": "Volume/Issue",
         "linkMissing": "A reference to a periodical or a multi-volume monograph is missing in SDNNT, therefore it is not represented by a link.",
         "sync_actions": {
           "title": "Proposed change",
@@ -927,7 +889,6 @@
       "alert": "The following variables must be configured"
     },
     "scheduleStartTheKapReviewProcess": {
-      "title": "Starting the KAPP license synchronization process",
       "desc": {
         "krameriusInstance": "Kramerius instance",
         "kappInstance": "KAPP instance",
@@ -937,7 +898,6 @@
     },
     "scheduleChangeFlagOnLicense": {
       "title": "Change flag on license",
-      "checkbox": "Also remove the policy flag",
       "section1": "Licenses will be allocated for the following models",
       "section2": "Symptoms are mapped for the following"
     },
@@ -949,32 +909,11 @@
       "title": "About",
       "desc": "Kramerius 7 admin interface."
     },
-    "scheduleChangeOrderDocumentsInCollection": {
-      "title": "Changing the order of documents in the collection",
-      "alert": "If you change the order of the documents in the collection, a reindexing process is created and the items can be displayed in their original order in the list until this process is finished.",
-      "button": {
-        "process": "Save and go to process list",
-        "collection": "Save and stay in your collection"
-      }
-    },
-    "scheduleChangeOrderLicenses": {
-      "title": "Change order of licenses",
-      "alert": "If you change the order of the licenses, a reindexing process will be created and the items may appear in their original order in the list until this process is finished.",
-      "button": {
-        "process": "Save and go to process list",
-        "licenses": "Save and stay in licenses"
-      }
-    },
     "userInfo": {
       "title": "User info"
     },
     "scheduleReHarvestSpecificPids": {
-      "title": "Object reharvest",
-      "message": "Reharvest object",
-      "loadingDataFromLibraries":{
-        "title":"Reading data from connected library",
-        "pleaseWait":"Plase wait"
-      }
+      "title": "Object reharvest"
     },
     "scheduleMigrateCollections": {
       "title": "Migrate collections from K5 instance"
@@ -994,7 +933,7 @@
     "addNewtSet": {
       "title": "Adding a new set"
     },
-    "fixlogprocess":{
+    "fixlogprocess": {
       "title": "Fix log process",
       "message": "The fix process. See issue:"
     }
@@ -1005,7 +944,6 @@
       "theCollectionHasBeenRemoved": "The collection has been removed",
       "removeFromThisCollection": "The item has been successfully removed from the collection",
       "copyToClipboard": "The text has been successfully copied to the clipboard",
-      "addToTheCollection": "The collection has been added",
       "theCollectionHasBeenModified": "The collection has been modified",
       "collectionHasBeenCreated": "The collection was created successfully",
       "theRightHasBeenRemoved": "The right has been removed",
@@ -1039,7 +977,7 @@
         "2-4": "{{value}} processes Remove Visibility flag have been scheduled",
         "more": "{{value}} processes have been scheduled to remove visibility flag"
       },
-      "scheduleCDKHarvest":"CDK harvest has been planned",
+      "scheduleCDKHarvest": "CDK harvest has been planned",
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",
@@ -1050,9 +988,7 @@
       "scheduleProcessingIndexRebuild": "The Build Processing index process has been scheduled",
       "scheduleProcessingIndexRebuildForObject": "The Process Rebuild Processing index for the object has been scheduled",
       "scheduleImportProcess": "The import has been scheduled",
-      "scheduleApplyLicenseAndImportProcess": "The applying license and import process has been scheduled",
       "scheduleSdnntSyncProcess": "The sync process has been scheduled",
-      "scheduleKapSyncProcess": "The KAPP sync process has been scheduled",
       "createOrEditRole": "The role has been added",
       "onRemoveRole": "The role has been removed",
       "onEditRole": "The role has been edited",
@@ -1077,7 +1013,6 @@
       "changeFlagOnLicense": "The license flag change process has been scheduled",
       "changeItemsOrder": "The order of the items has been changed",
       "changeItemsOrderSaved": "The change in order of items has been saved",
-      "scheduleChangeItemsOrder": "The process of saving the item order change was successfully started",
       "scheduleDeleteSelectedItemsFromCollection": "The process of deleting the selected items from the collection has been successfully started",
       "setRepresentativePage": "Setup of the representative page was successful",
       "startTheProcess": "The process was successfully scheduled",
@@ -1093,7 +1028,6 @@
       "failedToLoadListOfCollectionsContainingThisCollection": "Failed to load list of collections containing this collection",
       "collectionCouldNotBeDeleted": "Collection could not be deleted",
       "removeFromThisCollection": "Could not remove item from collection",
-      "addToTheCollection": "The collection could not been added",
       "theCollectionHasBeenModified": "The collection could not be edited",
       "collectionHasBeenCreated": "The collection could not be created",
       "visibilityChange": "Failed to schedule process(es) Change Visibility",
@@ -1110,14 +1044,12 @@
       "scheduleProcessingIndexRebuildForObject": "Failed to schedule the Rebuild Processing index process for the object",
       "scheduleImportProcess": "Failed to schedule Import process",
       "scheduleSdnntSyncProcess": "Failed to schedule sync process",
-      "scheduleKapSyncProcess": "Failed to schedule KAPP sync process",
       "createOrEditRole": "Failed to add role",
       "onRemoveRole": {
         "409": "Role is used, cannot be removed",
         "failed": "The role could not be deleted"
       },
       "onEditRole": "Failed to edit role",
-      "createOrEditLicense": "Failed to add license",
       "onEditLicese": "The license could not be modified",
       "onRemoveLicese": {
         "409": "The license is used, it cannot be deleted",
@@ -1132,7 +1064,6 @@
       "onNewValue": "Could not add value",
       "onRemoveValue": "The parameter value failed to delete",
       "onEditValue": "The parameter value could not be modified",
-      "onKillAllScheduled": "Error while canceling scheduled processes",
       "onRemoveProcess": "Failed to delete process/batch",
       "onKillProcess": "Failed to abort process/batch",
       "reloadProcesses": "Failed to load processes",
@@ -1144,38 +1075,33 @@
       "scheduleStartTheSdnntReviewProcess": "Error starting the SDNNT/Kramerius review process",
       "scheduleStartTheKapReviewProcess": "Error starting the KAPP/Kramerius review process",
       "deleteSelectedCollections": "An error occurred while deleting the selected collections",
-      "scheduleChangeItemsOrder": "An error occurred while saving the item order change",
-      "scheduleDeleteSelectedItemsFromCollection": "An error occurred while deleting the selected items from the collection",
       "anErrorOccurredWhileSaving": "An error occurred while saving",
-      "startTheProcess": "An error occurred while starting the process",
       "addingAnItem": "Error adding item",
       "deletingItem": "Error deleting item",
       "loadingAnItem": "Error loading item",
       "savingAnItem": "Error saving item",
-      "savingAnRecord": "Error saving record",
-      "scheduleCDKHarvest":"CDK harvest has NOT been planned",
-      "scheduleFixLogProcess": "The fix log process has NOT been planned"
+      "scheduleCDKHarvest": "CDK harvest has NOT been planned"
     },
     "alert": {
       "tokenTimeExpireInfo": "You will be automatically logged out of the application in 2 minutes"
     }
   },
   "desc": {
-    "typeOfImport" :"Type of import",
+    "typeOfImport": "Type of import",
     "typeOfImport_import": "Full import",
     "typeOfImport_import_desc": "Performs a full import, including relationships.",
     "typeOfImport_update": "Metadata update",
     "typeOfImport_update_desc": "Performs only an update of bibliographic data (BiblioMods and DC). Note: a full re-indexing will be triggered.",
-    "addToCollections":"Add to collection",
-    "noCollection":"No collection",
-    "selectCollection":"Select collection",
+    "addToCollections": "Add to collection",
+    "noCollection": "No collection",
+    "selectCollection": "Select collection",
     "pod": "Pod",
-    "root":"Whole title",
-    "children":"Only subparts",
-    "new_root":"New harvest of whole title",
+    "root": "Whole title",
+    "children": "Only subparts",
+    "new_root": "New harvest of whole title",
     "typeOfHarvest": "Type of reharvest",
     "modelDisplayStatistics": "Model display statistics",
-    "topLevelmodelStatistics":"Top level statistics",
+    "topLevelmodelStatistics": "Top level statistics",
     "statisticsOfUsedLanguages": "Statistics of used languages",
     "authorStatistics": "Author statistics",
     "providedByLicense": "Provided by license",
@@ -1244,19 +1170,19 @@
     "convolute": "Convolute",
     "map": "Map",
     "monograph": "Monograph",
-    "monographunit":"Monograph unit",
-    "multivolumemonograph":"Multivolume monograph",
+    "monographunit": "Monograph unit",
+    "multivolumemonograph": "Multivolume monograph",
     "periodical": "Periodical",
     "periodicalvolume": "Periodical Volume",
-    "periodicalitem": "Periodical Issue",    
+    "periodicalitem": "Periodical Issue",
     "manuscript": "Manuscript",
     "collection": "Collection",
     "soundrecording": "Soundrecording",
     "supplement": "Supplement",
-    "picture":"Picture",
+    "picture": "Picture",
     "track": "Track",
     "soundunit": "Part",
-    "internalpart": "Chapter",    
+    "internalpart": "Chapter",
     "version": "Version",
     "availability": "Availability",
     "synchronization": "Synchronization",
@@ -1300,7 +1226,7 @@
     "selectAllItems": "Select all items",
     "selectThisItem": "Select this item",
     "datak5migration": "Migration processes (From K5 instance)",
-    "fixprocesses":"Fix processess",
+    "fixprocesses": "Fix processess",
     "changeFlagOnLicense": "Change flag on license",
     "symptom": "Symptom",
     "localLibraryLicense": "Local Library License",
@@ -1350,35 +1276,35 @@
     "false": "No",
     "selectLicenseToImport": "Select a license to import",
     "noLicense": "No license",
-    "reharvestLibsOption":"Libraries for reharvest",
+    "reharvestLibsOption": "Libraries for reharvest",
     "allLibrariesPresentForTheTitleInTheIndex": "All libraries present for the title in the index",
     "selection": "Selection",
     "disabledLibrary": "Disabled library",
-    "selectLibraries":"Libraries  for reharvest",
-    "securedChannel":"Secured channel",
-    "register":"Kramerius registry",
+    "selectLibraries": "Libraries  for reharvest",
+    "securedChannel": "Secured channel",
+    "register": "Kramerius registry",
     "api": "API version",
-    "securedChannelHealth":"Healthcheck for",
-    "securedChannelEnabled":"The channel is enabled",
-    "securedChannelSolr":"The channel is able to connect to Solr.",
-    "securedChannelUser":"The channel is able to get info about users",
-    "usersInfo":"Users info",
-    "users":"Users",
-    "notLogged":"Not logged user",
-    "dnnt":"DNNT user",
-    "roles":"Roles",
-    "licenses":"Licenses",
-    "delete":"Delete",
-    "approve":"Approve",
-    "only_pid":"Reharvest only the given pid",
+    "securedChannelHealth": "Healthcheck for",
+    "securedChannelEnabled": "The channel is enabled",
+    "securedChannelSolr": "The channel is able to connect to Solr.",
+    "securedChannelUser": "The channel is able to get info about users",
+    "usersInfo": "Users info",
+    "users": "Users",
+    "notLogged": "Not logged user",
+    "dnnt": "DNNT user",
+    "roles": "Roles",
+    "licenses": "Licenses",
+    "delete": "Delete",
+    "approve": "Approve",
+    "only_pid": "Reharvest only the given pid",
     "delete_pid": "Delete object",
     "delete_tree": "Delete tree",
-    "library": "Library",   
-    "title":"Title",
-    "subtitle":"Subtitle",
+    "library": "Library",
+    "title": "Title",
+    "subtitle": "Subtitle",
     "dateAndTime": "Date and time",
     "parentResource": "Parent resource",
-    "endpointUrl":  "Endpoint URL",
+    "endpointUrl": "Endpoint URL",
     "labels": "Labels",
     "ipAddress": "IP address",
     "query": "Query",
@@ -1394,16 +1320,16 @@
     "notFound": "Not found",
     "conflict": "Conflict",
     "noConflict": "No conflict",
-    "none":"",
-    "runtimeLicense":"Runtime license",
-    "indexingSettings":"Indexing settings",
-    "indexRoots":"Complete indexation of all root titles in the package",
-    "indexNewImported": "Complete indexation of newly imported titles only, partial indexation of ancestors",   
-    "runtimeType":{
-      "ALL_DOCUMENTS":"All documents",
-      "COVER_AND_CONTENT_MONOGRAPH_PAGE":"Only cover and content pages"
+    "none": "",
+    "runtimeLicense": "Runtime license",
+    "indexingSettings": "Indexing settings",
+    "indexRoots": "Complete indexation of all root titles in the package",
+    "indexNewImported": "Complete indexation of newly imported titles only, partial indexation of ancestors",
+    "runtimeType": {
+      "ALL_DOCUMENTS": "All documents",
+      "COVER_AND_CONTENT_MONOGRAPH_PAGE": "Only cover and content pages"
     },
-    "selectTypeOfRuntimeLicenseFilter":"Select how to apply runtime license",
+    "selectTypeOfRuntimeLicenseFilter": "Select how to apply runtime license",
     "worker": "Worker"
   },
   "workmode": {
@@ -1413,7 +1339,7 @@
     },
     "distributedLocksException": {
       "label": "Locks server error",
-      "desc":  "Application is read only."
+      "desc": "Application is read only."
     },
     "noReason": {
       "label": "No reason mode",
