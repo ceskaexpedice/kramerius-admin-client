@@ -333,6 +333,14 @@
       "title": "Admin čtení",
       "subtitle": "Přístup do administračního rozhraní"
     },
+    "a_akubra_read": {
+      "title": "Akubra čtení pomocí API endpoint",
+      "subtitle": "Umožní číst z repozitáře Akubra přes API"
+    },
+    "a_akubra_edit": {
+      "title": "Zapisování do Akubra pomocí API endpoint",
+      "subtitle": "Umožní zapisovat do repozitáře Akubra přes API"
+    },
     "a_able_tobe_part_of_collections": {
       "title": "Možnost být zařazen do sbírky",
       "subtitle": "Toto právo dává objektům možnost být zařazen do sbírky"
@@ -348,6 +356,10 @@
     "a_admin_api_specification_read": {
       "title": "Čtení  specifikace administračního API",
       "subtitle": "Možnost získat specifikaci administračního API "
+    },
+    "a_content_generate":{
+      "title": "Offline generování pdf a eBook",
+      "subtitle": "Možnost spustit proces pro generování pdf a eBook"
     }
   },
   "alert": {

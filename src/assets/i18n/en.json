@@ -333,6 +333,14 @@
       "title": "Admin reading",
       "subtitle": "Access to the administration interface"
     },
+    "a_akubra_read": {
+      "title": "Akubra reading API endpoint",
+      "subtitle": "Read access to the Akubra repository through the API"
+    },
+    "a_akubra_edit": {
+      "title": "Akubra writing API endpoint",
+      "subtitle": "Write access to the Akubra repository through the API"
+    },
     "a_able_tobe_part_of_collections": {
       "title": "Possibility to be included in the collection",
       "subtitle": "This right gives the objects the possibility to be included in the collection"
@@ -348,7 +356,12 @@
     "a_admin_api_specification_read": {
       "title": "Read admin api specification",
       "subtitle": "Read admin api specification "
+    },
+    "a_content_generate":{
+      "title": "Offline generate pdf and eBook",
+      "subtitle": "Option to run process for generating pdf and eBook"
     }
+
   },
   "alert": {
     "statistics": {
