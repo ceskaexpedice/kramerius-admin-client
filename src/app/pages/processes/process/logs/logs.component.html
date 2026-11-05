@@ -11,8 +11,16 @@
     </div>
   </div>
   <div class="app-oa-y">
-    @for (line of lines; track line) {
-      <div [ngClass]="{ 'app-color-warn': (line.startsWith('SEVERE') || line.startsWith('WARNING'))}">{{  line }}</div>
+    @for (line of lines; track $index) {
+      <div [ngClass]="{ 'app-color-warn': (line.startsWith('SEVERE') || line.startsWith('WARNING'))}">
+        @for (segment of renderedLines[$index]; track $index) {
+          @if (segment.href) {
+            <a [href]="segment.href">{{ segment.text }}</a>
+          } @else {
+            {{ segment.text }}
+          }
+        }
+      </div>
     }
   </div>
 </div>

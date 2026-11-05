@@ -102,10 +102,23 @@
       </div>
     }
   }
+
+  <mat-expansion-panel class="app-mt-4">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Parametry procesu</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="app-fxLayout app-row app-gap-2 process-options">
+      <mat-form-field appearance="outline">
+        <mat-label>maxItemsToDelete</mat-label>
+        <input matInput type="text" inputmode="numeric" [(ngModel)]="processOptions.maxItemsToDelete" name="maxItemsToDelete">
+      </mat-form-field>
+      <mat-checkbox [(ngModel)]="processOptions.onlyShowConfiguration" name="onlyShowConfiguration">onlyShowConfiguration</mat-checkbox>
+    </div>
+  </mat-expansion-panel>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button matButton="filled" [disabled]="!pids" color="primary" (click)="schedule()" >{{ 'button.schedule' | translate }}</button>
+  <button matButton="filled" [disabled]="!pids || isProcessRunning || isLibsLoading" color="primary" (click)="runReharvestProcess()">{{ 'button.schedule' | translate }}</button>
   <button matButton [disabled]="false" mat-dialog-close="cancel">{{ 'button.cancel' | translate }}</button>
 </mat-dialog-actions>
 

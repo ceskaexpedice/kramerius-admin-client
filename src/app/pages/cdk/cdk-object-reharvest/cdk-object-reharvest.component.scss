@@ -2,6 +2,56 @@
   gap: 16px;
 }
 
+.reharvest-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+}
+
+.reharvest-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 16px;
+  color: inherit;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--app-default-border-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.reharvest-group:hover,
+.reharvest-group--active {
+  background: #f6f8fb;
+  border-color: var(--app-color-primary, #3f51b5);
+}
+
+.reharvest-group__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.reharvest-group__main span {
+  overflow: hidden;
+  color: var(--app-color-gray-6);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reharvest-group__meta {
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  background: #edf1f7;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
 .app-reharvest-card {
   padding: 20px 24px 16px;
   border-radius: 18px;

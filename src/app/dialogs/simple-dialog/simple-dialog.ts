@@ -7,6 +7,9 @@ export interface SimpleDialogData {
   checkbox?: SimpleDialogCheckbox;
   numberInput?: SimpleDialogNumberInput;
   textInput?: SimpleDialogTextInput;
+  collapsibleTextInput?: SimpleDialogTextInput;
+  timeRange?: SimpleDialogTimeRange;
+  showConfigurationOnly?: SimpleDialogShowConfigurationOnly;
   width?: number;
 }
 
@@ -31,4 +34,13 @@ export interface SimpleDialogNumberInput {
 export interface SimpleDialogTextInput {
   label: string;
   value: string;
+}
+
+export interface SimpleDialogTimeRange {
+  from: string;
+  to: string;
+}
+
+export interface SimpleDialogShowConfigurationOnly {
+  value: boolean;
 }

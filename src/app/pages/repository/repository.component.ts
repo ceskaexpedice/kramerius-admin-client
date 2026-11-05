@@ -23,7 +23,7 @@ import { ScheduleStartTheKapReviewProcessComponent } from 'src/app/dialogs/sched
 import { ScheduleChangeFlagOnLicenseDialogComponent } from 'src/app/dialogs/schedule-change-flag-on-license-dialog/schedule-change-flag-on-license-dialog.component';
 import { ScheduleRemoveTheVisibilityFlagDialogComponent } from 'src/app/dialogs/schedule-remove-the-visibility-flag-dialog/schedule-remove-the-visibility-flag-dialog.component';
 import { AppSettings } from 'src/app/services/app-settings';
-import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
+import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/pages/cdk/cdk-object-reharvest/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 import { ScheduleMigrateCollectionsDialogComponent } from 'src/app/dialogs/schedule-migrate-collections-dialog/schedule-migrate-collections-dialog.component';
 import { EditSetDialogComponent } from 'src/app/dialogs/edit-set-dialog/edit-set-dialog.component';
 import { AddNewSetDialogComponent } from 'src/app/dialogs/add-new-set-dialog/add-new-set-dialog.component';

@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="outline" class="app-w-100">
+    <mat-label>PID</mat-label>
+    <textarea matInput [(ngModel)]="pids" (ngModelChange)="onPidsChange()" rows="2" placeholder="Zadejte jeden nebo více PIDů"></textarea>
+  </mat-form-field>
+  @if (loading) { <mat-progress-bar mode="indeterminate"></mat-progress-bar> }
+  @if (pidList.length && !loading) {
+    <section class="pid-introspection">
+      @for (pid of pidList; track pid) {
+        <div class="pid-group">
+          <strong>{{ pid }}</strong>
+          @if (hitsByPid[pid]?.length) {
+            <table>
+              <thead><tr><th>Knihovna</th><th>Model</th><th>root.pid</th><th>pid_paths</th><th>Klient</th></tr></thead>
+              <tbody>
+                @for (hit of hitsByPid[pid]; track $index) {
+                  <tr>
+                    <td>
+                      <div class="library-key">
+                        @if (logo(hit.library); as libraryLogo) {
+                          <img class="app-logo-lib" [src]="libraryLogo" [alt]="hit.library" />
+                          <span>{{ hit.library }}</span>
+                        } @else {
+                          <strong>{{ hit.library }}</strong>
+                        }
+                      </div>
+                    </td>
+                    <td><span class="compare-value" [class.value--different]="fieldDiffers(pid, 'model', hit.model)">{{ hit.model || '—' }}</span></td>
+                    <td>
+                      @if (hit.rootPid) {
+                        <div class="copyable-value">
+                          <button type="button" class="path-node root-pid-node pid-link compare-value" [class.value--different]="fieldDiffers(pid, 'rootPid', hit.rootPid)" (click)="inspectPid(hit.rootPid)">{{ hit.rootPid }}</button>
+                          <button mat-icon-button type="button" class="copy-button" matTooltip="Kopírovat root.pid" aria-label="Kopírovat root.pid" (click)="copy(hit.rootPid)">
+                            <mat-icon>content_copy</mat-icon>
+                          </button>
+                        </div>
+                      } @else { — }
+                    </td>
+                    <td>
+                      @if (hit.pidPaths.length) {
+                        <div class="path-list">
+                          @for (path of hit.pidPaths; track $index; let pathIndex = $index) {
+                            <div class="pid-path">
+                              @for (segment of pathSegments(path); track $index; let last = $last) {
+                                <button type="button" class="path-node pid-link" [class.path-node--different]="pathDiffers(pid, pathIndex, path)" (click)="inspectPid(segment)">{{ segment }}</button>
+                                @if (!last) { <span class="path-separator">/</span> }
+                              }
+                              <button mat-icon-button type="button" class="copy-button" matTooltip="Kopírovat cestu" aria-label="Kopírovat cestu" (click)="copy(path)">
+                                <mat-icon>content_copy</mat-icon>
+                              </button>
+                            </div>
+                          }
+                        </div>
+                      } @else { — }
+                    </td>
+                    <td>
+                      @if (hit.client) {
+                        <a [href]="clientUrl(hit.client, hit.pid)" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Otevřít ' + hit.pid + ' v klientovi ' + hit.library" matTooltip="Otevřít v klientovi">
+                          <mat-icon class="client-link-icon">open_in_new</mat-icon>
+                        </a>
+                      } @else { — }
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+            @if (hasConflict(hitsByPid[pid])) { <div class="conflict"><mat-icon>warning</mat-icon> Konflikt modelů mezi knihovnami</div> }
+            @if (hasCdkConflict(hitsByPid[pid])) { <div class="conflict"><mat-icon>warning</mat-icon> Konflikt záznamů v CDK indexu</div> }
+          } @else { <div>PID nebylo nalezeno v žádné knihovně.</div> }
+        </div>
+      }
+    </section>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button matButton mat-dialog-close>Zavřít</button>
+</mat-dialog-actions>

@@ -57,6 +57,10 @@ export class CdkApiService {
         }
     }
 
+    private doPost(path: string, body: any): Observable<Object> {
+      return this.http.post(this.cdkUrl + path, body);
+    }
+
     private delete(path: string, options = {}): Observable<Object> {
       let url = this.cdkUrl + path;
       return this.http.delete(url, options);
@@ -66,6 +70,31 @@ export class CdkApiService {
 
     setStatus(code:string, status:boolean) : Observable<any>{
       return this.doPut(`/api/admin/v7.0/connected/${code}/status?status=${status}`,null,{}).pipe(map(response => Library.oneLibFromJson(code, response)));
+    }
+
+    scheduleCdkHarvest(code: string, options: { filterQuery: string; showConfigurationOnly: 'true' | 'false' }): Observable<any> {
+      return this.doPost(`/api/admin/v7.0/cdk/${encodeURIComponent(code)}/process/harvest`, options);
+    }
+
+    checkForCdkUpdates(code: string, options: { showConfigurationOnly: 'true' | 'false' }): Observable<any> {
+      return this.doPost(`/api/admin/v7.0/cdk/${encodeURIComponent(code)}/process/update`, options);
+    }
+
+    scheduleCdkDelete(code: string, options: { filterQuery?: string; onlyShowConfiguration?: 'true' | 'false'; dryRun?: boolean } = {}): Observable<any> {
+      return this.doPost(`/api/admin/v7.0/cdk/${encodeURIComponent(code)}/process/delete`, options);
+    }
+
+    compareCdkLibrary(code: string, options: {
+      deleteMissing: boolean;
+      onlyShowConfiguration: boolean;
+      models?: string;
+      license?: string;
+      iterationId?: string;
+      onlyModelsWithMoreInCdk?: boolean;
+      rows?: number;
+      reportEvery?: number;
+    }): Observable<any> {
+      return this.doPost(`/api/admin/v7.0/cdk/${encodeURIComponent(code)}/process/compare`, options);
     }
 
     connected(): Observable<any[]> {
@@ -88,6 +117,10 @@ export class CdkApiService {
       return this.doGet(`/api/admin/v7.0/connected/${code}/config/channel/health`,{}).pipe();
     }
 
+    indexHealth(code: string): Observable<any> {
+      return this.doGet(`/api/admin/v7.0/connected/${encodeURIComponent(code)}/config/index/health`,{}).pipe();
+    }
+
     reharvests(page:number, rows:number, pid:string, filters:string[]): Observable<any> {
       let sfitlers = filters.join(';');
       if(pid) sfitlers = sfitlers+";pid:\""+pid+"\"";
@@ -96,6 +129,13 @@ export class CdkApiService {
       } else {
         return this.doGet(`/api/admin/v7.0/reharvest?page=${page}&rows=${rows}&filters=${sfitlers}`,{}).pipe();
       }
+    }
+
+    groupedReharvests(page: number, rows: number, pid: string, filters: string[]): Observable<any> {
+      let searchFilters = filters.join(';');
+      if (pid) searchFilters += `${searchFilters ? ';' : ''}pid:"${pid}"`;
+      const query = `page=${page}&rows=${rows}`;
+      return this.doGet(`/api/admin/v7.0/reharvest/groups?${query}${searchFilters ? `&filters=${encodeURIComponent(searchFilters)}` : ''}`, {});
     }
 
     introspectPid(pid:string): Observable<any> {
@@ -109,6 +149,13 @@ export class CdkApiService {
         map(response => Reharvest.reharvestFromJson(response))
       );
 
+    }
+
+    runCdkReharvestProcess(library: string, options: any): Observable<any> {
+      const path = library
+        ? `/api/admin/v7.0/cdk/${encodeURIComponent(library)}/process/reharvest`
+        : '/api/admin/v7.0/cdk/process/reharvest';
+      return this.doPost(path, options);
     }
 
     deleteReharvest(id:string):Observable<any> {

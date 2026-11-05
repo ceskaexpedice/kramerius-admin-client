@@ -1,0 +1,56 @@
+:host {
+  display: block;
+}
+
+mat-dialog-content {
+  min-width: min(620px, 75vw);
+  max-height: 70vh;
+}
+
+.model-actions {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.model-list {
+  max-height: 320px;
+  overflow: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.model-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 90px 140px;
+  align-items: center;
+  gap: 12px;
+  min-height: 42px;
+  padding: 0 8px;
+}
+
+.model-header {
+  position: sticky;
+  top: 0;
+  background: var(--mat-sys-surface, white);
+  font-weight: 600;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+@media (max-width: 600px) {
+  mat-dialog-content {
+    min-width: 0;
+  }
+
+  .model-row {
+    grid-template-columns: minmax(130px, 1fr) 55px 90px;
+    gap: 6px;
+    padding: 0 2px;
+  }
+}

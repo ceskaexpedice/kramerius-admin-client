@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
@@ -14,12 +13,16 @@ import { ShowMappingDialogComponent } from 'src/app/dialogs/show-mapping-dialog/
 import { ShowSeChannelDialogComponent } from 'src/app/dialogs/show-sechannel-dialog/show-sechannel-dialog.component';
 import { Library } from 'src/app/models/cdk.library.model';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
+import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
+import { UIService } from 'src/app/services/ui.service';
+import { ShowIndexHealthDialogComponent } from 'src/app/dialogs/show-index-health-dialog/show-index-health-dialog.component';
+import { CompareCdkLibraryDialogComponent } from 'src/app/dialogs/compare-cdk-library-dialog/compare-cdk-library-dialog.component';
 
 @Component({
-    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatSlideToggleModule, MatButtonModule, MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule, MatProgressBarModule],
+    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatButtonModule, MatTooltipModule, MatTableModule, MatDividerModule, MatSelectModule, MatProgressBarModule],
     selector: 'app-cdk-proxy',
     templateUrl: './cdk-proxy.component.html',
     styleUrls: ['./cdk-proxy.component.scss']
@@ -271,7 +274,7 @@ export class CdkProxyComponent implements OnInit {
   cdkMock:any ={"svkhk":{"status":true},"kkp":{"status":true},"svkul":{"status":true},"knav":{"status":true},"uzei":{"status":true},"inovatika":{"status":true},"mzk":{"status":true}};
 
 
-  displayedColumns: string[] = ['logo','code', 'name'/*, 'state'*/,  'stateDuration', 'showMapping','showSEChannel', 'switch'];
+  displayedColumns: string[] = ['logo','code', 'name'/*, 'state'*/,  'stateDuration', 'showMapping','showSEChannel', 'showIndexHealth', 'actions'];
 
   dataSource:Library[];
   register:Map<String, any> = new Map();
@@ -281,6 +284,7 @@ export class CdkProxyComponent implements OnInit {
 
   constructor(
     private cdkApi: CdkApiService,
+    private ui: UIService,
     public dialog: MatDialog
     ) { 
   }
@@ -378,16 +382,6 @@ export class CdkProxyComponent implements OnInit {
     return this.loading;
   }
 
-  public toggle(code:string, event: MatSlideToggleChange) {
-    this.cdkApi.setStatus(code, event.checked).subscribe(resp=> {
-      this.dataSource.forEach(l=> {
-        if (l.code === code) {
-          l.status = resp.status;
-        }
-      });
-    });
-  }
-
   logo(code: string) {
     if (this.register.get(code) != null && this.register.get(code)['logo']) {
       return this.register.get(code)['logo'];
@@ -450,6 +444,141 @@ export class CdkProxyComponent implements OnInit {
       width: '1280px'
     });
 
+  }
+
+  showIndexHealthDialog(lib: Library) {
+    this.dialog.open(ShowIndexHealthDialogComponent, {
+      data: { code: lib.code },
+      width: '1000px',
+      maxWidth: '95vw',
+      panelClass: 'app-show-mapping-dialog'
+    });
+  }
+
+  updateLibrary(lib: Library) {
+    const name = this.register.get(lib.code)?.name || lib.code;
+    const data: SimpleDialogData = {
+      title: `Ruční harvest knihovny ${name}`,
+      message: `Opravdu chcete naplánovat ruční harvest knihovny ${name}?`,
+      collapsibleTextInput: {
+        label: 'Solr filtr (filterQuery, volitelné)',
+        value: ''
+      },
+      showConfigurationOnly: { value: false },
+      checkbox: {
+        label: 'Dry run (pouze vypsat plánované dávky do logu, bez mazání)',
+        checked: false
+      },
+      /*
+      timeRange: { from: '', to: '' },
+      */
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'primary'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'default'
+      }
+    };
+
+    this.dialog.open(SimpleDialogComponent, {
+      data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    }).afterClosed().subscribe(result => {
+      if (result !== 'yes') return;
+
+      const filterQuery = data.collapsibleTextInput?.value.trim();
+      const options: { filterQuery: string; showConfigurationOnly: 'true' | 'false'; from?: string; to?: string } = {
+        filterQuery: filterQuery || '',
+        showConfigurationOnly: data.showConfigurationOnly?.value ? 'true' : 'false'
+      };
+      // Working time temporarily disabled until the API contract supports it.
+      // if (data.timeRange?.from) options.from = data.timeRange.from;
+      // if (data.timeRange?.to) options.to = data.timeRange.to;
+      this.cdkApi.scheduleCdkHarvest(lib.code, options).subscribe({
+        next: () => this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest'),
+        error: () => this.ui.showErrorSnackBar('snackbar.error.scheduleCDKHarvest')
+      });
+    });
+  }
+
+  checkForUpdates(lib: Library) {
+    this.cdkApi.checkForCdkUpdates(lib.code, {
+      showConfigurationOnly: 'false'
+    }).subscribe({
+      next: (response: any) => this.ui.showInfoSnackBar(
+        response?.scheduled === false
+          ? 'snackbar.success.cdkUpdateNoChanges'
+          : 'snackbar.success.cdkUpdateScheduled'
+      ),
+      error: () => this.ui.showErrorSnackBar('snackbar.error.scheduleCDKHarvest')
+    });
+  }
+
+  compareLibrary(lib: Library) {
+    this.dialog.open(CompareCdkLibraryDialogComponent, {
+      data: { code: lib.code, name: this.register.get(lib.code)?.name || lib.code },
+      width: '700px',
+      maxWidth: '95vw',
+      panelClass: 'app-simple-dialog'
+    }).afterClosed().subscribe(options => {
+      if (!options) return;
+      this.cdkApi.compareCdkLibrary(lib.code, {
+        deleteMissing: options.deleteMissing,
+        onlyShowConfiguration: options.onlyShowConfiguration,
+        models: options.models,
+        license: options.license
+      }).subscribe({
+        next: () => this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest'),
+        error: () => this.ui.showErrorSnackBar('snackbar.error.scheduleCDKHarvest')
+      });
+    });
+  }
+
+  confirmDeleteLibrary(lib: Library) {
+    const name = this.register.get(lib.code)?.name || lib.code;
+    const data: SimpleDialogData = {
+      title: 'Smazat celou knihovnu nebo vybrané dokumenty',
+      message: `Opravdu chcete smazat knihovnu ${name}?`,
+      collapsibleTextInput: {
+        label: 'Solr filtr (filterQuery, volitelný)',
+        value: ''
+      },
+      showConfigurationOnly: { value: false },
+      btn1: {
+        label: 'Ano',
+        value: 'yes',
+        color: 'warn'
+      },
+      btn2: {
+        label: 'Ne',
+        value: 'no',
+        color: 'default'
+      }
+    };
+
+    this.dialog.open(SimpleDialogComponent, {
+      data,
+      width: '600px',
+      panelClass: 'app-simple-dialog'
+    }).afterClosed().subscribe(result => {
+      if (result !== 'yes') return;
+
+      const filterQuery = data.collapsibleTextInput?.value.trim() || '';
+      const options = {
+        filterQuery,
+        onlyShowConfiguration: data.showConfigurationOnly?.value ? 'true' as const : 'false' as const,
+        dryRun: data.checkbox?.checked ?? false
+      };
+      this.cdkApi.scheduleCdkDelete(lib.code, options).subscribe({
+        next: () => this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest'),
+        error: () => this.ui.showErrorSnackBar('snackbar.error.scheduleCDKHarvest')
+      });
+    });
   }
 
 }

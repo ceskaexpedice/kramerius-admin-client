@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Porovnat modely: {{ data.name }}</h2>
+<mat-dialog-content class="mat-typography">
+  <p>Modely s vyšším počtem položek v CDK jsou předvybrané. Pokud není vybraný žádný model, použije se seznam z konfigurace.</p>
+  @if (loading) { <mat-progress-bar mode="indeterminate"></mat-progress-bar> }
+  @if (loadError) {
+    <p>Nepodařilo se načíst počty modelů. Bez výběru se použijí modely z konfigurace.</p>
+  }
+  @if (!loading && models.length > 0) {
+    <div class="model-actions">
+      <button mat-button type="button" (click)="selectAll(true)">Vybrat vše</button>
+      <button mat-button type="button" (click)="selectAll(false)">Zrušit výběr</button>
+    </div>
+    <div class="model-list">
+      <div class="model-row model-header"><span>Model</span><span>CDK</span><span>Vzdálená knihovna</span></div>
+      @for (model of models; track model.name) {
+        <div class="model-row">
+          <mat-checkbox [(ngModel)]="model.selected">{{ model.name }}</mat-checkbox>
+          <span>{{ model.cdkCount | number }}</span>
+          <span>{{ model.remoteCount | number }}</span>
+        </div>
+      }
+    </div>
+  }
+  @if (!loading && !loadError && models.length === 0) {
+    <p>Nebyly vráceny žádné modely. Bez výběru se použijí modely z konfigurace.</p>
+  }
+  <div class="options">
+    <mat-form-field appearance="outline">
+      <mat-label>Licence</mat-label>
+      <mat-select [(ngModel)]="license" name="license">
+        <mat-option [value]="null">Bez filtru licence</mat-option>
+        @for (item of licenses; track item) { <mat-option [value]="item">{{ item }}</mat-option> }
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="deleteMissing">Smazat objekty, které chybí ve vzdálené knihovně</mat-checkbox>
+    <mat-slide-toggle [(ngModel)]="onlyShowConfiguration">Zobrazit pouze konfiguraci</mat-slide-toggle>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button matDialogClose>Zrušit</button>
+  <button mat-button color="primary" (click)="submit()">Naplánovat</button>
+</mat-dialog-actions>

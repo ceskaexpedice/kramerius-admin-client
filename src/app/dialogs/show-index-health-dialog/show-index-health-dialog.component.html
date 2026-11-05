@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>{{ 'desc.indexHealth' | translate }}: <span class="app-text-uppercase">{{ data.code }}</span></h2>
+<mat-dialog-content class="mat-typography">
+  @if (loading) { <mat-progress-bar mode="indeterminate"></mat-progress-bar> }
+  @if (error) { <p>{{ 'desc.indexHealthError' | translate }}</p> }
+  @if (health && !loading) {
+    <p class="sampled-at">{{ 'desc.indexHealthSampledAt' | translate }}: {{ health.sampledAt | date:'medium' }}</p>
+    <p class="status-line">
+      {{ 'desc.indexHealthStatus' | translate }}:
+      <strong>{{ 'desc.indexHealthCdk' | translate }} {{ health.cdk?.status || '—' }}</strong>
+      · <strong>{{ 'desc.indexHealthRemote' | translate }} {{ health.remote?.status || '—' }}</strong>
+      <span>{{ 'desc.indexHealthNumFound' | translate }}: {{ health.cdk?.numFound | number }} / {{ health.remote?.numFound | number }}</span>
+    </p>
+
+    <h3>{{ 'desc.indexHealthModels' | translate }}</h3>
+    <table class="comparison-table">
+      <thead><tr><th>{{ 'desc.indexHealthValue' | translate }}</th><th>CDK</th><th>{{ 'desc.indexHealthRemote' | translate }}</th><th>{{ 'desc.indexHealthDifference' | translate }}</th></tr></thead>
+      <tbody>
+        @for (row of modelRows; track row.name) {
+          <tr [class.has-difference]="row.difference !== 0">
+            <th>{{ row.name }}</th><td>{{ row.cdk === null ? '—' : (row.cdk | number) }}</td><td>{{ row.remote === null ? '—' : (row.remote | number) }}</td><td>{{ row.difference === null ? '—' : (row.difference | number) }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <h3>{{ 'desc.indexHealthGlobalLicenses' | translate }}</h3>
+    <p class="hint">{{ 'desc.indexHealthGlobalLicenseHint' | translate }}</p>
+    <ng-container *ngTemplateOutlet="licenseTable; context: { $implicit: globalLicenseRows }"></ng-container>
+
+    <h3>{{ 'desc.indexHealthLocalLicenses' | translate }} ({{ data.code }}_…)</h3>
+    <p class="hint">{{ 'desc.indexHealthLocalLicenseHint' | translate }}</p>
+    <ng-container *ngTemplateOutlet="licenseTable; context: { $implicit: localLicenseRows }"></ng-container>
+  }
+</mat-dialog-content>
+<ng-template #licenseTable let-rows>
+  <table class="comparison-table">
+    <thead><tr><th>{{ 'desc.indexHealthValue' | translate }}</th><th>CDK</th><th>{{ 'desc.indexHealthRemote' | translate }}</th><th>{{ 'desc.indexHealthDifference' | translate }}</th></tr></thead>
+    <tbody>
+      @if (rows.length === 0) { <tr><td colspan="4" class="empty">—</td></tr> }
+      @for (row of rows; track row.name) {
+        <tr [class.has-difference]="row.difference !== 0">
+          <th>{{ row.name }}</th><td>{{ row.cdk === null ? '—' : (row.cdk | number) }}</td><td>{{ row.remote === null ? '—' : (row.remote | number) }}</td><td>{{ row.difference === null ? '—' : (row.difference | number) }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</ng-template>
+<mat-dialog-actions align="end"><button mat-button matDialogClose>{{ 'button.close' | translate }}</button></mat-dialog-actions>

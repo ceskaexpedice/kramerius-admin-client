@@ -192,7 +192,9 @@
       "desc": "Setting up the involved libraries",
       "proxy": {
         "title": "Proxy - connected libraries",
-        "icon": "hub"
+        "icon": "hub",
+        "manualHarvest": "Manual harvest",
+        "checkUpdates": "Check for changes"
       },
       "europeanou": {
         "title": "Europeanou",
@@ -991,6 +993,8 @@
         "more": "{{value}} processes have been scheduled to remove visibility flag"
       },
       "scheduleCDKHarvest": "CDK harvest has been planned",
+      "cdkUpdateNoChanges": "No changes were found.",
+      "cdkUpdateScheduled": "Changes found; the update process has been scheduled.",
       "scheduleAddLicense": "The Add License process has been scheduled",
       "scheduleRemoveLicense": "The License Withdrawal process has been scheduled",
       "addThisToSuperCollection": "The object has been added to the collection",
@@ -1298,6 +1302,20 @@
     "register": "Kramerius registry",
     "api": "API version",
     "securedChannelHealth": "Healthcheck for",
+    "indexHealth": "Index comparison",
+    "indexHealthError": "Could not load the index health check.",
+    "indexHealthSampledAt": "Sampled at",
+    "indexHealthStatus": "Status",
+    "indexHealthCdk": "CDK:",
+    "indexHealthRemote": "Remote index",
+    "indexHealthNumFound": "Total documents",
+    "indexHealthModels": "Counts by model",
+    "indexHealthValue": "Value",
+    "indexHealthDifference": "Difference (remote − CDK)",
+    "indexHealthGlobalLicenses": "Global licenses",
+    "indexHealthGlobalLicenseHint": "Licenses without a library prefix.",
+    "indexHealthLocalLicenses": "Local licenses",
+    "indexHealthLocalLicenseHint": "Only licenses prefixed with this library code are compared; the prefix is hidden in the table.",
     "securedChannelEnabled": "The channel is enabled",
     "securedChannelSolr": "The channel is able to connect to Solr.",
     "securedChannelUser": "The channel is able to get info about users",

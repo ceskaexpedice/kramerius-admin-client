@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, model, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Inject, Optional } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
@@ -10,26 +11,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatRadioModule } from '@angular/material/radio';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { Library } from 'src/app/models/cdk.library.model';
-import { AdminApiService } from 'src/app/services/admin-api.service';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { UIService } from 'src/app/services/ui.service';
-import { debounceTime, Subject } from 'rxjs';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { debounceTime, Subject, from, concatMap, toArray } from 'rxjs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
-import { forkJoin, from, concatMap, toArray  } from 'rxjs';
 
 @Component({
     imports: [
         CommonModule, TranslateModule, MatDialogModule, MatCheckboxModule,
-        MatButtonModule, MatIconModule, MatInputModule, MatSelectModule, MatDividerModule,
-        MatProgressBarModule, MatTooltipModule, MatRadioModule, FormsModule, MatProgressBarModule, MatExpansionModule, MatCardModule
+        MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule, MatDividerModule,
+        MatProgressBarModule, MatRadioModule, FormsModule, MatExpansionModule, MatCardModule
     ],
     selector: 'app-schedule-re-harvest-specific-pids-dialog',
     templateUrl: './schedule-re-harvest-specific-pids-dialog.component.html',
@@ -38,6 +34,7 @@ import { forkJoin, from, concatMap, toArray  } from 'rxjs';
 export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
   isLibsLoading: boolean = false;  // nahrava seznam ve kterych knihovnach se titul nachazi
+  isProcessRunning = false;
   reharvestingDisabled = false; // znemozneny standardni reharvest
   selectedCount = 0; // v kolika knihovnach byl titul nalezen
 
@@ -56,20 +53,29 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
   pids: string;
   typeOfHarvest: string = 'children';
   reharvestLibsOption: string = "fromindex";
+  processOptions: {
+    onlyShowConfiguration: boolean;
+    maxItemsToDelete: string | null;
+  } = {
+    onlyShowConfiguration: false,
+    maxItemsToDelete: null
+  };
   root_pids:string[] = [];
   pid_paths:string[] = [];
+  private ownPidPathsByPid: Record<string, string> = {};
 
   // Debouncing 
   private subject: Subject<string> = new Subject();
+  private lookupVersion = 0;
 
 
 
 
   constructor(
-    public adminApi: AdminApiService,
     public cdkApi: CdkApiService,
     private ui: UIService,
-    public dialogRef: MatDialogRef<ScheduleReHarvestSpecificPidsDialogComponent>) { }
+    public dialogRef: MatDialogRef<ScheduleReHarvestSpecificPidsDialogComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) private data: { pids?: string; reharvestItemId?: string } | null) { }
 
   ngOnInit(): void {
 
@@ -84,6 +90,11 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
     this.subject.pipe(
       debounceTime(400)
     ).subscribe(pids => {
+      const lookupVersion = this.lookupVersion;
+      if (!pids.trim()) {
+        this.isLibsLoading = false;
+        return;
+      }
       this.isLibsLoading = true;
       this.options.forEach(opt=> {
         opt.selected = false;
@@ -97,6 +108,8 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
       for (let i = 0; i < pidlist.length; i++) {
         this.cdkApi.introspectPid(pidlist[i]).subscribe(resp => {
+          // Ignore results from an older PID lookup that completed late.
+          if (lookupVersion !== this.lookupVersion) return;
 
           let keys = Object.keys(resp);
           for (let j = 0; j < keys.length; j++) {
@@ -108,6 +121,7 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
                 let rp = docs[0]['root.pid'];
                 let pp = docs[0]['pid_paths'];
+                const ownPidPath = docs[0]['own_pid_path'];
                 rootpids.push(rp);
 
                 if (pp && pp.length > 0) {
@@ -115,6 +129,7 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
                 } else {
                   pidpaths.push(rp)
                 }
+                if (ownPidPath) this.ownPidPathsByPid[pidlist[i]] = ownPidPath;
                 fdocs[key]= docs;
               }
               enabled.push(key);
@@ -163,7 +178,10 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
             this.conflictAlternatives = cdkConflict[2];
           }
 
-          this.reharvestingDisabled = this.selectedCount <1 || this.conflict;
+          // A PID can exist in the CDK index without being present in any
+          // connected library. Keep the operation types available in that
+          // case; the user can choose the target libraries manually.
+          this.reharvestingDisabled = (this.selectedCount < 1 && !this.cdkIndex) || this.conflict;
 
           let libs: string[] = [];
           this.options.forEach(option => {
@@ -177,6 +195,12 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
       }
 
     });
+
+    // Subscribe before emitting the dialog's initial PID so the debounced
+    // introspection lookup is not lost during initialization.
+    if (this.data?.pids) {
+      this.onPidsChange(this.data.pids);
+    }
 
   }
 
@@ -194,10 +218,29 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
 
   onPidsChange(newPidsValue: string): void {
     this.pids = newPidsValue;
-    if (newPidsValue) {
-      this.isLibsLoading = true;
-      this.subject.next(this.pids);
-    }
+    this.lookupVersion++;
+    // Clear results for the previous PID immediately, before the debounced
+    // introspection starts. Otherwise a conflict remains visible while the
+    // user is entering a different PID (or clears the field).
+    this.resetLookupState();
+    this.isLibsLoading = !!newPidsValue?.trim();
+    this.subject.next(newPidsValue || '');
+  }
+
+  private resetLookupState(): void {
+    this.conflict = false;
+    this.conflictMessage = '';
+    this.conflictAlternatives = [];
+    this.selectedCount = 0;
+    this.reharvestingDisabled = false;
+    this.cdkIndex = null;
+    this.root_pids = [];
+    this.pid_paths = [];
+    this.ownPidPathsByPid = {};
+    this.options.forEach(option => {
+      option.selected = false;
+      option.doc = null;
+    });
   }
   
   onReharvestLibsOptionChange(event: any) {
@@ -217,91 +260,44 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
   }  
 
   schedule() {
+    this.runReharvestProcess();
+  }
 
-    const pidlist = this.splitPids(this.pids);
-    pidlist.forEach(pid => {
-      if (this.reharvestLibsOption == 'selection') {
+  runReharvestProcess(): void {
+    const isDelete = this.typeOfHarvest.startsWith('delete_');
+    const libraries = isDelete ? [] : this.options
+      .filter(option => option.selected && option.enabled)
+      .map(option => option.library.code);
+    const libraryList = libraries.join(',');
+    const requests = this.splitPids(this.pids).map(pid => {
+      const request: any = { pid, type: this.typeOfHarvest };
+      request.own_pid_path = this.ownPidPathsByPid[pid] || pid;
+      const rootPid = this.root_pids[0] || (this.typeOfHarvest === 'new_root' || this.typeOfHarvest === 'delete_root' ? pid : '');
+      if (rootPid) request.rootPid = rootPid;
 
-          let libs:string[] = [];
-          this.options.forEach(option=> {
-            if (option.selected) {
-              libs.push(option.library.code);
-            }
-          });
-
-
-          let object:any = {
-            name:'User trigger | Reharvest from admin client ',
-            pid:pid,
-            type: this.typeOfHarvest,
-            libraries:libs
-          };
-
-
-        // new root
-        if (this.typeOfHarvest == 'new_root') {
-          object['root.pid'] = pid
-        }
-
-        
-
-        if (!this.cdkIndex && this.pid_paths.length > 0) {
-          object['own_pid_path']=this.pid_paths[0];
-        }
-
-
-        if (libs.length > 0) {
-          this.cdkApi.planReharvest(object).subscribe(
-            res => {
-              this.dialogRef.close(res);
-            },
-            error => {
-              this.dialogRef.close('error');
-            }
-          );
-        }
-      } else {
-
-        let object:any ={ name: 'User trigger - reharvest from admin client', pid: pid, type: this.typeOfHarvest }
-        
-        if (this.typeOfHarvest == 'delete_root' && !object['root.pid']) {
-          object['root.pid'] = pid
-        }
-
-        this.cdkApi.planReharvest(object).subscribe(
-          res => {
-            this.dialogRef.close(res);
-          },
-          error => {
-            this.dialogRef.close('error');
-          }
-        );
+      request.onlyShowConfiguration = this.processOptions.onlyShowConfiguration;
+      if (this.processOptions.maxItemsToDelete != null && this.processOptions.maxItemsToDelete !== '') {
+        request.maxItemsToDelete = this.processOptions.maxItemsToDelete;
       }
+      if (this.data?.reharvestItemId) {
+        request.reharvestItemId = this.data.reharvestItemId;
+        request.successState = 'closed';
+      }
+
+      return { libraries: libraryList, request };
+    });
+
+    if (!requests.length) return;
+    this.isProcessRunning = true;
+    from(requests).pipe(
+      concatMap(({ libraries, request }) => this.cdkApi.runCdkReharvestProcess(libraries, request)),
+      toArray()
+    ).subscribe({
+      next: result => this.dialogRef.close(result),
+      error: () => this.dialogRef.close('error')
     });
   }
 
-  scheduleAlternatives() {
-    if (this.conflictAlternatives) {
-
-      from(this.conflictAlternatives).pipe(
-        concatMap(doc => this.cdkApi.planReharvest(doc)), 
-        toArray() 
-      ).subscribe(
-        res => {
-          this.dialogRef.close(res); 
-        },
-        error => {
-          this.dialogRef.close('error'); 
-        }
-      );
-
-    } else {
-      this.dialogRef.close('error'); 
-    }
-
-  }
-
-  
   cdkConflict(docs: any[]): [boolean, string,any[]] {
     let conflict =  docs?.length > 1;
     let message = this.ui.getTranslation('desc.cdkconflict')
@@ -340,6 +336,12 @@ export class ScheduleReHarvestSpecificPidsDialogComponent implements OnInit {
     let selected = this.options.filter(o => o.selected);
     let models = selected.map(o => o.doc['model']);
     this.selectedCount = selected.length;
+    // No library may be selected when a PID exists only in the _cdk_ index.
+    // An empty model list is not a model conflict and must not hide the
+    // operation controls in the dialog.
+    if (models.length === 0) {
+      return [false, '', []];
+    }
     let modelConflict = new Set(models).size !== 1;
     
     let modelName = models.length > 0 ? models[0] : "";
@@ -384,6 +386,9 @@ summary() {
   splitPids(pids: string): string[] {
     if (pids) {
       return pids
+        // Accept copied values such as "PID: uuid:..." without treating
+        // the label itself as another PID and scheduling an extra process.
+        .replace(/\bPID\s*:\s*/gi, ' ')
         .split(/[\s,;]+/) //split by white spaces, ',', ';'
         .filter(n => n); //remove empty strings
     } else return [pids];

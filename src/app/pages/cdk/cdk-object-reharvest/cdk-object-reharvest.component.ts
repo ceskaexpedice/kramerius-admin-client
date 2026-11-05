@@ -12,11 +12,11 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { debounceTime, Subject } from 'rxjs';
-import { ScheduleReHarvestSpecificPidsDialogComponent } from 'src/app/dialogs/schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
+import { ScheduleReHarvestSpecificPidsDialogComponent } from './schedule-re-harvest-specific-pids-dialog/schedule-re-harvest-specific-pids-dialog.component';
 import { SimpleDialogData } from 'src/app/dialogs/simple-dialog/simple-dialog';
 import { SimpleDialogComponent } from 'src/app/dialogs/simple-dialog/simple-dialog.component';
 import { Reharvest } from 'src/app/models/cdk.library.model';
@@ -24,6 +24,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { UIService } from 'src/app/services/ui.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { CdkIntrospectionComponent } from '../cdk-introspection/cdk-introspection.component';
 
 
 /**
@@ -45,10 +46,14 @@ export class CdkObjectReharvestComponent implements OnInit {
 
   /** Table columns */
   displayedColumns: string[] = [
-    'date', 'pid', 'code', 'type', 'state', 'pod', 'description', 'approve', 'cancel', 'delete'
+    'date', 'pid', 'code', 'type', 'state', 'description', 'approve', 'cancel', 'delete'
   ];
   /** Datasource for table */
   dataSource: Reharvest[];
+  groups: any[] = [];
+  expandedGroupId: string | null = null;
+  groupDetails: Record<string, Reharvest[]> = {};
+  groupLoading: Record<string, boolean> = {};
 
   /** Paging properties */
   length = 50;
@@ -72,7 +77,9 @@ export class CdkObjectReharvestComponent implements OnInit {
     private ui: UIService,
     private cdkApi: CdkApiService,
     private appSettings: AppSettings,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -83,7 +90,28 @@ export class CdkObjectReharvestComponent implements OnInit {
       this.reloadReharvests();
     });
 
+    this.route.queryParamMap.subscribe(params => {
+      const dialog = params.get('dialog');
+      const pid = params.get('pid') || params.get('pids') || '';
+      if (dialog === 'introspection') {
+        this.openIntrospectionDialog(pid);
+        this.clearDialogQueryParams();
+      } else if (dialog === 'reharvest') {
+        this.openScheduledReHarvestSpecificPidsDialog(pid, params.get('reharvestItemId') || undefined);
+        this.clearDialogQueryParams();
+      }
+    });
+
     this.reloadReharvests();
+  }
+
+  private clearDialogQueryParams(): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { dialog: null, pid: null, pids: null, reharvestItemId: null },
+      queryParamsHandling: 'merge',
+      replaceUrl: true
+    });
   }
 
 
@@ -92,22 +120,47 @@ export class CdkObjectReharvestComponent implements OnInit {
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.reloadReharvests();
+    this.reloadReharvests(false);
   }
 
 
-  reloadReharvests() {
+  reloadReharvests(resetPage = true) {
     this.loading = true;
-    this.pageIndex = 0;
+    if (resetPage) {
+      this.pageIndex = 0;
+    }
 
-    this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
-      this.dataSource = resp['response']['docs'];
-      //console.log(this.dataSource);
-      this.length = resp['response']['numFound'];
+    this.cdkApi.groupedReharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
+      const grouped = resp?.grouped?.conflict_id;
+      if (grouped?.groups) {
+        this.groups = grouped.groups.map((group: any) => ({
+          id: group.groupValue,
+          count: group.doclist?.numFound ?? 0,
+          representative: Reharvest.reharvestFromJson(group.doclist?.docs?.[0] ?? {})
+        }));
+        this.length = grouped.ngroups ?? 0;
+      } else {
+        const response = resp?.response;
+        this.groups = (response?.docs ?? []).map((doc: any) => ({ id: doc.conflict_id || doc.id, count: 1, representative: Reharvest.reharvestFromJson(doc) }));
+        this.length = response?.numFound ?? 0;
+      }
       this.loading = false;
-
-    });
+    }, () => { this.loading = false; });
   }
+
+  toggleGroup(group: any) {
+    if (this.expandedGroupId === group.id) { this.expandedGroupId = null; return; }
+    this.expandedGroupId = group.id;
+    if (this.groupDetails[group.id]) { this.dataSource = this.groupDetails[group.id]; return; }
+    this.groupLoading[group.id] = true;
+    this.cdkApi.reharvests(0, Math.max(group.count, 1), this.pid, [...this.filters, `conflict_id:${group.id}`]).subscribe(resp => {
+      this.groupDetails[group.id] = (resp?.response?.docs ?? []).map((doc: any) => Reharvest.reharvestFromJson(doc));
+      this.dataSource = this.groupDetails[group.id];
+      this.groupLoading[group.id] = false;
+    }, () => { this.groupLoading[group.id] = false; });
+  }
+
+  refreshAfterMutation() { this.groupDetails = {}; this.expandedGroupId = null; this.reloadReharvests(); }
 
   isReharvestFromCore(reharvest: Reharvest) {
     return reharvest.name?.startsWith("Delete");
@@ -142,17 +195,18 @@ export class CdkObjectReharvestComponent implements OnInit {
       if (result === 'yes') {
 
         this.cdkApi.deleteReharvest(element.id).subscribe(result => {
-          this.reloadReharvests();
+          this.refreshAfterMutation();
         });
 
       }
     });
   }
 
-  openScheduledReHarvestSpecificPidsDialog() {
+  openScheduledReHarvestSpecificPidsDialog(pid = '', reharvestItemId?: string) {
     const dialogRef = this.dialog.open(ScheduleReHarvestSpecificPidsDialogComponent, {
       width: '1400px',
-      panelClass: 'app-schedule-re-harvest-specific-pids-dialog'
+      panelClass: 'app-schedule-re-harvest-specific-pids-dialog',
+      data: { pids: pid, reharvestItemId }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -163,35 +217,27 @@ export class CdkObjectReharvestComponent implements OnInit {
       } else {
         this.ui.showInfoSnackBar('snackbar.success.scheduleCDKHarvest');
       }
-      this.cdkApi.reharvests(this.pageIndex, this.pageSize,this.pid, this.filters).subscribe(resp => {
-        this.dataSource = resp;
-        this.reloadReharvests();
-      });
+      this.refreshAfterMutation();
     })
+  }
+
+  openIntrospectionDialog(pid = this.pid || '') {
+    this.dialog.open(CdkIntrospectionComponent, {
+      width: '1000px',
+      maxWidth: '95vw',
+      data: { pids: pid }
+    });
   }
 
   approveState(reharvest: any) {
     this.cdkApi.changeReharvestState(reharvest.id, 'open').subscribe(x => {
-
-      //this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
-
-      this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
-        this.dataSource = resp['response']['docs'];
-        this.length = resp['response']['numFound'];
-        this.loading = false;
-
-      });
+      this.refreshAfterMutation();
     });
   }
 
   closedState(reharvest: any) {
     this.cdkApi.changeReharvestState(reharvest.id, 'cancelled').subscribe(x => {
-      this.cdkApi.reharvests(this.pageIndex, this.pageSize, this.pid, this.filters).subscribe(resp => {
-        this.dataSource = resp['response']['docs'];
-        //console.log(this.dataSource);
-        this.length = resp['response']['numFound'];
-        this.loading = false;
-      });
+      this.refreshAfterMutation();
     });
   }
 

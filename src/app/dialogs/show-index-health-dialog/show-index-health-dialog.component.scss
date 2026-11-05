@@ -1,0 +1,9 @@
+.sampled-at, .hint { color: rgba(0, 0, 0, .62); font-size: 13px; }
+.status-line { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+h3 { margin: 20px 0 8px; }
+.comparison-table { border-collapse: collapse; width: 100%; margin-bottom: 12px; }
+.comparison-table th, .comparison-table td { border-bottom: 1px solid rgba(0, 0, 0, .12); padding: 7px 10px; text-align: right; }
+.comparison-table thead th:first-child, .comparison-table tbody th { text-align: left; }
+.comparison-table tbody th { font-weight: 500; }
+.comparison-table .has-difference { background: rgba(255, 193, 7, .12); }
+.comparison-table .empty { text-align: center; color: rgba(0, 0, 0, .54); }

@@ -192,7 +192,9 @@
       "desc": "Nastavení zapojených knihoven",
       "proxy": {
         "title": "Proxy - Zapojené knihovny",
-        "icon": "hub"
+        "icon": "hub",
+        "manualHarvest": "Ruční harvest",
+        "checkUpdates": "Zkontrolovat změny"
       },
       "europeanou": {
         "title": "Europeanou",
@@ -989,7 +991,9 @@
         "2-4": "Byly naplánovány {{value}} procesy Odebrání příznaku viditelnosti",
         "more": "Bylo naplánováno {{value}} procesů Odebrání příznaku viditelnosti"
       },
-      "scheduleCDKHarvest": "Harvest pidu byl naplánovován",
+      "scheduleCDKHarvest": "Harvest/knihovny  byl naplánovován",
+      "cdkUpdateNoChanges": "Nebyly zjištěny žádné změny.",
+      "cdkUpdateScheduled": "Zjištěny změny, proces update byl naplánován.",
       "scheduleAddLicense": "Proces Přidání licence byl naplánován",
       "scheduleRemoveLicense": "Proces Odebrání licence byl naplánován",
       "addThisToSuperCollection": "Objekt byl přidán do sbírky",
@@ -1297,6 +1301,20 @@
     "register": "Registr kramériů",
     "api": "Verze API",
     "securedChannelHealth": "Healthcheck chráněného kanálu pro",
+    "indexHealth": "Porovnání indexu",
+    "indexHealthError": "Kontrolu indexu se nepodařilo načíst.",
+    "indexHealthSampledAt": "Čas kontroly",
+    "indexHealthStatus": "Stav",
+    "indexHealthCdk": "CDK:",
+    "indexHealthRemote": "Vzdálený index",
+    "indexHealthNumFound": "Celkový počet",
+    "indexHealthModels": "Počty podle modelů",
+    "indexHealthValue": "Hodnota",
+    "indexHealthDifference": "Rozdíl (vzdálený − CDK)",
+    "indexHealthGlobalLicenses": "Globální licence",
+    "indexHealthGlobalLicenseHint": "Licence bez prefixu knihovny.",
+    "indexHealthLocalLicenses": "Lokální licence",
+    "indexHealthLocalLicenseHint": "Porovnávají se pouze licence s prefixem této knihovny; prefix je v tabulce skrytý.",
     "securedChannelEnabled": "Chráněný kanál je povolen",
     "securedChannelSolr": "Chráněný kanál vidí na vzdálený solr",
     "securedChannelUser": "Chráněný kanál může získat inforamce o uživateli",

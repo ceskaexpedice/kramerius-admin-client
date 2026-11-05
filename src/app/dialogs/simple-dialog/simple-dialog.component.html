@@ -23,6 +23,36 @@
       <input matInput [placeholder]="data.textInput.label" type="text" [(ngModel)]="data.textInput.value">
     </mat-form-field>
   }
+  @if (data.collapsibleTextInput) {
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ data.collapsibleTextInput.label }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field appearance="outline" class="app-w-100">
+          <mat-label>{{ data.collapsibleTextInput.label }}</mat-label>
+          <input matInput [placeholder]="data.collapsibleTextInput.label" type="text" [(ngModel)]="data.collapsibleTextInput.value">
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  }
+  <!-- Working time inputs are temporarily disabled.
+  @if (data.timeRange) {
+    <div class="app-fxLayout app-row app-gap-4">
+      <mat-form-field appearance="outline" class="app-w-100">
+        <mat-label>Od</mat-label>
+        <input matInput type="time" [(ngModel)]="data.timeRange.from">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="app-w-100">
+        <mat-label>Do</mat-label>
+        <input matInput type="time" [(ngModel)]="data.timeRange.to">
+      </mat-form-field>
+    </div>
+  }
+  -->
+  @if (data.showConfigurationOnly) {
+    <mat-slide-toggle [(ngModel)]="data.showConfigurationOnly.value">Zobrazit pouze konfiguraci</mat-slide-toggle>
+  }
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button matButton="filled" (click)="onClose(data.btn1.value)" [color]="data.btn1.color">{{ data.btn1.label }}</button>

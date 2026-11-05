@@ -1,0 +1,137 @@
+.pid-introspection {
+  font-size: 14px;
+}
+
+.pid-group {
+  margin: 12px 0;
+}
+
+.pid-group table {
+  width: 100%;
+  margin-top: 6px;
+  border-collapse: collapse;
+}
+
+.pid-group th,
+.pid-group td {
+  padding: 4px 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.library-key {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.library-key .app-logo-lib {
+  flex: 0 0 24px;
+  object-fit: contain;
+}
+
+.client-link-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.path-list {
+  display: flex;
+  flex-direction: column;
+  min-width: 360px;
+}
+
+.pid-path {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 5px 0;
+}
+
+.pid-path + .pid-path {
+  border-top: 1px solid #e7e7e7;
+}
+
+.path-node {
+  padding: 2px 5px;
+  border: 1px solid var(--mat-sys-outline-variant, #d0d0d0);
+  border-radius: 4px;
+  background: var(--mat-sys-surface-container-low, #f6f6f6);
+  overflow-wrap: anywhere;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.pid-link {
+  color: inherit;
+  cursor: pointer;
+}
+
+.pid-link:hover {
+  color: var(--mat-sys-primary, #3f51b5);
+  text-decoration: underline;
+}
+
+button.path-node {
+  line-height: normal;
+}
+
+.path-node--different {
+  border-color: #e8b7b7;
+  background: #fff1f1;
+  color: #8f3434;
+}
+
+.value--different {
+  display: inline-block;
+  padding: 2px 5px;
+  border: 1px solid #e8b7b7;
+  border-radius: 4px;
+  background: #fff1f1;
+  color: #8f3434;
+}
+
+.root-pid-node {
+  flex: 1 0 260px;
+  min-width: 260px;
+  overflow-wrap: normal;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.path-separator {
+  padding: 0 2px;
+  color: var(--mat-sys-primary, #555);
+  font-size: 12px;
+}
+
+.copyable-value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 300px;
+}
+
+.copy-button {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  line-height: 28px;
+}
+
+.copy-button mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.conflict {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  color: #b3261e;
+}

@@ -1,0 +1,10 @@
+.process-options {
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 12px;
+}
+
+.process-options mat-form-field {
+  min-width: 180px;
+  flex: 1 1 180px;
+}

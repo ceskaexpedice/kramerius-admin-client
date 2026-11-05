@@ -27,7 +27,8 @@ export class CdkComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.view = this.local.getStringProperty('cdk.view');
+    const routeView = this.router.url.split('?')[0].split('/')[2];
+    this.view = routeView || this.local.getStringProperty('cdk.view') || 'proxy';
   }
 
   changeView(view: string) {
