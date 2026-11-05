@@ -55,8 +55,11 @@ export class CompareCdkLibraryDialogComponent implements OnInit {
     this.cdkApi.indexHealth(this.data.code).subscribe({
       next: health => {
         this.models = this.toModelOptions(health?.cdk?.models, health?.remote?.models);
-        this.licenses = [...new Set((health?.cdk?.licenses || []).map((item: ModelCount) => item.value).filter(Boolean))]
-          .sort((a, b) => a.localeCompare(b));
+        const licenseValues: string[] = (health?.cdk?.licenses || [])
+          .map((item: ModelCount) => item.value)
+          .filter((value: string) => Boolean(value));
+        this.licenses = Array.from(new Set<string>(licenseValues))
+          .sort((a: string, b: string) => a.localeCompare(b));
         this.loading = false;
       },
       error: () => {
