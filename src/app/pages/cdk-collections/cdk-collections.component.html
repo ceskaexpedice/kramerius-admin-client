@@ -22,10 +22,14 @@
           <mat-form-field appearance="outline" class="app-search">
             <input matInput [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
           </mat-form-field>
-          <button [disabled]="!allowedGlobalAction('a_collections_edit')" matButton="filled" color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
-          <button [disabled]="!selection.hasValue() || collections?.length === 0" matButton="filled" color="warn" (click)="deleteSelectedCollections()">{{ 'button.deleteSelectedCollections' | translate }}</button>
+          @if (view === 'cdk') {
+            <button [disabled]="!allowedGlobalAction('a_collections_edit')" matButton="filled" color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
+            <button [disabled]="selectedCdkCollections.length === 0" matButton="filled" color="warn" (click)="deleteSelectedCollections()">{{ 'button.deleteSelectedCollections' | translate }}</button>
+          }
           <button [disabled]="!selection.hasValue() || collections?.length === 0" matButton="filled" color="primary" (click)="openCreateCollectionBackupDialog()">{{ 'button.createBackup' | translate }}</button>
-          <button matButton="filled" color="primary" (click)="openRestoreFromCollectionBackupDialog()">{{ 'button.restoreFromBackup' | translate }}</button>
+          @if (view === 'cdk') {
+            <button matButton="filled" color="primary" (click)="openRestoreFromCollectionBackupDialog()">{{ 'button.restoreFromBackup' | translate }}</button>
+          }
           <button mat-icon-button [matTooltip]="'button.reloadThePage' | translate" (click)="reloadPage('cdk-collections')" [disabled]="state === 'loading'"><mat-icon>refresh</mat-icon></button>
         </div>
         <div>
@@ -45,7 +49,7 @@
       @if (!errorState) {
         <div class="app-table-wrapper app-maxh-100 app-view-border app-oa-y">
           @if (view == 'cdk') {
-            <app-cdk-collections-cdk [standaloneOnly]="standaloneOnly"></app-cdk-collections-cdk>
+            <app-cdk-collections-cdk [standaloneOnly]="standaloneOnly" (selectionChange)="onCdkCollectionSelectionChange($event)"></app-cdk-collections-cdk>
           }
           @if (view == 'diglib') {
             <app-cdk-collections-diglib [standaloneOnly]="standaloneOnly"></app-cdk-collections-diglib>

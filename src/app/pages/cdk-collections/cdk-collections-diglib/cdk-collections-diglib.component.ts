@@ -20,6 +20,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { CreateCollectionBackupDialogComponent } from 'src/app/dialogs/create-collection-backup-dialog/create-collection-backup-dialog.component';
 import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -67,6 +68,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
 
   errorMessage: string;
   errorState: boolean = false;
+  libraryLogos: Record<string, string> = {};
 
   // paging   
   pageIndex: number = 0;
@@ -108,6 +110,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     private dialog: MatDialog,
     private ui: UIService,
     private adminApi: AdminApiService,
+    private cdkApi: CdkApiService,
 
     ) { }
 
@@ -128,6 +131,12 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     });
 
     this.reload();
+    this.cdkApi.registrinfo().subscribe({
+      next: (libraries: any[]) => this.libraryLogos = Object.fromEntries(
+        (Array.isArray(libraries) ? libraries : []).filter(library => library?.code && library?.logo).map(library => [library.code, library.logo])
+      ),
+      error: () => this.libraryLogos = {}
+    });
     this.view = this.locals.getStringProperty('cdk-collections.view');
   }
 
@@ -161,12 +170,13 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   reload() {
     this.state = 'loading';
 
-    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc')
+    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc', 'diglib')
     .subscribe((res: any)  => {
       this.allCollections = res["docs"].map((d: any)=> {
         let col:Collection = new Collection();
         // zjistit jazyk a pokud neni, search.title, collection.desc atd..         
         col.id= d.pid;
+        col.libraryCodes = this.readLibraryCodes(d['cdk.collection']);
         col.standalone = d["collection.is_standalone"];
         
         col.names = {};
@@ -262,6 +272,20 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   }
 
 
+  readLibraryCodes(value: any): string[] {
+    const values = Array.isArray(value) ? value : (typeof value === 'string' ? value.replace(/^\[|\]$/g, '').split(',') : []);
+    return values.map(code => String(code).trim()).filter(code => !!code);
+  }
+
+  libraryLogo(collection: Collection): string | null {
+    const code = collection.libraryCodes?.[0];
+    return code ? this.libraryLogos[code] || null : null;
+  }
+
+  libraryLabel(collection: Collection): string {
+    return collection.libraryCodes?.join(', ') || 'CDK';
+  }
+
   allowBePartOfCollection(pid: string) {
     if (this.collectionActions.has(pid)) {
       if (this.collectionActions.get(pid).includes('a_able_tobe_part_of_collections')) {
@@ -273,11 +297,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
 
 
   allowEdit(pid: string) {
-    if (this.collectionActions.has(pid)) {
-      if (this.collectionActions.get(pid).includes('a_collections_edit')) {
-        return true;
-      }
-    }
+    // Collections imported from partner libraries are presented as read-only.
     return false;
   }
 

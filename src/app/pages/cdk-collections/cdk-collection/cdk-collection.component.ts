@@ -70,6 +70,7 @@ export class CdkCollectionComponent implements OnInit {
   collectionActions:Map<string,string[]> = new Map();
   /** collection id  */
   collectionId: string;
+  readOnly = false;
 
   selectedAllCollections: boolean = false;
 
@@ -107,6 +108,7 @@ export class CdkCollectionComponent implements OnInit {
   ngOnInit() {
     this.languages = this.appSettings.languages;
     this.state = 'loading';
+    this.readOnly = this.route.snapshot.queryParamMap.get('readOnly') === 'true';
     this.route.params.subscribe(params => {
       this.loadData(params['id']);
       this.collectionId = params['id'];
@@ -128,7 +130,9 @@ export class CdkCollectionComponent implements OnInit {
         
         this.clientApi.getCollectionChildren(collectionId).subscribe((res) => {
           // items
-          this.items = res.filter(item => this.collection.items.includes(item['pid']))
+          // The index query is authoritative for this view. CDK collection metadata
+          // may not include an `items` list, even when the index finds its children.
+          this.items = res;
           this.items.sort((a, b) => {
             const indexA = fosterChildren.indexOf(a['pid']);
             const indexB = fosterChildren.indexOf(b['pid']);
@@ -138,7 +142,11 @@ export class CdkCollectionComponent implements OnInit {
 
 
           //this.view = this.local.getStringProperty('collection.view');
-          this.view = this.router.url.replace('/cdk-collections/', '').replace('/' + this.collectionId, '');
+          this.view = this.router.url.split('?')[0].replace('/cdk-collections/', '').replace('/' + this.collectionId, '');
+          if (this.readOnly && this.view === 'edit') {
+            this.view = 'detail';
+            this.router.navigate(['/cdk-collections/detail/', this.collectionId], { queryParams: { readOnly: true }, replaceUrl: true });
+          }
           this.state = 'success';
 
           this.itemSelection.clear();
@@ -185,9 +193,14 @@ export class CdkCollectionComponent implements OnInit {
   }
 
   changeView(view: string) {
+    if (this.readOnly && view === 'edit') {
+      return;
+    }
     this.view = view;
     this.local.setStringProperty('cdk-collection.view', view);
-    this.router.navigate(['/cdk-collections/' + view + '/', this.collectionId]);
+    this.router.navigate(['/cdk-collections/' + view + '/', this.collectionId], {
+      queryParams: this.readOnly ? { readOnly: true } : {}
+    });
   }
 
   /** Returns true if all items are selected */
@@ -392,7 +405,10 @@ export class CdkCollectionComponent implements OnInit {
     const dialogRef2 = this.dialog.open(DeleteSelectedItemsFromCollectionComponent, {
       data: {
         "pid":this.collection.id,
-        "todelete":toDelete
+        "todelete":toDelete,
+        "foreignPids": this.items
+          .filter(item => toDelete.includes(item.pid) && this.readLibraryCodes(item['cdk.collection'] ?? item['cdk:collection']).length > 0)
+          .map(item => item.pid)
       },
       width: '600px',
       panelClass: 'app-add-items-to-collection'
@@ -406,6 +422,11 @@ export class CdkCollectionComponent implements OnInit {
         });
       }
     });
+  }
+
+  private readLibraryCodes(value: any): string[] {
+    const values = Array.isArray(value) ? value : (typeof value === 'string' ? value.replace(/^\[|\]$/g, '').split(',') : []);
+    return values.map(code => String(code).trim()).filter(code => !!code);
   }
 
   getBreadcrumb() {

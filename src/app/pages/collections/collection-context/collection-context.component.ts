@@ -16,6 +16,7 @@ import { ClientApiService } from 'src/app/services/client-api.service';
 import { CollectionsService } from 'src/app/services/collections.service';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { UIService } from 'src/app/services/ui.service';
+import { AppSettings } from 'src/app/services/app-settings';
 
 @Component({
     imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
@@ -34,6 +35,7 @@ export class CollectionContextComponent implements OnInit {
   @Input() collectionActions:Map<string,string[]>;
 
   @Input() lang:string;
+  @Input() readOnly = false;
 
   @Output() updated = new EventEmitter<any>();
 
@@ -43,7 +45,8 @@ export class CollectionContextComponent implements OnInit {
     private ui: UIService,
     private dialog: MatDialog,
     private clientApi: ClientApiService,
-    private isoConvert: IsoConvertService
+    private isoConvert: IsoConvertService,
+    public appSettings: AppSettings
   ) { }
 
   ngOnInit(): void {

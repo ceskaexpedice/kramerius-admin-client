@@ -72,6 +72,7 @@ export class CdkCollectionsComponent implements OnInit {
   displayedColumns = ['select', 'name_cze', 'description_cze', 'createdAt', 'modifiedAt', 'action'];
 
   selection = new SelectionModel<any>(true, []);
+  selectedCdkCollections: Collection[] = [];
 
   public langSelected: string = 'cs';
   // seznam vsech jazyku
@@ -400,18 +401,18 @@ export class CdkCollectionsComponent implements OnInit {
   }
 
   deleteSelectedCollections() {
-    let toDelete: any[] = [];
-    this.collections.forEach(c=> {
-      if (this.selection.isSelected(c)) {
-        toDelete.push(c);
-      }
-    })
+    const toDelete = this.selectedCdkCollections;
+    if (!toDelete.length) return;
 
     const dialogRef = this.dialog.open(DeleteSelectedCollectionsDialogComponent, {
       data : { selection: toDelete },
       width: '600px',
       panelClass: 'app-delete-selected-collections-dialog'
     });
+  }
+
+  onCdkCollectionSelectionChange(collections: Collection[]) {
+    this.selectedCdkCollections = collections;
   }
 
   setLang(lang: string) {
@@ -492,6 +493,9 @@ export class CdkCollectionsComponent implements OnInit {
   }
 
   changeView(view: string) {
+    if (view !== 'cdk') {
+      this.selectedCdkCollections = [];
+    }
     this.view = view;
     this.locals.setStringProperty('cdk-collections.view', view);
     this.router.navigate(['/cdk-collections/', view]);

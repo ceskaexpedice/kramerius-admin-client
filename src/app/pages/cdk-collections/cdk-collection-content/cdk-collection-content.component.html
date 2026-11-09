@@ -12,7 +12,7 @@
 			</div>
 
 			<div fxFlex class="app-left">
-				<mat-card-title [routerLink]="allowEdit(item['pid']) && item['model'] == 'collection' ?  ['/collections/content/', item['pid']] : null" [class.app-cursor-pointer]="allowEdit(item['pid']) && item['model'] == 'collection'"><mat-icon *ngIf="allowEdit(item['pid']) && item['model'] == 'collection'">link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
+				<mat-card-title [routerLink]="allowEdit(item['pid']) && item['model'] == 'collection' ? ['/cdk-collections/detail/', item['pid']] : null" [class.app-cursor-pointer]="allowEdit(item['pid']) && item['model'] == 'collection'"><mat-icon *ngIf="allowEdit(item['pid']) && item['model'] == 'collection'">link</mat-icon>{{ getName(item) }} <ng-container *ngIf="item['title.search'] != item['root.title']">({{item['root.title'] }})</ng-container></mat-card-title>
 				<mat-card-subtitle>{{ 'desc.'+item['model'] | translate }}</mat-card-subtitle>
 			</div>
 			<!--

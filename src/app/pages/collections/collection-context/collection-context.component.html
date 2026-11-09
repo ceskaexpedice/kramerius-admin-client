@@ -7,7 +7,7 @@
 </mat-card>
 
 @for (superCollection of superCollections; track superCollection) {
-  <mat-card appearance="outlined" class="app-view-item app-with-header app-fxLayout app-row app-gap-4 app-cursor-pointer" [routerLink]="allowEdit(superCollection['id'])  ?  ['/collections/context/', superCollection['id']] : null " [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!allowEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
+<mat-card appearance="outlined" class="app-view-item app-with-header app-fxLayout app-row app-gap-4" [class.app-cursor-pointer]="!readOnly && allowEdit(superCollection['id'])" [routerLink]="!readOnly && allowEdit(superCollection['id']) ? (appSettings.cdkMode ? ['/cdk-collections/context/', superCollection['id']] : ['/collections/context/', superCollection['id']]) : null" [ngClass]="!readOnly && !allowEdit(superCollection['id']) ? 'app-not-allowed' : null" [matTooltip]="!readOnly && !allowEdit(superCollection['id']) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!readOnly && !allowEdit(superCollection['id']) ? 'app-alert-not-allowed' : null">
     @if (getThumb(superCollection['id'])) {
       <div>
         <img [src]="getThumb(superCollection['id'])" />
@@ -16,17 +16,19 @@
     <mat-card-header class="app-fxLayout app-row app-fxFlex">
       <div class="app-fxFlex app-left">
         <mat-card-title>
-          @if (allowEdit(superCollection['id'])) {
+          @if (!readOnly && allowEdit(superCollection['id'])) {
             <mat-icon class="app-mr-2">link</mat-icon>
             }{{ getName(superCollection) }}
           </mat-card-title>
           <mat-card-subtitle>{{ getDescription(superCollection) }}</mat-card-subtitle>
         </div>
+        @if (!readOnly) {
         <div class="app-right app-actions">
           <a (click)="allowEdit(superCollection['id']) ? removeItemFromAnotherCollection(superCollection, collection, $event) : null" [matTooltip]="allowEdit(superCollection['id']) ? ('button.removeFromCollection' | translate) : null" class="app-btn-warn" [ngClass]="!allowEdit(superCollection['id']) ? 'app-not-allowed' : null">
             <mat-icon>cancel</mat-icon>
           </a>
         </div>
+        }
       </mat-card-header>
     </mat-card>
   }

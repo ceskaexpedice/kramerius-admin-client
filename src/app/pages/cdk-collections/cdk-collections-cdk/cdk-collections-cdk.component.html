@@ -9,7 +9,7 @@
       }
     </th>
     <td mat-cell *matCellDef="let row" class="app-col-checkbox">
-      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
+      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? toggleSelection(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)" [matTooltip]="'desc.selectThisCollection' | translate"></mat-checkbox>
     </td>
   </ng-container>
   <ng-container matColumnDef="name_cze">
@@ -27,13 +27,17 @@
   <ng-container matColumnDef="logo">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'Logo' | translate }}</th>
     <td mat-cell *matCellDef="let element">
-      <img class="app-logo-lib" src="https://api.registr.digitalniknihovna.cz/libraries/vse/logo" />
+      @if (libraryLogo(element); as logo) {
+        <img class="app-logo-lib" [src]="logo" [alt]="libraryLabel(element)" />
+      } @else {
+        <mat-icon class="material-icons-outlined" [matTooltip]="libraryLabel(element)">{{ element.libraryCodes?.length ? 'local_library' : 'library_books' }}</mat-icon>
+      }
     </td>
   </ng-container>
   <ng-container matColumnDef="code">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.code' | translate }}</th>
     <td mat-cell *matCellDef="let element">
-      <strong>vse</strong>
+      <strong>{{ libraryLabel(element) }}</strong>
     </td>
   </ng-container>
   <ng-container matColumnDef="description_cze">
@@ -54,7 +58,6 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.managed' | translate }}</th>
     <td mat-cell *matCellDef="let element">{{ element.modifiedAt | date : 'dd.MM.yyyy' }}</td>
   </ng-container>
-
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.app-not-allowed]="!allowEdit(row.id)" [matTooltip]="!allowEdit(row.id) ? ('alert.notAllowed' | translate) : null" [matTooltipClass]="!allowEdit(row.id) ? 'app-alert-not-allowed' : null"></tr>
 </table>

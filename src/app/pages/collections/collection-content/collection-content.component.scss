@@ -1,3 +1,63 @@
+.app-view-item {
+  position: relative;
+}
+
+.app-library-origin {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  max-width: 190px;
+  padding: 3px 5px;
+  border: 1px solid var(--mat-sys-outline-variant, #d5d8dc);
+  border-radius: 6px;
+  background: var(--mat-sys-surface, #fff);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 16%);
+
+  .app-library-link {
+    display: flex;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 4px;
+
+    &:focus-visible {
+      outline: 2px solid var(--mat-sys-primary, #3f51b5);
+      outline-offset: 2px;
+    }
+  }
+
+  img {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
+    object-fit: contain;
+    box-sizing: border-box;
+    padding: 2px;
+    border: 1px solid var(--mat-sys-outline-variant, #d5d8dc);
+    border-radius: 4px;
+    background: var(--mat-sys-surface, #fff);
+  }
+
+  span {
+    max-width: 50px;
+    overflow: hidden;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 21px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 4px;
+    border: 1px solid var(--mat-sys-outline-variant, #d5d8dc);
+    border-radius: 4px;
+    background: var(--mat-sys-surface, #fff);
+  }
+}
+
 .app-img-cutting-wrapper {
   min-width: 60px;
 }

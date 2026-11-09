@@ -27,10 +27,31 @@
     <div>
       <mat-form-field appearance="outline" class="app-w-100 app-download">
         <mat-label>{{ 'desc.pids' | translate }}</mat-label>
-        <textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="{{pidsTextareaRows}}"></textarea>
+        <textarea [disabled]="inProgress || isFinished()" matInput type="text" id="inputPids" name="pids" [(ngModel)]="pids" (ngModelChange)="onPidsChanged()" (blur)="resolvePidsForPreview()" [placeholder]="('desc.insertPidsHere' | translate) + ' ...'" required autofocus rows="{{pidsTextareaRows}}"></textarea>
         <mat-icon matSuffix (click)="onPidsFromFile()" [matTooltip]="'button.loadPidsFromFile' | translate" class="app-cursor-pointer">file_download</mat-icon>
       </mat-form-field>
       <input style="display: none;" #fileWithPids name="pf" type="file" (change)="onSelectFile($event)" accept=".txt" />
+      @if (appSettings.cdkMode && resolvedPids.length > 0) {
+        <div class="app-fxLayout app-column app-gap-1 app-mt-2">
+          @for (item of resolvedPids; track $index) {
+            <div class="app-fxLayout app-row app-center-v app-gap-2">
+              @if (libraryLogo(item); as logo) {
+                <img class="app-logo-lib" [src]="logo" [alt]="item.libraryCodes.join(', ')" />
+              } @else if (item.libraryCodes.length > 0) {
+                <mat-icon class="material-icons-outlined" [matTooltip]="item.libraryCodes.join(', ')">local_library</mat-icon>
+              }
+              <span>{{ item.inputPid }}</span>
+              @if (item.targetPid !== item.inputPid) {
+                <mat-icon class="app-16">arrow_forward</mat-icon>
+                <strong>{{ item.targetPid }}</strong>
+              }
+              @if (item.libraryCodes.length > 0) {
+                <span class="app-desc">{{ item.libraryCodes.join(', ') }}</span>
+              }
+            </div>
+          }
+        </div>
+      }
     </div>
     @if (inProgress) {
       <mat-progress-bar mode="indeterminate" [mode]="progressBarMode" [value]="getProgress()"></mat-progress-bar>

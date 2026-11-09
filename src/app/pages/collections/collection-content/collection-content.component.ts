@@ -15,6 +15,7 @@ import { AdminApiService } from 'src/app/services/admin-api.service';
 import { DeleteSelectedItemsFromCollectionComponent } from 'src/app/dialogs/delete-selected-items-from-collection/delete-selected-items-from-collection.component';
 import { IsoConvertService } from 'src/app/services/isoconvert.service';
 import { AppSettings } from 'src/app/services/app-settings';
+import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -45,6 +46,7 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   @Input() items: SelectionModel<any>[];
   @Input() lang: string;
   @Input() contentView: string;
+  @Input() readOnly = false;
 
   @Input() collectionActions:Map<string,string[]>;
 
@@ -66,9 +68,12 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   clippingItems: any[];
 
   public isRepresentativePageSelected: any = [];
+  libraryLogos: Record<string, string> = {};
+  libraryUrls: Record<string, string> = {};
 
   constructor(
     public appSettings: AppSettings,
+    private cdkApi: CdkApiService,
     private collectionsService: CollectionsService,
     private ui: UIService,
     private dialog: MatDialog,
@@ -81,9 +86,43 @@ export class CollectionContentComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if (this.appSettings.cdkMode) {
+      this.cdkApi.registrinfo().subscribe({
+        next: (libraries: any[]) => {
+          const registeredLibraries = Array.isArray(libraries) ? libraries : [];
+          this.libraryLogos = Object.fromEntries(
+            registeredLibraries.filter(library => library?.code && library?.logo).map(library => [library.code, library.logo])
+          );
+          this.libraryUrls = Object.fromEntries(
+            registeredLibraries
+              .filter(library => library?.code && (library?.new_client_url || library?.url))
+              .map(library => [library.code, library.new_client_url || library.url])
+          );
+        },
+        error: () => {
+          this.libraryLogos = {};
+          this.libraryUrls = {};
+        }
+      });
+    }
     this.collectionItems = [];
     this.noncollectionItems =  this.items;
     this.clippingItems = this.collection.clipitems;
+  }
+
+  libraryCodes(item: any): string[] {
+    const value = item?.['cdk.collection'] ?? item?.['cdk:collection'];
+    const values = Array.isArray(value) ? value : (typeof value === 'string' ? value.replace(/^\[|\]$/g, '').split(',') : []);
+    return [...new Set(values.map(code => String(code).trim()).filter(code => !!code))];
+  }
+
+  libraryObjectUrl(code: string, pid: string): string | null {
+    const baseUrl = this.libraryUrls[code];
+    if (!baseUrl || !pid) {
+      return null;
+    }
+    const uuid = pid.startsWith('cdk/') ? pid.substring(4) : pid;
+    return `${baseUrl.replace(/\/+$/, '')}/uuid/${uuid}`;
   }
 
 

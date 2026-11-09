@@ -43,7 +43,7 @@ export class DeleteSelectedItemsFromCollectionComponent implements OnInit {
 
 
   schedulerDeleteSelectedItemsAndClose() {
-    let todelete = this.data['todelete'];
+    let todelete = this.getPidsForRemoval();
     let colid = this.data['pid'];  
 
     this.collectionsService.removeBatchItemsFromCollection(colid, todelete).subscribe( () => {
@@ -54,7 +54,7 @@ export class DeleteSelectedItemsFromCollectionComponent implements OnInit {
 
   scheduleDeleteSelectedItemsAndChangeRoute(routerLink: string) {
     
-    let todelete = this.data['todelete'];
+    let todelete = this.getPidsForRemoval();
     let colid = this.data['pid'];  
 
     this.collectionsService.removeBatchItemsFromCollection(colid, todelete).subscribe( () => {
@@ -72,6 +72,12 @@ export class DeleteSelectedItemsFromCollectionComponent implements OnInit {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
         this.router.navigate([routerLink]))
     );
+  }
+
+  private getPidsForRemoval(): string[] {
+    const pids: string[] = this.data['todelete'] || [];
+    const foreignPids = new Set<string>(this.data['foreignPids'] || []);
+    return pids.map(pid => foreignPids.has(pid) && !pid.startsWith('cdk/') ? `cdk/${pid}` : pid);
   }
 
 }

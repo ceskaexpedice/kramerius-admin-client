@@ -10,6 +10,7 @@ export class Collection {
   thumbnail:"none";
 
   standalone: boolean = false;
+  libraryCodes: string[] = [];
 
   createdAt: Date;
   modifiedAt: Date;

@@ -66,7 +66,7 @@ export class ClientApiService {
   }
 
 
-  getCollections(rows:number, offset:number, standalone:boolean, prefix:string, sort:string, sortDir: string) {
+  getCollections(rows:number, offset:number, standalone:boolean, prefix:string, sort:string, sortDir: string, source?: 'cdk' | 'diglib') {
 
     let iSort = 'title.sort asc';
     if (sort && sortDir) {
@@ -74,6 +74,11 @@ export class ClientApiService {
     }
 
     let filterQuery:string = 'model:"collection"';
+    if (source === 'cdk') {
+      filterQuery += ' AND -cdk.collection:[* TO *]';
+    } else if (source === 'diglib') {
+      filterQuery += ' AND cdk.collection:[* TO *]';
+    }
     if (standalone) {
       filterQuery = filterQuery + ' AND collection.is_standalone:'+standalone
     }
@@ -106,9 +111,13 @@ export class ClientApiService {
   getCollectionChildren(uuid: string): Observable<any[]> {
     //vrati ofilterQuerybsah sbirky na zaklade priznaku ve vyhledavacim indexu (tj. korektni az eventually po reindexaci)
     //takze hned po pridani (spatne) ne, hned po odbrani (spatne) ano
+    const fields = ['model', 'pid', 'title.search', 'root.title', 'date.str', 'level', 'title.search_*'];
+    if (this.appSettings.cdkMode) {
+      fields.push('cdk.collection');
+    }
     return this.search({
       q: `in_collections.direct:"${uuid}"`,
-      fl: 'model,pid,title.search,root.title,date.str,level,title.search_*',
+      fl: fields.join(','),
       //sort: 'rels_ext_index.sort asc',
       rows: '400'
     });

@@ -15,8 +15,16 @@ import { Collection } from 'src/app/models/collection.model';
 import { RightAction } from 'src/app/models/right-action.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CollectionsService } from 'src/app/services/collections.service';
-import { AdminApiService } from 'src/app/services/admin-api.service';
 import { catchError, of } from 'rxjs';
+import { ClientApiService } from 'src/app/services/client-api.service';
+import { CdkApiService } from 'src/app/services/cdk-api.service';
+import { AppSettings } from 'src/app/services/app-settings';
+
+interface ResolvedPid {
+  inputPid: string;
+  targetPid: string;
+  libraryCodes: string[];
+}
 
 
 @Component({
@@ -34,6 +42,8 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
   inProgress = false;
 
   pids: string;
+  resolvedPids: ResolvedPid[] = [];
+  libraryLogos: Record<string, string> = {};
 
   collection_title;
   collection_pid;
@@ -54,7 +64,9 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<AddItemsToCollectionDialogComponent>, @Inject(MAT_DIALOG_DATA) public collection: Collection, 
   private collectionApi: CollectionsService,
   private authService: AuthService,
-  private adminApi: AdminApiService 
+  private clientApi: ClientApiService,
+  private cdkApi: CdkApiService,
+  public appSettings: AppSettings
   ) {
     if (collection) {
       this.collection_title = collection.names['cze'];
@@ -63,6 +75,14 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.appSettings.cdkMode) {
+      this.cdkApi.registrinfo().subscribe({
+        next: (libraries: any[]) => this.libraryLogos = Object.fromEntries(
+          (Array.isArray(libraries) ? libraries : []).filter(library => library?.code && library?.logo).map(library => [library.code, library.logo])
+        ),
+        error: () => this.libraryLogos = {}
+      });
+    }
   }
 
   onSelectFile(event: any): void {
@@ -70,6 +90,7 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     let fileReader: FileReader = new FileReader();
     fileReader.onload = (e) => {
       this.pids = String(fileReader.result);
+      this.resolvePidsForPreview();
     }
     fileReader.readAsText(event.target.files[0]);
   }
@@ -83,46 +104,92 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     this.genericErrors = {};
 
 
+    this.resolvedPids = [];
     pids.forEach(pid => {
-      this.authService.getAuthorizedActions(pid).subscribe((rAct: RightAction[]) => {
-        let authActions: any[] = [];
-        rAct.forEach(rA => {
-          authActions.push(rA.code);
-        });
-  
-        if (authActions.includes('a_able_tobe_part_of_collections')) {
-          this.collectionApi.addItemToCollection(this.collection.id, pid)
-          .subscribe((resp:any) => {
-
-            this.items_counter_added++;
-            if (this.isFinished()) {
-              this.inProgress = false;
-            }
-          }, errorResp => {
-            // pid
-            this.items_counter_failed++;
-            if (errorResp.error && errorResp.error.message) {
-              this.genericErrors[pid]= errorResp.error.message;
-            } else {
-              this.genericErrors[pid]= errorResp;
-            }
-
-            if (this.isFinished()) {
-              this.inProgress = false;
-            }
-          });
-        } else {
-          // nema prava
-          // pid
-          this.items_counter_failed++;
-          if (this.isFinished()) {
-            this.inProgress = false;
-          }
-          this.rightsErrors.push(pid);
-        }
-      });
-    })
+      if (this.appSettings.cdkMode) {
+        this.resolvePidAndAdd(pid);
+      } else {
+        this.addPid(pid, pid);
+      }
+    });
     this.progressBarMode = 'determinate';
+  }
+
+  onPidsChanged() {
+    this.resolvedPids = [];
+  }
+
+  resolvePidsForPreview() {
+    if (!this.appSettings.cdkMode || this.inProgress) {
+      return;
+    }
+    this.resolvedPids = [];
+    this.splitPids(this.pids).forEach(pid => this.resolvePid(pid, resolved => {
+      this.resolvedPids = [...this.resolvedPids.filter(item => item.inputPid !== pid), resolved];
+    }));
+  }
+
+  private resolvePidAndAdd(pid: string) {
+    this.resolvePid(pid, resolved => {
+      this.resolvedPids = [...this.resolvedPids.filter(item => item.inputPid !== pid), resolved];
+      this.addPid(pid, resolved.targetPid);
+    });
+  }
+
+  private resolvePid(pid: string, callback: (resolved: ResolvedPid) => void) {
+    const lookupPid = pid.startsWith('cdk/') ? pid.substring(4) : pid;
+    this.clientApi.getObjectByPidFromIndex(lookupPid).pipe(catchError(() => of(null))).subscribe(doc => {
+      const libraryCodes = this.readLibraryCodes(doc?.['cdk.collection'] ?? doc?.['cdk:collection']);
+      const targetPid = libraryCodes.length > 0 && !pid.startsWith('cdk/') ? `cdk/${lookupPid}` : pid;
+      callback({ inputPid: pid, targetPid, libraryCodes });
+    });
+  }
+
+  private addPid(inputPid: string, targetPid: string) {
+    this.authService.getAuthorizedActions(targetPid).subscribe({
+      next: (actions: RightAction[]) => {
+        const canAdd = actions.some(action => action.code === 'a_able_tobe_part_of_collections');
+        if (!canAdd) {
+          this.items_counter_failed++;
+          this.rightsErrors.push(inputPid);
+          this.finishIfDone();
+          return;
+        }
+
+        this.collectionApi.addItemToCollection(this.collection.id, targetPid).subscribe({
+          next: () => {
+            this.items_counter_added++;
+            this.finishIfDone();
+          },
+          error: error => {
+            this.items_counter_failed++;
+            this.genericErrors[inputPid] = error?.error?.message || error;
+            this.finishIfDone();
+          }
+        });
+      },
+      error: error => {
+        this.items_counter_failed++;
+        this.genericErrors[inputPid] = error?.error?.message || error;
+        this.finishIfDone();
+      }
+    });
+  }
+
+  private finishIfDone() {
+    if (this.isFinished()) {
+      this.inProgress = false;
+    }
+  }
+
+  private readLibraryCodes(value: any): string[] {
+    const values = Array.isArray(value) ? value : (typeof value === 'string' ? value.replace(/^\[|\]$/g, '').split(',') : []);
+    return values.map(code => String(code).trim()).filter(code => !!code);
+  }
+
+  libraryLogo(item: ResolvedPid): string | null {
+    const code = item.libraryCodes[0];
+    return code ? this.libraryLogos[code] || null : null;
   }
 
   containsGe() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
@@ -20,6 +20,7 @@ import { AppSettings } from 'src/app/services/app-settings';
 import { CreateCollectionBackupDialogComponent } from 'src/app/dialogs/create-collection-backup-dialog/create-collection-backup-dialog.component';
 import { RestoreFromCollectionBackupDialogComponent } from 'src/app/dialogs/restore-from-collection-backup-dialog/restore-from-collection-backup-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { CdkApiService } from 'src/app/services/cdk-api.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -46,6 +47,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class CdkCollectionsCdkComponent implements OnInit {
 
   @Input() standaloneOnly: boolean;
+  @Output() selectionChange = new EventEmitter<Collection[]>();
 
   // Debouncing 
   private subject: Subject<string> = new Subject();
@@ -67,6 +69,7 @@ export class CdkCollectionsCdkComponent implements OnInit {
 
   errorMessage: string;
   errorState: boolean = false;
+  libraryLogos: Record<string, string> = {};
 
   // paging   
   pageIndex: number = 0;
@@ -108,6 +111,7 @@ export class CdkCollectionsCdkComponent implements OnInit {
     private dialog: MatDialog,
     private ui: UIService,
     private adminApi: AdminApiService,
+    private cdkApi: CdkApiService,
 
     ) { }
 
@@ -127,6 +131,12 @@ export class CdkCollectionsCdkComponent implements OnInit {
     });
 
     this.reload();
+    this.cdkApi.registrinfo().subscribe({
+      next: (libraries: any[]) => this.libraryLogos = Object.fromEntries(
+        (Array.isArray(libraries) ? libraries : []).filter(library => library?.code && library?.logo).map(library => [library.code, library.logo])
+      ),
+      error: () => this.libraryLogos = {}
+    });
     this.view = this.locals.getStringProperty('cdk-collections.view');
   }
 
@@ -160,12 +170,13 @@ export class CdkCollectionsCdkComponent implements OnInit {
   reload() {
     this.state = 'loading';
 
-    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc')
+    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc', 'cdk')
     .subscribe((res: any)  => {
       this.allCollections = res["docs"].map((d: any)=> {
         let col:Collection = new Collection();
         // zjistit jazyk a pokud neni, search.title, collection.desc atd..         
         col.id= d.pid;
+        col.libraryCodes = this.readLibraryCodes(d['cdk.collection']);
         col.standalone = d["collection.is_standalone"];
         
         col.names = {};
@@ -260,6 +271,20 @@ export class CdkCollectionsCdkComponent implements OnInit {
 
   }
 
+
+  readLibraryCodes(value: any): string[] {
+    const values = Array.isArray(value) ? value : (typeof value === 'string' ? value.replace(/^\[|\]$/g, '').split(',') : []);
+    return values.map(code => String(code).trim()).filter(code => !!code);
+  }
+
+  libraryLogo(collection: Collection): string | null {
+    const code = collection.libraryCodes?.[0];
+    return code ? this.libraryLogos[code] || null : null;
+  }
+
+  libraryLabel(collection: Collection): string {
+    return collection.libraryCodes?.join(', ') || 'CDK';
+  }
 
   allowBePartOfCollection(pid: string) {
     if (this.collectionActions.has(pid)) {
@@ -393,6 +418,12 @@ export class CdkCollectionsCdkComponent implements OnInit {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+    this.selectionChange.emit(this.selection.selected);
+  }
+
+  toggleSelection(row: Collection) {
+    this.selection.toggle(row);
+    this.selectionChange.emit(this.selection.selected);
   }
 
   // The label for the checkbox on the passed row
@@ -404,12 +435,7 @@ export class CdkCollectionsCdkComponent implements OnInit {
   }
 
   deleteSelectedCollections() {
-    let toDelete: Collection[] = [];
-    this.collections.forEach(c=> {
-      if (this.selection.isSelected(c)) {
-        toDelete.push(c);
-      }
-    })
+    const toDelete = this.selection.selected;
 
     const dialogRef = this.dialog.open(DeleteSelectedCollectionsDialogComponent, {
       data : { selection: toDelete },

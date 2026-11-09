@@ -3,12 +3,35 @@
 }
 
 @if (contentView === 'object') {
-  <div cdkDropList (cdkDropListDropped)="drop($event)">
+  <div cdkDropList [cdkDropListDisabled]="readOnly" (cdkDropListDropped)="drop($event)">
     @for (item of noncollectionItems; track item) {
-      <mat-card appearance="outlined" class="app-view-item app-with-header app-fxLayout app-row app-gap-4" [ngClass]="{'item-collection':item['model'] == 'collection'}" cdkDrag>
+      <mat-card appearance="outlined" class="app-view-item app-with-header app-fxLayout app-row app-gap-4" [ngClass]="{'item-collection':item['model'] == 'collection'}" cdkDrag [cdkDragDisabled]="readOnly">
+        @if (appSettings.cdkMode && libraryCodes(item).length > 0) {
+          <div class="app-library-origin" [matTooltip]="libraryCodes(item).join(', ')">
+            @for (code of libraryCodes(item); track code) {
+              @if (libraryLogos[code]; as logo) {
+                @if (libraryUrls[code]) {
+                  <a class="app-library-link" [href]="libraryObjectUrl(code, item['pid'])" target="_blank" rel="noopener noreferrer" [attr.aria-label]="code">
+                    <img [src]="logo" [alt]="code" />
+                  </a>
+                } @else {
+                  <img [src]="logo" [alt]="code" />
+                }
+              } @else {
+                @if (libraryUrls[code]) {
+                  <a class="app-library-link" [href]="libraryObjectUrl(code, item['pid'])" target="_blank" rel="noopener noreferrer" [attr.aria-label]="code"><span>{{ code }}</span></a>
+                } @else {
+                  <span>{{ code }}</span>
+                }
+              }
+            }
+          </div>
+        }
+        @if (!readOnly) {
         <div class="app-ml-n2">
           <mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? itemSelection.toggle(item) : null" [checked]="itemSelection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
         </div>
+        }
         @if (getThumb(item['pid'])) {
           <div>
             <img [src]="getThumb(item['pid'])" onerror="this.src='assets/img/no-image.png'" />
@@ -16,7 +39,7 @@
         }
         <mat-card-header class="app-fxLayout app-row">
           <div class="app-fxFlex app-left">
-            <mat-card-title [routerLink]="allowEdit(item['pid']) && item['model'] == 'collection' ?  ['/collections/content/', item['pid']] : null" [class.app-cursor-pointer]="allowEdit(item['pid']) && item['model'] == 'collection'">@if (allowEdit(item['pid']) && item['model'] == 'collection') {
+            <mat-card-title [routerLink]="!readOnly && allowEdit(item['pid']) && item['model'] == 'collection' ? (appSettings.cdkMode ? ['/cdk-collections/detail/', item['pid']] : ['/collections/content/', item['pid']]) : null" [class.app-cursor-pointer]="!readOnly && allowEdit(item['pid']) && item['model'] == 'collection'">@if (!readOnly && allowEdit(item['pid']) && item['model'] == 'collection') {
               <mat-icon>link</mat-icon>
               }{{ getName(item) }} @if (item['title.search'] != item['root.title']) {
               ({{item['root.title'] }})
@@ -32,9 +55,11 @@
 @if (contentView === 'cuttings') {
   @for (item of clippingItems; track item) {
     <mat-card appearance="outlined" class="app-view-item app-with-header app-fxLayout app-row app-gap-4">
+      @if (!readOnly) {
       <div class="app-ml-n2">
         <mat-checkbox (click)="$event.stopPropagation()"  (change)="$event ? cuttingsSelection.toggle(item) : null" [checked]="cuttingsSelection.isSelected(item)"  [matTooltip]="'desc.selectThisCollection' | translate" ></mat-checkbox>
       </div>
+      }
       @if (!item['thumb']) {
         <div>
           <img [src]="'assets/img/no-image.png'" onerror="this.src='assets/img/no-image.png'" />
