@@ -75,6 +75,22 @@
         "title": "Parameters",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "rule_folder"
+      },
+      "users": {
+        "title": "Users",
+        "desc": "User accounts in Keycloak.",
+        "icon": "group",
+        "search": "Search (username, name, e-mail)",
+        "searchHint": "Tip: finds users whose first name, last name, username or e-mail starts with the text. *text* = anywhere, \"text\" = exact match.",
+        "searchButton": "Search",
+        "username": "Username",
+        "name": "Name",
+        "email": "E-mail",
+        "enabled": "Enabled",
+        "created": "Created",
+        "lastLogin": "Last login",
+        "empty": "No user matches the search.",
+        "pageSize": "Per page"
       }
     },
     "processes": {

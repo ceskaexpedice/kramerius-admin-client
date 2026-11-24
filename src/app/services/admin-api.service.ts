@@ -518,6 +518,14 @@ export class AdminApiService {
     return this.delete(`/roles/${role.id}`);
   }
 
+  searchKeycloakUsers(search: string, first: number, max: number): Observable<any> {
+    const params: any = { first, max };
+    if (search && search.trim()) {
+      params.search = search.trim();
+    }
+    return this.get('/keycloak/users/search', params);
+  }
+
   getActions(pid: String): Observable<any> {
     return this.get(`/rights/actions?pid=${pid}`).pipe(map(response =>
       RightAction.fromJsonArray(response)));
