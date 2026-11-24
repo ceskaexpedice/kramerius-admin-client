@@ -17,9 +17,14 @@
     <td mat-cell *matCellDef="let element">
       <div  [matTooltip]="element.names[displayLanguage()]" class="app-text-cutter-wrapper">
         <div class="app-text-cutter">
-          <a [routerLink]="allowEdit(element.id) ? getRouterLink('/cdk-collections/detail/', element.id, 'collection', 'detail') : null" [class.app-avoid-click]="!allowEdit(element.id)" [queryParams]="{ readOnly: true }">
+          <a [routerLink]="getRouterLink('/cdk-collections/detail/', element.id, 'collection', 'detail')" [queryParams]="{ readOnly: true, remote: true }">
             {{ element.names[displayLanguage()] }}
           </a>
+          @if (sourceCollectionUrl(element); as sourceUrl) {
+            <a [href]="sourceUrl" target="_blank" rel="noopener noreferrer" [matTooltip]="libraryLabel(element)" [attr.aria-label]="libraryLabel(element)" class="app-ml-1 app-va-sub">
+              <mat-icon class="material-icons-outlined app-16">open_in_new</mat-icon>
+            </a>
+          }
         </div>
       </div>
     </td>
@@ -58,6 +63,38 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'desc.managed' | translate }}</th>
     <td mat-cell *matCellDef="let element">{{ element.modifiedAt | date : 'dd.MM.yyyy' }}</td>
   </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button [matMenuTriggerFor]="collectionActions" [matMenuTriggerData]="{ collection: element }" [matTooltip]="'button.collectionActions' | translate" [attr.aria-label]="'button.collectionActions' | translate">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <mat-menu #collectionActions="matMenu">
+    <ng-template matMenuContent let-collection="collection">
+      <button mat-menu-item [matMenuTriggerFor]="addToCdkCollectionMenu" [matMenuTriggerData]="{ collection: collection }">
+        <mat-icon>playlist_add</mat-icon><span>{{ 'button.addToACollection' | translate }}</span>
+      </button>
+      <button mat-menu-item (click)="adoptRemoteCollection(collection)" [disabled]="!collection.libraryCodes?.length">
+        <mat-icon>arrow_forward</mat-icon><span>{{ 'button.adoptRemoteCollection' | translate }}</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="scheduleCollectionHarvest(collection)" [disabled]="!collection.libraryCodes?.length">
+        <mat-icon>download</mat-icon><span>{{ 'button.cdkCollectionHarvest' | translate }}</span>
+      </button>
+    </ng-template>
+  </mat-menu>
+  <mat-menu #addToCdkCollectionMenu="matMenu">
+    <ng-template matMenuContent let-collection="collection">
+      <button mat-menu-item (click)="addRemoteCollectionToCdk(collection)">
+        <mat-icon>collections_bookmark</mat-icon><span>{{ 'button.addRemoteCollectionAsCollection' | translate }}</span>
+      </button>
+      <button mat-menu-item (click)="addRemoteCollectionContentsToCdk(collection)">
+        <mat-icon>playlist_add_check</mat-icon><span>{{ 'button.addRemoteCollectionContentsLabel' | translate }}</span>
+      </button>
+    </ng-template>
+  </mat-menu>
   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

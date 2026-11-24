@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
@@ -26,6 +26,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { ScheduleIndexationByPidDialogComponent } from 'src/app/dialogs/schedule-indexation-by-pid-dialog/schedule-indexation-by-pid-dialog.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -38,13 +40,13 @@ import { TranslateModule } from '@ngx-translate/core';
     imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
         MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
         MatTooltipModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatPaginatorModule,
-        MatTableModule, MatSortModule
+        MatTableModule, MatSortModule, MatMenuModule
     ],
     selector: 'app-cdk-collections-cdk',
     templateUrl: './cdk-collections-cdk.component.html',
     styleUrls: ['./cdk-collections-cdk.component.scss']
 })
-export class CdkCollectionsCdkComponent implements OnInit {
+export class CdkCollectionsCdkComponent implements OnInit, OnChanges {
 
   @Input() standaloneOnly: boolean;
   @Output() selectionChange = new EventEmitter<Collection[]>();
@@ -61,7 +63,7 @@ export class CdkCollectionsCdkComponent implements OnInit {
   collectionActions:Map<string,string[]> = new Map();
 
   state = 'none';
-  query: string;
+  @Input() query: string;
   //standaloneOnly: boolean;
 
   sortField: string;
@@ -77,7 +79,7 @@ export class CdkCollectionsCdkComponent implements OnInit {
   page: number = 0;
   numFound: number = 1000;
 
-  displayedColumns = ['select', 'name_cze', 'logo', 'code', 'description_cze', 'createdAt', 'modifiedAt'];
+  displayedColumns = ['select', 'name_cze', 'logo', 'code', 'adoptedFrom', 'description_cze', 'createdAt', 'modifiedAt', 'actions'];
 
   selection = new SelectionModel<any>(true, []);
 
@@ -115,11 +117,35 @@ export class CdkCollectionsCdkComponent implements OnInit {
 
     ) { }
 
+  scheduleManualCdkSync() {
+    this.adminApi.scheduleProcess({ defid: 'cdk-index-collection', params: {} }).subscribe({
+      next: () => this.ui.showInfoSnackBar('snackbar.success.startTheProcess'),
+      error: error => {
+        console.error(error);
+        this.ui.showErrorSnackBar('snackbar.error.anErrorOccurredWhileSaving');
+      }
+    });
+  }
+
+  scheduleCollectionIndexation(collection: Collection) {
+    const dialogRef = this.dialog.open(ScheduleIndexationByPidDialogComponent, {
+      data: { pid: collection.id, title: collection.getName(this.langTranslated[0]), cdkIndex: true },
+      width: '600px',
+      panelClass: 'app-schedule-indexation-by-pid-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (typeof result === 'number') {
+        this.ui.showInfoSnackBar('snackbar.success.startTheProcess');
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.anErrorOccurredWhileSaving');
+      }
+    });
+  }
+
   ngOnInit() {
     this.cdkMode = this.appSettings.cdkMode;
     this.languages = this.appSettings.languages;
     this.lang =  this.appSettings.defaultLang;//'cs';
-    this.query = "";
     this.standaloneOnly = false;
     this.sortField = this.locals.getStringProperty('collectoins.sort_field', 'createdAt');
     this.sortAsc = this.locals.getBoolProperty('collectoins.sort_asc', true);
@@ -142,6 +168,13 @@ export class CdkCollectionsCdkComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['query'] && !changes['query'].firstChange) {
+      this.page = 0;
+      this.subject.next(this.query || '');
+    }
   }
 
   linkToDetail(id:string) {
@@ -177,6 +210,9 @@ export class CdkCollectionsCdkComponent implements OnInit {
         // zjistit jazyk a pokud neni, search.title, collection.desc atd..         
         col.id= d.pid;
         col.libraryCodes = this.readLibraryCodes(d['cdk.collection']);
+        //console.log("d['cdk.local_override']=" + d['cdk.local_override']);
+        
+        col.localOverrideLibrary = this.readLibraryCodes(d['cdk.local_override'])[0] || null;
         col.standalone = d["collection.is_standalone"];
         
         col.names = {};

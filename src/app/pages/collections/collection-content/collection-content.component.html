@@ -39,9 +39,16 @@
         }
         <mat-card-header class="app-fxLayout app-row">
           <div class="app-fxFlex app-left">
-            <mat-card-title [routerLink]="!readOnly && allowEdit(item['pid']) && item['model'] == 'collection' ? (appSettings.cdkMode ? ['/cdk-collections/detail/', item['pid']] : ['/collections/content/', item['pid']]) : null" [class.app-cursor-pointer]="!readOnly && allowEdit(item['pid']) && item['model'] == 'collection'">@if (!readOnly && allowEdit(item['pid']) && item['model'] == 'collection') {
-              <mat-icon>link</mat-icon>
-              }{{ getName(item) }} @if (item['title.search'] != item['root.title']) {
+            <mat-card-title [routerLink]="!remoteObjectUrl(item) && !readOnly && allowEdit(item['pid']) && item['model'] == 'collection' ? (appSettings.cdkMode ? ['/cdk-collections/detail/', item['pid']] : ['/collections/content/', item['pid']]) : null" [class.app-cursor-pointer]="!remoteObjectUrl(item) && !readOnly && allowEdit(item['pid']) && item['model'] == 'collection'">
+              @if (remoteObjectUrl(item); as remoteUrl) {
+                <a [href]="remoteUrl" target="_blank" rel="noopener noreferrer">{{ getName(item) }}</a>
+              } @else {
+                @if (!readOnly && allowEdit(item['pid']) && item['model'] == 'collection') {
+                  <mat-icon>link</mat-icon>
+                }
+                {{ getName(item) }}
+              }
+              @if (item['title.search'] != item['root.title']) {
               ({{item['root.title'] }})
             }</mat-card-title>
             <mat-card-subtitle>{{ 'desc.'+item['model'] | translate }}</mat-card-subtitle>

@@ -1,7 +1,7 @@
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AppSettings } from './app-settings';
-import { map } from 'rxjs/operators';
+import { expand, map, reduce } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -66,7 +66,7 @@ export class ClientApiService {
   }
 
 
-  getCollections(rows:number, offset:number, standalone:boolean, prefix:string, sort:string, sortDir: string, source?: 'cdk' | 'diglib') {
+  getCollections(rows:number, offset:number, standalone:boolean, prefix:string, sort:string, sortDir: string, source?: 'cdk' | 'diglib', libraryCode?: string) {
 
     let iSort = 'title.sort asc';
     if (sort && sortDir) {
@@ -78,6 +78,10 @@ export class ClientApiService {
       filterQuery += ' AND -cdk.collection:[* TO *]';
     } else if (source === 'diglib') {
       filterQuery += ' AND cdk.collection:[* TO *]';
+    }
+    if (source === 'diglib' && libraryCode) {
+      const escapedLibraryCode = libraryCode.replace(/(["\\])/g, '\\$1');
+      filterQuery += ` AND cdk.collection:"${escapedLibraryCode}"`;
     }
     if (standalone) {
       filterQuery = filterQuery + ' AND collection.is_standalone:'+standalone
@@ -121,6 +125,32 @@ export class ClientApiService {
       //sort: 'rels_ext_index.sort asc',
       rows: '400'
     });
+  }
+
+  getAllCollectionChildren(uuid: string): Observable<any[]> {
+    const fields = ['model', 'pid', 'title.search', 'root.title', 'date.str', 'level', 'title.search_*'];
+    if (this.appSettings.cdkMode) {
+      fields.push('cdk.collection');
+    }
+    const params = {
+      q: `in_collections.direct:"${uuid}"`,
+      fl: fields.join(','),
+      rows: 400
+    };
+    const loadPage = (start: number) => this.fullSearch({ ...params, start }).pipe(
+      map((response: any) => ({
+        docs: response?.docs || [],
+        numFound: Number(response?.numFound || 0),
+        start
+      }))
+    );
+
+    return loadPage(0).pipe(
+      expand(page => page.start + page.docs.length < page.numFound && page.docs.length > 0
+        ? loadPage(page.start + page.docs.length)
+        : EMPTY),
+      reduce((items, page) => items.concat(page.docs), [] as any[])
+    );
   }
 
   getAvailableCollections(uuid: string): Observable<any[]> {

@@ -51,7 +51,7 @@ export class DeleteSelectedCollectionsDialogComponent implements OnInit {
 
     forkJoin(requests).subscribe({
       next: (results) => {
-        this.ui.showInfoSnackBar('snackbar.success.deleteSelectedCollections');
+         this.ui.showInfoSnackBar('snackbar.success.deleteSelectedCollections');
         this.dialogRef.close(
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
             this.router.navigate([routerLink])

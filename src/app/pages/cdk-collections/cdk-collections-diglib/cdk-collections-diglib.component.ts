@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Collection } from 'src/app/models/collection.model';
 import { CollectionsService } from 'src/app/services/collections.service';
@@ -33,20 +33,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';;
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { AddRemoteCollectionToCdkDialogComponent } from 'src/app/dialogs/add-remote-collection-to-cdk-dialog/add-remote-collection-to-cdk-dialog.component';
+import { AdoptRemoteCollectionDialogComponent } from 'src/app/dialogs/adopt-remote-collection-dialog/adopt-remote-collection-dialog.component';
 
 @Component({
     imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
         MatCardModule, MatButtonModule, MatIconModule, MatProgressBarModule,
         MatTooltipModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatPaginatorModule,
-        MatTableModule, MatSortModule
+        MatTableModule, MatSortModule, MatMenuModule, MatDividerModule
     ],
     selector: 'app-cdk-collections-diglib',
     templateUrl: './cdk-collections-diglib.component.html',
     styleUrls: ['./cdk-collections-diglib.component.scss']
 })
-export class CdkCollectionsDiglibComponent implements OnInit {
+export class CdkCollectionsDiglibComponent implements OnInit, OnChanges {
 
   @Input() standaloneOnly: boolean;
+  @Input() selectedLibraryCode = '';
+  @Output() selectedLibraryCodeChange = new EventEmitter<string>();
 
   // Debouncing 
   private subject: Subject<string> = new Subject();
@@ -60,7 +66,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   collectionActions:Map<string,string[]> = new Map();
 
   state = 'none';
-  query: string;
+  @Input() query: string;
   //standaloneOnly: boolean;
 
   sortField: string;
@@ -69,6 +75,9 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   errorMessage: string;
   errorState: boolean = false;
   libraryLogos: Record<string, string> = {};
+  librariesByCode: Record<string, any> = {};
+  libraryUrls: Record<string, string> = {};
+  libraryCodes: string[] = [];
 
   // paging   
   pageIndex: number = 0;
@@ -76,7 +85,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   page: number = 0;
   numFound: number = 1000;
 
-  displayedColumns = ['select', 'name_cze', 'logo', 'code', 'description_cze', 'createdAt', 'modifiedAt'];
+  displayedColumns = ['select', 'name_cze', 'logo', 'code', 'description_cze', 'createdAt', 'modifiedAt', 'actions'];
 
   selection = new SelectionModel<any>(true, []);
 
@@ -118,8 +127,6 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     this.cdkMode = this.appSettings.cdkMode;
     this.languages = this.appSettings.languages;
     this.lang =  this.appSettings.defaultLang;//'cs';
-    this.query = "";
-    this.query = "";
     this.standaloneOnly = false;
     this.sortField = this.locals.getStringProperty('collectoins.sort_field', 'createdAt');
     this.sortAsc = this.locals.getBoolProperty('collectoins.sort_asc', true);
@@ -131,17 +138,52 @@ export class CdkCollectionsDiglibComponent implements OnInit {
     });
 
     this.reload();
+    this.cdkApi.connected().subscribe({
+      next: libraries => {
+        this.libraryCodes = [...new Set((libraries || []).map(library => library.code).filter(Boolean))].sort();
+        libraries.forEach(library => this.cdkApi.config(library.code).subscribe({
+          next: (config: any) => {
+            const clientUrl = config?.client || config?.baseurl;
+            if (clientUrl) {
+              this.libraryUrls[library.code] = clientUrl;
+            }
+          },
+          error: () => { }
+        }));
+      },
+      error: () => this.libraryCodes = [...new Set(this.allCollections.flatMap(collection => collection.libraryCodes || []))].sort()
+    });
     this.cdkApi.registrinfo().subscribe({
-      next: (libraries: any[]) => this.libraryLogos = Object.fromEntries(
-        (Array.isArray(libraries) ? libraries : []).filter(library => library?.code && library?.logo).map(library => [library.code, library.logo])
-      ),
-      error: () => this.libraryLogos = {}
+      next: (libraries: any[]) => {
+        const registeredLibraries = Array.isArray(libraries) ? libraries : [];
+        this.libraryLogos = Object.fromEntries(
+          registeredLibraries.filter(library => library?.code && library?.logo).map(library => [library.code, library.logo])
+        );
+        this.librariesByCode = Object.fromEntries(
+          registeredLibraries.filter(library => library?.code).map(library => [library.code, library])
+        );
+      },
+      error: () => {
+        this.libraryLogos = {};
+        this.librariesByCode = {};
+      }
     });
     this.view = this.locals.getStringProperty('cdk-collections.view');
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['query'] && !changes['query'].firstChange) {
+      this.page = 0;
+      this.subject.next(this.query || '');
+    }
+    if (changes['selectedLibraryCode'] && !changes['selectedLibraryCode'].firstChange) {
+      this.page = 0;
+      this.reload();
+    }
   }
 
   linkToDetail(id:string) {
@@ -170,7 +212,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
   reload() {
     this.state = 'loading';
 
-    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc', 'diglib')
+    this.clientService.getCollections(this.rows, this.page*this.rows, this.standaloneOnly, this.query, this.columnMapping[ this.sortField], this.sortAsc ? 'desc' : 'asc', 'diglib', this.selectedLibraryCode)
     .subscribe((res: any)  => {
       this.allCollections = res["docs"].map((d: any)=> {
         let col:Collection = new Collection();
@@ -215,6 +257,7 @@ export class CdkCollectionsDiglibComponent implements OnInit {
         col.modifiedAt = d["modified"]
         return col;
       });
+      this.libraryCodes = [...new Set([...this.libraryCodes, ...this.allCollections.flatMap(collection => collection.libraryCodes || [])])].sort();
 
       this.numFound = res["numFound"];
 
@@ -284,6 +327,99 @@ export class CdkCollectionsDiglibComponent implements OnInit {
 
   libraryLabel(collection: Collection): string {
     return collection.libraryCodes?.join(', ') || 'CDK';
+  }
+
+  libraryName(code: string): string {
+    const library = this.librariesByCode[code];
+    const name = this.lang === 'en'
+      ? (library?.name_en || library?.name)
+      : (library?.name || library?.name_cs);
+    return name || code;
+  }
+
+  sourceCollectionUrl(collection: Collection): string | null {
+    const code = collection.libraryCodes?.find(libraryCode => !!this.libraryUrls[libraryCode]);
+    const baseUrl = code ? this.libraryUrls[code] : null;
+    if (!baseUrl || !collection.id) {
+      return null;
+    }
+    const pid = collection.id.startsWith('cdk/') ? collection.id.substring(4) : collection.id;
+    return `${baseUrl.replace(/\/+$/, '')}/uuid/${pid}`;
+  }
+
+  scheduleCollectionHarvest(collection: Collection) {
+    const library = collection.libraryCodes?.[0];
+    if (!library || !collection.id) {
+      this.ui.showErrorSnackBar('snackbar.error.anErrorOccurredWhileSaving');
+      return;
+    }
+    const pid = collection.id.replace(/^cdk\//, '');
+    this.cdkApi.scheduleCdkHarvest(library, {
+      filterQuery: `pid_paths.children:\"${pid}\"`,
+      showConfigurationOnly: 'false'
+    }).subscribe({
+      next: () => this.ui.showInfoSnackBar('snackbar.success.startTheProcess'),
+      error: error => {
+        console.error(error);
+        this.ui.showErrorSnackBar('snackbar.error.anErrorOccurredWhileSaving');
+      }
+    });
+  }
+
+  addRemoteCollectionToCdk(collection: Collection) {
+    const dialogRef = this.dialog.open(AddRemoteCollectionToCdkDialogComponent, {
+      data: { pid: collection.id, title: collection.getName(this.displayLanguage()) || collection.id },
+      width: '520px',
+      maxHeight: '80vh',
+      panelClass: 'app-add-item-to-collection'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result?.added) return;
+      this.ui.showInfoSnackBar('snackbar.success.addThisCollectionToAnotherCollection');
+    });
+  }
+
+  addRemoteCollectionContentsToCdk(collection: Collection) {
+    const dialogRef = this.dialog.open(AddRemoteCollectionToCdkDialogComponent, {
+      data: {
+        pid: collection.id,
+        title: collection.getName(this.displayLanguage()) || collection.id,
+        addContents: true
+      },
+      width: '520px',
+      maxHeight: '80vh',
+      panelClass: 'app-add-item-to-collection'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result?.addContents || !result.collection) return;
+      if (result.failedCount > 0) {
+        this.ui.showErrorSnackBar('snackbar.error.addRemoteCollectionContentsToCdk');
+      } else if (result.total > 0) {
+        this.ui.showInfoSnackBar('snackbar.success.addRemoteCollectionContentsToCdk');
+      }
+    });
+  }
+
+  adoptRemoteCollection(collection: Collection) {
+    const sourceLibrary = collection.libraryCodes?.[0];
+    if (!sourceLibrary || !collection.id) return;
+    const title = collection.getName(this.displayLanguage())
+      || Object.values(collection.names || {}).find((name: any) => typeof name === 'string' && name.trim())
+      || collection.id;
+    this.dialog.open(AdoptRemoteCollectionDialogComponent, {
+      data: { title, library: this.libraryLabel(collection) },
+      width: '520px',
+      panelClass: 'app-add-item-to-collection'
+    }).afterClosed().subscribe(newTitle => {
+      if (!newTitle) return;
+      this.cdkApi.adoptRemoteCollection(sourceLibrary, { sourcePid: collection.id, title: newTitle }).subscribe({
+        next: () => this.ui.showInfoSnackBar('snackbar.success.startTheProcess'),
+        error: error => {
+          console.error(error);
+          this.ui.showErrorSnackBar('snackbar.error.anErrorOccurredWhileSaving');
+        }
+      });
+    });
   }
 
   allowBePartOfCollection(pid: string) {

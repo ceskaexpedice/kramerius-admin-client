@@ -22,6 +22,42 @@
           <mat-form-field appearance="outline" class="app-search">
             <input matInput [placeholder]="'desc.searchCollection' | translate" [(ngModel)]="query" (ngModelChange)="onSearch()" autocomplete="off">
           </mat-form-field>
+          @if (view === 'diglib') {
+            <mat-form-field appearance="outline" class="app-library-filter">
+              <mat-label>{{ 'desc.filterByLibrary' | translate }}</mat-label>
+              <mat-select [(ngModel)]="selectedLibraryCode" (selectionChange)="onLibrarySelectionChange($event.value)">
+                <mat-select-trigger>
+                  @if (selectedLibraryCode) {
+                    @if (libraryLogos[selectedLibraryCode]; as logo) {
+                      <img class="app-library-filter-logo" [src]="logo" [alt]="''" />
+                    }
+                    {{ libraryName(selectedLibraryCode) }}
+                  } @else {
+                    {{ 'desc.allLibraries' | translate }}
+                  }
+                </mat-select-trigger>
+                <mat-option value="">
+                  <span class="app-library-filter-option">
+                    <mat-icon class="material-icons-outlined">public</mat-icon>
+                    <span>{{ 'desc.allLibraries' | translate }}</span>
+                  </span>
+                </mat-option>
+                @for (code of libraryCodes; track code) {
+                  <mat-option [value]="code">
+                    <span class="app-library-filter-option">
+                      @if (libraryLogos[code]; as logo) {
+                        <img class="app-library-filter-logo" [src]="logo" [alt]="''" />
+                      } @else {
+                        <mat-icon class="material-icons-outlined">account_balance</mat-icon>
+                      }
+                      <span>{{ libraryName(code) }}</span>
+                      <small class="app-library-filter-code">{{ code }}</small>
+                    </span>
+                  </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          }
           @if (view === 'cdk') {
             <button [disabled]="!allowedGlobalAction('a_collections_edit')" matButton="filled" color="primary" (click)="onNewCollections()">{{ 'button.createNewCollection' | translate }}</button>
             <button [disabled]="selectedCdkCollections.length === 0" matButton="filled" color="warn" (click)="deleteSelectedCollections()">{{ 'button.deleteSelectedCollections' | translate }}</button>
@@ -49,10 +85,10 @@
       @if (!errorState) {
         <div class="app-table-wrapper app-maxh-100 app-view-border app-oa-y">
           @if (view == 'cdk') {
-            <app-cdk-collections-cdk [standaloneOnly]="standaloneOnly" (selectionChange)="onCdkCollectionSelectionChange($event)"></app-cdk-collections-cdk>
+            <app-cdk-collections-cdk [standaloneOnly]="standaloneOnly" [query]="query" (selectionChange)="onCdkCollectionSelectionChange($event)"></app-cdk-collections-cdk>
           }
           @if (view == 'diglib') {
-            <app-cdk-collections-diglib [standaloneOnly]="standaloneOnly"></app-cdk-collections-diglib>
+            <app-cdk-collections-diglib [standaloneOnly]="standaloneOnly" [query]="query" [selectedLibraryCode]="selectedLibraryCode" (selectedLibraryCodeChange)="onLibrarySelectionChange($event)"></app-cdk-collections-diglib>
           }
         </div>
       }

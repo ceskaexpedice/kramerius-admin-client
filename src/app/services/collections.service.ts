@@ -4,13 +4,14 @@ import { map, tap } from 'rxjs/operators';
 import { Collection } from '../models/collection.model';
 import { ClientApiService } from './client-api.service';
 import { AdminApiService } from './admin-api.service';
+import { CdkApiService } from './cdk-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CollectionsService {
 
-  constructor(private clientApi: ClientApiService, private adminApi: AdminApiService) { }
+  constructor(private clientApi: ClientApiService, private adminApi: AdminApiService, private cdkApi: CdkApiService) { }
 
   //collections CRUD
 
@@ -46,6 +47,10 @@ export class CollectionsService {
     return this.adminApi.getCollection(id).pipe(map(response => {
       return Collection.fromAdminApiJson(response);
     }));
+  }
+
+  getRemoteCollection(id: string): Observable<Collection> {
+    return this.cdkApi.getRemoteCollection(id).pipe(map(response => Collection.fromAdminApiJson(response)));
   }
 
   updateCollection(collection: Collection): Observable<any> {

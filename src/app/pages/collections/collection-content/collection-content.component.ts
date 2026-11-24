@@ -87,21 +87,29 @@ export class CollectionContentComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.appSettings.cdkMode) {
+      this.cdkApi.connected().subscribe({
+        next: libraries => {
+          libraries.forEach(library => this.cdkApi.config(library.code).subscribe({
+            next: (config: any) => {
+              const clientUrl = config?.client || config?.baseurl;
+              if (clientUrl) {
+                this.libraryUrls[library.code] = clientUrl;
+              }
+            },
+            error: () => { }
+          }));
+        },
+        error: () => { }
+      });
       this.cdkApi.registrinfo().subscribe({
         next: (libraries: any[]) => {
           const registeredLibraries = Array.isArray(libraries) ? libraries : [];
           this.libraryLogos = Object.fromEntries(
             registeredLibraries.filter(library => library?.code && library?.logo).map(library => [library.code, library.logo])
           );
-          this.libraryUrls = Object.fromEntries(
-            registeredLibraries
-              .filter(library => library?.code && (library?.new_client_url || library?.url))
-              .map(library => [library.code, library.new_client_url || library.url])
-          );
         },
         error: () => {
           this.libraryLogos = {};
-          this.libraryUrls = {};
         }
       });
     }
@@ -123,6 +131,11 @@ export class CollectionContentComponent implements OnInit, OnChanges {
     }
     const uuid = pid.startsWith('cdk/') ? pid.substring(4) : pid;
     return `${baseUrl.replace(/\/+$/, '')}/uuid/${uuid}`;
+  }
+
+  remoteObjectUrl(item: any): string | null {
+    const code = this.libraryCodes(item).find(libraryCode => !!this.libraryUrls[libraryCode]);
+    return code ? this.libraryObjectUrl(code, item?.['pid']) : null;
   }
 
 

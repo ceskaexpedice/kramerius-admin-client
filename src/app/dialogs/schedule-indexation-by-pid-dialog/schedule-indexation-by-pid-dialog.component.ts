@@ -35,6 +35,7 @@ export class ScheduleIndexationByPidDialogComponent implements OnInit {
   pids = "";
   title: string = undefined;
   fixed = false;
+  cdkIndex = false;
 
   pidsCounter = 0;
   scheduledCounter = 0;
@@ -46,6 +47,7 @@ export class ScheduleIndexationByPidDialogComponent implements OnInit {
       this.fixed = true;
       this.pids = data.pid;
       this.title = data.title;
+      this.cdkIndex = data.cdkIndex === true;
       this.pidsTextareaRows = 1;
     }
   }
@@ -75,17 +77,21 @@ export class ScheduleIndexationByPidDialogComponent implements OnInit {
 
     let requests: any[] = [];
     pids.forEach(pid => {
-      requests.push(
-        this.adminApi.scheduleProcess({
-          defid: 'new_indexer_index_object',
-          params: {
-            type: type,
-            pid: pid,
-            title: title,
-            ignoreInconsistentObjects: ignoreInconsistentObjects
-          }
-        }, () => this.scheduledCounter++)
-      );
+      requests.push(this.adminApi.scheduleProcess({
+        defid: this.cdkIndex ? 'cdk-index' : 'new_indexer_index_object',
+        params: this.cdkIndex ? {
+          pid,
+          title: title ? `Reindexace ${title} (${pid}, typ ${type})` : `Reindexace ${pid} (typ ${type})`,
+          type,
+          forceSync: 'true',
+          ignoreInconsistentObjects: String(ignoreInconsistentObjects)
+        } : {
+          type,
+          pid,
+          title,
+          ignoreInconsistentObjects
+        }
+      }, () => this.scheduledCounter++));
     })
     this.progressBarMode = 'determinate';
 

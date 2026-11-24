@@ -71,6 +71,7 @@ export class CdkCollectionComponent implements OnInit {
   /** collection id  */
   collectionId: string;
   readOnly = false;
+  remoteCollection = false;
 
   selectedAllCollections: boolean = false;
 
@@ -109,6 +110,7 @@ export class CdkCollectionComponent implements OnInit {
     this.languages = this.appSettings.languages;
     this.state = 'loading';
     this.readOnly = this.route.snapshot.queryParamMap.get('readOnly') === 'true';
+    this.remoteCollection = this.route.snapshot.queryParamMap.get('remote') === 'true';
     this.route.params.subscribe(params => {
       this.loadData(params['id']);
       this.collectionId = params['id'];
@@ -118,7 +120,10 @@ export class CdkCollectionComponent implements OnInit {
   loadData(collectionId: string) {
     this.state = 'loading';
     //console.log('loading data for ' + collectionId)
-    this.collectionsService.getCollection(collectionId).subscribe((collection: Collection) => {
+    const collectionRequest = this.remoteCollection
+      ? this.collectionsService.getRemoteCollection(collectionId)
+      : this.collectionsService.getCollection(collectionId);
+    collectionRequest.subscribe((collection: Collection) => {
       this.collection = collection;
       //cuttings          
       this.cuttings = this.collection.clipitems;
@@ -145,7 +150,10 @@ export class CdkCollectionComponent implements OnInit {
           this.view = this.router.url.split('?')[0].replace('/cdk-collections/', '').replace('/' + this.collectionId, '');
           if (this.readOnly && this.view === 'edit') {
             this.view = 'detail';
-            this.router.navigate(['/cdk-collections/detail/', this.collectionId], { queryParams: { readOnly: true }, replaceUrl: true });
+            this.router.navigate(['/cdk-collections/detail/', this.collectionId], {
+              queryParams: { readOnly: true, ...(this.remoteCollection ? { remote: true } : {}) },
+              replaceUrl: true
+            });
           }
           this.state = 'success';
 
@@ -169,6 +177,10 @@ export class CdkCollectionComponent implements OnInit {
       console.log(error);
       this.ui.showErrorSnackBar("snackbar.error.theCollectionCouldNotBeLoaded");
     });
+    if (this.remoteCollection) {
+      this.superCollections = [];
+      return;
+    }
     this.collectionsService.getCollectionsContainingItem(this.langTranslated[0], collectionId).subscribe((data: [collections: Collection[], size: number]) => {
       //console.log(data)
       this.superCollections = data[0];
@@ -199,7 +211,9 @@ export class CdkCollectionComponent implements OnInit {
     this.view = view;
     this.local.setStringProperty('cdk-collection.view', view);
     this.router.navigate(['/cdk-collections/' + view + '/', this.collectionId], {
-      queryParams: this.readOnly ? { readOnly: true } : {}
+      queryParams: this.readOnly
+        ? { readOnly: true, ...(this.remoteCollection ? { remote: true } : {}) }
+        : {}
     });
   }
 

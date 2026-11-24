@@ -435,6 +435,7 @@
     }
   },
   "button": {
+    "adoptedCollection": "Převzatá",
     "autoRefresProcesses": "Automatický reload {{refreshinterval}} s",
     "showDetail": "Zobrazit detail",
     "hideDetail": "Skrýt detail",
@@ -471,6 +472,17 @@
     "addToACollection": "Přidat do sbírky",
     "removeFromCollection": "Odebrat ze sbírky",
     "addThisCollectionToAnotherCollection": "Přidat tuto sbírku do jiné sbírky",
+    "addRemoteCollectionToCdk": "Zařadit do CDK sbírky",
+    "addRemoteCollectionContentsToCdk": "Přidat obsah do CDK sbírky",
+    "addRemoteCollectionContentsLabel": "Obsah sbírky",
+    "addRemoteCollectionAsCollection": "Sbírku",
+    "adoptRemoteCollection": "Vytvořit vlastní kopii sbírky",
+    "cdkCollectionProcesses": "Procesy sbírky",
+    "collectionActions": "Akce",
+    "cdkCollectionHarvest": "Dosklizení obsahu",
+    "cdkCollectionIndex": "Indexace sbírky",
+    "cdkManualSync": "Ruční synchronizace CDK sbírek",
+    "cdkManualSyncTooltip": "Proces projde všechny CDK sbírky",
     "create": "Vytvořit",
     "edit": "Upravit",
     "remove": "Odstranit",
@@ -624,6 +636,20 @@
     "addItemsToCollection": {
       "title": "Přidání položek do sbírky",
       "message": "Pro každý vložený PID bude přidána položka do sbírky. Součástí přidání každé položky do sbírky je naplánování indexačního procesu, proto se příslušnost do sbírky nemusí projevit okamžitě"
+    },
+    "addRemoteCollectionToCdk": {
+      "title": "Přidat vzdálenou sbírku do CDK",
+      "search": "Vyhledat CDK sbírku",
+      "noResults": "Žádná dostupná CDK sbírka neodpovídá hledání.",
+      "alreadyContainsSource": "Již zařazeno",
+      "error": "Sbírky se nepodařilo načíst nebo zařadit."
+    },
+    "addRemoteCollectionContentsToCdk": {
+      "title": "Přidat obsah vzdálené sbírky do CDK sbírky",
+      "submit": "Přidat obsah",
+      "loading": "Načítám obsah vzdálené sbírky…",
+      "progress": "Zpracováno {{completed}} z {{total}} položek.",
+      "result": "Zařazeno {{added}} z {{total}} položek. Neúspěšných: {{failed}}."
     },
     "addItemToCollection": {
       "titleCollection": "Přidání sbírky do jiné sbírky",
@@ -955,6 +981,7 @@
   "snackbar": {
     "success": {
       "addThisCollectionToAnotherCollection": "Sbírka byla přidána do jiné sbírky",
+      "addRemoteCollectionContentsToCdk": "Obsah vzdálené sbírky byl přidán do CDK sbírky",
       "theCollectionHasBeenRemoved": "Sbírka byla odstraněna",
       "removeFromThisCollection": "Položka byla úspěšně odebrána ze sbírky",
       "copyToClipboard": "Text byl úspěšně zkopírován do schánky",
@@ -1040,6 +1067,7 @@
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
+      "addRemoteCollectionContentsToCdk": "Některé položky vzdálené sbírky se nepodařilo přidat",
       "theCollectionCouldNotBeLoaded": "Sbírku se nepodařilo načíst",
       "failedToLoadListOfCollectionsContainingThisCollection": "Nepodařil se načíst seznam sbírek obsahujích tuto sbírku",
       "collectionCouldNotBeDeleted": "Sbírku se nepodařilo odstranit",
@@ -1103,6 +1131,8 @@
     }
   },
   "desc": {
+    "adoptedCollectionFrom": "Převzato z knihovny {{library}}",
+    "adoptedFrom": "Převzato z",
     "typeOfImport": "Typ importu",
     "typeOfImport_import": "Plný import",
     "typeOfImport_import_desc": "Provede plný import včetně vazeb.",
@@ -1110,6 +1140,7 @@
     "typeOfImport_update_desc": "Provede pouze update bibliografických dat (BiblioMods a DC). Poznámka: spouští se plná indexace.",
     "addToCollections": "Přidat do sbírky",
     "noCollection": "Žádná sbírka",
+    "adoptRemoteCollection": "Proces vytvoří lokální kopii sbírky {{title}} z knihovny {{library}}, potlačí vzdálené zdrojové záznamy a zachová odkazy na obsah.",
     "selectCollection": "Vyber sbírku",
     "pod": "Pod",
     "root": "Reharvest celého titulu",
@@ -1162,6 +1193,8 @@
     "durationOfTheProcess": "Trvání procesu",
     "enterTheUuidOfTheObject": "Zadejte UUID objektu",
     "searchCollection": "Hledat sbírku",
+    "filterByLibrary": "Filtrovat podle knihovny",
+    "allLibraries": "Všechny knihovny",
     "description": "Popis",
     "created": "Vytvořeno",
     "managed": "Upraveno",

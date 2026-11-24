@@ -1,0 +1,38 @@
+/* CDK UI CHANGE: width of the collection search field */
+.app-topbar {
+  .mat-mdc-form-field {
+    &.app-search {
+      width: 350px;
+    }
+  }
+}
+
+/* CDK UI CHANGE: library filter sizing */
+.app-library-filter {
+  width: 280px;
+  min-width: 280px;
+}
+
+/* CDK UI CHANGE: library filter option layout and logo sizing */
+.app-library-filter-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-library-filter-option mat-icon,
+.app-library-filter-logo {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+}
+
+.app-library-filter-logo {
+  object-fit: contain;
+}
+
+/* CDK UI CHANGE: align library code to the end of each option */
+.app-library-filter-code {
+  margin-left: auto;
+  opacity: 0.7;
+}

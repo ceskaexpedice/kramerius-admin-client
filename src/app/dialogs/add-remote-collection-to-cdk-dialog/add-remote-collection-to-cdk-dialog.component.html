@@ -1,0 +1,52 @@
+<form (ngSubmit)="add()">
+  <h2 mat-dialog-title>{{ (data.addContents ? 'modal.addRemoteCollectionContentsToCdk.title' : 'modal.addRemoteCollectionToCdk.title') | translate }}</h2>
+  <mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-3">
+    <div class="app-desc">{{ data.title }}</div>
+    <mat-form-field appearance="outline" class="app-w-100">
+      <mat-label>{{ 'modal.addRemoteCollectionToCdk.search' | translate }}</mat-label>
+      <input matInput type="search" [(ngModel)]="query" (ngModelChange)="search()" (keydown.enter)="$event.preventDefault()" name="collectionSearch" autocomplete="off" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    @if (loading) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    } @else if (error) {
+      <div class="app-color-warn">{{ 'modal.addRemoteCollectionToCdk.error' | translate }}</div>
+    } @else if (!filteredCollections.length) {
+      <div class="app-desc">{{ 'modal.addRemoteCollectionToCdk.noResults' | translate }}</div>
+    } @else {
+      <mat-radio-group class="app-fxLayout app-column app-gap-1" [(ngModel)]="selectedCollection" name="collection" [disabled]="inProgress || contentFinished">
+        @for (collection of filteredCollections; track collection.id) {
+          <mat-radio-button [value]="collection">
+            {{ name(collection) }}
+            @if (alreadyContainsSource(collection)) {
+              <span class="app-desc"> · {{ 'modal.addRemoteCollectionToCdk.alreadyContainsSource' | translate }}</span>
+            }
+          </mat-radio-button>
+        }
+      </mat-radio-group>
+    }
+    @if (data.addContents && contentLoading) {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <div>{{ 'modal.addRemoteCollectionContentsToCdk.loading' | translate }}</div>
+    } @else if (data.addContents && inProgress) {
+      <mat-progress-bar mode="determinate" [value]="contentTotal ? contentCompleted / contentTotal * 100 : 0"></mat-progress-bar>
+      <div>{{ 'modal.addRemoteCollectionContentsToCdk.progress' | translate:{ completed: contentCompleted, total: contentTotal } }}</div>
+    }
+    @if (data.addContents && contentFinished) {
+      <div class="app-desc">{{ 'modal.addRemoteCollectionContentsToCdk.result' | translate:{ added: contentAdded, failed: contentFailed.length, total: contentTotal } }}</div>
+      @if (contentFailed.length > 0) {
+        <ul class="app-m-0 app-color-warn">
+          @for (pid of contentFailed; track $index) { <li>{{ pid }}</li> }
+        </ul>
+      }
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    @if (data.addContents && contentFinished) {
+      <button matButton="filled" color="primary" type="button" (click)="closeContentsResult()">{{ 'button.close' | translate }}</button>
+    } @else {
+      <button matButton="filled" color="primary" type="submit" [disabled]="loading || error || inProgress || !selectedCollection">{{ (data.addContents ? 'modal.addRemoteCollectionContentsToCdk.submit' : 'button.add') | translate }}</button>
+    }
+    <button matButton type="button" mat-dialog-close [disabled]="inProgress">{{ 'button.cancel' | translate }}</button>
+  </mat-dialog-actions>
+</form>

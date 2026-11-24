@@ -11,6 +11,7 @@ export class Collection {
 
   standalone: boolean = false;
   libraryCodes: string[] = [];
+  localOverrideLibrary: string | null = null;
 
   createdAt: Date;
   modifiedAt: Date;

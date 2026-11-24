@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TranslateModule } from '@ngx-translate/core';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { DatetimePipe } from 'src/app/pipes/datetime.pipe';
@@ -23,7 +24,7 @@ import { LogsComponent } from './logs/logs.component';
 @Component({
     imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
         MatCardModule, MatButtonModule, MatIconModule,
-        MatTooltipModule, MatTabsModule,
+        MatTooltipModule, MatTabsModule, MatProgressBarModule,
         DurationPipe, DatetimePipe, LogsComponent
     ],
     selector: 'app-process',
@@ -34,8 +35,9 @@ export class ProcessComponent implements OnInit {
 
   processId: string;
 
-  batch: Batch;
-  process: Process;
+  batch: Batch | null;
+  process: Process | null;
+  processUnavailable = false;
   log = 'out';
 
   view: string;
@@ -62,14 +64,19 @@ export class ProcessComponent implements OnInit {
   }
 
   reloadProcess() {
+    this.processUnavailable = false;
+    this.process = null;
+    this.batch = null;
     // fetch process detail
     this.adminApi.getProcess(this.processId)
       .subscribe(
-        ([batch, process]: [Batch, Process]) => {
+        ([batch, process]: [Batch | null, Process | null]) => {
           this.batch = batch;
           this.process = process;
+          this.processUnavailable = !batch || !process;
           this.loadedTimestamp = new Date();
-        }
+        },
+        () => this.processUnavailable = true
       );
   }
 
@@ -139,6 +146,9 @@ export class ProcessComponent implements OnInit {
   }
 
   canDownloadLog() {
+    if (!this.batch) {
+      return false;
+    }
     switch (this.batch.state) {
       case Process.FINISHED:
       case Process.FAILED:
@@ -150,7 +160,7 @@ export class ProcessComponent implements OnInit {
   }
 
   logOutUrl() {
-    return this.adminApi.getProcessLogsUrl(this.process.uuid, "out", this.logOutFilename());
+    return this.process ? this.adminApi.getProcessLogsUrl(this.process.uuid, "out", this.logOutFilename()) : '';
   }
 
   logOutFilename() {
@@ -158,7 +168,7 @@ export class ProcessComponent implements OnInit {
   }
 
   logErrUrl() {
-    return this.adminApi.getProcessLogsUrl(this.process.uuid, "err", this.logErrFilename());
+    return this.process ? this.adminApi.getProcessLogsUrl(this.process.uuid, "err", this.logErrFilename()) : '';
   }
 
   logErrFilename() {

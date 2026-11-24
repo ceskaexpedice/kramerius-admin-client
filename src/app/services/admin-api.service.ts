@@ -152,10 +152,13 @@ export class AdminApiService {
     return `${this.baseUrl}/processes/by_process_uuid/${procesUuid}/logs/${logType}?fileName=${fileName}`;
   }
 
-  getProcess(processId: string): Observable<[Batch, Process]> {
+  getProcess(processId: string): Observable<[Batch | null, Process | null]> {
     return this.get(`/processes/by_process_id/${processId}`).pipe(
       //tap(response => console.log(response)),
-      map((response: any) => [Batch.fromJson(response), Process.fromJson(response['process'])])
+      map((response: any): [Batch | null, Process | null] => [
+        response?.batch ? Batch.fromJson(response) : null,
+        response?.process ? Process.fromJson(response['process']) : null
+      ])
     );
   }
 

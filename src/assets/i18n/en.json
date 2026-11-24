@@ -436,6 +436,7 @@
     }
   },
   "button": {
+    "adoptedCollection": "Adopted",
     "autoRefresProcesses": "Automatic reload {{refreshinterval}} s",
     "showDetail": "Show detail",
     "hideDetail": "Hide detail",
@@ -472,6 +473,17 @@
     "addToACollection": "Add to a collection",
     "removeFromCollection": "Remove from collection",
     "addThisCollectionToAnotherCollection": "Add this collection to another collection",
+    "addRemoteCollectionToCdk": "Add to a CDK collection",
+    "addRemoteCollectionContentsToCdk": "Add contents to a CDK collection",
+    "addRemoteCollectionContentsLabel": "Collection contents",
+    "addRemoteCollectionAsCollection": "Collection",
+    "adoptRemoteCollection": "Create a local copy of the collection",
+    "cdkCollectionProcesses": "Collection processes",
+    "collectionActions": "Actions",
+    "cdkCollectionHarvest": "Harvest collection contents",
+    "cdkCollectionIndex": "Index collection",
+    "cdkManualSync": "Manually synchronize CDK collections",
+    "cdkManualSyncTooltip": "This process scans all CDK collections",
     "create": "Create",
     "edit": "Edit",
     "remove": "Remove",
@@ -625,6 +637,20 @@
     "addItemsToCollection": {
       "title": "Adding items to a collection",
       "message": "For each PID entered, an item will be added to the collection. Part of adding each item to a collection is scheduling the indexing process, so collection membership may not be immediately apparent"
+    },
+    "addRemoteCollectionToCdk": {
+      "title": "Add a remote collection to CDK",
+      "search": "Search CDK collections",
+      "noResults": "No available CDK collection matches your search.",
+      "alreadyContainsSource": "Already included",
+      "error": "Could not load the collections or add the remote collection."
+    },
+    "addRemoteCollectionContentsToCdk": {
+      "title": "Add remote collection contents to a CDK collection",
+      "submit": "Add contents",
+      "loading": "Loading remote collection contents…",
+      "progress": "Processed {{completed}} of {{total}} items.",
+      "result": "Added {{added}} of {{total}} items. Failed: {{failed}}."
     },
     "addItemToCollection": {
       "titleCollection": "Adding a collection to another collection",
@@ -956,6 +982,7 @@
   "snackbar": {
     "success": {
       "addThisCollectionToAnotherCollection": "The collection has been added to another collection",
+      "addRemoteCollectionContentsToCdk": "Remote collection contents were added to the CDK collection",
       "theCollectionHasBeenRemoved": "The collection has been removed",
       "removeFromThisCollection": "The item has been successfully removed from the collection",
       "copyToClipboard": "The text has been successfully copied to the clipboard",
@@ -1041,6 +1068,7 @@
     },
     "error": {
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
+      "addRemoteCollectionContentsToCdk": "Some remote collection items could not be added",
       "theCollectionCouldNotBeLoaded": "The collection could not be loaded",
       "failedToLoadListOfCollectionsContainingThisCollection": "Failed to load list of collections containing this collection",
       "collectionCouldNotBeDeleted": "Collection could not be deleted",
@@ -1104,6 +1132,8 @@
     }
   },
   "desc": {
+    "adoptedCollectionFrom": "Adopted from library {{library}}",
+    "adoptedFrom": "Adopted from",
     "typeOfImport": "Type of import",
     "typeOfImport_import": "Full import",
     "typeOfImport_import_desc": "Performs a full import, including relationships.",
@@ -1111,6 +1141,7 @@
     "typeOfImport_update_desc": "Performs only an update of bibliographic data (BiblioMods and DC). Note: a full re-indexing will be triggered.",
     "addToCollections": "Add to collection",
     "noCollection": "No collection",
+    "adoptRemoteCollection": "The process creates a local copy of {{title}} from {{library}}, suppresses the remote source collection, and preserves links to its contents.",
     "selectCollection": "Select collection",
     "pod": "Pod",
     "root": "Whole title",
@@ -1163,6 +1194,8 @@
     "durationOfTheProcess": "Duration of the process",
     "enterTheUuidOfTheObject": "Enter the UUID of the object",
     "searchCollection": "Search collection",
+    "filterByLibrary": "Filter by library",
+    "allLibraries": "All libraries",
     "description": "Description",
     "created": "Created",
     "managed": "Managed",

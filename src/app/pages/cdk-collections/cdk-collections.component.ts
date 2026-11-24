@@ -33,9 +33,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CdkCollectionsCdkComponent } from "./cdk-collections-cdk/cdk-collections-cdk.component";
 import { CdkCollectionsDiglibComponent } from "./cdk-collections-diglib/cdk-collections-diglib.component";
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { CdkApiService } from 'src/app/services/cdk-api.service';
 
 @Component({
-    imports: [RouterModule, TranslateModule, FormsModule, MatInputModule, MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule, MatTooltipModule, MatSlideToggleModule, CdkCollectionsCdkComponent, CdkCollectionsDiglibComponent],
+    imports: [RouterModule, TranslateModule, FormsModule, MatInputModule, MatSelectModule, MatCardModule, MatButtonModule, MatIconModule, MatMenuModule, MatTabsModule, MatTooltipModule, MatSlideToggleModule, CdkCollectionsCdkComponent, CdkCollectionsDiglibComponent],
     selector: 'app-cdk-collections',
     templateUrl: './cdk-collections.component.html',
     styleUrls: ['./cdk-collections.component.scss']
@@ -81,6 +83,10 @@ export class CdkCollectionsComponent implements OnInit {
   // all configured languages
   public languages: string[];
   public lang: string;
+  libraryCodes: string[] = [];
+  libraryLogos: Record<string, string> = {};
+  librariesByCode: Record<string, any> = {};
+  selectedLibraryCode = '';
 
 
 
@@ -105,6 +111,7 @@ export class CdkCollectionsComponent implements OnInit {
     private dialog: MatDialog,
     private ui: UIService,
     private adminApi: AdminApiService,
+    private cdkApi: CdkApiService,
 
     ) { }
 
@@ -124,7 +131,11 @@ export class CdkCollectionsComponent implements OnInit {
     });
 
     this.reload();
-    this.view = this.locals.getStringProperty('cdk-collections.view');
+    const routeView = this.router.url.split(/[?#]/)[0].split('/').pop();
+    this.view = routeView === 'cdk' || routeView === 'diglib'
+      ? routeView
+      : this.locals.getStringProperty('cdk-collections.view', 'cdk');
+    this.loadRemoteLibraryOptions();
   }
 
   ngAfterViewInit() {
@@ -332,6 +343,38 @@ export class CdkCollectionsComponent implements OnInit {
   onSearch() {
     this.subject.next(this.query);  
     //this.reloadTable();
+  }
+
+  onLibrarySelectionChange(code: string) {
+    this.selectedLibraryCode = code;
+  }
+
+  libraryName(code: string): string {
+    const library = this.librariesByCode[code];
+    const name = this.lang === 'en'
+      ? (library?.name_en || library?.name)
+      : (library?.name || library?.name_cs);
+    return name || code;
+  }
+
+  private loadRemoteLibraryOptions() {
+    this.cdkApi.connected().subscribe({
+      next: libraries => {
+        this.libraryCodes = [...new Set((libraries || []).map(library => library.code).filter(Boolean))].sort();
+      },
+      error: () => this.libraryCodes = []
+    });
+    this.cdkApi.registrinfo().subscribe({
+      next: (libraries: any[]) => {
+        const registeredLibraries = Array.isArray(libraries) ? libraries : [];
+        this.libraryLogos = Object.fromEntries(registeredLibraries.filter(library => library?.code && library?.logo).map(library => [library.code, library.logo]));
+        this.librariesByCode = Object.fromEntries(registeredLibraries.filter(library => library?.code).map(library => [library.code, library]));
+      },
+      error: () => {
+        this.libraryLogos = {};
+        this.librariesByCode = {};
+      }
+    });
   }
 
   onStandaloneChange() {

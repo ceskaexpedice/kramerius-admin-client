@@ -1,3 +1,58 @@
+/* CDK UI CHANGE: layout and truncation for collection names */
+.app-collection-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.app-collection-name-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* CDK UI CHANGE: badge for adopted collections */
+.app-adopted-collection {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 12px;
+  background: #e8f2fb;
+  color: #245b82;
+  font-size: 11px;
+  line-height: 18px;
+  vertical-align: middle;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  mat-icon {
+    width: 15px;
+    height: 15px;
+    font-size: 15px;
+    line-height: 15px;
+  }
+}
+
+/* CDK UI CHANGE: source library marker */
+.app-adopted-source {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+}
+
+/* CDK UI CHANGE: highlight locally overridden collection rows */
+.mat-mdc-row.app-cdk-local-override {
+  background-color: #e8f2fb;
+}
+
+.mat-mdc-row.app-cdk-local-override:hover {
+  background-color: #d8eaf7;
+}
+
 .mat-mdc-cell {
   &.mat-column-name_cze {
     width: 13%;

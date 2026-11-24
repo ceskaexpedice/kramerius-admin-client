@@ -142,6 +142,10 @@ export class CdkApiService {
       return this.doGet(`/api/admin/v7.0/items/${pid}/solr/instintrospect`,{}).pipe();
     }
 
+    getRemoteCollection(pid: string): Observable<any> {
+      return this.doGet(`/api/admin/v7.0/collections/${encodeURIComponent(pid)}/remote`, {});
+    }
+
 
     planReharvest(obj:any) {
       return this.doPut('/api/admin/v7.0/reharvest', obj, {}).pipe(
@@ -156,6 +160,10 @@ export class CdkApiService {
         ? `/api/admin/v7.0/cdk/${encodeURIComponent(library)}/process/reharvest`
         : '/api/admin/v7.0/cdk/process/reharvest';
       return this.doPost(path, options);
+    }
+
+    adoptRemoteCollection(library: string, options: { sourcePid: string; title: string }): Observable<any> {
+      return this.doPost(`/api/admin/v7.0/cdk/${encodeURIComponent(library)}/process/adopt-remote-collection`, options);
     }
 
     deleteReharvest(id:string):Observable<any> {
