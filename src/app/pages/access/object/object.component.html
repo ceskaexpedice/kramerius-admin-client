@@ -241,12 +241,12 @@
         @if (view == 'editing' && (proarcServers?.length > 0) || (altoeditorServers?.length > 0 )) {
         <mat-accordion class="app-view-default" multi>
 
-
+@if (view == 'editing'){
           <mat-expansion-panel expanded>
             <mat-expansion-panel-header>
               <mat-panel-title>{{ 'desc.editingParts' | translate }}</mat-panel-title>
             </mat-expansion-panel-header>
-            <div style="display: flex; flex-wrap: wrap;" cdkDropList (cdkDropListDropped)="drop($event)" cdkDropListOrientation="mixed">
+            <div style="display: flex; flex-wrap: wrap; gap: 10px;" cdkDropList (cdkDropListDropped)="drop($event)" cdkDropListOrientation="mixed">
             @for (item of parts(); track item.pid) {
 
             <mat-card appearance="outlined" class="app-view-item app-with-header app-fxLayout app-row app-gap-4"
@@ -271,7 +271,7 @@
                 (click)="saveOrder()">{{ 'button.saveOrderChange' | translate }}</button>
             </mat-action-row>
           </mat-expansion-panel>
-
+}
 
           <mat-expansion-panel>
             <mat-expansion-panel-header>

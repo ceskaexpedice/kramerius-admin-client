@@ -187,7 +187,8 @@ export class ObjectComponent implements OnInit {
   loadChildren() {
     let params: HttpParams = new HttpParams();
     params = params.set('q', `own_parent.pid:"${this.pid}"`);
-    params = params.set('rows', '1000');
+    params = params.set('rows', '4000');
+    params = params.set('sort', 'rels_ext_index.sort asc');
     params = params.set('fl', 'pid title.search date.str model root.pid root.title part.number.str');
 
     this.clientApi.search(params).subscribe(docs => {
@@ -197,17 +198,9 @@ export class ObjectComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.parts(), event.previousIndex, event.currentIndex);
-    if (event.previousIndex !== event.currentIndex) {
-      //this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
-
-      //this.orderingChanged = true;
-      //let arr = this.noncollectionItems.map(obj=> obj['pid']);
-      //this.dragEvent.emit(arr);
-    }
   }
 
   saveOrder() {
-    console.log(this.parts());
 
     this.adminApi.setChildrenOrder(this.pid, this.parts().map(p => p.pid)).subscribe(() => {
       this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrderSaved`);
