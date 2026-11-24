@@ -35,12 +35,14 @@ import { RightsComponent } from '../rights/rights.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HttpParams } from '@angular/common/http';
+import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
     imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
         MatCardModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatProgressBarModule,
         MatTooltipModule, MatTabsModule, MatDividerModule, MatSelectModule, MatInputModule,
-        RightsComponent, MatExpansionModule],
+        RightsComponent, MatExpansionModule, DragDropModule],
     templateUrl: './object.component.html',
     styleUrls: ['./object.component.scss']
 })
@@ -81,6 +83,9 @@ export class ObjectComponent implements OnInit {
 
   //TODO:  language from component
   language:string  = 'cze';
+
+  // structure = signal<{pid: string, relation: string}[]>([]);
+  parts = signal<any[]>([]);
 
   constructor(
     private authApi: AuthService,
@@ -143,6 +148,7 @@ export class ObjectComponent implements OnInit {
       this.loadSolrData();
       this.loadCollections();
       this.loadLicenses();
+      this.loadChildren();
     }, error => {
       this.pidIsCorrect = false;
       this.checkingPid = false;
@@ -175,6 +181,42 @@ export class ObjectComponent implements OnInit {
     this.clientApi.getObjectByPidFromIndex(this.pid).subscribe(result => {
       this.title = result['title.search'];
     })
+  }
+
+
+  loadChildren() {
+    let params: HttpParams = new HttpParams();
+    params = params.set('q', `own_parent.pid:"${this.pid}"`);
+    params = params.set('rows', '1000');
+    params = params.set('fl', 'pid title.search date.str model root.pid root.title part.number.str');
+
+    this.clientApi.search(params).subscribe(docs => {
+    this.parts.set([...docs])
+    })
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.parts(), event.previousIndex, event.currentIndex);
+    if (event.previousIndex !== event.currentIndex) {
+      //this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrder`);
+
+      //this.orderingChanged = true;
+      //let arr = this.noncollectionItems.map(obj=> obj['pid']);
+      //this.dragEvent.emit(arr);
+    }
+  }
+
+  saveOrder() {
+    console.log(this.parts());
+
+    this.adminApi.setChildrenOrder(this.pid, this.parts().map(p => p.pid)).subscribe(() => {
+      this.ui.showInfoSnackBar(`snackbar.success.changeItemsOrderSaved`);
+    },(error) => {
+      console.log(error.status);
+      this.ui.showInfoSnackBar(`snackbar.error.anErrorOccurredWhileSaving`);
+    });
+
+
   }
 
   loadCollections() {
