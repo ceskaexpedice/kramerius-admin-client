@@ -95,8 +95,22 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     fileReader.readAsText(event.target.files[0]);
   }
 
+  cleanPids() {
+    // Najit uuid z permalinku
+    const pids = this.splitPids(this.pids);
+    const pids2 = pids.map(pid => {
+      if (pid.startsWith('http') && pid.includes('uuid/')) {
+        return pid.split('uuid/')[1];
+      } else {
+        return pid
+      }
+    });
+    this.pids = pids2.join('\n');
+  }
+
   onAdd() {
     this.inProgress = true;
+    this.cleanPids();
     const pids = this.splitPids(this.pids);
     this.items_counter_total = pids.length;
 
