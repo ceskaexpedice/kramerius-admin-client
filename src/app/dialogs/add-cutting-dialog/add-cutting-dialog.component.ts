@@ -36,6 +36,9 @@ export class AddCuttingDialogComponent implements OnInit {
   ]);
 
   disableAddButton() {
+    if (this.adding) {
+      return true;
+    }
     if (this.url) {
 
       const urls: string[] = this.collection.clipitems.map(obj => {
@@ -97,15 +100,16 @@ export class AddCuttingDialogComponent implements OnInit {
       description: this.description,
       url: this.url
     }).subscribe(result=> {
-      this.dialogRef.close('added');
-    },
-      (error) => {
-        this.dialogRef.close('error');
-      });    
+      //this.dialogRef.close('added');
+    });    
   }
 
+  adding = false;
   add() {
-    
+    if (this.adding) {
+      return;
+    }
+    this.adding = true;
     this.api.addCuttingtoColllection(this.collection.id, {
       name: this.name,
       description: this.description,
