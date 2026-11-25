@@ -123,6 +123,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pageSize = parseInt(this.local.getStringProperty('processes.pageSize', this.pageSize+''));
     this.reloadProcesses();
   }
 
@@ -203,6 +204,7 @@ export class ProcessesComponent implements OnInit {
   onPageChanged(event: PageEvent) {
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
+    this.local.setStringProperty('processes.pageSize', this.pageSize+'');
     this.reloadProcesses();
   }
 
