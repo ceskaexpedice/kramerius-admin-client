@@ -371,6 +371,7 @@
     "addItemsToCollection": {
       "success": "Přidáno <strong>{{ value1 }}/{{ value2 }}</strong> položek",
       "error": "Nepodařilo se přidat <strong>{{ value }}</strong> položek",
+      "genericErrors": "Na níže uvedené položky jsou chyby",
       "notAllowed": "Na níže uvedené položky nemáte práva"
     },
     "object": {

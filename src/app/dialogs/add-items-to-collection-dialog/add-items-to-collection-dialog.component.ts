@@ -145,6 +145,10 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     });
   }
 
+  genericErrorsKeys() {
+    return Object.keys(this.genericErrors);
+  }
+
   private addPid(inputPid: string, targetPid: string) {
     this.authService.getAuthorizedActions(targetPid).subscribe({
       next: (actions: RightAction[]) => {
@@ -205,7 +209,7 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     if (this.genericErrors) {
       Object.keys(this.genericErrors).forEach((ge) => {
         //retval = retval +","+ ge+"("+this.genericErrors[ge]+")";
-        retval = "<li>" + this.genericErrors[ge] + "</li>";
+        retval += "<li>" + ge + ': ' + this.genericErrors[ge] + "</li>";
       });
     }
     return "<ul class=\"app-m-0\">" + retval + "</ul>";

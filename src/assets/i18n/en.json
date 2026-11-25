@@ -372,6 +372,7 @@
     "addItemsToCollection": {
       "success": "Added <strong>{{ value1 }}/{{ value2 }}</strong> items",
       "error": "Failed to add <strong>{{ value }}</strong> items",
+      "genericErrors": "There are erros on the items below",
       "notAllowed": "You do not have rights to the items below"
     },
     "object": {
