@@ -1265,6 +1265,7 @@
     "noLicenseSelected": "Není vybrána licence",
     "licenseSynchronization": "Synchronizace licencí",
     "licenseSynchronizationFetch": "Spuštění synchronizace licencí",
+    "editingParts": "Editace částí",
     "editingAnObjectInTheApplication": "Editace objektu v aplikaci {{ app }}",
     "selectServer": "Vyberte server",
     "selectAllObjects": "Vybrat všechny objekty",

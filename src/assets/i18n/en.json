@@ -1266,6 +1266,7 @@
     "noLicenseSelected": "No license selected",
     "licenseSynchronization": "License synchronization",
     "licenseSynchronizationFetch": "Start license synchronization process",
+    "editingParts": "Editing parts",
     "editingAnObjectInTheApplication": "Editing an object in the {{ app }} application",
     "selectServer": "Select a server",
     "selectAllObjects": "Select all objects",
