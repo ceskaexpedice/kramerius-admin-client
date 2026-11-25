@@ -10,7 +10,7 @@
             <mat-panel-title>{{ 'rights.' + action.code + '.title' | translate }}<span class="app-badge app-count">{{ action.rights.length }}</span></mat-panel-title>
             <mat-panel-description>{{ 'rights.' + action.description + '.subtitle' | translate }}</mat-panel-description>
           </mat-expansion-panel-header>
-          <table [cellPadding]="0" [cellSpacing]="0" class="app-table">
+          <table [cellPadding]="0" [cellSpacing]="0" class="app-table" >
             <thead>
               <tr>
                 <th>{{ 'desc.role' | translate }}</th>
@@ -23,7 +23,7 @@
             <tbody>
               @for (right of action.rights; track right) {
                 <tr>
-                  <td> {{ right.role.name }}</td>
+                  <td > {{ right.role.name }}</td>
                   <td>{{ right.condition ? right.condition.name : "-"}}</td>
                   <td>{{ right.condition && right.condition.params && right.condition.params.description ? right.condition.params.description : "-"}}</td>
                   <td>{{ right.hasLicense() ? right.condition.license : "-"}}</td>
