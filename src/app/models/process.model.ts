@@ -24,6 +24,7 @@ export class Process {
     Process.PLANNED,
     Process.RUNNING,
     Process.FINISHED,
+    Process.WARNING,
     Process.FAILED,
     Process.KILLED,
   ];
@@ -31,6 +32,7 @@ export class Process {
   static DELETABLE_STATES = [
     Process.FINISHED,
     Process.FAILED,
+    Process.WARNING,
     Process.KILLED
   ];
 
