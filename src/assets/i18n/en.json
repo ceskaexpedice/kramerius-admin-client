@@ -551,6 +551,7 @@
     "restoreAndGoToProcessList": "Restore and go to process list",
     "restoreAndStayInCollections": "Restore and stay in collections",
     "addCutting": "Add cutting",
+    "editCutting": "Edit cutting",
     "changeRepresentativeView": "Change representative view",
     "save": "Save",
     "addNewSet": "Add new set",
@@ -967,6 +968,9 @@
     },
     "addCutting": {
       "title": "Adding a cutting"
+    },
+    "editCutting": {
+      "title": "Editing a cutting"
     },
     "editSet": {
       "title": "Edit set"

@@ -550,6 +550,7 @@
     "restoreAndGoToProcessList": "Obnovit a přejít na seznam procesů",
     "restoreAndStayInCollections": "Obnovit a zůstat ve sbírkách",
     "addCutting": "Přidat výstřižek",
+    "editCutting": "Editovat výstřižek",
     "changeRepresentativeView": "Změnit reprezentativní náhled",
     "save": "Uložit",
     "addNewSet": "Přidat nový set",
@@ -966,6 +967,9 @@
     },
     "addCutting": {
       "title": "Přidání výstřižku"
+    },
+    "editCutting": {
+      "title": "Editace výstřižku"
     },
     "editSet": {
       "title": "Editace setu"

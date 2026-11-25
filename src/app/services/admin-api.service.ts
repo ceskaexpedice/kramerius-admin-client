@@ -318,6 +318,10 @@ export class AdminApiService {
     return this.put(`/collections/${collectionPid}/delete_batch_clipitems`, {"clipitems":cutting});
   }
 
+  editBatchCuttingItemsToCollection(collectionPid: string, cutting:any[]) : Observable<Object> {
+    return this.put(`/collections/${collectionPid}/edit_batch_clipitems`, {"clipitems":cutting});
+  }
+
 
 
   removeItemFromCollection(collectionPid: string, itemPid: string): Observable<Object> {

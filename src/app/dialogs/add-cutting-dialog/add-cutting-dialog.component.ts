@@ -1,5 +1,5 @@
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -23,6 +23,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 })
 export class AddCuttingDialogComponent implements OnInit {
 
+  isEditing = signal(false);
   collection:Collection;
   name='';
   description='';
@@ -59,20 +60,39 @@ export class AddCuttingDialogComponent implements OnInit {
     protected adminApi:AdminApiService,
     ) {
 
-      if (data && data.collection) {
-        this.collection = data.collection;
-      }
+      // if (data && data.collection) {
+      //   this.collection = data.collection;
+      //   this.isEditing.set(!!data.isEditing);
+      // }
 
    }
 
   ngOnInit(): void {
+      if (this.data && this.data.collection) {
+        this.collection = this.data.collection;
+        this.isEditing.set(this.data.isEditing);
+        if (this.data.isEditing) {
+          this.name = this.data.cutting.name;
+          this.description = this.data.cutting.description;
+          this.url = this.data.cutting.url;
+        }
+      }
   }
   
   onSave() {
     if (!this.name || !this.url) {
       return;
     }
-    this.api.addCuttingtoColllection(this.collection.id, {
+
+    if (this.isEditing()) {
+      this.edit();
+    } else {
+      this.add();
+    }
+  }
+
+  edit() {
+    this.api.editCuttingInCollection(this.collection.id, {
       name: this.name,
       description: this.description,
       url: this.url
@@ -84,6 +104,19 @@ export class AddCuttingDialogComponent implements OnInit {
       });    
   }
 
+  add() {
+    
+    this.api.addCuttingtoColllection(this.collection.id, {
+      name: this.name,
+      description: this.description,
+      url: this.url
+    }).subscribe(result=> {
+      this.dialogRef.close('added');
+    },
+      (error) => {
+        this.dialogRef.close('error');
+      });    
+  }
 
 
   isClipUrl(): boolean {

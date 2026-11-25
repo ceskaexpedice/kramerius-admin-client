@@ -75,6 +75,10 @@ export class CollectionsService {
     return this.adminApi.addCuttingItemToCollection(collectionPid, cutting);
   }
 
+  editCuttingInCollection(collectionPid: string, cuttings:any): Observable<Object> { 
+    return this.adminApi.editBatchCuttingItemsToCollection(collectionPid, cuttings);    
+  }
+
   removeItemFromCollection(collectionPid: string, itemPid: string): Observable<Object> {
     return this.adminApi.removeItemFromCollection(collectionPid, itemPid);
   }
