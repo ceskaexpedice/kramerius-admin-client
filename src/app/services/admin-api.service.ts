@@ -310,6 +310,10 @@ export class AdminApiService {
     return this.post(`/collections/${collectionPid}/add_clip_item`, cutting);
   }
 
+  editCuttingItemInCollection(collectionPid: string, cutting:any) : Observable<Object> {
+    return this.post(`/collections/${collectionPid}/edit_clip_item`, cutting);
+  }
+
   removeCuttingItemToCollection(collectionPid: string, cutting:any) : Observable<Object> {
     return this.put(`/collections/${collectionPid}/delete_clip_item`, cutting);
   }
