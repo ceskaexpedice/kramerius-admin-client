@@ -112,7 +112,7 @@
               </mat-card>
             }
             @if (view == 'content' && items) {
-              <div appearance="outlined" class="app-oa-y">
+              <div appearance="outlined" class="app-oa-y" style="max-height: 600px;">
                 <app-collection-content  [itemSelection]="itemSelection"  [cuttingsSelection]="cuttingsSelection" [collection]="collection" [state]="state" [items]="items" (dragEvent)="changeOrderings($event)" [collectionActions]="collectionActions" (updated)="onUpdated()" [lang]="lang" [contentView]="contentView"></app-collection-content>
               </div>
             }
