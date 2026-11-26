@@ -200,7 +200,11 @@
         "title": "Generování logů pro NK",
         "desc": "Generování logů pro NK.",
         "icon": "fitbit"
-      }
+      },
+      "users_count": "celkem uživatelů",
+      "folders_count": "celkem seznamů",
+      "users_with_folder": "kolik uživatelů má alespoň jeden seznam",
+      "uuid_count": "Počet uuid na seznam"
     },
     "cdk": {
       "title": "ČDK",

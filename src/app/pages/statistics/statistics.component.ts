@@ -33,7 +33,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
@@ -160,6 +160,7 @@ export class StatisticsComponent implements OnInit {
     private clientApi: ClientApiService,
     private isoConvert: IsoConvertService,
     private downloadService: FileDownloadService,
+    private translate: TranslateService,
     @Inject(DOCUMENT) private document: Document,
     private local: LocalStorageService,
     private router: Router,
@@ -726,7 +727,7 @@ export class StatisticsComponent implements OnInit {
     
     this.folderOpts = {
       title: {
-        text: 'Počet uuid na seznam',
+        text: this.translate.instant('sites.statistics.uuid_count'),
         show: true,
         top: 20,
         textStyle: {

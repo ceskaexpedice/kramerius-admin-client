@@ -200,7 +200,11 @@
         "title": "Generating logs for NK",
         "desc": "Generating logs for NK.",
         "icon": "fitbit"
-      }
+      },
+      "users_count": "Users count",
+      "folders_count": "Folders count",
+      "users_with_folder": "Users with folder",
+      "uuid_count": "Items per folder"
     },
     "cdk": {
       "title": "ČDK",

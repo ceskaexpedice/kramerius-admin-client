@@ -228,9 +228,9 @@
               </mat-card-header>
               
                 <mat-card-content class="app-fxFlex">
-                  <div><label class="app-label">celkem uživatelů:</label> {{ users_count }}</div>
-                  <div><label class="app-label">celkem seznamů:</label> {{ folders.length }}</div>
-                  <div><label class="app-label">kolik uživatelů má alespoň jeden seznam:</label> {{ users_with_folder }} </div>
+                  <div><label class="app-label">{{'sites.statistics.users_count' | translate }}:</label> {{ users_count }}</div>
+                  <div><label class="app-label">{{'sites.statistics.folders_count' | translate }}:</label> {{ folders.length }}</div>
+                  <div><label class="app-label">{{'sites.statistics.users_with_folder' | translate }}:</label> {{ users_with_folder }} </div>
                   
                   <div echarts [options]="folderOpts"  style="height: 250px;"></div>
 
