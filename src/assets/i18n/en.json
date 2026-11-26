@@ -437,6 +437,7 @@
     }
   },
   "button": {
+    "translateContent": "Translate from",
     "adoptedCollection": "Adopted",
     "autoRefresProcesses": "Automatic reload {{refreshinterval}} s",
     "showDetail": "Show detail",
@@ -1072,6 +1073,8 @@
       "scheduleFixLogProcess": "The fix logs process has been planned"
     },
     "error": {
+      "translationFailed": "The collection description could not be translated",
+      "translationContentChanged": "The description changed while translation was running; translation was not applied",
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
       "addRemoteCollectionContentsToCdk": "Some remote collection items could not be added",
       "theCollectionCouldNotBeLoaded": "The collection could not be loaded",
@@ -1209,6 +1212,7 @@
     "separateCollection": "Separate collection",
     "shortDescriptionOfTheCollection": "Short description of the collection",
     "fullDescriptionOfTheCollection": "Full description of the collection",
+    "translationSourceLanguage": "Translate from",
     "yes": "Yes",
     "no": "No",
     "collectionsContainingThisCollection": "Collections containing this collection",

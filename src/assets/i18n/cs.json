@@ -436,6 +436,7 @@
     }
   },
   "button": {
+    "translateContent": "Přeložit z",
     "adoptedCollection": "Převzatá",
     "autoRefresProcesses": "Automatický reload {{refreshinterval}} s",
     "showDetail": "Zobrazit detail",
@@ -1071,6 +1072,8 @@
       "scheduleFixLogProcess": "Proces pro opravy logů naplánován"
     },
     "error": {
+      "translationFailed": "Popis sbírky se nepodařilo přeložit",
+      "translationContentChanged": "Popis se během překladu změnil; překlad nebyl použit",
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
       "addRemoteCollectionContentsToCdk": "Některé položky vzdálené sbírky se nepodařilo přidat",
       "theCollectionCouldNotBeLoaded": "Sbírku se nepodařilo načíst",
@@ -1208,6 +1211,7 @@
     "separateCollection": "Samostatná sbírka/samostatně viditelná v digitální knihovně",
     "shortDescriptionOfTheCollection": "Krátky popis sbírky",
     "fullDescriptionOfTheCollection": "Úplný popis sbírky",
+    "translationSourceLanguage": "Přeložit z jazyka",
     "yes": "Ano",
     "no": "Ne",
     "collectionsContainingThisCollection": "Sbírky obsahující tuto sbírku",

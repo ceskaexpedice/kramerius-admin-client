@@ -1,2 +1,13 @@
 //@import 'ckeditor5/ckeditor5.css';
 //@import '@ckeditor/ckeditor5-build-classic/build/ckeditor.css';
+
+:host ::ng-deep .app-translation-source-language {
+  align-self: center;
+  margin: 0 var(--ck-spacing-small);
+  padding: var(--ck-spacing-small);
+  border: 1px solid var(--ck-color-base-border);
+  border-radius: var(--ck-border-radius);
+  background: var(--ck-color-base-background);
+  color: var(--ck-color-text);
+  cursor: pointer;
+}

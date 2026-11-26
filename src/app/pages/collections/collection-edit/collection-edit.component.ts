@@ -26,6 +26,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { List } from 'echarts';
 import { catchError, map, of, switchMap, take } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
+import { AppSettings } from 'src/app/services/app-settings';
+import { LindatTranslationService } from 'src/app/services/lindat-translation.service';
 
 @Component({
     imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
@@ -43,6 +45,10 @@ export class CollectionEditComponent implements OnInit {
   editorEng = ClassicEditor; //BalloonEditor;
 
   public Editor = ClassicEditor as any;
+
+  sourceLanguage = '';
+  translating = false;
+  private sourceLanguageSelect?: HTMLSelectElement;
 
 
   public editorConfig = {
@@ -86,6 +92,8 @@ export class CollectionEditComponent implements OnInit {
     private collectionsService: CollectionsService,
     private clientService: ClientApiService,
     private adminService: AdminApiService,
+    private appSettings: AppSettings,
+    private translationService: LindatTranslationService,
     private isoConvert: IsoConvertService,
     private dialog: MatDialog) {
   }
@@ -120,12 +128,18 @@ export class CollectionEditComponent implements OnInit {
   private initCollectionLangValues() {
     this.langs = this.isoConvert.isTranslatable(this.lang) ? this.isoConvert.convert(this.lang) : [this.lang];
 
+    if (!this.sourceLanguages.includes(this.sourceLanguage)) {
+      this.sourceLanguage = this.sourceLanguages[0] || '';
+    }
+    this.refreshSourceLanguageOptions();
+
     this.name = '';// + this.langs;
     this.description = '';
     this.content = '';
     this.standalone = false;
     this.author = '';
 
+    console.log(this.collection, this.langs)
     if (this.collection) {
       this.langs.forEach(l => {
         if (this.collection.names[l]) {
@@ -162,6 +176,88 @@ export class CollectionEditComponent implements OnInit {
   onModelLangChange(key: string, newValue: string) {
     this.langs.forEach(l => {
       this.collection[key][l] = newValue;
+    });
+  }
+
+  get sourceLanguages(): string[] {
+    return (this.appSettings.languages as string[]).filter((language: string) => language !== this.lang);
+  }
+
+  private refreshSourceLanguageOptions(): void {
+    const select = this.sourceLanguageSelect;
+    if (!select) {
+      return;
+    }
+
+    select.replaceChildren();
+    for (const language of this.sourceLanguages) {
+      const option = document.createElement('option');
+      option.value = language;
+      option.textContent = this.ui.getTranslation('lang.' + language);
+      select.appendChild(option);
+    }
+    select.value = this.sourceLanguage;
+  }
+
+  onEditorReady(editor: any): void {
+    const toolbar = editor.ui.view.toolbar.element;
+    if (!toolbar) {
+      return;
+    }
+
+    const select = document.createElement('select');
+    select.className = 'ck app-translation-source-language';
+    select.setAttribute('aria-label', this.ui.getTranslation('desc.translationSourceLanguage'));
+    select.title = this.ui.getTranslation('desc.translationSourceLanguage');
+    this.sourceLanguageSelect = select;
+    this.refreshSourceLanguageOptions();
+    select.addEventListener('change', () => {
+      this.sourceLanguage = select.value;
+      //this.translateContent(editor, button, select)
+    });
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'ck ck-button ck-off app-translate-button';
+    button.textContent = this.ui.getTranslation('button.translateContent');
+    button.setAttribute('aria-label', button.textContent);
+    button.addEventListener('click', () => this.translateContent(editor, button, select));
+    toolbar.appendChild(button);
+    toolbar.appendChild(select);
+  }
+
+  private translateContent(editor: any, button: HTMLButtonElement, select: HTMLSelectElement): void {
+    const langIso = this.isoConvert.isTranslatable(this.sourceLanguage) ? this.isoConvert.convert(this.sourceLanguage)[0] : this.sourceLanguage;
+    const inputText = this.collection.contents[langIso];
+    const source = this.sourceLanguage;
+    const target = this.lang;
+    if (this.translating || !inputText.trim() || !source || source === target) {
+      return;
+    }
+
+    this.translating = true;
+    button.disabled = true;
+    select.disabled = true;
+    this.translationService.translate(inputText, source, target).subscribe({
+      next: translated => {
+          console.log(translated)
+        if (typeof translated !== 'string' || !translated.trim()) {
+          this.ui.showErrorSnackBar('snackbar.error.translationFailed');
+        } else if (editor.getData() !== inputText || this.lang !== target) {
+          editor.setData(translated);
+          this.content = editor.getData();
+          this.onModelLangChange('contents', this.content);
+        }
+        this.translating = false;
+        button.disabled = false;
+        select.disabled = false;
+      },
+      error: () => {
+        this.ui.showErrorSnackBar('snackbar.error.translationFailed');
+        this.translating = false;
+        button.disabled = false;
+        select.disabled = false;
+      }
     });
   }
 

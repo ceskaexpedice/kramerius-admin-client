@@ -59,7 +59,7 @@
 
       [editor]="Editor"
 
-    required [ngModel]="content" (ngModelChange)="onModelLangChange('contents', $event)" data="" name="text"></ckeditor>
+      required [ngModel]="content" (ngModelChange)="onModelLangChange('contents', $event)" (ready)="onEditorReady($event)" data="" name="text"></ckeditor>
   </div>
 
   <div class="app-fxLayout app-row app-gap-2">
