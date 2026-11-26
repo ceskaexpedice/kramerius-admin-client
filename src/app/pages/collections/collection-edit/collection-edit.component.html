@@ -62,6 +62,22 @@
       required [ngModel]="content" (ngModelChange)="onModelLangChange('contents', $event)" (ready)="onEditorReady($event)" data="" name="text"></ckeditor>
   </div>
 
+  @if(notes_private.length > 0) {
+   <div>
+    <div class="app-label app-mb-2">{{ 'desc.notes_private'  | translate }}</div>
+    @for(note of notes_private; track note) {
+      <div>{{note.user}} - {{note.date | date : 'dd.MM.yyyy'}} - {{note.text}}</div>
+    }
+   </div>
+  }
+  <mat-form-field appearance="outline">
+    <mat-label>{{ 'desc.note'  | translate }}</mat-label>
+    <input matInput [(ngModel)]="note_private" (ngModelChange)="onAuthorChange($event)">
+    <button mat-icon-button matSuffix color="primary" (click)="addNote()" class="app-action app-cursor-pointer" [matTooltip]="'desc.addNote' | translate" [matTooltipPosition]="'above'">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+  </mat-form-field>
+
   <div class="app-fxLayout app-row app-gap-2">
     @if (mode === 'new') {
       <button matButton="filled" color="primary" (click)="onSave()">{{ 'button.create'  | translate }}</button>

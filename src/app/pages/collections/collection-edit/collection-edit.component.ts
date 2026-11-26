@@ -28,6 +28,7 @@ import { catchError, map, of, switchMap, take } from 'rxjs';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { AppSettings } from 'src/app/services/app-settings';
 import { LindatTranslationService } from 'src/app/services/lindat-translation.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     imports: [CommonModule, RouterModule, TranslateModule, FormsModule,
@@ -68,7 +69,19 @@ export class CollectionEditComponent implements OnInit {
   mode = 'none';
   state = 'none';
   author = '';
-
+  note_private = ''; // nova poznamka
+  notes_private: {text: string, date: Date, user: string}[] = [
+    {
+      text: 'bírku je třeba průběžně doplňovat',
+      user: 'user1',
+      date: new Date()
+    },
+    {
+      text: 'bírku je třeba průběžně doplňovat',
+      user: 'user2',
+      date: new Date()
+    },
+  ];
 
   keyword: string;
 
@@ -93,6 +106,7 @@ export class CollectionEditComponent implements OnInit {
     private clientService: ClientApiService,
     private adminService: AdminApiService,
     private appSettings: AppSettings,
+    private auth: AuthService, 
     private translationService: LindatTranslationService,
     private isoConvert: IsoConvertService,
     private dialog: MatDialog) {
@@ -267,6 +281,18 @@ export class CollectionEditComponent implements OnInit {
 
   onAuthorChange(auth: string) {
     this.collection.author = auth;
+  }
+
+  onNoteChange(note_private: string) {
+    this.collection.note_private = note_private;
+  }
+
+  addNote() {
+    this.notes_private.push({
+      text: this.note_private,
+      date: new Date(),
+      user: this.auth.user.uid
+    })
   }
 
   reloadtimestamp: number;
