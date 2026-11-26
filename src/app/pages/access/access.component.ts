@@ -12,9 +12,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { RolesComponent } from './roles/roles.component';
 import { LicensesComponent } from './licenses/licenses.component';
 import { ParamsComponent } from './params/params.component';
+import { KeycloakUsersComponent } from './keycloak-users/keycloak-users.component';
 
 @Component({
-    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatTabsModule, RightsComponent, RolesComponent, LicensesComponent, ParamsComponent],
+    imports: [RouterModule, TranslateModule, FormsModule, MatIconModule, MatTabsModule, RightsComponent, RolesComponent, LicensesComponent, ParamsComponent, KeycloakUsersComponent],
     selector: 'app-access',
     templateUrl: './access.component.html',
     styleUrls: ['./access.component.scss']

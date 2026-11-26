@@ -13,6 +13,7 @@
           <a mat-tab-link (click)="changeView('roles')" [active]="view == 'roles'"><mat-icon class="material-icons-outlined">manage_accounts</mat-icon>{{ 'sites.access.roles.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('licenses')" [active]="view == 'licenses'"><mat-icon class="material-icons-outlined">policy</mat-icon>{{ 'sites.access.licenses.title' | translate }}</a>
           <a mat-tab-link (click)="changeView('params')" [active]="view == 'params'"><mat-icon class="material-icons-outlined">rule_folder</mat-icon>{{ 'sites.access.parameters.title' | translate }}</a>
+          <a mat-tab-link (click)="changeView('users')" [active]="view == 'users'"><mat-icon class="material-icons-outlined">group</mat-icon>{{ 'sites.access.users.title' | translate }}</a>
         </nav>
         <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
       </div>
@@ -30,6 +31,9 @@
         }
         @if (view == 'params') {
           <app-params></app-params>
+        }
+        @if (view == 'users') {
+          <app-keycloak-users></app-keycloak-users>
         }
       </div>
     </div>
