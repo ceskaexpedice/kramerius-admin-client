@@ -95,8 +95,22 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     fileReader.readAsText(event.target.files[0]);
   }
 
+  cleanPids() {
+    // Najit uuid z permalinku
+    const pids = this.splitPids(this.pids);
+    const pids2 = pids.map(pid => {
+      if (pid.startsWith('http') && pid.includes('uuid/')) {
+        return pid.split('uuid/')[1];
+      } else {
+        return pid
+      }
+    });
+    this.pids = pids2.join('\n');
+  }
+
   onAdd() {
     this.inProgress = true;
+    this.cleanPids();
     const pids = this.splitPids(this.pids);
     this.items_counter_total = pids.length;
 
@@ -143,6 +157,10 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
       const targetPid = libraryCodes.length > 0 && !pid.startsWith('cdk/') ? `cdk/${lookupPid}` : pid;
       callback({ inputPid: pid, targetPid, libraryCodes });
     });
+  }
+
+  genericErrorsKeys() {
+    return Object.keys(this.genericErrors);
   }
 
   private addPid(inputPid: string, targetPid: string) {
@@ -205,7 +223,7 @@ export class AddItemsToCollectionDialogComponent implements OnInit {
     if (this.genericErrors) {
       Object.keys(this.genericErrors).forEach((ge) => {
         //retval = retval +","+ ge+"("+this.genericErrors[ge]+")";
-        retval = "<li>" + this.genericErrors[ge] + "</li>";
+        retval += "<li>" + ge + ': ' + this.genericErrors[ge] + "</li>";
       });
     }
     return "<ul class=\"app-m-0\">" + retval + "</ul>";

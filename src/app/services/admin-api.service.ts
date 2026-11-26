@@ -314,12 +314,20 @@ export class AdminApiService {
     return this.post(`/collections/${collectionPid}/add_clip_item`, cutting);
   }
 
+  editCuttingItemInCollection(collectionPid: string, cutting:any) : Observable<Object> {
+    return this.post(`/collections/${collectionPid}/edit_clip_item`, cutting);
+  }
+
   removeCuttingItemToCollection(collectionPid: string, cutting:any) : Observable<Object> {
     return this.put(`/collections/${collectionPid}/delete_clip_item`, cutting);
   }
 
   removeBatchCuttingItemsToCollection(collectionPid: string, cutting:any[]) : Observable<Object> {
     return this.put(`/collections/${collectionPid}/`, {"clipitems":cutting});
+  }
+
+  editBatchCuttingItemsToCollection(collectionPid: string, cutting:any[]) : Observable<Object> {
+    return this.put(`/collections/${collectionPid}/edit_batch_clipitems`, {"clipitems":cutting});
   }
 
 
@@ -523,6 +531,14 @@ export class AdminApiService {
 
   removeRole(role: Role): Observable<any> {
     return this.delete(`/roles/${role.id}`);
+  }
+
+  searchKeycloakUsers(search: string, first: number, max: number): Observable<any> {
+    const params: any = { first, max };
+    if (search && search.trim()) {
+      params.search = search.trim();
+    }
+    return this.get('/keycloak/users/search', params);
   }
 
   getActions(pid: String): Observable<any> {

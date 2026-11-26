@@ -75,6 +75,22 @@
         "title": "Parameters",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "rule_folder"
+      },
+      "users": {
+        "title": "Users",
+        "desc": "User accounts in Keycloak.",
+        "icon": "group",
+        "search": "Search (username, name, e-mail)",
+        "searchHint": "Tip: finds users whose first name, last name, username or e-mail starts with the text. *text* = anywhere, \"text\" = exact match.",
+        "searchButton": "Search",
+        "username": "Username",
+        "name": "Name",
+        "email": "E-mail",
+        "enabled": "Enabled",
+        "created": "Created",
+        "lastLogin": "Last login",
+        "empty": "No user matches the search.",
+        "pageSize": "Per page"
       }
     },
     "processes": {
@@ -372,6 +388,7 @@
     "addItemsToCollection": {
       "success": "Added <strong>{{ value1 }}/{{ value2 }}</strong> items",
       "error": "Failed to add <strong>{{ value }}</strong> items",
+      "genericErrors": "There are erros on the items below",
       "notAllowed": "You do not have rights to the items below"
     },
     "object": {
@@ -436,6 +453,7 @@
     }
   },
   "button": {
+    "translateContent": "Translate from",
     "adoptedCollection": "Adopted",
     "autoRefresProcesses": "Automatic reload {{refreshinterval}} s",
     "showDetail": "Show detail",
@@ -554,6 +572,7 @@
     "restoreAndGoToProcessList": "Restore and go to process list",
     "restoreAndStayInCollections": "Restore and stay in collections",
     "addCutting": "Add cutting",
+    "editCutting": "Edit cutting",
     "changeRepresentativeView": "Change representative view",
     "save": "Save",
     "addNewSet": "Add new set",
@@ -1002,6 +1021,9 @@
     "addCutting": {
       "title": "Adding a cutting"
     },
+    "editCutting": {
+      "title": "Editing a cutting"
+    },
     "editSet": {
       "title": "Edit set"
     },
@@ -1102,6 +1124,8 @@
       "scheduleFixLogProcess": "The fix logs process has been planned"
     },
     "error": {
+      "translationFailed": "The collection description could not be translated",
+      "translationContentChanged": "The description changed while translation was running; translation was not applied",
       "addThisCollectionToAnotherCollection": "Failed to add collection to collection",
       "addRemoteCollectionContentsToCdk": "Some remote collection items could not be added",
       "theCollectionCouldNotBeLoaded": "The collection could not be loaded",
@@ -1240,6 +1264,7 @@
     "separateCollection": "Separate collection",
     "shortDescriptionOfTheCollection": "Short description of the collection",
     "fullDescriptionOfTheCollection": "Full description of the collection",
+    "translationSourceLanguage": "Translate from",
     "yes": "Yes",
     "no": "No",
     "collectionsContainingThisCollection": "Collections containing this collection",
@@ -1302,6 +1327,7 @@
     "noLicenseSelected": "No license selected",
     "licenseSynchronization": "License synchronization",
     "licenseSynchronizationFetch": "Start license synchronization process",
+    "editingParts": "Editing parts",
     "editingAnObjectInTheApplication": "Editing an object in the {{ app }} application",
     "selectServer": "Select a server",
     "selectAllObjects": "Select all objects",
@@ -1340,6 +1366,9 @@
     "completeTheInstance": "Complete the instance",
     "nameOfBackup": "Name of backup",
     "addKeyword": "Add keyword",
+    "notes_private": "Private notes",
+    "note": "Note",
+    "addNote": "Add note",
     "displayCuttings": "Display cuttings",
     "displayObjects": "Display objects",
     "cuttingName": "Cutting name",

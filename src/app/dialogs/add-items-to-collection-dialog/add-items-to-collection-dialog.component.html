@@ -63,10 +63,25 @@
             <div [innerHtml]="('alert.addItemsToCollection.success' | translate : {value1: items_counter_added, value2: items_counter_total}) + '!'"></div>
             &nbsp;
             @if (!!items_counter_failed) {
-              <div [innerHtml]="('alert.addItemsToCollection.error' | translate : {value: items_counter_failed}) + '!'"></div>
+              <div [innerHtml]="('alert.addItemsToCollection.error' | translate : {value: items_counter_failed}) + '!'"></div> 
             }
           </mat-card-content>
         </mat-card>
+      }
+      @if(containsGe()) {
+        <mat-card appearance="outlined" class="app-view-alert app-warn app-mt-2">
+          <mat-card-content>
+            <div>
+              <strong>{{ 'alert.addItemsToCollection.genericErrors' | translate }}:</strong>
+              <ul>
+                @for(item of genericErrorsKeys(); track item) {
+                  <li>{{ item }}: {{ genericErrors[item] }}</li>
+                }
+              </ul>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        
       }
       @if (rightsErrors.length > 0 || containsGe()) {
         <mat-card appearance="outlined" class="app-view-alert app-warn app-mt-2">
@@ -81,9 +96,9 @@
                 </ul>
               </div>
             }
-            @if (containsGe()) {
+            <!-- @if (containsGe()) {
               <div [innerHtml]="genericErrorToText()"></div>
-            }
+            } -->
           </mat-card-content>
         </mat-card>
       }

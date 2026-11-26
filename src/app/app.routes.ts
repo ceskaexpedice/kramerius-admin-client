@@ -85,6 +85,7 @@ export const routes: Routes = [
   { path: 'access/roles', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'access/licenses', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'access/params', component: AccessComponent, canActivate: [AuthGuard] },
+  { path: 'access/users', component: AccessComponent, canActivate: [AuthGuard] },
   { path: 'import', redirectTo: 'import/foxml' },
   { path: 'import/foxml', component: ImportComponent, canActivate: [AuthGuard] },
   { path: 'import/ndk', component: ImportComponent, canActivate: [AuthGuard] },

@@ -93,6 +93,7 @@
           @if (view === 'content' && contentView === 'cuttings') {
             <div>
               <button matButton="filled" color="primary" (click)="openAddCuttingDialog()" class="app-mr-2">{{ 'button.addCutting' | translate }}</button>
+              <button [disabled]="cuttingsSelection.selected.length != 1" matButton="filled" color="warn" (click)="editSelectedCuttingsFromCollection()" class="app-mr-2">{{ 'button.editCutting' | translate }}</button>
               <button [disabled]="!cuttingsSelection.hasValue()" matButton="filled" color="warn" (click)="deleteSelectedCuttingsFromCollection()">{{ 'button.deleteSelectedItems' | translate }}</button>
             </div>
           }
@@ -111,7 +112,7 @@
               </mat-card>
             }
             @if (view == 'content' && items) {
-              <div appearance="outlined" class="app-oa-y">
+              <div appearance="outlined" class="app-oa-y" style="max-height: 500px;">
                 <app-collection-content  [itemSelection]="itemSelection"  [cuttingsSelection]="cuttingsSelection" [collection]="collection" [state]="state" [items]="items" (dragEvent)="changeOrderings($event)" [collectionActions]="collectionActions" (updated)="onUpdated()" [lang]="lang" [contentView]="contentView"></app-collection-content>
               </div>
             }

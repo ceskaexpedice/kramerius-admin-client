@@ -22,31 +22,31 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
-    imports: [TranslateModule, MatProgressBarModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatExpansionModule],
-    selector: 'app-rights',
-    templateUrl: './rights.component.html',
-    styleUrls: ['./rights.component.scss']
+  imports: [TranslateModule, MatProgressBarModule, MatCardModule, MatButtonModule, MatIconModule, MatTooltipModule, MatExpansionModule],
+  selector: 'app-rights',
+  templateUrl: './rights.component.html',
+  styleUrls: ['./rights.component.scss']
 })
 export class RightsComponent implements OnInit {
   //TODO: prejmenovat na ActionsComponent. Je to hlavně seznam (relevantních) akcí. Až sekundárně administrace práv nad konkrétními akcemi
-  
+
   readonly panelOpenState = signal(false);
-  
+
   state: string;
   // roles: any[];
-  actionMap: {[key: string]: RightAction};
+  actionMap: { [key: string]: RightAction };
   //selectedAction: RightAction;
 
   actions: RightAction[];
   errorMessage: string;
   errorState: boolean = false;
-  
+
   @Input() pid: string;
 
   constructor(private api: AdminApiService,
-    private authApi: AuthService, 
+    private authApi: AuthService,
     private ui: UIService,
-    private dialog: MatDialog) {}
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.state = 'loading';
@@ -54,10 +54,18 @@ export class RightsComponent implements OnInit {
     this.api.getActions(this.pid || 'uuid:1').subscribe((rAct: RightAction[]) => {
       this.actionMap = {};
 
-      rAct.forEach(a=> {
+      rAct.forEach(a => {
         this.actionMap[a.code] = a;
         // console.log(this.actionMap[a.code]);
+        a.rights.sort((r1, r2) => {
+          const r1_label = r1.condition && r1.condition.params && r1.condition.params.description ? r1.condition.params.description : "-";
+          const r2_label = r2.condition && r2.condition.params && r2.condition.params.description ? r2.condition.params.description : "-";
+          return r1.role.name.localeCompare(r2.role.name) || r1_label.localeCompare(r2_label);
+        })
       });
+      // rAct.sort((a,b) => {
+      //   return a.code.localeCompare(b.code);
+      // })
       this.actions = rAct;
 
       // call rights
@@ -71,7 +79,7 @@ export class RightsComponent implements OnInit {
         this.state = 'success';
         // console.log('rights', rights);
       });
-    }, (error:HttpErrorResponse) => {
+    }, (error: HttpErrorResponse) => {
       this.errorState = true;
       this.errorMessage = error.error.message;
     });
@@ -80,7 +88,7 @@ export class RightsComponent implements OnInit {
 
   onEditRight(action: RightAction, right: Right) {
     const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
-      data : { 
+      data: {
         action: action.code,
         right: right.clone()
       },
@@ -88,9 +96,9 @@ export class RightsComponent implements OnInit {
       panelClass: 'app-create-or-edit-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
-        if (result && result.right) {
-          right.copyFrom(result.right);
-        }
+      if (result && result.right) {
+        right.copyFrom(result.right);
+      }
     });
   }
 
@@ -109,7 +117,7 @@ export class RightsComponent implements OnInit {
         color: 'light'
       }
     };
-    const dialogRef = this.dialog.open(SimpleDialogComponent, { 
+    const dialogRef = this.dialog.open(SimpleDialogComponent, {
       data: data,
       width: '600px',
       panelClass: 'app-simple-dialog'
@@ -127,14 +135,14 @@ export class RightsComponent implements OnInit {
 
   onNewRight(action: RightAction) {
     const dialogRef = this.dialog.open(CreateOrEditRightDialogComponent, {
-      data : { action: action.code, pid: this.pid || 'uuid:1' },
+      data: { action: action.code, pid: this.pid || 'uuid:1' },
       width: '600px',
       panelClass: 'app-create-or-edit-right-dialog'
     });
     dialogRef.afterClosed().subscribe(result => {
-        if (result && result.right) {
-            action.addRight(result.right);
-        }
+      if (result && result.right) {
+        action.addRight(result.right);
+      }
     });
   }
 

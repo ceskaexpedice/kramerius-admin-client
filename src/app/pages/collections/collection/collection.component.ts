@@ -477,10 +477,17 @@ export class CollectionComponent implements OnInit {
 //    this.changeLang.emit(this.langTranslated);
   }
 
-  openAddCuttingDialog() {
+  editSelectedCuttingsFromCollection() {
+    const cutting = this.cuttingsSelection.selected[0];
+    this.openAddCuttingDialog(true, cutting);
+  }
+
+  openAddCuttingDialog(isEditing: boolean = false, cutting: any = null) {
     const dialogRef = this.dialog.open(AddCuttingDialogComponent, {
       data:{
-        collection: this.collection
+        collection: this.collection,
+        isEditing: isEditing,
+        cutting: cutting
       },
       width: '600px',
       panelClass: 'app-add-cutting-dialog'

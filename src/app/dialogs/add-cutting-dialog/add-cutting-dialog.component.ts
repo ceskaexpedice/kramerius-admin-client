@@ -1,5 +1,5 @@
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -23,6 +23,7 @@ import { CollectionsService } from 'src/app/services/collections.service';
 })
 export class AddCuttingDialogComponent implements OnInit {
 
+  isEditing = signal(false);
   collection:Collection;
   name='';
   description='';
@@ -35,6 +36,9 @@ export class AddCuttingDialogComponent implements OnInit {
   ]);
 
   disableAddButton() {
+    if (this.adding) {
+      return true;
+    }
     if (this.url) {
 
       const urls: string[] = this.collection.clipitems.map(obj => {
@@ -59,19 +63,53 @@ export class AddCuttingDialogComponent implements OnInit {
     protected adminApi:AdminApiService,
     ) {
 
-      if (data && data.collection) {
-        this.collection = data.collection;
-      }
+      // if (data && data.collection) {
+      //   this.collection = data.collection;
+      //   this.isEditing.set(!!data.isEditing);
+      // }
 
    }
 
   ngOnInit(): void {
+      if (this.data && this.data.collection) {
+        this.collection = this.data.collection;
+        this.isEditing.set(this.data.isEditing);
+        if (this.data.isEditing) {
+          this.name = this.data.cutting.name;
+          this.description = this.data.cutting.description;
+          this.url = this.data.cutting.url;
+        }
+      }
   }
   
   onSave() {
     if (!this.name || !this.url) {
       return;
     }
+
+    if (this.isEditing()) {
+      this.edit();
+    } else {
+      this.add();
+    }
+  }
+
+  edit() {
+    this.api.editCuttingInCollection(this.collection.id, {
+      name: this.name,
+      description: this.description,
+      url: this.url
+    }).subscribe(result=> {
+      //this.dialogRef.close('added');
+    });    
+  }
+
+  adding = false;
+  add() {
+    if (this.adding) {
+      return;
+    }
+    this.adding = true;
     this.api.addCuttingtoColllection(this.collection.id, {
       name: this.name,
       description: this.description,
@@ -83,7 +121,6 @@ export class AddCuttingDialogComponent implements OnInit {
         this.dialogRef.close('error');
       });    
   }
-
 
 
   isClipUrl(): boolean {

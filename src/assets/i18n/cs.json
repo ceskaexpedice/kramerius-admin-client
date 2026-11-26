@@ -75,6 +75,22 @@
         "title": "Parametry",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "rule_folder"
+      },
+      "users": {
+        "title": "Uživatelé",
+        "desc": "Účty uživatelů v Keycloaku.",
+        "icon": "group",
+        "search": "Hledat (uživatelské jméno, jméno, e-mail)",
+        "searchHint": "Nápověda: najde uživatele, jehož jméno, příjmení, uživatelské jméno nebo e-mail začíná zadaným textem. *text* = kdekoli, \"text\" = přesná shoda.",
+        "searchButton": "Hledat",
+        "username": "Uživatelské jméno",
+        "name": "Jméno",
+        "email": "E-mail",
+        "enabled": "Aktivní",
+        "created": "Vytvořen",
+        "lastLogin": "Poslední přihlášení",
+        "empty": "Žádný uživatel neodpovídá hledání.",
+        "pageSize": "Na stránku"
       }
     },
     "processes": {
@@ -371,6 +387,7 @@
     "addItemsToCollection": {
       "success": "Přidáno <strong>{{ value1 }}/{{ value2 }}</strong> položek",
       "error": "Nepodařilo se přidat <strong>{{ value }}</strong> položek",
+      "genericErrors": "Na níže uvedené položky jsou chyby",
       "notAllowed": "Na níže uvedené položky nemáte práva"
     },
     "object": {
@@ -435,6 +452,7 @@
     }
   },
   "button": {
+    "translateContent": "Přeložit z",
     "adoptedCollection": "Převzatá",
     "autoRefresProcesses": "Automatický reload {{refreshinterval}} s",
     "showDetail": "Zobrazit detail",
@@ -553,6 +571,7 @@
     "restoreAndGoToProcessList": "Obnovit a přejít na seznam procesů",
     "restoreAndStayInCollections": "Obnovit a zůstat ve sbírkách",
     "addCutting": "Přidat výstřižek",
+    "editCutting": "Editovat výstřižek",
     "changeRepresentativeView": "Změnit reprezentativní náhled",
     "save": "Uložit",
     "addNewSet": "Přidat nový set",
@@ -1001,6 +1020,9 @@
     "addCutting": {
       "title": "Přidání výstřižku"
     },
+    "editCutting": {
+      "title": "Editace výstřižku"
+    },
     "editSet": {
       "title": "Editace setu"
     },
@@ -1101,6 +1123,8 @@
       "scheduleFixLogProcess": "Proces pro opravy logů naplánován"
     },
     "error": {
+      "translationFailed": "Popis sbírky se nepodařilo přeložit",
+      "translationContentChanged": "Popis se během překladu změnil; překlad nebyl použit",
       "addThisCollectionToAnotherCollection": "Sbírku se nepodařilo přidat do sbírky",
       "addRemoteCollectionContentsToCdk": "Některé položky vzdálené sbírky se nepodařilo přidat",
       "theCollectionCouldNotBeLoaded": "Sbírku se nepodařilo načíst",
@@ -1239,6 +1263,7 @@
     "separateCollection": "Samostatná sbírka/samostatně viditelná v digitální knihovně",
     "shortDescriptionOfTheCollection": "Krátky popis sbírky",
     "fullDescriptionOfTheCollection": "Úplný popis sbírky",
+    "translationSourceLanguage": "Přeložit z jazyka",
     "yes": "Ano",
     "no": "Ne",
     "collectionsContainingThisCollection": "Sbírky obsahující tuto sbírku",
@@ -1301,6 +1326,7 @@
     "noLicenseSelected": "Není vybrána licence",
     "licenseSynchronization": "Synchronizace licencí",
     "licenseSynchronizationFetch": "Spuštění synchronizace licencí",
+    "editingParts": "Editace částí",
     "editingAnObjectInTheApplication": "Editace objektu v aplikaci {{ app }}",
     "selectServer": "Vyberte server",
     "selectAllObjects": "Vybrat všechny objekty",
@@ -1339,6 +1365,9 @@
     "completeTheInstance": "Vyplňte instanci",
     "nameOfBackup": "Název zálohy",
     "addKeyword": "Přidat klíčové slovo",
+    "notes_private": "Neveřejné poznámky",
+    "note": "Poznámka",
+    "addNote": "Přidat poznámku",
     "displayCuttings": "Zobrazit výstřižky",
     "displayObjects": "Zobrazit objekty",
     "cuttingName": "Název výstřižku",
