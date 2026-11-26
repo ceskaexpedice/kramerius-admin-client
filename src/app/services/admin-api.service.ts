@@ -917,6 +917,10 @@ export class AdminApiService {
     return url;    
   }
 
+  folders() {
+    return this.get(`/folders`);
+  }
+
   /** generic statistic search */
   statisticsSearch(dateFrom: string, dateTo: string,  identifier: string, filter:any[], facets:string[] ) {
     let params: HttpParams = this.searchParams(identifier, facets, dateFrom, dateTo, filter);

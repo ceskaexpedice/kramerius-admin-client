@@ -98,6 +98,7 @@ export class StatisticsComponent implements OnInit {
   authorOpts: EChartsOption = {};
   providedByLicensesOpts: EChartsOption = {};
   collectionsOpts: EChartsOption = {};
+  folderOpts: EChartsOption = {};
 
   filters: any[] = [];
 
@@ -148,6 +149,10 @@ export class StatisticsComponent implements OnInit {
 
   logfiles: any[] = [];
 
+  users_count: number; 
+  users_with_folder: number; 
+  folders: any[] = [];
+
   // pripojena instance
   constructor(
     public appSettings: AppSettings,
@@ -187,17 +192,18 @@ export class StatisticsComponent implements OnInit {
 
   reinitGraphs() {
 
-    let facets = [];
-    facets.push('provided_by_license');
-    facets.push('authors');
-    facets.push('langs');
-    facets.push('all_models');
+    // let facets = [];
+    // facets.push('provided_by_license');
+    // facets.push('authors');
+    // facets.push('langs');
+    // facets.push('all_models');
+    // facets.push('user');
 
 
     this.adminApi.statisticsSearch(
       this.dateFrom != null ? this.dateFrom.toISOString() : null,
       this.dateTo != null ? this.dateTo.toISOString() : null,
-      this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models']).subscribe((response: any) => {
+      this.identifier, this.filters, ['provided_by_license', 'authors', 'langs', 'all_models', 'user']).subscribe((response: any) => {
         if (response['facet_counts']) {
 
           // authors 
@@ -218,6 +224,9 @@ export class StatisticsComponent implements OnInit {
           let modelNames = this.extractNames(models);
           this.reinitTopLevelModelGraph(modelNames, modelCounts);
 
+          // top level models
+          this.users_count = response['facet_counts']['facet_fields']['user'].length / 2;
+
           // detail models
           // let detailModels = response['facet_counts']['facet_fields']['all_models'];
           // let detailModelCounts = this.extractCounts(detailModels);
@@ -229,6 +238,21 @@ export class StatisticsComponent implements OnInit {
           let providedLicensesCounts = this.extractCounts(providedByLicenses);
           let providedLicensesNames = this.extractNames(providedByLicenses);
           this.reinitProvidedLicensesGraph(providedLicensesNames, providedLicensesCounts);
+
+          this.adminApi.folders().subscribe((res: any) => {
+            this.folders = res.folders;
+            this.users_with_folder = 0;
+            const users: string[] = [];
+            this.folders.forEach(f => {
+              f.users.forEach((u:any) => {
+                if (!users.includes(u.userId)) {
+                  users.push(u.userId)
+                }
+              });
+            });
+            this.users_with_folder = users.length;
+            this.reinitFoldersGraph(this.folders)
+          });
 
           // check if pids_collection exists
           this.adminApi.statisticsSearch(
@@ -687,6 +711,44 @@ export class StatisticsComponent implements OnInit {
         {
           showBackground: true,
           data: authorItems,
+          type: 'bar'
+        }
+      ]
+    };
+  }
+
+  private reinitFoldersGraph(folders: {itemsCount: number, name: string}[]) {
+    let folderItems: {value: number, name: string}[] = folders.map(f => ({
+        value: f.itemsCount,
+        name: f.name,
+    }));
+    
+    
+    this.folderOpts = {
+      xAxis: {
+        type: 'category',
+
+        data: folderItems.map(f => f.name),
+        axisTick: {
+          show: false
+        },
+        axisLine: {
+          show: false
+        },
+        z: 10
+      },
+
+      yAxis: {
+        name: 'Počet',
+        interval: 1
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      series: [
+        {
+          showBackground: true,
+          data: folderItems,
           type: 'bar'
         }
       ]
