@@ -1,0 +1,73 @@
+<div class="app-fxLayout app-row app-center-v app-mb-4">
+  <mat-form-field appearance="outline" class="app-fxFlex app-mr-2">
+    <mat-label>{{ 'sites.access.users.search' | translate }}</mat-label>
+    <input matInput [(ngModel)]="search" (keyup.enter)="onSearch()">
+    <mat-hint><mat-icon inline class="material-icons-outlined">info</mat-icon> {{ 'sites.access.users.searchHint' | translate }}</mat-hint>
+  </mat-form-field>
+  <button matButton="filled" color="primary" (click)="onSearch()">{{ 'sites.access.users.searchButton' | translate }}</button>
+</div>
+
+@if (state == 'loading') {
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+@if (state == 'error') {
+<mat-card appearance="outlined" class="app-view-alert app-warn">
+  <mat-card-content>
+    <mat-icon>error</mat-icon>{{ errorMessage }}
+  </mat-card-content>
+</mat-card>
+}
+
+@if (state == 'success') {
+@if (users.length == 0) {
+<p>{{ 'sites.access.users.empty' | translate }}</p>
+} @else {
+<table mat-table [dataSource]="users" class="app-w-100">
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef>{{ 'sites.access.users.username' | translate }}</th>
+    <td mat-cell *matCellDef="let u">{{ u.username }}</td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>{{ 'sites.access.users.name' | translate }}</th>
+    <td mat-cell *matCellDef="let u">{{ u.firstName }} {{ u.lastName }}</td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>{{ 'sites.access.users.email' | translate }}</th>
+    <td mat-cell *matCellDef="let u">{{ u.email }}</td>
+  </ng-container>
+  <ng-container matColumnDef="enabled">
+    <th mat-header-cell *matHeaderCellDef>{{ 'sites.access.users.enabled' | translate }}</th>
+    <td mat-cell *matCellDef="let u"><mat-icon>{{ u.enabled ? 'check' : 'block' }}</mat-icon></td>
+  </ng-container>
+  <ng-container matColumnDef="created">
+    <th mat-header-cell *matHeaderCellDef>{{ 'sites.access.users.created' | translate }}</th>
+    <td mat-cell *matCellDef="let u">{{ u.createdTimestamp | date:'d. M. yyyy' }}</td>
+  </ng-container>
+  <ng-container matColumnDef="lastLogin">
+    <th mat-header-cell *matHeaderCellDef>{{ 'sites.access.users.lastLogin' | translate }}</th>
+    <td mat-cell *matCellDef="let u">{{ u.lastLogin | date:'d. M. yyyy H:mm' }}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns"></tr>
+</table>
+}
+
+<div class="app-fxLayout app-row app-center-v app-pt-4">
+  <mat-form-field appearance="outline" class="app-mr-2">
+    <mat-label>{{ 'sites.access.users.pageSize' | translate }}</mat-label>
+    <mat-select [(ngModel)]="pageSize" (selectionChange)="onPageSize()">
+      @for (size of pageSizes; track size) {
+      <mat-option [value]="size">{{ size }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <span class="app-fxFlex">
+      @if (users.length > 0) {
+        {{ first + 1 }} – {{ first + users.length }}
+      }
+    </span>
+  <button mat-icon-button (click)="onPrev()" [disabled]="first == 0"><mat-icon>chevron_left</mat-icon></button>
+  <button mat-icon-button (click)="onNext()" [disabled]="!hasMore"><mat-icon>chevron_right</mat-icon></button>
+</div>
+}

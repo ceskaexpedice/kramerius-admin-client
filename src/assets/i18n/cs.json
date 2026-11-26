@@ -75,6 +75,22 @@
         "title": "Parametry",
         "desc": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae arcu. Aliquam erat volutpat.",
         "icon": "rule_folder"
+      },
+      "users": {
+        "title": "Uživatelé",
+        "desc": "Účty uživatelů v Keycloaku.",
+        "icon": "group",
+        "search": "Hledat (uživatelské jméno, jméno, e-mail)",
+        "searchHint": "Nápověda: najde uživatele, jehož jméno, příjmení, uživatelské jméno nebo e-mail začíná zadaným textem. *text* = kdekoli, \"text\" = přesná shoda.",
+        "searchButton": "Hledat",
+        "username": "Uživatelské jméno",
+        "name": "Jméno",
+        "email": "E-mail",
+        "enabled": "Aktivní",
+        "created": "Vytvořen",
+        "lastLogin": "Poslední přihlášení",
+        "empty": "Žádný uživatel neodpovídá hledání.",
+        "pageSize": "Na stránku"
       }
     },
     "processes": {
