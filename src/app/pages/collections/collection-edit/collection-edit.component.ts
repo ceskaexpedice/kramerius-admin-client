@@ -70,18 +70,7 @@ export class CollectionEditComponent implements OnInit {
   state = 'none';
   author = '';
   note_private = ''; // nova poznamka
-  notes_private: {text: string, date: Date, user: string}[] = [
-    {
-      text: 'bírku je třeba průběžně doplňovat',
-      user: 'user1',
-      date: new Date()
-    },
-    {
-      text: 'bírku je třeba průběžně doplňovat',
-      user: 'user2',
-      date: new Date()
-    },
-  ];
+  notes_private: {text: string, date: Date, user: string}[] = [];
 
   keyword: string;
 
@@ -152,8 +141,8 @@ export class CollectionEditComponent implements OnInit {
     this.content = '';
     this.standalone = false;
     this.author = '';
+    this.notes_private = [];
 
-    console.log(this.collection, this.langs)
     if (this.collection) {
       this.langs.forEach(l => {
         if (this.collection.names[l]) {
@@ -170,6 +159,8 @@ export class CollectionEditComponent implements OnInit {
       this.author = this.collection.author;
 
       this.standalone = this.collection.standalone;
+      this.notes_private = this.collection.notes_private;
+      
     }
   }
 
