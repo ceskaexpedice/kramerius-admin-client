@@ -38,6 +38,17 @@
           <mat-accordion class="app-view-default" multi>
             <mat-expansion-panel expanded="true">
               <mat-expansion-panel-header>
+
+                <mat-panel-title>{{'modal.scheduleIndexMigration.title' | translate }}</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="app-fxLayout app-row app-gap-2">
+                <button matButton="filled" (click)="openIndexMigrationDialog()" color="primary">{{ 'button.migrateIndex' | translate }}</button>
+                <button matButton="filled" (click)="openSolrIndexMigrationDialog()" color="primary">{{ 'button.migrateSolrCore' | translate }}</button>
+                <button matButton="filled" (click)="openProcessingIndexBuildDialog()" color="primary">{{ 'button.buildIndexFromSourceData' | translate }}</button>
+              </div>
+            </mat-expansion-panel>
+            <mat-expansion-panel expanded="true">
+              <mat-expansion-panel-header>
                 <mat-panel-title>{{ 'desc.basedOnEmbeddedPids' | translate }}</mat-panel-title>
               </mat-expansion-panel-header>
               <div class="app-fxLayout app-row app-gap-2">

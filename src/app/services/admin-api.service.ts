@@ -183,6 +183,10 @@ export class AdminApiService {
     )
   }
 
+  getCoreConfiguration(): Observable<any> {
+    return this.get('/indexreflection/cores');
+  }
+
     
   killBatch(firstProcessId: string): Observable<any> {
     return this.delete(`/processes/batches/by_first_process_id/${firstProcessId}/execution`).pipe(
@@ -319,7 +323,7 @@ export class AdminApiService {
   }
 
   removeBatchCuttingItemsToCollection(collectionPid: string, cutting:any[]) : Observable<Object> {
-    return this.put(`/collections/${collectionPid}/delete_batch_clipitems`, {"clipitems":cutting});
+    return this.put(`/collections/${collectionPid}/`, {"clipitems":cutting});
   }
 
   editBatchCuttingItemsToCollection(collectionPid: string, cutting:any[]) : Observable<Object> {

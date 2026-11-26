@@ -549,6 +549,9 @@
     "indexSelectedObjects": "Indexovat vybrané objekty",
     "indexTheModel": "Indexovat model",
     "indexTheObject": "Indexovat objekt",
+    "migrateIndex": "Kopie z indexu do indexu",
+    "buildIndexFromSourceData": "Vybudovat index z podkladových dat",
+    "migrateSolrCore": "Migrovat Solr core",
     "deleteSelectedCollections": "Vymazat vybrané sbírky",
     "acceptChanges": "Akceptovat změny",
     "deleteSelectedItems": "Vymazat vybrané položky",
@@ -753,6 +756,37 @@
           "title": "Postup obnovy Processing indexu:"
         }
       }
+    },
+    "scheduleIndexMigration": {
+      "title": "Migrace dat mezi indexy",
+      "message": "Naplánuje kopírování dokumentů ze zdrojového indexu do cílového indexu.",
+      "sourceUrl": "URL zdrojového indexu",
+      "destinationUrl": "URL cílového indexu",
+      "identifier": "Identifikátor (volitelné)",
+      "fieldList": "Seznam polí (volitelné)",
+      "filterQuery": "Filtrační dotaz (volitelné)"
+    },
+    "scheduleSolrIndexMigration": {
+      "title": "Migrace Solr indexu",
+      "message": "Vyberte Solr core, jehož index se má zkopírovat.",
+      "core": "Solr core",
+      "destinationUrl": "Cesta výstupního indexu",
+      "batchSize": "Velikost dávky",
+      "verifyAfterCopy": "Ověřit po zkopírování",
+      "url": "URL",
+      "identifierField": "Identifikační pole",
+      "compositeId": "Používá composite ID",
+      "status": "Stav",
+      "process": "Spouštěný proces",
+      "loadError": "Konfiguraci Solr core se nepodařilo načíst.",
+      "configurationMissing": "Konfigurace pro tento core nebyla nalezena."
+    },
+    "scheduleProcessingIndexBuild": {
+      "title": "Vybudovat index z podkladových dat",
+      "message": "Naplánuje vybudování nového indexu z dat v Akubře a Processing indexu.",
+      "destinationUrl": "URL cílového indexu",
+      "ignoreInconsistentObjects": "Ignorovat nekonzistentní objekty",
+      "topModels": "Top modely (volitelné)"
     },
     "generateNkpLogs": {
       "title": "Generování NKP logů"
@@ -1070,6 +1104,7 @@
       "onRemoveProcess": "Proces/dávka byl smazán",
       "onKillProcess": "Proces/dávka byla zrušena",
       "scheduleIndexationByPid": "Indexace byla naplánována",
+      "scheduleIndexMigration": "Migrace dat mezi indexy byla naplánována",
       "scheduleIndexationByModel": "Indexace modelu {{value}} byla naplánována",
       "scheduleIndexationsByMultiplePids": "Bylo naplánováno {{value}} indexací",
       "scheduleStartTheSdnntReviewProcess": "Spuštění procesu kontroly SDNNT/Kramerius bylo naplánováno",
@@ -1137,6 +1172,7 @@
       "reloadProcesses": "Nepodařilo se načíst procesy",
       "scheduleTestProcess": "Nepodařilo se naplánovat proces",
       "scheduleIndexationByPid": "Nepodařilo se naplánovat indexaci",
+      "scheduleIndexMigration": "Nepodařilo se naplánovat migraci indexu",
       "scheduleIndexationByModel": "Nepodařilo se naplánovat indexaci modelu {{value}}",
       "scheduleIndexationsByMultiplePids": "Nepodařilo se naplánovat indexace",
       "loadMoreItemsForBatch": "Nepodařilo se načíst data",

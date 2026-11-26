@@ -8,6 +8,9 @@ import { ScheduleImportFoxmlDialogComponent } from 'src/app/dialogs/schedule-imp
 import { ScheduleImportNdkDialogComponent } from 'src/app/dialogs/schedule-import-ndk-dialog/schedule-import-ndk-dialog.component';
 import { ScheduleProcessingIndexRebuildDialogComponent } from 'src/app/dialogs/schedule-processing-index-rebuild-dialog/schedule-processing-index-rebuild-dialog.component';
 import { ScheduleProcessingIndexRebuildForObjectDialogComponent } from 'src/app/dialogs/schedule-processing-index-rebuild-for-object-dialog/schedule-processing-index-rebuild-for-object-dialog.component';
+import { ScheduleIndexMigrationDialogComponent } from 'src/app/dialogs/schedule-index-migration-dialog/schedule-index-migration-dialog.component';
+import { ScheduleSolrIndexMigrationDialogComponent } from 'src/app/dialogs/schedule-solr-index-migration-dialog/schedule-solr-index-migration-dialog.component';
+import { ScheduleProcessingIndexBuildDialogComponent } from '../../dialogs/schedule-processing-index-build-dialog/schedule-processing-index-build-dialog.component';
 import { ScheduleRemoveLicenseDialogComponent } from 'src/app/dialogs/schedule-remove-license-dialog/schedule-remove-license-dialog.component';
 import { AdminApiService } from 'src/app/services/admin-api.service';
 import { UIService } from 'src/app/services/ui.service';
@@ -240,6 +243,48 @@ export class RepositoryComponent implements OnInit {
       }
     });
   };
+
+  openIndexMigrationDialog() {
+    const dialogRef = this.dialog.open(ScheduleIndexMigrationDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-index-migration-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'scheduled') {
+        this.ui.showInfoSnackBar('snackbar.success.scheduleIndexMigration');
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.scheduleIndexMigration');
+      }
+    });
+  }
+
+  openSolrIndexMigrationDialog() {
+    const dialogRef = this.dialog.open(ScheduleSolrIndexMigrationDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-solr-index-migration-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'scheduled') {
+        this.ui.showInfoSnackBar('snackbar.success.scheduleIndexMigration');
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.scheduleIndexMigration');
+      }
+    });
+  }
+
+  openProcessingIndexBuildDialog() {
+    const dialogRef = this.dialog.open(ScheduleProcessingIndexBuildDialogComponent, {
+      width: '600px',
+      panelClass: 'app-schedule-processing-index-build-dialog'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'scheduled') {
+        this.ui.showInfoSnackBar('snackbar.success.scheduleIndexMigration');
+      } else if (result === 'error') {
+        this.ui.showErrorSnackBar('snackbar.error.scheduleIndexMigration');
+      }
+    });
+  }
 
   openScheduleImportFoxmlDialog() {
     const dialogRef = this.dialog.open(ScheduleImportFoxmlDialogComponent, {
