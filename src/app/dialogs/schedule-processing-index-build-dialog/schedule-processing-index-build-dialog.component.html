@@ -1,0 +1,24 @@
+<form #f="ngForm" (ngSubmit)="schedule()">
+  @if (inProgress) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+  <h2 mat-dialog-title>{{ 'modal.scheduleProcessingIndexBuild.title' | translate }}</h2>
+  <mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+    <div class="app-desc">{{ 'modal.scheduleProcessingIndexBuild.message' | translate }}</div>
+    <mat-form-field appearance="outline" class="app-w-100">
+      <mat-label>{{ 'modal.scheduleProcessingIndexBuild.destinationUrl' | translate }}</mat-label>
+      <input matInput name="destinationUrl" [(ngModel)]="destinationUrl" required [disabled]="inProgress">
+    </mat-form-field>
+    <mat-checkbox name="ignoreInconsistentObjects" [(ngModel)]="ignoreInconsistentObjects" [disabled]="inProgress">
+      {{ 'modal.scheduleProcessingIndexBuild.ignoreInconsistentObjects' | translate }}
+    </mat-checkbox>
+    <mat-form-field appearance="outline" class="app-w-100">
+      <mat-label>{{ 'modal.scheduleProcessingIndexBuild.topModels' | translate }}</mat-label>
+      <input matInput name="topModels" [(ngModel)]="topModels" [disabled]="inProgress">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton="filled" color="primary" type="submit" [disabled]="inProgress || !f.valid">{{ 'button.schedule' | translate }}</button>
+    <button matButton type="button" mat-dialog-close="cancel" [disabled]="inProgress">{{ 'button.cancel' | translate }}</button>
+  </mat-dialog-actions>
+</form>

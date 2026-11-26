@@ -532,6 +532,9 @@
     "indexSelectedObjects": "Index selected objects",
     "indexTheModel": "Index the model",
     "indexTheObject": "Index the object",
+    "migrateIndex": "Copy from index to index",
+    "buildIndexFromSourceData": "Build index from source data",
+    "migrateSolrCore": "Migrate Solr core",
     "deleteSelectedCollections": "Delete selected collections",
     "acceptChanges": "Accept changes",
     "deleteSelectedItems": "Delete selected items",
@@ -735,6 +738,37 @@
           "title": "Processing index recovery procedure:"
         }
       }
+    },
+    "scheduleIndexMigration": {
+      "title": "Migrate data between indexes",
+      "message": "Schedule copying documents from the source index to the destination index.",
+      "sourceUrl": "Source index URL",
+      "destinationUrl": "Destination index URL",
+      "identifier": "Identifier (optional)",
+      "fieldList": "Field list (optional)",
+      "filterQuery": "Filter query (optional)"
+    },
+    "scheduleSolrIndexMigration": {
+      "title": "Solr index migration",
+      "message": "Select the Solr core whose index should be copied.",
+      "core": "Solr core",
+      "destinationUrl": "Output index path",
+      "batchSize": "Batch size",
+      "verifyAfterCopy": "Verify after copy",
+      "url": "URL",
+      "identifierField": "Identifier field",
+      "compositeId": "Uses composite ID",
+      "status": "Status",
+      "process": "Process to schedule",
+      "loadError": "Failed to load the Solr core configuration.",
+      "configurationMissing": "Configuration for this core was not found."
+    },
+    "scheduleProcessingIndexBuild": {
+      "title": "Build index from source data",
+      "message": "Schedule building a new index from source data.",
+      "destinationUrl": "Destination index URL",
+      "ignoreInconsistentObjects": "Ignore inconsistent objects",
+      "topModels": "Top models (optional)"
     },
     "generateNkpLogs": {
       "title": "Generating NKP logs"
@@ -1049,6 +1083,7 @@
       "onRemoveProcess": "The process/batch has been deleted",
       "onKillProcess": "The process/batch was cancelled",
       "scheduleIndexationByPid": "Indexing has been scheduled",
+      "scheduleIndexMigration": "Index migration has been scheduled",
       "scheduleIndexationByModel": "{{value}} model indexing has been scheduled",
       "scheduleIndexationsByMultiplePids": "{{value}} was scheduled by indexing",
       "scheduleStartTheSdnntReviewProcess": "The launch of the SDNNT/Kramerius review process has been scheduled",
@@ -1114,6 +1149,7 @@
       "reloadProcesses": "Failed to load processes",
       "scheduleTestProcess": "Failed to schedule process",
       "scheduleIndexationByPid": "Failed to schedule index",
+      "scheduleIndexMigration": "Failed to schedule index migration",
       "scheduleIndexationByModel": "Failed to schedule model index {{value}}",
       "scheduleIndexationsByMultiplePids": "Failed to schedule indexing",
       "loadMoreItemsForBatch": "Failed to load data",

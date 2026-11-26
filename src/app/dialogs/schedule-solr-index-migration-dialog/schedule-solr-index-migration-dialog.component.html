@@ -1,0 +1,48 @@
+<form #f="ngForm" (ngSubmit)="schedule()">
+  @if (loading || inProgress) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+  <h2 mat-dialog-title>{{ 'modal.scheduleSolrIndexMigration.title' | translate }}</h2>
+  <mat-dialog-content class="mat-typography app-fxLayout app-column app-gap-4 app-form-customize">
+    <div class="app-desc">{{ 'modal.scheduleSolrIndexMigration.message' | translate }}</div>
+    @if (loadError) {
+      <div class="app-color-warn">{{ 'modal.scheduleSolrIndexMigration.loadError' | translate }}</div>
+    }
+    <mat-form-field appearance="outline" class="app-w-100">
+      <mat-label>{{ 'modal.scheduleSolrIndexMigration.core' | translate }}</mat-label>
+      <mat-select name="core" [(ngModel)]="selectedCore" (ngModelChange)="onCoreChange()" [disabled]="loading || inProgress">
+        @for (core of coreNames; track core) {
+          <mat-option [value]="core">{{ core }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="app-w-100">
+      <mat-label>{{ 'modal.scheduleSolrIndexMigration.destinationUrl' | translate }}</mat-label>
+      <input matInput name="destinationUrl" [(ngModel)]="destinationUrl" required [disabled]="inProgress">
+    </mat-form-field>
+    <div class="app-fxLayout app-column">
+      <div><strong>{{ 'modal.scheduleSolrIndexMigration.batchSize' | translate }}:</strong> {{ batchSize }}</div>
+      <mat-slider class="app-w-100" [min]="10" [max]="batchSizeMax" step="1" [disabled]="loading || inProgress">
+        <input matSliderThumb name="batchSize" [(ngModel)]="batchSize">
+      </mat-slider>
+    </div>
+    <mat-checkbox name="verifyAfterCopy" [(ngModel)]="verifyAfterCopy" [disabled]="inProgress">
+      {{ 'modal.scheduleSolrIndexMigration.verifyAfterCopy' | translate }}
+    </mat-checkbox>
+    @if (cores[selectedCore]; as configuration) {
+      <div class="app-desc">
+        <div><strong>{{ 'modal.scheduleSolrIndexMigration.url' | translate }}:</strong> {{ configuration.url }}</div>
+        <div><strong>{{ 'modal.scheduleSolrIndexMigration.identifierField' | translate }}:</strong> {{ configuration.identifierField }}</div>
+        <div><strong>{{ 'modal.scheduleSolrIndexMigration.compositeId' | translate }}:</strong> {{ configuration.usesCompositeId ? ('button.yes' | translate) : ('button.no' | translate) }}</div>
+        <div><strong>{{ 'modal.scheduleSolrIndexMigration.status' | translate }}:</strong> {{ configuration.health?.status || '—' }}</div>
+      </div>
+    } @else if (!loading && !loadError) {
+      <div class="app-color-warn">{{ 'modal.scheduleSolrIndexMigration.configurationMissing' | translate }}</div>
+    }
+    <div><strong>{{ 'modal.scheduleSolrIndexMigration.process' | translate }}:</strong> {{ processIds[selectedCore] }}</div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton="filled" color="primary" type="submit" [disabled]="loading || inProgress || loadError || !cores[selectedCore] || !destinationUrl.trim()">{{ 'button.schedule' | translate }}</button>
+    <button matButton type="button" mat-dialog-close="cancel" [disabled]="inProgress">{{ 'button.cancel' | translate }}</button>
+  </mat-dialog-actions>
+</form>
