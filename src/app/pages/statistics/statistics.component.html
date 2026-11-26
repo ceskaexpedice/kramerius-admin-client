@@ -228,10 +228,10 @@
               </mat-card-header>
               
                 <mat-card-content class="app-fxFlex">
-                  <div>celkem uživatelů: {{ users_count }}</div>
-                  <div>celkem seznamů: {{ folders.length }}</div>
-                  <div>kolik uživatelů má alespoň jeden seznam: {{ users_with_folder }} </div>
-
+                  <div><label class="app-label">celkem uživatelů:</label> {{ users_count }}</div>
+                  <div><label class="app-label">celkem seznamů:</label> {{ folders.length }}</div>
+                  <div><label class="app-label">kolik uživatelů má alespoň jeden seznam:</label> {{ users_with_folder }} </div>
+                  
                   <div echarts [options]="folderOpts"  style="height: 250px;"></div>
 
                 </mat-card-content>

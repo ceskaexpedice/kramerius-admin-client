@@ -725,6 +725,15 @@ export class StatisticsComponent implements OnInit {
     
     
     this.folderOpts = {
+      title: {
+        text: 'Počet uuid na seznam',
+        show: true,
+        top: 20,
+        textStyle: {
+          fontWeight: 'lighter',
+          fontSize: 12
+        }
+      },
       xAxis: {
         type: 'category',
 
@@ -739,7 +748,6 @@ export class StatisticsComponent implements OnInit {
       },
 
       yAxis: {
-        name: 'Počet',
         interval: 1
       },
       tooltip: {
@@ -747,7 +755,7 @@ export class StatisticsComponent implements OnInit {
       },
       series: [
         {
-          showBackground: true,
+          //showBackground: true,
           data: folderItems,
           type: 'bar'
         }
